@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAPI™ Assessment | Aligned Power</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); margin: 0; min-height: 100vh; }
+    h1, h2 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .quiz-viewport { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; }
+    #question-container { position: relative; min-height: 70vh; max-height: calc(100vh - 5rem); }
+    .quiz-slide { display: none; width: 100%; min-height: 70vh; max-height: calc(100vh - 5rem); flex-direction: column; align-items: center; justify-content: flex-start; padding: 0.5rem 0.75rem 0.75rem; box-sizing: border-box; transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.32s ease-out; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 639px) {
+      #question-container { max-height: calc(100vh - 4.75rem); }
+      .quiz-slide { max-height: calc(100vh - 4.75rem); padding: 0.375rem 0.5rem 0.5rem; }
+    }
+    #question-container .quiz-slide { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+    #quiz-prehead { position: absolute; top: 0; left: 0; right: 0; z-index: 5; pointer-events: none; }
+    #quiz-progress-block { position: absolute; bottom: 0; left: 0; right: 0; z-index: 5; pointer-events: none; }
+    #quiz-progress-block > div { pointer-events: auto; }
+    .quiz-slide-inner.question-slide-inner { padding-top: 2rem; padding-bottom: 3.25rem; }
+    .quiz-slide.active { display: flex; }
+    .quiz-slide.leaving { transform: translateX(-100vw); opacity: 0; pointer-events: none; z-index: 2; }
+    .quiz-slide.entering { transform: translateX(100vw); opacity: 0; z-index: 1; }
+    .quiz-slide.entering.in { transform: translateX(0); opacity: 1; }
+    .quiz-slide-inner { width: 100%; max-width: 42rem; margin: 0 auto; }
+    @media (min-width: 640px) {
+      #question-container { max-height: none; }
+      .quiz-slide { max-height: none; justify-content: center; padding: 2rem 1.5rem; }
+    }
+    .scale-btn { transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s; }
+    .scale-btn:hover { background: var(--ap-primary); color: #fff; border-color: var(--ap-primary); }
+    .scale-btn.selected { background: var(--ap-primary); color: #fff; border-color: var(--ap-primary); }
+    .scale-btn.selected .scale-btn-check { opacity: 1; transform: scale(1); }
+    .scale-btn .scale-btn-check { opacity: 0; transform: scale(0.5); transition: opacity 0.25s ease-out, transform 0.25s ease-out; margin-left: 0.375rem; }
+    @keyframes selectPop { 0% { transform: scale(1); } 55% { transform: scale(1.03); } 100% { transform: scale(1); } }
+    .scale-btn.selected { animation: selectPop 0.35s ease-out; }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="fixed top-0 left-0 right-0 h-1 bg-[var(--ap-muted)]/30 z-20">
+    <div id="progress-bar" class="h-full bg-[var(--ap-accent)] transition-all duration-300" style="width: 0%"></div>
+  </div>
+
+  <div class="max-w-2xl mx-auto pt-4 pb-3 sm:pt-8 sm:pb-5 flex justify-center border-b border-[var(--ap-border)]/50 bg-[var(--ap-bg)]/95">
+    <img src="../images/aligned-power-logo.png" alt="Aligned Power" class="h-10 sm:h-14 w-auto block bg-transparent" />
+  </div>
+
+  <div class="max-w-2xl mx-auto pt-1 pb-12 sm:pt-2">
+    <!-- Intro slide -->
+    <div id="intro-slide" class="quiz-slide active">
+      <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">VAPI™ Assessment</p>
+      <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight">Values-Aligned Performance Indicator™</h1>
+      <p class="text-[var(--ap-secondary)] mb-4 leading-relaxed text-center">For each statement below, reflect honestly on your actual experience over the past 30 days. Not your best day. Not your worst. Your honest baseline. Select the response that most accurately reflects your reality.</p>
+      <p class="text-sm text-[var(--ap-muted)] mb-8">This assessment takes approximately 12–15 minutes.</p>
+      <button type="button" id="btn-start" class="w-full sm:w-auto px-8 py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">
+        Start assessment
+      </button>
+    </div>
+
+    <div class="quiz-viewport">
+      <div id="question-container">
+        <div id="email-slide" class="quiz-slide">
+          <div class="quiz-slide-inner">
+            <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">Almost there</p>
+            <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-4 leading-tight">Your results are ready</h2>
+            <p class="text-[var(--ap-secondary)] mb-6 leading-relaxed">Enter your details below and we'll show you your VAPI™ scores across 12 domains in 3 arenas, plus what they mean and suggested next steps.</p>
+            <form id="email-form" class="space-y-4">
+              <div>
+                <label for="first-name" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">First name</label>
+                <input type="text" id="first-name" name="firstName" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none">
+              </div>
+              <div>
+                <label for="last-name" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Last name</label>
+                <input type="text" id="last-name" name="lastName" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Email</label>
+                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none">
+              </div>
+              <button type="submit" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">Get my results</button>
+            </form>
+            <p class="text-sm text-[var(--ap-muted)] mt-4">We'll never spam you. Unsubscribe anytime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="encouragement-1" class="fixed inset-0 z-30 flex items-center justify-center p-4 bg-[var(--ap-accent)]/35 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 sm:p-8 text-center border border-[var(--ap-border)]">
+      <p class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] mb-2">You're 1/3 of the way there!</p>
+      <p class="text-[var(--ap-secondary)] mb-6">You're doing great. Keep going — you'll be done before you know it.</p>
+      <button type="button" id="encouragement-1-continue" class="w-full sm:w-auto px-8 py-3 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold rounded-lg transition-colors">Continue</button>
+    </div>
+  </div>
+  <div id="encouragement-2" class="fixed inset-0 z-30 flex items-center justify-center p-4 bg-[var(--ap-accent)]/35 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 sm:p-8 text-center border border-[var(--ap-border)]">
+      <p class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] mb-2">Almost there!</p>
+      <p class="text-[var(--ap-secondary)] mb-6">You're 2/3 of the way through. Just a few more questions and you'll have your results.</p>
+      <button type="button" id="encouragement-2-continue" class="w-full sm:w-auto px-8 py-3 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold rounded-lg transition-colors">Continue</button>
+    </div>
+  </div>
+
+  <script src="vapi-quiz-data.js"></script>
+  <script>
+    (function() {
+      var SCALE = ['Strongly Agree', 'Agree', 'Somewhat Agree', 'Neither Agree Nor Disagree', 'Somewhat Disagree', 'Disagree', 'Strongly Disagree'];
+      var SCALE_VALUES = [7, 6, 5, 4, 3, 2, 1];
+      var QUESTIONS = window.VAPI_QUESTIONS.slice();
+      var totalQuestions = QUESTIONS.length;
+      var presentationOrder = [];
+      var answers = {};
+      var currentIndex = -1;
+      var totalSteps = 1 + totalQuestions + 1;
+      var animating = false;
+
+      function shuffle(a) {
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      function getProgressPercent() {
+        if (currentIndex < 0) return 0;
+        if (currentIndex < totalQuestions) return ((currentIndex + 1) / totalSteps) * 100;
+        return 100;
+      }
+
+      function getQuestionProgressPercent() {
+        if (currentIndex < 0) return 0;
+        if (currentIndex < totalQuestions) return ((currentIndex + 1) / totalQuestions) * 100;
+        return 100;
+      }
+
+      function updateConspicuousProgress() {
+        var block = document.getElementById('quiz-progress-block');
+        if (!block) return;
+        var prehead = document.getElementById('quiz-prehead');
+        if (currentIndex < 0 || currentIndex >= totalQuestions) {
+          block.style.display = 'none';
+          if (prehead) prehead.style.display = 'none';
+          return;
+        }
+        block.style.display = 'block';
+        if (prehead) prehead.style.display = 'block';
+        var currentEl = document.getElementById('progress-current');
+        var pctEl = document.getElementById('progress-pct');
+        var barEl = document.getElementById('progress-bar-conspicuous');
+        if (currentEl) currentEl.textContent = currentIndex + 1;
+        if (pctEl) pctEl.textContent = Math.round(getQuestionProgressPercent()) + '%';
+        if (barEl) barEl.style.width = Math.round(getQuestionProgressPercent()) + '%';
+      }
+
+      function showSlide(slideEl) {
+        document.querySelectorAll('.quiz-slide').forEach(function(s) { s.classList.remove('active'); });
+        if (slideEl) slideEl.classList.add('active');
+        document.getElementById('progress-bar').style.width = getProgressPercent() + '%';
+        updateConspicuousProgress();
+      }
+
+      function showNextSlideWithAnimation(nextSlide, thenRestore) {
+        nextSlide.classList.add('active', 'entering');
+        document.getElementById('progress-bar').style.width = getProgressPercent() + '%';
+        updateConspicuousProgress();
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            nextSlide.classList.add('in');
+          });
+        });
+        setTimeout(function() {
+          document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('leaving', 'entering', 'in'); });
+          document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active'); });
+          nextSlide.classList.add('active');
+          animating = false;
+          if (thenRestore) restoreSlideState(nextSlide);
+        }, 340);
+      }
+
+      function renderQuestions() {
+        var container = document.getElementById('question-container');
+        presentationOrder.forEach(function(q, i) {
+          var slide = document.createElement('div');
+          slide.className = 'quiz-slide';
+          slide.id = 'slide-' + i;
+          slide.dataset.questionId = q.id;
+          var scaleHtml = SCALE.map(function(label, idx) {
+            var v = SCALE_VALUES[idx];
+            return '<button type="button" class="scale-btn w-full text-left px-[0.69rem] py-[0.275rem] sm:py-[0.41rem] rounded border border-[var(--ap-border)] bg-white font-medium text-[var(--ap-secondary)] mt-[0.14rem] sm:mt-[0.275rem] flex items-center justify-between text-[0.825rem] sm:text-[0.96rem] leading-snug" data-value="' + v + '"><span>' + label + '</span><span class="scale-btn-check text-white text-[0.75rem]" aria-hidden="true">✓</span></button>';
+          }).join('');
+          slide.innerHTML = '<div class="quiz-slide-inner question-slide-inner">' +
+            '<h2 class="text-base sm:text-2xl text-[var(--ap-primary)] mb-2 sm:mb-6 leading-snug sm:leading-tight">' + q.text + '</h2>' +
+            '<div class="scale-options space-y-0">' + scaleHtml + '</div>' +
+            '<div class="flex gap-3 mt-[1px] sm:mt-8">' +
+            '<button type="button" class="quiz-back inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 text-[var(--ap-secondary)] hover:opacity-70 flex-shrink-0 p-0 min-w-0" style="display:none" aria-label="Back"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>' +
+            '</div></div>';
+          var scaleOpts = slide.querySelectorAll('.scale-btn');
+          scaleOpts.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+              if (animating) return;
+              var val = parseInt(btn.dataset.value, 10);
+              answers[q.id] = val;
+              scaleOpts.forEach(function(b) { b.classList.remove('selected'); });
+              btn.classList.add('selected');
+              animating = true;
+              slide.classList.add('leaving');
+              var nextIdx = currentIndex + 1;
+              setTimeout(function() {
+                currentIndex = nextIdx;
+                if (currentIndex >= totalQuestions) {
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active', 'leaving', 'entering', 'in'); });
+                  var emailSlide = document.getElementById('email-slide');
+                  emailSlide.classList.add('active', 'entering');
+                  document.getElementById('progress-bar').style.width = '100%';
+                  updateConspicuousProgress();
+                  requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                      emailSlide.classList.add('in');
+                    });
+                  });
+                  setTimeout(function() { emailSlide.classList.remove('entering', 'in'); }, 340);
+                  animating = false;
+                  return;
+                }
+                var nextSlide = document.getElementById('slide-' + currentIndex);
+                if (currentIndex === 24) {
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('leaving', 'entering', 'in'); });
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active'); });
+                  document.getElementById('encouragement-1').classList.remove('hidden');
+                  document.getElementById('progress-bar').style.width = getProgressPercent() + '%';
+                  updateConspicuousProgress();
+                  animating = false;
+                  return;
+                }
+                if (currentIndex === 48) {
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('leaving', 'entering', 'in'); });
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active'); });
+                  document.getElementById('encouragement-2').classList.remove('hidden');
+                  document.getElementById('progress-bar').style.width = getProgressPercent() + '%';
+                  updateConspicuousProgress();
+                  animating = false;
+                  return;
+                }
+                nextSlide.classList.add('active', 'entering');
+                document.getElementById('progress-bar').style.width = getProgressPercent() + '%';
+                updateConspicuousProgress();
+                requestAnimationFrame(function() {
+                  requestAnimationFrame(function() {
+                    nextSlide.classList.add('in');
+                  });
+                });
+                setTimeout(function() {
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('leaving', 'entering', 'in'); });
+                  document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active'); });
+                  nextSlide.classList.add('active');
+                  animating = false;
+                  restoreSlideState(nextSlide);
+                }, 340);
+              }, 100);
+            });
+          });
+          slide.querySelector('.quiz-back').addEventListener('click', function() { goPrev(); });
+          container.appendChild(slide);
+        });
+        document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) {
+          var backBtn = s.querySelector('.quiz-back');
+          if (backBtn) backBtn.style.display = (s.id === 'slide-0') ? 'none' : 'inline-flex';
+        });
+        var preheadBlock = document.createElement('div');
+        preheadBlock.id = 'quiz-prehead';
+        preheadBlock.style.display = 'none';
+        preheadBlock.innerHTML = '<div class="w-full max-w-[42rem] mx-auto pt-0.5 pb-0 bg-[var(--ap-bg)]"><p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-0">In the past 30 days...</p></div>';
+        container.insertBefore(preheadBlock, container.firstChild);
+        var progressBlock = document.createElement('div');
+        progressBlock.id = 'quiz-progress-block';
+        progressBlock.style.display = 'none';
+        progressBlock.innerHTML = '<div class="max-w-2xl mx-auto px-4 py-2 sm:py-2.5 bg-[var(--ap-bg)] border-t border-[var(--ap-border)]/30">' +
+          '<div class="flex items-center justify-between gap-3 mb-1">' +
+          '<span class="text-sm font-semibold text-[var(--ap-secondary)]">Question <span id="progress-current">1</span> of <span id="progress-total">72</span></span>' +
+          '<span id="progress-pct" class="text-xs font-medium text-[var(--ap-muted)] tabular-nums">0%</span>' +
+          '</div>' +
+          '<div class="h-2 w-full bg-[var(--ap-muted)]/30 rounded-full overflow-hidden"><div id="progress-bar-conspicuous" class="h-full bg-[var(--ap-accent)] transition-all duration-300 rounded-full" style="width:0%"></div></div>' +
+          '</div>';
+        container.appendChild(progressBlock);
+      }
+
+      function restoreSlideState(slide) {
+        if (!slide || !slide.dataset.questionId) return;
+        var qId = slide.dataset.questionId;
+        var val = answers[qId];
+        if (val != null) {
+          slide.querySelectorAll('.scale-btn').forEach(function(b) {
+            b.classList.toggle('selected', parseInt(b.dataset.value, 10) === val);
+          });
+        }
+      }
+
+      function goNext() {
+        if (currentIndex < totalQuestions - 1) {
+          currentIndex++;
+          var slide = document.getElementById('slide-' + currentIndex);
+          showSlide(slide);
+          restoreSlideState(slide);
+        } else {
+          currentIndex = totalQuestions;
+          showSlide(document.getElementById('email-slide'));
+        }
+      }
+
+      function goPrev() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          var slide = document.getElementById('slide-' + currentIndex);
+          showSlide(slide);
+          restoreSlideState(slide);
+        } else {
+          currentIndex = -1;
+          showSlide(document.getElementById('intro-slide'));
+        }
+      }
+
+      function round1(x) { return Math.round(x * 10) / 10; }
+      function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+
+      function getTier(score) {
+        if (score >= 8) return 'Dialed';
+        if (score >= 6) return 'Functional';
+        if (score >= 4) return 'Below the Line';
+        return 'In the Red';
+      }
+
+      function computeScores() {
+        var byDomain = {};
+        window.VAPI_QUESTIONS.forEach(function(q) {
+          if (!byDomain[q.domainCode]) byDomain[q.domainCode] = { domain: q.domain, arena: q.arena, items: [] };
+          byDomain[q.domainCode].items.push({ weight: q.weight, reverse: q.reverse, id: q.id });
+        });
+        var domainScores = {};
+        Object.keys(byDomain).forEach(function(code) {
+          var d = byDomain[code];
+          var weightedSum = 0;
+          d.items.forEach(function(it) {
+            var raw = answers[it.id];
+            if (raw == null) raw = 4;
+            var scored = it.reverse ? (8 - raw) : raw;
+            weightedSum += scored * it.weight;
+          });
+          var domainScore = ((weightedSum - 6.0) / 36.0) * 10;
+          domainScores[code] = round1(clamp(domainScore, 0, 10));
+        });
+
+        var arenaOrder = ['Personal', 'Relationships', 'Business'];
+        var domainToArena = { PH: 'Personal', IA: 'Personal', ME: 'Personal', AF: 'Personal', RS: 'Relationships', FA: 'Relationships', CO: 'Relationships', WI: 'Relationships', VS: 'Business', EX: 'Business', OH: 'Business', EC: 'Business' };
+        var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var arenaScores = {};
+        arenaOrder.forEach(function(arena) {
+          var codes = domainOrder.filter(function(c) { return domainToArena[c] === arena; });
+          var sum = 0;
+          codes.forEach(function(c) { sum += domainScores[c]; });
+          arenaScores[arena] = round1(sum / 4);
+        });
+        var overallSum = 0;
+        domainOrder.forEach(function(c) { overallSum += domainScores[c]; });
+        var overall = round1(overallSum / 12);
+
+        var acquiescence = false;
+        var posItems = window.VAPI_QUESTIONS.filter(function(q) { return !q.reverse; });
+        var revItems = window.VAPI_QUESTIONS.filter(function(q) { return q.reverse; });
+        if (posItems.every(function(q) { return (answers[q.id] || 0) >= 6; }) && revItems.every(function(q) { return (answers[q.id] || 0) >= 6; })) acquiescence = true;
+
+        var domainsWithTiers = domainOrder.map(function(code) {
+          var s = domainScores[code];
+          return { code: code, domain: byDomain[code].domain, arena: domainToArena[code], score: s, tier: getTier(s) };
+        });
+        var sorted = domainsWithTiers.slice().sort(function(a, b) { return b.score - a.score; });
+        var top3 = sorted.slice(0, 3);
+        var bottom3 = sorted.slice(-3).reverse();
+
+        return {
+          overall: overall,
+          overallTier: getTier(overall),
+          arenaScores: arenaScores,
+          arenaTiers: { Personal: getTier(arenaScores.Personal), Relationships: getTier(arenaScores.Relationships), Business: getTier(arenaScores.Business) },
+          domainScores: domainScores,
+          domains: domainsWithTiers,
+          top3: top3,
+          bottom3: bottom3,
+          acquiescence: acquiescence,
+          allResponses: answers
+        };
+      }
+
+      document.getElementById('encouragement-1-continue').addEventListener('click', function() {
+        document.getElementById('encouragement-1').classList.add('hidden');
+        showNextSlideWithAnimation(document.getElementById('slide-24'), true);
+      });
+      document.getElementById('encouragement-2-continue').addEventListener('click', function() {
+        document.getElementById('encouragement-2').classList.add('hidden');
+        showNextSlideWithAnimation(document.getElementById('slide-48'), true);
+      });
+
+      document.getElementById('btn-start').addEventListener('click', function() {
+        presentationOrder = shuffle(QUESTIONS.slice());
+        renderQuestions();
+        currentIndex = 0;
+        showSlide(document.getElementById('slide-0'));
+        var firstSlide = document.getElementById('slide-0');
+        if (answers[presentationOrder[0].id] != null) {
+          firstSlide.querySelectorAll('.scale-btn').forEach(function(b) {
+            b.classList.toggle('selected', parseInt(b.dataset.value, 10) === answers[presentationOrder[0].id]);
+          });
+        }
+      });
+
+      document.getElementById('email-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var results = computeScores();
+        results.firstName = document.getElementById('first-name').value.trim();
+        results.lastName = document.getElementById('last-name').value.trim();
+        results.email = document.getElementById('email').value.trim();
+        results.presentationOrder = presentationOrder.map(function(q) { return q.id; });
+        try {
+          sessionStorage.setItem('vapiResults', JSON.stringify(results));
+        } catch (err) {}
+        window.location.href = 'vapi-results.html';
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in | Aligned Power Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="/api/config"></script>
+  <script src="../supabase-config.js"></script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <main class="max-w-md mx-auto px-4 pt-16 pb-12">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Aligned Power Portal</h1>
+      <p class="text-[var(--ap-secondary)]">Log in to view your VAPI™ results and history.</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 sm:p-8">
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none">
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none">
+        </div>
+        <p id="login-error" class="text-sm text-red-600 hidden"></p>
+        <button type="submit" class="w-full bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-3 px-4 rounded-xl transition-colors">
+          Log in
+        </button>
+      </form>
+      <p class="text-sm text-[var(--ap-muted)] mt-6 text-center">
+        Don’t have an account? <a href="signup.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Sign up</a>
+      </p>
+    </div>
+    <p class="text-center mt-6">
+      <a href="../html/vapi-landing.html" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">← Back to assessment</a>
+    </p>
+  </main>
+  <script type="module">
+    (async function() {
+      if (typeof window.SUPABASE_URL === 'undefined' || !window.SUPABASE_URL) {
+        document.getElementById('login-error').textContent = 'Portal is not configured. Add Supabase URL and key to supabase-config.js.';
+        document.getElementById('login-error').classList.remove('hidden');
+        return;
+      }
+      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+      var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var session = await supabase.auth.getSession();
+      if (session.data.session) {
+        window.location.href = 'dashboard.html';
+        return;
+      }
+      document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var errEl = document.getElementById('login-error');
+        errEl.classList.add('hidden');
+        var { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+          errEl.textContent = error.message || 'Log in failed.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        window.location.href = 'dashboard.html';
+      });
+    })();
+  </script>
+</body>
+</html>

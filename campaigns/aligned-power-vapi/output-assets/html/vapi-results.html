@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your VAPI™ Results | Aligned Power</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <script src="vapi-results-interpretations.js"></script>
+  <script src="/api/config"></script>
+  <script src="../supabase-config.js"></script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
+    .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
+    .print-only { display: none; }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { padding-bottom: 2.5rem; }
+      #results-content .rounded-xl,
+      #results-content .rounded-lg { page-break-inside: avoid; }
+      #results-content .results-title-block { page-break-after: avoid; margin-bottom: 1rem !important; }
+      #results-content .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
+      #results-content .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
+      #results-content h2 { page-break-after: avoid; }
+      #results-content h3 { page-break-after: avoid; }
+      .enlarge-hint { display: none !important; }
+      .print-report-header { margin-bottom: 0.25rem; padding-bottom: 0.25rem; border-bottom: none; font-size: 0.7rem; color: var(--ap-secondary); line-height: 1.2; }
+      .print-report-header strong { color: var(--ap-primary); font-weight: 600; }
+      .print-page-footer { position: fixed; bottom: 0; left: 0; right: 0; height: 2.25rem; display: flex !important; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.65rem; color: var(--ap-muted); background: #fff; border-top: 1px solid var(--ap-border); padding: 0 0.5rem; }
+      .print-page-footer img { height: 1.25rem; width: auto; object-fit: contain; flex-shrink: 0; vertical-align: middle; }
+      .print-page-footer span { flex: 0 1 auto; line-height: 1.2; }
+    }
+    @page { size: letter; margin: 0.525in 0.75in; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10 no-print pt-6 pb-5">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <a href="vapi-landing.html" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
+        <img src="../images/aligned-power-logo.png" alt="Aligned Power — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
+      </a>
+      <div class="flex flex-col items-end gap-0.5">
+        <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          Download / Print results
+        </button>
+        <span class="text-xs text-[var(--ap-muted)]">Tip: Turn off &ldquo;Headers and footers&rdquo; in the print dialog for a clean PDF.</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 sm:py-14">
+    <div class="print-only print-page-footer" aria-hidden="true">
+      <img src="../images/alignment-logo-footer.png" alt="Aligned Power" />
+      <span>Values-Aligned Performance Indicator™ (VAPI™). © 2026 Aligned Power LLC. All rights reserved.</span>
+    </div>
+    <div id="results-content"></div>
+
+    <div id="continue-journey" class="space-y-6 no-print mt-12 scroll-mt-24">
+      <h2 class="text-2xl text-[var(--ap-primary)]">Continue your alignment journey</h2>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Free Aligned Success course</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Build clarity and take aligned action with our free course inside the Aligned Entrepreneurs Community.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Get free access <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Join the Aligned Entrepreneurs Community</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Connect with other values-driven entrepreneurs, get support, and stay accountable as you grow.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Join the community <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-lg p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Work with the Aligned Power team</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Ready for deeper support? Our coaching programs and workshops help you move from clarity to embodied execution.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">Learn about coaching & workshops <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Your results, saved</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Log in to your portal to see this assessment and your history over time—all in one place.</p>
+        <a href="../portal/login.html" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-[var(--ap-border)] py-6 mt-12 no-print">
+    <div class="max-w-4xl mx-auto px-4 text-center text-sm text-[var(--ap-muted)]">
+      © Aligned Power. Values-Aligned Performance Indicator™ (VAPI™) Assessment. Results can be emailed to you; a copy may be sent to jacob@alignedpower.coach for follow-up.
+    </div>
+  </footer>
+
+  <script type="module">
+    (async function() {
+      try {
+        var raw = sessionStorage.getItem('vapiResults');
+        if (!raw) return;
+        var results = JSON.parse(raw);
+        if (!results.email || typeof window.SUPABASE_URL !== 'string' || !window.SUPABASE_URL || typeof window.SUPABASE_ANON_KEY !== 'string') return;
+        if (sessionStorage.getItem('vapiResultsSaved')) return;
+        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+        var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        await client.from('vapi_results').insert({
+          email: results.email,
+          first_name: results.firstName || null,
+          last_name: results.lastName || null,
+          results: results
+        });
+        sessionStorage.setItem('vapiResultsSaved', '1');
+      } catch (e) {}
+    })();
+  </script>
+  <script>
+    (function() {
+      var COLORS = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
+      var INTERP = window.VAPI_INTERPRETATIONS || { domain: {}, arena: {} };
+      var results = null;
+      try {
+        var raw = sessionStorage.getItem('vapiResults');
+        if (raw) results = JSON.parse(raw);
+      } catch (e) {}
+
+      function tierColor(tier) { return COLORS[tier] || 'var(--ap-accent)'; }
+      function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+      var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
+      var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
+      var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+
+      function buildLifeWheelSVG(domains, opts) {
+        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var overall = opts && typeof opts.overall === 'number' ? opts.overall : null;
+        var overallTier = opts && opts.overallTier ? opts.overallTier : '';
+        var byCode = {};
+        domains.forEach(function(d) { byCode[d.code] = d; });
+        var cx = 160, cy = 160, r = 120;
+        var segmentAngle = 360 / 12;
+        var labelRadius = r + 12;
+        var rInner = r * 0.42;
+        function cellPath(r0, r1, a0Rad, a1Rad) {
+          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
+          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
+          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
+          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
+          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
+        }
+        var html = '<h2 class="text-2xl text-[var(--ap-primary)] mb-4 mt-10">Your alignment at a glance</h2>';
+        html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white shadow-sm p-6 mb-10 overflow-x-auto">';
+        html += '<div class="flex flex-col sm:flex-row items-center gap-6">';
+        html += '<div class="alignment-glance-left flex-shrink-0 mx-auto cursor-pointer outline-none rounded-lg focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2" style="max-width:320px" role="button" tabindex="0" title="Click to enlarge">';
+        html += '<div class="alignment-glance-inner">';
+        html += '<h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-1">The Power of Alignment</h2>';
+        html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">12 core domains for an aligned high impact life and business.</p>';
+        html += '<div class="relative w-full overflow-visible" style="max-width:320px; margin:0 auto;">';
+        html += '<div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible" aria-hidden="true" style="width:119%; height:119%; left:-9.5%; top:-9.5%;"><img src="../images/alignment-logo-watermark.png" alt="" class="w-full h-full object-contain opacity-[0.10]" style="max-width:none; max-height:none; min-width:100%; min-height:100%;"/></div>';
+        html += '<svg viewBox="0 0 320 320" class="w-full h-auto relative z-10" style="overflow:visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Life wheel of 12 alignment domains">';
+        html += '<defs>';
+        html += '<filter id="arenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcPersonal" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
+        var arcRelStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcRelEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcRel" d="M' + arcRelStart.x.toFixed(2) + ',' + arcRelStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcRelEnd.x.toFixed(2) + ',' + arcRelEnd.y.toFixed(2) + '"/>';
+        var arcBizStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcBizEnd = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="arcBiz" d="M' + arcBizStart.x.toFixed(2) + ',' + arcBizStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcBizEnd.x.toFixed(2) + ',' + arcBizEnd.y.toFixed(2) + '"/>';
+        html += '</defs>';
+        for (var i = 0; i < 12; i++) {
+          var d = byCode[order[i]];
+          var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
+          var arena = (d && d.arena) ? d.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10);
+            var r1 = r * (k / 10);
+            var fill = (k <= score) ? darkC : lightC;
+            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+          }
+        }
+        for (var ring = 1; ring <= 10; ring++) {
+          var rr = r * (ring / 10);
+          html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        for (var i = 0; i < 12; i++) {
+          var a0 = (i * segmentAngle - 90) * Math.PI / 180;
+          var x0 = cx + r * Math.cos(a0);
+          var y0 = cy + r * Math.sin(a0);
+          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x0 + '" y2="' + y0 + '" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
+        for (var k = 1; k <= 10; k++) {
+          var rr = r * (k / 10);
+          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
+        }
+        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
+        for (var i = 0; i < 12; i++) {
+          var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad);
+          var ty = cy + labelRadius * Math.sin(midRad);
+          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
+          var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
+          var lineHeight = 10;
+          var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
+          for (var L = 0; L < lines.length; L++) {
+            html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + escapeHtml(lines[L]) + '</tspan>';
+          }
+          html += '</text>';
+        }
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcPersonal" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcRel" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '</svg>';
+        html += '</div>';
+        html += '<img src="../images/aligned-power-logo.png" alt="Aligned Power" class="h-12 w-auto mt-4 mx-auto block"/>';
+        html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
+        html += '</div></div>';
+        html += '<div class="flex-1 min-w-0">';
+        if (overall != null && overallTier) {
+          html += '<p class="text-sm font-semibold text-[var(--ap-muted)] mb-1">Overall composite score</p>';
+          html += '<p class="text-5xl font-bold mb-1" style="color:' + tierColor(overallTier) + '">' + overall + ' <span class="text-2xl font-normal text-[var(--ap-secondary)]">/ 10</span></p>';
+          html += '<p class="font-semibold mb-3" style="color:' + tierColor(overallTier) + '">' + overallTier + '</p>';
+          var compositeText = (INTERP.composite && INTERP.composite[overallTier]) ? INTERP.composite[overallTier] : '';
+          if (compositeText) html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">' + escapeHtml(compositeText) + '</p>';
+        }
+        html += '<div class="flex flex-wrap gap-x-4 gap-y-1 text-sm">';
+        ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
+          var c = ARENA_DARK[arena];
+          html += '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:' + c + '"></span><span class="font-medium text-[var(--ap-primary)]">' + arena + '</span></span>';
+        });
+        html += '</div>';
+        html += '</div></div>';
+        html += '</div>';
+        return html;
+      }
+
+      function renderPlaceholder() {
+        var el = document.getElementById('results-content');
+        el.innerHTML = '<div class="text-center mb-10"><p class="text-[var(--ap-accent)] mb-2">Your Results</p><h1 class="text-4xl text-[var(--ap-primary)]">Your VAPI™ Scores</h1><p class="text-[var(--ap-secondary)] mt-2">Complete the assessment to see your results.</p></div><p class="text-[var(--ap-muted)]"><a href="vapi-landing.html">Start the VAPI™ Assessment</a></p>';
+      }
+
+      function render(results) {
+        var firstName = results.firstName || '';
+        var lastName = results.lastName || '';
+        var fullName = [firstName, lastName].filter(Boolean).join(' ');
+        var overall = results.overall;
+        var overallTier = results.overallTier;
+        var arenaScores = results.arenaScores || {};
+        var arenaTiers = results.arenaTiers || {};
+        if (arenaScores.Self != null && arenaScores.Personal == null) arenaScores.Personal = arenaScores.Self;
+        if (arenaTiers.Self && !arenaTiers.Personal) arenaTiers.Personal = arenaTiers.Self;
+        var domains = (results.domains || []).map(function(d) {
+          var out = Object.assign({}, d);
+          if (out.arena === 'Self') out.arena = 'Personal';
+          return out;
+        });
+        var top3 = results.top3 || [];
+        var bottom3 = results.bottom3 || [];
+        var acquiescence = results.acquiescence;
+
+        var html = '';
+
+        var reportDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        if (acquiescence) {
+          html += '<div class="rounded-lg border-2 border-amber-500 bg-amber-50 p-4 mb-8 text-amber-900"><p class="font-semibold">Note on your responses</p><p class="text-sm mt-1">Some of your responses appear contradictory. For the most accurate results, retake the assessment and read each statement carefully.</p></div>';
+        }
+
+        html += '<div class="print-only print-report-header"><strong>VAPI™ Results</strong>' + (fullName ? ' · ' + escapeHtml(fullName) : '') + ' · ' + reportDate + '</div>';
+        html += '<div class="results-title-block text-center mb-10">';
+        html += '<p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">Your Results</p>';
+        html += '<h1 class="text-4xl sm:text-5xl text-[var(--ap-primary)] leading-tight">' + (firstName ? firstName + ', your ' : 'Your ') + 'VAPI™ Score</h1>';
+        html += '<p class="text-[var(--ap-secondary)] mt-2">Values-Aligned Performance Indicator™. 12 Domains. 3 Arenas. 1 Aligned Life.</p>';
+        html += '</div>';
+
+        html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
+        html += '<div class="no-print flex flex-wrap items-center justify-center gap-3 py-6 mb-6 rounded-lg border border-[var(--ap-border)] bg-[var(--ap-bg)]/80">';
+        html += '<span class="text-[var(--ap-secondary)] text-sm">What&rsquo;s next?</span>';
+        html += '<a href="#continue-journey" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-4 py-2 border border-[var(--ap-primary)]/30 hover:border-[var(--ap-accent)] hover:bg-[var(--ap-accent)]/10 transition-colors">See resources and next steps below <i data-lucide="arrow-down" class="w-4 h-4"></i></a>';
+        html += '</div>';
+        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Arena scores</h2>';
+        html += '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">';
+        ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
+          var score = arenaScores[arena];
+          var tier = arenaTiers[arena];
+          var text = (INTERP.arena[arena] && INTERP.arena[arena][tier]) ? INTERP.arena[arena][tier] : '';
+          if (score == null) score = '—';
+          html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5">';
+          html += '<p class="font-semibold text-[var(--ap-primary)]">' + arena + '</p>';
+          html += '<p class="text-2xl font-bold mt-1" style="color:' + tierColor(tier) + '">' + score + ' / 10</p>';
+          html += '<p class="text-sm font-medium mt-1" style="color:' + tierColor(tier) + '">' + tier + '</p>';
+          html += '<p class="text-sm text-[var(--ap-secondary)] mt-3 leading-relaxed">' + text + '</p>';
+          html += '</div>';
+        });
+        html += '</div>';
+
+        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Your strengths</h2>';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6 mb-6"><ul class="space-y-2">';
+        top3.forEach(function(d) {
+          html += '<li class="flex items-center gap-2"><span class="font-semibold text-[var(--ap-secondary)]">' + d.domain + '</span><span class="font-bold" style="color:' + tierColor(d.tier) + '">' + d.score + '/10</span><span class="text-sm" style="color:' + tierColor(d.tier) + '">' + d.tier + '</span></li>';
+        });
+        html += '</ul></div>';
+
+        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Your priority focus areas</h2>';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6 mb-10"><ul class="space-y-2">';
+        bottom3.forEach(function(d) {
+          html += '<li class="flex items-center gap-2"><span class="font-semibold text-[var(--ap-secondary)]">' + d.domain + '</span><span class="font-bold" style="color:' + tierColor(d.tier) + '">' + d.score + '/10</span><span class="text-sm" style="color:' + tierColor(d.tier) + '">' + d.tier + '</span></li>';
+        });
+        html += '</ul></div>';
+
+        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Domain detail</h2>';
+        var arenaOrder = ['Personal', 'Relationships', 'Business'];
+        var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        arenaOrder.forEach(function(arena, idx) {
+          var mt = idx === 0 ? 'mt-2' : 'mt-8';
+          html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + arena + '</h3>';
+          domains.filter(function(d) { return d.arena === arena; }).forEach(function(d) {
+            var pct = Math.min(100, d.score * 10);
+            var text = (INTERP.domain[d.code] && INTERP.domain[d.code][d.tier]) ? INTERP.domain[d.code][d.tier] : '';
+            html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6 mb-4">';
+            html += '<div class="flex flex-wrap items-center gap-2 mb-2"><span class="font-semibold text-[var(--ap-secondary)]">' + d.domain + '</span>';
+            html += '<span class="font-bold" style="color:' + tierColor(d.tier) + '">' + d.score + ' / 10</span>';
+            html += '<span class="text-sm font-medium px-2 py-0.5 rounded" style="background:' + tierColor(d.tier) + '20;color:' + tierColor(d.tier) + '">' + d.tier + '</span></div>';
+            html += '<div class="h-2 bg-[var(--ap-muted)]/30 rounded-full overflow-hidden mb-4"><div class="h-full rounded-full transition-all duration-500" style="width:' + pct + '%;background:' + tierColor(d.tier) + '"></div></div>';
+            html += '<p class="text-[var(--ap-secondary)] leading-relaxed text-sm">' + text + '</p>';
+            html += '</div>';
+          });
+        });
+
+        html += '<p class="text-sm text-[var(--ap-muted)] mt-8 no-print">Use &ldquo;Download / Print results&rdquo; above to save this page as a PDF.</p>';
+
+        document.getElementById('results-content').innerHTML = html;
+        attachAlignmentLightbox();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+
+      function attachAlignmentLightbox() {
+        var el = document.querySelector('.alignment-glance-left');
+        if (!el) return;
+        function openLightbox() {
+          var overlay = document.createElement('div');
+          overlay.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 no-print';
+          overlay.setAttribute('role', 'dialog');
+          overlay.setAttribute('aria-modal', 'true');
+          overlay.setAttribute('aria-label', 'Enlarged alignment view');
+          var inner = document.createElement('div');
+          inner.className = 'bg-white rounded-xl w-[95vw] max-w-6xl h-[95vh] max-h-[95vh] overflow-auto relative shadow-xl';
+          var closeBtn = document.createElement('button');
+          closeBtn.type = 'button';
+          closeBtn.className = 'absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full text-[var(--ap-secondary)] hover:bg-[var(--ap-muted)]/30 hover:text-[var(--ap-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)]';
+          closeBtn.setAttribute('aria-label', 'Close');
+          closeBtn.innerHTML = '&times;';
+          closeBtn.style.fontSize = '1.5rem';
+          closeBtn.style.lineHeight = '1';
+          var printBtn = document.createElement('button');
+          printBtn.type = 'button';
+          printBtn.className = 'absolute top-4 right-16 w-10 h-10 flex items-center justify-center rounded-full text-[var(--ap-secondary)] hover:bg-[var(--ap-muted)]/30 hover:text-[var(--ap-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)]';
+          printBtn.setAttribute('aria-label', 'Print this view');
+          printBtn.textContent = 'Print';
+          printBtn.style.fontSize = '0.875rem';
+          var contentWrap = document.createElement('div');
+          contentWrap.className = 'p-12 sm:p-16 flex items-center justify-center min-h-[200px] lightbox-print-content';
+          var clone = document.querySelector('.alignment-glance-inner').cloneNode(true);
+          var hint = clone.querySelector('.enlarge-hint');
+          if (hint) hint.remove();
+          clone.style.transform = 'scale(3.2)';
+          clone.style.transformOrigin = 'top center';
+          contentWrap.appendChild(clone);
+          inner.appendChild(closeBtn);
+          inner.appendChild(printBtn);
+          inner.appendChild(contentWrap);
+          overlay.appendChild(inner);
+          function close() {
+            overlay.remove();
+            document.body.style.overflow = '';
+          }
+          function printLightbox() {
+            var printWin = window.open('', '_blank');
+            if (!printWin) return;
+            var content = contentWrap.cloneNode(true);
+            var cloneInner = content.querySelector('.alignment-glance-inner');
+            if (cloneInner) {
+              cloneInner.style.transform = 'none';
+              var subhead = cloneInner.querySelector('p');
+              if (subhead) subhead.remove();
+              var hint = cloneInner.querySelector('.enlarge-hint');
+              if (hint) hint.remove();
+              var printHeadline = cloneInner.querySelector('h2');
+              if (printHeadline) printHeadline.textContent = 'Your VAPI™ Scores';
+            }
+            content.style.padding = '0';
+            content.style.transform = 'none';
+            var link = document.querySelector('link[href*="fonts.googleapis"]');
+            var fontLink = link ? '<link rel="stylesheet" href="' + link.href + '">' : '';
+            var baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
+            var logoAbs = baseUrl + '../images/aligned-power-logo.png';
+            var watermarkAbs = baseUrl + '../images/alignment-logo-watermark.png';
+            var bodyHtml = content.innerHTML
+              .replace('src="../images/aligned-power-logo.png"', 'src="' + logoAbs + '"')
+              .replace('src="../images/alignment-logo-watermark.png"', 'src="' + watermarkAbs + '"');
+            var printStyles = '<style>' +
+              ':root{--ap-primary:#582233;--ap-secondary:#334750;--ap-accent:#D4AA70;--ap-muted:#C6B8A7;}' +
+              'body{font-family:\'Source Sans 3\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
+              'body *{box-sizing:border-box;}' +
+              '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
+              '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
+              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#582233;margin:0 0 0.5rem 0;}' +
+              '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
+              '.alignment-glance-inner .absolute{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;width:119%;height:119%;left:-9.5%;top:-9.5%;}' +
+              '.alignment-glance-inner .absolute img{width:100%;height:100%;object-fit:contain;opacity:0.1;max-width:none;max-height:none;min-width:100%;min-height:100%;}' +
+              '.alignment-glance-inner svg{width:100%;height:auto;display:block;position:relative;z-index:10;}' +
+              '.alignment-glance-inner > img:last-of-type{display:block;width:auto;height:4rem;margin:1.25rem auto 0;max-width:100%;}' +
+              'img{max-width:100%;height:auto;}' +
+              'svg{max-width:100%;height:auto;}' +
+              '@media print{@page{margin:0.2in;} body{padding:0;margin:0;} .print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}}' +
+              '</style>';
+            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Your VAPI™ Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
+            printWin.document.write(html);
+            printWin.document.close();
+            printWin.focus();
+            setTimeout(function() { try { printWin.print(); printWin.close(); } catch (err) { printWin.close(); } }, 250);
+          }
+          printBtn.addEventListener('click', function(e) { e.stopPropagation(); printLightbox(); });
+          closeBtn.addEventListener('click', close);
+          overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) close();
+          });
+          document.addEventListener('keydown', function onKey(e) {
+            if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onKey); }
+          });
+          document.body.style.overflow = 'hidden';
+          document.body.appendChild(overlay);
+        }
+        el.addEventListener('click', openLightbox);
+        el.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        });
+      }
+
+      if (results && typeof results.overall === 'number') {
+        render(results);
+      } else {
+        renderPlaceholder();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# Supabase config (URL + anon key per environment)
+**/supabase-config.js
+
 # Node.js
 node_modules/
 package-lock.json

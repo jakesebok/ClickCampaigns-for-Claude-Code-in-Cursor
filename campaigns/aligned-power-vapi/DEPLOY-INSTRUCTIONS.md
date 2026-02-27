@@ -1,0 +1,159 @@
+# Get your VAPI assessment + portal live (no coding required)
+
+You’ll do **4 main things**: set up Supabase (database + auth), put your project on GitHub, connect it to Vercel, and add your Supabase keys in Vercel. Everything is done in the browser or with simple copy-paste.
+
+---
+
+## Part 1: Supabase (where results and logins are stored)
+
+### 1.1 Create a Supabase account and project
+
+1. Open **https://supabase.com** in your browser.
+2. Click **Start your project** (or **Sign in** if you already have an account).
+3. Sign in with **GitHub** (easiest since you already have GitHub).
+4. After sign-in, click **New project**.
+5. Fill in:
+   - **Name**: e.g. `aligned-power` (anything you like).
+   - **Database password**: invent a strong password and **save it somewhere safe** (you need it for the database).
+   - **Region**: pick one close to you.
+6. Click **Create new project** and wait 1–2 minutes until it says the project is ready.
+
+### 1.2 Create the table and security rules (run the SQL)
+
+1. In the left sidebar, click **SQL Editor**.
+2. Click **New query**.
+3. Open the file **schema** in this project:  
+   In your project folder, go to **supabase** → open **schema.sql** (it’s in the main project, not inside the campaign folder).  
+   Select **all** the text in that file and **copy** it.
+4. Paste that entire text into the Supabase SQL Editor (the big empty box).
+5. Click **Run** (or the green “Run” button at the bottom right).
+6. You should see a message that the query ran successfully. That created the table and rules for saving assessment results and for the portal.
+
+### 1.3 Get your Supabase “keys” (URL and anon key)
+
+1. In the left sidebar, click the **gear icon** (⚙️) at the bottom to open **Project settings**.
+2. Click **API** in the left menu under Project settings.
+3. On the right you’ll see:
+   - **Project URL** — something like `https://abcdefgh.supabase.co`  
+   - **Project API keys** — one called **anon** **public**  
+   Copy both and keep them somewhere handy (e.g. a Notes app):
+   - Project URL  
+   - anon public key (the long string under “anon public”)
+
+You’ll paste these into Vercel in Part 3.
+
+---
+
+## Part 2: Put your project on GitHub
+
+You need your project (the code) in a GitHub repository so Vercel can use it.
+
+### Option A: You already have this project in a GitHub repo
+
+- If someone already created a repo and you have it (e.g. you cloned it or have the folder from GitHub), skip to **Part 3**.
+
+### Option B: You have the project only on your computer
+
+1. Go to **https://github.com** and sign in.
+2. Click the **+** in the top right → **New repository**.
+3. **Repository name**: e.g. `aligned-power-vapi` (or any name you like).
+4. Leave **Public** selected. Do **not** check “Add a README” (you already have files).
+5. Click **Create repository**.
+6. GitHub will show a page with “…or push an existing repository from the command line.” You’ll use that in a moment.
+7. On your computer, open **Terminal** (Mac) or **Command Prompt** (Windows):
+   - **Mac**: Spotlight (Cmd+Space), type **Terminal**, press Enter.
+   - **Windows**: Start menu → type **cmd** or **Command Prompt**, open it.
+8. Go to your project folder. Type this (replace with your real folder path if different):
+   ```bash
+   cd /Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor
+   ```
+   Press Enter.
+9. Then run these three commands, **one at a time** (replace `YOUR_USERNAME` and `aligned-power-vapi` with your GitHub username and the repo name you chose in step 3):
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/aligned-power-vapi.git
+   git push -u origin main
+   ```
+   When it asks for username/password, use your GitHub username and a **Personal Access Token** (GitHub no longer accepts account password here):
+   - GitHub → Settings → Developer settings → Personal access tokens → Generate new token. Give it a name, check **repo**, generate, then copy the token and paste it when the terminal asks for “Password”.
+
+If you’ve never used Git and this feels confusing, you can instead:
+- Create the repo on GitHub (steps 1–5 above), then use **GitHub Desktop** (download from github.com) to “Add” your local folder and “Publish repository” to push the code.
+
+---
+
+## Part 3: Deploy on Vercel and add Supabase keys
+
+### 3.1 Import the project into Vercel
+
+1. Go to **https://vercel.com** and sign in (use **Continue with GitHub** if you can).
+2. Click **Add New…** → **Project**.
+3. You should see your GitHub repo in the list (e.g. `aligned-power-vapi` or `ClickCampaigns-for-Claude-Code-in-Cursor`). Click **Import** next to it.
+4. **Important — set the root folder**:
+   - Find **Root Directory**. Click **Edit** next to it.
+   - Enter exactly: **campaigns/aligned-power-vapi/output-assets**
+   - This tells Vercel that the “website” and the **api** folder live inside that folder.
+5. **Do not** add any “Build and Output” overrides. Click **Deploy**.
+6. Wait for the deployment to finish (usually under a minute). You’ll get a URL like `something.vercel.app`. That’s your live site.
+
+### 3.2 Add your Supabase keys in Vercel
+
+1. On Vercel, open your project (click the project name).
+2. Click the **Settings** tab at the top.
+3. In the left sidebar, click **Environment Variables**.
+4. Add **two** variables (one at a time):
+
+   **First variable**
+   - **Name**: `SUPABASE_URL`  
+   - **Value**: paste your **Project URL** from Supabase (from Part 1.3).  
+   - **Environment**: leave all three checked (Production, Preview, Development).  
+   - Click **Save**.
+
+   **Second variable**
+   - **Name**: `SUPABASE_ANON_KEY`  
+   - **Value**: paste your **anon public** key from Supabase (from Part 1.3).  
+   - **Environment**: leave all three checked.  
+   - Click **Save**.
+
+5. **Redeploy** so the new keys are used:
+   - Go to the **Deployments** tab.
+   - Click the **⋯** on the latest deployment → **Redeploy** → **Redeploy** again to confirm.
+
+---
+
+## Part 4: Tell Supabase your live site URL (for portal login)
+
+1. In Supabase, go to **Authentication** (left sidebar) → **URL Configuration**.
+2. Under **Redirect URLs**, click **Add URL**.
+3. Add your Vercel URL, with a trailing slash and then `**` so all portal paths work, e.g.:
+   - `https://your-project-name.vercel.app/**`
+   Replace `your-project-name` with your real Vercel project URL.
+4. Click **Save**.
+
+---
+
+## You’re done
+
+- **Assessment (landing)**: `https://your-project.vercel.app/html/vapi-landing.html`  
+- **Portal login**: `https://your-project.vercel.app/portal/login.html`  
+- **Portal signup**: `https://your-project.vercel.app/portal/signup.html`  
+
+Share the landing link so people can take the assessment. When they enter their email at the end, that result is saved. If they create a portal account with the **same email** and log in, they’ll see that result (and any future ones) on the dashboard.
+
+---
+
+## Quick checklist
+
+- [ ] Supabase project created  
+- [ ] SQL from `supabase/schema.sql` run in Supabase SQL Editor  
+- [ ] Project URL and anon key copied from Supabase  
+- [ ] Code pushed to a GitHub repo  
+- [ ] Vercel project created with Root Directory = `campaigns/aligned-power-vapi/output-assets`  
+- [ ] `SUPABASE_URL` and `SUPABASE_ANON_KEY` added in Vercel Environment Variables  
+- [ ] Vercel project redeployed after adding env vars  
+- [ ] Redirect URL added in Supabase (your Vercel URL + `/**`)  
+
+If something doesn’t work (e.g. “portal not configured”, or results not saving), double-check that the two env var **names** in Vercel are exactly `SUPABASE_URL` and `SUPABASE_ANON_KEY`, and that you redeployed after saving them.
