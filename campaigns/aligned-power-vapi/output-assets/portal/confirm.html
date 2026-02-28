@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email confirmed | Aligned Power Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <main class="max-w-md mx-auto px-4 pt-16 pb-12">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Email confirmed</h1>
+      <p class="text-[var(--ap-secondary)]">Your account is ready. Redirecting you to log in…</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 sm:p-8 text-center">
+      <p id="message" class="text-[var(--ap-secondary)]">Taking you to the portal…</p>
+      <p class="mt-4">
+        <a href="login.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in now</a> if you’re not redirected.
+      </p>
+    </div>
+    <p class="text-center mt-6">
+      <a href="../html/vapi-landing.html" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">← Back to assessment</a>
+    </p>
+  </main>
+  <script type="module">
+    (function() {
+      var hash = window.location.hash ? window.location.hash.slice(1) : '';
+      var params = new URLSearchParams(hash || window.location.search);
+      var errorDesc = params.get('error_description');
+      var msgEl = document.getElementById('message');
+      if (errorDesc) {
+        msgEl.textContent = errorDesc;
+        msgEl.classList.add('text-red-600');
+        return;
+      }
+      setTimeout(function() {
+        window.location.href = 'login.html';
+      }, 2500);
+    })();
+  </script>
+</body>
+</html>

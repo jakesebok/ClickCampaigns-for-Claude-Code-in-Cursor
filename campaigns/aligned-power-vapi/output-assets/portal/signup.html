@@ -92,7 +92,8 @@
         var password = document.getElementById('password').value;
         var errEl = document.getElementById('signup-error');
         errEl.classList.add('hidden');
-        var { data, error } = await supabase.auth.signUp({ email, password });
+        var redirectTo = window.location.origin + '/portal/confirm.html';
+        var { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: redirectTo } });
         if (error) {
           errEl.textContent = error.message || 'Sign up failed.';
           errEl.classList.remove('hidden');

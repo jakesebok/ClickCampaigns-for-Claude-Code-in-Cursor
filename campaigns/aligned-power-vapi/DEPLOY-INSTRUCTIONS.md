@@ -136,14 +136,16 @@ If you’ve never used Git and this feels confusing, you can instead:
 
 ---
 
-## Part 4: Tell Supabase your live site URL (for portal login)
+## Part 4: Tell Supabase your live site URL (for portal login and email confirmation)
 
 1. In Supabase, go to **Authentication** (left sidebar) → **URL Configuration**.
-2. Under **Redirect URLs**, click **Add URL**.
-3. Add your Vercel URL, with a trailing slash and then `**` so all portal paths work, e.g.:
+2. Set **Site URL** to your portal confirmation page so that “Confirm your mail” links in signup emails send users to a real page instead of a 404:
+   - **Site URL**: `https://your-project-name.vercel.app/portal/confirm.html`  
+   (Replace `your-project-name` with your real Vercel project URL.)
+3. Under **Redirect URLs**, click **Add URL** (if not already there).
+4. Add your Vercel URL with a trailing slash and `**` so all portal paths work, e.g.:
    - `https://your-project-name.vercel.app/**`
-   Replace `your-project-name` with your real Vercel project URL.
-4. Click **Save**.
+5. Click **Save**.
 
 ---
 
