@@ -10,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="../html/vapi-results-interpretations.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
@@ -26,7 +27,7 @@
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+  <header class="border-b border-[var(--ap-border)] bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-md">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
       <div class="flex items-center gap-4">
@@ -37,7 +38,7 @@
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 py-10">
+  <main class="max-w-3xl mx-auto px-4 py-10 bg-gradient-to-b from-[var(--ap-bg)] to-[#ebe0d8] min-h-[calc(100vh-4rem)]">
     <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading your results…</div>
     <div id="dashboard-content" class="hidden">
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your VAPI™ results</h1>
@@ -48,7 +49,7 @@
       <div id="progress-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
-        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-xl p-6 ring-1 ring-black/5">
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
               <canvas id="progress-chart"></canvas>
@@ -83,7 +84,7 @@
 
       <h2 class="text-xl text-[var(--ap-primary)] mb-4">Assessment history</h2>
       <div id="history-list" class="space-y-3"></div>
-      <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/50">
+      <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/80 shadow-lg ring-1 ring-black/5">
         <p class="text-[var(--ap-secondary)] mb-4">No assessments yet for this account.</p>
         <p id="empty-state-error" class="text-sm text-red-600 mb-4 hidden"></p>
         <a href="../html/vapi-landing.html" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take the VAPI™ assessment <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
@@ -238,26 +239,42 @@
 
       var latest = rows[0];
       var latestScore = overallScore(latest.results);
+      var latestTier = (latest.results && latest.results.overallTier) ? latest.results.overallTier : '';
+      var INTERP = window.VAPI_INTERPRETATIONS || {};
+      var TIER_COLORS = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
+      var compositeDesc = (INTERP.composite && latestTier && INTERP.composite[latestTier]) ? INTERP.composite[latestTier] : '';
+      var tierColor = TIER_COLORS[latestTier] || 'var(--ap-accent)';
       var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
-      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
+      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-xl p-6 ring-1 ring-black/5">';
       latestHtml += '<div class="flex flex-col sm:flex-row items-start gap-6">';
-      latestHtml += '<div class="flex-shrink-0 mx-auto sm:mx-0" style="max-width:200px">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '<div class="flex-1 min-w-0">';
       latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-1">Latest</p>';
       latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-1">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
       latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-4">' + formatDate(latest.created_at) + '</p>';
       if (latestScore != null) {
-        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall score: ' + latestScore + ' / 10</p>';
+        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-2">Overall score: ' + latestScore + ' / 10</p>';
       }
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
-      latestHtml += '</div></div>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors shadow-md hover:shadow-lg mb-4">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      if (latestTier || compositeDesc) {
+        latestHtml += '<div class="pt-4 mt-4 border-t border-[var(--ap-border)]">';
+        if (latestTier) {
+          latestHtml += '<p class="text-sm font-semibold mb-2"><span class="inline-block px-3 py-1 rounded-full text-white text-sm" style="background:' + tierColor + '">' + String(latestTier).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span></p>';
+        }
+        if (compositeDesc) {
+          latestHtml += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed line-clamp-4">' + compositeDesc.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;') + '</p>';
+        }
+        latestHtml += '</div>';
+      }
+      latestHtml += '</div>';
+      latestHtml += '<div class="flex-shrink-0 mx-auto sm:mx-0" style="max-width:200px">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
 
       var historyHtml = '';
       rows.forEach(function(row) {
         var score = overallScore(row.results);
-        historyHtml += '<div class="flex items-center justify-between gap-4 bg-white rounded-xl border border-[var(--ap-border)] p-4">';
+        historyHtml += '<div class="flex items-center justify-between gap-4 bg-white rounded-xl border border-[var(--ap-border)] p-4 shadow-md hover:shadow-lg transition-shadow ring-1 ring-black/5">';
         historyHtml += '<div><p class="font-medium text-[var(--ap-primary)]">' + formatDate(row.created_at) + '</p>';
         if (score != null) historyHtml += '<p class="text-sm text-[var(--ap-muted)]">Overall: ' + score + ' / 10</p>';
         historyHtml += '</div>';
