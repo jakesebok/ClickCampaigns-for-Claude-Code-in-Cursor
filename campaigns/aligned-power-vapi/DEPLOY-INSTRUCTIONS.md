@@ -29,18 +29,30 @@ You’ll do **4 main things**: set up Supabase (database + auth), put your proje
 5. Click **Run** (or the green “Run” button at the bottom right).
 6. You should see a message that the query ran successfully. That created the table and rules for saving assessment results and for the portal.
 
-### 1.3 Get your Supabase “keys” (URL and anon key)
+### 1.3 Get your Project URL and API key
+
+You need two values for Vercel later: **Project URL** and a **public API key** (either the Publishable key or the Legacy anon key—both work).
+
+**Project URL**
+
+- With your project open in the Supabase dashboard, look at the **address bar** in your browser. The URL looks like:  
+  `https://supabase.com/dashboard/project/xxxxxxxxxx/...`  
+  The part after `/project/` (e.g. `xxxxxxxxxx`) is your **project reference**.
+- Your **Project URL** is:  
+  **`https://xxxxxxxxxx.supabase.co`**  
+  (Replace `xxxxxxxxxx` with your actual project reference. No slash at the end.)
+- Copy that URL and keep it somewhere handy (e.g. a Notes app).
+
+**API key (for Vercel's SUPABASE_ANON_KEY)**
 
 1. In the left sidebar, click the **gear icon** (⚙️) at the bottom to open **Project settings**.
-2. Click **API** in the left menu under Project settings.
-3. On the right you’ll see:
-   - **Project URL** — something like `https://abcdefgh.supabase.co`  
-   - **Project API keys** — one called **anon** **public**  
-   Copy both and keep them somewhere handy (e.g. a Notes app):
-   - Project URL  
-   - anon public key (the long string under “anon public”)
+2. Click **API Keys** in the left menu.
+3. Use **one** of these (either is fine):
+   - **Publishable and secret API keys** tab → copy the **Publishable key** (starts with `sb_publishable_...`), or  
+   - **Legacy anon, service_role API keys** tab → copy the **Legacy ANON** key (a long JWT string).
+4. Copy that key and keep it handy. You will paste it into Vercel as **SUPABASE_ANON_KEY** in Part 3.
 
-You’ll paste these into Vercel in Part 3.
+**Do not** use a Secret key or the service_role key—those are for backend-only use. The Publishable key or Legacy anon key is the correct one for the portal and for saving results from the browser.
 
 ---
 
@@ -114,7 +126,7 @@ If you’ve never used Git and this feels confusing, you can instead:
 
    **Second variable**
    - **Name**: `SUPABASE_ANON_KEY`  
-   - **Value**: paste your **anon public** key from Supabase (from Part 1.3).  
+   - **Value**: paste your **Publishable key or Legacy anon** key from Supabase (from Part 1.3).  
    - **Environment**: leave all three checked.  
    - Click **Save**.
 
