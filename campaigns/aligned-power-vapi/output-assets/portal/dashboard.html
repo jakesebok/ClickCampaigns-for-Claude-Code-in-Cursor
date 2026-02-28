@@ -199,7 +199,7 @@
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
         var fid = 'dashboardWheelShadow';
-        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto" style="max-width:240px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:240px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs><filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
@@ -246,33 +246,30 @@
       var compositeDesc = (latestTier && interp[latestTier]) ? interp[latestTier] : '';
       var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
       var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
-      latestHtml += '<div class="flex flex-col sm:flex-row items-start gap-6">';
+      latestHtml += '<div class="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">';
       latestHtml += '<div class="flex-1 min-w-0">';
       latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-1">Latest</p>';
       latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-1">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
-      latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-4">' + formatDate(latest.created_at) + '</p>';
+      latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-3">' + formatDate(latest.created_at) + '</p>';
       if (latestScore != null) {
-        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)]">Overall score: ' + latestScore + ' / 10</p>';
+        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall score: ' + latestScore + ' / 10</p>';
       }
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
-      latestHtml += '<div class="flex-shrink-0 mx-auto sm:mx-0" style="max-width:200px">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-shrink-0 mx-auto sm:mx-0 overflow-visible p-2" style="max-width:220px">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '<div class="border-t border-[var(--ap-border)] mt-6 pt-6">';
       if (latestScore != null && latestTier) {
-        latestHtml += '<div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">';
-        latestHtml += '<div class="flex-shrink-0 flex items-baseline gap-2 flex-wrap">';
+        latestHtml += '<div class="flex items-baseline gap-2 flex-wrap mb-3">';
         latestHtml += '<span class="text-3xl font-bold" style="color:' + tierColor + '">' + latestScore + '</span>';
         latestHtml += '<span class="text-[var(--ap-muted)]">/ 10</span>';
         latestHtml += '<span class="font-semibold px-3 py-0.5 rounded-full text-sm text-white" style="background:' + tierColor + '">' + latestTier + '</span>';
         latestHtml += '</div>';
         if (compositeDesc) {
-          latestHtml += '<p class="text-[var(--ap-secondary)] text-sm leading-relaxed flex-1 min-w-0">' + compositeDesc.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+          latestHtml += '<p class="text-[var(--ap-secondary)] text-sm leading-relaxed">' + compositeDesc.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
         }
-        latestHtml += '</div>';
       }
-      latestHtml += '<div class="mt-6">';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
-      latestHtml += '</div></div>';
+      latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
 
