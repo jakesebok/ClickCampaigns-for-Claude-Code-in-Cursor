@@ -47,35 +47,36 @@
 
       <div id="progress-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
         <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
-          <label for="metric-select" class="block text-sm font-semibold text-[var(--ap-primary)] mb-2">Metric</label>
-          <select id="metric-select" class="w-full sm:w-auto mb-4 px-4 py-2 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-[var(--ap-text)]">
-            <optgroup label="Composite">
-              <option value="overall">Overall score</option>
-            </optgroup>
-            <optgroup label="Arena">
-              <option value="arena:Personal">Personal</option>
-              <option value="arena:Relationships">Relationships</option>
-              <option value="arena:Business">Business</option>
-            </optgroup>
-            <optgroup label="Domain">
-              <option value="domain:PH">Physical Health</option>
-              <option value="domain:IA">Inner Alignment</option>
-              <option value="domain:ME">Mental / Emotional Health</option>
-              <option value="domain:AF">Attention &amp; Focus</option>
-              <option value="domain:RS">Relationship to Self</option>
-              <option value="domain:FA">Family</option>
-              <option value="domain:CO">Community</option>
-              <option value="domain:WI">World / Impact</option>
-              <option value="domain:VS">Vision / Strategy</option>
-              <option value="domain:EX">Execution</option>
-              <option value="domain:OH">Operational Health</option>
-              <option value="domain:EC">Ecology</option>
-            </optgroup>
-          </select>
-          <div class="chart-container relative h-64 sm:h-80">
-            <canvas id="progress-chart"></canvas>
+          <div class="flex flex-col lg:flex-row gap-6">
+            <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
+              <canvas id="progress-chart"></canvas>
+            </div>
+            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
+              <div id="metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1">
+                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
+                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
+                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Domain</div>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
+                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -174,9 +175,74 @@
         window.location.href = '../html/vapi-results.html';
       }
 
+      function buildWheelSVG(domains) {
+        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
+        var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
+        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        var byCode = {};
+        (domains || []).forEach(function(d) {
+          var copy = { code: d.code, score: d.score, arena: (d.arena === 'Self' ? 'Personal' : d.arena) || 'Personal' };
+          byCode[d.code] = copy;
+        });
+        var cx = 160; var cy = 160; var r = 120;
+        var segmentAngle = 360 / 12;
+        var labelRadius = r + 12;
+        var rInner = r * 0.42;
+        function cellPath(r0, r1, a0Rad, a1Rad) {
+          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
+          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
+          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
+          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
+          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
+        }
+        var fid = 'dashboardWheelShadow';
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto" style="max-width:240px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
+        html += '<defs><filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
+        for (var i = 0; i < 12; i++) {
+          var d = byCode[order[i]];
+          var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
+          var arena = (d && d.arena) ? d.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+            var fill = (k <= score) ? darkC : lightC;
+            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+          }
+        }
+        for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
+        for (var i = 0; i < 12; i++) {
+          var a0 = (i * segmentAngle - 90) * Math.PI / 180;
+          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0)) + '" y2="' + (cy + r * Math.sin(a0)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
+        for (var i = 0; i < 12; i++) {
+          var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad); var ty = cy + labelRadius * Math.sin(midRad);
+          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
+          var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
+          var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
+          html += '</text>';
+        }
+        html += '</svg>';
+        return html;
+      }
+
       var latest = rows[0];
       var latestScore = overallScore(latest.results);
+      var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
       var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
+      latestHtml += '<div class="flex flex-col sm:flex-row items-start gap-6">';
+      latestHtml += '<div class="flex-shrink-0 mx-auto sm:mx-0" style="max-width:200px">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-1 min-w-0">';
       latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-1">Latest</p>';
       latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-1">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
       latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-4">' + formatDate(latest.created_at) + '</p>';
@@ -184,6 +250,7 @@
         latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall score: ' + latestScore + ' / 10</p>';
       }
       latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '</div></div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
 
@@ -231,9 +298,9 @@
         var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
         var progressChart = null;
 
+        var selectedMetricKey = 'overall';
         function updateChart() {
-          var metricKey = document.getElementById('metric-select').value;
-          var values = sortedByDate.map(function(r) { return getScoreForMetric(r.results, metricKey); });
+          var values = sortedByDate.map(function(r) { return getScoreForMetric(r.results, selectedMetricKey); });
           if (!progressChart) {
             var ctx = document.getElementById('progress-chart').getContext('2d');
             progressChart = new Chart(ctx, {
@@ -278,7 +345,23 @@
             progressChart.update('none');
           }
         }
-        document.getElementById('metric-select').addEventListener('change', updateChart);
+        function setSelectedMetric(value) {
+          document.querySelectorAll('#metric-list .metric-btn').forEach(function(btn) {
+            var isSelected = btn.getAttribute('data-value') === value;
+            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected);
+            btn.classList.toggle('text-white', isSelected);
+            btn.classList.toggle('border-[var(--ap-primary)]', isSelected);
+            btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
+          });
+        }
+        document.getElementById('metric-list').addEventListener('click', function(e) {
+          var btn = e.target.closest('.metric-btn');
+          if (!btn) return;
+          selectedMetricKey = btn.getAttribute('data-value');
+          setSelectedMetric(selectedMetricKey);
+          updateChart();
+        });
+        setSelectedMetric('overall');
         updateChart();
       }
 
