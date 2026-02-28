@@ -164,6 +164,15 @@ If the portal (signup/login) shows a message about config or Supabase:
 2. **Redeploy after any change**
    Changing Root Directory or Environment Variables only affects **new** deployments. Always trigger a **Redeploy** after editing them.
 
+
+### Assessment results not showing in the portal
+
+If someone took the assessment with the same email as their portal account but the dashboard says "No assessments yet":
+
+1. **One-time Supabase fix** (if you set up the project before this fix): In Supabase → **SQL Editor**, open the file **supabase/fix-email-policy.sql** from this repo, copy its contents, paste into the editor, and click **Run**. That makes the portal match results by email in a case-insensitive way so existing and new results show up.
+2. **Redeploy** so the results page uses the latest save logic (lowercase email and config loading).
+3. **New assessments** will then appear in the portal. For the assessment already taken, the SQL fix in step 1 is what makes it visible.
+
 ---
 ## You’re done
 

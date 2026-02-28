@@ -11,8 +11,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <script src="vapi-results-interpretations.js"></script>
-  <script src="/api/config"></script>
-  <script src="../supabase-config.js"></script>
   <style>
     :root {
       --ap-primary: #582233;
@@ -111,12 +109,24 @@
         var raw = sessionStorage.getItem('vapiResults');
         if (!raw) return;
         var results = JSON.parse(raw);
-        if (!results.email || typeof window.SUPABASE_URL !== 'string' || !window.SUPABASE_URL || typeof window.SUPABASE_ANON_KEY !== 'string') return;
+        if (!results.email) return;
+        async function loadConfig() {
+          try {
+            var r = await fetch('/api/config');
+            if (!r.ok) return null;
+            var t = await r.text();
+            eval(t);
+            return window.SUPABASE_URL && window.SUPABASE_ANON_KEY ? {} : null;
+          } catch (e) { return null; }
+        }
+        var cfg = await loadConfig();
+        if (!cfg) return;
         if (sessionStorage.getItem('vapiResultsSaved')) return;
         var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
         var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        var emailNormalized = String(results.email).trim().toLowerCase();
         await client.from('vapi_results').insert({
-          email: results.email,
+          email: emailNormalized,
           first_name: results.firstName || null,
           last_name: results.lastName || null,
           results: results

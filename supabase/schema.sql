@@ -24,12 +24,12 @@ create policy "Allow anonymous insert"
   to anon
   with check (true);
 
--- Policy: authenticated users can only read their own results (matched by email)
+-- Policy: authenticated users can only read their own results (matched by email, case-insensitive)
 create policy "Users can read own results"
   on public.vapi_results for select
   to authenticated
   using (
-    email = (select email from auth.users where id = auth.uid())
+    lower(email) = (select lower(email) from auth.users where id = auth.uid())
   );
 
 -- Optional: grant anon insert (required for client-side save from results page)

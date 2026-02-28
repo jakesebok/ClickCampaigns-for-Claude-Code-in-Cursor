@@ -99,7 +99,6 @@
       var { data: rows, error } = await supabase
         .from('vapi_results')
         .select('id, email, first_name, last_name, results, created_at')
-        .eq('email', email)
         .order('created_at', { ascending: false });
 
       document.getElementById('loading').classList.add('hidden');
