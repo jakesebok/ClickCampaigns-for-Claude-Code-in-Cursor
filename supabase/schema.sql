@@ -24,12 +24,21 @@ create policy "Allow anonymous insert"
   to anon
   with check (true);
 
--- Policy: authenticated users can only read their own results (matched by email, case-insensitive)
+-- Policy: authenticated users can only read their own results (matched by JWT email, case-insensitive)
 create policy "Users can read own results"
   on public.vapi_results for select
   to authenticated
   using (
-    lower(email) = (select lower(email) from auth.users where id = auth.uid())
+    lower(email) = lower(trim(coalesce(auth.jwt() ->> 'email', '')))
+  );
+
+-- Policy: anon with user JWT (browser sends anon key + Bearer token) can read own results
+create policy "Anon can read own results"
+  on public.vapi_results for select
+  to anon
+  using (
+    auth.uid() is not null
+    and lower(email) = lower(trim(coalesce(auth.jwt() ->> 'email', '')))
   );
 
 -- Optional: grant anon insert (required for client-side save from results page)

@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
@@ -29,6 +30,7 @@
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
       <div class="flex items-center gap-4">
+        <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
         <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
         <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
       </div>
@@ -42,6 +44,42 @@
       <p class="text-[var(--ap-secondary)] mb-8">Assessments completed with your account email are saved here. View any result below or take the assessment again to track over time.</p>
 
       <div id="latest-result" class="mb-10"></div>
+
+      <div id="progress-section" class="mb-10 hidden">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments.</p>
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
+          <label for="metric-select" class="block text-sm font-semibold text-[var(--ap-primary)] mb-2">Metric</label>
+          <select id="metric-select" class="w-full sm:w-auto mb-4 px-4 py-2 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-[var(--ap-text)]">
+            <optgroup label="Composite">
+              <option value="overall">Overall score</option>
+            </optgroup>
+            <optgroup label="Arena">
+              <option value="arena:Personal">Personal</option>
+              <option value="arena:Relationships">Relationships</option>
+              <option value="arena:Business">Business</option>
+            </optgroup>
+            <optgroup label="Domain">
+              <option value="domain:PH">Physical Health</option>
+              <option value="domain:IA">Inner Alignment</option>
+              <option value="domain:ME">Mental / Emotional Health</option>
+              <option value="domain:AF">Attention &amp; Focus</option>
+              <option value="domain:RS">Relationship to Self</option>
+              <option value="domain:FA">Family</option>
+              <option value="domain:CO">Community</option>
+              <option value="domain:WI">World / Impact</option>
+              <option value="domain:VS">Vision / Strategy</option>
+              <option value="domain:EX">Execution</option>
+              <option value="domain:OH">Operational Health</option>
+              <option value="domain:EC">Ecology</option>
+            </optgroup>
+          </select>
+          <div class="chart-container relative h-64 sm:h-80">
+            <canvas id="progress-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
       <h2 class="text-xl text-[var(--ap-primary)] mb-4">Assessment history</h2>
       <div id="history-list" class="space-y-3"></div>
       <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/50">
@@ -168,6 +206,81 @@
           if (row) viewResult(row);
         });
       });
+
+      function getScoreForMetric(res, metricKey) {
+        if (!res) return null;
+        if (metricKey === 'overall') return typeof res.overall === 'number' ? res.overall : null;
+        if (metricKey.indexOf('arena:') === 0) {
+          var arena = metricKey.slice(6);
+          var as = res.arenaScores || {};
+          return typeof as[arena] === 'number' ? as[arena] : null;
+        }
+        if (metricKey.indexOf('domain:') === 0) {
+          var code = metricKey.slice(7);
+          var ds = res.domainScores || {};
+          return typeof ds[code] === 'number' ? ds[code] : null;
+        }
+        return null;
+      }
+
+      if (rows.length >= 1) {
+        document.getElementById('progress-section').classList.remove('hidden');
+        var sortedByDate = rows.slice().sort(function(a, b) {
+          return new Date(a.created_at) - new Date(b.created_at);
+        });
+        var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
+        var progressChart = null;
+
+        function updateChart() {
+          var metricKey = document.getElementById('metric-select').value;
+          var values = sortedByDate.map(function(r) { return getScoreForMetric(r.results, metricKey); });
+          if (!progressChart) {
+            var ctx = document.getElementById('progress-chart').getContext('2d');
+            progressChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: chartLabels,
+                datasets: [{
+                  label: 'Score',
+                  data: values,
+                  borderColor: '#582233',
+                  backgroundColor: 'rgba(88, 34, 51, 0.08)',
+                  fill: true,
+                  tension: 0.2,
+                  pointBackgroundColor: '#582233',
+                  pointRadius: 4,
+                  pointHoverRadius: 6
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    min: 0,
+                    max: 10,
+                    ticks: { stepSize: 1 },
+                    grid: { color: 'rgba(198, 184, 167, 0.4)' },
+                    title: { display: true, text: 'Score (0–10)' }
+                  },
+                  x: {
+                    grid: { display: false },
+                    ticks: { maxRotation: 45, minRotation: 0 }
+                  }
+                },
+                plugins: {
+                  legend: { display: false }
+                }
+              }
+            });
+          } else {
+            progressChart.data.datasets[0].data = values;
+            progressChart.update('none');
+          }
+        }
+        document.getElementById('metric-select').addEventListener('change', updateChart);
+        updateChart();
+      }
 
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
     })();
