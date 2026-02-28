@@ -135,6 +135,22 @@ If you’ve never used Git and this feels confusing, you can instead:
 
 ---
 
+---
+## Troubleshooting: "Portal is not configured" or config errors
+
+If the portal (signup/login) shows a message about config or Supabase:
+
+1. **Check that the config endpoint works**
+   Open this URL in your browser (use your real Vercel URL):
+   `https://your-project.vercel.app/api/config`
+   You should see one line of JavaScript with `window.SUPABASE_URL="https://...";` and a long key.
+   - If you get **404**: Vercel is not seeing the `api` folder. Confirm **Root Directory** is exactly **campaigns/aligned-power-vapi/output-assets** (so that `api/config.js` is inside that root). Save and **Redeploy**.
+   - If the page loads but **SUPABASE_URL is empty** (`window.SUPABASE_URL="";`): The env vars are not set or were not applied. In Vercel → **Settings** → **Environment Variables**, add **SUPABASE_URL** and **SUPABASE_ANON_KEY** (exact names), save, then go to **Deployments** → **⋯** on latest → **Redeploy**.
+
+2. **Redeploy after any change**
+   Changing Root Directory or Environment Variables only affects **new** deployments. Always trigger a **Redeploy** after editing them.
+
+---
 ## You’re done
 
 - **Assessment (landing)**: `https://your-project.vercel.app/html/vapi-landing.html`  
@@ -156,4 +172,4 @@ Share the landing link so people can take the assessment. When they enter their 
 - [ ] Vercel project redeployed after adding env vars  
 - [ ] Redirect URL added in Supabase (your Vercel URL + `/**`)  
 
-If something doesn’t work (e.g. “portal not configured”, or results not saving), double-check that the two env var **names** in Vercel are exactly `SUPABASE_URL` and `SUPABASE_ANON_KEY`, and that you redeployed after saving them.
+If something doesn’t work (e.g. “portal not configured”, or results not saving), see **Troubleshooting** above. In short: open `/api/config` on your live URL to see if the API and env vars are working; double-check Root Directory and that you **Redeploy** after changing env vars.

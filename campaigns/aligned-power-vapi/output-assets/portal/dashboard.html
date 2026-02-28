@@ -10,8 +10,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
-  <script src="/api/config"></script>
-  <script src="../supabase-config.js"></script>
   <style>
     :root {
       --ap-primary: #582233;
@@ -56,10 +54,30 @@
 
   <script type="module">
     (async function() {
-      if (typeof window.SUPABASE_URL === 'undefined' || !window.SUPABASE_URL) {
+      async function loadConfig() {
+        try {
+          var r = await fetch('/api/config');
+          if (!r.ok) return { error: 'fetch_failed' };
+          var t = await r.text();
+          eval(t);
+          if (!window.SUPABASE_URL) return { error: 'empty_config' };
+          return {};
+        } catch (e) {
+          return { error: 'fetch_failed' };
+        }
+      }
+      var authErr = document.getElementById('auth-error');
+      var cfg = await loadConfig();
+      if (cfg.error === 'fetch_failed') {
         document.getElementById('loading').classList.add('hidden');
-        document.getElementById('auth-error').textContent = 'Portal is not configured. Add Supabase URL and key to supabase-config.js.';
-        document.getElementById('auth-error').classList.remove('hidden');
+        authErr.textContent = 'Portal config could not be loaded. If you run this site: set Vercel Root Directory to the folder that contains the api folder, add SUPABASE_URL and SUPABASE_ANON_KEY in Vercel → Settings → Environment Variables, then redeploy.';
+        authErr.classList.remove('hidden');
+        return;
+      }
+      if (cfg.error === 'empty_config') {
+        document.getElementById('loading').classList.add('hidden');
+        authErr.textContent = 'Supabase URL is not set. Add SUPABASE_URL and SUPABASE_ANON_KEY in Vercel → Settings → Environment Variables and redeploy.';
+        authErr.classList.remove('hidden');
         return;
       }
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');

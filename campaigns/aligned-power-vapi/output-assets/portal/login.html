@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="/api/config"></script>
-  <script src="../supabase-config.js"></script>
   <style>
     :root {
       --ap-primary: #582233;
@@ -55,9 +53,28 @@
   </main>
   <script type="module">
     (async function() {
-      if (typeof window.SUPABASE_URL === 'undefined' || !window.SUPABASE_URL) {
-        document.getElementById('login-error').textContent = 'Portal is not configured. Add Supabase URL and key to supabase-config.js.';
-        document.getElementById('login-error').classList.remove('hidden');
+      async function loadConfig() {
+        try {
+          var r = await fetch('/api/config');
+          if (!r.ok) return { error: 'fetch_failed' };
+          var t = await r.text();
+          eval(t);
+          if (!window.SUPABASE_URL) return { error: 'empty_config' };
+          return {};
+        } catch (e) {
+          return { error: 'fetch_failed' };
+        }
+      }
+      var errEl = document.getElementById('login-error');
+      var cfg = await loadConfig();
+      if (cfg.error === 'fetch_failed') {
+        errEl.textContent = 'Portal config could not be loaded. If you run this site: set Vercel Root Directory to the folder that contains the api folder, add SUPABASE_URL and SUPABASE_ANON_KEY in Vercel → Settings → Environment Variables, then redeploy.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (cfg.error === 'empty_config') {
+        errEl.textContent = 'Supabase URL is not set. Add SUPABASE_URL and SUPABASE_ANON_KEY in Vercel → Settings → Environment Variables and redeploy.';
+        errEl.classList.remove('hidden');
         return;
       }
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
