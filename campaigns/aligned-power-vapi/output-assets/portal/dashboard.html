@@ -296,7 +296,7 @@
           html += '</text>';
         }
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8) rotate(180, 160, 160)" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
@@ -435,14 +435,16 @@
           var i = getSegmentIndexForMetric(metricKey);
           if (i == null) return { scale: 1, rotate: 0 };
           var segmentCenterAngle = -75 + 30 * i;
-          return { scale: 1.55, rotate: -segmentCenterAngle };
+          var topAngle = -90;
+          return { scale: 1.55, rotate: topAngle - segmentCenterAngle };
         }
         if (metricKey.indexOf('arena:') === 0) {
           var arena = metricKey.slice(6);
           var centerAngles = { Personal: -30, Relationships: 90, Business: 210 };
           var angle = centerAngles[arena];
           if (angle == null) return { scale: 1, rotate: 0 };
-          return { scale: 1.4, rotate: -angle };
+          var topAngle = -90;
+          return { scale: 1.4, rotate: topAngle - angle };
         }
         return { scale: 1, rotate: 0 };
       }
