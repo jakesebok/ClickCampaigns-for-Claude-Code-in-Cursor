@@ -26,6 +26,7 @@
     body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; aspect-ratio: 1; }
+    #breakdown-wheel-container.breakdown-wheel-container--zoomed.breakdown-wheel-container--labels-visible { overflow: visible; }
     .wheel-segment { transition: opacity 0.35s ease-out; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
   </style>
@@ -471,20 +472,23 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
-        // Labels reappear after wheel spin (transitionend or 700ms fallback)
+        // Labels reappear after wheel spin (800ms after selection)
         var breakdownLabelsTimeout = null;
-        var breakdownLabelsTransitionBound = false;
         function showBreakdownDomainLabels() {
           if (breakdownLabelsTimeout) {
             clearTimeout(breakdownLabelsTimeout);
             breakdownLabelsTimeout = null;
           }
-          var svg = document.getElementById('breakdown-wheel-svg');
+          var wheelContainer = document.getElementById('breakdown-wheel-container');
+          var svg = wheelWrap && wheelWrap.querySelector('svg');
           if (svg) {
-            var s = svg.querySelector('svg');
-            if (s) {
-              s.querySelectorAll('.wheel-domain-label').forEach(function(el) { el.style.opacity = '1'; });
+            var labels = svg.querySelectorAll('.wheel-domain-label');
+            for (var i = 0; i < labels.length; i++) {
+              labels[i].style.setProperty('opacity', '1');
             }
+          }
+          if (wheelContainer && wheelContainer.classList.contains('breakdown-wheel-container--zoomed')) {
+            wheelContainer.classList.add('breakdown-wheel-container--labels-visible');
           }
         }
         function updateBreakdown(metricKey) {
@@ -546,15 +550,11 @@
             if (metricKey === 'overall') {
               domainLabels.forEach(function(el) { el.style.opacity = '1'; });
             } else {
-              domainLabels.forEach(function(el) { el.style.opacity = '0'; });
-              if (!breakdownLabelsTransitionBound) {
-                breakdownLabelsTransitionBound = true;
-                wheelWrap.addEventListener('transitionend', function onWheelTransitionEnd(e) {
-                  if (e.target !== wheelWrap || e.propertyName !== 'transform') return;
-                  showBreakdownDomainLabels();
-                });
-              }
-              breakdownLabelsTimeout = setTimeout(showBreakdownDomainLabels, 700);
+              wheelContainer.classList.remove('breakdown-wheel-container--labels-visible');
+              domainLabels.forEach(function(el) { el.style.setProperty('opacity', '0'); });
+              breakdownLabelsTimeout = setTimeout(function() {
+                requestAnimationFrame(function() { showBreakdownDomainLabels(); });
+              }, 800);
             }
           }
         }
