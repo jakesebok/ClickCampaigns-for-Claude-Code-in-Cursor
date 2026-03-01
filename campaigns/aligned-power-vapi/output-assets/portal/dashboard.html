@@ -50,7 +50,7 @@
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores from this assessment. Select a metric below.</p>
         <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
-          <div class="flex flex-col lg:flex-row gap-6">
+          <div class="flex flex-col lg:flex-row gap-6 border-b border-[var(--ap-border)] pb-6">
             <div class="flex-1 min-w-0 flex flex-col justify-center">
               <p id="breakdown-metric-label" class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Overall score</p>
               <div class="flex items-baseline gap-3 flex-wrap mb-4">
@@ -58,16 +58,13 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto aspect-square rounded-full overflow-hidden bg-[var(--ap-bg)]/30 flex items-center justify-center" style="min-height: 200px;">
-                <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-500 ease-out" style="transform: scale(1) rotate(0deg);">
+              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto aspect-square flex items-center justify-center overflow-hidden" style="min-height: 200px;">
+                <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-700 ease-in-out" style="transform: scale(1) rotate(0deg);">
                   <div id="breakdown-wheel-svg"></div>
                 </div>
               </div>
-              <div id="breakdown-interpretation" class="mt-4 p-4 rounded-xl bg-[var(--ap-bg)]/50 border border-[var(--ap-border)]/50 hidden">
-                <p id="breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
-              </div>
             </div>
-            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4">
+            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 lg:self-start">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
               <div id="breakdown-metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1">
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
@@ -91,6 +88,9 @@
                 <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
               </div>
             </div>
+          </div>
+          <div id="breakdown-interpretation" class="pt-4 mt-0 border-t border-[var(--ap-border)] hidden">
+            <p id="breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
           </div>
         </div>
       </div>
@@ -225,7 +225,8 @@
         window.location.href = '../html/vapi-results.html';
       }
 
-      function buildWheelSVG(domains) {
+      function buildWheelSVG(domains, idSuffix) {
+        var uid = idSuffix || ('w' + Math.random().toString(36).slice(2, 9));
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
         var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
@@ -248,8 +249,29 @@
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
         var fid = 'dashboardWheelShadow';
-        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:240px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
-        html += '<defs><filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
+        html += '<defs>';
+        html += '<filter id="' + fid + uid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        html += '<clipPath id="clipFull' + uid + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 1) + '"/></clipPath>';
+        var topY = 0;
+        var domEast = (cx + r * Math.cos(0 * Math.PI / 180)).toFixed(2), domY1 = (cy + r * Math.sin(-15 * Math.PI / 180)).toFixed(2), domY2 = (cy + r * Math.sin(15 * Math.PI / 180)).toFixed(2);
+        var domR = (cx + r * Math.cos(15 * Math.PI / 180)).toFixed(2), domL = (cx + r * Math.cos(-15 * Math.PI / 180)).toFixed(2);
+        html += '<clipPath id="clipDomain' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + domEast + ' ' + cy + ' A' + r + ' ' + r + ' 0 0 1 ' + domR + ' ' + domY2 + ' A' + r + ' ' + r + ' 0 0 1 ' + domL + ' ' + domY1 + ' Z"/></clipPath>';
+        var arenaEast = (cx + r * Math.cos(0 * Math.PI / 180)).toFixed(2);
+        var arenaR = (cx + r * Math.cos(60 * Math.PI / 180)).toFixed(2), arenaL = (cx + r * Math.cos(-60 * Math.PI / 180)).toFixed(2);
+        var arenaY1 = (cy + r * Math.sin(60 * Math.PI / 180)).toFixed(2), arenaY2 = (cy + r * Math.sin(-60 * Math.PI / 180)).toFixed(2);
+        html += '<clipPath id="clipArena' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + arenaEast + ' ' + cy + ' A' + r + ' ' + r + ' 0 0 1 ' + arenaR + ' ' + arenaY1 + ' A' + r + ' ' + r + ' 0 0 1 ' + arenaL + ' ' + arenaY2 + ' Z"/></clipPath>';
+        var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcPersonal' + uid + '" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
+        var arcRelStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcRelEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcRel' + uid + '" d="M' + arcRelStart.x.toFixed(2) + ',' + arcRelStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcRelEnd.x.toFixed(2) + ',' + arcRelEnd.y.toFixed(2) + '"/>';
+        var arcBizStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcBizEnd = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="arcBiz' + uid + '" d="M' + arcBizStart.x.toFixed(2) + ',' + arcBizStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcBizEnd.x.toFixed(2) + ',' + arcBizEnd.y.toFixed(2) + '"/>';
+        html += '</defs>';
+        html += '<g id="wheel-content' + uid + '" clip-path="url(#clipFull' + uid + ')">';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
           var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
@@ -278,11 +300,14 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + uid + ')">';
           for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '</svg>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + uid + ')"><textPath href="#arcPersonal' + uid + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#' + fid + uid + ')"><textPath href="#arcRel' + uid + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + uid + ')"><textPath href="#arcBiz' + uid + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '</g></svg>';
         return html;
       }
 
@@ -440,14 +465,20 @@
           return o;
         });
         var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
-        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains);
+        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains, 'breakdown');
         var wheelWrap = document.getElementById('breakdown-wheel-wrap');
+        var wheelContentGroup = document.getElementById('wheel-contentbreakdown');
         var wheelSvgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
         if (wheelSvgEl) {
           wheelSvgEl.style.width = '100%';
           wheelSvgEl.style.height = '100%';
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
+        }
+        var breakdownTransitionMs = 700;
+        var currentBreakdownMetric = 'overall';
+        function setWheelClip(clipId) {
+          if (wheelContentGroup) wheelContentGroup.setAttribute('clip-path', clipId ? 'url(#' + clipId + ')' : 'none');
         }
         function updateBreakdown(metricKey) {
           var score = getScoreForMetric(singleResult, metricKey);
@@ -464,7 +495,28 @@
             badgeEl.classList.add('hidden');
           }
           var t = getWheelTransform(metricKey);
-          wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var isOverall = metricKey === 'overall';
+          var isDomain = metricKey.indexOf('domain:') === 0;
+          var isArena = metricKey.indexOf('arena:') === 0;
+          var targetRotate = t.rotate;
+          var targetScale = t.scale;
+          if (currentBreakdownMetric !== metricKey) {
+            setWheelClip('clipFullbreakdown');
+            wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
+            currentBreakdownMetric = metricKey;
+            setTimeout(function() {
+              if (isOverall) {
+                setWheelClip('clipFullbreakdown');
+                wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
+              } else {
+                setWheelClip(isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown');
+                wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
+              }
+            }, breakdownTransitionMs);
+          } else {
+            setWheelClip(isOverall ? 'clipFullbreakdown' : (isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown'));
+            wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
+          }
           var interpText = getInterpretation(singleResult, metricKey);
           var interpEl = document.getElementById('breakdown-interpretation-text');
           if (interpText) {
