@@ -61,9 +61,12 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto flex items-center justify-center overflow-visible" style="min-height: 200px;">
+              <div id="breakdown-wheel-container" class="relative w-full max-w-[280px] mx-auto flex items-center justify-center overflow-visible" style="min-height: 200px;">
                 <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
                   <div id="breakdown-wheel-svg"></div>
+                </div>
+                <div id="breakdown-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300" aria-hidden="true">
+                  <svg id="breakdown-wheel-labels-svg" viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg"></svg>
                 </div>
               </div>
             </div>
@@ -470,7 +473,59 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
+        var BREAKDOWN_DOMAIN_ORDER = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var BREAKDOWN_DOMAIN_NAMES = { PH: 'Physical Health', IA: 'Inner Alignment', ME: 'Mental / Emotional', AF: 'Attention & Focus', RS: 'Relationship to Self', FA: 'Family', CO: 'Community', WI: 'World / Impact', VS: 'Vision / Strategy', EX: 'Execution', OH: 'Operational Health', EC: 'Ecology' };
+        var breakdownLabelsTimeout = null;
+
+        function updateBreakdownLabels(currentRotationDeg) {
+          var overlay = document.getElementById('breakdown-wheel-labels-overlay');
+          var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
+          if (!overlay || !labelsSvg) return;
+          var cx = 160; var cy = 160;
+          var labelRadius = 125;
+          labelsSvg.innerHTML = '';
+          for (var i = 0; i < 12; i++) {
+            var viewAngleDeg = -75 + 30 * i + currentRotationDeg;
+            while (viewAngleDeg > 360) viewAngleDeg -= 360;
+            while (viewAngleDeg < 0) viewAngleDeg += 360;
+            var rad = viewAngleDeg * Math.PI / 180;
+            var x = cx + labelRadius * Math.cos(rad);
+            var y = cy + labelRadius * Math.sin(rad);
+            var anchor = 'middle';
+            if (viewAngleDeg >= 45 && viewAngleDeg <= 135) anchor = 'middle';
+            else if (viewAngleDeg >= 225 && viewAngleDeg <= 315) anchor = 'middle';
+            else if (viewAngleDeg > 135 && viewAngleDeg < 225) anchor = 'end';
+            else anchor = 'start';
+            var name = BREAKDOWN_DOMAIN_NAMES[BREAKDOWN_DOMAIN_ORDER[i]] || BREAKDOWN_DOMAIN_ORDER[i];
+            var textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            textEl.setAttribute('x', x.toFixed(2));
+            textEl.setAttribute('y', y.toFixed(2));
+            textEl.setAttribute('text-anchor', anchor);
+            textEl.setAttribute('dominant-baseline', 'middle');
+            textEl.setAttribute('font-size', '9');
+            textEl.setAttribute('fill', '#582233');
+            textEl.setAttribute('font-family', 'Source Sans 3, sans-serif');
+            textEl.setAttribute('font-weight', '600');
+            textEl.textContent = name;
+            labelsSvg.appendChild(textEl);
+          }
+          overlay.classList.remove('opacity-0');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideBreakdownLabels() {
+          var overlay = document.getElementById('breakdown-wheel-labels-overlay');
+          if (!overlay) return;
+          overlay.classList.add('opacity-0');
+          overlay.setAttribute('aria-hidden', 'true');
+          document.getElementById('breakdown-wheel-labels-svg').innerHTML = '';
+        }
+
         function updateBreakdown(metricKey) {
+          if (breakdownLabelsTimeout) {
+            clearTimeout(breakdownLabelsTimeout);
+            breakdownLabelsTimeout = null;
+          }
           var score = getScoreForMetric(singleResult, metricKey);
           var tier = getTierForMetric(singleResult, metricKey);
           var label = getMetricLabel(metricKey);
@@ -489,8 +544,13 @@
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           if (metricKey === 'overall') {
             wheelContainer.classList.remove('breakdown-wheel-container--zoomed');
+            hideBreakdownLabels();
           } else {
             wheelContainer.classList.add('breakdown-wheel-container--zoomed');
+            breakdownLabelsTimeout = setTimeout(function() {
+              breakdownLabelsTimeout = null;
+              updateBreakdownLabels(t.rotate);
+            }, 660);
           }
           var interpText = getInterpretation(singleResult, metricKey);
           var interpEl = document.getElementById('breakdown-interpretation-text');
