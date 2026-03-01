@@ -28,10 +28,7 @@
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; aspect-ratio: 1; }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed.breakdown-wheel-container--labels-visible { overflow: visible; }
     .wheel-segment { transition: opacity 0.35s ease-out; }
-    .wheel-domain-label { transition: opacity 0.35s ease-out; }
-    #breakdown-wheel-svg .wheel-domain-labels-group { transition: transform 0.65s ease-out; }
-    #breakdown-wheel-svg .wheel-domain-labels-group.labels-instant-show { transition: none; }
-    #breakdown-wheel-svg .wheel-domain-labels-group.labels-instant-show .wheel-domain-label { transition: none; }
+    .wheel-domain-label { transition: opacity 0.4s ease-out, transform 0.65s ease-out; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -290,19 +287,16 @@
           html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0)) + '" y2="' + (cy + r * Math.sin(a0)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
         }
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.25"/>';
-        html += '<g id="dashboard-wheel-domain-labels-group" class="wheel-domain-labels-group" transform="rotate(0, 160, 160)">';
-        var labelInnerEdgeOffset = 18;
+        html += '<g id="dashboard-wheel-domain-labels-group">';
         for (var i = 0; i < 12; i++) {
           var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
           var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad); var ty = cy + labelRadius * Math.sin(midRad);
           var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
-          var useMiddle = Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10;
-          if (useMiddle) anchor = 'middle';
-          var rLabel = labelRadius + (useMiddle ? labelInnerEdgeOffset : 0);
-          var tx = cx + rLabel * Math.cos(midRad); var ty = cy + rLabel * Math.sin(midRad);
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          html += '<text class="wheel-domain-label" data-mid-angle="' + midDeg + '" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
@@ -480,31 +474,48 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
-        // Labels reappear after wheel spin (800ms after selection), always upright (bottoms toward bottom of page)
+        // Labels reappear after wheel spin (800ms), upright and on their wedges; appear instantly (no slide)
         var breakdownLabelsTimeout = null;
         var currentBreakdownWheelRotate = 0;
         function getBreakdownLabelsGroup() {
           var wrap = document.getElementById('breakdown-wheel-svg');
           return wrap ? wrap.querySelector('#dashboard-wheel-domain-labels-group') : null;
         }
+        function applyBreakdownLabelTransforms(wheelRotate, useStyle) {
+          var svg = document.getElementById('breakdown-wheel-svg');
+          if (!svg) return;
+          var labels = svg.querySelectorAll('.wheel-domain-label');
+          for (var i = 0; i < labels.length; i++) {
+            var el = labels[i];
+            var x = el.getAttribute('x'), y = el.getAttribute('y'), mid = el.getAttribute('data-mid-angle');
+            if (x != null && y != null && mid != null) {
+              var angle = -(parseFloat(mid) + wheelRotate);
+              if (useStyle) {
+                el.removeAttribute('transform');
+                el.style.transformOrigin = x + 'px ' + y + 'px';
+                el.style.transform = 'rotate(' + angle.toFixed(2) + 'deg)';
+              } else {
+                el.style.transform = '';
+                el.style.transformOrigin = '';
+                el.setAttribute('transform', 'rotate(' + angle.toFixed(2) + ', ' + x + ', ' + y + ')');
+              }
+            }
+          }
+        }
         function showBreakdownDomainLabels() {
           if (breakdownLabelsTimeout) {
             clearTimeout(breakdownLabelsTimeout);
             breakdownLabelsTimeout = null;
           }
-          var labelsGroup = getBreakdownLabelsGroup();
-          if (labelsGroup) {
-            labelsGroup.classList.add('labels-instant-show');
-            labelsGroup.style.transform = '';
-            labelsGroup.style.transformOrigin = '';
-            labelsGroup.setAttribute('transform', 'rotate(' + (-currentBreakdownWheelRotate) + ', 160, 160)');
-          }
+          applyBreakdownLabelTransforms(currentBreakdownWheelRotate);
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           var svg = wheelWrap && wheelWrap.querySelector('svg');
           if (svg) {
             var labels = svg.querySelectorAll('.wheel-domain-label');
             for (var i = 0; i < labels.length; i++) {
-              labels[i].style.setProperty('opacity', '1');
+              var el = labels[i];
+              el.style.transition = 'none';
+              el.style.setProperty('opacity', '1');
             }
           }
           if (wheelContainer && wheelContainer.classList.contains('breakdown-wheel-container--zoomed')) {
@@ -530,13 +541,13 @@
             badgeEl.classList.add('hidden');
           }
           var t = getWheelTransform(metricKey);
+          var prevRotate = currentBreakdownWheelRotate;
           currentBreakdownWheelRotate = t.rotate;
           wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
-          var labelsGroup = getBreakdownLabelsGroup();
-          if (labelsGroup) {
-            labelsGroup.style.transformOrigin = '160px 160px';
-            labelsGroup.style.transform = 'rotate(' + (-t.rotate) + 'deg)';
-          }
+          applyBreakdownLabelTransforms(prevRotate, true);
+          requestAnimationFrame(function() {
+            applyBreakdownLabelTransforms(t.rotate, true);
+          });
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           if (metricKey === 'overall') {
             wheelContainer.classList.remove('breakdown-wheel-container--zoomed');
@@ -574,13 +585,9 @@
             }
             var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
             if (metricKey === 'overall') {
-              var grp = getBreakdownLabelsGroup();
-              if (grp) grp.classList.remove('labels-instant-show');
               domainLabels.forEach(function(el) { el.style.opacity = '1'; });
             } else {
               wheelContainer.classList.remove('breakdown-wheel-container--labels-visible');
-              var labelsGrp = getBreakdownLabelsGroup();
-              if (labelsGrp) labelsGrp.classList.remove('labels-instant-show');
               domainLabels.forEach(function(el) { el.style.setProperty('opacity', '0'); });
               breakdownLabelsTimeout = setTimeout(function() {
                 requestAnimationFrame(function() { showBreakdownDomainLabels(); });
