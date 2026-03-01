@@ -297,7 +297,7 @@
           html += '</text>';
         }
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text id="breakdown-arena-label-relationships" font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8) translate(' + cx + ', ' + relArcCenterY.toFixed(2) + ') scale(-1, 1) rotate(180) scale(1,-1) translate(' + (-cx) + ', ' + (-relArcCenterY).toFixed(2) + ')" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8) translate(' + cx + ', ' + relArcCenterY.toFixed(2) + ') scale(-1, 1) rotate(180) scale(1,-1) translate(' + (-cx) + ', ' + (-relArcCenterY).toFixed(2) + ')" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
@@ -484,13 +484,6 @@
           }
           var t = getWheelTransform(metricKey);
           wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
-          var relLabel = wheelSvgEl && wheelSvgEl.querySelector('#breakdown-arena-label-relationships');
-          if (relLabel) {
-            var wheelCx = 160, wheelCy = 160, relArcCy = 210.4;
-            var base = 'translate(0, 8) translate(160, ' + relArcCy + ') scale(-1, 1) rotate(180) scale(1,-1) translate(-160, ' + (-relArcCy) + ')';
-            var counter = 'translate(' + wheelCx + ', ' + wheelCy + ') rotate(' + (-t.rotate) + ') translate(' + (-wheelCx) + ', ' + (-wheelCy) + ') ';
-            relLabel.setAttribute('transform', counter + base);
-          }
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           if (metricKey === 'overall') {
             wheelContainer.classList.remove('breakdown-wheel-container--zoomed');
