@@ -470,7 +470,22 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
+        // Labels reappear after wheel spin (transitionend or 700ms fallback)
         var breakdownLabelsTimeout = null;
+        var breakdownLabelsTransitionBound = false;
+        function showBreakdownDomainLabels() {
+          if (breakdownLabelsTimeout) {
+            clearTimeout(breakdownLabelsTimeout);
+            breakdownLabelsTimeout = null;
+          }
+          var svg = document.getElementById('breakdown-wheel-svg');
+          if (svg) {
+            var s = svg.querySelector('svg');
+            if (s) {
+              s.querySelectorAll('.wheel-domain-label').forEach(function(el) { el.style.opacity = '1'; });
+            }
+          }
+        }
         function updateBreakdown(metricKey) {
           if (breakdownLabelsTimeout) {
             clearTimeout(breakdownLabelsTimeout);
@@ -531,13 +546,14 @@
               domainLabels.forEach(function(el) { el.style.opacity = '1'; });
             } else {
               domainLabels.forEach(function(el) { el.style.opacity = '0'; });
-              breakdownLabelsTimeout = setTimeout(function() {
-                breakdownLabelsTimeout = null;
-                var svg = document.getElementById('breakdown-wheel-svg').querySelector('svg');
-                if (svg) {
-                  svg.querySelectorAll('.wheel-domain-label').forEach(function(el) { el.style.opacity = '1'; });
-                }
-              }, 650);
+              if (!breakdownLabelsTransitionBound) {
+                breakdownLabelsTransitionBound = true;
+                wheelWrap.addEventListener('transitionend', function onWheelTransitionEnd(e) {
+                  if (e.target !== wheelWrap || e.propertyName !== 'transform') return;
+                  showBreakdownDomainLabels();
+                });
+              }
+              breakdownLabelsTimeout = setTimeout(showBreakdownDomainLabels, 700);
             }
           }
         }

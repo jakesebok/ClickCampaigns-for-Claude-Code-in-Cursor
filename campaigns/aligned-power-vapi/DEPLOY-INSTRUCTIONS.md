@@ -219,5 +219,8 @@ If you pushed updates (e.g. dashboard or landing page) but the live site still s
 3. **Confirm you’re on the right page**  
    Dashboard changes (e.g. “Explore your score” wheel) only appear on **Dashboard** (`/portal/dashboard.html`) when you’re logged in and have at least one assessment. Landing-page changes are on `/html/vapi-landing.html`.
 
-4. **Optional: reduce caching so updates show sooner**  
+4. **Confirm the deployed file is the new version**  
+   On the live site, open the dashboard page, then **View Page Source** (right‑click → View Page Source, or `Ctrl+U` / `Cmd+Option+U`). Search for **Labels reappear** (or **showBreakdownDomainLabels**). If you don’t find it, the server is still serving an old build: check Vercel’s **Root Directory** is exactly `campaigns/aligned-power-vapi/output-assets`, that you pushed from the repo that Vercel is connected to, and that the latest deployment **Succeeded**.
+
+5. **Optional: reduce caching so updates show sooner**  
    A `vercel.json` in the deploy root (see below) sets short cache for HTML. After adding it, commit, push, and redeploy once; then new pushes should be visible after a normal refresh.
