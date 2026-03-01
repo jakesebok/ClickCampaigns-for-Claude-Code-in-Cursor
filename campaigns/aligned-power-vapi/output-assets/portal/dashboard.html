@@ -322,31 +322,52 @@
           var values = sortedByDate.map(function(r) { return getScoreForMetric(r.results, selectedMetricKey); });
           if (!progressChart) {
             var ctx = document.getElementById('progress-chart').getContext('2d');
+            var gradient = ctx.createLinearGradient(0, 0, 0, 280);
+            gradient.addColorStop(0, 'rgba(212, 170, 112, 0.35)');
+            gradient.addColorStop(0.5, 'rgba(212, 170, 112, 0.12)');
+            gradient.addColorStop(1, 'rgba(212, 170, 112, 0.02)');
             progressChart = new Chart(ctx, {
               type: 'line',
               data: {
                 labels: chartLabels,
-                datasets: [{
-                  label: 'Score',
-                  data: values,
-                  borderColor: '#582233',
-                  backgroundColor: 'rgba(88, 34, 51, 0.08)',
-                  fill: true,
-                  tension: 0.2,
-                  pointBackgroundColor: '#582233',
-                  pointRadius: 4,
-                  pointHoverRadius: 6
-                }]
+                datasets: [
+                  {
+                    label: 'Your score',
+                    data: values,
+                    borderColor: '#582233',
+                    backgroundColor: gradient,
+                    fill: true,
+                    tension: 0.35,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#582233',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBorderWidth: 2
+                  },
+                  {
+                    label: 'Dialed (8+)',
+                    data: chartLabels.map(function() { return 8; }),
+                    borderColor: 'rgba(212, 170, 112, 0.7)',
+                    borderWidth: 1.5,
+                    borderDash: [6, 4],
+                    fill: false,
+                    pointRadius: 0,
+                    pointHoverRadius: 0
+                  }
+                ]
               },
               options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: { intersect: false, mode: 'index' },
                 scales: {
                   y: {
                     min: 0,
                     max: 10,
                     ticks: { stepSize: 1 },
-                    grid: { color: 'rgba(198, 184, 167, 0.4)' },
+                    grid: { color: 'rgba(198, 184, 167, 0.35)' },
                     title: { display: true, text: 'Score (0–10)' }
                   },
                   x: {
@@ -355,7 +376,16 @@
                   }
                 },
                 plugins: {
-                  legend: { display: false }
+                  legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                      usePointStyle: true,
+                      padding: 16,
+                      font: { size: 12 }
+                    }
+                  }
                 }
               }
             });
