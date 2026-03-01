@@ -113,11 +113,21 @@
         async function loadConfig() {
           try {
             var r = await fetch('/api/config');
-            if (!r.ok) return null;
+            if (!r.ok) {
+              console.error('[VAPI save] Config fetch failed:', r.status, r.statusText);
+              return null;
+            }
             var t = await r.text();
             eval(t);
-            return window.SUPABASE_URL && window.SUPABASE_ANON_KEY ? {} : null;
-          } catch (e) { return null; }
+            if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+              console.error('[VAPI save] SUPABASE_URL or SUPABASE_ANON_KEY missing after /api/config');
+              return null;
+            }
+            return {};
+          } catch (e) {
+            console.error('[VAPI save] Config load error:', e);
+            return null;
+          }
         }
         var cfg = await loadConfig();
         if (!cfg) return;
@@ -125,14 +135,20 @@
         var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
         var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         var emailNormalized = String(results.email).trim().toLowerCase();
-        await client.from('vapi_results').insert({
+        var { error } = await client.from('vapi_results').insert({
           email: emailNormalized,
           first_name: results.firstName || null,
           last_name: results.lastName || null,
           results: results
         });
+        if (error) {
+          console.error('[VAPI save] Insert failed:', error.message, error);
+          return;
+        }
         sessionStorage.setItem('vapiResultsSaved', '1');
-      } catch (e) {}
+      } catch (e) {
+        console.error('[VAPI save] Unexpected error:', e);
+      }
     })();
   </script>
   <script>

@@ -18,6 +18,11 @@ create index if not exists vapi_results_created_at_idx on public.vapi_results (c
 -- RLS: enable row-level security
 alter table public.vapi_results enable row level security;
 
+-- Policies (drop first so this script can be re-run safely)
+drop policy if exists "Allow anonymous insert" on public.vapi_results;
+drop policy if exists "Users can read own results" on public.vapi_results;
+drop policy if exists "Anon can read own results" on public.vapi_results;
+
 -- Policy: anyone can insert (assessment form submission from landing/quiz)
 create policy "Allow anonymous insert"
   on public.vapi_results for insert
@@ -41,7 +46,9 @@ create policy "Anon can read own results"
     and lower(email) = lower(trim(coalesce(auth.jwt() ->> 'email', '')))
   );
 
--- Optional: grant anon insert (required for client-side save from results page)
--- Service role can do anything; anon can insert only.
+-- Grant anon insert (required for client-side save from results page).
+-- Without this, the RLS policy allows insert but the role has no table privilege.
+grant insert on public.vapi_results to anon;
+grant select on public.vapi_results to authenticated;
 
 comment on table public.vapi_results is 'VAPI assessment results; linked to portal users by email';

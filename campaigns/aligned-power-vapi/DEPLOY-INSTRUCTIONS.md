@@ -164,6 +164,13 @@ If the portal (signup/login) shows a message about config or Supabase:
 2. **Redeploy after any change**
    Changing Root Directory or Environment Variables only affects **new** deployments. Always trigger a **Redeploy** after editing them.
 
+### New VAPI results not being stored (no new rows in database)
+
+If people complete the assessment and enter their email but no new rows appear in Supabase for `vapi_results`:
+
+1. **One-time Supabase fix**: In Supabase → **SQL Editor**, open **supabase/fix-vapi-insert.sql** from this repo, copy its contents, paste into the editor, and click **Run**. That grants the `anon` role permission to insert into `vapi_results` (the RLS policy allows it, but the role also needs the table privilege).
+2. **Check the browser console**: After completing the assessment and landing on the results page, open Developer Tools (F12) → **Console**. If the save fails, you’ll see a message like `[VAPI save] Config fetch failed` or `[VAPI save] Insert failed: ...`. That tells you whether the problem is the config endpoint (e.g. 404 or missing env vars) or the database (e.g. permission denied).
+3. **Confirm /api/config works**: Open `https://your-project.vercel.app/api/config` in your browser. You should see JavaScript with non-empty `SUPABASE_URL` and `SUPABASE_ANON_KEY`. If either is empty, fix Vercel env vars and redeploy.
 
 ### Assessment results not showing in the portal
 
