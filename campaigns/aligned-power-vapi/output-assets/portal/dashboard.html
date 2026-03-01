@@ -438,7 +438,7 @@
           if (i == null) return { scale: 1, rotate: 0 };
           var segmentCenterAngle = -75 + 30 * i;
           var topAngle = -90;
-          return { scale: 1.55, rotate: topAngle - segmentCenterAngle };
+          return { scale: 2.7, rotate: topAngle - segmentCenterAngle };
         }
         if (metricKey.indexOf('arena:') === 0) {
           var arena = metricKey.slice(6);
@@ -446,7 +446,7 @@
           var angle = centerAngles[arena];
           if (angle == null) return { scale: 1, rotate: 0 };
           var topAngle = -90;
-          return { scale: 1.4, rotate: topAngle - angle };
+          return { scale: 2.1, rotate: topAngle - angle };
         }
         return { scale: 1, rotate: 0 };
       }
@@ -503,7 +503,7 @@
           var svgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
           if (svgEl) {
             var segments = svgEl.querySelectorAll('.wheel-segment');
-            var dimOpacity = '0.45';
+            var dimOpacity = '0.2';
             var focusOpacity = '1';
             if (metricKey === 'overall') {
               segments.forEach(function(p) { p.style.opacity = focusOpacity; });
