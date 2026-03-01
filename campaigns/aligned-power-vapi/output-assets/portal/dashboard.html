@@ -482,7 +482,7 @@
           var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
           if (!overlay || !labelsSvg) return;
           var cx = 160; var cy = 160;
-          var labelRadius = 125;
+          var labelRadius = 142;
           labelsSvg.innerHTML = '';
           for (var i = 0; i < 12; i++) {
             var viewAngleDeg = -75 + 30 * i + currentRotationDeg;
@@ -503,7 +503,7 @@
             textEl.setAttribute('text-anchor', anchor);
             textEl.setAttribute('dominant-baseline', 'middle');
             textEl.setAttribute('font-size', '9');
-            textEl.setAttribute('fill', '#582233');
+            textEl.setAttribute('fill', '#D4AA70');
             textEl.setAttribute('font-family', 'Source Sans 3, sans-serif');
             textEl.setAttribute('font-weight', '600');
             textEl.textContent = name;
@@ -526,6 +526,7 @@
             clearTimeout(breakdownLabelsTimeout);
             breakdownLabelsTimeout = null;
           }
+          hideBreakdownLabels();
           var score = getScoreForMetric(singleResult, metricKey);
           var tier = getTierForMetric(singleResult, metricKey);
           var label = getMetricLabel(metricKey);
