@@ -252,15 +252,16 @@
         var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs>';
         html += '<filter id="' + fid + uid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
-        html += '<clipPath id="clipFull' + uid + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 50) + '"/></clipPath>';
-        var topY = 0;
-        var domEast = (cx + r * Math.cos(0 * Math.PI / 180)).toFixed(2), domY1 = (cy + r * Math.sin(-15 * Math.PI / 180)).toFixed(2), domY2 = (cy + r * Math.sin(15 * Math.PI / 180)).toFixed(2);
-        var domR = (cx + r * Math.cos(15 * Math.PI / 180)).toFixed(2), domL = (cx + r * Math.cos(-15 * Math.PI / 180)).toFixed(2);
-        html += '<clipPath id="clipDomain' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + domEast + ' ' + cy + ' A' + r + ' ' + r + ' 0 0 1 ' + domR + ' ' + domY2 + ' A' + r + ' ' + r + ' 0 0 1 ' + domL + ' ' + domY1 + ' Z"/></clipPath>';
-        var arenaEast = (cx + r * Math.cos(0 * Math.PI / 180)).toFixed(2);
-        var arenaR = (cx + r * Math.cos(60 * Math.PI / 180)).toFixed(2), arenaL = (cx + r * Math.cos(-60 * Math.PI / 180)).toFixed(2);
-        var arenaY1 = (cy + r * Math.sin(60 * Math.PI / 180)).toFixed(2), arenaY2 = (cy + r * Math.sin(-60 * Math.PI / 180)).toFixed(2);
-        html += '<clipPath id="clipArena' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + arenaEast + ' ' + cy + ' A' + r + ' ' + r + ' 0 0 1 ' + arenaR + ' ' + arenaY1 + ' A' + r + ' ' + r + ' 0 0 1 ' + arenaL + ' ' + arenaY2 + ' Z"/></clipPath>';
+        var rClipFull = r + 60;
+        html += '<clipPath id="clipFull' + uid + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + rClipFull + '"/></clipPath>';
+        var rClipWedge = r + 30;
+        var domEast = (cx + rClipWedge * Math.cos(0 * Math.PI / 180)).toFixed(2), domY1 = (cy + rClipWedge * Math.sin(-15 * Math.PI / 180)).toFixed(2), domY2 = (cy + rClipWedge * Math.sin(15 * Math.PI / 180)).toFixed(2);
+        var domR = (cx + rClipWedge * Math.cos(15 * Math.PI / 180)).toFixed(2), domL = (cx + rClipWedge * Math.cos(-15 * Math.PI / 180)).toFixed(2);
+        html += '<clipPath id="clipDomain' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + domEast + ' ' + cy + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + domR + ' ' + domY2 + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + domL + ' ' + domY1 + ' Z"/></clipPath>';
+        var arenaEast = (cx + rClipWedge * Math.cos(0 * Math.PI / 180)).toFixed(2);
+        var arenaR = (cx + rClipWedge * Math.cos(60 * Math.PI / 180)).toFixed(2), arenaL = (cx + rClipWedge * Math.cos(-60 * Math.PI / 180)).toFixed(2);
+        var arenaY1 = (cy + rClipWedge * Math.sin(60 * Math.PI / 180)).toFixed(2), arenaY2 = (cy + rClipWedge * Math.sin(-60 * Math.PI / 180)).toFixed(2);
+        html += '<clipPath id="clipArena' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + arenaEast + ' ' + cy + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + arenaR + ' ' + arenaY1 + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + arenaL + ' ' + arenaY2 + ' Z"/></clipPath>';
         var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
         var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
         html += '<path id="arcPersonal' + uid + '" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
@@ -584,18 +585,20 @@
         var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
         var wheelContainer = document.getElementById('breakdown-wheel-svg');
         var wheelWrap = document.getElementById('breakdown-wheel-wrap');
-        function applySvgSize() {
-          var svgEl = wheelContainer.querySelector('svg');
-          if (svgEl) {
-            svgEl.style.width = '100%';
-            svgEl.style.height = '100%';
-            svgEl.style.maxWidth = '320px';
-            svgEl.style.maxHeight = '320px';
-          }
-        }
         wheelContainer.innerHTML = buildWheelSVG(singleResultDomains, 'breakdown');
-        applySvgSize();
-        wheelWrap.style.transform = 'scale(1) rotate(0deg)';
+        var wheelSvgEl = wheelContainer.querySelector('svg');
+        if (wheelSvgEl) {
+          wheelSvgEl.style.width = '100%';
+          wheelSvgEl.style.height = '100%';
+          wheelSvgEl.style.maxWidth = '320px';
+          wheelSvgEl.style.maxHeight = '320px';
+        }
+        var breakdownTransitionMs = 700;
+        var currentBreakdownMetric = null;
+        function setWheelClip(clipId) {
+          var g = document.getElementById('wheel-contentbreakdown');
+          if (g) g.setAttribute('clip-path', clipId ? 'url(#' + clipId + ')' : 'none');
+        }
         function updateBreakdown(metricKey) {
           var score = getScoreForMetric(singleResult, metricKey);
           var tier = getTierForMetric(singleResult, metricKey);
@@ -610,22 +613,30 @@
           } else {
             badgeEl.classList.add('hidden');
           }
+          var t = getWheelTransform(metricKey);
           var isOverall = metricKey === 'overall';
           var isDomain = metricKey.indexOf('domain:') === 0;
           var isArena = metricKey.indexOf('arena:') === 0;
-          if (isOverall) {
-            wheelContainer.innerHTML = buildWheelSVG(singleResultDomains, 'breakdown');
-            wheelWrap.style.transform = 'scale(1) rotate(0deg)';
-          } else if (isDomain) {
-            var code = metricKey.slice(7);
-            wheelContainer.innerHTML = buildDomainSliceSVG(singleResultDomains, code, 'breakdown');
-            wheelWrap.style.transform = 'scale(1) rotate(0deg)';
-          } else if (isArena) {
-            var arenaName = metricKey.slice(6);
-            wheelContainer.innerHTML = buildArenaSliceSVG(singleResultDomains, arenaName, 'breakdown');
-            wheelWrap.style.transform = 'scale(1) rotate(0deg)';
+          var targetRotate = t.rotate;
+          var targetScale = t.scale;
+          var metricChanged = currentBreakdownMetric !== metricKey;
+          currentBreakdownMetric = metricKey;
+          if (metricChanged) {
+            setWheelClip('clipFullbreakdown');
+            wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
+            setTimeout(function() {
+              if (isOverall) {
+                setWheelClip('clipFullbreakdown');
+                wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
+              } else {
+                setWheelClip(isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown');
+                wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
+              }
+            }, breakdownTransitionMs);
+          } else {
+            setWheelClip(isOverall ? 'clipFullbreakdown' : (isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown'));
+            wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
           }
-          applySvgSize();
           var interpText = getInterpretation(singleResult, metricKey);
           var interpEl = document.getElementById('breakdown-interpretation-text');
           if (interpText) {
