@@ -58,10 +58,14 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div class="h-4 w-full bg-[var(--ap-bg)] rounded-full overflow-hidden">
-                <div id="breakdown-score-bar" class="h-full rounded-full transition-all duration-500" style="width: 0%; max-width: 100%; background: var(--ap-accent);"></div>
+              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto aspect-square rounded-full overflow-hidden bg-[var(--ap-bg)]/30 flex items-center justify-center" style="min-height: 200px;">
+                <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-500 ease-out" style="transform: scale(1) rotate(0deg);">
+                  <div id="breakdown-wheel-svg"></div>
+                </div>
               </div>
-              <p id="breakdown-hint" class="text-[var(--ap-muted)] text-xs mt-3">Select a metric in the list to see its score.</p>
+              <div id="breakdown-interpretation" class="mt-4 p-4 rounded-xl bg-[var(--ap-bg)]/50 border border-[var(--ap-border)]/50 hidden">
+                <p id="breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
+              </div>
             </div>
             <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
@@ -381,25 +385,76 @@
         return metricKey;
       }
 
+      function getInterpretation(results, metricKey) {
+        var tier = getTierForMetric(results, metricKey);
+        if (!tier) return '';
+        var INTERP = window.VAPI_INTERPRETATIONS;
+        if (!INTERP) return '';
+        if (metricKey === 'overall') return (INTERP.composite && INTERP.composite[tier]) || '';
+        if (metricKey.indexOf('arena:') === 0) {
+          var arena = metricKey.slice(6);
+          return (INTERP.arena && INTERP.arena[arena] && INTERP.arena[arena][tier]) || '';
+        }
+        if (metricKey.indexOf('domain:') === 0) {
+          var code = metricKey.slice(7);
+          return (INTERP.domain && INTERP.domain[code] && INTERP.domain[code][tier]) || '';
+        }
+        return '';
+      }
+
+      function getSegmentIndexForMetric(metricKey) {
+        if (metricKey === 'overall') return null;
+        if (metricKey.indexOf('domain:') === 0) {
+          var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+          var code = metricKey.slice(7);
+          var i = order.indexOf(code);
+          return i >= 0 ? i : null;
+        }
+        return null;
+      }
+
+      function getWheelTransform(metricKey) {
+        if (metricKey === 'overall') return { scale: 1, rotate: 0 };
+        if (metricKey.indexOf('domain:') === 0) {
+          var i = getSegmentIndexForMetric(metricKey);
+          if (i == null) return { scale: 1, rotate: 0 };
+          var segmentCenterAngle = -75 + 30 * i;
+          return { scale: 1.55, rotate: -segmentCenterAngle };
+        }
+        if (metricKey.indexOf('arena:') === 0) {
+          var arena = metricKey.slice(6);
+          var centerAngles = { Personal: -30, Relationships: 90, Business: 210 };
+          var angle = centerAngles[arena];
+          if (angle == null) return { scale: 1, rotate: 0 };
+          return { scale: 1.4, rotate: -angle };
+        }
+        return { scale: 1, rotate: 0 };
+      }
+
       if (rows.length === 1) {
         document.getElementById('breakdown-section').classList.remove('hidden');
         var singleResult = rows[0].results;
+        var singleResultDomains = (singleResult.domains || []).map(function(d) {
+          var o = Object.assign({}, d);
+          if (o.arena === 'Self') o.arena = 'Personal';
+          return o;
+        });
         var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
+        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains);
+        var wheelWrap = document.getElementById('breakdown-wheel-wrap');
+        var wheelSvgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
+        if (wheelSvgEl) {
+          wheelSvgEl.style.width = '100%';
+          wheelSvgEl.style.height = '100%';
+          wheelSvgEl.style.maxWidth = '320px';
+          wheelSvgEl.style.maxHeight = '320px';
+        }
         function updateBreakdown(metricKey) {
           var score = getScoreForMetric(singleResult, metricKey);
           var tier = getTierForMetric(singleResult, metricKey);
           var label = getMetricLabel(metricKey);
           document.getElementById('breakdown-metric-label').textContent = label;
           document.getElementById('breakdown-score-value').textContent = score != null ? Math.round(score * 10) / 10 : '—';
-          var barEl = document.getElementById('breakdown-score-bar');
-          var pct = score != null ? Math.min(100, Math.max(0, (score / 10) * 100)) : 0;
-          barEl.style.width = pct + '%';
-          if (score != null && tier) {
-            var color = tierColors[tier] || 'var(--ap-accent)';
-            barEl.style.background = color;
-          } else {
-            barEl.style.background = 'var(--ap-accent)';
-          }
           var badgeEl = document.getElementById('breakdown-tier-badge');
           if (tier) {
             badgeEl.textContent = tier;
@@ -408,7 +463,17 @@
           } else {
             badgeEl.classList.add('hidden');
           }
-          document.getElementById('breakdown-hint').textContent = score != null ? 'Score out of 10. Take the assessment again to see progress over time.' : 'No score for this metric.';
+          var t = getWheelTransform(metricKey);
+          wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var interpText = getInterpretation(singleResult, metricKey);
+          var interpEl = document.getElementById('breakdown-interpretation-text');
+          if (interpText) {
+            interpEl.textContent = interpText;
+            document.getElementById('breakdown-interpretation').classList.remove('hidden');
+          } else {
+            interpEl.textContent = '';
+            document.getElementById('breakdown-interpretation').classList.add('hidden');
+          }
         }
         document.getElementById('breakdown-metric-list').addEventListener('click', function(e) {
           var btn = e.target.closest('.breakdown-metric-btn');
