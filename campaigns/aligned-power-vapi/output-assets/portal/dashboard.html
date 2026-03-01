@@ -475,12 +475,18 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
-        // Labels reappear after wheel spin (800ms after selection)
+        // Labels reappear after wheel spin (800ms after selection), always upright (bottoms toward bottom of page)
         var breakdownLabelsTimeout = null;
+        var currentBreakdownWheelRotate = 0;
         function showBreakdownDomainLabels() {
           if (breakdownLabelsTimeout) {
             clearTimeout(breakdownLabelsTimeout);
             breakdownLabelsTimeout = null;
+          }
+          var labelsGroup = document.getElementById('dashboard-wheel-domain-labels-group');
+          if (labelsGroup) {
+            labelsGroup.style.transformOrigin = '160px 160px';
+            labelsGroup.style.transform = 'rotate(' + (-currentBreakdownWheelRotate) + 'deg)';
           }
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           var svg = wheelWrap && wheelWrap.querySelector('svg');
@@ -513,6 +519,7 @@
             badgeEl.classList.add('hidden');
           }
           var t = getWheelTransform(metricKey);
+          currentBreakdownWheelRotate = t.rotate;
           wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
           var labelsGroup = document.getElementById('dashboard-wheel-domain-labels-group');
           if (labelsGroup) {
