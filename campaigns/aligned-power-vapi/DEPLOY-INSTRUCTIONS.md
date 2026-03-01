@@ -203,3 +203,21 @@ Share the landing link so people can take the assessment. When they enter their 
 - [ ] Redirect URL added in Supabase (your Vercel URL + `/**`)  
 
 If something doesn’t work (e.g. “portal not configured”, or results not saving), see **Troubleshooting** above. In short: open `/api/config` on your live URL to see if the API and env vars are working; double-check Root Directory and that you **Redeploy** after changing env vars.
+
+### Changes not visible after I push
+
+If you pushed updates (e.g. dashboard or landing page) but the live site still shows the old version:
+
+1. **Confirm a new deployment ran**  
+   In Vercel → your project → **Deployments**, check that the latest deployment is from **after** your push and that it **Succeeded**. If there’s no new deployment, trigger one (e.g. push an empty commit or use **Redeploy**).
+
+2. **Bypass browser cache**  
+   Your browser may be serving a cached copy of the page:
+   - **Mac**: `Cmd + Shift + R` on the page, or open the site in a **Private/Incognito** window.
+   - **Windows/Linux**: `Ctrl + Shift + R`, or use a Private/Incognito window.
+
+3. **Confirm you’re on the right page**  
+   Dashboard changes (e.g. “Explore your score” wheel) only appear on **Dashboard** (`/portal/dashboard.html`) when you’re logged in and have at least one assessment. Landing-page changes are on `/html/vapi-landing.html`.
+
+4. **Optional: reduce caching so updates show sooner**  
+   A `vercel.json` in the deploy root (see below) sets short cache for HTML. After adding it, commit, push, and redeploy once; then new pushes should be visible after a normal refresh.
