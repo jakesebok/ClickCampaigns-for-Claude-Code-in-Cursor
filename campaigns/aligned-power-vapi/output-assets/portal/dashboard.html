@@ -24,6 +24,7 @@
     }
     body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; aspect-ratio: 1; max-width: 280px; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -50,7 +51,7 @@
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores from this assessment. Select a metric below.</p>
         <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
-          <div class="flex flex-col lg:flex-row gap-6 border-b border-[var(--ap-border)] pb-6">
+          <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 flex flex-col justify-center">
               <p id="breakdown-metric-label" class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Overall score</p>
               <div class="flex items-baseline gap-3 flex-wrap mb-4">
@@ -58,15 +59,15 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto aspect-square flex items-center justify-center overflow-hidden" style="min-height: 200px;">
-                <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-700 ease-in-out" style="transform: scale(1) rotate(0deg);">
+              <div id="breakdown-wheel-container" class="w-full max-w-[280px] mx-auto flex items-center justify-center overflow-visible" style="min-height: 200px;">
+                <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-500 ease-out" style="transform: scale(1) rotate(0deg);">
                   <div id="breakdown-wheel-svg"></div>
                 </div>
               </div>
             </div>
-            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 lg:self-start">
+            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex flex-col">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
-              <div id="breakdown-metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1">
+              <div id="breakdown-metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1 flex-1 min-h-0">
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
                 <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
@@ -89,7 +90,7 @@
               </div>
             </div>
           </div>
-          <div id="breakdown-interpretation" class="pt-4 mt-0 border-t border-[var(--ap-border)] hidden">
+          <div id="breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">
             <p id="breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
           </div>
         </div>
@@ -225,8 +226,7 @@
         window.location.href = '../html/vapi-results.html';
       }
 
-      function buildWheelSVG(domains, idSuffix) {
-        var uid = idSuffix || ('w' + Math.random().toString(36).slice(2, 9));
+      function buildWheelSVG(domains) {
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
         var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
@@ -249,30 +249,20 @@
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
         var fid = 'dashboardWheelShadow';
+        var arcIdP = 'dashWheelArcP'; var arcIdR = 'dashWheelArcR'; var arcIdB = 'dashWheelArcB';
         var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs>';
-        html += '<filter id="' + fid + uid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
-        var rClipFull = r + 60;
-        html += '<clipPath id="clipFull' + uid + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + rClipFull + '"/></clipPath>';
-        var rClipWedge = r + 30;
-        var domEast = (cx + rClipWedge * Math.cos(0 * Math.PI / 180)).toFixed(2), domY1 = (cy + rClipWedge * Math.sin(-15 * Math.PI / 180)).toFixed(2), domY2 = (cy + rClipWedge * Math.sin(15 * Math.PI / 180)).toFixed(2);
-        var domR = (cx + rClipWedge * Math.cos(15 * Math.PI / 180)).toFixed(2), domL = (cx + rClipWedge * Math.cos(-15 * Math.PI / 180)).toFixed(2);
-        html += '<clipPath id="clipDomain' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + domEast + ' ' + cy + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + domR + ' ' + domY2 + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + domL + ' ' + domY1 + ' Z"/></clipPath>';
-        var arenaEast = (cx + rClipWedge * Math.cos(0 * Math.PI / 180)).toFixed(2);
-        var arenaR = (cx + rClipWedge * Math.cos(60 * Math.PI / 180)).toFixed(2), arenaL = (cx + rClipWedge * Math.cos(-60 * Math.PI / 180)).toFixed(2);
-        var arenaY1 = (cy + rClipWedge * Math.sin(60 * Math.PI / 180)).toFixed(2), arenaY2 = (cy + rClipWedge * Math.sin(-60 * Math.PI / 180)).toFixed(2);
-        html += '<clipPath id="clipArena' + uid + '"><path d="M' + cx + ' ' + cy + ' L' + arenaEast + ' ' + cy + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + arenaR + ' ' + arenaY1 + ' A' + rClipWedge + ' ' + rClipWedge + ' 0 0 1 ' + arenaL + ' ' + arenaY2 + ' Z"/></clipPath>';
-        var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
-        var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
-        html += '<path id="arcPersonal' + uid + '" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
-        var arcRelStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
-        var arcRelEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
-        html += '<path id="arcRel' + uid + '" d="M' + arcRelStart.x.toFixed(2) + ',' + arcRelStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcRelEnd.x.toFixed(2) + ',' + arcRelEnd.y.toFixed(2) + '"/>';
-        var arcBizStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
-        var arcBizEnd = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
-        html += '<path id="arcBiz' + uid + '" d="M' + arcBizStart.x.toFixed(2) + ',' + arcBizStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcBizEnd.x.toFixed(2) + ',' + arcBizEnd.y.toFixed(2) + '"/>';
+        html += '<filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcP1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="' + arcIdP + '" d="M' + arcP0.x.toFixed(2) + ',' + arcP0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcP1.x.toFixed(2) + ',' + arcP1.y.toFixed(2) + '"/>';
+        var arcR0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcR1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="' + arcIdR + '" d="M' + arcR0.x.toFixed(2) + ',' + arcR0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcR1.x.toFixed(2) + ',' + arcR1.y.toFixed(2) + '"/>';
+        var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
         html += '</defs>';
-        html += '<g id="wheel-content' + uid + '" clip-path="url(#clipFull' + uid + ')">';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
           var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
@@ -301,130 +291,13 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + uid + ')">';
-          for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + uid + ')"><textPath href="#arcPersonal' + uid + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#' + fid + uid + ')"><textPath href="#arcRel' + uid + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + uid + ')"><textPath href="#arcBiz' + uid + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
-        html += '</g></svg>';
-        return html;
-      }
-
-      function buildDomainSliceSVG(domains, domainCode, idSuffix) {
-        var uid = idSuffix || ('d' + Math.random().toString(36).slice(2, 9));
-        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
-        var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
-        var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
-        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
-        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-        var byCode = {};
-        (domains || []).forEach(function(d) {
-          var copy = { code: d.code, score: d.score, arena: (d.arena === 'Self' ? 'Personal' : d.arena) || 'Personal' };
-          byCode[d.code] = copy;
-        });
-        var i = order.indexOf(domainCode);
-        if (i < 0) return '';
-        var d = byCode[domainCode];
-        var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
-        var arena = (d && d.arena) ? d.arena : 'Personal';
-        var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
-        var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
-        var cx = 160, cy = 160, r = 120, labelRadius = r + 12;
-        var wedgeStartDeg = -105, wedgeEndDeg = -75;
-        var a0Rad = wedgeStartDeg * Math.PI / 180, a1Rad = wedgeEndDeg * Math.PI / 180;
-        function cellPath(r0, r1, a0R, a1R) {
-          var x1 = cx + r1 * Math.cos(a0R), y1 = cy + r1 * Math.sin(a0R);
-          var x2 = cx + r1 * Math.cos(a1R), y2 = cy + r1 * Math.sin(a1R);
-          var x3 = cx + r0 * Math.cos(a1R), y3 = cy + r0 * Math.sin(a1R);
-          var x4 = cx + r0 * Math.cos(a0R), y4 = cy + r0 * Math.sin(a0R);
-          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
-        }
-        var fid = 'dashboardWheelShadow';
-        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Domain slice">';
-        html += '<defs><filter id="' + fid + uid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
-        for (var k = 1; k <= 10; k++) {
-          var r0 = r * ((k - 1) / 10), r1 = r * (k / 10);
-          var fill = (k <= score) ? darkC : lightC;
-          html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
-        }
-        for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
-        html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0Rad)) + '" y2="' + (cy + r * Math.sin(a0Rad)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
-        html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a1Rad)) + '" y2="' + (cy + r * Math.sin(a1Rad)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
-        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
-        var midDeg = (wedgeStartDeg + wedgeEndDeg) / 2, midRad = midDeg * Math.PI / 180;
-        var tx = cx + labelRadius * Math.cos(midRad), ty = cy + labelRadius * Math.sin(midRad);
-        var lines = WHEEL_LABEL_LINES[domainCode] || [domainCode];
-        var lineHeight = 10, firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-        html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="middle" dominant-baseline="middle" filter="url(#' + fid + uid + ')">';
-        for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
-        html += '</text></svg>';
-        return html;
-      }
-
-      function buildArenaSliceSVG(domains, arenaName, idSuffix) {
-        var uid = idSuffix || ('a' + Math.random().toString(36).slice(2, 9));
-        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
-        var ARENA_DOMAINS = { Personal: ['PH', 'IA', 'ME', 'AF'], Relationships: ['RS', 'FA', 'CO', 'WI'], Business: ['VS', 'EX', 'OH', 'EC'] };
-        var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
-        var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
-        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
-        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-        var byCode = {};
-        (domains || []).forEach(function(d) {
-          var copy = { code: d.code, score: d.score, arena: (d.arena === 'Self' ? 'Personal' : d.arena) || 'Personal' };
-          byCode[d.code] = copy;
-        });
-        var codes = ARENA_DOMAINS[arenaName];
-        if (!codes || codes.length !== 4) return '';
-        var cx = 160, cy = 160, r = 120, labelRadius = r + 12, rInner = r * 0.42, segmentAngle = 30;
-        function cellPath(r0, r1, a0Rad, a1Rad) {
-          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
-          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
-          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
-          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
-          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
-        }
-        var fid = 'dashboardWheelShadow';
-        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Arena slice">';
-        html += '<defs><filter id="' + fid + uid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
-        var arcStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
-        var arcEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
-        html += '<path id="arcArena' + uid + '" d="M' + arcStart.x.toFixed(2) + ',' + arcStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcEnd.x.toFixed(2) + ',' + arcEnd.y.toFixed(2) + '"/></defs>';
-        for (var idx = 0; idx < 4; idx++) {
-          var code = codes[idx];
-          var d = byCode[code];
-          var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
-          var darkC = ARENA_DARK[arenaName] || ARENA_DARK.Personal;
-          var lightC = ARENA_LIGHT[arenaName] || ARENA_LIGHT.Personal;
-          var a0Deg = -90 + idx * segmentAngle, a1Deg = -90 + (idx + 1) * segmentAngle;
-          var a0Rad = a0Deg * Math.PI / 180, a1Rad = a1Deg * Math.PI / 180;
-          for (var k = 1; k <= 10; k++) {
-            var r0 = r * ((k - 1) / 10), r1 = r * (k / 10);
-            var fill = (k <= score) ? darkC : lightC;
-            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
-          }
-        }
-        for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
-        for (var idx = 0; idx <= 4; idx++) {
-          var a = (-90 + idx * segmentAngle) * Math.PI / 180;
-          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a)) + '" y2="' + (cy + r * Math.sin(a)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
-        }
-        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
-        for (var idx = 0; idx < 4; idx++) {
-          var code = codes[idx];
-          var midDeg = -90 + idx * segmentAngle + segmentAngle / 2, midRad = midDeg * Math.PI / 180;
-          var tx = cx + labelRadius * Math.cos(midRad), ty = cy + labelRadius * Math.sin(midRad);
-          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
-          if (Math.abs(midDeg + 90) < 15 || Math.abs(midDeg - 90) < 15) anchor = 'middle';
-          var lines = WHEEL_LABEL_LINES[code] || [code];
-          var lineHeight = 10, firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + uid + ')">';
-          for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
-          html += '</text>';
-        }
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + uid + ')"><textPath href="#arcArena' + uid + '" startOffset="50%" text-anchor="middle">' + esc(arenaName) + '</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -583,21 +456,14 @@
           return o;
         });
         var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
-        var wheelContainer = document.getElementById('breakdown-wheel-svg');
+        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains);
         var wheelWrap = document.getElementById('breakdown-wheel-wrap');
-        wheelContainer.innerHTML = buildWheelSVG(singleResultDomains, 'breakdown');
-        var wheelSvgEl = wheelContainer.querySelector('svg');
+        var wheelSvgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
         if (wheelSvgEl) {
           wheelSvgEl.style.width = '100%';
           wheelSvgEl.style.height = '100%';
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
-        }
-        var breakdownTransitionMs = 700;
-        var currentBreakdownMetric = null;
-        function setWheelClip(clipId) {
-          var g = document.getElementById('wheel-contentbreakdown');
-          if (g) g.setAttribute('clip-path', clipId ? 'url(#' + clipId + ')' : 'none');
         }
         function updateBreakdown(metricKey) {
           var score = getScoreForMetric(singleResult, metricKey);
@@ -614,28 +480,12 @@
             badgeEl.classList.add('hidden');
           }
           var t = getWheelTransform(metricKey);
-          var isOverall = metricKey === 'overall';
-          var isDomain = metricKey.indexOf('domain:') === 0;
-          var isArena = metricKey.indexOf('arena:') === 0;
-          var targetRotate = t.rotate;
-          var targetScale = t.scale;
-          var metricChanged = currentBreakdownMetric !== metricKey;
-          currentBreakdownMetric = metricKey;
-          if (metricChanged) {
-            setWheelClip('clipFullbreakdown');
-            wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
-            setTimeout(function() {
-              if (isOverall) {
-                setWheelClip('clipFullbreakdown');
-                wheelWrap.style.transform = 'scale(1) rotate(' + targetRotate + 'deg)';
-              } else {
-                setWheelClip(isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown');
-                wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
-              }
-            }, breakdownTransitionMs);
+          wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var wheelContainer = document.getElementById('breakdown-wheel-container');
+          if (metricKey === 'overall') {
+            wheelContainer.classList.remove('breakdown-wheel-container--zoomed');
           } else {
-            setWheelClip(isOverall ? 'clipFullbreakdown' : (isDomain ? 'clipDomainbreakdown' : 'clipArenabreakdown'));
-            wheelWrap.style.transform = 'scale(' + targetScale + ') rotate(' + targetRotate + 'deg)';
+            wheelContainer.classList.add('breakdown-wheel-container--zoomed');
           }
           var interpText = getInterpretation(singleResult, metricKey);
           var interpEl = document.getElementById('breakdown-interpretation-text');
