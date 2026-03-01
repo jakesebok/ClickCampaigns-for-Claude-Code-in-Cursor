@@ -256,9 +256,9 @@
         var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
         var arcP1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
         html += '<path id="' + arcIdP + '" d="M' + arcP0.x.toFixed(2) + ',' + arcP0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcP1.x.toFixed(2) + ',' + arcP1.y.toFixed(2) + '"/>';
-        var arcR0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
-        var arcR1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
-        html += '<path id="' + arcIdR + '" d="M' + arcR0.x.toFixed(2) + ',' + arcR0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcR1.x.toFixed(2) + ',' + arcR1.y.toFixed(2) + '"/>';
+        var arcR0 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        var arcR1 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        html += '<path id="' + arcIdR + '" d="M' + arcR0.x.toFixed(2) + ',' + arcR0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 1 1 ' + arcR1.x.toFixed(2) + ',' + arcR1.y.toFixed(2) + '"/>';
         var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
