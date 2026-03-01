@@ -29,6 +29,7 @@
     #breakdown-wheel-container.breakdown-wheel-container--zoomed.breakdown-wheel-container--labels-visible { overflow: visible; }
     .wheel-segment { transition: opacity 0.35s ease-out; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
+    #dashboard-wheel-domain-labels-group { transition: transform 0.65s ease-out; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -287,6 +288,7 @@
           html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0)) + '" y2="' + (cy + r * Math.sin(a0)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
         }
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.25"/>';
+        html += '<g id="dashboard-wheel-domain-labels-group" class="wheel-domain-labels-group" transform="rotate(0, 160, 160)">';
         for (var i = 0; i < 12; i++) {
           var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
           var midRad = midDeg * Math.PI / 180;
@@ -299,6 +301,7 @@
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
+        html += '</g>';
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
         html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
@@ -511,6 +514,11 @@
           }
           var t = getWheelTransform(metricKey);
           wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var labelsGroup = document.getElementById('dashboard-wheel-domain-labels-group');
+          if (labelsGroup) {
+            labelsGroup.style.transformOrigin = '160px 160px';
+            labelsGroup.style.transform = 'rotate(' + (-t.rotate) + 'deg)';
+          }
           var wheelContainer = document.getElementById('breakdown-wheel-container');
           if (metricKey === 'overall') {
             wheelContainer.classList.remove('breakdown-wheel-container--zoomed');
