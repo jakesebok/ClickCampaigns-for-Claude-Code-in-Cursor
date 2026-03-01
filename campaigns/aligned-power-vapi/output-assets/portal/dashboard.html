@@ -470,7 +470,12 @@
           wheelSvgEl.style.maxWidth = '320px';
           wheelSvgEl.style.maxHeight = '320px';
         }
+        var breakdownLabelsTimeout = null;
         function updateBreakdown(metricKey) {
+          if (breakdownLabelsTimeout) {
+            clearTimeout(breakdownLabelsTimeout);
+            breakdownLabelsTimeout = null;
+          }
           var score = getScoreForMetric(singleResult, metricKey);
           var tier = getTierForMetric(singleResult, metricKey);
           var label = getMetricLabel(metricKey);
@@ -522,9 +527,18 @@
               segments.forEach(function(p) { p.style.opacity = focusOpacity; });
             }
             var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
-            domainLabels.forEach(function(el) {
-              el.style.opacity = metricKey === 'overall' ? '1' : '0';
-            });
+            if (metricKey === 'overall') {
+              domainLabels.forEach(function(el) { el.style.opacity = '1'; });
+            } else {
+              domainLabels.forEach(function(el) { el.style.opacity = '0'; });
+              breakdownLabelsTimeout = setTimeout(function() {
+                breakdownLabelsTimeout = null;
+                var svg = document.getElementById('breakdown-wheel-svg').querySelector('svg');
+                if (svg) {
+                  svg.querySelectorAll('.wheel-domain-label').forEach(function(el) { el.style.opacity = '1'; });
+                }
+              }, 650);
+            }
           }
         }
         document.getElementById('breakdown-metric-list').addEventListener('click', function(e) {
