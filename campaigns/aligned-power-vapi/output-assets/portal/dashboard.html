@@ -434,12 +434,13 @@
 
       function getWheelTransform(metricKey) {
         if (metricKey === 'overall') return { scale: 1, rotate: 0 };
+        var focusScale = 1.33;
         if (metricKey.indexOf('domain:') === 0) {
           var i = getSegmentIndexForMetric(metricKey);
           if (i == null) return { scale: 1, rotate: 0 };
           var segmentCenterAngle = -75 + 30 * i;
           var topAngle = -90;
-          return { scale: 1.33, rotate: topAngle - segmentCenterAngle };
+          return { scale: focusScale, rotate: topAngle - segmentCenterAngle };
         }
         if (metricKey.indexOf('arena:') === 0) {
           var arena = metricKey.slice(6);
@@ -447,7 +448,7 @@
           var angle = centerAngles[arena];
           if (angle == null) return { scale: 1, rotate: 0 };
           var topAngle = -90;
-          return { scale: 1.3, rotate: topAngle - angle };
+          return { scale: focusScale, rotate: topAngle - angle };
         }
         return { scale: 1, rotate: 0 };
       }
