@@ -27,6 +27,7 @@
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
+    .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -96,7 +97,9 @@
                 <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
                 <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
               </div>
-              <div id="breakdown-scroll-fade" class="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent rounded-b-lg transition-opacity duration-300"></div>
+              <div id="breakdown-scroll-indicator" class="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-1 pt-3 bg-gradient-to-t from-white via-white/90 to-transparent transition-opacity duration-300 cursor-pointer" title="Scroll for more">
+                <i data-lucide="chevron-down" class="w-4 h-4 text-[var(--ap-muted)] animate-bounce"></i>
+              </div>
               </div>
             </div>
           </div>
@@ -320,20 +323,20 @@
       var interp = (window.VAPI_INTERPRETATIONS && window.VAPI_INTERPRETATIONS.composite) ? window.VAPI_INTERPRETATIONS.composite : {};
       var compositeDesc = (latestTier && interp[latestTier]) ? interp[latestTier] : '';
       var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
-      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
-      latestHtml += '<div class="flex flex-col sm:flex-row items-start sm:items-center">';
+      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-4 sm:p-5">';
+      latestHtml += '<div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">';
       latestHtml += '<div class="flex-shrink-0 min-w-0">';
-      latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-1">Latest</p>';
-      latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-1">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
-      latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-3">' + formatDate(latest.created_at) + '</p>';
+      latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-0.5">Latest</p>';
+      latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-0.5">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
+      latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-2">' + formatDate(latest.created_at) + '</p>';
       if (latestScore != null) {
-        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall score: ' + latestScore + ' / 10</p>';
+        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-3">Overall score: ' + latestScore + ' / 10</p>';
       }
       latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
-      latestHtml += '<div class="flex-1 flex justify-center items-center overflow-visible p-2 min-h-0 mt-4 sm:mt-0 sm:min-w-[200px]">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-1 flex justify-center items-center overflow-visible min-h-0 sm:min-w-[170px] sm:max-w-[200px]">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
-      latestHtml += '<div class="border-t border-[var(--ap-border)] mt-6 pt-6">';
+      latestHtml += '<div class="border-t border-[var(--ap-border)] mt-4 pt-4">';
       if (latestScore != null && latestTier) {
         latestHtml += '<div class="flex items-baseline gap-2 flex-wrap mb-3">';
         latestHtml += '<span class="text-3xl font-bold" style="color:' + tierColor + '">' + latestScore + '</span>';
@@ -598,11 +601,17 @@
           }
         }
         var bml = document.getElementById('breakdown-metric-list');
-        var bsf = document.getElementById('breakdown-scroll-fade');
-        bml.addEventListener('scroll', function() {
+        var bsi = document.getElementById('breakdown-scroll-indicator');
+        function checkScrollEnd() {
           var atBottom = bml.scrollHeight - bml.scrollTop - bml.clientHeight < 8;
-          bsf.style.opacity = atBottom ? '0' : '1';
+          bsi.style.opacity = atBottom ? '0' : '1';
+          bsi.style.pointerEvents = atBottom ? 'none' : 'auto';
+        }
+        bml.addEventListener('scroll', checkScrollEnd);
+        bsi.addEventListener('click', function() {
+          bml.scrollBy({ top: 80, behavior: 'smooth' });
         });
+        setTimeout(checkScrollEnd, 100);
         bml.addEventListener('click', function(e) {
           var btn = e.target.closest('.breakdown-metric-btn');
           if (!btn) return;
@@ -612,11 +621,12 @@
             b.classList.toggle('bg-[var(--ap-primary)]', on);
             b.classList.toggle('text-white', on);
             b.classList.toggle('border-[var(--ap-primary)]', on);
+            b.classList.toggle('bm-selected', on);
             b.classList.toggle('text-[var(--ap-text)]', !on);
           });
           updateBreakdown(value);
         });
-        document.querySelector('#breakdown-metric-list .breakdown-metric-btn[data-value="overall"]').classList.add('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]');
+        document.querySelector('#breakdown-metric-list .breakdown-metric-btn[data-value="overall"]').classList.add('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'bm-selected');
         document.querySelectorAll('#breakdown-metric-list .breakdown-metric-btn:not([data-value="overall"])').forEach(function(b) { b.classList.add('text-[var(--ap-text)]'); });
         updateBreakdown('overall');
       }
