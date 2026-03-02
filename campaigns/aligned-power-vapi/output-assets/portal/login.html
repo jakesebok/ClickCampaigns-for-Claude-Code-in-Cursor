@@ -79,9 +79,14 @@
       }
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var params = new URLSearchParams(window.location.search);
+      var redirect = params.get('redirect') || '';
+      var allowedRedirects = ['dashboard.html', 'admin.html', 'settings.html'];
+      var redirectTo = allowedRedirects.indexOf(redirect) !== -1 ? redirect : 'dashboard.html';
+
       var session = await supabase.auth.getSession();
       if (session.data.session) {
-        window.location.href = 'dashboard.html';
+        window.location.href = redirectTo;
         return;
       }
       document.getElementById('login-form').addEventListener('submit', async function(e) {
@@ -96,7 +101,7 @@
           errEl.classList.remove('hidden');
           return;
         }
-        window.location.href = 'dashboard.html';
+        window.location.href = redirectTo;
       });
     })();
   </script>

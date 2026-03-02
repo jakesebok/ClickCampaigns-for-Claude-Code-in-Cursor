@@ -27,6 +27,7 @@
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
       <div class="flex items-center gap-4">
+        <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
         <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
         <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
         <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
@@ -126,6 +127,12 @@
       document.getElementById('first-name').value = meta.first_name || meta.firstName || '';
       document.getElementById('last-name').value = meta.last_name || meta.lastName || '';
       document.getElementById('email').value = session.user.email || '';
+
+      var email = (session.user.email || '').trim().toLowerCase();
+      if (email === 'jacob@alignedpower.coach') {
+        var adminEl = document.getElementById('header-admin-link');
+        if (adminEl) adminEl.classList.remove('hidden');
+      }
 
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('settings-content').classList.remove('hidden');

@@ -29,6 +29,8 @@ You’ll do **4 main things**: set up Supabase (database + auth), put your proje
 5. Click **Run** (or the green “Run” button at the bottom right).
 6. You should see a message that the query ran successfully. That created the table and rules for saving assessment results and for the portal.
 
+**Optional — Admin portal:** If you use the coach/admin area to view any respondent’s results, run the SQL in **supabase/admin-policy.sql** the same way (New query → paste file → Run). That allows the admin user (jacob@alignedpower.coach) to see all assessment results.
+
 ### 1.3 Get your Project URL and API key
 
 You need two values for Vercel later: **Project URL** and a **public API key** (either the Publishable key or the Legacy anon key—both work).

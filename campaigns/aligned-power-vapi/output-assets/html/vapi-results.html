@@ -56,9 +56,12 @@
 <body class="min-h-screen antialiased">
   <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10 no-print pt-6 pb-5">
     <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
-      <a href="vapi-landing.html" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
-        <img src="../images/aligned-power-logo.png" alt="Aligned Power — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
-      </a>
+      <div class="flex items-center gap-4">
+        <span id="results-back-admin" class="hidden"><a href="../portal/admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
+        <a href="vapi-landing.html" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
+          <img src="../images/aligned-power-logo.png" alt="Aligned Power — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
+        </a>
+      </div>
       <div class="flex flex-col items-end gap-0.5">
         <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">
           <i data-lucide="download" class="w-4 h-4"></i>
@@ -173,6 +176,10 @@
   </script>
   <script>
     (function() {
+      if (sessionStorage.getItem('vapiResultsFromAdmin')) {
+        var el = document.getElementById('results-back-admin');
+        if (el) el.classList.remove('hidden');
+      }
       var COLORS = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
       var INTERP = window.VAPI_INTERPRETATIONS || { domain: {}, arena: {} };
       var results = null;
