@@ -61,7 +61,7 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-outer" class="relative w-full max-w-[350px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
+              <div id="breakdown-wheel-outer" class="relative w-full max-w-[350px] mx-auto overflow-visible -my-2" style="aspect-ratio: 1 / 1;">
                 <div id="breakdown-wheel-container" class="absolute inset-[35px] flex items-center justify-center overflow-visible">
                   <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
                     <div id="breakdown-wheel-svg"></div>
@@ -74,7 +74,7 @@
             </div>
             <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex flex-col">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
-              <div id="breakdown-metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1 flex-1 min-h-0">
+              <div id="breakdown-metric-list" class="space-y-1 overflow-y-auto pr-1 flex-1 min-h-0">
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
                 <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
@@ -571,7 +571,7 @@
           var svgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
           if (svgEl) {
             var segments = svgEl.querySelectorAll('.wheel-segment');
-            var dimOpacity = '0.2';
+            var dimOpacity = '0.1';
             var focusOpacity = '1';
             if (metricKey === 'overall') {
               segments.forEach(function(p) { p.style.opacity = focusOpacity; });
