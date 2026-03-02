@@ -61,14 +61,14 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-outer" class="relative w-full max-w-[340px] mx-auto flex items-center justify-center overflow-visible" style="min-height: 260px;">
-                <div id="breakdown-wheel-container" class="absolute inset-0 flex items-center justify-center overflow-visible">
-                  <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg); max-width:280px; margin:auto;">
+              <div id="breakdown-wheel-outer" class="relative w-full max-w-[380px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
+                <div id="breakdown-wheel-container" class="absolute inset-[50px] flex items-center justify-center overflow-visible">
+                  <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
                     <div id="breakdown-wheel-svg"></div>
                   </div>
                 </div>
                 <div id="breakdown-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-10" aria-hidden="true">
-                  <svg id="breakdown-wheel-labels-svg" viewBox="0 0 400 400" class="w-full h-auto overflow-visible" style="max-width:340px" xmlns="http://www.w3.org/2000/svg"></svg>
+                  <svg id="breakdown-wheel-labels-svg" viewBox="0 0 380 380" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>
                 </div>
               </div>
             </div>
@@ -485,10 +485,8 @@
           var overlay = document.getElementById('breakdown-wheel-labels-overlay');
           var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
           if (!overlay || !labelsSvg) return;
-          var cx = 200; var cy = 200;
-          var r = 120;
-          var zoomScale = 1.33;
-          var labelRadius = r * zoomScale + 14;
+          var cx = 190; var cy = 190;
+          var labelRadius = 155;
           var lineHeight = 10;
           var filterId = 'overlayLabelShadow';
           var html = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
