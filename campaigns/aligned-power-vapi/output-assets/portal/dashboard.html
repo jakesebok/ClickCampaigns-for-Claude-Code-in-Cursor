@@ -485,29 +485,37 @@
           var overlay = document.getElementById('breakdown-wheel-labels-overlay');
           var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
           if (!overlay || !labelsSvg) return;
-          var cx = 190; var cy = 190;
-          var labelRadius = 155;
+          var cx = 190, cy = 190;
+          var wheelR = 140;
+          var gap = 6;
+          var anchorR = wheelR + gap;
           var lineHeight = 10;
+          var halfFont = 5;
           var filterId = 'overlayLabelShadow';
           var html = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
           for (var i = 0; i < 12; i++) {
-            var viewAngleDeg = -75 + 30 * i + currentRotationDeg;
-            while (viewAngleDeg > 360) viewAngleDeg -= 360;
-            while (viewAngleDeg < 0) viewAngleDeg += 360;
-            var rad = viewAngleDeg * Math.PI / 180;
-            var tx = cx + labelRadius * Math.cos(rad);
-            var ty = cy + labelRadius * Math.sin(rad);
-            var anchor;
-            if (viewAngleDeg >= -10 && viewAngleDeg < 10 || viewAngleDeg >= 350) anchor = 'start';
-            else if (viewAngleDeg >= 170 && viewAngleDeg < 190) anchor = 'end';
-            else if (viewAngleDeg >= 10 && viewAngleDeg < 170) anchor = 'start';
-            else anchor = 'end';
-            if (Math.abs(viewAngleDeg - 90) < 10 || Math.abs(viewAngleDeg - 270) < 10) anchor = 'middle';
+            var a = ((-75 + 30 * i + currentRotationDeg) % 360 + 360) % 360;
+            var rad = a * Math.PI / 180;
+            var ax = cx + anchorR * Math.cos(rad);
+            var ay = cy + anchorR * Math.sin(rad);
             var lines = BREAKDOWN_LABEL_LINES[BREAKDOWN_DOMAIN_ORDER[i]] || [BREAKDOWN_DOMAIN_ORDER[i]];
-            var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-            html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
-            for (var L = 0; L < lines.length; L++) {
-              html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
+            var numLines = lines.length;
+            var blockH = (numLines - 1) * lineHeight;
+            var anchor;
+            if (a > 315 || a <= 45) anchor = 'start';
+            else if (a > 135 && a <= 225) anchor = 'end';
+            else anchor = 'middle';
+            var firstLineY;
+            if (a > 45 && a <= 135) {
+              firstLineY = ay + halfFont;
+            } else if (a > 225 && a <= 315) {
+              firstLineY = ay - blockH - halfFont;
+            } else {
+              firstLineY = ay - blockH / 2;
+            }
+            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            for (var L = 0; L < numLines; L++) {
+              html += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
             }
             html += '</text>';
           }
