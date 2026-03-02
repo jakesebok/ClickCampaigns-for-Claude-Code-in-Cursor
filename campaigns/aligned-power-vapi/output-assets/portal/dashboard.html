@@ -477,38 +477,40 @@
         var BREAKDOWN_DOMAIN_NAMES = { PH: 'Physical Health', IA: 'Inner Alignment', ME: 'Mental / Emotional', AF: 'Attention & Focus', RS: 'Relationship to Self', FA: 'Family', CO: 'Community', WI: 'World / Impact', VS: 'Vision / Strategy', EX: 'Execution', OH: 'Operational Health', EC: 'Ecology' };
         var breakdownLabelsTimeout = null;
 
+        var BREAKDOWN_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+
         function updateBreakdownLabels(currentRotationDeg) {
           var overlay = document.getElementById('breakdown-wheel-labels-overlay');
           var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
           if (!overlay || !labelsSvg) return;
           var cx = 160; var cy = 160;
-          var labelRadius = 142;
-          labelsSvg.innerHTML = '';
+          var r = 120;
+          var labelRadius = r + 12;
+          var lineHeight = 10;
+          var filterId = 'overlayLabelShadow';
+          var html = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
           for (var i = 0; i < 12; i++) {
             var viewAngleDeg = -75 + 30 * i + currentRotationDeg;
             while (viewAngleDeg > 360) viewAngleDeg -= 360;
             while (viewAngleDeg < 0) viewAngleDeg += 360;
             var rad = viewAngleDeg * Math.PI / 180;
-            var x = cx + labelRadius * Math.cos(rad);
-            var y = cy + labelRadius * Math.sin(rad);
-            var anchor = 'middle';
-            if (viewAngleDeg >= 45 && viewAngleDeg <= 135) anchor = 'middle';
-            else if (viewAngleDeg >= 225 && viewAngleDeg <= 315) anchor = 'middle';
-            else if (viewAngleDeg > 135 && viewAngleDeg < 225) anchor = 'end';
-            else anchor = 'start';
-            var name = BREAKDOWN_DOMAIN_NAMES[BREAKDOWN_DOMAIN_ORDER[i]] || BREAKDOWN_DOMAIN_ORDER[i];
-            var textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            textEl.setAttribute('x', x.toFixed(2));
-            textEl.setAttribute('y', y.toFixed(2));
-            textEl.setAttribute('text-anchor', anchor);
-            textEl.setAttribute('dominant-baseline', 'middle');
-            textEl.setAttribute('font-size', '9');
-            textEl.setAttribute('fill', '#D4AA70');
-            textEl.setAttribute('font-family', 'Source Sans 3, sans-serif');
-            textEl.setAttribute('font-weight', '600');
-            textEl.textContent = name;
-            labelsSvg.appendChild(textEl);
+            var tx = cx + labelRadius * Math.cos(rad);
+            var ty = cy + labelRadius * Math.sin(rad);
+            var anchor;
+            if (viewAngleDeg >= -10 && viewAngleDeg < 10 || viewAngleDeg >= 350) anchor = 'start';
+            else if (viewAngleDeg >= 170 && viewAngleDeg < 190) anchor = 'end';
+            else if (viewAngleDeg >= 10 && viewAngleDeg < 170) anchor = 'start';
+            else anchor = 'end';
+            if (Math.abs(viewAngleDeg - 90) < 10 || Math.abs(viewAngleDeg - 270) < 10) anchor = 'middle';
+            var lines = BREAKDOWN_LABEL_LINES[BREAKDOWN_DOMAIN_ORDER[i]] || [BREAKDOWN_DOMAIN_ORDER[i]];
+            var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+            html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            for (var L = 0; L < lines.length; L++) {
+              html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
+            }
+            html += '</text>';
           }
+          labelsSvg.innerHTML = html;
           overlay.classList.remove('opacity-0');
           overlay.setAttribute('aria-hidden', 'false');
         }
