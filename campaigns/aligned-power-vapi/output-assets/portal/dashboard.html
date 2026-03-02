@@ -61,14 +61,14 @@
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-outer" class="relative w-full max-w-[380px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
-                <div id="breakdown-wheel-container" class="absolute inset-[50px] flex items-center justify-center overflow-visible">
+              <div id="breakdown-wheel-outer" class="relative w-full max-w-[350px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
+                <div id="breakdown-wheel-container" class="absolute inset-[35px] flex items-center justify-center overflow-visible">
                   <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
                     <div id="breakdown-wheel-svg"></div>
                   </div>
                 </div>
                 <div id="breakdown-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-10" aria-hidden="true">
-                  <svg id="breakdown-wheel-labels-svg" viewBox="0 0 380 380" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>
+                  <svg id="breakdown-wheel-labels-svg" viewBox="0 0 350 350" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>
                 </div>
               </div>
             </div>
@@ -437,7 +437,7 @@
       }
 
       function getWheelTransform(metricKey) {
-        var focusScale = 1.6;
+        var focusScale = 1.33;
         if (metricKey === 'overall') return { scale: focusScale, rotate: 0 };
         if (metricKey.indexOf('domain:') === 0) {
           var i = getSegmentIndexForMetric(metricKey);
@@ -485,9 +485,9 @@
           var overlay = document.getElementById('breakdown-wheel-labels-overlay');
           var labelsSvg = document.getElementById('breakdown-wheel-labels-svg');
           if (!overlay || !labelsSvg) return;
-          var cx = 190, cy = 190;
+          var cx = 175, cy = 175;
           var wheelR = 140;
-          var gap = 9;
+          var gap = 8;
           var anchorR = wheelR + gap;
           var lineHeight = 10;
           var halfFont = 5;
