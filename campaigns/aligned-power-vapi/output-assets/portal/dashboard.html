@@ -485,7 +485,8 @@
           if (!overlay || !labelsSvg) return;
           var cx = 160; var cy = 160;
           var r = 120;
-          var labelRadius = r + 12;
+          var zoomScale = 1.33;
+          var labelRadius = r * zoomScale + 10;
           var lineHeight = 10;
           var filterId = 'overlayLabelShadow';
           var html = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
