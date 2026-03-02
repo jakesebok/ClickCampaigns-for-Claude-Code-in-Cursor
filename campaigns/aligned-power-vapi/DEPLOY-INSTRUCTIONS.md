@@ -54,7 +54,7 @@ You need two values for Vercel later: **Project URL** and a **public API key** (
    - **Legacy anon, service_role API keys** tab → copy the **Legacy ANON** key (a long JWT string).
 4. Copy that key and keep it handy. You will paste it into Vercel as **SUPABASE_ANON_KEY** in Part 3.
 
-**Do not** use a Secret key or the service_role key—those are for backend-only use. The Publishable key or Legacy anon key is the correct one for the portal and for saving results from the browser.
+**Do not** use a Secret key or the service_role key in the browser. The Publishable key or Legacy anon key is the correct one for the portal and for saving results from the browser. (The service_role key is only used server-side for the optional Admin view.)
 
 ---
 
@@ -118,7 +118,7 @@ If you’ve never used Git and this feels confusing, you can instead:
 1. On Vercel, open your project (click the project name).
 2. Click the **Settings** tab at the top.
 3. In the left sidebar, click **Environment Variables**.
-4. Add **two** variables (one at a time):
+4. Add **two** variables (plus an optional third for Admin):
 
    **First variable**
    - **Name**: `SUPABASE_URL`  
@@ -131,6 +131,14 @@ If you’ve never used Git and this feels confusing, you can instead:
    - **Value**: paste your **Publishable key or Legacy anon** key from Supabase (from Part 1.3).  
    - **Environment**: leave all three checked.  
    - Click **Save**.
+
+   **Optional (Admin only)**
+   - **Name**: `SUPABASE_SERVICE_ROLE_KEY`
+   - **Value**: Supabase **service_role** key (Project Settings → API Keys → Legacy anon, service_role API keys).
+   - **Environment**: leave all three checked.
+   - Click **Save**.
+
+   Keep this key **secret** (Vercel env var only). Never paste it into HTML files or client-side JavaScript.
 
 5. **Redeploy** so the new keys are used:
    - Go to the **Deployments** tab.

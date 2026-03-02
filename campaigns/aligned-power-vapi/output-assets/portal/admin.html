@@ -48,6 +48,9 @@
       <div id="admin-respondents-view">
         <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Respondents</h1>
         <p class="text-[var(--ap-secondary)] mb-6">Everyone who has completed the VAPI™ assessment. Click a respondent to see all of their assessments and open a report.</p>
+        <div id="admin-warning" class="hidden mb-6 rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/70 px-4 py-3 text-sm text-[var(--ap-secondary)]">
+          If you’re only seeing your own email, the Admin read-all permissions aren’t enabled yet. Run <code>supabase/admin-policy.sql</code> in Supabase or add <strong>SUPABASE_SERVICE_ROLE_KEY</strong> in Vercel and redeploy.
+        </div>
 
         <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <div class="relative flex-1 max-w-sm">
@@ -149,20 +152,44 @@
         window.location.href = 'login.html';
       });
 
-      var { data: rows, error } = await supabase
-        .from('vapi_results')
-        .select('id, email, first_name, last_name, results, created_at')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        document.getElementById('admin-content').classList.remove('hidden');
-        document.getElementById('admin-respondents-view').classList.remove('hidden');
-        document.getElementById('admin-respondents-body').innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-red-600">Error loading results: ' + (error.message || '') + '</td></tr>';
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
-        return;
+      // Prefer server endpoint (bypasses RLS). If it's not configured yet, fall back to RLS-based select.
+      var allRows = [];
+      var endpointErr = null;
+      try {
+        var resp = await fetch('/api/admin-results', {
+          method: 'GET',
+          headers: { Authorization: 'Bearer ' + session.access_token }
+        });
+        if (!resp.ok) {
+          var txt = await resp.text().catch(function() { return ''; });
+          throw new Error('admin-results failed: ' + resp.status + ' ' + txt);
+        }
+        var payload = await resp.json();
+        allRows = payload.rows || [];
+      } catch (e) {
+        endpointErr = e;
       }
 
-      var allRows = rows || [];
+      if (!allRows || allRows.length === 0) {
+        var q = await supabase
+          .from('vapi_results')
+          .select('id, email, first_name, last_name, results, created_at')
+          .order('created_at', { ascending: false });
+
+        if (!q.error && q.data && q.data.length) {
+          allRows = q.data;
+        } else if (endpointErr) {
+          document.getElementById('admin-content').classList.remove('hidden');
+          document.getElementById('admin-respondents-view').classList.remove('hidden');
+          document.getElementById('admin-respondents-body').innerHTML =
+            '<tr><td colspan="5" class="px-4 py-8 text-center text-red-600">' +
+            'Error loading results. Add <strong>SUPABASE_SERVICE_ROLE_KEY</strong> in Vercel env vars (server-only), then redeploy. ' +
+            'Alternatively, run <code>supabase/admin-policy.sql</code> in Supabase to enable read-all via RLS.' +
+            '</td></tr>';
+          if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+          return;
+        }
+      }
 
       function overallScore(r) {
         if (r && r.results && typeof r.results.overall === 'number') return r.results.overall;
@@ -257,6 +284,10 @@
       } else {
         // List view: one row per respondent (unique email)
         var respondents = buildRespondentsList(allRows);
+        if (respondents.length === 1 && respondents[0].emailKey === ADMIN_EMAIL.toLowerCase() && endpointErr) {
+          var warn = document.getElementById('admin-warning');
+          if (warn) warn.classList.remove('hidden');
+        }
 
         function renderRespondents(filtered) {
           var tbody = document.getElementById('admin-respondents-body');
