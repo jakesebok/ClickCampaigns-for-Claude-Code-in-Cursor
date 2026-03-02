@@ -44,33 +44,60 @@
       <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="admin-content" class="hidden">
-      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Respondent results</h1>
-      <p class="text-[var(--ap-secondary)] mb-6">View any completed VAPI™ assessment for your coaching sessions. Click <strong>View report</strong> to open the full results.</p>
+      <!-- View 1: List of respondents (one per unique email) -->
+      <div id="admin-respondents-view">
+        <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Respondents</h1>
+        <p class="text-[var(--ap-secondary)] mb-6">Everyone who has completed the VAPI™ assessment. Click a respondent to see all of their assessments and open a report.</p>
 
-      <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
-        <div class="relative flex-1 max-w-sm">
-          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ap-muted)]"></i>
-          <input type="search" id="admin-search" placeholder="Search by name or email…" class="w-full pl-10 pr-4 py-2.5 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+        <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+          <div class="relative flex-1 max-w-sm">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ap-muted)]"></i>
+            <input type="search" id="admin-search" placeholder="Search by name or email…" class="w-full pl-10 pr-4 py-2.5 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+          </div>
+          <p id="admin-count" class="text-sm text-[var(--ap-muted)]"></p>
         </div>
-        <p id="admin-count" class="text-sm text-[var(--ap-muted)]"></p>
+
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-[var(--ap-border)] bg-[var(--ap-bg)]/60">
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Name</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Email</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Assessments</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Latest</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-36"></th>
+                </tr>
+              </thead>
+              <tbody id="admin-respondents-body" class="divide-y divide-[var(--ap-border)]/60"></tbody>
+            </table>
+          </div>
+          <div id="admin-respondents-empty" class="hidden px-4 py-12 text-center text-[var(--ap-muted)] text-sm">No respondents match your search.</div>
+        </div>
       </div>
 
-      <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left">
-            <thead>
-              <tr class="border-b border-[var(--ap-border)] bg-[var(--ap-bg)]/60">
-                <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Name</th>
-                <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Email</th>
-                <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Completed</th>
-                <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Overall</th>
-                <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-32"></th>
-              </tr>
-            </thead>
-            <tbody id="admin-table-body" class="divide-y divide-[var(--ap-border)]/60"></tbody>
-          </table>
+      <!-- View 2: One respondent's assessments -->
+      <div id="admin-detail-view" class="hidden">
+        <a href="admin.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] mb-6">← Back to all respondents</a>
+        <h1 id="admin-detail-title" class="text-3xl text-[var(--ap-primary)] mb-1"></h1>
+        <p id="admin-detail-email" class="text-[var(--ap-secondary)] mb-6"></p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Select an assessment to open the full results report.</p>
+
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-[var(--ap-border)] bg-[var(--ap-bg)]/60">
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Completed</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Overall</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-36"></th>
+                </tr>
+              </thead>
+              <tbody id="admin-assessments-body" class="divide-y divide-[var(--ap-border)]/60"></tbody>
+            </table>
+          </div>
+          <div id="admin-assessments-empty" class="hidden px-4 py-12 text-center text-[var(--ap-muted)] text-sm">No assessments found.</div>
         </div>
-        <div id="admin-empty" class="hidden px-4 py-12 text-center text-[var(--ap-muted)] text-sm">No results match your search.</div>
       </div>
     </div>
   </main>
@@ -128,7 +155,9 @@
         .order('created_at', { ascending: false });
 
       if (error) {
-        document.getElementById('admin-table-body').innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-red-600">Error loading results: ' + (error.message || '') + '</td></tr>';
+        document.getElementById('admin-content').classList.remove('hidden');
+        document.getElementById('admin-respondents-view').classList.remove('hidden');
+        document.getElementById('admin-respondents-body').innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-red-600">Error loading results: ' + (error.message || '') + '</td></tr>';
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
         return;
       }
@@ -150,60 +179,123 @@
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
 
-      function renderTable(filtered) {
-        var tbody = document.getElementById('admin-table-body');
-        var emptyEl = document.getElementById('admin-empty');
-        var countEl = document.getElementById('admin-count');
-        countEl.textContent = filtered.length === 0 ? 'No respondents' : filtered.length + ' respondent' + (filtered.length === 1 ? '' : 's');
-        emptyEl.classList.add('hidden');
-        if (filtered.length === 0) {
-          tbody.innerHTML = '';
-          emptyEl.classList.remove('hidden');
-          return;
-        }
-        tbody.innerHTML = filtered.map(function(row) {
-          var name = [row.first_name, row.last_name].filter(Boolean).join(' ') || '—';
-          var score = overallScore(row);
-          var scoreStr = score != null ? (Math.round(score * 10) / 10) + ' / 10' : '—';
-          return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
-            '<td class="px-4 py-3 font-medium text-[var(--ap-primary)]">' + escapeHtml(name) + '</td>' +
-            '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(row.email || '') + '</td>' +
-            '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + formatDate(row.created_at) + '</td>' +
-            '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + '</td>' +
-            '<td class="px-4 py-3">' +
-            '<button type="button" class="view-report inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)]/50 transition-colors" data-id="' + escapeHtml(row.id) + '">View report <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>' +
-            '</td></tr>';
-        }).join('');
-        filtered.forEach(function(row, i) {
-          var btn = tbody.querySelectorAll('.view-report')[i];
-          if (btn) btn.addEventListener('click', function() {
-            try {
-              sessionStorage.setItem('vapiResults', JSON.stringify(row.results));
-              sessionStorage.removeItem('vapiResultsSaved');
-              sessionStorage.setItem('vapiResultsFromAdmin', '1');
-            } catch (e) {}
-            window.location.href = '../html/vapi-results.html';
-          });
+      // Group rows by email (one respondent per email); each group sorted by created_at desc
+      function groupByEmail(rows) {
+        var byEmail = {};
+        rows.forEach(function(row) {
+          var key = (row.email || '').trim().toLowerCase();
+          if (!key) return;
+          if (!byEmail[key]) byEmail[key] = [];
+          byEmail[key].push(row);
         });
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        Object.keys(byEmail).forEach(function(key) {
+          byEmail[key].sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+        });
+        return byEmail;
       }
 
-      renderTable(allRows);
+      function buildRespondentsList(rows) {
+        var byEmail = groupByEmail(rows);
+        return Object.keys(byEmail).map(function(emailKey) {
+          var group = byEmail[emailKey];
+          var latest = group[0];
+          var name = [latest.first_name, latest.last_name].filter(Boolean).join(' ') || latest.email || '—';
+          return {
+            email: latest.email,
+            emailKey: emailKey,
+            name: name,
+            count: group.length,
+            latestAt: latest.created_at,
+            rows: group
+          };
+        }).sort(function(a, b) { return new Date(b.latestAt) - new Date(a.latestAt); });
+      }
 
-      var searchEl = document.getElementById('admin-search');
-      searchEl.addEventListener('input', function() {
-        var q = (searchEl.value || '').trim().toLowerCase();
-        if (!q) {
-          renderTable(allRows);
-          return;
+      var params = new URLSearchParams(window.location.search);
+      var detailEmail = params.get('email') ? decodeURIComponent(params.get('email')) : null;
+
+      if (detailEmail !== null) {
+        // Detail view: show all assessments for this email
+        var detailRows = allRows.filter(function(r) { return (r.email || '').trim().toLowerCase() === detailEmail.toLowerCase(); });
+        document.getElementById('admin-respondents-view').classList.add('hidden');
+        document.getElementById('admin-detail-view').classList.remove('hidden');
+
+        var latest = detailRows[0];
+        var displayName = latest ? ([latest.first_name, latest.last_name].filter(Boolean).join(' ') || latest.email || '—') : detailEmail;
+        document.getElementById('admin-detail-title').textContent = displayName;
+        document.getElementById('admin-detail-email').textContent = detailEmail;
+
+        var aBody = document.getElementById('admin-assessments-body');
+        var aEmpty = document.getElementById('admin-assessments-empty');
+        if (detailRows.length === 0) {
+          aBody.innerHTML = '';
+          aEmpty.classList.remove('hidden');
+        } else {
+          aEmpty.classList.add('hidden');
+          aBody.innerHTML = detailRows.map(function(row) {
+            var score = overallScore(row);
+            var scoreStr = score != null ? (Math.round(score * 10) / 10) + ' / 10' : '—';
+            return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
+              '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + formatDate(row.created_at) + '</td>' +
+              '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + '</td>' +
+              '<td class="px-4 py-3"><button type="button" class="view-report inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)]/50 transition-colors">View report <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button></td>' +
+              '</tr>';
+          }).join('');
+          detailRows.forEach(function(row, i) {
+            var btn = aBody.querySelectorAll('.view-report')[i];
+            if (btn) btn.addEventListener('click', function() {
+              try {
+                sessionStorage.setItem('vapiResults', JSON.stringify(row.results));
+                sessionStorage.removeItem('vapiResultsSaved');
+                sessionStorage.setItem('vapiResultsFromAdmin', '1');
+              } catch (e) {}
+              window.location.href = '../html/vapi-results.html';
+            });
+          });
         }
-        var filtered = allRows.filter(function(row) {
-          var name = [row.first_name, row.last_name].filter(Boolean).join(' ').toLowerCase();
-          var email = (row.email || '').toLowerCase();
-          return name.indexOf(q) !== -1 || email.indexOf(q) !== -1;
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      } else {
+        // List view: one row per respondent (unique email)
+        var respondents = buildRespondentsList(allRows);
+
+        function renderRespondents(filtered) {
+          var tbody = document.getElementById('admin-respondents-body');
+          var emptyEl = document.getElementById('admin-respondents-empty');
+          var countEl = document.getElementById('admin-count');
+          countEl.textContent = filtered.length === 0 ? 'No respondents' : filtered.length + ' respondent' + (filtered.length === 1 ? '' : 's');
+          emptyEl.classList.add('hidden');
+          if (filtered.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.classList.remove('hidden');
+            return;
+          }
+          tbody.innerHTML = filtered.map(function(r) {
+            return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
+              '<td class="px-4 py-3 font-medium text-[var(--ap-primary)]">' + escapeHtml(r.name) + '</td>' +
+              '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(r.email) + '</td>' +
+              '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + r.count + '</td>' +
+              '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + formatDate(r.latestAt) + '</td>' +
+              '<td class="px-4 py-3"><a href="admin.html?email=' + encodeURIComponent(r.emailKey) + '" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)]/50 transition-colors">View assessments <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></td>' +
+              '</tr>';
+          }).join('');
+          if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        }
+
+        renderRespondents(respondents);
+
+        var searchEl = document.getElementById('admin-search');
+        searchEl.addEventListener('input', function() {
+          var q = (searchEl.value || '').trim().toLowerCase();
+          if (!q) {
+            renderRespondents(respondents);
+            return;
+          }
+          var filtered = respondents.filter(function(r) {
+            return (r.name || '').toLowerCase().indexOf(q) !== -1 || (r.email || '').toLowerCase().indexOf(q) !== -1;
+          });
+          renderRespondents(filtered);
         });
-        renderTable(filtered);
-      });
+      }
     })();
   </script>
 </body>
