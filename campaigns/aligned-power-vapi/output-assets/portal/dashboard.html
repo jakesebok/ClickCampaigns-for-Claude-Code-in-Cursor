@@ -323,30 +323,36 @@
       var interp = (window.VAPI_INTERPRETATIONS && window.VAPI_INTERPRETATIONS.composite) ? window.VAPI_INTERPRETATIONS.composite : {};
       var compositeDesc = (latestTier && interp[latestTier]) ? interp[latestTier] : '';
       var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
-      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
-      latestHtml += '<div class="flex flex-col sm:flex-row items-start sm:items-center">';
-      latestHtml += '<div class="flex-shrink-0 min-w-0">';
-      latestHtml += '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-1">Latest</p>';
-      latestHtml += '<p class="text-2xl text-[var(--ap-primary)] mb-1">' + (latest.results.firstName ? latest.results.firstName + '\'s ' : '') + 'VAPI™ results</p>';
-      latestHtml += '<p class="text-[var(--ap-muted)] text-sm mb-3">' + formatDate(latest.created_at) + '</p>';
-      if (latestScore != null) {
-        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall score: ' + latestScore + ' / 10</p>';
-      }
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold py-2 px-4 rounded-lg transition-colors">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      var firstName = latest.results.firstName || '';
+      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">';
+      latestHtml += '<div class="flex flex-col sm:flex-row">';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.04] p-5 sm:p-6 sm:w-[180px]">';
+      latestHtml += '<div class="w-[140px] h-[140px] sm:w-[150px] sm:h-[150px]">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
-      latestHtml += '<div class="flex-1 flex justify-center items-center overflow-visible p-2 min-h-0 mt-4 sm:mt-0 sm:min-w-[200px]">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-1 min-w-0 p-5 sm:p-6 flex flex-col justify-center">';
+      latestHtml += '<div class="flex items-center gap-2 mb-3">';
+      latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
+      latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + formatDate(latest.created_at) + '</span>';
       latestHtml += '</div>';
-      latestHtml += '<div class="border-t border-[var(--ap-border)] mt-6 pt-6">';
+      latestHtml += '<h3 class="text-xl text-[var(--ap-primary)] mb-3">' + (firstName ? firstName + '\u2019s ' : '') + 'VAPI\u2122 Results</h3>';
       if (latestScore != null && latestTier) {
-        latestHtml += '<div class="flex items-baseline gap-2 flex-wrap mb-3">';
+        latestHtml += '<div class="flex items-baseline gap-2.5 mb-1">';
         latestHtml += '<span class="text-3xl font-bold" style="color:' + tierColor + '">' + latestScore + '</span>';
-        latestHtml += '<span class="text-[var(--ap-muted)]">/ 10</span>';
-        latestHtml += '<span class="font-semibold px-3 py-0.5 rounded-full text-sm text-white" style="background:' + tierColor + '">' + latestTier + '</span>';
+        latestHtml += '<span class="text-sm text-[var(--ap-muted)]">/ 10</span>';
+        latestHtml += '<span class="font-semibold px-2.5 py-0.5 rounded-full text-xs text-white ml-1" style="background:' + tierColor + '">' + latestTier + '</span>';
         latestHtml += '</div>';
         if (compositeDesc) {
-          latestHtml += '<p class="text-[var(--ap-secondary)] text-sm leading-relaxed">' + compositeDesc.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+          latestHtml += '<p class="text-[var(--ap-secondary)] text-xs leading-relaxed mt-2 mb-4 line-clamp-2">' + compositeDesc.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
+        } else {
+          latestHtml += '<div class="mb-4"></div>';
         }
+      } else if (latestScore != null) {
+        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall: ' + latestScore + ' / 10</p>';
+      } else {
+        latestHtml += '<div class="mb-4"></div>';
       }
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md self-start">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '</div>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
