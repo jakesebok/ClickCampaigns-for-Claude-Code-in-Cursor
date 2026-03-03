@@ -48,7 +48,7 @@
     }
     @page { size: letter; margin: 0.525in 0.75in; }
     #results-breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
-    .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
+    .wheel-segment { transition: opacity 0.35s ease-out, transform 0.35s ease-out, filter 0.35s ease-out; cursor: pointer; transform-origin: 50% 50%; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .results-breakdown-metric-btn.rbm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
   </style>
@@ -763,14 +763,26 @@
             var segments = svgEl.querySelectorAll('.wheel-segment');
             var dimOpacity = '0.13';
             var focusOpacity = '1';
-            if (metricKey === 'overall') segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+            var useAccent = metricKey !== 'overall' && (metricKey.indexOf('arena:') === 0 || metricKey.indexOf('domain:') === 0);
+            function setSegmentFocus(segment, focused) {
+              segment.style.opacity = focused ? focusOpacity : dimOpacity;
+              if (useAccent && focused) {
+                var fill = segment.getAttribute('fill') || '#582233';
+                segment.style.transform = 'scale(1.08)';
+                segment.style.filter = 'drop-shadow(0 5px 12px rgba(0,0,0,0.28)) drop-shadow(0 0 16px ' + fill + ') drop-shadow(0 0 28px ' + fill + ')';
+              } else {
+                segment.style.transform = '';
+                segment.style.filter = '';
+              }
+            }
+            if (metricKey === 'overall') segments.forEach(function(p) { setSegmentFocus(p, true); });
             else if (metricKey.indexOf('arena:') === 0) {
               var arenaFocus = metricKey.slice(6);
-              segments.forEach(function(p) { p.style.opacity = p.getAttribute('data-arena') === arenaFocus ? focusOpacity : dimOpacity; });
+              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-arena') === arenaFocus); });
             } else if (metricKey.indexOf('domain:') === 0) {
               var domainIdx = getSegmentIndexForMetric(metricKey);
-              segments.forEach(function(p) { p.style.opacity = p.getAttribute('data-domain-index') === String(domainIdx) ? focusOpacity : dimOpacity; });
-            } else segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-domain-index') === String(domainIdx)); });
+            } else segments.forEach(function(p) { setSegmentFocus(p, true); });
             var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
             domainLabels.forEach(function(el) { el.style.opacity = '0'; });
             var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
