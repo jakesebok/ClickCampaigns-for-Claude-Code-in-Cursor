@@ -364,8 +364,6 @@
       function buildWheelSVGOverview(domains) {
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
-        var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
-        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
         var byCode = {};
         (domains || []).forEach(function(d) {
           var copy = { code: d.code, score: d.score, arena: (d.arena === 'Self' ? 'Personal' : d.arena) || 'Personal' };
@@ -380,19 +378,18 @@
           var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
-        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Alignment wheel shape">';
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Alignment wheel shape">';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
           var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
           var arena = (order[i] === 'RS') ? 'Relationships' : ((d && d.arena) ? d.arena : 'Personal');
           var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
-          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
           var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
           var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
           for (var k = 1; k <= 10; k++) {
+            if (k > score) continue;
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
-            var fill = (k <= score) ? darkC : lightC;
-            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.04)" stroke-width="0.2"/>';
+            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + darkC + '" fill-opacity="0.9" stroke="rgba(0,0,0,0.06)" stroke-width="0.25"/>';
           }
         }
         html += '</svg>';
@@ -604,10 +601,10 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
-      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center p-3 sm:p-6 lg:p-10 lg:min-w-[280px]">';
-      latestHtml += '<div class="wheel-static w-[260px] h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVGOverview(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center p-3 pr-2 lg:pr-4">';
+      latestHtml += '<div class="wheel-static w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] flex items-center justify-center">' + buildWheelSVGOverview(latestDomains) + '</div>';
       latestHtml += '</div>';
-      latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
+      latestHtml += '<div class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + escHtml(formatDate(latest.created_at)) + '</span>';
