@@ -224,6 +224,7 @@
         html += '<svg viewBox="0 0 320 320" class="w-full h-auto relative z-10" style="overflow:visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Life wheel of 12 alignment domains">';
         html += '<defs>';
         html += '<filter id="arenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        html += '<filter id="arenaLabelShadowDepth" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
         var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
         var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
         html += '<path id="arcPersonal" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
@@ -281,9 +282,9 @@
           }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcPersonal" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcRel" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#582233" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadow)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcPersonal" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcRel" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         html += '</div>';
         html += '<img src="../images/aligned-power-logo.png" alt="Aligned Power" class="h-12 w-auto mt-4 mx-auto block"/>';
