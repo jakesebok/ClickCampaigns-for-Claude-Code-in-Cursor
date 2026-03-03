@@ -262,7 +262,7 @@
         }
         html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
         for (var k = 1; k <= 10; k++) {
-          var rr = r * (k - 0.8) / 10;
+          var rr = r * (k - 1) / 10;
           html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
         }
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
