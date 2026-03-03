@@ -313,6 +313,7 @@
         var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
+        html += '<filter id="dashboardArenaLabelShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1" stdDeviation="0.6" flood-color="rgba(0,0,0,0.22)" flood-opacity="1"/></filter>';
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
@@ -342,13 +343,13 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -572,7 +573,7 @@
             } else {
               firstLineY = ay - blockH / 2;
             }
-            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
+            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
             for (var L = 0; L < numLines; L++) {
               html += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
             }
