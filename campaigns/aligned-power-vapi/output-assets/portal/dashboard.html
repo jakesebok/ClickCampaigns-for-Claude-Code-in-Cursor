@@ -284,7 +284,7 @@
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
         var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
-        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
         function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
         var byCode = {};
         (domains || []).forEach(function(d) {
@@ -293,7 +293,7 @@
         });
         var cx = 160; var cy = 160; var r = 120;
         var segmentAngle = 360 / 12;
-        var labelRadius = r + 12;
+        var labelRadius = r + 14;
         var rInner = r * 0.42;
         function cellPath(r0, r1, a0Rad, a1Rad) {
           var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
@@ -348,9 +348,9 @@
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -541,7 +541,7 @@
         var BREAKDOWN_DOMAIN_NAMES = { PH: 'Physical Health', IA: 'Inner Alignment', ME: 'Mental / Emotional', AF: 'Attention & Focus', RS: 'Relationship to Self', FA: 'Family', CO: 'Community', WI: 'World / Impact', VS: 'Vision / Strategy', EX: 'Execution', OH: 'Operational Health', EC: 'Ecology' };
         var breakdownLabelsTimeout = null;
 
-        var BREAKDOWN_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention &', 'Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        var BREAKDOWN_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
 
         function updateBreakdownLabels(currentRotationDeg) {
           var overlay = document.getElementById('breakdown-wheel-labels-overlay');
@@ -655,6 +655,9 @@
             domainLabels.forEach(function(el) {
               el.style.opacity = '0';
             });
+            var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
+            var arenaFill = (metricKey.indexOf('domain:') === 0) ? 'var(--ap-accent)' : '#f7f2e8';
+            arenaLabels.forEach(function(el) { el.setAttribute('fill', arenaFill); });
           }
         }
         var bml = document.getElementById('breakdown-metric-list');
