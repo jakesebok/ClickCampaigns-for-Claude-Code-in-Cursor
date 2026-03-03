@@ -22,8 +22,9 @@
       --ap-muted: #C6B8A7;
       --ap-border: #C6B8A7;
     }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(88,34,51,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
@@ -54,7 +55,7 @@
       <div id="breakdown-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.</p>
-        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 flex flex-col justify-center">
               <div class="flex items-center justify-between gap-2 mb-1">
@@ -147,7 +148,7 @@
       <div id="progress-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
-        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
               <canvas id="progress-chart"></canvas>
@@ -182,7 +183,7 @@
 
       <h2 class="text-xl text-[var(--ap-primary)] mb-4">Assessment history</h2>
       <div id="history-list" class="space-y-3"></div>
-      <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/50">
+      <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/50 dashboard-card">
         <p class="text-[var(--ap-secondary)] mb-4">No assessments yet for this account.</p>
         <p id="empty-state-error" class="text-sm text-red-600 mb-4 hidden"></p>
         <a href="../html/vapi-landing.html" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take the VAPI™ assessment <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
@@ -300,11 +301,9 @@
           var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
-        var fid = 'dashboardWheelShadow';
         var arcIdP = 'dashWheelArcP'; var arcIdR = 'dashWheelArcR'; var arcIdB = 'dashWheelArcB';
         var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs>';
-        html += '<filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
         var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
         var arcP1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
         html += '<path id="' + arcIdP + '" d="M' + arcP0.x.toFixed(2) + ',' + arcP0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcP1.x.toFixed(2) + ',' + arcP1.y.toFixed(2) + '"/>';
@@ -343,13 +342,13 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + fid + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="700"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -364,9 +363,9 @@
       var top3 = latest.results.top3 || (latestDomains.slice().sort(function(a, b) { return (b.score || 0) - (a.score || 0); }).slice(0, 3));
       var bottom3 = latest.results.bottom3 || (latestDomains.slice().sort(function(a, b) { return (a.score || 0) - (b.score || 0); }).slice(0, 3));
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-      var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">';
+      var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
-      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-amber-50 to-[var(--ap-accent)]/10 p-6 sm:p-8 lg:p-10 lg:min-w-[280px]">';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-6 sm:p-8 lg:p-10 lg:min-w-[280px]">';
       latestHtml += '<div class="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
@@ -409,7 +408,7 @@
       var historyHtml = '';
       rows.forEach(function(row) {
         var score = overallScore(row.results);
-        historyHtml += '<div class="flex items-center justify-between gap-4 bg-white rounded-xl border border-[var(--ap-border)] p-4">';
+        historyHtml += '<div class="dashboard-card flex items-center justify-between gap-4 bg-white rounded-xl border border-[var(--ap-border)] p-4">';
         historyHtml += '<div><p class="font-medium text-[var(--ap-primary)]">' + formatDate(row.created_at) + '</p>';
         if (score != null) historyHtml += '<p class="text-sm text-[var(--ap-muted)]">Overall: ' + score + ' / 10</p>';
         historyHtml += '</div>';
@@ -552,8 +551,7 @@
           var anchorR = wheelR + gap;
           var lineHeight = 10;
           var halfFont = 5;
-          var filterId = 'overlayLabelShadow';
-          var html = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
+          var html = '';
           for (var i = 0; i < 12; i++) {
             var a = ((-75 + 30 * i + currentRotationDeg) % 360 + 360) % 360;
             var rad = a * Math.PI / 180;
@@ -574,7 +572,7 @@
             } else {
               firstLineY = ay - blockH / 2;
             }
-            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
             for (var L = 0; L < numLines; L++) {
               html += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
             }
