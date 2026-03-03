@@ -479,27 +479,12 @@
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
         html += '<filter id="progressWheelArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
         for (var g = 0; g < 12; g++) {
-          var gPrevD = prevByCode[order[g]];
-          var gCurrD = currByCode[order[g]];
-          var gPrevR = (gPrevD && typeof gPrevD.score === 'number') ? Math.min(10, Math.max(0, Math.round(Math.max(0, Math.min(10, gPrevD.score))))) : 0;
-          var gCurrR = (gCurrD && typeof gCurrD.score === 'number') ? Math.min(10, Math.max(0, Math.round(Math.max(0, Math.min(10, gCurrD.score))))) : 0;
-          var gDiff = (gCurrD && gPrevD && typeof gCurrD.score === 'number' && typeof gPrevD.score === 'number') ? (gCurrD.score - gPrevD.score) : 0;
           var midDeg = -75 + 30 * g;
           var midRad = midDeg * Math.PI / 180;
           var gx2 = cx + r * Math.cos(midRad);
           var gy2 = cy + r * Math.sin(midRad);
-          var tImp = gPrevR / 10;
-          var tDec = gCurrR / 10;
-          if (gDiff >= changeThreshold) {
-            html += '<linearGradient id="progImp' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse">';
-            html += '<stop offset="0" stop-color="' + IMPROVED_MUTED + '"/><stop offset="' + tImp + '" stop-color="' + IMPROVED_MUTED + '"/>';
-            html += '<stop offset="' + tImp + '" stop-color="' + IMPROVED_BOLD + '"/><stop offset="1" stop-color="' + IMPROVED_BOLD + '"/></linearGradient>';
-          }
-          if (gDiff <= -changeThreshold) {
-            html += '<linearGradient id="progDec' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse">';
-            html += '<stop offset="0" stop-color="' + DECLINED_BOLD + '"/><stop offset="' + tDec + '" stop-color="' + DECLINED_BOLD + '"/>';
-            html += '<stop offset="' + tDec + '" stop-color="' + DECLINED_MUTED + '"/><stop offset="1" stop-color="' + DECLINED_MUTED + '"/></linearGradient>';
-          }
+          html += '<linearGradient id="progImp' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + IMPROVED_MUTED + '"/><stop offset="1" stop-color="' + IMPROVED_BOLD + '"/></linearGradient>';
+          html += '<linearGradient id="progDec' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + DECLINED_BOLD + '"/><stop offset="1" stop-color="' + DECLINED_MUTED + '"/></linearGradient>';
         }
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
