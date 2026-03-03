@@ -25,7 +25,7 @@
     body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
-    .wheel-segment { transition: opacity 0.35s ease-out; }
+    .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
   </style>
@@ -53,17 +53,47 @@
 
       <div id="breakdown-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores from this assessment. Select a metric below.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.</p>
         <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">
-          <div class="flex flex-col lg:flex-row gap-6">
-            <div class="flex-1 min-w-0 flex flex-col justify-center">
-              <p id="breakdown-metric-label" class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Overall score</p>
-              <div class="flex items-baseline gap-3 flex-wrap mb-4">
+          <div class="flex-1 min-w-0 flex flex-col justify-center">
+            <div class="flex flex-wrap items-end gap-3 mb-3">
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <p id="breakdown-metric-label" class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-full mb-0.5">Overall score</p>
                 <span id="breakdown-score-value" class="text-4xl sm:text-5xl font-bold text-[var(--ap-primary)]">—</span>
                 <span class="text-xl text-[var(--ap-muted)]">/ 10</span>
                 <span id="breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>
               </div>
-              <div id="breakdown-wheel-outer" class="relative w-full max-w-[330px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
+              <div class="relative ml-auto" id="breakdown-metric-dropdown-wrap">
+                <button type="button" id="breakdown-metric-dropdown-trigger" class="inline-flex items-center gap-2 w-full sm:w-auto min-w-[180px] px-3 py-2 rounded-lg border border-[var(--ap-border)] bg-white text-left text-sm font-medium text-[var(--ap-text)] hover:border-[var(--ap-primary)]/50 hover:bg-[var(--ap-bg)] transition-colors" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="breakdown-metric-label">
+                  <span id="breakdown-metric-dropdown-label">Overall score</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4 text-[var(--ap-muted)] flex-shrink-0 transition-transform" id="breakdown-metric-chevron"></i>
+                </button>
+                <div id="breakdown-metric-dropdown-panel" class="absolute top-full left-0 right-0 mt-1 z-20 bg-white border border-[var(--ap-border)] rounded-lg shadow-lg overflow-hidden hidden max-h-[280px] overflow-y-auto">
+                  <div id="breakdown-metric-list" class="space-y-0.5 p-2">
+                    <div class="text-xs font-semibold text-[var(--ap-primary)] mt-2 first:mt-0 px-2 py-1">Composite</div>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
+                    <div class="text-xs font-semibold text-[var(--ap-primary)] mt-2 px-2 py-1">Arena</div>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
+                    <div class="text-xs font-semibold text-[var(--ap-primary)] mt-2 px-2 py-1">Domain</div>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
+                    <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="breakdown-wheel-outer" class="relative w-full max-w-[330px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
                 <div id="breakdown-wheel-container" class="absolute inset-[25px] flex items-center justify-center overflow-visible">
                   <div id="breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
                     <div id="breakdown-wheel-svg"></div>
@@ -72,35 +102,6 @@
                 <div id="breakdown-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-10" aria-hidden="true">
                   <svg id="breakdown-wheel-labels-svg" viewBox="0 0 330 330" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>
                 </div>
-              </div>
-            </div>
-            <div class="lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex flex-col">
-              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
-              <div class="relative flex-1 min-h-0">
-              <div id="breakdown-metric-list" class="space-y-1 max-h-[370px] overflow-y-auto pr-1 h-full">
-                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
-                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
-                <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Domain</div>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
-                <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
-              </div>
-              <div id="breakdown-scroll-indicator" class="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-1 pt-3 bg-gradient-to-t from-white via-white/90 to-transparent transition-opacity duration-300 cursor-pointer" title="Scroll for more">
-                <i data-lucide="chevron-down" class="w-4 h-4 text-[var(--ap-muted)] animate-bounce"></i>
-              </div>
               </div>
             </div>
           </div>
@@ -559,6 +560,8 @@
           var tier = getTierForMetric(singleResult, metricKey);
           var label = getMetricLabel(metricKey);
           document.getElementById('breakdown-metric-label').textContent = label;
+          var dropdownLabel = document.getElementById('breakdown-metric-dropdown-label');
+          if (dropdownLabel) dropdownLabel.textContent = label;
           document.getElementById('breakdown-score-value').textContent = score != null ? Math.round(score * 10) / 10 : '—';
           var badgeEl = document.getElementById('breakdown-tier-badge');
           if (tier) {
@@ -612,17 +615,30 @@
           }
         }
         var bml = document.getElementById('breakdown-metric-list');
-        var bsi = document.getElementById('breakdown-scroll-indicator');
-        function checkScrollEnd() {
-          var atBottom = bml.scrollHeight - bml.scrollTop - bml.clientHeight < 8;
-          bsi.style.opacity = atBottom ? '0' : '1';
-          bsi.style.pointerEvents = atBottom ? 'none' : 'auto';
+        var dropdownTrigger = document.getElementById('breakdown-metric-dropdown-trigger');
+        var dropdownPanel = document.getElementById('breakdown-metric-dropdown-panel');
+        var dropdownWrap = document.getElementById('breakdown-metric-dropdown-wrap');
+        var chevronEl = document.getElementById('breakdown-metric-chevron');
+        function closeDropdown() {
+          if (dropdownPanel) dropdownPanel.classList.add('hidden');
+          if (dropdownTrigger) dropdownTrigger.setAttribute('aria-expanded', 'false');
+          if (chevronEl) chevronEl.style.transform = '';
         }
-        bml.addEventListener('scroll', checkScrollEnd);
-        bsi.addEventListener('click', function() {
-          bml.scrollBy({ top: 80, behavior: 'smooth' });
-        });
-        setTimeout(checkScrollEnd, 100);
+        function openDropdown() {
+          if (dropdownPanel) dropdownPanel.classList.remove('hidden');
+          if (dropdownTrigger) dropdownTrigger.setAttribute('aria-expanded', 'true');
+          if (chevronEl) chevronEl.style.transform = 'rotate(180deg)';
+        }
+        if (dropdownTrigger && dropdownPanel) {
+          dropdownTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isOpen = !dropdownPanel.classList.contains('hidden');
+            if (isOpen) closeDropdown(); else openDropdown();
+          });
+          document.addEventListener('click', function(e) {
+            if (dropdownWrap && !dropdownWrap.contains(e.target)) closeDropdown();
+          });
+        }
         bml.addEventListener('click', function(e) {
           var btn = e.target.closest('.breakdown-metric-btn');
           if (!btn) return;
@@ -635,8 +651,29 @@
             b.classList.toggle('bm-selected', on);
             b.classList.toggle('text-[var(--ap-text)]', !on);
           });
+          closeDropdown();
           updateBreakdown(value);
         });
+        var wheelSvgContainer = document.getElementById('breakdown-wheel-svg');
+        if (wheelSvgContainer) {
+          wheelSvgContainer.addEventListener('click', function(e) {
+            var seg = e.target.closest && e.target.closest('.wheel-segment');
+            if (!seg) return;
+            var idx = seg.getAttribute('data-domain-index');
+            if (idx == null) return;
+            var metricKey = 'domain:' + BREAKDOWN_DOMAIN_ORDER[parseInt(idx, 10)];
+            document.querySelectorAll('#breakdown-metric-list .breakdown-metric-btn').forEach(function(b) {
+              var on = b.getAttribute('data-value') === metricKey;
+              b.classList.toggle('bg-[var(--ap-primary)]', on);
+              b.classList.toggle('text-white', on);
+              b.classList.toggle('border-[var(--ap-primary)]', on);
+              b.classList.toggle('bm-selected', on);
+              b.classList.toggle('text-[var(--ap-text)]', !on);
+            });
+            closeDropdown();
+            updateBreakdown(metricKey);
+          });
+        }
         document.querySelector('#breakdown-metric-list .breakdown-metric-btn[data-value="overall"]').classList.add('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'bm-selected');
         document.querySelectorAll('#breakdown-metric-list .breakdown-metric-btn:not([data-value="overall"])').forEach(function(b) { b.classList.add('text-[var(--ap-text)]'); });
         updateBreakdown('overall');
