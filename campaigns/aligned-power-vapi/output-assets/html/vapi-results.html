@@ -48,7 +48,7 @@
     }
     @page { size: letter; margin: 0.525in 0.75in; }
     #results-breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
-    .wheel-segment { transition: opacity 0.35s ease-out, transform 0.35s ease-out, filter 0.35s ease-out; cursor: pointer; transform-origin: 50% 50%; }
+    .wheel-segment { transition: opacity 0.2s ease-out, transform 0.2s ease-out; cursor: pointer; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .results-breakdown-metric-btn.rbm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
   </style>
@@ -764,24 +764,40 @@
             var dimOpacity = '0.13';
             var focusOpacity = '1';
             var useAccent = metricKey !== 'overall' && (metricKey.indexOf('arena:') === 0 || metricKey.indexOf('domain:') === 0);
-            function setSegmentFocus(segment, focused) {
+            var wheelCx = 160; var wheelCy = 160; var wheelR = 120; var segmentAngleDeg = 30;
+            function outerMidpoint(domainIndex) {
+              var midDeg = (domainIndex + 0.5) * segmentAngleDeg - 90;
+              var rad = midDeg * Math.PI / 180;
+              return { x: wheelCx + wheelR * Math.cos(rad), y: wheelCy + wheelR * Math.sin(rad) };
+            }
+            function arenaCenterAngle(arenaKey) {
+              var start = arenaKey === 'Personal' ? 0 : arenaKey === 'Relationships' ? 4 : 8;
+              var midDeg = (start + 1.5) * segmentAngleDeg - 90;
+              var rad = midDeg * Math.PI / 180;
+              return { x: wheelCx + wheelR * Math.cos(rad), y: wheelCy + wheelR * Math.sin(rad) };
+            }
+            function setSegmentFocus(segment, focused, origin) {
               segment.style.opacity = focused ? focusOpacity : dimOpacity;
-              if (useAccent && focused) {
+              if (useAccent && focused && origin) {
+                segment.style.transformOrigin = origin.x + ' ' + origin.y;
                 segment.style.transform = 'scale(1.08)';
                 segment.style.filter = 'drop-shadow(0 5px 12px rgba(0,0,0,0.28))';
               } else {
+                segment.style.transformOrigin = '';
                 segment.style.transform = '';
                 segment.style.filter = '';
               }
             }
-            if (metricKey === 'overall') segments.forEach(function(p) { setSegmentFocus(p, true); });
+            if (metricKey === 'overall') segments.forEach(function(p) { setSegmentFocus(p, true, null); });
             else if (metricKey.indexOf('arena:') === 0) {
               var arenaFocus = metricKey.slice(6);
-              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-arena') === arenaFocus); });
+              var arenaOrigin = arenaCenterAngle(arenaFocus);
+              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-arena') === arenaFocus, p.getAttribute('data-arena') === arenaFocus ? arenaOrigin : null); });
             } else if (metricKey.indexOf('domain:') === 0) {
               var domainIdx = getSegmentIndexForMetric(metricKey);
-              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-domain-index') === String(domainIdx)); });
-            } else segments.forEach(function(p) { setSegmentFocus(p, true); });
+              var domainOrigin = outerMidpoint(domainIdx);
+              segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-domain-index') === String(domainIdx), p.getAttribute('data-domain-index') === String(domainIdx) ? domainOrigin : null); });
+            } else segments.forEach(function(p) { setSegmentFocus(p, true, null); });
             var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
             domainLabels.forEach(function(el) { el.style.opacity = '0'; });
             var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
