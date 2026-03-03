@@ -201,6 +201,9 @@
                       <div id="progress-comparative-wheel-svg" class="w-full h-full overflow-visible"></div>
                     </div>
                   </div>
+                  <div id="progress-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-10" aria-hidden="true">
+                    <svg id="progress-wheel-labels-svg" viewBox="0 0 330 330" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>
+                  </div>
                   <div id="progress-wheel-tooltip" class="absolute z-20 hidden pointer-events-none px-3 py-2 rounded-lg border border-[var(--ap-border)] bg-white shadow-lg text-sm max-w-[200px]"></div>
                 </div>
                 <div id="progress-wheel-legend" class="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[var(--ap-secondary)]"></div>
@@ -959,8 +962,68 @@
         document.getElementById('progress-comparative-wheel-svg').innerHTML = buildComparativeWheelSVG(progressPrevDomains, progressCurrDomains, progressPrevDateStr, progressCurrDateStr);
         var progressWheelWrap = document.getElementById('progress-wheel-wrap');
         var progressWheelContainerInner = document.getElementById('progress-wheel-container-inner');
+        var PROGRESS_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        var PROGRESS_DOMAIN_ORDER_LABELS = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var progressLabelsTimeout = null;
+
+        function updateProgressWheelLabels(currentRotationDeg) {
+          var overlay = document.getElementById('progress-wheel-labels-overlay');
+          var labelsSvg = document.getElementById('progress-wheel-labels-svg');
+          if (!overlay || !labelsSvg) return;
+          var cx = 165, cy = 165;
+          var wheelR = 140;
+          var gap = 9;
+          var anchorR = wheelR + gap;
+          var lineHeight = 10;
+          var halfFont = 5;
+          var html = '';
+          for (var i = 0; i < 12; i++) {
+            var a = ((-75 + 30 * i + currentRotationDeg) % 360 + 360) % 360;
+            var rad = a * Math.PI / 180;
+            var ax = cx + anchorR * Math.cos(rad);
+            var ay = cy + anchorR * Math.sin(rad);
+            var lines = PROGRESS_LABEL_LINES[PROGRESS_DOMAIN_ORDER_LABELS[i]] || [PROGRESS_DOMAIN_ORDER_LABELS[i]];
+            var numLines = lines.length;
+            var blockH = (numLines - 1) * lineHeight;
+            var anchor;
+            if (a > 315 || a <= 45) anchor = 'start';
+            else if (a > 135 && a <= 225) anchor = 'end';
+            else anchor = 'middle';
+            var firstLineY;
+            if (a > 45 && a <= 135) {
+              firstLineY = ay + halfFont;
+            } else if (a > 225 && a <= 315) {
+              firstLineY = ay - blockH - halfFont;
+            } else {
+              firstLineY = ay - blockH / 2;
+            }
+            html += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
+            for (var L = 0; L < numLines; L++) {
+              html += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
+            }
+            html += '</text>';
+          }
+          labelsSvg.innerHTML = html;
+          overlay.classList.remove('opacity-0');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideProgressWheelLabels() {
+          var overlay = document.getElementById('progress-wheel-labels-overlay');
+          if (!overlay) return;
+          overlay.classList.add('opacity-0');
+          overlay.setAttribute('aria-hidden', 'true');
+          var labelsSvg = document.getElementById('progress-wheel-labels-svg');
+          if (labelsSvg) labelsSvg.innerHTML = '';
+        }
+
         function updateProgressWheel(metricKey) {
           if (!progressWheelWrap || !progressWheelContainerInner) return;
+          if (progressLabelsTimeout) {
+            clearTimeout(progressLabelsTimeout);
+            progressLabelsTimeout = null;
+          }
+          hideProgressWheelLabels();
           var t = getWheelTransform(metricKey);
           progressWheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
           progressWheelContainerInner.classList.add('progress-wheel-container--zoomed');
@@ -984,7 +1047,13 @@
             } else {
               segments.forEach(function(p) { p.style.opacity = focusOpacity; });
             }
+            var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
+            domainLabels.forEach(function(el) { el.style.opacity = '0'; });
           }
+          progressLabelsTimeout = setTimeout(function() {
+            progressLabelsTimeout = null;
+            updateProgressWheelLabels(t.rotate);
+          }, 660);
         }
         var legendEl = document.getElementById('progress-wheel-legend');
         legendEl.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
