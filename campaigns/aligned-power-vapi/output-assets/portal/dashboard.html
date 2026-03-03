@@ -151,43 +151,45 @@
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
-          <div class="lg:hidden flex items-center justify-between gap-3 mb-4">
-            <div class="relative min-w-0 max-w-[70%]">
-              <select id="progress-metric-select" class="w-full rounded-full border border-[var(--ap-border)] bg-[var(--ap-bg)] text-[var(--ap-primary)] text-sm font-medium py-2 pl-4 pr-9 appearance-none cursor-pointer" aria-label="Select metric">
-              <optgroup label="Composite">
-                <option value="overall">Overall score</option>
-              </optgroup>
-              <optgroup label="Arena">
-                <option value="arena:Personal">Personal</option>
-                <option value="arena:Relationships">Relationships</option>
-                <option value="arena:Business">Business</option>
-              </optgroup>
-              <optgroup label="Domain">
-                <option value="domain:PH">Physical Health</option>
-                <option value="domain:IA">Inner Alignment</option>
-                <option value="domain:ME">Mental / Emotional</option>
-                <option value="domain:AF">Attention &amp; Focus</option>
-                <option value="domain:RS">Relationship to Self</option>
-                <option value="domain:FA">Family</option>
-                <option value="domain:CO">Community</option>
-                <option value="domain:WI">World / Impact</option>
-                <option value="domain:VS">Vision / Strategy</option>
-                <option value="domain:EX">Execution</option>
-                <option value="domain:OH">Operational Health</option>
-                <option value="domain:EC">Ecology</option>
-              </optgroup>
-              </select>
-              <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--ap-muted)] pointer-events-none" aria-hidden="true"></i>
-            </div>
-            <span class="text-xs text-[var(--ap-muted)] whitespace-nowrap">Your score · Dialed (8+)</span>
-          </div>
           <div class="flex flex-col lg:flex-row gap-6">
-            <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
-              <canvas id="progress-chart"></canvas>
+            <div class="flex-1 min-w-0 flex flex-row items-flex-start gap-2">
+              <div class="lg:hidden relative shrink-0 pt-0.5" id="progress-metric-dropdown-wrap">
+                <button type="button" id="progress-metric-dropdown-trigger" class="inline-flex items-center gap-1 rounded-full py-1 px-2.5 border border-[var(--ap-border)] bg-white text-[10px] font-medium uppercase tracking-wider text-[var(--ap-text)] hover:border-[var(--ap-primary)]/50 hover:bg-[var(--ap-bg)] transition-colors max-w-[100px]" aria-haspopup="listbox" aria-expanded="false" aria-label="Select metric">
+                  <span id="progress-metric-dropdown-label" class="truncate">Overall score</span>
+                  <i data-lucide="chevron-down" class="w-3 h-3 text-[var(--ap-muted)] flex-shrink-0 transition-transform" id="progress-metric-chevron" aria-hidden="true"></i>
+                </button>
+                <div id="progress-metric-dropdown-panel" class="absolute top-full left-0 mt-1 z-20 w-48 bg-white border border-[var(--ap-border)] rounded-lg shadow-lg overflow-hidden hidden max-h-[280px] overflow-y-auto">
+                  <div class="space-y-0.5 p-1.5">
+                    <div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 first:mt-0 px-2 py-0.5">Composite</div>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
+                    <div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Arena</div>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
+                    <div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Domain</div>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
+                    <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
+                <canvas id="progress-chart"></canvas>
+              </div>
             </div>
-            <div class="hidden lg:block lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4">
+            <div class="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex-col">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
-              <div id="metric-list" class="space-y-1 max-h-80 overflow-y-auto pr-1">
+              <div class="relative flex-1 min-h-0 max-h-80">
+                <div id="metric-list" class="space-y-1 h-full max-h-80 overflow-y-auto pr-1">
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
@@ -207,6 +209,13 @@
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                </div>
+                <div id="progress-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">
+                  <i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)]"></i>
+                </div>
+                <div id="progress-sidebar-scroll-down" class="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-200" aria-hidden="false">
+                  <i data-lucide="chevron-down" class="w-5 h-5 text-[var(--ap-primary)]"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -890,8 +899,15 @@
             btn.classList.toggle('border-[var(--ap-primary)]', isSelected);
             btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
           });
-          var progressSelect = document.getElementById('progress-metric-select');
-          if (progressSelect) progressSelect.value = value;
+          var progressDropdownLabel = document.getElementById('progress-metric-dropdown-label');
+          if (progressDropdownLabel) progressDropdownLabel.textContent = getMetricLabel(value);
+          document.querySelectorAll('.progress-metric-dropdown-btn').forEach(function(btn) {
+            var isSelected = btn.getAttribute('data-value') === value;
+            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected);
+            btn.classList.toggle('text-white', isSelected);
+            btn.classList.toggle('border-[var(--ap-primary)]', isSelected);
+            btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
+          });
         }
 
         var TIER_ORDER = ['In the Red', 'Below the Line', 'Functional', 'Dialed'];
@@ -943,15 +959,54 @@
           updateChart();
           updateProgressTransition();
         });
-        var progressSelectEl = document.getElementById('progress-metric-select');
-        if (progressSelectEl) {
-          progressSelectEl.addEventListener('change', function() {
-            selectedMetricKey = progressSelectEl.value;
+        var progressDropdownTrigger = document.getElementById('progress-metric-dropdown-trigger');
+        var progressDropdownPanel = document.getElementById('progress-metric-dropdown-panel');
+        var progressDropdownWrap = document.getElementById('progress-metric-dropdown-wrap');
+        var progressMetricChevron = document.getElementById('progress-metric-chevron');
+        function closeProgressDropdown() {
+          if (progressDropdownPanel) progressDropdownPanel.classList.add('hidden');
+          if (progressDropdownTrigger) progressDropdownTrigger.setAttribute('aria-expanded', 'false');
+          if (progressMetricChevron) progressMetricChevron.style.transform = '';
+        }
+        function openProgressDropdown() {
+          if (progressDropdownPanel) progressDropdownPanel.classList.remove('hidden');
+          if (progressDropdownTrigger) progressDropdownTrigger.setAttribute('aria-expanded', 'true');
+          if (progressMetricChevron) progressMetricChevron.style.transform = 'rotate(180deg)';
+        }
+        if (progressDropdownTrigger && progressDropdownPanel) {
+          progressDropdownTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isOpen = !progressDropdownPanel.classList.contains('hidden');
+            if (isOpen) closeProgressDropdown(); else openProgressDropdown();
+          });
+          document.addEventListener('click', function(e) {
+            if (progressDropdownWrap && !progressDropdownWrap.contains(e.target)) closeProgressDropdown();
+          });
+        }
+        document.querySelectorAll('.progress-metric-dropdown-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            selectedMetricKey = btn.getAttribute('data-value');
+            closeProgressDropdown();
             setSelectedMetric(selectedMetricKey);
             updateChart();
             updateProgressTransition();
           });
+        });
+        var progressSidebarList = document.getElementById('metric-list');
+        var progressScrollUp = document.getElementById('progress-sidebar-scroll-up');
+        var progressScrollDown = document.getElementById('progress-sidebar-scroll-down');
+        function updateProgressSidebarScrollIndicators() {
+          if (!progressSidebarList || !progressScrollDown || !progressScrollUp) return;
+          var el = progressSidebarList;
+          var atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 8;
+          var atTop = el.scrollTop < 8;
+          progressScrollDown.style.opacity = atBottom ? '0' : '1';
+          progressScrollDown.setAttribute('aria-hidden', atBottom ? 'true' : 'false');
+          progressScrollUp.style.opacity = atTop ? '0' : '1';
+          progressScrollUp.setAttribute('aria-hidden', atTop ? 'true' : 'false');
         }
+        progressSidebarList.addEventListener('scroll', updateProgressSidebarScrollIndicators);
+        setTimeout(updateProgressSidebarScrollIndicators, 100);
         setSelectedMetric('overall');
         updateChart();
         updateProgressTransition();
