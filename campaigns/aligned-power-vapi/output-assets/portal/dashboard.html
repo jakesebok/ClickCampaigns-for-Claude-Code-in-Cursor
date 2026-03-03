@@ -31,6 +31,8 @@
     .wheel-static .wheel-segment { cursor: default; pointer-events: none; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
+    .progress-domain-view .wheel-segment.cell-changed.segment-pulse { animation: progress-cell-pulse 1.2s ease-in-out infinite; }
+    @keyframes progress-cell-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -149,8 +151,13 @@
 
       <div id="progress-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart or domain view.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">View:</span>
+            <button type="button" id="progress-view-graph" class="progress-view-btn rounded-full py-1.5 px-4 text-sm font-medium border border-[var(--ap-border)] bg-[var(--ap-primary)] text-white" data-view="graph">Graph</button>
+            <button type="button" id="progress-view-domain" class="progress-view-btn rounded-full py-1.5 px-4 text-sm font-medium border border-[var(--ap-border)] bg-[var(--ap-bg)] text-[var(--ap-text)]" data-view="domain">Domain</button>
+          </div>
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 relative">
               <div class="lg:hidden absolute left-0 top-0 z-10 pt-0.5" id="progress-metric-dropdown-wrap">
@@ -182,8 +189,26 @@
                   </div>
                 </div>
               </div>
-              <div class="chart-container relative h-64 sm:h-80 lg:h-80 w-full min-w-0">
-                <canvas id="progress-chart"></canvas>
+              <div id="progress-graph-view" class="w-full">
+                <div class="chart-container relative h-64 sm:h-80 lg:h-80 w-full min-w-0">
+                  <canvas id="progress-chart"></canvas>
+                </div>
+              </div>
+              <div id="progress-domain-view" class="hidden w-full relative">
+                <div id="progress-domain-wheels-wrap" class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 py-4 w-full transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
+                  <div class="flex flex-col items-center gap-2">
+                    <p id="progress-wheel-prev-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Previous</p>
+                    <div class="progress-domain-wheel-container wheel-static relative w-full max-w-[280px] mx-auto" style="aspect-ratio: 1 / 1;">
+                      <div id="progress-wheel-prev" class="absolute inset-0 flex items-center justify-center overflow-visible"></div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center gap-2">
+                    <p id="progress-wheel-curr-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Current</p>
+                    <div class="progress-domain-wheel-container wheel-static relative w-full max-w-[280px] mx-auto" style="aspect-ratio: 1 / 1;">
+                      <div id="progress-wheel-curr" class="absolute inset-0 flex items-center justify-center overflow-visible"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex-col">
@@ -328,7 +353,10 @@
         window.location.href = '../html/vapi-results.html';
       }
 
-      function buildWheelSVG(domains) {
+      function buildWheelSVG(domains, opts) {
+        opts = opts || {};
+        var idPrefix = opts.idPrefix || '';
+        var changedCells = opts.changedCells || {};
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
         var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
@@ -350,7 +378,9 @@
           var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
-        var arcIdP = 'dashWheelArcP'; var arcIdR = 'dashWheelArcR'; var arcIdB = 'dashWheelArcB';
+        var arcIdP = idPrefix + 'dashWheelArcP'; var arcIdR = idPrefix + 'dashWheelArcR'; var arcIdB = idPrefix + 'dashWheelArcB';
+        var filterShadow = idPrefix + 'dashboardArenaLabelShadow';
+        var filterHalo = idPrefix + 'dashboardArenaLabelHalo';
         var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs>';
         var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
@@ -362,8 +392,8 @@
         var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
-        html += '<filter id="dashboardArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
-        html += '<filter id="dashboardArenaLabelHalo" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        html += '<filter id="' + filterShadow + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        html += '<filter id="' + filterHalo + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
@@ -376,7 +406,9 @@
           for (var k = 1; k <= 10; k++) {
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
             var fill = (k <= score) ? darkC : lightC;
-            html += '<path class="wheel-segment" data-domain-index="' + i + '" data-arena="' + esc(arena) + '" d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+            var cellChanged = changedCells[i + '_' + k];
+            var segClass = 'wheel-segment' + (cellChanged ? ' cell-changed' : '');
+            html += '<path class="' + segClass + '" data-domain-index="' + i + '" data-ring="' + k + '" data-arena="' + esc(arena) + '" d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
           }
         }
         for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
@@ -397,9 +429,9 @@
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + filterShadow + ')"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + filterShadow + ')"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + filterShadow + ')"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -951,14 +983,6 @@
           block.classList.remove('hidden');
         }
 
-        document.getElementById('metric-list').addEventListener('click', function(e) {
-          var btn = e.target.closest('.metric-btn');
-          if (!btn) return;
-          selectedMetricKey = btn.getAttribute('data-value');
-          setSelectedMetric(selectedMetricKey);
-          updateChart();
-          updateProgressTransition();
-        });
         var progressDropdownTrigger = document.getElementById('progress-metric-dropdown-trigger');
         var progressDropdownPanel = document.getElementById('progress-metric-dropdown-panel');
         var progressDropdownWrap = document.getElementById('progress-metric-dropdown-wrap');
@@ -988,8 +1012,12 @@
             selectedMetricKey = btn.getAttribute('data-value');
             closeProgressDropdown();
             setSelectedMetric(selectedMetricKey);
-            updateChart();
-            updateProgressTransition();
+            if (progressViewMode === 'graph') {
+              updateChart();
+              updateProgressTransition();
+            } else {
+              updateProgressDomainView(selectedMetricKey);
+            }
           });
         });
         var progressSidebarList = document.getElementById('metric-list');
@@ -1007,6 +1035,170 @@
         }
         progressSidebarList.addEventListener('scroll', updateProgressSidebarScrollIndicators);
         setTimeout(updateProgressSidebarScrollIndicators, 100);
+
+        var progressViewMode = 'graph';
+        var progressDomainWheelsBuilt = false;
+        var progressGraphView = document.getElementById('progress-graph-view');
+        var progressDomainView = document.getElementById('progress-domain-view');
+        var progressViewGraphBtn = document.getElementById('progress-view-graph');
+        var progressViewDomainBtn = document.getElementById('progress-view-domain');
+        var progressDomainWheelsWrap = document.getElementById('progress-domain-wheels-wrap');
+        var progressWheelPrevLabel = document.getElementById('progress-wheel-prev-label');
+        var progressWheelCurrLabel = document.getElementById('progress-wheel-curr-label');
+
+        function buildProgressDomainWheels() {
+          if (progressDomainWheelsBuilt) return;
+          var prev = sortedByDate[sortedByDate.length - 2];
+          var curr = sortedByDate[sortedByDate.length - 1];
+          var prevDomains = (prev.results.domains || []).map(function(d) {
+            var o = Object.assign({}, d);
+            if (o.arena === 'Self') o.arena = 'Personal';
+            return o;
+          });
+          var currDomains = (curr.results.domains || []).map(function(d) {
+            var o = Object.assign({}, d);
+            if (o.arena === 'Self') o.arena = 'Personal';
+            return o;
+          });
+          var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+          var byCodePrev = {};
+          prevDomains.forEach(function(d) { byCodePrev[d.code] = d; });
+          var byCodeCurr = {};
+          currDomains.forEach(function(d) { byCodeCurr[d.code] = d; });
+          var changedCells = {};
+          for (var i = 0; i < 12; i++) {
+            var code = order[i];
+            var prevScore = (byCodePrev[code] && typeof byCodePrev[code].score === 'number') ? Math.max(0, Math.min(10, Math.round(byCodePrev[code].score))) : 0;
+            var currScore = (byCodeCurr[code] && typeof byCodeCurr[code].score === 'number') ? Math.max(0, Math.min(10, Math.round(byCodeCurr[code].score))) : 0;
+            for (var k = 1; k <= 10; k++) {
+              var prevFilled = prevScore >= k;
+              var currFilled = currScore >= k;
+              if (prevFilled !== currFilled) changedCells[i + '_' + k] = true;
+            }
+          }
+          var prevHtml = buildWheelSVG(prevDomains, { idPrefix: 'progressPrev' });
+          var currHtml = buildWheelSVG(currDomains, { idPrefix: 'progressCurr', changedCells: changedCells });
+          document.getElementById('progress-wheel-prev').innerHTML = prevHtml;
+          document.getElementById('progress-wheel-curr').innerHTML = currHtml;
+          progressWheelPrevLabel.textContent = 'Previous: ' + formatDate(prev.created_at);
+          progressWheelCurrLabel.textContent = 'Current: ' + formatDate(curr.created_at);
+          [document.getElementById('progress-wheel-prev').querySelector('svg'), document.getElementById('progress-wheel-curr').querySelector('svg')].forEach(function(svg) {
+            if (svg) {
+              svg.style.width = '100%';
+              svg.style.height = '100%';
+              svg.style.maxWidth = '280px';
+              svg.style.maxHeight = '280px';
+            }
+          });
+          progressDomainWheelsBuilt = true;
+        }
+
+        function applySegmentFocusToWheel(svgEl, metricKey, isCurrentWheel) {
+          if (!svgEl) return;
+          var segments = svgEl.querySelectorAll('.wheel-segment');
+          var dimOpacity = '0.13';
+          var focusOpacity = '1';
+          var useAccent = metricKey !== 'overall' && (metricKey.indexOf('arena:') === 0 || metricKey.indexOf('domain:') === 0);
+          var wheelCx = 160; var wheelCy = 160; var wheelR = 120; var segmentAngleDeg = 30;
+          function outerMidpoint(domainIndex) {
+            var midDeg = (domainIndex + 0.5) * segmentAngleDeg - 90;
+            var rad = midDeg * Math.PI / 180;
+            return { x: wheelCx + wheelR * Math.cos(rad), y: wheelCy + wheelR * Math.sin(rad) };
+          }
+          function arenaCenterAngle(arenaKey) {
+            var start = arenaKey === 'Personal' ? 0 : arenaKey === 'Relationships' ? 4 : 8;
+            var midDeg = (start + 1.5) * segmentAngleDeg - 90;
+            var rad = midDeg * Math.PI / 180;
+            return { x: wheelCx + wheelR * Math.cos(rad), y: wheelCy + wheelR * Math.sin(rad) };
+          }
+          function setSegmentFocus(segment, focused, origin) {
+            segment.style.opacity = focused ? focusOpacity : dimOpacity;
+            if (useAccent && focused && origin) {
+              segment.style.transformOrigin = origin.x + ' ' + origin.y;
+              segment.style.transform = 'scale(1.08)';
+              segment.style.filter = 'drop-shadow(0 5px 12px rgba(0,0,0,0.28))';
+            } else {
+              segment.style.transformOrigin = '';
+              segment.style.transform = '';
+              segment.style.filter = '';
+            }
+            if (isCurrentWheel && segment.classList.contains('cell-changed')) {
+              if (focused) segment.classList.add('segment-pulse');
+              else segment.classList.remove('segment-pulse');
+            }
+          }
+          if (metricKey === 'overall') {
+            segments.forEach(function(p) { setSegmentFocus(p, true, null); });
+          } else if (metricKey.indexOf('arena:') === 0) {
+            var arenaFocus = metricKey.slice(6);
+            var arenaOrigin = arenaCenterAngle(arenaFocus);
+            segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-arena') === arenaFocus, p.getAttribute('data-arena') === arenaFocus ? arenaOrigin : null); });
+          } else if (metricKey.indexOf('domain:') === 0) {
+            var domainIdx = getSegmentIndexForMetric(metricKey);
+            var domainOrigin = outerMidpoint(domainIdx);
+            segments.forEach(function(p) { setSegmentFocus(p, p.getAttribute('data-domain-index') === String(domainIdx), p.getAttribute('data-domain-index') === String(domainIdx) ? domainOrigin : null); });
+          } else {
+            segments.forEach(function(p) { setSegmentFocus(p, true, null); });
+          }
+        }
+
+        function updateProgressDomainView(metricKey) {
+          if (!progressDomainWheelsWrap) return;
+          var t = getWheelTransform(metricKey);
+          progressDomainWheelsWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var prevSvg = document.getElementById('progress-wheel-prev') && document.getElementById('progress-wheel-prev').querySelector('svg');
+          var currSvg = document.getElementById('progress-wheel-curr') && document.getElementById('progress-wheel-curr').querySelector('svg');
+          applySegmentFocusToWheel(prevSvg, metricKey, false);
+          applySegmentFocusToWheel(currSvg, metricKey, true);
+        }
+
+        function setProgressView(view) {
+          progressViewMode = view;
+          if (view === 'graph') {
+            if (progressGraphView) progressGraphView.classList.remove('hidden');
+            if (progressDomainView) progressDomainView.classList.add('hidden');
+            if (progressViewGraphBtn) {
+              progressViewGraphBtn.classList.add('bg-[var(--ap-primary)]', 'text-white');
+              progressViewGraphBtn.classList.remove('bg-[var(--ap-bg)]', 'text-[var(--ap-text)]');
+            }
+            if (progressViewDomainBtn) {
+              progressViewDomainBtn.classList.remove('bg-[var(--ap-primary)]', 'text-white');
+              progressViewDomainBtn.classList.add('bg-[var(--ap-bg)]', 'text-[var(--ap-text)]');
+            }
+            updateChart();
+            updateProgressTransition();
+          } else {
+            if (progressGraphView) progressGraphView.classList.add('hidden');
+            if (progressDomainView) progressDomainView.classList.remove('hidden');
+            if (progressViewGraphBtn) {
+              progressViewGraphBtn.classList.remove('bg-[var(--ap-primary)]', 'text-white');
+              progressViewGraphBtn.classList.add('bg-[var(--ap-bg)]', 'text-[var(--ap-text)]');
+            }
+            if (progressViewDomainBtn) {
+              progressViewDomainBtn.classList.add('bg-[var(--ap-primary)]', 'text-white');
+              progressViewDomainBtn.classList.remove('bg-[var(--ap-bg)]', 'text-[var(--ap-text)]');
+            }
+            buildProgressDomainWheels();
+            updateProgressDomainView(selectedMetricKey);
+          }
+        }
+
+        if (progressViewGraphBtn) progressViewGraphBtn.addEventListener('click', function() { setProgressView('graph'); });
+        if (progressViewDomainBtn) progressViewDomainBtn.addEventListener('click', function() { setProgressView('domain'); });
+
+        document.getElementById('metric-list').addEventListener('click', function(e) {
+          var btn = e.target.closest('.metric-btn');
+          if (!btn) return;
+          selectedMetricKey = btn.getAttribute('data-value');
+          setSelectedMetric(selectedMetricKey);
+          if (progressViewMode === 'graph') {
+            updateChart();
+            updateProgressTransition();
+          } else {
+            updateProgressDomainView(selectedMetricKey);
+          }
+        });
+
         setSelectedMetric('overall');
         updateChart();
         updateProgressTransition();
