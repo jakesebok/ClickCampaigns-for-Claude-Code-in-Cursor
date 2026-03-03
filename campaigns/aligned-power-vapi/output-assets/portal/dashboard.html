@@ -11,6 +11,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="../html/vapi-results-interpretations.js"></script>
+  <script src="progress-transitions.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
@@ -178,6 +179,14 @@
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
               </div>
             </div>
+          </div>
+          <div id="progress-transition-block" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full">
+            <h3 class="text-lg text-[var(--ap-primary)] mb-2">What Changed</h3>
+            <p id="progress-transition-subheading" class="text-sm font-semibold text-[var(--ap-secondary)] mb-1 flex items-center gap-2">
+              <span id="progress-transition-arrow" class="inline-flex items-center" aria-hidden="true"></span>
+              <span id="progress-transition-label"></span>
+            </p>
+            <p id="progress-transition-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
           </div>
         </div>
       </div>
@@ -456,9 +465,19 @@
           var code = metricKey.slice(7);
           var doms = res.domains || [];
           var d = doms.find(function(x) { return x.code === code; });
-          return (d && d.tier) ? d.tier : null;
+          if (d && d.tier) return d.tier;
+          var score = getScoreForMetric(res, metricKey);
+          return score != null ? scoreToTier(score) : null;
         }
         return null;
+      }
+
+      function scoreToTier(score) {
+        if (score == null || typeof score !== 'number') return null;
+        if (score >= 8) return 'Dialed';
+        if (score >= 6) return 'Functional';
+        if (score >= 4) return 'Below the Line';
+        return 'In the Red';
       }
 
       function getMetricLabel(metricKey) {
@@ -842,15 +861,56 @@
             btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
           });
         }
+
+        var TIER_ORDER = ['In the Red', 'Below the Line', 'Functional', 'Dialed'];
+        function updateProgressTransition() {
+          var block = document.getElementById('progress-transition-block');
+          var labelEl = document.getElementById('progress-transition-label');
+          var arrowEl = document.getElementById('progress-transition-arrow');
+          var textEl = document.getElementById('progress-transition-text');
+          if (!block || !labelEl || !arrowEl || !textEl) return;
+          if (selectedMetricKey.indexOf('domain:') !== 0 || sortedByDate.length < 2) {
+            block.classList.add('hidden');
+            return;
+          }
+          var prevRes = sortedByDate[sortedByDate.length - 2].results;
+          var currRes = sortedByDate[sortedByDate.length - 1].results;
+          var prevTier = getTierForMetric(prevRes, selectedMetricKey);
+          var currTier = getTierForMetric(currRes, selectedMetricKey);
+          if (!prevTier || !currTier) {
+            block.classList.add('hidden');
+            return;
+          }
+          var transitionKey = prevTier === currTier ? 'Maintained ' + currTier : prevTier + ' \u2192 ' + currTier;
+          var domainCode = selectedMetricKey.slice(7);
+          var TRANS = window.VAPI_PROGRESS_TRANSITIONS;
+          var interpretation = TRANS && TRANS[domainCode] && TRANS[domainCode][transitionKey];
+          if (!interpretation) {
+            block.classList.add('hidden');
+            return;
+          }
+          var domainName = getMetricLabel(selectedMetricKey);
+          labelEl.textContent = domainName + ': ' + (prevTier === currTier ? currTier : prevTier + ' \u2192 ' + currTier);
+          var prevIdx = TIER_ORDER.indexOf(prevTier);
+          var currIdx = TIER_ORDER.indexOf(currTier);
+          var direction = currIdx > prevIdx ? 'up' : currIdx < prevIdx ? 'down' : 'same';
+          arrowEl.textContent = direction === 'up' ? '\u2191' : direction === 'down' ? '\u2193' : '\u2192';
+          arrowEl.className = 'inline-flex items-center font-semibold ' + (direction === 'up' ? 'text-green-600' : direction === 'down' ? 'text-red-600' : 'text-amber-600');
+          textEl.textContent = interpretation;
+          block.classList.remove('hidden');
+        }
+
         document.getElementById('metric-list').addEventListener('click', function(e) {
           var btn = e.target.closest('.metric-btn');
           if (!btn) return;
           selectedMetricKey = btn.getAttribute('data-value');
           setSelectedMetric(selectedMetricKey);
           updateChart();
+          updateProgressTransition();
         });
         setSelectedMetric('overall');
         updateChart();
+        updateProgressTransition();
       }
 
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
