@@ -27,6 +27,7 @@
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(88,34,51,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
+    .wheel-static .wheel-segment { cursor: default; pointer-events: none; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
   </style>
@@ -347,9 +348,9 @@
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text font-size="11" fill="#936738" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -367,7 +368,7 @@
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
       latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-6 sm:p-8 lg:p-10 lg:min-w-[280px]">';
-      latestHtml += '<div class="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="wheel-static w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
