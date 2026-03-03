@@ -211,8 +211,8 @@
             </div>
             <div class="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex-col">
               <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>
-              <div class="relative flex-1 min-h-0 max-h-80">
-                <div id="metric-list" class="space-y-1 h-full max-h-80 overflow-y-auto pr-1">
+              <div class="relative flex-1 min-h-0 max-h-[370px]">
+                <div id="metric-list" class="space-y-1 h-full max-h-[370px] overflow-y-auto pr-1">
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>
@@ -245,9 +245,10 @@
           <div id="progress-transition-block" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full">
             <h3 class="text-lg text-[var(--ap-primary)] mb-2">What Changed</h3>
             <p id="progress-transition-subheading" class="text-sm font-semibold text-[var(--ap-secondary)] mb-1 flex items-center gap-2">
-              <span id="progress-transition-arrow" class="inline-flex items-center" aria-hidden="true"></span>
+              <span id="progress-transition-arrow" class="inline-flex items-center text-2xl font-bold align-middle" aria-hidden="true"></span>
               <span id="progress-transition-label"></span>
             </p>
+            <div id="progress-transition-scores" class="text-sm text-[var(--ap-secondary)] mb-2 space-y-0.5 hidden"></div>
             <p id="progress-transition-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
           </div>
         </div>
@@ -1056,10 +1057,15 @@
           }, 660);
         }
         var legendEl = document.getElementById('progress-wheel-legend');
-        legendEl.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
+        legendEl.innerHTML = '<div class="flex flex-col items-center gap-y-2 w-full">' +
+          '<div class="flex flex-wrap items-center justify-center gap-x-6">' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
           '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9ca3af; opacity:0.35"></span> Previous (' + progressPrevDateStr + ')</span>' +
+          '</div>' +
+          '<div class="flex flex-wrap items-center justify-center gap-x-6">' +
           '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-green-500"></span> Improved</span>' +
-          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-red-500"></span> Declined</span>';
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-red-500"></span> Declined</span>' +
+          '</div></div>';
         var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
         var progressChart = null;
 
@@ -1165,6 +1171,7 @@
           var labelEl = document.getElementById('progress-transition-label');
           var arrowEl = document.getElementById('progress-transition-arrow');
           var textEl = document.getElementById('progress-transition-text');
+          var scoresEl = document.getElementById('progress-transition-scores');
           if (!block || !labelEl || !arrowEl || !textEl) return;
           var isOverall = selectedMetricKey === 'overall';
           var isArena = selectedMetricKey.indexOf('arena:') === 0;
@@ -1175,28 +1182,42 @@
           }
           var prevRes = sortedByDate[sortedByDate.length - 2].results;
           var currRes = sortedByDate[sortedByDate.length - 1].results;
+          var prevScore = getScoreForMetric(prevRes, selectedMetricKey);
+          var currScore = getScoreForMetric(currRes, selectedMetricKey);
           var prevTier = getTierForMetric(prevRes, selectedMetricKey);
           var currTier = getTierForMetric(currRes, selectedMetricKey);
-          if (!prevTier || !currTier) {
-            block.classList.add('hidden');
-            return;
+          var prevStr = prevScore != null ? Math.round(prevScore * 10) / 10 + ' / 10' + (prevTier ? ' (' + prevTier + ')' : '') : '—';
+          var currStr = currScore != null ? Math.round(currScore * 10) / 10 + ' / 10' + (currTier ? ' (' + currTier + ')' : '') : '—';
+          var change = (currScore != null && prevScore != null) ? currScore - prevScore : null;
+          var changeStr = change != null ? (change >= 0 ? '+' : '') + Math.round(change * 10) / 10 : '—';
+          var changeArrow = change != null ? (change > 0 ? '\u2191' : change < 0 ? '\u2193' : '\u2192') : '';
+          if (scoresEl) {
+            scoresEl.innerHTML = '<div>Previous: ' + prevStr + '</div><div>Current: ' + currStr + '</div>' +
+              '<div class="font-medium ' + (change != null && change > 0 ? 'text-green-600' : change != null && change < 0 ? 'text-red-600' : 'text-[var(--ap-secondary)]') + '">Change: ' + changeStr + ' ' + changeArrow + '</div>';
+            scoresEl.classList.remove('hidden');
           }
-          var transitionKey = prevTier === currTier ? 'Maintained ' + currTier : prevTier + ' \u2192 ' + currTier;
-          var lookupKey = isOverall ? 'overall' : isArena ? selectedMetricKey.slice(6) : selectedMetricKey.slice(7);
-          var TRANS = window.VAPI_PROGRESS_TRANSITIONS;
-          var interpretation = TRANS && TRANS[lookupKey] && TRANS[lookupKey][transitionKey];
-          if (!interpretation) {
+          if (!prevTier && !currTier) {
             block.classList.add('hidden');
             return;
           }
           var labelPrefix = isOverall ? 'Overall' : getMetricLabel(selectedMetricKey);
-          labelEl.textContent = labelPrefix + ': ' + (prevTier === currTier ? currTier : prevTier + ' \u2192 ' + currTier);
-          var prevIdx = TIER_ORDER.indexOf(prevTier);
-          var currIdx = TIER_ORDER.indexOf(currTier);
-          var direction = currIdx > prevIdx ? 'up' : currIdx < prevIdx ? 'down' : 'same';
-          arrowEl.textContent = direction === 'up' ? '\u2191' : direction === 'down' ? '\u2193' : '\u2192';
-          arrowEl.className = 'inline-flex items-center font-semibold ' + (direction === 'up' ? 'text-green-600' : direction === 'down' ? 'text-red-600' : 'text-amber-600');
-          textEl.textContent = interpretation;
+          var transitionKey = prevTier && currTier ? (prevTier === currTier ? 'Maintained ' + currTier : prevTier + ' \u2192 ' + currTier) : '';
+          var lookupKey = isOverall ? 'overall' : isArena ? selectedMetricKey.slice(6) : selectedMetricKey.slice(7);
+          var TRANS = window.VAPI_PROGRESS_TRANSITIONS;
+          var interpretation = transitionKey && TRANS && TRANS[lookupKey] && TRANS[lookupKey][transitionKey];
+          if (prevTier && currTier) {
+            labelEl.textContent = labelPrefix + ': ' + (prevTier === currTier ? currTier : prevTier + ' \u2192 ' + currTier);
+            var prevIdx = TIER_ORDER.indexOf(prevTier);
+            var currIdx = TIER_ORDER.indexOf(currTier);
+            var direction = currIdx > prevIdx ? 'up' : currIdx < prevIdx ? 'down' : 'same';
+            arrowEl.textContent = direction === 'up' ? '\u2191' : direction === 'down' ? '\u2193' : '\u2192';
+            arrowEl.className = 'inline-flex items-center text-2xl font-bold align-middle ' + (direction === 'up' ? 'text-green-600' : direction === 'down' ? 'text-red-600' : 'text-amber-600');
+          } else {
+            labelEl.textContent = labelPrefix + ' score change';
+            arrowEl.textContent = changeArrow || '\u2192';
+            arrowEl.className = 'inline-flex items-center text-2xl font-bold align-middle ' + (change != null && change > 0 ? 'text-green-600' : change != null && change < 0 ? 'text-red-600' : 'text-amber-600');
+          }
+          textEl.textContent = interpretation || '';
           block.classList.remove('hidden');
         }
 
