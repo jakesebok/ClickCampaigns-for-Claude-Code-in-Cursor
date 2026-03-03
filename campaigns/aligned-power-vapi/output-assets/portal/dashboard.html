@@ -607,13 +607,13 @@
       latestHtml += '</div>';
       latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-1 tracking-tight">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
       if (latestScore != null && latestTier) {
-        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-y border-[var(--ap-border)]/60">';
+        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-t border-[var(--ap-border)]/60">';
         latestHtml += '<span class="text-4xl sm:text-5xl font-bold tabular-nums" style="color:' + tierColor + '">' + (typeof latestScore === 'number' ? Math.round(latestScore * 10) / 10 : latestScore) + '</span>';
         latestHtml += '<span class="text-lg text-[var(--ap-muted)]">/ 10</span>';
         latestHtml += '<span class="font-semibold px-3 py-1.5 rounded-full text-sm text-white" style="background:' + tierColor + '">' + escHtml(latestTier) + '</span>';
         latestHtml += '</div>';
       } else if (latestScore != null) {
-        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-y border-[var(--ap-border)]/60"><span class="text-4xl font-bold text-[var(--ap-secondary)] tabular-nums">' + latestScore + '</span><span class="text-[var(--ap-muted)]">/ 10</span></div>';
+        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-t border-[var(--ap-border)]/60"><span class="text-4xl font-bold text-[var(--ap-secondary)] tabular-nums">' + latestScore + '</span><span class="text-[var(--ap-muted)]">/ 10</span></div>';
       } else {
         latestHtml += '<div class="mb-8"></div>';
       }
