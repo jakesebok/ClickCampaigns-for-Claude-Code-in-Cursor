@@ -601,10 +601,7 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
-      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center p-3 pr-2 lg:pr-4">';
-      latestHtml += '<div class="wheel-static w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] flex items-center justify-center">' + buildWheelSVGOverview(latestDomains) + '</div>';
-      latestHtml += '</div>';
-      latestHtml += '<div class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">';
+      latestHtml += '<div class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 flex flex-col justify-center text-left">';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + escHtml(formatDate(latest.created_at)) + '</span>';
@@ -635,7 +632,10 @@
       });
       latestHtml += '</ul></div>';
       latestHtml += '</div>';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md self-start">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '</div>';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center p-3 pl-2 lg:pl-4">';
+      latestHtml += '<div class="wheel-static w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] flex items-center justify-center">' + buildWheelSVGOverview(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       latestHtml += '</div>';
