@@ -599,39 +599,39 @@
       var top3 = latest.results.top3 || (latestDomains.slice().sort(function(a, b) { return (b.score || 0) - (a.score || 0); }).slice(0, 3));
       var bottom3 = latest.results.bottom3 || (latestDomains.slice().sort(function(a, b) { return (a.score || 0) - (b.score || 0); }).slice(0, 3));
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-      var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
-      latestHtml += '<div class="relative p-4 sm:p-6 lg:p-8 text-left">';
-      latestHtml += '<div class="flex items-center gap-2 mb-2">';
-      latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
-      latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + escHtml(formatDate(latest.created_at)) + '</span>';
+      var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm">';
+      latestHtml += '<div class="p-5 sm:p-7 lg:p-9 text-left">';
+      latestHtml += '<div class="flex items-center gap-2.5 mb-3">';
+      latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2.5 py-1 rounded-md">Latest</span>';
+      latestHtml += '<span class="text-[var(--ap-muted)] text-sm">' + escHtml(formatDate(latest.created_at)) + '</span>';
       latestHtml += '</div>';
-      latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-4 sm:pr-32">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
+      latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-1 tracking-tight">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
       if (latestScore != null && latestTier) {
-        latestHtml += '<div class="flex items-baseline gap-3 mb-6">';
-        latestHtml += '<span class="text-4xl sm:text-5xl font-bold" style="color:' + tierColor + '">' + (typeof latestScore === 'number' ? Math.round(latestScore * 10) / 10 : latestScore) + '</span>';
+        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-y border-[var(--ap-border)]/60">';
+        latestHtml += '<span class="text-4xl sm:text-5xl font-bold tabular-nums" style="color:' + tierColor + '">' + (typeof latestScore === 'number' ? Math.round(latestScore * 10) / 10 : latestScore) + '</span>';
         latestHtml += '<span class="text-lg text-[var(--ap-muted)]">/ 10</span>';
-        latestHtml += '<span class="font-semibold px-3 py-1 rounded-full text-sm text-white" style="background:' + tierColor + '">' + escHtml(latestTier) + '</span>';
+        latestHtml += '<span class="font-semibold px-3 py-1.5 rounded-full text-sm text-white" style="background:' + tierColor + '">' + escHtml(latestTier) + '</span>';
         latestHtml += '</div>';
       } else if (latestScore != null) {
-        latestHtml += '<div class="flex items-baseline gap-3 mb-6"><span class="text-4xl font-bold text-[var(--ap-secondary)]">' + latestScore + '</span><span class="text-[var(--ap-muted)]">/ 10</span></div>';
+        latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-y border-[var(--ap-border)]/60"><span class="text-4xl font-bold text-[var(--ap-secondary)] tabular-nums">' + latestScore + '</span><span class="text-[var(--ap-muted)]">/ 10</span></div>';
       } else {
-        latestHtml += '<div class="mb-6"></div>';
+        latestHtml += '<div class="mb-8"></div>';
       }
-      latestHtml += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">';
-      latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Top 3 strengths</p><ul class="space-y-1.5">';
+      latestHtml += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mb-8">';
+      latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Top 3 strengths</p><ul class="space-y-2.5 mt-2">';
       top3.forEach(function(d) {
         var c = (d.tier && tierColors[d.tier]) ? tierColors[d.tier] : 'var(--ap-secondary)';
-        latestHtml += '<li class="flex items-center gap-2 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+        latestHtml += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
       });
       latestHtml += '</ul></div>';
-      latestHtml += '<div class="relative"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Priority focus areas</p><ul class="space-y-1.5 relative z-10">';
+      latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Priority focus areas</p><ul class="space-y-2.5 mt-2">';
       bottom3.forEach(function(d) {
         var c = (d.tier && tierColors[d.tier]) ? tierColors[d.tier] : 'var(--ap-secondary)';
-        latestHtml += '<li class="flex items-center gap-2 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+        latestHtml += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
       });
       latestHtml += '</ul></div>';
       latestHtml += '</div>';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-1.5 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md">View results <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-primary)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
