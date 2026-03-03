@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check your email | Aligned Power Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <main class="max-w-md mx-auto px-4 pt-16 pb-12">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Check your email</h1>
+      <p class="text-[var(--ap-secondary)]">We’ve sent you a confirmation link.</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 sm:p-8">
+      <p class="text-[var(--ap-secondary)] mb-4">Please check the email address you used to sign up and click the link we sent to confirm your account.</p>
+      <p class="text-[var(--ap-secondary)] mb-6">Once you’ve confirmed your email, you can log in to your portal to view and track your VAPI™ results.</p>
+      <p class="text-sm text-[var(--ap-muted)]">Didn’t receive the email? Check your spam folder, or <a href="signup.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">try signing up again</a>.</p>
+    </div>
+    <p class="text-center mt-6">
+      <a href="login.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in</a>
+      <span class="text-[var(--ap-muted)] mx-2">·</span>
+      <a href="../html/vapi-landing.html" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Back to assessment</a>
+    </p>
+  </main>
+</body>
+</html>

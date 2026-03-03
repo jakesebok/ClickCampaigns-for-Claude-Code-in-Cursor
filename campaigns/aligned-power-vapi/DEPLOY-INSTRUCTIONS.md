@@ -190,6 +190,10 @@ If someone took the assessment with the same email as their portal account but t
 2. **Redeploy** so the results page uses the latest save logic (lowercase email and config loading).
 3. **New assessments** will then appear in the portal. For the assessment already taken, the SQL fix in step 1 is what makes it visible.
 
+### “Go to my portal” always going to login (or signup) instead of the other
+
+The results page checks whether the assessment email already has a portal account and sends users to **Log in** or **Create account** accordingly. For that to work, run the one-time SQL that adds the check: In Supabase → **SQL Editor**, open **supabase/check-portal-email-exists.sql** from the **main project** (not inside the campaign folder), copy its contents, paste into the editor, and click **Run**. After that, “Go to my portal” will route existing users to login and new users to signup.
+
 ---
 ## You’re done
 
@@ -205,6 +209,7 @@ Share the landing link so people can take the assessment. When they enter their 
 
 - [ ] Supabase project created  
 - [ ] SQL from `supabase/schema.sql` run in Supabase SQL Editor  
+- [ ] SQL from `supabase/check-portal-email-exists.sql` run (so “Go to my portal” routes to login vs signup)  
 - [ ] Project URL and anon key copied from Supabase  
 - [ ] Code pushed to a GitHub repo  
 - [ ] Vercel project created with Root Directory = `campaigns/aligned-power-vapi/output-assets`  

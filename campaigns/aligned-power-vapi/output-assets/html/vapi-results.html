@@ -99,7 +99,7 @@
       <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
         <h3 class="text-xl text-[var(--ap-primary)] mb-2">Your results, saved</h3>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Log in to your portal to see this assessment and your history over time—all in one place.</p>
-        <a href="../portal/login.html" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="../portal/login.html" id="go-to-portal-btn" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
   </main>
@@ -172,6 +172,47 @@
       } catch (e) {
         console.error('[VAPI save] Unexpected error:', e);
       }
+    })();
+  </script>
+  <script type="module">
+    (function() {
+      var btn = document.getElementById('go-to-portal-btn');
+      if (!btn) return;
+      btn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        var raw = sessionStorage.getItem('vapiResults');
+        var results = raw ? (function() { try { return JSON.parse(raw); } catch (err) { return null; } })() : null;
+        var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
+        var base = '../portal/';
+        if (!email) {
+          window.location.href = base + 'login.html';
+          return;
+        }
+        try {
+          var r = await fetch('/api/config');
+          if (!r.ok) { window.location.href = base + 'login.html?email=' + encodeURIComponent(email); return; }
+          var t = await r.text();
+          eval(t);
+          if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+            return;
+          }
+          var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+          var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+          var { data: exists, error } = await supabase.rpc('check_portal_email_exists', { check_email: email });
+          if (error) {
+            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+            return;
+          }
+          if (exists) {
+            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+          } else {
+            window.location.href = base + 'signup.html?email=' + encodeURIComponent(email);
+          }
+        } catch (err) {
+          window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+        }
+      });
     })();
   </script>
   <script>

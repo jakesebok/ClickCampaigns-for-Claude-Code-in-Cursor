@@ -44,7 +44,7 @@
         </button>
       </form>
       <p class="text-sm text-[var(--ap-muted)] mt-6 text-center">
-        Don’t have an account? <a href="signup.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Sign up</a>
+        Don’t have an account? <a href="signup.html" id="signup-link" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Sign up</a>
       </p>
     </div>
     <p class="text-center mt-6">
@@ -89,6 +89,10 @@
         window.location.href = redirectTo;
         return;
       }
+      var emailParam = params.get('email');
+      if (emailParam) document.getElementById('email').value = emailParam;
+      var signupLink = document.getElementById('signup-link');
+      if (signupLink && emailParam) signupLink.href = 'signup.html?email=' + encodeURIComponent(emailParam);
       document.getElementById('login-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         var email = document.getElementById('email').value.trim();

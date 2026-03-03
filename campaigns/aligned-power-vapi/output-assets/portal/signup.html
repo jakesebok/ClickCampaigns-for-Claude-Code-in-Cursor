@@ -46,7 +46,7 @@
         </button>
       </form>
       <p class="text-sm text-[var(--ap-muted)] mt-6 text-center">
-        Already have an account? <a href="login.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in</a>
+        Already have an account? <a href="login.html" id="login-link" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in</a>
       </p>
     </div>
     <p class="text-center mt-6">
@@ -86,6 +86,11 @@
         window.location.href = 'dashboard.html';
         return;
       }
+      var signupParams = new URLSearchParams(window.location.search);
+      var emailParam = signupParams.get('email');
+      if (emailParam) document.getElementById('email').value = emailParam;
+      var loginLink = document.getElementById('login-link');
+      if (loginLink && emailParam) loginLink.href = 'login.html?email=' + encodeURIComponent(emailParam);
       document.getElementById('signup-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         var email = document.getElementById('email').value.trim();
@@ -99,7 +104,7 @@
           errEl.classList.remove('hidden');
           return;
         }
-        window.location.href = 'dashboard.html';
+        window.location.href = 'check-email.html';
       });
     })();
   </script>
