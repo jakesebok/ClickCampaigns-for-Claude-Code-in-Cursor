@@ -391,7 +391,7 @@
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
           var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
-          var arena = (d && d.arena) ? d.arena : 'Personal';
+          var arena = (order[i] === 'RS') ? 'Relationships' : ((d && d.arena) ? d.arena : 'Personal');
           var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
           var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
           var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
@@ -438,7 +438,7 @@
         var NEUTRAL_MUTED = '#9ca3af';
         var UNSHADED = '#ffffff';
         var changeThreshold = 0.5;
-        var PROGRESS_ARENAS = ['Personal','Personal','Personal','Personal','Personal','Relationships','Relationships','Relationships','Business','Business','Business','Business'];
+        var PROGRESS_ARENAS = ['Personal','Personal','Personal','Personal','Relationships','Relationships','Relationships','Relationships','Business','Business','Business','Business'];
         function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
         var prevByCode = {};
         (prevDomains || []).forEach(function(d) { prevByCode[d.code] = d; });
