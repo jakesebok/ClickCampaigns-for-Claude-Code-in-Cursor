@@ -195,19 +195,12 @@
                 </div>
               </div>
               <div id="progress-domain-view" class="hidden w-full relative">
-                <div id="progress-domain-wheels-wrap" class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 py-4 w-full transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
-                  <div class="flex flex-col items-center gap-2">
-                    <p id="progress-wheel-prev-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Previous</p>
-                    <div class="progress-domain-wheel-container wheel-static relative w-full max-w-[280px] mx-auto" style="aspect-ratio: 1 / 1;">
-                      <div id="progress-wheel-prev" class="absolute inset-0 flex items-center justify-center overflow-visible"></div>
-                    </div>
+                <div id="progress-domain-wheels-wrap" class="flex flex-col items-center justify-center gap-3 py-4 w-full transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
+                  <p id="progress-domain-wheel-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] text-center">Latest assessment</p>
+                  <div class="progress-domain-wheel-container wheel-static relative w-full max-w-[280px] mx-auto" style="aspect-ratio: 1 / 1;">
+                    <div id="progress-domain-wheel" class="absolute inset-0 flex items-center justify-center overflow-visible"></div>
                   </div>
-                  <div class="flex flex-col items-center gap-2">
-                    <p id="progress-wheel-curr-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Current</p>
-                    <div class="progress-domain-wheel-container wheel-static relative w-full max-w-[280px] mx-auto" style="aspect-ratio: 1 / 1;">
-                      <div id="progress-wheel-curr" class="absolute inset-0 flex items-center justify-center overflow-visible"></div>
-                    </div>
-                  </div>
+                  <p class="text-[10px] text-[var(--ap-muted)] text-center max-w-[280px]">Changes from your previous assessment are highlighted when you select a metric.</p>
                 </div>
               </div>
             </div>
@@ -1043,8 +1036,7 @@
         var progressViewGraphBtn = document.getElementById('progress-view-graph');
         var progressViewDomainBtn = document.getElementById('progress-view-domain');
         var progressDomainWheelsWrap = document.getElementById('progress-domain-wheels-wrap');
-        var progressWheelPrevLabel = document.getElementById('progress-wheel-prev-label');
-        var progressWheelCurrLabel = document.getElementById('progress-wheel-curr-label');
+        var progressDomainWheelLabel = document.getElementById('progress-domain-wheel-label');
 
         function buildProgressDomainWheels() {
           if (progressDomainWheelsBuilt) return;
@@ -1076,20 +1068,16 @@
               if (prevFilled !== currFilled) changedCells[i + '_' + k] = true;
             }
           }
-          var prevHtml = buildWheelSVG(prevDomains, { idPrefix: 'progressPrev' });
-          var currHtml = buildWheelSVG(currDomains, { idPrefix: 'progressCurr', changedCells: changedCells });
-          document.getElementById('progress-wheel-prev').innerHTML = prevHtml;
-          document.getElementById('progress-wheel-curr').innerHTML = currHtml;
-          progressWheelPrevLabel.textContent = 'Previous: ' + formatDate(prev.created_at);
-          progressWheelCurrLabel.textContent = 'Current: ' + formatDate(curr.created_at);
-          [document.getElementById('progress-wheel-prev').querySelector('svg'), document.getElementById('progress-wheel-curr').querySelector('svg')].forEach(function(svg) {
-            if (svg) {
-              svg.style.width = '100%';
-              svg.style.height = '100%';
-              svg.style.maxWidth = '280px';
-              svg.style.maxHeight = '280px';
-            }
-          });
+          var wheelHtml = buildWheelSVG(currDomains, { idPrefix: 'progressDomain', changedCells: changedCells });
+          document.getElementById('progress-domain-wheel').innerHTML = wheelHtml;
+          if (progressDomainWheelLabel) progressDomainWheelLabel.textContent = formatDate(prev.created_at) + ' \u2192 ' + formatDate(curr.created_at);
+          var svg = document.getElementById('progress-domain-wheel').querySelector('svg');
+          if (svg) {
+            svg.style.width = '100%';
+            svg.style.height = '100%';
+            svg.style.maxWidth = '280px';
+            svg.style.maxHeight = '280px';
+          }
           progressDomainWheelsBuilt = true;
         }
 
@@ -1146,10 +1134,9 @@
           if (!progressDomainWheelsWrap) return;
           var t = getWheelTransform(metricKey);
           progressDomainWheelsWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
-          var prevSvg = document.getElementById('progress-wheel-prev') && document.getElementById('progress-wheel-prev').querySelector('svg');
-          var currSvg = document.getElementById('progress-wheel-curr') && document.getElementById('progress-wheel-curr').querySelector('svg');
-          applySegmentFocusToWheel(prevSvg, metricKey, false);
-          applySegmentFocusToWheel(currSvg, metricKey, true);
+          var wheelEl = document.getElementById('progress-domain-wheel');
+          var svg = wheelEl && wheelEl.querySelector('svg');
+          applySegmentFocusToWheel(svg, metricKey, true);
         }
 
         function setProgressView(view) {
