@@ -129,6 +129,12 @@
                   <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
                   <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
                 </div>
+                <div id="breakdown-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">
+                  <i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)] animate-bounce"></i>
+                </div>
+                <div id="breakdown-sidebar-scroll-down" class="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-200" aria-hidden="false">
+                  <i data-lucide="chevron-down" class="w-5 h-5 text-[var(--ap-primary)] animate-bounce"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -685,13 +691,28 @@
           closeDropdown();
           updateBreakdown(value);
         });
-        document.getElementById('breakdown-metric-list-sidebar').addEventListener('click', function(e) {
+        var breakdownSidebarList = document.getElementById('breakdown-metric-list-sidebar');
+        var breakdownScrollDown = document.getElementById('breakdown-sidebar-scroll-down');
+        var breakdownScrollUp = document.getElementById('breakdown-sidebar-scroll-up');
+        function updateBreakdownSidebarScrollIndicators() {
+          if (!breakdownSidebarList || !breakdownScrollDown || !breakdownScrollUp) return;
+          var el = breakdownSidebarList;
+          var atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 8;
+          var atTop = el.scrollTop < 8;
+          breakdownScrollDown.style.opacity = atBottom ? '0' : '1';
+          breakdownScrollDown.setAttribute('aria-hidden', atBottom ? 'true' : 'false');
+          breakdownScrollUp.style.opacity = atTop ? '0' : '1';
+          breakdownScrollUp.setAttribute('aria-hidden', atTop ? 'true' : 'false');
+        }
+        breakdownSidebarList.addEventListener('click', function(e) {
           var btn = e.target.closest('.breakdown-metric-btn');
           if (!btn) return;
           var value = btn.getAttribute('data-value');
           setBreakdownSelection(value);
           updateBreakdown(value);
         });
+        breakdownSidebarList.addEventListener('scroll', updateBreakdownSidebarScrollIndicators);
+        setTimeout(updateBreakdownSidebarScrollIndicators, 100);
         var wheelSvgContainer = document.getElementById('breakdown-wheel-svg');
         if (wheelSvgContainer) {
           wheelSvgContainer.addEventListener('click', function(e) {

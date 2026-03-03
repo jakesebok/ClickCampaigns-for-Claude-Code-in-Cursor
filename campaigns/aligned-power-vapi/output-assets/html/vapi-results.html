@@ -492,7 +492,14 @@
         html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>';
         html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>';
         html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>';
-        html += '</div></div></div>';
+        html += '</div>';
+        html += '<div id="results-breakdown-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">';
+        html += '<i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)] animate-bounce"></i>';
+        html += '</div>';
+        html += '<div id="results-breakdown-sidebar-scroll-down" class="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-200" aria-hidden="false">';
+        html += '<i data-lucide="chevron-down" class="w-5 h-5 text-[var(--ap-primary)] animate-bounce"></i>';
+        html += '</div>';
+        html += '</div></div>';
         html += '</div>';
         html += '<div id="results-breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">';
         html += '<p id="results-breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>';
@@ -766,6 +773,18 @@
           updateBreakdown(value);
         });
         var rbmlSidebar = document.getElementById('results-breakdown-metric-list-sidebar');
+        var rScrollDown = document.getElementById('results-breakdown-sidebar-scroll-down');
+        var rScrollUp = document.getElementById('results-breakdown-sidebar-scroll-up');
+        function updateResultsSidebarScrollIndicators() {
+          if (!rbmlSidebar || !rScrollDown || !rScrollUp) return;
+          var el = rbmlSidebar;
+          var atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 8;
+          var atTop = el.scrollTop < 8;
+          rScrollDown.style.opacity = atBottom ? '0' : '1';
+          rScrollDown.setAttribute('aria-hidden', atBottom ? 'true' : 'false');
+          rScrollUp.style.opacity = atTop ? '0' : '1';
+          rScrollUp.setAttribute('aria-hidden', atTop ? 'true' : 'false');
+        }
         if (rbmlSidebar) {
           rbmlSidebar.addEventListener('click', function(e) {
             var btn = e.target.closest('.results-breakdown-metric-btn');
@@ -774,6 +793,8 @@
             setResultsBreakdownSelection(value);
             updateBreakdown(value);
           });
+          rbmlSidebar.addEventListener('scroll', updateResultsSidebarScrollIndicators);
+          setTimeout(updateResultsSidebarScrollIndicators, 100);
         }
         var rWheelSvgContainer = document.getElementById('results-breakdown-wheel-svg');
         if (rWheelSvgContainer) {
