@@ -27,7 +27,9 @@
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(88,34,51,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
+    #progress-wheel-container-inner.progress-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
+    .progress-wheel-segment { transition: opacity 0.35s ease-out; }
     .wheel-static .wheel-segment { cursor: default; pointer-events: none; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
@@ -193,8 +195,12 @@
                 <canvas id="progress-chart"></canvas>
               </div>
               <div id="progress-wheel-container" class="hidden flex flex-col items-center w-full">
-                <div class="relative w-full max-w-[330px] mx-auto" style="aspect-ratio: 1 / 1;">
-                  <div id="progress-comparative-wheel-svg" class="w-full h-full overflow-visible"></div>
+                <div id="progress-wheel-outer" class="relative w-full max-w-[330px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">
+                  <div id="progress-wheel-container-inner" class="absolute inset-[25px] flex items-center justify-center overflow-visible">
+                    <div id="progress-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">
+                      <div id="progress-comparative-wheel-svg" class="w-full h-full overflow-visible"></div>
+                    </div>
+                  </div>
                   <div id="progress-wheel-tooltip" class="absolute z-20 hidden pointer-events-none px-3 py-2 rounded-lg border border-[var(--ap-border)] bg-white shadow-lg text-sm max-w-[200px]"></div>
                 </div>
                 <div id="progress-wheel-legend" class="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[var(--ap-secondary)]"></div>
@@ -422,13 +428,14 @@
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
         var PREV_FILL = '#9ca3af';
-        var IMPROVED_FILL = '#22C55E';
-        var IMPROVED_LIGHT = '#bbf7d0';
-        var DECLINED_FILL = '#EF4444';
-        var DECLINED_LIGHT = '#fecaca';
-        var NEUTRAL_FILL = '#6b7280';
-        var NEUTRAL_LIGHT = '#e5e7eb';
+        var IMPROVED_BOLD = '#15803d';
+        var IMPROVED_MUTED = '#86efac';
+        var DECLINED_BOLD = '#b91c1c';
+        var DECLINED_MUTED = '#fca5a5';
+        var NEUTRAL_MUTED = '#9ca3af';
+        var UNSHADED = '#ffffff';
         var changeThreshold = 0.5;
+        var PROGRESS_ARENAS = ['Personal','Personal','Personal','Personal','Personal','Relationships','Relationships','Relationships','Business','Business','Business','Business'];
         function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
         var prevByCode = {};
         (prevDomains || []).forEach(function(d) { prevByCode[d.code] = d; });
@@ -475,18 +482,27 @@
           var currD = currByCode[order[i]];
           var prevScore = (prevD && typeof prevD.score === 'number') ? Math.max(0, Math.min(10, prevD.score)) : 0;
           var currScore = (currD && typeof currD.score === 'number') ? Math.max(0, Math.min(10, currD.score)) : 0;
+          var prevRings = Math.min(10, Math.max(0, Math.round(prevScore)));
           var currRings = Math.min(10, Math.max(0, Math.round(currScore)));
           var diff = currScore - prevScore;
-          var fillColor; var lightColor;
-          if (diff >= changeThreshold) { fillColor = IMPROVED_FILL; lightColor = IMPROVED_LIGHT; }
-          else if (diff <= -changeThreshold) { fillColor = DECLINED_FILL; lightColor = DECLINED_LIGHT; }
-          else { fillColor = NEUTRAL_FILL; lightColor = NEUTRAL_LIGHT; }
+          var arena = PROGRESS_ARENAS[i] || 'Personal';
           var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
           var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
           for (var k = 1; k <= 10; k++) {
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
-            var fill = (k <= currRings) ? fillColor : lightColor;
-            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+            var fill;
+            if (diff >= changeThreshold) {
+              if (k <= prevRings) fill = IMPROVED_MUTED;
+              else if (k <= currRings) fill = IMPROVED_BOLD;
+              else fill = UNSHADED;
+            } else if (diff <= -changeThreshold) {
+              if (k <= currRings) fill = DECLINED_MUTED;
+              else if (k <= prevRings) fill = DECLINED_BOLD;
+              else fill = UNSHADED;
+            } else {
+              fill = (k <= currRings) ? NEUTRAL_MUTED : UNSHADED;
+            }
+            html += '<path class="progress-wheel-segment" data-domain-index="' + i + '" data-arena="' + esc(arena) + '" d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.9" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
           }
         }
         for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
@@ -941,6 +957,35 @@
         var progressPrevDateStr = formatDate(progressPrev.created_at);
         var progressCurrDateStr = formatDate(progressCurr.created_at);
         document.getElementById('progress-comparative-wheel-svg').innerHTML = buildComparativeWheelSVG(progressPrevDomains, progressCurrDomains, progressPrevDateStr, progressCurrDateStr);
+        var progressWheelWrap = document.getElementById('progress-wheel-wrap');
+        var progressWheelContainerInner = document.getElementById('progress-wheel-container-inner');
+        function updateProgressWheel(metricKey) {
+          if (!progressWheelWrap || !progressWheelContainerInner) return;
+          var t = getWheelTransform(metricKey);
+          progressWheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          progressWheelContainerInner.classList.add('progress-wheel-container--zoomed');
+          var svgEl = document.getElementById('progress-comparative-wheel-svg').querySelector('svg');
+          if (svgEl) {
+            var segments = svgEl.querySelectorAll('.progress-wheel-segment');
+            var dimOpacity = '0.1';
+            var focusOpacity = '1';
+            if (metricKey === 'overall') {
+              segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+            } else if (metricKey.indexOf('arena:') === 0) {
+              var arenaFocus = metricKey.slice(6);
+              segments.forEach(function(p) {
+                p.style.opacity = p.getAttribute('data-arena') === arenaFocus ? focusOpacity : dimOpacity;
+              });
+            } else if (metricKey.indexOf('domain:') === 0) {
+              var domainIdx = getSegmentIndexForMetric(metricKey);
+              segments.forEach(function(p) {
+                p.style.opacity = p.getAttribute('data-domain-index') === String(domainIdx) ? focusOpacity : dimOpacity;
+              });
+            } else {
+              segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+            }
+          }
+        }
         var legendEl = document.getElementById('progress-wheel-legend');
         legendEl.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
           '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9ca3af; opacity:0.35"></span> Previous (' + progressPrevDateStr + ')</span>' +
@@ -1093,6 +1138,7 @@
           setSelectedMetric(selectedMetricKey);
           updateChart();
           updateProgressTransition();
+          updateProgressWheel(selectedMetricKey);
         });
         var progressDropdownTrigger = document.getElementById('progress-metric-dropdown-trigger');
         var progressDropdownPanel = document.getElementById('progress-metric-dropdown-panel');
@@ -1125,6 +1171,7 @@
             setSelectedMetric(selectedMetricKey);
             updateChart();
             updateProgressTransition();
+            updateProgressWheel(selectedMetricKey);
           });
         });
         var progressViewLine = document.getElementById('progress-view-line');
@@ -1137,6 +1184,7 @@
           var isLine = view === 'line';
           if (progressChartContainer) progressChartContainer.classList.toggle('hidden', !isLine);
           if (progressWheelContainer) progressWheelContainer.classList.toggle('hidden', isLine);
+          if (!isLine) updateProgressWheel(selectedMetricKey);
           if (progressViewLine) {
             progressViewLine.setAttribute('aria-selected', isLine ? 'true' : 'false');
             progressViewLine.classList.toggle('bg-white', isLine);
@@ -1201,6 +1249,7 @@
             setSelectedMetric(selectedMetricKey);
             updateChart();
             updateProgressTransition();
+            updateProgressWheel(selectedMetricKey);
             var block = document.getElementById('progress-transition-block');
             if (block && !block.classList.contains('hidden')) block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           });
