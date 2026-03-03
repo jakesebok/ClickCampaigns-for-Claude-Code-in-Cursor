@@ -601,9 +601,6 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="relative p-4 sm:p-6 lg:p-8 text-left">';
-      latestHtml += '<div class="hidden sm:flex absolute left-[calc(50%+0.75rem)] w-[190px] h-[190px] lg:w-[207px] lg:h-[207px] items-center justify-center pointer-events-none" style="top: calc(5rem - 86px);">';
-      latestHtml += '<div class="wheel-static w-full h-full">' + buildWheelSVGOverview(latestDomains) + '</div>';
-      latestHtml += '</div>';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + escHtml(formatDate(latest.created_at)) + '</span>';
@@ -620,7 +617,6 @@
       } else {
         latestHtml += '<div class="mb-6"></div>';
       }
-      latestHtml += '<div class="flex justify-center sm:hidden mb-6"><div class="wheel-static w-[120px] h-[120px] flex items-center justify-center">' + buildWheelSVGOverview(latestDomains) + '</div></div>';
       latestHtml += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">';
       latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Top 3 strengths</p><ul class="space-y-1.5">';
       top3.forEach(function(d) {
