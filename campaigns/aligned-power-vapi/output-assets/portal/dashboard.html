@@ -255,7 +255,6 @@
                   <span id="progress-transition-label" class="font-semibold text-[var(--ap-secondary)]"></span>
                   <div id="progress-transition-scores" class="text-sm text-[var(--ap-secondary)] flex flex-col"></div>
                 </div>
-                <div id="progress-transition-change" class="text-sm font-medium mt-0.5"></div>
               </div>
             </div>
             <p id="progress-transition-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed mt-2"></p>
@@ -1181,7 +1180,6 @@
           var arrowEl = document.getElementById('progress-transition-arrow');
           var textEl = document.getElementById('progress-transition-text');
           var scoresEl = document.getElementById('progress-transition-scores');
-          var changeEl = document.getElementById('progress-transition-change');
           if (!block || !labelEl || !arrowEl || !textEl) return;
           var isOverall = selectedMetricKey === 'overall';
           var isArena = selectedMetricKey.indexOf('arena:') === 0;
@@ -1203,11 +1201,7 @@
           var changeArrow = change != null ? (change > 0 ? '\u2191' : change < 0 ? '\u2193' : '\u2192') : '';
           var changeColorClass = change != null && change > 0 ? 'text-green-600' : change != null && change < 0 ? 'text-red-600' : 'text-[var(--ap-secondary)]';
           if (scoresEl) {
-            scoresEl.innerHTML = '<span>Previous: ' + prevStr + '</span><span>Current: ' + currStr + '</span>';
-          }
-          if (changeEl) {
-            changeEl.textContent = 'Change: ' + changeStr + ' ' + changeArrow;
-            changeEl.className = 'text-sm font-medium mt-0.5 ' + changeColorClass;
+            scoresEl.innerHTML = '<span>Previous: ' + prevStr + '</span><span>Current: ' + currStr + '</span><span class="text-sm font-medium ' + changeColorClass + '">Change: ' + changeStr + ' ' + changeArrow + '</span>';
           }
           if (!prevTier && !currTier) {
             block.classList.add('hidden');
