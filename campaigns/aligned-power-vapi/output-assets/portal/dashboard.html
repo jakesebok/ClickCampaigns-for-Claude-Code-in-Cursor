@@ -869,7 +869,10 @@
           var arrowEl = document.getElementById('progress-transition-arrow');
           var textEl = document.getElementById('progress-transition-text');
           if (!block || !labelEl || !arrowEl || !textEl) return;
-          if (selectedMetricKey.indexOf('domain:') !== 0 || sortedByDate.length < 2) {
+          var isOverall = selectedMetricKey === 'overall';
+          var isArena = selectedMetricKey.indexOf('arena:') === 0;
+          var isDomain = selectedMetricKey.indexOf('domain:') === 0;
+          if ((!isOverall && !isArena && !isDomain) || sortedByDate.length < 2) {
             block.classList.add('hidden');
             return;
           }
@@ -882,15 +885,15 @@
             return;
           }
           var transitionKey = prevTier === currTier ? 'Maintained ' + currTier : prevTier + ' \u2192 ' + currTier;
-          var domainCode = selectedMetricKey.slice(7);
+          var lookupKey = isOverall ? 'overall' : isArena ? selectedMetricKey.slice(6) : selectedMetricKey.slice(7);
           var TRANS = window.VAPI_PROGRESS_TRANSITIONS;
-          var interpretation = TRANS && TRANS[domainCode] && TRANS[domainCode][transitionKey];
+          var interpretation = TRANS && TRANS[lookupKey] && TRANS[lookupKey][transitionKey];
           if (!interpretation) {
             block.classList.add('hidden');
             return;
           }
-          var domainName = getMetricLabel(selectedMetricKey);
-          labelEl.textContent = domainName + ': ' + (prevTier === currTier ? currTier : prevTier + ' \u2192 ' + currTier);
+          var labelPrefix = isOverall ? 'Overall' : getMetricLabel(selectedMetricKey);
+          labelEl.textContent = labelPrefix + ': ' + (prevTier === currTier ? currTier : prevTier + ' \u2192 ' + currTier);
           var prevIdx = TIER_ORDER.indexOf(prevTier);
           var currIdx = TIER_ORDER.indexOf(currTier);
           var direction = currIdx > prevIdx ? 'up' : currIdx < prevIdx ? 'down' : 'same';
