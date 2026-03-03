@@ -252,7 +252,7 @@
               <div class="min-w-0">
                 <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0">
                   <span id="progress-transition-label" class="font-semibold text-[var(--ap-secondary)]"></span>
-                  <span id="progress-transition-scores" class="text-sm text-[var(--ap-secondary)]"></span>
+                  <div id="progress-transition-scores" class="text-sm text-[var(--ap-secondary)] flex flex-col"></div>
                 </div>
                 <div id="progress-transition-change" class="text-sm font-medium mt-0.5"></div>
               </div>
@@ -504,12 +504,12 @@
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
             var fill;
             if (diff >= changeThreshold) {
-              if (k <= prevRings) fill = IMPROVED_MUTED;
-              else if (k <= currRings) fill = IMPROVED_BOLD;
+              if (k <= prevRings) fill = IMPROVED_BOLD;
+              else if (k <= currRings) fill = IMPROVED_MUTED;
               else fill = UNSHADED;
             } else if (diff <= -changeThreshold) {
-              if (k <= currRings) fill = DECLINED_MUTED;
-              else if (k <= prevRings) fill = DECLINED_BOLD;
+              if (k <= currRings) fill = DECLINED_BOLD;
+              else if (k <= prevRings) fill = DECLINED_MUTED;
               else fill = UNSHADED;
             } else {
               fill = (k <= currRings) ? NEUTRAL_MUTED : UNSHADED;
@@ -1202,7 +1202,7 @@
           var changeArrow = change != null ? (change > 0 ? '\u2191' : change < 0 ? '\u2193' : '\u2192') : '';
           var changeColorClass = change != null && change > 0 ? 'text-green-600' : change != null && change < 0 ? 'text-red-600' : 'text-[var(--ap-secondary)]';
           if (scoresEl) {
-            scoresEl.textContent = 'Previous: ' + prevStr + ' · Current: ' + currStr;
+            scoresEl.innerHTML = '<span>Previous: ' + prevStr + '</span><span>Current: ' + currStr + '</span>';
           }
           if (changeEl) {
             changeEl.textContent = 'Change: ' + changeStr + ' ' + changeArrow;
