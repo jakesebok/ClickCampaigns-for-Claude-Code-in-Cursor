@@ -361,8 +361,7 @@
         window.location.href = '../html/vapi-results.html';
       }
 
-      function buildWheelSVG(domains, idPrefix) {
-        idPrefix = idPrefix || 'dash';
+      function buildWheelSVG(domains) {
         var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
         var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
@@ -384,7 +383,7 @@
           var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
           return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
         }
-        var arcIdP = idPrefix + 'WheelArcP'; var arcIdR = idPrefix + 'WheelArcR'; var arcIdB = idPrefix + 'WheelArcB';
+        var arcIdP = 'dashWheelArcP'; var arcIdR = 'dashWheelArcR'; var arcIdB = 'dashWheelArcB';
         var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
         html += '<defs>';
         var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
@@ -396,19 +395,8 @@
         var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
-        html += '<filter id="' + idPrefix + 'ArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
-        html += '<filter id="' + idPrefix + 'ArenaLabelHalo" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
-        for (var g = 0; g < 12; g++) {
-          var dg = byCode[order[g]];
-          var arenaG = (order[g] === 'RS') ? 'Relationships' : ((dg && dg.arena) ? dg.arena : 'Personal');
-          var darkG = ARENA_DARK[arenaG] || ARENA_DARK.Personal;
-          var lightG = ARENA_LIGHT[arenaG] || ARENA_LIGHT.Personal;
-          var midDeg = -75 + 30 * g;
-          var midRad = midDeg * Math.PI / 180;
-          var gx2 = cx + r * Math.cos(midRad);
-          var gy2 = cy + r * Math.sin(midRad);
-          html += '<linearGradient id="' + idPrefix + 'WheelGrad' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + lightG + '"/><stop offset="1" stop-color="' + darkG + '"/></linearGradient>';
-        }
+        html += '<filter id="dashboardArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        html += '<filter id="dashboardArenaLabelHalo" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
@@ -420,7 +408,7 @@
           var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
           for (var k = 1; k <= 10; k++) {
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
-            var fill = (k <= score) ? 'url(#' + idPrefix + 'WheelGrad' + i + ')' : lightC;
+            var fill = (k <= score) ? darkC : lightC;
             html += '<path class="wheel-segment" data-domain-index="' + i + '" data-arena="' + esc(arena) + '" d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
           }
         }
@@ -442,9 +430,9 @@
           for (var L = 0; L < lines.length; L++) {           html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + idPrefix + 'ArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + idPrefix + 'ArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
-        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#' + idPrefix + 'ArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         return html;
       }
@@ -491,12 +479,27 @@
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
         html += '<filter id="progressWheelArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
         for (var g = 0; g < 12; g++) {
+          var gPrevD = prevByCode[order[g]];
+          var gCurrD = currByCode[order[g]];
+          var gPrevR = (gPrevD && typeof gPrevD.score === 'number') ? Math.min(10, Math.max(0, Math.round(Math.max(0, Math.min(10, gPrevD.score))))) : 0;
+          var gCurrR = (gCurrD && typeof gCurrD.score === 'number') ? Math.min(10, Math.max(0, Math.round(Math.max(0, Math.min(10, gCurrD.score))))) : 0;
+          var gDiff = (gCurrD && gPrevD && typeof gCurrD.score === 'number' && typeof gPrevD.score === 'number') ? (gCurrD.score - gPrevD.score) : 0;
           var midDeg = -75 + 30 * g;
           var midRad = midDeg * Math.PI / 180;
           var gx2 = cx + r * Math.cos(midRad);
           var gy2 = cy + r * Math.sin(midRad);
-          html += '<linearGradient id="progImp' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + IMPROVED_MUTED + '"/><stop offset="1" stop-color="' + IMPROVED_BOLD + '"/></linearGradient>';
-          html += '<linearGradient id="progDec' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + DECLINED_BOLD + '"/><stop offset="1" stop-color="' + DECLINED_MUTED + '"/></linearGradient>';
+          var tImp = gPrevR / 10;
+          var tDec = gCurrR / 10;
+          if (gDiff >= changeThreshold) {
+            html += '<linearGradient id="progImp' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse">';
+            html += '<stop offset="0" stop-color="' + IMPROVED_MUTED + '"/><stop offset="' + tImp + '" stop-color="' + IMPROVED_MUTED + '"/>';
+            html += '<stop offset="' + tImp + '" stop-color="' + IMPROVED_BOLD + '"/><stop offset="1" stop-color="' + IMPROVED_BOLD + '"/></linearGradient>';
+          }
+          if (gDiff <= -changeThreshold) {
+            html += '<linearGradient id="progDec' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse">';
+            html += '<stop offset="0" stop-color="' + DECLINED_BOLD + '"/><stop offset="' + tDec + '" stop-color="' + DECLINED_BOLD + '"/>';
+            html += '<stop offset="' + tDec + '" stop-color="' + DECLINED_MUTED + '"/><stop offset="1" stop-color="' + DECLINED_MUTED + '"/></linearGradient>';
+          }
         }
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
@@ -579,7 +582,7 @@
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
       latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-3 sm:p-6 lg:p-10 lg:min-w-[280px]">';
-      latestHtml += '<div class="wheel-static w-[260px] h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains, 'glance') + '</div>';
+      latestHtml += '<div class="wheel-static w-[260px] h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
@@ -749,7 +752,7 @@
           return o;
         });
         var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
-        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains, 'breakdown');
+        document.getElementById('breakdown-wheel-svg').innerHTML = buildWheelSVG(singleResultDomains);
         var wheelWrap = document.getElementById('breakdown-wheel-wrap');
         var wheelSvgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
         if (wheelSvgEl) {
@@ -880,7 +883,7 @@
             var isDomain = metricKey.indexOf('domain:') === 0;
             arenaLabels.forEach(function(el) {
               el.setAttribute('fill', isDomain ? '#000' : '#f7f2e8');
-              el.setAttribute('filter', isDomain ? 'url(#breakdownArenaLabelHalo)' : 'url(#breakdownArenaLabelShadow)');
+              el.setAttribute('filter', isDomain ? 'url(#dashboardArenaLabelHalo)' : 'url(#dashboardArenaLabelShadow)');
             });
           }
         }
