@@ -152,8 +152,8 @@
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div class="flex flex-col lg:flex-row gap-6">
-            <div class="flex-1 min-w-0 flex flex-row items-flex-start gap-2">
-              <div class="lg:hidden relative shrink-0 pt-0.5" id="progress-metric-dropdown-wrap">
+            <div class="flex-1 min-w-0 relative">
+              <div class="lg:hidden absolute left-0 top-0 z-10 pt-0.5" id="progress-metric-dropdown-wrap">
                 <button type="button" id="progress-metric-dropdown-trigger" class="inline-flex items-center gap-1 rounded-full py-1 px-2.5 border border-[var(--ap-border)] bg-white text-[10px] font-medium uppercase tracking-wider text-[var(--ap-text)] hover:border-[var(--ap-primary)]/50 hover:bg-[var(--ap-bg)] transition-colors max-w-[100px]" aria-haspopup="listbox" aria-expanded="false" aria-label="Select metric">
                   <span id="progress-metric-dropdown-label" class="truncate">Overall score</span>
                   <i data-lucide="chevron-down" class="w-3 h-3 text-[var(--ap-muted)] flex-shrink-0 transition-transform" id="progress-metric-chevron" aria-hidden="true"></i>
@@ -182,7 +182,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex-1 min-w-0 chart-container relative h-64 sm:h-80 lg:h-80">
+              <div class="chart-container relative h-64 sm:h-80 lg:h-80 w-full min-w-0">
                 <canvas id="progress-chart"></canvas>
               </div>
             </div>
