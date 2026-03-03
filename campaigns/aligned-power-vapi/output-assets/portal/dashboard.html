@@ -315,6 +315,7 @@
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
         html += '<filter id="dashboardArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        html += '<filter id="dashboardArenaLabelHalo" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
           var d = byCode[order[i]];
@@ -656,8 +657,11 @@
               el.style.opacity = '0';
             });
             var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
-            var arenaFill = (metricKey.indexOf('domain:') === 0) ? 'var(--ap-accent)' : '#f7f2e8';
-            arenaLabels.forEach(function(el) { el.setAttribute('fill', arenaFill); });
+            var isDomain = metricKey.indexOf('domain:') === 0;
+            arenaLabels.forEach(function(el) {
+              el.setAttribute('fill', isDomain ? '#000' : '#f7f2e8');
+              el.setAttribute('filter', isDomain ? 'url(#dashboardArenaLabelHalo)' : 'url(#dashboardArenaLabelShadow)');
+            });
           }
         }
         var bml = document.getElementById('breakdown-metric-list');
