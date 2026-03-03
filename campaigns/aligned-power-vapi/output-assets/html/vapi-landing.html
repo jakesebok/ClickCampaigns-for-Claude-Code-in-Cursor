@@ -23,50 +23,198 @@
     body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 25px -5px rgba(88, 34, 51, 0.25); }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <main class="max-w-2xl mx-auto px-5 sm:px-6 pt-12 sm:pt-16 pb-16 sm:pb-20">
-    <div class="text-center mb-10 sm:mb-12">
+  <main class="max-w-3xl mx-auto px-5 sm:px-6 pt-12 sm:pt-16 pb-20 sm:pb-24">
+    <!-- Hero -->
+    <section class="text-center mb-14 sm:mb-18">
       <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-3">Free Assessment</p>
-      <h1 class="text-4xl sm:text-5xl text-[var(--ap-primary)] leading-tight mb-5">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl text-[var(--ap-primary)] leading-tight mb-5">
         See how you're <em>really</em> performing.
       </h1>
-      <p class="text-lg sm:text-xl text-[var(--ap-secondary)] max-w-xl mx-auto leading-relaxed">
-        Take the <strong>Values-Aligned Performance Indicator™ (VAPI™)</strong>, a 72-question assessment that scores you across 12 domains in three arenas: Personal, Relationships, and Business. See where you’re strong, where you’re leaking energy, and which levers will get you where you want to go with clarity, conviction, and confidence.
+      <p class="text-lg sm:text-xl text-[var(--ap-secondary)] max-w-2xl mx-auto leading-relaxed mb-8">
+        Most of us are moving fast—but are we moving in the right direction? The <strong>Values-Aligned Performance Indicator™ (VAPI™)</strong> gives you an honest snapshot across 12 domains and 3 arenas of your life, so you know exactly where you're strong, where you're leaking energy, and which levers will get you where you want to go.
       </p>
-    </div>
-
-    <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-[var(--ap-border)]/80 shadow-lg shadow-[var(--ap-primary)]/5 p-6 sm:p-8 mb-8">
-      <h2 class="text-xl text-[var(--ap-primary)] mb-4">What you’ll get</h2>
-      <ul class="space-y-4 text-[var(--ap-secondary)]">
-        <li class="flex items-start gap-3">
-          <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
-          <span><strong class="text-[var(--ap-primary)]">Scores across all 12 domains + 3 arenas</strong>—so you see exactly where you stand, not guess.</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
-          <span><strong class="text-[var(--ap-primary)]">Top 3 strengths + 3 priorities</strong>—plain-language insight on where to focus and what’s leaking energy.</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
-          <span><strong class="text-[var(--ap-primary)]">Your results in one place</strong>—save as PDF and revisit anytime so you can track progress, not start over.</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="text-center mb-8">
-      <a href="vapi-quiz.html" id="cta-start" class="cta-primary inline-flex flex-col items-center justify-center gap-0 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-[var(--ap-primary)]/20">
+      <a href="vapi-quiz.html" id="cta-hero" class="cta-primary inline-flex flex-col items-center justify-center gap-0 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-[var(--ap-primary)]/20">
         <span class="inline-flex items-center gap-2">
           Start the VAPI™ Assessment
           <i data-lucide="arrow-right" class="w-5 h-5"></i>
         </span>
-        <span class="text-[10px] sm:text-xs font-normal text-[var(--ap-muted)] -mt-0.5 leading-none">72 questions · ~12–15 min</span>
+        <span class="text-[10px] sm:text-xs font-normal text-white/80 -mt-0.5 leading-none">72 questions · ~12–15 min · Free</span>
       </a>
-      <p class="text-sm text-[var(--ap-muted)] mt-4 max-w-md mx-auto leading-relaxed">No payment required. Enter your email at the end to receive your results. Your answers are confidential. We’ll use your results only to send your report and relevant resources from Aligned Power.</p>
-    </div>
+    </section>
 
-    <div class="border-t border-[var(--ap-border)] pt-10 mt-10"></div>
+    <!-- Problem / Why this matters -->
+    <section class="mb-16 sm:mb-20">
+      <div class="bg-white/80 rounded-2xl border border-[var(--ap-border)]/80 shadow-sm p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-5">You can't fix what you don't measure.</h2>
+        <p class="text-[var(--ap-secondary)] leading-relaxed mb-4">
+          High performers often assume they're "doing fine" everywhere—until one area cracks. Burnout, strained relationships, or a business that runs on fumes. The truth is, we're usually over-indexed in a few domains and under-invested in others. We guess where to focus. We double down on what we're already good at and avoid the spots that feel uncomfortable.
+        </p>
+        <p class="text-[var(--ap-secondary)] leading-relaxed">
+          The VAPI™ doesn't judge. It measures. You answer 72 statements about your actual experience over the past 30 days—not your best day, not your intentions. Your honest baseline. From that, you get a clear picture: scores across 12 domains grouped into personal, relationship, and business arenas. You see your top three strengths and your top three priorities. No fluff. No generic advice. Just a map so you can decide where to go next with clarity, conviction, and confidence.
+        </p>
+      </div>
+    </section>
+
+    <!-- What is VAPI: 12 domains, 3 arenas -->
+    <section class="mb-16 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] text-center mb-3">One assessment. 12 domains. 3 arenas.</h2>
+      <p class="text-[var(--ap-secondary)] text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        The VAPI™ is built around 12 core domains that matter for an aligned, high-impact life and business. Each domain is scored 0–10. They're grouped into three arenas so you can see patterns at a glance.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#9e4a5e]/15 flex items-center justify-center mb-4">
+            <i data-lucide="heart" class="w-5 h-5 text-[#9e4a5e]"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Personal</h3>
+          <p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Physical Health, Inner Alignment, Mental / Emotional, Attention & Focus. How you're showing up for yourself.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#5b7c9a]/15 flex items-center justify-center mb-4">
+            <i data-lucide="users" class="w-5 h-5 text-[#5b7c9a]"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Relationships</h3>
+          <p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Relationship to Self, Family, Community, World / Impact. How you're showing up for others and the world around you.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#38a169]/15 flex items-center justify-center mb-4">
+            <i data-lucide="briefcase" class="w-5 h-5 text-[#38a169]"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Business</h3>
+          <p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Vision / Strategy, Execution, Operational Health, Ecology. How you're showing up in your work and systems.</p>
+        </div>
+      </div>
+      <p class="text-[var(--ap-secondary)] text-center text-sm max-w-xl mx-auto leading-relaxed">
+        You'll see your score for each domain and each arena, plus an overall composite. No more guessing. You'll know exactly where you stand.
+      </p>
+    </section>
+
+    <!-- CTA above What you'll get -->
+    <section class="text-center mb-14 sm:mb-16">
+      <a href="vapi-quiz.html" class="cta-primary inline-flex flex-col items-center justify-center gap-0 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-[var(--ap-primary)]/20">
+        <span class="inline-flex items-center gap-2">
+          Start the VAPI™ Assessment
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </span>
+        <span class="text-[10px] sm:text-xs font-normal text-white/80 -mt-0.5 leading-none">72 questions · ~12–15 min · Free</span>
+      </a>
+    </section>
+
+    <!-- What you'll get -->
+    <section class="mb-16 sm:mb-20">
+      <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-[var(--ap-border)]/80 shadow-lg shadow-[var(--ap-primary)]/5 p-6 sm:p-8">
+        <h2 class="text-2xl text-[var(--ap-primary)] mb-6">What you'll get</h2>
+        <ul class="space-y-5 text-[var(--ap-secondary)]">
+          <li class="flex items-start gap-3">
+            <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
+            <span><strong class="text-[var(--ap-primary)]">Scores across all 12 domains + 3 arenas</strong>—so you see exactly where you stand, not guess. Each domain and arena gets a 0–10 score and a tier (e.g. Dialed, Functional, Below the Line) so you know what's working and what needs attention.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
+            <span><strong class="text-[var(--ap-primary)]">Your top 3 strengths + 3 priority focus areas</strong>—plain-language insight on where you're already strong and where a little more focus could unlock the most. No generic advice; your map, your levers.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
+            <span><strong class="text-[var(--ap-primary)]">Interpretations for every score</strong>—what each tier means for that domain or arena, so you can reflect and decide what to do next.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i data-lucide="check-circle" class="w-6 h-6 text-[var(--ap-accent)] shrink-0 mt-0.5"></i>
+            <span><strong class="text-[var(--ap-primary)]">Your results in one place</strong>—save as PDF and revisit anytime. If you create a portal account with the same email, your results are saved so you can track progress over time, not start over.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="mb-16 sm:mb-20">
+      <div class="bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/15 rounded-2xl p-6 sm:p-8">
+        <blockquote class="text-[var(--ap-secondary)] leading-relaxed mb-4">
+          "I love that you can see everything at a glance and the way it breaks everything down. My results were extremely accurate, and knowing where to put my energy made all the difference."
+        </blockquote>
+        <cite class="not-italic font-semibold text-[var(--ap-primary)]">Dr. Marshall Gevers</cite>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="mb-16 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] text-center mb-8">How it works</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--ap-primary)] text-white font-semibold flex items-center justify-center">1</span>
+          <div>
+            <h3 class="font-semibold text-[var(--ap-primary)] mb-1">Answer 72 statements</h3>
+            <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">For each statement, you choose how much it reflects your experience over the past 30 days. Not your best day—your honest baseline. Takes about 12–15 minutes.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--ap-primary)] text-white font-semibold flex items-center justify-center">2</span>
+          <div>
+            <h3 class="font-semibold text-[var(--ap-primary)] mb-1">Enter your details</h3>
+            <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">At the end, you enter your first name, last name, and email. We use this only to show you your results and send your report. No payment required.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--ap-primary)] text-white font-semibold flex items-center justify-center">3</span>
+          <div>
+            <h3 class="font-semibold text-[var(--ap-primary)] mb-1">Get your results</h3>
+            <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">You're taken straight to your results page: scores, strengths, priorities, and interpretations. Download or print as PDF anytime. If you sign up for the portal with the same email, your assessment is saved for future comparison.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mid-page CTA -->
+    <section class="text-center my-16 sm:my-20">
+      <p class="text-[var(--ap-secondary)] mb-6 max-w-xl mx-auto leading-relaxed">Ready for an honest snapshot? Start the assessment and get your results in one sitting.</p>
+      <a href="vapi-quiz.html" class="cta-primary inline-flex flex-col items-center justify-center gap-0 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-[var(--ap-primary)]/20">
+        <span class="inline-flex items-center gap-2">
+          Start the VAPI™ Assessment
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </span>
+        <span class="text-[10px] sm:text-xs font-normal text-white/80 -mt-0.5 leading-none">72 questions · ~12–15 min</span>
+      </a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-16 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] text-center mb-8">Common questions</h2>
+      <div class="space-y-6 max-w-2xl mx-auto">
+        <div class="bg-white/70 rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <h3 class="font-semibold text-[var(--ap-primary)] mb-2">Is it really free?</h3>
+          <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">Yes. There's no payment. You enter your email at the end to receive your results. We use your email only to show you your report and send relevant resources from Aligned Power. Your answers are confidential.</p>
+        </div>
+        <div class="bg-white/70 rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <h3 class="font-semibold text-[var(--ap-primary)] mb-2">How long does it take?</h3>
+          <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">Most people finish in 12–15 minutes. You'll see 72 statements and choose how much each reflects your experience over the past 30 days. You can complete it in one sitting.</p>
+        </div>
+        <div class="bg-white/70 rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <h3 class="font-semibold text-[var(--ap-primary)] mb-2">What if I've already taken it?</h3>
+          <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">You can retake the VAPI™ anytime. If you create a portal account with the same email you used when submitting your results, your assessments are saved so you can compare over time and track progress.</p>
+        </div>
+        <div class="bg-white/70 rounded-xl border border-[var(--ap-border)]/80 p-5 sm:p-6">
+          <h3 class="font-semibold text-[var(--ap-primary)] mb-2">Who is this for?</h3>
+          <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">Leaders, entrepreneurs, and anyone who wants a clear picture of where they're strong and where they're leaking energy across life and work. The VAPI™ is built for people who are ready to measure, not guess—and to use that clarity to take aligned action.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="text-center pt-6 pb-4">
+      <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-4">See how you're really performing.</h2>
+      <p class="text-[var(--ap-secondary)] mb-6 max-w-md mx-auto leading-relaxed">Take the free VAPI™ assessment and get your scores, strengths, and priorities in one place.</p>
+      <a href="vapi-quiz.html" id="cta-footer" class="cta-primary inline-flex flex-col items-center justify-center gap-0 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-[var(--ap-primary)]/20">
+        <span class="inline-flex items-center gap-2">
+          Start the VAPI™ Assessment
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </span>
+        <span class="text-[10px] sm:text-xs font-normal text-white/80 -mt-0.5 leading-none">72 questions · ~12–15 min · Free</span>
+      </a>
+      <p class="text-sm text-[var(--ap-muted)] mt-5 max-w-md mx-auto leading-relaxed">No payment required. Enter your email at the end to receive your results. Your answers are confidential.</p>
+    </section>
   </main>
 
   <footer class="border-t border-[var(--ap-border)] py-8 mt-16">
@@ -74,6 +222,5 @@
       © Aligned Power. Values-Aligned Performance Indicator™ (VAPI™) Assessment.
     </div>
   </footer>
-
 </body>
 </html>
