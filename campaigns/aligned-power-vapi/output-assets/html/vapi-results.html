@@ -54,7 +54,7 @@
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10 no-print pt-6 pb-5">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print pt-6 pb-5">
     <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <span id="results-back-admin" class="hidden"><a href="../portal/admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
@@ -504,7 +504,7 @@
         html += '<div id="results-breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">';
         html += '<p id="results-breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>';
         html += '</div></div></div>';
-        html += '<div class="no-print flex flex-wrap items-center justify-center gap-3 py-6 mb-6 rounded-lg border border-[var(--ap-border)] bg-[var(--ap-bg)]/80">';
+        html += '<div class="no-print flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 py-6 mb-6 rounded-lg border border-[var(--ap-border)] bg-[var(--ap-bg)]/80">';
         html += '<span class="text-[var(--ap-secondary)] text-sm">What&rsquo;s next?</span>';
         html += '<a href="#continue-journey" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-4 py-2 border border-[var(--ap-primary)]/30 hover:border-[var(--ap-accent)] hover:bg-[var(--ap-accent)]/10 transition-colors">See resources and next steps below <i data-lucide="arrow-down" class="w-4 h-4"></i></a>';
         html += '</div>';
