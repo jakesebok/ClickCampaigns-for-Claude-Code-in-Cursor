@@ -478,6 +478,14 @@
         var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
         html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
         html += '<filter id="progressWheelArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        for (var g = 0; g < 12; g++) {
+          var midDeg = -75 + 30 * g;
+          var midRad = midDeg * Math.PI / 180;
+          var gx2 = cx + r * Math.cos(midRad);
+          var gy2 = cy + r * Math.sin(midRad);
+          html += '<linearGradient id="progImp' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + IMPROVED_MUTED + '"/><stop offset="1" stop-color="' + IMPROVED_BOLD + '"/></linearGradient>';
+          html += '<linearGradient id="progDec' + g + '" x1="' + cx + '" y1="' + cy + '" x2="' + gx2.toFixed(2) + '" y2="' + gy2.toFixed(2) + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="' + DECLINED_BOLD + '"/><stop offset="1" stop-color="' + DECLINED_MUTED + '"/></linearGradient>';
+        }
         html += '</defs>';
         for (var i = 0; i < 12; i++) {
           var prevD = prevByCode[order[i]];
@@ -505,12 +513,10 @@
             var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
             var fill;
             if (diff >= changeThreshold) {
-              if (k <= prevRings) fill = IMPROVED_MUTED;
-              else if (k <= currRings) fill = IMPROVED_BOLD;
+              if (k <= currRings) fill = 'url(#progImp' + i + ')';
               else fill = UNSHADED;
             } else if (diff <= -changeThreshold) {
-              if (k <= currRings) fill = DECLINED_BOLD;
-              else if (k <= prevRings) fill = DECLINED_MUTED;
+              if (k <= prevRings) fill = 'url(#progDec' + i + ')';
               else fill = UNSHADED;
             } else {
               fill = (k <= currRings) ? NEUTRAL_MUTED : UNSHADED;
