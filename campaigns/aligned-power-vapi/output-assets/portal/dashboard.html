@@ -151,6 +151,13 @@
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">View:</span>
+            <div class="inline-flex rounded-lg border border-[var(--ap-border)] p-0.5 bg-[var(--ap-bg)]" role="tablist" aria-label="Progress view">
+              <button type="button" id="progress-view-line" role="tab" aria-selected="true" class="progress-view-btn rounded-md px-3 py-1.5 text-sm font-medium transition-colors bg-white border border-[var(--ap-border)] shadow-sm text-[var(--ap-primary)]" data-view="line">Line Graph</button>
+              <button type="button" id="progress-view-wheel" role="tab" aria-selected="false" class="progress-view-btn rounded-md px-3 py-1.5 text-sm font-medium transition-colors text-[var(--ap-text)] hover:text-[var(--ap-primary)]" data-view="wheel">Wheel Comparison</button>
+            </div>
+          </div>
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 relative">
               <div class="lg:hidden absolute left-0 top-0 z-10 pt-0.5" id="progress-metric-dropdown-wrap">
@@ -182,8 +189,15 @@
                   </div>
                 </div>
               </div>
-              <div class="chart-container relative h-64 sm:h-80 lg:h-80 w-full min-w-0">
+              <div id="progress-chart-container" class="chart-container relative h-64 sm:h-80 lg:h-80 w-full min-w-0">
                 <canvas id="progress-chart"></canvas>
+              </div>
+              <div id="progress-wheel-container" class="hidden flex flex-col items-center w-full">
+                <div class="relative w-full max-w-[330px] mx-auto" style="aspect-ratio: 1 / 1;">
+                  <div id="progress-comparative-wheel-svg" class="w-full h-full overflow-visible"></div>
+                  <div id="progress-wheel-tooltip" class="absolute z-20 hidden pointer-events-none px-3 py-2 rounded-lg border border-[var(--ap-border)] bg-white shadow-lg text-sm max-w-[200px]"></div>
+                </div>
+                <div id="progress-wheel-legend" class="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[var(--ap-secondary)]"></div>
               </div>
             </div>
             <div class="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex-col">
@@ -400,6 +414,128 @@
         html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
         html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
         html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#dashboardArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '</svg>';
+        return html;
+      }
+
+      function buildComparativeWheelSVG(prevDomains, currDomains, prevDateStr, currDateStr) {
+        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
+        var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
+        var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        var prevByCode = {};
+        (prevDomains || []).forEach(function(d) { prevByCode[d.code] = d; });
+        var currByCode = {};
+        (currDomains || []).forEach(function(d) { currByCode[d.code] = d; });
+        var cx = 160; var cy = 160; var r = 120;
+        var segmentAngle = 360 / 12;
+        var labelRadius = r + 14;
+        var rInner = r * 0.42;
+        function cellPath(r0, r1, a0Rad, a1Rad) {
+          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
+          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
+          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
+          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
+          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
+        }
+        var arcIdP = 'progressWheelArcP'; var arcIdR = 'progressWheelArcR'; var arcIdB = 'progressWheelArcB';
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-full overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Comparative alignment wheel">';
+        html += '<defs>';
+        var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcP1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="' + arcIdP + '" d="M' + arcP0.x.toFixed(2) + ',' + arcP0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcP1.x.toFixed(2) + ',' + arcP1.y.toFixed(2) + '"/>';
+        var arcRStart = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        var arcREnd = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        html += '<path id="' + arcIdR + '" d="M' + arcRStart.x.toFixed(2) + ',' + arcRStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcREnd.x.toFixed(2) + ',' + arcREnd.y.toFixed(2) + '"/>';
+        var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
+        html += '<filter id="progressWheelArenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        html += '</defs>';
+        for (var i = 0; i < 12; i++) {
+          var prevD = prevByCode[order[i]];
+          var currD = currByCode[order[i]];
+          var prevScore = (prevD && typeof prevD.score === 'number') ? Math.max(0, Math.min(10, prevD.score)) : 0;
+          var currScore = (currD && typeof currD.score === 'number') ? Math.max(0, Math.min(10, currD.score)) : 0;
+          var prevRings = Math.min(10, Math.max(0, Math.round(prevScore)));
+          var currRings = Math.min(10, Math.max(0, Math.round(currScore)));
+          var arena = (currD && currD.arena) ? currD.arena : (prevD && prevD.arena) ? prevD.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+            var d = cellPath(r0, r1, a0Rad, a1Rad);
+            if (k <= prevRings) {
+              html += '<path d="' + d + '" fill="' + darkC + '" fill-opacity="0.35" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+            }
+          }
+        }
+        for (var i = 0; i < 12; i++) {
+          var currD = currByCode[order[i]];
+          var currScore = (currD && typeof currD.score === 'number') ? Math.max(0, Math.min(10, currD.score)) : 0;
+          var currRings = Math.min(10, Math.max(0, Math.round(currScore)));
+          var arena = (currD && currD.arena) ? currD.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+            var fill = (k <= currRings) ? darkC : lightC;
+            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+          }
+        }
+        var changeThreshold = 0.5;
+        for (var i = 0; i < 12; i++) {
+          var prevD = prevByCode[order[i]];
+          var currD = currByCode[order[i]];
+          var prevScore = (prevD && typeof prevD.score === 'number') ? Math.max(0, Math.min(10, prevD.score)) : 0;
+          var currScore = (currD && typeof currD.score === 'number') ? Math.max(0, Math.min(10, currD.score)) : 0;
+          var prevRings = Math.min(10, Math.max(0, Math.round(prevScore)));
+          var currRings = Math.min(10, Math.max(0, Math.round(currScore)));
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          var diff = currScore - prevScore;
+          if (diff >= changeThreshold) {
+            for (var k = prevRings + 1; k <= currRings; k++) {
+              var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+              html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="#22C55E" fill-opacity="0.5" stroke="#16a34a" stroke-width="0.6"/>';
+            }
+          } else if (diff <= -changeThreshold) {
+            for (var k = currRings + 1; k <= prevRings; k++) {
+              var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+              html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="#EF4444" fill-opacity="0.5" stroke="#dc2626" stroke-width="0.6"/>';
+            }
+          }
+        }
+        for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
+        for (var i = 0; i < 12; i++) {
+          var a0 = (i * segmentAngle - 90) * Math.PI / 180;
+          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0)) + '" y2="' + (cy + r * Math.sin(a0)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.25"/>';
+        for (var i = 0; i < 12; i++) {
+          var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad); var ty = cy + labelRadius * Math.sin(midRad);
+          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
+          var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
+          var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="var(--ap-accent)" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle">';
+          for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
+          html += '</text>';
+        }
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#progressWheelArenaLabelShadow)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#progressWheelArenaLabelShadow)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#progressWheelArenaLabelShadow)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        for (var i = 0; i < 12; i++) {
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          html += '<path class="progress-wheel-slice-hit" data-domain-index="' + i + '" d="' + cellPath(0, r, a0Rad, a1Rad) + '" fill="transparent" stroke="none" pointer-events="all" cursor="pointer"/>';
+        }
         html += '</svg>';
         return html;
       }
@@ -811,6 +947,26 @@
         var sortedByDate = rows.slice().sort(function(a, b) {
           return new Date(a.created_at) - new Date(b.created_at);
         });
+        var progressPrev = sortedByDate[sortedByDate.length - 2];
+        var progressCurr = sortedByDate[sortedByDate.length - 1];
+        var progressPrevDomains = (progressPrev.results.domains || []).map(function(d) {
+          var o = Object.assign({}, d);
+          if (o.arena === 'Self') o.arena = 'Personal';
+          return o;
+        });
+        var progressCurrDomains = (progressCurr.results.domains || []).map(function(d) {
+          var o = Object.assign({}, d);
+          if (o.arena === 'Self') o.arena = 'Personal';
+          return o;
+        });
+        var progressPrevDateStr = formatDate(progressPrev.created_at);
+        var progressCurrDateStr = formatDate(progressCurr.created_at);
+        document.getElementById('progress-comparative-wheel-svg').innerHTML = buildComparativeWheelSVG(progressPrevDomains, progressCurrDomains, progressPrevDateStr, progressCurrDateStr);
+        var legendEl = document.getElementById('progress-wheel-legend');
+        legendEl.innerHTML = '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9e4a5e; opacity:1"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9e4a5e; opacity:0.35"></span> Previous (' + progressPrevDateStr + ')</span>' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-green-500"></span> Improved</span>' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-red-500"></span> Declined</span>';
         var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
         var progressChart = null;
 
@@ -992,6 +1148,85 @@
             updateProgressTransition();
           });
         });
+        var progressViewLine = document.getElementById('progress-view-line');
+        var progressViewWheel = document.getElementById('progress-view-wheel');
+        var progressChartContainer = document.getElementById('progress-chart-container');
+        var progressWheelContainer = document.getElementById('progress-wheel-container');
+        var progressWheelTooltip = document.getElementById('progress-wheel-tooltip');
+        var PROGRESS_DOMAIN_ORDER = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        function setProgressView(view) {
+          var isLine = view === 'line';
+          if (progressChartContainer) progressChartContainer.classList.toggle('hidden', !isLine);
+          if (progressWheelContainer) progressWheelContainer.classList.toggle('hidden', isLine);
+          if (progressViewLine) {
+            progressViewLine.setAttribute('aria-selected', isLine ? 'true' : 'false');
+            progressViewLine.classList.toggle('bg-white', isLine);
+            progressViewLine.classList.toggle('border', isLine);
+            progressViewLine.classList.toggle('shadow-sm', isLine);
+            progressViewLine.classList.toggle('text-[var(--ap-primary)]', isLine);
+            progressViewLine.classList.toggle('text-[var(--ap-text)]', !isLine);
+          }
+          if (progressViewWheel) {
+            progressViewWheel.setAttribute('aria-selected', !isLine ? 'true' : 'false');
+            progressViewWheel.classList.toggle('bg-white', !isLine);
+            progressViewWheel.classList.toggle('border', !isLine);
+            progressViewWheel.classList.toggle('shadow-sm', !isLine);
+            progressViewWheel.classList.toggle('text-[var(--ap-primary)]', !isLine);
+            progressViewWheel.classList.toggle('text-[var(--ap-text)]', isLine);
+          }
+        }
+        if (progressViewLine) progressViewLine.addEventListener('click', function() { setProgressView('line'); });
+        if (progressViewWheel) progressViewWheel.addEventListener('click', function() { setProgressView('wheel'); });
+        var progressWheelSvgContainer = document.getElementById('progress-comparative-wheel-svg');
+        if (progressWheelSvgContainer) {
+          progressWheelSvgContainer.addEventListener('mouseover', function(e) {
+            var hit = e.target.closest && e.target.closest('.progress-wheel-slice-hit');
+            if (!hit || !progressWheelTooltip) return;
+            var idx = parseInt(hit.getAttribute('data-domain-index'), 10);
+            if (isNaN(idx) || idx < 0 || idx >= 12) return;
+            var code = PROGRESS_DOMAIN_ORDER[idx];
+            var metricKey = 'domain:' + code;
+            var prevRes = progressPrev.results;
+            var currRes = progressCurr.results;
+            var prevScore = getScoreForMetric(prevRes, metricKey);
+            var currScore = getScoreForMetric(currRes, metricKey);
+            var prevTier = getTierForMetric(prevRes, metricKey);
+            var currTier = getTierForMetric(currRes, metricKey);
+            var label = getMetricLabel(metricKey);
+            var prevStr = prevScore != null ? Math.round(prevScore * 10) / 10 + ' / 10 (' + (prevTier || '') + ')' : '—';
+            var currStr = currScore != null ? Math.round(currScore * 10) / 10 + ' / 10 (' + (currTier || '') + ')' : '—';
+            var change = (currScore != null && prevScore != null) ? currScore - prevScore : null;
+            var changeStr = change != null ? (change >= 0 ? '+' : '') + Math.round(change * 10) / 10 : '—';
+            var arrow = change != null ? (change > 0 ? '\u2191' : change < 0 ? '\u2193' : '\u2192') : '';
+            progressWheelTooltip.innerHTML = '<div class="font-semibold text-[var(--ap-primary)]">' + label + '</div>' +
+              '<div class="mt-1">Previous: ' + prevStr + '</div>' +
+              '<div>Current: ' + currStr + '</div>' +
+              '<div class="mt-1 font-medium ' + (change != null && change > 0 ? 'text-green-600' : change != null && change < 0 ? 'text-red-600' : 'text-[var(--ap-secondary)]') + '">Change: ' + changeStr + ' ' + arrow + '</div>';
+            progressWheelTooltip.classList.remove('hidden');
+            var rect = progressWheelSvgContainer.getBoundingClientRect();
+            progressWheelTooltip.style.left = '50%';
+            progressWheelTooltip.style.top = '8px';
+            progressWheelTooltip.style.transform = 'translateX(-50%)';
+          }, true);
+          progressWheelSvgContainer.addEventListener('mouseout', function(e) {
+            var hit = e.target.closest && e.target.closest('.progress-wheel-slice-hit');
+            var toHit = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.progress-wheel-slice-hit');
+            if (hit && !toHit && progressWheelTooltip) progressWheelTooltip.classList.add('hidden');
+          }, true);
+          progressWheelSvgContainer.addEventListener('click', function(e) {
+            var hit = e.target.closest('.progress-wheel-slice-hit');
+            if (!hit) return;
+            var idx = parseInt(hit.getAttribute('data-domain-index'), 10);
+            if (isNaN(idx) || idx < 0 || idx >= 12) return;
+            selectedMetricKey = 'domain:' + PROGRESS_DOMAIN_ORDER[idx];
+            setSelectedMetric(selectedMetricKey);
+            updateChart();
+            updateProgressTransition();
+            var block = document.getElementById('progress-transition-block');
+            if (block && !block.classList.contains('hidden')) block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        }
+
         var progressSidebarList = document.getElementById('metric-list');
         var progressScrollUp = document.getElementById('progress-sidebar-scroll-up');
         var progressScrollDown = document.getElementById('progress-sidebar-scroll-down');
