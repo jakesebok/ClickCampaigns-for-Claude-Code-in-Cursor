@@ -767,9 +767,8 @@
             function setSegmentFocus(segment, focused) {
               segment.style.opacity = focused ? focusOpacity : dimOpacity;
               if (useAccent && focused) {
-                var fill = segment.getAttribute('fill') || '#582233';
                 segment.style.transform = 'scale(1.08)';
-                segment.style.filter = 'drop-shadow(0 5px 12px rgba(0,0,0,0.28)) drop-shadow(0 0 16px ' + fill + ') drop-shadow(0 0 28px ' + fill + ')';
+                segment.style.filter = 'drop-shadow(0 5px 12px rgba(0,0,0,0.28))';
               } else {
                 segment.style.transform = '';
                 segment.style.filter = '';
