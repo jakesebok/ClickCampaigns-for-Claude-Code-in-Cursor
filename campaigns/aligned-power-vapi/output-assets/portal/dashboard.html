@@ -416,8 +416,8 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden">';
       latestHtml += '<div class="flex flex-col lg:flex-row">';
-      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-6 sm:p-8 lg:p-10 lg:min-w-[280px]">';
-      latestHtml += '<div class="wheel-static w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-3 sm:p-6 lg:p-10 lg:min-w-[280px]">';
+      latestHtml += '<div class="wheel-static w-[260px] h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
       latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
       latestHtml += '<div class="flex items-center gap-2 mb-2">';
