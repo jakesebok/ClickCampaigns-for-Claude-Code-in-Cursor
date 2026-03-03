@@ -359,37 +359,47 @@
       var latestTier = (latest.results.overallTier || '').trim() || null;
       var tierColors = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
       var tierColor = latestTier ? (tierColors[latestTier] || 'var(--ap-secondary)') : 'var(--ap-secondary)';
-      var interp = (window.VAPI_INTERPRETATIONS && window.VAPI_INTERPRETATIONS.composite) ? window.VAPI_INTERPRETATIONS.composite : {};
-      var compositeDesc = (latestTier && interp[latestTier]) ? interp[latestTier] : '';
       var latestDomains = (latest.results.domains || []).map(function(d) { var o = Object.assign({}, d); if (o.arena === 'Self') o.arena = 'Personal'; return o; });
       var firstName = latest.results.firstName || '';
+      var top3 = latest.results.top3 || (latestDomains.slice().sort(function(a, b) { return (b.score || 0) - (a.score || 0); }).slice(0, 3));
+      var bottom3 = latest.results.bottom3 || (latestDomains.slice().sort(function(a, b) { return (a.score || 0) - (b.score || 0); }).slice(0, 3));
+      function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">';
-      latestHtml += '<div class="flex flex-col sm:flex-row">';
-      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.04] p-5 sm:p-6 sm:w-[180px]">';
-      latestHtml += '<div class="w-[140px] h-[140px] sm:w-[150px] sm:h-[150px]">' + buildWheelSVG(latestDomains) + '</div>';
+      latestHtml += '<div class="flex flex-col lg:flex-row">';
+      latestHtml += '<div class="flex-shrink-0 flex items-center justify-center bg-[var(--ap-primary)]/[0.06] p-6 sm:p-8 lg:p-10 lg:min-w-[280px]">';
+      latestHtml += '<div class="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[280px] lg:h-[280px] flex items-center justify-center">' + buildWheelSVG(latestDomains) + '</div>';
       latestHtml += '</div>';
-      latestHtml += '<div class="flex-1 min-w-0 p-5 sm:p-6 flex flex-col justify-center">';
-      latestHtml += '<div class="flex items-center gap-2 mb-3">';
+      latestHtml += '<div class="flex-1 min-w-0 p-6 sm:p-8 flex flex-col justify-center">';
+      latestHtml += '<div class="flex items-center gap-2 mb-2">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2 py-0.5 rounded">Latest</span>';
-      latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + formatDate(latest.created_at) + '</span>';
+      latestHtml += '<span class="text-[var(--ap-muted)] text-xs">' + escHtml(formatDate(latest.created_at)) + '</span>';
       latestHtml += '</div>';
-      latestHtml += '<h3 class="text-xl text-[var(--ap-primary)] mb-3">' + (firstName ? firstName + '\u2019s ' : '') + 'VAPI\u2122 Results</h3>';
+      latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-4">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
       if (latestScore != null && latestTier) {
-        latestHtml += '<div class="flex items-baseline gap-2.5 mb-1">';
-        latestHtml += '<span class="text-3xl font-bold" style="color:' + tierColor + '">' + latestScore + '</span>';
-        latestHtml += '<span class="text-sm text-[var(--ap-muted)]">/ 10</span>';
-        latestHtml += '<span class="font-semibold px-2.5 py-0.5 rounded-full text-xs text-white ml-1" style="background:' + tierColor + '">' + latestTier + '</span>';
+        latestHtml += '<div class="flex items-baseline gap-3 mb-6">';
+        latestHtml += '<span class="text-4xl sm:text-5xl font-bold" style="color:' + tierColor + '">' + (typeof latestScore === 'number' ? Math.round(latestScore * 10) / 10 : latestScore) + '</span>';
+        latestHtml += '<span class="text-lg text-[var(--ap-muted)]">/ 10</span>';
+        latestHtml += '<span class="font-semibold px-3 py-1 rounded-full text-sm text-white" style="background:' + tierColor + '">' + escHtml(latestTier) + '</span>';
         latestHtml += '</div>';
-        if (compositeDesc) {
-          latestHtml += '<p class="text-[var(--ap-secondary)] text-xs leading-relaxed mt-2 mb-4 line-clamp-2">' + compositeDesc.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
-        } else {
-          latestHtml += '<div class="mb-4"></div>';
-        }
       } else if (latestScore != null) {
-        latestHtml += '<p class="text-lg font-bold text-[var(--ap-secondary)] mb-4">Overall: ' + latestScore + ' / 10</p>';
+        latestHtml += '<div class="flex items-baseline gap-3 mb-6"><span class="text-4xl font-bold text-[var(--ap-secondary)]">' + latestScore + '</span><span class="text-[var(--ap-muted)]">/ 10</span></div>';
       } else {
-        latestHtml += '<div class="mb-4"></div>';
+        latestHtml += '<div class="mb-6"></div>';
       }
+      latestHtml += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">';
+      latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Top 3 strengths</p><ul class="space-y-1.5">';
+      top3.forEach(function(d) {
+        var c = (d.tier && tierColors[d.tier]) ? tierColors[d.tier] : 'var(--ap-secondary)';
+        latestHtml += '<li class="flex items-center justify-between gap-2 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+      });
+      latestHtml += '</ul></div>';
+      latestHtml += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Priority focus areas</p><ul class="space-y-1.5">';
+      bottom3.forEach(function(d) {
+        var c = (d.tier && tierColors[d.tier]) ? tierColors[d.tier] : 'var(--ap-secondary)';
+        latestHtml += '<li class="flex items-center justify-between gap-2 text-sm"><span class="text-[var(--ap-text)]">' + escHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+      });
+      latestHtml += '</ul></div>';
+      latestHtml += '</div>';
       latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md self-start">View full results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
       latestHtml += '</div>';
