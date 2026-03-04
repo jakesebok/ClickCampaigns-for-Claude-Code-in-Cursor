@@ -62,14 +62,15 @@
    - 9-domain score graphic (downloadable)  
    - Short interpretation of what scores mean  
    - 2–3 next steps (e.g. focus on lowest domain, join free workshop)  
-   - Upsells: free Aligned Success course, Aligned Entrepreneurs Community / join the team
+   - Upsells: free Aligned Freedom course (take VAPI first if they haven’t), Aligned Entrepreneurs Community / join the team
 
 ---
 
 ## 5. Upsells to feature on results page
 
-- **Free:** Aligned Success course (in Aligned Entrepreneurs Community)  
+- **Free:** Aligned Freedom course (VAPI is the first step if they haven’t taken it; then course inside community or dedicated URL)  
 - **Free:** Aligned Success Workshop (monthly 90-minute)  
+- **Paid courses:** The Aligned Avatar, The Aligned Offer, Aligned Ads, Aligned Networking, Aligned Course Creation ($49 each or $197 Aligned Business Foundations Bundle)  
 - **Community:** Join Aligned Entrepreneurs Community (free tier or paid)  
 - **Next step:** Book a call / join the team (as appropriate)
 

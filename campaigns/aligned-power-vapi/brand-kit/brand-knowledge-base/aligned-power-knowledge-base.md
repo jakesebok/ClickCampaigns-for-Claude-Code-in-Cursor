@@ -25,8 +25,8 @@ The goal is for Aligned Power to help entrepreneurs who feel trapped by their bu
 
 ## Offer Stack (Relevant to VAPI)
 
-- **Free:** VAPI Assessment, Aligned Success Workshop, Aligned Entrepreneurs Community (with Aligned Success course)
-- **Paid courses:** The Aligned Avatar, The Aligned Offer, The Aligned Ads Course, The Aligned Referral Network ($49 each or $149 bundle)
+- **Free:** VAPI Assessment, Aligned Freedom course, Aligned Success Workshop, Aligned Entrepreneurs Community
+- **Paid courses:** The Aligned Avatar, The Aligned Offer, Aligned Ads, Aligned Networking, Aligned Course Creation ($49 each or $197 Aligned Business Foundations Bundle)
 - **Community:** $99/month or $997/year (courses, challenges, calls, workshops)
 - **Mastermind:** $197/month or $1,997/year (weekly calls, networking)
 - **Group Program:** $5,997/12 months | **1:1 Mentorship:** $50,000/year
