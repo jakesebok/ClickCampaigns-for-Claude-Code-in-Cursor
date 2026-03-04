@@ -69,6 +69,7 @@
                   <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Email</th>
                   <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Assessments</th>
                   <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Latest</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Active client</th>
                   <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-36"></th>
                 </tr>
               </thead>
@@ -182,7 +183,7 @@
           document.getElementById('admin-content').classList.remove('hidden');
           document.getElementById('admin-respondents-view').classList.remove('hidden');
           document.getElementById('admin-respondents-body').innerHTML =
-            '<tr><td colspan="5" class="px-4 py-8 text-center text-red-600">' +
+            '<tr><td colspan="6" class="px-4 py-8 text-center text-red-600">' +
             'Error loading results. Add <strong>SUPABASE_SERVICE_ROLE_KEY</strong> in Vercel env vars (server-only), then redeploy. ' +
             'Alternatively, run <code>supabase/admin-policy.sql</code> in Supabase to enable read-all via RLS.' +
             '</td></tr>';
@@ -237,6 +238,21 @@
           };
         }).sort(function(a, b) { return new Date(b.latestAt) - new Date(a.latestAt); });
       }
+
+      var activeClientsMap = {};
+      try {
+        var acResp = await fetch('/api/admin-active-clients', {
+          method: 'GET',
+          headers: { Authorization: 'Bearer ' + session.access_token }
+        });
+        if (acResp.ok) {
+          var acPayload = await acResp.json();
+          (acPayload.rows || []).forEach(function(row) {
+            var k = (row.email || '').trim().toLowerCase();
+            if (k) activeClientsMap[k] = !!row.active_client;
+          });
+        }
+      } catch (e) {}
 
       var params = new URLSearchParams(window.location.search);
       var detailEmail = params.get('email') ? decodeURIComponent(params.get('email')) : null;
@@ -301,14 +317,40 @@
             return;
           }
           tbody.innerHTML = filtered.map(function(r) {
+            var isActive = !!activeClientsMap[r.emailKey];
             return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
               '<td class="px-4 py-3 font-medium text-[var(--ap-primary)]">' + escapeHtml(r.name) + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(r.email) + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + r.count + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + formatDate(r.latestAt) + '</td>' +
+              '<td class="px-4 py-3"><button type="button" class="active-client-toggle inline-flex items-center gap-1.5 text-sm font-medium py-1.5 px-2.5 rounded-lg border transition-colors ' + (isActive ? 'bg-[var(--ap-primary)] text-white border-[var(--ap-primary)]' : 'bg-white text-[var(--ap-muted)] border-[var(--ap-border)] hover:border-[var(--ap-primary)]') + '" data-email="' + escapeHtml(r.emailKey) + '" data-active="' + (isActive ? '1' : '0') + '" aria-label="Toggle active client">' + (isActive ? 'Yes' : 'No') + '</button></td>' +
               '<td class="px-4 py-3"><a href="admin.html?email=' + encodeURIComponent(r.emailKey) + '" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-primary)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">View assessments <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></td>' +
               '</tr>';
           }).join('');
+          tbody.querySelectorAll('.active-client-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+              var emailKey = this.getAttribute('data-email');
+              var next = this.getAttribute('data-active') === '1' ? false : true;
+              var self = this;
+              fetch('/api/admin-set-active-client', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
+                body: JSON.stringify({ email: emailKey, active_client: next })
+              }).then(function(res) {
+                if (res.ok) {
+                  activeClientsMap[emailKey] = next;
+                  self.setAttribute('data-active', next ? '1' : '0');
+                  self.textContent = next ? 'Yes' : 'No';
+                  self.classList.toggle('bg-[var(--ap-primary)]', next);
+                  self.classList.toggle('text-white', next);
+                  self.classList.toggle('border-[var(--ap-primary)]', next);
+                  self.classList.toggle('bg-white', !next);
+                  self.classList.toggle('text-[var(--ap-muted)]', !next);
+                  self.classList.toggle('border-[var(--ap-border)]', !next);
+                }
+              }).catch(function() {});
+            });
+          });
           if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
         }
 

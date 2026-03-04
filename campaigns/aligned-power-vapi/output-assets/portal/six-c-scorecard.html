@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6C's Weekly Scorecard | Aligned Power Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root {
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .scorecard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03); }
+    .scale-opt { transition: background 0.2s, border-color 0.2s; }
+    .scale-opt:has(input:checked) { background: var(--ap-primary); color: #fff; border-color: var(--ap-primary); }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
+      <div class="flex items-center gap-4">
+        <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+        <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
+        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading…</div>
+    <div id="access-denied" class="hidden text-center py-12">
+      <p class="text-[var(--ap-primary)] font-semibold mb-2">6C's Scorecard is for active clients</p>
+      <p class="text-[var(--ap-secondary)] text-sm mb-4">This weekly review is only available to users marked as active clients. If you believe you should have access, contact your coach.</p>
+      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">← Back to dashboard</a>
+    </div>
+    <div id="scorecard-content" class="hidden">
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">6C's Weekly Scorecard</h1>
+      <p class="text-[var(--ap-secondary)] mb-8">Use this as a quick, honest snapshot of where you are right now. Score first, then reflect. Be accurate, not dramatic. Complete weekly to plan better for the next week.</p>
+
+      <form id="six-c-form" class="space-y-10">
+        <input type="hidden" name="email" id="form-email" value="">
+
+        <!-- Section A: 6Cs -->
+        <div class="scorecard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6 sm:p-8">
+          <h2 class="text-xl text-[var(--ap-primary)] mb-1">Section A — 6Cs (Alignment-State)</h2>
+          <p class="text-sm text-[var(--ap-muted)] mb-6">For each statement, choose 1 (low) to 5 (high). Your total per C × 4 = percentage out of 100.</p>
+
+          <div id="six-c-sections"></div>
+        </div>
+
+        <!-- Section B: Weekly review -->
+        <div class="scorecard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6 sm:p-8">
+          <h2 class="text-xl text-[var(--ap-primary)] mb-2">Weekly review</h2>
+          <p class="text-[var(--ap-secondary)] text-sm mb-4">Reflect on what could have been better this week and choose one main priority for improvement next week.</p>
+          <div>
+            <label for="one-thing" class="block text-sm font-semibold text-[var(--ap-primary)] mb-2">The one thing I will improve next week</label>
+            <textarea id="one-thing" name="one_thing_to_improve" rows="3" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none resize-y" placeholder="e.g. Protect my morning block for deep work so I stay focused on the outcome that matters most."></textarea>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-base py-3 px-6 rounded-lg transition-colors shadow-sm">
+            Save this week's scorecard
+          </button>
+          <a href="dashboard.html" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">Cancel</a>
+        </div>
+      </form>
+
+      <div id="submit-success" class="hidden mt-8 p-6 rounded-xl bg-[var(--ap-primary)]/10 border border-[var(--ap-primary)]/20">
+        <p class="text-[var(--ap-primary)] font-semibold mb-1">Scorecard saved</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Your 6C's scores and your one thing to improve are saved. You can see your latest scores on your dashboard.</p>
+        <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">View dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    (async function() {
+      var configRes = await fetch('/api/config');
+      if (!configRes.ok) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('access-denied').classList.remove('hidden');
+        return;
+      }
+      var configText = await configRes.text();
+      eval(configText);
+      if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('access-denied').classList.remove('hidden');
+        return;
+      }
+
+      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+      var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = 'login.html?redirect=' + encodeURIComponent('six-c-scorecard.html');
+        return;
+      }
+
+      var email = (session.user.email || '').trim().toLowerCase();
+      document.getElementById('form-email').value = email;
+
+      document.getElementById('logout-btn').addEventListener('click', async function() {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+
+      var { data: acRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
+      var isActiveClient = !!(acRow && acRow.active_client);
+
+      document.getElementById('loading').classList.add('hidden');
+      if (!isActiveClient) {
+        document.getElementById('access-denied').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('scorecard-content').classList.remove('hidden');
+
+      var SIX_C = [
+        {
+          key: 'clarity',
+          title: 'Clarity',
+          questions: [
+            'I knew what mattered most this week.',
+            'I was clear on the outcomes I was aiming for.',
+            'I stayed focused as much as I wanted to.',
+            'I knew the feelings/state I wanted to generate this week.',
+            'I identified the one thing to improve next week.'
+          ]
+        },
+        {
+          key: 'coherence',
+          title: 'Coherence',
+          questions: [
+            'My actions matched my values more often than not.',
+            'I made decisions that aligned with my season and priorities.',
+            'I honored boundaries that protect my energy and focus.',
+            'I said no to distractions or misaligned commitments.',
+            'I acted with integrity even when it was inconvenient.'
+          ]
+        },
+        {
+          key: 'capacity',
+          title: 'Capacity',
+          questions: [
+            'My nervous system could hold my life this week.',
+            'I recovered well from stress (regulation, rest, reset).',
+            'I fueled and moved my body in supportive ways.',
+            'I kept a sustainable pace (not adrenaline-driven).',
+            'I noticed overload early and adjusted before I crashed.'
+          ]
+        },
+        {
+          key: 'confidence',
+          title: 'Confidence / Self-Trust',
+          questions: [
+            'I kept my word to myself this week.',
+            'I followed through on my commitments without needing urgency.',
+            'I spoke honestly about what was true (to myself and others).',
+            'I made decisions and owned them (no second-guess spiral).',
+            'I treated myself with self-respect (standards, not shame).'
+          ]
+        },
+        {
+          key: 'courage',
+          title: 'Courage',
+          questions: [
+            'I took action even when I felt fear or resistance.',
+            'I had (or initiated) a hard conversation I was avoiding.',
+            'I showed up visibly (sell, share, lead) despite discomfort.',
+            'I tolerated uncertainty without freezing or numbing out.',
+            'I did the hard right thing instead of the easy familiar thing.'
+          ]
+        },
+        {
+          key: 'connection',
+          title: 'Connection',
+          questions: [
+            'I was genuinely present with the people who matter.',
+            'I asked for support instead of carrying everything alone.',
+            'I invested in relationships that energize and ground me.',
+            'I contributed or served in a way that felt aligned.',
+            'I felt connected to something bigger than my own stress.'
+          ]
+        }
+      ];
+
+      var container = document.getElementById('six-c-sections');
+      SIX_C.forEach(function(c) {
+        var section = document.createElement('div');
+        section.className = 'mb-8 last:mb-0';
+        section.innerHTML = '<h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-4">' + escapeHtml(c.title) + '</h3>';
+        var qList = document.createElement('div');
+        qList.className = 'space-y-3';
+        c.questions.forEach(function(q, i) {
+          var name = c.key + '_q' + (i + 1);
+          var row = document.createElement('div');
+          row.className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 py-2 border-b border-[var(--ap-border)]/50 last:border-0';
+          row.innerHTML = '<label class="sm:flex-1 text-sm text-[var(--ap-secondary)]">' + escapeHtml(q) + '</label>' +
+            '<div class="flex gap-1 flex-shrink-0" role="group" aria-label="Score 1 to 5">' +
+            [1,2,3,4,5].map(function(v) {
+              return '<label class="scale-opt inline-flex items-center justify-center w-10 h-10 rounded-lg border-2 border-[var(--ap-border)] bg-white cursor-pointer text-sm font-semibold text-[var(--ap-text)]"><input type="radio" name="' + name + '" value="' + v + '" required class="sr-only">' + v + '</label>';
+            }).join('') +
+            '</div>';
+          qList.appendChild(row);
+        });
+        section.appendChild(qList);
+        container.appendChild(section);
+      });
+
+      function escapeHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      document.getElementById('six-c-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var form = this;
+        var btn = document.getElementById('submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        var scores = {};
+        SIX_C.forEach(function(c) {
+          var total = 0;
+          for (var i = 1; i <= 5; i++) {
+            var name = c.key + '_q' + i;
+            var input = form.querySelector('input[name="' + name + '"]:checked');
+            total += input ? parseInt(input.value, 10) : 0;
+          }
+          scores[c.key] = Math.min(100, Math.round(total * 4));
+        });
+
+        var oneThing = (form.querySelector('#one-thing') || {}).value ? String(form.querySelector('#one-thing').value).trim() : null;
+
+        var { error } = await supabase.from('six_c_submissions').insert({
+          email: email,
+          scores: scores,
+          one_thing_to_improve: oneThing || null,
+          weekly_review: null
+        });
+
+        btn.disabled = false;
+        btn.textContent = 'Save this week\'s scorecard';
+
+        if (error) {
+          alert('Could not save: ' + (error.message || 'Unknown error'));
+          return;
+        }
+
+        form.classList.add('hidden');
+        document.getElementById('submit-success').classList.remove('hidden');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      });
+    })();
+  </script>
+</body>
+</html>

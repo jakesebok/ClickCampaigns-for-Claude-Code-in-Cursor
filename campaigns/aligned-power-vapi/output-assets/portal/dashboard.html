@@ -43,6 +43,7 @@
       <div class="flex items-center gap-4">
         <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
         <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
+        <a id="header-6c-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
         <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
         <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
       </div>
@@ -56,6 +57,21 @@
       <p class="text-[var(--ap-secondary)] mb-8">Assessments completed with your account email are saved here. View any result below or take the assessment again to track over time.</p>
 
       <div id="latest-result" class="mb-10"></div>
+
+      <div id="six-c-section" class="mb-10 hidden">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-2">Your latest 6C's</h2>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. Fill out the 6C's Scorecard each week to track alignment and plan ahead.</p>
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+          <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
+          <div id="six-c-one-thing" class="mt-6 pt-6 border-t border-[var(--ap-border)]/60 hidden">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Last week you said you'd improve</p>
+            <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
+          </div>
+          <div class="mt-6">
+            <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
 
       <div id="breakdown-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
@@ -341,8 +357,6 @@
         } else {
           errEl.classList.add('hidden');
         }
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
-        return;
       }
 
       function formatDate(iso) {
@@ -589,6 +603,7 @@
         return html;
       }
 
+      if (rows && rows.length > 0) {
       var latest = rows[0];
       var latestScore = overallScore(latest.results);
       var latestTier = (latest.results.overallTier || '').trim() || null;
@@ -1412,6 +1427,44 @@
         updateChart();
         updateProgressTransition();
       }
+      }
+
+      (async function check6C() {
+        var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
+        if (!activeRow || !activeRow.active_client) return;
+        document.getElementById('header-6c-link').classList.remove('hidden');
+        var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve').eq('email', email).order('created_at', { ascending: false }).limit(2);
+        if (sixCErr || !sixCRows || sixCRows.length === 0) {
+          document.getElementById('six-c-section').classList.remove('hidden');
+          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">No 6C\'s submissions yet. <a href="six-c-scorecard.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out your first scorecard</a>.</p>';
+          if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+          return;
+        }
+        var latest6C = sixCRows[0];
+        var prev6C = sixCRows[1] || null;
+        var scores = latest6C.scores || {};
+        var labels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence / Self-Trust', courage: 'Courage', connection: 'Connection' };
+        var icons = { clarity: 'crosshair', coherence: 'link', capacity: 'battery-charging', confidence: 'shield-check', courage: 'zap', connection: 'users' };
+        var keys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
+        var cardsHtml = '';
+        keys.forEach(function(k) {
+          var score = typeof scores[k] === 'number' ? Math.round(scores[k]) : 0;
+          var pct = Math.max(0, Math.min(100, score));
+          cardsHtml += '<div class="flex flex-col items-center p-3 rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/50">';
+          cardsHtml += '<i data-lucide="' + (icons[k] || 'circle') + '" class="w-8 h-8 text-[var(--ap-primary)] mb-2" aria-hidden="true"></i>';
+          cardsHtml += '<p class="text-xs font-semibold text-[var(--ap-primary)] mb-1">' + (labels[k] || k) + '</p>';
+          cardsHtml += '<p class="text-lg font-bold tabular-nums text-[var(--ap-secondary)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-muted)]">%</span></p>';
+          cardsHtml += '<div class="w-full h-1.5 rounded-full bg-[var(--ap-border)]/40 mt-1 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-primary)]" style="width:' + pct + '%"></div></div>';
+          cardsHtml += '</div>';
+        });
+        document.getElementById('six-c-cards').innerHTML = cardsHtml;
+        if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
+          document.getElementById('six-c-one-thing').classList.remove('hidden');
+          document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
+        }
+        document.getElementById('six-c-section').classList.remove('hidden');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      })();
 
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
     })();
