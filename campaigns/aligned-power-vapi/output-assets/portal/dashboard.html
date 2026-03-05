@@ -10,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="six-c-window.js"></script>
   <script src="../html/vapi-results-interpretations.js"></script>
   <script src="progress-transitions.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
@@ -71,7 +72,11 @@
 
       <div id="six-c-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Your latest 6C's</h2>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. Fill out the 6C's Scorecard each week to track alignment and plan ahead.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
+        <div id="six-c-window-urgency" class="mb-4 rounded-xl border-2 border-[var(--ap-primary)]/30 bg-[var(--ap-primary)]/5 px-4 py-3 hidden">
+          <p id="six-c-window-message" class="font-semibold text-[var(--ap-primary)] text-sm"></p>
+          <p id="six-c-window-countdown" class="text-[var(--ap-secondary)] text-sm mt-1 hidden"></p>
+        </div>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
           <div id="six-c-one-thing" class="mt-6 pt-6 border-t border-[var(--ap-border)]/60 hidden">
@@ -79,7 +84,8 @@
             <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
           </div>
           <div class="mt-6">
-            <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            <a id="six-c-fill-link" href="six-c-scorecard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
         </div>
       </div>
@@ -1449,7 +1455,20 @@
         var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve').eq('email', email).order('created_at', { ascending: false }).limit(2);
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');
-          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">No 6C\'s submissions yet. <a href="six-c-scorecard.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out your first scorecard</a>.</p>';
+          var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+          var linkHtml = win && win.canSubmit
+            ? 'No 6C\'s submissions yet. <a href="six-c-scorecard.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out your first scorecard</a>.'
+            : 'No 6C\'s submissions yet. ' + (win ? win.message : 'The scorecard is available Friday 12pm – Sunday 6pm.');
+          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">' + linkHtml + '</p>';
+          if (win) {
+            document.getElementById('six-c-window-urgency').classList.remove('hidden');
+            document.getElementById('six-c-window-message').textContent = win.message;
+            var ce = document.getElementById('six-c-window-countdown');
+            if (win.countdownMessage) { ce.textContent = win.countdownMessage; ce.classList.remove('hidden'); } else { ce.classList.add('hidden'); }
+            document.getElementById('six-c-fill-link').classList.toggle('hidden', !win.canSubmit);
+            document.getElementById('six-c-window-closed-msg').classList.toggle('hidden', win.canSubmit);
+            if (!win.canSubmit) document.getElementById('six-c-window-closed-msg').textContent = win.message;
+          }
           if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
           return;
         }
@@ -1471,12 +1490,37 @@
           cardsHtml += '</div>';
         });
         document.getElementById('six-c-cards').innerHTML = cardsHtml;
-        if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
-          var oneThing = String(prev6C.one_thing_to_improve).trim();
-          document.getElementById('six-c-one-thing').classList.remove('hidden');
-          document.getElementById('six-c-one-thing-text').textContent = oneThing;
+        var oneThingLatest = (latest6C.one_thing_to_improve && String(latest6C.one_thing_to_improve).trim()) ? String(latest6C.one_thing_to_improve).trim() : null;
+        if (oneThingLatest) {
           document.getElementById('one-thing-banner').classList.remove('hidden');
-          document.getElementById('one-thing-banner-text').textContent = oneThing;
+          document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+        }
+        if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
+          document.getElementById('six-c-one-thing').classList.remove('hidden');
+          document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
+        }
+        var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+        if (win) {
+          document.getElementById('six-c-window-urgency').classList.remove('hidden');
+          document.getElementById('six-c-window-message').textContent = win.message;
+          var countdownEl = document.getElementById('six-c-window-countdown');
+          if (win.countdownMessage) {
+            countdownEl.textContent = win.countdownMessage;
+            countdownEl.classList.remove('hidden');
+          } else {
+            countdownEl.classList.add('hidden');
+          }
+          var linkEl = document.getElementById('six-c-fill-link');
+          var closedMsg = document.getElementById('six-c-window-closed-msg');
+          if (win.canSubmit) {
+            linkEl.classList.remove('hidden');
+            linkEl.removeAttribute('aria-disabled');
+            closedMsg.classList.add('hidden');
+          } else {
+            linkEl.classList.add('hidden');
+            closedMsg.textContent = win.message;
+            closedMsg.classList.remove('hidden');
+          }
         }
         document.getElementById('six-c-section').classList.remove('hidden');
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
