@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Editorial Authority Brand Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --maroon:        #582233;
+      --maroon-deep:   #3E1724;
+      --maroon-mid:    #6E2B40;
+      --maroon-lt:     #8A3A52;
+      --maroon-tint:   rgba(88,34,51,0.06);
+      --maroon-tint2:  rgba(88,34,51,0.12);
+
+      --gold:          #D4AA70;
+      --gold-deep:     #B8904A;
+      --gold-tint:     rgba(212,170,112,0.12);
+
+      --teal:          #334750;
+      --teal-lt:       #3E5662;
+
+      --bg:            #F4ECE3;
+      --bg-warm:       #EDE4D8;
+      --bg-rule:       #E2D5C4;
+      --surface:       #FAF6F0;
+      --surface-raised:#FFFFFF;
+
+      --ink:           #1A0F13;
+      --ink-mid:       #3D2430;
+      --ink-muted:     #7A5C66;
+      --ink-subtle:    #C6B8A7;
+      --ink-rule:      #DDD0BF;
+
+      --radius-sm:     4px;
+      --radius-md:     10px;
+      --radius-lg:     18px;
+
+      --shadow-lifted: 0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 20px rgba(26,15,19,0.08), 0 1px 4px rgba(26,15,19,0.05);
+      --shadow-float:  0 1px 0 rgba(255,255,255,0.95) inset, 0 10px 36px rgba(26,15,19,0.11), 0 2px 8px rgba(26,15,19,0.06);
+      --shadow-maroon: 0 4px 24px rgba(88,34,51,0.22), 0 1px 0 rgba(255,255,255,0.1) inset;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.022'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .serif { font-family: 'Cormorant Garamond', serif; }
+    .sans  { font-family: 'Source Sans 3', sans-serif; }
+
+    .display-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+    }
+    .display-lg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+    .display-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .label--maroon { color: var(--maroon); }
+    .pullquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic; font-weight: 400;
+      line-height: 1.48; letter-spacing: -0.01em;
+      color: var(--ink-mid);
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    section { padding: 92px 0; }
+    .rule { height: 1px; background: var(--ink-rule); }
+    .rule--accent { height: 2px; background: var(--maroon); width: 40px; border-radius: 2px; }
+    .rule--gold   { height: 1.5px; background: linear-gradient(90deg, var(--gold), transparent); width: 80px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 0;
+      background: rgba(244,236,227,0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ink-rule);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700; letter-spacing: 0.01em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav__logo em { font-style: italic; color: var(--maroon); }
+    .nav__links { display: flex; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); text-decoration: none; transition: color 0.15s; }
+    .nav__links a:hover { color: var(--maroon); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 80px; padding-bottom: 60px; position: relative; overflow: hidden;
+    }
+
+    /* Maroon vertical accent bar */
+    .hero__bar {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 60%, transparent 100%);
+    }
+
+    /* Large ghost serif word — NO lines, just a single word as texture */
+    .hero__bg-word {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14rem, 30vw, 24rem);
+      font-weight: 700;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(88,34,51,0.07);
+      right: -3%; top: 50%; transform: translateY(-50%);
+      line-height: 1; pointer-events: none; user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    /* Diagonal gold accent */
+    .hero__gold-line {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, rgba(212,170,112,0.2) 60%, transparent 100%);
+    }
+
+    .hero__content { position: relative; z-index: 2; max-width: 700px; padding-left: 28px; }
+    .hero__eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .hero__eyebrow-rule { width: 48px; height: 2px; background: var(--maroon); flex-shrink: 0; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8125rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      padding: 13px 28px; cursor: pointer;
+      transition: all 0.18s ease; border: none; text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--maroon);
+      color: #FAF6F0;
+      box-shadow: var(--shadow-maroon);
+    }
+    .btn-primary:hover {
+      background: var(--maroon-deep);
+      box-shadow: 0 6px 28px rgba(88,34,51,0.3), 0 1px 0 rgba(255,255,255,0.1) inset;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--maroon);
+      border: 1.5px solid var(--maroon);
+    }
+    .btn-secondary:hover { background: var(--maroon-tint); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-muted);
+      border: 1px solid var(--ink-rule);
+    }
+    .btn-ghost:hover { background: var(--bg-rule); color: var(--ink-mid); border-color: var(--ink-subtle); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      box-shadow: 0 4px 20px rgba(212,170,112,0.28), 0 1px 0 rgba(255,255,255,0.2) inset;
+    }
+    .btn-gold:hover {
+      background: var(--gold-deep);
+      color: #fff;
+      box-shadow: 0 6px 28px rgba(212,170,112,0.38);
+      transform: translateY(-1px);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface-raised);
+      border: 1px solid var(--ink-rule);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lifted);
+      padding: 32px;
+      position: relative;
+    }
+    .card--maroon-top {
+      border-top: 3px solid var(--maroon);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+    .card--maroon-left {
+      border-left: 3px solid var(--maroon);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    }
+    .card--warm {
+      background: var(--bg-warm);
+      border-color: var(--ink-rule);
+    }
+    .card--teal {
+      background: var(--teal);
+      border-color: transparent;
+      color: #FAF6F0;
+    }
+
+    /* icon circle */
+    .icon-circle {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .icon-circle--maroon { background: var(--maroon-tint2); border: 1px solid rgba(88,34,51,0.18); }
+    .icon-circle--gold   { background: var(--gold-tint);    border: 1px solid rgba(212,170,112,0.25); }
+    .icon-circle--teal   { background: rgba(51,71,80,0.12); border: 1px solid rgba(51,71,80,0.2); }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; border-radius: var(--radius-sm);
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .badge-maroon  { background: var(--maroon-tint2); color: var(--maroon);    border: 1px solid rgba(88,34,51,0.2); }
+    .badge-gold    { background: var(--gold-tint);    color: var(--gold-deep); border: 1px solid rgba(212,170,112,0.28); }
+    .badge-neutral { background: var(--bg-rule);      color: var(--ink-muted); border: 1px solid var(--ink-rule); }
+    .badge-teal    { background: rgba(51,71,80,0.1);  color: var(--teal);      border: 1px solid rgba(51,71,80,0.2); }
+
+    /* ── INPUTS ── */
+    .input-label { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; color: var(--ink-mid); display: block; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%; background: var(--surface-raised);
+      border: 1px solid var(--ink-rule); border-radius: var(--radius-sm);
+      padding: 11px 14px; color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif; font-size: 0.9375rem;
+      outline: none; transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    input:focus, textarea:focus { border-color: var(--maroon); box-shadow: 0 0 0 3px rgba(88,34,51,0.08); }
+    input::placeholder { color: var(--ink-subtle); }
+
+    /* ── SCORE BARS ── */
+    @keyframes fillBar { from { width: 0; } }
+    .bar-bg { height: 3px; border-radius: 2px; background: var(--bg-rule); margin-top: 14px; overflow: hidden; }
+    .bar-fill-maroon { height: 100%; border-radius: 2px; background: var(--maroon); animation: fillBar 1.2s ease both; }
+    .bar-fill-gold   { height: 100%; border-radius: 2px; background: var(--gold);   animation: fillBar 1.2s ease both; }
+
+    /* ── LAYOUT HELPERS ── */
+    .showcase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media (max-width: 768px) { .showcase-grid { grid-template-columns: 1fr; } .nav__links { display: none; } .hero__bg-word { font-size: 10rem; opacity: 0.5; } }
+
+    /* ── SWATCH ── */
+    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+    .swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--ink-rule); box-shadow: var(--shadow-lifted); }
+    .swatch__color { height: 68px; }
+    .swatch__info { background: var(--surface-raised); padding: 10px 12px; }
+    .swatch__name { font-size: 0.8125rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .swatch__hex  { font-size: 0.6875rem; color: var(--ink-muted); font-family: monospace; }
+
+    /* ── TYPE ROW ── */
+    .type-row { display: flex; align-items: baseline; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--ink-rule); }
+    .type-meta { width: 150px; flex-shrink: 0; }
+    .type-meta-name { font-size: 0.75rem; font-weight: 700; color: var(--ink-muted); }
+    .type-meta-spec { font-size: 0.6875rem; color: var(--ink-subtle); margin-top: 2px; }
+
+    /* ── PULL-QUOTE ── */
+    .pullquote-block { border-left: 3px solid var(--maroon); padding: 8px 0 8px 28px; }
+
+    /* ── SECTION HEADER ── */
+    .section-header { margin-bottom: 56px; }
+
+    /* ── FEATURE STRIP ── */
+    .feature-strip { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--ink-rule); }
+    .feature-strip__title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .feature-strip__body  { font-size: 0.9375rem; color: var(--ink-muted); line-height: 1.65; font-weight: 300; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { animation: fadeUp 0.65s ease forwards; }
+    .d1 { animation-delay: 0.04s; opacity: 0; }
+    .d2 { animation-delay: 0.16s; opacity: 0; }
+    .d3 { animation-delay: 0.3s;  opacity: 0; }
+    .d4 { animation-delay: 0.46s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">Aligned <em>Power</em></a>
+      <ul class="nav__links">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#cards">Cards</a></li>
+        <li><a href="#inuse">In Use</a></li>
+      </ul>
+      <a href="#" class="btn btn-primary" style="font-size:0.75rem;padding:10px 20px;">Begin Assessment</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:80px;">
+    <div class="hero__bar"></div>
+    <div class="hero__bg-word">Power</div>
+    <div class="hero__gold-line"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__eyebrow anim d1">
+          <div class="hero__eyebrow-rule"></div>
+          <div class="label label--maroon">05 — brand-concept-editorial-authority</div>
+        </div>
+
+        <h1 class="display-xl anim d2" style="margin-bottom:24px;">
+          Aligned<br>
+          <span class="display-italic" style="color:var(--maroon);">Power.</span>
+        </h1>
+
+        <div class="pullquote-block anim d3" style="margin-bottom:38px;max-width:540px;">
+          <p class="pullquote">"The business that once felt like a beautiful prison became the vehicle for the life I always knew was possible."</p>
+        </div>
+
+        <div class="anim d4" style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary">
+            <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+            Begin Your Assessment
+          </a>
+          <a href="#" class="btn btn-secondary">See the Framework</a>
+        </div>
+
+        <div style="margin-top:44px;display:flex;gap:32px;flex-wrap:wrap;" class="anim d4">
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;color:var(--maroon);letter-spacing:-0.03em;line-height:1;">847</div>
+            <div style="font-size:0.8125rem;font-weight:600;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:3px;">Assessments</div>
+          </div>
+          <div style="width:1px;background:var(--ink-rule);"></div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;color:var(--maroon);letter-spacing:-0.03em;line-height:1;">94%</div>
+            <div style="font-size:0.8125rem;font-weight:600;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:3px;">Report Clarity</div>
+          </div>
+          <div style="width:1px;background:var(--ink-rule);"></div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;color:var(--maroon);letter-spacing:-0.03em;line-height:1;">6C</div>
+            <div style="font-size:0.8125rem;font-weight:600;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:3px;">Framework</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- COLORS -->
+  <section id="colors">
+    <div class="container">
+      <div class="section-header">
+        <div class="label label--maroon" style="margin-bottom:12px;">01 — Color System</div>
+        <h2 class="display-lg">Maroon, Gold<br><span class="display-italic">&amp; Linen</span></h2>
+        <p style="margin-top:16px;font-size:1rem;color:var(--ink-muted);font-weight:300;max-width:480px;">Your existing maroon (#582233) anchors the palette. Gold elevates. Linen grounds it in warmth without going soft.</p>
+      </div>
+
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch__color" style="background:#582233;"></div><div class="swatch__info"><div class="swatch__name">Maroon</div><div class="swatch__hex">#582233 — Primary</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#3E1724;"></div><div class="swatch__info"><div class="swatch__name">Maroon Deep</div><div class="swatch__hex">#3E1724 — Hover</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#8A3A52;"></div><div class="swatch__info"><div class="swatch__name">Maroon Light</div><div class="swatch__hex">#8A3A52 — Tint</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#D4AA70;"></div><div class="swatch__info"><div class="swatch__name">Gold</div><div class="swatch__hex">#D4AA70 — Accent</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#334750;"></div><div class="swatch__info"><div class="swatch__name">Teal</div><div class="swatch__hex">#334750 — Secondary</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#F4ECE3;border:1px solid var(--ink-rule);"></div><div class="swatch__info"><div class="swatch__name">Linen</div><div class="swatch__hex">#F4ECE3 — BG</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#FAF6F0;border:1px solid var(--ink-rule);"></div><div class="swatch__info"><div class="swatch__name">Surface</div><div class="swatch__hex">#FAF6F0 — Card</div></div></div>
+        <div class="swatch"><div class="swatch__color" style="background:#1A0F13;"></div><div class="swatch__info"><div class="swatch__name">Ink</div><div class="swatch__hex">#1A0F13 — Text</div></div></div>
+      </div>
+
+      <div style="margin-top:40px;">
+        <div class="label" style="margin-bottom:16px;">Tonal Expressions</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="height:56px;border-radius:var(--radius-sm);background:var(--maroon);display:flex;align-items:center;padding:0 22px;gap:12px;color:#FAF6F0;font-size:0.875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;box-shadow:var(--shadow-maroon);">
+            <i data-lucide="zap" style="width:16px;height:16px;"></i> Maroon — Authority, Action
+          </div>
+          <div style="height:56px;border-radius:var(--radius-sm);background:var(--gold);display:flex;align-items:center;padding:0 22px;gap:12px;color:var(--ink);font-size:0.875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;box-shadow:var(--shadow-lifted);">
+            <i data-lucide="star" style="width:16px;height:16px;"></i> Gold — Achievement, Distinction
+          </div>
+          <div style="height:56px;border-radius:var(--radius-sm);background:var(--teal);display:flex;align-items:center;padding:0 22px;gap:12px;color:#FAF6F0;font-size:0.875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;box-shadow:var(--shadow-lifted);">
+            <i data-lucide="compass" style="width:16px;height:16px;"></i> Teal — Strategic Depth
+          </div>
+          <div style="height:56px;border-radius:var(--radius-sm);background:var(--bg-warm);border:1px solid var(--ink-rule);display:flex;align-items:center;padding:0 22px;font-size:0.875rem;color:var(--ink-muted);box-shadow:var(--shadow-lifted);">Linen — Warm, credible, grounded</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- TYPE -->
+  <section id="type">
+    <div class="container">
+      <div class="section-header">
+        <div class="label label--maroon" style="margin-bottom:12px;">02 — Typography</div>
+        <h2 class="display-lg"><span class="display-italic">Cormorant Garamond</span><br>+ Source Sans Pro</h2>
+        <p style="margin-top:16px;font-size:1rem;color:var(--ink-muted);font-weight:300;max-width:480px;">Your existing type stack, used with more editorial intention. Garamond handles gravitas. Source Sans handles clarity.</p>
+      </div>
+
+      <div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Display XL</div><div class="type-meta-spec">Cormorant 700, −2.5em</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6rem);font-weight:700;letter-spacing:-0.025em;line-height:0.9;color:var(--maroon);">Aligned Power</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Display Italic</div><div class="type-meta-spec">Cormorant 400 italic</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-style:italic;font-weight:400;letter-spacing:-0.015em;line-height:1.0;">Break Free. Build Bold.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Heading H2</div><div class="type-meta-spec">Cormorant 700, −1.5em</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;letter-spacing:-0.015em;">Your Assessment Results</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Pull Quote</div><div class="type-meta-spec">Cormorant 400 italic</div></div>
+          <div class="pullquote-block" style="max-width:520px;">
+            <p class="pullquote">"The goal isn't a bigger business. The goal is a business that fits who you actually are."</p>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Body</div><div class="type-meta-spec">Source Sans 300, 1.7 lead</div></div>
+          <div style="font-size:1rem;font-weight:300;line-height:1.7;color:var(--ink-mid);max-width:520px;">Most entrepreneurs are building a business that doesn't quite fit who they are. The Aligned Power Framework helps you close the gap — so your work finally feels as good as it looks from the outside.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Label / Eyebrow</div><div class="type-meta-spec">Source Sans 700, 22em tracking</div></div>
+          <div class="label label--maroon">01 — Strategic Clarity</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Stats</div><div class="type-meta-spec">Cormorant 700 + label</div></div>
+          <div style="display:flex;gap:32px;align-items:baseline;flex-wrap:wrap;">
+            <div>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);">94%</span>
+              <div class="label" style="margin-top:4px;">Report Clarity</div>
+            </div>
+            <div>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;letter-spacing:-0.03em;color:var(--gold-deep);">6C</span>
+              <div class="label" style="margin-top:4px;">Framework</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- COMPONENTS -->
+  <section id="components">
+    <div class="container">
+      <div class="section-header">
+        <div class="label label--maroon" style="margin-bottom:12px;">03 — Components</div>
+        <h2 class="display-lg">Buttons, Badges<br><span class="display-italic">&amp; Inputs</span></h2>
+      </div>
+
+      <div style="margin-bottom:48px;">
+        <div class="label" style="margin-bottom:20px;">Buttons</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <a href="#" class="btn btn-primary"><i data-lucide="arrow-right" style="width:14px;height:14px;"></i> Begin Assessment</a>
+          <a href="#" class="btn btn-gold"><i data-lucide="star" style="width:14px;height:14px;"></i> Premium Access</a>
+          <a href="#" class="btn btn-secondary">Learn More</a>
+          <a href="#" class="btn btn-ghost">View Results</a>
+        </div>
+      </div>
+
+      <div style="margin-bottom:48px;">
+        <div class="label" style="margin-bottom:20px;">Badges</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <span class="badge badge-maroon">Active Client</span>
+          <span class="badge badge-gold">Premium</span>
+          <span class="badge badge-teal">In Progress</span>
+          <span class="badge badge-neutral">Draft</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom:20px;">Form Inputs</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;max-width:600px;">
+          <div><label class="input-label">Full Name</label><input type="text" placeholder="Jake Sebok"></div>
+          <div><label class="input-label">Email Address</label><input type="email" placeholder="jake@alignedpower.coach"></div>
+          <div style="grid-column:1/-1;"><label class="input-label">Your ONE THING this week</label><textarea rows="3" placeholder="Protect my morning block for deep work…" style="resize:vertical;"></textarea></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CARDS -->
+  <section id="cards">
+    <div class="container">
+      <div class="section-header">
+        <div class="label label--maroon" style="margin-bottom:12px;">04 — Card System</div>
+        <h2 class="display-lg">Depth &amp;<br><span class="display-italic">Elevation</span></h2>
+      </div>
+
+      <div class="showcase-grid">
+
+        <!-- Score card -->
+        <div class="card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+            <div class="icon-circle icon-circle--maroon">
+              <i data-lucide="target" style="width:20px;height:20px;color:var(--maroon);"></i>
+            </div>
+            <span class="badge badge-maroon">Strong</span>
+          </div>
+          <div class="label label--maroon" style="margin-bottom:10px;">Strategic Clarity</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;margin-bottom:6px;">84<span style="font-size:1.25rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+          <p style="font-size:0.9375rem;color:var(--ink-muted);line-height:1.65;font-weight:300;">You know what you want. Now it's about having the right system to execute — without burning out.</p>
+          <div class="bar-bg"><div class="bar-fill-maroon" style="width:84%;animation-delay:0.4s;"></div></div>
+        </div>
+
+        <!-- One thing card -->
+        <div class="card card--maroon-left">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+            <div class="icon-circle icon-circle--maroon">
+              <i data-lucide="flame" style="width:20px;height:20px;color:var(--maroon);"></i>
+            </div>
+            <span class="badge badge-neutral">Week of Feb 24</span>
+          </div>
+          <div class="label label--maroon" style="margin-bottom:10px;">This Week's Focus</div>
+          <p class="pullquote" style="font-size:1.1rem;margin-bottom:20px;">"Protect my morning block for deep work so I stay focused on the outcome that matters most."</p>
+          <div style="font-size:0.8125rem;font-weight:600;color:var(--ink-muted);letter-spacing:0.03em;">Your ONE THING · Set last Friday</div>
+        </div>
+
+        <!-- 6C grid card -->
+        <div class="card card--warm" style="grid-column:1/-1;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;">
+            <div class="icon-circle icon-circle--maroon">
+              <i data-lucide="layout-grid" style="width:20px;height:20px;color:var(--maroon);"></i>
+            </div>
+            <div>
+              <div class="label label--maroon">6C Alignment — This Week</div>
+              <div style="font-size:0.8125rem;color:var(--ink-muted);margin-top:2px;">Week of Feb 24, 2026</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+            <div style="padding:16px 18px;border-right:1px solid var(--ink-rule);border-bottom:1px solid var(--ink-rule);">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Clarity</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">88<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:88%;animation-delay:0.5s;"></div></div>
+            </div>
+            <div style="padding:16px 18px;border-right:1px solid var(--ink-rule);border-bottom:1px solid var(--ink-rule);">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Coherence</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">74<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:74%;animation-delay:0.62s;"></div></div>
+            </div>
+            <div style="padding:16px 18px;border-bottom:1px solid var(--ink-rule);">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Capacity</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">61<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:61%;animation-delay:0.74s;"></div></div>
+            </div>
+            <div style="padding:16px 18px;border-right:1px solid var(--ink-rule);">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Confidence</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">82<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:82%;animation-delay:0.86s;"></div></div>
+            </div>
+            <div style="padding:16px 18px;border-right:1px solid var(--ink-rule);">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Courage</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">71<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:71%;animation-delay:0.98s;"></div></div>
+            </div>
+            <div style="padding:16px 18px;">
+              <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Connection</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--maroon);line-height:1;">79<span style="font-size:0.9rem;font-weight:400;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill-maroon" style="width:79%;animation-delay:1.1s;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teal contrast card -->
+        <div class="card card--teal">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="compass" style="width:20px;height:20px;color:#D4AA70;"></i>
+            </div>
+            <span class="badge" style="background:rgba(212,170,112,0.15);color:#D4AA70;border:1px solid rgba(212,170,112,0.3);">Framework</span>
+          </div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#FAF6F0;margin-bottom:10px;">The Aligned Power<br>Framework</h3>
+          <p style="font-size:0.9375rem;color:rgba(250,246,240,0.7);line-height:1.65;font-weight:300;margin-bottom:20px;">Six domains. One decision tree. The clarity you've been missing.</p>
+          <a href="#" class="btn btn-gold" style="font-size:0.8125rem;padding:10px 22px;">
+            <i data-lucide="arrow-right" style="width:13px;height:13px;"></i>
+            Explore
+          </a>
+        </div>
+
+        <!-- Notification card -->
+        <div class="card">
+          <div style="display:flex;align-items:flex-start;gap:14px;">
+            <div class="icon-circle icon-circle--gold">
+              <i data-lucide="bell" style="width:20px;height:20px;color:var(--gold-deep);"></i>
+            </div>
+            <div>
+              <div style="font-size:0.9375rem;font-weight:700;color:var(--ink);margin-bottom:4px;">Scorecard Window Open</div>
+              <p style="font-size:0.875rem;color:var(--ink-muted);line-height:1.6;font-weight:300;">Your weekly 6C review is available now. Takes 5 minutes. Closes Sunday at 6pm.</p>
+              <div style="margin-top:14px;display:flex;gap:10px;">
+                <a href="#" class="btn btn-primary" style="font-size:0.75rem;padding:9px 18px;"><i data-lucide="check" style="width:13px;height:13px;"></i> Fill It Out</a>
+                <a href="#" class="btn btn-ghost" style="font-size:0.75rem;padding:9px 18px;">Later</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- IN USE -->
+  <section id="inuse">
+    <div class="container">
+      <div class="section-header">
+        <div class="label label--maroon" style="margin-bottom:12px;">05 — In Use</div>
+        <h2 class="display-lg">Brand in<br><span class="display-italic">Context</span></h2>
+      </div>
+
+      <!-- Framework strip -->
+      <div style="margin-bottom:56px;">
+        <div class="label" style="margin-bottom:20px;">The Five Stages</div>
+        <div>
+          <div class="feature-strip">
+            <div class="icon-circle icon-circle--maroon" style="flex-shrink:0;">
+              <i data-lucide="eye" style="width:18px;height:18px;color:var(--maroon);"></i>
+            </div>
+            <div><div class="feature-strip__title">Awareness</div><div class="feature-strip__body">Recognizing the gap between where you are and where you know you're meant to be.</div></div>
+          </div>
+          <div class="feature-strip">
+            <div class="icon-circle icon-circle--maroon" style="flex-shrink:0;">
+              <i data-lucide="compass" style="width:18px;height:18px;color:var(--maroon);"></i>
+            </div>
+            <div><div class="feature-strip__title">Strategic Clarity</div><div class="feature-strip__body">A compass — not a to-do list. Knowing the one decision that makes all others easier.</div></div>
+          </div>
+          <div class="feature-strip">
+            <div class="icon-circle icon-circle--maroon" style="flex-shrink:0;">
+              <i data-lucide="layers" style="width:18px;height:18px;color:var(--maroon);"></i>
+            </div>
+            <div><div class="feature-strip__title">Internal Alignment</div><div class="feature-strip__body">When your values, your offers, and your calendar finally say the same thing.</div></div>
+          </div>
+          <div class="feature-strip">
+            <div class="icon-circle icon-circle--maroon" style="flex-shrink:0;">
+              <i data-lucide="zap" style="width:18px;height:18px;color:var(--maroon);"></i>
+            </div>
+            <div><div class="feature-strip__title">Aligned Action</div><div class="feature-strip__body">Doing the right things — not all the things — with confidence and without apology.</div></div>
+          </div>
+          <div class="feature-strip">
+            <div class="icon-circle icon-circle--gold" style="flex-shrink:0;">
+              <i data-lucide="star" style="width:18px;height:18px;color:var(--gold-deep);"></i>
+            </div>
+            <div><div class="feature-strip__title">Embodied Execution</div><div class="feature-strip__body">The work becomes the life. You stop performing alignment and start living it.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial -->
+      <div style="margin-bottom:56px;">
+        <div class="label" style="margin-bottom:20px;">Social Proof</div>
+        <div class="card card--maroon-left" style="max-width:640px;">
+          <div class="icon-circle icon-circle--gold" style="margin-bottom:18px;">
+            <i data-lucide="quote" style="width:18px;height:18px;color:var(--gold-deep);"></i>
+          </div>
+          <p class="pullquote" style="font-size:1.25rem;margin-bottom:24px;">"I went from feeling like I was running in circles to having absolute clarity on my next move. Aligned Power didn't just give me a framework — it gave me myself back."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:38px;height:38px;border-radius:50%;background:var(--maroon);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;color:#FAF6F0;flex-shrink:0;">SR</div>
+            <div><div style="font-weight:700;font-size:0.9375rem;">Sarah R.</div><div style="font-size:0.8125rem;color:var(--ink-muted);">Health Coach · $280K Revenue</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="card card--maroon-top" style="padding:60px 44px;text-align:center;background:var(--surface-raised);">
+        <div class="rule--accent" style="margin:0 auto 20px;"></div>
+        <div class="label label--maroon" style="margin-bottom:14px;text-align:center;">Free Assessment</div>
+        <h2 class="display-lg" style="margin-bottom:16px;">Find Your<br><span class="display-italic" style="color:var(--maroon);">Alignment Gap</span></h2>
+        <p style="font-size:1.0625rem;color:var(--ink-muted);max-width:420px;margin:0 auto 36px;line-height:1.72;font-weight:300;">A 15-minute assessment that reveals exactly where your business is out of alignment — and what to do about it.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary" style="font-size:0.9375rem;padding:14px 36px;">
+            <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+            Take the VAPI Assessment
+          </a>
+          <a href="#" class="btn btn-ghost">See Sample Results</a>
+        </div>
+        <p style="font-size:0.8125rem;color:var(--ink-subtle);margin-top:18px;">Free · No credit card · Takes 15 minutes</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:36px 0;border-top:1px solid var(--ink-rule);">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.375rem;font-weight:700;color:var(--ink);">Aligned <em style="color:var(--maroon);">Power</em></span>
+      <span style="font-size:0.8125rem;color:var(--ink-subtle);">05 — brand-concept-editorial-authority</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
+</body>
+</html>
