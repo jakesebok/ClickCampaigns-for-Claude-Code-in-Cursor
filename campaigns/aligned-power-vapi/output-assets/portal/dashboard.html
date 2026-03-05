@@ -66,6 +66,15 @@
             <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-primary)] mb-2">This week's focus</p>
             <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
             <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your one thing to improve last week. Keep it top of mind.</p>
+            <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
+              <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
+                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="one-thing-banner-chevron"></i>
+                <span>View my 6C reflections</span>
+              </button>
+              <div id="one-thing-banner-accordion" class="hidden mt-3 pt-3 border-t border-[var(--ap-border)]/60 space-y-3" role="region" aria-label="6C reflections">
+                <div id="one-thing-banner-reflections"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1452,7 +1461,7 @@
         var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
         if (!activeRow || !activeRow.active_client) return;
         document.getElementById('header-6c-link').classList.remove('hidden');
-        var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve').eq('email', email).order('created_at', { ascending: false }).limit(2);
+        var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(2);
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');
           var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
@@ -1494,6 +1503,32 @@
         if (oneThingLatest) {
           document.getElementById('one-thing-banner').classList.remove('hidden');
           document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+        }
+        var weeklyReview = latest6C.weekly_review || {};
+        var reflectionKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
+        var reflectionLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
+        var hasReflections = reflectionKeys.some(function(k) { return weeklyReview[k] && String(weeklyReview[k]).trim(); });
+        if (hasReflections) {
+          function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+          var wrap = document.getElementById('one-thing-banner-expand-wrap');
+          wrap.classList.remove('hidden');
+          var html = '';
+          reflectionKeys.forEach(function(k) {
+            var val = weeklyReview[k] && String(weeklyReview[k]).trim();
+            if (!val) return;
+            var label = reflectionLabels[k] || k;
+            html += '<div class="rounded-lg border border-[var(--ap-border)]/50 bg-white/60 px-3 py-2"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-primary)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + esc(val) + '</p></div>';
+          });
+          document.getElementById('one-thing-banner-reflections').innerHTML = html;
+          var expandBtn = document.getElementById('one-thing-banner-expand-btn');
+          var accordion = document.getElementById('one-thing-banner-accordion');
+          var chevron = document.getElementById('one-thing-banner-chevron');
+          expandBtn.addEventListener('click', function() {
+            var open = accordion.classList.toggle('hidden');
+            expandBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+            if (chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
+            if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+          });
         }
         if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
           document.getElementById('six-c-one-thing').classList.remove('hidden');
