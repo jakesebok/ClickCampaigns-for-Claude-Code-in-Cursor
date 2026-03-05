@@ -39,6 +39,8 @@ function getReminderType() {
   return null;
 }
 
+const SCORECARD_URL = 'https://portal.alignedpower.coach/portal/six-c-scorecard.html';
+
 const SUBJECTS = {
   available: "Your 6C's Scorecard is available for this week",
   saturday: "Reminder: Get your 6C's Scorecard in this weekend",
@@ -50,21 +52,29 @@ const BODIES = {
 
 Fill out your 6C's Scorecard between now and Sunday 6pm (Eastern). It only takes a few minutes and keeps your alignment and planning on track.
 
-→ Log in to your portal and complete your scorecard when you're ready.`,
+→ Log in to your portal and complete your scorecard when you're ready:
+${SCORECARD_URL}`,
   saturday: `This is a friendly reminder: your 6C's Scorecard for the week is open until Sunday 6pm (Eastern).
 
 Take a few minutes to complete your weekly CEO review so you can plan better for next week.
 
-→ Log in to your portal to fill it out.`,
+→ Log in to your portal to fill it out:
+${SCORECARD_URL}`,
   'one-hour-left': `You have one hour left to submit your 6C's Scorecard for the week. The window closes at 6pm Eastern.
 
-Don't miss your weekly CEO review—log in and complete it now.
+Don't miss your weekly CEO review—log in and complete it now:
+${SCORECARD_URL}
 
 → Submit your scorecard before 6pm.`,
 };
 
 function isValidEmail(s) {
   return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+}
+
+function bodyToHtml(body) {
+  const html = body.split('\n\n').map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+  return html.replace(SCORECARD_URL, `<a href="${SCORECARD_URL}">${SCORECARD_URL}</a>`);
 }
 
 export async function GET(request) {
@@ -95,7 +105,7 @@ export async function GET(request) {
     }
     const subject = SUBJECTS.available;
     const body = BODIES.available;
-    const html = body.split('\n\n').map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('') + '<p style="margin-top:1em;color:#999;font-size:12px;">[Test email — 6C reminders]</p>';
+    const html = bodyToHtml(body) + '<p style="margin-top:1em;color:#999;font-size:12px;">[Test email — 6C reminders]</p>';
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -171,7 +181,7 @@ export async function GET(request) {
 
   const subject = SUBJECTS[type];
   const body = BODIES[type];
-  const html = body.split('\n\n').map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('') + '<p style="margin-top:1em;color:#666;font-size:12px;">Aligned Power Portal · 6C\'s Weekly Scorecard</p>';
+  const html = bodyToHtml(body) + '<p style="margin-top:1em;color:#666;font-size:12px;">Aligned Power Portal · 6C\'s Weekly Scorecard</p>';
 
   let sent = 0;
   for (const to of emails) {

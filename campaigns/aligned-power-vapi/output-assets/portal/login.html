@@ -81,7 +81,7 @@
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var params = new URLSearchParams(window.location.search);
       var redirect = params.get('redirect') || '';
-      var allowedRedirects = ['dashboard.html', 'admin.html', 'settings.html'];
+      var allowedRedirects = ['dashboard.html', 'admin.html', 'settings.html', 'six-c-scorecard.html'];
       var redirectTo = allowedRedirects.indexOf(redirect) !== -1 ? redirect : 'dashboard.html';
 
       var session = await supabase.auth.getSession();
