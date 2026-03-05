@@ -63,9 +63,14 @@ Don't miss your weekly CEO review—log in and complete it now.
 → Submit your scorecard before 6pm.`,
 };
 
+function isValidEmail(s) {
+  return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+}
+
 export async function GET(request) {
+  const url = request.url ? new URL(request.url) : null;
   const authHeader = request.headers.get('authorization') || request.headers.get('Authorization') || '';
-  const secret = authHeader.replace(/^Bearer\s+/i, '') || (request.url ? new URL(request.url).searchParams.get('secret') : '');
+  const secret = authHeader.replace(/^Bearer\s+/i, '') || (url && url.searchParams.get('secret')) || '';
   const cronSecret = process.env.CRON_SECRET;
   if (cronSecret && secret !== cronSecret) {
     return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
@@ -78,6 +83,56 @@ export async function GET(request) {
 
   if (!supabaseUrl || !serviceKey) {
     return new Response(JSON.stringify({ error: 'missing_env', message: 'SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const testSendEmail = url && url.searchParams.get('test_send');
+  if (testSendEmail) {
+    if (!isValidEmail(testSendEmail)) {
+      return new Response(JSON.stringify({ error: 'invalid_email', message: 'test_send must be a valid email address' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (!resendKey) {
+      return new Response(JSON.stringify({ error: 'missing_env', message: 'RESEND_API_KEY required to send test email' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+    const subject = SUBJECTS.available;
+    const body = BODIES.available;
+    const html = body.split('\n\n').map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('') + '<p style="margin-top:1em;color:#999;font-size:12px;">[Test email — 6C reminders]</p>';
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: [testSendEmail.trim().toLowerCase()],
+          subject: '[Test] ' + subject,
+          html,
+          reply_to: process.env['6C_REPLY_TO'] || undefined,
+        }),
+      });
+      if (!res.ok) {
+        const errText = await res.text();
+        return new Response(JSON.stringify({ ok: false, error: 'resend_failed', status: res.status, detail: errText.slice(0, 500) }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+      }
+      const data = await res.json().catch(() => ({}));
+      return new Response(JSON.stringify({ ok: true, test_send: true, to: testSendEmail, id: data.id || null }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    } catch (err) {
+      return new Response(JSON.stringify({ ok: false, error: 'send_error', message: String(err.message) }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+  }
+
+  const statusOnly = url && (url.searchParams.get('status') === '1' || url.searchParams.get('status') === 'true');
+  if (statusOnly) {
+    const e = nowInEastern();
+    const type = getReminderType();
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        status: true,
+        eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
+        reminderType: type,
+        message: type ? `Would send "${type}" to active clients.` : 'No reminder scheduled for this time (Fri/Sat/Sun 5pm Eastern only).',
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 
   const type = getReminderType();

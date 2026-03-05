@@ -45,7 +45,7 @@ Without sending email (to see which type would run):
    curl -H "Authorization: Bearer YOUR_CRON_SECRET" "https://your-app.vercel.app/api/cron/6c-reminders"
    ```
 
-Response example: `{"ok":true,"type":"available","sent":3,"total":3}`.
+For **status only** (no email): add `?status=1` to the URL. For **one test email** to your inbox: add `?test_send=your@email.com`. Full testing steps: [6c-reminders-setup-guide.md](./6c-reminders-setup-guide.md#testing-that-it-works).
 
 ## Hobby plan note
 
