@@ -66,7 +66,7 @@
           <div class="min-w-0 flex-1">
             <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-primary)] mb-2">This week's focus</p>
             <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
-            <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your one thing to improve last week. Keep it top of mind.</p>
+            <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
             <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
               <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
                 <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="one-thing-banner-chevron"></i>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div id="one-thing-banner-accordion" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]/60" role="region" aria-label="6C reflections">
-          <div id="one-thing-banner-reflections" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+          <div id="one-thing-banner-reflections" class="grid grid-cols-1 gap-4"></div>
           <div class="mt-4 pt-3 border-t border-[var(--ap-border)]/40 flex justify-center">
             <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">
               <i data-lucide="chevron-up" class="w-4 h-4"></i>
@@ -96,7 +96,7 @@
             <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
           </div>
           <div class="mt-6">
-            <a id="six-c-fill-link" href="six-c-scorecard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+            <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's</a>
             <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
         </div>
@@ -1545,9 +1545,17 @@
         var linkEl = document.getElementById('six-c-fill-link');
         var closedMsg = document.getElementById('six-c-window-closed-msg');
         var urgencyEl = document.getElementById('six-c-window-urgency');
-        if (win && win.canSubmit) {
+
+        // Determine if latest submission was during this week's window
+        var submittedThisWeek = false;
+        if (latest6C && latest6C.created_at && win && win.opensAt && win.closesAt) {
+          var submittedAt = new Date(latest6C.created_at);
+          submittedThisWeek = submittedAt >= win.opensAt && submittedAt <= win.closesAt;
+        }
+
+        urgencyEl.classList.add('hidden');
+        if (win && win.canSubmit && !submittedThisWeek) {
           linkEl.classList.remove('hidden');
-          linkEl.removeAttribute('aria-disabled');
           closedMsg.classList.add('hidden');
           urgencyEl.classList.remove('hidden');
           document.getElementById('six-c-window-message').textContent = win.message;
@@ -1558,10 +1566,14 @@
           } else {
             countdownEl.classList.add('hidden');
           }
+        } else if (submittedThisWeek) {
+          linkEl.classList.add('hidden');
+          closedMsg.textContent = "You've already filled out your 6C's scorecard for the week.";
+          closedMsg.classList.remove('hidden');
         } else {
           linkEl.classList.add('hidden');
-          closedMsg.classList.add('hidden');
-          urgencyEl.classList.add('hidden');
+          closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
+          closedMsg.classList.remove('hidden');
         }
         document.getElementById('six-c-section').classList.remove('hidden');
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();

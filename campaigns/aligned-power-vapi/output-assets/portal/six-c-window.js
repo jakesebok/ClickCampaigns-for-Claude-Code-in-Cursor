@@ -88,11 +88,15 @@
       message = 'Your scorecard window has closed. Your next scorecard will be available Friday at 12pm.';
     }
 
+    // opensAt = the Friday noon that started (or will start) the current/upcoming window
+    var opensAt = inWindow ? new Date(fridayNoon.getTime() - 7 * 24 * 60 * 60 * 1000) : fridayNoon;
+
     return {
       status: status,
       canSubmit: status === 'open',
       message: message,
       countdownMessage: countdownMessage,
+      opensAt: opensAt,
       closesAt: closesAt,
       nextOpen: nextOpen,
       daysUntil: daysUntil,
