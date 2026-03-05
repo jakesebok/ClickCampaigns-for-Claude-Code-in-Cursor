@@ -69,7 +69,7 @@
             <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
             <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
               <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
-                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="one-thing-banner-chevron"></i>
+                <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
                 <span>View my 6C reflections</span>
               </button>
             </div>
@@ -1521,13 +1521,16 @@
           document.getElementById('one-thing-banner-reflections').innerHTML = html;
           var expandBtn = document.getElementById('one-thing-banner-expand-btn');
           var accordion = document.getElementById('one-thing-banner-accordion');
-          var chevron = document.getElementById('one-thing-banner-chevron');
           var collapseBtn = document.getElementById('one-thing-banner-collapse-btn');
+          var SVG_DOWN = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+          var SVG_UP   = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polyline points="18 15 12 9 6 15"></polyline></svg>';
+          var chevronWrap = document.getElementById('one-thing-banner-chevron');
+          if (chevronWrap) chevronWrap.innerHTML = SVG_DOWN;
           function setAccordionOpen(open) {
             accordion.classList.toggle('hidden', !open);
             expandBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            if (chevron) chevron.setAttribute('data-lucide', open ? 'chevron-up' : 'chevron-down');
-            if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+            var el = document.getElementById('one-thing-banner-chevron');
+            if (el) el.innerHTML = open ? SVG_UP : SVG_DOWN;
           }
           expandBtn.addEventListener('click', function() {
             var isOpen = !accordion.classList.contains('hidden');
