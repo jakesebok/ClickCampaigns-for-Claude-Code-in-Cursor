@@ -97,10 +97,9 @@
         </div>
       </form>
 
-      <div id="submit-success" class="hidden mt-8 p-6 rounded-xl bg-[var(--ap-primary)]/10 border border-[var(--ap-primary)]/20">
-        <p class="text-[var(--ap-primary)] font-semibold mb-1">Scorecard saved</p>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Your 6C's scores, reflections, and your one thing to improve are saved. You can see your latest on your dashboard.</p>
-        <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">View dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      <div id="submit-success" class="hidden mt-8 p-6 rounded-xl bg-[var(--ap-primary)]/10 border border-[var(--ap-primary)]/20 text-center">
+        <p class="text-[var(--ap-primary)] font-semibold text-lg mb-1">Scorecard saved</p>
+        <p class="text-[var(--ap-secondary)] text-sm">Redirecting to your dashboard…</p>
       </div>
     </div>
   </main>
@@ -338,7 +337,7 @@
 
         form.classList.add('hidden');
         document.getElementById('submit-success').classList.remove('hidden');
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        setTimeout(function() { window.location.href = 'dashboard.html'; }, 1500);
       });
     })();
   </script>

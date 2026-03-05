@@ -71,9 +71,9 @@
     if (status === 'before') {
       var ms = fridayNoon - now;
       daysUntil = Math.floor(ms / (24 * 60 * 60 * 1000));
-      if (daysUntil > 1) message = 'Your next scorecard is due in ' + daysUntil + ' days.';
-      else if (daysUntil === 1) message = 'Your next scorecard is due in 24 hours.';
-      else message = 'Your next scorecard is due in less than 24 hours.';
+      if (daysUntil > 1) message = 'Your next scorecard opens in ' + daysUntil + ' days (Friday 12pm).';
+      else if (daysUntil === 1) message = 'Your next scorecard opens in about 24 hours (Friday 12pm).';
+      else message = 'Your next scorecard opens in less than 24 hours (Friday 12pm).';
     } else if (status === 'open') {
       message = 'Your scorecard is available now. Fill it out before Sunday 6pm.';
       var msLeft = closesAt - now;
