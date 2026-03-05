@@ -54,6 +54,9 @@
   <main class="max-w-3xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading your results…</div>
     <div id="dashboard-content" class="hidden">
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Aligned Power Dashboard</h1>
+      <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
+
       <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 p-6 shadow-lg dashboard-card">
         <div class="flex gap-4 items-start">
           <div class="shrink-0 w-12 h-12 rounded-full bg-[var(--ap-accent)]/30 flex items-center justify-center" aria-hidden="true">
@@ -67,16 +70,9 @@
         </div>
       </div>
 
-      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Aligned Power Dashboard</h1>
-      <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
-
       <div id="six-c-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Your latest 6C's</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
-        <div id="six-c-window-urgency" class="mb-4 rounded-xl border-2 border-[var(--ap-primary)]/30 bg-[var(--ap-primary)]/5 px-4 py-3 hidden">
-          <p id="six-c-window-message" class="font-semibold text-[var(--ap-primary)] text-sm"></p>
-          <p id="six-c-window-countdown" class="text-[var(--ap-secondary)] text-sm mt-1 hidden"></p>
-        </div>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
           <div id="six-c-one-thing" class="mt-6 pt-6 border-t border-[var(--ap-border)]/60 hidden">
@@ -87,6 +83,10 @@
             <a id="six-c-fill-link" href="six-c-scorecard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
             <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
+        </div>
+        <div id="six-c-window-urgency" class="mt-4 rounded-xl border-2 border-[var(--ap-primary)]/30 bg-[var(--ap-primary)]/5 px-4 py-3 hidden">
+          <p id="six-c-window-message" class="font-semibold text-[var(--ap-primary)] text-sm"></p>
+          <p id="six-c-window-countdown" class="text-[var(--ap-secondary)] text-sm mt-1 hidden"></p>
         </div>
       </div>
 
