@@ -4,12 +4,13 @@ Reminder emails are sent to **active clients** (from `portal_active_clients`) du
 
 ## Schedule (Eastern)
 
-| When (Eastern)     | Email |
-|--------------------|--------|
-| Friday 12:00–12:59 | "Your scorecard is available for this week" |
-| Saturday 12:00–12:59 | "Reminder: Get your scorecard in this weekend" |
-| Sunday 12:00–12:59 | "Final day: Submit by 6pm today" |
-| Sunday 15:00–15:59 (3pm) | "About 3 hours left to submit" |
+The cron runs **once per day** at 22:00 UTC (5pm Eastern). The API sends one email based on the day:
+
+| Day (when cron runs at 5pm Eastern) | Email |
+|-------------------------------------|--------|
+| Friday | "Your scorecard is available for this week" |
+| Saturday | "Reminder: Get your scorecard in this weekend" |
+| Sunday | "One hour left to submit" (only Sunday email) |
 
 ## Setup
 
@@ -25,7 +26,7 @@ Summary:
 `vercel.json` in this folder already defines:
 
 - Path: `/api/cron/6c-reminders`
-- Schedule: `0 16,17,19,20 * * 0,5,6` (4 times per day on Fri/Sat/Sun, UTC). The API only sends when the current Eastern time matches one of the windows above.
+- Schedule: `0 22 * * *` (once daily at 22:00 UTC, which is 5pm Eastern). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday 5pm → “available”, Saturday 5pm → reminder, Sunday 5pm → “one hour left” only.
 
 After deployment, Cron runs automatically. You can confirm in Vercel → Project → Settings → Crons.
 
@@ -46,9 +47,7 @@ Without sending email (to see which type would run):
 
 Response example: `{"ok":true,"type":"available","sent":3,"total":3}`.
 
-## One-hour-left email (optional)
+## Hobby plan note
 
-The current “3 hours left” email runs at Sunday 3pm Eastern. To add a “1 hour left” email at Sunday 5pm Eastern:
+Vercel Hobby allows only **one cron run per day**. The schedule is set to `0 22 * * *` (once daily at 5pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 12pm emails plus the Sunday 5pm "one hour left" email.
 
-1. In `api/cron/6c-reminders.js`, add a branch for `e.dayOfWeek === 0 && e.hour === 17` and a subject/body for the 1-hour reminder.
-2. Add a cron time that lands in the 17:00 hour Eastern on Sunday (e.g. 22:00 UTC for EDT) in `vercel.json` if needed.

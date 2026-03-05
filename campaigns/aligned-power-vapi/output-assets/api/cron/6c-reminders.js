@@ -1,10 +1,9 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Sends to active clients based on current time in America/New_York:
- * - Friday 12:00–12:59 → "Your scorecard is available"
- * - Saturday 12:00–12:59 → Saturday reminder
- * - Sunday 12:00–12:59 → "Final day to submit"
- * - Sunday 15:00–15:59 (3pm) → "3 hours left"
+ * Schedule: once daily at 22:00 UTC (5pm Eastern). Sends based on America/New_York:
+ * - Friday 5pm Eastern → "Your scorecard is available"
+ * - Saturday 5pm Eastern → Saturday reminder
+ * - Sunday 5pm Eastern → "One hour left to submit" (only Sunday email)
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
  *      6C_FROM_EMAIL (e.g. scorecard@alignedpower.coach), 6C_REPLY_TO (optional).
@@ -33,18 +32,17 @@ function nowInEastern() {
 
 function getReminderType() {
   const e = nowInEastern();
-  if (e.dayOfWeek === 5 && e.hour === 12) return 'available';
-  if (e.dayOfWeek === 6 && e.hour === 12) return 'saturday';
-  if (e.dayOfWeek === 0 && e.hour === 12) return 'sunday';
-  if (e.dayOfWeek === 0 && e.hour === 15) return 'three-hours-left';
+  const is5pm = e.hour === 17 || e.hour === 18;
+  if (e.dayOfWeek === 5 && is5pm) return 'available';
+  if (e.dayOfWeek === 6 && is5pm) return 'saturday';
+  if (e.dayOfWeek === 0 && is5pm) return 'one-hour-left';
   return null;
 }
 
 const SUBJECTS = {
   available: "Your 6C's Scorecard is available for this week",
   saturday: "Reminder: Get your 6C's Scorecard in this weekend",
-  sunday: "Final day: Submit your 6C's Scorecard by 6pm today",
-  'three-hours-left': "About 3 hours left to submit your 6C's Scorecard",
+  'one-hour-left': "One hour left to submit your 6C's Scorecard",
 };
 
 const BODIES = {
@@ -58,14 +56,9 @@ Fill out your 6C's Scorecard between now and Sunday 6pm (Eastern). It only takes
 Take a few minutes to complete your weekly CEO review so you can plan better for next week.
 
 → Log in to your portal to fill it out.`,
-  sunday: `Today is the last day to submit your 6C's Scorecard for the week. The window closes at 6pm Eastern.
+  'one-hour-left': `You have one hour left to submit your 6C's Scorecard for the week. The window closes at 6pm Eastern.
 
-If you haven't already, log in and complete your weekly review so you don't miss the cycle.
-
-→ Submit your scorecard before 6pm.`,
-  'three-hours-left': `You have about 3 hours left to submit your 6C's Scorecard for the week. The window closes at 6pm Eastern.
-
-Don't miss your weekly CEO review—log in and complete it soon.
+Don't miss your weekly CEO review—log in and complete it now.
 
 → Submit your scorecard before 6pm.`,
 };
