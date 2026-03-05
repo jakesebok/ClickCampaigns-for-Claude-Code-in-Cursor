@@ -1464,8 +1464,7 @@
         var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(2);
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');
-          var linkHtml = 'Complete your first 6C scorecard whenever you\'re ready. <a href="six-c-scorecard.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out your first scorecard</a>. After that, the weekly window (Friday 12pm – Sunday 6pm Eastern) will apply.';
-          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">' + linkHtml + '</p>';
+          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">Complete your first 6C scorecard whenever you\'re ready.</p>';
           document.getElementById('six-c-fill-link').classList.remove('hidden');
           document.getElementById('six-c-fill-link').setAttribute('href', 'six-c-scorecard.html');
           document.getElementById('six-c-fill-link').innerHTML = 'Fill out your first 6C scorecard <i data-lucide="arrow-right" class="w-4 h-4"></i>';
