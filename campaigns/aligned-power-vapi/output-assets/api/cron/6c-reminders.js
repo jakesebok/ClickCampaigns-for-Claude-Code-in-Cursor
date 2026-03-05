@@ -6,7 +6,7 @@
  * - Sunday 5pm Eastern → "One hour left to submit" (only Sunday email)
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
- *      6C_FROM_EMAIL (e.g. scorecard@alignedpower.coach), 6C_REPLY_TO (optional).
+ *      SIX_C_FROM_EMAIL (e.g. scorecard@alignedpower.coach), SIX_C_REPLY_TO (optional).
  */
 
 const TZ = 'America/New_York';
@@ -70,8 +70,8 @@ function isValidEmail(s) {
 export async function GET(request) {
   const url = request.url ? new URL(request.url) : null;
   const authHeader = request.headers.get('authorization') || request.headers.get('Authorization') || '';
-  const secret = authHeader.replace(/^Bearer\s+/i, '') || (url && url.searchParams.get('secret')) || '';
-  const cronSecret = process.env.CRON_SECRET;
+  const secret = (authHeader.replace(/^Bearer\s+/i, '').trim() || (url && url.searchParams.get('secret')) || '').trim();
+  const cronSecret = (process.env.CRON_SECRET || '').trim();
   if (cronSecret && secret !== cronSecret) {
     return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
@@ -79,7 +79,7 @@ export async function GET(request) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const resendKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env['6C_FROM_EMAIL'] || process.env.RESEND_FROM_EMAIL || 'scorecard@alignedpower.coach';
+  const fromEmail = process.env.SIX_C_FROM_EMAIL || process.env.RESEND_FROM_EMAIL || 'scorecard@alignedpower.coach';
 
   if (!supabaseUrl || !serviceKey) {
     return new Response(JSON.stringify({ error: 'missing_env', message: 'SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
@@ -105,12 +105,19 @@ export async function GET(request) {
           to: [testSendEmail.trim().toLowerCase()],
           subject: '[Test] ' + subject,
           html,
-          reply_to: process.env['6C_REPLY_TO'] || undefined,
+          reply_to: process.env.SIX_C_REPLY_TO || undefined,
         }),
       });
       if (!res.ok) {
         const errText = await res.text();
-        return new Response(JSON.stringify({ ok: false, error: 'resend_failed', status: res.status, detail: errText.slice(0, 500) }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+        const is403 = res.status === 403;
+        const hint = is403
+          ? ' Set SIX_C_FROM_EMAIL in Vercel to the exact address you verified in Resend (e.g. notifications@notifications.alignedpower.coach if you verified that subdomain).'
+          : '';
+        return new Response(
+          JSON.stringify({ ok: false, error: 'resend_failed', status: res.status, detail: errText.slice(0, 500), hint: hint || undefined }),
+          { status: 502, headers: { 'Content-Type': 'application/json' } }
+        );
       }
       const data = await res.json().catch(() => ({}));
       return new Response(JSON.stringify({ ok: true, test_send: true, to: testSendEmail, id: data.id || null }), { status: 200, headers: { 'Content-Type': 'application/json' } });
@@ -180,7 +187,7 @@ export async function GET(request) {
           to: [to],
           subject,
           html,
-          reply_to: process.env['6C_REPLY_TO'] || undefined,
+          reply_to: process.env.SIX_C_REPLY_TO || undefined,
         }),
       });
       if (res.ok) sent++;

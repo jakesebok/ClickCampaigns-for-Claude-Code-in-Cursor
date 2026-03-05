@@ -18,7 +18,7 @@ The cron runs **once per day** at 22:00 UTC (5pm Eastern). The API sends one ema
 
 Summary:
 
-- **Resend:** Emails are sent via [Resend](https://resend.com). Create an API key and add **RESEND_API_KEY** in Vercel. Verify your domain in Resend so you can send from e.g. `scorecard@alignedpower.coach`, or set **6C_FROM_EMAIL** to a verified address.
+- **Resend:** Emails are sent via [Resend](https://resend.com). Create an API key and add **RESEND_API_KEY** in Vercel. Verify your domain in Resend so you can send from e.g. `scorecard@alignedpower.coach`, or set **SIX_C_FROM_EMAIL** to a verified address.
 - **Cron secret:** Generate a random string (e.g. `openssl rand -hex 32`) and add **CRON_SECRET** in Vercel. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>` when it runs.
 
 ### 3. Vercel Cron
@@ -32,7 +32,7 @@ After deployment, Cron runs automatically. You can confirm in Vercel → Project
 
 ### 4. Optional env
 
-- **6C_REPLY_TO** – Reply-to address for reminder emails.
+- **SIX_C_REPLY_TO** – Reply-to address for reminder emails.
 
 ## Manual test
 

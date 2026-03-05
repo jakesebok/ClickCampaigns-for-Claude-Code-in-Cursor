@@ -41,15 +41,17 @@ This tells Vercel how to send email through Resend. You’ll get the key from Re
 5. Under **Environments**, leave **Production** checked.
 6. Click **Save**.
 
-### Step 5: (Optional) Add 6C_FROM_EMAIL
+### Step 5: Add SIX_C_FROM_EMAIL (recommended)
 
-Only do this if you verified your own domain in Resend and want reminders to come “From” that address (e.g. scorecard@yourdomain.com).
+Set this to the exact From address that matches the domain or **subdomain** you verified in Resend (e.g. if you verified notifications.alignedpower.coach, use something like notifications@notifications.alignedpower.coach).
 
 1. Click **Add New**.
-2. In **Key**, type exactly: `6C_FROM_EMAIL`
-3. In **Value**, type the exact email address you verified in Resend (e.g. `scorecard@alignedpower.coach`).
+2. In **Key**, type exactly: `SIX_C_FROM_EMAIL`
+3. In **Value**, type the exact email address you verified in Resend (e.g. `notifications@notifications.alignedpower.coach` if you verified that subdomain).
 4. Under **Environments**, leave **Production** checked.
 5. Click **Save**.
+
+**Important:** If you verified a **subdomain** in Resend (e.g. notifications.alignedpower.coach), set **SIX_C_FROM_EMAIL** to an address on that subdomain (e.g. `notifications@notifications.alignedpower.coach`), not the root domain. Otherwise you may get "domain is not verified" from Resend.
 
 ### Step 6: Redeploy
 
@@ -60,7 +62,7 @@ Environment variables are applied on the **next** deployment.
 3. Click **Redeploy**.
 4. Wait for the deployment to finish.
 
-After this, **CRON_SECRET** and **RESEND_API_KEY** (and **6C_FROM_EMAIL** if you set it) are available to `/api/cron/6c-reminders`.
+After this, **CRON_SECRET** and **RESEND_API_KEY** (and **SIX_C_FROM_EMAIL** if you set it) are available to `/api/cron/6c-reminders`.
 
 ---
 
@@ -121,14 +123,14 @@ Resend will show a short list of “DNS records.” You add these where your dom
 2. In Resend, open **Domains**, find your domain, and click **Verify** (or wait for it to verify automatically).
 3. When the status shows **Verified**, you can use any address at that domain as the “From” address (e.g. scorecard@alignedpower.coach).
 
-### Step 4: Set 6C_FROM_EMAIL in Vercel (optional but recommended)
+### Step 4: Set SIX_C_FROM_EMAIL in Vercel (optional but recommended)
 
 1. In Vercel → **Settings** → **Environment Variables**, add (if you haven’t already):
-   - **Key:** `6C_FROM_EMAIL`
+   - **Key:** `SIX_C_FROM_EMAIL`
    - **Value:** `scorecard@alignedpower.coach` (or whatever address you want, at the verified domain).
 2. Redeploy so the new variable is applied.
 
-The 6C reminder API uses this as the “From” address. If you don’t set **6C_FROM_EMAIL**, the code falls back to `scorecard@alignedpower.coach` — that address must still be allowed by your verified domain in Resend.
+The 6C reminder API uses this as the “From” address. If you don’t set **SIX_C_FROM_EMAIL**, the code falls back to `scorecard@alignedpower.coach` — that address must still be allowed by your verified domain in Resend.
 
 ---
 
@@ -137,7 +139,7 @@ The 6C reminder API uses this as the “From” address. If you don’t set **6C
 Good for testing only.
 
 1. Do **not** add or verify a domain in Resend.
-2. **Do not** set **6C_FROM_EMAIL** in Vercel, **or** set it to an address Resend allows for testing (e.g. the one they show in the dashboard, often `onboarding@resend.dev` or your own verified email in Resend).
+2. **Do not** set **SIX_C_FROM_EMAIL** in Vercel, **or** set it to an address Resend allows for testing (e.g. the one they show in the dashboard, often `onboarding@resend.dev` or your own verified email in Resend).
 3. Resend may require you to verify the **recipient** email when using their default domain. Check their docs for “testing” or “sandbox” limits.
 
 For production, use **Part 3a** and verify your own domain.
@@ -146,7 +148,7 @@ For production, use **Part 3a** and verify your own domain.
 
 ## Testing that it works
 
-After you’ve set **CRON_SECRET**, **RESEND_API_KEY**, and (optionally) **6C_FROM_EMAIL** and redeployed, you can verify everything in three steps. **No coding required**—you'll only use your web browser.
+After you’ve set **CRON_SECRET**, **RESEND_API_KEY**, and (optionally) **SIX_C_FROM_EMAIL** and redeployed, you can verify everything in three steps. **No coding required**—you'll only use your web browser.
 
 You'll need two things written down: your **Vercel site address** (e.g. aligned-power.vercel.app) and the **CRON_SECRET** value you pasted into Vercel (the long random password from Step 3 in Part 1).
 
@@ -206,9 +208,20 @@ If you receive that email, your setup is working correctly.
 
 ---
 
+### If you get "unauthorized" on Tests 2 or 3
+
+That usually means the secret in the URL doesn't match what's in Vercel. Try this:
+
+1. **Use your real CRON_SECRET.** In Tests 2 and 3 you must replace **YOUR_SECRET** with the exact value you added in Vercel (Settings → Environment Variables → CRON_SECRET). Copy it from Vercel again and paste it into the URL where it says YOUR_SECRET. Don't leave the word "YOUR_SECRET" in the link.
+2. **No spaces.** When you paste the secret into the URL, make sure there are no spaces before or after it.
+3. **Special characters in the secret.** If your secret contains **&**, **=**, or **#**, the browser can break the URL and the server won't see the full secret. Fix it by creating a **new** CRON_SECRET in Vercel that uses only letters and numbers (e.g. 32 random characters like `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6`). Save, redeploy, then use that new value in the test URL.
+4. **Redeploy after adding the secret.** Vercel only loads new environment variables after you redeploy. Go to Deployments → ⋯ on the latest deployment → Redeploy, wait for it to finish, then try the test again.
+
+---
+
 ### If the test email doesn't arrive or you see an error
 
-- If the **browser** shows something like resend_failed or an error message, read the rest of the text on the page. It often says what went wrong (e.g. "domain not verified" or "invalid from address"). Fix that in Resend (e.g. finish domain verification) or in Vercel (e.g. set **6C_FROM_EMAIL** to an address that's allowed for your domain), then try Test 3 again.
+- If the **browser** shows something like resend_failed or an error message, read the rest of the text on the page. It often says what went wrong (e.g. "domain not verified" or "invalid from address"). Fix that in Resend (e.g. finish domain verification) or in Vercel (e.g. set **SIX_C_FROM_EMAIL** to an address that's allowed for your domain), then try Test 3 again.
 - If the **browser** shows ok and test_send true but you never get the email, check your spam/junk folder and "Promotions" (Gmail). If it's still not there after a few minutes, check Resend's dashboard for any delivery errors or limits.
 
 ### When do the real reminders go out?
@@ -223,7 +236,7 @@ The system sends reminders **once per day** at **5pm Eastern** (Friday, Saturday
 - [ ] **Resend:** Created an API key; copied it.
 - [ ] **Vercel:** Added **RESEND_API_KEY** (paste of that key).
 - [ ] **Resend:** Either verified your domain (Part 3a) or accepted using Resend’s default (Part 3b).
-- [ ] **Vercel:** Optionally added **6C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
+- [ ] **Vercel:** Optionally added **SIX_C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
 - [ ] **Vercel:** Redeployed so the new env vars are in effect.
 
 After that, the cron job will run once daily at 5pm Eastern (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
