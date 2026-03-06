@@ -159,7 +159,7 @@ View your full results: ${ctaUrl}
   return { html, text };
 }
 
-function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, reflectionResponse, timestamp }) {
+function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp }) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
   const ordinalNum = ordinal(assessmentNumber || 1);
   const accountStatus = hasPortalAccount ? 'Has portal account' : 'No account yet';
@@ -267,8 +267,59 @@ Primary Challenge: ${cp.primaryChallenge || 'Not provided'}`;
   return { html, text };
 }
 
+async function lookupUserByEmail(supabaseUrl, serviceRoleKey, email) {
+  // Returns { hasAccount, assessmentNumber, contextualProfile, firstName, lastName }
+  const result = { hasAccount: false, assessmentNumber: 1, contextualProfile: null, firstName: null, lastName: null };
+  if (!email || !supabaseUrl || !serviceRoleKey) return result;
+
+  const emailNorm = email.trim().toLowerCase();
+
+  // 1. Check auth.users for a portal account and pull user_metadata
+  try {
+    const usersRes = await fetch(
+      `${supabaseUrl}/auth/v1/admin/users?filter=${encodeURIComponent(emailNorm)}`,
+      { headers: { 'apikey': serviceRoleKey, 'Authorization': `Bearer ${serviceRoleKey}` } }
+    );
+    if (usersRes.ok) {
+      const usersJson = await usersRes.json();
+      const users = usersJson.users || [];
+      const match = users.find(u => (u.email || '').toLowerCase() === emailNorm);
+      if (match) {
+        result.hasAccount = true;
+        const meta = match.user_metadata || {};
+        result.contextualProfile = meta.contextual_profile || null;
+        if (!result.firstName && meta.first_name) result.firstName = meta.first_name;
+        if (!result.lastName  && meta.last_name)  result.lastName  = meta.last_name;
+      }
+    }
+  } catch (e) {}
+
+  // 2. Count prior assessments for this email
+  try {
+    const countRes = await fetch(
+      `${supabaseUrl}/rest/v1/vapi_results?email=eq.${encodeURIComponent(emailNorm)}&select=id`,
+      {
+        headers: {
+          'apikey': serviceRoleKey,
+          'Authorization': `Bearer ${serviceRoleKey}`,
+          'Prefer': 'count=exact',
+          'Range': '0-0',
+        },
+      }
+    );
+    const contentRange = countRes.headers.get('content-range') || '';
+    const match = contentRange.match(/\/(\d+)$/);
+    // Count is rows already saved; this call happens after save, so count = this assessment number
+    result.assessmentNumber = match ? parseInt(match[1], 10) : 1;
+  } catch (e) {}
+
+  return result;
+}
+
 export async function POST(request) {
   const resendKey = process.env.RESEND_API_KEY;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!resendKey) {
     return new Response(JSON.stringify({ error: 'missing_env', message: 'RESEND_API_KEY required' }), {
@@ -287,11 +338,18 @@ export async function POST(request) {
     email, firstName, lastName, overall, overallTier,
     arenaScores = {}, arenaTiers = {}, domains = [],
     importanceRatings = {}, priorityMatrix = {},
-    contextualProfile, assessmentNumber, hasPortalAccount,
-    reflectionResponse,
   } = body;
 
   const timestamp = new Date().toISOString();
+
+  // Server-side lookup: account status, assessment number, contextual profile
+  const lookup = await lookupUserByEmail(supabaseUrl, serviceRoleKey, email);
+  const hasPortalAccount = lookup.hasAccount;
+  const assessmentNumber = lookup.assessmentNumber;
+  const contextualProfile = lookup.contextualProfile;
+  // Use metadata name if quiz didn't capture one
+  const resolvedFirstName = firstName || lookup.firstName;
+  const resolvedLastName  = lastName  || lookup.lastName;
 
   // Determine #1 Critical Priority
   const criticals = priorityMatrix.criticalPriority || [];
@@ -308,7 +366,7 @@ export async function POST(request) {
 
   // Email 1: User
   if (email) {
-    const { html, text } = buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount });
+    const { html, text } = buildUserEmail({ firstName: resolvedFirstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount });
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -335,10 +393,10 @@ export async function POST(request) {
 
   // Email 2: Admin
   const { html: adminHtml, text: adminText } = buildAdminEmail({
-    email, firstName, lastName, overall, overallTier,
-    arenaScores, arenaTiers, domains, importanceRatings,
-    priorityMatrix, contextualProfile, assessmentNumber,
-    hasPortalAccount, reflectionResponse, timestamp,
+    email, firstName: resolvedFirstName, lastName: resolvedLastName,
+    overall, overallTier, arenaScores, arenaTiers, domains,
+    importanceRatings, priorityMatrix, contextualProfile,
+    assessmentNumber, hasPortalAccount, timestamp,
   });
   try {
     const res = await fetch('https://api.resend.com/emails', {

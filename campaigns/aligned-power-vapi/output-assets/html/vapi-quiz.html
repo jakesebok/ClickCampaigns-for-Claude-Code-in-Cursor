@@ -672,6 +672,8 @@
       }
 
       function fireEmailTrigger(results) {
+        // Pass only assessment data — the server looks up account status,
+        // assessment number, and contextual profile by email using the service role key.
         var payload = {
           email: results.email || null,
           firstName: results.firstName || null,
@@ -683,8 +685,6 @@
           domains: results.domains,
           importanceRatings: results.importanceRatings,
           priorityMatrix: results.priorityMatrix,
-          assessmentNumber: 1,
-          hasPortalAccount: false,
         };
         fetch('/api/vapi-assessment-complete', {
           method: 'POST',
