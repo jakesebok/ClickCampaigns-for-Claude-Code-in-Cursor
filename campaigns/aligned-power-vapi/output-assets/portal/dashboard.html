@@ -311,6 +311,10 @@
               </div>
             </div>
             <p id="progress-transition-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed mt-2"></p>
+            <div id="progress-importance-shift" class="hidden mt-3 p-3 bg-[var(--ap-bg)] border border-[var(--ap-border)] rounded-lg">
+              <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">Priority Shift</p>
+              <p id="progress-importance-shift-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -417,6 +421,7 @@
       var { data: rows, error } = await supabase
         .from('vapi_results')
         .select('id, email, first_name, last_name, results, created_at')
+        .eq('email', email)
         .order('created_at', { ascending: false });
 
       document.getElementById('loading').classList.add('hidden');
@@ -1386,6 +1391,44 @@
           textEl.textContent = interpretation || '';
           textEl.classList.toggle('hidden', !interpretation);
           block.classList.remove('hidden');
+
+          // Importance shift detection (domain metrics only)
+          var shiftEl = document.getElementById('progress-importance-shift');
+          var shiftTextEl = document.getElementById('progress-importance-shift-text');
+          if (shiftEl && shiftTextEl) {
+            var shiftMsg = '';
+            if (isDomain) {
+              var domCode = selectedMetricKey.slice(7);
+              var prevImp = (prevRes.importanceRatings || {})[domCode];
+              var currImp = (currRes.importanceRatings || {})[domCode];
+              if (prevImp != null && currImp != null) {
+                var impDiff = currImp - prevImp;
+                var domLabel = getMetricLabel(selectedMetricKey);
+                if (Math.abs(impDiff) >= 3) {
+                  var scoreChange = change != null ? change : 0;
+                  if (impDiff > 0) {
+                    // Importance increased
+                    var tail = scoreChange >= 0.5
+                      ? 'Your score reflects that shift.'
+                      : "Your score hasn't caught up yet. Now that this is a real priority, give it the focused attention it deserves.";
+                    shiftMsg = 'You rated ' + domLabel + ' as ' + prevImp + '\u202f/\u202f10 priority last time and ' + currImp + '\u202f/\u202f10 this time. This area has become significantly more important to you. ' + tail;
+                  } else {
+                    // Importance decreased
+                    var tail2 = (currScore != null && currScore >= 6.0)
+                      ? 'Your score is still strong here, so this may be a healthy rebalancing of your attention.'
+                      : 'Both your priority and your score declined. Make sure this is a conscious choice and not avoidance disguised as reprioritization.';
+                    shiftMsg = 'You rated ' + domLabel + ' as ' + prevImp + '\u202f/\u202f10 priority last time and ' + currImp + '\u202f/\u202f10 this time. This area has moved down your priority list. ' + tail2;
+                  }
+                }
+              }
+            }
+            if (shiftMsg) {
+              shiftTextEl.textContent = shiftMsg;
+              shiftEl.classList.remove('hidden');
+            } else {
+              shiftEl.classList.add('hidden');
+            }
+          }
         }
 
         document.getElementById('metric-list').addEventListener('click', function(e) {
