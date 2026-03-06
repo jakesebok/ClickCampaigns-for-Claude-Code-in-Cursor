@@ -75,6 +75,161 @@
       </button>
     </div>
 
+    <!-- Importance Ratings Screen -->
+    <div id="importance-slide" class="hidden">
+      <div class="max-w-2xl mx-auto px-4 py-8">
+        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
+        <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
+        <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
+        <p class="text-sm text-[var(--ap-secondary)] mb-8 leading-relaxed">For each area, rate how much attention and energy it deserves given your current season of life. There are no right answers. A low rating doesn't mean you don't care. It means it's not where you need to focus right now.</p>
+
+        <form id="importance-form">
+          <!-- SELF -->
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-4 pb-2 border-b border-[var(--ap-border)]">Self</h3>
+          <div class="space-y-6 mb-8" id="importance-self">
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-PH">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your physical health: sleep quality, nutrition, exercise, and physical energy.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-PH">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-PH" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-IA">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Living in alignment with your values: making space for joy, meaning, and experiences that matter to you.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-IA">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-IA" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-ME">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your mental and emotional health: stress recovery, emotional regulation, self-talk, and sustainable pace.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-ME">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-ME" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-AF">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your ability to focus: resisting distraction, protecting deep work time, and directing your attention with intention.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-AF">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-AF" style="cursor:pointer">
+            </div>
+          </div>
+
+          <!-- RELATIONSHIPS -->
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-4 pb-2 border-b border-[var(--ap-border)]">Relationships</h3>
+          <div class="space-y-6 mb-8">
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-RS">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your relationship with yourself: self-trust, boundaries, keeping promises to yourself, and self-respect.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-RS">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-RS" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-FA">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your family relationships: presence, communication, quality time, and emotional availability with the people closest to you.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-FA">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-FA" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-CO">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your friendships and community: genuine belonging, real connection, and investing in people who know and support you.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-CO">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-CO" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-WI">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your contribution and impact: serving something beyond your own business or personal gain.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-WI">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-WI" style="cursor:pointer">
+            </div>
+          </div>
+
+          <!-- BUSINESS -->
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-4 pb-2 border-b border-[var(--ap-border)]">Business</h3>
+          <div class="space-y-6 mb-8">
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-VS">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your business clarity: knowing where you're headed, having a simple strategy, and saying no to distractions.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-VS">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-VS" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-EX">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your execution consistency: finishing what you start, following your weekly rhythm, and shipping what matters.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-EX">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EX" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-OH">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your business systems: tracking metrics, building processes, delegating, and reducing dependence on you.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-OH">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-OH" style="cursor:pointer">
+            </div>
+
+            <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5" data-imp="IMP-EC">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-1 text-sm leading-snug">Your business alignment: ensuring your model, pace, and goals match who you are and the life you actually want.</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2 mt-3">
+                <span>Not a focus right now</span>
+                <span class="font-bold text-base text-[var(--ap-primary)] tabular-nums imp-val" id="val-IMP-EC">—</span>
+                <span>One of my highest priorities</span>
+              </div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EC" style="cursor:pointer">
+            </div>
+          </div>
+
+          <div id="importance-error" class="hidden text-sm text-red-600 font-medium mb-4 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+            Please set all 12 sliders before continuing.
+          </div>
+
+          <button type="submit" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">
+            Continue to your results
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="quiz-viewport">
       <div id="question-container">
         <div id="email-slide" class="quiz-slide">
@@ -128,6 +283,8 @@
       var totalQuestions = QUESTIONS.length;
       var presentationOrder = [];
       var answers = {};
+      var importanceRatings = {}; // keyed by domain code: PH, IA, ME, AF, RS, FA, CO, WI, VS, EX, OH, EC
+      var impSlidersTouched = {}; // tracks which sliders have been moved
       var currentIndex = -1;
       var totalSteps = 1 + totalQuestions + 1;
       var animating = false;
@@ -228,16 +385,15 @@
                 currentIndex = nextIdx;
                 if (currentIndex >= totalQuestions) {
                   document.querySelectorAll('#question-container .quiz-slide').forEach(function(s) { s.classList.remove('active', 'leaving', 'entering', 'in'); });
-                  var emailSlide = document.getElementById('email-slide');
-                  emailSlide.classList.add('active', 'entering');
                   document.getElementById('progress-bar').style.width = '100%';
                   updateConspicuousProgress();
-                  requestAnimationFrame(function() {
-                    requestAnimationFrame(function() {
-                      emailSlide.classList.add('in');
-                    });
-                  });
-                  setTimeout(function() { emailSlide.classList.remove('entering', 'in'); }, 340);
+                  // Show importance ratings screen instead of email slide
+                  var impSlide = document.getElementById('importance-slide');
+                  if (impSlide) {
+                    document.querySelector('.quiz-viewport').classList.add('hidden');
+                    impSlide.classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                  }
                   animating = false;
                   return;
                 }
@@ -322,7 +478,9 @@
           restoreSlideState(slide);
         } else {
           currentIndex = totalQuestions;
-          showSlide(document.getElementById('email-slide'));
+          document.querySelector('.quiz-viewport').classList.add('hidden');
+          var impSlide = document.getElementById('importance-slide');
+          if (impSlide) { impSlide.classList.remove('hidden'); window.scrollTo(0, 0); }
         }
       }
 
@@ -431,6 +589,50 @@
         }
       });
 
+      // Importance slider wiring
+      (function() {
+        var IMP_CODES = ['IMP-PH','IMP-IA','IMP-ME','IMP-AF','IMP-RS','IMP-FA','IMP-CO','IMP-WI','IMP-VS','IMP-EX','IMP-OH','IMP-EC'];
+        var DOM_CODES = { 'IMP-PH':'PH','IMP-IA':'IA','IMP-ME':'ME','IMP-AF':'AF','IMP-RS':'RS','IMP-FA':'FA','IMP-CO':'CO','IMP-WI':'WI','IMP-VS':'VS','IMP-EX':'EX','IMP-OH':'OH','IMP-EC':'EC' };
+        document.querySelectorAll('.imp-slider').forEach(function(slider) {
+          var code = slider.dataset.code;
+          var valEl = document.getElementById('val-' + code);
+          slider.addEventListener('input', function() {
+            var v = parseInt(slider.value, 10);
+            importanceRatings[DOM_CODES[code]] = v;
+            impSlidersTouched[code] = true;
+            if (valEl) valEl.textContent = v;
+            // Highlight the card once touched
+            var card = slider.closest('[data-imp]');
+            if (card) card.style.borderColor = 'var(--ap-accent)';
+          });
+        });
+
+        document.getElementById('importance-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          // Validate all 12 sliders have been touched
+          var allSet = IMP_CODES.every(function(c) { return impSlidersTouched[c]; });
+          if (!allSet) {
+            document.getElementById('importance-error').classList.remove('hidden');
+            // Scroll to first untouched slider
+            for (var i = 0; i < IMP_CODES.length; i++) {
+              if (!impSlidersTouched[IMP_CODES[i]]) {
+                var card = document.querySelector('[data-imp="' + IMP_CODES[i] + '"]');
+                if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); card.style.borderColor = '#EF4444'; }
+                break;
+              }
+            }
+            return;
+          }
+          document.getElementById('importance-error').classList.add('hidden');
+          // Show email form
+          document.getElementById('importance-slide').classList.add('hidden');
+          document.querySelector('.quiz-viewport').classList.remove('hidden');
+          var emailSlide = document.getElementById('email-slide');
+          emailSlide.classList.add('active');
+          window.scrollTo(0, 0);
+        });
+      })();
+
       document.getElementById('email-form').addEventListener('submit', function(e) {
         e.preventDefault();
         var results = computeScores();
@@ -438,11 +640,59 @@
         results.lastName = document.getElementById('last-name').value.trim();
         results.email = document.getElementById('email').value.trim();
         results.presentationOrder = presentationOrder.map(function(q) { return q.id; });
+        results.importanceRatings = importanceRatings;
+        // Compute priority matrix
+        results.priorityMatrix = computePriorityMatrix(results.domainScores, importanceRatings, results.domains);
         try {
           sessionStorage.setItem('vapiResults', JSON.stringify(results));
         } catch (err) {}
+        // Fire email trigger (non-blocking)
+        try { fireEmailTrigger(results); } catch(err) {}
         window.location.href = 'vapi-results.html';
       });
+
+      function computePriorityMatrix(domainScores, impRatings, domainsList) {
+        var DOMAIN_NAMES = { PH:'Physical Health', IA:'Inner Alignment', ME:'Mental / Emotional', AF:'Attention & Focus', RS:'Relationship to Self', FA:'Family', CO:'Community', WI:'World / Impact', VS:'Vision / Strategy', EX:'Execution', OH:'Operational Health', EC:'Ecology' };
+        var codes = ['PH','IA','ME','AF','RS','FA','CO','WI','VS','EX','OH','EC'];
+        var matrix = { criticalPriority: [], protectAndSustain: [], monitor: [], overInvestment: [] };
+        codes.forEach(function(code) {
+          var score = domainScores[code];
+          var imp = impRatings[code];
+          if (score == null || imp == null) return;
+          var highImp = imp >= 7;
+          var highScore = score >= 6.0;
+          var domName = DOMAIN_NAMES[code] || code;
+          var entry = { code: code, domain: domName, score: score, importance: imp };
+          if (highImp && !highScore) matrix.criticalPriority.push(entry);
+          else if (highImp && highScore) matrix.protectAndSustain.push(entry);
+          else if (!highImp && !highScore) matrix.monitor.push(entry);
+          else matrix.overInvestment.push(entry);
+        });
+        return matrix;
+      }
+
+      function fireEmailTrigger(results) {
+        var payload = {
+          email: results.email || null,
+          firstName: results.firstName || null,
+          lastName: results.lastName || null,
+          overall: results.overall,
+          overallTier: results.overallTier,
+          arenaScores: results.arenaScores,
+          arenaTiers: results.arenaTiers,
+          domains: results.domains,
+          importanceRatings: results.importanceRatings,
+          priorityMatrix: results.priorityMatrix,
+          assessmentNumber: 1,
+          hasPortalAccount: false,
+        };
+        fetch('/api/vapi-assessment-complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }).catch(function() {});
+      }
     })();
   </script>
 </body>

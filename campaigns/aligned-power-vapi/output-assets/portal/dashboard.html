@@ -369,6 +369,46 @@
         if (adminEl) adminEl.classList.remove('hidden');
       }
 
+      // Onboarding modal: show if not yet completed
+      var userMeta = session.user.user_metadata || {};
+      if (!userMeta.onboarding_complete) {
+        var obModal = document.getElementById('onboarding-modal');
+        if (obModal) {
+          obModal.classList.remove('hidden');
+          document.getElementById('onboarding-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var rev = document.getElementById('ob-revenue-stage').value;
+            var team = document.getElementById('ob-team-size').value;
+            var life = document.getElementById('ob-life-stage').value;
+            var tib = document.getElementById('ob-time-in-business').value;
+            var chal = document.getElementById('ob-primary-challenge').value;
+            if (!rev || !team || !life || !tib || !chal) {
+              document.getElementById('onboarding-error').classList.remove('hidden');
+              return;
+            }
+            document.getElementById('onboarding-error').classList.add('hidden');
+            var btn = document.getElementById('onboarding-submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+            try {
+              await supabase.auth.updateUser({
+                data: {
+                  onboarding_complete: true,
+                  contextual_profile: {
+                    revenueStage: rev,
+                    teamSize: team,
+                    lifeStage: life,
+                    timeInBusiness: tib,
+                    primaryChallenge: chal
+                  }
+                }
+              });
+            } catch(err) {}
+            obModal.classList.add('hidden');
+          });
+        }
+      }
+
       document.getElementById('logout-btn').addEventListener('click', async function() {
         await supabase.auth.signOut();
         window.location.href = 'login.html';
@@ -1165,9 +1205,18 @@
         var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
         var progressChart = null;
 
+        function getImportanceForMetric(results, metricKey) {
+          var imp = results.importanceRatings || {};
+          if (metricKey.indexOf('domain:') !== 0) return null;
+          var code = metricKey.slice(7);
+          return imp[code] != null ? imp[code] : null;
+        }
+
         var selectedMetricKey = 'overall';
         function updateChart() {
           var values = sortedByDate.map(function(r) { return getScoreForMetric(r.results, selectedMetricKey); });
+          var impValues = sortedByDate.map(function(r) { return getImportanceForMetric(r.results, selectedMetricKey); });
+          var hasImportance = impValues.some(function(v) { return v != null; });
           if (!progressChart) {
             var ctx = document.getElementById('progress-chart').getContext('2d');
             var gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -1180,7 +1229,7 @@
                 labels: chartLabels,
                 datasets: [
                   {
-                    label: 'Your score',
+                    label: 'Score',
                     data: values,
                     borderColor: '#582233',
                     backgroundColor: gradient,
@@ -1193,6 +1242,22 @@
                     pointRadius: 5,
                     pointHoverRadius: 7,
                     pointHoverBorderWidth: 2
+                  },
+                  {
+                    label: 'Priority',
+                    data: hasImportance ? impValues : [],
+                    borderColor: 'rgba(88,34,51,0.45)',
+                    borderWidth: 2,
+                    borderDash: [5, 4],
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.35,
+                    pointBackgroundColor: 'rgba(88,34,51,0.55)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: hasImportance ? 4 : 0,
+                    pointHoverRadius: hasImportance ? 6 : 0,
+                    hidden: !hasImportance
                   },
                   {
                     label: 'Dialed (8+)',
@@ -1216,7 +1281,7 @@
                     max: 10,
                     ticks: { stepSize: 1 },
                     grid: { color: 'rgba(198, 184, 167, 0.35)' },
-                    title: { display: true, text: 'Score (0–10)' }
+                    title: { display: true, text: 'Score / Priority (0–10)' }
                   },
                   x: {
                     grid: { display: false },
@@ -1239,6 +1304,9 @@
             });
           } else {
             progressChart.data.datasets[0].data = values;
+            progressChart.data.datasets[1].data = hasImportance ? impValues : [];
+            progressChart.data.datasets[1].hidden = !hasImportance;
+            progressChart.data.datasets[1].pointRadius = hasImportance ? 4 : 0;
             progressChart.update('none');
           }
         }
@@ -1586,5 +1654,90 @@
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
     })();
   </script>
+
+  <!-- Onboarding Modal -->
+  <div id="onboarding-modal" class="fixed inset-0 z-50 hidden" aria-modal="true" role="dialog" aria-labelledby="onboarding-title">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="relative min-h-screen flex items-center justify-center px-4 py-8">
+      <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh]">
+        <div class="p-6 sm:p-8">
+          <div class="mb-6">
+            <h2 id="onboarding-title" class="text-2xl text-[var(--ap-primary)] mb-2">Let's Set Up Your Profile</h2>
+            <p class="text-[var(--ap-secondary)] text-sm leading-relaxed">These five questions help us personalize your experience. They take about 30 seconds.</p>
+          </div>
+
+          <form id="onboarding-form" novalidate class="space-y-5">
+            <div>
+              <label for="ob-revenue-stage" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1.5">What is your current annual business revenue?</label>
+              <select id="ob-revenue-stage" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+                <option value="">Select one...</option>
+                <option value="Pre-revenue">Pre-revenue</option>
+                <option value="Under $100K">Under $100K</option>
+                <option value="$100K - $500K">$100K - $500K</option>
+                <option value="$500K - $1M">$500K - $1M</option>
+                <option value="$1M - $5M">$1M - $5M</option>
+                <option value="$5M+">$5M+</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ob-team-size" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1.5">How many people work in your business (including you)?</label>
+              <select id="ob-team-size" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+                <option value="">Select one...</option>
+                <option value="Just me">Just me</option>
+                <option value="2-3">2-3</option>
+                <option value="4-10">4-10</option>
+                <option value="11-25">11-25</option>
+                <option value="25+">25+</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ob-life-stage" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1.5">Which best describes your current life stage?</label>
+              <select id="ob-life-stage" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+                <option value="">Select one...</option>
+                <option value="Single, no children">Single, no children</option>
+                <option value="Partnered, no children">Partnered, no children</option>
+                <option value="Young children at home (under 12)">Young children at home (under 12)</option>
+                <option value="Older children at home (12+)">Older children at home (12+)</option>
+                <option value="Empty nest / children are adults">Empty nest / children are adults</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ob-time-in-business" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1.5">How long have you been running your current business?</label>
+              <select id="ob-time-in-business" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+                <option value="">Select one...</option>
+                <option value="Less than 1 year">Less than 1 year</option>
+                <option value="1-3 years">1-3 years</option>
+                <option value="3-7 years">3-7 years</option>
+                <option value="7+ years">7+ years</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ob-primary-challenge" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1.5">What is the single biggest challenge you're facing right now?</label>
+              <select id="ob-primary-challenge" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm">
+                <option value="">Select one...</option>
+                <option value="Growth (not enough revenue or clients)">Growth (not enough revenue or clients)</option>
+                <option value="Profitability (revenue exists but margins are thin)">Profitability (revenue exists but margins are thin)</option>
+                <option value="Time freedom (business demands too much of me)">Time freedom (business demands too much of me)</option>
+                <option value="Clarity (not sure where to focus)">Clarity (not sure where to focus)</option>
+                <option value="Burnout (running on empty)">Burnout (running on empty)</option>
+                <option value="Transition (changing my model, offer, or direction)">Transition (changing my model, offer, or direction)</option>
+              </select>
+            </div>
+
+            <p id="onboarding-error" class="hidden text-sm text-red-600 font-medium bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please answer all five questions to continue.</p>
+
+            <button type="submit" id="onboarding-submit-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-base rounded-xl transition-colors mt-2">
+              Save &amp; Continue
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
