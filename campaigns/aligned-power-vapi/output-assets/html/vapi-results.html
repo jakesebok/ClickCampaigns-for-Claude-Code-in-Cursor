@@ -34,28 +34,31 @@
       body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       main { padding-bottom: 2.5rem; }
 
-      /* Prevent any card from being split across a page break */
+      /* Prevent individual cards from splitting mid-card */
       #results-content .rounded-xl,
       #results-content .rounded-lg,
       #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
 
-      /* Title + wheel always stay together on the first page */
-      .print-hero-block { break-inside: avoid; page-break-inside: avoid; }
-      /* Scores section stays together */
-      #results-content .results-title-block { page-break-after: avoid; margin-bottom: 1rem !important; }
-      #results-content .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
-      #results-content .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
+      /* Hero block: title flows directly into the wheel — no break between them */
+      .print-hero-block .results-title-block { break-after: avoid; page-break-after: avoid; margin-bottom: 0.5rem !important; }
+      .print-hero-block .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
+      .print-hero-block .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0 !important; }
 
-      /* Section headings always stay with their first card */
+      /* Section headings stay glued to whatever follows them */
       #results-content h2 { break-after: avoid; page-break-after: avoid; }
       #results-content h3 { break-after: avoid; page-break-after: avoid; }
 
       /* Priority matrix: each quadrant row stays full-width, cards wrap naturally */
       #results-content .flex-wrap { flex-wrap: wrap !important; }
 
-      /* Domain detail: 2nd and 3rd arena groups start on their own page */
-      .print-arena-group { break-before: page; page-break-before: always; }
-      .print-first-arena { break-before: avoid !important; page-break-before: avoid !important; }
+      /* Domain detail: every arena group starts on its own fresh page */
+      .print-arena-group { break-before: page; page-break-before: always; break-inside: auto; }
+      /* Personal is the first arena — it still gets its own page (starts after scores/matrix) */
+      .print-first-arena { break-before: page; page-break-before: always; }
+      /* Arena h3 heading always stays with the first card below it */
+      .print-arena-group h3 { break-after: avoid; page-break-after: avoid; }
+      /* Individual domain cards inside an arena can break across pages if needed */
+      .print-arena-group .rounded-lg { break-inside: avoid; page-break-inside: avoid; }
 
       .enlarge-hint { display: none !important; }
       .print-report-header { margin-bottom: 0.25rem; padding-bottom: 0.25rem; border-bottom: none; font-size: 0.7rem; color: var(--ap-secondary); line-height: 1.2; }
@@ -777,13 +780,16 @@
         // Priority Matrix replaces old Top 3 Strengths / Bottom 3 section
         html += buildPriorityMatrix(results);
 
-        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Domain detail</h2>';
         var arenaOrder = ['Personal', 'Relationships', 'Business'];
         var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         arenaOrder.forEach(function(arena, idx) {
-          // Each arena wrapped in print-arena-group for page-break-before on print
           var isFirst = idx === 0;
           html += '<div class="print-arena-group' + (isFirst ? ' print-first-arena' : '') + '">';
+          // Include the "Domain detail" h2 inside the first arena group so it
+          // always lands on the same page as the Personal section heading and cards
+          if (isFirst) {
+            html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Domain detail</h2>';
+          }
           var mt = isFirst ? 'mt-2' : 'mt-8';
           html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + escapeHtml(arena) + '</h3>';
           domains.filter(function(d) { return d.arena === arena; }).forEach(function(d) {
