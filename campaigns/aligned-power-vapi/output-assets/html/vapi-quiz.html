@@ -38,6 +38,11 @@
     .quiz-slide.entering { transform: translateX(100vw); opacity: 0; z-index: 1; }
     .quiz-slide.entering.in { transform: translateX(0); opacity: 1; }
     .quiz-slide-inner { width: 100%; max-width: 42rem; margin: 0 auto; }
+    /* Full-page slide used for importance ratings — same animation system */
+    #importance-outer { display: none; position: fixed; inset: 0; z-index: 40; background: var(--ap-bg); overflow-y: auto; -webkit-overflow-scrolling: touch; transform: translateX(100vw); opacity: 0; transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.32s ease-out; }
+    #importance-outer.imp-entering { display: block; transform: translateX(100vw); opacity: 0; }
+    #importance-outer.imp-entering.imp-in { transform: translateX(0); opacity: 1; }
+    #importance-outer.imp-active { display: block; transform: translateX(0); opacity: 1; }
     @media (min-width: 640px) {
       #question-container { max-height: none; }
       .quiz-slide { max-height: none; justify-content: center; padding: 2rem 1.5rem; }
@@ -76,8 +81,9 @@
     </div>
 
     <!-- Importance Ratings Screen -->
-    <div id="importance-slide" class="hidden">
-      <div class="max-w-2xl mx-auto px-4 py-8">
+    <div id="importance-outer">
+    <div id="importance-slide">
+      <div class="max-w-2xl mx-auto px-4 py-8 pt-20 sm:pt-24">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
         <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
         <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
@@ -229,6 +235,7 @@
         </form>
       </div>
     </div>
+    </div><!-- end importance-outer -->
 
     <div class="quiz-viewport">
       <div id="question-container">
@@ -388,11 +395,19 @@
                   document.getElementById('progress-bar').style.width = '100%';
                   updateConspicuousProgress();
                   // Show importance ratings screen instead of email slide
-                  var impSlide = document.getElementById('importance-slide');
-                  if (impSlide) {
-                    document.querySelector('.quiz-viewport').classList.add('hidden');
-                    impSlide.classList.remove('hidden');
-                    window.scrollTo(0, 0);
+                  var impOuter = document.getElementById('importance-outer');
+                  if (impOuter) {
+                    impOuter.classList.add('imp-entering');
+                    requestAnimationFrame(function() {
+                      requestAnimationFrame(function() {
+                        impOuter.classList.add('imp-in');
+                        setTimeout(function() {
+                          impOuter.classList.remove('imp-entering', 'imp-in');
+                          impOuter.classList.add('imp-active');
+                          impOuter.scrollTop = 0;
+                        }, 340);
+                      });
+                    });
                   }
                   animating = false;
                   return;
@@ -478,9 +493,20 @@
           restoreSlideState(slide);
         } else {
           currentIndex = totalQuestions;
-          document.querySelector('.quiz-viewport').classList.add('hidden');
-          var impSlide = document.getElementById('importance-slide');
-          if (impSlide) { impSlide.classList.remove('hidden'); window.scrollTo(0, 0); }
+          var impOuter = document.getElementById('importance-outer');
+          if (impOuter) {
+            impOuter.classList.add('imp-entering');
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                impOuter.classList.add('imp-in');
+                setTimeout(function() {
+                  impOuter.classList.remove('imp-entering', 'imp-in');
+                  impOuter.classList.add('imp-active');
+                  impOuter.scrollTop = 0;
+                }, 340);
+              });
+            });
+          }
         }
       }
 
@@ -624,12 +650,26 @@
             return;
           }
           document.getElementById('importance-error').classList.add('hidden');
-          // Show email form
-          document.getElementById('importance-slide').classList.add('hidden');
-          document.querySelector('.quiz-viewport').classList.remove('hidden');
-          var emailSlide = document.getElementById('email-slide');
-          emailSlide.classList.add('active');
-          window.scrollTo(0, 0);
+          // Animate importance screen out, then show email slide
+          var impOuter = document.getElementById('importance-outer');
+          if (impOuter) {
+            impOuter.style.transition = 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.32s ease-out';
+            impOuter.style.transform = 'translateX(-100vw)';
+            impOuter.style.opacity = '0';
+            setTimeout(function() {
+              impOuter.classList.remove('imp-active');
+              impOuter.style.transform = '';
+              impOuter.style.opacity = '';
+              impOuter.style.transition = '';
+              var emailSlide = document.getElementById('email-slide');
+              emailSlide.classList.add('active');
+              window.scrollTo(0, 0);
+            }, 340);
+          } else {
+            var emailSlide = document.getElementById('email-slide');
+            emailSlide.classList.add('active');
+            window.scrollTo(0, 0);
+          }
         });
       })();
 

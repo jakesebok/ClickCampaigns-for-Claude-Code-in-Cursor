@@ -48,8 +48,8 @@
       #results-content h2 { break-after: avoid; page-break-after: avoid; }
       #results-content h3 { break-after: avoid; page-break-after: avoid; }
 
-      /* Priority matrix: columns become single-column for print */
-      #results-content .sm\:columns-2 { columns: 1 !important; }
+      /* Priority matrix: revert to 2-column grid for print */
+      #results-content .lg\:grid-cols-4 { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
 
       /* Domain detail: 2nd and 3rd arena groups start on their own page */
       .print-arena-group { break-before: page; page-break-before: always; }
@@ -572,25 +572,25 @@
 
         // Build quadrant blocks ordered by relevance: Critical, Protect, Monitor, Over-Investment
         var quadrantDefs = [
-          { key: 'criticalPriority',  entries: matrix.criticalPriority,  border: 'border-red-200',   bg: 'bg-red-50',   dot: 'bg-red-500',   label: 'Critical Priority',          sub: 'High importance. Low score. Focus here first.',                          accentColor: '#EF4444' },
-          { key: 'protectAndSustain', entries: matrix.protectAndSustain, border: 'border-green-200', bg: 'bg-green-50', dot: 'bg-green-500', label: 'Protect &amp; Sustain',       sub: 'High importance. Strong score. Don\'t neglect these.',                    accentColor: '#22C55E' },
-          { key: 'monitor',           entries: matrix.monitor,           border: 'border-gray-200',  bg: 'bg-gray-50',  dot: 'bg-gray-400',  label: 'Monitor',                    sub: 'Lower priority right now. Lower score. Keep an eye on these.',            accentColor: '#6B7280' },
-          { key: 'overInvestment',    entries: matrix.overInvestment,    border: 'border-amber-200', bg: 'bg-amber-50', dot: 'bg-amber-500', label: 'Possible Over-Investment',   sub: 'Lower priority, but scoring well. Could this energy go elsewhere?',       accentColor: '#EAB308' },
+          { key: 'criticalPriority',  entries: matrix.criticalPriority,  border: 'border-red-200',   bg: 'bg-red-50',   dot: 'bg-red-500',   label: 'Critical Priority',        sub: 'High importance. Low score. Focus here first.',               accentColor: '#EF4444' },
+          { key: 'protectAndSustain', entries: matrix.protectAndSustain, border: 'border-green-200', bg: 'bg-green-50', dot: 'bg-green-500', label: 'Protect &amp; Sustain',     sub: 'High importance. Strong score. Don\'t neglect these.',         accentColor: '#22C55E' },
+          { key: 'monitor',           entries: matrix.monitor,           border: 'border-gray-200',  bg: 'bg-gray-50',  dot: 'bg-gray-400',  label: 'Monitor',                  sub: 'Lower priority. Lower score. Keep an eye on these.',           accentColor: '#6B7280' },
+          { key: 'overInvestment',    entries: matrix.overInvestment,    border: 'border-amber-200', bg: 'bg-amber-50', dot: 'bg-amber-500', label: 'Possible Over-Investment', sub: 'Lower priority, but scoring well. Could this go elsewhere?',   accentColor: '#EAB308' },
         ];
 
-        // Responsive masonry-style two-column layout using two column arrays
-        // On mobile: single column (all stacked). On sm+: two columns using CSS columns.
+        // Horizontal row layout: 4 quadrants side by side, each scrolls independently
+        // On mobile: 2x2 grid. On lg: single row of 4.
         html += '<div class="mb-10">';
-        html += '<div class="sm:columns-2 sm:gap-3 space-y-3 sm:space-y-0">';
+        html += '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">';
         quadrantDefs.forEach(function(q) {
-          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 mb-3">';
-          html += '<div class="flex items-start gap-2 mb-1">';
+          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 flex flex-col">';
+          html += '<div class="flex items-start gap-2 mb-3">';
           html += '<span class="w-2 h-2 rounded-full ' + q.dot + ' mt-1.5 flex-shrink-0"></span>';
-          html += '<div><p class="font-semibold text-sm" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5">' + q.sub + '</p></div></div>';
-          html += '<div class="mt-3">' + quadrantItems(q.entries, q.key, q.accentColor) + '</div>';
+          html += '<div><p class="font-semibold text-sm leading-tight" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5 leading-snug">' + q.sub + '</p></div></div>';
+          html += '<div class="flex-1">' + quadrantItems(q.entries, q.key, q.accentColor) + '</div>';
           html += '</div>';
         });
-        html += '</div>'; // end columns
+        html += '</div>'; // end grid
         html += '</div>'; // end container
 
         return html;
