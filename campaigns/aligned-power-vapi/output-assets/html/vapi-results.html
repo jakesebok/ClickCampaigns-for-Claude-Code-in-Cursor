@@ -39,10 +39,24 @@
       #results-content .rounded-lg,
       #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
 
-      /* Hero block: title flows directly into the wheel — no break between them */
-      .print-hero-block .results-title-block { break-after: avoid; page-break-after: avoid; margin-bottom: 0.5rem !important; }
-      .print-hero-block .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
-      .print-hero-block .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0 !important; }
+      /* Hero block: scale everything down so title + wheel fit together on page 1 */
+      .print-hero-block { break-inside: avoid; page-break-inside: avoid; }
+      .print-hero-block .results-title-block { margin-bottom: 0.4rem !important; }
+      .print-hero-block .results-title-block h1 { font-size: 1.5rem !important; line-height: 1.2; }
+      .print-hero-block .results-title-block p { font-size: 0.65rem !important; margin-top: 0.2rem !important; margin-bottom: 0 !important; }
+      /* Shrink the wheel card so it fits under the title on page 1 */
+      .print-hero-block .rounded-xl { break-inside: avoid !important; page-break-inside: avoid !important; }
+      .print-hero-block .alignment-glance-left { max-width: 200px !important; }
+      .print-hero-block .alignment-glance-inner h2 { font-size: 0.85rem !important; margin-bottom: 0.15rem !important; }
+      .print-hero-block .alignment-glance-inner > p { font-size: 0.6rem !important; margin-bottom: 0.25rem !important; }
+      /* Shrink the composite + arena score text */
+      .print-hero-block .text-5xl, .print-hero-block .text-4xl { font-size: 1.75rem !important; }
+      .print-hero-block .text-3xl { font-size: 1.25rem !important; }
+      .print-hero-block .text-2xl { font-size: 1rem !important; }
+      .print-hero-block p, .print-hero-block span, .print-hero-block li { font-size: 0.7rem !important; }
+      .print-hero-block .p-6 { padding: 0.75rem !important; }
+      .print-hero-block .mb-10 { margin-bottom: 0.5rem !important; }
+      .print-hero-block .gap-6 { gap: 0.75rem !important; }
 
       /* Section headings stay glued to whatever follows them */
       #results-content h2 { break-after: avoid; page-break-after: avoid; }
