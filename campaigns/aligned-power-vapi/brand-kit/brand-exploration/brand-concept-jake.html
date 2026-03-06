@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Concept 07: Jake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --orange:       #F26522;
+      --orange-lt:    #FF8040;
+      --orange-dk:    #C4501A;
+      --orange-tint:  rgba(242,101,34,0.1);
+      --orange-glow:  rgba(242,101,34,0.2);
+
+      --ink:          #111111;
+      --ink-mid:      #333333;
+      --ink-muted:    #666666;
+      --ink-subtle:   #AAAAAA;
+
+      --bg:           #F9F7F4;
+      --bg-warm:      #F4F1EC;
+      --surface:      #FFFFFF;
+      --surface-2:    #FAFAFA;
+
+      --celtic:       #00843D;   /* Celtic green — Chucks */
+      --pink:         #E8547A;   /* Pink shirts */
+      --cobalt:       #1E4FC2;   /* Thick-rimmed glasses */
+      --yellow:       #F5C400;
+
+      --rule:         rgba(17,17,17,0.1);
+      --rule-lt:      rgba(17,17,17,0.06);
+
+      --radius-sm:    6px;
+      --radius-md:    14px;
+      --radius-lg:    22px;
+      --radius-xl:    40px;
+      --radius-pill:  100px;
+
+      --shadow-sm:    0 1px 0 rgba(255,255,255,0.8) inset, 0 2px 8px rgba(17,17,17,0.07), 0 1px 2px rgba(17,17,17,0.05);
+      --shadow-md:    0 1px 0 rgba(255,255,255,0.9) inset, 0 6px 24px rgba(17,17,17,0.09), 0 2px 6px rgba(17,17,17,0.06);
+      --shadow-orange:0 4px 24px rgba(242,101,34,0.28), 0 1px 0 rgba(255,255,255,0.15) inset;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .display-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 11vw, 9rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+    .display-lg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+    }
+    .display-italic {
+      font-style: italic;
+      font-weight: 400;
+    }
+    .label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .big-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0;
+      background: var(--surface);
+      border-bottom: 2px solid var(--ink);
+    }
+    .nav__inner {
+      display: flex; align-items: stretch; justify-content: space-between;
+      height: 60px;
+    }
+    .nav__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center;
+      padding: 0 24px;
+      border-right: 2px solid var(--ink);
+    }
+    .nav__logo em { font-style: italic; color: var(--orange); }
+    .nav__links { display: flex; list-style: none; }
+    .nav__links li { border-right: 1px solid var(--rule); }
+    .nav__links a {
+      display: flex; align-items: center;
+      padding: 0 22px;
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--ink-muted); text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      height: 100%;
+    }
+    .nav__links a:hover { background: var(--orange); color: #fff; }
+    .nav__cta {
+      display: flex; align-items: center;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.8125rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0 28px; text-decoration: none;
+      border-left: 2px solid var(--ink);
+      transition: background 0.15s;
+    }
+    .nav__cta:hover { background: var(--orange-dk); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    /* Left: white with big headline */
+    .hero__left {
+      padding: 72px 48px 72px 28px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 2px solid var(--ink);
+      position: relative;
+    }
+
+    /* Right: bold orange fill */
+    .hero__right {
+      background: var(--orange);
+      padding: 72px 28px 72px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid pattern on the orange side */
+    .hero__right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 28px;
+    }
+    .hero__eyebrow-pill {
+      background: var(--ink); color: #fff;
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: var(--radius-pill);
+    }
+    .hero__eyebrow-pill--orange { background: var(--orange); }
+
+    .hero__headline { margin-bottom: 28px; }
+    .hero__headline .word-main { display: block; color: var(--ink); }
+    .hero__headline .word-accent {
+      display: block; color: var(--orange);
+      text-decoration: underline;
+      text-decoration-thickness: 4px;
+      text-underline-offset: 8px;
+    }
+
+    .hero__sub {
+      font-size: 1.0625rem; font-weight: 300; line-height: 1.7;
+      color: var(--ink-muted); max-width: 440px; margin-bottom: 36px;
+    }
+
+    /* Right side content */
+    .hero__right-content { position: relative; z-index: 2; }
+    .hero__quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-style: italic; font-weight: 400;
+      line-height: 1.4;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+    .hero__quote-attr {
+      font-size: 0.875rem; font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Stats strip */
+    .hero__stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border-top: 2px solid var(--ink);
+    }
+    .hero__stat {
+      padding: 24px 28px;
+      border-right: 2px solid var(--ink);
+    }
+    .hero__stat:last-child { border-right: none; }
+    .hero__stat-num { color: var(--orange); display: block; margin-bottom: 4px; }
+    .hero__stat-label { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.04em; color: var(--ink-muted); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 13px 26px; cursor: pointer;
+      transition: all 0.15s ease; border: none; text-decoration: none;
+      border-radius: var(--radius-sm);
+    }
+    .btn-orange {
+      background: var(--orange); color: #fff;
+      box-shadow: var(--shadow-orange);
+      border: 2px solid var(--orange);
+    }
+    .btn-orange:hover { background: var(--orange-dk); border-color: var(--orange-dk); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 2px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+    .btn-white {
+      background: #fff; color: var(--orange);
+      border: 2px solid #fff;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-white:hover { background: var(--bg-warm); }
+    .btn-white-outline {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .btn-white-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 4px 4px 0 var(--ink);
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .card--orange {
+      background: var(--orange);
+      border-color: var(--orange-dk);
+      box-shadow: 4px 4px 0 var(--orange-dk);
+      color: #fff;
+    }
+    .card--orange:hover { box-shadow: 6px 6px 0 var(--orange-dk); }
+    .card--celtic {
+      background: var(--celtic);
+      border-color: #005C2B;
+      box-shadow: 4px 4px 0 #005C2B;
+      color: #fff;
+    }
+    .card--celtic:hover { box-shadow: 6px 6px 0 #005C2B; }
+    .card--ink {
+      background: var(--ink);
+      border-color: #000;
+      box-shadow: 4px 4px 0 #000;
+      color: #fff;
+    }
+    .card--ink:hover { box-shadow: 6px 6px 0 #000; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; border-radius: var(--radius-pill);
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1.5px solid currentColor;
+    }
+    .badge-orange { color: var(--orange); background: var(--orange-tint); }
+    .badge-celtic { color: var(--celtic); background: rgba(0,132,61,0.08); }
+    .badge-pink   { color: var(--pink);   background: rgba(232,84,122,0.08); }
+    .badge-cobalt { color: var(--cobalt); background: rgba(30,79,194,0.08); }
+    .badge-ink    { color: var(--ink);    background: rgba(17,17,17,0.06); }
+
+    /* ── INPUTS ── */
+    .input-label { font-size: 0.875rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9375rem;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      box-shadow: 3px 3px 0 rgba(17,17,17,0.08);
+    }
+    input:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 3px 3px 0 var(--orange);
+    }
+    input::placeholder { color: var(--ink-subtle); }
+
+    /* ── SCORE BARS ── */
+    @keyframes fillBar { from { width: 0; } }
+    .bar-bg { height: 6px; border-radius: var(--radius-pill); background: var(--rule-lt); border: 1.5px solid var(--rule); margin-top: 12px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: var(--radius-pill); background: var(--orange); animation: fillBar 1s ease both; }
+    .bar-fill-celtic  { background: var(--celtic); }
+    .bar-fill-cobalt  { background: var(--cobalt); }
+    .bar-fill-pink    { background: var(--pink); }
+    .bar-fill-yellow  { background: var(--yellow); }
+
+    /* ── SECTION ── */
+    .section { padding: 88px 0; }
+    .section-rule { height: 2px; background: var(--ink); }
+    .section-header { margin-bottom: 52px; }
+
+    /* ── COLOR CHIP ── */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--surface); border: 2px solid var(--ink);
+      border-radius: var(--radius-md); padding: 10px 16px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .chip__dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.12); flex-shrink: 0; }
+    .chip__name { font-size: 0.875rem; font-weight: 700; color: var(--ink); }
+    .chip__hex  { font-size: 0.75rem; color: var(--ink-muted); font-family: monospace; }
+
+    /* ── TYPE ROW ── */
+    .type-row { display: flex; align-items: baseline; gap: 24px; padding: 28px 0; border-bottom: 2px solid var(--rule-lt); }
+    .type-meta { width: 150px; flex-shrink: 0; }
+    .type-meta-name { font-size: 0.75rem; font-weight: 700; color: var(--ink-muted); }
+    .type-meta-spec { font-size: 0.6875rem; color: var(--ink-subtle); margin-top: 2px; }
+
+    /* ── SHOWCASE GRID ── */
+    .showcase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    /* ── FEATURE LIST ── */
+    .feature-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 2px solid var(--rule-lt); }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-item__num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700; line-height: 1;
+      color: var(--orange); flex-shrink: 0; width: 32px;
+    }
+    .feature-item__title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+    .feature-item__body { font-size: 0.9375rem; color: var(--ink-muted); line-height: 1.65; font-weight: 300; }
+
+    /* ── 6C GRID ── */
+    .six-c-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+    .six-c-cell { padding: 18px; border-right: 2px solid var(--rule-lt); border-bottom: 2px solid var(--rule-lt); }
+    .six-c-cell:nth-child(3n) { border-right: none; }
+    .six-c-cell:nth-child(n+4) { border-bottom: none; }
+    .six-c-cell__label { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
+    .six-c-cell__score { line-height: 1; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__right { display: none; }
+      .hero__stats { grid-template-columns: 1fr 1fr; }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .nav__links { display: none; }
+      .six-c-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .anim { animation: fadeUp 0.6s ease forwards; }
+    .d1 { animation-delay: 0.05s; opacity:0; }
+    .d2 { animation-delay: 0.18s; opacity:0; }
+    .d3 { animation-delay: 0.32s; opacity:0; }
+    .d4 { animation-delay: 0.48s; opacity:0; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV — structured like a newspaper masthead -->
+  <nav>
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">Aligned <em>Power</em></a>
+      <ul class="nav__links">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#cards">Cards</a></li>
+      </ul>
+      <a href="#" class="nav__cta">
+        <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+        Begin Assessment
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO — SPLIT GRID
+  ════════════════════════════════════════════ -->
+  <section class="hero">
+    <!-- Left: The message -->
+    <div class="hero__left">
+      <div class="hero__eyebrow anim d1">
+        <span class="hero__eyebrow-pill">07</span>
+        <span class="hero__eyebrow-pill hero__eyebrow-pill--orange">brand-concept-jake</span>
+      </div>
+
+      <h1 class="display-xl hero__headline anim d2">
+        <span class="word-main">Stop</span>
+        <span class="word-main">Spinning.</span>
+        <span class="word-accent"><em>Get Clear.</em></span>
+      </h1>
+
+      <p class="hero__sub anim d3">
+        Confusion is loud. Clarity is quiet. The Aligned Power framework cuts through the noise so you can build a business that actually fits your life.
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim d4">
+        <a href="#" class="btn btn-orange">
+          <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          Take the Assessment
+        </a>
+        <a href="#" class="btn btn-outline">See the Framework</a>
+      </div>
+    </div>
+
+    <!-- Right: Orange with quote + personality -->
+    <div class="hero__right">
+      <div class="hero__right-content">
+        <div style="margin-bottom:32px;">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.15);border-radius:var(--radius-pill);padding:5px 14px;margin-bottom:28px;">
+            <i data-lucide="sun" style="width:13px;height:13px;color:rgba(255,255,255,0.8);"></i>
+            <span style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.8);">Real talk</span>
+          </div>
+          <p class="hero__quote">"Your business shouldn't feel like a beautiful prison. It should feel like the best version of your life."</p>
+          <div class="hero__quote-attr">— Jake Sebok, Aligned Power</div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="#" class="btn btn-white">
+            <i data-lucide="play" style="width:13px;height:13px;"></i>
+            Watch the Story
+          </a>
+          <a href="#" class="btn btn-white-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip — full width, pinned to bottom -->
+    <div class="hero__stats" style="grid-column:1/-1;">
+      <div class="hero__stat">
+        <span class="big-num hero__stat-num">847+</span>
+        <div class="hero__stat-label">Entrepreneurs Assessed</div>
+      </div>
+      <div class="hero__stat">
+        <span class="big-num hero__stat-num">6C</span>
+        <div class="hero__stat-label">Alignment Framework</div>
+      </div>
+      <div class="hero__stat">
+        <span class="big-num hero__stat-num">94%</span>
+        <div class="hero__stat-label">Report Clarity After</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       COLORS
+  ════════════════════════════════════════════ -->
+  <section class="section" id="colors">
+    <div class="container">
+      <div class="section-header">
+        <div class="label" style="color:var(--orange);margin-bottom:12px;">01 — Color System</div>
+        <h2 class="display-lg">Bright, Bold<br><em style="color:var(--orange);">& Unapologetic</em></h2>
+        <p style="margin-top:14px;font-size:1rem;color:var(--ink-muted);font-weight:300;max-width:480px;">Orange is the hero. The accent palette pulls directly from the wardrobe: Celtic green, cobalt glasses, pink shirts, yellow energy.</p>
+      </div>
+
+      <div class="chip-row">
+        <div class="chip"><div class="chip__dot" style="background:#F26522;"></div><div><div class="chip__name">Orange</div><div class="chip__hex">#F26522 — Hero</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#111111;"></div><div><div class="chip__name">Ink</div><div class="chip__hex">#111111 — Body</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#F9F7F4;border:2px solid #ddd;"></div><div><div class="chip__name">Linen</div><div class="chip__hex">#F9F7F4 — BG</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#00843D;"></div><div><div class="chip__name">Celtic Green</div><div class="chip__hex">#00843D — Accent</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#E8547A;"></div><div><div class="chip__name">Pink</div><div class="chip__hex">#E8547A — Accent</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#1E4FC2;"></div><div><div class="chip__name">Cobalt</div><div class="chip__hex">#1E4FC2 — Accent</div></div></div>
+        <div class="chip"><div class="chip__dot" style="background:#F5C400;"></div><div><div class="chip__name">Yellow</div><div class="chip__hex">#F5C400 — Accent</div></div></div>
+      </div>
+
+      <!-- Palette in use — accent color blocks -->
+      <div style="margin-top:36px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:0;border:2px solid var(--ink);border-radius:var(--radius-md);overflow:hidden;box-shadow:4px 4px 0 var(--ink);">
+        <div style="background:var(--orange);padding:28px 24px;display:flex;align-items:flex-end;">
+          <div>
+            <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:4px;">Primary</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;">Orange</div>
+          </div>
+        </div>
+        <div style="background:var(--celtic);border-left:2px solid var(--ink);padding:28px 16px;display:flex;align-items:flex-end;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:#fff;">Celtic</div>
+        </div>
+        <div style="background:var(--pink);border-left:2px solid var(--ink);padding:28px 16px;display:flex;align-items:flex-end;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:#fff;">Pink</div>
+        </div>
+        <div style="background:var(--cobalt);border-left:2px solid var(--ink);padding:28px 16px;display:flex;align-items:flex-end;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:#fff;">Cobalt</div>
+        </div>
+        <div style="background:var(--yellow);border-left:2px solid var(--ink);padding:28px 16px;display:flex;align-items:flex-end;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--ink);">Yellow</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       TYPOGRAPHY
+  ════════════════════════════════════════════ -->
+  <section class="section" id="type">
+    <div class="container">
+      <div class="section-header">
+        <div class="label" style="color:var(--orange);margin-bottom:12px;">02 — Typography</div>
+        <h2 class="display-lg"><em>Cormorant Garamond</em><br>+ DM Sans</h2>
+        <p style="margin-top:14px;font-size:1rem;color:var(--ink-muted);font-weight:300;max-width:480px;">Garamond brings the soul and the gravitas. DM Sans brings the friendliness and the directness. Together they're confident without being stiff.</p>
+      </div>
+
+      <div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Display XL</div><div class="type-meta-spec">Cormorant 700, −3em</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,7rem);font-weight:700;letter-spacing:-0.03em;line-height:0.9;color:var(--orange);">Clarity.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Display Italic</div><div class="type-meta-spec">Cormorant 400 italic</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.75rem);font-style:italic;font-weight:400;letter-spacing:-0.02em;color:var(--ink);">Break Free. Build Bold.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Heading H2</div><div class="type-meta-spec">Cormorant 700</div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;">Your Assessment Results</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Pull Quote</div><div class="type-meta-spec">Cormorant 400 italic</div></div>
+          <div style="border-left:4px solid var(--orange);padding-left:24px;max-width:520px;">
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--ink-mid);line-height:1.55;">"The goal isn't a bigger business. The goal is a business that fits who you actually are."</p>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Body</div><div class="type-meta-spec">DM Sans 300, 1.7 lead</div></div>
+          <div style="font-size:1rem;font-weight:300;line-height:1.7;color:var(--ink-muted);max-width:520px;">Most entrepreneurs are building a business that doesn't fit who they are. The Aligned Power Framework helps you close the gap — so your work finally feels as good as it looks from the outside.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-meta-name">Label</div><div class="type-meta-spec">DM Sans 700, 18em</div></div>
+          <span class="label" style="color:var(--orange);">01 — Strategic Clarity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       COMPONENTS
+  ════════════════════════════════════════════ -->
+  <section class="section" id="components">
+    <div class="container">
+      <div class="section-header">
+        <div class="label" style="color:var(--orange);margin-bottom:12px;">03 — Components</div>
+        <h2 class="display-lg">Buttons, Badges<br><em style="color:var(--orange);">&amp; Inputs</em></h2>
+      </div>
+
+      <div style="margin-bottom:44px;">
+        <div class="label" style="color:var(--ink-muted);margin-bottom:18px;">Buttons</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <a href="#" class="btn btn-orange"><i data-lucide="arrow-right" style="width:14px;height:14px;"></i> Begin Assessment</a>
+          <a href="#" class="btn btn-outline">Learn More</a>
+          <a href="#" class="btn" style="background:var(--celtic);color:#fff;border:2px solid var(--celtic);box-shadow:var(--shadow-md);">
+            <i data-lucide="check" style="width:14px;height:14px;"></i> Submitted
+          </a>
+          <a href="#" class="btn" style="background:var(--cobalt);color:#fff;border:2px solid var(--cobalt);box-shadow:var(--shadow-md);">View Results</a>
+        </div>
+      </div>
+
+      <div style="margin-bottom:44px;">
+        <div class="label" style="color:var(--ink-muted);margin-bottom:18px;">Badges</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <span class="badge badge-orange">Active Client</span>
+          <span class="badge badge-celtic">Submitted</span>
+          <span class="badge badge-pink">New</span>
+          <span class="badge badge-cobalt">Premium</span>
+          <span class="badge badge-ink">Draft</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="label" style="color:var(--ink-muted);margin-bottom:18px;">Inputs</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;max-width:600px;">
+          <div><label class="input-label">Full Name</label><input type="text" placeholder="Jake Sebok"></div>
+          <div><label class="input-label">Email</label><input type="email" placeholder="jake@alignedpower.coach"></div>
+          <div style="grid-column:1/-1;"><label class="input-label">Your ONE THING this week</label><textarea rows="3" placeholder="Protect my morning block for deep work…" style="resize:vertical;"></textarea></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       CARDS
+  ════════════════════════════════════════════ -->
+  <section class="section" id="cards">
+    <div class="container">
+      <div class="section-header">
+        <div class="label" style="color:var(--orange);margin-bottom:12px;">04 — Card System</div>
+        <h2 class="display-lg">Depth &amp;<br><em style="color:var(--orange);">Personality</em></h2>
+        <p style="margin-top:14px;font-size:1rem;color:var(--ink-muted);font-weight:300;">Hard shadows, bold borders. Cards feel physical — like something you can pick up.</p>
+      </div>
+
+      <div class="showcase-grid">
+
+        <!-- Score card -->
+        <div class="card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+            <div style="width:44px;height:44px;border-radius:var(--radius-md);background:var(--orange);border:2px solid var(--orange-dk);display:flex;align-items:center;justify-content:center;">
+              <i data-lucide="target" style="width:20px;height:20px;color:#fff;"></i>
+            </div>
+            <span class="badge badge-orange">Strong</span>
+          </div>
+          <div class="label" style="color:var(--orange);margin-bottom:8px;">Strategic Clarity</div>
+          <div class="big-num" style="color:var(--orange);margin-bottom:8px;">84<span style="font-size:1.25rem;color:var(--ink-muted);">%</span></div>
+          <p style="font-size:0.9375rem;color:var(--ink-muted);line-height:1.65;font-weight:300;">You know what you want. Now it's about executing without grinding yourself into dust.</p>
+          <div class="bar-bg"><div class="bar-fill" style="width:84%;animation-delay:0.4s;"></div></div>
+        </div>
+
+        <!-- ONE THING card — orange -->
+        <div class="card card--orange">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+            <div style="width:44px;height:44px;border-radius:var(--radius-md);background:rgba(0,0,0,0.15);border:2px solid rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;">
+              <i data-lucide="flame" style="width:20px;height:20px;color:#fff;"></i>
+            </div>
+            <span class="badge" style="color:#fff;border-color:rgba(255,255,255,0.4);">Week of Feb 24</span>
+          </div>
+          <div class="label" style="color:rgba(255,255,255,0.7);margin-bottom:10px;">This Week's Focus</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:400;line-height:1.5;margin-bottom:20px;">"Protect my morning block so I stay focused on what actually moves the needle."</p>
+          <div style="font-size:0.8125rem;font-weight:500;color:rgba(255,255,255,0.7);">Your ONE THING · Set last Friday</div>
+        </div>
+
+        <!-- 6C grid — full width with each score bar a different accent color -->
+        <div class="card" style="grid-column:1/-1;padding:0;overflow:hidden;">
+          <div style="padding:24px 28px;border-bottom:2px solid var(--rule-lt);display:flex;align-items:center;gap:14px;">
+            <div style="width:40px;height:40px;border-radius:var(--radius-md);background:var(--orange);border:2px solid var(--orange-dk);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="layout-grid" style="width:18px;height:18px;color:#fff;"></i>
+            </div>
+            <div>
+              <div class="label" style="color:var(--orange);">6C Alignment — This Week</div>
+              <div style="font-size:0.8125rem;color:var(--ink-muted);margin-top:2px;">Week of Feb 24, 2026</div>
+            </div>
+          </div>
+          <div class="six-c-grid">
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Clarity</div>
+              <div class="big-num six-c-cell__score" style="color:var(--orange);">88<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:88%;animation-delay:0.5s;"></div></div>
+            </div>
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Coherence</div>
+              <div class="big-num six-c-cell__score" style="color:var(--cobalt);">74<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill bar-fill-cobalt" style="width:74%;animation-delay:0.62s;"></div></div>
+            </div>
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Capacity</div>
+              <div class="big-num six-c-cell__score" style="color:var(--pink);">61<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill bar-fill-pink" style="width:61%;animation-delay:0.74s;"></div></div>
+            </div>
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Confidence</div>
+              <div class="big-num six-c-cell__score" style="color:var(--celtic);">82<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill bar-fill-celtic" style="width:82%;animation-delay:0.86s;"></div></div>
+            </div>
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Courage</div>
+              <div class="big-num six-c-cell__score" style="color:var(--yellow);">71<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill bar-fill-yellow" style="width:71%;animation-delay:0.98s;"></div></div>
+            </div>
+            <div class="six-c-cell">
+              <div class="six-c-cell__label">Connection</div>
+              <div class="big-num six-c-cell__score" style="color:var(--orange);">79<span style="font-size:1rem;color:var(--ink-muted);">%</span></div>
+              <div class="bar-bg"><div class="bar-fill" style="width:79%;animation-delay:1.1s;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Celtic / framework card -->
+        <div class="card card--celtic">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+            <div style="width:44px;height:44px;border-radius:var(--radius-md);background:rgba(0,0,0,0.15);border:2px solid rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;">
+              <i data-lucide="compass" style="width:20px;height:20px;color:#fff;"></i>
+            </div>
+          </div>
+          <div class="label" style="color:rgba(255,255,255,0.7);margin-bottom:10px;">The Framework</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:10px;">The Aligned Power 6C Framework</h3>
+          <p style="font-size:0.9375rem;color:rgba(255,255,255,0.8);line-height:1.65;font-weight:300;margin-bottom:20px;">Six dimensions. One honest snapshot. The clarity you've been missing.</p>
+          <a href="#" class="btn btn-white" style="font-size:0.8125rem;padding:10px 22px;">Explore →</a>
+        </div>
+
+        <!-- Ink / testimonial card -->
+        <div class="card card--ink">
+          <div style="width:44px;height:44px;border-radius:var(--radius-md);background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+            <i data-lucide="quote" style="width:18px;height:18px;color:var(--orange);"></i>
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:400;color:#fff;line-height:1.55;margin-bottom:20px;">"Aligned Power didn't just give me a framework — it gave me myself back."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;color:#fff;flex-shrink:0;">SR</div>
+            <div><div style="font-weight:700;font-size:0.875rem;color:#fff;">Sarah R.</div><div style="font-size:0.8125rem;color:rgba(255,255,255,0.55);">Health Coach · $280K Revenue</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- ═══════════════════════════════════════════
+       CTA
+  ════════════════════════════════════════════ -->
+  <section style="background:var(--orange);padding:100px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.07) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+    <div class="container" style="text-align:center;position:relative;z-index:2;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.15);border-radius:var(--radius-pill);padding:5px 14px;margin-bottom:24px;">
+        <span style="font-size:0.6875rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.8);">Free Assessment</span>
+      </div>
+      <h2 class="display-lg" style="color:#fff;margin-bottom:20px;">Find Your<br><em>Alignment Gap</em></h2>
+      <p style="font-size:1.0625rem;color:rgba(255,255,255,0.8);max-width:420px;margin:0 auto 40px;line-height:1.7;font-weight:300;">15 minutes. No fluff. Just a clear picture of where you're out of alignment and what to do about it.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="#" class="btn btn-white" style="font-size:0.9375rem;padding:15px 38px;">
+          <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+          Take the VAPI Assessment
+        </a>
+        <a href="#" class="btn btn-white-outline">See Sample Results</a>
+      </div>
+      <p style="font-size:0.8125rem;color:rgba(255,255,255,0.6);margin-top:20px;">Free · No credit card · Takes 15 minutes</p>
+    </div>
+  </section>
+
+  <footer style="padding:32px 0;background:var(--ink);border-top:2px solid #000;">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.375rem;font-weight:700;color:#fff;">Aligned <em style="color:var(--orange);">Power</em></span>
+      <span style="font-size:0.8125rem;color:rgba(255,255,255,0.3);">07 — brand-concept-jake</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
+</body>
+</html>
