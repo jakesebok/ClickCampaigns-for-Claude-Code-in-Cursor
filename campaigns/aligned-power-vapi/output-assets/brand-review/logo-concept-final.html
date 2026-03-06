@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Logo: The Mark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── DETONATION PALETTE ── */
+    :root {
+      --bg:         #F5F3F0;
+      --surface:    #FFFFFF;
+      --ink:        #1A1A1A;
+      --ink-mid:    #3D3D3D;
+      --ink-muted:  #7A7A7A;
+      --rule:       #E2E0DC;
+      --rule-dk:    #C8C5BF;
+      --orange:     #F26522;
+      --orange-dk:  #C4501A;
+      --orange-lt:  #FF8040;
+      --orange-tint:#FEF0E8;
+      --teal:       #2E706A;
+      --teal-lt:    #3D8C85;
+      --teal-dk:    #1F4E4A;
+      --teal-tint:  #EAF2F1;
+      --shadow-md:  0 4px 16px rgba(26,26,26,0.09), 0 1px 4px rgba(26,26,26,0.06);
+      --shadow-orange: 0 4px 24px rgba(242,101,34,0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* Subtle corporate grid — Detonation's signature */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(var(--rule) 1px, transparent 1px);
+      background-size: 100% 80px;
+      opacity: 0.18;
+    }
+
+    .page-header {
+      position: relative; z-index: 1;
+      padding: 40px 48px 32px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface);
+    }
+    .page-header .eyebrow {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 8px;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .page-header h1 span { color: var(--orange); font-style: italic; }
+    .page-header p {
+      font-size: 0.9375rem; color: var(--ink-muted);
+      margin-top: 8px; max-width: 580px; line-height: 1.7;
+    }
+
+    .main {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 48px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section:last-child { border-bottom: none; }
+    .section-eyebrow {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.875rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .section-title span { color: var(--orange); font-style: italic; }
+    .section-desc {
+      font-size: 0.9375rem; color: var(--ink-muted);
+      max-width: 600px; line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    /* ── HERO DISPLAY ── */
+    .hero-display {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 52px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-md);
+    }
+    .wm-aligned {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1;
+      color: var(--ink);
+    }
+    .wm-power {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 400; font-style: italic;
+      letter-spacing: -0.02em; line-height: 1.1;
+      color: var(--orange);
+    }
+
+    /* ── COLOR GRID ── */
+    .display-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .display-box {
+      border-radius: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px 12px 32px;
+      position: relative;
+      border: 1px solid var(--rule);
+      min-height: 130px;
+    }
+    .db-white   { background: #FFFFFF; }
+    .db-linen   { background: var(--bg); }
+    .db-ink     { background: #1A1A1A; border-color: transparent; }
+    .db-orange  { background: var(--orange); border-color: transparent; }
+    .db-teal    { background: var(--teal); border-color: transparent; }
+    .db-slate   { background: #2A2A2A; border-color: transparent; }
+    .db-label {
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--ink-muted);
+      position: absolute; bottom: 9px;
+    }
+    .db-ink    .db-label,
+    .db-orange .db-label,
+    .db-teal   .db-label,
+    .db-slate  .db-label { color: rgba(255,255,255,0.35); }
+
+    /* ── NAV SIM ── */
+    .nav-sim {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .nav-sim__inner {
+      height: 58px; display: flex; align-items: center;
+      padding: 0 24px; justify-content: space-between;
+    }
+    .nav-sim__links { display: flex; gap: 28px; font-size: 0.8125rem; color: var(--ink-muted); }
+    .nav-sim__cta {
+      background: var(--orange); color: #fff;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 9px 20px; border-radius: 4px;
+    }
+    .nav-divider {
+      width: 1px; height: 28px;
+      background: var(--rule); margin: 0 16px;
+    }
+
+    /* ── ANNOTATION ── */
+    .annotation {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 22px 28px;
+      margin-top: 12px;
+      box-shadow: var(--shadow-md);
+    }
+    .annotation h4 { font-size: 0.875rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .annotation p { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.75; }
+    .annotation p + p { margin-top: 8px; }
+    .annotation strong { color: var(--ink); }
+
+    /* Orange accent annotation */
+    .annotation--feature {
+      background: var(--ink);
+      border-color: transparent;
+    }
+    .annotation--feature h4 { color: var(--orange); }
+    .annotation--feature p { color: rgba(255,255,255,0.65); }
+    .annotation--feature strong { color: #fff; }
+
+    /* Dark hero display */
+    .hero-display--dark {
+      background: var(--ink);
+      border-color: transparent;
+    }
+    .hero-display--orange {
+      background: var(--orange);
+      border-color: transparent;
+    }
+    .hero-display--teal {
+      background: var(--teal);
+      border-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Aligned Power — Logo Final</div>
+  <h1>The <span>Mark</span></h1>
+  <p>The inscribed pyramid. Three concentric triangles, each point precisely touching the containing circle. The center dot at the geometric midpoint of the circle. Rendered in the Detonation brand system: corporate restraint with the orange detonating through.</p>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════
+     THE MARK — MATHEMATICS
+     
+     Inscribed equilateral triangle in a circle:
+     Center of circle: (48, 52)
+     Radius: R = 40
+     
+     For an equilateral triangle inscribed in a circle
+     with one vertex at the TOP:
+       Top vertex:    (cx, cy - R)         = (48, 12)
+       Bottom-left:   (cx - R·sin60°, cy + R·cos60°·... )
+       
+     Using angles 90°, 210°, 330° from positive x-axis
+     (so top vertex is at 90° = straight up):
+       Top:          cx + R·cos(90°)  = 48+0  = 48,   cy - R·sin(90°)  = 52-40 = 12
+       Bottom-right: cx + R·cos(330°) = 48+R·(√3/2) = 48+34.64 = 82.64 ≈ 83,  cy - R·sin(330°) = 52+20 = 72
+       Bottom-left:  cx + R·cos(210°) = 48-34.64 = 13.36 ≈ 13,  cy - R·sin(210°) = 52+20 = 72
+
+     So outer triangle vertices: (48,12)  (83,72)  (13,72)  — all on circle r=40 ✓
+     
+     For MIDDLE triangle (r2 = 26):
+       Top:         (48, 52-26) = (48, 26)
+       Bottom-right: (48 + 26·sin60°, 52 + 13) = (48+22.52, 65) = (70.5, 65) ≈ (71, 65)
+       Bottom-left:  (48-22.52, 65) = (25.5, 65) ≈ (25, 65)
+     
+     For INNER triangle (r3 = 14):
+       Top:         (48, 52-14) = (48, 38)
+       Bottom-right: (48 + 14·sin60°, 52+7) = (48+12.12, 59) = (60.12, 59) ≈ (60, 59)
+       Bottom-left:  (48-12.12, 59) = (35.88, 59) ≈ (36, 59)
+     
+     Center dot: (48, 52)
+     Tier dashes (horizontal lines connecting base vertices):
+       Outer base: y=72, x from 13 to 83
+       Middle base: y=65, x from 25 to 71
+       Inner base: y=59, x from 36 to 60
+══════════════════════════ -->
+
+<div class="section">
+  <div class="section-eyebrow">The Final Mark</div>
+  <div class="section-title">Pyramid <span>Inscribed</span></div>
+  <div class="section-desc">
+    Three concentric equilateral triangles, each perfectly inscribed in the containing circle — every apex and every base vertex touches the circumference exactly. The circumpunct center dot sits at the precise geometric center of the circle. No apex dot at the top. Just the mark, exact and complete.
+  </div>
+
+  <!-- PRIMARY — Light background -->
+  <div class="hero-display" style="margin-bottom:10px;">
+    <svg width="104" height="104" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- The containing circle -->
+      <circle cx="48" cy="52" r="40"
+        fill="none" stroke="#1A1A1A" stroke-width="1.5" opacity="0.15"/>
+
+      <!-- Outer triangle — teal — inscribed exactly in circle r=40 -->
+      <polygon points="48,12 83,72 13,72"
+        fill="none" stroke="#2E706A" stroke-width="1.75" stroke-linejoin="round"/>
+
+      <!-- Middle triangle — orange — inscribed in r=26 -->
+      <polygon points="48,26 71,65 25,65"
+        fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+
+      <!-- Inner triangle — dark ink — inscribed in r=14 -->
+      <polygon points="48,38 60,59 36,59"
+        fill="none" stroke="#1A1A1A" stroke-width="2.25" stroke-linejoin="round"/>
+
+      <!-- Horizontal tier dashes — architectural -->
+      <line x1="13" y1="72" x2="83" y2="72"
+        stroke="#2E706A" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.4"/>
+      <line x1="25" y1="65" x2="71" y2="65"
+        stroke="#F26522" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.45"/>
+      <line x1="36" y1="59" x2="60" y2="59"
+        stroke="#1A1A1A" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.3"/>
+
+      <!-- Center dot — geometric center of the circle -->
+      <circle cx="48" cy="52" r="3.5"
+        fill="#F26522"/>
+    </svg>
+
+    <div>
+      <div class="wm-aligned">Aligned</div>
+      <div class="wm-power">Power</div>
+    </div>
+  </div>
+
+  <!-- PRIMARY — Dark background -->
+  <div class="hero-display hero-display--dark" style="margin-bottom:10px;">
+    <svg width="104" height="104" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+      <polygon points="48,12 83,72 13,72" fill="none" stroke="#3D8C85" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2.25" stroke-linejoin="round"/>
+      <line x1="13" y1="72" x2="83" y2="72" stroke="#3D8C85" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.4"/>
+      <line x1="25" y1="65" x2="71" y2="65" stroke="#F26522" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.45"/>
+      <line x1="36" y1="59" x2="60" y2="59" stroke="rgba(255,255,255,0.4)" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/>
+      <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+    </svg>
+    <div>
+      <div class="wm-aligned" style="color:#FAFAF6;">Aligned</div>
+      <div class="wm-power">Power</div>
+    </div>
+  </div>
+
+  <!-- PRIMARY — Orange background -->
+  <div class="hero-display hero-display--orange" style="margin-bottom:10px;">
+    <svg width="104" height="104" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+      <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,26 71,65 25,65" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.25" stroke-linejoin="round"/>
+      <circle cx="48" cy="52" r="3.5" fill="#1A1A1A"/>
+    </svg>
+    <div>
+      <div class="wm-aligned" style="color:#FFFFFF;">Aligned</div>
+      <div class="wm-power" style="color:#1A1A1A;font-style:italic;">Power</div>
+    </div>
+  </div>
+
+  <!-- PRIMARY — Teal background -->
+  <div class="hero-display hero-display--teal" style="margin-bottom:16px;">
+    <svg width="104" height="104" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+      <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+      <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.25" stroke-linejoin="round"/>
+      <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+    </svg>
+    <div>
+      <div class="wm-aligned" style="color:#FFFFFF;">Aligned</div>
+      <div class="wm-power">Power</div>
+    </div>
+  </div>
+
+  <!-- 6-ACROSS COLOR GRID -->
+  <div class="display-grid">
+
+    <div class="display-box db-linen">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="1.75" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#F26522"/>
+      </svg>
+      <div class="db-label">On Linen</div>
+    </div>
+
+    <div class="display-box db-white">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="1.75" opacity="0.12"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#F26522"/>
+      </svg>
+      <div class="db-label">On White</div>
+    </div>
+
+    <div class="display-box db-ink">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.75"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#3D8C85" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#F26522"/>
+      </svg>
+      <div class="db-label">On Dark</div>
+    </div>
+
+    <div class="display-box db-orange">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.75"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#1A1A1A"/>
+      </svg>
+      <div class="db-label">On Orange</div>
+    </div>
+
+    <div class="display-box db-teal">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.75"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#F26522"/>
+      </svg>
+      <div class="db-label">On Teal</div>
+    </div>
+
+    <!-- Favicon -->
+    <div class="display-box db-linen">
+      <svg width="32" height="32" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="3" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="3.5" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="3.5" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="4.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="6.5" fill="#F26522"/>
+      </svg>
+      <div class="db-label">Favicon</div>
+    </div>
+
+  </div>
+
+  <!-- NAV SIMULATION -->
+  <div class="nav-sim">
+    <div class="nav-sim__inner">
+      <div style="display:flex;align-items:center;">
+        <svg width="26" height="27" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="2.5" opacity="0.12"/>
+          <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="48" cy="52" r="6" fill="#F26522"/>
+        </svg>
+        <div class="nav-divider"></div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1875rem;font-weight:700;letter-spacing:-0.01em;line-height:1;color:#1A1A1A;">Aligned</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.0625rem;font-weight:400;font-style:italic;line-height:1.1;color:#F26522;margin-top:1px;">Power</div>
+        </div>
+      </div>
+      <div class="nav-sim__links">
+        <span>Framework</span><span>Results</span><span>About</span>
+      </div>
+      <div class="nav-sim__cta">Begin →</div>
+    </div>
+  </div>
+
+  <!-- Dark nav simulation -->
+  <div class="nav-sim" style="background:#1A1A1A;border-color:transparent;margin-top:8px;">
+    <div class="nav-sim__inner">
+      <div style="display:flex;align-items:center;">
+        <svg width="26" height="27" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2.5"/>
+          <polygon points="48,12 83,72 13,72" fill="none" stroke="#3D8C85" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="48" cy="52" r="6" fill="#F26522"/>
+        </svg>
+        <div style="width:1px;height:28px;background:rgba(255,255,255,0.12);margin:0 16px;"></div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1875rem;font-weight:700;letter-spacing:-0.01em;line-height:1;color:#FAFAF6;">Aligned</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.0625rem;font-weight:400;font-style:italic;line-height:1.1;color:#F26522;margin-top:1px;">Power</div>
+        </div>
+      </div>
+      <div class="nav-sim__links" style="color:rgba(255,255,255,0.5);">
+        <span>Framework</span><span>Results</span><span>About</span>
+      </div>
+      <div class="nav-sim__cta">Begin →</div>
+    </div>
+  </div>
+
+  <div class="annotation--feature annotation" style="margin-top:16px;">
+    <h4>The geometry</h4>
+    <p>Each of the three triangles is a true inscribed equilateral — every vertex lands exactly on the circumference of its containing circle. The outer triangle spans the full circle. The middle triangle is inscribed at 65% of the radius. The inner triangle at 35%. The orange center dot sits at the precise geometric centroid of the circle — the exact same point that is equidistant from all three inner triangle vertices. <strong>The orange is the core:</strong> in the Detonation brand system, the teal holds structure, the ink holds authority, and the orange detonates from the center outward.</p>
+    <p>The dashed horizontal tier lines at each triangle's base give the mark an architectural, engineered quality — like a technical drawing of something ancient. The circle contains it all: the outer boundary, the whole, the field within which the ascent happens.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════
+     MARK-ONLY — ISOLATED
+     Large isolated views,
+     no wordmark
+══════════════════════ -->
+<div class="section">
+  <div class="section-eyebrow">Icon Only</div>
+  <div class="section-title">The Mark <span>Alone</span></div>
+  <div class="section-desc">
+    The mark functioning as a standalone icon — app icon, favicon, stamp, emboss. Shown at multiple sizes and on all key backgrounds.
+  </div>
+
+  <!-- Large isolated mark -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
+
+    <div style="background:#F5F3F0;border:1px solid var(--rule);border-radius:16px;display:flex;align-items:center;justify-content:center;padding:40px;aspect-ratio:1;">
+      <svg width="120" height="120" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="1.5" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.25" stroke-linejoin="round"/>
+        <line x1="13" y1="72" x2="83" y2="72" stroke="#2E706A" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.4"/>
+        <line x1="25" y1="65" x2="71" y2="65" stroke="#F26522" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.45"/>
+        <line x1="36" y1="59" x2="60" y2="59" stroke="#1A1A1A" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.3"/>
+        <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+      </svg>
+    </div>
+
+    <div style="background:#1A1A1A;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:40px;aspect-ratio:1;">
+      <svg width="120" height="120" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#3D8C85" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2.25" stroke-linejoin="round"/>
+        <line x1="13" y1="72" x2="83" y2="72" stroke="#3D8C85" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.4"/>
+        <line x1="25" y1="65" x2="71" y2="65" stroke="#F26522" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.45"/>
+        <line x1="36" y1="59" x2="60" y2="59" stroke="rgba(255,255,255,0.4)" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/>
+        <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+      </svg>
+    </div>
+
+    <div style="background:#F26522;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:40px;aspect-ratio:1;">
+      <svg width="120" height="120" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.25" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="3.5" fill="#1A1A1A"/>
+      </svg>
+    </div>
+
+    <div style="background:#2E706A;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:40px;aspect-ratio:1;">
+      <svg width="120" height="120" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.25" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Size scale -->
+  <div style="background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:28px 32px;display:flex;align-items:flex-end;gap:28px;margin-bottom:10px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="80" height="80" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="1.5" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="1.75" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="2.25" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="3.5" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">80px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="56" height="56" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="2" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="2.25" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="2.25" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4.5" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">56px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="40" height="40" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="2.5" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="6" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">40px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="28" height="28" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="3" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="4" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="4" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="5.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="8" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">28px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="20" height="20" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="4" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="5" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="5" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="7" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="10" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">20px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="16" height="16" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="52" r="40" fill="none" stroke="#1A1A1A" stroke-width="5" opacity="0.15"/>
+        <polygon points="48,12 83,72 13,72" fill="none" stroke="#2E706A" stroke-width="6" stroke-linejoin="round"/>
+        <polygon points="48,26 71,65 25,65" fill="none" stroke="#F26522" stroke-width="6" stroke-linejoin="round"/>
+        <polygon points="48,38 60,59 36,59" fill="none" stroke="#1A1A1A" stroke-width="9" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="13" fill="#F26522"/>
+      </svg>
+      <span style="font-size:0.6875rem;color:var(--ink-muted);font-weight:600;">16px</span>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Scale behavior</h4>
+    <p>The mark holds extremely well down to 28px. Below that, the three nested triangles begin to merge — at 20px and 16px the orange center dot and inner triangle dominate, which still reads as a distinct mark. The tier dashes are dropped below 40px (they disappear at small scales) but the core geometry remains legible. <strong>Recommendation:</strong> use the full mark down to 28px; below that, consider using the isolated inner triangle + orange dot as a micro-icon variant.</p>
+  </div>
+</div>
+
+</div><!-- /main -->
+</body>
+</html>
