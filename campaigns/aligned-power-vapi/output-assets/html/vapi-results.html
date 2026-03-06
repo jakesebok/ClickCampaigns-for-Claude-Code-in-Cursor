@@ -934,8 +934,8 @@
               .replace('src="../images/aligned-power-logo.png"', 'src="' + logoAbs + '"')
               .replace('src="../images/alignment-logo-watermark.png"', 'src="' + watermarkAbs + '"');
             var printStyles = '<style>' +
-              ':root{--ap-primary:#F26522;--ap-secondary:#334750;--ap-accent:#2E706A;--ap-muted:#E2E0DC;}' +
-              'body{font-family:\'Source Sans 3\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
+              ':root{--ap-primary:#F26522;--ap-secondary:#2E706A;--ap-accent:#2E706A;--ap-muted:#7A7A7A;}' +
+              'body{font-family:\'Inter\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
               'body *{box-sizing:border-box;}' +
               '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
               '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
@@ -949,8 +949,7 @@
               'svg{max-width:100%;height:auto;}' +
               '@media print{@page{margin:0.2in;} body{padding:0;margin:0;} .print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}}' +
               '</style>';
-            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F26522'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%232E706A'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml"><title>Your VAPI™ Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
+            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Your VAPI\u2122 Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
             printWin.document.write(html);
             printWin.document.close();
             printWin.focus();
