@@ -34,9 +34,9 @@
       body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       main { padding-bottom: 2.5rem; }
 
-      /* Prevent individual cards from splitting mid-card */
-      #results-content .rounded-xl,
-      #results-content .rounded-lg,
+      /* Prevent individual cards from splitting mid-card (excludes priority matrix — handled separately) */
+      #results-content .rounded-xl:not(.pm-quadrant),
+      #results-content .rounded-lg:not(.pm-card),
       #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
 
       /* Hero block: title flows directly into the wheel — no break between them */
@@ -48,8 +48,37 @@
       #results-content h2 { break-after: avoid; page-break-after: avoid; }
       #results-content h3 { break-after: avoid; page-break-after: avoid; }
 
-      /* Priority matrix: each quadrant row stays full-width, cards wrap naturally */
-      #results-content .flex-wrap { flex-wrap: wrap !important; }
+      /* ─── Priority matrix ─── */
+      /* Section heading + intro paragraph stay with what follows */
+      #results-content h2.where-to-focus { break-after: avoid; page-break-after: avoid; }
+      #results-content p.where-to-focus-intro { break-after: avoid; page-break-after: avoid; }
+
+      /* Each quadrant block: header stays glued to the first card */
+      .pm-quadrant { break-inside: auto; page-break-inside: auto; }
+      .pm-quadrant-header { break-after: avoid; page-break-after: avoid; }
+
+      /* Switch card layout from flex-wrap to single-column stacking for print */
+      .pm-cards-wrap { display: block !important; }
+      .pm-card { display: block !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important; flex: none !important; break-inside: avoid; page-break-inside: avoid; margin-bottom: 0.5rem; }
+      .pm-card:last-child { margin-bottom: 0; }
+
+      /* Force all accordion bodies open, hide chevrons */
+      .pm-card-body { display: block !important; }
+      .pm-card-toggle { pointer-events: none; }
+      .pm-chev { display: none !important; }
+
+      /* Quadrant container: don't try to keep the whole thing together (may be many cards) */
+      /* Instead, keep heading+first card together, then allow natural page breaks after each card */
+      .pm-quadrant + .pm-quadrant { margin-top: 1rem; }
+
+      /* "Worth Examining" flag box */
+      .pm-flag-box { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Remove overflow clipping so card bodies can't be cut */
+      .pm-card { overflow: visible !important; }
+
+      /* Add breathing room between card body text and its container top */
+      .pm-card-body { padding-top: 0.5rem !important; }
 
       /* Domain detail: every arena group starts on its own fresh page */
       .print-arena-group { break-before: page; page-break-before: always; break-inside: auto; }
@@ -624,8 +653,8 @@
         }
 
         var html = '';
-        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
-        html += '<p class="text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. Expand any domain to read your personalized guidance.</p>';
+        html += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
+        html += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. Expand any domain to read your personalized guidance.</p>';
 
         // Build quadrant blocks ordered by relevance: Critical, Protect, Monitor, Over-Investment
         var quadrantDefs = [
@@ -638,16 +667,16 @@
         // Each quadrant is a full-width row, with domain cards flowing horizontally inside it
         html += '<div class="mb-10 space-y-3">';
         quadrantDefs.forEach(function(q) {
-          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
-          // Header row
-          html += '<div class="flex items-start gap-2 mb-3">';
+          html += '<div class="pm-quadrant rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
+          // Header row — tagged so print CSS can keep it with the first card
+          html += '<div class="pm-quadrant-header flex items-start gap-2 mb-3">';
           html += '<span class="w-2 h-2 rounded-full ' + q.dot + ' mt-1.5 flex-shrink-0"></span>';
           html += '<div><p class="font-semibold text-sm leading-tight" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5 leading-snug">' + q.sub + '</p></div></div>';
-          // Domain cards in a horizontal wrapping row
+          // Domain cards
           if (q.entries.length === 0) {
             html += '<p class="text-sm text-[var(--ap-muted)] italic">None right now.</p>';
           } else {
-            html += '<div class="flex flex-wrap gap-2">';
+            html += '<div class="pm-cards-wrap flex flex-wrap gap-2">';
             q.entries.forEach(function(e) {
               var copy = PM_COPY[e.code] ? PM_COPY[e.code][q.key] : '';
               var flagCopy = (q.key === 'monitor' && PM_COPY[e.code] && PM_COPY[e.code].flag) ? PM_COPY[e.code].flag : null;
@@ -657,25 +686,25 @@
                 if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
               }
               var uid = 'pm-' + q.key + '-' + e.code;
-              html += '<div class="flex-1 min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
-              html += '<button type="button" onclick="(function(){var c=document.getElementById(\'' + uid + '\');var open=c.classList.toggle(\'hidden\');document.getElementById(\'' + uid + '-chev\').style.transform=open?\'rotate(0deg)\':\' rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
+              html += '<div class="pm-card flex-1 min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
+              html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var open=c.classList.toggle(\'hidden\');document.getElementById(\'' + uid + '-chev\').style.transform=open?\'rotate(0deg)\':\' rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
               html += '<div class="flex flex-col min-w-0">';
               html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
               html += '<div class="flex items-center gap-2 mt-0.5">';
               html += '<span class="text-xs font-bold" style="color:' + q.accentColor + '">' + e.score + '/10</span>';
               html += '<span class="text-xs text-[var(--ap-muted)]">Priority: ' + e.importance + '/10</span>';
               html += '</div></div>';
-              html += '<svg id="' + uid + '-chev" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(180deg)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
+              html += '<svg id="' + uid + '-chev" class="pm-chev w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(180deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
               html += '</button>';
-              html += '<div id="' + uid + '" class="px-3 pb-3 pt-0 bg-white">';
+              html += '<div id="' + uid + '" class="pm-card-body px-3 pb-3 pt-0 bg-white">';
               html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(copy) + '</p>';
-              if (flagCopy) html += '<div class="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg"><p class="text-xs font-semibold text-amber-800 mb-1">Worth Examining</p><p class="text-xs text-amber-900 leading-relaxed">' + escapeHtml(flagCopy) + '</p></div>';
+              if (flagCopy) html += '<div class="pm-flag-box mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg"><p class="text-xs font-semibold text-amber-800 mb-1">Worth Examining</p><p class="text-xs text-amber-900 leading-relaxed">' + escapeHtml(flagCopy) + '</p></div>';
               html += '</div>';
               html += '</div>';
             });
-            html += '</div>'; // end flex wrap
+            html += '</div>'; // end pm-cards-wrap
           }
-          html += '</div>'; // end quadrant
+          html += '</div>'; // end pm-quadrant
         });
         html += '</div>'; // end container
 
@@ -1254,6 +1283,13 @@
       } else {
         renderPlaceholder();
       }
+
+      // Before printing: expand all collapsed priority-matrix cards so they print fully
+      window.addEventListener('beforeprint', function() {
+        document.querySelectorAll('.pm-card-body').forEach(function(el) {
+          el.classList.remove('hidden');
+        });
+      });
     })();
   </script>
 </body>
