@@ -48,8 +48,8 @@
       #results-content h2 { break-after: avoid; page-break-after: avoid; }
       #results-content h3 { break-after: avoid; page-break-after: avoid; }
 
-      /* Priority matrix: revert to 2-column grid for print */
-      #results-content .lg\:grid-cols-4 { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+      /* Priority matrix: each quadrant row stays full-width, cards wrap naturally */
+      #results-content .flex-wrap { flex-wrap: wrap !important; }
 
       /* Domain detail: 2nd and 3rd arena groups start on their own page */
       .print-arena-group { break-before: page; page-break-before: always; }
@@ -578,19 +578,48 @@
           { key: 'overInvestment',    entries: matrix.overInvestment,    border: 'border-amber-200', bg: 'bg-amber-50', dot: 'bg-amber-500', label: 'Possible Over-Investment', sub: 'Lower priority, but scoring well. Could this go elsewhere?',   accentColor: '#EAB308' },
         ];
 
-        // Horizontal row layout: 4 quadrants side by side, each scrolls independently
-        // On mobile: 2x2 grid. On lg: single row of 4.
-        html += '<div class="mb-10">';
-        html += '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">';
+        // Each quadrant is a full-width row, with domain cards flowing horizontally inside it
+        html += '<div class="mb-10 space-y-3">';
         quadrantDefs.forEach(function(q) {
-          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 flex flex-col">';
+          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
+          // Header row
           html += '<div class="flex items-start gap-2 mb-3">';
           html += '<span class="w-2 h-2 rounded-full ' + q.dot + ' mt-1.5 flex-shrink-0"></span>';
           html += '<div><p class="font-semibold text-sm leading-tight" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5 leading-snug">' + q.sub + '</p></div></div>';
-          html += '<div class="flex-1">' + quadrantItems(q.entries, q.key, q.accentColor) + '</div>';
-          html += '</div>';
+          // Domain cards in a horizontal wrapping row
+          if (q.entries.length === 0) {
+            html += '<p class="text-sm text-[var(--ap-muted)] italic">None right now.</p>';
+          } else {
+            html += '<div class="flex flex-wrap gap-2">';
+            q.entries.forEach(function(e) {
+              var copy = PM_COPY[e.code] ? PM_COPY[e.code][q.key] : '';
+              var flagCopy = (q.key === 'monitor' && PM_COPY[e.code] && PM_COPY[e.code].flag) ? PM_COPY[e.code].flag : null;
+              if (e.code === 'FA' && flagCopy) {
+                var profile = results.contextualProfile || {};
+                var lifeStage = profile.lifeStage || '';
+                if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
+              }
+              var uid = 'pm-' + q.key + '-' + e.code;
+              html += '<div class="flex-1 min-w-[180px] max-w-[280px] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
+              html += '<button type="button" onclick="(function(){var c=document.getElementById(\'' + uid + '\');var open=c.classList.toggle(\'hidden\');document.getElementById(\'' + uid + '-chev\').style.transform=open?\'rotate(0deg)\':\' rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
+              html += '<div class="flex flex-col min-w-0">';
+              html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
+              html += '<div class="flex items-center gap-2 mt-0.5">';
+              html += '<span class="text-xs font-bold" style="color:' + q.accentColor + '">' + e.score + '/10</span>';
+              html += '<span class="text-xs text-[var(--ap-muted)]">Priority: ' + e.importance + '/10</span>';
+              html += '</div></div>';
+              html += '<svg id="' + uid + '-chev" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(180deg)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
+              html += '</button>';
+              html += '<div id="' + uid + '" class="px-3 pb-3 pt-0 bg-white">';
+              html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(copy) + '</p>';
+              if (flagCopy) html += '<div class="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg"><p class="text-xs font-semibold text-amber-800 mb-1">Worth Examining</p><p class="text-xs text-amber-900 leading-relaxed">' + escapeHtml(flagCopy) + '</p></div>';
+              html += '</div>';
+              html += '</div>';
+            });
+            html += '</div>'; // end flex wrap
+          }
+          html += '</div>'; // end quadrant
         });
-        html += '</div>'; // end grid
         html += '</div>'; // end container
 
         return html;
