@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F26522'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%232E706A'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your VAPI™ Results | Aligned Power</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <script src="vapi-results-interpretations.js"></script>
   <style>
     :root {
-      --ap-primary: #F26522;
-      --ap-secondary: #2E706A;
-      --ap-accent: #2E706A;
-      --ap-bg: #F5F3F0;
-      --ap-text: #1A1A1A;
-      --ap-muted: #7A7A7A;
-      --ap-border: #E2E0DC;
+      --ap-primary: #582233;
+      --ap-secondary: #334750;
+      --ap-accent: #D4AA70;
+      --ap-bg: #F4ECE3;
+      --ap-text: #582233;
+      --ap-muted: #C6B8A7;
+      --ap-border: #C6B8A7;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
@@ -306,10 +306,10 @@
         html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
         for (var k = 2; k <= 10; k++) {
           var rr = r * (k - 1.2) / 10;
-          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#F26522" font-family="Inter,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
+          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
         }
         var rrStar = r * 9.8 / 10;
-        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#F26522" font-family="Inter,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
+        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
         for (var i = 0; i < 12; i++) {
           var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
@@ -321,7 +321,7 @@
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10;
           var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#2E706A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
           for (var L = 0; L < lines.length; L++) {
             html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + escapeHtml(lines[L]) + '</tspan>';
           }
@@ -418,7 +418,7 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#2E706A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
           for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
@@ -653,7 +653,7 @@
             if (a > 45 && a <= 135) firstLineY = ay + halfFont;
             else if (a > 225 && a <= 315) firstLineY = ay - blockH - halfFont;
             else firstLineY = ay - blockH / 2;
-            h += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#2E706A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            h += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
             for (var L = 0; L < numLines; L++) {
               h += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
             }
@@ -934,12 +934,12 @@
               .replace('src="../images/aligned-power-logo.png"', 'src="' + logoAbs + '"')
               .replace('src="../images/alignment-logo-watermark.png"', 'src="' + watermarkAbs + '"');
             var printStyles = '<style>' +
-              ':root{--ap-primary:#F26522;--ap-secondary:#2E706A;--ap-accent:#2E706A;--ap-muted:#7A7A7A;}' +
-              'body{font-family:\'Inter\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
+              ':root{--ap-primary:#582233;--ap-secondary:#334750;--ap-accent:#D4AA70;--ap-muted:#C6B8A7;}' +
+              'body{font-family:\'Source Sans 3\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
               'body *{box-sizing:border-box;}' +
               '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
               '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
-              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#F26522;margin:0 0 0.5rem 0;}' +
+              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#582233;margin:0 0 0.5rem 0;}' +
               '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
               '.alignment-glance-inner .absolute{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;width:119%;height:119%;left:-9.5%;top:-9.5%;}' +
               '.alignment-glance-inner .absolute img{width:100%;height:100%;object-fit:contain;opacity:0.1;max-width:none;max-height:none;min-width:100%;min-height:100%;}' +
@@ -949,7 +949,8 @@
               'svg{max-width:100%;height:auto;}' +
               '@media print{@page{margin:0.2in;} body{padding:0;margin:0;} .print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}}' +
               '</style>';
-            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Your VAPI\u2122 Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
+            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml"><title>Your VAPI™ Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
             printWin.document.write(html);
             printWin.document.close();
             printWin.focus();
