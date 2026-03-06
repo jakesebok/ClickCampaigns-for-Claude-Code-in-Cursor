@@ -33,13 +33,28 @@
       .print-only { display: block !important; }
       body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       main { padding-bottom: 2.5rem; }
+
+      /* Prevent any card from being split across a page break */
       #results-content .rounded-xl,
-      #results-content .rounded-lg { page-break-inside: avoid; }
+      #results-content .rounded-lg,
+      #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Scores section stays together */
       #results-content .results-title-block { page-break-after: avoid; margin-bottom: 1rem !important; }
       #results-content .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
       #results-content .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0.25rem !important; }
-      #results-content h2 { page-break-after: avoid; }
-      #results-content h3 { page-break-after: avoid; }
+
+      /* Section headings always stay with their first card */
+      #results-content h2 { break-after: avoid; page-break-after: avoid; }
+      #results-content h3 { break-after: avoid; page-break-after: avoid; }
+
+      /* Priority matrix: columns become single-column for print */
+      #results-content .sm\:columns-2 { columns: 1 !important; }
+
+      /* Domain detail: 2nd and 3rd arena groups start on their own page */
+      .print-arena-group { break-before: page; page-break-before: always; }
+      .print-first-arena { break-before: avoid !important; page-break-before: avoid !important; }
+
       .enlarge-hint { display: none !important; }
       .print-report-header { margin-bottom: 0.25rem; padding-bottom: 0.25rem; border-bottom: none; font-size: 0.7rem; color: var(--ap-secondary); line-height: 1.2; }
       .print-report-header strong { color: var(--ap-primary); font-weight: 600; }
@@ -117,14 +132,14 @@
       var raw = sessionStorage.getItem('vapiResults');
       var results = raw ? (function() { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
       var hasEmail = results && results.email;
-      console.log('[VAPI save] Started. Has results in sessionStorage:', !!raw, '| Has email:', hasEmail);
+      console.log('[VAPI save] Started. Has results in sessionStorage:', !!raw, '| Has email:', !!hasEmail);
       try {
         if (!raw) {
           console.warn('[VAPI save] No results in sessionStorage. Complete the quiz on this site and submit the form; the redirect should bring you here with data. If you opened this page in a new tab or different URL, that can explain missing data.');
           return;
         }
         if (!results || !results.email) {
-          console.warn('[VAPI save] Results missing or no email. Cannot save to database.');
+          console.warn('[VAPI save] Results missing or no email. Cannot save to database.', 'results keys:', results ? Object.keys(results) : 'null');
           return;
         }
         async function loadConfig() {
@@ -158,21 +173,23 @@
         var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
         var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         var emailNormalized = String(results.email).trim().toLowerCase();
-        console.log('[VAPI save] Inserting row for:', emailNormalized);
-        var { error } = await client.from('vapi_results').insert({
+        console.log('[VAPI save] Inserting row for:', emailNormalized, '| results keys:', Object.keys(results));
+        var insertPayload = {
           email: emailNormalized,
           first_name: results.firstName || null,
           last_name: results.lastName || null,
           results: results
-        });
+        };
+        console.log('[VAPI save] Insert payload (keys):', Object.keys(insertPayload));
+        var { data: insertData, error } = await client.from('vapi_results').insert(insertPayload).select();
         if (error) {
-          console.error('[VAPI save] Insert failed:', error.message, error);
+          console.error('[VAPI save] Insert failed. Code:', error.code, '| Message:', error.message, '| Details:', error.details, '| Hint:', error.hint, '| Full error:', JSON.stringify(error));
           return;
         }
         sessionStorage.setItem('vapiResultsSaved', '1');
-        console.log('[VAPI save] Insert succeeded.');
+        console.log('[VAPI save] Insert succeeded. Returned row:', JSON.stringify(insertData));
       } catch (e) {
-        console.error('[VAPI save] Unexpected error:', e);
+        console.error('[VAPI save] Unexpected error:', e.message, e);
       }
     })();
   </script>
@@ -542,7 +559,7 @@
           else matrix.overInvestment.push(entry);
         });
 
-        function quadrantItems(entries, quadrantKey, accentColor, bgColor) {
+        function quadrantItems(entries, quadrantKey, accentColor) {
           if (entries.length === 0) {
             return '<p class="text-sm text-[var(--ap-muted)] italic">None right now.</p>';
           }
@@ -578,58 +595,28 @@
         html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
         html += '<p class="text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. Expand any domain to read your personalized guidance.</p>';
 
-        // Grid container with axis labels
-        html += '<div class="relative mb-10">';
+        // Build quadrant blocks ordered by relevance: Critical, Protect, Monitor, Over-Investment
+        var quadrantDefs = [
+          { key: 'criticalPriority',  entries: matrix.criticalPriority,  border: 'border-red-200',   bg: 'bg-red-50',   dot: 'bg-red-500',   label: 'Critical Priority',          sub: 'High importance. Low score. Focus here first.',                          accentColor: '#EF4444' },
+          { key: 'protectAndSustain', entries: matrix.protectAndSustain, border: 'border-green-200', bg: 'bg-green-50', dot: 'bg-green-500', label: 'Protect &amp; Sustain',       sub: 'High importance. Strong score. Don\'t neglect these.',                    accentColor: '#22C55E' },
+          { key: 'monitor',           entries: matrix.monitor,           border: 'border-gray-200',  bg: 'bg-gray-50',  dot: 'bg-gray-400',  label: 'Monitor',                    sub: 'Lower priority right now. Lower score. Keep an eye on these.',            accentColor: '#6B7280' },
+          { key: 'overInvestment',    entries: matrix.overInvestment,    border: 'border-amber-200', bg: 'bg-amber-50', dot: 'bg-amber-500', label: 'Possible Over-Investment',   sub: 'Lower priority, but scoring well. Could this energy go elsewhere?',       accentColor: '#EAB308' },
+        ];
 
-        // Y-axis label
-        html += '<div class="hidden sm:flex absolute -left-8 top-0 bottom-0 items-center justify-center pointer-events-none" style="writing-mode:vertical-rl;transform:rotate(180deg);">';
-        html += '<span class="text-xs font-semibold uppercase tracking-widest text-[var(--ap-muted)]">YOUR SCORE</span>';
-        html += '</div>';
-
-        html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
-
-        // Top-left: CRITICAL PRIORITY
-        html += '<div class="rounded-xl border-2 border-red-200 bg-red-50 p-4">';
-        html += '<div class="flex items-start gap-2 mb-1">';
-        html += '<span class="w-2 h-2 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></span>';
-        html += '<div><p class="font-semibold text-red-800 text-sm">Critical Priority</p><p class="text-xs text-red-600 mt-0.5">High importance to you. Low score. Focus here first.</p></div></div>';
-        html += '<div class="mt-3">' + quadrantItems(matrix.criticalPriority, 'criticalPriority', '#EF4444', '#FEF2F2') + '</div>';
-        html += '</div>';
-
-        // Top-right: PROTECT & SUSTAIN
-        html += '<div class="rounded-xl border-2 border-green-200 bg-green-50 p-4">';
-        html += '<div class="flex items-start gap-2 mb-1">';
-        html += '<span class="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></span>';
-        html += '<div><p class="font-semibold text-green-800 text-sm">Protect &amp; Sustain</p><p class="text-xs text-green-600 mt-0.5">High importance to you. Strong score. Don\'t neglect these.</p></div></div>';
-        html += '<div class="mt-3">' + quadrantItems(matrix.protectAndSustain, 'protectAndSustain', '#22C55E', '#F0FDF4') + '</div>';
-        html += '</div>';
-
-        // Bottom-left: MONITOR
-        html += '<div class="rounded-xl border-2 border-gray-200 bg-gray-50 p-4">';
-        html += '<div class="flex items-start gap-2 mb-1">';
-        html += '<span class="w-2 h-2 rounded-full bg-gray-400 mt-1.5 flex-shrink-0"></span>';
-        html += '<div><p class="font-semibold text-gray-700 text-sm">Monitor</p><p class="text-xs text-gray-500 mt-0.5">Lower priority right now. Lower score. Keep an eye on these.</p></div></div>';
-        html += '<div class="mt-3">' + quadrantItems(matrix.monitor, 'monitor', '#6B7280', '#F9FAFB') + '</div>';
-        html += '</div>';
-
-        // Bottom-right: POSSIBLE OVER-INVESTMENT
-        html += '<div class="rounded-xl border-2 border-amber-200 bg-amber-50 p-4">';
-        html += '<div class="flex items-start gap-2 mb-1">';
-        html += '<span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>';
-        html += '<div><p class="font-semibold text-amber-800 text-sm">Possible Over-Investment</p><p class="text-xs text-amber-600 mt-0.5">Lower priority to you, but scoring well. Is energy going here that could go elsewhere?</p></div></div>';
-        html += '<div class="mt-3">' + quadrantItems(matrix.overInvestment, 'overInvestment', '#EAB308', '#FFFBEB') + '</div>';
-        html += '</div>';
-
-        html += '</div>'; // end grid
-
-        // X-axis label
-        html += '<div class="flex justify-between items-center mt-2 px-1">';
-        html += '<span class="text-xs font-semibold text-[var(--ap-muted)] uppercase tracking-widest">High Priority</span>';
-        html += '<span class="text-xs font-semibold text-[var(--ap-muted)] uppercase tracking-widest">YOUR PRIORITY</span>';
-        html += '<span class="text-xs font-semibold text-[var(--ap-muted)] uppercase tracking-widest">Low Priority</span>';
-        html += '</div>';
-
-        html += '</div>'; // end relative
+        // Responsive masonry-style two-column layout using two column arrays
+        // On mobile: single column (all stacked). On sm+: two columns using CSS columns.
+        html += '<div class="mb-10">';
+        html += '<div class="sm:columns-2 sm:gap-3 space-y-3 sm:space-y-0">';
+        quadrantDefs.forEach(function(q) {
+          html += '<div class="break-inside-avoid rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 mb-3">';
+          html += '<div class="flex items-start gap-2 mb-1">';
+          html += '<span class="w-2 h-2 rounded-full ' + q.dot + ' mt-1.5 flex-shrink-0"></span>';
+          html += '<div><p class="font-semibold text-sm" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5">' + q.sub + '</p></div></div>';
+          html += '<div class="mt-3">' + quadrantItems(q.entries, q.key, q.accentColor) + '</div>';
+          html += '</div>';
+        });
+        html += '</div>'; // end columns
+        html += '</div>'; // end container
 
         return html;
       }
@@ -785,8 +772,11 @@
         var arenaOrder = ['Personal', 'Relationships', 'Business'];
         var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         arenaOrder.forEach(function(arena, idx) {
-          var mt = idx === 0 ? 'mt-2' : 'mt-8';
-          html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + arena + '</h3>';
+          // Each arena wrapped in print-arena-group for page-break-before on print
+          var isFirst = idx === 0;
+          html += '<div class="print-arena-group' + (isFirst ? ' print-first-arena' : '') + '">';
+          var mt = isFirst ? 'mt-2' : 'mt-8';
+          html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + escapeHtml(arena) + '</h3>';
           domains.filter(function(d) { return d.arena === arena; }).forEach(function(d) {
             var pct = Math.min(100, d.score * 10);
             var text = (INTERP.domain[d.code] && INTERP.domain[d.code][d.tier]) ? INTERP.domain[d.code][d.tier] : '';
@@ -798,6 +788,7 @@
             html += '<p class="text-[var(--ap-secondary)] leading-relaxed text-sm">' + text + '</p>';
             html += '</div>';
           });
+          html += '</div>'; // end print-arena-group
         });
 
         html += '<p class="text-sm text-[var(--ap-muted)] mt-8 no-print">Use &ldquo;Download / Print results&rdquo; above to save this page as a PDF.</p>';

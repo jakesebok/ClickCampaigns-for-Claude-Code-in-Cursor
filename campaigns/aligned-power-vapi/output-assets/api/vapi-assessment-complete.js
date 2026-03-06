@@ -24,8 +24,10 @@
  *   reflectionResponse string  (optional)
  */
 
-const ADMIN_EMAIL = 'jacob@alignedpower.coach';
-const PORTAL_URL  = 'https://portal.alignedpower.coach';
+const ADMIN_EMAIL       = 'jacob@alignedpower.coach';
+const PORTAL_URL        = 'https://portal.alignedpower.coach';
+const USER_FROM_EMAIL   = process.env.VAPI_USER_FROM_EMAIL   || 'hello@notifications.alignedpower.coach';
+const ADMIN_FROM_EMAIL  = process.env.VAPI_ADMIN_FROM_EMAIL  || 'assessments@notifications.alignedpower.coach';
 
 function getTierColor(tier) {
   if (tier === 'Dialed')          return '#22C55E';
@@ -230,11 +232,6 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
       ${profileRows}
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Reflection Response</td></tr>
-      <tr><td style="padding:8px 12px;color:#334750;font-size:14px;">${escHtml(reflectionResponse || 'Skipped')}</td></tr>
-    </table>
-
   </td></tr>
 </table>
 </td></tr>
@@ -265,16 +262,13 @@ Revenue Stage: ${cp.revenueStage || 'Not provided'}
 Team Size: ${cp.teamSize || 'Not provided'}
 Life Stage: ${cp.lifeStage || 'Not provided'}
 Time in Business: ${cp.timeInBusiness || 'Not provided'}
-Primary Challenge: ${cp.primaryChallenge || 'Not provided'}
-
-Reflection Response: ${reflectionResponse || 'Skipped'}`;
+Primary Challenge: ${cp.primaryChallenge || 'Not provided'}`;
 
   return { html, text };
 }
 
 export async function POST(request) {
   const resendKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.VAPI_FROM_EMAIL || process.env.SIX_C_FROM_EMAIL || 'results@alignedpower.coach';
 
   if (!resendKey) {
     return new Response(JSON.stringify({ error: 'missing_env', message: 'RESEND_API_KEY required' }), {
@@ -320,12 +314,12 @@ export async function POST(request) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
         body: JSON.stringify({
-          from: fromEmail,
+          from: `Aligned Power <${USER_FROM_EMAIL}>`,
           to: [email.trim().toLowerCase()],
           subject: 'Your VAPI Assessment Results Are Ready',
           html,
           text,
-          reply_to: process.env.SIX_C_REPLY_TO || undefined,
+          reply_to: process.env.VAPI_REPLY_TO || process.env.SIX_C_REPLY_TO || undefined,
         }),
       });
       if (res.ok) {
@@ -350,13 +344,13 @@ export async function POST(request) {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [ADMIN_EMAIL],
-        subject: 'New VAPI Assessment Completed',
-        html: adminHtml,
-        text: adminText,
-      }),
+        body: JSON.stringify({
+          from: `VAPI Assessments <${ADMIN_FROM_EMAIL}>`,
+          to: [ADMIN_EMAIL],
+          subject: 'New VAPI Assessment Completed',
+          html: adminHtml,
+          text: adminText,
+        }),
     });
     if (res.ok) {
       results.adminEmailSent = true;
