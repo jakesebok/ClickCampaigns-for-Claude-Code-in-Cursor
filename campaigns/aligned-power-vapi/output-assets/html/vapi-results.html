@@ -75,8 +75,19 @@
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print pt-6 pb-5">
-    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print">
+    <!-- Portal CTA banner — shown only when not logged in -->
+    <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-primary)] text-white">
+      <div class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p class="text-xs font-medium text-white/90 text-center sm:text-left">Save your results &amp; track your progress over time — it&apos;s free.</p>
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a id="portal-banner-signup" href="../portal/signup.html" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
+          <a id="portal-banner-login" href="../portal/login.html" class="text-xs font-semibold text-white/70 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">Log in</a>
+        </div>
+      </div>
+    </div>
+    <!-- /Portal CTA banner -->
+    <div class="max-w-4xl mx-auto px-4 pt-6 pb-5 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <span id="results-back-admin" class="hidden"><a href="../portal/admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
         <a href="vapi-landing.html" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
@@ -173,6 +184,47 @@
       }
     })();
   </script>
+  <!-- Portal CTA visibility: show banner + inline CTAs only when NOT logged in -->
+  <script type="module">
+    (async function() {
+      try {
+        var r = await fetch('/api/config');
+        if (!r.ok) return;
+        eval(await r.text());
+        if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
+        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+        var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        var { data: { session } } = await supabase.auth.getSession();
+        var banner = document.getElementById('portal-sticky-banner');
+        var inlineCtas = document.querySelectorAll('.portal-inline-cta');
+        if (session && session.user) {
+          // User is logged in — hide all portal CTAs, they're already in the portal ecosystem
+          if (banner) banner.remove();
+          inlineCtas.forEach(function(el) { el.remove(); });
+        } else {
+          // Not logged in — show the sticky banner
+          if (banner) banner.classList.remove('hidden');
+          // Pre-fill email on signup/login links if we have it from session storage
+          var raw = sessionStorage.getItem('vapiResults');
+          var results = raw ? (function() { try { return JSON.parse(raw); } catch(e) { return null; } })() : null;
+          var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
+          if (email) {
+            document.querySelectorAll('a.portal-cta-signup, #portal-banner-signup').forEach(function(a) {
+              a.href = '../portal/signup.html?email=' + encodeURIComponent(email);
+            });
+            document.querySelectorAll('a.portal-cta-login, #portal-banner-login').forEach(function(a) {
+              a.href = '../portal/login.html?email=' + encodeURIComponent(email);
+            });
+          }
+        }
+      } catch (e) {
+        // On any error, default: show the banner (safe fallback)
+        var banner = document.getElementById('portal-sticky-banner');
+        if (banner) banner.classList.remove('hidden');
+      }
+    })();
+  </script>
+
   <script type="module">
     (function() {
       var btn = document.getElementById('go-to-portal-btn');
@@ -761,6 +813,18 @@
         html += '<span class="text-[var(--ap-secondary)] text-sm">What&rsquo;s next?</span>';
         html += '<a href="#continue-journey" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-4 py-2 border border-[var(--ap-primary)]/30 hover:border-[var(--ap-accent)] hover:bg-[var(--ap-accent)]/10 transition-colors">See resources and next steps below <i data-lucide="arrow-down" class="w-4 h-4"></i></a>';
         html += '</div>';
+        // Inline CTA 1 — after composite score, before arena scores
+        html += '<div class="no-print portal-inline-cta bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">Your results are ready — save them before you leave.</p>';
+        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Create a free portal account to save these results, track your progress over time, and see what changes between assessments.</p>';
+        html += '</div>';
+        html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">';
+        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
+        html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold border border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] text-[var(--ap-primary)] px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Log in</a>';
+        html += '</div>';
+        html += '</div>';
+
         html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Arena scores</h2>';
         html += '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">';
         ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
@@ -779,6 +843,19 @@
 
         // Priority Matrix replaces old Top 3 Strengths / Bottom 3 section
         html += buildPriorityMatrix(results);
+
+        // Inline CTA 2 — after priority matrix, before domain detail
+        html += '<div class="no-print portal-inline-cta bg-gradient-to-r from-[var(--ap-primary)]/8 to-[var(--ap-accent)]/8 border border-[var(--ap-accent)]/25 rounded-xl p-5 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+        html += '<div class="text-2xl flex-shrink-0">📈</div>';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">See how you change over time.</p>';
+        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted — scores, priorities, and what to focus on next.</p>';
+        html += '</div>';
+        html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">';
+        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#c45b1a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Start tracking free</a>';
+        html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
+        html += '</div>';
+        html += '</div>';
 
         var arenaOrder = ['Personal', 'Relationships', 'Business'];
         var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
