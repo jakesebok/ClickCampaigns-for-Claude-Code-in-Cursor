@@ -131,71 +131,38 @@
     (async function() {
       var raw = sessionStorage.getItem('vapiResults');
       var results = raw ? (function() { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
-      var hasEmail = results && results.email;
-      console.log('[VAPI save] Started. Has results in sessionStorage:', !!raw, '| Has email:', !!hasEmail);
+      console.log('[VAPI save] Started. Has results in sessionStorage:', !!raw, '| Has email:', !!(results && results.email));
       try {
-        if (!raw) {
-          console.warn('[VAPI save] No results in sessionStorage. Complete the quiz on this site and submit the form; the redirect should bring you here with data. If you opened this page in a new tab or different URL, that can explain missing data.');
+        if (!raw || !results) {
+          console.warn('[VAPI save] No results in sessionStorage.');
           return;
         }
-        if (!results || !results.email) {
-          console.warn('[VAPI save] Results missing or no email. Cannot save to database.', 'results keys:', results ? Object.keys(results) : 'null');
-          return;
-        }
-        async function loadConfig() {
-          try {
-            var r = await fetch('/api/config');
-            console.log('[VAPI save] /api/config response status:', r.status);
-            if (!r.ok) {
-              console.error('[VAPI save] Config fetch failed:', r.status, r.statusText);
-              return null;
-            }
-            var t = await r.text();
-            console.log('[VAPI save] /api/config raw response (first 120 chars):', t.slice(0, 120));
-            eval(t);
-            console.log('[VAPI save] After eval — SUPABASE_URL:', window.SUPABASE_URL ? window.SUPABASE_URL.slice(0, 40) : '(empty)', '| SUPABASE_ANON_KEY length:', (window.SUPABASE_ANON_KEY || '').length);
-            if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
-              console.error('[VAPI save] SUPABASE_URL or SUPABASE_ANON_KEY missing after /api/config. Check Vercel env vars.');
-              return null;
-            }
-            return {};
-          } catch (e) {
-            console.error('[VAPI save] Config load error:', e);
-            return null;
-          }
-        }
-        var cfg = await loadConfig();
-        if (!cfg) {
-          console.warn('[VAPI save] Config not loaded. Insert skipped. Fix /api/config or env vars and try again.');
-          return;
-        }
-        console.log('[VAPI save] Config loaded. SUPABASE_URL:', window.SUPABASE_URL ? window.SUPABASE_URL.slice(0,40) + '...' : '(empty!)', '| SUPABASE_ANON_KEY length:', window.SUPABASE_ANON_KEY ? window.SUPABASE_ANON_KEY.length : 0);
-        if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
-          console.error('[VAPI save] Missing env vars — SUPABASE_URL or SUPABASE_ANON_KEY is empty. Check Vercel Environment Variables.');
+        if (!results.email) {
+          console.warn('[VAPI save] No email in results. Cannot save.');
           return;
         }
         if (sessionStorage.getItem('vapiResultsSaved')) {
-          console.log('[VAPI save] Already marked as saved this session. Insert skipped (no duplicate).');
+          console.log('[VAPI save] Already saved this session. Skipping.');
           return;
         }
-        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
-        var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-        var emailNormalized = String(results.email).trim().toLowerCase();
-        console.log('[VAPI save] Inserting row for:', emailNormalized, '| results keys:', Object.keys(results));
-        var insertPayload = {
-          email: emailNormalized,
-          first_name: results.firstName || null,
-          last_name: results.lastName || null,
-          results: results
-        };
-        console.log('[VAPI save] Insert payload (keys):', Object.keys(insertPayload));
-        var { data: insertData, error } = await client.from('vapi_results').insert(insertPayload).select();
-        if (error) {
-          console.error('[VAPI save] Insert failed. Code:', error.code, '| Message:', error.message, '| Details:', error.details, '| Hint:', error.hint, '| Full error:', JSON.stringify(error));
+        console.log('[VAPI save] Saving via /api/save-vapi-results for:', results.email);
+        var saveRes = await fetch('/api/save-vapi-results', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: results.email,
+            firstName: results.firstName || null,
+            lastName: results.lastName || null,
+            results: results,
+          }),
+        });
+        var saveJson = await saveRes.json();
+        if (!saveRes.ok || saveJson.error) {
+          console.error('[VAPI save] Save failed:', saveRes.status, JSON.stringify(saveJson));
           return;
         }
         sessionStorage.setItem('vapiResultsSaved', '1');
-        console.log('[VAPI save] Insert succeeded. Returned row:', JSON.stringify(insertData));
+        console.log('[VAPI save] Save succeeded.');
       } catch (e) {
         console.error('[VAPI save] Unexpected error:', e.message, e);
       }
