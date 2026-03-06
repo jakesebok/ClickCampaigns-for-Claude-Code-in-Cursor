@@ -600,7 +600,7 @@
                 if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
               }
               var uid = 'pm-' + q.key + '-' + e.code;
-              html += '<div class="flex-1 min-w-[180px] max-w-[280px] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
+              html += '<div class="flex-1 min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
               html += '<button type="button" onclick="(function(){var c=document.getElementById(\'' + uid + '\');var open=c.classList.toggle(\'hidden\');document.getElementById(\'' + uid + '-chev\').style.transform=open?\'rotate(0deg)\':\' rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
               html += '<div class="flex flex-col min-w-0">';
               html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
