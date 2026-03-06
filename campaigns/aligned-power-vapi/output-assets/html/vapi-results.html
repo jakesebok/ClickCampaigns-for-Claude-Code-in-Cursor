@@ -39,6 +39,8 @@
       #results-content .rounded-lg,
       #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
 
+      /* Title + wheel always stay together on the first page */
+      .print-hero-block { break-inside: avoid; page-break-inside: avoid; }
       /* Scores section stays together */
       #results-content .results-title-block { page-break-after: avoid; margin-bottom: 1rem !important; }
       #results-content .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
@@ -657,6 +659,8 @@
         }
 
         html += '<div class="print-only print-report-header"><strong>VAPI™ Results</strong>' + (fullName ? ' · ' + escapeHtml(fullName) : '') + ' · ' + reportDate + '</div>';
+        // Wrap title + wheel together so they never split across a page break
+        html += '<div class="print-hero-block">';
         html += '<div class="results-title-block text-center mb-10">';
         html += '<p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">Your Results</p>';
         html += '<h1 class="text-4xl sm:text-5xl text-[var(--ap-primary)] leading-tight">' + (firstName ? firstName + ', your ' : 'Your ') + 'VAPI™ Score</h1>';
@@ -664,6 +668,7 @@
         html += '</div>';
 
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
+        html += '</div>'; // end print-hero-block
         html += '<div id="results-explore-section" class="no-print mb-10">';
         html += '<h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>';
         html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.</p>';
