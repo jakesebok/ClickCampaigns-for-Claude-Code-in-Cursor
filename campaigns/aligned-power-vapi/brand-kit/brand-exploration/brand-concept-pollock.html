@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Concept 09: Pollock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --orange:      #F26522;
+      --orange-dk:   #C4501A;
+      --teal:        #2E706A;
+      --teal-lt:     #3D8C85;
+      --ink:         #1A1A1A;
+      --ink-mid:     #3D3D3D;
+      --ink-muted:   #7A7A7A;
+      --ink-subtle:  #B8B8B8;
+      --bg:          #F5F3F0;
+      --surface:     #FFFFFF;
+      --rule:        #E2E0DC;
+      --rule-dk:     #C8C5BF;
+      --orange-tint: #FEF0E8;
+      --teal-tint:   #EAF2F1;
+      --shadow-sm:   0 1px 4px rgba(26,26,26,0.07), 0 1px 2px rgba(26,26,26,0.05);
+      --shadow-md:   0 4px 16px rgba(26,26,26,0.09);
+      --shadow-o:    0 4px 20px rgba(242,101,34,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .serif { font-family: 'Cormorant Garamond', serif; }
+    .display-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      font-weight: 700; line-height: 0.9; letter-spacing: -0.03em;
+    }
+    .display-lg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.0; letter-spacing: -0.025em;
+    }
+    .label {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 2; }
+
+    /* ══════════════════════════════════════
+       NAV — still composed. Still corporate.
+       One orange tab. That's all it needs.
+    ═══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      background: var(--surface);
+      border-bottom: 1px solid var(--rule-dk);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav__left  { display: flex; align-items: stretch; height: 100%; }
+    .nav__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.375rem; font-weight: 700;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center;
+      padding-right: 28px; border-right: 1px solid var(--rule-dk); margin-right: 28px;
+    }
+    .nav__logo em { font-style: italic; color: var(--orange); }
+    .nav__links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav__links a { font-size: 0.8125rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; transition: color 0.15s; }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__cta {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0 24px; height: 100%; text-decoration: none;
+      transition: background 0.15s; border-left: 1px solid var(--orange-dk);
+    }
+    .nav__cta:hover { background: var(--orange-dk); }
+
+    /* ══════════════════════════════════════
+       HERO — POLLOCK
+       The corporate grid still exists.
+       But orange has completely detonated through it.
+       The structure is visible as wreckage.
+    ═══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    /* The ghost of the corporate grid — barely visible under the chaos */
+    .hero__ghost-grid {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image:
+        linear-gradient(var(--rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.25;
+    }
+
+    /* SVG PAINT CANVAS — the Pollock layer */
+    .hero__paint {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      width: 100%; height: 100%;
+    }
+
+    /* Hero content sits above the paint */
+    .hero__content {
+      position: relative; z-index: 3;
+      min-height: calc(100vh - 56px);
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 80px 0 100px;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 12px; margin-bottom: 32px;
+    }
+    .hero__ew-dash { width: 32px; height: 2px; background: var(--orange); flex-shrink: 0; }
+    .hero__ew-text { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); }
+
+    .hero__headline { margin-bottom: 28px; max-width: 700px; }
+
+    /* The word "Rules" is crossed out — typographically killed */
+    .strike-through {
+      display: inline-block;
+      position: relative;
+      color: var(--ink-muted);
+    }
+    .strike-through::after {
+      content: '';
+      position: absolute;
+      left: -4px; right: -4px;
+      top: 50%; transform: translateY(-50%) rotate(-2deg);
+      height: 6px;
+      background: var(--orange);
+      border-radius: 3px;
+    }
+
+    .hero__sub {
+      font-size: 1.0625rem; font-weight: 400; line-height: 1.75;
+      color: var(--ink-muted); max-width: 480px; margin-bottom: 40px;
+    }
+
+    /* ── Broken stat strip — stats scattered, not in a row ── */
+    .hero__stat-scattered {
+      position: absolute; z-index: 3;
+    }
+    .hero__stat-box {
+      background: var(--surface);
+      border: 1px solid var(--rule-dk);
+      border-radius: 8px;
+      padding: 14px 20px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .hero__stat-box .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem; font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1;
+      color: var(--orange); display: block;
+    }
+    .hero__stat-box .lbl {
+      font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-muted); margin-top: 3px;
+    }
+    /* Specific positions — scattered, like they flew off the table */
+    .hs-1 { bottom: 14%; right: 6%; transform: rotate(3deg); }
+    .hs-2 { bottom: 26%; right: 18%; transform: rotate(-5deg); }
+    .hs-3 { bottom: 10%; right: 22%; transform: rotate(1.5deg); }
+
+    /* ══════════════════════════════════════
+       SECTION TRANSITIONS
+    ═══════════════════════════════════════ */
+    .section-main { padding: 88px 0; position: relative; }
+    .section-rule  { height: 1px; background: var(--rule-dk); }
+    .orange-rule   { height: 3px; background: var(--orange); }
+    .teal-rule     { height: 3px; background: var(--teal); }
+
+    .section-header { margin-bottom: 52px; }
+
+    /* ══════════════════════════════════════
+       BROKEN LAYOUT DEVICES
+       These are structural elements that are
+       deliberately misaligned, rotated, or overlapping.
+    ═══════════════════════════════════════ */
+
+    /* An orange stripe that "bleeds" out of its container */
+    .bleed-stripe-orange {
+      position: absolute;
+      left: -36px; right: -36px;
+      height: 4px;
+      background: var(--orange);
+    }
+
+    /* Rotated label — label that doesn't follow the baseline */
+    .rotated-label {
+      display: inline-block;
+      transform: rotate(-90deg);
+      transform-origin: left center;
+      white-space: nowrap;
+    }
+
+    /* Oversized number that bleeds out of its card */
+    .bleed-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 700; line-height: 0.85;
+      letter-spacing: -0.05em;
+      color: var(--orange);
+      position: absolute;
+      top: -20px; right: -20px;
+      pointer-events: none; user-select: none;
+      opacity: 0.12;
+    }
+
+    /* ══════════════════════════════════════
+       CARDS — Same structure as Detonation
+       but now some are tilted, overlapping, broken out
+    ═══════════════════════════════════════ */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--rule-dk);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: relative; overflow: hidden;
+    }
+    .card--orange  { background: var(--orange); border-color: var(--orange-dk); color: #fff; box-shadow: var(--shadow-o); }
+    .card--teal    { background: var(--teal);   border-color: var(--teal-lt);   color: #fff; }
+    .card--ink     { background: var(--ink);    border-color: #000;             color: #fff; }
+    .card--left-o  { border-left: 3px solid var(--orange); border-radius: 0 16px 16px 0; }
+    .card--top-o   { border-top: 3px solid var(--orange);  border-radius: 0 0 16px 16px; }
+
+    /* The "tilted" card — breaks the grid */
+    .card--tilted  { transform: rotate(-1.5deg); }
+    .card--tilted:hover { transform: rotate(0deg); transition: transform 0.2s ease; }
+
+    /* The "escaped" card — negative margin pulls it out of alignment */
+    .card--escaped-right { margin-right: -48px; position: relative; z-index: 5; }
+    .card--escaped-left  { margin-left:  -48px; position: relative; z-index: 5; }
+
+    /* ── ICON CIRCLE ── */
+    .ic { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ic-o { background: var(--orange-tint); border: 1px solid rgba(242,101,34,0.2); }
+    .ic-t { background: var(--teal-tint);   border: 1px solid rgba(46,112,106,0.2); }
+    .ic-w { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 4px;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .bo { background: var(--orange-tint); color: var(--orange);   border: 1px solid rgba(242,101,34,0.2); }
+    .bt { background: var(--teal-tint);   color: var(--teal);     border: 1px solid rgba(46,112,106,0.2); }
+    .bn { background: var(--bg);          color: var(--ink-muted); border: 1px solid var(--rule-dk); }
+    .bw { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 12px 24px; cursor: pointer; border: none; text-decoration: none; border-radius: 4px;
+      transition: all 0.15s;
+    }
+    .btn-o { background: var(--orange); color: #fff; box-shadow: var(--shadow-o); }
+    .btn-o:hover { background: var(--orange-dk); transform: translateY(-1px); }
+    .btn-t { background: var(--teal);   color: #fff; }
+    .btn-t:hover { background: var(--teal-lt); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--rule-dk); }
+    .btn-outline:hover { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .btn-inv { background: #fff; color: var(--orange); }
+    .btn-inv:hover { background: var(--orange-tint); }
+
+    /* ── INPUTS ── */
+    .ilabel { font-size: 0.8125rem; font-weight: 600; color: var(--ink-mid); display: block; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%; background: var(--surface);
+      border: 1.5px solid var(--rule-dk); border-radius: 4px;
+      padding: 10px 14px; color: var(--ink);
+      font-family: 'Inter', sans-serif; font-size: 0.9375rem;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input:focus, textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(242,101,34,0.1); }
+    input::placeholder { color: var(--ink-subtle); }
+
+    /* ── BARS ── */
+    @keyframes fillBar { from { width: 0; } }
+    .bar-bg { height: 3px; border-radius: 2px; background: var(--rule); margin-top: 14px; overflow: hidden; }
+    .bfo { height: 100%; border-radius: 2px; background: var(--orange); animation: fillBar 1.1s ease both; }
+    .bft { height: 100%; border-radius: 2px; background: var(--teal);   animation: fillBar 1.1s ease both; }
+    .bfn { height: 100%; border-radius: 2px; background: var(--ink-muted); animation: fillBar 1.1s ease both; }
+
+    /* ── SCORE TABLE ── */
+    .six-c { display: grid; grid-template-columns: repeat(3,1fr); }
+    .sc { padding: 20px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .sc:nth-child(3n) { border-right: none; }
+    .sc:nth-child(n+4) { border-bottom: none; }
+    .sc-lbl { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
+    .sc-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+
+    /* ── BROKEN GRID SECTION ── */
+    /* The 2-col grid — but one column is offset */
+    .grid-broken {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start; /* so offset cards don't stretch */
+    }
+    .grid-broken .col-b { margin-top: 40px; } /* the right column drops down — off the beat */
+
+    /* Masonry-ish arrangement via manual offsets */
+    .pull-up-32  { margin-top: -32px; }
+    .pull-up-56  { margin-top: -56px; }
+    .push-right  { margin-left: 32px; }
+
+    /* Swatches */
+    .swatch-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .swatch { flex:1; min-width: 110px; border: 1px solid var(--rule-dk); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .swatch__block { height: 68px; }
+    .swatch__info { background: var(--surface); padding: 10px 14px; }
+    .swatch__name { font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+    .swatch__hex  { font-size: 0.6875rem; color: var(--ink-muted); font-family: monospace; margin-top: 2px; }
+
+    /* Type row */
+    .trow { display: flex; align-items: baseline; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--rule); }
+    .tmeta { width: 150px; flex-shrink: 0; }
+    .tmeta-n { font-size: 0.75rem; font-weight: 600; color: var(--ink-muted); }
+    .tmeta-s { font-size: 0.6875rem; color: var(--ink-subtle); margin-top: 2px; }
+
+    /* Feat row */
+    .feat { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+    .feat:last-child { border-bottom: none; }
+    .feat-t { font-size: 0.9375rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .feat-b { font-size: 0.9375rem; color: var(--ink-muted); line-height: 1.65; }
+
+    /* Pull quote */
+    .pq { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-style: italic; font-weight: 400; line-height: 1.5; color: var(--ink-mid); }
+    .pq-o { border-left: 3px solid var(--orange); padding-left: 24px; }
+    .pq-t { border-left: 3px solid var(--teal);   padding-left: 24px; }
+
+    @media (max-width: 900px) {
+      .grid-broken { grid-template-columns: 1fr; }
+      .grid-broken .col-b { margin-top: 0; }
+      .card--escaped-right, .card--escaped-left { margin: 0; }
+      .nav__links { display: none; }
+      .hs-1,.hs-2,.hs-3 { display: none; }
+      .six-c { grid-template-columns: repeat(2,1fr); }
+      .bleed-num { display: none; }
+    }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .anim { animation: fadeUp 0.65s ease forwards; }
+    .d1{animation-delay:.04s;opacity:0;} .d2{animation-delay:.18s;opacity:0;} .d3{animation-delay:.32s;opacity:0;} .d4{animation-delay:.46s;opacity:0;}
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV — last bastion of order
+═══════════════════════════════════════ -->
+<nav>
+  <div class="container nav__inner">
+    <div class="nav__left">
+      <a href="#" class="nav__logo">Aligned <em>Power</em></a>
+      <ul class="nav__links">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#cards">Cards</a></li>
+      </ul>
+    </div>
+    <a href="#" class="nav__cta"><i data-lucide="arrow-right" style="width:13px;height:13px;"></i> Begin Assessment</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO — CORPORATE GRID + POLLOCK CHAOS
+═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__ghost-grid"></div>
+
+  <!-- SVG paint splatter — the Pollock layer -->
+  <svg class="hero__paint" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- Big orange diagonal slash — the main detonation -->
+    <polygon points="860,0 1440,0 1440,900 680,900" fill="#F26522" opacity="0.92"/>
+
+    <!-- Teal wedge in bottom-right corner — a second character -->
+    <polygon points="1100,900 1440,900 1440,580" fill="#2E706A" opacity="0.95"/>
+
+    <!-- Orange drip strokes across the white zone — painted, not designed -->
+    <path d="M 120 180 Q 160 220 140 280 Q 120 340 170 380" stroke="#F26522" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 200 80 Q 240 130 220 200 Q 200 260 260 290" stroke="#F26522" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.35"/>
+    <path d="M 60 350 Q 100 380 80 440 Q 60 500 120 520" stroke="#F26522" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.25"/>
+    <path d="M 340 140 Q 360 190 350 250 Q 340 310 390 330" stroke="#F26522" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+    <!-- Teal accent strokes crossing into white space -->
+    <path d="M 480 60 Q 510 100 500 160 Q 490 220 540 240" stroke="#2E706A" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <path d="M 380 400 Q 420 440 410 500" stroke="#2E706A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+    <!-- Drip dots / splatters — scattered over white zone -->
+    <circle cx="95"  cy="520" r="5"   fill="#F26522" opacity="0.45"/>
+    <circle cx="280" cy="480" r="3"   fill="#F26522" opacity="0.35"/>
+    <circle cx="160" cy="620" r="7"   fill="#F26522" opacity="0.25"/>
+    <circle cx="420" cy="560" r="4"   fill="#2E706A" opacity="0.4"/>
+    <circle cx="310" cy="720" r="6"   fill="#F26522" opacity="0.2"/>
+    <circle cx="500" cy="300" r="3.5" fill="#F26522" opacity="0.3"/>
+    <circle cx="70"  cy="420" r="4"   fill="#2E706A" opacity="0.35"/>
+    <circle cx="240" cy="340" r="2.5" fill="#F26522" opacity="0.5"/>
+    <circle cx="450" cy="200" r="3"   fill="#F26522" opacity="0.28"/>
+
+    <!-- Small splatters near the boundary of the orange field -->
+    <circle cx="630" cy="80"  r="8"   fill="#F5F3F0" opacity="0.6"/>
+    <circle cx="670" cy="160" r="5"   fill="#F5F3F0" opacity="0.5"/>
+    <circle cx="600" cy="300" r="6"   fill="#F5F3F0" opacity="0.4"/>
+    <circle cx="650" cy="420" r="4"   fill="#F5F3F0" opacity="0.45"/>
+
+    <!-- Thin ink lines cutting through the orange — the corporate grid fighting back, losing -->
+    <line x1="760" y1="0"   x2="800" y2="900" stroke="#1A1A1A" stroke-width="1" opacity="0.08"/>
+    <line x1="840" y1="0"   x2="880" y2="900" stroke="#1A1A1A" stroke-width="1" opacity="0.06"/>
+    <line x1="920" y1="0"   x2="960" y2="900" stroke="#1A1A1A" stroke-width="1" opacity="0.05"/>
+    <line x1="0"   y1="240" x2="640" y2="240" stroke="#1A1A1A" stroke-width="1" opacity="0.07"/>
+    <line x1="0"   y1="480" x2="600" y2="480" stroke="#1A1A1A" stroke-width="1" opacity="0.05"/>
+
+    <!-- White text zone — a small "island" of calm white behind the headline -->
+    <!-- (no actual white fill — we let the body white show through via the composition) -->
+  </svg>
+
+  <!-- Scattered stats — flew off the table -->
+  <div class="hero__stat-scattered hs-1">
+    <div class="hero__stat-box" style="transform:rotate(3deg);">
+      <span class="num">847+</span>
+      <div class="lbl">Assessed</div>
+    </div>
+  </div>
+  <div class="hero__stat-scattered hs-2">
+    <div class="hero__stat-box" style="transform:rotate(-4deg);">
+      <span class="num">94%</span>
+      <div class="lbl">Report Clarity</div>
+    </div>
+  </div>
+  <div class="hero__stat-scattered hs-3">
+    <div class="hero__stat-box" style="transform:rotate(2deg);">
+      <span class="num" style="color:var(--teal);">6C</span>
+      <div class="lbl">Framework</div>
+    </div>
+  </div>
+
+  <div class="container hero__content">
+    <div style="max-width:560px;">
+      <div class="hero__eyebrow anim d1">
+        <div class="hero__ew-dash"></div>
+        <span class="hero__ew-text">09 — brand-concept-pollock</span>
+      </div>
+
+      <h1 class="display-xl hero__headline anim d2">
+        <span style="display:block;color:var(--ink);">We're done</span>
+        <span style="display:block;color:var(--ink);">being <span class="strike-through">professional.</span></span>
+        <span style="display:block;color:var(--orange);font-style:italic;font-weight:400;">We're being us.</span>
+      </h1>
+
+      <p class="hero__sub anim d3" style="max-width:400px;">
+        Most coaching looks exactly the same. Aligned Power doesn't. Because you're not the same — and your business shouldn't be either.
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="anim d4">
+        <a href="#" class="btn btn-o"><i data-lucide="arrow-right" style="width:13px;height:13px;"></i> Take the Assessment</a>
+        <a href="#" class="btn btn-outline">See the Framework</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COLORS
+═══════════════════════════════════════ -->
+<div class="orange-rule"></div>
+<section class="section-main" id="colors">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color:var(--orange);margin-bottom:12px;">01 — Color System</div>
+      <h2 class="display-lg">Two colors.<br><em style="color:var(--orange);">Total control.</em></h2>
+      <p style="margin-top:16px;font-size:1rem;color:var(--ink-muted);max-width:500px;line-height:1.75;">Orange detonates. Teal grounds. Everything else is neutral — on purpose. When you have two strong colors, you don't need eight.</p>
+    </div>
+
+    <div class="swatch-row">
+      <div class="swatch"><div class="swatch__block" style="background:#F26522;"></div><div class="swatch__info"><div class="swatch__name">Orange</div><div class="swatch__hex">#F26522 — Detonate</div></div></div>
+      <div class="swatch"><div class="swatch__block" style="background:#2E706A;"></div><div class="swatch__info"><div class="swatch__name">Teal</div><div class="swatch__hex">#2E706A — Ground</div></div></div>
+      <div class="swatch"><div class="swatch__block" style="background:#1A1A1A;"></div><div class="swatch__info"><div class="swatch__name">Ink</div><div class="swatch__hex">#1A1A1A</div></div></div>
+      <div class="swatch"><div class="swatch__block" style="background:#FFFFFF;border:1px solid var(--rule-dk);"></div><div class="swatch__info"><div class="swatch__name">Surface</div><div class="swatch__hex">#FFFFFF</div></div></div>
+      <div class="swatch"><div class="swatch__block" style="background:#F5F3F0;border:1px solid var(--rule-dk);"></div><div class="swatch__info"><div class="swatch__name">Linen</div><div class="swatch__hex">#F5F3F0</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TYPOGRAPHY
+═══════════════════════════════════════ -->
+<div class="section-rule"></div>
+<section class="section-main" id="type">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color:var(--orange);margin-bottom:12px;">02 — Typography</div>
+      <h2 class="display-lg"><em>Cormorant Garamond</em><br>+ Inter</h2>
+    </div>
+    <div>
+      <div class="trow">
+        <div class="tmeta"><div class="tmeta-n">Display XL</div><div class="tmeta-s">Cormorant 700, −3em</div></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,7rem);font-weight:700;letter-spacing:-0.03em;line-height:0.9;color:var(--orange);">Clarity.</div>
+      </div>
+      <div class="trow">
+        <div class="tmeta"><div class="tmeta-n">Display Italic</div><div class="tmeta-s">Cormorant 400 italic</div></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.25rem);font-style:italic;font-weight:400;letter-spacing:-0.02em;">Break Free. Build Bold.</div>
+      </div>
+      <div class="trow">
+        <div class="tmeta"><div class="tmeta-n">Heading H2</div><div class="tmeta-s">Cormorant 700</div></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;">Your Assessment Results</div>
+      </div>
+      <div class="trow" style="align-items:flex-start;">
+        <div class="tmeta"><div class="tmeta-n">Pull Quote</div><div class="tmeta-s">Cormorant 400 italic</div></div>
+        <div class="pq-o pq" style="max-width:520px;">"The goal isn't a bigger business. The goal is a business that fits who you actually are."</div>
+      </div>
+      <div class="trow">
+        <div class="tmeta"><div class="tmeta-n">Body</div><div class="tmeta-s">Inter 400, 1.75 lead</div></div>
+        <div style="font-size:1rem;line-height:1.75;color:var(--ink-muted);max-width:520px;">Most entrepreneurs are building a business that doesn't fit who they are. The Aligned Power Framework helps you close the gap — so your work finally feels as good as it looks from the outside.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COMPONENTS
+═══════════════════════════════════════ -->
+<div class="section-rule"></div>
+<section class="section-main" id="components">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color:var(--orange);margin-bottom:12px;">03 — Components</div>
+      <h2 class="display-lg">Buttons, Badges<br><em style="color:var(--orange);">&amp; Inputs</em></h2>
+    </div>
+    <div style="margin-bottom:40px;">
+      <div class="label" style="color:var(--ink-muted);margin-bottom:16px;">Buttons</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <a href="#" class="btn btn-o"><i data-lucide="arrow-right" style="width:13px;height:13px;"></i> Begin Assessment</a>
+        <a href="#" class="btn btn-t"><i data-lucide="check" style="width:13px;height:13px;"></i> Submitted</a>
+        <a href="#" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+    <div style="margin-bottom:40px;">
+      <div class="label" style="color:var(--ink-muted);margin-bottom:16px;">Badges</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="badge bo">Active Client</span>
+        <span class="badge bt">Submitted</span>
+        <span class="badge bn">In Progress</span>
+        <span class="badge bn">Draft</span>
+      </div>
+    </div>
+    <div>
+      <div class="label" style="color:var(--ink-muted);margin-bottom:16px;">Inputs</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;max-width:600px;">
+        <div><label class="ilabel">Full Name</label><input type="text" placeholder="Jake Sebok"></div>
+        <div><label class="ilabel">Email</label><input type="email" placeholder="jake@alignedpower.coach"></div>
+        <div style="grid-column:1/-1;"><label class="ilabel">Your ONE THING this week</label><textarea rows="3" placeholder="Protect my morning block…" style="resize:vertical;"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CARDS — The broken grid
+     Structure is present, but erupting.
+═══════════════════════════════════════ -->
+<div class="section-rule"></div>
+<section class="section-main" id="cards" style="overflow:visible;">
+  <div class="container">
+    <div class="section-header">
+      <div class="label" style="color:var(--orange);margin-bottom:12px;">04 — Card System</div>
+      <h2 class="display-lg">The grid<br><em style="color:var(--orange);">broke free.</em></h2>
+      <p style="margin-top:16px;font-size:1rem;color:var(--ink-muted);max-width:500px;line-height:1.75;">The structure is still here. The bones are still visible. But nothing's staying in its lane anymore.</p>
+    </div>
+
+    <!-- BROKEN GRID — right column is dropped down, cards overlap each other -->
+    <div class="grid-broken" style="align-items:start;">
+
+      <!-- LEFT COLUMN -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Score card — composed, but the bleed number escapes the top -->
+        <div class="card" style="overflow:visible;">
+          <div class="bleed-num">84</div>
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
+            <div class="ic ic-o"><i data-lucide="target" style="width:18px;height:18px;color:var(--orange);"></i></div>
+            <span class="badge bo">Strong</span>
+          </div>
+          <div class="label" style="color:var(--orange);margin-bottom:8px;">Strategic Clarity</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;letter-spacing:-0.03em;color:var(--orange);line-height:1;margin-bottom:10px;">84<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div>
+          <p style="font-size:0.9375rem;color:var(--ink-muted);line-height:1.7;">You know what you want. Now it's about executing without grinding yourself to dust.</p>
+          <div class="bar-bg"><div class="bfo" style="width:84%;animation-delay:.4s;"></div></div>
+        </div>
+
+        <!-- Framework card — teal, tilted -->
+        <div class="card card--teal card--tilted" style="overflow:visible;">
+          <div class="ic ic-w" style="margin-bottom:16px;"><i data-lucide="compass" style="width:18px;height:18px;color:#fff;"></i></div>
+          <div class="label" style="color:rgba(255,255,255,0.6);margin-bottom:10px;">The Framework</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.02em;">The Aligned Power 6C Framework</h3>
+          <p style="font-size:0.9375rem;color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:22px;">Six dimensions. One honest snapshot. The clarity you've been missing.</p>
+          <a href="#" class="btn btn-inv" style="font-size:0.8125rem;padding:10px 20px;">Explore <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></a>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN — drops down 40px off the beat -->
+      <div class="col-b" style="display:flex;flex-direction:column;gap:20px;">
+
+        <!-- ONE THING card — orange, escaped right -->
+        <div class="card card--orange card--escaped-right">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;">
+            <div class="ic ic-w"><i data-lucide="flame" style="width:18px;height:18px;color:#fff;"></i></div>
+            <span class="badge bw">Week of Feb 24</span>
+          </div>
+          <div class="label" style="color:rgba(255,255,255,0.65);margin-bottom:10px;">This Week's Focus</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.375rem;color:#fff;line-height:1.5;margin-bottom:20px;">"Protect my morning block for deep work so I stay focused on the one thing that actually moves the needle."</p>
+          <div style="font-size:0.8125rem;font-weight:500;color:rgba(255,255,255,0.6);">Your ONE THING · Set last Friday</div>
+        </div>
+
+        <!-- Testimonial — ink card, slight tilt other direction -->
+        <div class="card card--ink" style="transform:rotate(0.8deg);">
+          <div class="ic ic-w" style="margin-bottom:16px;"><i data-lucide="quote" style="width:18px;height:18px;color:var(--orange);"></i></div>
+          <div class="pq-o pq" style="margin-bottom:20px;--pq-b:rgba(242,101,34,0.5);">
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:#fff;line-height:1.55;">"Aligned Power didn't just give me a framework — it gave me myself back."</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+            <div style="width:34px;height:34px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;color:#fff;flex-shrink:0;">SR</div>
+            <div><div style="font-weight:600;font-size:0.875rem;color:#fff;">Sarah R.</div><div style="font-size:0.8125rem;color:rgba(255,255,255,0.45);">Health Coach · $280K</div></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 6C SCORECARD — full width, corporate table, orange+teal numbers detonate through it -->
+    <div style="margin-top:24px;" class="card" style="padding:0;overflow:hidden;">
+      <!-- Orange rule at top — the crack in the structure -->
+      <div class="orange-rule" style="position:absolute;top:0;left:0;right:0;"></div>
+      <div style="padding:20px 24px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;">
+        <div class="ic ic-o"><i data-lucide="layout-grid" style="width:18px;height:18px;color:var(--orange);"></i></div>
+        <div>
+          <div class="label" style="color:var(--orange);">6C Alignment Score — This Week</div>
+          <div style="font-size:0.8125rem;color:var(--ink-muted);margin-top:2px;">Week of Feb 24, 2026</div>
+        </div>
+      </div>
+      <div class="six-c">
+        <div class="sc"><div class="sc-lbl">Clarity</div>     <div class="sc-num" style="color:var(--orange);">88<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bfo" style="width:88%;animation-delay:.5s;"></div></div></div>
+        <div class="sc"><div class="sc-lbl">Coherence</div>   <div class="sc-num" style="color:var(--teal);">74<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bft" style="width:74%;animation-delay:.62s;"></div></div></div>
+        <div class="sc"><div class="sc-lbl">Capacity</div>    <div class="sc-num" style="color:var(--ink-mid);">61<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bfn" style="width:61%;animation-delay:.74s;"></div></div></div>
+        <div class="sc"><div class="sc-lbl">Confidence</div>  <div class="sc-num" style="color:var(--orange);">82<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bfo" style="width:82%;animation-delay:.86s;"></div></div></div>
+        <div class="sc"><div class="sc-lbl">Courage</div>     <div class="sc-num" style="color:var(--teal);">71<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bft" style="width:71%;animation-delay:.98s;"></div></div></div>
+        <div class="sc"><div class="sc-lbl">Connection</div>  <div class="sc-num" style="color:var(--ink-mid);">79<span style="font-size:1rem;color:var(--ink-subtle);">%</span></div><div class="bar-bg"><div class="bfn" style="width:79%;animation-delay:1.1s;"></div></div></div>
+      </div>
+    </div>
+
+    <!-- 5 STAGES — feature list, left-escaped teal card -->
+    <div style="margin-top:48px;display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;">
+
+      <div class="card card--left-o" style="padding:0;overflow:hidden;">
+        <div style="padding:0 24px;">
+          <div class="feat">
+            <div class="ic ic-o" style="flex-shrink:0;margin-top:2px;"><i data-lucide="eye" style="width:16px;height:16px;color:var(--orange);"></i></div>
+            <div><div class="feat-t">Awareness</div><div class="feat-b">Recognizing the gap between where you are and where you know you're meant to be.</div></div>
+          </div>
+          <div class="feat">
+            <div class="ic ic-o" style="flex-shrink:0;margin-top:2px;"><i data-lucide="compass" style="width:16px;height:16px;color:var(--orange);"></i></div>
+            <div><div class="feat-t">Strategic Clarity</div><div class="feat-b">A compass — not a to-do list. The one decision that makes every other decision easier.</div></div>
+          </div>
+          <div class="feat">
+            <div class="ic ic-t" style="flex-shrink:0;margin-top:2px;"><i data-lucide="layers" style="width:16px;height:16px;color:var(--teal);"></i></div>
+            <div><div class="feat-t">Internal Alignment</div><div class="feat-b">When your values, offers, and calendar finally say the same thing.</div></div>
+          </div>
+          <div class="feat">
+            <div class="ic ic-t" style="flex-shrink:0;margin-top:2px;"><i data-lucide="zap" style="width:16px;height:16px;color:var(--teal);"></i></div>
+            <div><div class="feat-t">Aligned Action</div><div class="feat-b">Doing the right things — not all the things — with confidence and without apology.</div></div>
+          </div>
+          <div class="feat" style="border-bottom:none;">
+            <div class="ic ic-o" style="flex-shrink:0;margin-top:2px;"><i data-lucide="star" style="width:16px;height:16px;color:var(--orange);"></i></div>
+            <div><div class="feat-t">Embodied Execution</div><div class="feat-b">The work becomes the life. You stop performing alignment and start living it.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Escaped left — pulls out of the right column into the space between -->
+      <div class="card card--orange card--escaped-left card--tilted" style="transform:rotate(-2deg);">
+        <div class="ic ic-w" style="margin-bottom:16px;"><i data-lucide="sun" style="width:18px;height:18px;color:#fff;"></i></div>
+        <div class="label" style="color:rgba(255,255,255,0.65);margin-bottom:10px;">The Promise</div>
+        <p class="pq" style="font-size:1.125rem;color:#fff;">"You don't need more hustle. You need alignment. When your direction is clear, everything else gets easier — or becomes unnecessary."</p>
+        <div style="margin-top:20px;font-size:0.8125rem;color:rgba(255,255,255,0.6);">— Jake Sebok</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="orange-rule"></div>
+<section style="background:var(--surface);padding:100px 0;position:relative;z-index:2;">
+  <div class="container" style="text-align:center;">
+    <div class="label" style="color:var(--orange);margin-bottom:16px;">Free Assessment</div>
+    <h2 class="display-lg" style="margin-bottom:20px;">Find Your<br><em style="color:var(--orange);">Alignment Gap</em></h2>
+    <p style="font-size:1.0625rem;color:var(--ink-muted);max-width:420px;margin:0 auto 40px;line-height:1.75;">15 minutes. No fluff. A clear picture of where you're out of alignment — and what to do about it.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="#" class="btn btn-o" style="font-size:0.9375rem;padding:14px 36px;">
+        <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+        Take the VAPI Assessment
+      </a>
+      <a href="#" class="btn btn-outline">See Sample Results</a>
+    </div>
+    <p style="font-size:0.8125rem;color:var(--ink-subtle);margin-top:18px;">Free · No credit card · Takes 15 minutes</p>
+  </div>
+</section>
+<div class="teal-rule"></div>
+
+<footer style="padding:32px 0;background:var(--ink);position:relative;z-index:2;">
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.375rem;font-weight:700;color:#fff;">Aligned <em style="color:var(--orange);">Power</em></span>
+    <span style="font-size:0.8125rem;color:rgba(255,255,255,0.3);">09 — brand-concept-pollock</span>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+</script>
+</body>
+</html>
