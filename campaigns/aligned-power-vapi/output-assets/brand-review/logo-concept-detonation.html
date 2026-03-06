@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Logo Concept: Detonation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F26522;
+      --orange-dk: #C4501A;
+      --teal: #2E706A;
+      --ink: #1A1A1A;
+      --ink-mid: #3D3D3D;
+      --ink-muted: #7A7A7A;
+      --ink-subtle: #B8B8B8;
+      --bg: #F5F3F0;
+      --surface: #FFFFFF;
+      --rule: #E2E0DC;
+      --rule-dk: #C8C5BF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* ── page header ── */
+    .page-header {
+      padding: 40px 48px 32px;
+      border-bottom: 1px solid var(--rule-dk);
+      background: var(--surface);
+      display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700; letter-spacing: -0.02em;
+    }
+    .page-header h1 em { color: var(--orange); font-style: italic; }
+    .page-header p { font-size: 0.875rem; color: var(--ink-muted); margin-top: 4px; max-width: 520px; line-height: 1.6; }
+    .page-header .tag {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange); background: rgba(242,101,34,0.08);
+      border: 1px solid rgba(242,101,34,0.2); border-radius: 4px;
+      padding: 4px 12px;
+    }
+
+    .main { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+
+    /* ── section ── */
+    .logo-section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+    .logo-section:last-child { border-bottom: none; }
+    .section-label {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem; font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .section-title em { color: var(--orange); font-style: italic; }
+    .section-desc {
+      font-size: 0.9375rem; color: var(--ink-muted);
+      max-width: 580px; line-height: 1.72; margin-bottom: 40px;
+    }
+
+    /* ── logo display boxes ── */
+    .logo-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .logo-box {
+      border: 1px solid var(--rule-dk);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .logo-box--light   { background: var(--surface); }
+    .logo-box--linen   { background: var(--bg); }
+    .logo-box--ink     { background: var(--ink); }
+    .logo-box--orange  { background: var(--orange); }
+    .logo-box--teal    { background: var(--teal); }
+
+    /* sizes */
+    .sz-xl   { width: 400px; height: 200px; }
+    .sz-lg   { width: 280px; height: 140px; }
+    .sz-md   { width: 200px; height: 100px; }
+    .sz-sm   { width: 140px; height: 70px; }
+    .sz-xs   { width: 80px;  height: 80px; }  /* icon/favicon size */
+    .sz-xxs  { width: 40px;  height: 40px; }  /* super small */
+
+    .logo-box .size-label {
+      position: absolute; bottom: 8px; right: 10px;
+      font-size: 0.625rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-subtle); pointer-events: none;
+    }
+    .logo-box--ink .size-label,
+    .logo-box--orange .size-label,
+    .logo-box--teal .size-label { color: rgba(255,255,255,0.3); }
+
+    /* ── annotation ── */
+    .annotation {
+      background: var(--surface); border: 1px solid var(--rule-dk);
+      border-radius: 10px; padding: 20px 24px;
+      margin-top: 20px;
+    }
+    .annotation h4 { font-size: 0.875rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .annotation p  { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; }
+    .annotation ul { padding-left: 20px; margin-top: 8px; }
+    .annotation ul li { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div style="font-size:0.6875rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;">Brand Concept 08 — Detonation</div>
+    <h1>Logo <em>Exploration</em></h1>
+    <p>Three mark directions. Each one holds the same philosophy: corporate structure, orange detonation. The contrast is the brand.</p>
+  </div>
+  <span class="tag">Logo Concept</span>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════
+     MARK A — THE SLASH WORDMARK
+     "Aligned Power" in Cormorant, serious and composed.
+     A single orange diagonal stroke cuts clean through the P.
+     The word is intact. The detonation has already happened.
+════════════════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-label">Mark A</div>
+  <div class="section-title">The Slash <em>Wordmark</em></div>
+  <div class="section-desc">
+    "Aligned Power" set in composed Cormorant Garamond. A single orange stroke cuts diagonally through the letter P — not decorating it, cutting through it. The typographic detonation. The word is still legible. The structure is intact. But something has already broken through.
+  </div>
+
+  <!-- HERO SIZE -->
+  <div class="logo-row">
+    <div class="logo-box logo-box--light sz-xl">
+      <svg width="340" height="80" viewBox="0 0 340 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wordmark: ALIGNED -->
+        <text x="0" y="38"
+          font-family="'Cormorant Garamond', serif"
+          font-size="40" font-weight="700"
+          letter-spacing="-1"
+          fill="#1A1A1A">ALIGNED</text>
+        <!-- Wordmark: POWER -->
+        <text x="0" y="76"
+          font-family="'Cormorant Garamond', serif"
+          font-size="40" font-weight="400"
+          font-style="italic"
+          letter-spacing="-1"
+          fill="#1A1A1A">Power</text>
+        <!-- THE SLASH — orange diagonal cutting through the P in Power -->
+        <!-- P sits approx x=0..26, y=42..78 -->
+        <line x1="1" y1="82" x2="30" y2="42"
+          stroke="#F26522" stroke-width="4.5"
+          stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">Hero / Web Header</span>
+    </div>
+  </div>
+
+  <!-- MEDIUM SIZES -->
+  <div class="logo-row">
+    <div class="logo-box logo-box--light sz-lg">
+      <svg width="230" height="54" viewBox="0 0 230 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="26" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="700" letter-spacing="-0.6" fill="#1A1A1A">ALIGNED</text>
+        <text x="0" y="52" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="400" font-style="italic" letter-spacing="-0.6" fill="#1A1A1A">Power</text>
+        <line x1="0" y1="55" x2="21" y2="28" stroke="#F26522" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">Medium</span>
+    </div>
+    <div class="logo-box logo-box--linen sz-lg">
+      <svg width="230" height="54" viewBox="0 0 230 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="26" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="700" letter-spacing="-0.6" fill="#1A1A1A">ALIGNED</text>
+        <text x="0" y="52" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="400" font-style="italic" letter-spacing="-0.6" fill="#1A1A1A">Power</text>
+        <line x1="0" y1="55" x2="21" y2="28" stroke="#F26522" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">On Linen</span>
+    </div>
+    <div class="logo-box logo-box--ink sz-lg">
+      <svg width="230" height="54" viewBox="0 0 230 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="26" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="700" letter-spacing="-0.6" fill="#FDFAF6">ALIGNED</text>
+        <text x="0" y="52" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="400" font-style="italic" letter-spacing="-0.6" fill="#FDFAF6">Power</text>
+        <line x1="0" y1="55" x2="21" y2="28" stroke="#F26522" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">On Dark</span>
+    </div>
+    <div class="logo-box logo-box--orange sz-lg">
+      <svg width="230" height="54" viewBox="0 0 230 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="26" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="700" letter-spacing="-0.6" fill="#FFFFFF">ALIGNED</text>
+        <text x="0" y="52" font-family="'Cormorant Garamond', serif" font-size="27" font-weight="400" font-style="italic" letter-spacing="-0.6" fill="#FFFFFF">Power</text>
+        <line x1="0" y1="55" x2="21" y2="28" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">On Orange</span>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design rationale</h4>
+    <p>The slash is the entire brand philosophy in a single stroke. Cormorant Garamond at 700 weight is serious, composed, authority-coded — the corporate establishment. The orange slash cuts through the P in "Power" from bottom-left to top-right, like a signature, like a knife, like a decision being made. The word is still perfectly readable. The structure survives. But the mark has been made — and can't be undone.</p>
+    <ul>
+      <li>On light backgrounds: ink type, orange slash</li>
+      <li>On dark backgrounds: white type, orange slash (slash stays orange — it's always orange)</li>
+      <li>On orange backgrounds: white type, white slash (unified, no tension needed — we're already inside the detonation)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MARK B — THE GRID MONOGRAM
+     AP in a structured grid square.
+     The grid is the corporate system.
+     One orange diagonal cuts it corner to corner.
+     The grid survives. The orange wins.
+════════════════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-label">Mark B</div>
+  <div class="section-title">The Grid <em>Monogram</em></div>
+  <div class="section-desc">
+    The monogram AP inside a structured grid square. Every line of the grid is present and correct — measured, corporate, disciplined. One orange diagonal cuts corner to corner. The grid is the establishment. The stroke is the answer to it. Used as an icon, favicon, or standalone mark.
+  </div>
+
+  <!-- HERO SIZE — mark only, larger -->
+  <div class="logo-row">
+    <div class="logo-box logo-box--light" style="width:220px;height:220px;">
+      <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- The grid square border -->
+        <rect x="4" y="4" width="152" height="152" stroke="#1A1A1A" stroke-width="2" fill="none" rx="2"/>
+
+        <!-- Interior grid lines — the corporate structure -->
+        <!-- Horizontals -->
+        <line x1="4"   y1="54"  x2="156" y2="54"  stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+        <line x1="4"   y1="80"  x2="156" y2="80"  stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+        <line x1="4"   y1="106" x2="156" y2="106" stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+        <!-- Verticals -->
+        <line x1="54"  y1="4"   x2="54"  y2="156" stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+        <line x1="80"  y1="4"   x2="80"  y2="156" stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+        <line x1="106" y1="4"   x2="106" y2="156" stroke="#1A1A1A" stroke-width="0.75" opacity="0.18"/>
+
+        <!-- The A — left half, Cormorant style constructed in paths -->
+        <!-- Using text element centered in left zone (x 4–80) -->
+        <text x="22" y="106"
+          font-family="'Cormorant Garamond', serif"
+          font-size="82" font-weight="700"
+          fill="#1A1A1A"
+          letter-spacing="-2">A</text>
+
+        <!-- The P — right half, italic, x 80-156 -->
+        <text x="78" y="106"
+          font-family="'Cormorant Garamond', serif"
+          font-size="82" font-weight="400"
+          font-style="italic"
+          fill="#1A1A1A"
+          letter-spacing="-2">P</text>
+
+        <!-- THE DETONATION — orange diagonal, corner to corner -->
+        <!-- Starts bottom-left corner, ends top-right corner -->
+        <line x1="4" y1="156" x2="156" y2="4"
+          stroke="#F26522" stroke-width="5"
+          stroke-linecap="round"/>
+
+        <!-- Orange dots at the endpoints — the impact points -->
+        <circle cx="4"   cy="156" r="5" fill="#F26522"/>
+        <circle cx="156" cy="4"   r="5" fill="#F26522"/>
+      </svg>
+      <span class="size-label">Mark / Standalone</span>
+    </div>
+
+    <!-- With wordmark beside it -->
+    <div class="logo-box logo-box--light" style="width:440px;height:120px;">
+      <svg width="380" height="80" viewBox="0 0 380 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- ICON MARK — scaled down beside the wordmark -->
+        <!-- Outer square -->
+        <rect x="2" y="2" width="72" height="72" stroke="#1A1A1A" stroke-width="1.5" fill="none" rx="1"/>
+        <!-- Grid lines (subtle) -->
+        <line x1="2"  y1="26" x2="74" y2="26" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <line x1="2"  y1="38" x2="74" y2="38" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <line x1="2"  y1="50" x2="74" y2="50" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <line x1="26" y1="2"  x2="26" y2="74" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <line x1="38" y1="2"  x2="38" y2="74" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <line x1="50" y1="2"  x2="50" y2="74" stroke="#1A1A1A" stroke-width="0.5" opacity="0.18"/>
+        <!-- AP letters -->
+        <text x="8" y="54" font-family="'Cormorant Garamond', serif" font-size="42" font-weight="700" fill="#1A1A1A" letter-spacing="-1">A</text>
+        <text x="36" y="54" font-family="'Cormorant Garamond', serif" font-size="42" font-weight="400" font-style="italic" fill="#1A1A1A" letter-spacing="-1">P</text>
+        <!-- Diagonal slash -->
+        <line x1="2" y1="74" x2="74" y2="2" stroke="#F26522" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="2"  cy="74" r="2.5" fill="#F26522"/>
+        <circle cx="74" cy="2"  r="2.5" fill="#F26522"/>
+
+        <!-- WORDMARK -->
+        <text x="96" y="34" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="700" letter-spacing="-0.5" fill="#1A1A1A">ALIGNED</text>
+        <text x="96" y="66" font-family="'Cormorant Garamond', serif" font-size="28" font-weight="400" font-style="italic" letter-spacing="-0.5" fill="#1A1A1A">Power</text>
+        <!-- slash on the P of Power in wordmark too -->
+        <line x1="96" y1="70" x2="117" y2="43" stroke="#F26522" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">Lockup — Mark + Wordmark</span>
+    </div>
+  </div>
+
+  <!-- Small / icon sizes -->
+  <div class="logo-row" style="margin-top:8px;">
+    <div class="logo-box logo-box--light sz-xs">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="74" height="74" stroke="#1A1A1A" stroke-width="2" fill="none" rx="1"/>
+        <line x1="3" y1="29" x2="77" y2="29" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+        <line x1="3" y1="51" x2="77" y2="51" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+        <line x1="29" y1="3" x2="29" y2="77" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+        <line x1="51" y1="3" x2="51" y2="77" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+        <text x="6"  y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#1A1A1A">A</text>
+        <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#1A1A1A">P</text>
+        <line x1="3" y1="77" x2="77" y2="3" stroke="#F26522" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="3"  cy="77" r="4" fill="#F26522"/>
+        <circle cx="77" cy="3"  r="4" fill="#F26522"/>
+      </svg>
+      <span class="size-label">64px</span>
+    </div>
+    <div class="logo-box logo-box--ink sz-xs">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="74" height="74" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" rx="1"/>
+        <line x1="3" y1="29" x2="77" y2="29" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="3" y1="51" x2="77" y2="51" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="29" y1="3" x2="29" y2="77" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="51" y1="3" x2="51" y2="77" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <text x="6"  y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#FDFAF6">A</text>
+        <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#FDFAF6">P</text>
+        <line x1="3" y1="77" x2="77" y2="3" stroke="#F26522" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="3"  cy="77" r="4" fill="#F26522"/>
+        <circle cx="77" cy="3"  r="4" fill="#F26522"/>
+      </svg>
+      <span class="size-label">On Dark</span>
+    </div>
+    <div class="logo-box logo-box--orange sz-xs">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="74" height="74" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" rx="1"/>
+        <line x1="3" y1="29" x2="77" y2="29" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+        <line x1="3" y1="51" x2="77" y2="51" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+        <line x1="29" y1="3" x2="29" y2="77" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+        <line x1="51" y1="3" x2="51" y2="77" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+        <text x="6"  y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#FFFFFF">A</text>
+        <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#FFFFFF">P</text>
+        <line x1="3" y1="77" x2="77" y2="3" stroke="rgba(255,255,255,0.9)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="3"  cy="77" r="4" fill="rgba(255,255,255,0.9)"/>
+        <circle cx="77" cy="3"  r="4" fill="rgba(255,255,255,0.9)"/>
+      </svg>
+      <span class="size-label">On Orange</span>
+    </div>
+    <div class="logo-box logo-box--teal sz-xs">
+      <svg width="52" height="52" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="74" height="74" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none" rx="1"/>
+        <line x1="3" y1="29" x2="77" y2="29" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="3" y1="51" x2="77" y2="51" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="29" y1="3" x2="29" y2="77" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <line x1="51" y1="3" x2="51" y2="77" stroke="rgba(255,255,255,0.15)" stroke-width="0.75"/>
+        <text x="6"  y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#FFFFFF">A</text>
+        <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#FFFFFF">P</text>
+        <line x1="3" y1="77" x2="77" y2="3" stroke="#F26522" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="3"  cy="77" r="4" fill="#F26522"/>
+        <circle cx="77" cy="3"  r="4" fill="#F26522"/>
+      </svg>
+      <span class="size-label">On Teal</span>
+    </div>
+    <!-- Favicon / super small -->
+    <div class="logo-box logo-box--light sz-xxs" style="border-radius:6px;">
+      <svg width="28" height="28" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="74" height="74" stroke="#1A1A1A" stroke-width="3" fill="none" rx="2"/>
+        <text x="6"  y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#1A1A1A">A</text>
+        <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#1A1A1A">P</text>
+        <line x1="3" y1="77" x2="77" y2="3" stroke="#F26522" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <span class="size-label">Favicon</span>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design rationale</h4>
+    <p>The grid is the corporate establishment made visual — measured, regular, every line in its place. The A is roman, upright, structured. The P is italic, in motion, already breaking. The orange diagonal doesn't just cross the grid — it uses the exact corners of the square as its anchor points, as if it measured itself against the system before cutting through it. The orange dots at each terminus are impact marks. This scales from 16px favicon to large format without losing its legibility or meaning.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MARK C — THE RULED LINE WORDMARK
+     A single horizontal rule — the corporate baseline.
+     "Aligned" sits above it, composed.
+     "Power" sits below it, breaking out italic and orange.
+     The line is the before. Both words are the after.
+════════════════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-label">Mark C</div>
+  <div class="section-title">The Rule <em>Wordmark</em></div>
+  <div class="section-desc">
+    A single horizontal rule divides the mark. "ALIGNED" sits above it — composed, upright, in order. "Power" erupts below it — italic, orange, already past the line. The rule is the boundary. The brand is what happens when you cross it.
+  </div>
+
+  <div class="logo-row">
+    <!-- Light -->
+    <div class="logo-box logo-box--light sz-xl">
+      <svg width="300" height="90" viewBox="0 0 300 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- ALIGNED — composed, upright, above the line -->
+        <text x="0" y="36"
+          font-family="'Cormorant Garamond', serif"
+          font-size="38" font-weight="700"
+          letter-spacing="4"
+          fill="#1A1A1A">ALIGNED</text>
+        <!-- The rule — full width, the corporate boundary -->
+        <line x1="0" y1="46" x2="300" y2="46" stroke="#1A1A1A" stroke-width="1.5"/>
+        <!-- Power — italic, orange, already below the line, already free -->
+        <text x="2" y="82"
+          font-family="'Cormorant Garamond', serif"
+          font-size="38" font-weight="400"
+          font-style="italic"
+          letter-spacing="-0.5"
+          fill="#F26522">Power</text>
+      </svg>
+      <span class="size-label">Hero / Web Header</span>
+    </div>
+  </div>
+
+  <div class="logo-row">
+    <div class="logo-box logo-box--light sz-lg">
+      <svg width="210" height="62" viewBox="0 0 210 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="24" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="700" letter-spacing="3" fill="#1A1A1A">ALIGNED</text>
+        <line x1="0" y1="31" x2="210" y2="31" stroke="#1A1A1A" stroke-width="1.5"/>
+        <text x="1" y="56" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="400" font-style="italic" letter-spacing="-0.5" fill="#F26522">Power</text>
+      </svg>
+      <span class="size-label">Medium</span>
+    </div>
+    <div class="logo-box logo-box--ink sz-lg">
+      <svg width="210" height="62" viewBox="0 0 210 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="24" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="700" letter-spacing="3" fill="#FDFAF6">ALIGNED</text>
+        <line x1="0" y1="31" x2="210" y2="31" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <text x="1" y="56" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="400" font-style="italic" letter-spacing="-0.5" fill="#F26522">Power</text>
+      </svg>
+      <span class="size-label">On Dark</span>
+    </div>
+    <div class="logo-box logo-box--linen sz-lg">
+      <svg width="210" height="62" viewBox="0 0 210 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="24" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="700" letter-spacing="3" fill="#1A1A1A">ALIGNED</text>
+        <line x1="0" y1="31" x2="210" y2="31" stroke="#C8C5BF" stroke-width="1.5"/>
+        <text x="1" y="56" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="400" font-style="italic" letter-spacing="-0.5" fill="#F26522">Power</text>
+      </svg>
+      <span class="size-label">On Linen</span>
+    </div>
+    <div class="logo-box logo-box--orange sz-lg">
+      <svg width="210" height="62" viewBox="0 0 210 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="24" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="700" letter-spacing="3" fill="#FFFFFF">ALIGNED</text>
+        <line x1="0" y1="31" x2="210" y2="31" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+        <text x="1" y="56" font-family="'Cormorant Garamond', serif" font-size="26" font-weight="400" font-style="italic" letter-spacing="-0.5" fill="#FFFFFF">Power</text>
+      </svg>
+      <span class="size-label">On Orange</span>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design rationale</h4>
+    <p>The horizontal rule is one of the oldest typographic devices — it separates, orders, maintains hierarchy. Here it separates the composed "ALIGNED" (tracked out, all caps, formal) from the italic orange "Power" (flowing, personal, already free). The rule is the line you cross. "Power" has already crossed it. This reads as a before/after in a single glance — which is exactly what the brand promises clients: you're going to cross that line too.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     COMPARISON — all three at nav scale
+════════════════════════════════════════════════ -->
+<div class="logo-section" style="border-bottom:none;">
+  <div class="section-label">Comparison</div>
+  <div class="section-title">All Three at <em>Nav Scale</em></div>
+  <div class="section-desc">How each mark looks in the actual nav bar context, at the size a visitor first encounters it.</div>
+
+  <!-- Simulated nav bars -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <!-- Nav A — Slash Wordmark -->
+    <div style="background:#FFFFFF;border:1px solid var(--rule-dk);border-radius:8px;overflow:hidden;">
+      <div style="height:56px;display:flex;align-items:center;padding:0 24px;justify-content:space-between;border-bottom:1px solid var(--rule-dk);">
+        <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;color:var(--ink-muted);text-transform:uppercase;padding-right:16px;border-right:1px solid var(--rule);margin-right:16px;">Mark A</div>
+        <div style="flex:1;display:flex;align-items:center;">
+          <svg width="130" height="38" viewBox="0 0 130 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="18" font-family="'Cormorant Garamond', serif" font-size="19" font-weight="700" letter-spacing="-0.3" fill="#1A1A1A">ALIGNED</text>
+            <text x="0" y="36" font-family="'Cormorant Garamond', serif" font-size="19" font-weight="400" font-style="italic" letter-spacing="-0.3" fill="#1A1A1A">Power</text>
+            <line x1="0" y1="38" x2="15" y2="19" stroke="#F26522" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="display:flex;gap:24px;align-items:center;">
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Framework</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Results</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">About</span>
+          <div style="background:var(--orange);color:#fff;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 18px;border-radius:3px;margin-left:8px;">Begin →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav B — Grid Monogram + Wordmark -->
+    <div style="background:#FFFFFF;border:1px solid var(--rule-dk);border-radius:8px;overflow:hidden;">
+      <div style="height:56px;display:flex;align-items:center;padding:0 24px;justify-content:space-between;border-bottom:1px solid var(--rule-dk);">
+        <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;color:var(--ink-muted);text-transform:uppercase;padding-right:16px;border-right:1px solid var(--rule);margin-right:16px;">Mark B</div>
+        <div style="flex:1;display:flex;align-items:center;gap:12px;">
+          <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="74" height="74" stroke="#1A1A1A" stroke-width="2.5" fill="none" rx="1"/>
+            <line x1="3" y1="29" x2="77" y2="29" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+            <line x1="3" y1="51" x2="77" y2="51" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+            <line x1="29" y1="3" x2="29" y2="77" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+            <line x1="51" y1="3" x2="51" y2="77" stroke="#1A1A1A" stroke-width="0.75" opacity="0.2"/>
+            <text x="6" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="700" fill="#1A1A1A">A</text>
+            <text x="38" y="58" font-family="'Cormorant Garamond', serif" font-size="52" font-weight="400" font-style="italic" fill="#1A1A1A">P</text>
+            <line x1="3" y1="77" x2="77" y2="3" stroke="#F26522" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="3" cy="77" r="6" fill="#F26522"/>
+            <circle cx="77" cy="3" r="6" fill="#F26522"/>
+          </svg>
+          <svg width="110" height="34" viewBox="0 0 110 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="16" font-family="'Cormorant Garamond', serif" font-size="17" font-weight="700" letter-spacing="-0.2" fill="#1A1A1A">ALIGNED</text>
+            <text x="0" y="32" font-family="'Cormorant Garamond', serif" font-size="17" font-weight="400" font-style="italic" letter-spacing="-0.2" fill="#1A1A1A">Power</text>
+          </svg>
+        </div>
+        <div style="display:flex;gap:24px;align-items:center;">
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Framework</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Results</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">About</span>
+          <div style="background:var(--orange);color:#fff;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 18px;border-radius:3px;margin-left:8px;">Begin →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav C — Rule Wordmark -->
+    <div style="background:#FFFFFF;border:1px solid var(--rule-dk);border-radius:8px;overflow:hidden;">
+      <div style="height:56px;display:flex;align-items:center;padding:0 24px;justify-content:space-between;border-bottom:1px solid var(--rule-dk);">
+        <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;color:var(--ink-muted);text-transform:uppercase;padding-right:16px;border-right:1px solid var(--rule);margin-right:16px;">Mark C</div>
+        <div style="flex:1;display:flex;align-items:center;">
+          <svg width="120" height="38" viewBox="0 0 120 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="16" font-family="'Cormorant Garamond', serif" font-size="17" font-weight="700" letter-spacing="2" fill="#1A1A1A">ALIGNED</text>
+            <line x1="0" y1="22" x2="120" y2="22" stroke="#1A1A1A" stroke-width="1"/>
+            <text x="1" y="38" font-family="'Cormorant Garamond', serif" font-size="17" font-weight="400" font-style="italic" fill="#F26522">Power</text>
+          </svg>
+        </div>
+        <div style="display:flex;gap:24px;align-items:center;">
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Framework</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">Results</span>
+          <span style="font-size:0.8125rem;color:var(--ink-muted);">About</span>
+          <div style="background:var(--orange);color:#fff;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 18px;border-radius:3px;margin-left:8px;">Begin →</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annotation" style="margin-top:24px;">
+    <h4>My recommendation</h4>
+    <p><strong>Mark B</strong> (the grid monogram) is the strongest long-term identity asset — it's the most scalable, the most original, and it carries the philosophy most completely. The grid is the system; the slash is the answer. It works at 16px favicon and at 4-foot banner scale without losing meaning.</p>
+    <p style="margin-top:8px;"><strong>Mark C</strong> (the rule wordmark) is the most elegant and quickest to read. It's the most practical for a coaching website where you want instant clarity. "ALIGNED" above the line, "Power" below and past it — the whole promise in two words and a rule.</p>
+    <p style="margin-top:8px;"><strong>Mark A</strong> (the slash wordmark) is the most subtle — the detonation is small, almost missed at first, then unmissable once you see it. That's the brand in a nutshell too.</p>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+  // Web fonts need a moment to load for SVG text rendering
+  document.fonts.ready.then(() => {
+    // Force a repaint so SVG text renders with the correct font
+    document.querySelectorAll('svg').forEach(svg => {
+      svg.style.display = 'none';
+      svg.offsetHeight;
+      svg.style.display = '';
+    });
+  });
+</script>
+</body>
+</html>
