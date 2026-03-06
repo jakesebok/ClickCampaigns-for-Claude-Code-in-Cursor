@@ -68,3 +68,27 @@ We address both internal and external challenges: overcome internal blocks (fear
 - Reframe investment as cost of staying stuck; highlight risks of inaction
 - Speak to healers and entrepreneurs in their own language
 - Sustainable, values-aligned growth (no hustle culture)
+- Direct and a little rebellious — we're done pretending "professional" means beige and boring
+- The brand has personality: warm, vibrant, fun, confident — not stiff or corporate
+
+---
+
+## Brand Personality & Visual Identity
+
+**Concept: Detonation**
+
+The visual brand lives in contrast. The structure is professional — composed layouts, clean type, serious whitespace. Then orange detonates through it. That contrast *is* the positioning: we know what "professional" is supposed to look like, and we chose something better.
+
+**Brand colors:**
+- **Orange `#F26522`** — the primary action color, the detonation. Appears where it matters: CTAs, key numbers, the headline word that changes everything.
+- **Teal `#2E706A`** — the grounding color. Framework elements, secondary actions, achievement moments.
+- **Linen `#F5F3F0`** / **White `#FFFFFF`** — the composed, neutral field that makes the orange mean something.
+- **Ink `#1A1A1A`** — primary text. No-nonsense, readable, direct.
+
+**Typography:**
+- **Cormorant Garamond** — headings, display, pull quotes. Gravitas, soul, editorial authority.
+- **Inter** — body, UI, labels. Clean, modern, internationally readable.
+
+**Logo:** The AP Grid Monogram — A and P letterforms inside a structured corporate grid square, with a single orange diagonal cutting corner to corner. The grid is the establishment. The stroke is the answer.
+
+**Brand positioning in one sentence:** "I am orange in a sea of terracotta and linen."

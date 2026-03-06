@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F26522'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%232E706A'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your dashboard | Aligned Power Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
@@ -17,17 +17,17 @@
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
-      --ap-primary: #582233;
-      --ap-secondary: #334750;
-      --ap-accent: #D4AA70;
-      --ap-bg: #F4ECE3;
-      --ap-text: #582233;
-      --ap-muted: #C6B8A7;
-      --ap-border: #C6B8A7;
+      --ap-primary: #F26522;
+      --ap-secondary: #2E706A;
+      --ap-accent: #2E706A;
+      --ap-bg: #F5F3F0;
+      --ap-text: #1A1A1A;
+      --ap-muted: #7A7A7A;
+      --ap-border: #E2E0DC;
     }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    body { font-family: 'Inter', sans-serif; background: var(--ap-bg); background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
-    .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(88,34,51,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
+    .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(242,101,34,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     #progress-wheel-container-inner.progress-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
@@ -68,7 +68,7 @@
             <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
             <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
             <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
-              <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
+              <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#C4501A]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
                 <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
                 <span>View my 6C reflections</span>
               </button>
@@ -78,7 +78,7 @@
         <div id="one-thing-banner-accordion" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]/60" role="region" aria-label="6C reflections">
           <div id="one-thing-banner-reflections" class="grid grid-cols-1 gap-2"></div>
           <div class="mt-4 pt-3 border-t border-[var(--ap-border)]/40 flex justify-center">
-            <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">
+            <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#C4501A]">
               <i data-lucide="chevron-up" class="w-4 h-4"></i>
               <span>Collapse</span>
             </button>
@@ -682,7 +682,7 @@
       });
       latestHtml += '</ul></div>';
       latestHtml += '</div>';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-primary)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#C4501A] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-primary)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
@@ -1171,9 +1171,9 @@
           if (!progressChart) {
             var ctx = document.getElementById('progress-chart').getContext('2d');
             var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(212, 170, 112, 0.35)');
-            gradient.addColorStop(0.5, 'rgba(212, 170, 112, 0.12)');
-            gradient.addColorStop(1, 'rgba(212, 170, 112, 0.02)');
+            gradient.addColorStop(0, 'rgba(46, 112, 106, 0.35)');
+            gradient.addColorStop(0.5, 'rgba(46, 112, 106, 0.12)');
+            gradient.addColorStop(1, 'rgba(46, 112, 106, 0.02)');
             progressChart = new Chart(ctx, {
               type: 'line',
               data: {
@@ -1182,12 +1182,12 @@
                   {
                     label: 'Your score',
                     data: values,
-                    borderColor: '#582233',
+                    borderColor: '#F26522',
                     backgroundColor: gradient,
                     fill: true,
                     tension: 0.35,
                     borderWidth: 2.5,
-                    pointBackgroundColor: '#582233',
+                    pointBackgroundColor: '#F26522',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     pointRadius: 5,
@@ -1197,7 +1197,7 @@
                   {
                     label: 'Dialed (8+)',
                     data: chartLabels.map(function() { return 8; }),
-                    borderColor: 'rgba(212, 170, 112, 0.7)',
+                    borderColor: 'rgba(46, 112, 106, 0.7)',
                     borderWidth: 1.5,
                     borderDash: [6, 4],
                     fill: false,
