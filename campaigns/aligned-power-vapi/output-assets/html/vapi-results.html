@@ -178,7 +178,7 @@
           console.log('[VAPI save] Already marked as saved this session. Insert skipped (no duplicate).');
           return;
         }
-        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
         var client = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         var emailNormalized = String(results.email).trim().toLowerCase();
         console.log('[VAPI save] Inserting row for:', emailNormalized, '| results keys:', Object.keys(results));
@@ -224,7 +224,7 @@
             window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
             return;
           }
-          var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+          var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
           var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
           var { data: exists, error } = await supabase.rpc('check_portal_email_exists', { check_email: email });
           if (error) {

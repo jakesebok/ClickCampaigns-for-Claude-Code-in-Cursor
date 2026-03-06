@@ -120,7 +120,7 @@
         return;
       }
 
-      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var { data: { session } } = await supabase.auth.getSession();
       if (!session) {
