@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Power — Sacred Geometry Logo Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --maroon:  #582233;
+      --gold:    #D4AA70;
+      --teal:    #334750;
+      --bg:      #F4ECE3;
+      --surface: #FFFFFF;
+      --ink:     #1A1A1A;
+      --muted:   #7A7A7A;
+      --rule:    #E0D8CF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+    .page-header {
+      padding: 40px 48px 32px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface);
+    }
+    .page-header .eyebrow {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--maroon);
+    }
+    .page-header h1 em { font-style: italic; color: var(--gold); }
+    .page-header p {
+      font-size: 0.9375rem; color: var(--muted);
+      margin-top: 8px; max-width: 580px; line-height: 1.7;
+    }
+    .main { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+    .logo-section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .logo-section:last-child { border-bottom: none; }
+    .section-eyebrow {
+      font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--maroon);
+      margin-bottom: 6px;
+    }
+    .section-title em { color: var(--gold); font-style: italic; }
+    .section-desc {
+      font-size: 0.9375rem; color: var(--muted);
+      max-width: 600px; line-height: 1.75;
+      margin-bottom: 44px;
+    }
+    .display-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .display-box {
+      border-radius: 14px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 28px 16px 36px;
+      position: relative;
+      border: 1px solid var(--rule);
+      gap: 0;
+      min-height: 140px;
+    }
+    .display-box--white  { background: #FFFFFF; }
+    .display-box--linen  { background: var(--bg); }
+    .display-box--maroon { background: var(--maroon); border-color: transparent; }
+    .display-box--teal   { background: var(--teal);   border-color: transparent; }
+    .display-box--ink    { background: #1A1A1A;        border-color: transparent; }
+    .display-box--gold   { background: var(--gold);    border-color: transparent; }
+    .display-box__label {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+      position: absolute; bottom: 10px;
+    }
+    .display-box--maroon .display-box__label,
+    .display-box--teal   .display-box__label,
+    .display-box--ink    .display-box__label { color: rgba(255,255,255,0.3); }
+    .display-box--gold   .display-box__label { color: rgba(88,34,51,0.5); }
+
+    .hero-display {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 52px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      margin-bottom: 12px;
+      min-height: 200px;
+    }
+    .hero-wordmark { display: flex; flex-direction: column; }
+
+    .nav-sim {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .nav-sim__inner {
+      height: 56px; display: flex; align-items: center;
+      padding: 0 24px; justify-content: space-between;
+    }
+    .nav-sim__links { display: flex; gap: 24px; font-size: 0.8125rem; color: var(--muted); }
+    .nav-sim__cta {
+      background: var(--maroon); color: #fff;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 4px;
+    }
+    .nav-sim__label {
+      font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); padding-right: 16px;
+      border-right: 1px solid var(--rule); margin-right: 16px;
+    }
+    .annotation {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 22px 28px;
+      margin-top: 16px;
+    }
+    .annotation h4 { font-size: 0.875rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .annotation p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+    .annotation p + p { margin-top: 8px; }
+    .recommendation-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px; margin-bottom: 28px;
+    }
+    .rec-card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px; padding: 24px; text-align: center;
+    }
+    .rec-card--pick { border: 2px solid var(--gold); position: relative; }
+    .rec-card__badge {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--maroon);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 3px 12px; border-radius: 100px;
+    }
+    .rec-card__name { font-size: 0.8125rem; font-weight: 700; color: var(--maroon); margin: 12px 0 4px; }
+    .rec-card__desc { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Aligned Power — Logo Exploration III</div>
+  <h1>Sacred <em>Geometry</em></h1>
+  <p>Three marks built on precise geometric forms — triangular, pyramidic, architectural. Each draws from the ancient visual language of alignment: the triangle as upward aspiration, the layered pyramid as structured ascent, the star of triangles as the geometry of all things coming into perfect order.</p>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════
+     MARK A — THE ASCENDING PYRAMID
+     Three nested triangles, each slightly
+     smaller, all sharing the same apex.
+     The pyramid of alignment — foundation,
+     structure, ascension to a single point.
+     Architectural. Precise. Ancient power.
+═══════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-eyebrow">Mark A</div>
+  <div class="section-title">The Ascending <em>Pyramid</em></div>
+  <div class="section-desc">
+    Three concentric triangles sharing a single apex — the pyramid. Each ring represents a domain ascending toward the same point of alignment. Reading bottom to top: Business/World (outer, widest foundation), Relationships (middle tier), Self (innermost, closest to the apex). The single point where all three converge is where Aligned Power lives.
+  </div>
+
+  <div class="hero-display">
+    <!-- PYRAMID MARK — nested triangles, shared apex -->
+    <svg width="88" height="100" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer triangle — largest, foundation (Business/World) -->
+      <!-- Apex at (44, 4), base at (4, 96) and (84, 96) -->
+      <polygon points="44,4 84,96 4,96"
+        fill="none" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Middle triangle — Relationships -->
+      <!-- Apex same (44,4), base narrowed proportionally -->
+      <polygon points="44,4 68,72 20,72"
+        fill="none" stroke="#D4AA70" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Inner triangle — Self/Personal -->
+      <!-- Apex same (44,4), base narrowed more -->
+      <polygon points="44,4 54,48 34,48"
+        fill="none" stroke="#582233" stroke-width="2.5" stroke-linejoin="round"/>
+
+      <!-- Apex dot — the point of alignment -->
+      <circle cx="44" cy="4" r="3.5" fill="#D4AA70"/>
+
+      <!-- Horizontal base rules — architectural feel -->
+      <line x1="20" y1="72" x2="68" y2="72"
+        stroke="#D4AA70" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.6"/>
+      <line x1="34" y1="48" x2="54" y2="48"
+        stroke="#582233" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.5"/>
+    </svg>
+
+    <div class="hero-wordmark">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;line-height:1;color:#582233;">Aligned</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.1;color:#D4AA70;">Power</div>
+    </div>
+  </div>
+
+  <div class="display-grid">
+    <div class="display-box display-box--linen">
+      <svg width="50" height="58" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="#582233" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+        <line x1="20" y1="72" x2="68" y2="72" stroke="#D4AA70" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        <line x1="34" y1="48" x2="54" y2="48" stroke="#582233" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
+      </svg>
+      <div class="display-box__label">On Linen</div>
+    </div>
+    <div class="display-box display-box--white">
+      <svg width="50" height="58" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="#582233" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On White</div>
+    </div>
+    <div class="display-box display-box--maroon">
+      <svg width="50" height="58" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Maroon</div>
+    </div>
+    <div class="display-box display-box--teal">
+      <svg width="50" height="58" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Teal</div>
+    </div>
+    <div class="display-box display-box--ink">
+      <svg width="50" height="58" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Dark</div>
+    </div>
+    <div class="display-box display-box--linen">
+      <svg width="30" height="34" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="#334750" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="#582233" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">Favicon</div>
+    </div>
+  </div>
+
+  <div class="nav-sim">
+    <div class="nav-sim__inner">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="nav-sim__label">Mark A</span>
+        <svg width="22" height="26" viewBox="0 0 88 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="44,4 84,96 4,96" fill="none" stroke="#334750" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="44,4 54,48 34,48" fill="none" stroke="#582233" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="44" cy="4" r="5" fill="#D4AA70"/>
+        </svg>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;letter-spacing:-0.01em;line-height:1;color:#582233;">Aligned</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.1;color:#D4AA70;margin-top:1px;">Power</div>
+        </div>
+      </div>
+      <div class="nav-sim__links"><span>Framework</span><span>Results</span><span>About</span></div>
+      <div class="nav-sim__cta">Begin →</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design intent</h4>
+    <p>The pyramid is one of the oldest expressions of aligned power in human history — a base that distributes weight perfectly, rising to a single irreducible point. Three nested triangles sharing one apex say: however wide your foundation, however many areas of life you're working on, it all converges at alignment. The dashed horizontal base-lines at each tier level add an architectural, blueprint quality — like you're looking at a cross-section of something that was designed with tremendous precision. The gold apex dot is the vanishing point: where everything meets.</p>
+    <p>The color sequence — teal outer, gold middle, maroon inner — moves from the broadest (world) to the most intimate (self), with gold at the center of the frame.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MARK B — THE STAR TETRAHEDRON
+     Two interlocking equilateral triangles —
+     one pointing up, one pointing down.
+     The Star of David / Merkaba structure.
+     As above, so below. The geometry of
+     perfect integration. Masculine + Feminine.
+     Inner + Outer. Self + World.
+═══════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-eyebrow">Mark B</div>
+  <div class="section-title">The Star <em>Tetrahedron</em></div>
+  <div class="section-desc">
+    Two equilateral triangles, perfectly interlocked — one pointing upward (aspiration, masculine, world), one pointing downward (roots, feminine, self). This is the Merkaba, the Sri Yantra's core structure, the Star of David: the oldest sacred geometry symbol for perfect integration. When two forces that seem opposite find their alignment, they create something greater than either alone.
+  </div>
+
+  <!-- Calculate precise equilateral triangle points for a centered star:
+       Center (48,48), radius 38
+       Upward triangle: top (48, 10), bottom-left (15, 76), bottom-right (81, 76)
+       Downward triangle: bottom (48, 86), top-left (15, 20), top-right (81, 20)
+       For equilateral: points at 0°, 120°, 240° rotations
+       Up: (48, 10), (81.9, 67), (14.1, 67) — using r=38, center=(48,48)
+       Down: (48, 86), (14.1, 29), (81.9, 29)
+  -->
+
+  <div class="hero-display">
+    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Upward triangle — maroon — Aspiration / Self rising -->
+      <polygon points="48,8 87,74 9,74"
+        fill="#582233" fill-opacity="0.04"
+        stroke="#582233" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Downward triangle — teal — Roots / Foundation -->
+      <polygon points="48,88 9,22 87,22"
+        fill="#334750" fill-opacity="0.04"
+        stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- The six inner intersection points form a hexagon in the center.
+           Highlight the center diamond/hexagon area in gold -->
+      <!-- Center hexagon formed by intersections — approximate -->
+      <polygon points="48,30 66,41 66,63 48,74 30,63 30,41"
+        fill="#D4AA70" fill-opacity="0.12"
+        stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- Center point — the aligned self -->
+      <circle cx="48" cy="52" r="3.5" fill="#D4AA70"/>
+
+      <!-- Apex dots -->
+      <circle cx="48" cy="8" r="3" fill="#582233"/>
+      <circle cx="48" cy="88" r="3" fill="#334750"/>
+    </svg>
+
+    <div class="hero-wordmark">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;line-height:1;color:#582233;">Aligned</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.1;color:#D4AA70;">Power</div>
+    </div>
+  </div>
+
+  <div class="display-grid">
+    <div class="display-box display-box--linen">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="#582233" fill-opacity="0.05" stroke="#582233" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="#334750" fill-opacity="0.05" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.15" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+        <circle cx="48" cy="8" r="3.5" fill="#582233"/>
+        <circle cx="48" cy="88" r="3.5" fill="#334750"/>
+      </svg>
+      <div class="display-box__label">On Linen</div>
+    </div>
+    <div class="display-box display-box--white">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="#582233" fill-opacity="0.04" stroke="#582233" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="#334750" fill-opacity="0.04" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+        <circle cx="48" cy="8" r="3.5" fill="#582233"/>
+        <circle cx="48" cy="88" r="3.5" fill="#334750"/>
+      </svg>
+      <div class="display-box__label">On White</div>
+    </div>
+    <div class="display-box display-box--maroon">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Maroon</div>
+    </div>
+    <div class="display-box display-box--teal">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.75)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.25" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Teal</div>
+    </div>
+    <div class="display-box display-box--ink">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Dark</div>
+    </div>
+    <div class="display-box display-box--linen">
+      <svg width="32" height="32" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="#582233" fill-opacity="0.05" stroke="#582233" stroke-width="3.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="#334750" fill-opacity="0.05" stroke="#334750" stroke-width="3.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.25" stroke="#D4AA70" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="5.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">Favicon</div>
+    </div>
+  </div>
+
+  <div class="nav-sim">
+    <div class="nav-sim__inner">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="nav-sim__label">Mark B</span>
+        <svg width="28" height="28" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="48,8 87,74 9,74" fill="#582233" fill-opacity="0.05" stroke="#582233" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,88 9,22 87,22" fill="#334750" fill-opacity="0.04" stroke="#334750" stroke-width="3" stroke-linejoin="round"/>
+          <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="48" cy="52" r="4.5" fill="#D4AA70"/>
+        </svg>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;letter-spacing:-0.01em;line-height:1;color:#582233;">Aligned</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.1;color:#D4AA70;margin-top:1px;">Power</div>
+        </div>
+      </div>
+      <div class="nav-sim__links"><span>Framework</span><span>Results</span><span>About</span></div>
+      <div class="nav-sim__cta">Begin →</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design intent</h4>
+    <p>This is the Merkaba — the star tetrahedron — one of the most ancient symbols in sacred geometry. The upward-pointing triangle represents aspiration, masculine energy, the world you're building toward. The downward-pointing triangle represents roots, foundation, the inner self. Where they intersect is the hexagonal center — highlighted in gold — which is the zone of alignment: where inner and outer life become one coherent whole. "Aligned Power" is literally the label for this central zone.</p>
+    <p>The mark is deeply spiritually resonant for those who know the symbol, and reads as a sophisticated geometric logo for those who don't. It will attract a client who is doing serious inner work and wants results in the world — which is exactly your client. The gold center point is the coach's fixed position: you are the guide at the center of two worlds.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MARK C — THE TRIANGLE OF TRIANGLES
+     A single large upward triangle whose
+     interior is subdivided into four smaller
+     triangles (Sierpinski-like). The top
+     triangle is filled — the goal achieved.
+     The two bottom triangles are empty —
+     still becoming. The inverted center
+     triangle is the void that makes it whole.
+     Sacred, precise, architectural.
+═══════════════════════════════════════ -->
+<div class="logo-section">
+  <div class="section-eyebrow">Mark C</div>
+  <div class="section-title">The Triangle <em>of Triangles</em></div>
+  <div class="section-desc">
+    A single equilateral triangle subdivided into four — three pointing up, one inverted at the center. The top triangle is filled solid: the achieved self, the aligned state, the realized power. The two flanking triangles are open wireframe: areas still being activated. The inverted center triangle is the negative space — the void that makes the structure possible. This is Sierpinski geometry, fractal order, the architecture of growth.
+  </div>
+
+  <!-- Equilateral triangle with midpoint subdivision
+       Main triangle: apex (48,4), bl (4,92), br (92,92)
+       Midpoints: left-mid (26,48), right-mid (70,48), bottom-mid (48,92)
+       Four triangles:
+         Top: (48,4), (26,48), (70,48)
+         Bottom-left: (4,92), (26,48), (48,92)
+         Bottom-right: (70,48), (92,92), (48,92)
+         Center (inverted): (26,48), (48,92), (70,48)
+  -->
+
+  <div class="hero-display">
+    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer border triangle — architectural container -->
+      <polygon points="48,4 92,92 4,92"
+        fill="none" stroke="#582233" stroke-width="1.5" stroke-linejoin="round" opacity="0.2"/>
+
+      <!-- Top triangle — FILLED — the achieved/aligned state -->
+      <polygon points="48,4 26,48 70,48"
+        fill="#582233" stroke="#582233" stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- Bottom-left triangle — open wireframe — Relationships -->
+      <polygon points="4,92 26,48 48,92"
+        fill="#334750" fill-opacity="0.07"
+        stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Bottom-right triangle — open wireframe — Business -->
+      <polygon points="70,48 92,92 48,92"
+        fill="#334750" fill-opacity="0.07"
+        stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- Center inverted triangle — negative space — gold highlight -->
+      <polygon points="26,48 48,92 70,48"
+        fill="#D4AA70" fill-opacity="0.15"
+        stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- Apex dot on the filled triangle -->
+      <circle cx="48" cy="4" r="3" fill="#D4AA70"/>
+    </svg>
+
+    <div class="hero-wordmark">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:700;letter-spacing:-0.02em;line-height:1;color:#582233;">Aligned</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:400;font-style:italic;letter-spacing:-0.02em;line-height:1.1;color:#D4AA70;">Power</div>
+    </div>
+  </div>
+
+  <div class="display-grid">
+    <div class="display-box display-box--linen">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 92,92 4,92" fill="none" stroke="#582233" stroke-width="1.5" stroke-linejoin="round" opacity="0.15"/>
+        <polygon points="48,4 26,48 70,48" fill="#582233" stroke="#582233" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Linen</div>
+    </div>
+    <div class="display-box display-box--white">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="#582233" stroke="#582233" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="#334750" fill-opacity="0.07" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="#334750" fill-opacity="0.07" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On White</div>
+    </div>
+    <div class="display-box display-box--maroon">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.25" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Maroon</div>
+    </div>
+    <div class="display-box display-box--teal">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.3" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Teal</div>
+    </div>
+    <div class="display-box display-box--ink">
+      <svg width="54" height="54" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="rgba(255,255,255,0.88)" stroke="rgba(255,255,255,0.88)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.25" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">On Dark</div>
+    </div>
+    <div class="display-box display-box--linen">
+      <svg width="32" height="32" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="#582233" stroke="#582233" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="#334750" fill-opacity="0.09" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="#334750" fill-opacity="0.09" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.3" stroke="#D4AA70" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="4.5" fill="#D4AA70"/>
+      </svg>
+      <div class="display-box__label">Favicon</div>
+    </div>
+  </div>
+
+  <div class="nav-sim">
+    <div class="nav-sim__inner">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="nav-sim__label">Mark C</span>
+        <svg width="26" height="26" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="48,4 26,48 70,48" fill="#582233" stroke="#582233" stroke-width="2" stroke-linejoin="round"/>
+          <polygon points="4,92 26,48 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="70,48 92,92 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.25" stroke="#D4AA70" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="48" cy="4" r="4" fill="#D4AA70"/>
+        </svg>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;letter-spacing:-0.01em;line-height:1;color:#582233;">Aligned</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.1;color:#D4AA70;margin-top:1px;">Power</div>
+        </div>
+      </div>
+      <div class="nav-sim__links"><span>Framework</span><span>Results</span><span>About</span></div>
+      <div class="nav-sim__cta">Begin →</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Design intent</h4>
+    <p>The filled top triangle is the most important element: it represents the aligned self, fully realized, solid and complete. The two open wireframe triangles flanking it represent the domains still being activated — Relationships and Business — structured but not yet filled. The inverted gold center triangle is the void: in sacred geometry, the inverted triangle represents the receptive, the inner, the space where transformation happens. Together the four triangles read as: "the part of you that is already aligned is pointing the way up."</p>
+    <p>This mark also has a strong practical advantage: the solid filled top triangle is immediately recognizable even at 16×16 favicon size, while the full composition rewards close inspection. It's the most distinctive and ownable of the three marks — nothing else in the coaching or business space looks quite like this.</p>
+  </div>
+</div>
+
+<!-- RECOMMENDATION -->
+<div class="logo-section" style="border-bottom:none;">
+  <div class="section-eyebrow">Recommendation</div>
+  <div class="section-title">Which <em>Mark</em></div>
+
+  <div class="recommendation-grid">
+    <div class="rec-card">
+      <svg width="48" height="56" viewBox="0 0 88 100" fill="none" style="margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="44,4 84,96 4,96" fill="none" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 68,72 20,72" fill="none" stroke="#D4AA70" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="44,4 54,48 34,48" fill="none" stroke="#582233" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="44" cy="4" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="rec-card__name">Mark A</div>
+      <div class="rec-card__desc">Ascending Pyramid<br>Structured. Classic.<br>Most immediately "power."</div>
+    </div>
+    <div class="rec-card">
+      <svg width="52" height="52" viewBox="0 0 96 96" fill="none" style="margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,8 87,74 9,74" fill="#582233" fill-opacity="0.05" stroke="#582233" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,88 9,22 87,22" fill="#334750" fill-opacity="0.05" stroke="#334750" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="48,30 66,41 66,63 48,74 30,63 30,41" fill="#D4AA70" fill-opacity="0.15" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="52" r="4" fill="#D4AA70"/>
+      </svg>
+      <div class="rec-card__name">Mark B</div>
+      <div class="rec-card__desc">Star Tetrahedron<br>As above, so below.<br>Deepest meaning.</div>
+    </div>
+    <div class="rec-card rec-card--pick">
+      <div class="rec-card__badge">My Pick</div>
+      <svg width="52" height="52" viewBox="0 0 96 96" fill="none" style="margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,4 26,48 70,48" fill="#582233" stroke="#582233" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="4,92 26,48 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="70,48 92,92 48,92" fill="#334750" fill-opacity="0.08" stroke="#334750" stroke-width="2" stroke-linejoin="round"/>
+        <polygon points="26,48 48,92 70,48" fill="#D4AA70" fill-opacity="0.2" stroke="#D4AA70" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="48" cy="4" r="3.5" fill="#D4AA70"/>
+      </svg>
+      <div class="rec-card__name">Mark C</div>
+      <div class="rec-card__desc">Triangle of Triangles<br>Most distinctive.<br>Scales beautifully.</div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <h4>Why Mark C</h4>
+    <p><strong>Mark C is the most ownable and distinctive mark of the three.</strong> The solid filled top triangle creates immediate visual recognition even at tiny sizes — it's a bold shape the eye goes to first. The gold inverted center triangle then reveals itself as you look longer. The two open wireframe flanking triangles add depth and the sense of "domains in progress." Nothing in the coaching or high-performance space uses this exact geometric language, which means it will be distinctly yours.</p>
+    <p>Mark B (the Star Tetrahedron / Merkaba) is the deepest in spiritual meaning and would resonate powerfully with clients who are doing serious inner work — but it's also closer to well-known spiritual symbols, which limits its distinctiveness as a business brand. Mark A is clean and powerful but reads more like a generic "corporate triangle" than a sacred geometry mark.</p>
+    <p><strong>My honest recommendation:</strong> If you want a mark that is simultaneously sacred, architectural, distinctive, and scalable — Mark C is it. If you want the deepest spiritual resonance and don't mind it being more esoteric — Mark B.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
