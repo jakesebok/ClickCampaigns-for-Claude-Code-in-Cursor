@@ -145,12 +145,15 @@
         async function loadConfig() {
           try {
             var r = await fetch('/api/config');
+            console.log('[VAPI save] /api/config response status:', r.status);
             if (!r.ok) {
               console.error('[VAPI save] Config fetch failed:', r.status, r.statusText);
               return null;
             }
             var t = await r.text();
+            console.log('[VAPI save] /api/config raw response (first 120 chars):', t.slice(0, 120));
             eval(t);
+            console.log('[VAPI save] After eval — SUPABASE_URL:', window.SUPABASE_URL ? window.SUPABASE_URL.slice(0, 40) : '(empty)', '| SUPABASE_ANON_KEY length:', (window.SUPABASE_ANON_KEY || '').length);
             if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
               console.error('[VAPI save] SUPABASE_URL or SUPABASE_ANON_KEY missing after /api/config. Check Vercel env vars.');
               return null;
