@@ -516,7 +516,7 @@
       }
 
       // ── PRIORITY MATRIX TEASER (results page) ─────────────────────────────
-      // Full matrix lives in portal dashboard. This shows a blurred preview + CTA.
+      // Full matrix lives in portal dashboard. Compact 2x2 quadrant preview with fogged-glass cards + CTA.
       function buildPriorityMatrixTeaser() {
         var signupHref = '../portal/signup.html';
         try {
@@ -524,31 +524,32 @@
           if (email) signupHref += '?email=' + encodeURIComponent(email);
         } catch (e) {}
         var quadrantDefs = [
-          { border: 'border-red-200', bg: 'bg-red-50', dot: 'bg-red-500', label: 'Critical Priority', sub: 'High importance. Low score.', accentColor: '#EF4444' },
-          { border: 'border-green-200', bg: 'bg-green-50', dot: 'bg-green-500', label: 'Protect &amp; Sustain', sub: 'High importance. Strong score.', accentColor: '#22C55E' },
-          { border: 'border-gray-200', bg: 'bg-gray-50', dot: 'bg-gray-400', label: 'Monitor', sub: 'Lower priority. Lower score.', accentColor: '#6B7280' },
-          { border: 'border-amber-200', bg: 'bg-amber-50', dot: 'bg-amber-500', label: 'Possible Over-Investment', sub: 'Lower priority, scoring well.', accentColor: '#EAB308' },
+          { border: 'border-red-200', bg: 'bg-red-50', accentColor: '#EF4444', domain: 'Mental / Emotional' },
+          { border: 'border-green-200', bg: 'bg-green-50', accentColor: '#22C55E', domain: 'Physical Health' },
+          { border: 'border-gray-200', bg: 'bg-gray-50', accentColor: '#6B7280', domain: 'Community' },
+          { border: 'border-amber-200', bg: 'bg-amber-50', accentColor: '#EAB308', domain: 'Execution' },
         ];
-        var placeholderCards = '<div class="pm-card flex-1 min-w-[200px] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white"><div class="px-3 py-2.5"><span class="font-semibold text-[var(--ap-secondary)] text-sm">Domain name</span><div class="text-xs text-[var(--ap-muted)] mt-0.5">7/10 · Priority: 8/10</div></div><div class="px-3 pb-3 pt-0"><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Your personalized guidance appears here when you create a portal account.</p></div></div>';
         var previewHtml = '';
         previewHtml += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
         previewHtml += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed. Your personalized focus areas and guidance are available in your portal.</p>';
         previewHtml += '<div class="relative no-print">';
-        previewHtml += '<div class="pm-teaser-blurred space-y-3 select-none pointer-events-none" style="filter:blur(8px);user-select:none;-webkit-user-select:none;opacity:0.7">';
+        previewHtml += '<div class="pm-teaser-grid grid grid-cols-2 gap-2 max-w-[280px] select-none pointer-events-none">';
         quadrantDefs.forEach(function(q) {
-          previewHtml += '<div class="pm-quadrant rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
-          previewHtml += '<div class="flex items-start gap-2 mb-3"><span class="w-2 h-2 rounded-full ' + q.dot + ' mt-1.5 flex-shrink-0"></span>';
-          previewHtml += '<div><p class="font-semibold text-sm" style="color:' + q.accentColor + '">' + q.label + '</p><p class="text-xs text-[var(--ap-muted)] mt-0.5">' + q.sub + '</p></div></div>';
-          previewHtml += '<div class="pm-cards-wrap flex flex-wrap gap-2">' + placeholderCards + placeholderCards + '</div></div>';
+          previewHtml += '<div class="rounded-lg border-2 ' + q.border + ' ' + q.bg + ' p-2">';
+          previewHtml += '<div class="relative bg-white rounded-md border border-[var(--ap-border)] p-2.5 overflow-hidden">';
+          previewHtml += '<p class="font-semibold text-[var(--ap-secondary)] text-xs leading-tight">' + q.domain + '</p>';
+          previewHtml += '<p class="text-[10px] text-[var(--ap-muted)] mt-0.5">7/10 · Priority: 8/10</p>';
+          previewHtml += '<p class="text-[10px] text-[var(--ap-secondary)] leading-relaxed mt-1.5 line-clamp-2">Your personalized guidance appears here when you create a portal account.</p>';
+          previewHtml += '<div class="absolute inset-0 rounded-md bg-white/60 backdrop-blur-[3px]" aria-hidden="true"></div>';
+          previewHtml += '</div></div>';
         });
         previewHtml += '</div>';
-        previewHtml += '<div class="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-xl">';
-        previewHtml += '<div class="text-center px-6 py-8 max-w-md">';
-        previewHtml += '<p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">See your personalized focus areas</p>';
-        previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
-        previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-bold text-sm px-5 py-3 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
-        previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-4">Already have an account? <a href="../portal/login.html" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
-        previewHtml += '</div></div></div>';
+        previewHtml += '<div class="mt-6 flex flex-col items-center justify-center">';
+        previewHtml += '<p class="text-base font-semibold text-[var(--ap-primary)] mb-1.5">See your personalized focus areas</p>';
+        previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed text-center max-w-sm">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
+        previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
+        previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="../portal/login.html" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
+        previewHtml += '</div></div>';
         return previewHtml;
       }
 
