@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your VAPI™ Results | Jake Sebok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,14 +224,7 @@
   <!-- Portal CTA visibility: show banner + inline CTAs only when NOT logged in -->
   <script type="module">
     (async function() {
-      try {
-        var r = await fetch('/api/config');
-        if (!r.ok) return;
-        eval(await r.text());
-        if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
-        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
-        var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-        var { data: { session } } = await supabase.auth.getSession();
+      function applyPortalCtaVisibility(session) {
         var banner = document.getElementById('portal-sticky-banner');
         var bannerInner = document.getElementById('portal-banner-inner');
         var inlineCtas = document.querySelectorAll('.portal-inline-cta');
@@ -259,6 +252,18 @@
             });
           }
         }
+      }
+      try {
+        var r = await fetch('/api/config');
+        if (!r.ok) return;
+        eval(await r.text());
+        if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
+        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+        var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        var { data: { session } } = await supabase.auth.getSession();
+        // Defer so results are guaranteed to be in DOM (results script may run after this module)
+        setTimeout(function() { applyPortalCtaVisibility(session); }, 0);
+        document.addEventListener('vapi-results-rendered', function() { applyPortalCtaVisibility(session); });
       } catch (e) {
         // On any error, default: show the banner (safe fallback)
         var banner = document.getElementById('portal-sticky-banner');
@@ -783,6 +788,7 @@
         attachAlignmentLightbox();
         initExploreSection(results, domains);
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        document.dispatchEvent(new CustomEvent('vapi-results-rendered'));
       }
 
       function initExploreSection(res, domains) {

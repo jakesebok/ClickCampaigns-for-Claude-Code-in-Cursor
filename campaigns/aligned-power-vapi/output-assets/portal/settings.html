@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings | VAPI Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,14 +19,17 @@
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
     }
-    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">VAPI Portal</a>
+      <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+        <img src="../images/logo-jake-sebok-horizontal.png" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>VAPI Portal</span>
+      </a>
       <div class="flex items-center gap-4">
         <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
         <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
@@ -44,7 +47,7 @@
       <p class="text-[var(--ap-secondary)] mb-8">Update your account details. Use the same email as when you take the assessment so your results appear in the portal.</p>
 
       <form id="settings-form" class="space-y-6">
-        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 space-y-4">
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 space-y-4 border-l-4 border-l-[var(--ap-accent)]/50">
           <h2 class="text-xl text-[var(--ap-primary)]">Name</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -81,7 +84,7 @@
         </div>
 
         <!-- About You -->
-        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 space-y-4">
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 space-y-4 border-l-4 border-l-[var(--ap-accent)]/50">
           <h2 class="text-xl text-[var(--ap-primary)]">About You</h2>
           <p class="text-sm text-[var(--ap-muted)]">Updating these helps keep your assessment results personalized. Changes apply to future assessments only.</p>
 

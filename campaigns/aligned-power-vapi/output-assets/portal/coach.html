@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coach Dashboard | VAPI Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,16 +21,19 @@
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
     }
-    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     .client-card { transition: transform 0.2s, box-shadow 0.2s; }
-    .client-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(14,22,36,0.15); }
+    .client-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(14,22,36,0.15), 0 0 0 1px rgba(255,107,26,0.2); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/90 backdrop-blur-sm sticky top-0 z-10">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="coach.html" class="font-semibold text-[var(--ap-primary)]">Coach Dashboard</a>
+      <a href="coach.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+        <img src="../images/logo-jake-sebok-horizontal.png" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>Coach Dashboard</span>
+      </a>
       <div class="flex items-center gap-4">
         <a href="admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
         <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">My Dashboard</a>
@@ -146,7 +149,7 @@
           if (c.isActiveClient) badges.push('<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[var(--ap-primary)]/15 text-[var(--ap-primary)]">Active</span>');
           if (c.assessmentCount > 0) badges.push('<span class="text-xs text-[var(--ap-muted)]">' + c.assessmentCount + ' VAPI</span>');
           if (c.sixcCount > 0) badges.push('<span class="text-xs text-[var(--ap-muted)]">' + c.sixcCount + ' 6C</span>');
-          return '<a href="coach-client.html?email=' + encodeURIComponent(c.email) + '" class="client-card block bg-white rounded-2xl border border-[var(--ap-border)] p-5 shadow-sm hover:border-[var(--ap-primary)]/40">' +
+          return '<a href="coach-client.html?email=' + encodeURIComponent(c.email) + '" class="client-card block bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-5 shadow-sm hover:border-[var(--ap-primary)]/40">' +
             '<div class="flex items-start justify-between gap-2 mb-2">' +
             '<h3 class="font-semibold text-[var(--ap-primary)] text-lg leading-tight">' + escapeHtml(c.name) + '</h3>' +
             '<i data-lucide="chevron-right" class="w-5 h-5 text-[var(--ap-muted)] flex-shrink-0 mt-0.5"></i>' +
