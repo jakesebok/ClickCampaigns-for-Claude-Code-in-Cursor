@@ -43,6 +43,7 @@
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
       <div class="flex items-center gap-4">
+        <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
         <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
         <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
         <a id="header-6c-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
@@ -382,6 +383,8 @@
       }
       var email = (session.user.email || '').trim().toLowerCase();
       if (email === 'jacob@alignedpower.coach') {
+        var coachEl = document.getElementById('header-coach-link');
+        if (coachEl) coachEl.classList.remove('hidden');
         var adminEl = document.getElementById('header-admin-link');
         if (adminEl) adminEl.classList.remove('hidden');
       }

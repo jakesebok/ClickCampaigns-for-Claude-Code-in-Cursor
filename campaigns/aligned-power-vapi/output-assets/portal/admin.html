@@ -103,6 +103,24 @@
           </div>
           <div id="admin-assessments-empty" class="hidden px-4 py-12 text-center text-[var(--ap-muted)] text-sm">No assessments found.</div>
         </div>
+
+        <h2 class="text-xl text-[var(--ap-primary)] mt-10 mb-2">6C Scorecard submissions</h2>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Weekly 6C scorecards submitted by this user. Click a row to expand and see full details.</p>
+        <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-[var(--ap-border)] bg-[var(--ap-bg)]/60">
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Completed</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">One thing</th>
+                  <th class="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] w-24"></th>
+                </tr>
+              </thead>
+              <tbody id="admin-sixc-body" class="divide-y divide-[var(--ap-border)]/60"></tbody>
+            </table>
+          </div>
+          <div id="admin-sixc-empty" class="hidden px-4 py-12 text-center text-[var(--ap-muted)] text-sm">No 6C scorecard submissions.</div>
+        </div>
       </div>
     </div>
   </main>
@@ -298,6 +316,69 @@
           });
         }
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+
+        // Load 6C scorecard submissions for this user
+        (async function() {
+          var sixcBody = document.getElementById('admin-sixc-body');
+          var sixcEmpty = document.getElementById('admin-sixc-empty');
+          try {
+            var sixcResp = await fetch('/api/admin-six-c-submissions?email=' + encodeURIComponent(detailEmail), {
+              headers: { Authorization: 'Bearer ' + session.access_token }
+            });
+            var sixcData = sixcResp.ok ? await sixcResp.json() : { rows: [] };
+            var sixcRows = sixcData.rows || [];
+            if (sixcRows.length === 0) {
+              sixcBody.innerHTML = '';
+              sixcEmpty.classList.remove('hidden');
+            } else {
+              sixcEmpty.classList.add('hidden');
+              var labels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
+              var keys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
+              sixcBody.innerHTML = sixcRows.map(function(row, idx) {
+                var oneThing = (row.one_thing_to_improve && String(row.one_thing_to_improve).trim()) ? String(row.one_thing_to_improve).trim() : '—';
+                var oneThingShort = oneThing.length > 60 ? oneThing.slice(0, 57) + '…' : oneThing;
+                var rowId = 'sixc-row-' + idx;
+                var detailId = 'sixc-detail-' + idx;
+                var scores = row.scores || {};
+                var scoresHtml = keys.map(function(k) {
+                  var s = typeof scores[k] === 'number' ? Math.round(scores[k]) : '—';
+                  return '<span class="inline-block mr-3"><strong>' + escapeHtml(labels[k] || k) + ':</strong> ' + s + '%</span>';
+                }).join('');
+                var wr = row.weekly_review || {};
+                var refKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
+                var refLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
+                var refsHtml = refKeys.map(function(k) {
+                  var v = wr[k] && String(wr[k]).trim();
+                  if (!v) return '';
+                  return '<div class="mb-2"><p class="text-xs font-semibold text-[var(--ap-muted)] mb-0.5">' + escapeHtml(refLabels[k] || k) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(v) + '</p></div>';
+                }).filter(Boolean).join('');
+                return '<tr id="' + rowId + '" class="admin-sixc-row hover:bg-[var(--ap-bg)]/40 cursor-pointer" data-detail-id="' + detailId + '">' +
+                  '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + formatDate(row.created_at) + '</td>' +
+                  '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(oneThingShort) + '</td>' +
+                  '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">View</td>' +
+                  '</tr>' +
+                  '<tr id="' + detailId + '" class="admin-sixc-detail hidden bg-[var(--ap-bg)]/30">' +
+                  '<td colspan="3" class="px-4 py-4">' +
+                  '<div class="space-y-4 text-sm">' +
+                  '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">6C Scores</p><p class="text-[var(--ap-secondary)]">' + scoresHtml + '</p></div>' +
+                  (oneThing !== '—' ? '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">One thing to improve</p><p class="text-[var(--ap-secondary)]">' + escapeHtml(oneThing) + '</p></div>' : '') +
+                  (refsHtml ? '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Reflections</p>' + refsHtml + '</div>' : '') +
+                  '</div></td></tr>';
+              }).join('');
+              sixcBody.querySelectorAll('.admin-sixc-row').forEach(function(tr) {
+                tr.addEventListener('click', function() {
+                  var detailId = this.getAttribute('data-detail-id');
+                  var detailRow = document.getElementById(detailId);
+                  if (detailRow) detailRow.classList.toggle('hidden');
+                });
+              });
+            }
+          } catch (e) {
+            sixcBody.innerHTML = '';
+            sixcEmpty.textContent = 'Could not load 6C submissions.';
+            sixcEmpty.classList.remove('hidden');
+          }
+        })();
       } else {
         // List view: one row per respondent (unique email)
         var respondents = buildRespondentsList(allRows);
