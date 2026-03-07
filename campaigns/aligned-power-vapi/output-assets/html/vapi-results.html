@@ -533,23 +533,24 @@
         previewHtml += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
         previewHtml += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed. Your personalized focus areas and guidance are available in your portal.</p>';
         previewHtml += '<div class="relative no-print">';
-        previewHtml += '<div class="pm-teaser-grid grid grid-cols-2 gap-2 max-w-[280px] select-none pointer-events-none">';
+        previewHtml += '<div class="pm-teaser-grid grid grid-cols-2 gap-3 select-none pointer-events-none min-h-[320px]">';
         quadrantDefs.forEach(function(q) {
-          previewHtml += '<div class="rounded-lg border-2 ' + q.border + ' ' + q.bg + ' p-2">';
-          previewHtml += '<div class="relative bg-white rounded-md border border-[var(--ap-border)] p-2.5 overflow-hidden">';
-          previewHtml += '<p class="font-semibold text-[var(--ap-secondary)] text-xs leading-tight">' + q.domain + '</p>';
-          previewHtml += '<p class="text-[10px] text-[var(--ap-muted)] mt-0.5">7/10 · Priority: 8/10</p>';
-          previewHtml += '<p class="text-[10px] text-[var(--ap-secondary)] leading-relaxed mt-1.5 line-clamp-2">Your personalized guidance appears here when you create a portal account.</p>';
-          previewHtml += '<div class="absolute inset-0 rounded-md bg-white/60 backdrop-blur-[3px]" aria-hidden="true"></div>';
+          previewHtml += '<div class="rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 flex flex-col">';
+          previewHtml += '<div class="relative flex-1 bg-white rounded-lg border border-[var(--ap-border)] p-4 overflow-hidden">';
+          previewHtml += '<p class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight">' + q.domain + '</p>';
+          previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-0.5">7/10 · Priority: 8/10</p>';
+          previewHtml += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mt-3">Your personalized guidance appears here when you create a portal account.</p>';
+          previewHtml += '<div class="absolute inset-0 rounded-lg bg-white/60 backdrop-blur-[3px]" aria-hidden="true"></div>';
           previewHtml += '</div></div>';
         });
         previewHtml += '</div>';
-        previewHtml += '<div class="mt-6 flex flex-col items-center justify-center">';
-        previewHtml += '<p class="text-base font-semibold text-[var(--ap-primary)] mb-1.5">See your personalized focus areas</p>';
-        previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed text-center max-w-sm">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
+        previewHtml += '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto">';
+        previewHtml += '<div class="text-center px-6 py-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-[var(--ap-border)] max-w-sm">';
+        previewHtml += '<p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">See your personalized focus areas</p>';
+        previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
         previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
         previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="../portal/login.html" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
-        previewHtml += '</div></div>';
+        previewHtml += '</div></div></div>';
         return previewHtml;
       }
 
