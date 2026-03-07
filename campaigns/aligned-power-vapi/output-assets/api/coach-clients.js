@@ -104,11 +104,13 @@ export async function GET(request) {
       };
     });
 
-    const clients = Object.values(byEmail).sort((a, b) => {
+    const allClients = Object.values(byEmail).sort((a, b) => {
       const aDate = a.lastVapiAt || a.lastSixCAt || '';
       const bDate = b.lastVapiAt || b.lastSixCAt || '';
       return bDate.localeCompare(aDate);
     });
+
+    const clients = allClients.filter((c) => c.isActiveClient);
 
     return new Response(JSON.stringify({ clients }), {
       status: 200,

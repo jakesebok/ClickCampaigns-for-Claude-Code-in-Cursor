@@ -48,20 +48,18 @@
     </div>
     <div id="client-content" class="hidden">
       <div class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8">
-        <h1 id="client-name" class="text-2xl text-[var(--ap-primary)] mb-1"></h1>
-        <p id="client-email" class="text-[var(--ap-secondary)] text-sm mb-4"></p>
-        <div id="client-badges" class="flex flex-wrap gap-2"></div>
-      </div>
-
-      <!-- Intake context -->
-      <div id="intake-context-section" class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8 hidden">
-        <h2 class="text-xl text-[var(--ap-primary)] mb-2 flex items-center gap-2">
-          <i data-lucide="user" class="w-5 h-5"></i>
-          Intake context
-        </h2>
-        <p class="text-sm text-[var(--ap-muted)] mb-4">Answers from the client's profile setup questions.</p>
-        <dl id="intake-context-list" class="space-y-3 text-sm"></dl>
-        <p id="intake-context-empty" class="hidden text-sm text-[var(--ap-muted)] italic">Client has not completed intake yet.</p>
+        <div class="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
+          <div class="min-w-0 flex-1">
+            <h1 id="client-name" class="text-2xl text-[var(--ap-primary)] mb-1"></h1>
+            <p id="client-email" class="text-[var(--ap-secondary)] text-sm mb-4"></p>
+            <div id="client-badges" class="flex flex-wrap gap-2"></div>
+          </div>
+          <div id="intake-context-wrap" class="flex-1 min-w-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)]/60 pt-4 lg:pt-0 lg:pl-6">
+            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Intake context</p>
+            <div id="intake-context-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"></div>
+            <p id="intake-context-empty" class="hidden text-sm text-[var(--ap-muted)] italic">Not completed yet.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Coach notes -->
@@ -234,9 +232,8 @@
       if (sixcRows.length > 0) badges.push('<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--ap-accent)]/20 text-[var(--ap-secondary)]">' + sixcRows.length + ' 6C</span>');
       document.getElementById('client-badges').innerHTML = badges.join('');
 
-      // Intake context
-      var intakeSection = document.getElementById('intake-context-section');
-      var intakeList = document.getElementById('intake-context-list');
+      // Intake context (in top container)
+      var intakeGrid = document.getElementById('intake-context-grid');
       var intakeEmpty = document.getElementById('intake-context-empty');
       var intakeLabels = {
         revenueStage: 'Annual business revenue',
@@ -245,25 +242,24 @@
         timeInBusiness: 'Time in business',
         primaryChallenge: 'Primary challenge'
       };
-      intakeSection.classList.remove('hidden');
       if (contextualProfile && typeof contextualProfile === 'object') {
         var items = [];
         ['revenueStage', 'teamSize', 'lifeStage', 'timeInBusiness', 'primaryChallenge'].forEach(function(k) {
           var v = contextualProfile[k];
           if (v && String(v).trim()) {
-            items.push('<dt class="font-semibold text-[var(--ap-muted)]">' + escapeHtml(intakeLabels[k] || k) + '</dt><dd class="text-[var(--ap-secondary)] pl-0">' + escapeHtml(String(v).trim()) + '</dd>');
+            items.push('<div><span class="font-semibold text-[var(--ap-muted)]">' + escapeHtml(intakeLabels[k] || k) + ':</span> <span class="text-[var(--ap-secondary)]">' + escapeHtml(String(v).trim()) + '</span></div>');
           }
         });
         if (items.length > 0) {
           intakeEmpty.classList.add('hidden');
-          intakeList.innerHTML = items.join('');
+          intakeGrid.innerHTML = items.join('');
         } else {
           intakeEmpty.classList.remove('hidden');
-          intakeList.innerHTML = '';
+          intakeGrid.innerHTML = '';
         }
       } else {
         intakeEmpty.classList.remove('hidden');
-        intakeList.innerHTML = '';
+        intakeGrid.innerHTML = '';
       }
 
       document.getElementById('coach-notes-ta').value = notes;
