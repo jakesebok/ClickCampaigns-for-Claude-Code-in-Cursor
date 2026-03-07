@@ -80,6 +80,10 @@
       /* Add breathing room between card body text and its container top */
       .pm-card-body { padding-top: 0.5rem !important; }
 
+      /* Top 3 strengths + Priority focus areas: start on page 2 */
+      .print-strengths-focus { break-before: page; page-break-before: always; }
+      .print-strengths-focus .rounded-lg { break-inside: avoid; page-break-inside: avoid; }
+
       /* Domain detail: every arena group starts on its own fresh page */
       .print-arena-group { break-before: page; page-break-before: always; break-inside: auto; }
       /* Personal is the first arena — it still gets its own page (starts after scores/matrix) */
@@ -530,8 +534,8 @@
           { border: 'border-amber-200', bg: 'bg-amber-50', accentColor: '#EAB308', domain: 'Execution' },
         ];
         var previewHtml = '';
-        previewHtml += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
-        previewHtml += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed. Your personalized focus areas and guidance are available in your portal.</p>';
+        previewHtml += '<h2 class="where-to-focus no-print text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
+        previewHtml += '<p class="where-to-focus-intro no-print text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed. Your personalized focus areas and guidance are available in your portal.</p>';
         previewHtml += '<div class="relative no-print">';
         previewHtml += '<div class="pm-teaser-grid grid grid-cols-2 gap-3 select-none pointer-events-none min-h-[320px]">';
         quadrantDefs.forEach(function(q) {
@@ -598,15 +602,19 @@
 
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
         html += '</div>'; // end print-hero-block
-        // Print-only: legacy Top 3 Strengths and Priority Focus Areas
-        html += '<div class="print-only grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 mt-6 mb-8">';
-        html += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Top 3 strengths</p><ul class="space-y-2.5 mt-2">';
+        // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
+        html += '<div class="print-only print-strengths-focus grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-0 mb-8">';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
+        html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Top 3 strengths</p>';
+        html += '<ul class="space-y-2.5 mt-2">';
         top3.forEach(function(d) {
           var c = tierColor(d.tier);
           html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
         });
         html += '</ul></div>';
-        html += '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Priority focus areas</p><ul class="space-y-2.5 mt-2">';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
+        html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Priority focus areas</p>';
+        html += '<ul class="space-y-2.5 mt-2">';
         bottom3.forEach(function(d) {
           var c = tierColor(d.tier);
           html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
@@ -697,10 +705,6 @@
         html += '<div id="results-breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">';
         html += '<p id="results-breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>';
         html += '</div></div></div>';
-        html += '<div class="no-print flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 py-6 mb-6 rounded-lg border border-[var(--ap-border)] bg-[var(--ap-bg)]/80">';
-        html += '<span class="text-[var(--ap-secondary)] text-sm">What&rsquo;s next?</span>';
-        html += '<a href="#continue-journey" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-4 py-2 border border-[var(--ap-primary)]/30 hover:border-[var(--ap-accent)] hover:bg-[var(--ap-accent)]/10 transition-colors">See resources and next steps below <i data-lucide="arrow-down" class="w-4 h-4"></i></a>';
-        html += '</div>';
         // Inline CTA 1 — after composite score, before arena scores
         html += '<div class="no-print portal-inline-cta bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
         html += '<div class="flex-1 min-w-0">';
