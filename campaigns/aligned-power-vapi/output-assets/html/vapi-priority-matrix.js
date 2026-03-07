@@ -127,8 +127,8 @@
     ];
 
     var html = '';
-    html += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
-    html += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. <strong>Click any domain below to expand and read your personalized guidance.</strong></p>';
+    html += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2">Where to Focus</h2>';
+    html += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now.<br><strong>Click any domain below to expand and read your personalized guidance.</strong></p>';
     html += '<div class="mb-10 space-y-3">';
     quadrantDefs.forEach(function(q) {
       html += '<div class="pm-quadrant rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
