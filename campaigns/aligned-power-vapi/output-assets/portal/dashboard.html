@@ -1723,8 +1723,7 @@
           scorecardCta.classList.remove('hidden');
         } else if (submittedThisWeek) {
           linkEl.classList.add('hidden');
-          closedMsg.textContent = "You've already filled out your 6C's scorecard for the week.";
-          closedMsg.classList.remove('hidden');
+          closedMsg.classList.add('hidden');
           if (scorecardCta) scorecardCta.classList.add('hidden');
         } else {
           linkEl.classList.add('hidden');
