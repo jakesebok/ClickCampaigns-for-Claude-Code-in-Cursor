@@ -1,4 +1,4 @@
-# Jake Sebok Portal
+# VAPI Portal
 
 Client login area to view VAPI™ assessment results and history.
 
