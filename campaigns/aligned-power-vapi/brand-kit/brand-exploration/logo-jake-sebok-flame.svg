@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Simon Sinek–style: bold circle with three-tongued flame -->
+  <circle cx="32" cy="32" r="30" fill="currentColor"/>
+  <!-- Three flame tongues: left, center (tallest), right -->
+  <path d="M28 44 L24 28 L32 10 L40 28 L36 44 L32 36 Z" fill="#F9FFFD"/>
+</svg>
