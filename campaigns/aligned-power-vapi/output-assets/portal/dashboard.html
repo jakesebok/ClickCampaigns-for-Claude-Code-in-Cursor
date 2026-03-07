@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="six-c-window.js"></script>
   <script src="../html/vapi-results-interpretations.js"></script>
+  <script src="../html/vapi-priority-matrix.js"></script>
   <script src="progress-transitions.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
@@ -121,6 +122,8 @@
       </div>
 
       <div id="latest-result" class="mb-10"></div>
+
+      <div id="where-to-focus-section" class="mb-10 hidden"></div>
 
       <div id="breakdown-section" class="mb-10 hidden">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
@@ -747,6 +750,17 @@
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
+
+      // Where to Focus — full priority matrix (only when latest has importance ratings)
+      var wfEl = document.getElementById('where-to-focus-section');
+      var imp = latest.results.importanceRatings || {};
+      if (Object.keys(imp).length > 0 && window.VAPI_PM && typeof window.VAPI_PM.buildPriorityMatrix === 'function') {
+        var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
+        if (pmHtml) {
+          wfEl.innerHTML = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">' + pmHtml + '</div>';
+          wfEl.classList.remove('hidden');
+        }
+      }
 
       var historyHtml = '';
       rows.forEach(function(row) {
