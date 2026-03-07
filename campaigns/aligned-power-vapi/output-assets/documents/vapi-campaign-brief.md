@@ -2,7 +2,7 @@
 
 **Campaign name:** Aligned Power Values-Aligned Performance Indicator Assessment  
 **Short name:** VAPI Assessment  
-**Brand:** Aligned Power (brand kit and style guide in `campaigns/aligned-power-vapi/brand-kit/`)
+**Brand:** Jake Sebok (brand kit and style guide in `campaigns/aligned-power-vapi/brand-kit/`)
 
 ---
 
