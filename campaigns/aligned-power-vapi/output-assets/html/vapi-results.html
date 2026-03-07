@@ -80,8 +80,8 @@
       /* Add breathing room between card body text and its container top */
       .pm-card-body { padding-top: 0.5rem !important; }
 
-      /* Top 3 strengths + Priority focus areas: start on page 2 */
-      .print-strengths-focus { break-before: page; page-break-before: always; }
+      /* Top 3 strengths + Priority focus areas: start on page 2, side by side */
+      .print-strengths-focus { break-before: page; page-break-before: always; display: grid !important; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
       .print-strengths-focus .rounded-lg { break-inside: avoid; page-break-inside: avoid; }
 
       /* Domain detail: every arena group starts on its own fresh page */
@@ -603,7 +603,7 @@
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
         html += '</div>'; // end print-hero-block
         // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
-        html += '<div class="print-only print-strengths-focus grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-0 mb-8">';
+        html += '<div class="print-only print-strengths-focus grid grid-cols-2 gap-6 mt-0 mb-8">';
         html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
         html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Top 3 strengths</p>';
         html += '<ul class="space-y-2.5 mt-2">';
