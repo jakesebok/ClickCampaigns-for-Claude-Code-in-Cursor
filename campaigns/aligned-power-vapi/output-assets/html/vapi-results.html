@@ -732,28 +732,29 @@
         // Priority Matrix teaser — full matrix lives in portal dashboard
         html += buildPriorityMatrixTeaser();
 
-        // Inline CTA 2 — after priority matrix, before domain detail
-        html += '<div class="no-print portal-inline-cta bg-gradient-to-r from-[var(--ap-primary)]/8 to-[var(--ap-accent)]/8 border border-[var(--ap-accent)]/25 rounded-xl p-5 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
-        html += '<div class="text-2xl flex-shrink-0">📈</div>';
-        html += '<div class="flex-1 min-w-0">';
-        html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">See how you change over time.</p>';
-        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted — scores, priorities, and what to focus on next.</p>';
-        html += '</div>';
-        html += '<div class="flex flex-col items-center gap-1.5 flex-shrink-0">';
-        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#c45b1a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
-        html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
-        html += '</div>';
-        html += '</div>';
-
         var arenaOrder = ['Personal', 'Relationships', 'Business'];
         var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         arenaOrder.forEach(function(arena, idx) {
           var isFirst = idx === 0;
+          // Insert "See how you change over time" CTA between Personal and Relationships (non-logged-in only; removed by portal script when logged in)
+          if (idx === 1) {
+            html += '<div class="no-print portal-inline-cta bg-gradient-to-r from-[var(--ap-primary)]/8 to-[var(--ap-accent)]/8 border border-[var(--ap-accent)]/25 rounded-xl p-5 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+            html += '<div class="text-2xl flex-shrink-0">📈</div>';
+            html += '<div class="flex-1 min-w-0">';
+            html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">See how you change over time.</p>';
+            html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted — scores, priorities, and what to focus on next.</p>';
+            html += '</div>';
+            html += '<div class="flex flex-col items-center gap-1.5 flex-shrink-0">';
+            html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#c45b1a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
+            html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
+            html += '</div>';
+            html += '</div>';
+          }
           html += '<div class="print-arena-group' + (isFirst ? ' print-first-arena' : '') + '">';
           // Include the "Domain detail" h2 inside the first arena group so it
           // always lands on the same page as the Personal section heading and cards
           if (isFirst) {
-            html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Domain detail</h2>';
+            html += '<h2 class="text-2xl text-[var(--ap-primary)] mt-10 mb-4">Domain detail</h2>';
           }
           var mt = isFirst ? 'mt-2' : 'mt-8';
           html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + escapeHtml(arena) + '</h3>';
