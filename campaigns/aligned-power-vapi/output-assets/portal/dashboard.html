@@ -32,7 +32,7 @@
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(14,22,36,0.12), 0 0 0 1px rgba(0,0,0,0.03); border-left: 3px solid transparent; transition: border-color 0.2s, box-shadow 0.2s; }
     .dashboard-card:hover { border-left-color: var(--ap-accent); box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 8px 16px -4px rgba(14,22,36,0.14), 0 0 0 1px rgba(0,0,0,0.04); }
-    #one-thing-banner.dashboard-card { border-left: 4px solid var(--ap-accent); }
+    #one-thing-banner.dashboard-card { border-left-width: 2px; border-left-color: var(--ap-accent); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     #progress-wheel-container-inner.progress-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
@@ -50,7 +50,7 @@
   <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
-        <img src="../images/logo-jake-sebok-horizontal.png" alt="" class="h-8 sm:h-9 w-auto" />
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>VAPI Portal</span>
       </a>
       <div class="flex items-center gap-4">

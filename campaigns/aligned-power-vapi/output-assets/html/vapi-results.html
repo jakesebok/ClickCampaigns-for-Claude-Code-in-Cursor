@@ -359,7 +359,6 @@
         html += '<h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-1">The Power of Alignment</h2>';
         html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">12 core domains for an aligned high impact life and business.</p>';
         html += '<div class="relative w-full overflow-visible" style="max-width:320px; margin:0 auto;">';
-        html += '<div class="absolute flex items-center justify-center pointer-events-none overflow-visible" aria-hidden="true" style="width:200%; height:240%; left:50%; top:50%; transform:translate(-50%,-50%);"><img src="../images/favicon.svg" alt="" class="w-full h-full object-contain" style="opacity:0.06; max-width:none; max-height:none; min-width:100%; min-height:100%;"/></div>';
         html += '<svg viewBox="0 0 320 320" class="w-full h-auto relative z-10" style="overflow:visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Life wheel of 12 alignment domains">';
         html += '<defs>';
         html += '<filter id="arenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
@@ -1107,11 +1106,9 @@
             var baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
             var logoAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
             var watermarkAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
-            var faviconAbs = baseUrl + '../images/favicon.svg';
             var bodyHtml = content.innerHTML
               .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + logoAbs + '"')
-              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + watermarkAbs + '"')
-              .replace('src="../images/favicon.svg"', 'src="' + faviconAbs + '"');
+              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + watermarkAbs + '"');
             var printStyles = '<style>' +
               ':root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-muted:#7A8FA8;}' +
               'body{font-family:\'Cormorant Garamond\',serif;font-weight:600;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
@@ -1120,8 +1117,6 @@
               '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
               '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#0E1624;margin:0 0 0.5rem 0;}' +
               '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
-              '.alignment-glance-inner .absolute{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;width:200%;height:240%;left:50%;top:50%;transform:translate(-50%,-50%);}' +
-              '.alignment-glance-inner .absolute img{width:100%;height:100%;object-fit:contain;opacity:0.06;max-width:none;max-height:none;min-width:100%;min-height:100%;}' +
               '.alignment-glance-inner svg{width:100%;height:auto;display:block;position:relative;z-index:10;}' +
               '.alignment-glance-inner > img:last-of-type{display:block;width:auto;height:4rem;margin:1.25rem auto 0;max-width:100%;}' +
               'img{max-width:100%;height:auto;}' +
