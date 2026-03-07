@@ -37,6 +37,9 @@
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
     #metric-list .metric-btn:hover { color: var(--ap-primary) !important; }
+    /* Importance modal slide-in */
+    #importance-modal { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+    #importance-modal.importance-modal--hidden { transform: translateX(100%); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -385,6 +388,21 @@
         return;
       }
       var email = (session.user.email || '').trim().toLowerCase();
+      var needImportanceBackfill = false;
+      var latestRowId = null;
+
+      function showImportanceModalIfNeeded() {
+        if (!needImportanceBackfill) return;
+        var ob = document.getElementById('onboarding-modal');
+        if (ob && !ob.classList.contains('hidden')) return;
+        var impEl = document.getElementById('importance-modal');
+        var backdrop = document.getElementById('importance-modal-backdrop');
+        if (impEl && backdrop) {
+          impEl.classList.remove('importance-modal--hidden');
+          backdrop.classList.remove('hidden');
+        }
+      }
+
       if (email === 'jacob@alignedpower.coach') {
         var coachEl = document.getElementById('header-coach-link');
         if (coachEl) coachEl.classList.remove('hidden');
@@ -428,6 +446,7 @@
               });
             } catch(err) {}
             obModal.classList.add('hidden');
+            showImportanceModalIfNeeded();
           });
         }
       }
@@ -761,6 +780,80 @@
           wfEl.classList.remove('hidden');
         }
       }
+
+      // Legacy user backfill: show importance modal if latest has no importance ratings
+      needImportanceBackfill = !imp || Object.keys(imp).length === 0;
+      latestRowId = latest.id;
+
+      // Importance modal: sliders, submit, confirmation, close
+      (function() {
+        var IMP_CODES = ['IMP-PH','IMP-IA','IMP-ME','IMP-AF','IMP-RS','IMP-FA','IMP-CO','IMP-WI','IMP-VS','IMP-EX','IMP-OH','IMP-EC'];
+        var DOM_CODES = { 'IMP-PH':'PH','IMP-IA':'IA','IMP-ME':'ME','IMP-AF':'AF','IMP-RS':'RS','IMP-FA':'FA','IMP-CO':'CO','IMP-WI':'WI','IMP-VS':'VS','IMP-EX':'EX','IMP-OH':'OH','IMP-EC':'EC' };
+        var impSlidersTouched = {};
+        var importanceRatings = {};
+
+        document.querySelectorAll('.imp-slider').forEach(function(slider) {
+          var code = slider.dataset.code;
+          var valEl = document.getElementById('val-' + code);
+          slider.addEventListener('input', function() {
+            var v = parseInt(slider.value, 10);
+            importanceRatings[DOM_CODES[code]] = v;
+            impSlidersTouched[code] = true;
+            if (valEl) valEl.textContent = v;
+          });
+        });
+
+        document.getElementById('importance-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          var allSet = IMP_CODES.every(function(c) { return impSlidersTouched[c]; });
+          if (!allSet) {
+            document.getElementById('importance-error').classList.remove('hidden');
+            for (var i = 0; i < IMP_CODES.length; i++) {
+              if (!impSlidersTouched[IMP_CODES[i]]) {
+                var card = document.querySelector('[data-imp="' + IMP_CODES[i] + '"]');
+                if (card) { card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                break;
+              }
+            }
+            return;
+          }
+          document.getElementById('importance-error').classList.add('hidden');
+          var btn = document.getElementById('importance-submit-btn');
+          btn.disabled = true;
+          btn.textContent = 'Saving...';
+          try {
+            var { data: { session } } = await supabase.auth.getSession();
+            var token = session ? session.access_token : '';
+            var res = await fetch('/api/update-vapi-importance', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+              body: JSON.stringify({ id: latestRowId, importanceRatings: importanceRatings })
+            });
+            var data = await res.json().catch(function() { return {}; });
+            if (!res.ok) {
+              document.getElementById('importance-error').textContent = data.message || 'Failed to save. Please try again.';
+              document.getElementById('importance-error').classList.remove('hidden');
+              btn.disabled = false;
+              btn.textContent = 'Save &amp; Continue';
+              return;
+            }
+            document.getElementById('importance-form-view').classList.add('hidden');
+            document.getElementById('importance-confirmation-view').classList.remove('hidden');
+            if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+          } catch (err) {
+            document.getElementById('importance-error').textContent = 'Failed to save. Please try again.';
+            document.getElementById('importance-error').classList.remove('hidden');
+            btn.disabled = false;
+            btn.textContent = 'Save &amp; Continue';
+          }
+        });
+
+        document.getElementById('importance-close-btn').addEventListener('click', function() {
+          window.location.reload();
+        });
+      })();
+
+      showImportanceModalIfNeeded();
 
       var historyHtml = '';
       rows.forEach(function(row) {
@@ -1842,5 +1935,112 @@
       </div>
     </div>
   </div>
+
+  <!-- Importance Modal (legacy user backfill) — slides in from right -->
+  <div id="importance-modal" class="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-white shadow-2xl overflow-y-auto importance-modal--hidden" aria-modal="true" role="dialog" aria-labelledby="importance-modal-title">
+    <div class="p-6 sm:p-8">
+      <div id="importance-form-view">
+        <div class="mb-6">
+          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
+          <h2 id="importance-modal-title" class="text-2xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
+          <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
+          <p class="text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">For each area, rate how much attention and energy it deserves given your current season of life. There are no right answers.</p>
+        </div>
+
+        <form id="importance-form" class="space-y-4">
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-3 pb-2 border-b border-[var(--ap-border)]">Self</h3>
+          <div class="space-y-4 mb-6">
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-PH">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Physical health</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-PH">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-PH">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-IA">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Inner alignment</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-IA">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-IA">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-ME">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Mental / emotional health</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-ME">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-ME">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-AF">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Attention &amp; focus</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-AF">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-AF">
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-3 pb-2 border-b border-[var(--ap-border)]">Relationships</h3>
+          <div class="space-y-4 mb-6">
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-RS">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Relationship to self</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-RS">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-RS">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-FA">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Family</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-FA">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-FA">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-CO">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Community</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-CO">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-CO">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-WI">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">World / impact</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-WI">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-WI">
+            </div>
+          </div>
+
+          <h3 class="text-lg font-semibold text-[var(--ap-primary)] mb-3 pb-2 border-b border-[var(--ap-border)]">Business</h3>
+          <div class="space-y-4 mb-6">
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-VS">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Vision / strategy</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-VS">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-VS">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-EX">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Execution</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-EX">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EX">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-OH">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Operational health</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-OH">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-OH">
+            </div>
+            <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-EC">
+              <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm">Ecology</label>
+              <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-EC">—</span><span>Highest priority</span></div>
+              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EC">
+            </div>
+          </div>
+
+          <div id="importance-error" class="hidden text-sm text-red-600 font-medium mb-4 bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please set all 12 sliders before continuing.</div>
+
+          <button type="submit" id="importance-submit-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">Save &amp; Continue</button>
+        </form>
+      </div>
+
+      <div id="importance-confirmation-view" class="hidden text-center">
+        <div class="mb-6">
+          <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="check" class="w-8 h-8 text-green-600"></i>
+          </div>
+          <h2 class="text-2xl text-[var(--ap-primary)] mb-3">Thank you for your submission.</h2>
+          <p class="text-[var(--ap-secondary)] mb-6 leading-relaxed">You can now check out the new features of your dashboard:</p>
+          <ul class="text-left max-w-xs mx-auto space-y-2 mb-8 list-disc list-inside">
+            <li class="text-[var(--ap-secondary)]">Where to focus</li>
+          </ul>
+          <button type="button" id="importance-close-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">View my dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="importance-modal-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden" aria-hidden="true"></div>
 </body>
 </html>

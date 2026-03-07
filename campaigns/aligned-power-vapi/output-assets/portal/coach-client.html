@@ -53,6 +53,17 @@
         <div id="client-badges" class="flex flex-wrap gap-2"></div>
       </div>
 
+      <!-- Intake context -->
+      <div id="intake-context-section" class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8 hidden">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-2 flex items-center gap-2">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          Intake context
+        </h2>
+        <p class="text-sm text-[var(--ap-muted)] mb-4">Answers from the client's profile setup questions.</p>
+        <dl id="intake-context-list" class="space-y-3 text-sm"></dl>
+        <p id="intake-context-empty" class="hidden text-sm text-[var(--ap-muted)] italic">Client has not completed intake yet.</p>
+      </div>
+
       <!-- Coach notes -->
       <div class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8">
         <h2 class="text-xl text-[var(--ap-primary)] mb-2 flex items-center gap-2">
@@ -186,11 +197,13 @@
       var vapiRows = [];
       var sixcRows = [];
       var notes = '';
+      var contextualProfile = null;
       try {
-        var [vapiRes, sixcRes, notesRes] = await Promise.all([
+        var [vapiRes, sixcRes, notesRes, profileRes] = await Promise.all([
           fetch('/api/admin-results', { headers: authHeader }),
           fetch('/api/admin-six-c-submissions?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
           fetch('/api/coach-notes?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
+          fetch('/api/coach-client-profile?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
         ]);
         if (vapiRes.ok) {
           var vapiData = await vapiRes.json();
@@ -203,6 +216,10 @@
         if (notesRes.ok) {
           var notesData = await notesRes.json();
           notes = notesData.notes || '';
+        }
+        if (profileRes.ok) {
+          var profileData = await profileRes.json();
+          contextualProfile = profileData.contextualProfile || null;
         }
       } catch (e) {}
 
@@ -220,6 +237,38 @@
       if (vapiRows.length > 0) badges.push('<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--ap-primary)]/15 text-[var(--ap-primary)]">' + vapiRows.length + ' VAPI</span>');
       if (sixcRows.length > 0) badges.push('<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--ap-accent)]/20 text-[var(--ap-secondary)]">' + sixcRows.length + ' 6C</span>');
       document.getElementById('client-badges').innerHTML = badges.join('');
+
+      // Intake context
+      var intakeSection = document.getElementById('intake-context-section');
+      var intakeList = document.getElementById('intake-context-list');
+      var intakeEmpty = document.getElementById('intake-context-empty');
+      var intakeLabels = {
+        revenueStage: 'Annual business revenue',
+        teamSize: 'Team size',
+        lifeStage: 'Life stage',
+        timeInBusiness: 'Time in business',
+        primaryChallenge: 'Primary challenge'
+      };
+      intakeSection.classList.remove('hidden');
+      if (contextualProfile && typeof contextualProfile === 'object') {
+        var items = [];
+        ['revenueStage', 'teamSize', 'lifeStage', 'timeInBusiness', 'primaryChallenge'].forEach(function(k) {
+          var v = contextualProfile[k];
+          if (v && String(v).trim()) {
+            items.push('<dt class="font-semibold text-[var(--ap-muted)]">' + escapeHtml(intakeLabels[k] || k) + '</dt><dd class="text-[var(--ap-secondary)] pl-0">' + escapeHtml(String(v).trim()) + '</dd>');
+          }
+        });
+        if (items.length > 0) {
+          intakeEmpty.classList.add('hidden');
+          intakeList.innerHTML = items.join('');
+        } else {
+          intakeEmpty.classList.remove('hidden');
+          intakeList.innerHTML = '';
+        }
+      } else {
+        intakeEmpty.classList.remove('hidden');
+        intakeList.innerHTML = '';
+      }
 
       document.getElementById('coach-notes-ta').value = notes;
 
