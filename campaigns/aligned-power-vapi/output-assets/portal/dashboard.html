@@ -107,7 +107,7 @@
             <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Last week you said you'd improve</p>
             <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
           </div>
-          <div class="mt-6">
+          <div id="six-c-action-row" class="mt-6">
             <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
             <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
@@ -1724,6 +1724,8 @@
         } else if (submittedThisWeek) {
           linkEl.classList.add('hidden');
           closedMsg.classList.add('hidden');
+          var actionRow = document.getElementById('six-c-action-row');
+          if (actionRow) actionRow.classList.add('hidden');
           if (scorecardCta) scorecardCta.classList.add('hidden');
         } else {
           linkEl.classList.add('hidden');
