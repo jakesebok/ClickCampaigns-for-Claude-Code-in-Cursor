@@ -6,7 +6,7 @@
   <title>Jake Sebok — Fire & Ash (Outfit + Cormorant)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Outfit:wght@400;500;700;800;900&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Montserrat:wght@400;500;600;700&family=Outfit:wght@400;500;700;800;900&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,6 +63,7 @@
       color: var(--p-mid);
     }
     .ey {
+      font-family: 'Cormorant Garamond', serif;
       font-size: 10px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -147,9 +148,10 @@
       color: var(--p-dark); text-decoration: none;
     }
     .nav__logo-img {
-      width: 36px; height: 36px;
+      height: 36px;
+      width: auto;
       flex-shrink: 0;
-      color: var(--p-orange);
+      object-fit: contain;
     }
     .theme-toggle {
       display: flex; gap: 2px;
@@ -275,7 +277,7 @@
       margin-bottom: 24px;
     }
     .hero__quote-rule { width: 40px; height: 2px; background: rgba(255,255,255,0.35); margin-bottom: 16px; }
-    .hero__quote-attr { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.65); }
+    .hero__quote-attr { font-family: 'Cormorant Garamond', serif; font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.65); }
     /* Stats strip */
     .hero__stats {
       position: relative; z-index: 2;
@@ -360,6 +362,7 @@
     }
     body[data-font="c"] .sub, body[data-font="c"] .stat-box .slabel,
     body[data-font="c"] .hero__stat-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; line-height: 1.65; }
+    body[data-font="c"] .nav__logo { font-family: 'Cormorant Garamond', serif; }
     body[data-font="c"] .btn-fill, body[data-font="c"] .btn-outline-light,
     body[data-font="c"] .btn-outline-dark, body[data-font="c"] .font-toggle button { font-family: 'Outfit', sans-serif; }
 
@@ -377,9 +380,9 @@
     body[data-font="f"] .btn-fill, body[data-font="f"] .btn-outline-light,
     body[data-font="f"] .btn-outline-dark, body[data-font="f"] .font-toggle button { font-family: 'Urbanist', sans-serif; }
 
-    /* ── FONT G: Urbanist + Cormorant ── */
+    /* ── FONT G: Montserrat + Cormorant ── */
     body[data-font="g"] .hed, body[data-font="g"] .hed-sm {
-      font-family: 'Urbanist', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-style: normal;
       letter-spacing: -0.03em;
@@ -389,7 +392,35 @@
     body[data-font="g"] .hero__stat-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; line-height: 1.65; }
     body[data-font="g"] .nav__logo, body[data-font="g"] .hero__quote { font-family: 'Cormorant Garamond', serif; }
     body[data-font="g"] .btn-fill, body[data-font="g"] .btn-outline-light,
-    body[data-font="g"] .btn-outline-dark, body[data-font="g"] .font-toggle button { font-family: 'Urbanist', sans-serif; }
+    body[data-font="g"] .btn-outline-dark, body[data-font="g"] .font-toggle button { font-family: 'Montserrat', sans-serif; }
+
+    /* ── FONT H: DM Sans + Cormorant ── */
+    body[data-font="h"] .hed, body[data-font="h"] .hed-sm {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: -0.02em;
+      line-height: 0.93;
+    }
+    body[data-font="h"] .sub, body[data-font="h"] .stat-box .slabel,
+    body[data-font="h"] .hero__stat-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; line-height: 1.65; }
+    body[data-font="h"] .nav__logo, body[data-font="h"] .hero__quote { font-family: 'Cormorant Garamond', serif; }
+    body[data-font="h"] .btn-fill, body[data-font="h"] .btn-outline-light,
+    body[data-font="h"] .btn-outline-dark, body[data-font="h"] .font-toggle button { font-family: 'DM Sans', sans-serif; }
+
+    /* ── FONT I: Sora + Cormorant ── */
+    body[data-font="i"] .hed, body[data-font="i"] .hed-sm {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: -0.03em;
+      line-height: 0.93;
+    }
+    body[data-font="i"] .sub, body[data-font="i"] .stat-box .slabel,
+    body[data-font="i"] .hero__stat-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 16px; line-height: 1.65; }
+    body[data-font="i"] .nav__logo, body[data-font="i"] .hero__quote { font-family: 'Cormorant Garamond', serif; }
+    body[data-font="i"] .btn-fill, body[data-font="i"] .btn-outline-light,
+    body[data-font="i"] .btn-outline-dark, body[data-font="i"] .font-toggle button { font-family: 'Sora', sans-serif; }
 
     @media (max-width: 900px) {
       .hero__detonation, .hero__accent, .hero__bleed-line, .hero__right-content { display: none; }
@@ -483,8 +514,7 @@
   <nav>
     <div class="container nav__inner">
       <a href="#" class="nav__logo">
-        <svg class="nav__logo-img" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="currentColor"/><path d="M28 44 L24 28 L32 10 L40 28 L36 44 L32 36 Z" fill="#F9FFFD"/></svg>
-        Jake Sebok
+        <img class="nav__logo-img" src="logo-jake-sebok-horizontal.png" alt="Jake Sebok">
       </a>
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
         <div class="font-toggle" role="group" aria-label="Font">
@@ -492,6 +522,8 @@
           <button type="button" data-font="c" class="active">C</button>
           <button type="button" data-font="f">F</button>
           <button type="button" data-font="g">G</button>
+          <button type="button" data-font="h">H</button>
+          <button type="button" data-font="i">I</button>
         </div>
         <div class="theme-toggle" role="group" aria-label="Theme">
           <button type="button" data-theme="default" class="active">Default</button>
@@ -630,7 +662,7 @@
 
   <footer style="padding: 28px 0; background: var(--p-dark); border-top: 2px solid var(--p-orange); position: relative; z-index: 1;">
     <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-      <span style="display: flex; align-items: center; gap: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.375rem; font-weight: 700; font-style: italic; color: #fff;"><svg width="24" height="24" viewBox="0 0 64 64" fill="none" style="color: var(--p-orange); flex-shrink: 0;"><circle cx="32" cy="32" r="30" fill="currentColor"/><path d="M28 44 L24 28 L32 10 L40 28 L36 44 L32 36 Z" fill="#F9FFFD"/></svg>Jake Sebok</span>
+      <img src="logo-jake-sebok-horizontal.png" alt="Jake Sebok" style="height: 28px; width: auto; object-fit: contain;">
       <span style="font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--p-muted);">Fire & Ash · Outfit + Cormorant</span>
     </div>
   </footer>
