@@ -1,5 +1,5 @@
 // Vercel serverless: GET/POST coach notes for a client (coach only).
-// GET ?email=xxx  → { notes, updated_at }
+// GET ?email=xxx  → { notes, updated_at, contextualProfile }
 // POST { email, notes }  → upsert
 // Requires SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 
@@ -47,23 +47,31 @@ export async function GET(request) {
   }
 
   try {
-    const r = await fetch(
-      `${url}/rest/v1/coach_notes?client_email=eq.${encodeURIComponent(norm)}&select=notes,updated_at`,
-      {
-        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, Accept: 'application/json' },
-      }
-    );
-    if (!r.ok) {
-      const text = await r.text().catch(() => '');
-      return new Response(
-        JSON.stringify({ error: 'rest_failed', status: r.status, body: text.slice(0, 300) }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-    const rows = await r.json();
+    const [notesRes, usersRes] = await Promise.all([
+      fetch(
+        `${url}/rest/v1/coach_notes?client_email=eq.${encodeURIComponent(norm)}&select=notes,updated_at`,
+        { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, Accept: 'application/json' } }
+      ),
+      fetch(
+        `${url}/auth/v1/admin/users?filter=${encodeURIComponent(norm)}`,
+        { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` } }
+      ),
+    ]);
+    const rows = notesRes.ok ? await notesRes.json() : [];
     const row = Array.isArray(rows) && rows[0] ? rows[0] : null;
+    let contextualProfile = null;
+    if (usersRes.ok) {
+      const usersJson = await usersRes.json();
+      const users = usersJson.users || [];
+      const match = users.find((u) => (u.email || '').toLowerCase() === norm);
+      contextualProfile = match?.user_metadata?.contextual_profile || null;
+    }
     return new Response(
-      JSON.stringify({ notes: row ? row.notes || '' : '', updated_at: row ? row.updated_at : null }),
+      JSON.stringify({
+        notes: row ? row.notes || '' : '',
+        updated_at: row ? row.updated_at : null,
+        contextualProfile,
+      }),
       { status: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } }
     );
   } catch (e) {

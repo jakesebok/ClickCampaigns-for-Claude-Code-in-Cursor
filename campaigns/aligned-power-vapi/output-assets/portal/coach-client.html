@@ -199,11 +199,10 @@
       var notes = '';
       var contextualProfile = null;
       try {
-        var [vapiRes, sixcRes, notesRes, profileRes] = await Promise.all([
+        var [vapiRes, sixcRes, notesRes] = await Promise.all([
           fetch('/api/admin-results', { headers: authHeader }),
           fetch('/api/admin-six-c-submissions?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
           fetch('/api/coach-notes?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
-          fetch('/api/coach-client-profile?email=' + encodeURIComponent(clientEmail), { headers: authHeader }),
         ]);
         if (vapiRes.ok) {
           var vapiData = await vapiRes.json();
@@ -216,10 +215,7 @@
         if (notesRes.ok) {
           var notesData = await notesRes.json();
           notes = notesData.notes || '';
-        }
-        if (profileRes.ok) {
-          var profileData = await profileRes.json();
-          contextualProfile = profileData.contextualProfile || null;
+          contextualProfile = notesData.contextualProfile || null;
         }
       } catch (e) {}
 
