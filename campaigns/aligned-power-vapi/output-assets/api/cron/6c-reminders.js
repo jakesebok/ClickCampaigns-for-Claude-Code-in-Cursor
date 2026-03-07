@@ -1,9 +1,9 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Schedule: once daily at 22:00 UTC (5pm Eastern). Sends based on America/New_York:
- * - Friday 5pm Eastern → "Your scorecard is available"
- * - Saturday 5pm Eastern → Saturday reminder
- * - Sunday 5pm Eastern → "One hour left to submit" (only Sunday email)
+ * Schedule: once daily at 17:00 UTC (12pm Eastern). Sends based on America/New_York:
+ * - Friday 12pm Eastern → "Your scorecard is available"
+ * - Saturday 12pm Eastern → Saturday reminder
+ * - Sunday 12pm Eastern → "One hour left to submit" (only Sunday email)
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
  *      SIX_C_FROM_EMAIL (e.g. scorecard@notifications.alignedpower.coach), SIX_C_REPLY_TO (optional).
@@ -34,10 +34,10 @@ function nowInEastern() {
 
 function getReminderType() {
   const e = nowInEastern();
-  const is5pm = e.hour === 17 || e.hour === 18;
-  if (e.dayOfWeek === 5 && is5pm) return 'available';
-  if (e.dayOfWeek === 6 && is5pm) return 'saturday';
-  if (e.dayOfWeek === 0 && is5pm) return 'one-hour-left';
+  const isNoon = e.hour === 12 || e.hour === 13;
+  if (e.dayOfWeek === 5 && isNoon) return 'available';
+  if (e.dayOfWeek === 6 && isNoon) return 'saturday';
+  if (e.dayOfWeek === 0 && isNoon) return 'one-hour-left';
   return null;
 }
 
@@ -255,7 +255,7 @@ export async function GET(request) {
         status: true,
         eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
         reminderType: type,
-        message: type ? `Would send "${type}" to active clients.` : 'No reminder scheduled for this time (Fri/Sat/Sun 5pm Eastern only).',
+        message: type ? `Would send "${type}" to active clients.` : 'No reminder scheduled for this time (Fri/Sat/Sun 12pm Eastern only).',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );

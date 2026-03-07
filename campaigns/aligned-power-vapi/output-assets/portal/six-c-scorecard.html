@@ -86,6 +86,31 @@
           <div>
             <label for="one-thing" class="block text-sm font-semibold text-[var(--ap-primary)] mb-2">The one thing I will improve next week</label>
             <textarea id="one-thing" name="one_thing_to_improve" rows="3" required class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-white text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none resize-y" placeholder="e.g. Protect my morning block for deep work so I stay focused on the outcome that matters most."></textarea>
+            <button type="button" id="one-thing-help-btn" class="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-[var(--ap-muted)] hover:text-[var(--ap-secondary)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--ap-primary)] focus:ring-offset-1 rounded">
+              <i data-lucide="info" class="w-3.5 h-3.5"></i>
+              <span>HOW DO I CREATE A ONE THING?</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- One Thing help modal -->
+        <div id="one-thing-help-modal" class="fixed inset-0 z-50 hidden" aria-hidden="true">
+          <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="one-thing-help-backdrop"></div>
+          <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div id="one-thing-help-content" class="relative max-w-md w-full bg-white rounded-2xl border border-[var(--ap-border)] shadow-xl p-6" role="dialog" aria-labelledby="one-thing-help-title">
+              <button type="button" id="one-thing-help-close" class="absolute top-4 right-4 text-[var(--ap-muted)] hover:text-[var(--ap-primary)] transition-colors" aria-label="Close">
+                <i data-lucide="x" class="w-5 h-5"></i>
+              </button>
+              <h3 id="one-thing-help-title" class="text-lg font-bold text-[var(--ap-primary)] mb-3 pr-8">How to create a powerful One Thing</h3>
+              <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">From Gary Keller&rsquo;s <em>The One Thing</em>: extraordinary results come from narrowing your focus to a single priority.</p>
+              <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Ask yourself: <strong>What&rsquo;s the ONE thing I can do such that by doing it, everything else will be easier or unnecessary?</strong></p>
+              <ul class="text-sm text-[var(--ap-secondary)] leading-relaxed space-y-2 mb-4 list-disc list-inside">
+                <li>Go small — narrow down to the single most important action or shift.</li>
+                <li>Be specific — &ldquo;Protect my morning block&rdquo; beats &ldquo;work on focus.&rdquo;</li>
+                <li>Make it actionable — something you can actually do this week.</li>
+              </ul>
+              <p class="text-sm text-[var(--ap-muted)] italic">One domino knocks over the next. Start with the one that matters most.</p>
+            </div>
           </div>
         </div>
 
@@ -166,6 +191,22 @@
       }
 
       document.getElementById('scorecard-content').classList.remove('hidden');
+
+      // One Thing help modal
+      (function() {
+        var modal = document.getElementById('one-thing-help-modal');
+        var btn = document.getElementById('one-thing-help-btn');
+        var closeBtn = document.getElementById('one-thing-help-close');
+        var backdrop = document.getElementById('one-thing-help-backdrop');
+        function openModal() { modal.classList.remove('hidden'); modal.setAttribute('aria-hidden', 'false'); }
+        function closeModal() { modal.classList.add('hidden'); modal.setAttribute('aria-hidden', 'true'); }
+        if (btn) btn.addEventListener('click', openModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (backdrop) backdrop.addEventListener('click', closeModal);
+        modal.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      })();
+
       if (hasNoSubmissions) {
         document.getElementById('scorecard-urgency-message').textContent = 'Complete your first 6C scorecard whenever you\'re ready. After this, your next scorecards will be available during the weekly window (Friday 12pm – Sunday 6pm).';
         document.getElementById('scorecard-countdown').textContent = '';
