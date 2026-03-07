@@ -108,9 +108,9 @@
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
-          <div id="six-c-one-thing" class="mt-6 pt-6 border-t border-[var(--ap-border)]/60 hidden">
+          <div id="six-c-one-thing" class="mt-6 pt-6 pb-6 border-t border-[var(--ap-border)]/60 hidden">
             <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Last week you said you'd improve</p>
-            <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
+            <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm mb-0"></p>
           </div>
           <div id="six-c-action-row" class="mt-6">
             <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
@@ -1791,9 +1791,14 @@
             setAccordionOpen(false);
           });
         }
+        var oneThingEl = document.getElementById('six-c-one-thing');
+        var actionRowEl = document.getElementById('six-c-action-row');
         if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
-          document.getElementById('six-c-one-thing').classList.remove('hidden');
+          oneThingEl.classList.remove('hidden');
           document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
+          if (actionRowEl) { actionRowEl.classList.remove('mt-6'); actionRowEl.classList.add('mt-0'); }
+        } else if (actionRowEl) {
+          actionRowEl.classList.remove('mt-0'); actionRowEl.classList.add('mt-6');
         }
         var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
         var linkEl = document.getElementById('six-c-fill-link');
@@ -1833,9 +1838,10 @@
           scorecardCta.classList.remove('hidden');
         } else if (submittedThisWeek) {
           linkEl.classList.add('hidden');
-          closedMsg.classList.add('hidden');
+          closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
+          closedMsg.classList.remove('hidden');
           var actionRow = document.getElementById('six-c-action-row');
-          if (actionRow) actionRow.classList.add('hidden');
+          if (actionRow) actionRow.classList.remove('hidden');
           if (scorecardCta) scorecardCta.classList.add('hidden');
         } else {
           linkEl.classList.add('hidden');
