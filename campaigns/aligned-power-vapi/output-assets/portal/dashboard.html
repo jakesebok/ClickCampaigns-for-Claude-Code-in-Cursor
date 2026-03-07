@@ -32,6 +32,7 @@
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(14,22,36,0.12), 0 0 0 1px rgba(0,0,0,0.03); border-left: 3px solid transparent; transition: border-color 0.2s, box-shadow 0.2s; }
     .dashboard-card:hover { border-left-color: var(--ap-accent); box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 8px 16px -4px rgba(14,22,36,0.14), 0 0 0 1px rgba(0,0,0,0.04); }
+    #one-thing-banner.dashboard-card { border-left: 4px solid var(--ap-accent); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     #progress-wheel-container-inner.progress-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
@@ -69,10 +70,10 @@
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Dashboard</h1>
       <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
-      <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card overflow-hidden">
+      <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card">
         <div class="p-6">
           <div class="flex gap-4 items-start">
-            <div class="shrink-0 w-12 h-12 rounded-full bg-[var(--ap-accent)]/30 flex items-center justify-center" aria-hidden="true">
+            <div class="shrink-0 w-12 h-12 rounded-full bg-[var(--ap-accent)]/30 flex items-center justify-center ring-2 ring-white/80" aria-hidden="true">
               <i data-lucide="target" class="w-7 h-7 text-[var(--ap-primary)]"></i>
             </div>
             <div class="min-w-0 flex-1">
@@ -1750,8 +1751,8 @@
           cardsHtml += '<div class="flex flex-col items-center p-3 rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/50">';
           cardsHtml += '<i data-lucide="' + (icons[k] || 'circle') + '" class="w-8 h-8 text-[var(--ap-primary)] mb-2" aria-hidden="true"></i>';
           cardsHtml += '<p class="text-xs font-semibold text-[var(--ap-primary)] mb-1">' + (labels[k] || k) + '</p>';
-          cardsHtml += '<p class="text-lg font-bold tabular-nums text-[var(--ap-secondary)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-muted)]">%</span></p>';
-          cardsHtml += '<div class="w-full h-1.5 rounded-full bg-[var(--ap-border)]/40 mt-1 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-primary)]" style="width:' + pct + '%"></div></div>';
+          cardsHtml += '<p class="text-lg font-bold tabular-nums text-[var(--ap-accent)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-accent)]/80">%</span></p>';
+          cardsHtml += '<div class="w-full h-1.5 rounded-full bg-[var(--ap-border)]/40 mt-1 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-accent)]" style="width:' + pct + '%"></div></div>';
           cardsHtml += '</div>';
         });
         document.getElementById('six-c-cards').innerHTML = cardsHtml;
