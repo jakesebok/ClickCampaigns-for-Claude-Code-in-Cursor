@@ -149,14 +149,14 @@
           }
           var uid = 'pm-' + q.key + '-' + e.code;
           html += '<div class="pm-card w-full min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
-          html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(0deg)\':\'rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
+          html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(180deg)\':\'rotate(0deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
           html += '<div class="flex flex-col min-w-0">';
           html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
           html += '<div class="flex items-center gap-2 mt-0.5">';
           html += '<span class="text-xs font-bold" style="color:' + q.accentColor + '">' + e.score + '/10</span>';
           html += '<span class="text-xs text-[var(--ap-muted)]">Priority: ' + e.importance + '/10</span>';
           html += '</div><span class="text-[10px] text-[var(--ap-muted)] mt-1 italic">Click to expand</span></div>';
-          html += '<svg id="' + uid + '-chev" class="pm-chev w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(0deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
+          html += '<svg id="' + uid + '-chev" class="pm-chev w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(180deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
           html += '</button>';
           html += '<div id="' + uid + '" class="pm-card-body hidden px-3 pb-3 pt-0 bg-white">';
           html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(copy) + '</p>';
