@@ -58,31 +58,43 @@
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Aligned Power Dashboard</h1>
       <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
-      <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 p-6 shadow-lg dashboard-card">
-        <div class="flex gap-4 items-start">
-          <div class="shrink-0 w-12 h-12 rounded-full bg-[var(--ap-accent)]/30 flex items-center justify-center" aria-hidden="true">
-            <i data-lucide="target" class="w-7 h-7 text-[var(--ap-primary)]"></i>
+      <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card overflow-hidden">
+        <div class="p-6">
+          <div class="flex gap-4 items-start">
+            <div class="shrink-0 w-12 h-12 rounded-full bg-[var(--ap-accent)]/30 flex items-center justify-center" aria-hidden="true">
+              <i data-lucide="target" class="w-7 h-7 text-[var(--ap-primary)]"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-primary)] mb-2">This week's focus</p>
+              <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
+              <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
+              <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
+                <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
+                  <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
+                  <span>View my 6C reflections</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="min-w-0 flex-1">
-            <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-primary)] mb-2">This week's focus</p>
-            <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
-            <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
-            <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
-              <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
-                <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
-                <span>View my 6C reflections</span>
+          <div id="one-thing-banner-accordion" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]/60" role="region" aria-label="6C reflections">
+            <div id="one-thing-banner-reflections" class="grid grid-cols-1 gap-2"></div>
+            <div class="mt-4 pt-3 border-t border-[var(--ap-border)]/40 flex justify-center">
+              <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">
+                <i data-lucide="chevron-up" class="w-4 h-4"></i>
+                <span>Collapse</span>
               </button>
             </div>
           </div>
         </div>
-        <div id="one-thing-banner-accordion" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]/60" role="region" aria-label="6C reflections">
-          <div id="one-thing-banner-reflections" class="grid grid-cols-1 gap-2"></div>
-          <div class="mt-4 pt-3 border-t border-[var(--ap-border)]/40 flex justify-center">
-            <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">
-              <i data-lucide="chevron-up" class="w-4 h-4"></i>
-              <span>Collapse</span>
-            </button>
+        <!-- Scorecard CTA — shown only when the window is open and not yet submitted -->
+        <div id="one-thing-scorecard-cta" class="hidden border-t-2 border-[var(--ap-accent)]/40 bg-[var(--ap-primary)] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <p id="one-thing-scorecard-cta-label" class="text-white font-semibold text-sm leading-snug"></p>
+            <p id="one-thing-scorecard-cta-countdown" class="hidden text-white/70 text-xs mt-0.5"></p>
           </div>
+          <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#c49b5a] text-[var(--ap-primary)] font-bold text-sm px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap flex-shrink-0">
+            Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
         </div>
       </div>
 
@@ -96,13 +108,14 @@
             <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm"></p>
           </div>
           <div class="mt-6">
-            <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's</a>
+            <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
             <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
         </div>
-        <div id="six-c-window-urgency" class="mt-4 rounded-xl border-2 border-[var(--ap-primary)]/30 bg-[var(--ap-primary)]/5 px-4 py-3 hidden">
-          <p id="six-c-window-message" class="font-semibold text-[var(--ap-primary)] text-sm"></p>
-          <p id="six-c-window-countdown" class="text-[var(--ap-secondary)] text-sm mt-1 hidden"></p>
+        <!-- urgency banner kept but hidden — logic now handled in one-thing banner -->
+        <div id="six-c-window-urgency" class="hidden">
+          <p id="six-c-window-message" class="hidden"></p>
+          <p id="six-c-window-countdown" class="hidden"></p>
         </div>
       </div>
 
@@ -1584,9 +1597,25 @@
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');
           document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">Complete your first 6C scorecard whenever you\'re ready.</p>';
-          document.getElementById('six-c-fill-link').classList.remove('hidden');
-          document.getElementById('six-c-fill-link').setAttribute('href', 'six-c-scorecard.html');
-          document.getElementById('six-c-fill-link').innerHTML = 'Fill out your first 6C scorecard <i data-lucide="arrow-right" class="w-4 h-4"></i>';
+          // Check if window is currently open for first-timers
+          var winFirst = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+          if (winFirst && winFirst.canSubmit) {
+            // Show scorecard CTA inside the banner
+            var banner = document.getElementById('one-thing-banner');
+            var bannerText = document.getElementById('one-thing-banner-text');
+            var cta = document.getElementById('one-thing-scorecard-cta');
+            var ctaLabel = document.getElementById('one-thing-scorecard-cta-label');
+            bannerText.textContent = 'Ready to start your first weekly CEO review?';
+            document.querySelector('#one-thing-banner .text-sm.text-\\[var\\(--ap-secondary\\)\\]').textContent = 'The 6C\'s Scorecard helps you see exactly where you stand across six dimensions of an aligned life.';
+            ctaLabel.textContent = 'Your scorecard is open now through Sunday at 6pm.';
+            banner.classList.remove('hidden');
+            cta.classList.remove('hidden');
+            document.getElementById('six-c-fill-link').classList.add('hidden');
+          } else {
+            document.getElementById('six-c-fill-link').classList.remove('hidden');
+            document.getElementById('six-c-fill-link').setAttribute('href', 'six-c-scorecard.html');
+            document.getElementById('six-c-fill-link').innerHTML = 'Fill out your first 6C scorecard <i data-lucide="arrow-right" class="w-4 h-4"></i>';
+          }
           document.getElementById('six-c-window-urgency').classList.add('hidden');
           document.getElementById('six-c-window-closed-msg').classList.add('hidden');
           if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
@@ -1668,27 +1697,40 @@
           submittedThisWeek = submittedAt >= win.opensAt && submittedAt <= win.closesAt;
         }
 
-        urgencyEl.classList.add('hidden');
+        var scorecardCta = document.getElementById('one-thing-scorecard-cta');
+        var scorecardCtaLabel = document.getElementById('one-thing-scorecard-cta-label');
+        var scorecardCtaCountdown = document.getElementById('one-thing-scorecard-cta-countdown');
+
         if (win && win.canSubmit && !submittedThisWeek) {
-          linkEl.classList.remove('hidden');
+          // Window is open — show the CTA strip inside the banner
+          linkEl.classList.add('hidden');
           closedMsg.classList.add('hidden');
-          urgencyEl.classList.remove('hidden');
-          document.getElementById('six-c-window-message').textContent = win.message;
-          var countdownEl = document.getElementById('six-c-window-countdown');
-          if (win.countdownMessage) {
-            countdownEl.textContent = win.countdownMessage;
-            countdownEl.classList.remove('hidden');
+          urgencyEl.classList.add('hidden');
+
+          // Determine label based on whether it's closing soon
+          if (win.message && win.message.toLowerCase().includes('hour')) {
+            scorecardCtaLabel.textContent = '⏱ One hour left — submit before 6pm today.';
           } else {
-            countdownEl.classList.add('hidden');
+            scorecardCtaLabel.textContent = 'This week\'s scorecard is open through Sunday at 6pm.';
           }
+          if (win.countdownMessage) {
+            scorecardCtaCountdown.textContent = win.countdownMessage;
+            scorecardCtaCountdown.classList.remove('hidden');
+          }
+
+          // Make sure the one-thing banner is visible and show the CTA strip
+          document.getElementById('one-thing-banner').classList.remove('hidden');
+          scorecardCta.classList.remove('hidden');
         } else if (submittedThisWeek) {
           linkEl.classList.add('hidden');
           closedMsg.textContent = "You've already filled out your 6C's scorecard for the week.";
           closedMsg.classList.remove('hidden');
+          if (scorecardCta) scorecardCta.classList.add('hidden');
         } else {
           linkEl.classList.add('hidden');
           closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
           closedMsg.classList.remove('hidden');
+          if (scorecardCta) scorecardCta.classList.add('hidden');
         }
         document.getElementById('six-c-section').classList.remove('hidden');
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();

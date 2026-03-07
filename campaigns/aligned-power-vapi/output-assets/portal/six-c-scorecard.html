@@ -148,6 +148,16 @@
       var { data: existingSubmissions } = await supabase.from('six_c_submissions').select('id').eq('email', email).limit(1);
       var hasNoSubmissions = !existingSubmissions || existingSubmissions.length === 0;
 
+      // Fetch previous week's one thing to use as placeholder (for returning users)
+      if (!hasNoSubmissions) {
+        var { data: prevRow } = await supabase.from('six_c_submissions').select('one_thing_to_improve').eq('email', email).order('created_at', { ascending: false }).limit(1).maybeSingle();
+        var prevOneThing = (prevRow && prevRow.one_thing_to_improve && String(prevRow.one_thing_to_improve).trim()) ? String(prevRow.one_thing_to_improve).trim() : null;
+        var oneThingEl = document.getElementById('one-thing');
+        if (oneThingEl && prevOneThing) {
+          oneThingEl.placeholder = prevOneThing;
+        }
+      }
+
       var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
       if (!hasNoSubmissions && (!win || !win.canSubmit)) {
         document.getElementById('window-closed').classList.remove('hidden');
