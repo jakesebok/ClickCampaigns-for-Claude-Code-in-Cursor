@@ -105,9 +105,9 @@
 </head>
 <body class="min-h-screen antialiased">
   <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print">
-    <!-- Portal CTA banner — shown only when not logged in -->
+    <!-- Portal CTA banner — shown for everyone; content varies by login state -->
     <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-primary)] text-white">
-      <div class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div id="portal-banner-inner" class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p class="text-xs font-medium text-white/90 text-center sm:text-left">Save your results &amp; track your progress over time — it&apos;s free.</p>
         <div class="flex items-center gap-3 flex-shrink-0">
           <a id="portal-banner-signup" href="../portal/signup.html" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
@@ -225,10 +225,15 @@
         var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         var { data: { session } } = await supabase.auth.getSession();
         var banner = document.getElementById('portal-sticky-banner');
+        var bannerInner = document.getElementById('portal-banner-inner');
         var inlineCtas = document.querySelectorAll('.portal-inline-cta');
         if (session && session.user) {
-          // User is logged in — hide all portal CTAs, they're already in the portal ecosystem
-          if (banner) banner.remove();
+          // User is logged in — show banner with "Go to portal" message; hide inline CTAs
+          if (banner && bannerInner) {
+            bannerInner.innerHTML = '<p class="text-xs font-medium text-white/90 text-center sm:text-left">See your progress over time. Log into your portal now.</p>' +
+              '<a href="../portal/dashboard.html" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap flex-shrink-0">Go to my portal</a>';
+            banner.classList.remove('hidden');
+          }
           inlineCtas.forEach(function(el) { el.remove(); });
         } else {
           // Not logged in — show the sticky banner
