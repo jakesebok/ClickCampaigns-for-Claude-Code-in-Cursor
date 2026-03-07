@@ -101,6 +101,9 @@
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .results-breakdown-metric-btn.rbm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
+    /* Priority matrix: cards align to top so collapsed cards shrink to header height */
+    .pm-cards-wrap { align-items: flex-start; }
+    .pm-card { align-self: flex-start; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
