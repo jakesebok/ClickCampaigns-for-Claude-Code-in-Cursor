@@ -128,7 +128,7 @@
 
     var html = '';
     html += '<h2 class="where-to-focus text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
-    html += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. Expand any domain to read your personalized guidance.</p>';
+    html += '<p class="where-to-focus-intro text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed right now. <strong>Click any domain below to expand and read your personalized guidance.</strong></p>';
     html += '<div class="mb-10 space-y-3">';
     quadrantDefs.forEach(function(q) {
       html += '<div class="pm-quadrant rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4">';
@@ -138,7 +138,7 @@
       if (q.entries.length === 0) {
         html += '<p class="text-sm text-[var(--ap-muted)] italic">None right now.</p>';
       } else {
-        html += '<div class="pm-cards-wrap flex flex-wrap gap-2">';
+        html += '<div class="pm-cards-wrap flex flex-wrap gap-2 items-start">';
         q.entries.forEach(function(e) {
           var copy = PM_COPY[e.code] ? PM_COPY[e.code][q.key] : '';
           var flagCopy = (q.key === 'monitor' && PM_COPY[e.code] && PM_COPY[e.code].flag) ? PM_COPY[e.code].flag : null;
@@ -148,17 +148,17 @@
             if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
           }
           var uid = 'pm-' + q.key + '-' + e.code;
-          html += '<div class="pm-card flex-1 min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white">';
-          html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var open=c.classList.toggle(\'hidden\');document.getElementById(\'' + uid + '-chev\').style.transform=open?\'rotate(0deg)\':\' rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
+          html += '<div class="pm-card w-full min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
+          html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(0deg)\':\'rotate(180deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
           html += '<div class="flex flex-col min-w-0">';
           html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
           html += '<div class="flex items-center gap-2 mt-0.5">';
           html += '<span class="text-xs font-bold" style="color:' + q.accentColor + '">' + e.score + '/10</span>';
           html += '<span class="text-xs text-[var(--ap-muted)]">Priority: ' + e.importance + '/10</span>';
-          html += '</div></div>';
-          html += '<svg id="' + uid + '-chev" class="pm-chev w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(180deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
+          html += '</div><span class="text-[10px] text-[var(--ap-muted)] mt-1 italic">Click to expand</span></div>';
+          html += '<svg id="' + uid + '-chev" class="pm-chev w-4 h-4 flex-shrink-0 text-[var(--ap-muted)] transition-transform duration-200" style="transform:rotate(0deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
           html += '</button>';
-          html += '<div id="' + uid + '" class="pm-card-body px-3 pb-3 pt-0 bg-white">';
+          html += '<div id="' + uid + '" class="pm-card-body hidden px-3 pb-3 pt-0 bg-white">';
           html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(copy) + '</p>';
           if (flagCopy) html += '<div class="pm-flag-box mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg"><p class="text-xs font-semibold text-amber-800 mb-1">Worth Examining</p><p class="text-xs text-amber-900 leading-relaxed">' + escapeHtml(flagCopy) + '</p></div>';
           html += '</div>';
