@@ -9,7 +9,7 @@ This guide is written for anyone—no coding experience needed. You'll use your 
 ### Step 1: Open your project in Vercel
 
 1. Go to [vercel.com](https://vercel.com) and sign in.
-2. Open the project that hosts your Aligned Power portal (the one whose **Root Directory** is `campaigns/aligned-power-vapi/output-assets`, or the repo that contains that folder).
+2. Open the project that hosts your Jake Sebok portal (the one whose **Root Directory** is `campaigns/aligned-power-vapi/output-assets`, or the repo that contains that folder).
 
 ### Step 2: Open Environment Variables
 
@@ -79,7 +79,7 @@ An “API key” is a long password that lets Vercel send email through Resend. 
 
 1. In Resend, open **API Keys** in the sidebar (or **Integrations** → **API Keys**).
 2. Click **Create API Key**.
-3. Give it a name you’ll recognize, e.g. `Aligned Power 6C reminders`.
+3. Give it a name you’ll recognize, e.g. `Jake Sebok 6C reminders`.
 4. For **Permission**, choose **Sending access** (or Full access).
 5. Click **Create** (or **Add**).
 6. **Copy the key immediately.** It looks like `re_` followed by a long string. Resend will not show it again.

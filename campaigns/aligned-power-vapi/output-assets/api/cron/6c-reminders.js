@@ -47,7 +47,7 @@ const SUBJECTS = {
   'one-hour-left': "Last call: one hour left to submit your 6C's Scorecard",
 };
 
-const FROM_NAME = 'Jake at Aligned Power';
+const FROM_NAME = 'Jake Sebok';
 
 // Returns full branded HTML email
 function buildHtmlEmail({ type, firstName }) {
@@ -83,59 +83,59 @@ function buildHtmlEmail({ type, firstName }) {
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${SUBJECTS[type]}</title></head>
-<body style="margin:0;padding:0;background:#F4ECE3;font-family:'Helvetica Neue',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F4ECE3;padding:32px 16px;">
+<body style="margin:0;padding:0;background:#F5F7FA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:32px 16px;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #E0D0C4;">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
 
   <!-- Header -->
-  <tr><td style="background:#582233;padding:32px 40px;text-align:center;">
-    <p style="margin:0;color:#D4AA70;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Aligned Power</p>
+  <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
+    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Jake Sebok</p>
     <h1 style="margin:8px 0 0;color:#FFFFFF;font-size:26px;font-weight:700;line-height:1.2;">6C&rsquo;s Weekly Scorecard</h1>
   </td></tr>
 
   <!-- Body -->
   <tr><td style="padding:40px 40px 32px;">
-    <p style="margin:0 0 24px;color:#334750;font-size:16px;line-height:1.6;">${name}</p>
+    <p style="margin:0 0 24px;color:#3A4A5C;font-size:16px;line-height:1.6;">${name}</p>
 
-    <h2 style="margin:0 0 20px;color:#582233;font-size:26px;font-weight:700;line-height:1.25;">${c.headline}</h2>
+    <h2 style="margin:0 0 20px;color:#0E1624;font-size:26px;font-weight:700;line-height:1.25;">${c.headline}</h2>
 
-    <p style="margin:0 0 16px;color:#334750;font-size:16px;line-height:1.7;">${c.body}</p>
+    <p style="margin:0 0 16px;color:#3A4A5C;font-size:16px;line-height:1.7;">${c.body}</p>
     <p style="margin:0 0 32px;color:#7A6A5E;font-size:14px;line-height:1.7;">${c.subtext}</p>
 
     ${c.urgency ? `<div style="background:#FFF8EC;border-left:4px solid #D97706;border-radius:4px;padding:12px 16px;margin-bottom:24px;">${c.urgency}</div>` : ''}
 
     <div style="text-align:center;margin-bottom:32px;">
-      <a href="${SCORECARD_URL}" style="display:inline-block;background:#582233;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:16px 36px;border-radius:8px;">${c.cta}</a>
+      <a href="${SCORECARD_URL}" style="display:inline-block;background:#FF6B1A;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:16px 36px;border-radius:8px;">${c.cta}</a>
     </div>
 
-    <hr style="border:none;border-top:1px solid #E0D0C4;margin:0 0 28px;">
+    <hr style="border:none;border-top:1px solid #DDE3ED;margin:0 0 28px;">
 
-    <h3 style="margin:0 0 12px;color:#582233;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
+    <h3 style="margin:0 0 12px;color:#0E1624;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
       <tr>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Clarity</strong></td>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Coherence</strong></td>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Capacity</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Clarity</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Coherence</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Capacity</strong></td>
       </tr>
       <tr>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Confidence</strong></td>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Courage</strong></td>
-        <td style="padding:5px 8px;color:#334750;font-size:14px;">&#9670; <strong>Connection</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Confidence</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Courage</strong></td>
+        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Connection</strong></td>
       </tr>
     </table>
 
-    <p style="margin:0 0 28px;color:#334750;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your ONE THING to focus on next week.</p>
+    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your ONE THING to focus on next week.</p>
 
     <div style="text-align:center;margin-bottom:8px;">
-      <a href="${SCORECARD_URL}" style="display:inline-block;background:#334750;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">Log In to My Portal &rarr;</a>
+      <a href="${SCORECARD_URL}" style="display:inline-block;background:#0E1624;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">Log In to My Portal &rarr;</a>
     </div>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="background:#F4ECE3;padding:24px 40px;text-align:center;border-top:1px solid #E0D0C4;">
-    <p style="margin:0 0 8px;color:#7A6A5E;font-size:13px;">Jake Sebok &mdash; Aligned Power</p>
-    <p style="margin:0;color:#B8A89A;font-size:12px;">You received this because you&rsquo;re an active Aligned Power client. <a href="${PORTAL_URL}" style="color:#582233;">Unsubscribe</a></p>
+  <tr><td style="background:#F5F7FA;padding:24px 40px;text-align:center;border-top:1px solid #DDE3ED;">
+    <p style="margin:0 0 8px;color:#7A8FA8;font-size:13px;">Jake Sebok</p>
+    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you&rsquo;re an active client. <a href="${PORTAL_URL}" style="color:#FF6B1A;">Unsubscribe</a></p>
   </td></tr>
 
 </table>
@@ -157,7 +157,7 @@ It takes just a few minutes and keeps your alignment front and center as you hea
 
 → Fill out your scorecard: ${SCORECARD_URL}
 
--- Jake Sebok, Aligned Power`,
+-- Jake Sebok`,
     saturday: `${name}
 
 A quick reminder: your 6C's Scorecard for this week is still open until Sunday at 6pm Eastern.
@@ -166,7 +166,7 @@ A few minutes of reflection now makes next week sharper.
 
 → Complete your scorecard: ${SCORECARD_URL}
 
--- Jake Sebok, Aligned Power`,
+-- Jake Sebok`,
     'one-hour-left': `${name}
 
 One hour left. The window closes at 6pm Eastern today.
@@ -174,7 +174,7 @@ One hour left. The window closes at 6pm Eastern today.
 Log in now and get it done before it closes:
 ${SCORECARD_URL}
 
--- Jake Sebok, Aligned Power`,
+-- Jake Sebok`,
   };
   return texts[type] || texts.available;
 }

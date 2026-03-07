@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your dashboard | Aligned Power Portal</title>
+  <title>Your dashboard | Jake Sebok Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
@@ -18,17 +18,17 @@
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
-      --ap-primary: #582233;
-      --ap-secondary: #334750;
-      --ap-accent: #D4AA70;
-      --ap-bg: #F4ECE3;
-      --ap-text: #582233;
-      --ap-muted: #C6B8A7;
-      --ap-border: #C6B8A7;
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
     }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
-    .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(88,34,51,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+    .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(14,22,36,0.12), 0 0 0 1px rgba(0,0,0,0.03); }
     #breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     #progress-wheel-container-inner.progress-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
     .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
@@ -45,7 +45,7 @@
 <body class="min-h-screen antialiased">
   <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
+      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Jake Sebok Portal</a>
       <div class="flex items-center gap-4">
         <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
         <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
@@ -60,7 +60,7 @@
   <main class="max-w-3xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading your results…</div>
     <div id="dashboard-content" class="hidden">
-      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Aligned Power Dashboard</h1>
+      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Dashboard</h1>
       <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
       <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card overflow-hidden">
@@ -74,7 +74,7 @@
               <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
               <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your ONE THING to improve last week. Keep it top of mind.</p>
               <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
-                <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
+                <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
                   <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
                   <span>View my 6C reflections</span>
                 </button>
@@ -84,7 +84,7 @@
           <div id="one-thing-banner-accordion" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]/60" role="region" aria-label="6C reflections">
             <div id="one-thing-banner-reflections" class="grid grid-cols-1 gap-2"></div>
             <div class="mt-4 pt-3 border-t border-[var(--ap-border)]/40 flex justify-center">
-              <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">
+              <button type="button" id="one-thing-banner-collapse-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">
                 <i data-lucide="chevron-up" class="w-4 h-4"></i>
                 <span>Collapse</span>
               </button>
@@ -97,7 +97,7 @@
             <p id="one-thing-scorecard-cta-label" class="text-white font-semibold text-sm leading-snug"></p>
             <p id="one-thing-scorecard-cta-countdown" class="hidden text-white/70 text-xs mt-0.5"></p>
           </div>
-          <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#c49b5a] text-[var(--ap-primary)] font-bold text-sm px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap flex-shrink-0">
+          <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap flex-shrink-0">
             Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
@@ -765,7 +765,7 @@
       });
       latestHtml += '</ul></div>';
       latestHtml += '</div>';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-primary)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
@@ -1359,12 +1359,12 @@
                   {
                     label: 'Score',
                     data: values,
-                    borderColor: '#582233',
+                    borderColor: '#0E1624',
                     backgroundColor: gradient,
                     fill: true,
                     tension: 0.35,
                     borderWidth: 2.5,
-                    pointBackgroundColor: '#582233',
+                    pointBackgroundColor: '#0E1624',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     pointRadius: 5,
@@ -1937,7 +1937,7 @@
 
             <p id="onboarding-error" class="hidden text-sm text-red-600 font-medium bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please answer all five questions to continue.</p>
 
-            <button type="submit" id="onboarding-submit-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-base rounded-xl transition-colors mt-2">
+            <button type="submit" id="onboarding-submit-btn" class="w-full py-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-base rounded-xl transition-colors mt-2">
               Save &amp; Continue
             </button>
           </form>
@@ -2032,7 +2032,7 @@
 
           <div id="importance-error" class="hidden text-sm text-red-600 font-medium mb-4 bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please set all 12 sliders before continuing.</div>
 
-          <button type="submit" id="importance-submit-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">Save &amp; Continue</button>
+          <button type="submit" id="importance-submit-btn" class="w-full py-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-lg rounded-lg transition-colors">Save &amp; Continue</button>
         </form>
       </div>
 
@@ -2046,7 +2046,7 @@
           <ul class="text-left max-w-xs mx-auto space-y-2 mb-8 list-disc list-inside">
             <li class="text-[var(--ap-secondary)]">Where to focus</li>
           </ul>
-          <button type="button" id="importance-close-btn" class="w-full py-4 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-lg rounded-lg transition-colors">View my dashboard</button>
+          <button type="button" id="importance-close-btn" class="w-full py-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-lg rounded-lg transition-colors">View my dashboard</button>
         </div>
       </div>
     </div>

@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your VAPI™ Results | Aligned Power</title>
+  <title>Your VAPI™ Results | Jake Sebok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <script src="vapi-results-interpretations.js"></script>
   <style>
     :root {
-      --ap-primary: #582233;
-      --ap-secondary: #334750;
-      --ap-accent: #D4AA70;
-      --ap-bg: #F4ECE3;
-      --ap-text: #582233;
-      --ap-muted: #C6B8A7;
-      --ap-border: #C6B8A7;
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-accent-2: #FF9F6B;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
     .print-only { display: none; }
@@ -113,11 +114,11 @@
 <body class="min-h-screen antialiased">
   <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print">
     <!-- Portal CTA banner — shown for everyone; content varies by login state -->
-    <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-primary)] text-white">
+    <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-accent)] text-white">
       <div id="portal-banner-inner" class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p class="text-xs font-medium text-white/90 text-center sm:text-left">Save your results &amp; track your progress over time — it&apos;s free.</p>
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a id="portal-banner-signup" href="../portal/signup.html" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
+          <a id="portal-banner-signup" href="../portal/signup.html" class="text-xs font-bold bg-white text-[var(--ap-accent)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
           <a id="portal-banner-login" href="../portal/login.html" class="text-xs font-semibold text-white/70 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">Log in</a>
         </div>
       </div>
@@ -127,7 +128,7 @@
       <div class="flex items-center gap-4">
         <span id="results-back-admin" class="hidden"><a href="../portal/admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
         <a href="vapi-landing.html" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
-          <img src="../images/aligned-power-logo.png" alt="Aligned Power — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
+          <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
         </a>
       </div>
       <div class="flex flex-col items-end gap-0.5">
@@ -142,8 +143,8 @@
 
   <main class="max-w-3xl mx-auto px-4 py-10 sm:py-14">
     <div class="print-only print-page-footer" aria-hidden="true">
-      <img src="../images/alignment-logo-footer.png" alt="Aligned Power" />
-      <span>Values-Aligned Performance Indicator™ (VAPI™). © 2026 Aligned Power LLC. All rights reserved.</span>
+      <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" />
+      <span>Values-Aligned Performance Indicator™ (VAPI™). © 2026 Jake Sebok. All rights reserved.</span>
     </div>
     <div id="results-content"></div>
 
@@ -161,7 +162,7 @@
         <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Join the community <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
       <div class="bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-lg p-6">
-        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Work with the Aligned Power team</h3>
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Work with Jake Sebok</h3>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Ready for deeper support? Our coaching programs and workshops help you move from clarity to embodied execution.</p>
         <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">Learn about coaching & workshops <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
@@ -175,7 +176,7 @@
 
   <footer class="border-t border-[var(--ap-border)] py-6 mt-12 no-print">
     <div class="max-w-4xl mx-auto px-4 text-center text-sm text-[var(--ap-muted)]">
-      © Aligned Power. Values-Aligned Performance Indicator™ (VAPI™) Assessment. Results can be emailed to you; a copy may be sent to jacob@alignedpower.coach for follow-up.
+      © Jake Sebok. Values-Aligned Performance Indicator™ (VAPI™) Assessment. Results can be emailed to you; a copy may be sent to jacob@alignedpower.coach for follow-up.
     </div>
   </footer>
 
@@ -353,7 +354,7 @@
         html += '<h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-1">The Power of Alignment</h2>';
         html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">12 core domains for an aligned high impact life and business.</p>';
         html += '<div class="relative w-full overflow-visible" style="max-width:320px; margin:0 auto;">';
-        html += '<div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible" aria-hidden="true" style="width:119%; height:119%; left:-9.5%; top:-9.5%;"><img src="../images/alignment-logo-watermark.png" alt="" class="w-full h-full object-contain opacity-[0.10]" style="max-width:none; max-height:none; min-width:100%; min-height:100%;"/></div>';
+        html += '<div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible" aria-hidden="true" style="width:119%; height:119%; left:-9.5%; top:-9.5%;"><img src="../images/logo-jake-sebok-horizontal.png" alt="" class="w-full h-full object-contain opacity-[0.10]" style="max-width:none; max-height:none; min-width:100%; min-height:100%;"/></div>';
         html += '<svg viewBox="0 0 320 320" class="w-full h-auto relative z-10" style="overflow:visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Life wheel of 12 alignment domains">';
         html += '<defs>';
         html += '<filter id="arenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
@@ -396,10 +397,10 @@
         html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
         for (var k = 2; k <= 10; k++) {
           var rr = r * (k - 1.2) / 10;
-          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
+          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Sora,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
         }
         var rrStar = r * 9.8 / 10;
-        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#582233" font-family="Source Sans 3,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
+        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Sora,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
         for (var i = 0; i < 12; i++) {
           var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
@@ -411,7 +412,7 @@
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10;
           var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
           for (var L = 0; L < lines.length; L++) {
             html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + escapeHtml(lines[L]) + '</tspan>';
           }
@@ -422,7 +423,7 @@
         html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         html += '</div>';
-        html += '<img src="../images/aligned-power-logo.png" alt="Aligned Power" class="h-12 w-auto mt-4 mx-auto block"/>';
+        html += '<img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-12 w-auto mt-4 mx-auto block"/>';
         html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
         html += '</div></div>';
         html += '<div class="flex-1 min-w-0">';
@@ -508,7 +509,7 @@
           if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
           var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
           var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
           for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
           html += '</text>';
         }
@@ -552,7 +553,7 @@
         previewHtml += '<div class="text-center px-6 py-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-[var(--ap-border)] max-w-sm">';
         previewHtml += '<p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">See your personalized focus areas</p>';
         previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
-        previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
+        previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
         previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="../portal/login.html" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
         previewHtml += '</div></div></div>';
         return previewHtml;
@@ -712,7 +713,7 @@
         html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Create a free portal account to save these results, track your progress over time, and see what changes between assessments.</p>';
         html += '</div>';
         html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">';
-        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
+        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
         html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold border border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] text-[var(--ap-primary)] px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Log in</a>';
         html += '</div>';
         html += '</div>';
@@ -749,7 +750,7 @@
             html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted — scores, priorities, and what to focus on next.</p>';
             html += '</div>';
             html += '<div class="flex flex-col items-center gap-1.5 flex-shrink-0">';
-            html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#c45b1a] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
+            html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
             html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
             html += '</div>';
             html += '</div>';
@@ -823,7 +824,7 @@
             if (a > 45 && a <= 135) firstLineY = ay + halfFont;
             else if (a > 225 && a <= 315) firstLineY = ay - blockH - halfFont;
             else firstLineY = ay - blockH / 2;
-            h += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#D4AA70" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            h += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
             for (var L = 0; L < numLines; L++) {
               h += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
             }
@@ -1098,18 +1099,18 @@
             var link = document.querySelector('link[href*="fonts.googleapis"]');
             var fontLink = link ? '<link rel="stylesheet" href="' + link.href + '">' : '';
             var baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
-            var logoAbs = baseUrl + '../images/aligned-power-logo.png';
-            var watermarkAbs = baseUrl + '../images/alignment-logo-watermark.png';
+            var logoAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
+            var watermarkAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
             var bodyHtml = content.innerHTML
-              .replace('src="../images/aligned-power-logo.png"', 'src="' + logoAbs + '"')
-              .replace('src="../images/alignment-logo-watermark.png"', 'src="' + watermarkAbs + '"');
+              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + logoAbs + '"')
+              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + watermarkAbs + '"');
             var printStyles = '<style>' +
-              ':root{--ap-primary:#582233;--ap-secondary:#334750;--ap-accent:#D4AA70;--ap-muted:#C6B8A7;}' +
-              'body{font-family:\'Source Sans 3\',sans-serif;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
+              ':root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-muted:#7A8FA8;}' +
+              'body{font-family:\'Cormorant Garamond\',serif;font-weight:600;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
               'body *{box-sizing:border-box;}' +
               '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
               '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
-              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#582233;margin:0 0 0.5rem 0;}' +
+              '.alignment-glance-inner h2{font-family:\'Sora\',sans-serif;font-weight:800;font-size:1.375rem;line-height:1.2;color:#0E1624;margin:0 0 0.5rem 0;}' +
               '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
               '.alignment-glance-inner .absolute{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;width:119%;height:119%;left:-9.5%;top:-9.5%;}' +
               '.alignment-glance-inner .absolute img{width:100%;height:100%;object-fit:contain;opacity:0.1;max-width:none;max-height:none;min-width:100%;min-height:100%;}' +

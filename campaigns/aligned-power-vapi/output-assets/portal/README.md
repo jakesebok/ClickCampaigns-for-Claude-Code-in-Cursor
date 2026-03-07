@@ -1,4 +1,4 @@
-# Aligned Power Portal
+# Jake Sebok Portal
 
 Client login area to view VAPI™ assessment results and history.
 

@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client profile | Coach Dashboard</title>
+  <title>Client profile | Jake Sebok Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
-      --ap-primary: #582233;
-      --ap-secondary: #334750;
-      --ap-accent: #D4AA70;
-      --ap-bg: #F4ECE3;
-      --ap-text: #582233;
-      --ap-muted: #C6B8A7;
-      --ap-border: #C6B8A7;
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
     }
-    body { font-family: 'Source Sans 3', sans-serif; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 5%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 50%, color-mix(in srgb, var(--ap-accent) 3%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .section-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03); }
     .sixc-row { cursor: pointer; }
-    .sixc-row:hover { background: rgba(88,34,51,0.04); }
+    .sixc-row:hover { background: rgba(14,22,36,0.04); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -71,7 +71,7 @@
         <p class="text-sm text-[var(--ap-muted)] mb-4">Goals, focus areas, session notes — private to you.</p>
         <textarea id="coach-notes-ta" rows="6" placeholder="Current goals, focus areas, session notes…" class="w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-[var(--ap-bg)]/30 text-[var(--ap-text)] focus:border-[var(--ap-primary)] focus:outline-none resize-y text-sm mb-3"></textarea>
         <div class="flex items-center gap-3">
-          <button type="button" id="save-notes-btn" class="inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-sm px-4 py-2 rounded-lg transition-colors">
+          <button type="button" id="save-notes-btn" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm px-4 py-2 rounded-lg transition-colors">
             <i data-lucide="save" class="w-4 h-4"></i>
             Save notes
           </button>

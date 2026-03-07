@@ -60,7 +60,7 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
     const ti = arenaTiers[a]  ?? '';
     const c  = getTierColor(ti);
     return `<tr>
-      <td style="padding:6px 12px;font-weight:600;color:#334750;">${escHtml(a)}</td>
+      <td style="padding:6px 12px;font-weight:600;color:#3A4A5C;">${escHtml(a)}</td>
       <td style="padding:6px 12px;font-weight:700;color:${c};">${escHtml(String(sc))} / 10</td>
       <td style="padding:6px 12px;color:${c};font-size:13px;">${escHtml(ti)}</td>
     </tr>`;
@@ -72,68 +72,68 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Your VAPI Assessment Results</title></head>
-<body style="margin:0;padding:0;background:#F4ECE3;font-family:'Helvetica Neue',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F4ECE3;padding:32px 16px;">
+<body style="margin:0;padding:0;background:#F5F7FA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:32px 16px;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #E0D0C4;">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
 
   <!-- Header -->
-  <tr><td style="background:#582233;padding:32px 40px;text-align:center;">
-    <p style="margin:0;color:#D4AA70;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Aligned Power</p>
+  <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
+    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Jake Sebok</p>
     <h1 style="margin:8px 0 0;color:#FFFFFF;font-size:26px;font-weight:700;line-height:1.2;">Values-Aligned Performance Indicator&#8482;</h1>
   </td></tr>
 
   <!-- Body -->
   <tr><td style="padding:40px 40px 32px;">
-    <p style="margin:0 0 20px;color:#334750;font-size:16px;line-height:1.6;">${name}</p>
-    <p style="margin:0 0 20px;color:#334750;font-size:16px;line-height:1.6;">Congratulations on completing the VAPI Assessment.</p>
-    <p style="margin:0 0 32px;color:#334750;font-size:16px;line-height:1.6;">Taking an honest look at where you actually stand takes courage. Most people avoid it. You just did it.</p>
+    <p style="margin:0 0 20px;color:#3A4A5C;font-size:16px;line-height:1.6;">${name}</p>
+    <p style="margin:0 0 20px;color:#3A4A5C;font-size:16px;line-height:1.6;">Congratulations on completing the VAPI Assessment.</p>
+    <p style="margin:0 0 32px;color:#3A4A5C;font-size:16px;line-height:1.6;">Taking an honest look at where you actually stand takes courage. Most people avoid it. You just did it.</p>
 
-    <h2 style="margin:0 0 12px;color:#582233;font-size:18px;font-weight:700;">Your snapshot</h2>
+    <h2 style="margin:0 0 12px;color:#0E1624;font-size:18px;font-weight:700;">Your snapshot</h2>
 
     <!-- Overall score -->
-    <div style="background:#F4ECE3;border-radius:8px;padding:20px 24px;margin-bottom:20px;border:1px solid #E0D0C4;">
-      <p style="margin:0 0 4px;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">VAPI Composite Score</p>
-      <p style="margin:0;font-size:36px;font-weight:700;color:${overallColor};">${escHtml(String(overall ?? '?'))} <span style="font-size:20px;font-weight:400;color:#334750;">/ 10</span> &nbsp;<span style="font-size:18px;">${escHtml(overallTier ?? '')}</span></p>
+    <div style="background:#F5F7FA;border-radius:8px;padding:20px 24px;margin-bottom:20px;border:1px solid #DDE3ED;">
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">VAPI Composite Score</p>
+      <p style="margin:0;font-size:36px;font-weight:700;color:${overallColor};">${escHtml(String(overall ?? '?'))} <span style="font-size:20px;font-weight:400;color:#3A4A5C;">/ 10</span> &nbsp;<span style="font-size:18px;">${escHtml(overallTier ?? '')}</span></p>
     </div>
 
     <!-- Arena scores -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
       ${arenasHtml}
     </table>
 
     ${topCriticalPriority ? `<div style="background:#FFF3EE;border-left:4px solid #F97316;border-radius:4px;padding:16px 20px;margin-bottom:28px;">
-      <p style="margin:0 0 4px;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your #1 Critical Priority</p>
-      <p style="margin:0;color:#334750;font-size:16px;font-weight:600;">${escHtml(topCriticalPriority)}</p>
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your #1 Critical Priority</p>
+      <p style="margin:0;color:#3A4A5C;font-size:16px;font-weight:600;">${escHtml(topCriticalPriority)}</p>
     </div>` : ''}
 
-    <p style="margin:0 0 28px;color:#334750;font-size:15px;line-height:1.6;">Your full results, including all 12 domain scores, detailed interpretations, and your personalized priority matrix, are waiting for you in the portal.</p>
+    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.6;">Your full results, including all 12 domain scores, detailed interpretations, and your personalized priority matrix, are waiting for you in the portal.</p>
 
     <div style="text-align:center;margin-bottom:32px;">
-      <a href="${ctaUrl}" style="display:inline-block;background:#582233;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">View My Full Results &#8594;</a>
+      <a href="${ctaUrl}" style="display:inline-block;background:#FF6B1A;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">View My Full Results &#8594;</a>
     </div>
 
-    <hr style="border:none;border-top:1px solid #E0D0C4;margin:0 0 28px;">
+    <hr style="border:none;border-top:1px solid #DDE3ED;margin:0 0 28px;">
 
-    <h2 style="margin:0 0 12px;color:#582233;font-size:18px;font-weight:700;">When you create your free portal account, you can:</h2>
-    <ul style="margin:0 0 28px;padding:0 0 0 20px;color:#334750;font-size:15px;line-height:1.8;">
+    <h2 style="margin:0 0 12px;color:#0E1624;font-size:18px;font-weight:700;">When you create your free portal account, you can:</h2>
+    <ul style="margin:0 0 28px;padding:0 0 0 20px;color:#3A4A5C;font-size:15px;line-height:1.8;">
       <li>View your complete results with in-depth interpretations for every domain</li>
       <li>Download and print your results as a PDF</li>
       <li>Track your progress over time by retaking the assessment</li>
       <li>See exactly what changed and what to focus on next</li>
     </ul>
 
-    <p style="margin:0 0 20px;color:#334750;font-size:15px;line-height:1.6;">This is not a one-time snapshot. The VAPI Assessment is designed to measure your growth. Come back in 30, 60, or 90 days and see how far you have moved.</p>
+    <p style="margin:0 0 20px;color:#3A4A5C;font-size:15px;line-height:1.6;">This is not a one-time snapshot. The VAPI Assessment is designed to measure your growth. Come back in 30, 60, or 90 days and see how far you have moved.</p>
 
     <div style="text-align:center;margin-bottom:8px;">
-      <a href="${ctaUrl}" style="display:inline-block;background:#334750;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">${escHtml(loginCtaLabel)} &#8594;</a>
+      <a href="${ctaUrl}" style="display:inline-block;background:#0E1624;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">${escHtml(loginCtaLabel)} &#8594;</a>
     </div>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="background:#F4ECE3;padding:24px 40px;text-align:center;border-top:1px solid #E0D0C4;">
-    <p style="margin:0 0 8px;color:#7A6A5E;font-size:13px;">The Aligned Power Team</p>
-    <p style="margin:0;color:#B8A89A;font-size:12px;">You received this because you completed the VAPI Assessment. <a href="${PORTAL_URL}" style="color:#582233;">Unsubscribe</a></p>
+  <tr><td style="background:#F5F7FA;padding:24px 40px;text-align:center;border-top:1px solid #DDE3ED;">
+    <p style="margin:0 0 8px;color:#7A8FA8;font-size:13px;">Jake Sebok</p>
+    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you completed the VAPI Assessment. <a href="${PORTAL_URL}" style="color:#FF6B1A;">Unsubscribe</a></p>
   </td></tr>
 
 </table>
@@ -154,7 +154,7 @@ Business: ${arenaScores.Business ?? '?'} / 10 - ${arenaTiers.Business ?? ''}
 ${topCriticalPriority ? `\nYour #1 Critical Priority: ${topCriticalPriority}\n` : ''}
 View your full results: ${ctaUrl}
 
--- The Aligned Power Team`;
+-- Jake Sebok`;
 
   return { html, text };
 }
@@ -168,7 +168,7 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
   const domainRows = sortedDomains.map(d => {
     const c = getTierColor(d.tier);
     return `<tr>
-      <td style="padding:5px 12px;color:#334750;">${escHtml(d.domain)}</td>
+      <td style="padding:5px 12px;color:#3A4A5C;">${escHtml(d.domain)}</td>
       <td style="padding:5px 12px;font-weight:700;color:${c};">${escHtml(String(d.score))} / 10</td>
       <td style="padding:5px 12px;color:${c};font-size:13px;">${escHtml(d.tier)}</td>
     </tr>`;
@@ -183,52 +183,52 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
     ['Life Stage', cp.lifeStage],
     ['Time in Business', cp.timeInBusiness],
     ['Primary Challenge', cp.primaryChallenge],
-  ].map(([label, val]) => `<tr><td style="padding:5px 12px;color:#7A6A5E;font-size:13px;">${escHtml(label)}</td><td style="padding:5px 12px;color:#334750;font-size:13px;">${escHtml(val || 'Not provided')}</td></tr>`).join('');
+  ].map(([label, val]) => `<tr><td style="padding:5px 12px;color:#7A8FA8;font-size:13px;">${escHtml(label)}</td><td style="padding:5px 12px;color:#3A4A5C;font-size:13px;">${escHtml(val || 'Not provided')}</td></tr>`).join('');
 
   const overallColor = getTierColor(overallTier);
 
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><title>New VAPI Assessment Completed</title></head>
-<body style="margin:0;padding:0;background:#F4ECE3;font-family:'Helvetica Neue',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F4ECE3;padding:24px 16px;">
+<body style="margin:0;padding:0;background:#F5F7FA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:24px 16px;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #E0D0C4;">
-  <tr><td style="background:#334750;padding:24px 32px;">
-    <p style="margin:0;color:#D4AA70;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Aligned Power Admin</p>
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
+  <tr><td style="background:#0E1624;padding:24px 32px;">
+    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Jake Sebok Admin</p>
     <h1 style="margin:6px 0 0;color:#FFFFFF;font-size:22px;font-weight:700;">New VAPI Assessment Completed</h1>
   </td></tr>
   <tr><td style="padding:32px 32px 24px;">
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Assessment Details</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Date:</strong> ${escHtml(timestamp || new Date().toISOString())}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>User:</strong> ${escHtml(userName)}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Email:</strong> ${escHtml(email || 'Not provided')}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;background:#F5F7FA;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Assessment Details</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Date:</strong> ${escHtml(timestamp || new Date().toISOString())}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>User:</strong> ${escHtml(userName)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Email:</strong> ${escHtml(email || 'Not provided')}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Composite Score</td></tr>
-      <tr><td style="padding:10px 12px;font-size:28px;font-weight:700;color:${overallColor};">${escHtml(String(overall ?? '?'))} <span style="font-size:16px;color:#334750;font-weight:400;">/ 10 &mdash; ${escHtml(overallTier ?? '')}</span></td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Self:</strong> ${escHtml(String(arenaScores?.Personal ?? '?'))} &mdash; ${escHtml(arenaTiers?.Personal ?? '')}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Relationships:</strong> ${escHtml(String(arenaScores?.Relationships ?? '?'))} &mdash; ${escHtml(arenaTiers?.Relationships ?? '')}</td></tr>
-      <tr><td style="padding:5px 12px;color:#334750;"><strong>Business:</strong> ${escHtml(String(arenaScores?.Business ?? '?'))} &mdash; ${escHtml(arenaTiers?.Business ?? '')}</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;background:#F5F7FA;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Composite Score</td></tr>
+      <tr><td style="padding:10px 12px;font-size:28px;font-weight:700;color:${overallColor};">${escHtml(String(overall ?? '?'))} <span style="font-size:16px;color:#3A4A5C;font-weight:400;">/ 10 &mdash; ${escHtml(overallTier ?? '')}</span></td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Self:</strong> ${escHtml(String(arenaScores?.Personal ?? '?'))} &mdash; ${escHtml(arenaTiers?.Personal ?? '')}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Relationships:</strong> ${escHtml(String(arenaScores?.Relationships ?? '?'))} &mdash; ${escHtml(arenaTiers?.Relationships ?? '')}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Business:</strong> ${escHtml(String(arenaScores?.Business ?? '?'))} &mdash; ${escHtml(arenaTiers?.Business ?? '')}</td></tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td colspan="3" style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Domain Scores (Lowest to Highest)</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
+      <tr><td colspan="3" style="padding:8px 12px;background:#F5F7FA;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Domain Scores (Lowest to Highest)</td></tr>
       ${domainRows}
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Critical Priorities</td></tr>
-      <tr><td style="padding:8px 12px;color:#334750;">${criticalList}</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
+      <tr><td style="padding:8px 12px;background:#F5F7FA;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Critical Priorities</td></tr>
+      <tr><td style="padding:8px 12px;color:#3A4A5C;">${criticalList}</td></tr>
     </table>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #E0D0C4;border-radius:8px;overflow:hidden;">
-      <tr><td colspan="2" style="padding:8px 12px;background:#F4ECE3;color:#7A6A5E;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Contextual Profile</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
+      <tr><td colspan="2" style="padding:8px 12px;background:#F5F7FA;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Contextual Profile</td></tr>
       ${profileRows}
     </table>
 
@@ -372,7 +372,7 @@ export async function POST(request) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
         body: JSON.stringify({
-          from: `Aligned Power <${USER_FROM_EMAIL}>`,
+          from: `Jake Sebok <${USER_FROM_EMAIL}>`,
           to: [email.trim().toLowerCase()],
           subject: 'Your VAPI Assessment Results Are Ready',
           html,

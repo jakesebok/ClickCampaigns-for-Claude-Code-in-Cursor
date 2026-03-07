@@ -2,37 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23582233'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='14' fill='%23D4AA70'%3EAP%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E1624'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='12' fill='%23FF6B1A'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6C's Weekly Scorecard | Aligned Power Portal</title>
+  <title>6C's Weekly Scorecard | Jake Sebok Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="six-c-window.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
-      --ap-primary: #582233;
-      --ap-secondary: #334750;
-      --ap-accent: #D4AA70;
-      --ap-bg: #F4ECE3;
-      --ap-text: #582233;
-      --ap-muted: #C6B8A7;
-      --ap-border: #C6B8A7;
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
     }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--ap-bg); color: var(--ap-text); }
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .scorecard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03); }
     .scale-opt { transition: background 0.2s, border-color 0.2s; }
-    .scale-opt:has(input:checked) { background: var(--ap-primary); color: #fff; border-color: var(--ap-primary); }
+    .scale-opt:has(input:checked) { background: var(--ap-accent); color: #fff; border-color: var(--ap-accent); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
   <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-10">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Aligned Power Portal</a>
+      <a href="dashboard.html" class="font-semibold text-[var(--ap-primary)]">Jake Sebok Portal</a>
       <div class="flex items-center gap-4">
         <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
         <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
@@ -46,12 +46,12 @@
     <div id="access-denied" class="hidden text-center py-12">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">6C's Scorecard is for active clients</p>
       <p class="text-[var(--ap-secondary)] text-sm mb-4">This weekly review is only available to users marked as active clients. If you believe you should have access, contact your coach.</p>
-      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">← Back to dashboard</a>
+      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="window-closed" class="hidden text-center py-12">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">Scorecard is only available during the weekly window</p>
       <p id="window-closed-message" class="text-[var(--ap-secondary)] text-sm mb-4"></p>
-      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[#461b2a]">← Back to dashboard</a>
+      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="scorecard-content" class="hidden">
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">6C's Weekly Scorecard</h1>
@@ -115,7 +115,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4">
-          <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:bg-[#461b2a] text-white font-semibold text-base py-3 px-6 rounded-lg transition-colors shadow-sm">
+          <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-base py-3 px-6 rounded-lg transition-colors shadow-sm">
             Save this week's scorecard
           </button>
           <a href="dashboard.html" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">Cancel</a>
