@@ -22,15 +22,15 @@
 
 ### Typography
 
-- **Headings:** Sora, weight 800 (Extra Bold)
+- **Headings:** Outfit, weight 800 (Extra Bold)
 - **Body:** Cormorant Garamond, weight 600 (SemiBold)
 - **Eyebrow / Labels:** Cormorant Garamond, 10px, uppercase, letter-spacing 0.22em
-- **Buttons:** Sora, weight 600
+- **Buttons:** Outfit, weight 600
 
 **Google Fonts import:**
 ```
 Cormorant Garamond: 600, 700 (italic)
-Sora: 400, 500, 600, 700, 800
+Outfit: 400, 500, 600, 700, 800
 ```
 
 ### Logo
@@ -83,7 +83,7 @@ All buttons use **border-radius: 100px** for a full pill shape.
 - Use orange for CTAs, eyebrow labels, and accent highlights
 - Dark theme: backgrounds #0c0a09 / #0E1624, light text
 - Contrast theme: light base with dark framework sections
-- Headlines: Sora 800, tight letter-spacing (-0.03em to -0.04em)
+- Headlines: Outfit 800, tight letter-spacing (-0.03em to -0.04em)
 
 ---
 

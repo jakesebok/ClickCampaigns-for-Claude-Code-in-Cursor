@@ -7,7 +7,7 @@
   <title>VAPI™ Assessment | Jake Sebok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     :root {
@@ -21,7 +21,7 @@
       --ap-border: #DDE3ED;
     }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); margin: 0; min-height: 100vh; }
-    h1, h2 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+    h1, h2 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .quiz-viewport { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; }
     #question-container { position: relative; min-height: 70vh; max-height: calc(100vh - 5rem); }
     .quiz-slide { display: none; width: 100%; min-height: 70vh; max-height: calc(100vh - 5rem); flex-direction: column; align-items: center; justify-content: flex-start; padding: 0.5rem 0.75rem 0.75rem; box-sizing: border-box; transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.32s ease-out; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -73,7 +73,7 @@
     <!-- Intro slide -->
     <div id="intro-slide" class="quiz-slide active">
       <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">VAPI™ Assessment</p>
-      <h1 class="font-cormorant text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight text-center">Values-Aligned Performance Indicator™</h1>
+      <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight text-center">Values-Aligned Performance Indicator™</h1>
       <p class="text-[var(--ap-secondary)] mb-4 leading-relaxed text-center">For each statement below, reflect honestly on your actual experience over the past 30 days. Not your best day. Not your worst. Your honest baseline. Select the response that most accurately reflects your reality.</p>
       <p class="text-sm text-[var(--ap-muted)] mb-8">This assessment takes approximately 12–15 minutes.</p>
       <button type="button" id="btn-start" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] bg-transparent border-2 border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] hover:bg-[var(--ap-primary)]/5 focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-5 py-2.5 transition-colors group">
@@ -87,7 +87,7 @@
     <div id="importance-slide">
       <div class="max-w-2xl mx-auto px-4 py-8 pt-20 sm:pt-24">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
-        <h2 class="font-cormorant text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
+        <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
         <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
         <p class="text-sm text-[var(--ap-secondary)] mb-8 leading-relaxed">For each area, rate how much attention and energy it deserves given your current season of life. There are no right answers. A low rating doesn't mean you don't care. It means it's not where you need to focus right now.</p>
 
@@ -244,7 +244,7 @@
         <div id="email-slide" class="quiz-slide">
           <div class="quiz-slide-inner">
             <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">Almost there</p>
-            <h2 class="font-cormorant text-2xl sm:text-3xl text-[var(--ap-primary)] mb-4 leading-tight">Your results are ready</h2>
+            <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-4 leading-tight">Your results are ready</h2>
             <p class="text-[var(--ap-secondary)] mb-6 leading-relaxed">Enter your details below and we'll show you your VAPI™ scores across 12 domains in 3 arenas, plus what they mean and suggested next steps.</p>
             <form id="email-form" class="space-y-4">
               <div>

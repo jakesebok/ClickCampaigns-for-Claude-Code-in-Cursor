@@ -7,7 +7,7 @@
   <title>Your VAPI™ Results | Jake Sebok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
@@ -25,7 +25,7 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); }
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
     .print-only { display: none; }
@@ -397,10 +397,10 @@
         html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
         for (var k = 2; k <= 10; k++) {
           var rr = r * (k - 1.2) / 10;
-          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Sora,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
+          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Outfit,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
         }
         var rrStar = r * 9.8 / 10;
-        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Sora,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
+        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Outfit,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
         html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
         for (var i = 0; i < 12; i++) {
           var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
@@ -1110,7 +1110,7 @@
               'body *{box-sizing:border-box;}' +
               '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
               '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
-              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#0E1624;margin:0 0 0.5rem 0;}' +
+              '.alignment-glance-inner h2{font-family:\'Outfit\',sans-serif;font-weight:800;font-size:1.375rem;line-height:1.2;color:#0E1624;margin:0 0 0.5rem 0;}' +
               '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
               '.alignment-glance-inner .absolute{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;width:119%;height:119%;left:-9.5%;top:-9.5%;}' +
               '.alignment-glance-inner .absolute img{width:100%;height:100%;object-fit:contain;opacity:0.1;max-width:none;max-height:none;min-width:100%;min-height:100%;}' +
