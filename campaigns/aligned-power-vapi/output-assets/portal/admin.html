@@ -406,7 +406,7 @@
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + r.count + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + formatDate(r.latestAt) + '</td>' +
               '<td class="px-4 py-3"><button type="button" class="active-client-toggle inline-flex items-center gap-1.5 text-sm font-medium py-1.5 px-2.5 rounded-lg border transition-colors ' + (isActive ? 'bg-[var(--ap-primary)] text-white border-[var(--ap-primary)]' : 'bg-white text-[var(--ap-muted)] border-[var(--ap-border)] hover:border-[var(--ap-primary)]') + '" data-email="' + escapeHtml(r.emailKey) + '" data-active="' + (isActive ? '1' : '0') + '" aria-label="Toggle active client">' + (isActive ? 'Yes' : 'No') + '</button></td>' +
-              '<td class="px-4 py-3"><a href="' + (isActive ? 'coach-client.html?email=' : 'admin.html?email=') + encodeURIComponent(r.emailKey) + '" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-primary)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">' + (isActive ? 'View Client' : 'View assessments') + ' <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></td>' +
+              '<td class="px-4 py-3"><a href="' + (isActive ? 'coach-client.html?email=' : 'admin.html?email=') + encodeURIComponent(r.emailKey) + '" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-primary)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">' + (isActive ? 'View Client' : 'View VAPIs') + ' <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></td>' +
               '</tr>';
           }).join('');
           tbody.querySelectorAll('.active-client-toggle').forEach(function(btn) {
@@ -432,7 +432,7 @@
                   var link = self.closest('tr').querySelector('td:last-child a');
                   if (link) {
                     link.href = (next ? 'coach-client.html?email=' : 'admin.html?email=') + encodeURIComponent(emailKey);
-                    link.innerHTML = (next ? 'View Client' : 'View assessments') + ' <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>';
+                    link.innerHTML = (next ? 'View Client' : 'View VAPIs') + ' <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>';
                     if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
                   }
                 }
