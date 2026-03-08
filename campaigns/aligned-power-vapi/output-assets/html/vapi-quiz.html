@@ -23,6 +23,7 @@
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); margin: 0; min-height: 100vh; }
     h1, h2 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .intro-h1 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .priorities-h2 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     .quiz-viewport { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; }
     #question-container { position: relative; min-height: 70vh; max-height: calc(100vh - 5rem); }
     .quiz-slide { display: none; width: 100%; min-height: 70vh; max-height: calc(100vh - 5rem); flex-direction: column; align-items: center; justify-content: flex-start; padding: 0.5rem 0.75rem 0.75rem; box-sizing: border-box; transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.32s ease-out; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -59,6 +60,9 @@
     @keyframes selectPop { 0% { transform: scale(1); } 55% { transform: scale(1.03); } 100% { transform: scale(1); } }
     .scale-btn.selected { animation: selectPop 0.35s ease-out; }
     .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    /* Importance slider: light track (negative space) */
+    .imp-slider::-webkit-slider-runnable-track { background: rgba(221, 227, 237, 0.8); height: 6px; border-radius: 3px; }
+    .imp-slider::-moz-range-track { background: rgba(221, 227, 237, 0.8); height: 6px; border-radius: 3px; }
   </style>
 </head>
 <body class="antialiased">
@@ -88,7 +92,7 @@
     <div id="importance-slide">
       <div class="max-w-2xl mx-auto px-4 py-8 pt-20 sm:pt-24">
         <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
-        <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
+        <h2 class="priorities-h2 text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
         <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
         <p class="text-sm text-[var(--ap-secondary)] mb-8 leading-relaxed">For each area, rate how much attention and energy it deserves given your current season of life. There are no right answers. A low rating doesn't mean you don't care. It means it's not where you need to focus right now.</p>
 
