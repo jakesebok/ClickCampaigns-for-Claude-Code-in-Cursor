@@ -427,7 +427,7 @@
         html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
         html += '</svg>';
         html += '</div>';
-        html += '<img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-12 w-auto mt-4 mx-auto block"/>';
+        html += '<img src="../images/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-12 w-auto mt-4 mx-auto block"/>';
         html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
         html += '</div></div>';
         html += '<div class="flex-1 min-w-0">';
@@ -1106,9 +1106,11 @@
             var baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
             var logoAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
             var watermarkAbs = baseUrl + '../images/logo-jake-sebok-horizontal.png';
+            var vapiLogoAbs = baseUrl + '../images/vapi-logo.png';
             var bodyHtml = content.innerHTML
               .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + logoAbs + '"')
-              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + watermarkAbs + '"');
+              .replace('src="../images/logo-jake-sebok-horizontal.png"', 'src="' + watermarkAbs + '"')
+              .replace('src="../images/vapi-logo.png"', 'src="' + vapiLogoAbs + '"');
             var printStyles = '<style>' +
               ':root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-muted:#7A8FA8;}' +
               'body{font-family:\'Cormorant Garamond\',serif;font-weight:600;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
