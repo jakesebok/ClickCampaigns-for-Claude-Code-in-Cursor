@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    (function(){var t=localStorage.getItem('ap-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
+  </script>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your dashboard | Aligned Performance Portal</title>
@@ -15,7 +18,19 @@
   <script src="../html/vapi-results-interpretations.js"></script>
   <script src="../html/vapi-priority-matrix.js"></script>
   <script src="progress-transitions.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+      function getTheme(){return document.documentElement.getAttribute('data-theme')||'light';}
+      function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('ap-theme',t);updateThemeIcons();}
+      function updateThemeIcons(){var d=getTheme()==='dark';['','-mobile'].forEach(function(s){var li=document.getElementById('theme-icon-light'+s),ld=document.getElementById('theme-icon-dark'+s);if(li){li.classList.toggle('hidden',!d);}if(ld){ld.classList.toggle('hidden',d);}});}
+      function toggleTheme(){setTheme(getTheme()==='dark'?'light':'dark');}
+      updateThemeIcons();
+      var tb=document.getElementById('theme-toggle'),tbm=document.getElementById('theme-toggle-mobile');
+      if(tb)tb.addEventListener('click',toggleTheme);
+      if(tbm)tbm.addEventListener('click',toggleTheme);
+    });
+  </script>
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -27,7 +42,25 @@
       --ap-text: #0E1624;
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
+      --ap-surface: #ffffff;
+      --ap-header-bg: rgba(255,255,255,0.95);
+      --ap-dark: #0E1624;
     }
+    [data-theme="dark"] {
+      --ap-primary: #fafaf9;
+      --ap-secondary: #cbd5e1;
+      --ap-accent: #FF6B1A;
+      --ap-accent-2: #FF9F6B;
+      --ap-blue: #1e293b;
+      --ap-bg: #0c0a09;
+      --ap-text: #fafaf9;
+      --ap-muted: #94a3b8;
+      --ap-border: #334155;
+      --ap-surface: #1c1917;
+      --ap-header-bg: rgba(28,25,23,0.95);
+    }
+    [data-theme="dark"] .bg-white { background-color: var(--ap-surface) !important; }
+    [data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 6%, var(--ap-bg)) 35%, color-mix(in srgb, var(--ap-accent) 5%, var(--ap-bg)) 70%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
     .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ap-accent); }
@@ -70,6 +103,10 @@
         <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5"></i>
+        </button>
         <a href="../html/vapi-landing.html" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
         <div class="nav-links-desk flex items-center gap-4">
           <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
@@ -94,6 +131,13 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
+      <div class="flex items-center justify-between py-3 px-3 border-b border-[var(--ap-border)] mb-2">
+        <span class="text-sm font-semibold text-[var(--ap-primary)]">Theme</span>
+        <button type="button" id="theme-toggle-mobile" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light-mobile" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark-mobile" class="w-5 h-5"></i>
+        </button>
+      </div>
       <span id="header-coach-link-mobile" class="hidden"><a href="coach.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
       <span id="header-admin-link-mobile" class="hidden"><a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
       <a href="settings.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
@@ -148,7 +192,7 @@
           </div>
         </div>
         <!-- Scorecard CTA — shown only when the window is open and not yet submitted -->
-        <div id="one-thing-scorecard-cta" class="hidden border-t-2 border-[var(--ap-accent)]/40 bg-[var(--ap-primary)] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div id="one-thing-scorecard-cta" class="hidden border-t-2 border-[var(--ap-accent)]/40 bg-[var(--ap-dark)] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
             <p id="one-thing-scorecard-cta-label" class="text-white font-semibold text-sm leading-snug"></p>
             <p id="one-thing-scorecard-cta-countdown" class="hidden text-white/70 text-xs mt-0.5"></p>
