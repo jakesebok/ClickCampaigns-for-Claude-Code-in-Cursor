@@ -346,7 +346,7 @@
           btn.addEventListener('click', function() {
             try {
               sessionStorage.setItem('vapiResults', JSON.stringify(vapiRows[i].results));
-              sessionStorage.removeItem('vapiResultsSaved');
+              sessionStorage.setItem('vapiResultsSaved', '1'); // Viewing existing data — don't create new record
               sessionStorage.setItem('vapiResultsFromAdmin', '1');
             } catch (e) {}
             window.location.href = '/assessment/results';

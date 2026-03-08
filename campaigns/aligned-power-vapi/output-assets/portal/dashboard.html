@@ -662,7 +662,7 @@
       function viewResult(resultRow) {
         try {
           sessionStorage.setItem('vapiResults', JSON.stringify(resultRow.results));
-          sessionStorage.removeItem('vapiResultsSaved');
+          sessionStorage.setItem('vapiResultsSaved', '1'); // Mark as already saved — we're viewing existing data, don't create a new record
         } catch (e) {}
         window.location.href = '/assessment/results';
       }

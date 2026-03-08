@@ -733,6 +733,7 @@
         // Compute priority matrix
         results.priorityMatrix = computePriorityMatrix(results.domainScores, importanceRatings, results.domains);
         try {
+          sessionStorage.removeItem('vapiResultsSaved'); // Clear so results page will save this new assessment
           sessionStorage.setItem('vapiResults', JSON.stringify(results));
         } catch (err) {}
         // Fire email trigger (non-blocking)
