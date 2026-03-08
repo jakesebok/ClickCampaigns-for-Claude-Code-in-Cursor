@@ -22,6 +22,7 @@
     }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); margin: 0; min-height: 100vh; }
     h1, h2 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+    .intro-h1 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
     .quiz-viewport { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; }
     #question-container { position: relative; min-height: 70vh; max-height: calc(100vh - 5rem); }
     .quiz-slide { display: none; width: 100%; min-height: 70vh; max-height: calc(100vh - 5rem); flex-direction: column; align-items: center; justify-content: flex-start; padding: 0.5rem 0.75rem 0.75rem; box-sizing: border-box; transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.32s ease-out; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -73,7 +74,7 @@
     <!-- Intro slide -->
     <div id="intro-slide" class="quiz-slide active">
       <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">VAPI™ Assessment</p>
-      <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight text-center">Values-Aligned Performance Indicator™</h1>
+      <h1 class="intro-h1 text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight text-center">Values-Aligned Performance Indicator™</h1>
       <p class="text-[var(--ap-secondary)] mb-4 leading-relaxed text-center">For each statement below, reflect honestly on your actual experience over the past 30 days. Not your best day. Not your worst. Your honest baseline. Select the response that most accurately reflects your reality.</p>
       <p class="text-sm text-[var(--ap-muted)] mb-8">This assessment takes approximately 12–15 minutes.</p>
       <button type="button" id="btn-start" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] bg-transparent border-2 border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] hover:bg-[var(--ap-primary)]/5 focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2 rounded-lg px-5 py-2.5 transition-colors group">
