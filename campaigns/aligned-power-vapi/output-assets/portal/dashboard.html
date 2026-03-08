@@ -161,13 +161,13 @@
 
       <div id="six-c-section" class="mb-10 hidden">
         <p class="eyebrow mb-1">Weekly snapshot</p>
-        <h2 class="text-xl text-[var(--ap-primary)] mb-2">Your latest 6C's</h2>
-        <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
-        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">
+        <h2 class="text-xl sm:text-2xl text-[var(--ap-primary)] mb-2 tracking-tight">Your latest 6C's</h2>
+        <p class="text-[var(--ap-secondary)] text-sm mb-6">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6 sm:p-8">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
           <div id="six-c-one-thing" class="mt-6 pt-6 pb-4 border-t border-[var(--ap-border)]/60 hidden">
-            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Last week you said you'd improve</p>
-            <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm mb-0"></p>
+            <p class="eyebrow mb-1">Last week you said you'd improve</p>
+            <p id="six-c-one-thing-text" class="text-[var(--ap-primary)] text-base font-semibold leading-snug mb-0"></p>
           </div>
           <div id="six-c-action-row" class="mt-8 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm px-5 py-2.5 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)] w-fit">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
@@ -1857,7 +1857,7 @@
         var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(2);
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');
-          document.getElementById('six-c-cards').innerHTML = '<p class="col-span-full text-[var(--ap-muted)] text-sm">Complete your first 6C scorecard whenever you\'re ready.</p>';
+          document.getElementById('six-c-cards').innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-8 px-4 rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-[var(--ap-bg)]/30"><div class="w-14 h-14 rounded-full bg-[var(--ap-accent)]/20 flex items-center justify-center mb-4"><i data-lucide="clipboard-list" class="w-8 h-8 text-[var(--ap-accent)]" aria-hidden="true"></i></div><p class="text-[var(--ap-secondary)] font-semibold text-center mb-1">No scorecard yet</p><p class="text-[var(--ap-muted)] text-sm text-center">Complete your first 6C scorecard whenever you\'re ready.</p></div>';
           // Check if window is currently open for first-timers
           var winFirst = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
           if (winFirst && winFirst.canSubmit) {
@@ -1892,11 +1892,11 @@
         keys.forEach(function(k) {
           var score = typeof scores[k] === 'number' ? Math.round(scores[k]) : 0;
           var pct = Math.max(0, Math.min(100, score));
-          cardsHtml += '<div class="flex flex-col items-center p-3 rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/50">';
+          cardsHtml += '<div class="flex flex-col items-center p-4 rounded-2xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/50 hover:border-[var(--ap-accent)]/40 hover:bg-[var(--ap-accent)]/5 transition-colors duration-200">';
           cardsHtml += '<i data-lucide="' + (icons[k] || 'circle') + '" class="w-8 h-8 text-[var(--ap-accent)] mb-2" aria-hidden="true"></i>';
-          cardsHtml += '<p class="text-xs font-semibold text-[var(--ap-primary)] mb-1">' + (labels[k] || k) + '</p>';
-          cardsHtml += '<p class="text-lg font-bold tabular-nums text-[var(--ap-accent)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-accent)]/80">%</span></p>';
-          cardsHtml += '<div class="w-full h-1.5 rounded-full bg-[var(--ap-border)]/40 mt-1 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-accent)]" style="width:' + pct + '%"></div></div>';
+          cardsHtml += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-primary)] mb-1">' + (labels[k] || k) + '</p>';
+          cardsHtml += '<p class="text-xl font-bold tabular-nums text-[var(--ap-accent)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-accent)]/80">%</span></p>';
+          cardsHtml += '<div class="w-full h-2 rounded-full bg-[var(--ap-border)]/50 mt-2 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-accent)] transition-all duration-300" style="width:' + pct + '%"></div></div>';
           cardsHtml += '</div>';
         });
         document.getElementById('six-c-cards').innerHTML = cardsHtml;
@@ -1918,7 +1918,7 @@
             var val = weeklyReview[k] && String(weeklyReview[k]).trim();
             if (!val) return;
             var label = reflectionLabels[k] || k;
-            html += '<div class="rounded-lg border border-[var(--ap-border)]/50 bg-white/60 px-3 py-2"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-primary)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + esc(val) + '</p></div>';
+            html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(val) + '</p></div>';
           });
           document.getElementById('one-thing-banner-reflections').innerHTML = html;
           var expandBtn = document.getElementById('one-thing-banner-expand-btn');
