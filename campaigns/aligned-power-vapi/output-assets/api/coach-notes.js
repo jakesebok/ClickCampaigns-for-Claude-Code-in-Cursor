@@ -3,7 +3,7 @@
 // POST { email, notes }  → upsert
 // Requires SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 
-const ADMIN_EMAIL = 'jacob@alignedpower.coach';
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 
 async function verifyCoach(request) {
   const url = process.env.SUPABASE_URL || '';

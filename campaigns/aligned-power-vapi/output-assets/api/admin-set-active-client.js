@@ -6,7 +6,7 @@ export async function POST(request) {
   const url = process.env.SUPABASE_URL || '';
   const anonKey = process.env.SUPABASE_ANON_KEY || '';
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-  const ADMIN_EMAIL = 'jacob@alignedpower.coach';
+  const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 
   if (!url || !anonKey || !serviceKey) {
     return new Response(

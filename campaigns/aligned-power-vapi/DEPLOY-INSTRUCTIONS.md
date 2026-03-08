@@ -197,6 +197,16 @@ The results page checks whether the assessment email already has a portal accoun
 ---
 ## You’re done
 
+### Active clients missing / Can't mark users as active clients / Coach dashboard empty
+
+If the coach dashboard shows no clients, or you can't toggle the "Active client" switch in the Admin panel:
+
+1. **Check your admin email** — The admin/coach role is tied to a specific email (default: jacob@alignedpower.coach). If you use a different email, add ADMIN_EMAIL in Vercel Environment Variables with your actual admin email, then Redeploy.
+2. **Ensure the table exists** — In Supabase SQL Editor, run supabase/portal_active_clients.sql (or schema-six-c-scorecard.sql) from the main project.
+3. **Check SUPABASE_SERVICE_ROLE_KEY** — Confirm it's set in Vercel. Redeploy after adding it.
+4. **Re-mark clients** — Go to Admin → Respondents and click "No" next to each user to toggle to "Yes".
+
+---
 - **Assessment (landing)**: `https://your-project.vercel.app/html/vapi-landing.html`  
 - **Portal login**: `https://your-project.vercel.app/portal/login.html`  
 - **Portal signup**: `https://your-project.vercel.app/portal/signup.html`  
