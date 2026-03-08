@@ -1,4 +1,4 @@
-# VAPI Portal
+# Aligned Performance Portal
 
 Client login area to view VAPI™ assessment results and history.
 
