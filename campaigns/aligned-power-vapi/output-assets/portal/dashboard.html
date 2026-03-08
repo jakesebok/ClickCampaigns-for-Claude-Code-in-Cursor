@@ -59,9 +59,6 @@
       --ap-surface: #1c1917;
       --ap-header-bg: rgba(28,25,23,0.95);
     }
-    .header-logo-dark { display: none !important; }
-    [data-theme="dark"] .header-logo-light { display: none !important; }
-    [data-theme="dark"] .header-logo-dark { display: block !important; }
     [data-theme="dark"] .bg-white { background-color: var(--ap-surface) !important; }
     [data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }
     /* Importance matrix — dark quadrant containers */
@@ -117,10 +114,7 @@
   <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="nonclient">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
-        <span class="relative inline-block h-8 sm:h-9 w-8 sm:w-9 flex-shrink-0" aria-hidden="true">
-          <img src="../images/favicon.svg" alt="" class="header-logo header-logo-light h-8 sm:h-9 w-auto absolute inset-0" />
-          <img src="../images/favicon-dark.svg" alt="" class="header-logo header-logo-dark h-8 sm:h-9 w-auto absolute inset-0 hidden" />
-        </span>
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
