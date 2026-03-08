@@ -150,11 +150,12 @@ If you’ve never used Git and this feels confusing, you can instead:
 
 1. In Supabase, go to **Authentication** (left sidebar) → **URL Configuration**.
 2. Set **Site URL** to your portal confirmation page so that “Confirm your mail” links in signup emails send users to a real page instead of a 404:
-   - **Site URL**: `https://your-project-name.vercel.app/portal/confirm.html`  
+   - **Site URL**: `https://your-project-name.vercel.app`  
    (Replace `your-project-name` with your real Vercel project URL.)
 3. Under **Redirect URLs**, click **Add URL** (if not already there).
-4. Add your Vercel URL with a trailing slash and `**` so all portal paths work, e.g.:
+4. Add these URLs so signup confirmation and portal paths work:
    - `https://your-project-name.vercel.app/**`
+   - `https://your-project-name.vercel.app/confirm-email` (required for email confirmation links)
 5. Click **Save**.
 
 ---
@@ -207,11 +208,11 @@ If the coach dashboard shows no clients, or you can't toggle the "Active client"
 4. **Re-mark clients** — Go to Admin → Respondents and click "No" next to each user to toggle to "Yes".
 
 ---
-- **Assessment (landing)**: `https://your-project.vercel.app/html/vapi-landing.html`  
-- **Portal login**: `https://your-project.vercel.app/portal/login.html`  
-- **Portal signup**: `https://your-project.vercel.app/portal/signup.html`  
+- **Assessment (landing)**: `https://your-project.vercel.app/assessment`  
+- **Portal login**: `https://your-project.vercel.app/login`  
+- **Portal signup**: `https://your-project.vercel.app/signup`  
 
-Share the landing link so people can take the assessment. When they enter their email at the end, that result is saved. If they create a portal account with the **same email** and log in, they’ll see that result (and any future ones) on the dashboard.
+Share the landing link so people can take the assessment. Old URLs (e.g. `/html/vapi-landing.html`, `/portal/login.html`) redirect to these clean URLs. When they enter their email at the end, that result is saved. If they create a portal account with the **same email** and log in, they’ll see that result (and any future ones) on the dashboard.
 
 ---
 

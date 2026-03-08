@@ -26,7 +26,7 @@
 <body class="min-h-screen antialiased">
   <main class="max-w-md mx-auto px-4 pt-16 pb-12">
     <div class="text-center mb-8">
-      <a href="dashboard.html" class="inline-block mb-4">
+      <a href="/dashboard" class="inline-block mb-4">
         <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-12 sm:h-14 w-auto mx-auto" />
       </a>
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Email confirmed</h1>
@@ -35,11 +35,11 @@
     <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 sm:p-8 text-center">
       <p id="message" class="text-[var(--ap-secondary)]">Redirecting you to log in…</p>
       <p class="mt-4">
-        <a href="login.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in now</a> if you’re not redirected.
+        <a href="/login" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in now</a> if you’re not redirected.
       </p>
     </div>
     <p class="text-center mt-6">
-      <a href="../html/vapi-landing.html" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">← Back to assessment</a>
+      <a href="/assessment" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">← Back to assessment</a>
     </p>
   </main>
   <script type="module">
@@ -54,7 +54,7 @@
         return;
       }
       setTimeout(function() {
-        window.location.href = 'login.html';
+        window.location.href = '/login';
       }, 2500);
     })();
   </script>

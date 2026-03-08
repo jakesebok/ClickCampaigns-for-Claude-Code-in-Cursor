@@ -1,4 +1,34 @@
 {
+  "rewrites": [
+    { "source": "/assessment", "destination": "/html/vapi-landing.html" },
+    { "source": "/assessment/start", "destination": "/html/vapi-quiz.html" },
+    { "source": "/assessment/results", "destination": "/html/vapi-results.html" },
+    { "source": "/login", "destination": "/portal/login.html" },
+    { "source": "/signup", "destination": "/portal/signup.html" },
+    { "source": "/confirm-email", "destination": "/portal/confirm.html" },
+    { "source": "/check-email", "destination": "/portal/check-email.html" },
+    { "source": "/dashboard", "destination": "/portal/dashboard.html" },
+    { "source": "/settings", "destination": "/portal/settings.html" },
+    { "source": "/scorecard", "destination": "/portal/six-c-scorecard.html" },
+    { "source": "/coach", "destination": "/portal/coach.html" },
+    { "source": "/coach/client", "destination": "/portal/coach-client.html" },
+    { "source": "/admin", "destination": "/portal/admin.html" }
+  ],
+  "redirects": [
+    { "source": "/html/vapi-landing.html", "destination": "/assessment", "permanent": true },
+    { "source": "/html/vapi-quiz.html", "destination": "/assessment/start", "permanent": true },
+    { "source": "/html/vapi-results.html", "destination": "/assessment/results", "permanent": true },
+    { "source": "/portal/login.html", "destination": "/login", "permanent": true },
+    { "source": "/portal/signup.html", "destination": "/signup", "permanent": true },
+    { "source": "/portal/confirm.html", "destination": "/confirm-email", "permanent": true },
+    { "source": "/portal/check-email.html", "destination": "/check-email", "permanent": true },
+    { "source": "/portal/dashboard.html", "destination": "/dashboard", "permanent": true },
+    { "source": "/portal/settings.html", "destination": "/settings", "permanent": true },
+    { "source": "/portal/six-c-scorecard.html", "destination": "/scorecard", "permanent": true },
+    { "source": "/portal/coach.html", "destination": "/coach", "permanent": true },
+    { "source": "/portal/coach-client.html", "destination": "/coach/client", "permanent": true },
+    { "source": "/portal/admin.html", "destination": "/admin", "permanent": true }
+  ],
   "crons": [
     {
       "path": "/api/cron/6c-reminders",

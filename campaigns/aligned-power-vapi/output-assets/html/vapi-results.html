@@ -7,7 +7,7 @@
   <title>Your VAPI™ Results | Jake Sebok</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
@@ -24,7 +24,7 @@
       --ap-border: #DDE3ED;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); }
+    body { font-family: 'Outfit', sans-serif; font-weight: 500; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
@@ -118,16 +118,16 @@
       <div id="portal-banner-inner" class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p class="text-xs font-medium text-white/90 text-center sm:text-left">Save your results &amp; track your progress over time — it&apos;s free.</p>
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a id="portal-banner-signup" href="../portal/signup.html" class="text-xs font-bold bg-white text-[var(--ap-accent)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
-          <a id="portal-banner-login" href="../portal/login.html" class="text-xs font-semibold text-white/70 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">Log in</a>
+          <a id="portal-banner-signup" href="/signup" class="text-xs font-bold bg-white text-[var(--ap-accent)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
+          <a id="portal-banner-login" href="/login" class="text-xs font-semibold text-white/70 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">Log in</a>
         </div>
       </div>
     </div>
     <!-- /Portal CTA banner -->
     <div class="max-w-4xl mx-auto px-4 pt-6 pb-5 flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <span id="results-back-admin" class="hidden"><a href="../portal/admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
-        <a href="vapi-landing.html" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
+        <span id="results-back-admin" class="hidden"><a href="/admin" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
+        <a href="/assessment" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
           <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
         </a>
       </div>
@@ -169,7 +169,7 @@
       <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
         <h3 class="text-xl text-[var(--ap-primary)] mb-2">Your results, saved</h3>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Log in to your portal to see this assessment and your history over time—all in one place.</p>
-        <a href="../portal/login.html" id="go-to-portal-btn" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="/login" id="go-to-portal-btn" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
   </main>
@@ -232,7 +232,7 @@
           // User is logged in — show banner with "Go to portal" message; hide inline CTAs
           if (banner && bannerInner) {
             bannerInner.innerHTML = '<p class="text-xs font-medium text-white/90 text-center sm:text-left">See your progress over time. Log into your portal now.</p>' +
-              '<a href="../portal/dashboard.html" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap flex-shrink-0">Go to my portal</a>';
+              '<a href="/dashboard" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap flex-shrink-0">Go to my portal</a>';
             banner.classList.remove('hidden');
           }
           inlineCtas.forEach(function(el) { el.remove(); });
@@ -245,10 +245,10 @@
           var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
           if (email) {
             document.querySelectorAll('a.portal-cta-signup, #portal-banner-signup').forEach(function(a) {
-              a.href = '../portal/signup.html?email=' + encodeURIComponent(email);
+              a.href = '/signup?email=' + encodeURIComponent(email);
             });
             document.querySelectorAll('a.portal-cta-login, #portal-banner-login').forEach(function(a) {
-              a.href = '../portal/login.html?email=' + encodeURIComponent(email);
+              a.href = '/login?email=' + encodeURIComponent(email);
             });
           }
         }
@@ -281,34 +281,34 @@
         var raw = sessionStorage.getItem('vapiResults');
         var results = raw ? (function() { try { return JSON.parse(raw); } catch (err) { return null; } })() : null;
         var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
-        var base = '../portal/';
+        var base = '/';
         if (!email) {
-          window.location.href = base + 'login.html';
+          window.location.href = base + 'login';
           return;
         }
         try {
           var r = await fetch('/api/config');
-          if (!r.ok) { window.location.href = base + 'login.html?email=' + encodeURIComponent(email); return; }
+          if (!r.ok) { window.location.href = base + 'login?email=' + encodeURIComponent(email); return; }
           var t = await r.text();
           eval(t);
           if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
-            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
             return;
           }
           var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
           var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
           var { data: exists, error } = await supabase.rpc('check_portal_email_exists', { check_email: email });
           if (error) {
-            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
             return;
           }
           if (exists) {
-            window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
           } else {
-            window.location.href = base + 'signup.html?email=' + encodeURIComponent(email);
+            window.location.href = base + 'signup?email=' + encodeURIComponent(email);
           }
         } catch (err) {
-          window.location.href = base + 'login.html?email=' + encodeURIComponent(email);
+          window.location.href = base + 'login?email=' + encodeURIComponent(email);
         }
       });
     })();
@@ -527,7 +527,7 @@
       // ── PRIORITY MATRIX TEASER (results page) ─────────────────────────────
       // Full matrix lives in portal dashboard. Compact 2x2 quadrant preview with fogged-glass cards + CTA.
       function buildPriorityMatrixTeaser() {
-        var signupHref = '../portal/signup.html';
+        var signupHref = '/signup';
         try {
           var email = sessionStorage.getItem('vapi_results_email');
           if (email) signupHref += '?email=' + encodeURIComponent(email);
@@ -558,7 +558,7 @@
         previewHtml += '<p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">See your personalized focus areas</p>';
         previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed">Create a free portal account to unlock your full priority matrix — which domains need attention, which to protect, and personalized guidance for each.</p>';
         previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
-        previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="../portal/login.html" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
+        previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="/login" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
         previewHtml += '</div></div></div>';
         return previewHtml;
       }
@@ -567,7 +567,7 @@
 
       function renderPlaceholder() {
         var el = document.getElementById('results-content');
-        el.innerHTML = '<div class="text-center mb-10"><p class="text-[var(--ap-accent)] mb-2">Your Results</p><h1 class="text-4xl text-[var(--ap-primary)]">Your VAPI™ Scores</h1><p class="text-[var(--ap-secondary)] mt-2">Complete the assessment to see your results.</p></div><p class="text-[var(--ap-muted)]"><a href="vapi-landing.html">Start the VAPI™ Assessment</a></p>';
+        el.innerHTML = '<div class="text-center mb-10"><p class="text-[var(--ap-accent)] mb-2">Your Results</p><h1 class="text-4xl text-[var(--ap-primary)]">Your VAPI™ Scores</h1><p class="text-[var(--ap-secondary)] mt-2">Complete the assessment to see your results.</p></div><p class="text-[var(--ap-muted)]"><a href="/assessment">Start the VAPI™ Assessment</a></p>';
       }
 
       function render(results) {
@@ -717,8 +717,8 @@
         html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Create a free portal account to save these results, track your progress over time, and see what changes between assessments.</p>';
         html += '</div>';
         html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">';
-        html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
-        html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold border border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] text-[var(--ap-primary)] px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Log in</a>';
+        html += '<a href="/signup" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
+        html += '<a href="/login" class="portal-cta-login text-sm font-semibold border border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] text-[var(--ap-primary)] px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Log in</a>';
         html += '</div>';
         html += '</div>';
 
@@ -754,8 +754,8 @@
             html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted — scores, priorities, and what to focus on next.</p>';
             html += '</div>';
             html += '<div class="flex flex-col items-center gap-1.5 flex-shrink-0">';
-            html += '<a href="../portal/signup.html" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
-            html += '<a href="../portal/login.html" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
+            html += '<a href="/signup" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
+            html += '<a href="/login" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
             html += '</div>';
             html += '</div>';
           }

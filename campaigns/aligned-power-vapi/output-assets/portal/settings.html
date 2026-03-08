@@ -32,17 +32,17 @@
 <body class="min-h-screen antialiased">
   <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="nonclient">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
-        <a href="../html/vapi-landing.html" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+        <a href="/assessment" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
         <div class="nav-links-desk flex items-center gap-4">
-          <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
-          <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
-          <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
-          <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+          <span id="header-coach-link" class="hidden"><a href="/coach" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
+          <span id="header-admin-link" class="hidden"><a href="/admin" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
+          <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
           <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
         </div>
         <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
@@ -60,10 +60,10 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
-      <span id="header-coach-link-mobile" class="hidden"><a href="coach.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
-      <span id="header-admin-link-mobile" class="hidden"><a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
-      <a href="dashboard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
-      <a href="../html/vapi-landing.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+      <span id="header-coach-link-mobile" class="hidden"><a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
+      <span id="header-admin-link-mobile" class="hidden"><a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
+      <a href="/dashboard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
+      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
   </div>
@@ -215,13 +215,13 @@
       if (!session) {
         document.getElementById('loading').classList.add('hidden');
         authErr.classList.remove('hidden');
-        setTimeout(function() { window.location.href = 'login.html'; }, 1500);
+        setTimeout(function() { window.location.href = '/login'; }, 1500);
         return;
       }
 
       document.getElementById('logout-btn').addEventListener('click', async function() {
         await supabase.auth.signOut();
-        window.location.href = 'login.html';
+        window.location.href = '/login';
       });
 
       var meta = session.user.user_metadata || {};

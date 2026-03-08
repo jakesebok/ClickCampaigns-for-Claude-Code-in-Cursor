@@ -38,14 +38,14 @@
 <body class="min-h-screen antialiased">
   <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
         <div class="nav-links-desk flex items-center gap-4">
-          <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
-          <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
+          <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+          <a href="/settings" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
           <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
         </div>
         <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
@@ -63,8 +63,8 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
-      <a href="dashboard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
-      <a href="settings.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+      <a href="/dashboard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
+      <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
   </div>
@@ -74,12 +74,12 @@
     <div id="access-denied" class="hidden text-center py-12">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">6C's Scorecard is for active clients</p>
       <p class="text-[var(--ap-secondary)] text-sm mb-4">This weekly review is only available to users marked as active clients. If you believe you should have access, contact your coach.</p>
-      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
+      <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="window-closed" class="hidden text-center py-12">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">Scorecard is only available during the weekly window</p>
       <p id="window-closed-message" class="text-[var(--ap-secondary)] text-sm mb-4"></p>
-      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
+      <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="scorecard-content" class="hidden">
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">6C's Weekly Scorecard</h1>
@@ -146,7 +146,7 @@
           <button type="submit" id="submit-btn" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-base py-3 px-6 rounded-lg transition-colors shadow-sm">
             Save this week's scorecard
           </button>
-          <a href="dashboard.html" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">Cancel</a>
+          <a href="/dashboard" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">Cancel</a>
         </div>
       </form>
 
@@ -177,14 +177,14 @@
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        window.location.href = 'login.html?redirect=' + encodeURIComponent('six-c-scorecard.html');
+        window.location.href = '/login?redirect=' + encodeURIComponent('/scorecard');
         return;
       }
 
       var email = (session.user.email || '').trim().toLowerCase();
       document.getElementById('form-email').value = email;
 
-      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = 'login.html'; }); }
+      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = '/login'; }); }
       document.getElementById('logout-btn').addEventListener('click', doLogout);
       var logoutMobile = document.getElementById('logout-btn-mobile');
       if (logoutMobile) logoutMobile.addEventListener('click', doLogout);
@@ -427,7 +427,7 @@
 
         form.classList.add('hidden');
         document.getElementById('submit-success').classList.remove('hidden');
-        setTimeout(function() { window.location.href = 'dashboard.html'; }, 1500);
+        setTimeout(function() { window.location.href = '/dashboard'; }, 1500);
       });
     })();
   </script>

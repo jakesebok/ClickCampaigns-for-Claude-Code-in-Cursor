@@ -737,7 +737,7 @@
         } catch (err) {}
         // Fire email trigger (non-blocking)
         try { fireEmailTrigger(results); } catch(err) {}
-        window.location.href = 'vapi-results.html';
+        window.location.href = '/assessment/results';
       });
 
       function computePriorityMatrix(domainScores, impRatings, domainsList) {

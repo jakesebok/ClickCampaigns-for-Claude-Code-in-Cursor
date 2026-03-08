@@ -49,8 +49,8 @@ function escHtml(s) {
 
 function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount }) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
-  const portalLink = `${PORTAL_URL}/portal/login.html`;
-  const signupLink = `${PORTAL_URL}/portal/signup.html`;
+  const portalLink = `${PORTAL_URL}/login`;
+  const signupLink = `${PORTAL_URL}/signup`;
   const ctaUrl     = hasPortalAccount ? portalLink : signupLink;
   const ctaLabel   = hasPortalAccount ? 'View My Full Results' : 'Create My Free Account';
   const loginCtaLabel = hasPortalAccount ? 'Log Into My Account' : 'Create My Free Account';

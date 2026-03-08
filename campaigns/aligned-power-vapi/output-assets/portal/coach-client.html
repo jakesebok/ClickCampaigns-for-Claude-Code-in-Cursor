@@ -38,16 +38,16 @@
   <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-        <a href="coach.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity shrink-0">
+        <a href="/coach" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity shrink-0">
           <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
           <span class="hidden sm:inline">Coach Dashboard</span>
         </a>
-        <a href="coach.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] shrink-0"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to clients</a>
+        <a href="/coach" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] shrink-0"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to clients</a>
       </div>
       <div class="flex items-center gap-4">
         <div class="nav-links-desk flex items-center gap-4">
-          <a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)]">Coach</a>
-          <a href="admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
+          <a href="/coach" class="text-sm font-semibold text-[var(--ap-primary)]">Coach</a>
+          <a href="/admin" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
           <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
         </div>
         <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
@@ -65,8 +65,8 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
-      <a href="coach.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a>
-      <a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
+      <a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a>
+      <a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
   </div>
@@ -75,7 +75,7 @@
     <div id="loading" class="text-center py-16 text-[var(--ap-muted)]">Loading client profile…</div>
     <div id="access-denied" class="hidden text-center py-16">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">Access denied</p>
-      <a href="coach.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)]">← Back to clients</a>
+      <a href="/coach" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)]">← Back to clients</a>
     </div>
     <div id="client-content" class="hidden">
       <div class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8">
@@ -193,7 +193,7 @@
       var { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
-        window.location.href = 'login.html?redirect=' + encodeURIComponent('coach-client.html?email=' + encodeURIComponent(clientEmail));
+        window.location.href = '/login?redirect=' + encodeURIComponent('/coach/client?email=' + encodeURIComponent(clientEmail));
         return;
       }
 
@@ -203,7 +203,7 @@
       }
 
       document.getElementById('client-content').classList.remove('hidden');
-      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = 'login.html'; }); }
+      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = '/login'; }); }
       document.getElementById('logout-btn').addEventListener('click', doLogout);
       var logoutMobile = document.getElementById('logout-btn-mobile');
       if (logoutMobile) logoutMobile.addEventListener('click', doLogout);
@@ -349,7 +349,7 @@
               sessionStorage.removeItem('vapiResultsSaved');
               sessionStorage.setItem('vapiResultsFromAdmin', '1');
             } catch (e) {}
-            window.location.href = '../html/vapi-results.html';
+            window.location.href = '/assessment/results';
           });
         });
       }

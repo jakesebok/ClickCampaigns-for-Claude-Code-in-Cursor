@@ -11,7 +11,7 @@
 
 const TZ = 'America/New_York';
 const PORTAL_URL = 'https://portal.alignedpower.coach';
-const SCORECARD_URL = `${PORTAL_URL}/portal/six-c-scorecard.html`;
+const SCORECARD_URL = `${PORTAL_URL}/scorecard`;
 
 function nowInEastern() {
   const fmt = new Intl.DateTimeFormat('en-US', {

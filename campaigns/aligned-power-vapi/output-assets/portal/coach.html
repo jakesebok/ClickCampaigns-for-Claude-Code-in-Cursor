@@ -36,15 +36,15 @@
 <body class="min-h-screen antialiased">
   <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="coach.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+      <a href="/coach" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Coach Dashboard</span>
       </a>
       <div class="flex items-center gap-4">
         <div class="nav-links-desk flex items-center gap-4">
-          <a href="admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
-          <a href="dashboard.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">My Dashboard</a>
-          <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Assessment</a>
+          <a href="/admin" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
+          <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">My Dashboard</a>
+          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Assessment</a>
           <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
         </div>
         <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
@@ -62,9 +62,9 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
-      <a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
-      <a href="dashboard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Dashboard</a>
-      <a href="../html/vapi-landing.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Assessment</a>
+      <a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
+      <a href="/dashboard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Dashboard</a>
+      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Assessment</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
   </div>
@@ -74,7 +74,7 @@
     <div id="access-denied" class="hidden text-center py-16">
       <p class="text-[var(--ap-primary)] font-semibold mb-2">Access denied</p>
       <p class="text-[var(--ap-secondary)] text-sm mb-4">This area is for coaches only.</p>
-      <a href="dashboard.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
+      <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="coach-content" class="hidden">
       <div class="mb-8">
@@ -123,7 +123,7 @@
       var { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
-        window.location.href = 'login.html?redirect=' + encodeURIComponent('coach.html');
+        window.location.href = '/login?redirect=' + encodeURIComponent('/coach');
         return;
       }
 
@@ -134,7 +134,7 @@
       }
 
       document.getElementById('coach-content').classList.remove('hidden');
-      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = 'login.html'; }); }
+      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = '/login'; }); }
       document.getElementById('logout-btn').addEventListener('click', doLogout);
       var logoutMobile = document.getElementById('logout-btn-mobile');
       if (logoutMobile) logoutMobile.addEventListener('click', doLogout);
@@ -186,7 +186,7 @@
           if (c.isActiveClient) badges.push('<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[var(--ap-primary)]/15 text-[var(--ap-primary)]">Active</span>');
           if (c.assessmentCount > 0) badges.push('<span class="text-xs text-[var(--ap-muted)]">' + c.assessmentCount + ' VAPI</span>');
           if (c.sixcCount > 0) badges.push('<span class="text-xs text-[var(--ap-muted)]">' + c.sixcCount + ' 6C</span>');
-          return '<a href="coach-client.html?email=' + encodeURIComponent(c.email) + '" class="client-card block bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-5 shadow-sm hover:border-[var(--ap-primary)]/40">' +
+          return '<a href="/coach/client?email=' + encodeURIComponent(c.email) + '" class="client-card block bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-5 shadow-sm hover:border-[var(--ap-primary)]/40">' +
             '<div class="flex items-start justify-between gap-2 mb-2">' +
             '<h3 class="font-semibold text-[var(--ap-primary)] text-lg leading-tight">' + escapeHtml(c.name) + '</h3>' +
             '<i data-lucide="chevron-right" class="w-5 h-5 text-[var(--ap-muted)] flex-shrink-0 mt-0.5"></i>' +
