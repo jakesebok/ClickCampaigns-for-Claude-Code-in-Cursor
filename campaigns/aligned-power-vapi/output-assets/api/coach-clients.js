@@ -104,9 +104,12 @@ export async function GET(request) {
       };
     });
 
-    const allClients = Object.values(byEmail).sort((a, b) => {
-      const aDate = a.lastVapiAt || a.lastSixCAt || '';
-      const bDate = b.lastVapiAt || b.lastSixCAt || '';
+    const allClients = Object.values(byEmail).map((c) => {
+      const lastActivityAt = [c.lastVapiAt, c.lastSixCAt].filter(Boolean).sort().pop() || null;
+      return { ...c, lastActivityAt };
+    }).sort((a, b) => {
+      const aDate = a.lastActivityAt || '';
+      const bDate = b.lastActivityAt || '';
       return bDate.localeCompare(aDate);
     });
 

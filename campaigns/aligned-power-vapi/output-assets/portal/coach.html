@@ -181,7 +181,7 @@
           return;
         }
         grid.innerHTML = filtered.map(function(c) {
-          var lastActivity = c.lastVapiAt || c.lastSixCAt;
+          var lastActivity = c.lastActivityAt;
           var badges = [];
           if (c.isActiveClient) badges.push('<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[var(--ap-primary)]/15 text-[var(--ap-primary)]">Active</span>');
           if (c.assessmentCount > 0) badges.push('<span class="text-xs text-[var(--ap-muted)]">' + c.assessmentCount + ' VAPI</span>');
