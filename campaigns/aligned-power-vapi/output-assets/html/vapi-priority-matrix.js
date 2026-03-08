@@ -148,7 +148,7 @@
             if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
           }
           var uid = 'pm-' + q.key + '-' + e.code;
-          html += '<div class="pm-card w-full min-w-[240px] max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
+          html += '<div class="pm-card w-full min-w-0 sm:min-w-[240px] max-w-full sm:max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
           html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(180deg)\':\'rotate(0deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
           html += '<div class="flex flex-col min-w-0">';
           html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
