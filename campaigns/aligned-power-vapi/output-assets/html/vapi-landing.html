@@ -26,6 +26,20 @@
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
     .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 25px -5px rgba(255, 107, 26, 0.3); }
     html { scroll-behavior: smooth; }
+    .testimonial-banner {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,107,26,0.35) 0%, rgba(255,159,107,0.45) 25%, rgba(255,107,26,0.4) 50%, rgba(14,22,36,0.08) 100%);
+      border: 2px solid rgba(255,107,26,0.5);
+      box-shadow: 0 8px 32px -8px rgba(255,107,26,0.35), 0 0 0 1px rgba(255,255,255,0.4) inset, 0 1px 2px rgba(0,0,0,0.06);
+    }
+    .testimonial-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(255,255,255,0.4) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.15) 100%);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -33,7 +47,7 @@
     <!-- Hero -->
     <section class="text-center mb-14 sm:mb-18">
       <a href="vapi-quiz.html" class="inline-block mb-8">
-        <img src="../images/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-20 sm:h-24 w-auto mx-auto" />
+        <img src="../images/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-28 sm:h-36 w-auto mx-auto" />
       </a>
       <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-3">Free Assessment</p>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl text-[var(--ap-primary)] leading-tight mb-5">
@@ -136,11 +150,12 @@
 
     <!-- Testimonial -->
     <section class="mb-16 sm:mb-20">
-      <div class="rounded-2xl p-6 sm:p-8 border border-[var(--ap-accent)]/25 shadow-sm" style="background: linear-gradient(225deg, rgba(255,159,107,0.22) 0%, rgba(255,107,26,0.12) 50%, rgba(255,159,107,0.18) 100%);">
-        <blockquote class="text-[var(--ap-secondary)] leading-relaxed mb-4">
+      <div class="testimonial-banner rounded-2xl p-6 sm:p-8 relative">
+        <i data-lucide="quote" class="absolute top-5 right-6 w-10 h-10 text-[var(--ap-accent)]/40" aria-hidden="true"></i>
+        <blockquote class="text-[var(--ap-primary)] text-lg sm:text-xl leading-relaxed mb-4 relative z-10 font-medium">
           "I love that you can see everything at a glance and the way it breaks everything down. My results were extremely accurate, and knowing where to put my energy made all the difference."
         </blockquote>
-        <cite class="not-italic font-semibold text-[var(--ap-primary)]">Dr. Marshall Gevers</cite>
+        <cite class="not-italic font-semibold text-[var(--ap-primary)] relative z-10">— Dr. Marshall Gevers</cite>
       </div>
     </section>
 
