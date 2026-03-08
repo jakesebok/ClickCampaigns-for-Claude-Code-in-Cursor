@@ -87,13 +87,7 @@
       .print-strengths-focus { display: grid !important; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
       .print-strengths-focus .rounded-lg { break-inside: avoid; page-break-inside: avoid; }
 
-      /* Domain detail: every arena group starts on its own fresh page; reduce size so domains fit on one page */
-      .print-arena-group h2 { font-size: 1.1rem !important; margin-bottom: 0.5rem !important; }
-      .print-arena-group h3 { font-size: 0.95rem !important; margin-top: 0.5rem !important; margin-bottom: 0.35rem !important; }
-      .print-arena-group .rounded-lg { padding: 0.5rem 0.75rem !important; margin-bottom: 0.35rem !important; font-size: 0.8rem !important; }
-      .print-arena-group .rounded-lg > div:first-of-type { font-size: 0.75rem !important; }
-      .print-arena-group .rounded-lg p { font-size: 0.7rem !important; line-height: 1.35 !important; }
-      .print-arena-group .rounded-lg .h-2 { margin-bottom: 0.25rem !important; height: 0.25rem !important; }
+      /* Domain detail: every arena group starts on its own fresh page */
       .print-arena-group { break-before: page; page-break-before: always; break-inside: auto; }
       /* Personal is the first arena — it still gets its own page (starts after scores/matrix) */
       .print-first-arena { break-before: page; page-break-before: always; }
