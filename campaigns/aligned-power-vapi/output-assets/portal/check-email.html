@@ -35,7 +35,16 @@
     <div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6 sm:p-8">
       <p class="text-[var(--ap-secondary)] mb-4">Please check the email address you used to sign up and click the link we sent to confirm your account.</p>
       <p class="text-[var(--ap-secondary)] mb-6">Once you’ve confirmed your email, you can log in to your portal to view and track your VAPI™ results.</p>
-      <p class="text-sm text-[var(--ap-muted)]">Didn’t receive the email? Check your spam folder, or <a href="signup.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">try signing up again</a>.</p>
+      <p class="text-sm text-[var(--ap-muted)] mb-4">Didn’t receive the email? Check your spam folder first.</p>
+      <div id="resend-section" class="pt-4 border-t border-[var(--ap-border)]">
+        <p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Resend confirmation email</p>
+        <div class="flex gap-2">
+          <input type="email" id="resend-email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-lg border-2 border-[var(--ap-border)] bg-white focus:border-[var(--ap-primary)] focus:outline-none text-sm" />
+          <button type="button" id="resend-btn" class="px-4 py-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm rounded-lg transition-colors whitespace-nowrap">Resend</button>
+        </div>
+        <p id="resend-message" class="text-sm mt-2 hidden"></p>
+      </div>
+      <p class="text-sm text-[var(--ap-muted)] mt-4"><a href="signup.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Try signing up again</a> with a different email.</p>
     </div>
     <p class="text-center mt-6">
       <a href="login.html" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Log in</a>
@@ -43,5 +52,47 @@
       <a href="../html/vapi-landing.html" class="text-sm text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Back to assessment</a>
     </p>
   </main>
+  <script type="module">
+    (async function() {
+      var params = new URLSearchParams(window.location.search);
+      var emailParam = params.get('email');
+      var resendInput = document.getElementById('resend-email');
+      var resendBtn = document.getElementById('resend-btn');
+      var resendMsg = document.getElementById('resend-message');
+      if (emailParam) resendInput.value = emailParam;
+      try {
+        var r = await fetch('/api/config');
+        if (!r.ok) return;
+        var t = await r.text();
+        eval(t);
+        if (!window.SUPABASE_URL) return;
+      } catch (e) { return; }
+      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var redirectTo = 'https://portal.alignedpower.coach/portal/confirm.html';
+      resendBtn.addEventListener('click', async function() {
+        var email = (resendInput.value || '').trim();
+        resendMsg.classList.add('hidden');
+        if (!email) {
+          resendMsg.textContent = 'Please enter your email address.';
+          resendMsg.classList.remove('hidden');
+          resendMsg.classList.add('text-red-600');
+          return;
+        }
+        resendBtn.disabled = true;
+        var { error } = await supabase.auth.resend({ type: 'signup', email: email, options: { emailRedirectTo: redirectTo } });
+        resendBtn.disabled = false;
+        if (error) {
+          resendMsg.textContent = error.message || 'Could not resend. Try again.';
+          resendMsg.classList.remove('hidden');
+          resendMsg.classList.add('text-red-600');
+          return;
+        }
+        resendMsg.textContent = 'Confirmation email sent. Check your inbox and spam folder.';
+        resendMsg.classList.remove('hidden', 'text-red-600');
+        resendMsg.classList.add('text-green-600');
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -108,7 +108,7 @@
           errEl.classList.remove('hidden');
           return;
         }
-        window.location.href = 'check-email.html';
+        window.location.href = 'check-email.html?email=' + encodeURIComponent(email);
       });
     })();
   </script>

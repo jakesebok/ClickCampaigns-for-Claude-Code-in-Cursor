@@ -60,9 +60,45 @@
     @keyframes selectPop { 0% { transform: scale(1); } 55% { transform: scale(1.03); } 100% { transform: scale(1); } }
     .scale-btn.selected { animation: selectPop 0.35s ease-out; }
     .font-cormorant { font-family: 'Cormorant Garamond', serif; }
-    /* Importance slider: light track (negative space) */
-    .imp-slider::-webkit-slider-runnable-track { background: rgba(221, 227, 237, 0.8); height: 6px; border-radius: 3px; }
-    .imp-slider::-moz-range-track { background: rgba(221, 227, 237, 0.8); height: 6px; border-radius: 3px; }
+    /* Importance slider: orange fill left of thumb, gray right; thumb centered */
+    .imp-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      --imp-fill: 0%;
+      background: transparent;
+      height: 6px;
+    }
+    .imp-slider::-webkit-slider-runnable-track {
+      background: linear-gradient(to right, var(--ap-accent) 0%, var(--ap-accent) var(--imp-fill), rgba(221, 227, 237, 0.8) var(--imp-fill), rgba(221, 227, 237, 0.8) 100%);
+      height: 6px;
+      border-radius: 3px;
+    }
+    .imp-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ap-accent);
+      border: 2px solid white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      cursor: pointer;
+      margin-top: -7px;
+    }
+    .imp-slider::-moz-range-track {
+      background: linear-gradient(to right, var(--ap-accent) 0%, var(--ap-accent) var(--imp-fill), rgba(221, 227, 237, 0.8) var(--imp-fill), rgba(221, 227, 237, 0.8) 100%);
+      height: 6px;
+      border-radius: 3px;
+    }
+    .imp-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--ap-accent);
+      border: 2px solid white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -626,15 +662,21 @@
       (function() {
         var IMP_CODES = ['IMP-PH','IMP-IA','IMP-ME','IMP-AF','IMP-RS','IMP-FA','IMP-CO','IMP-WI','IMP-VS','IMP-EX','IMP-OH','IMP-EC'];
         var DOM_CODES = { 'IMP-PH':'PH','IMP-IA':'IA','IMP-ME':'ME','IMP-AF':'AF','IMP-RS':'RS','IMP-FA':'FA','IMP-CO':'CO','IMP-WI':'WI','IMP-VS':'VS','IMP-EX':'EX','IMP-OH':'OH','IMP-EC':'EC' };
+        function updateImpSliderFill(slider) {
+          var v = parseInt(slider.value, 10);
+          var pct = ((v - 1) / 9 * 100).toFixed(2);
+          slider.style.setProperty('--imp-fill', pct + '%');
+        }
         document.querySelectorAll('.imp-slider').forEach(function(slider) {
           var code = slider.dataset.code;
           var valEl = document.getElementById('val-' + code);
+          updateImpSliderFill(slider);
           slider.addEventListener('input', function() {
             var v = parseInt(slider.value, 10);
             importanceRatings[DOM_CODES[code]] = v;
             impSlidersTouched[code] = true;
             if (valEl) valEl.textContent = v;
-            // Highlight the card once touched
+            updateImpSliderFill(slider);
             var card = slider.closest('[data-imp]');
             if (card) card.style.borderColor = 'var(--ap-accent)';
           });
