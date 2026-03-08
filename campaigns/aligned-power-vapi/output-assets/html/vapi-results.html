@@ -112,7 +112,7 @@
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-[100] no-print">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sm:sticky top-0 z-[100] no-print">
     <!-- Portal CTA banner — shown for everyone; content varies by login state -->
     <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-accent)] text-white">
       <div id="portal-banner-inner" class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -136,7 +136,7 @@
           <i data-lucide="download" class="w-4 h-4"></i>
           Download / Print results
         </button>
-        <span class="text-xs text-[var(--ap-muted)]">Tip: Turn off &ldquo;Headers and footers&rdquo; in the print dialog for a clean PDF.</span>
+        <span class="text-xs text-[var(--ap-muted)] hidden sm:inline">Tip: Turn off &ldquo;Headers and footers&rdquo; in the print dialog for a clean PDF.</span>
       </div>
     </div>
   </header>
@@ -428,7 +428,7 @@
         html += '</svg>';
         html += '</div>';
         html += '<img src="../images/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-12 w-auto mt-4 mx-auto block"/>';
-        html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
+        html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center hidden sm:flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
         html += '</div></div>';
         html += '<div class="flex-1 min-w-0">';
         if (overall != null && overallTier) {
