@@ -41,26 +41,64 @@
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
     #metric-list .metric-btn:hover { color: var(--ap-primary) !important; }
+    /* Mobile nav: hamburger + Take Assessment for non-clients */
+    @media (max-width: 767px) {
+      .nav-links-desk { display: none !important; }
+      .nav-cta-bar { display: inline-flex !important; }
+      [data-nav-role="client"] .nav-cta-bar, [data-nav-role="admin"] .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: inline-flex !important; }
+    }
+    @media (min-width: 768px) {
+      .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: none !important; }
+    }
+    .nav-hamburger-panel { transform: translateX(100%); transition: transform 0.25s ease-out; }
+    .nav-hamburger-panel.nav-open { transform: translateX(0); }
+    .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
     /* Importance modal slide-in */
     #importance-modal { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
     #importance-modal.importance-modal--hidden { transform: translateX(100%); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+  <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="nonclient">
     <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="dashboard.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
-        <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
-        <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
-        <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
-        <a id="header-6c-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
-        <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
-        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+        <a href="../html/vapi-landing.html" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+        <div class="nav-links-desk flex items-center gap-4">
+          <span id="header-coach-link" class="hidden"><a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Coach</a></span>
+          <span id="header-admin-link" class="hidden"><a href="admin.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
+          <a href="settings.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
+          <a id="header-6c-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
+          <a href="../html/vapi-landing.html" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+          <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+        </div>
+        <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
+    </div>
+    <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-40 md:hidden" aria-hidden="true"></div>
+    <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-50 md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
+      <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
+        <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
+        <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <nav class="p-4 flex flex-col gap-1">
+        <span id="header-coach-link-mobile" class="hidden"><a href="coach.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
+        <span id="header-admin-link-mobile" class="hidden"><a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
+        <a href="settings.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+        <span id="header-6c-link-mobile" class="hidden"><a href="six-c-scorecard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a></span>
+        <a href="../html/vapi-landing.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+        <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+      </nav>
     </div>
   </header>
 
@@ -415,6 +453,12 @@
         if (coachEl) coachEl.classList.remove('hidden');
         var adminEl = document.getElementById('header-admin-link');
         if (adminEl) adminEl.classList.remove('hidden');
+        var coachMobile = document.getElementById('header-coach-link-mobile');
+        if (coachMobile) coachMobile.classList.remove('hidden');
+        var adminMobile = document.getElementById('header-admin-link-mobile');
+        if (adminMobile) adminMobile.classList.remove('hidden');
+        var header = document.getElementById('portal-header');
+        if (header) header.setAttribute('data-nav-role', 'admin');
       }
 
       // Onboarding modal: show if not yet completed
@@ -462,6 +506,22 @@
         await supabase.auth.signOut();
         window.location.href = 'login.html';
       });
+      var logoutMobile = document.getElementById('logout-btn-mobile');
+      if (logoutMobile) logoutMobile.addEventListener('click', async function() {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+      (function initHamburger() {
+        var btn = document.getElementById('nav-hamburger-btn');
+        var panel = document.getElementById('nav-hamburger-panel');
+        var backdrop = document.getElementById('nav-hamburger-backdrop');
+        var closeBtn = document.getElementById('nav-hamburger-close');
+        function open() { if (panel) panel.classList.add('nav-open'); if (backdrop) backdrop.classList.add('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu'); } document.body.style.overflow = 'hidden'; }
+        function close() { if (panel) panel.classList.remove('nav-open'); if (backdrop) backdrop.classList.remove('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu'); } document.body.style.overflow = ''; }
+        if (btn) btn.addEventListener('click', function() { panel.classList.contains('nav-open') ? close() : open(); });
+        if (backdrop) backdrop.addEventListener('click', close);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+      })();
 
       var { data: rows, error } = await supabase
         .from('vapi_results')
@@ -1710,6 +1770,10 @@
         var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
         if (!activeRow || !activeRow.active_client) return;
         document.getElementById('header-6c-link').classList.remove('hidden');
+        var sixcMobile = document.getElementById('header-6c-link-mobile');
+        if (sixcMobile) sixcMobile.classList.remove('hidden');
+        var header = document.getElementById('portal-header');
+        if (header && header.getAttribute('data-nav-role') !== 'admin') header.setAttribute('data-nav-role', 'client');
         var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(2);
         if (sixCErr || !sixCRows || sixCRows.length === 0) {
           document.getElementById('six-c-section').classList.remove('hidden');

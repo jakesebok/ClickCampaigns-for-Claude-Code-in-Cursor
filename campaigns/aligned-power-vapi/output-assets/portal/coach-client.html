@@ -26,23 +26,48 @@
     .section-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03); }
     .sixc-row { cursor: pointer; }
     .sixc-row:hover { background: rgba(14,22,36,0.04); }
+    @media (max-width: 767px) { .nav-links-desk { display: none !important; } .nav-hamburger { display: inline-flex !important; } }
+    @media (min-width: 768px) { .nav-hamburger { display: none !important; } }
+    .nav-hamburger-panel { transform: translateX(100%); transition: transform 0.25s ease-out; }
+    .nav-hamburger-panel.nav-open { transform: translateX(0); }
+    .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
   </style>
 </head>
 <body class="min-h-screen antialiased">
   <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <a href="coach.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+      <div class="flex items-center gap-2 sm:gap-4 min-w-0">
+        <a href="coach.html" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity shrink-0">
           <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
-          <span>Coach Dashboard</span>
+          <span class="hidden sm:inline">Coach Dashboard</span>
         </a>
-        <a href="coach.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to clients</a>
+        <a href="coach.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] shrink-0"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to clients</a>
       </div>
       <div class="flex items-center gap-4">
-        <a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)]">Coach</a>
-        <a href="admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
-        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+        <div class="nav-links-desk flex items-center gap-4">
+          <a href="coach.html" class="text-sm font-semibold text-[var(--ap-primary)]">Coach</a>
+          <a href="admin.html" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Admin</a>
+          <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+        </div>
+        <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
+    </div>
+    <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-40 md:hidden" aria-hidden="true"></div>
+    <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-50 md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
+      <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
+        <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
+        <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <nav class="p-4 flex flex-col gap-1">
+        <a href="coach.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a>
+        <a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
+        <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+      </nav>
     </div>
   </header>
 
@@ -178,10 +203,21 @@
       }
 
       document.getElementById('client-content').classList.remove('hidden');
-      document.getElementById('logout-btn').addEventListener('click', async function() {
-        await supabase.auth.signOut();
-        window.location.href = 'login.html';
-      });
+      function doLogout() { supabase.auth.signOut().then(function() { window.location.href = 'login.html'; }); }
+      document.getElementById('logout-btn').addEventListener('click', doLogout);
+      var logoutMobile = document.getElementById('logout-btn-mobile');
+      if (logoutMobile) logoutMobile.addEventListener('click', doLogout);
+      (function initHamburger() {
+        var btn = document.getElementById('nav-hamburger-btn');
+        var panel = document.getElementById('nav-hamburger-panel');
+        var backdrop = document.getElementById('nav-hamburger-backdrop');
+        var closeBtn = document.getElementById('nav-hamburger-close');
+        function open() { if (panel) panel.classList.add('nav-open'); if (backdrop) backdrop.classList.add('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu'); } document.body.style.overflow = 'hidden'; }
+        function close() { if (panel) panel.classList.remove('nav-open'); if (backdrop) backdrop.classList.remove('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu'); } document.body.style.overflow = ''; }
+        if (btn) btn.addEventListener('click', function() { panel.classList.contains('nav-open') ? close() : open(); });
+        if (backdrop) backdrop.addEventListener('click', close);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+      })();
 
       function formatDate(iso) {
         if (!iso) return '—';
