@@ -4,6 +4,29 @@
 
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 
+async function lookupDisplayName(url, serviceKey, email) {
+  if (!email || !url || !serviceKey) return null;
+  const emailNorm = String(email).trim().toLowerCase();
+  try {
+    const res = await fetch(
+      `${url}/auth/v1/admin/users?filter=${encodeURIComponent(emailNorm)}`,
+      { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` } }
+    );
+    if (!res.ok) return null;
+    const json = await res.json();
+    const users = json.users || [];
+    const match = users.find((u) => (u.email || '').toLowerCase() === emailNorm);
+    if (!match) return null;
+    const meta = match.user_metadata || {};
+    const first = meta.first_name || meta.firstName || '';
+    const last = meta.last_name || meta.lastName || '';
+    const name = [first, last].filter(Boolean).join(' ').trim();
+    return name || null;
+  } catch (e) {
+    return null;
+  }
+}
+
 async function verifyCoach(request) {
   const url = process.env.SUPABASE_URL || '';
   const anonKey = process.env.SUPABASE_ANON_KEY || '';
@@ -113,7 +136,27 @@ export async function GET(request) {
       return bDate.localeCompare(aDate);
     });
 
-    const clients = allClients.filter((c) => c.isActiveClient);
+    let clients = allClients.filter((c) => c.isActiveClient);
+
+    // Enrich names from auth.users for clients who only have email (no vapi_results name)
+    const needsName = clients.filter((c) => {
+      const n = (c.name || '').trim();
+      const e = (c.email || '').trim().toLowerCase();
+      return !n || n === e || n.toLowerCase() === e || n.includes('@');
+    });
+    if (needsName.length > 0) {
+      const enriched = await Promise.all(
+        needsName.map(async (c) => {
+          const displayName = await lookupDisplayName(url, serviceKey, c.email);
+          return { ...c, name: displayName || c.name };
+        })
+      );
+      const byEmailEnriched = new Map(enriched.map((c) => [(c.email || '').trim().toLowerCase(), c]));
+      clients = clients.map((c) => {
+        const k = (c.email || '').trim().toLowerCase();
+        return byEmailEnriched.has(k) ? byEmailEnriched.get(k) : c;
+      });
+    }
 
     return new Response(JSON.stringify({ clients }), {
       status: 200,
