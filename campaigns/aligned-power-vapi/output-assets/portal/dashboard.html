@@ -108,7 +108,16 @@
     <div id="dashboard-content" class="hidden">
       <p class="eyebrow mb-2">Your command center</p>
       <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-2 leading-tight">Where you stand. Where to focus.</h1>
-      <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
+      <p id="dashboard-intro-text" class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
+      <div id="nonclient-cta-banner" class="hidden mb-8 p-5 rounded-2xl border-2 border-[var(--ap-accent)]/40 bg-[var(--ap-accent)]/10">
+        <p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Get support with your alignment journey</p>
+        <p class="text-sm text-[var(--ap-secondary)] mb-4">Free monthly workshop, Aligned Freedom course, and community—no cost to get started.</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2 rounded-[100px] transition-colors">Free workshop <i data-lucide="calendar" class="w-3.5 h-3.5"></i></a>
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] px-4 py-2 rounded-[100px] transition-colors">Free course</a>
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] px-4 py-2 rounded-[100px] transition-colors">Community</a>
+        </div>
+      </div>
 
       <div id="one-thing-banner" class="hidden mb-12 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card">
         <div class="p-6">
@@ -557,6 +566,15 @@
       if (header && email === 'jacob@alignedpower.coach') header.setAttribute('data-nav-role', 'admin');
       else if (header && isActiveClient) header.setAttribute('data-nav-role', 'client');
 
+      var introEl = document.getElementById('dashboard-intro-text');
+      if (introEl) {
+        introEl.textContent = isNonClient
+          ? 'Assessments. View results below or take the assessment again to track over time.'
+          : 'Assessments and weekly scorecard. View results below or take the assessment again to track over time.';
+      }
+      var nonclientBanner = document.getElementById('nonclient-cta-banner');
+      if (nonclientBanner && isNonClient) nonclientBanner.classList.remove('hidden');
+
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('dashboard-content').classList.remove('hidden');
 
@@ -881,7 +899,7 @@
         var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
         if (pmHtml) {
           var ctaBlock = '';
-          if (isNonClient && hasCriticalPriority) {
+          if (isNonClient) {
             ctaBlock = '<div class="mt-8 pt-6 border-t border-[var(--ap-border)] rounded-xl bg-[var(--ap-accent)]/10 border border-[var(--ap-accent)]/30 p-5">' +
               '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Get support with these areas</p>' +
               '<p class="text-sm text-[var(--ap-secondary)] mb-4">Free monthly workshop, Aligned Freedom course, and community—no cost to get started.</p>' +
@@ -1202,7 +1220,7 @@
           if (interpText) {
             interpEl.textContent = interpText;
             document.getElementById('breakdown-interpretation').classList.remove('hidden');
-            if (ctaEl && isNonClient && score != null && score < 6) {
+            if (ctaEl && isNonClient) {
               ctaEl.classList.remove('hidden');
             } else if (ctaEl) {
               ctaEl.classList.add('hidden');
@@ -1547,7 +1565,13 @@
                     labels: {
                       usePointStyle: true,
                       padding: 16,
-                      font: { size: 12 }
+                      font: { size: 12 },
+                      generateLabels: function(chart) {
+                        var orig = Chart.defaults.plugins.legend.labels.generateLabels;
+                        var labels = orig ? orig.call(this, chart) : [];
+                        labels.forEach(function(l) { l.hidden = false; });
+                        return labels;
+                      }
                     }
                   }
                 }
