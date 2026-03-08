@@ -267,6 +267,17 @@
           </div>
           <div id="breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">
             <p id="breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>
+            <div id="breakdown-nonclient-cta" class="hidden mt-4 p-4 rounded-xl bg-[var(--ap-accent)]/10 border border-[var(--ap-accent)]/30">
+              <p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Want support with this?</p>
+              <p class="text-sm text-[var(--ap-secondary)] mb-3">Join our free monthly workshop, start the Aligned Freedom course, or connect in the community—all free.</p>
+              <div class="flex flex-wrap gap-2">
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f]">Free workshop <i data-lucide="calendar" class="w-3.5 h-3.5"></i></a>
+                <span class="text-[var(--ap-border)]">·</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f]">Free course</a>
+                <span class="text-[var(--ap-border)]">·</span>
+                <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f]">Community</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -534,11 +545,17 @@
         if (closeBtn) closeBtn.addEventListener('click', close);
       })();
 
-      var { data: rows, error } = await supabase
-        .from('vapi_results')
-        .select('id, email, first_name, last_name, results, created_at')
-        .eq('email', email)
-        .order('created_at', { ascending: false });
+      var [rowsResult, clientResult] = await Promise.all([
+        supabase.from('vapi_results').select('id, email, first_name, last_name, results, created_at').eq('email', email).order('created_at', { ascending: false }),
+        supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle()
+      ]);
+      var rows = rowsResult.data;
+      var error = rowsResult.error;
+      var isActiveClient = !!(clientResult.data && clientResult.data.active_client);
+      var isNonClient = (email !== 'jacob@alignedpower.coach') && !isActiveClient;
+      var header = document.getElementById('portal-header');
+      if (header && email === 'jacob@alignedpower.coach') header.setAttribute('data-nav-role', 'admin');
+      else if (header && isActiveClient) header.setAttribute('data-nav-role', 'client');
 
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('dashboard-content').classList.remove('hidden');
@@ -851,11 +868,32 @@
       // Where to Focus — full priority matrix (only when latest has importance ratings)
       var wfEl = document.getElementById('where-to-focus-section');
       var imp = latest.results.importanceRatings || {};
+      var domainScores = latest.results.domainScores || {};
+      var hasCriticalPriority = false;
+      if (Object.keys(imp).length > 0) {
+        ['PH','IA','ME','AF','RS','FA','CO','WI','VS','EX','OH','EC'].forEach(function(code) {
+          var score = domainScores[code];
+          var importance = imp[code];
+          if (importance != null && importance >= 7 && score != null && score < 6) hasCriticalPriority = true;
+        });
+      }
       if (Object.keys(imp).length > 0 && window.VAPI_PM && typeof window.VAPI_PM.buildPriorityMatrix === 'function') {
         var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
         if (pmHtml) {
-          wfEl.innerHTML = '<p class="eyebrow mb-1">Priority matrix</p><div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">' + pmHtml + '</div>';
+          var ctaBlock = '';
+          if (isNonClient && hasCriticalPriority) {
+            ctaBlock = '<div class="mt-8 pt-6 border-t border-[var(--ap-border)] rounded-xl bg-[var(--ap-accent)]/10 border border-[var(--ap-accent)]/30 p-5">' +
+              '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Get support with these areas</p>' +
+              '<p class="text-sm text-[var(--ap-secondary)] mb-4">Free monthly workshop, Aligned Freedom course, and community—no cost to get started.</p>' +
+              '<div class="flex flex-wrap gap-3">' +
+              '<a href="#" class="inline-flex items-center gap-2 text-sm font-semibold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2 rounded-[100px] transition-colors">Free workshop <i data-lucide="calendar" class="w-3.5 h-3.5"></i></a>' +
+              '<a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] px-4 py-2 rounded-[100px] transition-colors">Free course</a>' +
+              '<a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] px-4 py-2 rounded-[100px] transition-colors">Community</a>' +
+              '</div></div>';
+          }
+          wfEl.innerHTML = '<p class="eyebrow mb-1">Priority matrix</p><div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">' + pmHtml + ctaBlock + '</div>';
           wfEl.classList.remove('hidden');
+          if (ctaBlock && typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
         }
       }
 
@@ -1160,11 +1198,18 @@
           }, 660);
           var interpText = getInterpretation(singleResult, metricKey);
           var interpEl = document.getElementById('breakdown-interpretation-text');
+          var ctaEl = document.getElementById('breakdown-nonclient-cta');
           if (interpText) {
             interpEl.textContent = interpText;
             document.getElementById('breakdown-interpretation').classList.remove('hidden');
+            if (ctaEl && isNonClient && score != null && score < 6) {
+              ctaEl.classList.remove('hidden');
+            } else if (ctaEl) {
+              ctaEl.classList.add('hidden');
+            }
           } else {
             interpEl.textContent = '';
+            if (ctaEl) ctaEl.classList.add('hidden');
             document.getElementById('breakdown-interpretation').classList.add('hidden');
           }
           var svgEl = document.getElementById('breakdown-wheel-svg').querySelector('svg');
