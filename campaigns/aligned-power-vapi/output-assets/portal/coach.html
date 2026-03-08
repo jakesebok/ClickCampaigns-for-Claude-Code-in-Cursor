@@ -52,22 +52,22 @@
         </button>
       </div>
     </div>
-    <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-40 md:hidden" aria-hidden="true"></div>
-    <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-50 md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
-      <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
-        <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
-        <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <nav class="p-4 flex flex-col gap-1">
-        <a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
-        <a href="dashboard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Dashboard</a>
-        <a href="../html/vapi-landing.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Assessment</a>
-        <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
-      </nav>
-    </div>
   </header>
+  <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-[100] md:hidden" aria-hidden="true"></div>
+  <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-[101] md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
+    <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
+      <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
+      <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="p-4 flex flex-col gap-1">
+      <a href="admin.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Admin</a>
+      <a href="dashboard.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Dashboard</a>
+      <a href="../html/vapi-landing.html" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Assessment</a>
+      <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+    </nav>
+  </div>
 
   <main class="max-w-5xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-16 text-[var(--ap-muted)]">Loading your clients…</div>
