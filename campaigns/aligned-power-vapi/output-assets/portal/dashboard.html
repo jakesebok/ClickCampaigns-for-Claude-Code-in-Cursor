@@ -29,7 +29,8 @@
       --ap-border: #DDE3ED;
     }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 6%, var(--ap-bg)) 35%, color-mix(in srgb, var(--ap-accent) 5%, var(--ap-bg)) 70%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
-    h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+    .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ap-accent); }
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(14,22,36,0.12), 0 0 0 1px rgba(0,0,0,0.03); border-left: 3px solid transparent; transition: border-color 0.2s, box-shadow 0.2s; }
     .dashboard-card:hover { border-left-color: var(--ap-accent); box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 8px 16px -4px rgba(14,22,36,0.14), 0 0 0 1px rgba(0,0,0,0.04); }
     #one-thing-banner.dashboard-card { border-left-width: 2px; border-left-color: var(--ap-accent); }
@@ -105,7 +106,8 @@
   <main class="max-w-3xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading your results…</div>
     <div id="dashboard-content" class="hidden">
-      <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your Dashboard</h1>
+      <p class="eyebrow mb-2">Your command center</p>
+      <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-2 leading-tight">Where you stand. Where to focus.</h1>
       <p class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
       <div id="one-thing-banner" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/15 shadow-lg dashboard-card">
@@ -142,23 +144,24 @@
             <p id="one-thing-scorecard-cta-label" class="text-white font-semibold text-sm leading-snug"></p>
             <p id="one-thing-scorecard-cta-countdown" class="hidden text-white/70 text-xs mt-0.5"></p>
           </div>
-          <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap flex-shrink-0">
+          <a href="six-c-scorecard.html" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-5 py-2.5 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)] whitespace-nowrap flex-shrink-0">
             Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
       </div>
 
       <div id="six-c-section" class="mb-10 hidden">
+        <p class="eyebrow mb-1">Weekly snapshot</p>
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Your latest 6C's</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
-        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
           <div id="six-c-one-thing" class="mt-6 pt-6 pb-4 border-t border-[var(--ap-border)]/60 hidden">
             <p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Last week you said you'd improve</p>
             <p id="six-c-one-thing-text" class="text-[var(--ap-secondary)] text-sm mb-0"></p>
           </div>
           <div id="six-c-action-row" class="mt-4">
-            <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
+            <a id="six-c-fill-link" href="six-c-scorecard.html" class="hidden inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm px-5 py-2.5 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)]">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
             <span id="six-c-window-closed-msg" class="hidden text-sm text-[var(--ap-muted)]"></span>
           </div>
         </div>
@@ -174,9 +177,10 @@
       <div id="where-to-focus-section" class="mb-10 hidden"></div>
 
       <div id="breakdown-section" class="mb-10 hidden">
+        <p class="eyebrow mb-1">Latest assessment</p>
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.</p>
-        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">
           <div class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1 min-w-0 flex flex-col justify-center">
               <div class="flex items-center justify-between gap-2 mb-1">
@@ -268,9 +272,10 @@
       </div>
 
       <div id="progress-section" class="mb-10 hidden">
+        <p class="eyebrow mb-1">Trends</p>
         <h2 class="text-xl text-[var(--ap-primary)] mb-2">Progress over time</h2>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Track your composite, arena, or domain scores across assessments. Select a metric to update the chart.</p>
-        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">
+        <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
             <div class="flex items-center gap-2">
               <span class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)]">View:</span>
@@ -384,12 +389,18 @@
         </div>
       </div>
 
+      <p class="eyebrow mb-1">All assessments</p>
       <h2 class="text-xl text-[var(--ap-primary)] mb-4">Assessment history</h2>
       <div id="history-list" class="space-y-3"></div>
-      <div id="empty-state" class="hidden text-center py-12 rounded-2xl border border-[var(--ap-border)] bg-white/50 dashboard-card">
-        <p class="text-[var(--ap-secondary)] mb-4">No assessments yet for this account.</p>
+      <div id="empty-state" class="hidden text-center py-16 px-8 rounded-2xl border-2 border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] bg-white shadow-sm">
+        <div class="w-14 h-14 rounded-full bg-[var(--ap-accent)]/15 flex items-center justify-center mx-auto mb-5" aria-hidden="true">
+          <i data-lucide="compass" class="w-8 h-8 text-[var(--ap-accent)]"></i>
+        </div>
+        <p class="eyebrow mb-2">Ready when you are</p>
+        <h3 class="text-xl text-[var(--ap-primary)] mb-3">Your first assessment awaits</h3>
+        <p class="text-[var(--ap-secondary)] mb-6 max-w-md mx-auto">Take the VAPI™ to get your baseline across 12 domains. No fluff—just a clear map of where you stand and where to focus next.</p>
         <p id="empty-state-error" class="text-sm text-red-600 mb-4 hidden"></p>
-        <a href="../html/vapi-landing.html" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take the VAPI™ assessment <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <a href="../html/vapi-landing.html" class="cta-primary inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold px-8 py-3 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)]">Take the VAPI™ assessment <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
     <div id="auth-error" class="hidden text-center py-12 text-red-600">You must be logged in to view this page.</div>
@@ -832,7 +843,7 @@
       });
       latestHtml += '</ul></div>';
       latestHtml += '</div>';
-      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm py-2.5 px-5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
+      latestHtml += '<button type="button" data-id="' + latest.id + '" class="view-result inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm py-2.5 px-6 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2">View results <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
@@ -843,7 +854,7 @@
       if (Object.keys(imp).length > 0 && window.VAPI_PM && typeof window.VAPI_PM.buildPriorityMatrix === 'function') {
         var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
         if (pmHtml) {
-          wfEl.innerHTML = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6">' + pmHtml + '</div>';
+          wfEl.innerHTML = '<p class="eyebrow mb-1">Priority matrix</p><div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">' + pmHtml + '</div>';
           wfEl.classList.remove('hidden');
         }
       }
