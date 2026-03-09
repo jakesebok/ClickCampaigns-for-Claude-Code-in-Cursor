@@ -18,14 +18,14 @@ export default function HomePage() {
           className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
-        {/* Ghost words on orange — Slate & Spark style */}
-        <span className="absolute top-[120px] left-[28%] z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        {/* Ghost words on orange — Slate & Spark style, right side so image doesn't cover */}
+        <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
-        <span className="absolute top-[58%] left-[24%] -translate-y-1/2 z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        <span className="absolute top-[58%] right-[22%] -translate-y-1/2 z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Free.
         </span>
-        <span className="absolute bottom-[120px] left-[52%] z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        <span className="absolute bottom-[140px] right-[8%] z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Clear.
         </span>
         {/* Content */}
@@ -77,16 +77,18 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative hidden lg:block flex-shrink-0">
-              <div className="absolute inset-0 flex items-center pr-8 pl-12">
-                <div className="space-y-4">
-                  <div className="w-10 h-0.5 bg-white/35" />
-                  <p className="font-cormorant font-semibold italic text-xl text-white leading-snug max-w-[280px]">
+              {/* Quote on orange — right side, above image, visible */}
+              <div className="absolute inset-0 flex items-center justify-end pr-6 pl-4 z-20 pointer-events-none">
+                <div className="space-y-4 max-w-[260px] text-right">
+                  <div className="w-10 h-0.5 bg-white/35 ml-auto" />
+                  <p className="font-cormorant font-semibold italic text-xl text-white leading-snug">
                     &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually are.&rdquo;
                   </p>
                   <p className="text-sm text-white/65">— Jake Sebok, MCC</p>
                 </div>
               </div>
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-auto w-[75%] mb-6">
+              {/* Image — moved left so quote and ghost words stay visible on orange */}
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-0 w-[55%] mb-6 z-10">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok"
