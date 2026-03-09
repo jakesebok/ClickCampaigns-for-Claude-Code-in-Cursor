@@ -79,8 +79,7 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
 
   <!-- Header -->
   <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
-    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Jake Sebok</p>
-    <h1 style="margin:8px 0 0;color:#FFFFFF;font-size:26px;font-weight:700;line-height:1.2;">Values-Aligned Performance Indicator&#8482;</h1>
+    <a href="${PORTAL_URL}/assessment"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="180" height="auto" style="display:block;max-width:180px;height:auto;margin:0 auto;" /></a>
   </td></tr>
 
   <!-- Body -->
@@ -194,9 +193,8 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:24px 16px;">
 <tr><td align="center">
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
-  <tr><td style="background:#0E1624;padding:24px 32px;">
-    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Jake Sebok Admin</p>
-    <h1 style="margin:6px 0 0;color:#FFFFFF;font-size:22px;font-weight:700;">New VAPI Assessment Completed</h1>
+  <tr><td style="background:#0E1624;padding:24px 32px;text-align:center;">
+    <a href="${PORTAL_URL}/assessment"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="140" height="auto" style="display:block;max-width:140px;height:auto;margin:0 auto;" /></a>
   </td></tr>
   <tr><td style="padding:32px 32px 24px;">
 

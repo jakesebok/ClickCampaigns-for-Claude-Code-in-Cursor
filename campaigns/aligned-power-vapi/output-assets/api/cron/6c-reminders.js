@@ -90,8 +90,7 @@ function buildHtmlEmail({ type, firstName }) {
 
   <!-- Header -->
   <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
-    <p style="margin:0;color:#FF6B1A;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Jake Sebok</p>
-    <h1 style="margin:8px 0 0;color:#FFFFFF;font-size:26px;font-weight:700;line-height:1.2;">6C&rsquo;s Weekly Scorecard</h1>
+    <a href="${PORTAL_URL}"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="180" height="auto" style="display:block;max-width:180px;height:auto;margin:0 auto;" /></a>
   </td></tr>
 
   <!-- Body -->
