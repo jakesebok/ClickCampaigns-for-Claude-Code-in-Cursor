@@ -110,9 +110,12 @@ The marketing site includes the VAPI assessment as a lead magnet. For it to save
 
 | Name | Value | Notes |
 |------|-------|-------|
-| `SUPABASE_URL` | Your Supabase project URL | Same as portal |
-| `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service role key | Same as portal |
-| `RESEND_API_KEY` | Your Resend API key | Same as portal |
+| `SUPABASE_URL` | Your Supabase project URL | Same as portal — **exact name** |
+| `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service role key | Same as portal — **exact name** |
+| `SUPABASE_ANON_KEY` | Your Supabase anon/public key | For portal CTA on results page |
+| `RESEND_API_KEY` | Your Resend API key | Same as portal — **exact name** |
+
+**Important:** The names must match exactly (including underscores and case). `SUPABASE_SERVICE_ROLE_KEY` is not the same as `SERVICE_ROLE_KEY` or `SUPABASE_SERVICE_KEY`.
 
 3. Optional (for custom email addresses):
    - `VAPI_USER_FROM_EMAIL` — e.g. `hello@notifications.alignedpower.coach`
@@ -197,5 +200,17 @@ When you want to change text, images, or anything on the site:
 - **"My forms don't send emails"** — Double-check you replaced BOTH `YOUR_FORM_ID` placeholders with your real Formspree IDs.
 - **"The domain doesn't work"** — DNS can take up to 48 hours. Make sure you added the exact records Vercel showed you.
 - **"I've never used GitHub"** — Use Option B and GitHub Desktop. You can do the whole thing without typing any commands.
+
+### VAPI assessment not saving or sending emails
+
+1. **Check env vars:** Open `https://jakesebok.com/api/debug-vapi` in your browser. You should see something like:
+   ```json
+   { "env": { "SUPABASE_URL": true, "SUPABASE_SERVICE_ROLE_KEY": true, "RESEND_API_KEY": true, ... }, "vapiReady": true }
+   ```
+   If any are `false`, the env var name in Vercel is wrong or missing. Fix it in Vercel → Settings → Environment Variables, then **Redeploy**.
+
+2. **Exact names:** Use `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`, `RESEND_API_KEY` — no typos, no different casing.
+
+3. **Redeploy after changing env vars:** Vercel only picks up new/changed env vars on the next deploy. Trigger a redeploy (e.g. push a small change to GitHub, or use Vercel → Deployments → Redeploy).
 
 You can always come back and ask for help with any specific step.
