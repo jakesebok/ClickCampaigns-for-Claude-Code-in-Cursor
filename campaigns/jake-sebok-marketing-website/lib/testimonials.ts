@@ -4,7 +4,7 @@ export const testimonials = [
       "I've gotten more clients booked on my calendar in the past few weeks than I had in the previous six months before working with Jake. I have a deep understanding of what I'm building and why it's important!",
     headline: "Greater Clarity. Better Execution.",
     author: "Thaddeus John",
-    image: "/images/testimonials/Thaddeus.png",
+    image: "/images/testimonials/Thaddeus.jpeg",
   },
   {
     quote:
