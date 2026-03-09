@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Jake Sebok — Values-Aligned Performance Coaching for Entrepreneurs",
   description:
     "Help entrepreneurs who feel trapped by their businesses rediscover their vision and build something sustainable, values-driven, and fully alive.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Jake Sebok — Values-Aligned Performance Coaching",
     description:

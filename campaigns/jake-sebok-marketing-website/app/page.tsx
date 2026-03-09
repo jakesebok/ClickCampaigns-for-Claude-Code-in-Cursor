@@ -18,7 +18,7 @@ export default function HomePage() {
           className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
-        {/* Ghost words on orange — Slate & Spark style, right side so image doesn't cover */}
+        {/* Ghost words on orange — Slate & Spark style */}
         <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
@@ -64,63 +64,49 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative lg:hidden mt-8 mb-6">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl max-w-[280px] sm:max-w-[320px] mx-auto">
-                <Image
-                  src="/images/jake/jacob-sebok-laughing.jpeg"
-                  alt="Jake Sebok"
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/30 to-transparent" />
-              </div>
-            </div>
-            <div className="relative hidden lg:block flex-shrink-0">
-              {/* Quote on orange — right side, above image, visible */}
-              <div className="absolute inset-0 flex items-center justify-end pr-4 pl-[45%] z-20 pointer-events-none">
-                <div className="space-y-4 max-w-[260px] text-right">
-                  <div className="w-10 h-0.5 bg-white/35 ml-auto" />
-                  <p className="font-cormorant font-semibold italic text-xl text-white leading-snug">
-                    &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually are.&rdquo;
-                  </p>
-                  <p className="text-sm text-white/65">— Jake Sebok, MCC</p>
+            {/* Quote with circular thumbnail — right side on desktop (on orange), below on mobile */}
+            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
+              <div className="space-y-4 max-w-[280px] text-center lg:text-right">
+                <div className="w-10 h-0.5 bg-ap-accent/40 lg:bg-white/35 mx-auto lg:ml-auto lg:mr-0" />
+                <p className="font-cormorant font-semibold italic text-xl text-ap-primary lg:text-white leading-snug">
+                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually are.&rdquo;
+                </p>
+                <div className="flex items-center justify-center lg:justify-end gap-3">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-ap-accent/30 lg:ring-white/30 flex-shrink-0">
+                    <Image
+                      src="/images/jake/jacob-sebok-laughing.jpeg"
+                      alt="Jake Sebok"
+                      fill
+                      className="object-cover"
+                      sizes="48px"
+                      priority
+                    />
+                  </div>
+                  <p className="text-sm text-ap-mid lg:text-white/65">— Jake Sebok, MCPC</p>
                 </div>
-              </div>
-              {/* Image — moved left so quote and ghost words stay visible on orange */}
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-0 w-[55%] mb-6 z-10">
-                <Image
-                  src="/images/jake/jacob-sebok-laughing.jpeg"
-                  alt="Jake Sebok"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/40 to-transparent" />
               </div>
             </div>
           </div>
         </div>
-        {/* Trusted By strip — single row with chip style */}
-        <div className="relative z-10 border-t-2 border-ap-accent bg-white">
-          <div className="flex flex-wrap">
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+        {/* Trusted By strip — single row, full width */}
+        <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
+          <div className="flex flex-wrap w-full">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-cormorant font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Chiropractors</span>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
             </div>
           </div>
