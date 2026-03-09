@@ -102,26 +102,26 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* Trusted By strip — same style as stats, authority bar content */}
+        {/* Trusted By strip — single row with chip style */}
         <div className="relative z-10 border-t-2 border-ap-accent bg-white">
-          <p className="text-center text-ap-muted text-xs font-semibold uppercase tracking-wider py-4 sm:py-5 px-4">
-            Trusted by entrepreneurs who refused to stay stuck
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-5 border-t border-ap-border">
-            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0">
+          <div className="flex flex-wrap">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+              <span className="font-cormorant font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
+            </div>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Chiropractors</span>
             </div>
-            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-ap-border sm:border-b-0 sm:border-r">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
             </div>
-            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
             </div>
-            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-ap-border sm:border-b-0 sm:border-r col-span-2 sm:col-span-1">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Service Professionals</span>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
             </div>
-            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center col-span-2 sm:col-span-1">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Ex-Corporate Founders</span>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0 sm:flex-none">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
             </div>
           </div>
         </div>
