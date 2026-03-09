@@ -1,5 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import { testimonials } from "@/lib/testimonials";
+
+const moreResultsTestimonials = testimonials.filter(
+  (t) => t.author !== "Dr. Marshall Gevers" && t.author !== "Thaddeus John"
+);
 
 export const metadata = {
   title: "Case Studies — Jake Sebok | Real Results from Values-Aligned Coaching",
@@ -209,7 +214,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* More Results — Charul teaser */}
+      {/* More Results — additional testimonials */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
@@ -218,21 +223,28 @@ export default function CaseStudiesPage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             More entrepreneurs who chose alignment
           </h2>
-          <div className="max-w-2xl">
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden bg-ap-off flex-shrink-0">
-                  <Image src="/images/testimonials/Charul.png" alt="Charul Patel" fill className="object-cover" sizes="56px" />
+          <div className="grid sm:grid-cols-2 gap-6">
+            {moreResultsTestimonials.map((t) => (
+              <div
+                key={t.author}
+                className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden bg-ap-off flex-shrink-0">
+                    <Image src={t.image} alt={t.author} fill className="object-cover" sizes="56px" />
+                  </div>
+                  <div>
+                    <h3 className="font-outfit font-semibold text-ap-primary">{t.author}</h3>
+                    {t.headline && (
+                      <p className="text-sm text-ap-muted">{t.headline}</p>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-outfit font-semibold text-ap-primary">Charul Patel</h3>
-                  <p className="text-sm text-ap-muted">Jake was so insightful!</p>
-                </div>
+                <p className="text-ap-mid text-sm leading-relaxed">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
               </div>
-              <p className="text-ap-mid text-sm leading-relaxed">
-                &ldquo;Jake is an incredible Coach. His presence is calming, his demeanor is genuine, and he has a gift for bridging the gaps between challenges and solutions.&rdquo;
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
