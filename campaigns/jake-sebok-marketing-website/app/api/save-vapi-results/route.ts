@@ -54,6 +54,7 @@ export async function POST(request: Request) {
       first_name: firstName || null,
       last_name: lastName || null,
       results: results || {},
+      source: "marketing",
     }),
   });
 
