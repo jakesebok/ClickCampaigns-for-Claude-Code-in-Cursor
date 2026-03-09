@@ -213,7 +213,7 @@ export default function HomePage() {
             Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
-            <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/20 font-semibold leading-snug mb-6">
+            <p className="text-3xl sm:text-4xl lg:text-5xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
               But when what you&apos;re building matches who you actually are, execution stops being a war with yourself.
             </p>
             <p className="text-ap-mid text-lg leading-relaxed">
@@ -253,7 +253,7 @@ export default function HomePage() {
                 Awareness
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Know exactly what&apos;s holding you back—and the path to get there. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know which move leads where you want to go.
+                Know exactly what&apos;s holding you back and the path to get where you want to go. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know exactly which moves will make the difference.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -280,7 +280,7 @@ export default function HomePage() {
                 Embodied Execution
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would look forward to—not tolerate.
+                Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would dream of.
               </p>
             </div>
           </div>
@@ -313,10 +313,13 @@ export default function HomePage() {
                 Have it all. <span className="text-ap-accent">Really.</span>
               </h2>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
-                Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about—what actually matters to you—to build a business that&apos;s supposed to support your life.
+                Stop chasing the carrot at the end of the stick when what you really wanted was the apple that&apos;s right in front of you.
               </p>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
-                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm—because you&apos;re no longer fighting yourself.
+                Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about, what actually matters to you, to build a business that&apos;s supposed to support your life.
+              </p>
+              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm, <span className="text-ap-accent font-semibold">because you&apos;re no longer fighting yourself.</span>
               </p>
               <p className="font-semibold text-lg text-ap-primary">
                 No trade-offs. The work we do together is built on that belief.
