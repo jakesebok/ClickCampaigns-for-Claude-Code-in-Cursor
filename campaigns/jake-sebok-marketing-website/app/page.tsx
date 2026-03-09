@@ -78,7 +78,7 @@ export default function HomePage() {
             </div>
             <div className="relative hidden lg:block flex-shrink-0">
               {/* Quote on orange — right side, above image, visible */}
-              <div className="absolute inset-0 flex items-center justify-end pr-6 pl-4 z-20 pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-end pr-4 pl-[45%] z-20 pointer-events-none">
                 <div className="space-y-4 max-w-[260px] text-right">
                   <div className="w-10 h-0.5 bg-white/35 ml-auto" />
                   <p className="font-cormorant font-semibold italic text-xl text-white leading-snug">
