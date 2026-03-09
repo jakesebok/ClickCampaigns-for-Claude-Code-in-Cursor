@@ -39,7 +39,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="https://portal.alignedpower.coach/assessment"
+            href="/assessment"
             className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3 rounded-pill transition-all"
           >
             Take the VAPI™
@@ -91,7 +91,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="https://portal.alignedpower.coach/assessment"
+              href="/assessment"
               className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold py-3 rounded-pill"
               onClick={() => setMobileOpen(false)}
             >

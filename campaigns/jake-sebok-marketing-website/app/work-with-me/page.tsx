@@ -12,7 +12,7 @@ const offerings = [
     description:
       "72 questions. ~12 minutes. An honest snapshot across 12 life and business domains. Get your personalized baseline and clarity on where to focus.",
     cta: "Take the Assessment",
-    href: "https://portal.alignedpower.coach/assessment",
+    href: "/assessment",
     free: true,
   },
   {

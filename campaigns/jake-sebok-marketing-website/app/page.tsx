@@ -25,7 +25,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="https://portal.alignedpower.coach/assessment"
+                  href="/assessment"
                   className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all shadow-lg shadow-ap-accent/25"
                 >
                   Take the Free VAPI™ Assessment
@@ -225,7 +225,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="https://portal.alignedpower.coach/assessment"
+                  href="/assessment"
                   className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
                 >
                   Take the VAPI™

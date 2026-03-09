@@ -75,7 +75,7 @@ export default function ContactPage() {
         <p className="mt-8 text-sm text-ap-muted">
           Prefer to start with the free assessment?{" "}
           <Link
-            href="https://portal.alignedpower.coach/assessment"
+            href="/assessment"
             className="text-ap-accent font-semibold hover:underline"
           >
             Take the VAPI™

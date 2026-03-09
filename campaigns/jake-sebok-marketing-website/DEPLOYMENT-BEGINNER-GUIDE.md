@@ -101,7 +101,27 @@
 3. Type: `campaigns/jake-sebok-marketing-website`
 4. This tells Vercel: "Build the *marketing website* from this folder, not the portal." Your portal project uses a different root (something like `campaigns/aligned-power-vapi/output-assets`).
 
-### Step 3.3 — Deploy
+### Step 3.3 — Add environment variables (for VAPI assessment)
+
+The marketing site includes the VAPI assessment as a lead magnet. For it to save results and send emails, add these in Vercel:
+
+1. In your **marketing website** Vercel project, go to **Settings** → **Environment Variables**.
+2. Add these (use the same values as your portal project):
+
+| Name | Value | Notes |
+|------|-------|-------|
+| `SUPABASE_URL` | Your Supabase project URL | Same as portal |
+| `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service role key | Same as portal |
+| `RESEND_API_KEY` | Your Resend API key | Same as portal |
+
+3. Optional (for custom email addresses):
+   - `VAPI_USER_FROM_EMAIL` — e.g. `hello@notifications.alignedpower.coach`
+   - `VAPI_ADMIN_FROM_EMAIL` — e.g. `assessments@notifications.alignedpower.coach`
+   - `VAPI_REPLY_TO` — reply-to address for user emails
+
+4. Click **Save** for each variable.
+
+### Step 3.4 — Deploy
 
 1. Click **Deploy**.
 2. Wait 1–2 minutes. Vercel is building your site on their computers.
@@ -162,9 +182,11 @@ When you want to change text, images, or anything on the site:
 - [ ] Marketing site files pushed to GitHub (same repo as portal)
 - [ ] **Second** Vercel project created (don't replace the portal project!)
 - [ ] Root Directory set to `campaigns/jake-sebok-marketing-website`
+- [ ] VAPI env vars added: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`
 - [ ] Domain jakesebok.com added to the **marketing** Vercel project
 - [ ] DNS records updated where jakesebok.com is registered
 - [ ] Site loads at https://jakesebok.com
+- [ ] VAPI assessment works at https://jakesebok.com/assessment
 - [ ] Portal still works at https://portal.alignedpower.coach
 
 ---
