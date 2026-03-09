@@ -123,7 +123,7 @@ export default function HomePage() {
             The Cost of Success
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            From the outside, it looks like success. But you know the cost.
+            From the outside, it looks like success. But you know the <span className="text-ap-accent">cost</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
             For impact-driven founders who are done white-knuckling their way to the next level—does this sound familiar?
@@ -186,7 +186,7 @@ export default function HomePage() {
             Here&apos;s the Truth
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            You don&apos;t have a strategy problem. Or a discipline problem. You have an alignment problem.
+            You don&apos;t have a strategy problem. Or a discipline problem. You have an <span className="text-ap-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
             Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
@@ -200,7 +200,7 @@ export default function HomePage() {
             </p>
           </div>
           <p className="font-cormorant font-semibold text-xl text-ap-primary">
-            That&apos;s the work. Ready to see how?
+            That&apos;s the work—and here&apos;s how we get there.
           </p>
         </div>
       </section>
@@ -209,16 +209,16 @@ export default function HomePage() {
       <div className="h-0.5 bg-ap-accent" />
 
       {/* The Work — solution */}
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Work
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            Don&apos;t optimize for output. Optimize for alignment.
+            Don&apos;t optimize for output. Optimize for <span className="text-ap-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
-            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution—the path from the cage to the life you actually want.
+            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution—the path from the <span className="text-ap-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -289,7 +289,7 @@ export default function HomePage() {
                 You Don&apos;t Have to Choose
               </p>
               <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-                Have it all. Really.
+                Have it all. <span className="text-ap-accent">Really.</span>
               </h2>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
                 Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about—what actually matters to you—to build a business that&apos;s supposed to support your life.
@@ -298,7 +298,7 @@ export default function HomePage() {
                 When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm—because you&apos;re no longer fighting yourself.
               </p>
               <p className="font-cormorant font-semibold text-lg text-ap-primary">
-                You can have it all. The work we do together is built on that belief.
+                No trade-offs. The work we do together is built on that belief.
               </p>
             </div>
           </div>
@@ -394,15 +394,24 @@ export default function HomePage() {
           </div>
           <div className="mt-10 text-center">
             <p className="text-ap-mid text-sm mb-4">Ready to see where you stand?</p>
-            <Link
-              href="/assessment"
-              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
-            >
-              Take the VAPI™
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+            <div className="flex flex-wrap gap-3 justify-center items-center">
+              <Link
+                href="/assessment"
+                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
+              >
+                Take the VAPI™
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <span className="text-ap-muted text-sm">or</span>
+              <Link
+                href="/work-with-me"
+                className="text-ap-accent font-semibold text-sm hover:underline"
+              >
+                explore how it works
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -417,7 +426,7 @@ export default function HomePage() {
             What People Say
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
-            Real transformation. Real results.
+            What happens when alignment replaces the grind.
           </h2>
           <TestimonialCarousel testimonials={testimonials} />
           <div className="mt-8 text-center">
@@ -446,7 +455,7 @@ export default function HomePage() {
                 <Image src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" width={56} height={56} className="h-10 w-auto object-contain" />
               </div>
               <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
-                Ready to stop building the cage?
+                Ready to stop building the <span className="text-ap-accent">cage</span>?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
