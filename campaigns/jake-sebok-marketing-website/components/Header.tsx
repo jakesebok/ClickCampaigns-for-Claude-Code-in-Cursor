@@ -13,19 +13,20 @@ const navLinks = [
     label: "Work With Me",
     children: [
       { href: "/work-with-me", label: "Overview" },
-      { href: "/case-studies", label: "Case Studies" },
       { href: "/work-with-me/freedom-workshop", label: "Aligned Freedom Workshop" },
       { href: "/work-with-me/freedom-builders", label: "Freedom Builders Community" },
       { href: "/work-with-me/strategic-intensives", label: "Strategic Alignment Intensives" },
       { href: "/work-with-me/aligned-leaders", label: "Aligned Leaders Community" },
     ],
   },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workWithMeOpen, setWorkWithMeOpen] = useState(false);
+  const [mobileWorkWithMeOpen, setMobileWorkWithMeOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -38,6 +39,10 @@ export function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) setMobileWorkWithMeOpen(false);
+  }, [mobileOpen]);
 
   return (
     <header className="sticky top-0 z-50 bg-ap-bg/95 backdrop-blur-sm border-b border-ap-border">
@@ -159,14 +164,14 @@ export function Header() {
                   <div key={link.href}>
                     <button
                       type="button"
-                      onClick={() => setWorkWithMeOpen(!workWithMeOpen)}
-                      className={`font-semibold flex items-center justify-between w-full text-left ${
+                      onClick={() => setMobileWorkWithMeOpen(!mobileWorkWithMeOpen)}
+                      className={`font-semibold flex items-center justify-between w-full text-left py-1 ${
                         isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"
                       }`}
                     >
                       {link.label}
                       <svg
-                        className={`w-4 h-4 transition-transform ${workWithMeOpen ? "rotate-180" : ""}`}
+                        className={`w-4 h-4 transition-transform flex-shrink-0 ml-2 ${mobileWorkWithMeOpen ? "rotate-180" : ""}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -174,7 +179,7 @@ export function Header() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    {workWithMeOpen && (
+                    {mobileWorkWithMeOpen && (
                       <div className="mt-2 pl-4 flex flex-col gap-2 border-l-2 border-ap-border">
                         {link.children.map((child) => {
                           const childActive = pathname === child.href;
@@ -182,10 +187,10 @@ export function Header() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              className={`text-sm font-medium ${childActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"}`}
+                              className={`text-sm font-medium py-1 ${childActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"}`}
                               onClick={() => {
                                 setMobileOpen(false);
-                                setWorkWithMeOpen(false);
+                                setMobileWorkWithMeOpen(false);
                               }}
                             >
                               {child.label}

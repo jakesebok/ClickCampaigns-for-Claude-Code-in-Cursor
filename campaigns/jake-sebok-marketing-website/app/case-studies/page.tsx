@@ -226,11 +226,11 @@ export default function CaseStudiesPage() {
                 </div>
                 <div>
                   <h3 className="font-outfit font-semibold text-ap-primary">Charul Patel</h3>
-                  <p className="text-sm text-ap-muted">Jacob was so insightful!</p>
+                  <p className="text-sm text-ap-muted">Jake was so insightful!</p>
                 </div>
               </div>
               <p className="text-ap-mid text-sm leading-relaxed">
-                &ldquo;Jacob is an incredible Coach. His presence is calming, his demeanor is genuine, and he has a gift for bridging the gaps between challenges and solutions.&rdquo;
+                &ldquo;Jake is an incredible Coach. His presence is calming, his demeanor is genuine, and he has a gift for bridging the gaps between challenges and solutions.&rdquo;
               </p>
             </div>
           </div>

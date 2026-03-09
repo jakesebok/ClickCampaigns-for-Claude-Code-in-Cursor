@@ -19,7 +19,7 @@ export default function AboutPage() {
             The Story
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
-            Hey, I&apos;m Jacob Sebok.
+            Hey, I&apos;m Jake Sebok.
           </h1>
           <p className="text-xl text-ap-mid leading-relaxed mb-8 max-w-2xl">
             Master Certified Professional Coach, founder, full-time dad to three amazing kids.
@@ -76,7 +76,7 @@ export default function AboutPage() {
             Credentials
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-10">
-            I&apos;m not an observer. I&apos;m a survivor and thriver on this path.
+            I didn&apos;t learn this from a textbook. I lived it.
           </h2>
           <div className="grid sm:grid-cols-2 gap-6 mb-12">
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">

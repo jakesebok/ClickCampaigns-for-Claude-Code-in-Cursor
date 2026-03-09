@@ -50,7 +50,7 @@ const offerings = [
     description:
       "12-month group coaching program. The flagship experience for entrepreneurs ready to build a business that's an extension of who they are. Application required.",
     cta: "Apply Now",
-    href: "#accelerator-application",
+    href: "/work-with-me/apply",
     featured: true,
   },
 ];
@@ -141,113 +141,29 @@ export default function WorkWithMePage() {
         </div>
       </section>
 
-      {/* Accelerator Application */}
-      <section
-        id="accelerator-application"
-        className="py-20 sm:py-28 bg-white"
-      >
-        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
-            Aligned Power Accelerator
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            Apply for the 12-month program
-          </h2>
-          <p className="text-ap-mid mb-10">
-            The Accelerator is for entrepreneurs who are ready to do the real
-            work. I take a limited cohort each year. Tell me about yourself, your
-            business, and why you want in.
-          </p>
-
-          <form
-            action="https://formspree.io/f/mojkjnev"
-            method="POST"
-            className="space-y-6"
-          >
-            <input type="hidden" name="_subject" value="Aligned Power Accelerator Application" />
-            <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-ap-primary mb-2">
-                Email *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="business" className="block text-sm font-semibold text-ap-primary mb-2">
-                Business / Role *
-              </label>
-              <input
-                type="text"
-                id="business"
-                name="business"
-                required
-                placeholder="e.g. Chiropractor, Coach, Consultant"
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="revenue" className="block text-sm font-semibold text-ap-primary mb-2">
-                Annual Revenue (approx.) *
-              </label>
-              <select
-                id="revenue"
-                name="revenue"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              >
-                <option value="">Select range</option>
-                <option value="under-80k">Under $80K</option>
-                <option value="80k-150k">$80K – $150K</option>
-                <option value="150k-300k">$150K – $300K</option>
-                <option value="300k-750k">$300K – $750K</option>
-                <option value="750k-1m">$750K – $1M</option>
-                <option value="over-1m">Over $1M</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="why" className="block text-sm font-semibold text-ap-primary mb-2">
-                Why do you want to join the Accelerator? What&apos;s at stake for you? *
-              </label>
-              <textarea
-                id="why"
-                name="why"
-                required
-                rows={5}
-                placeholder="Tell me your story. What's not working? What would change if you had alignment between who you are and how you work?"
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition resize-none"
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="cta-pill w-full sm:w-auto inline-flex items-center justify-center bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
-              >
-                Submit Application
-              </button>
-            </div>
-          </form>
-
-          <p className="mt-6 text-sm text-ap-muted">
-            I review every application personally. You&apos;ll hear back within
-            5–7 business days.
-          </p>
+      {/* ALL IN CTA — exclusive opportunity */}
+      <section className="py-20 sm:py-28 bg-ap-primary">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6 text-center">
+          <div className="border-t-2 border-ap-accent pt-16 sm:pt-20">
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+              Exclusive Opportunity
+            </p>
+            <h2 className="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight">
+              Ready to go <span className="text-ap-accent">ALL IN</span>?
+            </h2>
+            <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+              The Aligned Power Accelerator is my flagship 12-month program for entrepreneurs who are done with half-measures. Limited cohort. Application required. This is for those ready to build a business that&apos;s an extension of who they actually are.
+            </p>
+            <Link
+              href="/work-with-me/apply"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-8 py-4 rounded-pill transition-all hover:bg-ap-accent-2"
+            >
+              Apply for the Accelerator
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
     </>

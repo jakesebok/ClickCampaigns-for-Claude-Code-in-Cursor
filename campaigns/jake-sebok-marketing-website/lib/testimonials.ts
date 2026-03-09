@@ -16,14 +16,14 @@ export const testimonials = [
   },
   {
     quote:
-      "Jacob is an incredible Coach. His presence is calming, his demeanor is genuine, and he has a gift for bridging the gaps between challenges and solutions.",
-    headline: "Jacob was so insightful!",
+      "Jake is an incredible Coach. His presence is calming, his demeanor is genuine, and he has a gift for bridging the gaps between challenges and solutions.",
+    headline: "Jake was so insightful!",
     author: "Charul Patel",
     image: "/images/testimonials/Charul.png",
   },
   {
     quote:
-      "Jacob has a steady, grounding presence that makes it easy to open up and honestly discuss what's holding you back. He's someone you can trust to lead you through an honest, introspective process without judgment. His approach to accountability isn't about pressure or guilt trips—he challenges you in a way that feels productive and keeps you moving forward.",
+      "Jake has a steady, grounding presence that makes it easy to open up and honestly discuss what's holding you back. He's someone you can trust to lead you through an honest, introspective process without judgment. His approach to accountability isn't about pressure or guilt trips—he challenges you in a way that feels productive and keeps you moving forward.",
     headline: "The One You Want in Your Corner.",
     author: "Cheryl O'Brien",
     image: "/images/testimonials/Cheryl.png",
@@ -37,7 +37,7 @@ export const testimonials = [
   },
   {
     quote:
-      "I had a wonderful coaching experience with Jacob. He created a safe space and asked powerful questions that significantly increased my awareness. Jacob helped me form a new definition of peace in my life. Through his insightful guidance, I began seeing problems as gifts rather than burdens. I consistently felt better about myself after our sessions.",
+      "I had a wonderful coaching experience with Jake. He created a safe space and asked powerful questions that significantly increased my awareness. Jake helped me form a new definition of peace in my life. Through his insightful guidance, I began seeing problems as gifts rather than burdens. I consistently felt better about myself after our sessions.",
     headline: "Problems as Gifts, Not Burdens.",
     author: "Gürcan Potur",
     image: "/images/testimonials/Gurcan.png",

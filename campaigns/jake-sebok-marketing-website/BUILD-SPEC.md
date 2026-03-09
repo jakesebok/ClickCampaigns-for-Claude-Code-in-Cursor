@@ -28,7 +28,7 @@
 - **Testimonials** — Scattered on Home + About; full page at /testimonials
 - **Application form** — Work With Me: capture revenue, "state their case," why choose them for Accelerator
 - **Contact form** — Simple form, no booking
-- **Images** — From brand-kit: Pictures of Jacob, Testimonials folder
+- **Images** — From brand-kit: Pictures of Jake, Testimonials folder
 
 ---
 

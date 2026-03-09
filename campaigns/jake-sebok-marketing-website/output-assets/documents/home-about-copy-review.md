@@ -67,8 +67,8 @@ The copy is strong—authentic, differentiated, and aligned with Jake's values. 
 ## About Page
 
 ### Hero
-**Headline:** "Hey, I'm Jacob Sebok."  
-- **Warm, conversational.** "Hey" works for an About page. Some audiences prefer "Hi" or "I'm Jacob"—test if needed.
+**Headline:** "Hey, I'm Jake Sebok."  
+- **Warm, conversational.** "Hey" works for an About page. Some audiences prefer "Hi" or "I'm Jake"—test if needed.
 
 **Subhead:** "Master Certified Professional Coach, founder, full-time dad to three amazing kids."  
 - **Good.** Credentials + humanity. "Amazing" is a bit generic—could be "three kids" or "three little ones" for variety, but it's fine.
