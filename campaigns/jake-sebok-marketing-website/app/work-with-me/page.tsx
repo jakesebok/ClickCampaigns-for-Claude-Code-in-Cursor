@@ -69,7 +69,7 @@ export default function WorkWithMePage() {
             How We Work
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-            Start free. Go deeper when you&apos;re ready.
+            Your place. Your pace.
           </h1>
           <p className="text-lg text-ap-mid max-w-2xl">
             The best entry point is the free VAPI™ Assessment and the monthly
