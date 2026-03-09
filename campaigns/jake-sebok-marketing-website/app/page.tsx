@@ -186,7 +186,7 @@ export default function HomePage() {
             The Work
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            I don&apos;t optimize for output. I optimize for alignment.
+            Don&apos;t optimize for output. Optimize for alignment.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
             It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution—the path from the cage to the life you actually want.
@@ -203,8 +203,7 @@ export default function HomePage() {
                 Awareness
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Surface what&apos;s actually going on—not what you think you
-                should want. See the gap between where you are and where you want to be without the stories you&apos;ve been telling yourself.
+                Know exactly what&apos;s holding you back—and the path to get there. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know which move leads where you want to go.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -217,9 +216,7 @@ export default function HomePage() {
                 Internal Alignment
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                NLP-based parts work that turns self-sabotage into momentum. The
-                business aligns with your nervous system so success and values
-                point the same way.
+                Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business—lowering your defenses and amplifying your output.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -233,13 +230,54 @@ export default function HomePage() {
                 Embodied Execution
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Sustainable growth that doesn&apos;t require you to abandon what
-                you actually want. Progress that continues after coaching ends.
+                Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would look forward to—not tolerate.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
+      {/* Have it all — reject the trade-off */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
+                <Image
+                  src="/images/jake/jake-and-son.png"
+                  alt="Jake Sebok with his son"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+                You Don&apos;t Have to Choose
+              </p>
+              <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+                Have it all. Really.
+              </h2>
+              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+                Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about—what actually matters to you—to build a business that&apos;s supposed to support your life.
+              </p>
+              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm—because you&apos;re no longer fighting yourself.
+              </p>
+              <p className="font-cormorant font-semibold text-lg text-ap-primary">
+                You can have it all. The work we do together is built on that belief.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
 
       {/* Outcomes — by the end of our work together */}
       <section className="py-20 sm:py-28 bg-white">
@@ -250,9 +288,25 @@ export default function HomePage() {
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             By the end of our work together, you will:
           </h2>
-          <p className="text-ap-mid mb-12 max-w-2xl">
+          <p className="text-ap-mid mb-8 max-w-2xl">
             Not a list of tactics. A fundamental shift in how you run your business and your life.
           </p>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-12">
+            <div className="lg:col-span-4 order-2 lg:order-1">
+              <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden shadow-xl">
+                <Image
+                  src="/images/jake/jake-ideal-end-state.png"
+                  alt="Jake Sebok — living the ideal end state"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              </div>
+              <p className="mt-4 font-cormorant font-semibold italic text-ap-primary text-center lg:text-left">
+                Envision the ideal end state.
+              </p>
+            </div>
+            <div className="lg:col-span-8 order-1 lg:order-2">
           <div className="space-y-6">
             <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
@@ -308,6 +362,8 @@ export default function HomePage() {
                 <h3 className="font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
               </div>
+            </div>
+          </div>
             </div>
           </div>
           <div className="mt-10 text-center">

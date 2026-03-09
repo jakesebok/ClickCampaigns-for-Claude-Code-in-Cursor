@@ -44,6 +44,13 @@ export default function CaseStudiesPage() {
                   &ldquo;I knew how to treat patients, but starting a business left me stuck and overthinking everything. Jake helped me cut through the noise, define a vision, and take confident action. What used to feel overwhelming now feels intentional—and it&apos;s directly translated into real business growth.&rdquo;
                 </p>
                 <p className="font-semibold text-ap-primary">— Dr. Marshall Gevers</p>
+                <p className="text-sm text-ap-muted mt-1">Chiropractor</p>
+              </div>
+              <div className="mt-6 p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
+                <p className="font-cormorant font-semibold italic text-lg mb-4">
+                  &ldquo;The business now feels more like an extension of me than something I have to go do. I feel completely different. I&apos;m excited for the next five years of business rather than anxious about it.&rdquo;
+                </p>
+                <p className="text-white/80 text-sm">— Dr. Marshall Gevers</p>
               </div>
             </div>
             <div className="lg:col-span-7 space-y-8">
@@ -91,13 +98,6 @@ export default function CaseStudiesPage() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
-                <p className="font-cormorant font-semibold italic text-xl mb-4">
-                  &ldquo;The business now feels more like an extension of me than something I have to go do. I feel completely different. I&apos;m excited for the next five years of business rather than anxious about it.&rdquo;
-                </p>
-                <p className="text-white/80 text-sm">— Dr. Marshall Gevers</p>
-              </div>
-
               <div className="pt-4">
                 <Link
                   href="/work-with-me"
@@ -134,6 +134,12 @@ export default function CaseStudiesPage() {
                 </p>
                 <p className="font-semibold text-ap-primary">— Thaddeus John</p>
                 <p className="text-sm text-ap-muted mt-1">Attention Coach</p>
+              </div>
+              <div className="mt-6 p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
+                <p className="font-cormorant font-semibold italic text-lg mb-4">
+                  &ldquo;I feel like Jake understands me at a deep level. I have a clear understanding of what I&apos;m building and why it matters—and it&apos;s rare to find someone who holds that kind of space. Jake doesn&apos;t tell me what to do. He calls forth what was already there.&rdquo;
+                </p>
+                <p className="text-white/80 text-sm">— Thaddeus John</p>
               </div>
             </div>
             <div className="lg:col-span-7 space-y-8">
@@ -185,13 +191,6 @@ export default function CaseStudiesPage() {
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <div className="p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
-                <p className="font-cormorant font-semibold italic text-xl mb-4">
-                  &ldquo;I feel like Jake understands me at a deep level. I have a clear understanding of what I&apos;m building and why it matters—and it&apos;s rare to find someone who holds that kind of space. Jake doesn&apos;t tell me what to do. He calls forth what was already there.&rdquo;
-                </p>
-                <p className="text-white/80 text-sm">— Thaddeus John</p>
               </div>
 
               <div className="pt-4">
