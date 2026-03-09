@@ -3,6 +3,8 @@
  * Returns Supabase config for client-side auth (portal CTA, session check).
  * Used by vapi-results.html for "logged in" vs "create account" state.
  */
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const url = process.env.SUPABASE_URL || "";
   const key = process.env.SUPABASE_ANON_KEY || "";

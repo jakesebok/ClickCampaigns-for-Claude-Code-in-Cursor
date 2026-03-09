@@ -1,3 +1,6 @@
+/** @type {import('next').RouteSegmentConfig} */
+export const dynamic = "force-dynamic";
+
 /**
  * POST /api/vapi-assessment-complete
  * Fires immediately after a user completes the VAPI assessment

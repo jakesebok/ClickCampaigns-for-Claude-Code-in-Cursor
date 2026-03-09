@@ -4,6 +4,8 @@
  * Uses the service role key to bypass RLS — runs server-side only.
  */
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
