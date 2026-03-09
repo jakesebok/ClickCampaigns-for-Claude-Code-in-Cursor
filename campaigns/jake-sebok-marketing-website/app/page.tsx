@@ -44,7 +44,7 @@ export default function HomePage() {
                 success.
               </h1>
               <p className="font-cormorant font-semibold text-base text-ap-mid leading-relaxed mb-8">
-                You don&apos;t have a discipline problem. You have an alignment problem. When what you&apos;re building finally matches who you are—execution stops being a war with yourself.
+                You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -126,7 +126,7 @@ export default function HomePage() {
             From the outside, it looks like success. But you know the cost.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
-            Sound familiar?
+            For impact-driven founders who are done white-knuckling their way to the next level—does this sound familiar?
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -189,7 +189,7 @@ export default function HomePage() {
             I don&apos;t optimize for output. I optimize for alignment.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
-            It doesn&apos;t have to stay this way. Awareness. Internal Alignment. Embodied Execution—the path from the cage to the life you actually want.
+            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution—the path from the cage to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -241,6 +241,93 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Outcomes — by the end of our work together */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+            By the End of Our Work Together
+          </p>
+          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+            By the end of our work together, you will:
+          </h2>
+          <p className="text-ap-mid mb-12 max-w-2xl">
+            Not a list of tactics. A fundamental shift in how you run your business and your life.
+          </p>
+          <div className="space-y-6">
+            <div className="flex gap-4 sm:gap-6 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-ap-primary mb-1">Extreme clarity about WHAT you&apos;re building and WHY</h3>
+                <p className="text-ap-mid text-sm leading-relaxed">So you stop chasing opportunities that drain you and start making moves that compound.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 sm:gap-6 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-ap-primary mb-1">Clarity on your greatest constraints and the single most valuable levers to pull</h3>
+                <p className="text-ap-mid text-sm leading-relaxed">To make everything else easier or unnecessary.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 sm:gap-6 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-ap-primary mb-1">Trust in yourself to execute consistently on a plan you believe in</h3>
+                <p className="text-ap-mid text-sm leading-relaxed">No forcing it with willpower.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 sm:gap-6 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-ap-primary mb-1">A business that supports your life instead of consuming it</h3>
+                <p className="text-ap-mid text-sm leading-relaxed">With real boundaries and a calendar that breathes.</p>
+              </div>
+            </div>
+            <div className="flex gap-4 sm:gap-6 items-start">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
+                <p className="text-ap-mid text-sm leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <p className="text-ap-mid text-sm mb-4">Ready to see where you stand?</p>
+            <Link
+              href="/assessment"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
+            >
+              Take the VAPI™
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
       {/* Testimonials — carousel */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
@@ -251,6 +338,14 @@ export default function HomePage() {
             Real transformation. Real results.
           </h2>
           <TestimonialCarousel testimonials={testimonials} />
+          <div className="mt-8 text-center">
+            <Link
+              href="/case-studies"
+              className="text-ap-accent font-semibold text-sm hover:underline"
+            >
+              Read Marshall&apos;s story — from dreading work to excited every day →
+            </Link>
+          </div>
         </div>
       </section>
 
