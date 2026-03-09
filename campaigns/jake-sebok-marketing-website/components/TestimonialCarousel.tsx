@@ -42,7 +42,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
         {testimonials.map((t) => (
           <div
             key={t.author}
-            className="flex-shrink-0 w-[85vw] sm:w-[400px] snap-center"
+            className="flex-shrink-0 h-[280px] snap-center"
           >
             <TestimonialCard {...t} />
           </div>

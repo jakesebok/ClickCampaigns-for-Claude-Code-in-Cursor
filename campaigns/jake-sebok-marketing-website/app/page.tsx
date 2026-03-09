@@ -18,8 +18,18 @@ export default function HomePage() {
           className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
+        {/* Ghost words on orange — Slate & Spark style */}
+        <span className="absolute top-[120px] left-[28%] z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+          Alive.
+        </span>
+        <span className="absolute top-[58%] left-[24%] -translate-y-1/2 z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+          Free.
+        </span>
+        <span className="absolute bottom-[120px] left-[52%] z-[1] font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+          Clear.
+        </span>
         {/* Content */}
-        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24">
+        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4 flex items-center gap-2">
@@ -54,8 +64,8 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative lg:hidden mt-8">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl max-w-sm mx-auto">
+            <div className="relative lg:hidden mt-8 mb-6">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl max-w-[280px] sm:max-w-[320px] mx-auto">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok"
@@ -66,7 +76,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/30 to-transparent" />
               </div>
             </div>
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block flex-shrink-0">
               <div className="absolute inset-0 flex items-center pr-8 pl-12">
                 <div className="space-y-4">
                   <div className="w-10 h-0.5 bg-white/35" />
@@ -76,7 +86,7 @@ export default function HomePage() {
                   <p className="text-sm text-white/65">— Jake Sebok, MCC</p>
                 </div>
               </div>
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-auto w-[85%]">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-auto w-[75%] mb-6">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok"
@@ -128,69 +138,50 @@ export default function HomePage() {
             I don&apos;t optimize for output. I optimize for alignment.
           </h2>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Business strategy and planning"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                  Awareness
-                </h3>
-                <p className="text-ap-mid text-sm leading-relaxed">
-                  Surface what&apos;s actually going on—not what you think you
-                  should want. The VAPI™ Assessment gives you an honest baseline.
-                </p>
-              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                Awareness
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                Surface what&apos;s actually going on—not what you think you
+                should want. I use awareness to help you see the gap between where you are and where you want to be—without the stories you&apos;ve been telling yourself.
+              </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src="https://images.pexels.com/photos/5715847/pexels-photo-5715847.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Coaching and mindset"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-rose-100 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                </svg>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                  Internal Alignment
-                </h3>
-                <p className="text-ap-mid text-sm leading-relaxed">
-                  NLP-based parts work that turns self-sabotage into momentum. The
-                  business aligns with your nervous system so success and values
-                  point the same way.
-                </p>
-              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                Internal Alignment
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                NLP-based parts work that turns self-sabotage into momentum. The
+                business aligns with your nervous system so success and values
+                point the same way.
+              </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src="https://images.pexels.com/photos/6804090/pexels-photo-6804090.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Execution and growth"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                </svg>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                  Embodied Execution
-                </h3>
-                <p className="text-ap-mid text-sm leading-relaxed">
-                  Sustainable growth that doesn&apos;t require you to abandon what
-                  you actually want. Progress that continues after coaching ends.
-                </p>
-              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                Embodied Execution
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                Sustainable growth that doesn&apos;t require you to abandon what
+                you actually want. Progress that continues after coaching ends.
+              </p>
             </div>
           </div>
         </div>
