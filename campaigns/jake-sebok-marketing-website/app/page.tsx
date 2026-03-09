@@ -179,6 +179,35 @@ export default function HomePage() {
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
+      {/* The Reframe — alignment, not discipline */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+            Here&apos;s the Truth
+          </p>
+          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+            You don&apos;t have a strategy problem. Or a discipline problem. You have an alignment problem.
+          </h2>
+          <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
+            Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
+          </p>
+          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
+            <p className="font-semibold text-ap-primary mb-4">
+              But when what you&apos;re building matches who you actually are—
+            </p>
+            <p className="text-ap-mid text-lg leading-relaxed">
+              execution stops being a war with yourself. Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
+            </p>
+          </div>
+          <p className="font-cormorant font-semibold text-xl text-ap-primary">
+            That&apos;s the work. Ready to see how?
+          </p>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
       {/* The Work — solution */}
       <section className="py-20 sm:py-28">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
