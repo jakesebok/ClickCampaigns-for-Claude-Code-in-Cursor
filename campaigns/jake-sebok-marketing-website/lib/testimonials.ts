@@ -12,6 +12,7 @@ export const testimonials = [
     headline: "Real Business Growth.",
     author: "Dr. Marshall Gevers",
     image: "/images/testimonials/Marshall.png",
+    wide: true,
   },
   {
     quote:

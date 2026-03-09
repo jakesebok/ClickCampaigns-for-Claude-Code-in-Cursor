@@ -8,18 +8,47 @@ interface TestimonialCarouselProps {
   testimonials: Testimonial[];
 }
 
+const MARSHALL_INDEX = 1;
+
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(MARSHALL_INDEX);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const scrollToMarshall = () => {
+      const children = el.children;
+      if (children.length <= MARSHALL_INDEX) return;
+      let scrollLeft = 0;
+      const gap = 24;
+      for (let i = 0; i < MARSHALL_INDEX; i++) {
+        scrollLeft += (children[i] as HTMLElement).offsetWidth + gap;
+      }
+      el.scrollLeft = scrollLeft;
+    };
+    scrollToMarshall();
+    const t = setTimeout(scrollToMarshall, 50);
+    return () => clearTimeout(t);
+  }, [testimonials.length]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const handleScroll = () => {
       const scrollLeft = el.scrollLeft;
-      const cardWidth = el.offsetWidth;
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveIndex(Math.min(index, testimonials.length - 1));
+      const children = el.children;
+      let accumulated = 0;
+      const gap = 24;
+      for (let i = 0; i < children.length; i++) {
+        const cardWidth = (children[i] as HTMLElement).offsetWidth + gap;
+        if (scrollLeft < accumulated + cardWidth / 2) {
+          setActiveIndex(i);
+          return;
+        }
+        accumulated += cardWidth;
+      }
+      setActiveIndex(children.length - 1);
     };
     el.addEventListener("scroll", handleScroll);
     return () => el.removeEventListener("scroll", handleScroll);
@@ -28,7 +57,13 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
   const goTo = (index: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollTo({ left: index * el.offsetWidth, behavior: "smooth" });
+    const children = el.children;
+    let scrollLeft = 0;
+    const gap = 24;
+    for (let i = 0; i < index && i < children.length; i++) {
+      scrollLeft += (children[i] as HTMLElement).offsetWidth + gap;
+    }
+    el.scrollTo({ left: scrollLeft, behavior: "smooth" });
     setActiveIndex(index);
   };
 

@@ -19,13 +19,13 @@ export default function HomePage() {
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
         {/* Ghost words on orange — Slate & Spark style */}
-        <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
-        <span className="absolute top-[58%] right-[22%] -translate-y-1/2 z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        <span className="absolute top-[58%] right-[22%] -translate-y-1/2 z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Free.
         </span>
-        <span className="absolute bottom-[140px] right-[8%] z-20 font-cormorant font-bold italic text-[clamp(48px,6vw,80px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
+        <span className="absolute bottom-[140px] right-[8%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Clear.
         </span>
         {/* Content */}
@@ -34,9 +34,9 @@ export default function HomePage() {
             <div className="max-w-xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4 flex items-center gap-2">
                 <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
-                Slate & Spark · Jake Sebok
+                Values-Aligned Performance · Jake Sebok
               </p>
-              <h1 className="font-outfit font-extrabold text-4xl sm:text-5xl lg:text-6xl text-ap-primary leading-[0.93] tracking-tight mb-6">
+              <h1 className="font-outfit font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
                 <span className="text-ap-accent">someone else&apos;s</span>
@@ -74,7 +74,7 @@ export default function HomePage() {
                 <div className="flex items-center justify-center lg:justify-end gap-3">
                   <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-ap-accent/30 lg:ring-white/30 flex-shrink-0">
                     <Image
-                      src="/images/jake/jacob-sebok-laughing.jpeg"
+                      src="/images/jake/MMC Profile.jpeg"
                       alt="Jake Sebok"
                       fill
                       className="object-cover"
@@ -127,8 +127,8 @@ export default function HomePage() {
           </h2>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
@@ -142,8 +142,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                 </svg>
               </div>
@@ -157,8 +157,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
                 </svg>

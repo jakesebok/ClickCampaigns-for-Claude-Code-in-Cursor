@@ -21,14 +21,13 @@ export default function AboutPage() {
           <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
             Hey, I&apos;m Jacob Sebok.
           </h1>
-          <p className="text-xl text-ap-mid leading-relaxed mb-8 max-w-2xl">
-            Master Certified Professional Coach. Business owner. Full-time dad to
-            three amazing kids.
+          <p className="text-xl text-ap-mid leading-relaxed mb-8 max-w-2xl whitespace-nowrap">
+            Master Certified Professional Coach, founder, full-time dad to three amazing kids.
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
               <Image
-                src="/images/jake/MMC Profile.jpeg"
+                src="/images/jake/jacob-sebok-laughing.jpeg"
                 alt="Jake Sebok"
                 fill
                 className="object-cover"

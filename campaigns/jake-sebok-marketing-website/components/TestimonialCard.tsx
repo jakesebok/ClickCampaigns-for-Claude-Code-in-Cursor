@@ -6,11 +6,12 @@ export interface Testimonial {
   author: string;
   title?: string;
   image: string;
+  wide?: boolean;
 }
 
-export function TestimonialCard({ quote, headline, author, title, image }: Testimonial) {
+export function TestimonialCard({ quote, headline, author, title, image, wide }: Testimonial) {
   return (
-    <div className="h-[360px] w-[min(520px,90vw)] min-w-[340px] bg-white rounded-[20px] border border-ap-border p-8 sm:p-10 hover:border-ap-accent/50 transition-colors flex flex-col">
+    <div className={`h-[360px] bg-white rounded-[20px] border border-ap-border p-8 sm:p-10 hover:border-ap-accent/50 transition-colors flex flex-col ${wide ? "w-[min(600px,90vw)] min-w-[380px]" : "w-[min(520px,90vw)] min-w-[340px]"}`}>
       {headline && (
         <p className="text-ap-accent font-semibold text-sm uppercase tracking-wider mb-3 flex-shrink-0">
           {headline}
