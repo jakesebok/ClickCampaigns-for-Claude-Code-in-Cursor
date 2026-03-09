@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ap-primary: #0E1624;
+  --ap-primary-2: #192236;
+  --ap-accent: #FF6B1A;
+  --ap-accent-2: #FF9F6B;
+  --ap-mid: #3A4A5C;
+  --ap-muted: #7A8FA8;
+  --ap-border: #DDE3ED;
+  --ap-bg: #F5F7FA;
+  --ap-off: #EEF1F7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ap-bg);
+  color: var(--ap-primary);
+}
+
+/* Pill button hover */
+.cta-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(255, 107, 26, 0.35);
+}
