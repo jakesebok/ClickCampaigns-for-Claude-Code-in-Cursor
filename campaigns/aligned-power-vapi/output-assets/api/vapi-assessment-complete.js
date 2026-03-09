@@ -78,7 +78,7 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
 
   <!-- Header -->
-  <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
+  <tr><td style="background:#FAF9F7;padding:32px 40px;text-align:center;border-bottom:1px solid #E8E6E3;">
     <a href="${PORTAL_URL}/assessment"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="180" height="auto" style="display:block;max-width:180px;height:auto;margin:0 auto;" /></a>
   </td></tr>
 
@@ -193,7 +193,7 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:24px 16px;">
 <tr><td align="center">
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
-  <tr><td style="background:#0E1624;padding:24px 32px;text-align:center;">
+  <tr><td style="background:#FAF9F7;padding:24px 32px;text-align:center;border-bottom:1px solid #E8E6E3;">
     <a href="${PORTAL_URL}/assessment"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="140" height="auto" style="display:block;max-width:140px;height:auto;margin:0 auto;" /></a>
   </td></tr>
   <tr><td style="padding:32px 32px 24px;">

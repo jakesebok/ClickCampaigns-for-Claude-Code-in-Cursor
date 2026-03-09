@@ -98,10 +98,11 @@
 
   var PM_DOMAIN_NAMES = { PH:'Physical Health', IA:'Inner Alignment', ME:'Mental / Emotional', AF:'Attention & Focus', RS:'Relationship to Self', FA:'Family', CO:'Community', WI:'World / Impact', VS:'Vision / Strategy', EX:'Execution', OH:'Operational Health', EC:'Ecology' };
 
-  function buildPriorityMatrix(results) {
+  function buildPriorityMatrix(results, idPrefix) {
     var imp = results.importanceRatings || {};
     var domainScores = results.domainScores || {};
     var codes = ['PH','IA','ME','AF','RS','FA','CO','WI','VS','EX','OH','EC'];
+    var prefix = (idPrefix && String(idPrefix).trim()) ? String(idPrefix).trim() + '-' : '';
 
     if (Object.keys(imp).length === 0) return '';
 
@@ -147,7 +148,7 @@
             var lifeStage = profile.lifeStage || '';
             if (['Partnered, no children','Young children at home (under 12)','Older children at home (12+)'].indexOf(lifeStage) === -1) flagCopy = null;
           }
-          var uid = 'pm-' + q.key + '-' + e.code;
+          var uid = prefix + 'pm-' + q.key + '-' + e.code;
           html += '<div class="pm-card w-full min-w-0 sm:min-w-[240px] max-w-full sm:max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
           html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(180deg)\':\'rotate(0deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
           html += '<div class="flex flex-col min-w-0">';

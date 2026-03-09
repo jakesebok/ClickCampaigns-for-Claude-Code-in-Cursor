@@ -89,7 +89,7 @@ function buildHtmlEmail({ type, firstName }) {
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
 
   <!-- Header -->
-  <tr><td style="background:#0E1624;padding:32px 40px;text-align:center;">
+  <tr><td style="background:#FAF9F7;padding:32px 40px;text-align:center;border-bottom:1px solid #E8E6E3;">
     <a href="${PORTAL_URL}"><img src="https://portal.alignedpower.coach/images/vapi-logo.png" alt="Values-Aligned Performance Indicator" width="180" height="auto" style="display:block;max-width:180px;height:auto;margin:0 auto;" /></a>
   </td></tr>
 
