@@ -69,16 +69,16 @@ export default function HomePage() {
               <div className="space-y-4 max-w-[280px] text-center lg:text-right">
                 <div className="w-10 h-0.5 bg-ap-accent/40 lg:bg-white/35 mx-auto lg:ml-auto lg:mr-0" />
                 <p className="font-cormorant font-semibold italic text-xl text-ap-primary lg:text-white leading-snug">
-                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually are.&rdquo;
+                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
                 </p>
                 <div className="flex items-center justify-center lg:justify-end gap-3">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-ap-accent/30 lg:ring-white/30 flex-shrink-0">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-ap-accent/30 lg:ring-white/30 flex-shrink-0">
                     <Image
                       src="/images/jake/jacob-sebok-laughing.jpeg"
                       alt="Jake Sebok"
                       fill
                       className="object-cover"
-                      sizes="48px"
+                      sizes="96px"
                       priority
                     />
                   </div>
@@ -126,9 +126,9 @@ export default function HomePage() {
             I don&apos;t optimize for output. I optimize for alignment.
           </h2>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
@@ -138,12 +138,12 @@ export default function HomePage() {
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
                 Surface what&apos;s actually going on—not what you think you
-                should want. I use awareness to help you see the gap between where you are and where you want to be—without the stories you&apos;ve been telling yourself.
+                should want. See the gap between where you are and where you want to be without the stories you&apos;ve been telling yourself.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-rose-100 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                 </svg>
               </div>
@@ -156,9 +156,9 @@ export default function HomePage() {
                 point the same way.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-accent/15 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
                 </svg>

@@ -11,7 +11,6 @@ export const testimonials = [
       "I knew how to treat patients, but starting a business left me stuck and overthinking everything. Jake helped me cut through the noise, define a vision, and take confident action. What used to feel overwhelming now feels intentional and it's directly translated into real business growth.",
     headline: "Real Business Growth.",
     author: "Dr. Marshall Gevers",
-    title: "Chiropractor",
     image: "/images/testimonials/Marshall.png",
   },
   {
