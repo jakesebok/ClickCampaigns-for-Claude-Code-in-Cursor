@@ -43,11 +43,11 @@ export default function HomePage() {
                 <br />
                 success.
               </h1>
-              <p className="font-semibold text-base text-ap-mid leading-relaxed mb-6">
+              <p className="font-semibold text-base text-ap-mid leading-relaxed mb-8">
                 You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
               </p>
-              {/* Quote above CTAs */}
-              <div className="space-y-4 mb-8">
+              {/* Quote above CTAs — mobile only */}
+              <div className="lg:hidden space-y-4 mb-8">
                 <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
                 <p className="font-semibold italic text-xl text-ap-primary leading-snug">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
@@ -84,43 +84,49 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            {/* Right column — Jake image on orange */}
-            <div className="hidden lg:flex justify-end items-center">
-              <div className="relative w-72 h-80 rounded-[20px] overflow-hidden shadow-xl ring-2 ring-white/20">
-                <Image
-                  src="/images/jake/MMC Profile.jpeg"
-                  alt="Jake Sebok"
-                  fill
-                  className="object-cover"
-                  sizes="288px"
-                />
+            {/* Right column — quote on orange (desktop only) */}
+            <div className="hidden lg:flex items-center justify-end">
+              <div className="space-y-4 max-w-[280px] text-right">
+                <div className="w-10 h-0.5 bg-white/35 ml-auto" />
+                <p className="font-semibold italic text-xl text-white leading-snug">
+                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+                </p>
+                <div className="flex items-center justify-end gap-3">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
+                    <Image
+                      src="/images/jake/MMC Profile.jpeg"
+                      alt="Jake Sebok"
+                      fill
+                      className="object-cover"
+                      sizes="96px"
+                    />
+                  </div>
+                  <p className="text-sm text-white/65">— Jake Sebok, MCPC</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Trusted By — full-width chip, then 6 items */}
+        {/* Trusted By strip — single row on desktop, chip + grid on mobile */}
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
-          <div className="px-4 py-3 sm:py-4 text-center border-b border-ap-border">
-            <span className="font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y sm:divide-y-0 border-t-0 border-ap-border">
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+          <div className="flex flex-wrap w-full">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+              <span className="font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
+            </div>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0">
               <span className="font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
-            </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Entrepreneurs</span>
             </div>
           </div>
         </div>
@@ -207,8 +213,11 @@ export default function HomePage() {
             Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
+            <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/20 font-semibold leading-snug mb-6">
+              But when what you&apos;re building matches who you actually are, execution stops being a war with yourself.
+            </p>
             <p className="text-ap-mid text-lg leading-relaxed">
-              But when what you&apos;re building matches who you actually are, execution stops being a war with yourself. Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
+              Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
           <p className="font-semibold text-xl text-ap-primary">
@@ -440,11 +449,7 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             What happens when alignment replaces the grind.
           </h2>
-        </div>
-        <div className="px-5 sm:px-6 lg:w-screen lg:relative lg:left-1/2 lg:-ml-[50vw] lg:px-6">
           <TestimonialCarousel testimonials={testimonials} />
-        </div>
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"

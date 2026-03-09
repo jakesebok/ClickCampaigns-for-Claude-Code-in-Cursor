@@ -14,6 +14,7 @@ const GAP = 24;
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(MARSHALL_INDEX);
   const [containerHeight, setContainerHeight] = useState(360);
+  const [isDesktop, setIsDesktop] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -26,12 +27,21 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
   }, [activeIndex]);
 
   useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const handler = () => setIsDesktop(mq.matches);
+    handler();
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (isDesktop) return;
     updateHeight();
     const ro = new ResizeObserver(updateHeight);
     const card = cardRefs.current[activeIndex];
     if (card) ro.observe(card);
     return () => ro.disconnect();
-  }, [activeIndex, updateHeight]);
+  }, [activeIndex, updateHeight, isDesktop]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -94,14 +104,14 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
         style={{
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",
-          height: containerHeight,
+          height: isDesktop ? 360 : containerHeight,
         }}
       >
         {testimonials.map((t, i) => (
           <div
             key={t.author}
             ref={(el) => { cardRefs.current[i] = el; }}
-            className="flex-shrink-0 snap-center"
+            className="flex-shrink-0 snap-center lg:h-[360px]"
           >
             <TestimonialCard {...t} />
           </div>
