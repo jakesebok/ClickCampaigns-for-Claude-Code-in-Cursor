@@ -30,7 +30,7 @@ export default function HomePage() {
         </span>
         {/* Content */}
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start w-full">
             <div className="max-w-xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4 flex items-center gap-2">
                 <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
@@ -65,7 +65,7 @@ export default function HomePage() {
               </div>
             </div>
             {/* Quote with circular thumbnail — right side on desktop (on orange), below on mobile */}
-            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0 lg:-translate-y-4 lg:-translate-x-6">
+            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
               <div className="space-y-4 max-w-[280px] text-center lg:text-right">
                 <div className="w-10 h-0.5 bg-ap-accent/40 lg:bg-white/35 mx-auto lg:ml-auto lg:mr-0" />
                 <p className="font-cormorant font-semibold italic text-xl text-ap-primary lg:text-white leading-snug">
