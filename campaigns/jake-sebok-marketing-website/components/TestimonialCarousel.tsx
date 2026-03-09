@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { TestimonialCard } from "./TestimonialCard";
 import type { Testimonial } from "./TestimonialCard";
 
@@ -9,10 +9,29 @@ interface TestimonialCarouselProps {
 }
 
 const MARSHALL_INDEX = 1;
+const GAP = 24;
 
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(MARSHALL_INDEX);
+  const [containerHeight, setContainerHeight] = useState(360);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const updateHeight = useCallback(() => {
+    const card = cardRefs.current[activeIndex];
+    if (card) {
+      const h = card.offsetHeight;
+      setContainerHeight(Math.max(h, 200));
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
+    updateHeight();
+    const ro = new ResizeObserver(updateHeight);
+    const card = cardRefs.current[activeIndex];
+    if (card) ro.observe(card);
+    return () => ro.disconnect();
+  }, [activeIndex, updateHeight]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -20,10 +39,9 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     const scrollToMarshall = () => {
       const children = el.children;
       if (children.length <= MARSHALL_INDEX) return;
-      const gap = 24;
       let offsetBeforeMarshall = 0;
       for (let i = 0; i < MARSHALL_INDEX; i++) {
-        offsetBeforeMarshall += (children[i] as HTMLElement).offsetWidth + gap;
+        offsetBeforeMarshall += (children[i] as HTMLElement).offsetWidth + GAP;
       }
       const marshallCardWidth = (children[MARSHALL_INDEX] as HTMLElement).offsetWidth;
       const containerWidth = el.offsetWidth;
@@ -42,9 +60,8 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
       const scrollLeft = el.scrollLeft;
       const children = el.children;
       let accumulated = 0;
-      const gap = 24;
       for (let i = 0; i < children.length; i++) {
-        const cardWidth = (children[i] as HTMLElement).offsetWidth + gap;
+        const cardWidth = (children[i] as HTMLElement).offsetWidth + GAP;
         if (scrollLeft < accumulated + cardWidth / 2) {
           setActiveIndex(i);
           return;
@@ -62,9 +79,8 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     if (!el) return;
     const children = el.children;
     let scrollLeft = 0;
-    const gap = 24;
     for (let i = 0; i < index && i < children.length; i++) {
-      scrollLeft += (children[i] as HTMLElement).offsetWidth + gap;
+      scrollLeft += (children[i] as HTMLElement).offsetWidth + GAP;
     }
     el.scrollTo({ left: scrollLeft, behavior: "smooth" });
     setActiveIndex(index);
@@ -74,13 +90,18 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 -mx-5 px-5 sm:-mx-6 sm:px-6 scrollbar-hide"
-        style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-6 pb-4 -mx-5 px-5 sm:-mx-6 sm:px-6 scrollbar-hide transition-[height] duration-300 ease-out"
+        style={{
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          height: containerHeight,
+        }}
       >
-        {testimonials.map((t) => (
+        {testimonials.map((t, i) => (
           <div
             key={t.author}
-            className="flex-shrink-0 h-[360px] snap-center"
+            ref={(el) => { cardRefs.current[i] = el; }}
+            className="flex-shrink-0 snap-center"
           >
             <TestimonialCard {...t} />
           </div>

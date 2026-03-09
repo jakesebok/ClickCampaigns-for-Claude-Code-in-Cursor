@@ -30,9 +30,9 @@ export default function HomePage() {
         </span>
         {/* Content */}
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4 flex items-center gap-2">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary mb-4 flex items-center gap-2">
                 <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
                 Values-Aligned Performance · Jake Sebok
               </p>
@@ -43,9 +43,29 @@ export default function HomePage() {
                 <br />
                 success.
               </h1>
-              <p className="font-cormorant font-semibold text-base text-ap-mid leading-relaxed mb-8">
+              <p className="font-cormorant font-semibold text-base text-ap-mid leading-relaxed mb-6">
                 You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
               </p>
+              {/* Quote above CTAs */}
+              <div className="space-y-4 mb-8">
+                <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
+                <p className="font-cormorant font-semibold italic text-xl text-ap-primary leading-snug">
+                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-ap-accent/30 flex-shrink-0">
+                    <Image
+                      src="/images/jake/MMC Profile.jpeg"
+                      alt="Jake Sebok"
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                      priority
+                    />
+                  </div>
+                  <p className="text-sm text-ap-mid">— Jake Sebok, MCPC</p>
+                </div>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/assessment"
@@ -64,50 +84,43 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            {/* Quote with circular thumbnail — right side on desktop (on orange), below on mobile */}
-            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
-              <div className="space-y-4 max-w-[280px] text-center lg:text-right">
-                <div className="w-10 h-0.5 bg-ap-accent/40 lg:bg-white/35 mx-auto lg:ml-auto lg:mr-0" />
-                <p className="font-cormorant font-semibold italic text-xl text-ap-primary lg:text-white leading-snug">
-                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
-                </p>
-                <div className="flex items-center justify-center lg:justify-end gap-3">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-ap-accent/30 lg:ring-white/30 flex-shrink-0">
-                    <Image
-                      src="/images/jake/MMC Profile.jpeg"
-                      alt="Jake Sebok"
-                      fill
-                      className="object-cover"
-                      sizes="96px"
-                      priority
-                    />
-                  </div>
-                  <p className="text-sm text-ap-mid lg:text-white/65">— Jake Sebok, MCPC</p>
-                </div>
+            {/* Right column — Jake image on orange */}
+            <div className="hidden lg:flex justify-end items-center">
+              <div className="relative w-72 h-80 rounded-[20px] overflow-hidden shadow-xl ring-2 ring-white/20">
+                <Image
+                  src="/images/jake/MMC Profile.jpeg"
+                  alt="Jake Sebok"
+                  fill
+                  className="object-cover"
+                  sizes="288px"
+                />
               </div>
             </div>
           </div>
         </div>
-        {/* Trusted By strip — single row, full width */}
+        {/* Trusted By — full-width chip, then 6 items */}
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
-          <div className="flex flex-wrap w-full">
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-cormorant font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
-            </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+          <div className="px-4 py-3 sm:py-4 text-center border-b border-ap-border">
+            <span className="font-cormorant font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y sm:divide-y-0 border-t-0 border-ap-border">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0">
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
               <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
+            </div>
+            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Entrepreneurs</span>
             </div>
           </div>
         </div>
@@ -186,17 +199,16 @@ export default function HomePage() {
             Here&apos;s the Truth
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            You don&apos;t have a strategy problem. Or a discipline problem. You have an <span className="text-ap-accent">alignment</span> problem.
+            You don&apos;t have a strategy problem. Or a discipline problem.
+            <br />
+            You have an <span className="text-ap-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
             Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
-            <p className="font-semibold text-ap-primary mb-4">
-              But when what you&apos;re building matches who you actually are—
-            </p>
             <p className="text-ap-mid text-lg leading-relaxed">
-              execution stops being a war with yourself. Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
+              But when what you&apos;re building matches who you actually are, execution stops being a war with yourself. Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
           <p className="font-cormorant font-semibold text-xl text-ap-primary">
@@ -320,7 +332,7 @@ export default function HomePage() {
           <p className="text-ap-mid mb-8 max-w-2xl">
             Not a list of tactics. A fundamental shift in how you run your business and your life.
           </p>
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-12">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch mb-12">
             <div className="lg:col-span-8 order-1">
           <div className="space-y-6">
             <div className="flex gap-4 sm:gap-6 items-start">
@@ -380,14 +392,14 @@ export default function HomePage() {
             </div>
           </div>
             </div>
-            <div className="lg:col-span-4 order-2">
-              <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden shadow-xl">
+            <div className="hidden lg:block lg:col-span-4 order-2">
+              <div className="relative h-full min-h-[480px] rounded-[20px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
                   alt="Jake Sebok"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  sizes="400px"
                 />
               </div>
             </div>
