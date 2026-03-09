@@ -18,34 +18,32 @@ const offerings = [
   {
     title: "Aligned Freedom Workshop",
     description:
-      "Free 90-minute monthly workshop. Get clarity, cut through the noise, and connect with a community of entrepreneurs who refuse to stay stuck.",
+      "90-minute monthly workshop. Get clarity, cut through the noise, and connect with a community of entrepreneurs who refuse to stay stuck.",
     cta: "Join the Next Workshop",
-    href: "#",
+    href: "/work-with-me/freedom-workshop",
     free: true,
   },
   {
     title: "Freedom Builders Community",
     description:
-      "Free community with the Aligned Freedom Course. Learn at your own pace, connect with like-minded founders, and build the foundation for aligned growth.",
-    cta: "Join Free",
-    href: "#",
+      "Community with the Aligned Freedom Course. Learn at your own pace, connect with like-minded founders, and build the foundation for aligned growth.",
+    cta: "Learn More",
+    href: "/work-with-me/freedom-builders",
     free: true,
   },
   {
     title: "Strategic Alignment Intensives",
     description:
-      "Quarterly deep-dive for owner-operators. $297 general admission, $97 for community members. Get strategic clarity and a clear path forward.",
+      "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
     cta: "Learn More",
-    href: "#",
-    free: false,
+    href: "/work-with-me/strategic-intensives",
   },
   {
     title: "Aligned Leaders Community",
     description:
-      "Paid community for ongoing support and accountability. $97/month or $997/year. Weekly calls, resources, and a cohort of aligned entrepreneurs.",
-    cta: "Join the Community",
-    href: "#",
-    free: false,
+      "Ongoing support and accountability. Weekly calls, resources, and a cohort of aligned entrepreneurs.",
+    cta: "Learn More",
+    href: "/work-with-me/aligned-leaders",
   },
   {
     title: "Aligned Power Accelerator",
@@ -53,7 +51,6 @@ const offerings = [
       "12-month group coaching program. The flagship experience for entrepreneurs ready to build a business that's an extension of who they are. Application required.",
     cta: "Apply Now",
     href: "#accelerator-application",
-    free: false,
     featured: true,
   },
 ];
@@ -62,8 +59,12 @@ export default function WorkWithMePage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+      <section
+        className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-cover bg-right"
+        style={{ backgroundImage: "url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800)" }}
+      >
+        <div className="absolute inset-0 bg-ap-bg/95" />
+        <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
             How We Work
           </p>
@@ -92,13 +93,11 @@ export default function WorkWithMePage() {
                     : "bg-white border-ap-border hover:border-ap-accent/50"
                 } transition-colors`}
               >
-                <span
-                  className={`inline-block text-xs font-semibold uppercase tracking-wider mb-4 ${
-                    offer.featured ? "text-ap-accent" : "text-ap-accent"
-                  }`}
-                >
-                  {offer.free ? "Free" : "Paid"}
-                </span>
+                {offer.free && (
+                  <span className="inline-block text-xs font-semibold uppercase tracking-wider mb-4 text-ap-accent">
+                    Free
+                  </span>
+                )}
                 <h3
                   className={`font-semibold text-xl mb-3 ${
                     offer.featured ? "text-white" : "text-ap-primary"

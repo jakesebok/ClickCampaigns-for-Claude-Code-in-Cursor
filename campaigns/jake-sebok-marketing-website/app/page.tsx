@@ -1,89 +1,122 @@
 import Link from "next/link";
 import Image from "next/image";
-import { TestimonialCard } from "@/components/TestimonialCard";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { testimonials } from "@/lib/testimonials";
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-28">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
-                Values-Aligned Performance
+      {/* Hero — Slate & Spark style: diagonal orange, punchy headline, stats strip */}
+      <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
+        <div className="absolute inset-0 bg-ap-bg" />
+        {/* Diagonal orange cut */}
+        <div
+          className="absolute top-0 right-0 w-[42%] h-full bg-ap-accent"
+          style={{ clipPath: "polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
+          style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+        />
+        {/* Content */}
+        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+            <div className="max-w-xl">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4 flex items-center gap-2">
+                <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
+                Slate & Spark · Jake Sebok
               </p>
-              <h1 className="font-cormorant font-bold text-4xl sm:text-5xl lg:text-6xl text-ap-primary leading-[1.1] tracking-tight mb-6">
-                Build a business that&apos;s an extension of who you are—not a
-                cage you built around yourself.
+              <h1 className="font-outfit font-extrabold text-4xl sm:text-5xl lg:text-6xl text-ap-primary leading-[0.93] tracking-tight mb-6">
+                Stop building
+                <br />
+                <span className="text-ap-accent">someone else&apos;s</span>
+                <br />
+                success.
               </h1>
-              <p className="text-lg sm:text-xl text-ap-mid leading-relaxed mb-8 max-w-xl">
-                I help entrepreneurs who feel trapped by the businesses they
-                built rediscover the vision that ignited them—and construct
-                something sustainable, values-driven, and fully alive.
+              <p className="font-cormorant font-semibold text-base text-ap-mid leading-relaxed mb-8">
+                You don&apos;t have a discipline problem. You have an alignment problem. When what you&apos;re building finally matches who you are—execution stops being a war with yourself.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-wrap gap-3">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all shadow-lg shadow-ap-accent/25"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
                 >
-                  Take the Free VAPI™ Assessment
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
+                  Take the VAPI™
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center justify-center gap-2 bg-transparent text-ap-primary font-semibold px-8 py-4 rounded-pill border-[1.5px] border-ap-primary hover:bg-ap-primary hover:text-white transition-all"
+                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-medium text-xs tracking-wider hover:border-ap-accent hover:text-ap-accent transition-all"
                 >
-                  Explore How We Work
+                  See How It Works
                 </Link>
               </div>
             </div>
-            <div className="relative">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl">
+            <div className="relative lg:hidden mt-8">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl max-w-sm mx-auto">
+                <Image
+                  src="/images/jake/jacob-sebok-laughing.jpeg"
+                  alt="Jake Sebok"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/30 to-transparent" />
+              </div>
+            </div>
+            <div className="relative hidden lg:block">
+              <div className="absolute inset-0 flex items-center pr-8 pl-12">
+                <div className="space-y-4">
+                  <div className="w-10 h-0.5 bg-white/35" />
+                  <p className="font-cormorant font-semibold italic text-xl text-white leading-snug max-w-[280px]">
+                    &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually are.&rdquo;
+                  </p>
+                  <p className="text-sm text-white/65">— Jake Sebok, MCC</p>
+                </div>
+              </div>
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-2xl ml-auto w-[85%]">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok"
                   fill
                   className="object-cover"
                   priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/40 to-transparent" />
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 sm:w-32 sm:h-32 bg-ap-accent rounded-[20px] -z-10" />
+            </div>
+          </div>
+        </div>
+        {/* Trusted By strip — same style as stats, authority bar content */}
+        <div className="relative z-10 border-t-2 border-ap-accent bg-white">
+          <p className="text-center text-ap-muted text-xs font-semibold uppercase tracking-wider py-4 sm:py-5 px-4">
+            Trusted by entrepreneurs who refused to stay stuck
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-5 border-t border-ap-border">
+            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Chiropractors</span>
+            </div>
+            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-ap-border sm:border-b-0 sm:border-r">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
+            </div>
+            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
+            </div>
+            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center border-b border-ap-border sm:border-b-0 sm:border-r col-span-2 sm:col-span-1">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Service Professionals</span>
+            </div>
+            <div className="px-3 py-3 sm:py-5 sm:px-6 text-center col-span-2 sm:col-span-1">
+              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Ex-Corporate Founders</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Social proof bar */}
-      <section className="bg-ap-primary py-12">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-center text-ap-muted text-sm font-semibold uppercase tracking-wider mb-6">
-            Trusted by entrepreneurs who refused to stay stuck
-          </p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-white/80">
-            <span className="font-cormorant font-semibold">Chiropractors</span>
-            <span className="font-cormorant font-semibold">Coaches</span>
-            <span className="font-cormorant font-semibold">Healers</span>
-            <span className="font-cormorant font-semibold">Service Professionals</span>
-            <span className="font-cormorant font-semibold">Ex-Corporate Founders</span>
-          </div>
-        </div>
-      </section>
+      {/* Orange rule — Slate & Spark */}
+      <div className="h-0.5 bg-ap-accent" />
 
       {/* What I do */}
       <section className="py-20 sm:py-28">
@@ -95,84 +128,75 @@ export default function HomePage() {
             I don&apos;t optimize for output. I optimize for alignment.
           </h2>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-12 h-12 rounded-xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg
-                  className="w-6 h-6 text-ap-accent"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                  />
-                </svg>
+            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="https://images.pexels.com/photos/7413915/pexels-photo-7413915.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Business strategy and planning"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                Awareness
-              </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
-                Surface what&apos;s actually going on—not what you think you
-                should want. The VAPI™ Assessment gives you an honest baseline.
-              </p>
+              <div className="p-8">
+                <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                  Awareness
+                </h3>
+                <p className="text-ap-mid text-sm leading-relaxed">
+                  Surface what&apos;s actually going on—not what you think you
+                  should want. The VAPI™ Assessment gives you an honest baseline.
+                </p>
+              </div>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-12 h-12 rounded-xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg
-                  className="w-6 h-6 text-ap-accent"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
+            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="https://images.pexels.com/photos/5715847/pexels-photo-5715847.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Coaching and mindset"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                Internal Alignment
-              </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
-                NLP-based parts work that turns self-sabotage into momentum. The
-                business aligns with your nervous system so success and values
-                point the same way.
-              </p>
+              <div className="p-8">
+                <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                  Internal Alignment
+                </h3>
+                <p className="text-ap-mid text-sm leading-relaxed">
+                  NLP-based parts work that turns self-sabotage into momentum. The
+                  business aligns with your nervous system so success and values
+                  point the same way.
+                </p>
+              </div>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-12 h-12 rounded-xl bg-ap-accent/15 flex items-center justify-center mb-6">
-                <svg
-                  className="w-6 h-6 text-ap-accent"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                  />
-                </svg>
+            <div className="bg-white rounded-[20px] border border-ap-border overflow-hidden hover:border-ap-accent/50 transition-colors">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="https://images.pexels.com/photos/6804090/pexels-photo-6804090.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Execution and growth"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
-                Embodied Execution
-              </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
-                Sustainable growth that doesn&apos;t require you to abandon what
-                you actually want. Progress that continues after coaching ends.
-              </p>
+              <div className="p-8">
+                <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                  Embodied Execution
+                </h3>
+                <p className="text-ap-mid text-sm leading-relaxed">
+                  Sustainable growth that doesn&apos;t require you to abandon what
+                  you actually want. Progress that continues after coaching ends.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials — carousel */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
@@ -181,39 +205,17 @@ export default function HomePage() {
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             Real transformation. Real results.
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((t) => (
-              <TestimonialCard key={t.author} {...t} />
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link
-              href="/testimonials"
-              className="inline-flex items-center gap-2 text-ap-accent font-semibold hover:underline"
-            >
-              Read more testimonials
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-          </div>
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
       {/* CTA */}
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center">
+          <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
               <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
@@ -223,16 +225,19 @@ export default function HomePage() {
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
                 An honest snapshot of where you stand across 12 domains.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
                 >
                   Take the VAPI™
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center justify-center bg-transparent text-white font-semibold px-8 py-4 rounded-pill border-[1.5px] border-white/60 hover:bg-white/10 transition-all"
+                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-white/60 text-white font-medium text-xs tracking-wider hover:bg-white/10 transition-all"
                 >
                   See All Offerings
                 </Link>

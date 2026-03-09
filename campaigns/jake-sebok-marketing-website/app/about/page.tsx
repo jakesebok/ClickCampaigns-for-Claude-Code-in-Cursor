@@ -6,7 +6,7 @@ import { testimonials } from "@/lib/testimonials";
 export const metadata = {
   title: "About Jake Sebok — Values-Aligned Performance Coach",
   description:
-    "Jake Sebok helps entrepreneurs who feel trapped by their businesses rediscover their vision. Certified coach, NLP practitioner, and former corporate leader who chose alignment over the cage.",
+    "Jake Sebok helps entrepreneurs who feel trapped by their businesses rediscover their vision. Master Certified Coach, business owner, and full-time dad who chose alignment over the cage.",
 };
 
 export default function AboutPage() {
@@ -19,10 +19,14 @@ export default function AboutPage() {
             The Story
           </p>
           <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
-            I wasn&apos;t failing at business. I was succeeding at the wrong one.
+            Hey, I&apos;m Jacob Sebok.
           </h1>
+          <p className="text-xl text-ap-mid leading-relaxed mb-8 max-w-2xl">
+            Master Certified Professional Coach. Business owner. Full-time dad to
+            three amazing kids.
+          </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden">
+            <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
               <Image
                 src="/images/jake/MMC Profile.jpeg"
                 alt="Jake Sebok"
@@ -33,51 +37,42 @@ export default function AboutPage() {
             </div>
             <div className="space-y-6">
               <p className="text-ap-mid text-lg leading-relaxed">
-                Life was restrictive and unfulfilling. I felt trapped trading
-                time for money, believing only relentless performance could
-                guarantee security. Even as my career advanced, I was stuck in
-                roles that looked impressive from the outside but felt
-                suffocating from the inside—bound by golden handcuffs.
+                By 33, I had achieved a lot. Six figures. Number two in my
+                company. I built a team and scaled revenue 20x in just nine
+                months. From the outside, checking all those boxes looked like
+                success.
               </p>
               <p className="text-ap-mid text-lg leading-relaxed">
-                When I finally started my own business, the thing I thought would
-                set me free, I fell into the same trap wearing a different mask.
-                I chased money over passion, overworked instead of
-                over-delivering, and built something that looked like success but
-                felt like a beautifully decorated prison.
+                Inside, I was burned out, anxious, and disconnected from
+                everything I said mattered most. I was giving my family the
+                scraps and grinding toward a version of &ldquo;more&rdquo; that
+                I didn&apos;t even want. And the worst part? I knew something
+                was wrong. I just couldn&apos;t stop.
               </p>
               <p className="text-ap-mid text-lg leading-relaxed">
-                The turning point wasn&apos;t a strategy. It was a decision to
-                be ruthlessly honest about what I actually wanted—and to pursue
-                it immediately, without waiting for permission. When I started
-                sharing my truth, something unexpected happened. Others
-                recognized themselves in my story.
+                That experience became my wake-up call. I got clear on my true
+                values and rebuilt my life and work around what actually
+                matters. Now I help impact-driven founders and leaders do the
+                same.
+              </p>
+              <p className="text-ap-mid text-lg leading-relaxed">
+                I&apos;m here to be relentlessly honest and fully committed to
+                helping you build what only you can—as you bring your gifts to
+                the world. This isn&apos;t just coaching. It&apos;s a
+                partnership to help you reconnect with your why and unlock your
+                highest performance without sacrificing what matters most.
+              </p>
+              <p className="font-cormorant font-semibold text-lg text-ap-primary">
+                Believe me, friends—your best days are ahead. Let&apos;s do this
+                together.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Today */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-8">
-            Life today
-          </h2>
-          <p className="text-ap-mid text-lg leading-relaxed max-w-3xl">
-            Today I work exclusively with clients who share my values and my
-            approach. I wake up with purpose, confidence, and a fire that
-            doesn&apos;t burn out—because it&apos;s fueled by alignment, not
-            adrenaline. I control my schedule, collaborate with people who
-            inspire me, prioritize my family and my health, and live fully
-            present. I am no longer postponing happiness until some future
-            milestone gives me permission to enjoy it.
-          </p>
-        </div>
-      </section>
-
       {/* Credentials */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Credentials
@@ -87,18 +82,18 @@ export default function AboutPage() {
             survivor and thriver on it.
           </h2>
           <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-white rounded-[20px] border border-ap-border p-8">
+            <div className="bg-ap-bg rounded-[20px] border border-ap-border p-8">
               <h3 className="font-semibold text-ap-primary mb-4">
                 Certifications
               </h3>
               <ul className="space-y-2 text-ap-mid">
-                <li>• Certified Professional Life Coach</li>
                 <li>• Master Certified Professional Coach</li>
+                <li>• Certified Professional Life Coach</li>
                 <li>• NLP Practitioner</li>
                 <li>• CrossFit Level 2 Coach</li>
               </ul>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border p-8">
+            <div className="bg-ap-bg rounded-[20px] border border-ap-border p-8">
               <h3 className="font-semibold text-ap-primary mb-4">
                 Experience
               </h3>
@@ -113,7 +108,7 @@ export default function AboutPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             What Clients Say

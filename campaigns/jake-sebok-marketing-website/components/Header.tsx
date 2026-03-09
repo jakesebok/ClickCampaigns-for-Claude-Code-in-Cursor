@@ -3,17 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/work-with-me", label: "Work With Me" },
-  { href: "/testimonials", label: "Testimonials" },
   { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 bg-ap-bg/95 backdrop-blur-sm border-b border-ap-border">
@@ -22,22 +23,27 @@ export function Header() {
           <Image
             src="/images/logo-jake-sebok-horizontal.png"
             alt="Jake Sebok"
-            width={140}
-            height={40}
-            className="h-8 w-auto"
+            width={200}
+            height={56}
+            className="h-14 sm:h-16 w-auto"
           />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-semibold text-ap-mid hover:text-ap-accent transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-semibold transition-colors ${
+                  isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/assessment"
             className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3 rounded-pill transition-all"
@@ -80,16 +86,19 @@ export function Header() {
       {mobileOpen && (
         <div className="md:hidden border-t border-ap-border bg-ap-bg px-5 py-4">
           <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-ap-mid hover:text-ap-accent font-semibold"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`font-semibold ${isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"}`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/assessment"
               className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold py-3 rounded-pill"
