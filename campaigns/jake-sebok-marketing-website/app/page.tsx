@@ -312,7 +312,7 @@ export default function HomePage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
-            By the End of Our Work Together
+            The Outcome
           </p>
           <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             By the end of our work together, you will:
@@ -321,21 +321,7 @@ export default function HomePage() {
             Not a list of tactics. A fundamental shift in how you run your business and your life.
           </p>
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-12">
-            <div className="lg:col-span-4 order-2 lg:order-1">
-              <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden shadow-xl">
-                <Image
-                  src="/images/jake/jake-ideal-end-state.png"
-                  alt="Jake Sebok — living the ideal end state"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-              </div>
-              <p className="mt-4 font-cormorant font-semibold italic text-ap-primary text-center lg:text-left">
-                Envision the ideal end state.
-              </p>
-            </div>
-            <div className="lg:col-span-8 order-1 lg:order-2">
+            <div className="lg:col-span-8 order-1">
           <div className="space-y-6">
             <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
@@ -393,6 +379,17 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+            </div>
+            <div className="lg:col-span-4 order-2">
+              <div className="relative aspect-[3/4] rounded-[20px] overflow-hidden shadow-xl">
+                <Image
+                  src="/images/jake/jake-ideal-end-state.png"
+                  alt="Jake Sebok"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              </div>
             </div>
           </div>
           <div className="mt-10 text-center">
