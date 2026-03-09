@@ -4,7 +4,31 @@ import Image from "next/image";
 export function Footer() {
   return (
     <footer className="bg-ap-primary text-white border-t-2 border-ap-accent py-8">
-      <div className="max-w-[1080px] mx-auto px-5 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mb-8 pb-6 border-b border-white/10">
+          <Image
+            src="/images/certifications/icf.png"
+            alt="International Coaching Federation"
+            width={120}
+            height={48}
+            className="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+          />
+          <Image
+            src="/images/certifications/cplc.png"
+            alt="Certified Professional Life Coach"
+            width={80}
+            height={80}
+            className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+          />
+          <Image
+            src="/images/certifications/mcpc.png"
+            alt="Master Certified Professional Coach"
+            width={80}
+            height={80}
+            className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+          />
+        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
         <Link href="/" className="flex-shrink-0">
           <Image
             src="/images/logo-jake-sebok-horizontal.png"
@@ -37,6 +61,7 @@ export function Footer() {
         <p className="text-ap-muted text-xs">
           © {new Date().getFullYear()} Jake Sebok
         </p>
+        </div>
       </div>
     </footer>
   );

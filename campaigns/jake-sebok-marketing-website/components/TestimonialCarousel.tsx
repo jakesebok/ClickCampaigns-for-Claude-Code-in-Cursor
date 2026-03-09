@@ -20,12 +20,15 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     const scrollToMarshall = () => {
       const children = el.children;
       if (children.length <= MARSHALL_INDEX) return;
-      let scrollLeft = 0;
       const gap = 24;
+      let offsetBeforeMarshall = 0;
       for (let i = 0; i < MARSHALL_INDEX; i++) {
-        scrollLeft += (children[i] as HTMLElement).offsetWidth + gap;
+        offsetBeforeMarshall += (children[i] as HTMLElement).offsetWidth + gap;
       }
-      el.scrollLeft = scrollLeft;
+      const marshallCardWidth = (children[MARSHALL_INDEX] as HTMLElement).offsetWidth;
+      const containerWidth = el.offsetWidth;
+      const scrollLeft = offsetBeforeMarshall + marshallCardWidth / 2 - containerWidth / 2;
+      el.scrollLeft = Math.max(0, scrollLeft);
     };
     scrollToMarshall();
     const t = setTimeout(scrollToMarshall, 50);

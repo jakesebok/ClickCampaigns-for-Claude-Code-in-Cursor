@@ -6,7 +6,7 @@ import { testimonials } from "@/lib/testimonials";
 export default function HomePage() {
   return (
     <>
-      {/* Hero — Slate & Spark style: diagonal orange, punchy headline, stats strip */}
+      {/* Hero — diagonal orange, punchy headline */}
       <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 bg-ap-bg" />
         {/* Diagonal orange cut */}
@@ -18,7 +18,7 @@ export default function HomePage() {
           className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
-        {/* Ghost words on orange — Slate & Spark style */}
+        {/* Ghost words on orange */}
         <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
@@ -65,7 +65,7 @@ export default function HomePage() {
               </div>
             </div>
             {/* Quote with circular thumbnail — right side on desktop (on orange), below on mobile */}
-            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
+            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0 lg:-translate-y-4 lg:-translate-x-6">
               <div className="space-y-4 max-w-[280px] text-center lg:text-right">
                 <div className="w-10 h-0.5 bg-ap-accent/40 lg:bg-white/35 mx-auto lg:ml-auto lg:mr-0" />
                 <p className="font-cormorant font-semibold italic text-xl text-ap-primary lg:text-white leading-snug">
@@ -113,18 +113,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Orange rule — Slate & Spark */}
+      {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
-      {/* What I do */}
+      {/* Empathy — pain-accentuating, gap-identifying */}
+      <section className="py-20 sm:py-28 bg-ap-bg">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+            The Cost of Success
+          </p>
+          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+            From the outside, it looks like success. But you know the cost.
+          </h2>
+          <p className="text-ap-mid mb-12 max-w-2xl">
+            Sound familiar?
+          </p>
+          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                The Grind
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                You&apos;re the bottleneck. Strategist, doer, fixer—all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
+              </p>
+            </div>
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                The Guilt
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere—and the guilt is loud at 2am. The business is bleeding into the life you built it for.
+              </p>
+            </div>
+            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 1l4 4-4 4" />
+                  <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                  <path d="M7 23l-4-4 4-4" />
+                  <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+                The Loop
+              </h3>
+              <p className="text-ap-mid text-sm leading-relaxed">
+                Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it—and you&apos;ve tried the discipline fixes. They didn&apos;t stick.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
+      {/* The Work — solution */}
       <section className="py-20 sm:py-28">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Work
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             I don&apos;t optimize for output. I optimize for alignment.
           </h2>
+          <p className="text-ap-mid mb-12 max-w-2xl">
+            It doesn&apos;t have to stay this way. Awareness. Internal Alignment. Embodied Execution—the path from the cage to the life you actually want.
+          </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
@@ -197,12 +263,18 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
+              <div className="flex flex-wrap items-center justify-center gap-6 mb-8 opacity-90">
+                <Image src="/images/certifications/icf.png" alt="International Coaching Federation" width={100} height={40} className="h-8 w-auto object-contain" />
+                <Image src="/images/certifications/cplc.png" alt="Certified Professional Life Coach" width={56} height={56} className="h-10 w-auto object-contain" />
+                <Image src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" width={56} height={56} className="h-10 w-auto object-contain" />
+              </div>
               <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
                 Ready to stop building the cage?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
                 An honest snapshot of where you stand across 12 domains.
+                <span className="block mt-2 text-white/90 font-medium">Free. No payment required.</span>
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
