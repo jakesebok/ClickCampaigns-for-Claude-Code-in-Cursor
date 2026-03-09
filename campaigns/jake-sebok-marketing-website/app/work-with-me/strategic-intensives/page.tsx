@@ -11,10 +11,10 @@ export default function StrategicIntensivesPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
           Strategic Alignment Intensives
         </p>
-        <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+        <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
           Quarterly deep-dive for owner-operators
         </h1>
         <div className="relative aspect-video rounded-[20px] overflow-hidden mb-10">
@@ -33,7 +33,7 @@ export default function StrategicIntensivesPage() {
           full Accelerator.
         </p>
         <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 mb-10">
-          <h2 className="font-semibold text-ap-primary mb-4">
+          <h2 className="font-outfit font-semibold text-ap-primary mb-4">
             Webinar / event registration
           </h2>
           <p className="text-ap-mid text-sm leading-relaxed mb-4">

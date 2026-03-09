@@ -32,7 +32,7 @@ export default function HomePage() {
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary mb-4 flex items-center gap-2">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary mb-4 flex items-center gap-2">
                 <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
                 Values-Aligned Performance · Jake Sebok
               </p>
@@ -43,13 +43,13 @@ export default function HomePage() {
                 <br />
                 success.
               </h1>
-              <p className="font-cormorant font-semibold text-base text-ap-mid leading-relaxed mb-6">
+              <p className="font-semibold text-base text-ap-mid leading-relaxed mb-6">
                 You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
               </p>
               {/* Quote above CTAs */}
               <div className="space-y-4 mb-8">
                 <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
-                <p className="font-cormorant font-semibold italic text-xl text-ap-primary leading-snug">
+                <p className="font-semibold italic text-xl text-ap-primary leading-snug">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
@@ -101,26 +101,26 @@ export default function HomePage() {
         {/* Trusted By — full-width chip, then 6 items */}
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
           <div className="px-4 py-3 sm:py-4 text-center border-b border-ap-border">
-            <span className="font-cormorant font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
+            <span className="font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y sm:divide-y-0 border-t-0 border-ap-border">
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
             </div>
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
             </div>
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
             </div>
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
             </div>
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
             </div>
             <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex items-center justify-center">
-              <span className="font-cormorant font-semibold text-ap-primary text-xs sm:text-base">Entrepreneurs</span>
+              <span className="font-semibold text-ap-primary text-xs sm:text-base">Entrepreneurs</span>
             </div>
           </div>
         </div>
@@ -132,10 +132,10 @@ export default function HomePage() {
       {/* Empathy — pain-accentuating, gap-identifying */}
       <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Cost of Success
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             From the outside, it looks like success. But you know the <span className="text-ap-accent">cost</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
@@ -149,7 +149,7 @@ export default function HomePage() {
                   <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Grind
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -162,7 +162,7 @@ export default function HomePage() {
                   <path d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Guilt
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -178,7 +178,7 @@ export default function HomePage() {
                   <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Loop
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -195,12 +195,12 @@ export default function HomePage() {
       {/* The Reframe — alignment, not discipline */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Here&apos;s the Truth
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
             You don&apos;t have a strategy problem. Or a discipline problem.
-            <br />
+            <br className="hidden lg:block" />
             You have an <span className="text-ap-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
@@ -211,7 +211,7 @@ export default function HomePage() {
               But when what you&apos;re building matches who you actually are, execution stops being a war with yourself. Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
-          <p className="font-cormorant font-semibold text-xl text-ap-primary">
+          <p className="font-semibold text-xl text-ap-primary">
             That&apos;s the work—and here&apos;s how we get there.
           </p>
         </div>
@@ -223,10 +223,10 @@ export default function HomePage() {
       {/* The Work — solution */}
       <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Work
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             Don&apos;t optimize for output. Optimize for <span className="text-ap-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
@@ -240,7 +240,7 @@ export default function HomePage() {
                   <circle cx="12" cy="12" r="3" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Awareness
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -253,7 +253,7 @@ export default function HomePage() {
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Internal Alignment
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -267,7 +267,7 @@ export default function HomePage() {
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-ap-primary mb-3">
+              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Embodied Execution
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
@@ -285,7 +285,7 @@ export default function HomePage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5">
+            <div className="hidden lg:block lg:col-span-5">
               <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/jake/jake-and-son.png"
@@ -297,10 +297,10 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
                 You Don&apos;t Have to Choose
               </p>
-              <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                 Have it all. <span className="text-ap-accent">Really.</span>
               </h2>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
@@ -309,7 +309,7 @@ export default function HomePage() {
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
                 When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm—because you&apos;re no longer fighting yourself.
               </p>
-              <p className="font-cormorant font-semibold text-lg text-ap-primary">
+              <p className="font-semibold text-lg text-ap-primary">
                 No trade-offs. The work we do together is built on that belief.
               </p>
             </div>
@@ -323,10 +323,10 @@ export default function HomePage() {
       {/* Outcomes — by the end of our work together */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Outcome
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             By the end of our work together, you will:
           </h2>
           <p className="text-ap-mid mb-8 max-w-2xl">
@@ -342,7 +342,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-ap-primary mb-1">Extreme clarity about WHAT you&apos;re building and WHY</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Extreme clarity about WHAT you&apos;re building and WHY</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">So you stop chasing opportunities that drain you and start making moves that compound.</p>
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-ap-primary mb-1">Clarity on your greatest constraints and the single most valuable levers to pull</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Clarity on your greatest constraints and the single most valuable levers to pull</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">To make everything else easier or unnecessary.</p>
               </div>
             </div>
@@ -364,7 +364,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-ap-primary mb-1">Trust in yourself to execute consistently on a plan you believe in</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Trust in yourself to execute consistently on a plan you believe in</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">No forcing it with willpower.</p>
               </div>
             </div>
@@ -375,7 +375,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-ap-primary mb-1">A business that supports your life instead of consuming it</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">A business that supports your life instead of consuming it</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">With real boundaries and a calendar that breathes.</p>
               </div>
             </div>
@@ -386,7 +386,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
                 <p className="text-ap-mid text-sm leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
               </div>
             </div>
@@ -434,13 +434,17 @@ export default function HomePage() {
       {/* Testimonials — carousel */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             What People Say
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             What happens when alignment replaces the grind.
           </h2>
+        </div>
+        <div className="px-5 sm:px-6 lg:w-screen lg:relative lg:left-1/2 lg:-ml-[50vw] lg:px-6">
           <TestimonialCarousel testimonials={testimonials} />
+        </div>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
@@ -466,7 +470,7 @@ export default function HomePage() {
                 <Image src="/images/certifications/cplc.png" alt="Certified Professional Life Coach" width={56} height={56} className="h-10 w-auto object-contain" />
                 <Image src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" width={56} height={56} className="h-10 w-auto object-contain" />
               </div>
-              <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
+              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
                 Ready to stop building the <span className="text-ap-accent">cage</span>?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">

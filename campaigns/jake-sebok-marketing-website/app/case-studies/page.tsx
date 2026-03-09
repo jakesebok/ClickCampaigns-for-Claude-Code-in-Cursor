@@ -13,10 +13,10 @@ export default function CaseStudiesPage() {
       {/* Hero */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
             Case Studies
           </p>
-          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Real results. Real transformation.
           </h1>
           <p className="text-xl text-ap-mid max-w-2xl leading-relaxed">
@@ -40,14 +40,14 @@ export default function CaseStudiesPage() {
                 />
               </div>
               <div className="mt-6 p-6 rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg">
-                <p className="font-cormorant font-semibold italic text-lg text-ap-primary mb-2">
+                <p className="font-semibold italic text-lg text-ap-primary mb-2">
                   &ldquo;I knew how to treat patients, but starting a business left me stuck and overthinking everything. Jake helped me cut through the noise, define a vision, and take confident action. What used to feel overwhelming now feels intentional—and it&apos;s directly translated into real business growth.&rdquo;
                 </p>
                 <p className="font-semibold text-ap-primary">— Dr. Marshall Gevers</p>
                 <p className="text-sm text-ap-muted mt-1">Chiropractor</p>
               </div>
               <div className="mt-6 p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
-                <p className="font-cormorant font-semibold italic text-lg mb-4">
+                <p className="font-semibold italic text-lg mb-4">
                   &ldquo;The business now feels more like an extension of me than something I have to go do. I feel completely different. I&apos;m excited for the next five years of business rather than anxious about it.&rdquo;
                 </p>
                 <p className="text-white/80 text-sm">— Dr. Marshall Gevers</p>
@@ -55,10 +55,10 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
                   Featured Case Study
                 </p>
-                <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+                <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From &ldquo;I hate owning a business&rdquo; to excited to go to work every day
                 </h2>
                 <p className="text-ap-mid text-lg leading-relaxed">
@@ -67,7 +67,7 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="font-semibold text-lg text-ap-primary">
+                <h3 className="font-outfit font-semibold text-lg text-ap-primary">
                   The transformation
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -129,14 +129,14 @@ export default function CaseStudiesPage() {
                 />
               </div>
               <div className="mt-6 p-6 rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg">
-                <p className="font-cormorant font-semibold italic text-lg text-ap-primary mb-2">
+                <p className="font-semibold italic text-lg text-ap-primary mb-2">
                   &ldquo;Jake called me forth to step into my power and become the man I always knew I could be.&rdquo;
                 </p>
                 <p className="font-semibold text-ap-primary">— Thaddeus John</p>
                 <p className="text-sm text-ap-muted mt-1">Attention Coach</p>
               </div>
               <div className="mt-6 p-6 sm:p-8 rounded-[20px] bg-ap-primary text-white border-t-2 border-ap-accent">
-                <p className="font-cormorant font-semibold italic text-lg mb-4">
+                <p className="font-semibold italic text-lg mb-4">
                   &ldquo;I feel like Jake understands me at a deep level. I have a clear understanding of what I&apos;m building and why it matters—and it&apos;s rare to find someone who holds that kind of space. Jake doesn&apos;t tell me what to do. He calls forth what was already there.&rdquo;
                 </p>
                 <p className="text-white/80 text-sm">— Thaddeus John</p>
@@ -144,10 +144,10 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
                   Case Study
                 </p>
-                <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+                <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From stuck and scattered to clarity, conviction, and a calendar full of clients
                 </h2>
                 <p className="text-ap-mid text-lg leading-relaxed">
@@ -156,7 +156,7 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="font-semibold text-lg text-ap-primary">
+                <h3 className="font-outfit font-semibold text-lg text-ap-primary">
                   The transformation
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -212,10 +212,10 @@ export default function CaseStudiesPage() {
       {/* More Results — Charul teaser */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             More Results
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             More entrepreneurs who chose alignment
           </h2>
           <div className="max-w-2xl">
@@ -225,7 +225,7 @@ export default function CaseStudiesPage() {
                   <Image src="/images/testimonials/Charul.png" alt="Charul Patel" fill className="object-cover" sizes="56px" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-ap-primary">Charul Patel</h3>
+                  <h3 className="font-outfit font-semibold text-ap-primary">Charul Patel</h3>
                   <p className="text-sm text-ap-muted">Jacob was so insightful!</p>
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function CaseStudiesPage() {
           <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
-              <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
+              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
                 Ready to write your own case study?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">

@@ -13,7 +13,7 @@ const outfit = Outfit({
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
-  weight: ["600", "700"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${cormorant.variable}`}>
-      <body className="min-h-screen antialiased font-outfit">
+      <body className="min-h-screen antialiased font-cormorant">
         <Header />
         <main>{children}</main>
         <Footer />

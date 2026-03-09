@@ -10,10 +10,10 @@ export default function ContactPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[640px] mx-auto px-5 sm:px-6">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
           Get in Touch
         </p>
-        <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+        <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
           Let&apos;s talk.
         </h1>
         <p className="text-ap-mid text-lg mb-10">

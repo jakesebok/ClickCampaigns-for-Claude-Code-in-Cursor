@@ -13,11 +13,11 @@ export function TestimonialCard({ quote, headline, author, title, image, wide }:
   return (
     <div className={`min-h-[200px] bg-white rounded-[20px] border border-ap-border p-8 sm:p-10 hover:border-ap-accent/50 transition-colors flex flex-col ${wide ? "w-[min(600px,90vw)] min-w-[280px] sm:min-w-[380px]" : "w-[min(520px,90vw)] min-w-[280px] sm:min-w-[340px]"}`}>
       {headline && (
-        <p className="text-ap-accent font-semibold text-sm uppercase tracking-wider mb-3 flex-shrink-0">
+        <p className="font-outfit text-ap-accent font-semibold text-sm uppercase tracking-wider mb-3 flex-shrink-0">
           {headline}
         </p>
       )}
-      <blockquote className="font-cormorant font-semibold text-xl sm:text-2xl text-ap-primary leading-relaxed mb-6">
+      <blockquote className="font-semibold text-xl sm:text-2xl text-ap-primary leading-relaxed mb-6">
         &ldquo;{quote}&rdquo;
       </blockquote>
       <div className="flex items-center gap-4 flex-shrink-0">

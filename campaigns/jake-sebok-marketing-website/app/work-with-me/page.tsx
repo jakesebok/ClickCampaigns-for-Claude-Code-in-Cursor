@@ -65,10 +65,10 @@ export default function WorkWithMePage() {
       >
         <div className="absolute inset-0 bg-ap-bg/95" />
         <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
             How We Work
           </p>
-          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Start free. Go deeper when you&apos;re ready.
           </h1>
           <p className="text-lg text-ap-mid max-w-2xl">
@@ -99,7 +99,7 @@ export default function WorkWithMePage() {
                   </span>
                 )}
                 <h3
-                  className={`font-semibold text-xl mb-3 ${
+                  className={`font-outfit font-semibold text-xl mb-3 ${
                     offer.featured ? "text-white" : "text-ap-primary"
                   }`}
                 >
@@ -147,10 +147,10 @@ export default function WorkWithMePage() {
         className="py-20 sm:py-28 bg-white"
       >
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Aligned Power Accelerator
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
             Apply for the 12-month program
           </h2>
           <p className="text-ap-mid mb-10">
