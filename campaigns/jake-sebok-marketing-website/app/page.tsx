@@ -484,9 +484,12 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
-              className="text-gradient-accent font-semibold text-sm hover:underline"
+              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-5 py-2.5 rounded-pill transition-all"
             >
-              Read Marshall&apos;s story: from dreading work to excited every day →
+              Read Marshall&apos;s story: from dreading work to excited every day
+              <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         </div>

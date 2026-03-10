@@ -18,14 +18,6 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const updateHeight = useCallback(() => {
-    const card = cardRefs.current[activeIndex];
-    if (card) {
-      const h = card.offsetHeight;
-      setContainerHeight(Math.max(h, 200));
-    }
-  }, [activeIndex]);
-
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
     const handler = () => setIsDesktop(mq.matches);
@@ -36,12 +28,24 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
 
   useEffect(() => {
     if (isDesktop) return;
-    updateHeight();
-    const ro = new ResizeObserver(updateHeight);
-    const card = cardRefs.current[activeIndex];
-    if (card) ro.observe(card);
-    return () => ro.disconnect();
-  }, [activeIndex, updateHeight, isDesktop]);
+    const run = () => {
+      let maxH = 200;
+      cardRefs.current.forEach((card) => {
+        if (card) maxH = Math.max(maxH, card.offsetHeight);
+      });
+      setContainerHeight(maxH);
+    };
+    run();
+    const t = setTimeout(run, 100);
+    const ro = new ResizeObserver(run);
+    cardRefs.current.forEach((card) => {
+      if (card) ro.observe(card);
+    });
+    return () => {
+      clearTimeout(t);
+      ro.disconnect();
+    };
+  }, [testimonials.length, isDesktop]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -100,7 +104,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-6 pb-4 -mx-5 px-5 sm:-mx-6 sm:px-6 scrollbar-hide transition-[height] duration-300 ease-out"
+        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-6 pb-4 -mx-5 px-5 sm:-mx-6 sm:px-6 scrollbar-hide transition-[height] duration-300 ease-out items-start"
         style={{
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",

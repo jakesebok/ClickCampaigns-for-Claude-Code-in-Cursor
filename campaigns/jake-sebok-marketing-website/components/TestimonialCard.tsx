@@ -17,7 +17,7 @@ export function TestimonialCard({ quote, headline, author, title, image, wide }:
           {headline}
         </p>
       )}
-      <blockquote className="font-semibold text-xl sm:text-2xl text-ap-primary leading-relaxed mb-6 lg:flex-1">
+      <blockquote className="font-semibold text-xl sm:text-2xl text-ap-primary leading-relaxed mb-6 lg:flex-1 lg:min-h-0">
         &ldquo;{quote}&rdquo;
       </blockquote>
       <div className="flex items-center gap-4 flex-shrink-0">
