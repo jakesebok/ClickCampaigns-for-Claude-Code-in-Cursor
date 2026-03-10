@@ -131,14 +131,14 @@ export default function HomePage() {
           </div>
         </div>
         {/* Quote + thumbnail — mobile only, below credibility bar */}
-        <div className="lg:hidden relative z-10 bg-white border-t border-ap-border px-5 py-8">
+        <div className="lg:hidden relative z-10 bg-ap-primary border-t border-ap-border px-5 py-8">
           <div className="max-w-xl mx-auto space-y-4">
-            <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
-            <p className="font-semibold italic text-xl text-ap-primary leading-snug">
+            <div className="w-10 h-0.5 bg-white/40 rounded" />
+            <p className="font-semibold italic text-xl text-white leading-snug">
               &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
             </p>
             <div className="flex items-center gap-3">
-              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-ap-accent/30 flex-shrink-0">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
                 <Image
                   src="/images/jake/MMC Profile.jpeg"
                   alt="Jake Sebok"
@@ -148,7 +148,7 @@ export default function HomePage() {
                   priority
                 />
               </div>
-              <p className="text-sm text-ap-mid">with Jake Sebok, MCPC</p>
+              <p className="text-sm text-white/80">— Jake Sebok, MCPC</p>
             </div>
           </div>
         </div>
