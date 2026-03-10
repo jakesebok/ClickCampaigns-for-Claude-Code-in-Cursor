@@ -53,10 +53,10 @@ export default function HomePage() {
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
                 Burnout isn&apos;t proof you need to grind harder. It&apos;s a sign you&apos;re building the wrong thing. When what you build matches who you are, effort becomes momentum and your impact finally catches up to your ambition.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 items-stretch">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all min-w-[220px]"
                 >
                   Take the VAPI™
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all min-w-[220px]"
                 >
                   See How It Works
                 </Link>
@@ -79,7 +79,7 @@ export default function HomePage() {
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
                 </p>
                 <div className="flex items-center justify-end gap-3">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
                     <Image
                       src="/images/jake/MMC Profile.jpeg"
                       alt="Jake Sebok"
@@ -153,7 +153,7 @@ export default function HomePage() {
               Does this sound familiar?
             </h3>
           </div>
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -243,15 +243,66 @@ export default function HomePage() {
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
-              But when what you&apos;re building matches who you actually are, <span className="text-ap-primary/50">execution stops being a <span className="text-gradient-accent">war</span></span> with yourself.
+              But when what you&apos;re building matches who you actually are, <span className="text-gradient-accent">execution stops being a war</span> with yourself.
             </p>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed">
               Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
-          <p className="font-semibold text-xl text-ap-primary">
+          <p className="font-semibold text-xl text-ap-primary mb-8">
             That&apos;s the work. Here&apos;s how we get there.
           </p>
+          {/* Three-step process — Don Miller: baby steps reduce risk */}
+          <div className="relative rounded-[24px] border-2 border-ap-accent/20 bg-gradient-to-br from-ap-accent/5 to-transparent p-8 sm:p-10 lg:p-12">
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-ap-accent/40 to-transparent rounded-t-[24px]" aria-hidden />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-4 items-start">
+              <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+                <div className="flex gap-4 items-start w-full lg:w-auto">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-ap-accent/20 flex items-center justify-center font-outfit font-bold text-lg text-ap-accent ring-2 ring-ap-accent/30">1</div>
+                  <div className="flex-1">
+                    <h3 className="font-outfit font-semibold text-ap-primary mb-1">Take the VAPI™</h3>
+                    <p className="text-ap-mid text-lg font-semibold">Free assessment. 72 questions. ~12 minutes. Get an honest snapshot of where you stand.</p>
+                  </div>
+                </div>
+                <div className="hidden lg:flex flex-1 items-center justify-center px-2" aria-hidden>
+                  <svg className="w-8 h-8 text-ap-accent/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+              <div className="lg:hidden flex justify-center py-2" aria-hidden>
+                <svg className="w-6 h-6 text-ap-accent/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+              <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
+                <div className="flex gap-4 items-start w-full lg:w-auto">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-ap-accent/20 flex items-center justify-center font-outfit font-bold text-lg text-ap-accent ring-2 ring-ap-accent/30">2</div>
+                  <div className="flex-1">
+                    <h3 className="font-outfit font-semibold text-ap-primary mb-1">Get your results</h3>
+                    <p className="text-ap-mid text-lg font-semibold">See your scores across 12 domains. Know exactly what&apos;s holding you back and what to do next.</p>
+                  </div>
+                </div>
+                <div className="hidden lg:flex flex-1 items-center justify-center px-2" aria-hidden>
+                  <svg className="w-8 h-8 text-ap-accent/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+              <div className="lg:hidden flex justify-center py-2" aria-hidden>
+                <svg className="w-6 h-6 text-ap-accent/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-ap-accent/20 flex items-center justify-center font-outfit font-bold text-lg text-ap-accent ring-2 ring-ap-accent/30">3</div>
+                <div className="flex-1">
+                  <h3 className="font-outfit font-semibold text-ap-primary mb-1">Choose your path</h3>
+                  <p className="text-ap-mid text-lg font-semibold">Workshop, community, or intensive—we&apos;ll find the right fit for where you are.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -270,7 +321,7 @@ export default function HomePage() {
           <p className="text-ap-mid text-xl font-semibold mb-12 max-w-2xl">
             More effort won&apos;t fix it. More strategy won&apos;t either. When your mind, your body, and your direction aren&apos;t working together, effort becomes resistance. That changes here. Take your first steps on the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
           </p>
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -445,6 +496,25 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          {/* Is it worth it? — client outcomes (no unfounded stats) */}
+          <div className="mb-12 p-8 sm:p-10 bg-ap-bg rounded-[20px] border border-ap-border">
+            <p className="font-outfit font-semibold text-ap-primary mb-6">In the first 30 days, clients report:</p>
+            <ul className="space-y-4">
+              <li className="flex gap-3 items-start">
+                <span className="text-ap-accent mt-1">•</span>
+                <span className="text-ap-mid text-lg font-semibold">Significantly greater clarity and confidence about what they&apos;re building and why</span>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-ap-accent mt-1">•</span>
+                <span className="text-ap-mid text-lg font-semibold">Feeling less overwhelmed and more intentional</span>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-ap-accent mt-1">•</span>
+                <span className="text-ap-mid text-lg font-semibold">Taking more productive action that directly impacts their bottom line</span>
+              </li>
+            </ul>
+          </div>
+
           <div className="mt-10 text-center">
             <p className="text-ap-mid text-xl font-semibold mb-4">Ready to see where you stand?</p>
             <div className="flex flex-wrap gap-3 justify-center items-center">

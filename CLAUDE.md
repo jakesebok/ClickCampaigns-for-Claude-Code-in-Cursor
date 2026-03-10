@@ -86,6 +86,8 @@ Before I create any assets, I'll ask you for:
 - Describe your brand and I'll create the docs for you
 - Proceed without (not recommended for final assets)
 
+**Jake Sebok voice:** When the user says "Write like Jake Sebok" or requests content in Jake's voice, read and apply `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` for voice, structure, themes, and signature phrases.
+
 ---
 
 ## Styling Guide
@@ -648,6 +650,7 @@ Which pages do you need? Or say "all" for the complete funnel.
 | Task skill files | `skills-and-instructions/skills/tasks/[type]/SKILL.md` |
 | Campaign output | `campaigns/[name]/output-assets/` |
 | Campaign brand files | `campaigns/[name]/brand-kit/` |
+| **Jake Sebok writing style** | `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` |
 
 ---
 

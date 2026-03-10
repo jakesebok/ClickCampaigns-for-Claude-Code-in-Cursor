@@ -9,8 +9,9 @@
     "generate-image": "node scripts/generate-image.js"
   },
   "dependencies": {
-    "pexels": "^1.4.0",
     "@google/genai": "^0.3.1",
-    "dotenv": "^16.4.0"
+    "docx": "^9.6.1",
+    "dotenv": "^16.4.0",
+    "pexels": "^1.4.0"
   }
 }
