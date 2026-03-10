@@ -24,7 +24,6 @@ const config: Config = {
       fontFamily: {
         outfit: ["var(--font-outfit)", "sans-serif"],
         cormorant: ["var(--font-cormorant)", "serif"],
-        urbanist: ["var(--font-urbanist)", "sans-serif"],
       },
       borderRadius: {
         pill: "100px",

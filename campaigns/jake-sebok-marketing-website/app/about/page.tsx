@@ -15,10 +15,10 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
             The Story
           </p>
-          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
             Hey, I&apos;m Jake Sebok.
           </h1>
           <p className="text-xl text-ap-mid leading-relaxed mb-8 max-w-2xl">
@@ -72,15 +72,15 @@ export default function AboutPage() {
       {/* Credentials */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Credentials
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-10">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-10">
             I didn&apos;t learn this from a textbook. I lived it.
           </h2>
           <div className="grid sm:grid-cols-2 gap-6 mb-12">
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">
-              <h3 className="font-cormorant font-semibold text-ap-primary mb-4">
+              <h3 className="font-outfit font-semibold text-ap-primary mb-4">
                 Trained at the highest level
               </h3>
               <ul className="space-y-2 text-ap-mid mb-4">
@@ -94,7 +94,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">
-              <h3 className="font-cormorant font-semibold text-ap-primary mb-4">
+              <h3 className="font-outfit font-semibold text-ap-primary mb-4">
                 Proven in the arena
               </h3>
               <p className="text-ap-mid leading-relaxed mb-4">
@@ -134,10 +134,10 @@ export default function AboutPage() {
       {/* Testimonials */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Proof
           </p>
-          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             Transformation isn&apos;t theoretical. Here&apos;s what clients say when the work is done.
           </h2>
           <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
