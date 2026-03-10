@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import { AdaptiveHeroText } from "@/components/AdaptiveHeroText";
 import { testimonials } from "@/lib/testimonials";
 
 export default function HomePage() {
@@ -45,7 +46,7 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <span className="text-ap-accent">someone else&apos;s</span>
+                <AdaptiveHeroText>someone else&apos;s</AdaptiveHeroText>
                 <br />
                 success.
               </h1>
