@@ -32,11 +32,17 @@ export default function HomePage() {
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary lg:text-ap-accent mb-4 flex items-center gap-2">
-                <span className="w-3.5 h-0.5 bg-ap-accent rounded" />
-                Values-Aligned Performance · Jake Sebok
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary lg:text-ap-accent mb-4">
+                <span className="lg:flex lg:items-center lg:gap-2">
+                  <span className="hidden lg:block w-3.5 h-0.5 bg-ap-accent rounded flex-shrink-0" />
+                  <span>Values-Aligned Performance</span>
+                  <span className="block lg:inline lg:before:content-['_·_']">
+                    <span className="lg:hidden">with Jake Sebok</span>
+                    <span className="hidden lg:inline">Jake Sebok</span>
+                  </span>
+                </span>
               </p>
-              <h1 className="font-outfit font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
+              <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
                 <span className="text-ap-accent">someone else&apos;s</span>
@@ -46,26 +52,6 @@ export default function HomePage() {
               <p className="font-semibold text-base text-ap-mid leading-relaxed mb-8">
                 You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
               </p>
-              {/* Quote above CTAs — mobile only */}
-              <div className="lg:hidden space-y-4 mb-8">
-                <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
-                <p className="font-semibold italic text-xl text-ap-primary leading-snug">
-                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-ap-accent/30 flex-shrink-0">
-                    <Image
-                      src="/images/jake/MMC Profile.jpeg"
-                      alt="Jake Sebok"
-                      fill
-                      className="object-cover"
-                      sizes="64px"
-                      priority
-                    />
-                  </div>
-                  <p className="text-sm text-ap-mid">— Jake Sebok, MCPC</p>
-                </div>
-              </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/assessment"
@@ -107,26 +93,62 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* Trusted By strip — single row on desktop, chip + grid on mobile */}
+        {/* Trusted By strip — single row on desktop; full-width label + 6 chips on mobile */}
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
-          <div className="flex flex-wrap w-full">
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-muted text-xs sm:text-base uppercase tracking-wider">Trusted by</span>
+          {/* Mobile: Trusted by full width, then 6 chips */}
+          <div className="lg:hidden">
+            <div className="px-4 py-3 text-center border-b border-ap-border w-full">
+              <span className="font-semibold text-ap-muted text-xs uppercase tracking-wider">Trusted by</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Doctors</span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 [&>*:nth-child(2n)]:border-r-0 [&>*:nth-child(n+5)]:border-b-0">
+              {["Doctors", "Coaches", "Healers", "Bodyworkers", "Creators", "Founders"].map((label) => (
+                <div key={label} className="px-4 py-3 text-center border-b border-r border-ap-border">
+                  <span className="font-semibold text-ap-primary text-xs sm:text-base">{label}</span>
+                </div>
+              ))}
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Coaches</span>
+          </div>
+          {/* Desktop: single row */}
+          <div className="hidden lg:flex flex-wrap w-full">
+            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
+              <span className="font-semibold text-ap-muted text-base uppercase tracking-wider">Trusted by</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Healers</span>
+            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
+              <span className="font-semibold text-ap-primary text-base">Doctors</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center border-b border-r border-ap-border sm:border-b-0 flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Bodyworkers</span>
+            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
+              <span className="font-semibold text-ap-primary text-base">Coaches</span>
             </div>
-            <div className="px-4 py-3 sm:py-5 sm:px-6 text-center flex-1 min-w-[50%] sm:min-w-0">
-              <span className="font-semibold text-ap-primary text-xs sm:text-base">Creators</span>
+            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
+              <span className="font-semibold text-ap-primary text-base">Healers</span>
+            </div>
+            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
+              <span className="font-semibold text-ap-primary text-base">Bodyworkers</span>
+            </div>
+            <div className="px-6 py-5 text-center flex-1 min-w-0">
+              <span className="font-semibold text-ap-primary text-base">Creators</span>
+            </div>
+          </div>
+        </div>
+        {/* Quote + thumbnail — mobile only, below credibility bar */}
+        <div className="lg:hidden relative z-10 bg-white border-t border-ap-border px-5 py-8">
+          <div className="max-w-xl mx-auto space-y-4">
+            <div className="w-10 h-0.5 bg-ap-accent/40 rounded" />
+            <p className="font-semibold italic text-xl text-ap-primary leading-snug">
+              &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-ap-accent/30 flex-shrink-0">
+                <Image
+                  src="/images/jake/MMC Profile.jpeg"
+                  alt="Jake Sebok"
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                  priority
+                />
+              </div>
+              <p className="text-sm text-ap-mid">with Jake Sebok, MCPC</p>
             </div>
           </div>
         </div>
@@ -144,9 +166,14 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             From the outside, it looks like success. But you know the <span className="text-ap-accent">cost</span>.
           </h2>
-          <p className="text-ap-mid mb-12 max-w-2xl">
-            For impact-driven founders who are done white-knuckling their way to the next level—does this sound familiar?
-          </p>
+          <div className="mb-12 max-w-2xl">
+            <p className="text-ap-mid">
+              For impact-driven founders who are done white-knuckling their way to the next level.
+            </p>
+            <h3 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mt-4">
+              Does this sound familiar?
+            </h3>
+          </div>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
