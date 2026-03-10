@@ -1,0 +1,189 @@
+---
+description: Context document for the Strategic Clarity Module build. Read this FIRST at the start of every session and after every context compaction. Review and update the task queue after completing each task.
+globs:
+  - Resources/Clarity Workshop/**
+  - campaigns/**/strategic-clarity/**
+alwaysApply: false
+---
+
+# Strategic Clarity Module — Build Context
+
+> **CRITICAL:** Read this document at the start of every session and after every context compaction. After completing each task, update the Task Queue section below before moving to the next task.
+
+---
+
+## What We're Building
+
+**Strategic Clarity** is Stage 2 of Jake Sebok's high-ticket coaching program (Aligned Power). It connects a person's daily actions directly to the outcomes they wish to see. It also runs as a live **Strategic Intensive** (same worksheets, facilitated live).
+
+**The payoff:** All worksheets feed a Master Prompt that turns any AI (ChatGPT, Claude, Gemini) into a personalized executive coach, strategic advisor, and virtual assistant that optimizes for the user's core values and never compromises them.
+
+---
+
+## Module Structure (Final — 18 Videos, 8 Worksheets + Pre-Work)
+
+| Lesson | Topic | Videos | Worksheet |
+|--------|-------|--------|-----------|
+| Intro | Module Introduction | 1 (Video 0.1) | — |
+| Pre | Pre-Work | 1 (Why Pre-Work Matters) | Pre-Work Packet |
+| 1 | MIQs (End vs. Means Goals) | 2 (1.1, 1.2) | MIQs |
+| 2 | Find Your WHY + Just Cause | 3 (2.1, 2.2, 2.3) | WHY + Just Cause |
+| 3 | Core Values Extraction | 2 (3.1, 3.2) | Core Values |
+| 4 | Becoming You (Future Four) | 2 (4.1, 4.2) | Becoming You |
+| 5 | Reality Check (Bridge) | 1 (5.1) | Reality Check |
+| 6 | Goals That Matter (Revenue Bridge) | 3 (6.1, 6.2, 6.3) | Goals That Matter |
+| 7 | ONE THING Domino Plan | 2 (7.1, 7.2) | ONE THING Domino |
+| 8 | Aligned AI OS — Master Prompt | 1 (8.1) | Master Prompt + Patch Notes |
+| 9 | AI Coach in Action — 50 Questions | 1 (9.1) | 50 High-Leverage Questions |
+
+---
+
+## Confirmed Decisions
+
+| Item | Decision |
+|------|----------|
+| **Order** | MIQs → WHY → Values → Becoming You → Reality Check → GTM → ONE THING → AI OS → 50 Questions |
+| **Strategic Intensives** | Same worksheets, facilitated live. No separate intensive-only materials. |
+| **Video style** | Jake Sebok voice (`Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md`). 5–15 min each. Teaching + context + why it matters + facilitate the exercise. |
+| **Worksheet format** | Google Doc. All blanks = empty tables so users can type directly. |
+| **MIQ expansion** | Keep MIQ simple (3 questions). Separate Reality Check worksheet (Lesson 5) holds integration fields (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). |
+| **Source: MIQs** | Vishan Lakhiani, *The Buddha and the Badass* |
+
+---
+
+## Key Files & Locations
+
+### Source Materials (READ THESE for content)
+| File | What It Contains |
+|------|-----------------|
+| `Resources/Clarity Workshop/New Materials/Clarity Worksheets.docx` | The full existing worksheet packet (Pre-Work, MIQs, WHY, Values, Becoming You, GTM, ONE THING, Master Prompt, Patch Notes, 50 Questions). Extract with `textutil -convert txt -stdout` |
+| `Resources/Clarity Workshop/New Materials/STRATEGIC-CLARITY-MODULE-GAMEPLAN.md` | Full game plan with lesson-by-lesson breakdown, video descriptions, worksheet details |
+| `Resources/Clarity Workshop/CLARITY-WORKSHOP-SUMMARY.md` | Summary of all 9 Virginia Muskees videos (GTM framework, MIQs, Start With Why, referral marketing) |
+| `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` | Jake's voice, tone, metaphors, structure patterns. USE THIS for all video scripts. |
+
+### Source Books (PDFs in `Resources/Clarity Workshop/New Materials/`)
+| File | Book |
+|------|------|
+| `Buddha and the Badass.pdf` | Vishan Lakhiani — MIQs, means vs. end goals |
+| `simon-sinek-start-with-why (1).pdf` | Simon Sinek — Golden Circle, WHY |
+| `The Infinite Game - Simon Sinek.pdf` | Simon Sinek — Just Cause |
+| `Find Your Why PDF.pdf` | Sinek et al. — Peak Moments, Theme Mining |
+| `Find Your WHY Connector's Code.docx (1).pdf` | WHY discovery process |
+| `high-performance-habits-.pdf` | Brendon Burchard — Future Four |
+| `The-ONE-Thing.pdf` | Gary Keller — ONE THING, Domino Plan |
+
+### Video Transcripts (Virginia Muskees — background context)
+All in `Resources/Clarity Workshop/`: `Starting Point.txt`, `GTM 1.txt` through `GTM 5.txt`, `MIQs.txt`, `014 - Memberships.txt`, `Memberships -  - 2026-03-10 11-45-11.txt`
+
+### Output Location
+All deliverables go in a campaign folder (create if needed):
+- Video scripts → `documents/`
+- Worksheets → `documents/` (as .md, then user converts to Google Doc)
+- Master Prompt → already exists in Clarity Worksheets.docx
+
+---
+
+## Existing Worksheet Content (What Already Exists)
+
+The `Clarity Worksheets.docx` contains complete drafts of ALL worksheets. Key details:
+
+1. **Pre-Work Packet** — Values Extraction (5 people × 5 qualities), Peak Moments (4–5 stories across life seasons), Revenue Bridge inputs (revenue, expenses, capacity, offer snapshot). Already well-structured.
+
+2. **MIQs** — 3 columns (Experiences, Growth, Contribution) with prompts. Simple. Keep as-is.
+
+3. **Find Your WHY + Just Cause** — Peak Moments table → Theme Mining (partner or solo AI prompt) → 3 WHY drafts → Full-Body Test → Strengthen WHY → Just Cause → Mission Statement. Includes a full Simon Sinek AI prompt for solo users. Well-developed.
+
+4. **Core Values Extraction** — 5 people → 5 qualities → AI translation prompt → ranked values → trade-off test AI prompt → Top 5 table (value, definition, behaviors, boundary). Includes AI prompts. Well-developed.
+
+5. **Becoming You (Future Four)** — Personal (3 aspirational words, standards, proof), Relationships (key people, 3 words, weekly intention), Business/Skills (PFI, 3 skills now, 3 skills future, calendar commitment), Integration (patterns, 90-day focus). Well-developed.
+
+6. **Goals That Matter** — 7 steps: Baseline Needs → Future Four investments → MIQ Desires → Just Cause Tithe → Required Revenue → Operationalize (QC math) → Capacity Check. Includes Referral and Ads lanes. Comprehensive.
+
+7. **ONE THING Domino Plan** — Re-anchor → Lead Lane → Someday Outcomes (4 lanes) → ONE THING per lane → Domino Chain (Someday → Right Now) → Calendar Install → Sabotage Plan → Commitment. Well-developed.
+
+8. **Master Prompt** — Full template with field map, priority order for conflicts, output rules. Generates ALIGNED AI OS UPGRADE + ALIGNMENT BLUEPRINT SUMMARY SHEET.
+
+9. **Monthly Patch Notes** — Update prompt for ongoing refinement. References bracket labels for precise field updates.
+
+10. **50 High-Leverage Questions** — Organized by: Weekly Planning (8), Strategy + Focus (10), QC + Sales (8), Marketing + Messaging (8), Execution + Nervous System (8), Weekly/Monthly Review (8).
+
+### What Needs to Be Created (NEW)
+- **Reality Check worksheet** (Lesson 5) — Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support. One page. Empty tables.
+
+### What Needs Refinement (EXISTING)
+- All worksheets need a consistency pass for Google Doc format (empty tables, consistent headers, clear instructions).
+- Master Prompt needs to reference Reality Check worksheet and handle [NEEDS INPUT] when it's skipped.
+
+---
+
+## Task Queue
+
+> **Instructions:** Work through tasks in order. After completing each task, mark it DONE with date and update any notes. If a task reveals new sub-tasks, add them.
+
+### Phase 1: Worksheets (Refine + Create) — DONE 2026-03-10
+- [x] **1.1** Create Reality Check worksheet (Lesson 5)
+- [x] **1.2** Refine Pre-Work Packet
+- [x] **1.3** Refine MIQs worksheet
+- [x] **1.4** Refine Find Your WHY + Just Cause worksheet
+- [x] **1.5** Refine Core Values Extraction worksheet
+- [x] **1.6** Refine Becoming You worksheet
+- [x] **1.7** Refine Goals That Matter worksheet
+- [x] **1.8** Refine ONE THING Domino Plan worksheet
+- [x] **1.9** Update Master Prompt — Reality Check refs + [NEEDS INPUT] handling
+- [x] **1.10** Refine 50 High-Leverage Questions
+
+### Phase 2: Video Scripts (18 scripts in Jake's voice) — DONE 2026-03-10
+- [x] **2.1** Video 0.1 — Module Introduction
+- [x] **2.2** Pre-Work video — Why Pre-Work Matters
+- [x] **2.3** Video 1.1 — MIQs: The Distinction (End vs. Means Goals)
+- [x] **2.4** Video 1.2 — MIQs: Worksheet Facilitation
+- [x] **2.5** Video 2.1 — WHY: Golden Circle
+- [x] **2.6** Video 2.2 — WHY: Peak Moments + Theme Mining
+- [x] **2.7** Video 2.3 — WHY: Draft, Test, Just Cause, Mission
+- [x] **2.8** Video 3.1 — Values: Why They Matter
+- [x] **2.9** Video 3.2 — Values: Extraction Process
+- [x] **2.10** Video 4.1 — Becoming You: Future Four
+- [x] **2.11** Video 4.2 — Becoming You: Integration + 90-Day Focus
+- [x] **2.12** Video 5.1 — Reality Check
+- [x] **2.13** Video 6.1 — GTM: Baseline, Desires, Impact
+- [x] **2.14** Video 6.2 — GTM: The Math (Revenue → QCs)
+- [x] **2.15** Video 6.3 — GTM: Lead Path Fork + Highest-Leverage Move
+- [x] **2.16** Video 7.1 — ONE THING: The Question + Lead Lane
+- [x] **2.17** Video 7.2 — ONE THING: Domino Chain + Calendar Install
+- [x] **2.18** Video 8.1 — Aligned AI OS: Master Prompt
+- [x] **2.19** Video 9.1 — AI Coach in Action: 50 Questions
+
+### Phase 3: Final Assembly — DONE 2026-03-10
+- [x] **3.1** Cross-reference worksheets for consistency
+- [x] **3.2** Voice consistency confirmed across all scripts
+- [x] **3.3** Final module outline created: `campaigns/strategic-clarity/output-assets/STRATEGIC-CLARITY-MODULE-OUTLINE.md`
+
+### Future Tasks (if requested)
+- [ ] Convert worksheets from markdown → Google Docs
+- [ ] Record videos from scripts
+- [ ] Build course platform (Kajabi, Teachable, etc.)
+- [ ] Create slide decks for Strategic Intensive facilitation
+
+---
+
+## Voice Reminders (Quick Reference for Scripts)
+
+When writing video scripts, ALWAYS read `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` first. Key points:
+
+- **Warm, intimate, conversational.** "You" throughout. Trusted guide, not lecturer.
+- **Invitational.** "What if...?" "Here's my invitation." Never demands.
+- **Self-aware humor.** "Some bald guy talking to you in an online course."
+- **Teaching flow:** Name the feeling → Reframe → Authority/reference → Story → Application → Invitation
+- **Short sentences for impact.** Lists of three. Rhetorical questions. Em dashes.
+- **Signature phrases:** "You are not broken." "Pain is a compass." "Let's get after it."
+- **Grounded, not preachy.** No spiritual bypass. No toxic positivity. Acknowledge the mess.
+
+---
+
+## How to Use This Document
+
+1. **Start of session:** Read this document. Check the Task Queue for what's next.
+2. **Before each task:** Read the relevant source material (game plan, existing worksheet, Jake's voice guide).
+3. **After each task:** Mark the task DONE in the Task Queue. Note any issues or decisions.
+4. **Before compaction:** Make sure the Task Queue is current.
+5. **After compaction:** Re-read this document to restore context.
