@@ -21,10 +21,10 @@ export default function ApplyPage() {
             </svg>
             Back to Work With Me
           </Link>
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             Aligned Power Accelerator
           </p>
-          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Apply for the 12-month program
           </h1>
           <p className="text-lg text-ap-mid">

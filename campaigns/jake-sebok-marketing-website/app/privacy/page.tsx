@@ -7,7 +7,7 @@ export default function PrivacyPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <h1 className="font-outfit font-bold text-4xl text-ap-primary mb-2">
+        <h1 className="font-cormorant font-bold text-4xl text-ap-primary mb-2">
           Privacy Policy
         </h1>
         <p className="text-ap-muted text-sm mb-12">
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
         <div className="prose prose-ap max-w-none space-y-8 text-ap-mid">
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               1. Information We Collect
             </h2>
             <p className="leading-relaxed">
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               2. How We Use Your Information
             </h2>
             <p className="leading-relaxed">
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               3. Data Sharing
             </h2>
             <p className="leading-relaxed">
@@ -57,7 +57,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               4. Your Rights
             </h2>
             <p className="leading-relaxed">
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               5. Cookies and Analytics
             </h2>
             <p className="leading-relaxed">
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               6. Contact
             </h2>
             <p className="leading-relaxed">

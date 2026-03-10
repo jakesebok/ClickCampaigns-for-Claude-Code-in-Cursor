@@ -7,7 +7,7 @@ export default function TermsPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <h1 className="font-outfit font-bold text-4xl text-ap-primary mb-2">
+        <h1 className="font-cormorant font-bold text-4xl text-ap-primary mb-2">
           Terms of Use
         </h1>
         <p className="text-ap-muted text-sm mb-12">
@@ -16,7 +16,7 @@ export default function TermsPage() {
 
         <div className="prose prose-ap max-w-none space-y-8 text-ap-mid">
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               1. Acceptance of Terms
             </h2>
             <p className="leading-relaxed">
@@ -27,7 +27,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               2. Services
             </h2>
             <p className="leading-relaxed">
@@ -40,7 +40,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               3. User Obligations
             </h2>
             <p className="leading-relaxed">
@@ -52,7 +52,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               4. Limitation of Liability
             </h2>
             <p className="leading-relaxed">
@@ -65,7 +65,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               5. Changes
             </h2>
             <p className="leading-relaxed">
@@ -76,7 +76,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
+            <h2 className="font-cormorant font-semibold text-ap-primary text-lg mb-4">
               6. Contact
             </h2>
             <p className="leading-relaxed">

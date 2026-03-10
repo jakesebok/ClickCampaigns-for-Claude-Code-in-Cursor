@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Cormorant_Garamond } from "next/font/google";
+import { Outfit, Cormorant_Garamond, Urbanist } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -14,6 +14,12 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
   weight: ["400", "600", "700"],
+});
+
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  variable: "--font-urbanist",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -37,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${cormorant.variable}`}>
-      <body className="min-h-screen antialiased font-cormorant">
+    <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${urbanist.variable}`}>
+      <body className="min-h-screen antialiased font-urbanist">
         <Header />
         <main>{children}</main>
         <Footer />

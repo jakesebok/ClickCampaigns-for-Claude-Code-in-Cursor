@@ -18,10 +18,10 @@ export default function CaseStudiesPage() {
       {/* Hero */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
             Case Studies
           </p>
-          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+          <h1 className="font-cormorant font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Real results. Real transformation.
           </h1>
           <p className="text-xl text-ap-mid max-w-2xl leading-relaxed">
@@ -60,10 +60,10 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
                   Featured Case Study
                 </p>
-                <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+                <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From &ldquo;I hate owning a business&rdquo; to excited to go to work every day
                 </h2>
                 <p className="text-ap-mid text-lg leading-relaxed">
@@ -72,7 +72,7 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="font-outfit font-semibold text-lg text-ap-primary">
+                <h3 className="font-cormorant font-semibold text-lg text-ap-primary">
                   The transformation
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -149,10 +149,10 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
                   Case Study
                 </p>
-                <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+                <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From stuck and scattered to clarity, conviction, and a calendar full of clients
                 </h2>
                 <p className="text-ap-mid text-lg leading-relaxed">
@@ -161,7 +161,7 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="font-outfit font-semibold text-lg text-ap-primary">
+                <h3 className="font-cormorant font-semibold text-lg text-ap-primary">
                   The transformation
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-6">
@@ -217,10 +217,10 @@ export default function CaseStudiesPage() {
       {/* More Results — additional testimonials */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-cormorant text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             More Results
           </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+          <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             More entrepreneurs who chose alignment
           </h2>
           <div className="grid sm:grid-cols-2 gap-6">
@@ -234,7 +234,7 @@ export default function CaseStudiesPage() {
                     <Image src={t.image} alt={t.author} fill className="object-cover" sizes="56px" />
                   </div>
                   <div>
-                    <h3 className="font-outfit font-semibold text-ap-primary">{t.author}</h3>
+                    <h3 className="font-cormorant font-semibold text-ap-primary">{t.author}</h3>
                     {t.headline && (
                       <p className="text-sm text-ap-muted">{t.headline}</p>
                     )}
@@ -255,7 +255,7 @@ export default function CaseStudiesPage() {
           <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
-              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
+              <h2 className="font-cormorant font-bold text-3xl sm:text-4xl text-white mb-6">
                 Ready to write your own case study?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">
