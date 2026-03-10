@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import { AdaptiveHeroText } from "@/components/AdaptiveHeroText";
+import { HeroAdaptiveText } from "@/components/HeroAdaptiveText";
 import { testimonials } from "@/lib/testimonials";
 
 export default function HomePage() {
   return (
     <>
       {/* Hero — diagonal orange, punchy headline */}
-      <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
+      <section id="hero" className="relative min-h-[85vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 bg-ap-bg" />
         {/* Diagonal orange cut */}
         <div
@@ -46,7 +46,7 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <AdaptiveHeroText>someone else&apos;s</AdaptiveHeroText>
+                <HeroAdaptiveText />
                 <br />
                 success.
               </h1>
