@@ -26,7 +26,7 @@ export default function FreedomBuildersPage() {
             sizes="(max-width: 768px) 100vw, 720px"
           />
         </div>
-        <p className="text-lg text-ap-mid leading-relaxed mb-10">
+        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
           The Aligned Freedom Course gives you the framework. The community gives
           you the support. Learn at your own pace, connect with like-minded
           founders, and build something worth waking up for.

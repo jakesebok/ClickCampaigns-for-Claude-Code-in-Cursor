@@ -18,7 +18,7 @@ export default function TestimonialsPage() {
         <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
           Real transformation. Real results.
         </h1>
-        <p className="text-lg text-ap-mid max-w-2xl mb-12">
+        <p className="text-xl font-semibold text-ap-mid max-w-2xl mb-12">
           Entrepreneurs who&apos;ve worked with me share what changed: clarity,
           confidence, and businesses that finally feel like extensions of who
           they are.

@@ -26,7 +26,7 @@ export default function FreedomWorkshopPage() {
             sizes="(max-width: 768px) 100vw, 720px"
           />
         </div>
-        <p className="text-lg text-ap-mid leading-relaxed mb-10">
+        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
           90 minutes. Clarity. Community. No fluff. Connect with entrepreneurs who
           refuse to stay stuck and get a clear next step for your alignment
           journey.
@@ -35,11 +35,11 @@ export default function FreedomWorkshopPage() {
           <h2 className="font-outfit font-semibold text-ap-primary mb-4">
             Webinar registration coming soon
           </h2>
-          <p className="text-ap-mid text-sm leading-relaxed mb-4">
+          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
             This workshop uses webinar registration to capture signups and send
             reminders. Recommended tools:
           </p>
-          <ul className="text-ap-mid text-sm space-y-2 list-disc list-inside mb-4">
+          <ul className="text-ap-mid text-xl font-semibold space-y-2 list-disc list-inside mb-4">
             <li>
               <strong>Calendly</strong> — Simple scheduling + automated reminders
             </li>

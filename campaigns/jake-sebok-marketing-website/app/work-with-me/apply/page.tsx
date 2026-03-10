@@ -27,7 +27,7 @@ export default function ApplyPage() {
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Apply for the 12-month program
           </h1>
-          <p className="text-lg text-ap-mid">
+          <p className="text-xl font-semibold text-ap-mid">
             The Accelerator is for entrepreneurs who are ready to do the real
             work. I take a limited cohort each year. Tell me about yourself, your
             business, and why you want in.

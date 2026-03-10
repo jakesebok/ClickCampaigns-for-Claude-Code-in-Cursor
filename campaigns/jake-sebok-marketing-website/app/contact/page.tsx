@@ -16,7 +16,7 @@ export default function ContactPage() {
         <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
           Let&apos;s talk.
         </h1>
-        <p className="text-ap-mid text-lg mb-10">
+        <p className="text-ap-mid text-xl font-semibold mb-10">
           Have a question about the VAPI™ Assessment, the Aligned Freedom
           Workshop, or coaching? Send me a message and I&apos;ll get back to
           you.

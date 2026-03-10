@@ -26,7 +26,7 @@ export default function AlignedLeadersPage() {
             sizes="(max-width: 768px) 100vw, 720px"
           />
         </div>
-        <p className="text-lg text-ap-mid leading-relaxed mb-10">
+        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
           Weekly calls. Resources. A cohort of entrepreneurs who get it. The
           Aligned Leaders Community is for founders who want ongoing support
           without the full commitment of the Accelerator and who are ready to

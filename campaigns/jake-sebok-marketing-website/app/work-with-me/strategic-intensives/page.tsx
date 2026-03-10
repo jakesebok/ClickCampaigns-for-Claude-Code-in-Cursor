@@ -26,7 +26,7 @@ export default function StrategicIntensivesPage() {
             sizes="(max-width: 768px) 100vw, 720px"
           />
         </div>
-        <p className="text-lg text-ap-mid leading-relaxed mb-10">
+        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
           A focused day (or half-day) to cut through the noise, get strategic
           clarity, and leave with a clear path forward. For entrepreneurs who
           are ready to go deeper than a workshop but not yet ready for the
@@ -36,11 +36,11 @@ export default function StrategicIntensivesPage() {
           <h2 className="font-outfit font-semibold text-ap-primary mb-4">
             Webinar / event registration
           </h2>
-          <p className="text-ap-mid text-sm leading-relaxed mb-4">
+          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
             For intensives, you&apos;ll want a way to collect registrations and
             send reminders. Recommended tools:
           </p>
-          <ul className="text-ap-mid text-sm space-y-2 list-disc list-inside mb-4">
+          <ul className="text-ap-mid text-xl font-semibold space-y-2 list-disc list-inside mb-4">
             <li>
               <strong>Calendly</strong> — One-on-one or group event scheduling
             </li>

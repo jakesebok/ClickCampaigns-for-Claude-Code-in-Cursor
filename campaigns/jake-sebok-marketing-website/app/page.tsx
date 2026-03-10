@@ -49,7 +49,7 @@ export default function HomePage() {
                 <br />
                 success.
               </h1>
-              <p className="font-semibold text-base text-ap-mid leading-relaxed mb-8">
+              <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
                 You&apos;ve been pouring everything into a version of success that was never yours. That&apos;s why it feels like a grind. When what you build matches who you actually are, you pour rocket fuel on your progress and your impact begins to match your ambition.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -145,7 +145,7 @@ export default function HomePage() {
             From the outside, it looks like success. But you know the <span className="text-gradient-accent">cost</span>.
           </h2>
           <div className="mb-12 max-w-2xl">
-            <p className="text-ap-mid">
+            <p className="text-ap-mid text-xl font-semibold">
               For impact-driven founders who are done white-knuckling their way to the next level.
             </p>
             <h3 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mt-4">
@@ -163,7 +163,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Grind
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 You&apos;re the bottleneck. Strategist, doer, fixer, all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
               </p>
             </div>
@@ -176,7 +176,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Guilt
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere, and the guilt is loud at 2am. The business is bleeding into the life you built it for.
               </p>
             </div>
@@ -192,7 +192,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Loop
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it. You&apos;ve tried the discipline fixes. They didn&apos;t stick.
               </p>
             </div>
@@ -237,14 +237,14 @@ export default function HomePage() {
             <br className="hidden lg:block" />
             You have an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
-          <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
             Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
               But when what you&apos;re building matches who you actually are, <span className="text-ap-primary/50">execution stops being a <span className="text-gradient-accent">war</span></span> with yourself.
             </p>
-            <p className="text-ap-mid text-lg leading-relaxed">
+            <p className="text-ap-mid text-xl font-semibold leading-relaxed">
               Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
@@ -266,7 +266,7 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             Don&apos;t optimize for output. Optimize for <span className="text-gradient-accent">alignment</span>.
           </h2>
-          <p className="text-ap-mid mb-12 max-w-2xl">
+          <p className="text-ap-mid text-xl font-semibold mb-12 max-w-2xl">
             It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution: the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
@@ -280,7 +280,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Awareness
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 Know exactly what&apos;s holding you back and the path to get where you want to go. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know exactly which moves will make the difference.
               </p>
             </div>
@@ -293,7 +293,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Internal Alignment
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business, lowering your defenses and amplifying your output.
               </p>
             </div>
@@ -307,7 +307,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Embodied Execution
               </h3>
-              <p className="text-ap-mid text-sm leading-relaxed">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would dream of.
               </p>
             </div>
@@ -340,13 +340,13 @@ export default function HomePage() {
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                 Have it all. <span className="text-gradient-accent">Really.</span>
               </h2>
-              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
                 Stop chasing the carrot at the end of the stick when what you really wanted was the apple that&apos;s right in front of you.
               </p>
-              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
                 Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about, what actually matters to you, to build a business that&apos;s supposed to support your life.
               </p>
-              <p className="text-ap-mid text-lg leading-relaxed mb-6">
+              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
                 When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm, <span className="text-gradient-accent font-semibold">because you&apos;re no longer fighting yourself.</span>
               </p>
               <p className="font-semibold text-lg text-ap-primary">
@@ -371,7 +371,7 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             By the end of our work together, you will:
           </h2>
-          <p className="text-ap-mid mb-8 max-w-2xl">
+          <p className="text-ap-mid text-xl font-semibold mb-8 max-w-2xl">
             Not a list of tactics. A fundamental shift in how you run your business and your life.
           </p>
           <div className="space-y-6">
@@ -383,7 +383,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">Extreme clarity about WHAT you&apos;re building and WHY</h3>
-                <p className="text-ap-mid text-sm leading-relaxed">So you stop chasing opportunities that drain you and start making moves that compound.</p>
+                <p className="text-ap-mid text-xl font-semibold leading-relaxed">So you stop chasing opportunities that drain you and start making moves that compound.</p>
               </div>
             </div>
             <div className="flex gap-4 sm:gap-6 items-start">
@@ -394,7 +394,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">Clarity on your greatest constraints and the single most valuable levers to pull</h3>
-                <p className="text-ap-mid text-sm leading-relaxed">To make everything else easier or unnecessary.</p>
+                <p className="text-ap-mid text-xl font-semibold leading-relaxed">To make everything else easier or unnecessary.</p>
               </div>
             </div>
             <div className="flex gap-4 sm:gap-6 items-start">
@@ -405,7 +405,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">Trust in yourself to execute consistently on a plan you believe in</h3>
-                <p className="text-ap-mid text-sm leading-relaxed">No forcing it with willpower.</p>
+                <p className="text-ap-mid text-xl font-semibold leading-relaxed">No forcing it with willpower.</p>
               </div>
             </div>
             <div className="flex gap-4 sm:gap-6 items-start">
@@ -416,7 +416,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">A business that supports your life instead of consuming it</h3>
-                <p className="text-ap-mid text-sm leading-relaxed">With real boundaries and a calendar that breathes.</p>
+                <p className="text-ap-mid text-xl font-semibold leading-relaxed">With real boundaries and a calendar that breathes.</p>
               </div>
             </div>
             <div className="flex gap-4 sm:gap-6 items-start">
@@ -427,7 +427,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
-                <p className="text-ap-mid text-sm leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
+                <p className="text-ap-mid text-xl font-semibold leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
               </div>
             </div>
           </div>
@@ -445,7 +445,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="mt-10 text-center">
-            <p className="text-ap-mid text-sm mb-4">Ready to see where you stand?</p>
+            <p className="text-ap-mid text-xl font-semibold mb-4">Ready to see where you stand?</p>
             <div className="flex flex-wrap gap-3 justify-center items-center">
               <Link
                 href="/assessment"
@@ -512,7 +512,7 @@ export default function HomePage() {
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
                 Ready to stop building the <span className="text-gradient-accent">cage</span>?
               </h2>
-              <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">
+              <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
                 An honest snapshot of where you stand across 12 domains.
                 <span className="block mt-2 text-white/90 font-medium">Free. No payment required.</span>

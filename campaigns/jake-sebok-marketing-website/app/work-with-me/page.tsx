@@ -71,7 +71,7 @@ export default function WorkWithMePage() {
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Your place. Your pace.
           </h1>
-          <p className="text-lg text-ap-mid max-w-2xl">
+          <p className="text-xl font-semibold text-ap-mid max-w-2xl">
             The best entry point is the free VAPI™ Assessment and the monthly
             Aligned Freedom Workshop. From there, you can join the free
             community, invest in intensives, or apply for the flagship
@@ -106,7 +106,7 @@ export default function WorkWithMePage() {
                   {offer.title}
                 </h3>
                 <p
-                  className={`text-sm leading-relaxed mb-6 ${
+                  className={`text-xl font-semibold leading-relaxed mb-6 ${
                     offer.featured ? "text-white/80" : "text-ap-mid"
                   }`}
                 >
@@ -151,7 +151,7 @@ export default function WorkWithMePage() {
             <h2 className="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight">
               Ready to go <span className="text-gradient-accent">ALL IN</span>?
             </h2>
-            <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+            <p className="text-white/80 text-xl font-semibold mb-10 max-w-xl mx-auto">
               The Aligned Power Accelerator is my flagship 12-month program for entrepreneurs who are done with half-measures. Limited cohort. Application required. This is for those ready to build a business that&apos;s an extension of who they actually are.
             </p>
             <Link
