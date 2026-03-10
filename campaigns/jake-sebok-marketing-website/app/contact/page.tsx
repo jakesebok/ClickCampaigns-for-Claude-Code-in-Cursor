@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export const metadata = {
   title: "Contact — Jake Sebok",
@@ -71,6 +72,11 @@ export default function ContactPage() {
             Send Message
           </button>
         </form>
+
+        <div className="mt-10 pt-8 border-t border-ap-border">
+          <p className="text-sm font-semibold text-ap-primary mb-3">Connect with me</p>
+          <SocialLinks variant="contact" />
+        </div>
 
         <p className="mt-8 text-sm text-ap-muted">
           Prefer to start with the free assessment?{" "}

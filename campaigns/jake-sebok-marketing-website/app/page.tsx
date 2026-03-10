@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import { SocialLinks } from "@/components/SocialLinks";
 import { testimonials } from "@/lib/testimonials";
 
 export default function HomePage() {
@@ -533,6 +534,10 @@ export default function HomePage() {
                 >
                   See All Offerings
                 </Link>
+              </div>
+              <div className="mt-8 pt-8 border-t border-white/20">
+                <p className="text-sm font-semibold text-white/80 mb-3">Follow along</p>
+                <SocialLinks variant="footer" className="[&_a]:text-white/70 [&_a:hover]:text-white" />
               </div>
             </div>
           </div>

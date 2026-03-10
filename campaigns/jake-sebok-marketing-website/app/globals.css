@@ -41,9 +41,9 @@ body {
   color: transparent;
 }
 
-/* Hero headline gradient — brand orange (top-left) to lighter peach (bottom-right) */
+/* Hero headline — same gradient direction, darker end */
 .text-gradient-accent-hero {
-  background: linear-gradient(135deg, var(--ap-accent) 0%, #FFD4BA 100%);
+  background: linear-gradient(135deg, var(--ap-accent) 0%, #A63D00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCard } from "@/components/TestimonialCard";
+import { SocialLinks } from "@/components/SocialLinks";
 import { testimonials } from "@/lib/testimonials";
 
 export const metadata = {
@@ -64,6 +65,10 @@ export default function AboutPage() {
                 Believe me, friends. Your best days are ahead. Let&apos;s do this
                 together.
               </p>
+              <div className="pt-6">
+                <p className="text-sm font-semibold text-ap-primary mb-3">Connect with me</p>
+                <SocialLinks variant="contact" />
+              </div>
             </div>
           </div>
         </div>
