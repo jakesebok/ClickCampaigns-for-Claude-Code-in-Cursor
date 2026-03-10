@@ -156,7 +156,7 @@ export default function WorkWithMePage() {
             </p>
             <Link
               href="/work-with-me/apply"
-              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-8 py-4 rounded-pill transition-all hover:bg-ap-accent-2"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all hover:bg-ap-accent-2"
             >
               Apply for the Accelerator
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -117,7 +117,7 @@ export function Header() {
           })}
           <Link
             href="/assessment"
-            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3 rounded-pill transition-all"
+            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
           >
             Take the VAPI™
           </Link>
@@ -216,7 +216,7 @@ export function Header() {
             })}
             <Link
               href="/assessment"
-              className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold py-3 rounded-pill"
+              className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold text-base py-4 px-8 rounded-pill"
               onClick={() => setMobileOpen(false)}
             >
               Take the VAPI™

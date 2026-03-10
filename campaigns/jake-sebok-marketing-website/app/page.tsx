@@ -45,17 +45,17 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <span className="text-gradient-accent">someone else&apos;s</span>
+                <span className="text-gradient-accent-hero">someone else&apos;s</span>
                 <br />
                 success.
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
-                You&apos;ve been pouring everything into a version of success that was never yours. That&apos;s why it feels like a grind. When what you build matches who you actually are, you pour rocket fuel on your progress and your impact begins to match your ambition.
+                Burnout isn&apos;t proof you need to grind harder. It&apos;s a sign you&apos;re building the wrong thing. When what you build matches who you are, effort becomes momentum and your impact finally catches up to your ambition.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
                 >
                   Take the VAPI™
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-medium text-xs tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all"
+                  className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all"
                 >
                   See How It Works
                 </Link>
@@ -145,7 +145,7 @@ export default function HomePage() {
             From the outside, it looks like success. But you know the <span className="text-gradient-accent">cost</span>.
           </h2>
           <div className="mb-12 max-w-2xl">
-            <p className="text-ap-mid text-xl font-semibold">
+            <p className="text-ap-mid text-xl font-semibold md:whitespace-nowrap">
               For impact-driven founders who are done white-knuckling their way to the next level.
             </p>
             <h3 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mt-4">
@@ -267,7 +267,7 @@ export default function HomePage() {
             Don&apos;t optimize for output. Optimize for <span className="text-gradient-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid text-xl font-semibold mb-12 max-w-2xl">
-            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution: the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
+            More effort won&apos;t fix it. More strategy won&apos;t either. When your mind, your body, and your direction aren&apos;t working together, effort becomes resistance. That changes here. Take your first steps on the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -369,7 +369,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch mb-12">
             <div className="lg:col-span-8 order-1 flex flex-col">
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            By the end of our work together, you will:
+            By the end of our work together, you will have:
           </h2>
           <p className="text-ap-mid text-xl font-semibold mb-8 max-w-2xl">
             Not a list of tactics. A fundamental shift in how you run your business and your life.
@@ -426,7 +426,7 @@ export default function HomePage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Healthier, sharper, and more energized than you have in years</h3>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Energy and vitality you haven&apos;t felt in years</h3>
                 <p className="text-ap-mid text-xl font-semibold leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
               </div>
             </div>
@@ -449,7 +449,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-3 justify-center items-center">
               <Link
                 href="/assessment"
-                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
+                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
               >
                 Take the VAPI™
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -484,7 +484,7 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-5 py-2.5 rounded-pill transition-all"
+              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
             >
               Read Marshall&apos;s story: from dreading work to excited every day
               <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -520,7 +520,7 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-3 justify-center">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-xs tracking-wider px-6 py-3 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
                 >
                   Take the VAPI™
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -529,7 +529,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-white/60 text-white font-medium text-xs tracking-wider hover:bg-white/10 transition-all"
+                  className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-white/60 text-white font-semibold text-base tracking-wider hover:bg-white/10 transition-all"
                 >
                   See All Offerings
                 </Link>

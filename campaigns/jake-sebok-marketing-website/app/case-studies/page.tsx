@@ -106,7 +106,7 @@ export default function CaseStudiesPage() {
               <div className="pt-4">
                 <Link
                   href="/work-with-me"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
                 >
                   Start Your Transformation
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ export default function CaseStudiesPage() {
               <div className="pt-4">
                 <Link
                   href="/work-with-me"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
                 >
                   Start Your Transformation
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,7 +263,7 @@ export default function CaseStudiesPage() {
               </p>
               <Link
                 href="/assessment"
-                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
               >
                 Take the VAPI™
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

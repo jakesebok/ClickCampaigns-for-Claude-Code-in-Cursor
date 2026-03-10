@@ -64,7 +64,7 @@ export default function FreedomWorkshopPage() {
         <div className="flex flex-wrap gap-4">
           <Link
             href="/contact"
-            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
           >
             Get Notified
           </Link>

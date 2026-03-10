@@ -148,7 +148,7 @@ export default function AboutPage() {
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-5 py-2.5 rounded-pill transition-all"
+              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
             >
               See Marshall&apos;s full story: from dreading work to excited every day
               <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +159,7 @@ export default function AboutPage() {
           <div className="mt-10 text-center">
             <Link
               href="/work-with-me"
-              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
             >
               Work With Me
             </Link>

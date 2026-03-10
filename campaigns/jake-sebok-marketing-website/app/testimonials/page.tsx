@@ -33,7 +33,7 @@ export default function TestimonialsPage() {
         <div className="mt-16 text-center">
           <Link
             href="/work-with-me"
-            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
           >
             Work With Me
           </Link>

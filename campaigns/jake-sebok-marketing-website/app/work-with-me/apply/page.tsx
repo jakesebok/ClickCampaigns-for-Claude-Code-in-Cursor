@@ -116,7 +116,7 @@ export default function ApplyPage() {
             <div>
               <button
                 type="submit"
-                className="cta-pill w-full sm:w-auto inline-flex items-center justify-center bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+                className="cta-pill w-full sm:w-auto inline-flex items-center justify-center bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
               >
                 Submit Application
               </button>

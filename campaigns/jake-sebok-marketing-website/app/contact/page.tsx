@@ -66,7 +66,7 @@ export default function ContactPage() {
           </div>
           <button
             type="submit"
-            className="cta-pill inline-flex items-center justify-center bg-ap-accent text-white font-semibold px-8 py-4 rounded-pill transition-all"
+            className="cta-pill inline-flex items-center justify-center bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
           >
             Send Message
           </button>
