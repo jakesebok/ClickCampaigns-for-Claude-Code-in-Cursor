@@ -45,7 +45,7 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <span className="text-gradient-accent-hero">someone else&apos;s</span>
+                <span className="text-gradient-accent">someone else&apos;s</span>
                 <br />
                 success.
               </h1>
