@@ -19,7 +19,7 @@ export default function TestimonialsPage() {
           Real transformation. Real results.
         </h1>
         <p className="text-lg text-ap-mid max-w-2xl mb-12">
-          Entrepreneurs who&apos;ve worked with me share what changed—clarity,
+          Entrepreneurs who&apos;ve worked with me share what changed: clarity,
           confidence, and businesses that finally feel like extensions of who
           they are.
         </p>

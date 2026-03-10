@@ -28,7 +28,7 @@ export default function FreedomWorkshopPage() {
         </div>
         <p className="text-lg text-ap-mid leading-relaxed mb-10">
           90 minutes. Clarity. Community. No fluff. Connect with entrepreneurs who
-          refuse to stay stuck—and get a clear next step for your alignment
+          refuse to stay stuck and get a clear next step for your alignment
           journey.
         </p>
         <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 mb-10">

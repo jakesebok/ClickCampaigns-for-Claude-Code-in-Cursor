@@ -23,7 +23,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Jake has a steady, grounding presence that makes it easy to open up and honestly discuss what's holding you back. He's someone you can trust to lead you through an honest, introspective process without judgment. His approach to accountability isn't about pressure or guilt trips—he challenges you in a way that feels productive and keeps you moving forward.",
+      "Jake has a steady, grounding presence that makes it easy to open up and honestly discuss what's holding you back. He's someone you can trust to lead you through an honest, introspective process without judgment. His approach to accountability isn't about pressure or guilt trips. He challenges you in a way that feels productive and keeps you moving forward.",
     headline: "The One You Want in Your Corner.",
     author: "Cheryl O'Brien",
     image: "/images/testimonials/Cheryl.png",

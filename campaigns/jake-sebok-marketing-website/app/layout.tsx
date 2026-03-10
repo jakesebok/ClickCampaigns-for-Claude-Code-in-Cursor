@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jake Sebok — Values-Aligned Performance Coaching",
     description:
-      "Build a business that's an extension of who you are—not a cage you built around yourself.",
+      "Build a business that's an extension of who you are, not a cage you built around yourself.",
     url: "https://jakesebok.com",
   },
 };

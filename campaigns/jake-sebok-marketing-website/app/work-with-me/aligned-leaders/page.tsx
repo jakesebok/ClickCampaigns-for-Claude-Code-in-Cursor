@@ -29,7 +29,7 @@ export default function AlignedLeadersPage() {
         <p className="text-lg text-ap-mid leading-relaxed mb-10">
           Weekly calls. Resources. A cohort of entrepreneurs who get it. The
           Aligned Leaders Community is for founders who want ongoing support
-          without the full commitment of the Accelerator—and who are ready to
+          without the full commitment of the Accelerator and who are ready to
           invest in their growth.
         </p>
         <Link

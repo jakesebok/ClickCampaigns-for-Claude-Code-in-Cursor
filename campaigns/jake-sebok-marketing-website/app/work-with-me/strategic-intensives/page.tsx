@@ -29,7 +29,7 @@ export default function StrategicIntensivesPage() {
         <p className="text-lg text-ap-mid leading-relaxed mb-10">
           A focused day (or half-day) to cut through the noise, get strategic
           clarity, and leave with a clear path forward. For entrepreneurs who
-          are ready to go deeper than a workshop—but not yet ready for the
+          are ready to go deeper than a workshop but not yet ready for the
           full Accelerator.
         </p>
         <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 mb-10">

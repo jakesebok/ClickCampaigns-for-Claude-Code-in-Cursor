@@ -61,7 +61,7 @@ export default function AboutPage() {
                 highest performance without sacrificing what matters most.
               </p>
               <p className="font-semibold text-lg text-ap-primary">
-                Believe me, friends—your best days are ahead. Let&apos;s do this
+                Believe me, friends. Your best days are ahead. Let&apos;s do this
                 together.
               </p>
             </div>
@@ -86,11 +86,11 @@ export default function AboutPage() {
               <ul className="space-y-2 text-ap-mid mb-4">
                 <li>• Master Certified Professional Coach (MCPC)</li>
                 <li>• Certified Professional Life Coach (CPLC)</li>
-                <li>• NLP Practitioner — addresses the root cause of self-sabotage</li>
+                <li>• NLP Practitioner (addresses the root cause of self-sabotage)</li>
                 <li>• CrossFit Level 2 Coach</li>
               </ul>
               <p className="text-sm text-ap-muted">
-                ICF-accredited. Master Certified is the top tier—earned through hundreds of coaching hours and rigorous assessment.
+                ICF-accredited. Master Certified is the top tier, earned through hundreds of coaching hours and rigorous assessment.
               </p>
             </div>
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">
@@ -98,7 +98,7 @@ export default function AboutPage() {
                 Proven in the arena
               </h3>
               <p className="text-ap-mid leading-relaxed mb-4">
-                Leadership roles across multiple industries. Built a team and scaled revenue 20x in nine months. Scaled businesses to multi-million dollar revenue. I&apos;ve always prioritized people over metrics—and the results followed.
+                Leadership roles across multiple industries. Built a team and scaled revenue 20x in nine months. Scaled businesses to multi-million dollar revenue. I&apos;ve always prioritized people over metrics, and the results followed.
               </p>
               <p className="text-ap-mid leading-relaxed">
                 My approach blends real results with deep humanity. I&apos;m not an observer of this path. I&apos;ve walked it, fallen into the traps, and found my way out. Now I help others do the same.
@@ -109,13 +109,13 @@ export default function AboutPage() {
           {/* How I Work */}
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-12">
             <h3 className="font-semibold text-ap-primary mb-4">
-              I coach the whole human being—not just the business
+              I coach the whole human being, not just the business
             </h3>
             <p className="text-ap-mid leading-relaxed mb-4">
-              Where competitors optimize for output, I optimize for alignment. I use NLP-based parts work to address the root cause of self-sabotage. I build Alignment Blueprints from your actual values—not inherited or assumed ones. Milestone-based pricing shifts risk to me, not you.
+              Where competitors optimize for output, I optimize for alignment. I use NLP-based parts work to address the root cause of self-sabotage. I build Alignment Blueprints from your actual values, not inherited or assumed ones. Milestone-based pricing shifts risk to me, not you.
             </p>
             <p className="text-ap-mid leading-relaxed">
-              This isn&apos;t peak performance. It&apos;s sustainable performance—because peaks imply valleys, and valleys carry a cost you were never willing to pay.
+              This isn&apos;t peak performance. It&apos;s sustainable performance, because peaks imply valleys and valleys carry a cost you were never willing to pay.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export default function AboutPage() {
               href="/case-studies"
               className="text-ap-accent font-semibold text-sm hover:underline"
             >
-              See Marshall&apos;s full story — from dreading work to excited every day →
+              See Marshall&apos;s full story: from dreading work to excited every day →
             </Link>
           </div>
           <div className="mt-10 text-center">

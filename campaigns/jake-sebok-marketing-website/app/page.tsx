@@ -50,7 +50,7 @@ export default function HomePage() {
                 success.
               </h1>
               <p className="font-semibold text-base text-ap-mid leading-relaxed mb-8">
-                You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo;—peaks imply valleys. This is sustainable high performance, fueled by what you actually want—not what you think you should want.
+                You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo; (peaks imply valleys). This is sustainable high performance, fueled by what you actually want, not what you think you should want.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -186,7 +186,7 @@ export default function HomePage() {
                 The Grind
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                You&apos;re the bottleneck. Strategist, doer, fixer—all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
+                You&apos;re the bottleneck. Strategist, doer, fixer, all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -199,7 +199,7 @@ export default function HomePage() {
                 The Guilt
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere—and the guilt is loud at 2am. The business is bleeding into the life you built it for.
+                At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere, and the guilt is loud at 2am. The business is bleeding into the life you built it for.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -215,7 +215,7 @@ export default function HomePage() {
                 The Loop
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it—and you&apos;ve tried the discipline fixes. They didn&apos;t stick.
+                Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it. You&apos;ve tried the discipline fixes. They didn&apos;t stick.
               </p>
             </div>
           </div>
@@ -237,18 +237,18 @@ export default function HomePage() {
             You have an <span className="text-ap-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
-            Your business might be growing—but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
+            Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
               But when what you&apos;re building matches who you actually are, <span className="text-ap-primary/50">execution stops being a <span className="text-ap-accent">war</span></span> with yourself.
             </p>
             <p className="text-ap-mid text-lg leading-relaxed">
-              Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact—and supports a life they&apos;re excited to wake up to every morning.
+              Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
           <p className="font-semibold text-xl text-ap-primary">
-            That&apos;s the work—and here&apos;s how we get there.
+            That&apos;s the work. Here&apos;s how we get there.
           </p>
         </div>
       </section>
@@ -266,7 +266,7 @@ export default function HomePage() {
             Don&apos;t optimize for output. Optimize for <span className="text-ap-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
-            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution—the path from the <span className="text-ap-accent">cage</span> to the life you actually want.
+            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution: the path from the <span className="text-ap-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -293,7 +293,7 @@ export default function HomePage() {
                 Internal Alignment
               </h3>
               <p className="text-ap-mid text-sm leading-relaxed">
-                Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business—lowering your defenses and amplifying your output.
+                Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business, lowering your defenses and amplifying your output.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -485,7 +485,7 @@ export default function HomePage() {
               href="/case-studies"
               className="text-ap-accent font-semibold text-sm hover:underline"
             >
-              Read Marshall&apos;s story — from dreading work to excited every day →
+              Read Marshall&apos;s story: from dreading work to excited every day →
             </Link>
           </div>
         </div>
