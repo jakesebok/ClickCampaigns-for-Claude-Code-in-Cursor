@@ -45,12 +45,12 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <span className="text-gradient-accent">someone else&apos;s</span>
+                <span className="text-gradient-accent-hero">someone else&apos;s</span>
                 <br />
                 success.
               </h1>
               <p className="font-semibold text-base text-ap-mid leading-relaxed mb-8">
-                You don&apos;t have a discipline problem. You have an alignment problem. This isn&apos;t &ldquo;peak performance&rdquo; (peaks imply valleys). This is sustainable high performance, fueled by what you actually want, not what you think you should want.
+                You&apos;ve been pouring everything into a version of success that was never yours. That&apos;s why it feels like a grind. When what you build matches who you actually are, you pour rocket fuel on your progress and your impact begins to match your ambition.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
