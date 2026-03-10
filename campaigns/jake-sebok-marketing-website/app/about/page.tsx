@@ -15,7 +15,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             The Story
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-8">
@@ -72,7 +72,7 @@ export default function AboutPage() {
       {/* Credentials */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Credentials
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-10">
@@ -134,7 +134,7 @@ export default function AboutPage() {
       {/* Testimonials */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Proof
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
@@ -148,7 +148,7 @@ export default function AboutPage() {
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
-              className="text-ap-accent font-semibold text-sm hover:underline"
+              className="text-gradient-accent font-semibold text-sm hover:underline"
             >
               See Marshall&apos;s full story: from dreading work to excited every day →
             </Link>

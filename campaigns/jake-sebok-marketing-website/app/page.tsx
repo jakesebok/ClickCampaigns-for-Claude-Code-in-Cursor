@@ -1,14 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import { HeroAdaptiveText } from "@/components/HeroAdaptiveText";
 import { testimonials } from "@/lib/testimonials";
 
 export default function HomePage() {
   return (
     <>
       {/* Hero — diagonal orange, punchy headline */}
-      <section id="hero" className="relative min-h-[85vh] flex flex-col overflow-hidden">
+      <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 bg-ap-bg" />
         {/* Diagonal orange cut */}
         <div
@@ -33,7 +32,7 @@ export default function HomePage() {
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary lg:text-ap-accent mb-4">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary lg:text-gradient-accent mb-4">
                 <span className="lg:flex lg:items-center lg:gap-2">
                   <span className="hidden lg:block w-3.5 h-0.5 bg-ap-accent rounded flex-shrink-0" />
                   <span>Values-Aligned Performance</span>
@@ -46,7 +45,7 @@ export default function HomePage() {
               <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
                 Stop building
                 <br />
-                <HeroAdaptiveText />
+                <span className="text-gradient-accent">someone else&apos;s</span>
                 <br />
                 success.
               </h1>
@@ -65,7 +64,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-medium text-xs tracking-wider hover:border-ap-accent hover:text-ap-accent transition-all"
+                  className="inline-flex items-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-medium text-xs tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all"
                 >
                   See How It Works
                 </Link>
@@ -139,11 +138,11 @@ export default function HomePage() {
       {/* Empathy — pain-accentuating, gap-identifying */}
       <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Cost of Success
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            From the outside, it looks like success. But you know the <span className="text-ap-accent">cost</span>.
+            From the outside, it looks like success. But you know the <span className="text-gradient-accent">cost</span>.
           </h2>
           <div className="mb-12 max-w-2xl">
             <p className="text-ap-mid">
@@ -230,20 +229,20 @@ export default function HomePage() {
       {/* The Reframe — alignment, not discipline */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Truth
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
             You don&apos;t have a strategy problem. Or a discipline problem.
             <br className="hidden lg:block" />
-            You have an <span className="text-ap-accent">alignment</span> problem.
+            You have an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-lg leading-relaxed mb-8 max-w-2xl">
             Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
-              But when what you&apos;re building matches who you actually are, <span className="text-ap-primary/50">execution stops being a <span className="text-ap-accent">war</span></span> with yourself.
+              But when what you&apos;re building matches who you actually are, <span className="text-ap-primary/50">execution stops being a <span className="text-gradient-accent">war</span></span> with yourself.
             </p>
             <p className="text-ap-mid text-lg leading-relaxed">
               Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
@@ -261,14 +260,14 @@ export default function HomePage() {
       {/* The Work — solution */}
       <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Work
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            Don&apos;t optimize for output. Optimize for <span className="text-ap-accent">alignment</span>.
+            Don&apos;t optimize for output. Optimize for <span className="text-gradient-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid mb-12 max-w-2xl">
-            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution: the path from the <span className="text-ap-accent">cage</span> to the life you actually want.
+            It doesn&apos;t have to stay this way. Awareness, Internal Alignment, and Embodied Execution: the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -335,11 +334,11 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
                 You Don&apos;t Have to Choose
               </p>
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-                Have it all. <span className="text-ap-accent">Really.</span>
+                Have it all. <span className="text-gradient-accent">Really.</span>
               </h2>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
                 Stop chasing the carrot at the end of the stick when what you really wanted was the apple that&apos;s right in front of you.
@@ -348,7 +347,7 @@ export default function HomePage() {
                 Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about, what actually matters to you, to build a business that&apos;s supposed to support your life.
               </p>
               <p className="text-ap-mid text-lg leading-relaxed mb-6">
-                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm, <span className="text-ap-accent font-semibold">because you&apos;re no longer fighting yourself.</span>
+                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm, <span className="text-gradient-accent font-semibold">because you&apos;re no longer fighting yourself.</span>
               </p>
               <p className="font-semibold text-lg text-ap-primary">
                 No trade-offs. The work we do together is built on that belief.
@@ -364,7 +363,7 @@ export default function HomePage() {
       {/* Outcomes — by the end of our work together */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Outcome
           </p>
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch mb-12">
@@ -460,7 +459,7 @@ export default function HomePage() {
               <span className="text-ap-muted text-sm">or</span>
               <Link
                 href="/work-with-me"
-                className="text-ap-accent font-semibold text-sm hover:underline"
+                className="text-gradient-accent font-semibold text-sm hover:underline"
               >
                 explore how it works
               </Link>
@@ -475,7 +474,7 @@ export default function HomePage() {
       {/* Testimonials — carousel */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             What People Say
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
@@ -485,7 +484,7 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
-              className="text-ap-accent font-semibold text-sm hover:underline"
+              className="text-gradient-accent font-semibold text-sm hover:underline"
             >
               Read Marshall&apos;s story: from dreading work to excited every day →
             </Link>
@@ -508,7 +507,7 @@ export default function HomePage() {
                 <Image src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" width={56} height={56} className="h-10 w-auto object-contain" />
               </div>
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
-                Ready to stop building the <span className="text-ap-accent">cage</span>?
+                Ready to stop building the <span className="text-gradient-accent">cage</span>?
               </h2>
               <p className="text-ap-muted text-lg max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.

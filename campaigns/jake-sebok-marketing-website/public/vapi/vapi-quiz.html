@@ -20,6 +20,13 @@
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
     }
+    .text-gradient-accent {
+      background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: var(--ap-bg); color: var(--ap-text); margin: 0; min-height: 100vh; }
     h1, h2 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     .intro-h1 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
@@ -113,7 +120,7 @@
   <div class="max-w-2xl mx-auto pt-1 pb-12 sm:pt-2">
     <!-- Intro slide -->
     <div id="intro-slide" class="quiz-slide active">
-      <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">VAPI™ Assessment</p>
+      <p class="text-sm font-semibold uppercase tracking-wider text-gradient-accent mb-2">VAPI™ Assessment</p>
       <h1 class="intro-h1 text-3xl sm:text-4xl text-[var(--ap-primary)] mb-6 leading-tight text-center">Values-Aligned Performance Indicator™</h1>
       <p class="text-[var(--ap-secondary)] mb-4 leading-relaxed text-center">For each statement below, reflect honestly on your actual experience over the past 30 days. Not your best day. Not your worst. Your honest baseline. Select the response that most accurately reflects your reality.</p>
       <p class="text-sm text-[var(--ap-muted)] mb-8">This assessment takes approximately 12–15 minutes.</p>
@@ -127,7 +134,7 @@
     <div id="importance-outer">
     <div id="importance-slide">
       <div class="max-w-2xl mx-auto px-4 py-8 pt-20 sm:pt-24">
-        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">One More Step</p>
+        <p class="text-sm font-semibold uppercase tracking-wider text-gradient-accent mb-2">One More Step</p>
         <h2 class="priorities-h2 text-2xl sm:text-3xl text-[var(--ap-primary)] mb-3 leading-tight">Your Priorities</h2>
         <p class="text-[var(--ap-secondary)] mb-2 leading-relaxed">You've told us where you are. Now tell us where your focus should be.</p>
         <p class="text-sm text-[var(--ap-secondary)] mb-8 leading-relaxed">For each area, rate how much attention and energy it deserves given your current season of life. There are no right answers. A low rating doesn't mean you don't care. It means it's not where you need to focus right now.</p>
@@ -284,7 +291,7 @@
       <div id="question-container">
         <div id="email-slide" class="quiz-slide">
           <div class="quiz-slide-inner">
-            <p class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-2">Almost there</p>
+            <p class="text-sm font-semibold uppercase tracking-wider text-gradient-accent mb-2">Almost there</p>
             <h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-4 leading-tight">Your results are ready</h2>
             <p class="text-[var(--ap-secondary)] mb-6 leading-relaxed">Enter your details below and we'll show you your VAPI™ scores across 12 domains in 3 arenas, plus what they mean and suggested next steps.</p>
             <form id="email-form" class="space-y-4">
@@ -502,7 +509,7 @@
         var preheadBlock = document.createElement('div');
         preheadBlock.id = 'quiz-prehead';
         preheadBlock.style.display = 'none';
-        preheadBlock.innerHTML = '<div class="w-full max-w-[42rem] mx-auto pt-0.5 pb-0 bg-[var(--ap-bg)] pl-[0.5rem] sm:pl-0 pr-0"><p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-0 text-left">In the past 30 days...</p></div>';
+        preheadBlock.innerHTML = '<div class="w-full max-w-[42rem] mx-auto pt-0.5 pb-0 bg-[var(--ap-bg)] pl-[0.5rem] sm:pl-0 pr-0"><p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gradient-accent mb-0 text-left">In the past 30 days...</p></div>';
         container.insertBefore(preheadBlock, container.firstChild);
         var progressBlock = document.createElement('div');
         progressBlock.id = 'quiz-progress-block';

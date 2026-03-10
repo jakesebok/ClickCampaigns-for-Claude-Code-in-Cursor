@@ -43,6 +43,13 @@
       border: 2px solid rgba(255,107,26,0.5);
       box-shadow: 0 8px 32px -8px rgba(255,107,26,0.35), 0 0 0 1px rgba(255,255,255,0.4) inset, 0 1px 2px rgba(0,0,0,0.06);
     }
+    .text-gradient-accent {
+      background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
     .testimonial-banner::before {
       content: '';
       position: absolute;
@@ -59,9 +66,9 @@
       <a href="/assessment/start" class="inline-block mb-8">
         <img src="/images/vapi/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-28 sm:h-36 w-auto mx-auto" />
       </a>
-      <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-accent)] mb-3">Free Assessment</p>
+      <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">Free Assessment</p>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl text-[var(--ap-primary)] leading-tight mb-5">
-        <span class="text-[var(--ap-primary)]">See how you're</span> <em class="text-[var(--ap-accent)]">really</em> <span class="text-[var(--ap-primary)]">performing.</span>
+        <span class="text-[var(--ap-primary)]">See how you're</span> <em class="text-gradient-accent">really</em> <span class="text-[var(--ap-primary)]">performing.</span>
       </h1>
       <p class="text-lg sm:text-xl text-[var(--ap-secondary)] max-w-2xl mx-auto leading-relaxed mb-8">
         Most of us are moving fast, but are we moving in the right direction? The <strong>Values-Aligned Performance Indicator™ (VAPI™)</strong> gives you an honest snapshot across 12 domains and 3 arenas of your life, so you know exactly where you're strong, where you're leaking energy, and which levers will get you where you want to go.

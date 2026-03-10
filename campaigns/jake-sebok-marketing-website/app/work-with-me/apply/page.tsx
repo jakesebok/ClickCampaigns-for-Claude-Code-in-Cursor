@@ -14,14 +14,14 @@ export default function ApplyPage() {
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
           <Link
             href="/work-with-me"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-ap-accent mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-gradient-accent mb-8 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Work With Me
           </Link>
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Aligned Power Accelerator
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">

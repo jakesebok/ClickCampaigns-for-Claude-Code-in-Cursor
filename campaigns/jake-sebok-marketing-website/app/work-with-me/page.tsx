@@ -65,7 +65,7 @@ export default function WorkWithMePage() {
       >
         <div className="absolute inset-0 bg-ap-bg/95" />
         <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             How We Work
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
@@ -94,7 +94,7 @@ export default function WorkWithMePage() {
                 } transition-colors`}
               >
                 {offer.free && (
-                  <span className="inline-block text-xs font-semibold uppercase tracking-wider mb-4 text-ap-accent">
+                  <span className="inline-block text-xs font-semibold uppercase tracking-wider mb-4 text-gradient-accent">
                     Free
                   </span>
                 )}
@@ -116,8 +116,8 @@ export default function WorkWithMePage() {
                   href={offer.href}
                   className={`inline-flex items-center gap-2 font-semibold text-sm ${
                     offer.featured
-                      ? "text-ap-accent hover:text-ap-accent-2"
-                      : "text-ap-accent hover:underline"
+                      ? "text-gradient-accent hover:text-ap-accent-2"
+                      : "text-gradient-accent hover:underline"
                   }`}
                 >
                   {offer.cta}
@@ -145,11 +145,11 @@ export default function WorkWithMePage() {
       <section className="py-20 sm:py-28 bg-ap-primary">
         <div className="max-w-[720px] mx-auto px-5 sm:px-6 text-center">
           <div className="border-t-2 border-ap-accent pt-16 sm:pt-20">
-            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
               Exclusive Opportunity
             </p>
             <h2 className="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight">
-              Ready to go <span className="text-ap-accent">ALL IN</span>?
+              Ready to go <span className="text-gradient-accent">ALL IN</span>?
             </h2>
             <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
               The Aligned Power Accelerator is my flagship 12-month program for entrepreneurs who are done with half-measures. Limited cohort. Application required. This is for those ready to build a business that&apos;s an extension of who they actually are.

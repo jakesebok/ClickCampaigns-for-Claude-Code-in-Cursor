@@ -67,7 +67,7 @@ export function Header() {
                     type="button"
                     onClick={() => setWorkWithMeOpen(!workWithMeOpen)}
                     className={`text-sm font-semibold transition-colors flex items-center gap-1 ${
-                      isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"
+                      isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
                     }`}
                   >
                     {link.label}
@@ -89,7 +89,7 @@ export function Header() {
                             key={child.href}
                             href={child.href}
                             className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                              childActive ? "text-ap-accent bg-ap-accent/5" : "text-ap-primary hover:bg-ap-bg hover:text-ap-accent"
+                              childActive ? "text-gradient-accent bg-ap-accent/5" : "text-ap-primary hover:bg-ap-bg hover:text-gradient-accent"
                             }`}
                             onClick={() => setWorkWithMeOpen(false)}
                           >
@@ -108,7 +108,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-semibold transition-colors ${
-                  isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"
+                  isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
                 }`}
               >
                 {link.label}
@@ -166,7 +166,7 @@ export function Header() {
                       type="button"
                       onClick={() => setMobileWorkWithMeOpen(!mobileWorkWithMeOpen)}
                       className={`font-semibold flex items-center justify-between w-full text-left py-1 ${
-                        isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"
+                        isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
                       }`}
                     >
                       {link.label}
@@ -187,7 +187,7 @@ export function Header() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              className={`text-sm font-medium py-1 ${childActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"}`}
+                              className={`text-sm font-medium py-1 ${childActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"}`}
                               onClick={() => {
                                 setMobileOpen(false);
                                 setMobileWorkWithMeOpen(false);
@@ -207,7 +207,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-semibold ${isActive ? "text-ap-accent" : "text-ap-mid hover:text-ap-accent"}`}
+                  className={`font-semibold ${isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"}`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}

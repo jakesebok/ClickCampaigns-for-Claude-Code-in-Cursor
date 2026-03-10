@@ -83,7 +83,7 @@ export default function TermsPage() {
               For questions about these terms, contact:{" "}
               <a
                 href="mailto:jacob@alignedpower.coach"
-                className="text-ap-accent font-semibold hover:underline"
+                className="text-gradient-accent font-semibold hover:underline"
               >
                 jacob@alignedpower.coach
               </a>

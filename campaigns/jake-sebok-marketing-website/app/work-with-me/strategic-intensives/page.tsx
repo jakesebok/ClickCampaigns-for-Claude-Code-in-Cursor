@@ -11,7 +11,7 @@ export default function StrategicIntensivesPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
           Strategic Alignment Intensives
         </p>
         <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
@@ -67,7 +67,7 @@ export default function StrategicIntensivesPage() {
           </Link>
           <Link
             href="/work-with-me"
-            className="inline-flex items-center text-ap-accent font-semibold hover:underline"
+            className="inline-flex items-center text-gradient-accent font-semibold hover:underline"
           >
             ← Back to offerings
           </Link>

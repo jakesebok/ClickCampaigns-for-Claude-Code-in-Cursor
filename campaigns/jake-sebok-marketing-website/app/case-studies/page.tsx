@@ -18,7 +18,7 @@ export default function CaseStudiesPage() {
       {/* Hero */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             Case Studies
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
@@ -60,7 +60,7 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-2">
                   Featured Case Study
                 </p>
                 <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
@@ -149,7 +149,7 @@ export default function CaseStudiesPage() {
             </div>
             <div className="lg:col-span-7 space-y-8">
               <div>
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-2">
                   Case Study
                 </p>
                 <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
@@ -217,7 +217,7 @@ export default function CaseStudiesPage() {
       {/* More Results — additional testimonials */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             More Results
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">

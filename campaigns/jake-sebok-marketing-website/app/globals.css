@@ -32,6 +32,15 @@ body {
   display: none;
 }
 
+/* Orange text gradient — brand orange (top-left) to darker orange (bottom-right) */
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 /* Pill button hover */
 .cta-pill:hover {
   transform: translateY(-2px);

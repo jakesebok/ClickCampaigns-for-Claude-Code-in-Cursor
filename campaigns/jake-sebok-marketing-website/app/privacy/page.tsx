@@ -88,7 +88,7 @@ export default function PrivacyPage() {
               rights, contact:{" "}
               <a
                 href="mailto:jacob@alignedpower.coach"
-                className="text-ap-accent font-semibold hover:underline"
+                className="text-gradient-accent font-semibold hover:underline"
               >
                 jacob@alignedpower.coach
               </a>
