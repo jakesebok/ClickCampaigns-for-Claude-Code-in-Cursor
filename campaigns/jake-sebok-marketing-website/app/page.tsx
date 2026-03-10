@@ -130,28 +130,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* Quote + thumbnail — mobile only, below credibility bar */}
-        <div className="lg:hidden relative z-10 bg-ap-primary border-t border-ap-border px-5 py-8">
-          <div className="max-w-xl mx-auto space-y-4">
-            <div className="w-10 h-0.5 bg-white/40 rounded" />
-            <p className="font-semibold italic text-xl text-white leading-snug">
-              &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
-                <Image
-                  src="/images/jake/MMC Profile.jpeg"
-                  alt="Jake Sebok"
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                  priority
-                />
-              </div>
-              <p className="text-sm text-white/80">— Jake Sebok, MCPC</p>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Orange rule */}
@@ -225,11 +203,34 @@ export default function HomePage() {
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
+      {/* Quote + thumbnail — mobile only, between Cost of Success and The Truth */}
+      <div className="lg:hidden relative z-10 bg-ap-primary border-t border-ap-border px-5 py-8">
+        <div className="max-w-xl mx-auto space-y-4">
+          <div className="w-10 h-0.5 bg-white/40 rounded" />
+          <p className="font-semibold italic text-xl text-white leading-snug">
+            &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
+              <Image
+                src="/images/jake/MMC Profile.jpeg"
+                alt="Jake Sebok"
+                fill
+                className="object-cover"
+                sizes="64px"
+                priority
+              />
+            </div>
+            <p className="text-sm text-white/80">— Jake Sebok, MCPC</p>
+          </div>
+        </div>
+      </div>
+
       {/* The Reframe — alignment, not discipline */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
-            Here&apos;s the Truth
+            The Truth
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
             You don&apos;t have a strategy problem. Or a discipline problem.
