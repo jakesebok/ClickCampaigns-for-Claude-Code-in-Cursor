@@ -252,80 +252,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How We Get There — three steps, full lane */}
-      <section className="relative py-20 sm:py-28 bg-ap-primary text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-ap-primary" aria-hidden />
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
-        <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="text-white/90 text-lg font-semibold mb-4">
-            That&apos;s the work. Here&apos;s how we get there.
-          </p>
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
-            How We Get There
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
-            Three steps. <span className="text-gradient-accent">No pressure.</span>
-          </h2>
-          <p className="text-white/80 text-lg font-semibold max-w-2xl mb-8">
-            Start with the free assessment. Get clarity. Then choose your path.
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take the VAPI™</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Free assessment. 72 questions. ~12 minutes. Discover your Founder Archetype and get an honest snapshot of where you stand.</p>
-                </div>
-              </div>
-              <div className="hidden lg:flex justify-end pt-2">
-                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Your personalized report: scores for every domain and arena, your full Founder Archetype profile with strengths, blind spots, and growth path, plus your top three priorities. Clear. Actionable. Yours.</p>
-                </div>
-              </div>
-              <div className="hidden lg:flex justify-end pt-2">
-                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Choose your path</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Then you choose your path. Monthly workshop for clarity. Community for support and accountability. Strategic intensives when you need a focused deep dive. We&apos;ll help you find the right fit for where you are.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/assessment"
-              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
-            >
-              Take the VAPI™
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
       {/* The Work — solution */}
       <section className="py-20 sm:py-28 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
@@ -422,6 +348,77 @@ export default function HomePage() {
                 No trade-offs. The work we do together is built on that belief.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
+      {/* How to Get Started — three steps, full lane */}
+      <section className="relative py-20 sm:py-28 bg-ap-primary text-white overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-ap-primary" aria-hidden />
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
+        <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
+            How to Get Started
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
+            Three steps. <span className="text-gradient-accent">Your pace.</span>
+          </h2>
+          <p className="text-white/80 text-lg font-semibold max-w-2xl mb-8">
+            Start with the free assessment. Get clarity. Then choose your path.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take the VAPI™</h3>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ (Values-Aligned Performance Indicator) is a free assessment that measures your experience across 12 life and business domains. You answer 72 statements about the past 30 days—your honest baseline, not your best day. In about 12 minutes you discover your Founder Archetype and get a clear picture of where you&apos;re strong, where you&apos;re leaking energy, and which levers will get you where you want to go.</p>
+                </div>
+              </div>
+              <div className="hidden lg:flex justify-end pt-2">
+                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Your personalized report gives you scores for every domain and arena, your full Founder Archetype profile with strengths, blind spots, and a growth path, plus your top three priorities. No generic advice. No fluff. Everything is tailored to your pattern so you know exactly what to focus on next and why. Save it as a PDF, share it with your coach, or retake it over time to track progress.</p>
+                </div>
+              </div>
+              <div className="hidden lg:flex justify-end pt-2">
+                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take Action</h3>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">From there, you choose how you want to engage. Free monthly workshops for clarity and connection. A community for ongoing support and accountability. Strategic intensives when you need a focused deep dive. Group coaching for sustained transformation. We offer many entry points and formats—from low-commitment to high-touch—so you can find the right fit for where you are and what you need right now. Your pace. Your path.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/assessment"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
+            >
+              Take the VAPI™
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
