@@ -4,6 +4,36 @@
 
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 
+function determineArchetype(results) {
+  if (!results) return null;
+  const arenaScores = results.arenaScores || {};
+  const domainScores = {};
+  (results.domains || []).forEach((d) => { if (d && d.code) domainScores[d.code] = d.score; });
+  const s = parseFloat(arenaScores.Personal ?? arenaScores.Self) ?? null;
+  const r = parseFloat(arenaScores.Relationships) ?? null;
+  const b = parseFloat(arenaScores.Business) ?? null;
+  const overall = typeof results.overall === 'number' ? results.overall : (Object.keys(domainScores).length ? Object.values(domainScores).reduce((a, v) => a + (v || 0), 0) / 12 : null);
+  const exScore = domainScores.EX; const ecScore = domainScores.EC; const vsScore = domainScores.VS;
+  if (s >= 8 && r >= 8 && b >= 8) return 'The Architect';
+  let arenasLow = 0;
+  if (s != null && s <= 4.5) arenasLow++;
+  if (r != null && r <= 4.5) arenasLow++;
+  if (b != null && b <= 4.5) arenasLow++;
+  if (overall != null && overall <= 4.5) return 'The Phoenix';
+  if (arenasLow >= 2) return 'The Phoenix';
+  if (exScore != null && exScore >= 7 && ((ecScore != null && ecScore <= 5) || (vsScore != null && vsScore <= 5))) return 'The Engine';
+  const allMid = s != null && r != null && b != null && s >= 5 && s <= 7.9 && r >= 5 && r <= 7.9 && b >= 5 && b <= 7.9;
+  const spread = Math.max(s, r, b) - Math.min(s, r, b);
+  if (allMid && spread <= 2) return 'The Drifter';
+  if (s != null && r != null && b != null) {
+    if (b === Math.max(s, r, b) && s === Math.min(s, r, b) && (b - s) >= 2) return 'The Performer';
+    if (b === Math.max(s, r, b) && r === Math.min(s, r, b) && (b - r) >= 2) return 'The Ghost';
+    if (r === Math.max(s, r, b) && b === Math.min(s, r, b) && (r - b) >= 2) return 'The Guardian';
+    if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2) return 'The Seeker';
+  }
+  return 'The Drifter';
+}
+
 async function lookupDisplayName(url, serviceKey, email) {
   if (!email || !url || !serviceKey) return null;
   const emailNorm = String(email).trim().toLowerCase();
@@ -63,7 +93,7 @@ export async function GET(request) {
 
   try {
     const [vapiRes, sixcRes, activeRes] = await Promise.all([
-      fetch(`${url}/rest/v1/vapi_results?select=email,first_name,last_name,created_at&order=created_at.desc&limit=2000`, { headers }),
+      fetch(`${url}/rest/v1/vapi_results?select=email,first_name,last_name,created_at,results&order=created_at.desc&limit=2000`, { headers }),
       fetch(`${url}/rest/v1/six_c_submissions?select=email,created_at&order=created_at.desc&limit=2000`, { headers }),
       fetch(`${url}/rest/v1/portal_active_clients?select=email,active_client`, { headers }),
     ]);
@@ -79,6 +109,8 @@ export async function GET(request) {
       const k = (r.email || '').trim().toLowerCase();
       if (!k) return;
       if (!byEmail[k]) {
+        const results = r.results || {};
+        const archetype = results.archetype || determineArchetype(results);
         byEmail[k] = {
           email: r.email,
           name: [r.first_name, r.last_name].filter(Boolean).join(' ') || r.email || '—',
@@ -87,10 +119,15 @@ export async function GET(request) {
           assessmentCount: 0,
           sixcCount: 0,
           isActiveClient: activeSet.has(k),
+          archetype: archetype || null,
         };
       }
       byEmail[k].assessmentCount++;
-      if (!byEmail[k].lastVapiAt || r.created_at > byEmail[k].lastVapiAt) byEmail[k].lastVapiAt = r.created_at;
+      if (!byEmail[k].lastVapiAt || r.created_at > byEmail[k].lastVapiAt) {
+        byEmail[k].lastVapiAt = r.created_at;
+        const results = r.results || {};
+        byEmail[k].archetype = results.archetype || determineArchetype(results);
+      }
     });
 
     const sixcByEmail = {};

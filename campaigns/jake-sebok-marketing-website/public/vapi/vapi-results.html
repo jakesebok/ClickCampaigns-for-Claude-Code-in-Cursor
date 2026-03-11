@@ -656,7 +656,7 @@
           if (meta.constraint) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
           if (meta.growth_path) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
           if (meta.program_phase) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
-          html += '<div class="flex justify-center pt-4"><i data-lucide="chevron-up" class="w-4 h-4 text-[var(--ap-muted)]"></i></div>';
+          html += '<div class="w-full flex justify-center pt-4"><button type="button" class="p-2 -m-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4 block mx-auto"></i></button></div>';
           html += '</div></details>';
         }
         html += '</div></div></div></div>';
