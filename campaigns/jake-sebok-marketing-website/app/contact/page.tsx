@@ -85,7 +85,8 @@ export default function ContactPage() {
             className="text-gradient-accent font-semibold hover:underline"
           >
             Take the VAPI™
-          </Link>
+          </Link>{" "}
+          and discover your Founder Archetype.
         </p>
       </div>
     </section>

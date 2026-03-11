@@ -42,6 +42,12 @@
       color: transparent;
     }
     .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
+    /* Screen only: larger body text for readability (print view unchanged) */
+    @media screen {
+      #results-content { font-size: 17px; }
+      #results-content .text-sm { font-size: 15px; }
+      #results-content p { font-size: 15px; }
+    }
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }

@@ -10,7 +10,7 @@ const offerings = [
   {
     title: "Free VAPI™ Assessment",
     description:
-      "72 questions. ~12 minutes. An honest snapshot across 12 life and business domains. Get your personalized baseline and clarity on where to focus.",
+      "72 questions. ~12 minutes. Discover your Founder Archetype and get an honest snapshot across 12 life and business domains. Get your personalized baseline and clarity on where to focus.",
     cta: "Take the Assessment",
     href: "/assessment",
     free: true,
@@ -72,7 +72,7 @@ export default function WorkWithMePage() {
             Your place. Your pace.
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
-            The best entry point is the free VAPI™ Assessment and the monthly
+            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, and the monthly
             Aligned Freedom Workshop. From there, you can join the free
             community, invest in intensives, or apply for the flagship
             Accelerator program.

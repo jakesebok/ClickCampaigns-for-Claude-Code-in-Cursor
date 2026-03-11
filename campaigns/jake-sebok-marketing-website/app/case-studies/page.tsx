@@ -259,7 +259,7 @@ export default function CaseStudiesPage() {
                 Ready to write your own case study?
               </h2>
               <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
-                Start with the free VAPI™ Assessment. Get clarity on where you stand, then let&apos;s build something that feels like an extension of who you are.
+                Start with the free VAPI™ Assessment. Discover your Founder Archetype and get clarity on where you stand, then let&apos;s build something that feels like an extension of who you are.
               </p>
               <Link
                 href="/assessment"
