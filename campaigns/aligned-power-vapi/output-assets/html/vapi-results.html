@@ -37,6 +37,7 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
     .print-only { display: none; }
@@ -593,7 +594,7 @@
         var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
         var tagline = meta && meta.tagline ? meta.tagline : '';
         var iconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(archetypeName, color) : '';
-        var html = '<div class="archetype-section bg-white rounded-2xl border-2 border-[var(--ap-border)] shadow-lg overflow-hidden mb-10" style="border-left-color:' + color + '; border-left-width:4px;">';
+        var html = '<div class="archetype-section bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden mb-10" style="border-left:4px solid ' + color + ';">';
         html += '<div class="p-6 sm:p-8">';
         html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
         if (iconSvg) {
@@ -601,12 +602,12 @@
           html += '<div class="w-10 h-10 sm:w-12 sm:h-12" style="color:' + color + '">' + iconSvg + '</div></div>';
         }
         html += '<div class="min-w-0 flex-1">';
-        html += '<p class="text-[10px] font-semibold uppercase tracking-[0.2em] mb-1" style="color:' + color + '">Your Founder Archetype</p>';
-        html += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-2">' + escapeHtml(archetypeName) + '</h2>';
+        html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + color + '">Your Founder Archetype</p>';
+        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escapeHtml(archetypeName) + '</h2>';
         if (tagline) html += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(tagline) + '</p>';
         if (meta && (meta.description || meta.strength || meta.growth_path)) {
-          html += '<details class="mt-4 group">';
-          html += '<summary class="cursor-pointer text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile</summary>';
+          html += '<details class="archetype-details mt-4 group">';
+          html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
           html += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed">';
           if (meta.description) html += '<p>' + escapeHtml(meta.description) + '</p>';
           if (meta.strength) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
@@ -614,6 +615,7 @@
           if (meta.constraint) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
           if (meta.growth_path) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
           if (meta.program_phase) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
+          html += '<div class="flex justify-center pt-4"><i data-lucide="chevron-up" class="w-4 h-4 text-[var(--ap-muted)]"></i></div>';
           html += '</div></details>';
         }
         html += '</div></div></div></div>';

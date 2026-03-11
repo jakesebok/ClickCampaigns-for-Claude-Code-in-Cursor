@@ -120,6 +120,8 @@
     /* Importance modal slide-in */
     #importance-modal { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
     #importance-modal.importance-modal--hidden { transform: translateX(100%); }
+    /* Archetype details chevron */
+    .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -253,6 +255,8 @@
       </div>
 
       <div id="latest-result" class="mb-10"></div>
+
+      <div id="archetype-section" class="mb-10 hidden"></div>
 
       <div id="where-to-focus-section" class="mb-10 hidden"></div>
 
@@ -652,6 +656,7 @@
       if (error || !rows || rows.length === 0) {
         document.getElementById('empty-state').classList.remove('hidden');
         document.getElementById('latest-result').classList.add('hidden');
+        document.getElementById('archetype-section').classList.add('hidden');
         document.getElementById('history-list').classList.add('hidden');
         var errEl = document.getElementById('empty-state-error');
         if (error) {
@@ -925,9 +930,10 @@
       latestHtml += '<div class="flex items-center gap-2.5 mb-3">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2.5 py-1 rounded-md">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-sm">' + escHtml(formatDate(latest.created_at)) + '</span>';
-      if (latestArchetype) latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md" style="color:' + archetypeColor + ';background:' + archetypeColor + '20;">' + escHtml(latestArchetype) + '</span>';
+      if (latestArchetype) latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-[0.22em] px-2.5 py-1 rounded-md" style="color:' + archetypeColor + ';background:' + archetypeColor + '20;">' + escHtml(latestArchetype) + '</span>';
       latestHtml += '</div>';
-      latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-1 tracking-tight">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
+      latestHtml += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-1 tracking-tight">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
+      if (latestArchetype) latestHtml += '<p class="text-sm font-semibold mb-4" style="color:' + archetypeColor + '">Your Founder Archetype: ' + escHtml(latestArchetype) + '</p>';
       if (latestScore != null && latestTier) {
         latestHtml += '<div class="flex flex-wrap items-baseline gap-3 mt-4 mb-8 py-4 border-t border-[var(--ap-border)]/60">';
         latestHtml += '<span class="text-4xl sm:text-5xl font-bold tabular-nums" style="color:' + tierColor + '">' + (typeof latestScore === 'number' ? Math.round(latestScore * 10) / 10 : latestScore) + '</span>';
@@ -957,6 +963,42 @@
       latestHtml += '</div>';
       latestHtml += '</div>';
       document.getElementById('latest-result').innerHTML = latestHtml;
+
+      // Archetype section — full profile card from results page
+      var archSectionEl = document.getElementById('archetype-section');
+      if (latestArchetype && archSectionEl) {
+        var archTagline = archetypeMeta && archetypeMeta.tagline ? archetypeMeta.tagline : '';
+        var archIconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(latestArchetype, archetypeColor) : '';
+        var archHtml = '<p class="eyebrow mb-1">Founder Archetype</p>';
+        archHtml += '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm" style="border-left:4px solid ' + archetypeColor + ';">';
+        archHtml += '<div class="p-6 sm:p-8">';
+        archHtml += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
+        if (archIconSvg) {
+          archHtml += '<div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center" style="background:' + archetypeColor + '20;">';
+          archHtml += '<div class="w-10 h-10 sm:w-12 sm:h-12" style="color:' + archetypeColor + '">' + archIconSvg + '</div></div>';
+        }
+        archHtml += '<div class="min-w-0 flex-1">';
+        archHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + archetypeColor + '">Your Founder Archetype</p>';
+        archHtml += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escHtml(latestArchetype) + '</h2>';
+        if (archTagline) archHtml += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escHtml(archTagline) + '</p>';
+        if (archetypeMeta && (archetypeMeta.description || archetypeMeta.strength || archetypeMeta.growth_path)) {
+          archHtml += '<details class="archetype-details mt-4 group">';
+          archHtml += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          archHtml += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed">';
+          if (archetypeMeta.description) archHtml += '<p>' + escHtml(archetypeMeta.description) + '</p>';
+          if (archetypeMeta.strength) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escHtml(archetypeMeta.strength) + '</p></div>';
+          if (archetypeMeta.shadow) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escHtml(archetypeMeta.shadow) + '</p></div>';
+          if (archetypeMeta.constraint) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escHtml(archetypeMeta.constraint) + '</p></div>';
+          if (archetypeMeta.growth_path) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escHtml(archetypeMeta.growth_path) + '</p></div>';
+          if (archetypeMeta.program_phase) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escHtml(archetypeMeta.program_phase) + '</p></div>';
+          archHtml += '<div class="flex justify-center pt-4"><i data-lucide="chevron-up" class="w-4 h-4 text-[var(--ap-muted)]"></i></div>';
+          archHtml += '</div></details>';
+        }
+        archHtml += '</div></div></div></div>';
+        archSectionEl.innerHTML = archHtml;
+        archSectionEl.classList.remove('hidden');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
 
       // Where to Focus — full priority matrix (only when latest has importance ratings)
       var wfEl = document.getElementById('where-to-focus-section');
