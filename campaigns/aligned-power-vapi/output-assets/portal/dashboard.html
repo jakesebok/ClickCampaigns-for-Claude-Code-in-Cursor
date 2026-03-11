@@ -88,7 +88,7 @@
     [data-theme="dark"] .pm-flag-box { background-color: rgba(234,179,8,0.15); border-color: rgba(234,179,8,0.4); }
     [data-theme="dark"] .pm-flag-box .text-amber-800 { color: #fcd34d !important; }
     [data-theme="dark"] .pm-flag-box .text-amber-900 { color: #fde68a !important; }
-    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 6%, var(--ap-bg)) 35%, color-mix(in srgb, var(--ap-accent) 5%, var(--ap-bg)) 70%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 17px; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 6%, var(--ap-bg)) 35%, color-mix(in srgb, var(--ap-accent) 5%, var(--ap-bg)) 70%, color-mix(in srgb, var(--ap-primary) 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
     .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ap-accent); }
     .dashboard-card { box-shadow: 0 1px 0 0 rgba(255,255,255,0.6) inset, 0 4px 6px -1px rgba(0,0,0,0.04), 0 14px 28px -8px rgba(14,22,36,0.12), 0 0 0 1px rgba(0,0,0,0.03); border-left: 3px solid var(--ap-accent); transition: box-shadow 0.2s; }
@@ -988,20 +988,21 @@
         archHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + archetypeColor + '">Your Founder Archetype</p>';
         archHtml += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escHtml(latestArchetype) + '</h2>';
         if (archTagline) archHtml += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escHtml(archTagline) + '</p>';
+        archHtml += '</div></div>';
         if (archetypeMeta && (archetypeMeta.description || archetypeMeta.strength || archetypeMeta.growth_path)) {
           archHtml += '<details class="archetype-details mt-4 group">';
-          archHtml += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-          archHtml += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed pb-10">';
+          archHtml += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          archHtml += '<div class="mt-4 space-y-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed pb-10 w-full">';
           if (archetypeMeta.description) archHtml += '<p>' + escHtml(archetypeMeta.description) + '</p>';
-          if (archetypeMeta.strength) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escHtml(archetypeMeta.strength) + '</p></div>';
-          if (archetypeMeta.shadow) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escHtml(archetypeMeta.shadow) + '</p></div>';
-          if (archetypeMeta.constraint) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escHtml(archetypeMeta.constraint) + '</p></div>';
-          if (archetypeMeta.growth_path) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escHtml(archetypeMeta.growth_path) + '</p></div>';
-          if (archetypeMeta.program_phase) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escHtml(archetypeMeta.program_phase) + '</p></div>';
+          if (archetypeMeta.strength) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Strength</p><p>' + escHtml(archetypeMeta.strength) + '</p></div>';
+          if (archetypeMeta.shadow) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Shadow</p><p>' + escHtml(archetypeMeta.shadow) + '</p></div>';
+          if (archetypeMeta.constraint) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Constraint</p><p>' + escHtml(archetypeMeta.constraint) + '</p></div>';
+          if (archetypeMeta.growth_path) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Growth path</p><p>' + escHtml(archetypeMeta.growth_path) + '</p></div>';
+          if (archetypeMeta.program_phase) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Program phase</p><p>' + escHtml(archetypeMeta.program_phase) + '</p></div>';
           archHtml += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
           archHtml += '</div></details>';
         }
-        archHtml += '</div></div></div></div>';
+        archHtml += '</div></div>';
         archSectionEl.innerHTML = archHtml;
         archSectionEl.classList.remove('hidden');
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
