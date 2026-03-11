@@ -947,9 +947,8 @@
         latestHtml += '<div class="flex flex-col items-start gap-2">';
         latestHtml += '<div class="flex items-center gap-3">';
         if (archIconSvg) latestHtml += '<div class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center shrink-0" style="background:' + archetypeColor + '20;"><div class="w-9 h-9 sm:w-11 sm:h-11" style="color:' + archetypeColor + '">' + archIconSvg + '</div></div>';
-        latestHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + archetypeColor + '">Your Founder Archetype</p>';
-        latestHtml += '</div>';
         latestHtml += '<span class="text-sm font-extrabold text-[var(--ap-primary)]">' + escHtml(latestArchetype) + '</span>';
+        latestHtml += '</div>';
         latestHtml += '</div>';
       }
       latestHtml += '</div>';
@@ -978,8 +977,8 @@
         var archTagline = archetypeMeta && archetypeMeta.tagline ? archetypeMeta.tagline : '';
         var archIconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(latestArchetype, archetypeColor) : '';
         var archHtml = '<p class="eyebrow mb-1">Founder Archetype</p>';
-        archHtml += '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm" style="border-left:4px solid ' + archetypeColor + ';">';
-        archHtml += '<div class="p-6 sm:p-8">';
+        archHtml += '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm relative" style="border-left:4px solid ' + archetypeColor + ';">';
+        archHtml += '<div class="p-6 sm:p-8 relative">';
         archHtml += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
         if (archIconSvg) {
           archHtml += '<div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center" style="background:' + archetypeColor + '20;">';
@@ -992,14 +991,14 @@
         if (archetypeMeta && (archetypeMeta.description || archetypeMeta.strength || archetypeMeta.growth_path)) {
           archHtml += '<details class="archetype-details mt-4 group">';
           archHtml += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-          archHtml += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed">';
+          archHtml += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed pb-10">';
           if (archetypeMeta.description) archHtml += '<p>' + escHtml(archetypeMeta.description) + '</p>';
           if (archetypeMeta.strength) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escHtml(archetypeMeta.strength) + '</p></div>';
           if (archetypeMeta.shadow) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escHtml(archetypeMeta.shadow) + '</p></div>';
           if (archetypeMeta.constraint) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escHtml(archetypeMeta.constraint) + '</p></div>';
           if (archetypeMeta.growth_path) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escHtml(archetypeMeta.growth_path) + '</p></div>';
           if (archetypeMeta.program_phase) archHtml += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escHtml(archetypeMeta.program_phase) + '</p></div>';
-          archHtml += '<div class="w-full flex items-center justify-center pt-2 pb-0.5"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
+          archHtml += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
           archHtml += '</div></details>';
         }
         archHtml += '</div></div></div></div>';
