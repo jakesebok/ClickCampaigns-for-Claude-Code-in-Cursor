@@ -376,7 +376,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take the VAPI™</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. Your honest baseline—not your best day. You discover your Founder Archetype and where to focus next.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. You get your Founder Archetype and a clear picture of where you&apos;re strong and where to focus next.</p>
                 </div>
               </div>
               <div className="hidden lg:flex justify-end pt-2">
@@ -390,7 +390,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, and your top three priorities. Tailored to your pattern—no generic advice. Save as PDF, share with your coach, or retake to track progress.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, and your top three priorities. Tailored to your pattern—no generic advice. Save as PDF or retake over time to track progress.</p>
                 </div>
               </div>
               <div className="hidden lg:flex justify-end pt-2">
@@ -404,7 +404,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take Action</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are and what you need right now.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are.</p>
                 </div>
               </div>
             </div>
