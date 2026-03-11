@@ -249,9 +249,6 @@ export default function HomePage() {
               Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
-          <p className="font-semibold text-xl text-ap-primary mb-0">
-            That&apos;s the work. Here&apos;s how we get there.
-          </p>
         </div>
       </section>
 
@@ -261,6 +258,9 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
         <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
         <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="text-white/90 text-lg font-semibold mb-4">
+            That&apos;s the work. Here&apos;s how we get there.
+          </p>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             How We Get There
           </p>
