@@ -11,6 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="/html/vapi-priority-matrix.js"></script>
+  <script src="/html/vapi-archetypes.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
@@ -349,9 +350,12 @@
           var detailId = 'vapi-detail-' + i;
           var pmResults = buildPmResults(row);
           var pmHtml = (typeof VAPI_PM !== 'undefined' && VAPI_PM.buildPriorityMatrix) ? VAPI_PM.buildPriorityMatrix(pmResults, 'vapi-' + i) : '';
+          var rowArchetype = row.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(row.results) : null);
+          var archMeta = rowArchetype && typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[rowArchetype] ? VAPI_ARCHETYPES[rowArchetype] : null;
+          var archColor = archMeta && archMeta.color_accent ? archMeta.color_accent : 'var(--ap-accent)';
           vapiHtml += '<tr class="vapi-row cursor-pointer hover:bg-[var(--ap-bg)]/40" data-detail-id="' + detailId + '">' +
             '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + formatDate(row.created_at) + '</td>' +
-            '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + '</td>' +
+            '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + (rowArchetype ? ' <span class="text-[10px] font-medium px-1.5 py-0.5 rounded" style="color:' + archColor + ';background:' + archColor + '20;">' + escapeHtml(rowArchetype) + '</span>' : '') + '</td>' +
             '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">View / Expand</td>' +
             '</tr>' +
             '<tr id="' + detailId + '" class="hidden bg-[var(--ap-bg)]/30">' +

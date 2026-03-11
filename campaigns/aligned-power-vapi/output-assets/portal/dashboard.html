@@ -27,6 +27,7 @@
   <script src="/portal/six-c-window.js"></script>
   <script src="/html/vapi-results-interpretations.js"></script>
   <script src="/html/vapi-priority-matrix.js"></script>
+  <script src="/html/vapi-archetypes.js"></script>
   <script src="/portal/progress-transitions.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -918,9 +919,13 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm">';
       latestHtml += '<div class="p-5 sm:p-7 lg:p-9 text-left">';
+      var latestArchetype = latest.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(latest.results) : null);
+      var archetypeMeta = latestArchetype && typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[latestArchetype] ? VAPI_ARCHETYPES[latestArchetype] : null;
+      var archetypeColor = archetypeMeta && archetypeMeta.color_accent ? archetypeMeta.color_accent : 'var(--ap-accent)';
       latestHtml += '<div class="flex items-center gap-2.5 mb-3">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2.5 py-1 rounded-md">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-sm">' + escHtml(formatDate(latest.created_at)) + '</span>';
+      if (latestArchetype) latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md" style="color:' + archetypeColor + ';background:' + archetypeColor + '20;">' + escHtml(latestArchetype) + '</span>';
       latestHtml += '</div>';
       latestHtml += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-1 tracking-tight">' + (firstName ? escHtml(firstName) + '\u2019s ' : '') + 'VAPI\u2122 at a glance</h2>';
       if (latestScore != null && latestTier) {
@@ -1531,16 +1536,21 @@
             updateProgressWheelLabels(t.rotate);
           }, 660);
         }
-        var legendEl = document.getElementById('progress-wheel-legend');
-        legendEl.innerHTML = '<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 w-full">' +
+        var currArchetype = progressCurr.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressCurr.results) : null);
+        var prevArchetype = progressPrev.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressPrev.results) : null);
+        var archetypeChanged = currArchetype && prevArchetype && currArchetype !== prevArchetype;
+        var legendHtml = '<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 w-full">' +
           '<div class="flex flex-col gap-y-1 items-start">' +
-          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')</span>' +
-          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9ca3af; opacity:0.35"></span> Previous (' + progressPrevDateStr + ')</span>' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-gray-500"></span> Most Recent (' + progressCurrDateStr + ')' + (currArchetype ? ' · ' + escHtml(currArchetype) : '') + '</span>' +
+          '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#9ca3af; opacity:0.35"></span> Previous (' + progressPrevDateStr + ')' + (prevArchetype ? ' · ' + escHtml(prevArchetype) : '') + '</span>' +
           '</div>' +
           '<div class="flex flex-col gap-y-1 items-start">' +
           '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-green-500"></span> Improved</span>' +
           '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-red-500"></span> Declined</span>' +
+          (archetypeChanged ? '<span class="inline-flex items-center gap-1.5 text-[var(--ap-accent)] font-medium"><span class="w-3 h-3 rounded-full flex-shrink-0 bg-[var(--ap-accent)]"></span> Archetype changed</span>' : '') +
           '</div></div>';
+        var legendEl = document.getElementById('progress-wheel-legend');
+        legendEl.innerHTML = legendHtml;
         var chartLabels = sortedByDate.map(function(r) { return formatDate(r.created_at); });
         var progressChart = null;
 

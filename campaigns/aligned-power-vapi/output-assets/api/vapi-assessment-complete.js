@@ -43,11 +43,43 @@ function ordinal(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+function determineArchetypeServer(results) {
+  const arenaScores = results.arenaScores || {};
+  const domainScores = (() => {
+    const ds = {};
+    (results.domains || []).forEach(d => { if (d && d.code) ds[d.code] = d.score; });
+    return ds;
+  })();
+  const s = parseFloat(arenaScores.Personal ?? arenaScores.Self) ?? null;
+  const r = parseFloat(arenaScores.Relationships) ?? null;
+  const b = parseFloat(arenaScores.Business) ?? null;
+  const overall = typeof results.overall === 'number' ? results.overall : (Object.keys(domainScores).length ? Object.values(domainScores).reduce((a, v) => a + (v || 0), 0) / 12 : null);
+  const exScore = domainScores.EX; const ecScore = domainScores.EC; const vsScore = domainScores.VS;
+  if (s >= 8 && r >= 8 && b >= 8) return 'The Architect';
+  let arenasLow = 0;
+  if (s != null && s <= 4.5) arenasLow++;
+  if (r != null && r <= 4.5) arenasLow++;
+  if (b != null && b <= 4.5) arenasLow++;
+  if (overall != null && overall <= 4.5) return 'The Phoenix';
+  if (arenasLow >= 2) return 'The Phoenix';
+  if (exScore != null && exScore >= 7 && ((ecScore != null && ecScore <= 5) || (vsScore != null && vsScore <= 5))) return 'The Engine';
+  const allMid = s != null && r != null && b != null && s >= 5 && s <= 7.9 && r >= 5 && r <= 7.9 && b >= 5 && b <= 7.9;
+  const spread = Math.max(s, r, b) - Math.min(s, r, b);
+  if (allMid && spread <= 2) return 'The Drifter';
+  if (s != null && r != null && b != null) {
+    if (b === Math.max(s, r, b) && s === Math.min(s, r, b) && (b - s) >= 2) return 'The Performer';
+    if (b === Math.max(s, r, b) && r === Math.min(s, r, b) && (b - r) >= 2) return 'The Ghost';
+    if (r === Math.max(s, r, b) && b === Math.min(s, r, b) && (r - b) >= 2) return 'The Guardian';
+    if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2) return 'The Seeker';
+  }
+  return 'The Drifter';
+}
+
 function escHtml(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount }) {
+function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype }) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
   const portalLink = `${PORTAL_URL}/login`;
   const signupLink = `${PORTAL_URL}/signup`;
@@ -105,6 +137,10 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your #1 Critical Priority</p>
       <p style="margin:0;color:#3A4A5C;font-size:16px;font-weight:600;">${escHtml(topCriticalPriority)}</p>
     </div>` : ''}
+    ${archetype ? `<div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your Founder Archetype</p>
+      <p style="margin:0;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(archetype)}</p>
+    </div>` : ''}
 
     <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.6;">Your full results, including all 12 domain scores, detailed interpretations, and your personalized priority matrix, are waiting for you in the portal.</p>
 
@@ -151,6 +187,7 @@ Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
 Relationships: ${arenaScores.Relationships ?? '?'} / 10 - ${arenaTiers.Relationships ?? ''}
 Business: ${arenaScores.Business ?? '?'} / 10 - ${arenaTiers.Business ?? ''}
 ${topCriticalPriority ? `\nYour #1 Critical Priority: ${topCriticalPriority}\n` : ''}
+${archetype ? `\nYour Founder Archetype: ${archetype}\n` : ''}
 View your full results: ${ctaUrl}
 
 -- Jake Sebok`;
@@ -158,7 +195,7 @@ View your full results: ${ctaUrl}
   return { html, text };
 }
 
-function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp }) {
+function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp, archetype }) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
   const ordinalNum = ordinal(assessmentNumber || 1);
   const accountStatus = hasPortalAccount ? 'Has portal account' : 'No account yet';
@@ -205,6 +242,7 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Email:</strong> ${escHtml(email || 'Not provided')}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
+      ${archetype ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Founder Archetype:</strong> ${escHtml(archetype)}</td></tr>` : ''}
     </table>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
@@ -336,7 +374,10 @@ export async function POST(request) {
     email, firstName, lastName, overall, overallTier,
     arenaScores = {}, arenaTiers = {}, domains = [],
     importanceRatings = {}, priorityMatrix = {},
+    archetype: archetypeFromBody,
   } = body;
+
+  const archetype = archetypeFromBody || determineArchetypeServer({ overall, overallTier, arenaScores, arenaTiers, domains });
 
   const timestamp = new Date().toISOString();
 
@@ -364,7 +405,7 @@ export async function POST(request) {
 
   // Email 1: User
   if (email) {
-    const { html, text } = buildUserEmail({ firstName: resolvedFirstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount });
+    const { html, text } = buildUserEmail({ firstName: resolvedFirstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype });
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -394,7 +435,7 @@ export async function POST(request) {
     email, firstName: resolvedFirstName, lastName: resolvedLastName,
     overall, overallTier, arenaScores, arenaTiers, domains,
     importanceRatings, priorityMatrix, contextualProfile,
-    assessmentNumber, hasPortalAccount, timestamp,
+    assessmentNumber, hasPortalAccount, timestamp, archetype,
   });
   try {
     const res = await fetch('https://api.resend.com/emails', {

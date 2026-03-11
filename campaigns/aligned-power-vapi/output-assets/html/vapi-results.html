@@ -22,6 +22,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <script src="/html/vapi-results-interpretations.js"></script>
+  <script src="/html/vapi-archetypes.js"></script>
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -209,6 +210,9 @@
         if (sessionStorage.getItem('vapiResultsSaved')) {
           console.log('[VAPI save] Already saved this session. Skipping.');
           return;
+        }
+        if (!results.archetype && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine) {
+          results.archetype = VAPI_ARCHETYPE.determine(results);
         }
         console.log('[VAPI save] Saving via /api/save-vapi-results for:', results.email);
         var saveRes = await fetch('/api/save-vapi-results', {
@@ -582,6 +586,40 @@
         el.innerHTML = '<div class="text-center mb-10"><p class="text-[var(--ap-accent)] mb-2">Your Results</p><h1 class="text-4xl text-[var(--ap-primary)]">Your VAPI™ Scores</h1><p class="text-[var(--ap-secondary)] mt-2">Complete the assessment to see your results.</p></div><p class="text-[var(--ap-muted)]"><a href="/assessment">Start the VAPI™ Assessment</a></p>';
       }
 
+      function buildArchetypeSection(results) {
+        var archetypeName = results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null);
+        if (!archetypeName) return '';
+        var meta = (typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[archetypeName]) ? VAPI_ARCHETYPES[archetypeName] : null;
+        var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
+        var tagline = meta && meta.tagline ? meta.tagline : '';
+        var iconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(archetypeName, color) : '';
+        var html = '<div class="archetype-section bg-white rounded-2xl border-2 border-[var(--ap-border)] shadow-lg overflow-hidden mb-10" style="border-left-color:' + color + '; border-left-width:4px;">';
+        html += '<div class="p-6 sm:p-8">';
+        html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
+        if (iconSvg) {
+          html += '<div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center" style="background:' + color + '20;">';
+          html += '<div class="w-10 h-10 sm:w-12 sm:h-12" style="color:' + color + '">' + iconSvg + '</div></div>';
+        }
+        html += '<div class="min-w-0 flex-1">';
+        html += '<p class="text-[10px] font-semibold uppercase tracking-[0.2em] mb-1" style="color:' + color + '">Your Founder Archetype</p>';
+        html += '<h2 class="text-2xl sm:text-3xl font-bold text-[var(--ap-primary)] mb-2">' + escapeHtml(archetypeName) + '</h2>';
+        if (tagline) html += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(tagline) + '</p>';
+        if (meta && (meta.description || meta.strength || meta.growth_path)) {
+          html += '<details class="mt-4 group">';
+          html += '<summary class="cursor-pointer text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile</summary>';
+          html += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed">';
+          if (meta.description) html += '<p>' + escapeHtml(meta.description) + '</p>';
+          if (meta.strength) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
+          if (meta.shadow) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escapeHtml(meta.shadow) + '</p></div>';
+          if (meta.constraint) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
+          if (meta.growth_path) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
+          if (meta.program_phase) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
+          html += '</div></details>';
+        }
+        html += '</div></div></div></div>';
+        return html;
+      }
+
       function render(results) {
         var firstName = results.firstName || '';
         var lastName = results.lastName || '';
@@ -600,6 +638,7 @@
         var top3 = results.top3 || [];
         var bottom3 = results.bottom3 || [];
         var acquiescence = results.acquiescence;
+        results.archetype = results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null);
 
         var html = '';
 
@@ -618,6 +657,7 @@
         html += '</div>';
 
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
+        html += buildArchetypeSection(results);
         html += '</div>'; // end print-hero-block
         // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
         html += '<div class="print-only print-strengths-focus-section">';
