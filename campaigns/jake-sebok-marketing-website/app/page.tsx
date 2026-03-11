@@ -376,7 +376,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take the VAPI™</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ (Values-Aligned Performance Indicator) is a free assessment that measures your experience across 12 life and business domains. You answer 72 statements about the past 30 days—your honest baseline, not your best day. In about 12 minutes you discover your Founder Archetype and get a clear picture of where you&apos;re strong, where you&apos;re leaking energy, and which levers will get you where you want to go.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. Your honest baseline—not your best day. You discover your Founder Archetype and where to focus next.</p>
                 </div>
               </div>
               <div className="hidden lg:flex justify-end pt-2">
@@ -390,7 +390,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Your personalized report gives you scores for every domain and arena, your full Founder Archetype profile with strengths, blind spots, and a growth path, plus your top three priorities. No generic advice. No fluff. Everything is tailored to your pattern so you know exactly what to focus on next and why. Save it as a PDF, share it with your coach, or retake it over time to track progress.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, and your top three priorities. Tailored to your pattern—no generic advice. Save as PDF, share with your coach, or retake to track progress.</p>
                 </div>
               </div>
               <div className="hidden lg:flex justify-end pt-2">
@@ -404,7 +404,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take Action</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">From there, you choose how you want to engage. Free monthly workshops for clarity and connection. A community for ongoing support and accountability. Strategic intensives when you need a focused deep dive. Group coaching for sustained transformation. We offer many entry points and formats—from low-commitment to high-touch—so you can find the right fit for where you are and what you need right now. Your pace. Your path.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are and what you need right now.</p>
                 </div>
               </div>
             </div>
