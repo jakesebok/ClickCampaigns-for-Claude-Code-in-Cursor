@@ -164,7 +164,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Grind
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 You&apos;re the bottleneck. Strategist, doer, fixer, all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
               </p>
             </div>
@@ -177,7 +177,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Guilt
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere, and the guilt is loud at 2am. The business is bleeding into the life you built it for.
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 The Loop
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it. You&apos;ve tried the discipline fixes. They didn&apos;t stick.
               </p>
             </div>
@@ -290,7 +290,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">See your scores across 12 domains. Discover your Founder Archetype. Know exactly what&apos;s holding you back and what to do next.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Your personalized report: scores for every domain and arena, your full Founder Archetype profile with strengths, blind spots, and growth path, plus your top three priorities. Clear. Actionable. Yours.</p>
                 </div>
               </div>
               <div className="hidden lg:flex justify-end pt-2">
@@ -304,7 +304,7 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-outfit font-semibold text-lg text-white mb-2">Choose your path</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Workshop, community, or intensive—we&apos;ll find the right fit for where you are.</p>
+                  <p className="text-white/75 text-base font-medium leading-relaxed">Then you choose your path. Monthly workshop for clarity. Community for support and accountability. Strategic intensives when you need a focused deep dive. We&apos;ll help you find the right fit for where you are.</p>
                 </div>
               </div>
             </div>
@@ -349,7 +349,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Awareness
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 Know exactly what&apos;s holding you back and the path to get where you want to go. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know exactly which moves will make the difference.
               </p>
             </div>
@@ -362,7 +362,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Internal Alignment
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business, lowering your defenses and amplifying your output.
               </p>
             </div>
@@ -376,7 +376,7 @@ export default function HomePage() {
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
                 Embodied Execution
               </h3>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+              <p className="text-ap-mid text-base font-medium leading-relaxed">
                 Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would dream of.
               </p>
             </div>
@@ -622,9 +622,9 @@ export default function HomePage() {
                   See All Offerings
                 </Link>
               </div>
-              <div className="mt-8 pt-8 border-t border-white/20">
+              <div className="mt-8 pt-8 border-t border-white/20 text-center">
                 <p className="text-sm font-semibold text-white/80 mb-3">Follow along</p>
-                <SocialLinks variant="footer" className="[&_a]:text-white/70 [&_a:hover]:text-white" />
+                <SocialLinks variant="footer" className="justify-center [&_a]:text-white/70 [&_a:hover]:text-white" />
               </div>
             </div>
           </div>
