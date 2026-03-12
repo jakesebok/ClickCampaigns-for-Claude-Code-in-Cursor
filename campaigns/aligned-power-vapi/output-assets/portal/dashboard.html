@@ -2012,12 +2012,14 @@
             cta.classList.remove('hidden');
             document.getElementById('six-c-fill-link').classList.add('hidden');
           } else {
-            document.getElementById('six-c-fill-link').classList.remove('hidden');
-            document.getElementById('six-c-fill-link').setAttribute('href', '/scorecard');
-            document.getElementById('six-c-fill-link').innerHTML = 'Fill out your first 6C scorecard <i data-lucide="arrow-right" class="w-4 h-4"></i>';
+            document.getElementById('six-c-fill-link').classList.add('hidden');
+            var closedEl = document.getElementById('six-c-window-closed-msg');
+            if (closedEl) {
+              closedEl.textContent = 'Your next scorecard will be available Friday at 12pm.';
+              closedEl.classList.remove('hidden');
+            }
           }
           document.getElementById('six-c-window-urgency').classList.add('hidden');
-          document.getElementById('six-c-window-closed-msg').classList.add('hidden');
           if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
           return;
         }
@@ -2131,14 +2133,14 @@
           document.getElementById('one-thing-banner').classList.remove('hidden');
           scorecardCta.classList.remove('hidden');
         } else if (submittedThisWeek) {
-          linkEl.classList.remove('hidden');
+          linkEl.classList.add('hidden');
           closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
           closedMsg.classList.remove('hidden');
           var actionRow = document.getElementById('six-c-action-row');
           if (actionRow) actionRow.classList.remove('hidden');
           if (scorecardCta) scorecardCta.classList.add('hidden');
         } else {
-          linkEl.classList.remove('hidden');
+          linkEl.classList.add('hidden');
           closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
           closedMsg.classList.remove('hidden');
           if (scorecardCta) scorecardCta.classList.add('hidden');
