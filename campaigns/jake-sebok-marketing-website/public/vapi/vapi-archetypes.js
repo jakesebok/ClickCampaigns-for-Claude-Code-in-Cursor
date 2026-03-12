@@ -12,7 +12,7 @@
   var ARCHETYPES = {
     'The Architect': {
       name: 'The Architect',
-      tagline: "You've built the rare thing: a life and business that actually work together.",
+      tagline: "You've built a life and business that actually work together.",
       color_accent: '#1E3A5F',
       description: "<strong>The Architect</strong> builds on a solid personal foundation. Your relationships are real. Your business is clear, executing, and aligned with who you actually are. This isn't perfection, and it's not balance in some idealized sense. It's integration. The way you live reinforces the way you work, and vice versa. Most founders sacrifice one arena to prop up another. You've figured out how to build all three simultaneously. That's not luck. That's the result of sustained, honest effort across every dimension of your life.",
       strength: "True integration. Your arenas reinforce each other instead of competing. Health fuels focus. Relationships provide resilience. Business creates freedom. And the whole system compounds.",
@@ -182,23 +182,25 @@
   }
 
   /**
-   * Return inline SVG icon for archetype. color overrides archetype color_accent.
-   * Minimal line-drawing style, stroke inherits.
+   * Return Lucide icon element for archetype. Uses Lucide's professionally designed icons.
+   * Caller must run lucide.createIcons() after injecting to render. Color inherits from style.
    */
   function getArchetypeIcon(archetypeName, color) {
     var meta = ARCHETYPES[archetypeName];
-    var stroke = color || (meta && meta.color_accent) || '#0E1624';
-    var icons = {
-      'The Architect': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect x="8" y="20" width="12" height="20" rx="1"/><rect x="28" y="20" width="12" height="20" rx="1"/><path d="M14 20V14a6 6 0 0112 0v6"/><path d="M26 20V14a6 6 0 0112 0v6"/><path d="M24 8v4"/><path d="M24 4v2"/></svg>',
-      'The Phoenix': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M24 40c-8 0-14-8-14-16 0-4 2-8 6-10 2 4 6 6 8 6 2-4 4-8 4-12 0-4-2-8-6-10 4 2 6 6 6 10 0 4-2 8-4 12 2 0 6-2 8-6 4 2 6 6 6 10 0 8-6 16-14 16z"/><path d="M24 28v12"/></svg>',
-      'The Engine': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="4"/><path d="M24 14v-4M24 38v-4M14 24h-4M38 24h4"/><path d="M17.66 17.66l-2.83-2.83M33.18 33.18l2.83 2.83M17.66 30.34l-2.83 2.83M33.18 14.82l2.83-2.83"/></svg>',
-      'The Drifter': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M8 32c4-4 8-4 12 0s8 4 12 0"/><path d="M8 24c4-4 8-4 12 0s8 4 12 0"/><path d="M12 36c2-2 4-2 6 0 2 2 4 2 6 0 2-2 4-2 6 0"/><path d="M24 12l4 8-4 8-4-8 4-8z"/><path d="M20 28l4 8"/><path d="M28 28l-4 8"/></svg>',
-      'The Performer': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M24 8l6 12 12 2-9 8 2 12-11-6-11 6 2-12-9-8 12-2 6-12z"/><circle cx="24" cy="24" r="4"/></svg>',
-      'The Ghost': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M24 8c-8 0-14 6-14 14 0 4 2 8 4 10v12h20v-12c2-2 4-6 4-10 0-8-6-14-14-14z"/><circle cx="20" cy="20" r="2"/><circle cx="28" cy="20" r="2"/><path d="M18 26c2 1 4 1 6 0"/></svg>',
-      'The Guardian': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M24 4l16 8v10c0 10-6 18-16 22-10-4-16-12-16-22V12l16-8z"/><path d="M24 12v20"/><path d="M16 20h16"/></svg>',
-      'The Seeker': '<svg viewBox="0 0 48 48" fill="none" stroke="' + stroke + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="20" cy="20" r="10"/><path d="M28 28l8 8"/><path d="M20 14v-4"/><path d="M20 34v4"/><path d="M14 20h-4"/><path d="M34 20h4"/></svg>'
+    var c = color || (meta && meta.color_accent) || '#0E1624';
+    var lucideIcons = {
+      'The Architect': 'drafting-compass',
+      'The Phoenix': 'flame',
+      'The Engine': 'cog',
+      'The Drifter': 'wind',
+      'The Performer': 'star',
+      'The Ghost': 'ghost',
+      'The Guardian': 'shield',
+      'The Seeker': 'search'
     };
-    return icons[archetypeName] || '';
+    var iconName = lucideIcons[archetypeName];
+    if (!iconName) return '';
+    return '<i data-lucide="' + iconName + '" class="w-full h-full" style="color:' + c + '"></i>';
   }
 
   /** Constellation network: positions (x,y in 0-400 x 0-280) and connections */
