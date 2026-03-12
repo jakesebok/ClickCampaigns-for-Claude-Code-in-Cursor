@@ -279,7 +279,7 @@
       tooltipEl = document.createElement('div');
       tooltipEl.id = 'vapi-constellation-tooltip';
       tooltipEl.setAttribute('role', 'tooltip');
-      tooltipEl.className = 'fixed z-[9999] pointer-events-none px-3 py-2 max-w-[220px] text-sm rounded-lg shadow-lg border border-[var(--ap-border)] bg-white text-[var(--ap-primary)] opacity-0 transition-opacity duration-150';
+      tooltipEl.className = 'fixed z-[9999] pointer-events-none px-3 py-2.5 max-w-[260px] text-sm rounded-lg shadow-lg border border-[var(--ap-border)] bg-white text-[var(--ap-primary)] opacity-0 transition-opacity duration-150';
       tooltipEl.style.fontFamily = 'inherit';
       document.body.appendChild(tooltipEl);
     }
@@ -288,9 +288,13 @@
       var meta = ARCHETYPES[name];
       if (!meta) return;
       var tagline = meta.tagline || '';
-      tooltipEl.innerHTML = '<span class="font-semibold block mb-0.5">' + String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' + (tagline ? '<span class="text-[var(--ap-secondary)] text-xs leading-relaxed">' + String(tagline).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</span>' : '');
+      var color = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-primary)';
+      var iconHtml = getArchetypeIcon(name, color);
+      var iconWrap = iconHtml ? '<div class="w-6 h-6 shrink-0 flex items-center justify-center">' + iconHtml.replace('w-full h-full', 'w-5 h-5') + '</div>' : '';
+      tooltipEl.innerHTML = '<div class="flex gap-2.5 items-start">' + iconWrap + '<div class="min-w-0">' + '<span class="font-semibold block mb-0.5">' + String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' + (tagline ? '<span class="text-[var(--ap-secondary)] text-xs leading-relaxed">' + String(tagline).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</span>' : '') + '</div></div>';
       tooltipEl.style.opacity = '1';
       positionTooltip(e);
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons({ root: tooltipEl });
     }
     function hide() {
       if (hideTimer) clearTimeout(hideTimer);
