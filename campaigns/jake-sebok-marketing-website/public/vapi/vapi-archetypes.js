@@ -290,8 +290,8 @@
       var tagline = meta.tagline || '';
       var color = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-primary)';
       var iconHtml = getArchetypeIcon(name, color);
-      var iconWrap = iconHtml ? '<div class="w-6 h-6 shrink-0 flex items-center justify-center">' + iconHtml.replace('w-full h-full', 'w-5 h-5') + '</div>' : '';
-      tooltipEl.innerHTML = '<div class="flex gap-2.5 items-start">' + iconWrap + '<div class="min-w-0">' + '<span class="font-semibold block mb-0.5">' + String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' + (tagline ? '<span class="text-[var(--ap-secondary)] text-xs leading-relaxed">' + String(tagline).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</span>' : '') + '</div></div>';
+      var iconWrap = iconHtml ? '<div class="w-8 shrink-0 self-stretch flex items-center justify-center [&>svg]:h-full [&>svg]:w-auto [&>i]:h-full [&>i]:w-auto">' + iconHtml.replace('w-full h-full', 'h-full w-auto') + '</div>' : '';
+      tooltipEl.innerHTML = '<div class="flex gap-2.5 items-stretch">' + iconWrap + '<div class="min-w-0 flex flex-col justify-center">' + '<span class="font-semibold block mb-0.5">' + String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' + (tagline ? '<span class="text-[var(--ap-secondary)] text-xs leading-relaxed">' + String(tagline).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</span>' : '') + '</div></div>';
       tooltipEl.style.opacity = '1';
       positionTooltip(e);
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons({ root: tooltipEl });
