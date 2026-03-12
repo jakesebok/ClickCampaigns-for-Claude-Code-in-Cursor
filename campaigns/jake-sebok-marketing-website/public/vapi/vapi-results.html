@@ -652,23 +652,24 @@
         html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + color + '">Your Founder Archetype</p>';
         html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escapeHtml(archetypeName) + '</h2>';
         if (tagline) html += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(tagline) + '</p>';
+        html += '</div></div>';
         if (meta && (meta.description || meta.strength || meta.growth_path)) {
           html += '<details class="archetype-details mt-4 group">';
-          html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-          html += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed pb-10">';
+          html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          html += '<div class="mt-4 space-y-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed pb-10 w-full">';
           if (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.buildConstellation) {
             html += VAPI_ARCHETYPE.buildConstellation(archetypeName);
           }
-          if (meta.description) html += '<p>' + escapeHtml(meta.description) + '</p>';
-          if (meta.strength) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
-          if (meta.shadow) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escapeHtml(meta.shadow) + '</p></div>';
-          if (meta.constraint) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
-          if (meta.growth_path) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
-          if (meta.program_phase) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
+          if (meta.description) html += '<p>' + meta.description + '</p>';
+          if (meta.strength) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
+          if (meta.shadow) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Shadow</p><p>' + escapeHtml(meta.shadow) + '</p></div>';
+          if (meta.constraint) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
+          if (meta.growth_path) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
+          if (meta.program_phase) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
           html += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
           html += '</div></details>';
         }
-        html += '</div></div></div></div>';
+        html += '</div></div>';
         return html;
       }
 

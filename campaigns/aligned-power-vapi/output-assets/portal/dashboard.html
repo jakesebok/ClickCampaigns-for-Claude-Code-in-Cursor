@@ -1000,7 +1000,7 @@
           if (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.buildConstellation) {
             archHtml += VAPI_ARCHETYPE.buildConstellation(latestArchetype);
           }
-          if (archetypeMeta.description) archHtml += '<p>' + escHtml(archetypeMeta.description) + '</p>';
+          if (archetypeMeta.description) archHtml += '<p>' + archetypeMeta.description + '</p>';
           if (archetypeMeta.strength) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Strength</p><p>' + escHtml(archetypeMeta.strength) + '</p></div>';
           if (archetypeMeta.shadow) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Shadow</p><p>' + escHtml(archetypeMeta.shadow) + '</p></div>';
           if (archetypeMeta.constraint) archHtml += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Constraint</p><p>' + escHtml(archetypeMeta.constraint) + '</p></div>';
