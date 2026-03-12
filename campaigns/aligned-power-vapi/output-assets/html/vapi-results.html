@@ -854,6 +854,8 @@
         attachAlignmentLightbox();
         initExploreSection(results, domains);
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        var constEl = document.querySelector('.archetype-constellation');
+        if (constEl && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.initConstellationTooltips) VAPI_ARCHETYPE.initConstellationTooltips(constEl);
         document.dispatchEvent(new CustomEvent('vapi-results-rendered'));
       }
 

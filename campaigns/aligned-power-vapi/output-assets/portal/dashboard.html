@@ -1013,6 +1013,8 @@
         archSectionEl.innerHTML = archHtml;
         archSectionEl.classList.remove('hidden');
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        var constEl = archSectionEl.querySelector('.archetype-constellation');
+        if (constEl && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.initConstellationTooltips) VAPI_ARCHETYPE.initConstellationTooltips(constEl);
       }
 
       // Where to Focus — full priority matrix (only when latest has importance ratings)

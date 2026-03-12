@@ -259,7 +259,7 @@
       var isHighlight = name === highlightArchetype;
       var r = isHighlight ? 10 : 6;
       var cls = isHighlight ? 'arch-node arch-node-highlight' : 'arch-node';
-      html += '<g class="' + cls + '" style="cursor:pointer">';
+      html += '<g class="' + cls + '" data-archetype="' + String(name).replace(/"/g, '&quot;') + '" style="cursor:pointer" role="button" tabindex="0" aria-label="' + String(name).replace(/"/g, '&quot;') + '">';
       html += '<title>' + tooltip.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</title>';
       if (isHighlight) html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + (r + 4) + '" fill="' + color + '" opacity="0.2"/>';
       html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + r + '" fill="' + color + '" stroke="' + (isHighlight ? '#fff' : 'rgba(255,255,255,0.8)') + '" stroke-width="' + (isHighlight ? 2 : 1) + '"/>';
@@ -272,11 +272,65 @@
     return html;
   }
 
+  function initConstellationTooltips(container) {
+    if (!container || !ARCHETYPES) return;
+    var tooltipEl = document.getElementById('vapi-constellation-tooltip');
+    if (!tooltipEl) {
+      tooltipEl = document.createElement('div');
+      tooltipEl.id = 'vapi-constellation-tooltip';
+      tooltipEl.setAttribute('role', 'tooltip');
+      tooltipEl.className = 'fixed z-[9999] pointer-events-none px-3 py-2 max-w-[220px] text-sm rounded-lg shadow-lg border border-[var(--ap-border)] bg-white text-[var(--ap-primary)] opacity-0 transition-opacity duration-150';
+      tooltipEl.style.fontFamily = 'inherit';
+      document.body.appendChild(tooltipEl);
+    }
+    var hideTimer = null;
+    function show(e, name) {
+      var meta = ARCHETYPES[name];
+      if (!meta) return;
+      var tagline = meta.tagline || '';
+      tooltipEl.innerHTML = '<span class="font-semibold block mb-0.5">' + String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' + (tagline ? '<span class="text-[var(--ap-secondary)] text-xs leading-relaxed">' + String(tagline).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '</span>' : '');
+      tooltipEl.style.opacity = '1';
+      positionTooltip(e);
+    }
+    function hide() {
+      if (hideTimer) clearTimeout(hideTimer);
+      hideTimer = setTimeout(function() { tooltipEl.style.opacity = '0'; }, 50);
+    }
+    function positionTooltip(e) {
+      var x = e.clientX, y = e.clientY;
+      var rect = tooltipEl.getBoundingClientRect();
+      var pad = 12;
+      var left = x + pad;
+      var top = y - rect.height - pad;
+      if (left + rect.width > window.innerWidth) left = x - rect.width - pad;
+      if (left < 0) left = pad;
+      if (top < 0) top = y + pad;
+      tooltipEl.style.left = left + 'px';
+      tooltipEl.style.top = top + 'px';
+    }
+    var nodes = container.querySelectorAll('.arch-node');
+    nodes.forEach(function(node) {
+      var name = node.getAttribute('data-archetype');
+      if (!name) return;
+      node.addEventListener('mouseenter', function(ev) {
+        if (hideTimer) clearTimeout(hideTimer);
+        show(ev, name);
+      });
+      node.addEventListener('mousemove', function(ev) {
+        if (tooltipEl.style.opacity === '1') positionTooltip(ev);
+      });
+      node.addEventListener('mouseleave', hide);
+      node.addEventListener('focus', function(ev) { show(ev, name); });
+      node.addEventListener('blur', hide);
+    });
+  }
+
   global.VAPI_ARCHETYPES = ARCHETYPES;
   global.VAPI_ARCHETYPE = {
     determine: determineArchetype,
     getIcon: getArchetypeIcon,
     get: function(name) { return ARCHETYPES[name] || null; },
-    buildConstellation: buildConstellationSVG
+    buildConstellation: buildConstellationSVG,
+    initConstellationTooltips: initConstellationTooltips
   };
 })(typeof window !== 'undefined' ? window : this);
