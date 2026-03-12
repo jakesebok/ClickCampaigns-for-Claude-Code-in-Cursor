@@ -228,41 +228,20 @@ export default function HomePage() {
       </div>
 
       {/* The Reframe — alignment, not discipline */}
-      <section className="relative py-20 sm:py-28 bg-white overflow-hidden">
-        {/* Geometric orange — right side, like hero */}
-        <div
-          className="absolute top-0 right-0 w-[38%] h-full bg-ap-accent"
-          style={{ clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
-        />
-        <div
-          className="absolute bottom-0 right-0 w-[20%] h-[35%] bg-ap-accent-2 opacity-60"
-          style={{ clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
-        />
-        {/* Ghost words on orange */}
-        <span className="absolute top-[15%] right-[18%] z-20 font-cormorant font-bold italic text-[clamp(56px,7vw,100px)] leading-[0.9] text-white/[0.05] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Strategy.
-        </span>
-        <span className="absolute top-[45%] right-[25%] -translate-y-1/2 z-20 font-cormorant font-bold italic text-[clamp(56px,7vw,100px)] leading-[0.9] text-white/[0.05] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Discipline.
-        </span>
-        <span className="absolute bottom-[20%] right-[12%] z-20 font-cormorant font-bold italic text-[clamp(56px,7vw,100px)] leading-[0.9] text-white/[0.05] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Alignment.
-        </span>
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6">
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Truth
           </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6 leading-tight">
-            You don&apos;t have a strategy problem.
-            <br />
-            You don&apos;t have a discipline problem.
-            <br />
-            You have an <span className="text-gradient-accent italic">alignment</span> problem.
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+            You don&apos;t have a strategy problem. Or a discipline problem.
+            <br className="hidden lg:block" />
+            You have an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
             Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
-          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 max-w-3xl">
+          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
               But when what you&apos;re building matches who you actually are, <span className="text-gradient-accent">execution stops being a war</span> with yourself.
             </p>

@@ -201,10 +201,78 @@
     return icons[archetypeName] || '';
   }
 
+  /** Constellation network: positions (x,y in 0-400 x 0-280) and connections */
+  var CONSTELLATION = {
+    positions: {
+      'The Architect': { x: 200, y: 35 },
+      'The Phoenix': { x: 70, y: 230 },
+      'The Engine': { x: 330, y: 70 },
+      'The Drifter': { x: 200, y: 140 },
+      'The Performer': { x: 310, y: 180 },
+      'The Ghost': { x: 340, y: 230 },
+      'The Guardian': { x: 60, y: 110 },
+      'The Seeker': { x: 200, y: 230 }
+    },
+    connections: [
+      ['The Architect', 'The Phoenix'],
+      ['The Architect', 'The Engine'],
+      ['The Architect', 'The Drifter'],
+      ['The Architect', 'The Performer'],
+      ['The Architect', 'The Ghost'],
+      ['The Architect', 'The Guardian'],
+      ['The Architect', 'The Seeker'],
+      ['The Phoenix', 'The Drifter'],
+      ['The Engine', 'The Performer'],
+      ['The Ghost', 'The Guardian'],
+      ['The Seeker', 'The Drifter']
+    ]
+  };
+
+  function buildConstellationSVG(highlightArchetype) {
+    var vb = '0 0 400 280';
+    var html = '<div class="archetype-constellation mt-6 pt-6 border-t border-[var(--ap-border)]"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-4">Your pattern in the constellation</p>';
+    html += '<svg viewBox="' + vb + '" preserveAspectRatio="xMidYMid meet" class="w-full max-w-md mx-auto block" style="min-height:200px" aria-hidden="true">';
+    html += '<defs><filter id="arch-glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+    var drawn = {};
+    CONSTELLATION.connections.forEach(function(pair) {
+      var a = pair[0], b = pair[1];
+      var key = a < b ? a + '|' + b : b + '|' + a;
+      if (drawn[key]) return;
+      drawn[key] = true;
+      var pa = CONSTELLATION.positions[a], pb = CONSTELLATION.positions[b];
+      if (!pa || !pb) return;
+      var stroke = 'var(--ap-border)';
+      if (highlightArchetype && (a === highlightArchetype || b === highlightArchetype)) {
+        var meta = ARCHETYPES[highlightArchetype];
+        stroke = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-accent)';
+      }
+      html += '<line x1="' + pa.x + '" y1="' + pa.y + '" x2="' + pb.x + '" y2="' + pb.y + '" stroke="' + stroke + '" stroke-width="1" stroke-opacity="0.6"/>';
+    });
+    var names = Object.keys(CONSTELLATION.positions);
+    names.forEach(function(name) {
+      var p = CONSTELLATION.positions[name];
+      var meta = ARCHETYPES[name];
+      var color = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-primary)';
+      var isHighlight = name === highlightArchetype;
+      var r = isHighlight ? 10 : 6;
+      var cls = isHighlight ? 'arch-node arch-node-highlight' : 'arch-node';
+      html += '<g class="' + cls + '">';
+      if (isHighlight) html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + (r + 4) + '" fill="' + color + '" opacity="0.2"/>';
+      html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + r + '" fill="' + color + '" stroke="' + (isHighlight ? '#fff' : 'rgba(255,255,255,0.8)') + '" stroke-width="' + (isHighlight ? 2 : 1) + '"/>';
+      html += '<text x="' + p.x + '" y="' + (p.y + 22) + '" text-anchor="middle" font-size="9" font-weight="' + (isHighlight ? '700' : '500') + '" fill="var(--ap-primary)" class="arch-label">' + name.replace('The ', '') + '</text>';
+      html += '</g>';
+    });
+    html += '</svg>';
+    html += '<p class="text-xs text-[var(--ap-muted)] mt-3 text-center max-w-md mx-auto">Connected patterns share growth dynamics. Your archetype is highlighted—no hierarchy, just relationships.</p>';
+    html += '</div>';
+    return html;
+  }
+
   global.VAPI_ARCHETYPES = ARCHETYPES;
   global.VAPI_ARCHETYPE = {
     determine: determineArchetype,
     getIcon: getArchetypeIcon,
-    get: function(name) { return ARCHETYPES[name] || null; }
+    get: function(name) { return ARCHETYPES[name] || null; },
+    buildConstellation: buildConstellationSVG
   };
 })(typeof window !== 'undefined' ? window : this);

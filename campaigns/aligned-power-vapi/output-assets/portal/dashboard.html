@@ -122,6 +122,9 @@
     #importance-modal.importance-modal--hidden { transform: translateX(100%); }
     /* Archetype details chevron */
     .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
+    /* Archetype constellation */
+    .archetype-constellation svg .arch-node-highlight circle:first-of-type { animation: arch-pulse 2.5s ease-in-out infinite; }
+    @keyframes arch-pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.4; } }
     /* Dashboard: larger body text throughout for readability */
     #dashboard-content .text-sm { font-size: 15px; }
     #dashboard-content .text-xs { font-size: 13px; }
@@ -990,8 +993,11 @@
         archHtml += '<div class="min-w-0 flex-1">';
         archHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + archetypeColor + '">Your Founder Archetype</p>';
         archHtml += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escHtml(latestArchetype) + '</h2>';
-        if (archTagline) archHtml += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escHtml(archTagline) + '</p>';
+        if (archTagline)         archHtml += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escHtml(archTagline) + '</p>';
         archHtml += '</div></div>';
+        if (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.buildConstellation) {
+          archHtml += VAPI_ARCHETYPE.buildConstellation(latestArchetype);
+        }
         if (archetypeMeta && (archetypeMeta.description || archetypeMeta.strength || archetypeMeta.growth_path)) {
           archHtml += '<details class="archetype-details mt-4 group">';
           archHtml += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
