@@ -87,14 +87,14 @@ export default function WorkWithMePage() {
             {offerings.map((offer) => (
               <div
                 key={offer.title}
-                className={`rounded-[20px] border p-8 ${
+                className={`flex flex-col h-full rounded-[20px] border p-8 ${
                   offer.featured
                     ? "bg-ap-primary text-white border-ap-primary"
                     : "bg-white border-ap-border hover:border-ap-accent/50"
                 } transition-colors`}
               >
                 {offer.free && (
-                  <span className="inline-block text-xs font-semibold uppercase tracking-wider mb-4 text-gradient-accent">
+                  <span className="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-ap-accent/20 text-ap-accent">
                     Free
                   </span>
                 )}
@@ -106,7 +106,7 @@ export default function WorkWithMePage() {
                   {offer.title}
                 </h3>
                 <p
-                  className={`text-xl font-semibold leading-relaxed mb-6 ${
+                  className={`flex-1 text-xl font-semibold leading-relaxed mb-6 ${
                     offer.featured ? "text-white/80" : "text-ap-mid"
                   }`}
                 >
@@ -114,7 +114,7 @@ export default function WorkWithMePage() {
                 </p>
                 <Link
                   href={offer.href}
-                  className={`inline-flex items-center gap-2 font-semibold text-sm ${
+                  className={`mt-auto inline-flex items-center gap-2 font-semibold text-sm ${
                     offer.featured
                       ? "text-gradient-accent hover:text-ap-accent-2"
                       : "text-gradient-accent hover:underline"
