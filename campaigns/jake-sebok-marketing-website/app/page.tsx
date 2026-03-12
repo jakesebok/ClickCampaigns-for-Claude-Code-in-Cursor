@@ -228,24 +228,24 @@ export default function HomePage() {
       </div>
 
       {/* The Reframe — alignment, not discipline */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-ap-primary text-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
             The Truth
           </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
             You don&apos;t have a strategy problem. Or a discipline problem.
             <br className="hidden lg:block" />
             You have an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
-          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/80 text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
             Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
-          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
-            <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
+          <div className="rounded-[20px] border-2 border-ap-accent/40 bg-white/5 p-8 sm:p-10">
+            <p className="text-2xl sm:text-3xl lg:text-4xl text-white/90 font-bold leading-snug mb-6 tracking-tight">
               But when what you&apos;re building matches who you actually are, <span className="text-gradient-accent">execution stops being a war</span> with yourself.
             </p>
-            <p className="text-ap-mid text-xl font-semibold leading-relaxed">
+            <p className="text-white/80 text-xl font-semibold leading-relaxed">
               Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
             </p>
           </div>
@@ -371,42 +371,26 @@ export default function HomePage() {
             Start with the free assessment. Get clarity. Then choose your path.
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
+            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take the VAPI™</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. You get your Founder Archetype and a clear picture of where you&apos;re strong and where to focus next.</p>
-                </div>
+                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take the VAPI™</h3>
               </div>
-              <div className="hidden lg:flex justify-end pt-2">
-                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
+              <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. You get your Founder Archetype and a clear picture of where you&apos;re strong and where to focus next.</p>
             </div>
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
+            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Get your results</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, and your top three priorities. Tailored to your pattern—no generic advice. Save as PDF or retake over time to track progress.</p>
-                </div>
+                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Get your results</h3>
               </div>
-              <div className="hidden lg:flex justify-end pt-2">
-                <svg className="w-6 h-6 text-ap-accent/50 group-hover:text-ap-accent/80 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
+              <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, and your top three priorities. Tailored to your pattern—no generic advice. Save as PDF or retake over time to track progress.</p>
             </div>
-            <div className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-start">
+            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+              <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-outfit font-semibold text-lg text-white mb-2">Take Action</h3>
-                  <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are.</p>
-                </div>
+                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take Action</h3>
               </div>
+              <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are.</p>
             </div>
           </div>
           <div className="mt-10 flex justify-center">
@@ -427,13 +411,13 @@ export default function HomePage() {
       <div className="h-0.5 bg-ap-accent" />
 
       {/* Outcomes — by the end of our work together */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-white overflow-hidden">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Outcome
           </p>
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch mb-12">
-            <div className="lg:col-span-8 order-1 flex flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch mb-12">
+            <div className="lg:col-span-7 order-1 flex flex-col">
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
             By the end of our work together, you will have:
           </h2>
@@ -498,14 +482,14 @@ export default function HomePage() {
             </div>
           </div>
             </div>
-            <div className="hidden lg:block lg:col-span-4 order-2 self-stretch">
-              <div className="relative h-full min-h-[400px] rounded-[20px] overflow-hidden shadow-xl">
+            <div className="hidden lg:block lg:col-span-5 order-2 self-stretch xl:-mr-[calc(50vw-540px-1.5rem)]">
+              <div className="relative aspect-[4/5] rounded-l-[20px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
                   alt="Jake Sebok"
                   fill
-                  className="object-cover"
-                  sizes="400px"
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
             </div>
