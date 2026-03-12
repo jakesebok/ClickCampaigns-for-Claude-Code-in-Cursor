@@ -615,6 +615,9 @@
           html += '<details class="archetype-details mt-4 group">';
           html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
           html += '<div class="mt-4 space-y-4 text-sm text-[var(--ap-secondary)] leading-relaxed pb-10">';
+          if (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.buildConstellation) {
+            html += VAPI_ARCHETYPE.buildConstellation(archetypeName);
+          }
           if (meta.description) html += '<p>' + escapeHtml(meta.description) + '</p>';
           if (meta.strength) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
           if (meta.shadow) html += '<div><p class="font-semibold text-[var(--ap-primary)] mb-1">Shadow</p><p>' + escapeHtml(meta.shadow) + '</p></div>';

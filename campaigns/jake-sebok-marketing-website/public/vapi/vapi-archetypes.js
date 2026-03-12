@@ -201,10 +201,81 @@
     return icons[archetypeName] || '';
   }
 
+  /** Constellation network: positions (x,y in 0-400 x 0-280) and connections */
+  var CONSTELLATION = {
+    positions: {
+      'The Architect': { x: 200, y: 35 },
+      'The Phoenix': { x: 70, y: 230 },
+      'The Engine': { x: 330, y: 70 },
+      'The Drifter': { x: 200, y: 140 },
+      'The Performer': { x: 310, y: 180 },
+      'The Ghost': { x: 340, y: 230 },
+      'The Guardian': { x: 60, y: 110 },
+      'The Seeker': { x: 200, y: 230 }
+    },
+    connections: [
+      ['The Architect', 'The Phoenix'],
+      ['The Architect', 'The Engine'],
+      ['The Architect', 'The Drifter'],
+      ['The Architect', 'The Performer'],
+      ['The Architect', 'The Ghost'],
+      ['The Architect', 'The Guardian'],
+      ['The Architect', 'The Seeker'],
+      ['The Phoenix', 'The Drifter'],
+      ['The Engine', 'The Performer'],
+      ['The Ghost', 'The Guardian'],
+      ['The Seeker', 'The Drifter']
+    ]
+  };
+
+  function buildConstellationSVG(highlightArchetype) {
+    var vb = '0 0 400 280';
+    var html = '<div class="archetype-constellation mt-6 pt-6 border-t border-[var(--ap-border)]">';
+    html += '<div class="relative w-full max-w-md mx-auto" style="min-height:220px">';
+    html += '<svg viewBox="' + vb + '" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 w-full h-full" aria-hidden="true">';
+    var drawn = {};
+    CONSTELLATION.connections.forEach(function(pair) {
+      var a = pair[0], b = pair[1];
+      var key = a < b ? a + '|' + b : b + '|' + a;
+      if (drawn[key]) return;
+      drawn[key] = true;
+      var pa = CONSTELLATION.positions[a], pb = CONSTELLATION.positions[b];
+      if (!pa || !pb) return;
+      var stroke = 'var(--ap-border)';
+      if (highlightArchetype && (a === highlightArchetype || b === highlightArchetype)) {
+        var meta = ARCHETYPES[highlightArchetype];
+        stroke = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-accent)';
+      }
+      html += '<line x1="' + pa.x + '" y1="' + pa.y + '" x2="' + pb.x + '" y2="' + pb.y + '" stroke="' + stroke + '" stroke-width="1" stroke-opacity="0.6"/>';
+    });
+    html += '</svg>';
+    var names = Object.keys(CONSTELLATION.positions);
+    names.forEach(function(name) {
+      var p = CONSTELLATION.positions[name];
+      var meta = ARCHETYPES[name];
+      var color = (meta && meta.color_accent) ? meta.color_accent : 'var(--ap-primary)';
+      var isHighlight = name === highlightArchetype;
+      var iconSvg = getArchetypeIcon(name, color);
+      var leftPct = (p.x / 400 * 100).toFixed(2);
+      var topPct = (p.y / 280 * 100).toFixed(2);
+      var cls = 'arch-node absolute transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center';
+      if (isHighlight) cls += ' arch-node-highlight z-10';
+      html += '<div class="' + cls + '" style="left:' + leftPct + '%;top:' + topPct + '%">';
+      html += '<div class="rounded-lg flex items-center justify-center shrink-0 ' + (isHighlight ? 'ring-2 ring-offset-2' : 'border border-[var(--ap-border)]') + '" style="background:' + color + '18;' + (isHighlight ? 'border-color:' + color + ';ring-color:' + color : '') + ';width:36px;height:36px">';
+      html += '<div class="w-5 h-5" style="color:' + color + '">' + iconSvg + '</div>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+    html += '<p class="text-xs text-[var(--ap-muted)] mt-3 text-center max-w-md mx-auto">Connected patterns share growth dynamics. Your archetype is highlighted—no hierarchy, just relationships.</p>';
+    html += '</div>';
+    return html;
+  }
+
   global.VAPI_ARCHETYPES = ARCHETYPES;
   global.VAPI_ARCHETYPE = {
     determine: determineArchetype,
     getIcon: getArchetypeIcon,
-    get: function(name) { return ARCHETYPES[name] || null; }
+    get: function(name) { return ARCHETYPES[name] || null; },
+    buildConstellation: buildConstellationSVG
   };
 })(typeof window !== 'undefined' ? window : this);
