@@ -2,7 +2,7 @@
 
 **Aligned Power | Strategic Clarity Workshop**
 
-> These are copy/paste-ready prompts designed to work with your Aligned AI OS. Your AI coach already knows your values, MIQs, WHY, Future Four, revenue targets, and ONE THING—so every answer is personalized to you.
+> These are copy/paste-ready prompts designed to work with your Aligned AI OS. Your AI coach already knows your values, MIQs, WHY, Future You, revenue targets, and ONE THING—so every answer is personalized to you.
 >
 > **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is loaded. Get a values-aligned answer in seconds.
 
@@ -10,7 +10,7 @@
 
 ## Weekly Planning (8 Questions)
 
-1. "Build my week around my Future 4 and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
+1. "Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
 
 2. "What are the 3 highest-leverage outcomes for this week across Business, Home, Self/Skills, and Impact—based on my Lead Lane?"
 
@@ -38,7 +38,7 @@
 
 12. "What would I stop doing immediately if I trusted my strategy?"
 
-13. "What is the simplest plan that hits my Target Revenue and protects my Future 4?"
+13. "What is the simplest plan that hits my Target Revenue and protects my Future You?"
 
 14. "List 10 ways I might unintentionally betray my values while pursuing growth—and the aligned counter-moves."
 
@@ -114,7 +114,7 @@
 
 ## Weekly / Monthly Review (8 Questions)
 
-43. "Run my Weekly Review: check values alignment, Future 4 progress, QC quota, revenue progress, and capacity—then choose one adjustment."
+43. "Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."
 
 44. "What did I do this week that proves I'm becoming my Future Self? What did I do that contradicts it?"
 

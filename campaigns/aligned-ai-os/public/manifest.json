@@ -1,0 +1,18 @@
+{
+  "name": "APOS — Aligned Performance Operating System",
+  "short_name": "APOS",
+  "description": "Your AI-powered performance coach. Values-aligned coaching on demand.",
+  "start_url": "/chat",
+  "display": "standalone",
+  "background_color": "#0E1624",
+  "theme_color": "#0E1624",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo-apos.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

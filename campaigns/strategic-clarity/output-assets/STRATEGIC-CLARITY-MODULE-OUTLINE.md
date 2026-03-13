@@ -68,11 +68,11 @@
 
 ---
 
-### Lesson 4: Becoming You (Future Four)
+### Lesson 4: Becoming You (The Future You)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 4.1 — The Future Four | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
+| Video 4.1 — The Future You | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
 | Video 4.2 — Integration + 90-Day Focus | `documents/video-4.2-becoming-you-integration.md` | Script | ~5–8 min |
 | Becoming You Worksheet | `worksheets/04-becoming-you.md` | Worksheet | — |
 
@@ -87,14 +87,14 @@
 
 ---
 
-### Lesson 6: Goals That Matter (Revenue Bridge)
+### Lesson 6: From Meaning to Math (The Revenue Bridge)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 6.1 — Baseline, Desires, Impact | `documents/video-6.1-gtm-baseline-desires-impact.md` | Script | ~10–15 min |
 | Video 6.2 — The Math (Revenue → QCs) | `documents/video-6.2-gtm-the-math.md` | Script | ~10–12 min |
 | Video 6.3 — Lead Path Fork + Highest-Leverage Move | `documents/video-6.3-gtm-lead-path-leverage.md` | Script | ~5–8 min |
-| Goals That Matter Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
+| The Revenue Bridge Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
 
 ---
 
@@ -137,11 +137,11 @@ Lesson 2: WHY + Just Cause — Why am I here? (Purpose + infinite game)
     ↓
 Lesson 3: Core Values — What do I stand for? (Operational definitions + boundaries)
     ↓
-Lesson 4: Becoming You — Who am I growing into? (Future Four: Self/Social/Skills/Service)
+Lesson 4: Becoming You — Who am I growing into? (The Future You: Self/Social/Skills/Service)
     ↓
 Lesson 5: Reality Check — What's actually true right now? (Bridge to operationalization)
     ↓
-Lesson 6: Goals That Matter — What does my business need to produce? (Meaning → Math)
+Lesson 6: From Meaning to Math — What does my business need to produce? (The Revenue Bridge)
     ↓
 Lesson 7: ONE THING — What's the single move that makes everything else easier?
     ↓
@@ -160,7 +160,7 @@ Lesson 9: 50 Questions — Put the AI coach to work daily
 | Simon Sinek, *Start With Why* | Golden Circle, WHY statement |
 | Simon Sinek, *The Infinite Game* | Just Cause |
 | Sinek et al., *Find Your Why* | Peak Moments, Theme Mining, WHY format |
-| Brendon Burchard, *High Performance Habits* | Future Four (Self, Social, Skills, Service) |
+| Brendon Burchard, *High Performance Habits* | The Future You (Self, Social, Skills, Service) |
 | Gary Keller, *The ONE Thing* | ONE THING question, Domino Plan |
 
 ---

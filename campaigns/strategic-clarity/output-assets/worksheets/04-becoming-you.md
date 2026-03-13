@@ -1,4 +1,4 @@
-# Becoming You (Future Four)
+# Becoming You (The Future You)
 
 **Aligned Power | Strategic Clarity Workshop**
 
@@ -166,4 +166,4 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ---
 
-*Your Future Four feeds directly into your Aligned AI OS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*Your Future You feeds directly into your Aligned AI OS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*

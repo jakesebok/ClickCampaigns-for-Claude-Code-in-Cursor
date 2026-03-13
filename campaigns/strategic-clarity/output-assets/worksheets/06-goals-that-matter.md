@@ -1,8 +1,8 @@
-# Goals That Matter (Revenue Bridge)
+# From Meaning to Math: The Revenue Bridge
 
 **Aligned Power | Strategic Clarity Workshop**
 
-> This worksheet bridges what you want (needs, desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Just Cause.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Just Cause.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
 
@@ -208,4 +208,4 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your Goals That Matter numbers feed directly into your Aligned AI OS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your Revenue Bridge numbers feed directly into your Aligned AI OS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*

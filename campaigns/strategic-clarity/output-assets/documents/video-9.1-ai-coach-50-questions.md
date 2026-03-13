@@ -32,7 +32,7 @@ Let me walk you through the categories and highlight a few of my favorites.
 
 This is where most people will start—and where you'll come back every single week.
 
-My go-to is **Question 1**: *"Build my week around my Future 4 and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
+My go-to is **Question 1**: *"Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
 
 You paste that in on a Sunday evening or Monday morning, and your AI coach builds your week. Not a generic time-blocking template. *Your* week. With your ONE THING block protected. With your family non-negotiables honored. With your QC targets included. With buffer time for the unexpected.
 
@@ -98,7 +98,7 @@ This one's a boundary. When you feel the pull to grind, you paste this and your 
 
 ### Weekly/Monthly Review (Questions 43–50)
 
-**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Future 4 progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
+**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
 
 Paste this every Friday. Five minutes. Your AI coach runs the full review and tells you the one thing to adjust next week. It's like having a COO who never forgets and never sugarcoats.
 

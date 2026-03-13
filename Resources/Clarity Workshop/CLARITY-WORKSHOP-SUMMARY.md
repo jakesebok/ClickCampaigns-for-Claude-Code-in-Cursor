@@ -6,7 +6,7 @@
 
 ## Overview
 
-The Clarity Workshop content comes from **Virginia Muskees** (the Referral Diva) and the **Business by Referral** / **Goals That Matter** frameworks. It addresses the core challenge for six-figure solopreneurs: **lack of clarity** — knowing what you do but struggling to articulate it in a way that attracts clients and referral partners.
+The Clarity Workshop content comes from **Virginia Muskees** (the Referral Diva) and the **Business by Referral** / **From Meaning to Math** (Revenue Bridge) frameworks. It addresses the core challenge for six-figure solopreneurs: **lack of clarity** — knowing what you do but struggling to articulate it in a way that attracts clients and referral partners.
 
 ---
 
@@ -71,15 +71,17 @@ If everyone you let in never leaves—who would you remove? You need **criterion
 
 ---
 
-## 3. Goals That Matter (GTM) — 5-Day Framework
+## 3. From Meaning to Math (The Revenue Bridge) — 5-Day Framework
 
 ### The Three Levels of Goals
 
+*In Strategic Clarity we use neutral, values-aligned language: Baseline, Desires, Impact.*
+
 | Level | Name | Description | Energy |
 |-------|------|-------------|--------|
-| **1** | **Needy Goals** | Survival goals. Bills, baseline revenue. Set from lack. | Fear, anxiety, exhaustion. **Client repellent.** |
-| **2** | **Greedy Goals** | Lifestyle goals. Affluence, abundance, finer things. | Often blocked by "you don't deserve it" programming. |
-| **3** | **MAD Goals** | Make A Difference goals. Impact, contribution, mission. | Curiosity, trust, generosity. **Client magnet.** |
+| **1** | **Baseline** | Survival goals. Bills, baseline revenue. What must be true to feel stable. | Reframe as neutral—fear repels; neutrality allows forward motion. |
+| **2** | **Desires** | Lifestyle goals. Affluence, abundance, finer things. What you want to fund. | "I am grateful for what I have AND I still want this." |
+| **3** | **Impact** | Make A Difference goals. Contribution, mission, Just Cause. | Curiosity, trust, generosity. **Client magnet.** |
 
 ### GTM Day 1: Know Your Numbers
 
@@ -93,18 +95,18 @@ If everyone you let in never leaves—who would you remove? You need **criterion
 
 ---
 
-### GTM Day 2: Baseline Sales Goal (Needy → Neutral)
+### GTM Day 2: Baseline Sales Goal
 
 - **Personal expenses** (last 12 months): bank statements, total outflow
 - **Baseline sales goal** = personal expenses + business expenses
 
 **Example:** $60K personal + $42K business = **$102K baseline**
 
-**Key insight:** Reframe needy goals as neutral baseline. Don't attach fear to them. Fear repels; neutrality allows forward motion.
+**Key insight:** Reframe survival goals as neutral baseline. Don't attach fear to them. Fear repels; neutrality allows forward motion.
 
 ---
 
-### GTM Day 3: Greedy Goals (Lifestyle)
+### GTM Day 3: Desires (Lifestyle)
 
 **Mindset gap:** We set lifestyle visions but pursue survival sales goals. We're programmed to conflate "grateful for what you have" with "don't want more."
 
@@ -116,14 +118,14 @@ If everyone you let in never leaves—who would you remove? You need **criterion
 5. Estimate cost + add 50% (taxes, expenses, investment)
 6. Add that number to baseline = new sales goal
 
-**Example:** Cruise $10K + 50% = $15K greedy goal. $102K baseline + $15K = **$117K**
+**Example:** Cruise $10K + 50% = $15K desires. $102K baseline + $15K = **$117K**
 
 ---
 
-### GTM Day 4: MAD Goals (Make A Difference)
+### GTM Day 4: Impact (Make A Difference)
 
-- Add **at least 10%** to your greedy goal for impact
-- **MAD revenue goal** = survival + lifestyle + make a difference
+- Add **at least 10%** to your desires total for impact
+- **Revenue goal** = baseline + desires + impact
 
 **Choose an impact project that:**
 - Grabs you by the throat (poverty, addiction, homelessness, animal welfare, environment, etc.)
@@ -138,14 +140,14 @@ If everyone you let in never leaves—who would you remove? You need **criterion
 
 ### GTM Day 5: The One Number — Sales Conversations Needed
 
-**Core formula:** How many qualified sales conversations do you need to hit your MAD goal?
+**Core formula:** How many qualified sales conversations do you need to hit your revenue goal?
 
 **Four calculations:**
 
 1. **Average client value** = gross revenue ÷ number of active clients (last 12 months)
    - Example: $50K ÷ 20 clients = $2,500/client
 
-2. **Clients needed** = MAD goal ÷ client value
+2. **Clients needed** = revenue goal ÷ client value
    - Example: $117K ÷ $2,500 = 47 clients
 
 3. **Close ratio** = new clients onboarded ÷ total sales conversations
@@ -156,11 +158,11 @@ If everyone you let in never leaves—who would you remove? You need **criterion
 
 **This number** = your focus for the next 12 months. Put it on a Post-it. Track it.
 
-**Why MAD goals work:** When you focus on making a difference, prospects feel curiosity and trust—not scarcity. Your energy shifts from need/greed to generosity. *"Desperation is not magnetic."*
+**Why impact works:** When you focus on making a difference, prospects feel curiosity and trust—not scarcity. Your energy shifts to generosity. *"Desperation is not magnetic."*
 
-**Warning:** You must actually deliver on your MAD commitment. Congruence matters. If you don't, it reads as manipulation, not influence.
+**Warning:** You must actually deliver on your impact commitment. Congruence matters. If you don't, it reads as manipulation, not influence.
 
-**MAD goal sizing (Memberships workshop):** Make your MAD goal **equal or exceed** your greedy goal. That way the "guilt guy" in your head feels balanced—you got something for yourself AND made a big difference.
+**Impact sizing (Memberships workshop):** Make your impact goal **equal or exceed** your desires total. That way you feel balanced—you funded your life AND made a big difference.
 
 ---
 
@@ -233,14 +235,14 @@ From *The Secret Spiritual Art of Succeeding at Work*. Used for ongoing clarity 
 ### For Messaging / Positioning
 
 - **Start with Why** — Lead with purpose, cause, belief. Not what you do or how you do it.
-- Lead with MAD (make a difference) energy, not needy or greedy
+- Lead with impact energy, not scarcity
 - "I'm committed to [impact] by helping [audience] build [outcome]"
 - Include the contribution/mission in your story—it creates curiosity and trust
 - Be unapologetic about your why. You're not for everybody.
 
 ### For Goal-Setting Exercises
 
-- Baseline (survival) → Greedy (lifestyle) → MAD (impact)
+- Baseline (survival) → Desires (lifestyle) → Impact (contribution)
 - The one number: sales conversations needed
 - MIQs for ongoing clarity and life design
 
@@ -252,14 +254,14 @@ From *The Secret Spiritual Art of Succeeding at Work*. Used for ongoing clarity 
 |-------|------------|---------|
 | Starting Point.mp4 | Starting Point.txt | Clarity foundations, ideal customer, problems, unique edge, vision |
 | GTM 1.mp4 | GTM 1.txt | Know your numbers, cash flow basics |
-| GTM 2.mp4 | GTM 2.txt | Baseline sales goal, needy → neutral |
-| GTM 3.mp4 | GTM 3.txt | Greedy goals, lifestyle, vision board + dollar value |
+| GTM 2.mp4 | GTM 2.txt | Baseline sales goal |
+| GTM 3.mp4 | GTM 3.txt | Desires (lifestyle), vision board + dollar value |
 | GTM 4.mp4 | GTM 4.txt | MAD goals, impact project, 10% for difference |
 | GTM 5.mp4 | GTM 5.txt | The one number, sales conversations formula |
 | MIQs.mp4 | MIQs.txt | Three Most Important Questions, means vs. end goals |
-| Memberships - 2026-03-10.mp4 | Memberships -  - 2026-03-10 11-45-11.txt | Live workshop: needy/greedy/MAD, referrals vs. conversations, Teresa Carrington story |
+| Memberships - 2026-03-10.mp4 | Memberships -  - 2026-03-10 11-45-11.txt | Live workshop: baseline/desires/impact, referrals vs. conversations, Teresa Carrington story |
 | 014 - Memberships.mp4 | 014 - Memberships.txt | Start With Why (Simon Sinek), golden circle, Apple example, Virginia's story, Who's In Your Room |
 
 ---
 
-*Transcribed and summarized for ClickCampaigns. Source: Clarity Workshop / Goals That Matter / Business by Referral (Virginia Muskees).*
+*Transcribed and summarized for ClickCampaigns. Source: Clarity Workshop / From Meaning to Math / Business by Referral (Virginia Muskees). Strategic Clarity uses Baseline, Desires, Impact—neutral language that avoids money-shame framing.*

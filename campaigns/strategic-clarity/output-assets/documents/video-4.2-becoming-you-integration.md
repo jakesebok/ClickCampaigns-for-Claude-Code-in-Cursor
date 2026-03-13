@@ -62,7 +62,7 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-Your Future Four becomes Section 4 of your Aligned AI OS. Your AI coach will know:
+Your Future You becomes Section 4 of your Aligned AI OS. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
@@ -75,7 +75,7 @@ So when you ask your AI coach for a weekly plan, it doesn't just look at revenue
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. MIQs. WHY. Values. Future Four. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. MIQs. WHY. Values. The Future You. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 

@@ -20,7 +20,7 @@ Before we turn everything into numbers—before we build the Revenue Bridge and 
 
 Not what we want to be true. What *is* true.
 
-Because your MIQs describe a future you. Your values describe an ideal you. Your Future Four describes the person you're becoming. All beautiful. All necessary. But if we don't also name the gap—the distance between *here* and *there*—we'll build a plan that doesn't account for reality. And plans that don't account for reality don't survive contact with Monday morning.
+Because your MIQs describe a future you. Your values describe an ideal you. Your Future You describes the person you're becoming. All beautiful. All necessary. But if we don't also name the gap—the distance between *here* and *there*—we'll build a plan that doesn't account for reality. And plans that don't account for reality don't survive contact with Monday morning.
 
 This is the Reality Check.
 
@@ -69,7 +69,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—MIQs, WHY, values, Future Four, reality check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
+In Lesson 6, we take everything you've built—MIQs, WHY, values, Future You, reality check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 

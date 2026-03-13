@@ -1,0 +1,223 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { UserButton } from "@clerk/nextjs";
+import { Bell, CreditCard, Upload, ExternalLink } from "lucide-react";
+
+type UserSettings = {
+  name: string;
+  email: string;
+  phone: string;
+  smsEnabled: boolean;
+  smsTime: string;
+  timezone: string;
+  tier: string;
+  subscriptionStatus: string;
+  trialEndsAt: string | null;
+  onboardingComplete: boolean;
+};
+
+export default function SettingsPage() {
+  const [settings, setSettings] = useState<UserSettings | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then(setSettings)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  async function updateSettings(updates: Partial<UserSettings>) {
+    const res = await fetch("/api/settings", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+    if (res.ok) {
+      setSettings((prev) => (prev ? { ...prev, ...updates } : null));
+    }
+  }
+
+  if (loading || !settings) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col h-full">
+      <header className="px-6 py-4 border-b border-border">
+        <h1 className="text-lg font-semibold">Settings</h1>
+      </header>
+
+      <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+        <div className="max-w-2xl mx-auto space-y-6">
+          {/* Account */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold flex items-center gap-2">
+              Account
+            </h2>
+            <div className="flex items-center gap-4">
+              <UserButton />
+              <div>
+                <p className="font-medium">{settings.name || settings.email}</p>
+                <p className="text-sm text-muted-foreground">{settings.email}</p>
+              </div>
+            </div>
+          </section>
+
+          {/* SMS Notifications */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold flex items-center gap-2">
+              <Bell className="h-4 w-4" />
+              Morning Prompts (SMS)
+            </h2>
+
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm">Daily SMS prompt</p>
+                <p className="text-xs text-muted-foreground">
+                  Get a values-aligned prompt every morning
+                </p>
+              </div>
+              <button
+                onClick={() =>
+                  updateSettings({ smsEnabled: !settings.smsEnabled })
+                }
+                className={`relative w-11 h-6 rounded-full transition-colors ${settings.smsEnabled ? "bg-primary" : "bg-muted"}`}
+              >
+                <div
+                  className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-transform ${settings.smsEnabled ? "translate-x-5.5 left-0.5" : "left-0.5"}`}
+                />
+              </button>
+            </div>
+
+            {settings.smsEnabled && (
+              <div className="space-y-3 pt-2">
+                <div>
+                  <label className="text-sm text-muted-foreground">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={settings.phone}
+                    onChange={(e) =>
+                      setSettings({ ...settings, phone: e.target.value })
+                    }
+                    onBlur={() => updateSettings({ phone: settings.phone })}
+                    placeholder="+1 555 123 4567"
+                    className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-sm text-muted-foreground">
+                      Send Time
+                    </label>
+                    <input
+                      type="time"
+                      value={settings.smsTime}
+                      onChange={(e) =>
+                        updateSettings({ smsTime: e.target.value })
+                      }
+                      className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground">
+                      Timezone
+                    </label>
+                    <select
+                      value={settings.timezone}
+                      onChange={(e) =>
+                        updateSettings({ timezone: e.target.value })
+                      }
+                      className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                    >
+                      <option value="America/New_York">Eastern</option>
+                      <option value="America/Chicago">Central</option>
+                      <option value="America/Denver">Mountain</option>
+                      <option value="America/Los_Angeles">Pacific</option>
+                      <option value="America/Anchorage">Alaska</option>
+                      <option value="Pacific/Honolulu">Hawaii</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
+
+          {/* Subscription */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold flex items-center gap-2">
+              <CreditCard className="h-4 w-4" />
+              Subscription
+            </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm capitalize">
+                  {settings.subscriptionStatus.replace("_", " ")}
+                </p>
+                {settings.trialEndsAt && (
+                  <p className="text-xs text-muted-foreground">
+                    Trial ends{" "}
+                    {new Date(settings.trialEndsAt).toLocaleDateString()}
+                  </p>
+                )}
+                <p className="text-xs text-muted-foreground capitalize">
+                  Tier: {settings.tier.replace("_", " ")}
+                </p>
+              </div>
+              <a
+                href="/api/billing/portal"
+                className="flex items-center gap-1 text-sm text-primary hover:underline"
+              >
+                Manage billing
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </section>
+
+          {/* Context / Onboarding */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold flex items-center gap-2">
+              <Upload className="h-4 w-4" />
+              Context Document
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {settings.onboardingComplete
+                ? "Your context document is loaded. Upload a new version to update it."
+                : "Complete onboarding to build your context document."}
+            </p>
+            <a
+              href={settings.onboardingComplete ? "/onboarding" : "/onboarding"}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm hover:bg-secondary transition-colors"
+            >
+              {settings.onboardingComplete
+                ? "Update Context"
+                : "Complete Onboarding"}
+            </a>
+          </section>
+
+          {/* Community */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold">Community</h2>
+            <a
+              href="https://circle.so"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              Open Aligned Power Community on Circle
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}

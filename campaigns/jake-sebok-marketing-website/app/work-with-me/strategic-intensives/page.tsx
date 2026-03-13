@@ -2,77 +2,253 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Strategic Alignment Intensives — Jake Sebok",
+  title: "Strategic Alignment Intensive — Jake Sebok",
   description:
-    "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
+    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter. $497. Includes 30 days of APOS access.",
 };
 
 export default function StrategicIntensivesPage() {
   return (
-    <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
-      <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-          Strategic Alignment Intensives
-        </p>
-        <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-          Quarterly deep-dive for owner-operators
-        </h1>
-        <div className="relative aspect-video rounded-[20px] overflow-hidden mb-10">
-          <Image
-            src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            alt="Strategic planning session"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 720px"
-          />
-        </div>
-        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
-          A focused day (or half-day) to cut through the noise, get strategic
-          clarity, and leave with a clear path forward. For entrepreneurs who
-          are ready to go deeper than a workshop but not yet ready for the
-          full Accelerator.
-        </p>
-        <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 mb-10">
-          <h2 className="font-outfit font-semibold text-ap-primary mb-4">
-            Webinar / event registration
-          </h2>
-          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
-            For intensives, you&apos;ll want a way to collect registrations and
-            send reminders. Recommended tools:
+    <>
+      {/* Hero */}
+      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
+            Quarterly Workshop · $497
           </p>
-          <ul className="text-ap-mid text-xl font-semibold space-y-2 list-disc list-inside mb-4">
-            <li>
-              <strong>Calendly</strong> — One-on-one or group event scheduling
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+            Strategic Alignment Intensive
+          </h1>
+          <div className="relative aspect-video rounded-[20px] overflow-hidden mb-10">
+            <Image
+              src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Strategic Alignment Intensive workshop"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 720px"
+            />
+          </div>
+          <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-6">
+            Most goal-setting is backwards. You name the revenue target, you
+            reverse-engineer the tactics, and you hustle until the number hits.
+            Then you look up and realize the life you built doesn&apos;t match the
+            life you actually want.
+          </p>
+          <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
+            The Strategic Alignment Intensive fixes that in a single half-day.
+            You&apos;ll connect your daily actions directly to the outcomes that
+            actually matter — and walk away with a personalized AI operating
+            system that keeps you on track every day after.
+          </p>
+        </div>
+      </section>
+
+      {/* What You Build */}
+      <section className="pb-16 sm:pb-20">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-8">
+            What you&apos;ll walk away with
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                title: "Your Most Important Questions (MIQs)",
+                description:
+                  "The end goals underneath the means goals. What you actually want your life to feel like — not just the revenue target.",
+              },
+              {
+                title: "Your WHY + Just Cause",
+                description:
+                  "A purpose statement that passes the full-body test. Not marketing copy — the real reason you do this work.",
+              },
+              {
+                title: "Your Top 5 Core Values (Operational)",
+                description:
+                  "Definition + behaviors + boundary for each. Values that make hard decisions easy.",
+              },
+              {
+                title: "Your Future You (Becoming You)",
+                description:
+                  "The person you're becoming across self, social, skills, and service. Standards, not wishes.",
+              },
+              {
+                title: "Your Revenue Bridge",
+                description:
+                  "Needs + desires + impact = Required Revenue. Reverse-engineered to weekly qualified conversations.",
+              },
+              {
+                title: "Your ONE THING Domino Plan",
+                description:
+                  "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
+              },
+              {
+                title: "30 Days of APOS — Your AI Operating System",
+                description:
+                  "A personalized AI coach that knows everything you built today. Your values, your numbers, your ONE THING — coaching on demand, every single day.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="flex gap-4 bg-ap-off rounded-[16px] border border-ap-border p-5"
+              >
+                <div className="w-1.5 rounded-full bg-ap-accent shrink-0" />
+                <div>
+                  <h3 className="font-outfit font-semibold text-ap-primary mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-ap-mid">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="pb-16 sm:pb-20 bg-ap-off border-y border-ap-border">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6 py-16">
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-8">
+            How it works
+          </h2>
+
+          <div className="space-y-6">
+            <div className="flex gap-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-ap-accent text-white font-outfit font-bold text-sm shrink-0">
+                1
+              </div>
+              <div>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">
+                  Pre-work packet (before the Intensive)
+                </h3>
+                <p className="text-ap-mid">
+                  You&apos;ll receive a short preparation packet to prime your
+                  thinking. Takes about 20 minutes. This ensures we hit the ground
+                  running on workshop day.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-ap-accent text-white font-outfit font-bold text-sm shrink-0">
+                2
+              </div>
+              <div>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">
+                  Half-day live workshop (virtual or in-person)
+                </h3>
+                <p className="text-ap-mid">
+                  We work through the full Strategic Clarity framework together.
+                  Teaching, exercises, worksheets. You build every asset in real
+                  time — not a passive lecture.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-ap-accent text-white font-outfit font-bold text-sm shrink-0">
+                3
+              </div>
+              <div>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">
+                  Upload your worksheets → APOS activates
+                </h3>
+                <p className="text-ap-mid">
+                  After the Intensive, you upload your completed worksheets into
+                  APOS (Aligned Performance Operating System). The app synthesizes
+                  everything into your personalized AI coach — loaded with your
+                  values, goals, revenue math, and ONE THING.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-ap-accent text-white font-outfit font-bold text-sm shrink-0">
+                4
+              </div>
+              <div>
+                <h3 className="font-outfit font-semibold text-ap-primary mb-1">
+                  30 days of daily coaching
+                </h3>
+                <p className="text-ap-mid">
+                  Your APOS coach texts you every morning, tracks your weekly ONE
+                  THING, runs your 6Cs scorecard, and gives you personalized
+                  strategy whenever you ask. 30 days of free access included.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who It's For */}
+      <section className="pb-16 sm:pb-20">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6 pt-16">
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-6">
+            Who this is for
+          </h2>
+          <ul className="space-y-3 text-xl font-semibold text-ap-mid">
+            <li className="flex gap-3">
+              <span className="text-ap-accent">→</span>
+              Owner-operators who are succeeding but feel misaligned
             </li>
-            <li>
-              <strong>Acuity / HoneyBook</strong> — Scheduling + payments +
-              contracts
+            <li className="flex gap-3">
+              <span className="text-ap-accent">→</span>
+              Entrepreneurs who set goals but never feel satisfied when they hit
+              them
             </li>
-            <li>
-              <strong>Eventbrite</strong> — Good for paid workshops and
-              intensives
+            <li className="flex gap-3">
+              <span className="text-ap-accent">→</span>
+              Founders who want clarity before they build the next thing
             </li>
-            <li>
-              <strong>Zoom + Calendly</strong> — Free option: Calendly for
-              signup, Zoom for the event
+            <li className="flex gap-3">
+              <span className="text-ap-accent">→</span>
+              People who want to go deeper than a workshop but aren&apos;t ready
+              for the full Accelerator
             </li>
           </ul>
         </div>
-        <div className="flex flex-wrap gap-4">
-          <Link
-            href="/contact"
-            className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
-          >
-            Express Interest
-          </Link>
-          <Link
-            href="/work-with-me"
-            className="inline-flex items-center text-gradient-accent font-semibold hover:underline"
-          >
-            ← Back to offerings
-          </Link>
+      </section>
+
+      {/* Pricing + CTA */}
+      <section className="pb-20 sm:pb-28">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+          <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 text-center">
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+              Next Intensive
+            </p>
+            <h2 className="font-outfit font-bold text-3xl text-ap-primary mb-3">
+              $497
+            </h2>
+            <p className="text-ap-mid text-lg mb-2">
+              Half-day live workshop + pre-work packet + all worksheets
+            </p>
+            <p className="text-ap-muted text-sm mb-8">
+              Includes 30 days of APOS access (your personalized AI coach)
+            </p>
+
+            <Link
+              href="/contact"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all mb-6"
+            >
+              Reserve Your Seat
+            </Link>
+
+            <p className="text-ap-muted text-sm">
+              Held quarterly. Limited to 20 participants per session for interactive depth.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4 mt-8 justify-center">
+            <Link
+              href="/work-with-me"
+              className="inline-flex items-center text-gradient-accent font-semibold hover:underline"
+            >
+              ← Back to offerings
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

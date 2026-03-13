@@ -38,7 +38,7 @@ Sinek uses Apple as the classic example. Apple doesn't lead with "we make comput
 
 Now, why does this matter for *you* in Strategic Clarity?
 
-Because your WHY is the through-line. It connects your MIQs to your values to your Future Four to your revenue to your ONE THING. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your WHY is the thing that says: *does this serve what I'm actually here for?*
+Because your WHY is the through-line. It connects your MIQs to your values to your Future You to your revenue to your ONE THING. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your WHY is the thing that says: *does this serve what I'm actually here for?*
 
 Without it, you're making decisions based on opportunity cost, fear of missing out, what the market wants, or what your peers are doing. With it, you're making decisions based on purpose. And purpose doesn't burn out the way ambition does.
 

@@ -9,8 +9,8 @@
 1. **MIQs** — End goals vs. means goals. What do we actually want to trade currency for?
 2. **Find Your Why + Just Cause** — Simon Sinek style. Purpose + infinite game.
 3. **Core Values** — Deep excavation. Operational definitions + boundaries.
-4. **Becoming You** — Burchard "Future Four" (Self, Social, Skills, Service).
-5. **Goals That Matter** — Operationalize vision into numbers → reverse engineer weekly behaviors.
+4. **Becoming You** — The Future You (Self, Social, Skills, Service), inspired by Burchard.
+5. **From Meaning to Math (The Revenue Bridge)** — Operationalize vision into numbers → reverse engineer weekly behaviors.
 6. **ONE THING** — Quarter, month, week, day. By achieving it, everything else becomes easier or unnecessary.
 
 **Strategic Intensives:** Same worksheets + master prompt → personalized AI coach that optimizes for values, never compromises them, reminds them what they want.
@@ -25,8 +25,8 @@
 | **MIQs** | 3 columns: Experiences I Want, How I Need to Grow, How I Will Contribute | Master Prompt, WHY |
 | **Find Your WHY + Just Cause** | Peak Moments → Theme Mining → Draft WHY → Full-Body Test → Strengthen WHY → Just Cause → Mission Statement | Master Prompt |
 | **Core Values Extraction** | 5 people → 5 qualities → AI translation → Top 5 (definition, behaviors, boundary) | Master Prompt |
-| **Becoming You** | Future Four: Personal (Self), Relationships (Social), Business (Skills), Service. Standards, proof, 90-day focus | Master Prompt |
-| **Goals That Matter** | Baseline Needs → Future Four + MIQ Desires → Just Cause Tithe → Required Revenue → QC math → Capacity check | Master Prompt |
+| **Becoming You** | The Future You: Personal (Self), Relationships (Social), Business (Skills), Service. Standards, proof, 90-day focus | Master Prompt |
+| **From Meaning to Math (The Revenue Bridge)** | Baseline Needs → Future You + MIQ Desires → Just Cause Tithe → Required Revenue → QC math → Capacity check | Master Prompt |
 | **ONE THING Domino Plan** | Lead Lane, Someday outcomes, ONE THING per lane, Domino chain (Someday → Right Now), Calendar install, Sabotage | Master Prompt |
 | **Master Prompt** | Synthesizes all worksheets into Aligned AI OS Upgrade + Alignment Blueprint Summary | AI Coach |
 | **Monthly Patch Notes** | Update prompt for ongoing refinement | AI Coach |
@@ -46,11 +46,11 @@ The **Master Prompt** expects MIQ fields the current worksheet doesn't have: Mus
 
 2. **The "expansion" fields are bridging questions** — they connect *what you want* to *your current reality*. They answer: "So what does this mean for my life right now? What's in the way? What's required?"
 
-3. **They belong at the bridge to operationalization** — right before Goals That Matter, when you're about to turn vision into numbers.
+3. **They belong at the bridge to operationalization** — right before From Meaning to Math, when you're about to turn vision into numbers.
 
 ### Proposed Solution: Separate "Reality Check" Worksheet
 
-Create a **one-page "Reality Check"** worksheet that sits between **Becoming You** (Lesson 4) and **Goals That Matter** (Lesson 5). It's optional, clearly framed, and doesn't bloat the MIQ.
+Create a **one-page "Reality Check"** worksheet that sits between **Becoming You** (Lesson 4) and **From Meaning to Math** (Lesson 6). It's optional, clearly framed, and doesn't bloat the MIQ.
 
 | Field | Question (example framing) |
 |-------|----------------------------|
@@ -61,7 +61,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 | **Resistance** | What part of you might resist this change? (Fear, protective part, old story.) |
 | **Support** | What would make alignment easier? (Person, system, boundary, accountability.) |
 
-**Framing for the user:** *"You've named what you want (MIQs, WHY, Values, Future Four). Before we turn that into numbers and weekly actions, take a moment to connect it to your current reality. These six questions strengthen your Master Prompt and your AI coach. You can do them now, during a Strategic Intensive, or when you're ready. No pressure—depth beats speed."*
+**Framing for the user:** *"You've named what you want (MIQs, WHY, Values, Future You). Before we turn that into numbers and weekly actions, take a moment to connect it to your current reality. These six questions strengthen your Master Prompt and your AI coach. You can do them now, during a Strategic Intensive, or when you're ready. No pressure—depth beats speed."*
 
 **Benefits:**
 - MIQ worksheet stays clean and fast (3 questions).
@@ -78,7 +78,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 **Strategic Clarity** — Connect your daily actions to the outcomes you actually want. Stop chasing means goals (money, titles, tactics) and start building a life and business that funds your end goals (experiences, growth, contribution) without compromising who you are.
 
-**Outcome:** By the end, you'll have clarity on your MIQs, WHY, Just Cause, Top 5 Values, Future Four, Required Revenue, and ONE THING—plus an Aligned AI OS that keeps you focused and values-aligned.
+**Outcome:** By the end, you'll have clarity on your MIQs, WHY, Just Cause, Top 5 Values, Future You, Required Revenue, and ONE THING—plus an Aligned AI OS that keeps you focused and values-aligned.
 
 ---
 
@@ -86,7 +86,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 | Element | Format | Content |
 |---------|--------|---------|
-| **Video 0.1** | 5–15 min | Welcome to Strategic Clarity. What this module is, why it matters, and what you'll walk away with. The big idea: connect your daily actions directly to the outcomes you actually want. Overview of the arc (MIQs → WHY → Values → Future Four → Reality Check → Revenue Bridge → ONE THING → AI OS). Set the tone: this isn't motivation work—it's decision clarity + operational strategy built on what actually matters to you. Introduce the Aligned AI OS payoff at the end. |
+| **Video 0.1** | 5–15 min | Welcome to Strategic Clarity. What this module is, why it matters, and what you'll walk away with. The big idea: connect your daily actions directly to the outcomes you actually want. Overview of the arc (MIQs → WHY → Values → Future You → Reality Check → Revenue Bridge → ONE THING → AI OS). Set the tone: this isn't motivation work—it's decision clarity + operational strategy built on what actually matters to you. Introduce the Aligned AI OS payoff at the end. |
 
 ---
 
@@ -139,13 +139,13 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 ---
 
-### Lesson 4: Becoming You (Future Four)
+### Lesson 4: Becoming You (The Future You)
 
 **Core idea:** Burchard's "Future for Which." Growth doesn't require self-abandonment. Define the person you're becoming across Self, Social, Skills, Service.
 
 | Element | Format | Content |
 |---------|--------|---------|
-| **Video 4.1** | 8–12 min | The Future Four. Self (identity, standards), Social (relationships), Skills (primary field, training), Service (contribution). |
+| **Video 4.1** | 8–12 min | The Future You. Self (identity, standards), Social (relationships), Skills (primary field, training), Service (contribution). |
 | **Video 4.2** | 5–8 min | Integration. "What keeps showing up as the real priority? What do you need to stop doing?" 90-day focus. |
 | **Worksheet** | Google Doc | Becoming You (existing). Empty tables for typing. Personal, Relationships, Business (Skills), Service. |
 | **Reflection** | Optional prompt | "If someone watched your last 30 days, what would be the clearest evidence you're becoming this person?" |
@@ -163,16 +163,16 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 ---
 
-### Lesson 6: Goals That Matter (Revenue Bridge)
+### Lesson 6: From Meaning to Math (The Revenue Bridge)
 
-**Core idea:** Turn meaning into math. Baseline + Future Four + MIQ desires + Just Cause tithe = Required Revenue. Reverse engineer to weekly qualified conversations. No "work harder"—leverage.
+**Core idea:** Turn meaning into math. Baseline + Future You + MIQ desires + Just Cause tithe = Required Revenue. Reverse engineer to weekly qualified conversations. No "work harder"—leverage.
 
 | Element | Format | Content |
 |---------|--------|---------|
-| **Video 6.1** | 10–15 min | Needy vs. Greedy vs. MAD (reframed as Baseline, Desires, Impact). "Desperation is not magnetic." Neutral baseline. |
+| **Video 6.1** | 10–15 min | Baseline, Desires, Impact. "Desperation is not magnetic." Neutral baseline. |
 | **Video 6.2** | 10–12 min | The math. Required Revenue → Sales needed → Sales conversations → Qualified conversations per week. Capacity check. |
 | **Video 6.3** | 5–8 min | Lead path fork (Referral vs. Ads). Highest-leverage move. |
-| **Worksheet** | Google Doc | Goals That Matter (existing). Empty tables for typing. Steps 1–7. |
+| **Worksheet** | Google Doc | The Revenue Bridge (existing). Empty tables for typing. Steps 1–7. |
 | **Deliverable** | Output | Required Revenue, Target Revenue, QCs/week, Lead Lane, Capacity constraints. |
 
 ---
@@ -222,9 +222,9 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 | 1 | MIQs (End vs. Means Goals) | 2 | MIQs |
 | 2 | Find Your WHY + Just Cause | 3 | WHY + Just Cause |
 | 3 | Core Values Extraction | 2 | Core Values |
-| 4 | Becoming You (Future Four) | 2 | Becoming You |
+| 4 | Becoming You (The Future You) | 2 | Becoming You |
 | 5 | Reality Check (Bridge) | 1 | Reality Check |
-| 6 | Goals That Matter (Revenue Bridge) | 3 | Goals That Matter |
+| 6 | From Meaning to Math (The Revenue Bridge) | 3 | The Revenue Bridge |
 | 7 | ONE THING Domino Plan | 2 | ONE THING Domino |
 | 8 | Aligned AI OS — Master Prompt | 1 | Master Prompt + Patch Notes |
 | 9 | AI Coach in Action — 50 Questions | 1 | 50 High-Leverage Questions |
@@ -254,7 +254,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 | Simon Sinek, *Start With Why* | Golden Circle, WHY, purpose |
 | Simon Sinek, *The Infinite Game* | Just Cause |
 | *Find Your Why* (Sinek et al.) | Peak Moments, Theme Mining, WHY format |
-| Brendon Burchard, *High Performance Habits* | Future Four (Self, Social, Skills, Service) / "Becoming You" |
+| Brendon Burchard, *High Performance Habits* | The Future You (Self, Social, Skills, Service) / "Becoming You" |
 | Gary Keller, *The ONE Thing* | Domino Plan, ONE THING question |
 
 ---
@@ -264,4 +264,4 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 1. **Refine all worksheets** — Consistency, clarity, empty tables for Google Doc. Add Reality Check worksheet.
 2. **Create video scripts** — Kendall drafts in Jake's voice. Each video: teaching + context + why it matters + facilitate the exercise.
 3. **Align Master Prompt** — Ensure it references Reality Check worksheet; handle [NEEDS INPUT] gracefully when Reality Check is skipped.
-4. **Build Google Doc versions** — Pre-Work, MIQs, WHY, Core Values, Becoming You, Reality Check, Goals That Matter, ONE THING. All blanks = empty tables.
+4. **Build Google Doc versions** — Pre-Work, MIQs, WHY, Core Values, Becoming You, Reality Check, The Revenue Bridge, ONE THING. All blanks = empty tables.

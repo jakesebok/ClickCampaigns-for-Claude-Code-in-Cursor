@@ -24,9 +24,9 @@ We're about to change that.
 
 You're going to take a **Master Prompt**—a structured template we've built—and paste all of your completed worksheets underneath it. The AI reads everything you've written and generates two documents:
 
-1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your MIQs, your WHY and Just Cause, your Future Four, your revenue math, your capacity constraints, your ONE THING, and explicit instructions for how the AI should talk to you and make decisions.
+1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your MIQs, your WHY and Just Cause, your Future You, your revenue math, your capacity constraints, your ONE THING, and explicit instructions for how the AI should talk to you and make decisions.
 
-2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Future Four, your revenue targets, and your domino. Everything in one glance.
+2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Future You, your revenue targets, and your domino. Everything in one glance.
 
 Once generated, you paste this Master Context into any AI conversation and you've got a personalized executive coach that:
 
@@ -60,7 +60,7 @@ Here's the process. It's straightforward.
 - Find Your WHY + Just Cause
 - Core Values Extraction
 - Becoming You
-- Goals That Matter
+- The Revenue Bridge (From Meaning to Math)
 - ONE THING Domino Plan
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
@@ -78,7 +78,7 @@ One of the most powerful features built into your OS is the Decision Filter. Any
 1. Values fit
 2. Moves your MIQs forward
 3. Supports your WHY / Just Cause
-4. Future Four fit (Self/Social/Skills/Service)
+4. Future You fit (Self/Social/Skills/Service)
 5. Revenue contribution
 6. Capacity cost
 

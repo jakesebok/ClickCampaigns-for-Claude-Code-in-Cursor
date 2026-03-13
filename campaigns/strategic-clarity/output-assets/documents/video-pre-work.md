@@ -30,7 +30,7 @@ There are four exercises in the packet:
 
 **Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your WHY. We're going to mine them.
 
-**Exercise 3: Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the Goals That Matter worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
 **Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your AI coach needs to understand your business to give you useful advice. This is how it learns.
 

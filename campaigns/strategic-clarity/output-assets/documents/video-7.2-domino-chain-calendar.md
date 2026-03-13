@@ -99,7 +99,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: MIQs, WHY, values, Future Four, a Reality Check, a Revenue Bridge, and a ONE THING Domino Plan installed on your calendar.
+You've now got everything you need: MIQs, WHY, values, Future You, a Reality Check, a Revenue Bridge, and a ONE THING Domino Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your Aligned AI OS comes online.
 

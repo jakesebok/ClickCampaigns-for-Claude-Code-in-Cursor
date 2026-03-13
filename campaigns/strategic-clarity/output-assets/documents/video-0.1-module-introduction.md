@@ -30,7 +30,7 @@ By the end of this module, you will have:
 
 3. **Your Top 5 Core Values** — operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
 
-4. **Your Future Four** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
+4. **Your Future You** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
 
 5. **A Reality Check** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
 
@@ -69,7 +69,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 3:** We extract your core values. Five of them. Operational. Specific. Non-negotiable.
 
-**Lesson 4:** We map your Future Four. The person you're becoming across every domain that matters.
+**Lesson 4:** We map your Future You. The person you're becoming across every domain that matters.
 
 **Lesson 5:** We do a Reality Check. Before we turn vision into numbers, we name what's in the way.
 
@@ -87,7 +87,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your MIQs feed your WHY. Your WHY feeds your values. Your values feed your Future Four. Your Future Four feeds your revenue math. Your revenue math feeds your ONE THING. And all of it feeds your AI OS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your MIQs feed your WHY. Your WHY feeds your values. Your values feed your Future You. Your Future You feeds your revenue math. Your revenue math feeds your ONE THING. And all of it feeds your AI OS. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as a Strategic Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 

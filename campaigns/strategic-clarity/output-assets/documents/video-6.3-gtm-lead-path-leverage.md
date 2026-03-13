@@ -1,6 +1,6 @@
 # Video 6.3 — Lead Path Fork + Highest-Leverage Move
 
-**Lesson 6: Goals That Matter (Revenue Bridge) | ~5–8 minutes**
+**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~5–8 minutes**
 
 ---
 

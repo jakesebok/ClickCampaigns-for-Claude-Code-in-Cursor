@@ -1,4 +1,4 @@
-# Video 4.1 — The Future Four
+# Video 4.1 — The Future You
 
 **Lesson 4: Becoming You | ~8–12 minutes**
 
@@ -16,9 +16,9 @@ This lesson is about the person you're *becoming*. Not the person you wish you w
 
 ---
 
-### Brendon Burchard and the Future Four
+### The Future You
 
-This framework comes from Brendon Burchard's work on high performance. He talks about what he calls the "Future Four"—four domains of growth that, together, create a whole person:
+This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Future You**—the person you're becoming:
 
 **1. Self (Personal)** — Your identity. Your standards. The person you are when nobody's watching. How you handle pressure. How you protect your energy. How you make decisions.
 

@@ -1,6 +1,6 @@
 # Video 6.1 — Baseline, Desires, Impact
 
-**Lesson 6: Goals That Matter (Revenue Bridge) | ~10–15 minutes**
+**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~10–15 minutes**
 
 ---
 
@@ -8,7 +8,7 @@
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—MIQs, WHY, values, Future Four, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—MIQs, WHY, values, Future You, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -49,7 +49,7 @@ Here's what I want you to notice about this number: it's not exciting. It's not 
 
 Now we go above the floor.
 
-Remember your Future Four? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
+Remember your Future You? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
 
 For each domain, answer:
 - What does "better" look like?

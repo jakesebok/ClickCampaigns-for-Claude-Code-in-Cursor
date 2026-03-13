@@ -1,6 +1,6 @@
 # Video 6.2 — The Math: Revenue → Qualified Conversations
 
-**Lesson 6: Goals That Matter (Revenue Bridge) | ~10–12 minutes**
+**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~10–12 minutes**
 
 ---
 
@@ -25,7 +25,7 @@ Now add a **Reality Buffer**—I recommend 10%. Because business isn't linear. T
 
 Baseline + Future + Desires + Impact + 10% buffer = **Target Revenue.**
 
-Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* MIQs, *your* values, *your* Future Four, and *your* cause.
+Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* MIQs, *your* values, *your* Future You, and *your* cause.
 
 This is not "I want to make more money." This is "My life requires $X, and here's exactly why."
 
