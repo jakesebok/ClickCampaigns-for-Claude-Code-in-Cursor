@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { UserButton } from "@clerk/nextjs";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -10,6 +9,7 @@ import {
   FileText,
   Activity,
   Settings,
+  BarChart3,
 } from "lucide-react";
 
 const navItems = [
@@ -19,6 +19,7 @@ const navItems = [
   { href: "/assessment", label: "VAPI", icon: Activity },
   { href: "/scorecard", label: "6Cs", icon: ClipboardCheck },
   { href: "/one-thing", label: "ONE THING", icon: Target },
+  { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
@@ -30,8 +31,10 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex h-dvh bg-background">
+      {/* Orange top bar — distinguishing app header */}
+      <div className="fixed top-0 left-0 right-0 h-1 bg-accent z-50" aria-hidden />
       {/* Sidebar — desktop */}
-      <aside className="hidden md:flex md:w-64 flex-col border-r border-border bg-card">
+      <aside className="hidden md:flex md:w-64 flex-col border-r border-border bg-card pt-1">
         <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
           <Image
             src="/logo-apos.png"
@@ -56,10 +59,13 @@ export default function DashboardLayout({
         </nav>
 
         <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-3">
-            <UserButton />
-            <span className="text-sm text-muted-foreground">Account</span>
-          </div>
+          <Link
+            href="/settings"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+          >
+            <Settings className="h-4 w-4" />
+            <span>Settings</span>
+          </Link>
         </div>
       </aside>
 
@@ -78,7 +84,7 @@ export default function DashboardLayout({
       </nav>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col overflow-hidden pb-16 md:pb-0">
+      <main className="flex-1 flex flex-col overflow-hidden pb-16 md:pb-0 pt-1">
         {children}
       </main>
     </div>

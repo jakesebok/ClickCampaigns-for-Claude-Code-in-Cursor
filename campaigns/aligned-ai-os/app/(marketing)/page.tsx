@@ -33,7 +33,7 @@ export default function LandingPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/pricing"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-accent transition-colors"
           >
             Pricing
           </Link>
@@ -43,8 +43,8 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="px-6 py-24 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border text-sm text-muted-foreground mb-8">
-          <Star className="h-3.5 w-3.5" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-sm text-muted-foreground mb-8 animate-float">
+          <Star className="h-3.5 w-3.5 text-accent" />
           Built on the Strategic Clarity framework
         </div>
 
@@ -60,17 +60,17 @@ export default function LandingPage() {
           aligned, and growing — without burning out.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="inline-flex flex-col sm:flex-row items-stretch gap-4 mx-auto">
           <Link
             href="/sign-up"
-            className="flex items-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
+            className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
           >
             Start Free Trial
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
             href="https://jakesebok.com/work-with-me/strategic-intensives"
-            className="flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground hover:bg-card transition-colors"
+            className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-accent/30 text-foreground hover:bg-accent/10 hover:border-accent/50 transition-colors"
           >
             Attend the Workshop
           </Link>
@@ -78,7 +78,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="px-6 py-24 bg-card border-y border-border">
+      <section className="px-6 py-24 bg-card/80 border-y border-border">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-serif font-bold text-center mb-4">
             Not another generic chatbot.
@@ -118,10 +118,12 @@ export default function LandingPage() {
                 <div className="text-xs font-medium text-muted-foreground">
                   STEP {item.step}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <item.icon className="h-6 w-6 text-accent" />
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center shrink-0">
+                    <item.icon className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
                 </div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
@@ -152,9 +154,11 @@ export default function LandingPage() {
             ].map((c) => (
               <div
                 key={c.label}
-                className="flex items-start gap-3 rounded-xl border border-border p-5"
+                className="flex items-start gap-3 rounded-xl border border-border p-5 bg-card/30 hover:border-accent/20 transition-colors"
               >
-                <c.icon className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                <div className="w-9 h-9 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
+                  <c.icon className="h-4 w-4 text-accent" />
+                </div>
                 <div>
                   <h3 className="font-semibold">{c.label}</h3>
                   <p className="text-sm text-muted-foreground">{c.desc}</p>
@@ -166,7 +170,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="px-6 py-24 bg-card border-y border-border">
+      <section className="px-6 py-24 bg-card/80 border-y border-border">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-serif font-bold text-center mb-16">
             Everything you need to stay aligned.
@@ -213,10 +217,14 @@ export default function LandingPage() {
             ].map((feature) => (
               <div
                 key={feature.title}
-                className="rounded-2xl border border-border p-6 space-y-3"
+                className="rounded-2xl border border-border p-6 space-y-3 bg-card/50 hover:border-accent/30 transition-colors"
               >
-                <feature.icon className="h-5 w-5 text-accent" />
-                <h3 className="font-semibold">{feature.title}</h3>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
+                    <feature.icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <h3 className="font-semibold">{feature.title}</h3>
+                </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
@@ -249,7 +257,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Preview */}
-      <section className="px-6 py-24 bg-card border-y border-border">
+      <section className="px-6 py-24 bg-card/80 border-y border-border">
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <h2 className="text-3xl font-serif font-bold">
             Simple, aligned pricing.

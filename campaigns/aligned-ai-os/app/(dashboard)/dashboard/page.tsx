@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { PageHeader } from "@/components/page-header";
 import {
   Activity,
   Compass,
@@ -27,6 +28,8 @@ import {
   MessageSquare,
   TrendingUp,
   AlertTriangle,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
@@ -69,11 +72,20 @@ type OneThing = {
   weekStart: string;
 };
 
+const QUAD_COLORS: Record<string, string> = {
+  "Critical Priority": "bg-red-500/15 border-red-500/30",
+  "Protect & Sustain": "bg-green-500/15 border-green-500/30",
+  Monitor: "bg-yellow-500/15 border-yellow-500/30",
+  "Possible Over-Investment": "bg-blue-500/15 border-blue-500/30",
+};
+
 export default function DashboardPage() {
   const [vapiResults, setVapiResults] = useState<VapiResult[]>([]);
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
   const [oneThing, setOneThing] = useState<OneThing | null>(null);
   const [loading, setLoading] = useState(true);
+  const [focusExpanded, setFocusExpanded] = useState(false);
+  const [historyExpanded, setHistoryExpanded] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -108,14 +120,15 @@ export default function DashboardPage() {
     : [];
   const criticalPriorities = priorityItems.filter((p) => p.quadrant === "Critical Priority");
 
+  const topStrengths = latestVapi
+    ? DOMAINS.map((d) => ({ ...d, score: latestVapi.domainScores[d.code] || 0 }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+    : [];
+
   return (
     <div className="flex flex-col h-full">
-      <header className="px-6 py-4 border-b border-border">
-        <h1 className="text-lg font-semibold">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">
-          Your alignment at a glance
-        </p>
-      </header>
+      <PageHeader title="Dashboard" subtitle="Your alignment at a glance" />
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-4xl mx-auto space-y-6">
@@ -145,37 +158,59 @@ export default function DashboardPage() {
             {/* VAPI Overall */}
             {latestVapi ? (
               <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
-                <div className="rounded-2xl border border-border p-5 space-y-3 hover:border-accent/30 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Activity className="h-4 w-4 text-accent" />
-                      <span className="text-sm font-medium text-muted-foreground">
-                        VAPI Score
-                      </span>
+                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <Activity className="h-4 w-4 text-accent" />
+                          <span className="text-sm font-medium text-muted-foreground">
+                            VAPI Score
+                          </span>
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(latestVapi.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="flex items-end gap-3">
+                        <span
+                          className="text-4xl font-bold font-serif"
+                          style={{ color: getTierColor(getTier(latestVapi.overallScore / 10)) }}
+                        >
+                          {(latestVapi.overallScore / 10).toFixed(1)}
+                        </span>
+                        <span
+                          className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white"
+                          style={{ backgroundColor: getTierColor(getTier(latestVapi.overallScore / 10)) }}
+                        >
+                          {getTier(latestVapi.overallScore / 10)}
+                        </span>
+                      </div>
+                      {archetype && (
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {archetype}
+                        </p>
+                      )}
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      {new Date(latestVapi.createdAt).toLocaleDateString()}
-                    </span>
+                    {topStrengths.length > 0 && (
+                      <div className="shrink-0 w-28">
+                        <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
+                          Top Strengths
+                        </p>
+                        {topStrengths.map((d) => {
+                          const Icon = DOMAIN_ICONS[d.code];
+                          const c = getTierColor(getTier(d.score));
+                          return (
+                            <div key={d.code} className="flex items-center gap-1.5 text-xs mb-1">
+                              {Icon && <Icon className="h-3 w-3 shrink-0" style={{ color: c }} />}
+                              <span className="truncate">{d.name.split(" ")[0]}</span>
+                              <span className="font-medium shrink-0" style={{ color: c }}>{d.score.toFixed(1)}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-                  <div className="flex items-end gap-3">
-                    <span
-                      className="text-4xl font-bold font-serif"
-                      style={{ color: getTierColor(getTier(latestVapi.overallScore / 10)) }}
-                    >
-                      {(latestVapi.overallScore / 10).toFixed(1)}
-                    </span>
-                    <span
-                      className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white"
-                      style={{ backgroundColor: getTierColor(getTier(latestVapi.overallScore / 10)) }}
-                    >
-                      {getTier(latestVapi.overallScore / 10)}
-                    </span>
-                  </div>
-                  {archetype && (
-                    <p className="text-sm text-muted-foreground">
-                      {archetype}
-                    </p>
-                  )}
                 </div>
               </Link>
             ) : (
@@ -196,7 +231,7 @@ export default function DashboardPage() {
             {/* 6Cs Latest */}
             {latestScorecard ? (
               <Link href="/scorecard" className="block">
-                <div className="rounded-2xl border border-border p-5 space-y-3 hover:border-accent/30 transition-colors">
+                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <ClipboardCheck className="h-4 w-4 text-accent" />
@@ -208,21 +243,31 @@ export default function DashboardPage() {
                       Week of {new Date(latestScorecard.weekStart).toLocaleDateString()}
                     </span>
                   </div>
-                  <div className="flex items-end gap-3">
+                  <div className="flex items-end gap-3 mb-3">
                     <span className="text-4xl font-bold font-serif text-accent">
                       {getOverallScore(latestScorecard.scores)}%
                     </span>
                   </div>
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="grid grid-cols-3 gap-2">
                     {SCORECARD_CATEGORIES.map((c) => {
                       const Icon = SCORECARD_ICONS[c.icon];
+                      const pct = latestScorecard.scores[c.key] || 0;
                       return (
                         <div
                           key={c.key}
-                          className="flex items-center gap-1 text-xs text-muted-foreground"
+                          className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
                         >
-                          {Icon && <Icon className="h-3 w-3" />}
-                          {latestScorecard.scores[c.key] || 0}%
+                          {Icon && <Icon className="h-5 w-5 text-accent mb-1" />}
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                            {c.label}
+                          </p>
+                          <p className="text-lg font-bold tabular-nums text-accent">{pct}%</p>
+                          <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
+                            <div
+                              className="h-full rounded-full bg-accent transition-all"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
                         </div>
                       );
                     })}
@@ -250,26 +295,36 @@ export default function DashboardPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               {/* Archetype */}
               {archetype && (
-                <div className="rounded-2xl border border-border p-5 space-y-3">
-                  <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                    Founder Archetype
-                  </h2>
-                  <h3 className="text-xl font-serif font-bold">{archetype}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
-                    {ARCHETYPE_DESCRIPTIONS[archetype]}
-                  </p>
-                </div>
+                <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
+                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
+                    <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                      Founder Archetype
+                    </h2>
+                    <h3 className="text-xl font-serif font-bold">{archetype}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
+                      {ARCHETYPE_DESCRIPTIONS[archetype]}
+                    </p>
+                    <p className="text-xs text-accent font-medium">Explore archetype →</p>
+                  </div>
+                </Link>
               )}
 
               {/* Critical Priorities */}
               {criticalPriorities.length > 0 && (
-                <div className="rounded-2xl border border-border p-5 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <AlertTriangle className="h-4 w-4 text-red-500" />
-                    <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                      Focus Here First
-                    </h2>
-                  </div>
+                <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm">
+                  <button
+                    type="button"
+                    onClick={() => setFocusExpanded(!focusExpanded)}
+                    className="w-full flex items-center justify-between gap-2 text-left"
+                  >
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-red-500" />
+                      <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                        Focus Here First
+                      </h2>
+                    </div>
+                    {focusExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  </button>
                   <div className="space-y-2">
                     {criticalPriorities.slice(0, 4).map((item) => {
                       const Icon = DOMAIN_ICONS[item.domain];
@@ -277,7 +332,7 @@ export default function DashboardPage() {
                       return (
                         <div
                           key={item.domain}
-                          className="flex items-center gap-3 rounded-lg border border-border p-3"
+                          className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3"
                         >
                           {Icon && <Icon className="h-4 w-4 text-accent" />}
                           <span className="text-sm flex-1">{item.domainName}</span>
@@ -288,6 +343,11 @@ export default function DashboardPage() {
                       );
                     })}
                   </div>
+                  {focusExpanded && (
+                    <p className="text-xs text-muted-foreground pt-2 border-t border-border">
+                      High importance, low score — focus here first. These domains matter most to you but need attention.
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -308,7 +368,7 @@ export default function DashboardPage() {
                   return (
                     <div
                       key={arena.key}
-                      className="rounded-xl border border-border p-4 space-y-3"
+                      className="rounded-xl border border-border bg-card/80 p-4 space-y-3 shadow-sm"
                     >
                       <div className="flex items-center justify-between">
                         <h3 className="font-medium text-sm">{arena.label}</h3>
@@ -408,21 +468,21 @@ export default function DashboardPage() {
             </div>
           )}
 
-          {/* VAPI History */}
+          {/* Results Over Time — only when >1 assessment */}
           {vapiResults.length > 1 && (
             <div className="space-y-3">
               <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                Assessment History
+                Results Over Time
               </h2>
               <div className="space-y-2">
-                {vapiResults.map((r) => {
+                {(historyExpanded ? vapiResults : vapiResults.slice(0, 1)).map((r) => {
                   const tier = getTier(r.overallScore / 10);
                   const color = getTierColor(tier);
                   return (
                     <Link
                       key={r.id}
                       href={`/assessment/results?id=${r.id}`}
-                      className="flex items-center justify-between rounded-xl border border-border p-4 hover:border-accent/30 transition-colors"
+                      className="flex items-center justify-between rounded-xl border border-border bg-card/80 p-4 hover:border-accent/30 transition-colors shadow-sm"
                     >
                       <div>
                         <p className="text-sm font-medium">
@@ -447,22 +507,42 @@ export default function DashboardPage() {
                     </Link>
                   );
                 })}
+                {vapiResults.length > 1 && !historyExpanded && (
+                  <button
+                    type="button"
+                    onClick={() => setHistoryExpanded(true)}
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-border text-sm text-muted-foreground hover:text-foreground hover:border-accent/30 transition-colors"
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                    View {vapiResults.length - 1} more
+                  </button>
+                )}
+                {historyExpanded && vapiResults.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setHistoryExpanded(false)}
+                    className="w-full flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ChevronUp className="h-4 w-4" />
+                    Show less
+                  </button>
+                )}
               </div>
             </div>
           )}
 
           {/* Quick Actions */}
-          <div className="grid sm:grid-cols-3 gap-3 pb-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 pb-4">
             <Link
               href="/chat"
-              className="flex items-center gap-3 rounded-xl border border-border p-4 hover:border-accent/30 transition-colors"
+              className="flex items-center gap-3 rounded-xl border border-border bg-card/80 p-4 hover:border-accent/30 transition-colors shadow-sm"
             >
               <MessageSquare className="h-5 w-5 text-accent" />
               <span className="text-sm font-medium">Talk to Coach</span>
             </Link>
             <Link
               href="/assessment"
-              className="flex items-center gap-3 rounded-xl border border-border p-4 hover:border-accent/30 transition-colors"
+              className="flex items-center gap-3 rounded-xl border border-border bg-card/80 p-4 hover:border-accent/30 transition-colors shadow-sm"
             >
               <Activity className="h-5 w-5 text-accent" />
               <span className="text-sm font-medium">
@@ -470,8 +550,15 @@ export default function DashboardPage() {
               </span>
             </Link>
             <Link
+              href="/priorities"
+              className="flex items-center gap-3 rounded-xl border border-border bg-card/80 p-4 hover:border-accent/30 transition-colors shadow-sm"
+            >
+              <AlertTriangle className="h-5 w-5 text-accent" />
+              <span className="text-sm font-medium">Priorities</span>
+            </Link>
+            <Link
               href="/scorecard"
-              className="flex items-center gap-3 rounded-xl border border-border p-4 hover:border-accent/30 transition-colors"
+              className="flex items-center gap-3 rounded-xl border border-border bg-card/80 p-4 hover:border-accent/30 transition-colors shadow-sm"
             >
               <ClipboardCheck className="h-5 w-5 text-accent" />
               <span className="text-sm font-medium">Weekly 6Cs</span>

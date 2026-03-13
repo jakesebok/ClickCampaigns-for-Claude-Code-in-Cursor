@@ -120,6 +120,22 @@
       .print-page-footer { position: fixed; bottom: 0; left: 0; right: 0; height: 2.25rem; display: flex !important; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.65rem; color: var(--ap-muted); background: #fff; border-top: 1px solid var(--ap-border); padding: 0 0.5rem; }
       .print-page-footer img { height: 1.25rem; width: auto; object-fit: contain; flex-shrink: 0; vertical-align: middle; }
       .print-page-footer span { flex: 0 1 auto; line-height: 1.2; }
+
+      /* ─── Founder Archetype: full profile on one page ─── */
+      .archetype-section { break-before: page; page-break-before: always; break-inside: avoid; page-break-inside: avoid; }
+      .archetype-details { display: block !important; }
+      .archetype-details summary { display: none !important; }
+      .archetype-details > div { display: block !important; margin-top: 0 !important; padding-bottom: 0 !important; }
+      .archetype-details .archetype-constellation { display: none !important; }
+      .archetype-details .absolute { display: none !important; }
+      .archetype-section { padding: 1rem 1.25rem !important; margin-bottom: 1rem !important; }
+      .archetype-section .p-6 { padding: 0 !important; }
+      .archetype-section h2 { font-size: 1.25rem !important; margin-bottom: 0.35rem !important; }
+      .archetype-section .text-lg { font-size: 0.8rem !important; line-height: 1.35 !important; margin-bottom: 0.75rem !important; }
+      .archetype-details .space-y-4 > p { font-size: 0.7rem !important; line-height: 1.35 !important; margin-bottom: 0.5rem !important; }
+      .archetype-details .space-y-4 > div { font-size: 0.7rem !important; line-height: 1.35 !important; margin-bottom: 0.6rem !important; }
+      .archetype-details .space-y-4 > div p:last-child { margin-bottom: 0 !important; }
+      .archetype-details .text-base { font-size: 0.7rem !important; font-weight: 600 !important; margin-bottom: 0.25rem !important; }
     }
     @page { size: letter; margin: 0.525in 0.75in; }
     #results-breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
@@ -1223,10 +1239,13 @@
         renderPlaceholder();
       }
 
-      // Before printing: expand all collapsed priority-matrix cards so they print fully
+      // Before printing: expand collapsed sections so they print fully
       window.addEventListener('beforeprint', function() {
         document.querySelectorAll('.pm-card-body').forEach(function(el) {
           el.classList.remove('hidden');
+        });
+        document.querySelectorAll('.archetype-details').forEach(function(d) {
+          d.setAttribute('open', '');
         });
       });
     })();

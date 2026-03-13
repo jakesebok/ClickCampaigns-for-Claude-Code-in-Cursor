@@ -29,7 +29,7 @@ export async function fetchPortalVapiByEmail(email: string): Promise<PortalVapiR
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return [];
   const emailNorm = String(email).trim().toLowerCase();
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/vapi_results?email=eq.${encodeURIComponent(emailNorm)}&select=id,email,first_name,last_name,results,created_at,source&order=created_at.desc`,
+    `${SUPABASE_URL}/rest/v1/vapi_results?email=ilike.${encodeURIComponent(emailNorm)}&select=id,email,first_name,last_name,results,created_at,source&order=created_at.desc`,
     {
       headers: {
         apikey: SUPABASE_SERVICE_ROLE_KEY,
@@ -45,7 +45,7 @@ export async function fetchPortalSixCByEmail(email: string): Promise<PortalSixCR
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return [];
   const emailNorm = String(email).trim().toLowerCase();
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/six_c_submissions?email=eq.${encodeURIComponent(emailNorm)}&select=id,email,created_at,scores,one_thing_to_improve,weekly_review&order=created_at.desc`,
+    `${SUPABASE_URL}/rest/v1/six_c_submissions?email=ilike.${encodeURIComponent(emailNorm)}&select=id,email,created_at,scores,one_thing_to_improve,weekly_review&order=created_at.desc`,
     {
       headers: {
         apikey: SUPABASE_SERVICE_ROLE_KEY,

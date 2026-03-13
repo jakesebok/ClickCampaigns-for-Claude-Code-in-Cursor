@@ -23,7 +23,12 @@ import {
   Shield,
   Eye,
   TrendingDown,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
+import { VapiWheel } from "@/components/vapi-wheel";
+import { PageHeader } from "@/components/page-header";
+import { DOMAIN_INTERPRETATIONS, ARENA_INTERPRETATIONS } from "@/lib/vapi/interpretations";
 import {
   getTier,
   getTierColor,
@@ -43,12 +48,12 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
 
 const QUADRANT_META: Record<
   PriorityQuadrant,
-  { icon: React.ElementType; color: string; bg: string }
+  { icon: React.ElementType; color: string; bg: string; border: string }
 > = {
-  "Critical Priority": { icon: AlertTriangle, color: "text-red-500", bg: "bg-red-500/10" },
-  "Protect & Sustain": { icon: Shield, color: "text-green-500", bg: "bg-green-500/10" },
-  Monitor: { icon: Eye, color: "text-yellow-500", bg: "bg-yellow-500/10" },
-  "Possible Over-Investment": { icon: TrendingDown, color: "text-blue-400", bg: "bg-blue-400/10" },
+  "Critical Priority": { icon: AlertTriangle, color: "text-red-500", bg: "bg-red-500/15", border: "border-red-500/30" },
+  "Protect & Sustain": { icon: Shield, color: "text-green-500", bg: "bg-green-500/15", border: "border-green-500/30" },
+  Monitor: { icon: Eye, color: "text-yellow-500", bg: "bg-yellow-500/15", border: "border-yellow-500/30" },
+  "Possible Over-Investment": { icon: TrendingDown, color: "text-blue-400", bg: "bg-blue-500/15", border: "border-blue-500/30" },
 };
 
 type ResultData = {
@@ -67,6 +72,8 @@ function ResultsContent() {
   const id = searchParams.get("id");
   const [result, setResult] = useState<ResultData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [expandedArenas, setExpandedArenas] = useState<Record<string, boolean>>({});
+  const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (!id) {
@@ -134,32 +141,35 @@ function ResultsContent() {
 
   return (
     <div className="flex flex-col h-full">
-      <header className="px-6 py-4 border-b border-border">
-        <h1 className="text-lg font-semibold">VAPI Results</h1>
-        <p className="text-sm text-muted-foreground">
-          {new Date(result.createdAt).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
-      </header>
+      <PageHeader
+        title="VAPI Results"
+        subtitle={new Date(result.createdAt).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
+      />
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-3xl mx-auto space-y-8">
-          {/* Overall Score */}
-          <div className="rounded-2xl border border-border p-6 text-center space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-              Overall Score
-            </h2>
-            <div className="text-6xl font-bold font-serif" style={{ color: overallColor }}>
-              {(result.overallScore / 10).toFixed(1)}
+          {/* Overall Score + Wheel */}
+          <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm">
+            <div className="text-center space-y-3">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                Overall Score
+              </h2>
+              <div className="text-6xl font-bold font-serif" style={{ color: overallColor }}>
+                {(result.overallScore / 10).toFixed(1)}
+              </div>
+              <div
+                className="inline-block px-3 py-1 rounded-full text-sm font-medium text-white"
+                style={{ backgroundColor: overallColor }}
+              >
+                {overallTier}
+              </div>
             </div>
-            <div
-              className="inline-block px-3 py-1 rounded-full text-sm font-medium text-white"
-              style={{ backgroundColor: overallColor }}
-            >
-              {overallTier}
+            <div className="flex justify-center">
+              <VapiWheel domainScores={result.domainScores} />
             </div>
           </div>
 
@@ -181,25 +191,44 @@ function ResultsContent() {
             </h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {ARENAS.map((arena) => {
-                const score = (result.arenaScores[arena.key] || 0);
+                const score = result.arenaScores[arena.key] || 0;
                 const tier = getTier(score);
                 const color = getTierColor(tier);
+                const isExpanded = expandedArenas[arena.key] ?? false;
+                const interpretation = ARENA_INTERPRETATIONS[arena.key]?.[tier];
 
                 return (
                   <div
                     key={arena.key}
-                    className="rounded-xl border border-border p-5 space-y-3"
+                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm"
                   >
-                    <h3 className="font-medium">{arena.label}</h3>
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-medium">{arena.label}</h3>
+                      <div
+                        className="inline-block px-2 py-0.5 rounded text-xs font-medium text-white"
+                        style={{ backgroundColor: color }}
+                      >
+                        {tier}
+                      </div>
+                    </div>
                     <div className="text-3xl font-bold font-serif" style={{ color }}>
                       {score.toFixed(1)}
                     </div>
-                    <div
-                      className="inline-block px-2 py-0.5 rounded text-xs font-medium text-white"
-                      style={{ backgroundColor: color }}
-                    >
-                      {tier}
-                    </div>
+                    {interpretation && (
+                      <button
+                        type="button"
+                        onClick={() => setExpandedArenas((e) => ({ ...e, [arena.key]: !isExpanded }))}
+                        className="flex items-center gap-1 text-xs text-accent hover:underline"
+                      >
+                        {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                        {isExpanded ? "Hide" : "Read interpretation"}
+                      </button>
+                    )}
+                    {isExpanded && interpretation && (
+                      <p className="text-sm text-muted-foreground leading-relaxed pt-2 border-t border-border">
+                        {interpretation}
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -223,40 +252,59 @@ function ResultsContent() {
                   const color = getTierColor(tier);
                   const Icon = DOMAIN_ICONS[code];
                   const imp = result.importance?.[code];
+                  const isExpanded = expandedDomains[code] ?? false;
+                  const interpretation = DOMAIN_INTERPRETATIONS[code]?.[tier];
 
                   return (
                     <div
                       key={code}
-                      className="flex items-center gap-3 rounded-xl border border-border p-4"
+                      className="rounded-xl border border-border bg-card/80 p-4 shadow-sm"
                     >
-                      {Icon && <Icon className="h-5 w-5 text-accent shrink-0" />}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">{domain.name}</span>
-                          {imp != null && (
-                            <span className="text-xs text-muted-foreground">
-                              (importance: {imp}/10)
-                            </span>
-                          )}
+                      <div className="flex items-center gap-3">
+                        {Icon && <Icon className="h-5 w-5 text-accent shrink-0" />}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">{domain.name}</span>
+                            {imp != null && (
+                              <span className="text-xs text-muted-foreground">
+                                (importance: {imp}/10)
+                              </span>
+                            )}
+                          </div>
+                          <div className="w-full h-2 bg-muted rounded-full mt-1.5">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{
+                                width: `${(score / 10) * 100}%`,
+                                backgroundColor: color,
+                              }}
+                            />
+                          </div>
                         </div>
-                        <div className="w-full h-2 bg-muted rounded-full mt-1.5">
-                          <div
-                            className="h-full rounded-full transition-all"
-                            style={{
-                              width: `${(score / 10) * 100}%`,
-                              backgroundColor: color,
-                            }}
-                          />
+                        <div className="text-right shrink-0">
+                          <div className="text-sm font-bold" style={{ color }}>
+                            {score.toFixed(1)}
+                          </div>
+                          <div className="text-[10px]" style={{ color }}>
+                            {tier}
+                          </div>
                         </div>
+                        {interpretation && (
+                          <button
+                            type="button"
+                            onClick={() => setExpandedDomains((e) => ({ ...e, [code]: !isExpanded }))}
+                            className="p-1 rounded text-muted-foreground hover:text-foreground"
+                            aria-label={isExpanded ? "Hide interpretation" : "Read interpretation"}
+                          >
+                            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                          </button>
+                        )}
                       </div>
-                      <div className="text-right shrink-0">
-                        <div className="text-sm font-bold" style={{ color }}>
-                          {score.toFixed(1)}
-                        </div>
-                        <div className="text-[10px]" style={{ color }}>
-                          {tier}
-                        </div>
-                      </div>
+                      {isExpanded && interpretation && (
+                        <p className="text-sm text-muted-foreground leading-relaxed mt-3 pt-3 border-t border-border">
+                          {interpretation}
+                        </p>
+                      )}
                     </div>
                   );
                 })}
@@ -281,7 +329,10 @@ function ResultsContent() {
                 ].map(
                   (section) =>
                     section.items.length > 0 && (
-                      <div key={section.label} className="space-y-2">
+                      <div
+                        key={section.label}
+                        className={`rounded-2xl border ${QUADRANT_META[section.label as PriorityQuadrant].border} ${QUADRANT_META[section.label as PriorityQuadrant].bg} p-4 space-y-3 shadow-sm`}
+                      >
                         <div className="flex items-center gap-2">
                           {(() => {
                             const meta = QUADRANT_META[section.label as PriorityQuadrant];
@@ -305,7 +356,7 @@ function ResultsContent() {
                             return (
                               <div
                                 key={item.domain}
-                                className="flex items-center gap-3 rounded-lg border border-border p-3"
+                                className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3"
                               >
                                 {Icon && <Icon className="h-4 w-4 text-accent" />}
                                 <div className="flex-1">

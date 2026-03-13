@@ -1,7 +1,5 @@
-import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
-import { db, schema } from "@/lib/db";
+import { getOrCreateUser } from "@/lib/get-or-create-user";
 import { calculateScores, getArchetype } from "@/lib/vapi/scoring";
 import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
 
@@ -12,7 +10,7 @@ async function fetchPortalVapiByEmail(email: string) {
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return null;
   const emailNorm = String(email).trim().toLowerCase();
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/vapi_results?email=eq.${encodeURIComponent(emailNorm)}&select=id,email,first_name,last_name,results,created_at,source&order=created_at.desc`,
+    `${SUPABASE_URL}/rest/v1/vapi_results?email=ilike.${encodeURIComponent(emailNorm)}&select=id,email,first_name,last_name,results,created_at,source&order=created_at.desc`,
     {
       headers: {
         apikey: SUPABASE_SERVICE_ROLE_KEY,
@@ -22,6 +20,18 @@ async function fetchPortalVapiByEmail(email: string) {
   );
   if (!res.ok) return null;
   return res.json();
+}
+
+/** Normalize arena keys from portal (Personal/Relationships/Business) to app (personal/relationships/business) */
+function normalizeArenaScores(raw: Record<string, number> | null | undefined): Record<string, number> {
+  if (!raw || typeof raw !== "object") return {};
+  const map: Record<string, string> = { Personal: "personal", Relationships: "relationships", Business: "business" };
+  const out: Record<string, number> = {};
+  for (const [k, v] of Object.entries(raw)) {
+    const key = map[k] ?? k.toLowerCase();
+    out[key] = typeof v === "number" ? v : 0;
+  }
+  return out;
 }
 
 async function insertPortalVapi(params: {
@@ -60,18 +70,9 @@ async function insertPortalVapi(params: {
 }
 
 export async function GET(req: NextRequest) {
-  const { userId: clerkId } = await auth();
-  if (!clerkId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const [user] = await db
-    .select()
-    .from(schema.users)
-    .where(eq(schema.users.clerkId, clerkId))
-    .limit(1);
-
+  const user = await getOrCreateUser();
   if (!user)
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const id = req.nextUrl.searchParams.get("id");
   const rows = await fetchPortalVapiByEmail(user.email);
@@ -87,7 +88,7 @@ export async function GET(req: NextRequest) {
       result: {
         id: row.id,
         domainScores: (r.domainScores as Record<string, number>) || {},
-        arenaScores: (r.arenaScores as Record<string, number>) || {},
+        arenaScores: normalizeArenaScores(r.arenaScores as Record<string, number>),
         overallScore: Math.round(((r.overall as number) || 0) * 10),
         archetype: (r.archetype as string) || null,
         importance: (r.importanceRatings as Record<string, number>) || {},
@@ -101,7 +102,7 @@ export async function GET(req: NextRequest) {
     return {
       id: row.id,
       domainScores: (r.domainScores as Record<string, number>) || {},
-      arenaScores: (r.arenaScores as Record<string, number>) || {},
+      arenaScores: normalizeArenaScores(r.arenaScores as Record<string, number>),
       overallScore: Math.round(((r.overall as number) || 0) * 10),
       archetype: (r.archetype as string) || null,
       importance: (r.importanceRatings as Record<string, number>) || {},
@@ -113,18 +114,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const { userId: clerkId } = await auth();
-  if (!clerkId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const [user] = await db
-    .select()
-    .from(schema.users)
-    .where(eq(schema.users.clerkId, clerkId))
-    .limit(1);
-
+  const user = await getOrCreateUser();
   if (!user)
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { answers, importance } = await req.json();
 
