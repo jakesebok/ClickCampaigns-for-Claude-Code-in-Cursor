@@ -31,7 +31,6 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { VapiWheel } from "@/components/vapi-wheel";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
@@ -186,13 +185,15 @@ export default function DashboardPage() {
                         </span>
                       </div>
                       {archetype && (
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {archetype}
-                        </p>
+                        <>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {archetype}
+                          </p>
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-3 flex-1">
+                            {ARCHETYPE_DESCRIPTIONS[archetype]}
+                          </p>
+                        </>
                       )}
-                      <div className="flex-1 flex items-center justify-center mt-3 min-h-[140px]">
-                        <VapiWheel domainScores={latestVapi.domainScores} />
-                      </div>
                     </div>
                     {topStrengths.length > 0 && (
                       <div className="shrink-0 w-28">
