@@ -31,6 +31,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
+import { VapiWheel } from "@/components/vapi-wheel";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
@@ -128,10 +129,13 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col h-full">
-      <PageHeader title="Dashboard" subtitle="Your alignment at a glance" />
+      <PageHeader title="Dashboard" />
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-4xl mx-auto space-y-6">
+          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+            Your alignment at a glance
+          </h2>
           {/* ONE THING Banner */}
           {oneThing && (
             <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5 flex items-center gap-4">
@@ -154,22 +158,17 @@ export default function DashboardPage() {
           )}
 
           {/* Score Cards Row */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4 -mt-2">
             {/* VAPI Overall */}
             {latestVapi ? (
               <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
-                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <Activity className="h-4 w-4 text-accent" />
-                          <span className="text-sm font-medium text-muted-foreground">
-                            VAPI Score
-                          </span>
-                        </div>
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(latestVapi.createdAt).toLocaleDateString()}
+                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="flex-1 min-w-0 flex flex-col">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Activity className="h-4 w-4 text-accent" />
+                        <span className="text-sm font-medium text-muted-foreground">
+                          VAPI Score
                         </span>
                       </div>
                       <div className="flex items-end gap-3">
@@ -191,6 +190,9 @@ export default function DashboardPage() {
                           {archetype}
                         </p>
                       )}
+                      <div className="flex-1 flex items-center justify-center mt-3 min-h-[140px]">
+                        <VapiWheel domainScores={latestVapi.domainScores} />
+                      </div>
                     </div>
                     {topStrengths.length > 0 && (
                       <div className="shrink-0 w-28">
@@ -231,7 +233,7 @@ export default function DashboardPage() {
             {/* 6Cs Latest */}
             {latestScorecard ? (
               <Link href="/scorecard" className="block">
-                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
+                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <ClipboardCheck className="h-4 w-4 text-accent" />
@@ -289,6 +291,68 @@ export default function DashboardPage() {
               </div>
             )}
           </div>
+
+          {/* Arena Breakdown */}
+          {latestVapi && (
+            <div className="space-y-3">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                Arena Breakdown
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {ARENAS.map((arena) => {
+                  const score = latestVapi.arenaScores[arena.key] || 0;
+                  const tier = getTier(score);
+                  const color = getTierColor(tier);
+
+                  return (
+                    <div
+                      key={arena.key}
+                      className="rounded-xl border border-border bg-card/80 p-4 space-y-3 shadow-sm"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-sm">{arena.label}</h3>
+                        <span
+                          className="text-xs font-medium px-2 py-0.5 rounded text-white"
+                          style={{ backgroundColor: color }}
+                        >
+                          {tier}
+                        </span>
+                      </div>
+                      <div className="text-2xl font-bold font-serif" style={{ color }}>
+                        {score.toFixed(1)}
+                      </div>
+                      <div className="space-y-1.5">
+                        {arena.domains.map((code) => {
+                          const domain = DOMAINS.find((d) => d.code === code)!;
+                          const dScore = latestVapi.domainScores[code] || 0;
+                          const dColor = getTierColor(getTier(dScore));
+                          return (
+                            <div key={code} className="flex items-center gap-2">
+                              <span className="text-xs text-muted-foreground flex-1 truncate">
+                                {domain.name}
+                              </span>
+                              <div className="w-16 h-1.5 bg-muted rounded-full">
+                                <div
+                                  className="h-full rounded-full"
+                                  style={{
+                                    width: `${(dScore / 10) * 100}%`,
+                                    backgroundColor: dColor,
+                                  }}
+                                />
+                              </div>
+                              <span className="text-xs font-medium w-6 text-right" style={{ color: dColor }}>
+                                {dScore.toFixed(1)}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Archetype + Critical Priorities */}
           {latestVapi && (
@@ -350,68 +414,6 @@ export default function DashboardPage() {
                   )}
                 </div>
               )}
-            </div>
-          )}
-
-          {/* Arena Breakdown */}
-          {latestVapi && (
-            <div className="space-y-3">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                Arena Breakdown
-              </h2>
-              <div className="grid sm:grid-cols-3 gap-4">
-                {ARENAS.map((arena) => {
-                  const score = latestVapi.arenaScores[arena.key] || 0;
-                  const tier = getTier(score);
-                  const color = getTierColor(tier);
-
-                  return (
-                    <div
-                      key={arena.key}
-                      className="rounded-xl border border-border bg-card/80 p-4 space-y-3 shadow-sm"
-                    >
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-medium text-sm">{arena.label}</h3>
-                        <span
-                          className="text-xs font-medium px-2 py-0.5 rounded text-white"
-                          style={{ backgroundColor: color }}
-                        >
-                          {tier}
-                        </span>
-                      </div>
-                      <div className="text-2xl font-bold font-serif" style={{ color }}>
-                        {score.toFixed(1)}
-                      </div>
-                      <div className="space-y-1.5">
-                        {arena.domains.map((code) => {
-                          const domain = DOMAINS.find((d) => d.code === code)!;
-                          const dScore = latestVapi.domainScores[code] || 0;
-                          const dColor = getTierColor(getTier(dScore));
-                          return (
-                            <div key={code} className="flex items-center gap-2">
-                              <span className="text-xs text-muted-foreground flex-1 truncate">
-                                {domain.name}
-                              </span>
-                              <div className="w-16 h-1.5 bg-muted rounded-full">
-                                <div
-                                  className="h-full rounded-full"
-                                  style={{
-                                    width: `${(dScore / 10) * 100}%`,
-                                    backgroundColor: dColor,
-                                  }}
-                                />
-                              </div>
-                              <span className="text-xs font-medium w-6 text-right" style={{ color: dColor }}>
-                                {dScore.toFixed(1)}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           )}
 

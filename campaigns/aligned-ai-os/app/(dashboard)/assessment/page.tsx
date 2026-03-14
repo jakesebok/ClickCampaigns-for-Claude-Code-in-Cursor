@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   ChevronLeft,
@@ -36,24 +36,39 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
   EC: Leaf,
 };
 
+type FlatQuestion = { domainCode: string; questionIdx: number; question: { id: string; text: string } };
+
+function shuffle<T>(arr: T[]): T[] {
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+const TOTAL_QUESTIONS = 72;
+
 type Phase = "intro" | "quiz" | "importance" | "submitting";
 
 export default function AssessmentPage() {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>("intro");
-  const [currentDomainIdx, setCurrentDomainIdx] = useState(0);
+  const [questionOrder, setQuestionOrder] = useState<FlatQuestion[]>([]);
+  const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number[]>>({});
   const [importance, setImportance] = useState<Record<string, number>>({});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const currentDomain = DOMAINS[currentDomainIdx];
-  const domainAnswers = answers[currentDomain?.code] || [];
-  const totalQuestions = DOMAINS.length * 6;
+  const currentQuestion = questionOrder[currentQuestionIdx];
   const answeredCount = useMemo(
     () => Object.values(answers).reduce((sum, a) => sum + a.filter((v) => v > 0).length, 0),
     [answers]
   );
+  const currentAnswer = currentQuestion
+    ? (answers[currentQuestion.domainCode] || [])[currentQuestion.questionIdx] || 0
+    : 0;
 
   const setAnswer = useCallback((domainCode: string, questionIdx: number, value: number) => {
     setAnswers((prev) => {
@@ -64,12 +79,28 @@ export default function AssessmentPage() {
     });
   }, []);
 
-  const allDomainAnswered = domainAnswers.length === 6 && domainAnswers.every((v) => v > 0);
   const allImportanceSet = DOMAINS.every((d) => (importance[d.code] || 0) > 0);
 
-  function nextDomain() {
-    if (currentDomainIdx < DOMAINS.length - 1) {
-      setCurrentDomainIdx((i) => i + 1);
+  function startQuiz() {
+    const flat: FlatQuestion[] = [];
+    for (const domain of DOMAINS) {
+      for (let i = 0; i < domain.questions.length; i++) {
+        flat.push({
+          domainCode: domain.code,
+          questionIdx: i,
+          question: domain.questions[i],
+        });
+      }
+    }
+    setQuestionOrder(shuffle(flat));
+    setCurrentQuestionIdx(0);
+    setPhase("quiz");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function nextQuestion() {
+    if (currentQuestionIdx < questionOrder.length - 1) {
+      setCurrentQuestionIdx((i) => i + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setPhase("importance");
@@ -77,9 +108,9 @@ export default function AssessmentPage() {
     }
   }
 
-  function prevDomain() {
-    if (currentDomainIdx > 0) {
-      setCurrentDomainIdx((i) => i - 1);
+  function prevQuestion() {
+    if (currentQuestionIdx > 0) {
+      setCurrentQuestionIdx((i) => i - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -126,9 +157,10 @@ export default function AssessmentPage() {
                 Measure What Matters
               </h2>
               <p className="text-muted-foreground max-w-md mx-auto">
-                The VAPI assesses 12 domains across your personal life,
-                relationships, and business. It takes about 15 minutes and
-                reveals exactly where you&apos;re aligned — and where you&apos;re not.
+                For each statement below, reflect honestly on your actual experience over the past 30 days. Not your best day. Not your worst. Your honest baseline.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                One question at a time · ~12–15 minutes
               </p>
             </div>
 
@@ -153,7 +185,7 @@ export default function AssessmentPage() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground shrink-0">1.</span>
-                  72 statements — rate each from Strongly Agree to Strongly Disagree
+                  72 statements — one at a time, rate each from Strongly Agree to Strongly Disagree
                 </li>
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground shrink-0">2.</span>
@@ -167,7 +199,7 @@ export default function AssessmentPage() {
             </div>
 
             <button
-              onClick={() => setPhase("quiz")}
+              onClick={startQuiz}
               className="w-full py-3.5 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
             >
               Begin Assessment
@@ -196,7 +228,7 @@ export default function AssessmentPage() {
         <header className="px-6 py-4 border-b border-border">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-lg font-semibold">Importance Ratings</h1>
+              <h1 className="text-lg font-semibold">Your Priorities</h1>
               <p className="text-sm text-muted-foreground">
                 How important is each domain to you right now? (1-10)
               </p>
@@ -205,6 +237,9 @@ export default function AssessmentPage() {
         </header>
         <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
           <div className="max-w-2xl mx-auto space-y-8">
+            <p className="text-sm text-muted-foreground">
+              You&apos;ve told us where you are. Now tell us where your focus should be. There are no right answers — a low rating means it&apos;s not where you need to focus right now.
+            </p>
             {IMPORTANCE_DOMAINS.map((section) => (
               <div key={section.section} className="space-y-3">
                 <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
@@ -262,7 +297,7 @@ export default function AssessmentPage() {
               <button
                 onClick={() => {
                   setPhase("quiz");
-                  setCurrentDomainIdx(DOMAINS.length - 1);
+                  setCurrentQuestionIdx(questionOrder.length - 1);
                 }}
                 className="flex-1 py-3 rounded-xl border border-border text-sm hover:bg-secondary transition-colors"
               >
@@ -282,11 +317,20 @@ export default function AssessmentPage() {
     );
   }
 
-  const Icon = DOMAIN_ICONS[currentDomain.code];
+  if (!currentQuestion || questionOrder.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  const domain = DOMAINS.find((d) => d.code === currentQuestion.domainCode)!;
+  const Icon = DOMAIN_ICONS[currentQuestion.domainCode];
   const arenaLabel =
-    currentDomain.arena === "personal"
+    domain.arena === "personal"
       ? "Personal"
-      : currentDomain.arena === "relationships"
+      : domain.arena === "relationships"
         ? "Relationships"
         : "Business";
 
@@ -300,23 +344,23 @@ export default function AssessmentPage() {
                 {arenaLabel}
               </span>
               <span className="text-xs text-muted-foreground">
-                {currentDomainIdx + 1} / {DOMAINS.length}
+                Question {currentQuestionIdx + 1} of {TOTAL_QUESTIONS}
               </span>
             </div>
             <h1 className="text-lg font-semibold flex items-center gap-2">
               {Icon && <Icon className="h-5 w-5 text-accent" />}
-              {currentDomain.name}
+              {domain.name}
             </h1>
           </div>
           <div className="text-right">
             <div className="text-xs text-muted-foreground">
-              {answeredCount} / {totalQuestions}
+              {answeredCount} / {TOTAL_QUESTIONS}
             </div>
             <div className="w-32 h-1.5 bg-muted rounded-full mt-1">
               <div
                 className="h-full bg-accent rounded-full transition-all"
                 style={{
-                  width: `${(answeredCount / totalQuestions) * 100}%`,
+                  width: `${(answeredCount / TOTAL_QUESTIONS) * 100}%`,
                 }}
               />
             </div>
@@ -326,54 +370,48 @@ export default function AssessmentPage() {
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-2xl mx-auto space-y-6">
-          {currentDomain.questions.map((question, qIdx) => (
-            <div
-              key={question.id}
-              className="rounded-xl border border-border p-5 space-y-4"
-            >
-              <div className="flex gap-2">
-                <span className="text-sm font-medium text-accent shrink-0">
-                  {qIdx + 1}.
-                </span>
-                <p className="text-sm leading-relaxed">{question.text}</p>
-              </div>
+          <p className="text-sm text-muted-foreground">In the past 30 days...</p>
+          <div className="rounded-xl border border-border p-5 space-y-4">
+            <p className="text-sm leading-relaxed">{currentQuestion.question.text}</p>
 
-              <div className="grid grid-cols-7 gap-1">
-                {SCALE_VALUES.map((value, sIdx) => (
-                  <button
-                    key={value}
-                    onClick={() => setAnswer(currentDomain.code, qIdx, value)}
-                    className={`flex flex-col items-center gap-1 py-2 px-1 rounded-lg text-center transition-colors ${
-                      domainAnswers[qIdx] === value
-                        ? "bg-accent text-accent-foreground"
-                        : "bg-muted hover:bg-secondary"
-                    }`}
-                  >
-                    <span className="text-xs font-medium">{value}</span>
-                    <span className="text-[10px] leading-tight hidden sm:block">
-                      {SCALE_LABELS[sIdx]}
-                    </span>
-                  </button>
-                ))}
-              </div>
+            <div className="grid grid-cols-7 gap-1">
+              {SCALE_VALUES.map((value, sIdx) => (
+                <button
+                  key={value}
+                  onClick={() => {
+                    setAnswer(currentQuestion.domainCode, currentQuestion.questionIdx, value);
+                    setTimeout(() => nextQuestion(), 150);
+                  }}
+                  className={`flex flex-col items-center gap-1 py-2 px-1 rounded-lg text-center transition-colors ${
+                    currentAnswer === value
+                      ? "bg-accent text-accent-foreground"
+                      : "bg-muted hover:bg-secondary"
+                  }`}
+                >
+                  <span className="text-xs font-medium">{value}</span>
+                  <span className="text-[10px] leading-tight hidden sm:block">
+                    {SCALE_LABELS[sIdx]}
+                  </span>
+                </button>
+              ))}
             </div>
-          ))}
+          </div>
 
           <div className="flex gap-3 pt-2 pb-4">
             <button
-              onClick={prevDomain}
-              disabled={currentDomainIdx === 0}
+              onClick={prevQuestion}
+              disabled={currentQuestionIdx === 0}
               className="flex-1 py-3 rounded-xl border border-border text-sm hover:bg-secondary disabled:opacity-30 transition-colors flex items-center justify-center gap-2"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous
             </button>
             <button
-              onClick={nextDomain}
-              disabled={!allDomainAnswered}
+              onClick={nextQuestion}
+              disabled={currentAnswer === 0}
               className="flex-1 py-3 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
             >
-              {currentDomainIdx === DOMAINS.length - 1 ? "Rate Importance" : "Next Domain"}
+              {currentQuestionIdx === questionOrder.length - 1 ? "Rate Importance" : "Next"}
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>

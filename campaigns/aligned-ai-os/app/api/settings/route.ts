@@ -26,6 +26,7 @@ export async function GET() {
     subscriptionStatus: user.subscriptionStatus,
     trialEndsAt: user.trialEndsAt?.toISOString() || null,
     onboardingComplete: user.onboardingComplete,
+    contextualProfile: user.contextualProfile ?? null,
   });
 }
 
@@ -35,7 +36,7 @@ export async function PATCH(req: NextRequest) {
 
   const updates = await req.json();
 
-  const allowedFields = ["phone", "smsEnabled", "smsTime", "timezone", "name"];
+  const allowedFields = ["phone", "smsEnabled", "smsTime", "timezone", "name", "contextualProfile"];
   const filtered: Record<string, unknown> = {};
   for (const key of allowedFields) {
     if (key in updates) filtered[key] = updates[key];

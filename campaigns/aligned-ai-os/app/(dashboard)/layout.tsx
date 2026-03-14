@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { IntakeGate } from "@/components/intake-gate";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -85,7 +86,7 @@ export default function DashboardLayout({
 
       {/* Main content */}
       <main className="flex-1 flex flex-col overflow-hidden pb-16 md:pb-0 pt-1">
-        {children}
+        <IntakeGate>{children}</IntakeGate>
       </main>
     </div>
   );

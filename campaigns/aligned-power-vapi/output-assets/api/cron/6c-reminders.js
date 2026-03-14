@@ -266,8 +266,8 @@ export async function GET(request) {
     return new Response(JSON.stringify({ ok: true, sent: 0, reason: 'no_reminder_scheduled_for_this_time' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
   }
 
-  // Fetch active clients (with first name if available)
-  const restUrl = `${supabaseUrl}/rest/v1/portal_active_clients?select=email,first_name&active_client=eq.true`;
+  // Fetch active clients (portal_active_clients has email, active_client, updated_at only)
+  const restUrl = `${supabaseUrl}/rest/v1/portal_active_clients?select=email&active_client=eq.true`;
   const restRes = await fetch(restUrl, {
     method: 'GET',
     headers: {
@@ -281,7 +281,7 @@ export async function GET(request) {
   }
   const activeRows = await restRes.json();
   const clients = (Array.isArray(activeRows) ? activeRows : [])
-    .map((r) => ({ email: (r.email || '').trim().toLowerCase(), firstName: r.first_name || null }))
+    .map((r) => ({ email: (r.email || '').trim().toLowerCase(), firstName: null }))
     .filter((r) => r.email);
 
   if (clients.length === 0) {

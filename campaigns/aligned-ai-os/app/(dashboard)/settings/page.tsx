@@ -4,6 +4,14 @@ import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Bell, CreditCard, Upload, ExternalLink } from "lucide-react";
 
+type ContextualProfile = {
+  revenueStage?: string;
+  teamSize?: string;
+  lifeStage?: string;
+  timeInBusiness?: string;
+  primaryChallenge?: string;
+};
+
 type UserSettings = {
   name: string;
   email: string;
@@ -15,7 +23,14 @@ type UserSettings = {
   subscriptionStatus: string;
   trialEndsAt: string | null;
   onboardingComplete: boolean;
+  contextualProfile: ContextualProfile | null;
 };
+
+const REVENUE_OPTIONS = ["", "Pre-revenue", "Under $100K", "$100K - $500K", "$500K - $1M", "$1M - $5M", "$5M+"];
+const TEAM_OPTIONS = ["", "Just me", "2-3", "4-10", "11-25", "25+"];
+const LIFE_STAGE_OPTIONS = ["", "Single, no children", "Partnered, no children", "Young children at home (under 12)", "Older children at home (12+)", "Empty nest / children are adults", "Prefer not to say"];
+const TIME_OPTIONS = ["", "Less than 1 year", "1-3 years", "3-7 years", "7+ years"];
+const CHALLENGE_OPTIONS = ["", "Growth (not enough revenue or clients)", "Profitability (revenue exists but margins are thin)", "Time freedom (business demands too much of me)", "Clarity (not sure where to focus)", "Burnout (running on empty)", "Transition (changing my model, offer, or direction)"];
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings | null>(null);
@@ -179,6 +194,111 @@ export default function SettingsPage() {
                 Manage billing
                 <ExternalLink className="h-3 w-3" />
               </a>
+            </div>
+          </section>
+
+          {/* About You */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold">About You</h2>
+            <p className="text-sm text-muted-foreground">
+              Updating these helps keep your assessment results personalized.
+            </p>
+            <div className="grid gap-4">
+              <div>
+                <label className="text-sm text-muted-foreground">Annual business revenue</label>
+                <select
+                  value={settings.contextualProfile?.revenueStage ?? ""}
+                  onChange={(e) =>
+                    updateSettings({
+                      contextualProfile: {
+                        ...(settings.contextualProfile ?? {}),
+                        revenueStage: e.target.value || undefined,
+                      },
+                    })
+                  }
+                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                >
+                  {REVENUE_OPTIONS.map((v) => (
+                    <option key={v || "empty"} value={v}>{v || "Select..."}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Team size</label>
+                <select
+                  value={settings.contextualProfile?.teamSize ?? ""}
+                  onChange={(e) =>
+                    updateSettings({
+                      contextualProfile: {
+                        ...(settings.contextualProfile ?? {}),
+                        teamSize: e.target.value || undefined,
+                      },
+                    })
+                  }
+                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                >
+                  {TEAM_OPTIONS.map((v) => (
+                    <option key={v || "empty"} value={v}>{v || "Select..."}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Life stage</label>
+                <select
+                  value={settings.contextualProfile?.lifeStage ?? ""}
+                  onChange={(e) =>
+                    updateSettings({
+                      contextualProfile: {
+                        ...(settings.contextualProfile ?? {}),
+                        lifeStage: e.target.value || undefined,
+                      },
+                    })
+                  }
+                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                >
+                  {LIFE_STAGE_OPTIONS.map((v) => (
+                    <option key={v || "empty"} value={v}>{v || "Select..."}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Time in business</label>
+                <select
+                  value={settings.contextualProfile?.timeInBusiness ?? ""}
+                  onChange={(e) =>
+                    updateSettings({
+                      contextualProfile: {
+                        ...(settings.contextualProfile ?? {}),
+                        timeInBusiness: e.target.value || undefined,
+                      },
+                    })
+                  }
+                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                >
+                  {TIME_OPTIONS.map((v) => (
+                    <option key={v || "empty"} value={v}>{v || "Select..."}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Primary challenge</label>
+                <select
+                  value={settings.contextualProfile?.primaryChallenge ?? ""}
+                  onChange={(e) =>
+                    updateSettings({
+                      contextualProfile: {
+                        ...(settings.contextualProfile ?? {}),
+                        primaryChallenge: e.target.value || undefined,
+                      },
+                    })
+                  }
+                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                >
+                  {CHALLENGE_OPTIONS.map((v) => (
+                    <option key={v || "empty"} value={v}>{v || "Select..."}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </section>
 

@@ -41,6 +41,13 @@ export const users = pgTable("users", {
   smsTime: text("sms_time").default("07:00"),
   timezone: text("timezone").default("America/New_York"),
   onboardingComplete: boolean("onboarding_complete").default(false),
+  contextualProfile: jsonb("contextual_profile").$type<{
+    revenueStage?: string;
+    teamSize?: string;
+    lifeStage?: string;
+    timeInBusiness?: string;
+    primaryChallenge?: string;
+  }>(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

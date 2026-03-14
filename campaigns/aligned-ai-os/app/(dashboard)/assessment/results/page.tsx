@@ -128,6 +128,10 @@ function ResultsContent() {
     result.importance || {}
   );
 
+  const topStrengths = DOMAINS.map((d) => ({ ...d, score: result.domainScores[d.code] || 0 }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
   const criticalPriorities = priorityMatrix.filter(
     (p) => p.quadrant === "Critical Priority"
   );
@@ -152,24 +156,56 @@ function ResultsContent() {
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-3xl mx-auto space-y-8">
-          {/* Overall Score + Wheel */}
+          {/* Overall Score + Wheel (matches dashboard alignment at a glance) */}
           <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm">
-            <div className="text-center space-y-3">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                Overall Score
-              </h2>
-              <div className="text-6xl font-bold font-serif" style={{ color: overallColor }}>
-                {(result.overallScore / 10).toFixed(1)}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <div className="flex-1 space-y-3">
+                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                  Overall Score
+                </h2>
+                <div className="flex items-end gap-3">
+                  <span
+                    className="text-5xl sm:text-6xl font-bold font-serif"
+                    style={{ color: overallColor }}
+                  >
+                    {(result.overallScore / 10).toFixed(1)}
+                  </span>
+                  <span
+                    className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white"
+                    style={{ backgroundColor: overallColor }}
+                  >
+                    {overallTier}
+                  </span>
+                </div>
+                {archetype && (
+                  <p className="text-sm text-muted-foreground">
+                    {archetype}
+                  </p>
+                )}
+                {topStrengths.length > 0 && (
+                  <div>
+                    <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
+                      Top Strengths
+                    </p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      {topStrengths.map((d) => {
+                        const Icon = DOMAIN_ICONS[d.code];
+                        const c = getTierColor(getTier(d.score));
+                        return (
+                          <div key={d.code} className="flex items-center gap-1.5 text-xs">
+                            {Icon && <Icon className="h-3 w-3 shrink-0" style={{ color: c }} />}
+                            <span>{d.name.split(" ")[0]}</span>
+                            <span className="font-medium" style={{ color: c }}>{d.score.toFixed(1)}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
-              <div
-                className="inline-block px-3 py-1 rounded-full text-sm font-medium text-white"
-                style={{ backgroundColor: overallColor }}
-              >
-                {overallTier}
+              <div className="flex justify-center shrink-0">
+                <VapiWheel domainScores={result.domainScores} />
               </div>
-            </div>
-            <div className="flex justify-center">
-              <VapiWheel domainScores={result.domainScores} />
             </div>
           </div>
 
