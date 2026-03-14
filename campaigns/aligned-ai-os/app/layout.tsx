@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   description:
     "Your AI-powered performance coach. Built on the Strategic Clarity framework by Jake Sebok.",
   manifest: "/manifest.json",
+  icons: { icon: "/logo-apos.png" },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
