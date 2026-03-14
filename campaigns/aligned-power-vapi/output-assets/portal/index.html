@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligned Performance Portal | Jake Sebok</title>
+  <meta name="description" content="Your hub for the VAPI™ Assessment, 6C Scorecard, and values-aligned coaching. Take the assessment, log in to your portal, or explore offerings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root {
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
+    }
+    body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    .cta-card:hover { border-color: var(--ap-accent); box-shadow: 0 8px 24px -8px rgba(255, 107, 26, 0.25); }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <main class="max-w-3xl mx-auto px-5 sm:px-6 pt-12 sm:pt-20 pb-16 sm:pb-24">
+    <!-- Hero -->
+    <section class="text-center mb-12 sm:mb-16">
+      <a href="/" class="inline-block mb-8">
+        <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-14 sm:h-16 w-auto mx-auto" />
+      </a>
+      <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-accent)] mb-3">Aligned Performance Portal</p>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl text-[var(--ap-primary)] leading-tight mb-5">
+        Your place.<br><span class="text-[var(--ap-accent)]">Your pace.</span>
+      </h1>
+      <p class="text-lg text-[var(--ap-secondary)] max-w-xl mx-auto leading-relaxed">
+        Take the VAPI™ Assessment, track your 6C Scorecard, or explore how we work together.
+      </p>
+    </section>
+
+    <!-- CTA cards -->
+    <section class="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-12">
+      <a href="/assessment" class="cta-card group block bg-white rounded-2xl border-2 border-[var(--ap-border)] p-6 sm:p-8 transition-all duration-200 border-l-4 border-l-[var(--ap-accent)]">
+        <div class="w-12 h-12 rounded-xl bg-[var(--ap-accent)]/15 flex items-center justify-center mb-4 group-hover:bg-[var(--ap-accent)]/25 transition-colors">
+          <i data-lucide="compass" class="w-6 h-6 text-[var(--ap-accent)]"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-[var(--ap-primary)] mb-2">Take the VAPI™</h2>
+        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">
+          72 questions. ~12 minutes. Discover your Founder Archetype and get scores across 12 life domains.
+        </p>
+        <span class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] group-hover:underline">
+          Start the assessment <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </span>
+      </a>
+
+      <a href="/login" class="cta-card group block bg-white rounded-2xl border-2 border-[var(--ap-border)] p-6 sm:p-8 transition-all duration-200 border-l-4 border-l-[var(--ap-primary)]/60">
+        <div class="w-12 h-12 rounded-xl bg-[var(--ap-primary)]/10 flex items-center justify-center mb-4 group-hover:bg-[var(--ap-primary)]/15 transition-colors">
+          <i data-lucide="log-in" class="w-6 h-6 text-[var(--ap-primary)]"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-[var(--ap-primary)] mb-2">Log in</h2>
+        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">
+          Access your dashboard, VAPI results, 6C Scorecard history, and more.
+        </p>
+        <span class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] group-hover:underline">
+          Log in to portal <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </span>
+      </a>
+
+      <a href="https://jakesebokmarketingsite.vercel.app/work-with-me" target="_blank" rel="noopener noreferrer" class="cta-card group block bg-white rounded-2xl border-2 border-[var(--ap-border)] p-6 sm:p-8 transition-all duration-200 border-l-4 border-l-[var(--ap-accent)]/60">
+        <div class="w-12 h-12 rounded-xl bg-[var(--ap-accent)]/10 flex items-center justify-center mb-4 group-hover:bg-[var(--ap-accent)]/20 transition-colors">
+          <i data-lucide="sparkles" class="w-6 h-6 text-[var(--ap-accent)]"></i>
+        </div>
+        <h2 class="text-xl font-semibold text-[var(--ap-primary)] mb-2">Work with me</h2>
+        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">
+          VAPI, workshops, community, intensives, and the Aligned Power Accelerator.
+        </p>
+        <span class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] group-hover:underline">
+          Explore offerings <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </span>
+      </a>
+    </section>
+
+    <!-- Footer note -->
+    <p class="text-center text-sm text-[var(--ap-muted)]">
+      Don't have an account? <a href="/signup" class="font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Sign up</a> to save your results and track your progress.
+    </p>
+  </main>
+</body>
+</html>

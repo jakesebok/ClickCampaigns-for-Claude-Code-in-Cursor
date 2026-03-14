@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/", "destination": "/portal/index.html" },
     { "source": "/assessment", "destination": "/html/vapi-landing.html" },
     { "source": "/assessment/start", "destination": "/html/vapi-quiz.html" },
     { "source": "/assessment/results", "destination": "/html/vapi-results.html" },
@@ -15,6 +16,8 @@
     { "source": "/admin", "destination": "/portal/admin.html" }
   ],
   "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "alignedpower.coach" }], "destination": "https://portal.alignedpower.coach/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.alignedpower.coach" }], "destination": "https://portal.alignedpower.coach/:path*", "permanent": true },
     { "source": "/html/vapi-landing.html", "destination": "/assessment", "permanent": true },
     { "source": "/html/vapi-quiz.html", "destination": "/assessment/start", "permanent": true },
     { "source": "/html/vapi-results.html", "destination": "/assessment/results", "permanent": true },

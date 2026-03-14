@@ -162,8 +162,8 @@ export default function DashboardPage() {
             {latestVapi ? (
               <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="flex-1 min-w-0 flex flex-col">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
                       <div className="flex items-center gap-2 mb-2">
                         <Activity className="h-4 w-4 text-accent" />
                         <span className="text-sm font-medium text-muted-foreground">
@@ -185,18 +185,13 @@ export default function DashboardPage() {
                         </span>
                       </div>
                       {archetype && (
-                        <>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {archetype}
-                          </p>
-                          <p className="text-sm text-muted-foreground leading-relaxed mt-3 flex-1">
-                            {ARCHETYPE_DESCRIPTIONS[archetype]}
-                          </p>
-                        </>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {archetype}
+                        </p>
                       )}
                     </div>
                     {topStrengths.length > 0 && (
-                      <div className="shrink-0 w-28">
+                      <div className="shrink-0 text-right">
                         <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
                           Top Strengths
                         </p>
@@ -204,7 +199,7 @@ export default function DashboardPage() {
                           const Icon = DOMAIN_ICONS[d.code];
                           const c = getTierColor(getTier(d.score));
                           return (
-                            <div key={d.code} className="flex items-center gap-1.5 text-xs mb-1">
+                            <div key={d.code} className="flex items-center justify-end gap-1.5 text-xs mb-1">
                               {Icon && <Icon className="h-3 w-3 shrink-0" style={{ color: c }} />}
                               <span className="truncate">{d.name.split(" ")[0]}</span>
                               <span className="font-medium shrink-0" style={{ color: c }}>{d.score.toFixed(1)}</span>
@@ -214,6 +209,11 @@ export default function DashboardPage() {
                       </div>
                     )}
                   </div>
+                  {archetype && (
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 w-full">
+                      {ARCHETYPE_DESCRIPTIONS[archetype]}
+                    </p>
+                  )}
                 </div>
               </Link>
             ) : (
