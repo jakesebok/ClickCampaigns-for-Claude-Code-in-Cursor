@@ -4,7 +4,6 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   ChevronLeft,
-  ChevronRight,
   Activity,
   Compass,
   Brain,
@@ -325,38 +324,18 @@ export default function AssessmentPage() {
     );
   }
 
-  const domain = DOMAINS.find((d) => d.code === currentQuestion.domainCode)!;
-  const Icon = DOMAIN_ICONS[currentQuestion.domainCode];
-  const arenaLabel =
-    domain.arena === "personal"
-      ? "Personal"
-      : domain.arena === "relationships"
-        ? "Relationships"
-        : "Business";
-
   return (
     <div className="flex flex-col h-full">
       <header className="px-6 py-4 border-b border-border">
         <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                {arenaLabel}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                Question {currentQuestionIdx + 1} of {TOTAL_QUESTIONS}
-              </span>
-            </div>
-            <h1 className="text-lg font-semibold flex items-center gap-2">
-              {Icon && <Icon className="h-5 w-5 text-accent" />}
-              {domain.name}
-            </h1>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-muted-foreground">
+          <span className="text-sm font-medium text-muted-foreground">
+            Question {currentQuestionIdx + 1} of {TOTAL_QUESTIONS}
+          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground tabular-nums">
               {answeredCount} / {TOTAL_QUESTIONS}
-            </div>
-            <div className="w-32 h-1.5 bg-muted rounded-full mt-1">
+            </span>
+            <div className="w-24 h-1.5 bg-muted rounded-full overflow-hidden">
               <div
                 className="h-full bg-accent rounded-full transition-all"
                 style={{
@@ -372,9 +351,11 @@ export default function AssessmentPage() {
         <div className="max-w-2xl mx-auto space-y-6">
           <p className="text-sm text-muted-foreground">In the past 30 days...</p>
           <div className="rounded-xl border border-border p-5 space-y-4">
-            <p className="text-sm leading-relaxed">{currentQuestion.question.text}</p>
+            <p className="text-base sm:text-lg leading-relaxed font-medium">
+              {currentQuestion.question.text}
+            </p>
 
-            <div className="grid grid-cols-7 gap-1">
+            <div className="space-y-2">
               {SCALE_VALUES.map((value, sIdx) => (
                 <button
                   key={value}
@@ -382,38 +363,31 @@ export default function AssessmentPage() {
                     setAnswer(currentQuestion.domainCode, currentQuestion.questionIdx, value);
                     setTimeout(() => nextQuestion(), 150);
                   }}
-                  className={`flex flex-col items-center gap-1 py-2 px-1 rounded-lg text-center transition-colors ${
+                  className={`w-full flex items-center justify-between py-3 px-4 rounded-lg border text-left transition-colors ${
                     currentAnswer === value
-                      ? "bg-accent text-accent-foreground"
-                      : "bg-muted hover:bg-secondary"
+                      ? "border-accent bg-accent/10 text-accent font-medium"
+                      : "border-border bg-muted/30 hover:bg-muted/50"
                   }`}
                 >
-                  <span className="text-xs font-medium">{value}</span>
-                  <span className="text-[10px] leading-tight hidden sm:block">
-                    {SCALE_LABELS[sIdx]}
-                  </span>
+                  <span className="text-sm sm:text-base">{SCALE_LABELS[sIdx]}</span>
+                  {currentAnswer === value && (
+                    <span className="text-accent text-sm font-medium">✓</span>
+                  )}
                 </button>
               ))}
             </div>
           </div>
 
           <div className="flex gap-3 pt-2 pb-4">
-            <button
-              onClick={prevQuestion}
-              disabled={currentQuestionIdx === 0}
-              className="flex-1 py-3 rounded-xl border border-border text-sm hover:bg-secondary disabled:opacity-30 transition-colors flex items-center justify-center gap-2"
-            >
-              <ChevronLeft className="h-4 w-4" />
-              Previous
-            </button>
-            <button
-              onClick={nextQuestion}
-              disabled={currentAnswer === 0}
-              className="flex-1 py-3 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
-            >
-              {currentQuestionIdx === questionOrder.length - 1 ? "Rate Importance" : "Next"}
-              <ChevronRight className="h-4 w-4" />
-            </button>
+            {currentQuestionIdx > 0 && (
+              <button
+                onClick={prevQuestion}
+                className="py-3 px-6 rounded-xl border border-border text-sm hover:bg-secondary transition-colors flex items-center justify-center gap-2"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Previous
+              </button>
+            }
           </div>
         </div>
       </div>

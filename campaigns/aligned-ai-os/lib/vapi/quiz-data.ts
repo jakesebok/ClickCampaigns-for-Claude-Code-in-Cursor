@@ -17,7 +17,7 @@ export const SCALE_LABELS = [
   "Strongly Agree",
   "Agree",
   "Somewhat Agree",
-  "Neutral",
+  "Neither Agree Nor Disagree",
   "Somewhat Disagree",
   "Disagree",
   "Strongly Disagree",

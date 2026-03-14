@@ -292,68 +292,6 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Arena Breakdown */}
-          {latestVapi && (
-            <div className="space-y-3">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                Arena Breakdown
-              </h2>
-              <div className="grid sm:grid-cols-3 gap-4">
-                {ARENAS.map((arena) => {
-                  const score = latestVapi.arenaScores[arena.key] || 0;
-                  const tier = getTier(score);
-                  const color = getTierColor(tier);
-
-                  return (
-                    <div
-                      key={arena.key}
-                      className="rounded-xl border border-border bg-card/80 p-4 space-y-3 shadow-sm"
-                    >
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-medium text-sm">{arena.label}</h3>
-                        <span
-                          className="text-xs font-medium px-2 py-0.5 rounded text-white"
-                          style={{ backgroundColor: color }}
-                        >
-                          {tier}
-                        </span>
-                      </div>
-                      <div className="text-2xl font-bold font-serif" style={{ color }}>
-                        {score.toFixed(1)}
-                      </div>
-                      <div className="space-y-1.5">
-                        {arena.domains.map((code) => {
-                          const domain = DOMAINS.find((d) => d.code === code)!;
-                          const dScore = latestVapi.domainScores[code] || 0;
-                          const dColor = getTierColor(getTier(dScore));
-                          return (
-                            <div key={code} className="flex items-center gap-2">
-                              <span className="text-xs text-muted-foreground flex-1 truncate">
-                                {domain.name}
-                              </span>
-                              <div className="w-16 h-1.5 bg-muted rounded-full">
-                                <div
-                                  className="h-full rounded-full"
-                                  style={{
-                                    width: `${(dScore / 10) * 100}%`,
-                                    backgroundColor: dColor,
-                                  }}
-                                />
-                              </div>
-                              <span className="text-xs font-medium w-6 text-right" style={{ color: dColor }}>
-                                {dScore.toFixed(1)}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
           {/* Archetype + Critical Priorities */}
           {latestVapi && (
             <div className="grid sm:grid-cols-2 gap-4">
@@ -414,6 +352,68 @@ export default function DashboardPage() {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Arena Breakdown */}
+          {latestVapi && (
+            <div className="space-y-3">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                Arena Breakdown
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {ARENAS.map((arena) => {
+                  const score = latestVapi.arenaScores[arena.key] || 0;
+                  const tier = getTier(score);
+                  const color = getTierColor(tier);
+
+                  return (
+                    <div
+                      key={arena.key}
+                      className="rounded-xl border border-border bg-card/80 p-4 space-y-3 shadow-sm"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-medium text-sm">{arena.label}</h3>
+                        <span
+                          className="text-xs font-medium px-2 py-0.5 rounded text-white"
+                          style={{ backgroundColor: color }}
+                        >
+                          {tier}
+                        </span>
+                      </div>
+                      <div className="text-2xl font-bold font-serif" style={{ color }}>
+                        {score.toFixed(1)}
+                      </div>
+                      <div className="space-y-1.5">
+                        {arena.domains.map((code) => {
+                          const domain = DOMAINS.find((d) => d.code === code)!;
+                          const dScore = latestVapi.domainScores[code] || 0;
+                          const dColor = getTierColor(getTier(dScore));
+                          return (
+                            <div key={code} className="flex items-center gap-2">
+                              <span className="text-xs text-muted-foreground flex-1 truncate">
+                                {domain.name}
+                              </span>
+                              <div className="w-16 h-1.5 bg-muted rounded-full">
+                                <div
+                                  className="h-full rounded-full"
+                                  style={{
+                                    width: `${(dScore / 10) * 100}%`,
+                                    backgroundColor: dColor,
+                                  }}
+                                />
+                              </div>
+                              <span className="text-xs font-medium w-6 text-right" style={{ color: dColor }}>
+                                {dScore.toFixed(1)}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
 
