@@ -387,7 +387,7 @@ export default function AssessmentPage() {
                 <ChevronLeft className="h-4 w-4" />
                 Previous
               </button>
-            }
+            )}
           </div>
         </div>
       </div>
