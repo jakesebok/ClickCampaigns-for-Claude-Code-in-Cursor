@@ -1,6 +1,6 @@
 # Video 6.1 — Baseline, Desires, Impact
 
-**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~10–15 minutes**
+**Lesson 6: From Meaning to Math | ~10–15 minutes**
 
 ---
 
@@ -8,7 +8,7 @@
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—MIQs, WHY, values, Future You, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, Driving Fire, values, The Becoming, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -16,11 +16,11 @@ So now we turn meaning into math.
 
 ---
 
-### The Revenue Bridge
+### From Meaning to Math
 
 Here's what we're building: a bridge from what you *want* to what your business must *produce*. Not a goal you pulled from a mastermind. Not a number your competitor is chasing. Not "I want to make a million dollars because it sounds impressive."
 
-A Required Revenue number that's built on *your* actual life—your baseline needs, the future you're funding, the desires your MIQs revealed, and the impact your Just Cause demands.
+A Required Revenue number that's built on *your* actual life—your baseline needs, the future you're funding, the desires your Real Reasons revealed, and the impact your Cause Worth Playing For demands.
 
 When we're done, you'll know exactly what your business needs to generate—and why. Every dollar will be connected to something real. And when you hit a rough month? You won't be wondering "why am I doing this?" You'll know. Because you built the number on purpose.
 
@@ -45,11 +45,11 @@ Here's what I want you to notice about this number: it's not exciting. It's not 
 
 ---
 
-### Step 2: Fund the Future You (Stretch Desires)
+### Step 2: Fund The Becoming (Stretch Desires)
 
 Now we go above the floor.
 
-Remember your Future You? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
+Remember The Becoming? Personal, Relationships, Skills, Service? Each of those domains costs something. Not in a mercenary way—in a "this life requires investment" way.
 
 For each domain, answer:
 - What does "better" look like?
@@ -59,23 +59,23 @@ For each domain, answer:
 
 Maybe Personal means hiring a trainer ($6,000/year). Maybe Relationships means a monthly date night and a family trip ($8,000/year). Maybe Skills means a coaching certification ($12,000/year). Maybe Impact means sponsoring a program ($5,000/year).
 
-Add it up. That's your Future You Total.
+Add it up. That's your Becoming Total.
 
-Then: your MIQ-based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
+Then: your Real Reasons–based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
 
-Add it up. That's your MIQ Desires Total.
+Add it up. That's your Real Reasons Desires Total.
 
 ---
 
 ### Step 3: Resource the Impact (Your Tithe)
 
-Your business doesn't have to *be* your Just Cause—but it can *fund* it.
+Your business doesn't have to *be* your Cause Worth Playing For—but it can *fund* it.
 
 Think of your impact target like a tithe: a percentage you protect, not an afterthought. I suggest 10%, but you choose the number.
 
-Write your Just Cause in plain language. Name a specific impact target for the year. Decide how you'll resource it—money, time, platform, partnerships. Estimate the annual contribution.
+Write your Cause Worth Playing For in plain language. Name a specific impact target for the year. Decide how you'll resource it—money, time, platform, partnerships. Estimate the annual contribution.
 
-That's your Just Cause Total.
+That's your Cause Total.
 
 ---
 

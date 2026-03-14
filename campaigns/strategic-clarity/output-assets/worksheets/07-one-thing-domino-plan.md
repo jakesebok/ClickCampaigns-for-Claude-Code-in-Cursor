@@ -1,11 +1,11 @@
-# The ONE THING Domino Plan
+# Your Vital Action Plan
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > **How to use:**
 > - Stay operational: write actions, not themes.
-> - Leverage wins: choose the ONE move that makes other moves easier or unnecessary.
-> - Whole-system focus: you will create ONE THING for each lane, then select one Lead Lane to execute first.
+> - Leverage wins: choose the Vital Action that makes other moves easier or unnecessary.
+> - Whole-system focus: you will create a Vital Action for each lane, then select one Lead Lane to execute first.
 
 ---
 
@@ -27,7 +27,7 @@ Circle the lane where meaningful progress would make the other lanes easier:
 |------|----------------|
 | **Business / Money** | If this improves, the other lane(s) that improve automatically are: |
 | **Home / Relationships** | If this improves, the other lane(s) that improve automatically are: |
-| **Impact / Just Cause** | If this improves, the other lane(s) that improve automatically are: |
+| **Impact / Cause Worth Playing For** | If this improves, the other lane(s) that improve automatically are: |
 | **Self / Skills** | If this improves, the other lane(s) that improve automatically are: |
 
 **My Lead Lane:**
@@ -46,31 +46,31 @@ Write one sentence per lane. Make it measurable or vividly observable.
 |------|------------------------------|
 | Business / Money |  |
 | Home / Relationships |  |
-| Impact / Just Cause |  |
+| Impact / Cause Worth Playing For |  |
 | Self / Skills |  |
 
 ---
 
-## 3) Your ONE THING (10–12 minutes)
+## 3) Your Vital Action (10–12 minutes)
 
-Answer for each lane: **"What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary?"**
+Answer for each lane: **"What is my Vital Action—the single aligned move that, by doing it, makes everything else easier or unnecessary?"**
 
-| Lane | My ONE THING (one action) |
+| Lane | My Vital Action (one action) |
 |------|---------------------------|
 | Business / Money |  |
 | Home / Relationships |  |
-| Impact / Just Cause |  |
+| Impact / Cause Worth Playing For |  |
 | Self / Skills |  |
 
 ---
 
-## 4) Goal-Setting to the Now — Domino Chain (10–15 minutes)
+## 4) Goal-Setting to the Now — The Arc Chain (10–15 minutes)
 
 Complete this for your **Lead Lane** first. If time allows, repeat for the other lanes.
 
 *Someday → 5 Years → This Year → This Quarter → This Month → This Week → Today → Right Now*
 
-| Level | ONE THING at This Level |
+| Level | Vital Action at This Level |
 |-------|-------------------------|
 | Someday |  |
 | 5 Years |  |
@@ -85,11 +85,11 @@ Complete this for your **Lead Lane** first. If time allows, repeat for the other
 
 ## 5) Install It on the Calendar (5–8 minutes)
 
-Your Lead Lane ONE THING must have a protected time block. If it isn't on the calendar, it isn't real.
+Your Lead Lane Vital Action must have a protected time block. If it isn't on the calendar, it isn't real.
 
 | Field | Your Answer |
 |-------|-------------|
-| Lead Lane ONE THING |  |
+| Lead Lane Vital Action |  |
 | Time Block (day / time) |  |
 | Frequency |  |
 | Protection Rule (what you will NOT allow during this block) |  |
@@ -117,7 +117,7 @@ Your Lead Lane ONE THING must have a protected time block. If it isn't on the ca
 
 Write it. Sign it.
 
-**My next season is built on this domino:**
+**My next season is built on this Vital Action:**
 
 |   |
 |---|
@@ -131,8 +131,8 @@ Write it. Sign it.
 
 ---
 
-*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue Bridge and protects the other lanes—not at their expense.*
+*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue from From Meaning to Math and protects the other lanes—not at their expense.*
 
 ---
 
-*Your ONE THING Domino Plan feeds directly into your Aligned AI OS. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
+*Your Vital Action Plan feeds directly into your VAPOS. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*

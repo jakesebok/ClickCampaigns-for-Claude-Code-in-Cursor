@@ -15,7 +15,7 @@
 
 I've been watching your engagement (not in a creepy way — in a "this person is serious" way).
 
-You're using APOS. You're doing the 6Cs scorecard. You're setting your ONE THING. That puts you in a very small percentage of people who actually follow through.
+You're using APOS. You're doing the 6Cs scorecard. You're setting your Vital Action. That puts you in a very small percentage of people who actually follow through.
 
 And here's what I've learned from working with hundreds of entrepreneurs: AI coaching gets you to 70%. The values are clear. The strategy is sound. The weekly plan exists.
 
@@ -46,8 +46,8 @@ High revenue. Full calendar. Zero alignment. They were succeeding at a game they
 
 In the first 90 days of the Accelerator, we:
 - Rebuilt their offer stack around their actual values (dropped 2 services, doubled down on 1)
-- Identified their ONE THING and protected it on the calendar
-- Reverse-engineered their Revenue Bridge (they needed 40% less revenue than they thought)
+- Identified their Vital Action and protected it on the calendar
+- Reverse-engineered From Meaning to Math (they needed 40% less revenue than they thought)
 - Built an APOS context so deep it's like having a virtual COO
 
 Result: Revenue stayed flat. Hours dropped by 30%. Satisfaction went through the roof.
@@ -73,7 +73,7 @@ Here's the honest breakdown:
 ✓ Personalized AI coaching 24/7
 ✓ Weekly planning and review
 ✓ Values-based decision filter
-✓ ONE THING tracking
+✓ Vital Action tracking
 ✓ 6Cs Scorecard
 
 **What the Accelerator adds:**

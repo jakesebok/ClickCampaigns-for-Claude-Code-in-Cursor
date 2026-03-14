@@ -57,7 +57,7 @@ $497 · Next Intensive coming soon.
 Imagine an AI coach that knows:
 • Your top 5 core values (and won't let you violate them)
 • Your revenue targets and capacity limits
-• Your ONE THING for the quarter
+• Your Vital Action for the quarter
 • The sabotage pattern that derails you every time
 
 Not a generic chatbot. YOUR operating system. Built on YOUR truth.
@@ -95,10 +95,10 @@ Build it in one half-day. $497 + 30 days free APOS access.
 Still thinking about the Strategic Alignment Intensive?
 
 Half-day. $497. You'll build:
-✓ Your MIQs (what you actually want)
-✓ Your WHY + Just Cause
-✓ Your Revenue Bridge (meaning → math)
-✓ Your ONE THING Domino Plan
+✓ Your Real Reasons (what you actually want)
+✓ Your Driving Fire + Cause Worth Playing For
+✓ From Meaning to Math (meaning → math)
+✓ Your Vital Action Plan
 ✓ APOS — your personalized AI coach
 
 Includes 30 days of free APOS access.

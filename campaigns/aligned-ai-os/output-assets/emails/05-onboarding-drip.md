@@ -20,11 +20,11 @@ Here's how to get started in the next 10 minutes:
 **1. Build your context** (most important)
 Go to Settings → Upload your Strategic Clarity worksheets from the Intensive, OR use the Guided Onboarding to answer questions. The more APOS knows about you, the better it serves you.
 
-**2. Set your ONE THING**
-Go to the ONE THING tab and set your focus for this week. One sentence. One domino.
+**2. Set your Vital Action**
+Go to the Vital Action tab and set your focus for this week. One sentence. One aligned move.
 
 **3. Ask your first question**
-Open the Coach tab and try: "Build my week around my ONE THING."
+Open the Coach tab and try: "Build my week around my Vital Action."
 
 That's it. 10 minutes and you're off.
 
@@ -45,7 +45,7 @@ Quick tip: Turn on morning SMS prompts in Settings.
 
 Every morning, at a time you choose, you'll get a short, values-aligned text. Something like:
 
-*"Good morning. What's your ONE THING today? The single move that makes everything else easier or unnecessary."*
+*"Good morning. What's your Vital Action today? The single move that makes everything else easier or unnecessary."*
 
 It takes 5 seconds to read. And it resets your intention before the inbox sets it for you.
 
@@ -98,7 +98,7 @@ Rate yourself 1-5 on 5 questions in each category:
 - **Courage** — Am I doing the hard right thing?
 - **Connection** — Am I present with the people who matter?
 
-Then write a brief reflection for each and name your ONE THING for next week.
+Then write a brief reflection for each and name your Vital Action for next week.
 
 APOS will reference your scorecard trends in future conversations — it gets smarter every week you submit.
 

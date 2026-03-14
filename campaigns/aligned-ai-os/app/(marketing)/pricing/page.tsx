@@ -5,9 +5,9 @@ import { Check } from "lucide-react";
 const features = [
   "Personalized AI coaching chat (powered by Claude)",
   "Values-aligned decision filter",
-  "Revenue Bridge math built in",
+  "From Meaning to Math built in",
   "50 High-Leverage Questions",
-  "Weekly ONE THING tracking",
+  "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
   "Daily SMS morning prompts",
   "Alignment Blueprint dashboard",

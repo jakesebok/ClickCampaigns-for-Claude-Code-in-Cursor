@@ -37,78 +37,78 @@
 
 ---
 
-### Lesson 1: End Goals vs. Means Goals (MIQs)
+### Lesson 1: The Real Reasons (End Goals vs. Means Goals)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 1.1 — The Distinction | `documents/video-1.1-miqs-the-distinction.md` | Script | ~8–12 min |
 | Video 1.2 — Worksheet Facilitation | `documents/video-1.2-miqs-worksheet.md` | Script | ~5–10 min |
-| MIQs Worksheet | `worksheets/01-miqs.md` | Worksheet | — |
+| The Real Reasons (Life Lists) Worksheet | `worksheets/01-miqs.md` | Worksheet | — |
 
 ---
 
-### Lesson 2: Find Your WHY + Just Cause
+### Lesson 2: Your Driving Fire + The Cause Worth Playing For
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 2.1 — The Golden Circle | `documents/video-2.1-why-golden-circle.md` | Script | ~10–15 min |
 | Video 2.2 — Peak Moments + Theme Mining | `documents/video-2.2-why-theme-mining.md` | Script | ~8–12 min |
-| Video 2.3 — Draft, Test, Just Cause, Mission | `documents/video-2.3-why-draft-test-cause.md` | Script | ~5–8 min |
-| Find Your WHY + Just Cause Worksheet | `worksheets/02-find-your-why-just-cause.md` | Worksheet | — |
+| Video 2.3 — Draft, Test, Cause Worth Playing For, Mission | `documents/video-2.3-why-draft-test-cause.md` | Script | ~5–8 min |
+| Your Driving Fire + Cause Worth Playing For Worksheet | `worksheets/02-find-your-why-just-cause.md` | Worksheet | — |
 
 ---
 
-### Lesson 3: Core Values Extraction
+### Lesson 3: Your Values Code
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 3.1 — Why Values Matter | `documents/video-3.1-values-why-they-matter.md` | Script | ~8–12 min |
 | Video 3.2 — The Extraction Process | `documents/video-3.2-values-extraction-process.md` | Script | ~5–8 min |
-| Core Values Extraction Worksheet | `worksheets/03-core-values-extraction.md` | Worksheet | — |
+| Your Values Code Worksheet | `worksheets/03-core-values-extraction.md` | Worksheet | — |
 
 ---
 
-### Lesson 4: Becoming You (The Future You)
+### Lesson 4: The Becoming
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 4.1 — The Future You | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
+| Video 4.1 — The Becoming | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
 | Video 4.2 — Integration + 90-Day Focus | `documents/video-4.2-becoming-you-integration.md` | Script | ~5–8 min |
-| Becoming You Worksheet | `worksheets/04-becoming-you.md` | Worksheet | — |
+| The Becoming Worksheet | `worksheets/04-becoming-you.md` | Worksheet | — |
 
 ---
 
-### Lesson 5: Reality Check (Bridge to Operationalization)
+### Lesson 5: The Reckoning (Bridge to Operationalization)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 5.1 — Reality Check | `documents/video-5.1-reality-check.md` | Script | ~5–10 min |
-| Reality Check Worksheet | `worksheets/05-reality-check.md` | Worksheet | — |
+| Video 5.1 — The Reckoning | `documents/video-5.1-reality-check.md` | Script | ~5–10 min |
+| The Reckoning Worksheet | `worksheets/05-reality-check.md` | Worksheet | — |
 
 ---
 
-### Lesson 6: From Meaning to Math (The Revenue Bridge)
+### Lesson 6: From Meaning to Math
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 6.1 — Baseline, Desires, Impact | `documents/video-6.1-gtm-baseline-desires-impact.md` | Script | ~10–15 min |
 | Video 6.2 — The Math (Revenue → QCs) | `documents/video-6.2-gtm-the-math.md` | Script | ~10–12 min |
 | Video 6.3 — Lead Path Fork + Highest-Leverage Move | `documents/video-6.3-gtm-lead-path-leverage.md` | Script | ~5–8 min |
-| The Revenue Bridge Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
+| From Meaning to Math Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
 
 ---
 
-### Lesson 7: The ONE THING Domino Plan
+### Lesson 7: Your Vital Action Plan
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 7.1 — The ONE THING Question + Lead Lane | `documents/video-7.1-one-thing-the-question.md` | Script | ~8–12 min |
-| Video 7.2 — Domino Chain + Calendar Install | `documents/video-7.2-domino-chain-calendar.md` | Script | ~5–8 min |
-| ONE THING Domino Plan Worksheet | `worksheets/07-one-thing-domino-plan.md` | Worksheet | — |
+| Video 7.1 — Your Vital Action + Lead Lane | `documents/video-7.1-one-thing-the-question.md` | Script | ~8–12 min |
+| Video 7.2 — The Arc Chain + Calendar Install | `documents/video-7.2-domino-chain-calendar.md` | Script | ~5–8 min |
+| Your Vital Action Plan Worksheet | `worksheets/07-one-thing-domino-plan.md` | Worksheet | — |
 
 ---
 
-### Lesson 8: Your Aligned AI OS — Master Prompt
+### Lesson 8: VAPOS — Master Prompt
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
@@ -117,12 +117,12 @@
 
 ---
 
-### Lesson 9: Your AI Coach in Action — 50 High-Leverage Questions
+### Lesson 9: Fire Starters (50 High-Leverage Questions)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 9.1 — Walkthrough + Demo | `documents/video-9.1-ai-coach-50-questions.md` | Script | ~8–15 min |
-| 50 High-Leverage Questions | `worksheets/09-50-high-leverage-questions.md` | Resource | — |
+| Fire Starters | `worksheets/09-50-high-leverage-questions.md` | Resource | — |
 
 ---
 
@@ -131,23 +131,23 @@
 ```
 Pre-Work (collect inputs)
     ↓
-Lesson 1: MIQs — What do I actually want? (End goals vs. means goals)
+Lesson 1: The Real Reasons — What do I actually want? (End goals vs. means goals)
     ↓
-Lesson 2: WHY + Just Cause — Why am I here? (Purpose + infinite game)
+Lesson 2: Driving Fire + Cause Worth Playing For — Why am I here? (Purpose + infinite game)
     ↓
-Lesson 3: Core Values — What do I stand for? (Operational definitions + boundaries)
+Lesson 3: Your Values Code — What do I stand for? (Operational definitions + boundaries)
     ↓
-Lesson 4: Becoming You — Who am I growing into? (The Future You: Self/Social/Skills/Service)
+Lesson 4: The Becoming — Who am I growing into? (Self/Social/Skills/Service)
     ↓
-Lesson 5: Reality Check — What's actually true right now? (Bridge to operationalization)
+Lesson 5: The Reckoning — What's actually true right now? (Bridge to operationalization)
     ↓
-Lesson 6: From Meaning to Math — What does my business need to produce? (The Revenue Bridge)
+Lesson 6: From Meaning to Math — What does my business need to produce?
     ↓
-Lesson 7: ONE THING — What's the single move that makes everything else easier?
+Lesson 7: Vital Action — What's the single move that makes everything else easier?
     ↓
-Lesson 8: AI OS — Feed it all into the Master Prompt → personalized AI coach
+Lesson 8: VAPOS — Feed it all into the Master Prompt → personalized AI coach
     ↓
-Lesson 9: 50 Questions — Put the AI coach to work daily
+Lesson 9: Fire Starters — Put the AI coach to work daily
 ```
 
 ---
@@ -156,12 +156,12 @@ Lesson 9: 50 Questions — Put the AI coach to work daily
 
 | Source | Framework / Concept |
 |--------|---------------------|
-| Vishen Lakhiani, *The Buddha and the Badass* | MIQs (Experiences, Growth, Contribution); means vs. end goals |
-| Simon Sinek, *Start With Why* | Golden Circle, WHY statement |
-| Simon Sinek, *The Infinite Game* | Just Cause |
-| Sinek et al., *Find Your Why* | Peak Moments, Theme Mining, WHY format |
-| Brendon Burchard, *High Performance Habits* | The Future You (Self, Social, Skills, Service) |
-| Gary Keller, *The ONE Thing* | ONE THING question, Domino Plan |
+| Vishen Lakhiani, *The Buddha and the Badass* | The Real Reasons / Life Lists (means vs. end goals; experiences, growth, contribution) |
+| Simon Sinek, *Start With Why* | Golden Circle; Driving Fire (What-How-Why structure) |
+| Simon Sinek, *The Infinite Game* | The Cause Worth Playing For |
+| Sinek et al., *Find Your Why* | Peak Moments, Theme Mining, Driving Fire format |
+| Brendon Burchard, *High Performance Habits* | The Becoming (four domains: Self, Social, Skills, Service) |
+| Gary Keller, *The ONE Thing* | Vital Action (focus, cascade, single-lever logic) |
 
 ---
 
@@ -179,5 +179,5 @@ All video scripts written in Jake Sebok's voice per `Resources/Jake's Voice/JAKE
 
 - **Worksheets** are formatted as markdown with empty tables, ready for conversion to Google Docs
 - **Video scripts** are written as teleprompter-ready scripts with natural speech patterns
-- **Master Prompt** updated to reference Reality Check worksheet with graceful `[NEEDS INPUT]` handling when skipped
-- **Strategic Intensives** use the same worksheets, facilitated live—no separate materials needed
+- **Master Prompt** updated to reference The Reckoning worksheet with graceful `[NEEDS INPUT]` handling when skipped
+- **The Alignment Arc Intensive** uses the same worksheets, facilitated live—no separate materials needed

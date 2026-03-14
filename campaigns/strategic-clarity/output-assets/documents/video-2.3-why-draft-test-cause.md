@@ -1,6 +1,6 @@
-# Video 2.3 — Draft, Test, Just Cause, Mission
+# Video 2.3 — Draft, Test, Cause Worth Playing For, Mission
 
-**Lesson 2: Find Your WHY + Just Cause | ~5–8 minutes**
+**Lesson 2: Your Driving Fire + The Cause Worth Playing For | ~5–8 minutes**
 
 ---
 
@@ -10,9 +10,9 @@ Okay, you've done the mining. You've got themes. You've got a messy sentence tha
 
 ---
 
-### Exercise 3: Draft Your WHY
+### Exercise 3: Draft Your Driving Fire
 
-Open your worksheet to Exercise 3. You're going to write three drafts of your WHY statement using the format:
+Open your worksheet to Exercise 3. You're going to write three drafts of your Driving Fire statement using the format:
 
 **To [contribution] so that [impact].**
 
@@ -20,9 +20,9 @@ Three versions. Don't agonize. Don't try to make them perfect. Write one, then w
 
 A few guidelines:
 
-- **Keep it about others, not about you.** Your WHY is about the impact you make, not the credential you hold.
+- **Keep it about others, not about you.** Your Driving Fire is about the impact you make, not the credential you hold.
 - **Avoid jargon.** If you'd be embarrassed to say it to a friend over dinner, simplify it.
-- **Make it timeless.** Your WHY doesn't change with your business model. It's been true since you were a kid. It'll be true when you're eighty.
+- **Make it timeless.** Your Driving Fire doesn't change with your business model. It's been true since you were a kid. It'll be true when you're eighty.
 
 ---
 
@@ -38,47 +38,41 @@ For each draft, note three things:
 - **Emotion:** What do you feel? Relief? Energy? Nothing? Anxiety? Tears?
 - **Truth note:** What feels true? What feels like performance?
 
-The draft that makes your chest open, that gives you a little surge of emotion, that makes you think "yeah... *that's* it"—that's your WHY. Even if it's not the best-written one. Even if it's the messiest. The body doesn't lie.
+The draft that makes your chest open, that gives you a little surge of emotion, that makes you think "yeah... *that's* it"—that's your Driving Fire. Even if it's not the best-written one. Even if it's the messiest. The body doesn't lie.
 
-If none of them land? That's okay. It means you're close but not there yet. Go back to your Theme Summary—the raw, messy sentence—and try again. Sometimes the WHY doesn't fit the template. Sometimes you have to write it in plain English first and then shape it into the "To ___ so that ___" format.
+If none of them land? That's okay. It means you're close but not there yet. Go back to your Theme Summary—the raw, messy sentence—and try again. Sometimes the Driving Fire doesn't fit the template. Sometimes you have to write it in plain English first and then shape it into the "To ___ so that ___" format.
 
 ---
 
-### Exercise 5: Strengthen Your WHY
+### Exercise 5: Strengthen Your Driving Fire
 
 Once you've got a working draft, we strengthen it with context. Answer these questions:
 
-- What kind of person is this WHY built to help?
+- What kind of person is this Driving Fire built to help?
 - Before you help, what are they experiencing?
 - After you help, what are they experiencing?
 - What "enemy" are you fighting against?
 - What deeper human need do you serve?
 
-This isn't extra work. This is the context that makes your WHY specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a WHY with teeth.
+This isn't extra work. This is the context that makes your Driving Fire specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a Driving Fire with teeth.
 
 Write your clean working draft at the bottom of Exercise 5.
 
 ---
 
-### Exercise 6: Your Just Cause
+### Exercise 6: Your Cause Worth Playing For
 
 Now we zoom out. Way out.
 
-Your WHY is personal. It's about the impact *you* make. Your **Just Cause** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely.
+Your Driving Fire is personal. It's about the impact *you* make. Your **Cause Worth Playing For** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely—a lifelong game with no finish line.
 
-Simon Sinek talks about this in *The Infinite Game*. A Just Cause is:
-- A specific vision of a future state that does not yet exist
-- So compelling you're willing to sacrifice to advance it
-- Bigger than any one person or organization
-- Pursued indefinitely—there's no "finish line"
-
-Here's the prompt: *"In a world with my Just Cause advancing..."*
+Here's the prompt: *"In a world with my Cause Worth Playing For advancing..."*
 
 - What becomes more true?
 - What becomes less true?
 - Who benefits, and how?
 
-Write two drafts of your Just Cause: "A world where..."
+Write two drafts of your Cause Worth Playing For: "A world where..."
 
 Then choose one and rewrite it clean.
 
@@ -86,7 +80,7 @@ Then choose one and rewrite it clean.
 
 ### Exercise 7: Connect the Dots
 
-Now we bring it all together. Your WHY + your Just Cause + your actual work.
+Now we bring it all together. Your Driving Fire + your Cause Worth Playing For + your actual work.
 
 Fill in:
 - **Target audience** (not a demographic—a human state)
@@ -102,13 +96,13 @@ Then write your **Mission Statement**: "I help [target audience] achieve/overcom
 
 At the bottom of the worksheet, write your three final drafts clean:
 
-1. **WHY:** To ________ so that ________.
-2. **Just Cause:** A world where...
+1. **Driving Fire:** To ________ so that ________.
+2. **Cause Worth Playing For:** A world where...
 3. **Business Mission Statement:** I help...
 
 These don't have to be final-final. They're working drafts. They'll sharpen over time. But they should feel *true*—true in your body, not just your head.
 
-And remember: all three feed directly into your Aligned AI OS. Your AI coach will use your WHY as a purpose filter, your Just Cause as a long-term orientation, and your Mission as the bridge between purpose and work.
+And remember: all three feed directly into your VAPOS. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
 
 That's Lesson 2. Three documents. Three levels of clarity. Take a breath. You've done real work here.
 

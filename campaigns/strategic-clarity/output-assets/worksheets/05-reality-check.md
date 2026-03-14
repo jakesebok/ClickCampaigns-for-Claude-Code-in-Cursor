@@ -1,8 +1,8 @@
-# Reality Check — Bridge to Operationalization
+# The Reckoning — Bridge to Operationalization
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> You've named what you want: your MIQs, your WHY, your values, and the person you're becoming. Before we turn that vision into numbers and weekly actions, take a moment to connect it to your current reality.
+> You've named what you want: your Real Reasons, your Driving Fire, your values, and the person you're becoming. Before we turn that vision into numbers and weekly actions, take a moment to connect it to your current reality.
 
 ---
 
@@ -10,17 +10,17 @@
 
 This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
-These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your AI OS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
+These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAPOS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
-**You can do this now, during a Strategic Intensive, or whenever you're ready. No pressure—depth beats speed.**
+**You can do this now, during an Alignment Arc Intensive, or whenever you're ready. No pressure—depth beats speed.**
 
 ---
 
 ## The Six Questions
 
-### 1. Must Be True
+### 1. Real Reasons Must Be True
 
-What must be true in your life for your MIQs to actually happen? (Non-negotiables—the conditions without which your vision stays a wish.)
+What must be true in your life for your Real Reasons to actually happen? (Non-negotiables—the conditions without which your vision stays a wish.)
 
 |   |
 |---|
@@ -87,4 +87,4 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-*These answers feed into your Aligned AI OS under "MIQ Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
+*These answers feed into your VAPOS under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*

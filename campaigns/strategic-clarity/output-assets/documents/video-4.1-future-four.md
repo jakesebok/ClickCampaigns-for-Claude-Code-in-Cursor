@@ -1,4 +1,4 @@
-# Video 4.1 — The Future You
+# Video 4.1 — The Becoming
 
 **Lesson 4: Becoming You | ~8–12 minutes**
 
@@ -8,17 +8,17 @@
 
 Lesson 4. We're going to do something different here.
 
-Up until now, we've been excavating. Digging up what's true. Your MIQs—what you actually want. Your WHY—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
+Up until now, we've been excavating. Digging up what's true. Your Real Reasons—what you actually want. Your Driving Fire—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
 
 Now we pivot. Now we look forward.
 
-This lesson is about the person you're *becoming*. Not the person you wish you were. Not some Instagram-filtered version of your best self. The real, embodied, lived-in version of you who can actually carry the life, the business, and the impact you've been describing in these worksheets.
+This lesson is about the person you're *becoming*. Not the person you wish you were. Not some Instagram-filtered version of your best self. The real, embodied, lived-in version of you—the one who can actually carry the life, the business, and the impact you've been describing in these worksheets.
 
 ---
 
-### The Future You
+### The Becoming
 
-This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Future You**—the person you're becoming:
+Four domains of growth that, together, create a whole person. We call it **The Becoming**—the person you're becoming:
 
 **1. Self (Personal)** — Your identity. Your standards. The person you are when nobody's watching. How you handle pressure. How you protect your energy. How you make decisions.
 
@@ -26,7 +26,7 @@ This framework is inspired by Brendon Burchard's work on high performance—four
 
 **3. Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands.
 
-**4. Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Just Cause?
+**4. Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Cause Worth Playing For?
 
 Here's what I love about this framework: it refuses to let you grow in one area at the expense of another. You can't just crush it in business while your relationships crumble. You can't just be an amazing partner while your skills stagnate. The whole point is that growth doesn't require self-abandonment. You grow *as a whole person*—or the growth is fragile.
 
@@ -43,16 +43,16 @@ Examples: Grounded. Decisive. Generous. Disciplined. Calm. Courageous. Present. 
 Pick three.
 
 Then we make them operational. For each word, you'll answer:
-- When I feel pressure, the future version of me responds by...
-- My future self protects energy by...
-- My future self makes decisions by...
-- A boundary the future version of me keeps no matter what is...
+- When I feel pressure, the version of me I'm becoming responds by...
+- The person I'm becoming protects energy by...
+- The person I'm becoming makes decisions by...
+- A boundary the version of me I'm becoming keeps no matter what is...
 
 See what we're doing? We're not just naming who you want to become—we're defining what it looks like in *practice*. Because "I want to be more present" means nothing without "I put my phone in another room during dinner." Specificity is the bridge between aspiration and reality.
 
 Then: proof. "If someone watched my last 30 days, the clearest evidence I'm becoming this person would be..."
 
-And contrast: "The old version of me would do ________. The future version does ________."
+And contrast: "The old version of me would do ________. The version I'm becoming does ________."
 
 That contrast is powerful. It makes the growth visible. And it gives your AI coach something concrete to hold you accountable to.
 
@@ -62,7 +62,7 @@ That contrast is powerful. It makes the growth visible. And it gives your AI coa
 
 Most goal-setting frameworks completely ignore relationships. Or they tack them on as an afterthought—"Oh, and also be a good spouse." That's not enough.
 
-The Social future asks you to name the people who matter most. And then—this is the part that gets people—it asks you to imagine what they'd say about you in *twenty years*. Three words each. "How would your partner describe why they love you?" "How would your kids describe the kind of parent you were?"
+The Social domain asks you to name the people who matter most. And then—this is the part that gets people—it asks you to imagine what they'd say about you in *twenty years*. Three words each. "How would your partner describe why they love you?" "How would your kids describe the kind of parent you were?"
 
 Then it asks: what would they say about the *last week*?
 
@@ -74,7 +74,7 @@ And the daily intention: "One way I will intentionally upgrade each of these rel
 
 ### Skills: What's the Game You're Playing?
 
-The Skills future starts with your Primary Field of Interest—the game you're actually playing. Not the twenty games you could be playing. The one you've chosen.
+The Skills domain starts with your Primary Field of Interest—the game you're actually playing. Not the twenty games you could be playing. The one you've chosen.
 
 Then: three skills you must build *now* to be lethal in that field twelve months from now. And three skills you'll need five to ten years from now. Future-proofing.
 

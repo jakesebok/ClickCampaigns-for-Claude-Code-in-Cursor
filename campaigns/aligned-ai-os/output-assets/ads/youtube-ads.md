@@ -51,10 +51,10 @@ The problem isn't your business model. The problem is that your strategy was nev
 **[SOLUTION]**
 In the Strategic Alignment Intensive, I walk you through the exact framework my Accelerator clients use to:
 - Name their real end goals — the experiences, growth, and contribution that actually matter
-- Find their WHY — not a marketing statement, the real purpose that passes the full-body test
+- Find their Driving Fire — not a marketing statement, the real purpose that passes the full-body test
 - Extract their top 5 values — with behaviors and boundaries, not just words on a wall
-- Build a Revenue Bridge — turning meaning into math
-- Identify their ONE THING — the domino that makes everything else easier
+- Build From Meaning to Math — turning meaning into math
+- Identify their Vital Action — the single move that makes everything else easier
 
 And at the end, you get APOS — the Aligned Performance Operating System. A personalized AI coach loaded with everything you built. 30 days free.
 

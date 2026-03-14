@@ -96,7 +96,7 @@ export default function LandingPage() {
                 step: "01",
                 title: "Build your context",
                 description:
-                  "Upload your Strategic Clarity worksheets from the Intensive or answer guided questions. Your AI coach learns your values, goals, WHY, and real business numbers.",
+                  "Upload your Alignment Arc worksheets from the Intensive or answer guided questions. Your AI coach learns your values, goals, Driving Fire, and real business numbers.",
                 icon: Target,
               },
               {
@@ -110,7 +110,7 @@ export default function LandingPage() {
                 step: "03",
                 title: "Stay aligned daily",
                 description:
-                  "Morning SMS prompts, weekly ONE THING tracking, 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
+                  "Morning SMS prompts, weekly Vital Action tracking, 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
                 icon: Bell,
               },
             ].map((item) => (
@@ -186,15 +186,15 @@ export default function LandingPage() {
               },
               {
                 icon: BarChart3,
-                title: "Revenue Bridge Math",
+                title: "From Meaning to Math",
                 description:
                   "Your real numbers — Required Revenue, QCs per week, close rates — built into every strategy recommendation.",
               },
               {
                 icon: Target,
-                title: "ONE THING Tracking",
+                title: "Vital Action Tracking",
                 description:
-                  "Set your weekly domino. Get mid-week check-ins. End-of-week reflections. Stay focused on the move that matters most.",
+                  "Set your weekly Vital Action. Get mid-week check-ins. End-of-week reflections. Stay focused on the move that matters most.",
               },
               {
                 icon: Bell,

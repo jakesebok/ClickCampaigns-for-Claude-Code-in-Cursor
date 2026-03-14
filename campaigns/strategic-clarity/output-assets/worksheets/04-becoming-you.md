@@ -1,8 +1,8 @@
-# Becoming You (The Future You)
+# The Becoming
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your WHY and Just Cause into a lived future.
+> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
 
 ---
 
@@ -34,13 +34,13 @@ Copy your three words into the left column below and answer each question.
 |---------|---------|---------|
 |         |         |         |
 
-**My future self protects energy by…**
+**The person I'm becoming protects energy by…**
 
 | Word 1: | Word 2: | Word 3: |
 |---------|---------|---------|
 |         |         |         |
 
-**My future self makes decisions by…**
+**The person I'm becoming makes decisions by…**
 
 | Word 1: | Word 2: | Word 3: |
 |---------|---------|---------|
@@ -60,7 +60,7 @@ Copy your three words into the left column below and answer each question.
 
 **The old version of me would do ________. The future version does ________.**
 
-| Word | Old Version Does… | Future Version Does… |
+| Word | Old Version Does… | Version I'm Becoming Does… |
 |------|-------------------|----------------------|
 |      |                   |                      |
 |      |                   |                      |
@@ -122,7 +122,7 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### B) The 3 skills I must build now to be lethal in this field 12 months from now:
 
-| Skill | Why It Matters (link to vision/WHY) | How I Will Build It (practice/coaching/training) |
+| Skill | Why It Matters (link to vision/Driving Fire) | How I Will Build It (practice/coaching/training) |
 |-------|--------------------------------------|--------------------------------------------------|
 |       |                                      |                                                  |
 |       |                                      |                                                  |
@@ -130,7 +130,7 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### C) The 3 skills I'll need 5–10 years from now (future-proofing):
 
-| Skill | Why It Matters (link to vision/WHY) | How I Will Build It (practice/coaching/training) |
+| Skill | Why It Matters (link to vision/Driving Fire) | How I Will Build It (practice/coaching/training) |
 |-------|--------------------------------------|--------------------------------------------------|
 |       |                                      |                                                  |
 |       |                                      |                                                  |
@@ -159,11 +159,11 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 | Prompt | Your Answer |
 |--------|-------------|
-| If I could only strengthen ONE future first to unlock the rest, it would be… |  |
+| If I could only strengthen ONE domain first to unlock the rest, it would be… |  |
 | The reason is… |  |
 | The old pattern that will try to pull me back is… |  |
 | The first visible action I will take in the next 7 days is… |  |
 
 ---
 
-*Your Future You feeds directly into your Aligned AI OS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*The Becoming feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*

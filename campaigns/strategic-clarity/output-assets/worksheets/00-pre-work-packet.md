@@ -1,4 +1,4 @@
-# Aligned Power — Strategic Clarity Pre-Work Packet
+# Aligned Power — The Alignment Arc Pre-Work Packet
 
 > **Complete this packet before the workshop.** Plan 30–60 minutes in a quiet space. Fill it digitally—we'll use AI during the workshop, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
 
@@ -6,7 +6,7 @@
 
 ## What This Powers
 
-Everything you write here feeds directly into your **Aligned AI OS Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
+Everything you write here feeds directly into your **VAPOS Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
 
 **The details you provide become the operating system that keeps your business expanding without compromising who you are.**
 
@@ -16,7 +16,7 @@ Everything you write here feeds directly into your **Aligned AI OS Upgrade**—a
 
 - [ ] Exercise 1: Values Extraction
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: Revenue Bridge Inputs
+- [ ] Exercise 3: From Meaning to Math Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
@@ -87,7 +87,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — Revenue Bridge Inputs
+## Exercise 3 — From Meaning to Math Inputs
 
 **Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
 
@@ -233,4 +233,4 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-*Bring this completed packet with you. Everything you've written powers your Aligned AI OS.*
+*Bring this completed packet with you. Everything you've written powers your VAPOS.*

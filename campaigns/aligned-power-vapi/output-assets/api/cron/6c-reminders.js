@@ -124,7 +124,7 @@ function buildHtmlEmail({ type, firstName }) {
       </tr>
     </table>
 
-    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your ONE THING to focus on next week.</p>
+    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your Vital Action to focus on next week.</p>
 
     <div style="text-align:center;margin-bottom:8px;">
       <a href="${SCORECARD_URL}" style="display:inline-block;background:#0E1624;color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;">Log In to My Portal &rarr;</a>
@@ -152,7 +152,7 @@ function buildTextEmail({ type, firstName }) {
 
 Your weekly 6C's Scorecard is open now through Sunday at 6pm Eastern.
 
-It takes just a few minutes and keeps your alignment front and center as you head into a new week. Rate yourself across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — then set your ONE THING to focus on next week.
+It takes just a few minutes and keeps your alignment front and center as you head into a new week. Rate yourself across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — then set your Vital Action to focus on next week.
 
 → Fill out your scorecard: ${SCORECARD_URL}
 

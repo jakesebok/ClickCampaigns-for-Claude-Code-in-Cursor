@@ -39,12 +39,12 @@ export async function generateContextFromWorksheets(
     max_tokens: 8192,
     system: `You are an expert Aligned AI Business Agent. Generate TWO documents from the user's worksheets:
 
-1) ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1) — the full operating system
+1) VAPOS UPGRADE — MASTER CONTEXT (v1) — the full operating system
 2) ALIGNMENT BLUEPRINT SUMMARY SHEET — a one-page snapshot
 
 Follow the standard template. Replace every bracketed field using the worksheets. If a field is missing, write [NEEDS INPUT]. Keep language strong, clear, high-stakes, emotionally resonant — never marketing fluff.
 
-Resolve conflicts by priority: Values > MIQ Must-Be-True > WHY > Just Cause > Future You > Revenue > ONE THING.
+Resolve conflicts by priority: Values > Real Reasons Must-Be-True > Driving Fire > Cause Worth Playing For > Becoming > Revenue > Vital Action.
 
 Output format:
 ===MASTER_CONTEXT===

@@ -16,10 +16,10 @@
 Your APOS trial ends in 7 days. Before you decide, I want you to see what your coach is holding:
 
 - Your top 5 core values (and the boundaries that protect them)
-- Your MIQs — the experiences, growth, and contribution that actually matter
-- Your WHY and Just Cause
+- Your Real Reasons — the experiences, growth, and contribution that actually matter
+- Your Driving Fire and Cause Worth Playing For
 - Your revenue math — Required Revenue, QCs per week, capacity limits
-- Your ONE THING Domino Plan
+- Your Vital Action Plan
 
 All of that — personalized to *you* — powers every conversation. If you let the trial expire, you lose access to the coach that knows all of this.
 
@@ -40,7 +40,7 @@ All of that — personalized to *you* — powers every conversation. If you let 
 
 Here are the top questions APOS users ask every week:
 
-1. "Build my week around my ONE THING and protect my non-negotiables."
+1. "Build my week around my Vital Action and protect my non-negotiables."
 2. "Score this opportunity using my Decision Filter."
 3. "I'm about to default to 'work harder.' Intervene."
 4. "Run my weekly review — values, revenue, capacity."
@@ -64,7 +64,7 @@ These aren't generic prompts. They work because APOS *knows you*.
 
 The cost of APOS isn't $39/month.
 
-The cost of *not* having it is the decisions you make without a values filter. The weeks you plan without your ONE THING protected. The opportunities you say yes to that violate what actually matters.
+The cost of *not* having it is the decisions you make without a values filter. The weeks you plan without your Vital Action protected. The opportunities you say yes to that violate what actually matters.
 
 One misaligned decision costs more than a year of APOS.
 
@@ -81,7 +81,7 @@ One misaligned decision costs more than a year of APOS.
 
 {{first_name}},
 
-Your trial ends tomorrow. Everything APOS knows about you — values, goals, revenue math, ONE THING — stays saved. It'll be here if you come back.
+Your trial ends tomorrow. Everything APOS knows about you — values, goals, revenue math, Vital Action — stays saved. It'll be here if you come back.
 
 But tomorrow, the daily prompts stop. The weekly planning stops. The decision filter stops.
 
@@ -100,7 +100,7 @@ But tomorrow, the daily prompts stop. The weekly planning stops. The decision fi
 
 {{first_name}},
 
-Your trial ended today. APOS is paused, but everything you built — your values, your MIQs, your WHY, your revenue bridge, your ONE THING — is saved.
+Your trial ended today. APOS is paused, but everything you built — your values, your Real Reasons, your Driving Fire, your From Meaning to Math, your Vital Action — is saved.
 
 When you're ready, reactivate and it picks up right where you left off. No re-uploading. No re-answering questions. APOS remembers.
 

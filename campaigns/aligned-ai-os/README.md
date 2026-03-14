@@ -67,7 +67,7 @@ app/
 ├── (dashboard)/        # Authenticated app
 │   ├── chat/           # AI coaching chat
 │   ├── blueprint/      # Alignment Blueprint viewer
-│   ├── one-thing/      # Weekly ONE THING tracker
+│   ├── one-thing/      # Weekly Vital Action tracker
 │   ├── scorecard/      # 6Cs weekly scorecard (full framework)
 │   ├── onboarding/     # Upload or guided onboarding
 │   └── settings/       # Account, SMS, billing, context
@@ -100,7 +100,7 @@ output-assets/
 | 5 | **Courage** | Am I doing the hard right thing? |
 | 6 | **Connection** | Am I present with the people who matter? |
 
-Each C has 5 statements rated 1-5, reflection prompts, and a final ONE THING question.
+Each C has 5 statements rated 1-5, reflection prompts, and a final Vital Action question.
 
 ## Integration with Marketing Website
 

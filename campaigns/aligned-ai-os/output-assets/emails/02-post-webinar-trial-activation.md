@@ -22,7 +22,7 @@ Your worksheets from today's Intensive are *gold*. And here's how to turn them i
 **Step 3:** Upload your completed worksheets (export your Google Doc as .docx)
 **Step 4:** APOS synthesizes everything into your personalized AI coach
 
-Your coach will know your values, your MIQs, your WHY, your revenue math, and your ONE THING. From day one.
+Your coach will know your values, your Real Reasons, your Driving Fire, your revenue math, and your Vital Action. From day one.
 
 **[Activate APOS →]**
 
@@ -65,7 +65,7 @@ If you hit any issues, just reply to this email. I've got you.
 
 If you've activated APOS — here are 3 questions to start with this week:
 
-**1. "Build my week around my Future You and ONE THING."**
+**1. "Build my week around my Becoming and Vital Action."**
 APOS will create a calendar plan that protects what matters.
 
 **2. "What's my current bottleneck? Prove it with the numbers."**
@@ -95,7 +95,7 @@ That's because APOS knows *you*.
 
 Here are two ways to make it even smarter:
 
-**1. Do the Reality Check worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make APOS more realistic about your current situation.
+**1. Do The Reckoning worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make APOS more realistic about your current situation.
 
 **2. Submit your first 6Cs Scorecard.** APOS tracks your scores across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — and references trends in future conversations.
 

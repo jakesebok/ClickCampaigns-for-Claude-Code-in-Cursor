@@ -1,4 +1,4 @@
-# Strategic Clarity Intensive Workshop — All Scripts in Order
+# The Alignment Arc Intensive — All Scripts in Order
 
 > **Consolidated document.** Every video script from the Strategic Clarity module, in sequence. Source files remain unchanged in `documents/`.
 
@@ -20,7 +20,7 @@ Fair. Let me explain.
 
 ### The Pre-Work Is the Foundation
 
-Everything we build in Strategic Clarity—your MIQs, your WHY, your values, your revenue bridge, your ONE THING—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
+Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your values, From Meaning to Math, your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
 
 Think of it this way. If I hand you the most incredible GPS in the world—one that knows every shortcut, every traffic pattern, every scenic route—but you never tell it where you're starting from? It's useless. Beautiful. Sophisticated. Useless.
 
@@ -34,9 +34,9 @@ There are four exercises in the packet:
 
 **Exercise 1: Values Extraction.** You're going to list five people you admire and five specific qualities you admire in each of them. This is the raw material we'll use to extract your core values. And I mean *specific*—not "she's smart," but "she explains complex things simply without making people feel small." That level. Because vague inputs produce vague values, and vague values produce vague decisions.
 
-**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your WHY. We're going to mine them.
+**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them.
 
-**Exercise 3: Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the From Meaning to Math worksheet actually *work* instead of just being wishful thinking.
 
 **Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your AI coach needs to understand your business to give you useful advice. This is how it learns.
 
@@ -58,7 +58,7 @@ A few rules:
 
 ### Why It Powers Everything
 
-Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your Aligned AI OS. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your AI coach.
+Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your VAPOS. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your AI coach.
 
 So when you write a peak moment that seems small? Your AI coach remembers it. When you write an honest number about your revenue? Your AI coach uses it. When you name a quality you admire in someone else? That becomes a core value your AI coach holds you to.
 
@@ -106,32 +106,32 @@ We're going to take the things that matter most to you—your real desires, your
 
 By the end of this module, you will have:
 
-1. **Your Most Important Questions (MIQs)** — what you actually want your life to feel like. Not the titles. Not the tactics. Not the revenue goal for its own sake. The *end goals* underneath all of that.
+1. **Your Real Reasons (Life Lists)** — what you actually want your life to feel like. Not the titles. Not the tactics. Not the revenue goal for its own sake. The *end goals* underneath all of that.
 
-2. **Your WHY and Just Cause** — a purpose statement that feels true in your body, not just something that sounds good on a website. Plus a vision of the future worth playing an infinite game for.
+2. **Your Driving Fire and Cause Worth Playing For** — a purpose statement that feels true in your body, not just something that sounds good on a website. Plus a vision of the future worth playing an infinite game for.
 
 3. **Your Top 5 Core Values** — operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
 
-4. **Your Future You** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
+4. **The Becoming** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
 
-5. **A Reality Check** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
+5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
 
-6. **Your Revenue Bridge** — meaning into math. We're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
+6. **From Meaning to Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
 
-7. **Your ONE THING Domino Plan** — the single move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
+7. **Your Vital Action Plan** — the single move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
 
 And then the part I'm most excited about...
 
 ---
 
-### The Aligned AI OS
+### Your VAPOS
 
 Everything you write in this module—every worksheet, every answer, every honest moment—feeds a **Master Prompt** that you'll run at the end. That prompt turns your favorite AI into a personalized executive coach, strategic advisor, and virtual assistant that:
 
 - Knows your values and *never* compromises them
-- Knows your MIQs and reminds you what you actually want
+- Knows your Real Reasons and reminds you what you actually want
 - Knows your revenue targets and capacity constraints
-- Knows your ONE THING and keeps you focused on the domino
+- Knows your Vital Action and keeps you focused on it
 - Scores every opportunity through a values-aligned decision filter
 - Intervenes when you're about to default to "work harder" instead of "work smarter"
 
@@ -145,23 +145,23 @@ And once it's live? You get 50 high-leverage questions you can ask it anytime—
 
 Here's the arc. Each lesson builds on the one before it:
 
-**Lesson 1:** We start with MIQs. End goals vs. means goals. What do you actually want to trade your time, energy, and money for?
+**Lesson 1:** We start with The Real Reasons. End goals vs. means goals. What do you actually want to trade your time, energy, and money for?
 
-**Lesson 2:** We go deep on your WHY and Just Cause. Not the marketing version. The real one.
+**Lesson 2:** We go deep on your Driving Fire and Cause Worth Playing For. Not the marketing version. The real one.
 
 **Lesson 3:** We extract your core values. Five of them. Operational. Specific. Non-negotiable.
 
-**Lesson 4:** We map your Future You. The person you're becoming across every domain that matters.
+**Lesson 4:** We map The Becoming. The person you're becoming across every domain that matters.
 
-**Lesson 5:** We do a Reality Check. Before we turn vision into numbers, we name what's in the way.
+**Lesson 5:** We do The Reckoning. Before we turn vision into numbers, we name what's in the way.
 
-**Lesson 6:** We build your Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
+**Lesson 6:** We build From Meaning to Math. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
 
-**Lesson 7:** We create your ONE THING Domino Plan. One protected move per quarter. Installed on the calendar.
+**Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
-**Lesson 8:** We run the Master Prompt and activate your Aligned AI OS.
+**Lesson 8:** We run the Master Prompt and activate your VAPOS.
 
-**Lesson 9:** We walk through the 50 High-Leverage Questions so you know exactly how to use your new AI coach.
+**Lesson 9:** We walk through the Fire Starters so you know exactly how to use your new AI coach.
 
 ---
 
@@ -169,7 +169,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your MIQs feed your WHY. Your WHY feeds your values. Your values feed your Future You. Your Future You feeds your revenue math. Your revenue math feeds your ONE THING. And all of it feeds your AI OS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your values. Your values feed The Becoming. The Becoming feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as a Strategic Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 
@@ -245,7 +245,7 @@ That's what happens when means goals run the show.
 
 ### The Three Most Important Questions
 
-So here's what we're going to do instead. We're going to answer three questions—Vishen calls them your Most Important Questions, your MIQs—and they cut right past the means goals to the end goals underneath:
+So here's what we're going to do instead. We're going to answer three questions—Vishen calls them your Most Important Questions, your Real Reasons—and they cut right past the means goals to the end goals underneath:
 
 **1. What are the experiences I want to have in this lifetime?**
 
@@ -265,13 +265,13 @@ That's it. Three questions. And they're going to reorient everything.
 
 ### Why We Start Here
 
-We start with MIQs before we talk about revenue, before we talk about strategy, before we talk about your ONE THING—because if you don't know what you actually want, every plan you build is just a more efficient way of running in the wrong direction.
+We start with Real Reasons before we talk about revenue, before we talk about strategy, before we talk about your Vital Action—because if you don't know what you actually want, every plan you build is just a more efficient way of running in the wrong direction.
 
-Your MIQs become the *filter*. Every decision, every opportunity, every shiny object—you run it through: *Does this move me toward the experiences I want? Does this help me grow in the ways that matter? Does this serve the way I want to contribute?*
+Your Real Reasons become the *filter*. Every decision, every opportunity, every shiny object—you run it through: *Does this move me toward the experiences I want? Does this help me grow in the ways that matter? Does this serve the way I want to contribute?*
 
 If yes, lean in. If no, it's a distraction—no matter how lucrative it looks.
 
-And here's the beautiful part: these answers feed directly into your Aligned AI OS. Your AI coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
+And here's the beautiful part: these answers feed directly into your VAPOS. Your AI coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
 
 ---
 
@@ -293,7 +293,7 @@ I'll meet you in the next video where we'll walk through the worksheet together.
 
 ---
 
-## 4. Video 1.2 — MIQs: Worksheet Facilitation
+## 4. Video 1.2 — The Real Reasons: Worksheet Facilitation
 
 **Source:** `video-1.2-miqs-worksheet.md` | ~5–10 minutes
 
@@ -366,11 +366,11 @@ Sit with that one for a minute. You don't have to share it with anyone. But nami
 
 ### When You're Done
 
-Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your WHY is hiding in these answers, your values are woven through them, and your Revenue Bridge will be built on top of them.
+Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your Driving Fire is hiding in these answers, your values are woven through them, and From Meaning to Math will be built on top of them.
 
 For now, your only job was to be honest. If you did that, you nailed it.
 
-I'll see you in Lesson 2, where we go find your WHY.
+I'll see you in Lesson 2, where we go find your Driving Fire.
 
 Let's get after it.
 
@@ -422,7 +422,7 @@ Sinek uses Apple as the classic example. Apple doesn't lead with "we make comput
 
 Now, why does this matter for *you* in Strategic Clarity?
 
-Because your WHY is the through-line. It connects your MIQs to your values to your Future You to your revenue to your ONE THING. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your WHY is the thing that says: *does this serve what I'm actually here for?*
+Because your Driving Fire is the through-line. It connects your Real Reasons to your values to your Becoming to your revenue to your Vital Action. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your Driving Fire is the thing that says: *does this serve what I'm actually here for?*
 
 Without it, you're making decisions based on opportunity cost, fear of missing out, what the market wants, or what your peers are doing. With it, you're making decisions based on purpose. And purpose doesn't burn out the way ambition does.
 
@@ -432,7 +432,7 @@ Without it, you're making decisions based on opportunity cost, fear of missing o
 
 A couple things I want to be really clear about.
 
-We are not writing a tagline. We're not writing marketing copy. If your WHY sounds like it belongs on a website header, it's probably not your WHY yet. Your WHY should feel almost uncomfortably honest. Like the kind of thing you'd tell a close friend at midnight—not the kind of thing you'd put on a business card.
+We are not writing a tagline. We're not writing marketing copy. If your Driving Fire sounds like it belongs on a website header, it's probably not your Driving Fire yet. Your WHY should feel almost uncomfortably honest. Like the kind of thing you'd tell a close friend at midnight—not the kind of thing you'd put on a business card.
 
 We are also not manufacturing purpose. You already have a WHY. It's already in you. It's been in you your whole life—it shows up in the stories you tell, the things that make you angry, the moments when you felt most alive. Our job isn't to create it. Our job is to *excavate* it.
 
@@ -440,7 +440,7 @@ We are also not manufacturing purpose. You already have a WHY. It's already in y
 
 ### The Format
 
-In this workshop, we use a specific format for your WHY:
+In this workshop, we use a specific format for your Driving Fire:
 
 **To ________ so that ________.**
 
@@ -460,7 +460,7 @@ Here's the beautiful part. You already did the hardest work in the Pre-Work Pack
 
 Your WHY is hiding in those stories. Not in one of them—in the *pattern* across all of them. The common thread. The thing you keep fighting for, protecting, or restoring. The transformation that keeps showing up.
 
-In the next video, we're going to mine those stories for themes. We're going to look for the pattern. And then we're going to draft your WHY.
+In the next video, we're going to mine those stories for themes. We're going to look for the pattern. And then we're going to draft your Driving Fire.
 
 But before that, I want you to do one thing. Go back and re-read your Peak Moments. Read them slowly. And as you read, ask yourself:
 
@@ -510,7 +510,7 @@ Now we go pattern hunting.
 
 If you're doing this with a partner or in a group—great. One person asks the questions, listens for repeats, and mirrors back what they hear. No advice. No fixing. Just listening and reflecting.
 
-If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as your WHY coach, walking you through the same process.
+If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as a values-aligned theme mining coach, walking you through the same process.
 
 Either way, here are the five questions. Answer them quickly. First honest answer wins.
 
@@ -553,7 +553,7 @@ That last one—the messy one—is usually closest to your real WHY. Don't clean
 
 Copy the prompt from the worksheet. Paste it into ChatGPT, Claude, or whatever you use. Then paste your Peak Moments table underneath it.
 
-The AI will act as Simon Sinek—warm, direct, no fluff. It'll ask you questions one at a time. It'll push you for specificity. It'll mirror back patterns. And it'll help you draft your WHY by the end of the conversation.
+The AI will act as a values-aligned theme mining coach—warm, direct, no fluff. It'll ask you questions one at a time. It'll push you for specificity. It'll mirror back patterns. And it'll help you draft your Driving Fire by the end of the conversation.
 
 A couple tips for the AI session:
 
@@ -565,7 +565,7 @@ A couple tips for the AI session:
 
 ### What Comes Next
 
-In the next video, we'll take everything you've mined—whether with a partner or with AI—and draft your WHY statement. Then we'll test it with your body, strengthen it with context, and connect it to your Just Cause.
+In the next video, we'll take everything you've mined—whether with a partner or with AI—and draft your Driving Fire statement. Then we'll test it with your body, strengthen it with context, and connect it to your Cause Worth Playing For.
 
 For now, your job is the mining. Dig into those stories. Find the thread. Trust the process.
 
@@ -577,7 +577,7 @@ Let's get after it.
 
 ---
 
-## 7. Video 2.3 — Draft, Test, Just Cause, Mission
+## 7. Video 2.3 — Draft, Test, Cause Worth Playing For, Mission
 
 **Source:** `video-2.3-why-draft-test-cause.md` | ~5–8 minutes
 
@@ -591,7 +591,7 @@ Okay, you've done the mining. You've got themes. You've got a messy sentence tha
 
 ### Exercise 3: Draft Your WHY
 
-Open your worksheet to Exercise 3. You're going to write three drafts of your WHY statement using the format:
+Open your worksheet to Exercise 3. You're going to write three drafts of your Driving Fire statement using the format:
 
 **To [contribution] so that [impact].**
 
@@ -617,7 +617,7 @@ For each draft, note three things:
 - **Emotion:** What do you feel? Relief? Energy? Nothing? Anxiety? Tears?
 - **Truth note:** What feels true? What feels like performance?
 
-The draft that makes your chest open, that gives you a little surge of emotion, that makes you think "yeah... *that's* it"—that's your WHY. Even if it's not the best-written one. Even if it's the messiest. The body doesn't lie.
+The draft that makes your chest open, that gives you a little surge of emotion, that makes you think "yeah... *that's* it"—that's your Driving Fire. Even if it's not the best-written one. Even if it's the messiest. The body doesn't lie.
 
 If none of them land? That's okay. It means you're close but not there yet. Go back to your Theme Summary—the raw, messy sentence—and try again. Sometimes the WHY doesn't fit the template. Sometimes you have to write it in plain English first and then shape it into the "To ___ so that ___" format.
 
@@ -633,31 +633,31 @@ Once you've got a working draft, we strengthen it with context. Answer these que
 - What "enemy" are you fighting against?
 - What deeper human need do you serve?
 
-This isn't extra work. This is the context that makes your WHY specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a WHY with teeth.
+This isn't extra work. This is the context that makes your Driving Fire specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a WHY with teeth.
 
 Write your clean working draft at the bottom of Exercise 5.
 
 ---
 
-### Exercise 6: Your Just Cause
+### Exercise 6: Your Cause Worth Playing For
 
 Now we zoom out. Way out.
 
-Your WHY is personal. It's about the impact *you* make. Your **Just Cause** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely.
+Your WHY is personal. It's about the impact *you* make. Your **Cause Worth Playing For** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely.
 
-Simon Sinek talks about this in *The Infinite Game*. A Just Cause is:
+Simon Sinek talks about this in *The Infinite Game*. A Cause Worth Playing For is:
 - A specific vision of a future state that does not yet exist
 - So compelling you're willing to sacrifice to advance it
 - Bigger than any one person or organization
 - Pursued indefinitely—there's no "finish line"
 
-Here's the prompt: *"In a world with my Just Cause advancing..."*
+Here's the prompt: *"In a world with my Cause Worth Playing For advancing..."*
 
 - What becomes more true?
 - What becomes less true?
 - Who benefits, and how?
 
-Write two drafts of your Just Cause: "A world where..."
+Write two drafts of your Cause Worth Playing For: "A world where..."
 
 Then choose one and rewrite it clean.
 
@@ -665,7 +665,7 @@ Then choose one and rewrite it clean.
 
 ### Exercise 7: Connect the Dots
 
-Now we bring it all together. Your WHY + your Just Cause + your actual work.
+Now we bring it all together. Your WHY + your Cause Worth Playing For + your actual work.
 
 Fill in:
 - **Target audience** (not a demographic—a human state)
@@ -682,12 +682,12 @@ Then write your **Mission Statement**: "I help [target audience] achieve/overcom
 At the bottom of the worksheet, write your three final drafts clean:
 
 1. **WHY:** To ________ so that ________.
-2. **Just Cause:** A world where...
+2. **Cause Worth Playing For:** A world where...
 3. **Business Mission Statement:** I help...
 
 These don't have to be final-final. They're working drafts. They'll sharpen over time. But they should feel *true*—true in your body, not just your head.
 
-And remember: all three feed directly into your Aligned AI OS. Your AI coach will use your WHY as a purpose filter, your Just Cause as a long-term orientation, and your Mission as the bridge between purpose and work.
+And remember: all three feed directly into your VAPOS. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
 
 That's Lesson 2. Three documents. Three levels of clarity. Take a breath. You've done real work here.
 
@@ -842,7 +842,7 @@ There's an AI prompt in the worksheet that runs a structured trade-off test. It 
 
 Here's the critical thing: **answer from your gut, not your head.** Your head will try to pick the "right" answer. Your gut knows which one you'd actually protect when it costs you something.
 
-If you find yourself agonizing over a matchup, it usually means both values are important—but one of them is *load-bearing*. It's the one that, if it were missing, everything else would collapse. That's the one you choose.
+If you find yourself agonizing over a matchup, it usually means both values are important—but one of them is *the one that holds everything else up*. It's the one that, if it were missing, everything else would collapse. That's the one you choose.
 
 ---
 
@@ -864,7 +864,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 This final table—five values, each with a definition, behaviors, and a boundary—this is one of the most important things you'll create in this entire module.
 
-It feeds directly into your Aligned AI OS as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
+It feeds directly into your VAPOS as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
 
 And more than that—this table becomes a mirror. You can come back to it in a month, in six months, in a year, and ask: am I living this? Am I embodying these behaviors? Am I holding these boundaries?
 
@@ -874,7 +874,7 @@ Values aren't something you set once. They're something you practice daily. This
 
 ### One Last Thing
 
-You might notice that your Top 5 don't include some values you expected. "Where's family? Where's health? Where's success?" That's normal. It doesn't mean those things don't matter. It means they show up *through* the values you did select. Integrity might be how you protect your family. Self-trust might be how you maintain your health. The Top 5 are the load-bearing walls. Everything else is built on them.
+You might notice that your Top 5 don't include some values you expected. "Where's family? Where's health? Where's success?" That's normal. It doesn't mean those things don't matter. It means they show up *through* the values you did select. Integrity might be how you protect your family. Self-trust might be how you maintain your health. The Top 5 are the the ones that hold everything else up. Everything else is built on them.
 
 Alright. You've got your values. I'll see you in Lesson 4, where we map the future you're building.
 
@@ -886,7 +886,7 @@ Let's get after it.
 
 ---
 
-## 10. Video 4.1 — The Future You
+## 10. Video 4.1 — The Becoming
 
 **Source:** `video-4.1-future-four.md` | ~8–12 minutes
 
@@ -896,7 +896,7 @@ Let's get after it.
 
 Lesson 4. We're going to do something different here.
 
-Up until now, we've been excavating. Digging up what's true. Your MIQs—what you actually want. Your WHY—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
+Up until now, we've been excavating. Digging up what's true. Your Real Reasons—what you actually want. Your WHY—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
 
 Now we pivot. Now we look forward.
 
@@ -904,9 +904,9 @@ This lesson is about the person you're *becoming*. Not the person you wish you w
 
 ---
 
-### The Future You
+### The Becoming
 
-This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Future You**—the person you're becoming:
+This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Becoming**—the person you're becoming:
 
 **1. Self (Personal)** — Your identity. Your standards. The person you are when nobody's watching. How you handle pressure. How you protect your energy. How you make decisions.
 
@@ -914,7 +914,7 @@ This framework is inspired by Brendon Burchard's work on high performance—four
 
 **3. Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands.
 
-**4. Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Just Cause?
+**4. Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Cause Worth Playing For?
 
 Here's what I love about this framework: it refuses to let you grow in one area at the expense of another. You can't just crush it in business while your relationships crumble. You can't just be an amazing partner while your skills stagnate. The whole point is that growth doesn't require self-abandonment. You grow *as a whole person*—or the growth is fragile.
 
@@ -1050,7 +1050,7 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-Your Future You becomes Section 4 of your Aligned AI OS. Your AI coach will know:
+Your Becoming becomes Section 4 of your VAPOS. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
@@ -1063,11 +1063,11 @@ So when you ask your AI coach for a weekly plan, it doesn't just look at revenue
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. MIQs. WHY. Values. The Future You. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. WHY. Values. The Becoming. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
-I'll see you in Lesson 5, where we do a Reality Check before turning all of this into numbers.
+I'll see you in Lesson 5, where we do a The Reckoning before turning all of this into numbers.
 
 ---
 
@@ -1075,7 +1075,7 @@ I'll see you in Lesson 5, where we do a Reality Check before turning all of this
 
 ---
 
-## 12. Video 5.1 — Reality Check
+## 12. Video 5.1 — The Reckoning
 
 **Source:** `video-5.1-reality-check.md` | ~5–10 minutes
 
@@ -1085,7 +1085,7 @@ I'll see you in Lesson 5, where we do a Reality Check before turning all of this
 
 Alright. Lesson 5. And this one's going to be short but honest.
 
-You've done incredible work. You've named what you actually want. You've found your WHY. You've defined your values. You've cast a vision for who you're becoming. That's real. That matters.
+You've done incredible work. You've named what you actually want. You've found your Driving Fire. You've defined your values. You've cast a vision for who you're becoming. That's real. That matters.
 
 But here's what I've learned—and this is the part nobody likes to hear: **vision without a reality check is just fantasy with good lighting.**
 
@@ -1093,23 +1093,23 @@ But here's what I've learned—and this is the part nobody likes to hear: **visi
 
 ### The Bridge
 
-Before we turn everything into numbers—before we build the Revenue Bridge and the Domino Plan and the weekly actions—we need to stop for a moment and name what's *true right now*.
+Before we turn everything into numbers—before we build the From Meaning to Math and the Vital Action Plan and the weekly actions—we need to stop for a moment and name what's *true right now*.
 
 Not what we want to be true. What *is* true.
 
-Because your MIQs describe a future you. Your values describe an ideal you. Your Future You describes the person you're becoming. All beautiful. All necessary. But if we don't also name the gap—the distance between *here* and *there*—we'll build a plan that doesn't account for reality. And plans that don't account for reality don't survive contact with Monday morning.
+Because your Real Reasons describe a future you. Your values describe an ideal you. Your Becoming describes the person you're becoming. All beautiful. All necessary. But if we don't also name the gap—the distance between *here* and *there*—we'll build a plan that doesn't account for reality. And plans that don't account for reality don't survive contact with Monday morning.
 
-This is the Reality Check.
+This is the The Reckoning.
 
 ---
 
 ### Six Questions
 
-Open the Reality Check worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one.
+Open the The Reckoning worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one.
 
-**1. Must Be True.** What must be true in your life for your MIQs to actually happen? Not "it would be nice if..." What's non-negotiable? What conditions *must* exist? Maybe it's "I need to be debt-free." Maybe it's "I need to work fewer than 40 hours a week." Maybe it's "I need a partner who supports this vision." Name the requirements.
+**1. Must Be True.** What must be true in your life for your Real Reasons to actually happen? Not "it would be nice if..." What's non-negotiable? What conditions *must* exist? Maybe it's "I need to be debt-free." Maybe it's "I need to work fewer than 40 hours a week." Maybe it's "I need a partner who supports this vision." Name the requirements.
 
-**2. Misalignments.** What are you currently tolerating that contradicts what you said you want? This one takes courage. Where is your calendar saying one thing while your MIQs say another? Where are you investing time, energy, or money in something that actively works against the future you described?
+**2. Misalignments.** What are you currently tolerating that contradicts what you said you want? This one takes courage. Where is your calendar saying one thing while your Real Reasons say another? Where are you investing time, energy, or money in something that actively works against the future you described?
 
 **3. Costs.** What is staying in misalignment costing you? Name it specifically. Energy. Relationships. Peace. Money. Health. Self-respect. Opportunity. Time you'll never get back. What is the *price* of not changing?
 
@@ -1123,7 +1123,7 @@ Open the Reality Check worksheet. There are six questions. That's it. One page. 
 
 ### Why This Worksheet Is Optional (But Powerful)
 
-I want to be transparent about something. This worksheet is optional. You can skip it and still run the Master Prompt and still get a functional AI OS. The fields that come from the Reality Check will simply show `[NEEDS INPUT]` in your AI OS, and your coach will ask you about them later.
+I want to be transparent about something. This worksheet is optional. You can skip it and still run the Master Prompt and still get a functional AI OS. The fields that come from the The Reckoning will simply show `[NEEDS INPUT]` in your AI OS, and your coach will ask you about them later.
 
 But here's what you gain if you do it: your AI coach becomes significantly smarter about your actual life. It knows not just what you want, but what's in the way. It knows what you're tolerating, what it's costing you, and what part of you might resist the plan. That context is the difference between advice that sounds good and advice that actually works—for *you*, in *your* situation, right now.
 
@@ -1146,7 +1146,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—MIQs, WHY, values, Future You, reality check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
+In Lesson 6, we take everything you've built—Real Reasons, WHY, values, Becoming, reality check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 
@@ -1170,7 +1170,7 @@ Let's get after it.
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—MIQs, WHY, values, Future You, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, WHY, values, Becoming, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -1178,11 +1178,11 @@ So now we turn meaning into math.
 
 ---
 
-### The Revenue Bridge
+### The From Meaning to Math
 
 Here's what we're building: a bridge from what you *want* to what your business must *produce*. Not a goal you pulled from a mastermind. Not a number your competitor is chasing. Not "I want to make a million dollars because it sounds impressive."
 
-A Required Revenue number that's built on *your* actual life—your baseline needs, the future you're funding, the desires your MIQs revealed, and the impact your Just Cause demands.
+A Required Revenue number that's built on *your* actual life—your baseline needs, the future you're funding, the desires your Real Reasons revealed, and the impact your Cause Worth Playing For demands.
 
 When we're done, you'll know exactly what your business needs to generate—and why. Every dollar will be connected to something real. And when you hit a rough month? You won't be wondering "why am I doing this?" You'll know. Because you built the number on purpose.
 
@@ -1207,11 +1207,11 @@ Here's what I want you to notice about this number: it's not exciting. It's not 
 
 ---
 
-### Step 2: Fund the Future You (Stretch Desires)
+### Step 2: Fund the Becoming (Stretch Desires)
 
 Now we go above the floor.
 
-Remember your Future You? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
+Remember your Becoming? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
 
 For each domain, answer:
 - What does "better" look like?
@@ -1221,7 +1221,7 @@ For each domain, answer:
 
 Maybe Personal means hiring a trainer ($6,000/year). Maybe Relationships means a monthly date night and a family trip ($8,000/year). Maybe Skills means a coaching certification ($12,000/year). Maybe Impact means sponsoring a program ($5,000/year).
 
-Add it up. That's your Future You Total.
+Add it up. That's your Becoming Total.
 
 Then: your MIQ-based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
 
@@ -1231,13 +1231,13 @@ Add it up. That's your MIQ Desires Total.
 
 ### Step 3: Resource the Impact (Your Tithe)
 
-Your business doesn't have to *be* your Just Cause—but it can *fund* it.
+Your business doesn't have to *be* your Cause Worth Playing For—but it can *fund* it.
 
 Think of your impact target like a tithe: a percentage you protect, not an afterthought. I suggest 10%, but you choose the number.
 
-Write your Just Cause in plain language. Name a specific impact target for the year. Decide how you'll resource it—money, time, platform, partnerships. Estimate the annual contribution.
+Write your Cause Worth Playing For in plain language. Name a specific impact target for the year. Decide how you'll resource it—money, time, platform, partnerships. Estimate the annual contribution.
 
-That's your Just Cause Total.
+That's your Cause Worth Playing For Total.
 
 ---
 
@@ -1277,7 +1277,7 @@ I'll see you in the next one.
 
 ### VIDEO SCRIPT
 
-Alright. You've got your numbers. Baseline Needs. Future You investments. MIQ Desires. Just Cause Tithe. Now we add them up and do the math that changes everything.
+Alright. You've got your numbers. Baseline Needs. Becoming investments. MIQ Desires. Cause Worth Playing For Tithe. Now we add them up and do the math that changes everything.
 
 ---
 
@@ -1286,9 +1286,9 @@ Alright. You've got your numbers. Baseline Needs. Future You investments. MIQ De
 Open your worksheet to Step 4. Stack your totals:
 
 - Baseline Needs Total
-- Future You Total
+- Becoming Total
 - MIQ Desires Total
-- Just Cause Total
+- Cause Worth Playing For Total
 
 Add them up. That's your **Required Revenue**. This is the number your business *must* produce for your life to function, grow, and make the impact you want.
 
@@ -1296,7 +1296,7 @@ Now add a **Reality Buffer**—I recommend 10%. Because business isn't linear. T
 
 Baseline + Future + Desires + Impact + 10% buffer = **Target Revenue.**
 
-Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* MIQs, *your* values, *your* Future You, and *your* cause.
+Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* Real Reasons, *your* values, *your* Becoming, and *your* cause.
 
 This is not "I want to make more money." This is "My life requires $X, and here's exactly why."
 
@@ -1390,7 +1390,7 @@ Let's keep going.
 
 ### VIDEO SCRIPT
 
-Last piece of the Revenue Bridge. Two more steps and you've got a complete operational plan.
+Last piece of the From Meaning to Math. Two more steps and you've got a complete operational plan.
 
 ---
 
@@ -1457,7 +1457,7 @@ At the bottom of the worksheet, you're going to write three things:
 2. **Because if this changes, everything downstream changes by...** — The cascade effect.
 3. **The first small experiment I will run in the next 7 days is...** — Not a 90-day plan. A 7-day experiment. Small. Testable. Real.
 
-This becomes the setup for Lesson 7—the ONE THING Domino Plan. Your highest-leverage move from the Revenue Bridge is often the seed of your ONE THING.
+This becomes the setup for Lesson 7—the Vital Action Plan. Your highest-leverage move from the From Meaning to Math is often the seed of your Vital Action.
 
 ---
 
@@ -1486,7 +1486,7 @@ Let's get after it.
 
 ---
 
-## 16. Video 7.1 — The ONE THING Question
+## 16. Video 7.1 — The Vital Action Question
 
 **Source:** `video-7.1-one-thing-the-question.md` | ~8–12 minutes
 
@@ -1524,15 +1524,15 @@ Your strategy works the same way. One right move creates the conditions for the 
 
 ### Four Lanes, One Lead Lane
 
-Open the ONE THING Domino Plan worksheet.
+Open the Vital Action Plan worksheet.
 
 We start by establishing your four lanes:
 - **Business / Money**
 - **Home / Relationships**
-- **Impact / Just Cause**
+- **Impact / Cause Worth Playing For**
 - **Self / Skills**
 
-For each lane, you're going to answer the ONE THING question. What's the ONE move in Business that makes everything else easier? What's the ONE move in Relationships? Impact? Self?
+For each lane, you're going to answer the Vital Action question. What's the ONE move in Business that makes everything else easier? What's the ONE move in Relationships? Impact? Self?
 
 But here's the critical step: you then choose a **Lead Lane**. One lane where progress would make the *other* lanes easier too.
 
@@ -1564,7 +1564,7 @@ These aren't 90-day goals. These are north stars. They orient the domino chain.
 
 ---
 
-### Your ONE THING Per Lane
+### Your Vital Action Per Lane
 
 Now, for each lane:
 
@@ -1572,15 +1572,15 @@ Now, for each lane:
 
 Be specific. Be action-oriented. Not "grow my business" but "create a group offer at $5K that lets me serve 10 clients simultaneously." Not "be a better spouse" but "protect Thursday evenings for date night and leave my phone in the car."
 
-The ONE THING should feel like a domino—one move that creates movement in everything downstream.
+The Vital Action should feel like a domino—one move that creates movement in everything downstream.
 
 ---
 
 ### What's Next
 
-In the next video, we take your Lead Lane ONE THING and build the Domino Chain—from Someday all the way down to what you'll do in the next 10 minutes. Then we install it on your calendar and plan for the sabotage that's coming.
+In the next video, we take your Lead Lane Vital Action and build the Arc Chain—from Someday all the way down to what you'll do in the next 10 minutes. Then we install it on your calendar and plan for the sabotage that's coming.
 
-For now, fill in your lanes, choose your Lead Lane, and define your ONE THING for each.
+For now, fill in your lanes, choose your Lead Lane, and define your Vital Action for each.
 
 ---
 
@@ -1588,7 +1588,7 @@ For now, fill in your lanes, choose your Lead Lane, and define your ONE THING fo
 
 ---
 
-## 17. Video 7.2 — Domino Chain + Calendar Install
+## 17. Video 7.2 — Arc Chain + Calendar Install
 
 **Source:** `video-7.2-domino-chain-calendar.md` | ~5–8 minutes
 
@@ -1596,15 +1596,15 @@ For now, fill in your lanes, choose your Lead Lane, and define your ONE THING fo
 
 ### VIDEO SCRIPT
 
-Alright, you've got your Lead Lane. You've got your ONE THING. Now we connect Someday to Right Now.
+Alright, you've got your Lead Lane. You've got your Vital Action. Now we connect Someday to Right Now.
 
 ---
 
-### The Domino Chain
+### The Arc Chain
 
 Open your worksheet to Section 4: Goal-Setting to the Now.
 
-This is where the ONE THING framework really earns its keep. We're going to chain your Someday outcome all the way down to what you do in the *next ten minutes*. Each level asks the same question: "What's the ONE thing at this level that makes the next level possible?"
+This is where the Vital Action framework really earns its keep. We're going to chain your Someday outcome all the way down to what you do in the *next ten minutes*. Each level asks the same question: "What's the ONE thing at this level that makes the next level possible?"
 
 **Someday** → your long-term vision for this lane. You already wrote it.
 
@@ -1632,14 +1632,14 @@ Do this for your Lead Lane first. If you have time, repeat for the other lanes. 
 
 Section 5. This is non-negotiable.
 
-Your Lead Lane ONE THING must have a protected time block. If it's not on the calendar, it doesn't exist. Intentions without time blocks are just wishes.
+Your Lead Lane Vital Action must have a protected time block. If it's not on the calendar, it doesn't exist. Intentions without time blocks are just wishes.
 
 Fill in:
-- **The ONE THING** — exactly what you're doing
+- **The Vital Action** — exactly what you're doing
 - **Time block** — day and time
 - **Frequency** — daily, 3x/week, weekly, or custom
 - **Protection rule** — what you will NOT allow during this block. Not "I'll try to protect it." What specifically is *banned*? No calls. No Slack. No email. Door closed. Phone in another room.
-- **Trigger plan** — when I feel resistance or distraction, I will... (Name the specific response. "I will take three breaths and re-read my MIQs." "I will set a 20-minute timer and just start." "I will remind myself what this protects.")
+- **Trigger plan** — when I feel resistance or distraction, I will... (Name the specific response. "I will take three breaths and re-read my Real Reasons." "I will set a 20-minute timer and just start." "I will remind myself what this protects.")
 
 The protection rule matters more than the time block itself. Because you *will* want to give that time away. Someone will have an "urgent" request. You'll feel guilty protecting it. Your old pattern will tell you that being available is more important than being focused.
 
@@ -1657,7 +1657,7 @@ List your likely sabotage patterns and obstacles. Then—for each one—write a 
 
 "I'll get distracted by a new idea." → "I'll write it in a parking lot and return to the domino."
 
-"A client will have an emergency." → "I'll have my VA handle the first response. My ONE THING block is non-negotiable unless someone is actually in danger."
+"A client will have an emergency." → "I'll have my VA handle the first response. My Vital Action block is non-negotiable unless someone is actually in danger."
 
 "I'll convince myself that today's exception is okay." → "I'll remember: one exception becomes a pattern. The pattern becomes a habit. The habit kills the domino."
 
@@ -1681,7 +1681,7 @@ I know it feels dramatic. That's the point. You're making a commitment to yourse
 
 ### One Last Note
 
-If your Lead Lane is Business/Money, go back and check: does your ONE THING support your Required Revenue Bridge? Does it protect the other lanes—or come at their expense? If your business ONE THING is "do 50 cold calls a day" but your Self future says "grounded and present" and your Social future says "protect family dinners"—something's off. Revisit. Realign.
+If your Lead Lane is Business/Money, go back and check: does your Vital Action support your Required From Meaning to Math? Does it protect the other lanes—or come at their expense? If your business Vital Action is "do 50 cold calls a day" but your Self future says "grounded and present" and your Social future says "protect family dinners"—something's off. Revisit. Realign.
 
 The whole point of Strategic Clarity is that your daily actions serve your whole life. Not just one lane at the cost of the others.
 
@@ -1689,9 +1689,9 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: MIQs, WHY, values, Future You, a Reality Check, a Revenue Bridge, and a ONE THING Domino Plan installed on your calendar.
+You've now got everything you need: Real Reasons, WHY, values, Becoming, a The Reckoning, a From Meaning to Math, and a Vital Action Plan installed on your calendar.
 
-In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your Aligned AI OS comes online.
+In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAPOS comes online.
 
 Almost there. Let's keep going.
 
@@ -1701,7 +1701,7 @@ Almost there. Let's keep going.
 
 ---
 
-## 18. Video 8.1 — Your Aligned AI OS: Master Prompt
+## 18. Video 8.1 — Your VAPOS: Master Prompt
 
 **Source:** `video-8.1-aligned-ai-os.md` | ~8–12 minutes
 
@@ -1713,7 +1713,7 @@ Okay. This is the payoff.
 
 Everything you've built—every worksheet, every honest answer, every number, every value, every vision statement—it all comes together right here.
 
-Welcome to your Aligned AI OS.
+Welcome to your VAPOS.
 
 ---
 
@@ -1727,17 +1727,17 @@ We're about to change that.
 
 You're going to take a **Master Prompt**—a structured template we've built—and paste all of your completed worksheets underneath it. The AI reads everything you've written and generates two documents:
 
-1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your MIQs, your WHY and Just Cause, your Future You, your revenue math, your capacity constraints, your ONE THING, and explicit instructions for how the AI should talk to you and make decisions.
+1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should talk to you and make decisions.
 
-2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Future You, your revenue targets, and your domino. Everything in one glance.
+2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your domino. Everything in one glance.
 
 Once generated, you paste this Master Context into any AI conversation and you've got a personalized executive coach that:
 
 - **Knows your values** and never recommends actions that violate them
-- **Knows your MIQs** and reminds you what you actually want when you're chasing shiny objects
+- **Knows your Real Reasons** and reminds you what you actually want when you're chasing shiny objects
 - **Knows your revenue math** and checks every plan against your real numbers
 - **Knows your capacity** and refuses to give "hustle harder" advice
-- **Knows your ONE THING** and includes it in every weekly plan
+- **Knows your Vital Action** and includes it in every weekly plan
 - **Scores every opportunity** through a values-aligned decision filter
 - **Reorients you** when you're scattered—back to the Blueprint before giving tactics
 
@@ -1758,17 +1758,17 @@ Here's the process. It's straightforward.
 **Step 4:** Paste the prompt.
 
 **Step 5:** Below the line that says "PASTE WORKSHEETS BELOW THIS LINE," paste each of your completed worksheets. In order:
-- MIQs
-- Reality Check (if you completed it—if not, that's fine)
-- Find Your WHY + Just Cause
+- Real Reasons
+- The Reckoning (if you completed it—if not, that's fine)
+- Find Your WHY + Cause Worth Playing For
 - Core Values Extraction
 - Becoming You
-- The Revenue Bridge (From Meaning to Math)
-- ONE THING Domino Plan
+- The From Meaning to Math (From Meaning to Math)
+- Vital Action Plan
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 
-**Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your WHY feels true. If something's off, tell the AI: "The WHY statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
+**Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your Driving Fire feels true. If something's off, tell the AI: "The WHY statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
 
 **Step 8:** Save your Master Context. Keep it in a document. Whenever you want your AI coach, start a new conversation by pasting it in.
 
@@ -1779,9 +1779,9 @@ Here's the process. It's straightforward.
 One of the most powerful features built into your OS is the Decision Filter. Any time you ask your AI coach about an opportunity, a strategy, a partnership, a pivot—it will score it on six dimensions:
 
 1. Values fit
-2. Moves your MIQs forward
-3. Supports your WHY / Just Cause
-4. Future You fit (Self/Social/Skills/Service)
+2. Moves your Real Reasons forward
+3. Supports your Driving Fire / Cause Worth Playing For
+4. Becoming fit (Self/Social/Skills/Service)
 5. Revenue contribution
 6. Capacity cost
 
@@ -1831,7 +1831,7 @@ Almost done. I'll see you in Lesson 9.
 
 Alright. Final lesson. And honestly? This might be the most *fun* one.
 
-You've built the operating system. Your AI knows your values, your MIQs, your WHY, your revenue math, your ONE THING—all of it. Now we put it to work.
+You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
 I'm going to walk you through the 50 High-Leverage Questions—organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
 
@@ -1855,13 +1855,13 @@ Let me walk you through the categories and highlight a few of my favorites.
 
 This is where most people will start—and where you'll come back every single week.
 
-My go-to is **Question 1**: *"Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
+My go-to is **Question 1**: *"Build my week around my Becoming and Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
 
-You paste that in on a Sunday evening or Monday morning, and your AI coach builds your week. Not a generic time-blocking template. *Your* week. With your ONE THING block protected. With your family non-negotiables honored. With your QC targets included. With buffer time for the unexpected.
+You paste that in on a Sunday evening or Monday morning, and your AI coach builds your week. Not a generic time-blocking template. *Your* week. With your Vital Action block protected. With your family non-negotiables honored. With your QC targets included. With buffer time for the unexpected.
 
 Another favorite: **Question 8**: *"Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the domino."*
 
-Because let's be real. Some weeks go sideways. A client emergency. A sick kid. A personal crisis. The Minimum Viable Week is your backup plan—the absolute essentials so that even in chaos, you protect the domino. Your AI coach knows what those essentials are because it knows your ONE THING and your capacity limits.
+Because let's be real. Some weeks go sideways. A client emergency. A sick kid. A personal crisis. The Minimum Viable Week is your backup plan—the absolute essentials so that even in chaos, you protect the domino. Your AI coach knows what those essentials are because it knows your Vital Action and your capacity limits.
 
 ---
 
@@ -1873,7 +1873,7 @@ This category is for when you need to zoom out.
 
 Any time you're weighing options—a new partnership, a course to buy, a client to take on, a project to start—paste this question with your three options. Your AI coach scores each one on values fit, MIQ alignment, revenue contribution, and capacity cost. It takes ten seconds. And it's like having a board of advisors who actually know your life.
 
-**Question 18** is for when you're about to get distracted: *"I'm tempted to chase a shiny object. Reorient me back to my MIQs and show me what this distraction is trying to give me."*
+**Question 18** is for when you're about to get distracted: *"I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me."*
 
 That last part—"show me what this distraction is trying to give me"—is key. Because shiny objects aren't random. They represent a need. Your AI coach will name the need (usually significance, novelty, or escape) and then show you how to meet that need *without* abandoning your strategy.
 
@@ -1889,7 +1889,7 @@ Run it anytime you need a reality check on whether you're pacing toward your tar
 
 **Question 24** is about selling without selling your soul: *"Write a simple sales call structure aligned to my WHY (no hype) that leads to a clean yes/no."*
 
-Your AI coach will create a sales conversation framework that feels like *you*—not like a script from a guru. Because it knows your values and your WHY, the approach will be authentic, not performative.
+Your AI coach will create a sales conversation framework that feels like *you*—not like a script from a guru. Because it knows your values and your Driving Fire, the approach will be authentic, not performative.
 
 ---
 
@@ -1897,11 +1897,11 @@ Your AI coach will create a sales conversation framework that feels like *you*�
 
 **Question 30** is one I love: *"Draft an origin story that ties my WHY to the problem I solve and the enemy I fight."*
 
-Your AI coach writes your origin story using your actual Peak Moments, your WHY, and your values. Not a fabricated marketing narrative. Your real story, structured for impact.
+Your AI coach writes your origin story using your actual Peak Moments, your Driving Fire, and your values. Not a fabricated marketing narrative. Your real story, structured for impact.
 
 **Question 34**: *"Build a referral narrative: the one paragraph people can repeat about me that makes intros easy."*
 
-This one is gold for the referral engine. It gives you the exact language your referral partners can use to introduce you—language that's aligned with your WHY and speaks to your ideal client's real problem.
+This one is gold for the referral engine. It gives you the exact language your referral partners can use to introduce you—language that's aligned with your Driving Fire and speaks to your ideal client's real problem.
 
 ---
 
@@ -1921,7 +1921,7 @@ This one's a boundary. When you feel the pull to grind, you paste this and your 
 
 ### Weekly/Monthly Review (Questions 43–50)
 
-**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
+**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
 
 Paste this every Friday. Five minutes. Your AI coach runs the full review and tells you the one thing to adjust next week. It's like having a COO who never forgets and never sugarcoats.
 
@@ -1961,7 +1961,7 @@ And then do it again tomorrow. And the day after. Make it a habit. Because this 
 
 You've done the work. You've built something real. Now go use it.
 
-And if you ever feel lost—if the noise gets loud and the strategy gets foggy—come back to your MIQs. Come back to your WHY. Come back to your values. They're your compass. They always were.
+And if you ever feel lost—if the noise gets loud and the strategy gets foggy—come back to your Real Reasons. Come back to your Driving Fire. Come back to your values. They're your compass. They always were.
 
 You are not broken. You were never behind. You just needed to remember what you're actually here for.
 

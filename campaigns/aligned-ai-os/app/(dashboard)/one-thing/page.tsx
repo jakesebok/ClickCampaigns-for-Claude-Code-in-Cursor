@@ -50,7 +50,7 @@ export default function OneThingPage() {
   const lanes = [
     "Business / Money",
     "Home / Relationships",
-    "Impact / Just Cause",
+    "Impact / Cause Worth Playing For",
     "Self / Skills",
   ];
 
@@ -65,7 +65,7 @@ export default function OneThingPage() {
   return (
     <div className="flex flex-col h-full">
       <header className="px-6 py-4 border-b border-border">
-        <h1 className="text-lg font-semibold">Your ONE THING</h1>
+        <h1 className="text-lg font-semibold">Your Vital Action</h1>
         <p className="text-sm text-muted-foreground">
           The single move that makes everything else easier or unnecessary
         </p>
@@ -142,12 +142,12 @@ export default function OneThingPage() {
             <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <Target className="h-5 w-5 text-primary" />
-                <h2 className="font-semibold">Set Your ONE THING</h2>
+                <h2 className="font-semibold">Set Your Vital Action</h2>
               </div>
 
               <p className="text-sm text-muted-foreground">
-                What&apos;s the ONE thing you can do this week such that by doing it
-                everything else becomes easier or unnecessary?
+                What&apos;s your Vital Action this week—the single aligned move that, by doing it,
+                makes everything else easier or unnecessary?
               </p>
 
               <div className="space-y-3">
@@ -166,7 +166,7 @@ export default function OneThingPage() {
                 <textarea
                   value={newOneThing}
                   onChange={(e) => setNewOneThing(e.target.value)}
-                  placeholder="My ONE THING this week is..."
+                  placeholder="My Vital Action this week is..."
                   rows={3}
                   className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
                 />
@@ -176,7 +176,7 @@ export default function OneThingPage() {
                   disabled={!newOneThing.trim()}
                   className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm hover:bg-primary/90 disabled:opacity-50 transition-colors"
                 >
-                  Set My ONE THING
+                  Set My Vital Action
                 </button>
               </div>
             </div>

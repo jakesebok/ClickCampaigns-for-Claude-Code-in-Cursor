@@ -245,7 +245,7 @@ You can leave this as `your-cron-secret-here` for now. When you deploy, you'll c
 2. **Onboarding** — You should be taken to onboarding. Try the guided questions or upload a worksheet.
 3. **Chat** — Go to the Chat tab and send a message. You should get a response from the AI.
 4. **Scorecard** — Try the 6Cs scorecard.
-5. **ONE THING** — Try setting your ONE THING for the week.
+5. **Vital Action** — Try setting your Vital Action for the week.
 
 If something doesn't work, check the Terminal window for error messages. They often say which key or service is missing.
 

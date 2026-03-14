@@ -53,12 +53,12 @@ export default function StrategicIntensivesPage() {
           <div className="space-y-4">
             {[
               {
-                title: "Your Most Important Questions (MIQs)",
+                title: "The Real Reasons (Your Life Lists)",
                 description:
                   "The end goals underneath the means goals. What you actually want your life to feel like — not just the revenue target.",
               },
               {
-                title: "Your WHY + Just Cause",
+                title: "Your Driving Fire + Cause Worth Playing For",
                 description:
                   "A purpose statement that passes the full-body test. Not marketing copy — the real reason you do this work.",
               },
@@ -68,24 +68,24 @@ export default function StrategicIntensivesPage() {
                   "Definition + behaviors + boundary for each. Values that make hard decisions easy.",
               },
               {
-                title: "Your Future You (Becoming You)",
+                title: "The Becoming",
                 description:
                   "The person you're becoming across self, social, skills, and service. Standards, not wishes.",
               },
               {
-                title: "Your Revenue Bridge",
+                title: "From Meaning to Math",
                 description:
                   "Needs + desires + impact = Required Revenue. Reverse-engineered to weekly qualified conversations.",
               },
               {
-                title: "Your ONE THING Domino Plan",
+                title: "Your Vital Action Plan",
                 description:
                   "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
               },
               {
                 title: "30 Days of APOS — Your AI Operating System",
                 description:
-                  "A personalized AI coach that knows everything you built today. Your values, your numbers, your ONE THING — coaching on demand, every single day.",
+                  "A personalized AI coach that knows everything you built today. Your values, your numbers, your Vital Action — coaching on demand, every single day.",
               },
             ].map((item) => (
               <div
@@ -138,7 +138,7 @@ export default function StrategicIntensivesPage() {
                   Half-day live workshop (virtual or in-person)
                 </h3>
                 <p className="text-ap-mid">
-                  We work through the full Strategic Clarity framework together.
+                  We work through the full Alignment Arc framework together.
                   Teaching, exercises, worksheets. You build every asset in real
                   time — not a passive lecture.
                 </p>
@@ -157,7 +157,7 @@ export default function StrategicIntensivesPage() {
                   After the Intensive, you upload your completed worksheets into
                   APOS (Aligned Performance Operating System). The app synthesizes
                   everything into your personalized AI coach — loaded with your
-                  values, goals, revenue math, and ONE THING.
+                  values, goals, revenue math, and Vital Action.
                 </p>
               </div>
             </div>
@@ -171,8 +171,8 @@ export default function StrategicIntensivesPage() {
                   30 days of daily coaching
                 </h3>
                 <p className="text-ap-mid">
-                  Your APOS coach texts you every morning, tracks your weekly ONE
-                  THING, runs your 6Cs scorecard, and gives you personalized
+                  Your APOS coach texts you every morning, tracks your weekly Vital
+                  Action, runs your 6Cs scorecard, and gives you personalized
                   strategy whenever you ask. 30 days of free access included.
                 </p>
               </div>

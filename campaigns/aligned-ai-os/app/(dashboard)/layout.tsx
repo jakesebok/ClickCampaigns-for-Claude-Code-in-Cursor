@@ -19,7 +19,7 @@ const navItems = [
   { href: "/voice", label: "Voice", icon: Mic },
   { href: "/assessment", label: "VAPI", icon: Activity },
   { href: "/scorecard", label: "6Cs", icon: ClipboardCheck },
-  { href: "/one-thing", label: "ONE THING", icon: Target },
+  { href: "/one-thing", label: "Vital Action", icon: Target },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
   { href: "/settings", label: "Settings", icon: Settings },

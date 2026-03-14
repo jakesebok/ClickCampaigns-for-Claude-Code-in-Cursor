@@ -62,7 +62,7 @@ In the Strategic Alignment Intensive, I show you how to fix that — in a single
 ## Email 3: The APOS Angle (Day 4)
 
 **Subject:** Your AI doesn't know you. That's about to change.
-**Preview:** Imagine an AI coach that knows your values, your revenue math, and your ONE THING.
+**Preview:** Imagine an AI coach that knows your values, your revenue math, and your Vital Action.
 
 {{first_name}},
 
@@ -72,11 +72,11 @@ They ask a question. They get a generic answer. They try again. Still generic. T
 
 Now imagine this instead:
 
-You open an AI coach that already knows your top 5 core values. It knows your WHY. It knows your revenue target and your capacity constraints. It knows the one thing you're supposed to be protecting on your calendar this week.
+You open an AI coach that already knows your top 5 core values. It knows your Driving Fire. It knows your revenue target and your capacity constraints. It knows the Vital Action you're supposed to be protecting on your calendar this week.
 
 You say: "Build my week."
 
-And it gives you a plan that's filtered through *your* values, built on *your* numbers, and anchored to *your* ONE THING.
+And it gives you a plan that's filtered through *your* values, built on *your* numbers, and anchored to *your* Vital Action.
 
 That's **APOS** — the Aligned Performance Operating System. And every Intensive attendee gets 30 days free.
 
@@ -120,10 +120,10 @@ The Strategic Alignment Intensive is almost full.
 
 Here's what you'll build:
 ✓ Your Most Important Questions (end goals, not means goals)
-✓ Your WHY + Just Cause
+✓ Your Driving Fire + Cause Worth Playing For
 ✓ Your Top 5 Values (operational — not a poster on a wall)
-✓ Your Revenue Bridge (meaning → math)
-✓ Your ONE THING Domino Plan
+✓ From Meaning to Math (meaning → math)
+✓ Your Vital Action Plan
 ✓ 30 days of APOS — your personalized AI coach
 
 **$497. Half-day. Interactive. Limited to 20 seats.**

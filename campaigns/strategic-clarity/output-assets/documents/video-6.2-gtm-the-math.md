@@ -1,12 +1,12 @@
 # Video 6.2 — The Math: Revenue → Qualified Conversations
 
-**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~10–12 minutes**
+**Lesson 6: From Meaning to Math | ~10–12 minutes**
 
 ---
 
 ## VIDEO SCRIPT
 
-Alright. You've got your numbers. Baseline Needs. Future You investments. MIQ Desires. Just Cause Tithe. Now we add them up and do the math that changes everything.
+Alright. You've got your numbers. Baseline Needs. Becoming investments. Real Reasons Desires. Cause Tithe. Now we add them up and do the math that changes everything.
 
 ---
 
@@ -15,9 +15,9 @@ Alright. You've got your numbers. Baseline Needs. Future You investments. MIQ De
 Open your worksheet to Step 4. Stack your totals:
 
 - Baseline Needs Total
-- Future You Total
-- MIQ Desires Total
-- Just Cause Total
+- Becoming Total
+- Real Reasons Desires Total
+- Cause Total
 
 Add them up. That's your **Required Revenue**. This is the number your business *must* produce for your life to function, grow, and make the impact you want.
 
@@ -25,7 +25,7 @@ Now add a **Reality Buffer**—I recommend 10%. Because business isn't linear. T
 
 Baseline + Future + Desires + Impact + 10% buffer = **Target Revenue.**
 
-Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* MIQs, *your* values, *your* Future You, and *your* cause.
+Write it down. Circle it. This is *your* number. Built on *your* life. Connected to *your* Real Reasons, *your* values, *your* Becoming, and *your* cause.
 
 This is not "I want to make more money." This is "My life requires $X, and here's exactly why."
 

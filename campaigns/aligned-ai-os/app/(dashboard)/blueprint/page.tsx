@@ -68,9 +68,9 @@ export default function BlueprintPage() {
   const sections = [
     { icon: Target, label: "North Star Stack", id: "north-star" },
     { icon: Heart, label: "Core Values", id: "values" },
-    { icon: Compass, label: "Future You", id: "future-you" },
+    { icon: Compass, label: "The Becoming", id: "future-you" },
     { icon: DollarSign, label: "Revenue + Operations", id: "revenue" },
-    { icon: Target, label: "Domino (90 Days)", id: "domino" },
+    { icon: Target, label: "Vital Action (90 Days)", id: "domino" },
   ];
 
   return (

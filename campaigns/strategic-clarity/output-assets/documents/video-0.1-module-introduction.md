@@ -24,38 +24,38 @@ We're going to take the things that matter most to you—your real desires, your
 
 By the end of this module, you will have:
 
-1. **Your Most Important Questions (MIQs)** — what you actually want your life to feel like. Not the titles. Not the tactics. Not the revenue goal for its own sake. The *end goals* underneath all of that.
+1. **Your Real Reasons** — what you actually want your life to feel like. Not the titles. Not the tactics. Not the revenue goal for its own sake. The *end goals* underneath all of that. Your Life Lists are how we find them.
 
-2. **Your WHY and Just Cause** — a purpose statement that feels true in your body, not just something that sounds good on a website. Plus a vision of the future worth playing an infinite game for.
+2. **Your Driving Fire and The Cause Worth Playing For** — a purpose statement that feels true in your body, not just something that sounds good on a website. Plus a vision of the future worth playing an infinite game for.
 
-3. **Your Top 5 Core Values** — operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
+3. **Your Values Code** — five non-negotiables, operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
 
-4. **Your Future You** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
+4. **The Becoming** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
 
-5. **A Reality Check** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
+5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
 
-6. **Your Revenue Bridge** — meaning into math. We're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
+6. **From Meaning to Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
 
-7. **Your ONE THING Domino Plan** — the single move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
+7. **Your Vital Action Plan** — the single aligned move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
 
 And then the part I'm most excited about...
 
 ---
 
-### The Aligned AI OS
+### VAPOS
 
 Everything you write in this module—every worksheet, every answer, every honest moment—feeds a **Master Prompt** that you'll run at the end. That prompt turns your favorite AI into a personalized executive coach, strategic advisor, and virtual assistant that:
 
 - Knows your values and *never* compromises them
-- Knows your MIQs and reminds you what you actually want
+- Knows your Real Reasons and reminds you what you actually want
 - Knows your revenue targets and capacity constraints
-- Knows your ONE THING and keeps you focused on the domino
+- Knows your Vital Action and keeps you focused on it
 - Scores every opportunity through a values-aligned decision filter
 - Intervenes when you're about to default to "work harder" instead of "work smarter"
 
-This isn't generic advice from an AI that doesn't know you. This is *your* operating system. Built on *your* truth. Running on *your* terms.
+This isn't generic advice from an AI that doesn't know you. This is *your* VAPOS—your Values-Aligned Performance Operating System. Built on *your* truth. Running on *your* terms.
 
-And once it's live? You get 50 high-leverage questions you can ask it anytime—for weekly planning, strategy, sales, marketing, execution, and reviews. All personalized. All aligned. All built on the foundation you're about to create.
+And once it's live? You get the Fire Starters—50 high-leverage questions you can ask anytime—for weekly planning, strategy, sales, marketing, execution, and reviews. All personalized. All aligned. All built on the foundation you're about to create.
 
 ---
 
@@ -63,23 +63,23 @@ And once it's live? You get 50 high-leverage questions you can ask it anytime—
 
 Here's the arc. Each lesson builds on the one before it:
 
-**Lesson 1:** We start with MIQs. End goals vs. means goals. What do you actually want to trade your time, energy, and money for?
+**Lesson 1:** We start with The Real Reasons. End goals vs. means goals. What do you actually want to trade your time, energy, and money for?
 
-**Lesson 2:** We go deep on your WHY and Just Cause. Not the marketing version. The real one.
+**Lesson 2:** We go deep on Your Driving Fire and The Cause Worth Playing For. Not the marketing version. The real one.
 
-**Lesson 3:** We extract your core values. Five of them. Operational. Specific. Non-negotiable.
+**Lesson 3:** We excavate Your Values Code. Five of them. Operational. Specific. Non-negotiable.
 
-**Lesson 4:** We map your Future You. The person you're becoming across every domain that matters.
+**Lesson 4:** We map The Becoming. The person you're becoming across every domain that matters.
 
-**Lesson 5:** We do a Reality Check. Before we turn vision into numbers, we name what's in the way.
+**Lesson 5:** We face The Reckoning. Before we turn vision into numbers, we name what's in the way.
 
-**Lesson 6:** We build your Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
+**Lesson 6:** We build From Meaning to Math. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
 
-**Lesson 7:** We create your ONE THING Domino Plan. One protected move per quarter. Installed on the calendar.
+**Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
-**Lesson 8:** We run the Master Prompt and activate your Aligned AI OS.
+**Lesson 8:** We run the Master Prompt and activate your VAPOS.
 
-**Lesson 9:** We walk through the 50 High-Leverage Questions so you know exactly how to use your new AI coach.
+**Lesson 9:** We walk through the Fire Starters so you know exactly how to use your VAPOS.
 
 ---
 
@@ -87,9 +87,9 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your MIQs feed your WHY. Your WHY feeds your values. Your values feed your Future You. Your Future You feeds your revenue math. Your revenue math feeds your ONE THING. And all of it feeds your AI OS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Becoming. The Becoming feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
 
-**This also works live.** If you're doing this as a Strategic Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
+**This also works live.** If you're doing this as The Alignment Arc Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 
 **You've already started.** If you've completed your Pre-Work Packet—and I hope you have—you've already got raw inputs for values, peak moments, and revenue numbers. That's the foundation. Everything from here builds on it.
 

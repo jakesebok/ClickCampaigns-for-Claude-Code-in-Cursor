@@ -1,12 +1,12 @@
 # Video 6.3 — Lead Path Fork + Highest-Leverage Move
 
-**Lesson 6: From Meaning to Math (The Revenue Bridge) | ~5–8 minutes**
+**Lesson 6: From Meaning to Math | ~5–8 minutes**
 
 ---
 
 ## VIDEO SCRIPT
 
-Last piece of the Revenue Bridge. Two more steps and you've got a complete operational plan.
+Last piece of From Meaning to Math. Two more steps and you've got a complete operational plan.
 
 ---
 
@@ -73,7 +73,7 @@ At the bottom of the worksheet, you're going to write three things:
 2. **Because if this changes, everything downstream changes by...** — The cascade effect.
 3. **The first small experiment I will run in the next 7 days is...** — Not a 90-day plan. A 7-day experiment. Small. Testable. Real.
 
-This becomes the setup for Lesson 7—the ONE THING Domino Plan. Your highest-leverage move from the Revenue Bridge is often the seed of your ONE THING.
+This becomes the setup for Lesson 7—Your Vital Action Plan. Your highest-leverage move from From Meaning to Math is often the seed of your Vital Action.
 
 ---
 
@@ -92,7 +92,7 @@ This is not a dream. This is not a vision board. This is a **strategy machine.**
 
 Alright. Lesson 6, done. Deep breath. You've done incredible work.
 
-I'll see you in Lesson 7, where we focus everything into one domino.
+I'll see you in Lesson 7, where we focus everything into one Vital Action.
 
 Let's get after it.
 

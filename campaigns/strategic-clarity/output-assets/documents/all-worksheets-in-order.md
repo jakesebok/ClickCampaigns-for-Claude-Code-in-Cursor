@@ -1,4 +1,4 @@
-# Strategic Clarity Intensive Workshop — All Worksheets in Order
+# The Alignment Arc Intensive — All Worksheets in Order
 
 > **Consolidated document.** Every worksheet from the Strategic Clarity module, in sequence. Source files remain unchanged in `worksheets/`.
 
@@ -18,7 +18,7 @@
 
 ## What This Powers
 
-Everything you write here feeds directly into your **Aligned AI OS Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
+Everything you write here feeds directly into your **VAPOS Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
 
 **The details you provide become the operating system that keeps your business expanding without compromising who you are.**
 
@@ -28,7 +28,7 @@ Everything you write here feeds directly into your **Aligned AI OS Upgrade**—a
 
 - [ ] Exercise 1: Values Extraction
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: Revenue Bridge Inputs
+- [ ] Exercise 3: From Meaning to Math Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
@@ -79,7 +79,7 @@ These should be **observable behaviors**, not vague compliments.
 
 ## Exercise 2 — Peak Moments
 
-**Goal:** Collect real stories that reveal what you're built to do. Your WHY leaves clues in your lived experience.
+**Goal:** Collect real stories that reveal what you're built to do. Your Driving Fire leaves clues in your lived experience.
 
 Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'm here for." Choose across seasons of life:
 
@@ -99,7 +99,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — Revenue Bridge Inputs
+## Exercise 3 — From Meaning to Math Inputs
 
 **Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
 
@@ -245,21 +245,21 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-*Bring this completed packet with you. Everything you've written powers your Aligned AI OS.*
+*Bring this completed packet with you. Everything you've written powers your VAPOS.*
 
 ---
 
 ---
 
-## 2. Most Important Questions (MIQs)
+## 2. The Real Reasons: Your Life Lists
 
 **Source:** `worksheets/01-miqs.md`
 
 ---
 
-# Most Important Questions (MIQs)
+# The Real Reasons: Your Life Lists
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > This exercise pulls you out of "means goals" (titles, tactics, numbers) and into **end goals**—what you actually want your life to feel like. Money is currency. We trade it for something. What is it that you actually want to trade it for?
 
@@ -309,33 +309,33 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 ---
 
-*Your MIQs feed directly into your Aligned AI OS. The more honest you are here, the more powerful your AI coach becomes.*
+*Your Real Reasons feed directly into your VAPOS. The more honest you are here, the more powerful your AI coach becomes.*
 
 ---
 
 ---
 
-## 3. Find Your WHY + Your Just Cause
+## 3. Your Driving Fire + The Cause Worth Playing For
 
 **Source:** `worksheets/02-find-your-why-just-cause.md`
 
 ---
 
-# Find Your WHY + Your Just Cause
+# Your Driving Fire + The Cause Worth Playing For
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> **Purpose:** Create a WHY that feels true in your body and a Just Cause that can sustain an infinite game—then translate both into a clear mission statement for your business.
+> **Purpose:** Create a Driving Fire that feels true in your body and a Cause Worth Playing For that can sustain an infinite game—then translate both into a clear mission statement for your business.
 >
-> **Rule:** If it sounds like marketing, it's probably not your WHY. If it sounds like something you'd do even if nobody was watching, you're getting warmer.
+> **Rule:** If it sounds like marketing, it's probably not your Driving Fire. If it sounds like something you'd do even if nobody was watching, you're getting warmer.
 
 ---
 
 ## What We're Creating
 
-1. **Your WHY (Purpose)** — A clear statement of the impact you exist to make. Format: *To ________ so that ________.*
-2. **Your Just Cause (Vision of the Future)** — A specific vision of a future state that does not yet exist, so compelling you're willing to sacrifice to advance it. Bigger than you. Pursued indefinitely.
-3. **Business Mission Statement** — Your work as a vehicle for your WHY + Cause.
+1. **Your Driving Fire (Purpose)** — A clear statement of the impact you exist to make. Format: *To ________ so that ________.*
+2. **Your Cause Worth Playing For (Vision of the Future)** — A specific vision of a future state that does not yet exist, so compelling you're willing to sacrifice to advance it. Bigger than you. Pursued indefinitely.
+3. **Business Mission Statement** — Your work as a vehicle for your Driving Fire + Cause.
 
 ---
 
@@ -381,12 +381,12 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 If you're completing this alone, copy/paste the prompt below into your preferred AI tool. Then paste your Peak Moments table (from Exercise 1) underneath it.
 
-> You are Simon Sinek (warm, direct, no fluff) acting as my WHY coach. Your job:
+> You are Simon Sinek (warm, direct, no fluff) acting as my Driving Fire coach. Your job:
 > 1) Help me theme-mine my Peak Moments (I will paste them below).
 > 2) Extract the pattern under the stories.
-> 3) Guide me to draft and refine a WHY statement (To ___ so that ___).
-> 4) Help me define a Just Cause that passes the Infinite Game test.
-> 5) Help me translate WHY + Cause into a business mission statement.
+> 3) Guide me to draft and refine a Driving Fire statement (To ___ so that ___).
+> 4) Help me define a Cause Worth Playing For that passes the Infinite Game test.
+> 5) Help me translate Driving Fire + Cause into a business mission statement.
 >
 > Rules:
 > - Ask ONE question at a time.
@@ -394,7 +394,7 @@ If you're completing this alone, copy/paste the prompt below into your preferred
 > - Push for specificity (who, what changes, what it replaces).
 > - When I get vague, ask follow-up questions.
 > - After every 3–4 questions, summarize what you're hearing in one short paragraph.
-> - End with clean final drafts for: WHY, Just Cause, and Mission Statement.
+> - End with clean final drafts for: Driving Fire, Cause Worth Playing For, and Mission Statement.
 >
 > Start by asking me to paste my Peak Moments table if I haven't already, then begin Theme Mining.
 
@@ -411,7 +411,7 @@ If you're completing this alone, copy/paste the prompt below into your preferred
 
 ---
 
-## Exercise 3 — Draft Your WHY
+## Exercise 3 — Draft Your Driving Fire
 
 Format: **To [contribution] so that [impact].** Write three versions. Don't overthink.
 
@@ -435,17 +435,17 @@ Read each draft out loud. Check your body. We're looking for honesty, not hype.
 
 ---
 
-## Exercise 5 — Strengthen Your WHY
+## Exercise 5 — Strengthen Your Driving Fire
 
 | Field | Your Answer |
 |-------|-------------|
-| What kind of person—emotionally and situationally—is this WHY built to help? |  |
+| What kind of person—emotionally and situationally—is this Driving Fire built to help? |  |
 | Before you help, what are they experiencing? |  |
 | After you help, what are they experiencing? |  |
 | What "enemy" are you fighting against? (burnout, fear, chaos, disconnection, confusion, etc.) |  |
 | What deeper human need do you serve? (belonging, freedom, dignity, meaning, agency, peace, etc.) |  |
 
-### Your WHY (Working Draft — Written Clean)
+### Your Driving Fire (Working Draft — Written Clean)
 
 | To... | ...so that... |
 |-------|---------------|
@@ -455,20 +455,20 @@ Read each draft out loud. Check your body. We're looking for honesty, not hype.
 
 ---
 
-## Exercise 6 — Define Your Just Cause
+## Exercise 6 — Define Your Cause Worth Playing For
 
-A Just Cause is not a revenue goal. It's a concrete future state that's bigger than you and worth advancing for years.
+A Cause Worth Playing For is not a revenue goal. It's a concrete future state that's bigger than you and worth advancing for years.
 
 | Field | Your Answer |
 |-------|-------------|
-| In a world with my Just Cause advancing… |  |
+| In a world with my Cause Worth Playing For advancing… |  |
 | What becomes more true? |  |
 | What becomes less true? |  |
 | Who benefits (and how)? |  |
 
-### Draft Your Just Cause (2 drafts)
+### Draft Your Cause Worth Playing For (2 drafts)
 
-| Draft | My Just Cause is a world where… |
+| Draft | My Cause Worth Playing For is a world where… |
 |-------|----------------------------------|
 | Draft 1 |  |
 | Draft 2 |  |
@@ -481,7 +481,7 @@ A Just Cause is not a revenue goal. It's a concrete future state that's bigger t
 
 ---
 
-## Exercise 7 — Connect the Dots (WHY → Cause → Your Work)
+## Exercise 7 — Connect the Dots (Driving Fire → Cause → Your Work)
 
 | Field | Your Answer |
 |-------|-------------|
@@ -504,13 +504,13 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 | Element | Your Final Draft |
 |---------|------------------|
-| **WHY** | To ____________ so that ____________. |
-| **Just Cause** | A world where… |
+| **Driving Fire** | To ____________ so that ____________. |
+| **Cause Worth Playing For** | A world where… |
 | **Business Mission Statement** |  |
 
 ---
 
-*Your WHY, Just Cause, and Mission Statement feed directly into your Aligned AI OS. They become the purpose filter for every decision your AI coach helps you make.*
+*Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your VAPOS. They become the purpose filter for every decision your AI coach helps you make.*
 
 ---
 
@@ -524,7 +524,7 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 # Core Values Extraction Worksheet
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > **Purpose:** Identify your top core values by reverse-engineering what you admire most in other people, clustering those traits into themes, and narrowing them down to the five values that will guide your decisions, boundaries, and priorities.
 >
@@ -663,23 +663,23 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
-*Your Top 5 Core Values feed directly into your Aligned AI OS. They become the non-negotiable filter for every recommendation your AI coach makes.*
+*Your Top 5 Core Values feed directly into your VAPOS. They become the non-negotiable filter for every recommendation your AI coach makes.*
 
 ---
 
 ---
 
-## 5. Becoming You (The Future You)
+## 5. Becoming You (The Becoming)
 
 **Source:** `worksheets/04-becoming-you.md`
 
 ---
 
-# Becoming You (The Future You)
+# Becoming You (The Becoming)
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your WHY and Just Cause into a lived future.
+> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
 
 ---
 
@@ -799,7 +799,7 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### B) The 3 skills I must build now to be lethal in this field 12 months from now:
 
-| Skill | Why It Matters (link to vision/WHY) | How I Will Build It (practice/coaching/training) |
+| Skill | Why It Matters (link to vision/Driving Fire) | How I Will Build It (practice/coaching/training) |
 |-------|--------------------------------------|--------------------------------------------------|
 |       |                                      |                                                  |
 |       |                                      |                                                  |
@@ -807,7 +807,7 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### C) The 3 skills I'll need 5–10 years from now (future-proofing):
 
-| Skill | Why It Matters (link to vision/WHY) | How I Will Build It (practice/coaching/training) |
+| Skill | Why It Matters (link to vision/Driving Fire) | How I Will Build It (practice/coaching/training) |
 |-------|--------------------------------------|--------------------------------------------------|
 |       |                                      |                                                  |
 |       |                                      |                                                  |
@@ -843,23 +843,23 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ---
 
-*Your Future You feeds directly into your Aligned AI OS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*Your Becoming feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
 
 ---
 
 ---
 
-## 6. Reality Check — Bridge to Operationalization
+## 6. The Reckoning — Bridge to Operationalization
 
 **Source:** `worksheets/05-reality-check.md`
 
 ---
 
-# Reality Check — Bridge to Operationalization
+# The Reckoning — Bridge to Operationalization
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> You've named what you want: your MIQs, your WHY, your values, and the person you're becoming. Before we turn that vision into numbers and weekly actions, take a moment to connect it to your current reality.
+> You've named what you want: your Real Reasons, your Driving Fire, your values, and the person you're becoming. Before we turn that vision into numbers and weekly actions, take a moment to connect it to your current reality.
 
 ---
 
@@ -877,7 +877,7 @@ These questions strengthen your Master Prompt and make your AI coach significant
 
 ### 1. Must Be True
 
-What must be true in your life for your MIQs to actually happen? (Non-negotiables—the conditions without which your vision stays a wish.)
+What must be true in your life for your Real Reasons to actually happen? (Non-negotiables—the conditions without which your vision stays a wish.)
 
 |   |
 |---|
@@ -944,23 +944,23 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-*These answers feed into your Aligned AI OS under "MIQ Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
+*These answers feed into your VAPOS under "MIQ Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
 
 ---
 
 ---
 
-## 7. From Meaning to Math: The Revenue Bridge
+## 7. From Meaning to Math: The From Meaning to Math
 
 **Source:** `worksheets/06-goals-that-matter.md`
 
 ---
 
-# From Meaning to Math: The Revenue Bridge
+# From Meaning to Math: The From Meaning to Math
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Just Cause.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Cause Worth Playing For.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
 
@@ -986,7 +986,7 @@ List what must be true financially for you and your business to feel stable (not
 
 ---
 
-## Step 2 — Fund the Future You + MIQs (Stretch Desires)
+## Step 2 — Fund the Becoming + Real Reasons (Stretch Desires)
 
 Translate the next-level life you want into numbers so your business target is tied to what you actually want—not just "growth."
 
@@ -997,7 +997,7 @@ Translate the next-level life you want into numbers so your business target is t
 | BUSINESS |  |  |  |  |
 | IMPACT |  |  |  |  |
 
-**Future You Total (annual):**
+**Becoming Total (annual):**
 
 |   |
 |---|
@@ -1023,17 +1023,17 @@ Now list 1–5 MIQ-based stretch desires you want your business to fund this yea
 
 ## Step 3 — Resource the Impact (Your "Tithe" for the Cause)
 
-Your business doesn't have to be your Just Cause—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
+Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
 
 | Field | Your Answer |
 |-------|-------------|
-| Your Just Cause (plain language) |  |
+| Your Cause Worth Playing For (plain language) |  |
 | Impact target this year (specific) |  |
 | Impact tithe % (suggested: 10%) |  |
 | How you'll resource it (money / time / platform / partnerships) |  |
 | Estimated annual contribution ($ + time value) |  |
 
-**Just Cause Total (annual):**
+**Cause Worth Playing For Total (annual):**
 
 |   |
 |---|
@@ -1048,9 +1048,9 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 | Component | Amount ($) |
 |-----------|------------|
 | Baseline Needs Total |  |
-| Future You Total |  |
+| Becoming Total |  |
 | MIQ Desires Total |  |
-| Just Cause Total |  |
+| Cause Worth Playing For Total |  |
 | **= Required Revenue (annual)** |  |
 | Reality Buffer (+10%) |  |
 | **= Target Revenue (annual)** |  |
@@ -1156,7 +1156,7 @@ Can your current model actually deliver this revenue without breaking your value
 
 ## Finish — Your Highest-Leverage Move
 
-Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds the ONE THING Domino Plan.)*
+Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds the Vital Action Plan.)*
 
 | Field | Your Answer |
 |-------|-------------|
@@ -1166,26 +1166,26 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your Revenue Bridge numbers feed directly into your Aligned AI OS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your From Meaning to Math numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
 
 ---
 
 ---
 
-## 8. The ONE THING Domino Plan
+## 8. The Vital Action Plan
 
 **Source:** `worksheets/07-one-thing-domino-plan.md`
 
 ---
 
-# The ONE THING Domino Plan
+# The Vital Action Plan
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > **How to use:**
 > - Stay operational: write actions, not themes.
 > - Leverage wins: choose the ONE move that makes other moves easier or unnecessary.
-> - Whole-system focus: you will create ONE THING for each lane, then select one Lead Lane to execute first.
+> - Whole-system focus: you will create Vital Action for each lane, then select one Lead Lane to execute first.
 
 ---
 
@@ -1207,7 +1207,7 @@ Circle the lane where meaningful progress would make the other lanes easier:
 |------|----------------|
 | **Business / Money** | If this improves, the other lane(s) that improve automatically are: |
 | **Home / Relationships** | If this improves, the other lane(s) that improve automatically are: |
-| **Impact / Just Cause** | If this improves, the other lane(s) that improve automatically are: |
+| **Impact / Cause Worth Playing For** | If this improves, the other lane(s) that improve automatically are: |
 | **Self / Skills** | If this improves, the other lane(s) that improve automatically are: |
 
 **My Lead Lane:**
@@ -1226,20 +1226,20 @@ Write one sentence per lane. Make it measurable or vividly observable.
 |------|------------------------------|
 | Business / Money |  |
 | Home / Relationships |  |
-| Impact / Just Cause |  |
+| Impact / Cause Worth Playing For |  |
 | Self / Skills |  |
 
 ---
 
-## 3) Your ONE THING (10–12 minutes)
+## 3) Your Vital Action (10–12 minutes)
 
 Answer for each lane: **"What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary?"**
 
-| Lane | My ONE THING (one action) |
+| Lane | My Vital Action (one action) |
 |------|---------------------------|
 | Business / Money |  |
 | Home / Relationships |  |
-| Impact / Just Cause |  |
+| Impact / Cause Worth Playing For |  |
 | Self / Skills |  |
 
 ---
@@ -1250,7 +1250,7 @@ Complete this for your **Lead Lane** first. If time allows, repeat for the other
 
 *Someday → 5 Years → This Year → This Quarter → This Month → This Week → Today → Right Now*
 
-| Level | ONE THING at This Level |
+| Level | Vital Action at This Level |
 |-------|-------------------------|
 | Someday |  |
 | 5 Years |  |
@@ -1265,11 +1265,11 @@ Complete this for your **Lead Lane** first. If time allows, repeat for the other
 
 ## 5) Install It on the Calendar (5–8 minutes)
 
-Your Lead Lane ONE THING must have a protected time block. If it isn't on the calendar, it isn't real.
+Your Lead Lane Vital Action must have a protected time block. If it isn't on the calendar, it isn't real.
 
 | Field | Your Answer |
 |-------|-------------|
-| Lead Lane ONE THING |  |
+| Lead Lane Vital Action |  |
 | Time Block (day / time) |  |
 | Frequency |  |
 | Protection Rule (what you will NOT allow during this block) |  |
@@ -1311,25 +1311,25 @@ Write it. Sign it.
 
 ---
 
-*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue Bridge and protects the other lanes—not at their expense.*
+*Note: If your Lead Lane is Business/Money, verify it supports your Required From Meaning to Math and protects the other lanes—not at their expense.*
 
 ---
 
-*Your ONE THING Domino Plan feeds directly into your Aligned AI OS. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
+*Your Vital Action Plan feeds directly into your VAPOS. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
 
 ---
 
 ---
 
-## 9. Aligned AI OS — Master Prompt
+## 9. VAPOS — Master Prompt
 
 **Source:** `worksheets/08-master-prompt.md`
 
 ---
 
-# Aligned AI OS — Master Prompt
+# VAPOS — Master Prompt
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > **What this is:** This prompt turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It synthesizes everything you've built in this module into one operating system.
 >
@@ -1361,23 +1361,23 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 - If multiple answers exist, choose the clearest / most specific, and put extras into "Notes / Backup Language" at the end.
 - If any content conflicts, resolve conflicts by this priority order:
   1) Core Values + Boundaries
-  2) MIQ "Must Be True" conditions (from Reality Check worksheet)
-  3) WHY statement
-  4) Just Cause + Infinite Game Test
-  5) Future You
-  6) Revenue Bridge numbers + capacity
-  7) ONE THING domino
+  2) MIQ "Must Be True" conditions (from The Reckoning worksheet)
+  3) Driving Fire statement
+  4) Cause Worth Playing For + Infinite Game Test
+  5) Becoming
+  6) From Meaning to Math numbers + capacity
+  7) Vital Action domino
 - Do NOT change the meaning of the user's words. You may tighten wording for clarity.
 
 FIELD MAP (where each field comes from)
 Use these worksheet tags to find the content:
 [MIQ] = Most Important Questions worksheet (Experiences, Growth, Contribution)
-[REALITY] = Reality Check worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If the Reality Check worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
-[WHY] = Find Your WHY + Just Cause worksheet (Peak Moments table, Theme Mining answers, Draft WHYs, Full-Body Test notes, Strengthen WHY answers, Just Cause future state answers, Infinite Game checklist, Connect the Dots table)
+[REALITY] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If the The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
+[Driving Fire] = Find Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fires, Full-Body Test notes, Strengthen Driving Fire answers, Cause Worth Playing For future state answers, Infinite Game checklist, Connect the Dots table)
 [VALUES] = Core Values Extraction worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
-[F4] = Becoming You worksheet / The Future You (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
-[REV] = From Meaning to Math / Revenue Bridge worksheet (Baseline needs, Future You investments, MIQ desires, Just Cause tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
-[DOMINO] = ONE THING Domino Plan (Lead lane, Someday outcomes, ONE THING per lane, Domino chain, Calendar install, sabotage list, commitment)
+[F4] = Becoming You worksheet / The Becoming (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
+[REV] = From Meaning to Math / From Meaning to Math worksheet (Baseline needs, Becoming investments, MIQ desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[DOMINO] = Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Domino chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
 
@@ -1393,12 +1393,12 @@ Optimize for: alignment + sustainability + impact + revenue — in that order.
 
 Output Rules
 - Never recommend actions that violate my top values (listed below). If a suggestion conflicts, flag it and offer aligned alternatives.
-- Always tie strategy to my end goals (MIQs), my WHY/Just Cause, and my Future You.
+- Always tie strategy to my end goals (Real Reasons), my Driving Fire/Cause Worth Playing For, and my Becoming.
 - Prefer simple systems over complex tactics.
 - No "hustle harder" advice. If capacity is the constraint, recommend levers like: pricing, offer design, audience, delivery model, systems, delegation, boundaries.
 - When I'm scattered or reactive, reorient me back to the Alignment Blueprint before giving tactical steps.
 - When making plans, you must include:
-  (1) the ONE THING (domino),
+  (1) the Vital Action (domino),
   (2) weekly quota (qualified conversations / sales targets),
   (3) a capacity check (what must be removed or delegated).
 - Always end with: (1) my ONE next action, (2) my time block, (3) what I'm saying no to.
@@ -1406,19 +1406,19 @@ Output Rules
 Decision Filter (use this every time)
 For any option, score it 1–10 on:
 - Values fit
-- Moves my MIQs forward
-- Supports my WHY/Just Cause
-- Future You fit (Self/Social/Skills/Service)
+- Moves my Real Reasons forward
+- Supports my Driving Fire/Cause Worth Playing For
+- Becoming fit (Self/Social/Skills/Service)
 - Revenue contribution
 - Capacity cost (time/energy/complexity)
 Then recommend: YES / NO / NOT NOW with one sentence why.
 
 1) MY IDENTITY + CONSTRAINTS (HOW I WANT TO OPERATE)
 Who I am (today):
-[BRACKET: derive a 2–3 sentence identity statement from recurring themes across MIQ + WHY + VALUES + F4. If unclear: [NEEDS INPUT]]
+[BRACKET: derive a 2–3 sentence identity statement from recurring themes across MIQ + Driving Fire + VALUES + F4. If unclear: [NEEDS INPUT]]
 
 The pattern I'm leaving:
-[BRACKET: pull from REALITY Misalignments + Costs + any explicit "old pattern" notes in F4 Integration or DOMINO sabotage. If Reality Check was not completed, pull from F4 Integration and DOMINO sabotage only.]
+[BRACKET: pull from REALITY Misalignments + Costs + any explicit "old pattern" notes in F4 Integration or DOMINO sabotage. If The Reckoning was not completed, pull from F4 Integration and DOMINO sabotage only.]
 
 My operating constraints (real life):
 Available weekly hours for growth work: [BRACKET: from REV Capacity section; else [NEEDS INPUT]]
@@ -1429,7 +1429,7 @@ Capacity limit (max clients/projects at once): [BRACKET: from REV Capacity; else
 
 My current friction points:
 The most common thing that derails me is:
-[BRACKET: from REALITY Resistance + DOMINO sabotage patterns + REV resistance notes. If Reality Check not completed, use DOMINO and REV only.]
+[BRACKET: from REALITY Resistance + DOMINO sabotage patterns + REV resistance notes. If The Reckoning not completed, use DOMINO and REV only.]
 
 The "avoidance loop" I default to is:
 [BRACKET: if present; else [NEEDS INPUT]]
@@ -1469,8 +1469,8 @@ Values Conflict Watchlist (common traps):
 - When I feel pressure, I tend to sacrifice ________.
   [BRACKET: same method; else [NEEDS INPUT]]
 
-3) THE NORTH STAR STACK (MIQs + WHY + JUST CAUSE)
-A) My Most Important Questions (MIQs)
+3) THE NORTH STAR STACK (Real Reasons + Driving Fire + JUST CAUSE)
+A) My The Real Reasons: Your Life Lists
 1) Experiences I want in this lifetime:
 [BRACKET: MIQ Experiences]
 
@@ -1481,7 +1481,7 @@ A) My Most Important Questions (MIQs)
 [BRACKET: MIQ Contribution]
 
 MIQ "Must Be True" Conditions (non-negotiables for success):
-[BRACKET: REALITY Must Be True. If Reality Check not completed: [NEEDS INPUT — complete the Reality Check worksheet to populate this field]]
+[BRACKET: REALITY Must Be True. If The Reckoning not completed: [NEEDS INPUT — complete the The Reckoning worksheet to populate this field]]
 
 Current Misalignments (what I'm tolerating):
 [BRACKET: REALITY Misalignments. If not completed: [NEEDS INPUT]]
@@ -1498,21 +1498,21 @@ What resists this change (fear/protective part):
 Support that makes alignment easier:
 [BRACKET: REALITY Support. If not completed: [NEEDS INPUT]]
 
-B) My WHY (Purpose)
-WHY Statement (clean draft):
-[BRACKET: WHY final WHY statement if present; else strongest "Current WHY (Working Draft)"]
+B) My Driving Fire (Purpose)
+Driving Fire Statement (clean draft):
+[BRACKET: Driving Fire final Driving Fire statement if present; else strongest "Current Driving Fire (Working Draft)"]
 
-C) My Just Cause (Infinite Game)
-Just Cause (clean draft):
-[BRACKET: WHY Just Cause final draft]
+C) My Cause Worth Playing For (Infinite Game)
+Cause Worth Playing For (clean draft):
+[BRACKET: Driving Fire Cause Worth Playing For final draft]
 
 Infinite Game Integrity Notes (what makes this a lifelong game):
-[BRACKET: WHY checklist refinements + "Connect the Dots" sacrifice/boundary lines]
+[BRACKET: Driving Fire checklist refinements + "Connect the Dots" sacrifice/boundary lines]
 
-This year's Just Cause "tithe" target (impact):
+This year's Cause Worth Playing For "tithe" target (impact):
 % tithe: [BRACKET: REV tithe % if present; else 10%]
-Method (money / time / platform / partnerships): [BRACKET: REV Just Cause resourcing method; else WHY Connect the Dots "vehicle"]
-Annual impact target: [BRACKET: REV Just Cause annual contribution target; else [NEEDS INPUT]]
+Method (money / time / platform / partnerships): [BRACKET: REV Cause Worth Playing For resourcing method; else Driving Fire Connect the Dots "vehicle"]
+Annual impact target: [BRACKET: REV Cause Worth Playing For annual contribution target; else [NEEDS INPUT]]
 
 4) MY FUTURE 4 (12-MONTH VISION)
 FUTURE 1 — SELF (Identity + Standards)
@@ -1539,9 +1539,9 @@ How my business enables the cause (even if indirect): [BRACKET: F4 Service "brid
 5) REVENUE BRIDGE + OPERATIONAL NUMBERS (NO GUESSING)
 A) Required Revenue (Baseline + Life + Impact)
 Baseline Needs (annual): [BRACKET: REV Baseline total]
-Future You Investments (annual): [BRACKET: REV Future You total]
+Becoming Investments (annual): [BRACKET: REV Becoming total]
 MIQ Desires (annual): [BRACKET: REV MIQ Desires total]
-Just Cause Tithe (annual): [BRACKET: REV Just Cause total]
+Cause Worth Playing For Tithe (annual): [BRACKET: REV Cause Worth Playing For total]
 Reality Buffer (+10%): [BRACKET: REV buffer amount or compute 10% of Required Revenue if missing]
 Required Annual Number: [BRACKET: REV Required Annual Number]
 
@@ -1604,9 +1604,9 @@ If required QCs exceed capacity, recommend in this order:
 5) Change model (group/retainer/async)
 Only last: increase volume
 
-7) THE ONE THING DOMINO (90-DAY EXECUTION)
+7) THE Vital Action DOMINO (90-DAY EXECUTION)
 Lead Lane: [BRACKET: DOMINO lead lane]
-My ONE THING (next 90 days): [BRACKET: DOMINO ONE THING in lead lane]
+My Vital Action (next 90 days): [BRACKET: DOMINO Vital Action in lead lane]
 
 Weekly commitment (time block):
 Day/time: [BRACKET: DOMINO time block]
@@ -1623,7 +1623,7 @@ Right Now (next 10 minutes):
 - Be direct, specific, and unsentimental.
 - If I'm spiraling: give me 1 grounding question, 1 values-based reframe, 1 next action.
 - Never overwhelm me with 20 options. Give 3 options max.
-- When I ask for tactics, confirm alignment first (values + MIQs + Future You + capacity), then give the tactic.
+- When I ask for tactics, confirm alignment first (values + Real Reasons + Becoming + capacity), then give the tactic.
 
 ===========================
 ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
@@ -1636,8 +1636,8 @@ NORTH STAR STACK
 MIQ 1 (Experiences): [BRACKET: MIQ Experiences distilled to 3–6 bullets]
 MIQ 2 (Growth): [BRACKET: MIQ Growth distilled]
 MIQ 3 (Contribution): [BRACKET: MIQ Contribution distilled]
-WHY: [BRACKET: WHY statement]
-JUST CAUSE: [BRACKET: Just Cause statement]
+Driving Fire: [BRACKET: Driving Fire statement]
+JUST CAUSE: [BRACKET: Cause Worth Playing For statement]
 
 TOP 5 VALUES + BOUNDARIES
 1) [BRACKET: Value 1 + boundary]
@@ -1660,7 +1660,7 @@ Lead Lane: [BRACKET]   Capacity Max QCs/week: [BRACKET]
 
 DOMINO (NEXT 90 DAYS)
 Lead Lane: [BRACKET]
-ONE THING: [BRACKET]
+Vital Action: [BRACKET]
 Weekly Block: [BRACKET]
 Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR DOMINO "This Week"]
 
@@ -1669,11 +1669,11 @@ PASTE WORKSHEETS BELOW THIS LINE (verbatim)
 ===========================
 [PASTE MIQ WORKSHEET]
 [PASTE REALITY CHECK WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
-[PASTE WHY + JUST CAUSE WORKSHEET]
+[PASTE Driving Fire + JUST CAUSE WORKSHEET]
 [PASTE CORE VALUES WORKSHEET]
 [PASTE BECOMING YOU WORKSHEET]
 [PASTE GOALS THAT MATTER WORKSHEET]
-[PASTE ONE THING DOMINO WORKSHEET]
+[PASTE Vital Action DOMINO WORKSHEET]
 
 ---
 
@@ -1700,11 +1700,11 @@ NON-NEGOTIABLE PATCH RULES (consistency + precision)
 - If an update conflicts with existing content: resolve conflicts using this priority order:
   1) Core Values + Boundaries
   2) MIQ "Must Be True" conditions
-  3) WHY statement
-  4) Just Cause + Infinite Game integrity
-  5) Future You
-  6) Revenue Bridge numbers + capacity
-  7) ONE THING domino
+  3) Driving Fire statement
+  4) Cause Worth Playing For + Infinite Game integrity
+  5) Becoming
+  6) From Meaning to Math numbers + capacity
+  7) Vital Action domino
 - If I say "REMOVE": delete that specific line/item only and leave the rest intact.
 - If a field is requested to update but I did not provide the data: write [NEEDS INPUT] in that specific spot (do not guess).
 - Keep language strong, clear, high-stakes, emotionally resonant—but never marketing fluff.
@@ -1719,7 +1719,7 @@ Allowed bracket labels:
 [IDENTITY], [PATTERN], [CONSTRAINTS], [FRICTION]
 [VALUES_1]...[VALUES_5], [VALUES_WATCHLIST]
 [MIQ_EXP], [MIQ_GROW], [MIQ_CONTRIB], [MIQ_MUST_TRUE], [MIQ_MISALIGN], [MIQ_COSTS], [MIQ_NEXT_MOVE], [MIQ_RESIST], [MIQ_SUPPORT]
-[WHY_STATEMENT], [JUST_CAUSE], [INFINITE_GAME_NOTES], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
+[Driving Fire_STATEMENT], [JUST_CAUSE], [INFINITE_GAME_NOTES], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
 [F4_SELF], [F4_SOCIAL], [F4_SKILLS], [F4_SERVICE]
 [REV_BASELINE], [REV_F4_INVEST], [REV_MIQ_DESIRES], [REV_TITHE], [REV_BUFFER], [REV_REQUIRED], [REV_TARGET_ANNUAL], [REV_TARGET_MONTH], [REV_TARGET_WEEK]
 [UNIT_ASV], [UNIT_MARGIN], [UNIT_CLOSE], [UNIT_SHOW], [UNIT_QC_TO_SALES]
@@ -1764,7 +1764,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-*Your Master Prompt and Monthly Patch Notes are the engine of your Aligned AI OS. Run the master prompt once to initialize. Run Patch Notes monthly to keep it current.*
+*Your Master Prompt and Monthly Patch Notes are the engine of your VAPOS. Run the master prompt once to initialize. Run Patch Notes monthly to keep it current.*
 
 ---
 
@@ -1778,9 +1778,9 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 # 50 High-Leverage Questions for Your AI OS
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> These are copy/paste-ready prompts designed to work with your Aligned AI OS. Your AI coach already knows your values, MIQs, WHY, Future You, revenue targets, and ONE THING—so every answer is personalized to you.
+> These are copy/paste-ready prompts designed to work with your VAPOS. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
 > **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is loaded. Get a values-aligned answer in seconds.
 
@@ -1788,7 +1788,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ## Weekly Planning (8 Questions)
 
-1. "Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
+1. "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
 
 2. "What are the 3 highest-leverage outcomes for this week across Business, Home, Self/Skills, and Impact—based on my Lead Lane?"
 
@@ -1808,7 +1808,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ## Strategy + Focus (10 Questions)
 
-9. "Given my MIQs, WHY/Just Cause, and Required Revenue, what game am I actually playing this quarter?"
+9. "Given my Real Reasons, Driving Fire/Cause Worth Playing For, and Required Revenue, what game am I actually playing this quarter?"
 
 10. "Score these 3 options using my Decision Filter and tell me YES/NO/NOT NOW with one sentence each."
 
@@ -1816,7 +1816,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 12. "What would I stop doing immediately if I trusted my strategy?"
 
-13. "What is the simplest plan that hits my Target Revenue and protects my Future You?"
+13. "What is the simplest plan that hits my Target Revenue and protects my Becoming?"
 
 14. "List 10 ways I might unintentionally betray my values while pursuing growth—and the aligned counter-moves."
 
@@ -1824,9 +1824,9 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 16. "Pressure-test my current offer against my values and capacity. What must change?"
 
-17. "Build a 90-day strategy that ladders from my ONE THING → weekly quota → daily actions."
+17. "Build a 90-day strategy that ladders from my Vital Action → weekly quota → daily actions."
 
-18. "I'm tempted to chase a shiny object. Reorient me back to my MIQs and show me what this distraction is trying to give me."
+18. "I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me."
 
 ---
 
@@ -1842,7 +1842,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 23. "Create a follow-up system that matches my values (no desperation). Give a 7-touch sequence."
 
-24. "Write a simple sales call structure aligned to my WHY (no hype) that leads to a clean yes/no."
+24. "Write a simple sales call structure aligned to my Driving Fire (no hype) that leads to a clean yes/no."
 
 25. "Help me decide: raise price vs improve conversion vs change offer. Use capacity math and values fit."
 
@@ -1852,19 +1852,19 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ## Marketing + Messaging (8 Questions)
 
-27. "Write my 'what I do' statement so it connects my business to my Just Cause and MIQs without sounding like marketing."
+27. "Write my 'what I do' statement so it connects my business to my Cause Worth Playing For and Real Reasons without sounding like marketing."
 
-28. "Extract my 3 most compelling themes from my MIQs + Values and turn them into content pillars."
+28. "Extract my 3 most compelling themes from my Real Reasons + Values and turn them into content pillars."
 
 29. "Create 10 hooks that call out the misalignment my ideal client is living in—without shame."
 
-30. "Draft an origin story that ties my WHY to the problem I solve and the enemy I fight."
+30. "Draft an origin story that ties my Driving Fire to the problem I solve and the enemy I fight."
 
 31. "Audit my current messaging for values conflict, vagueness, or hustle culture. Rewrite it aligned."
 
 32. "Create an offer page outline that sells the outcome while protecting my capacity and values."
 
-33. "Write a week of content that supports my ONE THING (not random posting). Include CTAs."
+33. "Write a week of content that supports my Vital Action (not random posting). Include CTAs."
 
 34. "Build a referral narrative: the one paragraph people can repeat about me that makes intros easy."
 
@@ -1878,11 +1878,11 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 37. "I'm flooded/anxious. Give me a 3-minute regulation protocol and then one micro-task to regain momentum."
 
-38. "What part of me is resisting this ONE THING—and what is it trying to protect? Help me negotiate a plan."
+38. "What part of me is resisting this Vital Action—and what is it trying to protect? Help me negotiate a plan."
 
 39. "Create a 'friction plan' for my top derailers: triggers, stories, replacement behaviors, and boundaries."
 
-40. "Rewrite my inner narrative from pressure to purpose using my WHY and MIQs."
+40. "Rewrite my inner narrative from pressure to purpose using my Driving Fire and Real Reasons."
 
 41. "Build an 'energy budget' for the week: what drains me, what fuels me, and what gets protected."
 
@@ -1892,7 +1892,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ## Weekly / Monthly Review (8 Questions)
 
-43. "Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."
+43. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
 
 44. "What did I do this week that proves I'm becoming my Future Self? What did I do that contradicts it?"
 
@@ -1910,4 +1910,4 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-*These questions are designed to work with your Aligned AI OS. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+*These questions are designed to work with your VAPOS. The more complete your worksheets, the more personalized and powerful every answer becomes.*

@@ -60,7 +60,7 @@
 - [ ] Daily active users
 - [ ] Messages sent per user per day
 - [ ] Scorecard completion rate
-- [ ] ONE THING completion rate
+- [ ] Vital Action completion rate
 - [ ] SMS opt-in rate
 - [ ] Context depth scores
 - [ ] Churn rate (who stops using it and when)
@@ -70,7 +70,7 @@
 - [ ] Apply beta feedback — fix bugs, refine UX
 - [ ] Record landing page testimonial video (if available)
 - [ ] Announce to full coaching client base
-- [ ] Run first Strategic Clarity Workshop with app tie-in
+- [ ] Run first Alignment Arc Workshop with app tie-in
 - [ ] Activate webinar invite email sequence
 - [ ] Launch Meta ads (start with Ad Set 1 + 2)
 - [ ] Monitor conversion: registration → trial → paid

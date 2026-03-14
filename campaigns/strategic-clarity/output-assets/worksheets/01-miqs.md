@@ -1,6 +1,6 @@
-# Most Important Questions (MIQs)
+# The Real Reasons: Your Life Lists
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > This exercise pulls you out of "means goals" (titles, tactics, numbers) and into **end goals**—what you actually want your life to feel like. Money is currency. We trade it for something. What is it that you actually want to trade it for?
 
@@ -50,4 +50,4 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 ---
 
-*Your MIQs feed directly into your Aligned AI OS. The more honest you are here, the more powerful your AI coach becomes.*
+*Your Life Lists feed directly into your VAPOS. The more honest you are here, the more powerful your AI coach becomes.*

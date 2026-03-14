@@ -1,4 +1,4 @@
-# Video 9.1 — Your AI Coach in Action: 50 High-Leverage Questions
+# Video 9.1 — Your AI Coach in Action: Fire Starters
 
 **Lesson 9: AI Coach in Action | ~8–15 minutes**
 
@@ -8,15 +8,15 @@
 
 Alright. Final lesson. And honestly? This might be the most *fun* one.
 
-You've built the operating system. Your AI knows your values, your MIQs, your WHY, your revenue math, your ONE THING—all of it. Now we put it to work.
+You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
-I'm going to walk you through the 50 High-Leverage Questions—organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
+I'm going to walk you through the Fire Starters—fifty high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
 
 ---
 
-### How to Use the Questions
+### How to Use the Fire Starters
 
-The 50 Questions resource is a copy/paste-ready document. Each question is a prompt. You don't have to memorize them. You don't even have to use them in order. Here's how it works:
+The Fire Starters resource is a copy/paste-ready document. Each question is a prompt. You don't have to memorize them. You don't even have to use them in order. Here's how it works:
 
 1. **Open a conversation** with your AI coach (paste your Master Context in if it's a new session)
 2. **Find the question** that matches what you need right now
@@ -32,13 +32,13 @@ Let me walk you through the categories and highlight a few of my favorites.
 
 This is where most people will start—and where you'll come back every single week.
 
-My go-to is **Question 1**: *"Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
+My go-to is **Question 1**: *"Build my week around my Becoming and Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."*
 
-You paste that in on a Sunday evening or Monday morning, and your AI coach builds your week. Not a generic time-blocking template. *Your* week. With your ONE THING block protected. With your family non-negotiables honored. With your QC targets included. With buffer time for the unexpected.
+You paste that in on a Sunday evening or Monday morning, and your AI coach builds your week. Not a generic time-blocking template. *Your* week. With your Vital Action block protected. With your family non-negotiables honored. With your QC targets included. With buffer time for the unexpected.
 
-Another favorite: **Question 8**: *"Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the domino."*
+Another favorite: **Question 8**: *"Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the Vital Action."*
 
-Because let's be real. Some weeks go sideways. A client emergency. A sick kid. A personal crisis. The Minimum Viable Week is your backup plan—the absolute essentials so that even in chaos, you protect the domino. Your AI coach knows what those essentials are because it knows your ONE THING and your capacity limits.
+Because let's be real. Some weeks go sideways. A client emergency. A sick kid. A personal crisis. The Minimum Viable Week is your backup plan—the absolute essentials so that even in chaos, you protect the Vital Action. Your AI coach knows what those essentials are because it knows your Vital Action and your capacity limits.
 
 ---
 
@@ -48,9 +48,9 @@ This category is for when you need to zoom out.
 
 **Question 10** is a powerhouse: *"Score these 3 options using my Decision Filter and tell me YES / NO / NOT NOW with one sentence each."*
 
-Any time you're weighing options—a new partnership, a course to buy, a client to take on, a project to start—paste this question with your three options. Your AI coach scores each one on values fit, MIQ alignment, revenue contribution, and capacity cost. It takes ten seconds. And it's like having a board of advisors who actually know your life.
+Any time you're weighing options—a new partnership, a course to buy, a client to take on, a project to start—paste this question with your three options. Your AI coach scores each one on values fit, Real Reasons alignment, revenue contribution, and capacity cost. It takes ten seconds. And it's like having a board of advisors who actually know your life.
 
-**Question 18** is for when you're about to get distracted: *"I'm tempted to chase a shiny object. Reorient me back to my MIQs and show me what this distraction is trying to give me."*
+**Question 18** is for when you're about to get distracted: *"I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me."*
 
 That last part—"show me what this distraction is trying to give me"—is key. Because shiny objects aren't random. They represent a need. Your AI coach will name the need (usually significance, novelty, or escape) and then show you how to meet that need *without* abandoning your strategy.
 
@@ -64,21 +64,21 @@ This is operational execution.
 
 Run it anytime you need a reality check on whether you're pacing toward your target.
 
-**Question 24** is about selling without selling your soul: *"Write a simple sales call structure aligned to my WHY (no hype) that leads to a clean yes/no."*
+**Question 24** is about selling without selling your soul: *"Write a simple sales call structure aligned to my Driving Fire (no hype) that leads to a clean yes/no."*
 
-Your AI coach will create a sales conversation framework that feels like *you*—not like a script from a guru. Because it knows your values and your WHY, the approach will be authentic, not performative.
+Your AI coach will create a sales conversation framework that feels like *you*—not like a script from a guru. Because it knows your values and your Driving Fire, the approach will be authentic, not performative.
 
 ---
 
 ### Marketing + Messaging (Questions 27–34)
 
-**Question 30** is one I love: *"Draft an origin story that ties my WHY to the problem I solve and the enemy I fight."*
+**Question 30** is one I love: *"Draft an origin story that ties my Driving Fire to the problem I solve and the enemy I fight."*
 
-Your AI coach writes your origin story using your actual Peak Moments, your WHY, and your values. Not a fabricated marketing narrative. Your real story, structured for impact.
+Your AI coach writes your origin story using your actual Peak Moments, your Driving Fire, and your values. Not a fabricated marketing narrative. Your real story, structured for impact.
 
 **Question 34**: *"Build a referral narrative: the one paragraph people can repeat about me that makes intros easy."*
 
-This one is gold for the referral engine. It gives you the exact language your referral partners can use to introduce you—language that's aligned with your WHY and speaks to your ideal client's real problem.
+This one is gold for the referral engine. It gives you the exact language your referral partners can use to introduce you—language that's aligned with your Driving Fire and speaks to your ideal client's real problem.
 
 ---
 
@@ -92,13 +92,13 @@ That's therapy-grade coaching from an AI that knows your sabotage patterns, your
 
 **Question 42**: *"I'm about to default to 'work harder.' Intervene: give leverage options only—price/offer/model/systems/delegation."*
 
-This one's a boundary. When you feel the pull to grind, you paste this and your AI coach *refuses* to let you hustle. It only gives you leverage options. Because your OS is optimized for alignment + sustainability + impact + revenue—in that order. "Work harder" is always the last resort.
+This one's a boundary. When you feel the pull to grind, you paste this and your AI coach *refuses* to let you hustle. It only gives you leverage options. Because your VAPOS is optimized for alignment + sustainability + impact + revenue—in that order. "Work harder" is always the last resort.
 
 ---
 
 ### Weekly/Monthly Review (Questions 43–50)
 
-**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
+**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
 
 Paste this every Friday. Five minutes. Your AI coach runs the full review and tells you the one thing to adjust next week. It's like having a COO who never forgets and never sugarcoats.
 
@@ -120,13 +120,13 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Mapped the person you're becoming across every domain
 - Connected your vision to your reality
 - Turned meaning into math
-- Chose one domino and installed it on your calendar
-- Built an AI operating system that holds all of it
-- And now you've got 50 questions that turn that OS into a daily tool
+- Chose one Vital Action and installed it on your calendar
+- Built a VAPOS that holds all of it
+- And now you've got Fire Starters—fifty questions that turn that system into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
 
-And the beautiful thing? It grows with you. Monthly Patch Notes keep it current. The worksheets can be revisited quarterly. The questions never expire. The OS gets smarter as you get clearer.
+And the beautiful thing? It grows with you. Monthly Patch Notes keep it current. The worksheets can be revisited quarterly. The Fire Starters never expire. Your VAPOS gets smarter as you get clearer.
 
 ---
 
@@ -138,7 +138,7 @@ And then do it again tomorrow. And the day after. Make it a habit. Because this 
 
 You've done the work. You've built something real. Now go use it.
 
-And if you ever feel lost—if the noise gets loud and the strategy gets foggy—come back to your MIQs. Come back to your WHY. Come back to your values. They're your compass. They always were.
+And if you ever feel lost—if the noise gets loud and the strategy gets foggy—come back to your Real Reasons. Come back to your Driving Fire. Come back to your values. They're your compass. They always were.
 
 You are not broken. You were never behind. You just needed to remember what you're actually here for.
 

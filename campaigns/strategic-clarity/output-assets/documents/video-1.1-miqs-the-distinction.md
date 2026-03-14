@@ -1,6 +1,6 @@
 # Video 1.1 — End Goals vs. Means Goals
 
-**Lesson 1: MIQs | ~8–12 minutes**
+**Lesson 1: The Real Reasons | ~8–12 minutes**
 
 ---
 
@@ -20,7 +20,7 @@ Because here's what I've learned—and this one hurt when I finally saw it: most
 
 ### Means Goals vs. End Goals
 
-This comes from Vishen Lakhiani. He wrote about it in *The Buddha and the Badass*, and when I read it, it hit me like a truck.
+There is a distinction I came across years ago—Vishen Lakhiani writes about it in *The Buddha and the Badass*—and it fundamentally changed how I think about goals. The idea is simple.
 
 A **means goal** is something you pursue because you believe it will give you what you actually want. Money. A title. A business model. A certain number of followers. A certification. A bigger team. These aren't bad things. But they're currency. They're vehicles. They're the *means* to something else.
 
@@ -48,9 +48,9 @@ That's what happens when means goals run the show.
 
 ---
 
-### The Three Most Important Questions
+### What Your Life Lists Are Actually For
 
-So here's what we're going to do instead. We're going to answer three questions—Vishen calls them your Most Important Questions, your MIQs—and they cut right past the means goals to the end goals underneath:
+So here's what we're going to do instead. In the Alignment Arc, we call the destination your Real Reasons. And your Life Lists are how we find them. Three columns. Three questions that cut right past the means goals to the end goals underneath:
 
 **1. What are the experiences I want to have in this lifetime?**
 
@@ -70,19 +70,19 @@ That's it. Three questions. And they're going to reorient everything.
 
 ### Why We Start Here
 
-We start with MIQs before we talk about revenue, before we talk about strategy, before we talk about your ONE THING—because if you don't know what you actually want, every plan you build is just a more efficient way of running in the wrong direction.
+We start with your Real Reasons before we talk about revenue, before we talk about strategy, before we talk about your Vital Action—because if you don't know what you actually want, every plan you build is just a more efficient way of running in the wrong direction.
 
-Your MIQs become the *filter*. Every decision, every opportunity, every shiny object—you run it through: *Does this move me toward the experiences I want? Does this help me grow in the ways that matter? Does this serve the way I want to contribute?*
+Your Real Reasons become the *filter*. Every decision, every opportunity, every shiny object—you run it through: *Does this move me toward the experiences I want? Does this help me grow in the ways that matter? Does this serve the way I want to contribute?*
 
 If yes, lean in. If no, it's a distraction—no matter how lucrative it looks.
 
-And here's the beautiful part: these answers feed directly into your Aligned AI OS. Your AI coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
+And here's the beautiful part: these answers feed directly into your VAPOS. Your VAPOS will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
 
 ---
 
 ### Before You Open the Worksheet
 
-One more thing. When you sit down with the MIQ worksheet, I want you to notice something: your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
+One more thing. When you sit down with your Life Lists, I want you to notice something: your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
 
 Ignore it. All of it.
 
@@ -90,7 +90,7 @@ This is not a business plan. This is a life map. And the more honest you are—t
 
 Write what you want. Not what you think you should want.
 
-I'll meet you in the next video where we'll walk through the worksheet together.
+I'll meet you in the next video where we'll walk through your Life Lists together.
 
 ---
 

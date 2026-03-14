@@ -1,8 +1,8 @@
-# 50 High-Leverage Questions for Your AI OS
+# Fire Starters: 50 High-Leverage Questions for Your VAPOS
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> These are copy/paste-ready prompts designed to work with your Aligned AI OS. Your AI coach already knows your values, MIQs, WHY, Future You, revenue targets, and ONE THING—so every answer is personalized to you.
+> These are copy/paste-ready prompts designed to work with your VAPOS. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
 > **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is loaded. Get a values-aligned answer in seconds.
 
@@ -10,7 +10,7 @@
 
 ## Weekly Planning (8 Questions)
 
-1. "Build my week around my Future You and ONE THING. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
+1. "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables."
 
 2. "What are the 3 highest-leverage outcomes for this week across Business, Home, Self/Skills, and Impact—based on my Lead Lane?"
 
@@ -24,13 +24,13 @@
 
 7. "What is the ONE boundary that would make this week feel 30% cleaner?"
 
-8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the domino."
+8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the Vital Action."
 
 ---
 
 ## Strategy + Focus (10 Questions)
 
-9. "Given my MIQs, WHY/Just Cause, and Required Revenue, what game am I actually playing this quarter?"
+9. "Given my Real Reasons, Driving Fire/Cause Worth Playing For, and Required Revenue, what game am I actually playing this quarter?"
 
 10. "Score these 3 options using my Decision Filter and tell me YES/NO/NOT NOW with one sentence each."
 
@@ -38,7 +38,7 @@
 
 12. "What would I stop doing immediately if I trusted my strategy?"
 
-13. "What is the simplest plan that hits my Target Revenue and protects my Future You?"
+13. "What is the simplest plan that hits my Target Revenue and protects my Becoming?"
 
 14. "List 10 ways I might unintentionally betray my values while pursuing growth—and the aligned counter-moves."
 
@@ -46,9 +46,9 @@
 
 16. "Pressure-test my current offer against my values and capacity. What must change?"
 
-17. "Build a 90-day strategy that ladders from my ONE THING → weekly quota → daily actions."
+17. "Build a 90-day strategy that ladders from my Vital Action → weekly quota → daily actions."
 
-18. "I'm tempted to chase a shiny object. Reorient me back to my MIQs and show me what this distraction is trying to give me."
+18. "I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me."
 
 ---
 
@@ -64,7 +64,7 @@
 
 23. "Create a follow-up system that matches my values (no desperation). Give a 7-touch sequence."
 
-24. "Write a simple sales call structure aligned to my WHY (no hype) that leads to a clean yes/no."
+24. "Write a simple sales call structure aligned to my Driving Fire (no hype) that leads to a clean yes/no."
 
 25. "Help me decide: raise price vs improve conversion vs change offer. Use capacity math and values fit."
 
@@ -74,19 +74,19 @@
 
 ## Marketing + Messaging (8 Questions)
 
-27. "Write my 'what I do' statement so it connects my business to my Just Cause and MIQs without sounding like marketing."
+27. "Write my 'what I do' statement so it connects my business to my Cause Worth Playing For and Real Reasons without sounding like marketing."
 
-28. "Extract my 3 most compelling themes from my MIQs + Values and turn them into content pillars."
+28. "Extract my 3 most compelling themes from my Real Reasons + Values and turn them into content pillars."
 
 29. "Create 10 hooks that call out the misalignment my ideal client is living in—without shame."
 
-30. "Draft an origin story that ties my WHY to the problem I solve and the enemy I fight."
+30. "Draft an origin story that ties my Driving Fire to the problem I solve and the enemy I fight."
 
 31. "Audit my current messaging for values conflict, vagueness, or hustle culture. Rewrite it aligned."
 
 32. "Create an offer page outline that sells the outcome while protecting my capacity and values."
 
-33. "Write a week of content that supports my ONE THING (not random posting). Include CTAs."
+33. "Write a week of content that supports my Vital Action (not random posting). Include CTAs."
 
 34. "Build a referral narrative: the one paragraph people can repeat about me that makes intros easy."
 
@@ -100,11 +100,11 @@
 
 37. "I'm flooded/anxious. Give me a 3-minute regulation protocol and then one micro-task to regain momentum."
 
-38. "What part of me is resisting this ONE THING—and what is it trying to protect? Help me negotiate a plan."
+38. "What part of me is resisting this Vital Action—and what is it trying to protect? Help me negotiate a plan."
 
 39. "Create a 'friction plan' for my top derailers: triggers, stories, replacement behaviors, and boundaries."
 
-40. "Rewrite my inner narrative from pressure to purpose using my WHY and MIQs."
+40. "Rewrite my inner narrative from pressure to purpose using my Driving Fire and Real Reasons."
 
 41. "Build an 'energy budget' for the week: what drains me, what fuels me, and what gets protected."
 
@@ -114,9 +114,9 @@
 
 ## Weekly / Monthly Review (8 Questions)
 
-43. "Run my Weekly Review: check values alignment, Future You progress, QC quota, revenue progress, and capacity—then choose one adjustment."
+43. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
 
-44. "What did I do this week that proves I'm becoming my Future Self? What did I do that contradicts it?"
+44. "What did I do this week that proves I'm becoming the person I described? What did I do that contradicts it?"
 
 45. "Show me where my calendar contradicted my stated priorities. What's the smallest fix?"
 
@@ -132,4 +132,4 @@
 
 ---
 
-*These questions are designed to work with your Aligned AI OS. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+*These Fire Starters are designed to work with your VAPOS. The more complete your worksheets, the more personalized and powerful every answer becomes.*

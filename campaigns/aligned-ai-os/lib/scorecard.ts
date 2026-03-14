@@ -16,7 +16,7 @@ export const SCORECARD_CATEGORIES: ScorecardCategory[] = [
       "I was clear on the outcomes I was aiming for.",
       "I stayed focused as much as I wanted to.",
       "I knew the feelings/state I wanted to generate this week.",
-      "I identified the one thing to improve next week.",
+      "I identified my Vital Action to improve next week.",
     ],
     reflectionPrompt:
       "If I was going to be even more clear on what matters most and stay focused on the outcomes I want next week, I would need to…",

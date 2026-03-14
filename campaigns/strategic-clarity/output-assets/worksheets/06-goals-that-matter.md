@@ -1,8 +1,8 @@
-# From Meaning to Math: The Revenue Bridge
+# From Meaning to Math
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
-> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Just Cause.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the person you're becoming, knock out a few Real Reasons–based stretch desires, and contribute to your Cause Worth Playing For.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
 
@@ -28,7 +28,7 @@ List what must be true financially for you and your business to feel stable (not
 
 ---
 
-## Step 2 — Fund the Future You + MIQs (Stretch Desires)
+## Step 2 — Fund The Becoming + Real Reasons (Stretch Desires)
 
 Translate the next-level life you want into numbers so your business target is tied to what you actually want—not just "growth."
 
@@ -39,15 +39,15 @@ Translate the next-level life you want into numbers so your business target is t
 | BUSINESS |  |  |  |  |
 | IMPACT |  |  |  |  |
 
-**Future You Total (annual):**
+**Becoming Total (annual):**
 
 |   |
 |---|
 |   |
 
-Now list 1–5 MIQ-based stretch desires you want your business to fund this year:
+Now list 1–5 Real Reasons–based stretch desires you want your business to fund this year:
 
-| MIQ / Desire | Annual Amount ($) |
+| Real Reasons Desire | Annual Amount ($) |
 |--------------|-------------------|
 |              |                   |
 |              |                   |
@@ -55,7 +55,7 @@ Now list 1–5 MIQ-based stretch desires you want your business to fund this yea
 |              |                   |
 |              |                   |
 
-**MIQ Desires Total (annual):**
+**Real Reasons Desires Total (annual):**
 
 |   |
 |---|
@@ -65,17 +65,17 @@ Now list 1–5 MIQ-based stretch desires you want your business to fund this yea
 
 ## Step 3 — Resource the Impact (Your "Tithe" for the Cause)
 
-Your business doesn't have to be your Just Cause—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
+Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
 
 | Field | Your Answer |
 |-------|-------------|
-| Your Just Cause (plain language) |  |
+| Your Cause Worth Playing For (plain language) |  |
 | Impact target this year (specific) |  |
 | Impact tithe % (suggested: 10%) |  |
 | How you'll resource it (money / time / platform / partnerships) |  |
 | Estimated annual contribution ($ + time value) |  |
 
-**Just Cause Total (annual):**
+**Cause Total (annual):**
 
 |   |
 |---|
@@ -90,9 +90,9 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 | Component | Amount ($) |
 |-----------|------------|
 | Baseline Needs Total |  |
-| Future You Total |  |
-| MIQ Desires Total |  |
-| Just Cause Total |  |
+| Becoming Total |  |
+| Real Reasons Desires Total |  |
+| Cause Total |  |
 | **= Required Revenue (annual)** |  |
 | Reality Buffer (+10%) |  |
 | **= Target Revenue (annual)** |  |
@@ -198,7 +198,7 @@ Can your current model actually deliver this revenue without breaking your value
 
 ## Finish — Your Highest-Leverage Move
 
-Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds the ONE THING Domino Plan.)*
+Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds Your Vital Action Plan.)*
 
 | Field | Your Answer |
 |-------|-------------|
@@ -208,4 +208,4 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your Revenue Bridge numbers feed directly into your Aligned AI OS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your From Meaning to Math numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*

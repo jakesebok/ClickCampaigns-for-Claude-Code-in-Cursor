@@ -135,7 +135,7 @@ export default function DashboardPage() {
           <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
             Your alignment at a glance
           </h2>
-          {/* ONE THING Banner */}
+          {/* Vital Action Banner */}
           {oneThing && (
             <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5 flex items-center gap-4">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
@@ -143,7 +143,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  This Week&apos;s ONE THING
+                  This Week&apos;s Vital Action
                 </p>
                 <p className="font-medium truncate">{oneThing.oneThing}</p>
               </div>

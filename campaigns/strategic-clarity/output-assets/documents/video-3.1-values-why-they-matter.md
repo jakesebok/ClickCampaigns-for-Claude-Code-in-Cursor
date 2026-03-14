@@ -1,6 +1,6 @@
 # Video 3.1 — Why Values Matter
 
-**Lesson 3: Core Values Extraction | ~8–12 minutes**
+**Lesson 3: Your Values Code: Excavating Your Non-Negotiables | ~8–12 minutes**
 
 ---
 

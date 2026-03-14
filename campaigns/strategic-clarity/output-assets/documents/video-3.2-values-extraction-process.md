@@ -1,12 +1,12 @@
 # Video 3.2 — The Values Extraction Process
 
-**Lesson 3: Core Values Extraction | ~5–8 minutes**
+**Lesson 3: Your Values Code: Excavating Your Non-Negotiables | ~5–8 minutes**
 
 ---
 
 ## VIDEO SCRIPT
 
-Alright, let's extract your values. Open up the Core Values Extraction worksheet.
+Alright, let's extract your values. Open up the Your Values Code worksheet.
 
 ---
 
@@ -53,7 +53,7 @@ There's an AI prompt in the worksheet that runs a structured trade-off test. It 
 
 Here's the critical thing: **answer from your gut, not your head.** Your head will try to pick the "right" answer. Your gut knows which one you'd actually protect when it costs you something.
 
-If you find yourself agonizing over a matchup, it usually means both values are important—but one of them is *load-bearing*. It's the one that, if it were missing, everything else would collapse. That's the one you choose.
+If you find yourself agonizing over a matchup, it usually means both values are important—but one of them is *the one that holds everything else up*. It's the one that, if it were missing, everything else would collapse. That's the one you choose.
 
 ---
 
@@ -75,7 +75,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 This final table—five values, each with a definition, behaviors, and a boundary—this is one of the most important things you'll create in this entire module.
 
-It feeds directly into your Aligned AI OS as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
+It feeds directly into your VAPOS as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
 
 And more than that—this table becomes a mirror. You can come back to it in a month, in six months, in a year, and ask: am I living this? Am I embodying these behaviors? Am I holding these boundaries?
 
@@ -85,7 +85,7 @@ Values aren't something you set once. They're something you practice daily. This
 
 ### One Last Thing
 
-You might notice that your Top 5 don't include some values you expected. "Where's family? Where's health? Where's success?" That's normal. It doesn't mean those things don't matter. It means they show up *through* the values you did select. Integrity might be how you protect your family. Self-trust might be how you maintain your health. The Top 5 are the load-bearing walls. Everything else is built on them.
+You might notice that your Top 5 don't include some values you expected. "Where's family? Where's health? Where's success?" That's normal. It doesn't mean those things don't matter. It means they show up *through* the values you did select. Integrity might be how you protect your family. Self-trust might be how you maintain your health. The Top 5 are the ones that hold everything else up. Everything else is built on them.
 
 Alright. You've got your values. I'll see you in Lesson 4, where we map the future you're building.
 

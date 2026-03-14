@@ -1,6 +1,6 @@
 # Video 2.2 — Peak Moments + Theme Mining
 
-**Lesson 2: Find Your WHY + Just Cause | ~8–12 minutes**
+**Lesson 2: Your Driving Fire + The Cause Worth Playing For | ~8–12 minutes**
 
 ---
 
@@ -8,7 +8,7 @@
 
 Alright. You've re-read your Peak Moments. You've got the Golden Circle framework in your head. Now it's time to dig.
 
-Open your Find Your WHY worksheet. We're starting with Exercises 1 and 2—Peak Moments and Theme Mining.
+Open your Your Driving Fire worksheet. We're starting with Exercises 1 and 2—Peak Moments and Theme Mining.
 
 ---
 
@@ -32,7 +32,7 @@ Now we go pattern hunting.
 
 If you're doing this with a partner or in a group—great. One person asks the questions, listens for repeats, and mirrors back what they hear. No advice. No fixing. Just listening and reflecting.
 
-If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as your WHY coach, walking you through the same process.
+If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as a values-aligned theme mining coach, walking you through the same process.
 
 Either way, here are the five questions. Answer them quickly. First honest answer wins.
 
@@ -67,7 +67,7 @@ After you answer those five questions, fill in the Theme Summary box:
 - **My strongest "move from → to" pattern is...**
 - **The sentence that feels most true (raw, messy) is...**
 
-That last one—the messy one—is usually closest to your real WHY. Don't clean it up. Just write it.
+That last one—the messy one—is usually closest to your real Driving Fire. Don't clean it up. Just write it.
 
 ---
 
@@ -75,19 +75,19 @@ That last one—the messy one—is usually closest to your real WHY. Don't clean
 
 Copy the prompt from the worksheet. Paste it into ChatGPT, Claude, or whatever you use. Then paste your Peak Moments table underneath it.
 
-The AI will act as Simon Sinek—warm, direct, no fluff. It'll ask you questions one at a time. It'll push you for specificity. It'll mirror back patterns. And it'll help you draft your WHY by the end of the conversation.
+The AI will act as a values-aligned theme mining coach—warm, direct, no fluff. It'll ask you questions one at a time. It'll push you for specificity. It'll mirror back patterns. And it'll help you draft your Driving Fire by the end of the conversation.
 
 A couple tips for the AI session:
 
 - Answer in full sentences. Give it texture. The more you give, the better it mines.
 - When it mirrors something back and it doesn't land, say so. "That doesn't feel right. It's more like..."
-- Don't rush to the WHY statement. Let the pattern emerge. The statement comes from the pattern, not from forcing words into a template.
+- Don't rush to the Driving Fire statement. Let the pattern emerge. The statement comes from the pattern, not from forcing words into a template.
 
 ---
 
 ### What Comes Next
 
-In the next video, we'll take everything you've mined—whether with a partner or with AI—and draft your WHY statement. Then we'll test it with your body, strengthen it with context, and connect it to your Just Cause.
+In the next video, we'll take everything you've mined—whether with a partner or with AI—and draft your Driving Fire statement. Then we'll test it with your body, strengthen it with context, and connect it to your Cause Worth Playing For.
 
 For now, your job is the mining. Dig into those stories. Find the thread. Trust the process.
 

@@ -42,7 +42,7 @@ function formatScorecardContext(entries: PortalSixCRow[]): string {
     for (const c of SCORECARD_CATEGORIES) {
       ctx += `\n  ${c.label}: ${scores[c.key] || 0}%`;
     }
-    if (entry.one_thing_to_improve) ctx += `\n  ONE THING: ${entry.one_thing_to_improve}`;
+    if (entry.one_thing_to_improve) ctx += `\n  Vital Action: ${entry.one_thing_to_improve}`;
   }
   return ctx;
 }

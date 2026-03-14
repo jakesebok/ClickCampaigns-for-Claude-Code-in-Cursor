@@ -18,7 +18,7 @@ Two questions:
 
 **"What keeps showing up as the 'real priority' underneath everything?"**
 
-Look across all four futures. Is there a theme? Maybe "presence" keeps appearing—present with yourself, present with your family, present in your craft. Maybe "boundaries" keeps surfacing—energy boundaries, relationship boundaries, time boundaries. Maybe "courage" is the thread—courage to say no, courage to be honest, courage to stop performing.
+Look across all four domains. Is there a theme? Maybe "presence" keeps appearing—present with yourself, present with your family, present in your craft. Maybe "boundaries" keeps surfacing—energy boundaries, relationship boundaries, time boundaries. Maybe "courage" is the thread—courage to say no, courage to be honest, courage to stop performing.
 
 Name it. Write it down. This is often the meta-value—the one thing that, if you got it right, would unlock all the others.
 
@@ -34,7 +34,7 @@ Whatever it is—name it. Not because naming it fixes it. But because naming it 
 
 Now the commitment.
 
-**"If I could only strengthen ONE future first to unlock the rest, it would be..."**
+**"If I could only strengthen ONE domain first to unlock the rest, it would be..."**
 
 This is not "which one is most important." They're all important. This is: which one is the *lever*? Which one, if it moved, would create movement in the others?
 
@@ -62,24 +62,24 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-Your Future You becomes Section 4 of your Aligned AI OS. Your AI coach will know:
+Your Becoming becomes Section 4 of your VAPOS. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
 - Your primary field and the most leveraged skill for the next 90 days
 - Your signature contribution and how your business enables your cause
 
-So when you ask your AI coach for a weekly plan, it doesn't just look at revenue targets. It checks: does this week move you toward the future you described across *all four domains*? If your Self future says "grounded and present" but your plan has zero margin, the AI will flag it. That's alignment by design.
+So when you ask your AI coach for a weekly plan, it doesn't just look at revenue targets. It checks: does this week move you toward the person you're becoming across *all four domains*? If your Self domain says "grounded and present" but your plan has zero margin, the AI will flag it. That's alignment by design.
 
 ---
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. MIQs. WHY. Values. The Future You. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Becoming. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
-I'll see you in Lesson 5, where we do a Reality Check before turning all of this into numbers.
+I'll see you in Lesson 5, where we do The Reckoning before turning all of this into numbers.
 
 ---
 

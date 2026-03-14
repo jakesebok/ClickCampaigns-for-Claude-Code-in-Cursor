@@ -1,6 +1,6 @@
-# Core Values Extraction Worksheet
+# Your Values Code: Excavating Your Non-Negotiables
 
-**Aligned Power | Strategic Clarity Workshop**
+**Aligned Power — The Alignment Arc**
 
 > **Purpose:** Identify your top core values by reverse-engineering what you admire most in other people, clustering those traits into themes, and narrowing them down to the five values that will guide your decisions, boundaries, and priorities.
 >
@@ -139,4 +139,4 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
-*Your Top 5 Core Values feed directly into your Aligned AI OS. They become the non-negotiable filter for every recommendation your AI coach makes.*
+*Your Top 5 Core Values feed directly into your VAPOS. They become the non-negotiable filter for every recommendation your AI coach makes.*

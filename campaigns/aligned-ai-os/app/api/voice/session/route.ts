@@ -84,7 +84,7 @@ export async function POST() {
       for (const c of SCORECARD_CATEGORIES) {
         ctx += ` | ${c.label}: ${scores[c.key] || 0}%`;
       }
-      if (entry.one_thing_to_improve) ctx += ` | ONE THING: ${entry.one_thing_to_improve}`;
+      if (entry.one_thing_to_improve) ctx += ` | Vital Action: ${entry.one_thing_to_improve}`;
     }
     scorecardSummary = ctx;
   }

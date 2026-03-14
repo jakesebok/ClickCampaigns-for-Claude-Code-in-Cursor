@@ -14,7 +14,7 @@ Fair. Let me explain.
 
 ### The Pre-Work Is the Foundation
 
-Everything we build in Strategic Clarity—your MIQs, your WHY, your values, your revenue bridge, your ONE THING—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
+Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your Values Code, the math inside From Meaning to Math, and your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
 
 Think of it this way. If I hand you the most incredible GPS in the world—one that knows every shortcut, every traffic pattern, every scenic route—but you never tell it where you're starting from? It's useless. Beautiful. Sophisticated. Useless.
 
@@ -28,11 +28,11 @@ There are four exercises in the packet:
 
 **Exercise 1: Values Extraction.** You're going to list five people you admire and five specific qualities you admire in each of them. This is the raw material we'll use to extract your core values. And I mean *specific*—not "she's smart," but "she explains complex things simply without making people feel small." That level. Because vague inputs produce vague values, and vague values produce vague decisions.
 
-**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your WHY. We're going to mine them.
+**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them.
 
-**Exercise 3: Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the From Meaning to Math worksheet actually *work* instead of just being wishful thinking.
 
-**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your AI coach needs to understand your business to give you useful advice. This is how it learns.
+**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your VAPOS needs to understand your business to give you useful advice. This is how it learns.
 
 ---
 
@@ -52,11 +52,11 @@ A few rules:
 
 ### Why It Powers Everything
 
-Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your Aligned AI OS. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your AI coach.
+Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your VAPOS. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your VAPOS.
 
-So when you write a peak moment that seems small? Your AI coach remembers it. When you write an honest number about your revenue? Your AI coach uses it. When you name a quality you admire in someone else? That becomes a core value your AI coach holds you to.
+So when you write a peak moment that seems small? Your VAPOS remembers it. When you write an honest number about your revenue? Your VAPOS uses it. When you name a quality you admire in someone else? That becomes a core value your VAPOS holds you to.
 
-The depth of your pre-work determines the quality of your AI coach. Garbage in, garbage out. Honesty in, alignment out.
+The depth of your pre-work determines the quality of your VAPOS. Garbage in, garbage out. Honesty in, alignment out.
 
 ---
 
