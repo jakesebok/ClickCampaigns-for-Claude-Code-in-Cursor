@@ -4,9 +4,9 @@ Reminder emails are sent to **active clients** (from `portal_active_clients`) du
 
 ## Schedule (Eastern)
 
-The cron runs **once per day** at 22:00 UTC (5pm Eastern). The API sends one email based on the day:
+The cron runs **once per day** at 18:00 UTC (1pm Eastern). The API sends one email based on the day:
 
-| Day (when cron runs at 5pm Eastern) | Email |
+| Day (when cron runs at 1pm Eastern) | Email |
 |-------------------------------------|--------|
 | Friday | "Your scorecard is available for this week" |
 | Saturday | "Reminder: Get your scorecard in this weekend" |
@@ -26,7 +26,7 @@ Summary:
 `vercel.json` in this folder already defines:
 
 - Path: `/api/cron/6c-reminders`
-- Schedule: `0 22 * * *` (once daily at 22:00 UTC, which is 5pm Eastern). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday 5pm → “available”, Saturday 5pm → reminder, Sunday 5pm → “one hour left” only.
+- Schedule: `0 18 * * *` (once daily at 18:00 UTC, which is 1pm Eastern). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday 1pm → “available”, Saturday 1pm → reminder, Sunday 1pm → “one hour left” only.
 
 After deployment, Cron runs automatically. You can confirm in Vercel → Project → Settings → Crons.
 
@@ -38,7 +38,7 @@ After deployment, Cron runs automatically. You can confirm in Vercel → Project
 
 Without sending email (to see which type would run):
 
-1. Call the API when it’s Friday 12pm Eastern (or change the server time for testing).  
+1. Call the API when it’s Friday 1pm Eastern (or change the server time for testing).  
 2. With sending: set **RESEND_API_KEY** and **CRON_SECRET**, then:
 
    ```bash
@@ -49,5 +49,5 @@ For **status only** (no email): add `?status=1` to the URL. For **one test email
 
 ## Hobby plan note
 
-Vercel Hobby allows only **one cron run per day**. The schedule is set to `0 22 * * *` (once daily at 5pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 12pm emails plus the Sunday 5pm "one hour left" email.
+Vercel Hobby allows only **one cron run per day**. The schedule is set to `0 18 * * *` (once daily at 1pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 1pm emails plus an additional Sunday 5pm "one hour left" email.
 

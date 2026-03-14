@@ -183,7 +183,7 @@ This checks that the system is running and knows the correct time. It does **not
 
 2. Press Enter.
 
-**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, and Sunday at 5pm Eastern. The important part is that you see a response with no error. You can close the tab.
+**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, and Sunday at 1pm Eastern. The important part is that you see a response with no error. You can close the tab.
 
 ### Test 3: Send yourself a real test email
 
@@ -226,7 +226,7 @@ That usually means the secret in the URL doesn't match what's in Vercel. Try thi
 
 ### When do the real reminders go out?
 
-The system sends reminders **once per day** at **5pm Eastern** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens (Friday 5pm), a reminder (Saturday 5pm), and a "one hour left" notice (Sunday 5pm). You don't have to do anything else—Vercel runs this automatically.
+The system sends reminders **once per day** at **1pm Eastern** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens (Friday 1pm), a reminder (Saturday 1pm), and a "one hour left" notice (Sunday 1pm). You don't have to do anything else—Vercel runs this automatically.
 
 ---
 
@@ -239,4 +239,4 @@ The system sends reminders **once per day** at **5pm Eastern** (Friday, Saturday
 - [ ] **Vercel:** Optionally added **SIX_C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
 - [ ] **Vercel:** Redeployed so the new env vars are in effect.
 
-After that, the cron job will run once daily at 5pm Eastern (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
+After that, the cron job will run once daily at 1pm Eastern (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
