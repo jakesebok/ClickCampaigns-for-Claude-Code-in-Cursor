@@ -1,9 +1,9 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Schedule: once daily at 18:00 UTC (1pm Eastern). Sends based on America/New_York:
- * - Friday 1pm Eastern → "Your scorecard is available"
- * - Saturday 1pm Eastern → Saturday reminder
- * - Sunday 1pm Eastern → "One hour left to submit" (only Sunday email)
+ * Schedule: once daily at 17:05 UTC (12:05pm Eastern). Sends 5 min after scorecard opens.
+ * - Friday 12:05pm Eastern → "Your scorecard is available"
+ * - Saturday 12:05pm Eastern → Saturday reminder
+ * - Sunday 12:05pm Eastern → "One hour left to submit" (only Sunday email)
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
  *      SIX_C_FROM_EMAIL (e.g. scorecard@notifications.alignedpower.coach), SIX_C_REPLY_TO (optional).
@@ -34,7 +34,8 @@ function nowInEastern() {
 
 function getReminderType() {
   const e = nowInEastern();
-  const isReminderHour = e.hour === 13 || e.hour === 14;
+  // 17:05 UTC = 12:05pm EST (winter) or 1:05pm EDT (summer); Vercel Hobby ±1hr window
+  const isReminderHour = e.hour >= 11 && e.hour <= 14;
   if (e.dayOfWeek === 5 && isReminderHour) return 'available';
   if (e.dayOfWeek === 6 && isReminderHour) return 'saturday';
   if (e.dayOfWeek === 0 && isReminderHour) return 'one-hour-left';
@@ -182,6 +183,46 @@ function isValidEmail(s) {
   return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
 }
 
+/** Returns { opensAt, closesAt } for this week's scorecard window (Friday 12pm – Sunday 6pm Eastern) as ISO strings. */
+function getThisWeekWindowBounds() {
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: TZ,
+    weekday: 'short',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  });
+  const parts = fmt.formatToParts(now);
+  const o = {};
+  parts.forEach((p) => { o[p.type] = p.value; });
+  const dayNames = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 };
+  const dow = dayNames[o.weekday] ?? 0;
+  const y = parseInt(o.year, 10) || 2025;
+  const m = parseInt(o.month, 10) || 1;
+  const d = parseInt(o.day, 10) || 1;
+  const hour = parseInt(o.hour, 10) || 0;
+  // Eastern offset: EDT (Apr–Oct) = 4, EST = 5 (matches six-c-window.js)
+  const offset = (m >= 4 && m <= 10) ? 4 : 5;
+  // Friday noon that started this week's window (Sat: yesterday, Sun: 2 days ago, Fri: today)
+  let fd = d;
+  if (dow === 6) fd = d - 1;
+  else if (dow === 0) fd = d - 2;
+  const fridayNoonUtc = new Date(Date.UTC(y, m - 1, fd, 12 + offset, 0));
+  // Sunday 6pm that closes this week's window (Sat: tomorrow, Sun: today, Fri: in 2 days)
+  let sd = d;
+  if (dow === 5 && hour >= 12) sd = d + 2;
+  else if (dow === 6) sd = d + 1;
+  const sunday6pmUtc = new Date(Date.UTC(y, m - 1, sd, 18 + offset, 0));
+  return {
+    opensAt: fridayNoonUtc.toISOString(),
+    closesAt: sunday6pmUtc.toISOString(),
+  };
+}
+
 export async function GET(request) {
   const url = request.url ? new URL(request.url) : null;
   const authHeader = request.headers.get('authorization') || request.headers.get('Authorization') || '';
@@ -254,7 +295,7 @@ export async function GET(request) {
         status: true,
         eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
         reminderType: type,
-        message: type ? `Would send "${type}" to active clients.` : 'No reminder scheduled for this time (Fri/Sat/Sun 1pm Eastern only).',
+        message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun 12:05pm Eastern only).',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
@@ -280,12 +321,40 @@ export async function GET(request) {
     return new Response(JSON.stringify({ error: 'supabase_failed', status: restRes.status }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
   const activeRows = await restRes.json();
-  const clients = (Array.isArray(activeRows) ? activeRows : [])
+  let clients = (Array.isArray(activeRows) ? activeRows : [])
     .map((r) => ({ email: (r.email || '').trim().toLowerCase(), firstName: null }))
     .filter((r) => r.email);
 
+  // Friday: send to all. Saturday/Sunday: only to those who haven't submitted this week.
+  if (type === 'saturday' || type === 'one-hour-left') {
+    const { opensAt, closesAt } = getThisWeekWindowBounds();
+    const subsUrl = `${supabaseUrl}/rest/v1/six_c_submissions?select=email&created_at=gte.${encodeURIComponent(opensAt)}&created_at=lte.${encodeURIComponent(closesAt)}`;
+    const subsRes = await fetch(subsUrl, {
+      method: 'GET',
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        Accept: 'application/json',
+      },
+    });
+    const submittedEmails = new Set();
+    if (subsRes.ok) {
+      const subs = await subsRes.json();
+      (Array.isArray(subs) ? subs : []).forEach((r) => {
+        const e = (r.email || '').trim().toLowerCase();
+        if (e) submittedEmails.add(e);
+      });
+    }
+    clients = clients.filter((c) => !submittedEmails.has(c.email));
+  }
+
   if (clients.length === 0) {
-    return new Response(JSON.stringify({ ok: true, sent: 0 }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    const totalActive = (Array.isArray(activeRows) ? activeRows : []).length;
+    return new Response(JSON.stringify({
+      ok: true,
+      sent: 0,
+      ...(totalActive > 0 && type !== 'available' && { skipped: totalActive, reason: 'all_already_submitted_this_week' }),
+    }), { status: 200, headers: { 'Content-Type': 'application/json' } });
   }
 
   if (!resendKey) {
@@ -316,5 +385,13 @@ export async function GET(request) {
     }
   }
 
-  return new Response(JSON.stringify({ ok: true, type, sent, total: clients.length }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  const totalActive = (Array.isArray(activeRows) ? activeRows : []).length;
+  const skipped = totalActive - clients.length;
+  return new Response(JSON.stringify({
+    ok: true,
+    type,
+    sent,
+    total: clients.length,
+    ...(skipped > 0 && { skipped, reason: 'already_submitted_this_week' }),
+  }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 }

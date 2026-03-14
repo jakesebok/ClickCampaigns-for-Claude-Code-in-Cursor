@@ -10,7 +10,7 @@
 
 ---
 
-# Aligned Power — Strategic Clarity Pre-Work Packet
+# Aligned Power — Alignment Arc Pre-Work Packet
 
 > **Complete this packet before the workshop.** Plan 30–60 minutes in a quiet space. Fill it digitally—we'll use AI during the workshop, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
 
@@ -26,14 +26,14 @@ Everything you write here feeds directly into your **VAPOS Upgrade**—a master 
 
 ## Pre-Work Checklist
 
-- [ ] Exercise 1: Values Extraction
+- [ ] Exercise 1: Your Values Code Inputs
 - [ ] Exercise 2: Peak Moments
 - [ ] Exercise 3: From Meaning to Math Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
 
-## Exercise 1 — Values Extraction
+## Exercise 1 — Your Values Code Inputs
 
 **Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the workshop.
 
@@ -516,13 +516,13 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 ---
 
-## 4. Core Values Extraction Worksheet
+## 4. Your Values Code: Excavating Your Non-Negotiables
 
 **Source:** `worksheets/03-core-values-extraction.md`
 
 ---
 
-# Core Values Extraction Worksheet
+# Your Values Code: Excavating Your Non-Negotiables
 
 **Aligned Power — The Alignment Arc**
 
@@ -867,7 +867,7 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
-These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your AI OS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
+These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAPOS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
 **You can do this now, during a Strategic Intensive, or whenever you're ready. No pressure—depth beats speed.**
 
@@ -944,23 +944,23 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-*These answers feed into your VAPOS under "MIQ Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
+*These answers feed into your VAPOS under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
 
 ---
 
 ---
 
-## 7. From Meaning to Math: The From Meaning to Math
+## 7. From Meaning to Math
 
 **Source:** `worksheets/06-goals-that-matter.md`
 
 ---
 
-# From Meaning to Math: The From Meaning to Math
+# From Meaning to Math
 
 **Aligned Power — The Alignment Arc**
 
-> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few MIQ-based stretch desires, and contribute to your Cause Worth Playing For.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few Real Reasons-based stretch desires, and contribute to your Cause Worth Playing For.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
 
@@ -1003,9 +1003,9 @@ Translate the next-level life you want into numbers so your business target is t
 |---|
 |   |
 
-Now list 1–5 MIQ-based stretch desires you want your business to fund this year:
+Now list 1–5 Real Reasons-based stretch desires you want your business to fund this year:
 
-| MIQ / Desire | Annual Amount ($) |
+| Real Reasons / Desire | Annual Amount ($) |
 |--------------|-------------------|
 |              |                   |
 |              |                   |
@@ -1013,7 +1013,7 @@ Now list 1–5 MIQ-based stretch desires you want your business to fund this yea
 |              |                   |
 |              |                   |
 
-**MIQ Desires Total (annual):**
+**Real Reasons Desires Total (annual):**
 
 |   |
 |---|
@@ -1049,7 +1049,7 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 |-----------|------------|
 | Baseline Needs Total |  |
 | Becoming Total |  |
-| MIQ Desires Total |  |
+| Real Reasons Desires Total |  |
 | Cause Worth Playing For Total |  |
 | **= Required Revenue (annual)** |  |
 | Reality Buffer (+10%) |  |
@@ -1184,7 +1184,7 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 > **How to use:**
 > - Stay operational: write actions, not themes.
-> - Leverage wins: choose the ONE move that makes other moves easier or unnecessary.
+> - Leverage wins: choose the single aligned move that makes other moves easier or unnecessary.
 > - Whole-system focus: you will create Vital Action for each lane, then select one Lead Lane to execute first.
 
 ---
@@ -1233,7 +1233,7 @@ Write one sentence per lane. Make it measurable or vividly observable.
 
 ## 3) Your Vital Action (10–12 minutes)
 
-Answer for each lane: **"What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary?"**
+Answer for each lane: **"What is my Vital Action—the single aligned move that, if I protect it, makes everything else easier or unnecessary?"**
 
 | Lane | My Vital Action (one action) |
 |------|---------------------------|
@@ -1244,7 +1244,7 @@ Answer for each lane: **"What's the ONE Thing I can do such that by doing it eve
 
 ---
 
-## 4) Goal-Setting to the Now — Domino Chain (10–15 minutes)
+## 4) Goal-Setting to the Now — The Arc Chain (10–15 minutes)
 
 Complete this for your **Lead Lane** first. If time allows, repeat for the other lanes.
 
@@ -1297,7 +1297,7 @@ Your Lead Lane Vital Action must have a protected time block. If it isn't on the
 
 Write it. Sign it.
 
-**My next season is built on this domino:**
+**My next season is built on this Vital Action:**
 
 |   |
 |---|
@@ -1347,7 +1347,7 @@ You are an expert Aligned AI Business Agent. Your job is to produce ONE standard
 
 TASK
 Fill in the template below to generate:
-1) ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)
+1) VAPOS UPGRADE — MASTER CONTEXT (v1)
 2) ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
 SOURCE MATERIAL
@@ -1361,32 +1361,32 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 - If multiple answers exist, choose the clearest / most specific, and put extras into "Notes / Backup Language" at the end.
 - If any content conflicts, resolve conflicts by this priority order:
   1) Core Values + Boundaries
-  2) MIQ "Must Be True" conditions (from The Reckoning worksheet)
+  2) Real Reasons "Must Be True" conditions (from The Reckoning worksheet)
   3) Driving Fire statement
   4) Cause Worth Playing For + Infinite Game Test
   5) Becoming
   6) From Meaning to Math numbers + capacity
-  7) Vital Action domino
+  7) Vital Action
 - Do NOT change the meaning of the user's words. You may tighten wording for clarity.
 
 FIELD MAP (where each field comes from)
 Use these worksheet tags to find the content:
-[MIQ] = Most Important Questions worksheet (Experiences, Growth, Contribution)
-[REALITY] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If the The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
-[Driving Fire] = Find Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fires, Full-Body Test notes, Strengthen Driving Fire answers, Cause Worth Playing For future state answers, Infinite Game checklist, Connect the Dots table)
-[VALUES] = Core Values Extraction worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
-[F4] = Becoming You worksheet / The Becoming (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
-[REV] = From Meaning to Math / From Meaning to Math worksheet (Baseline needs, Becoming investments, MIQ desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
-[DOMINO] = Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Domino chain, Calendar install, sabotage list, commitment)
+[REAL_REASONS] = Real Reasons (Life Lists) worksheet (Experiences, Growth, Contribution)
+[RECKONING] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
+[DRIVING_FIRE] = Your Driving Fire + The Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fires, Full-Body Test notes, Strengthen Driving Fire answers, Cause Worth Playing For future state answers, Infinite Game checklist, Connect the Dots table)
+[VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
+[BECOMING] = The Becoming worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
+[REV] = From Meaning to Math worksheet (Baseline needs, Becoming investments, Real Reasons desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[VITAL_ACTION] = Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
 
 ===========================
-ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)
+VAPOS UPGRADE — MASTER CONTEXT (v1)
 ===========================
 
 0) YOUR ROLE + RULES (NON-NEGOTIABLES)
-You are my Aligned AI Business Agent. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout).
+You are my Values-Aligned Performance Agent. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout).
 
 Prime Directive
 Optimize for: alignment + sustainability + impact + revenue — in that order.
@@ -1398,7 +1398,7 @@ Output Rules
 - No "hustle harder" advice. If capacity is the constraint, recommend levers like: pricing, offer design, audience, delivery model, systems, delegation, boundaries.
 - When I'm scattered or reactive, reorient me back to the Alignment Blueprint before giving tactical steps.
 - When making plans, you must include:
-  (1) the Vital Action (domino),
+  (1) the Vital Action,
   (2) weekly quota (qualified conversations / sales targets),
   (3) a capacity check (what must be removed or delegated).
 - Always end with: (1) my ONE next action, (2) my time block, (3) what I'm saying no to.
@@ -1415,27 +1415,27 @@ Then recommend: YES / NO / NOT NOW with one sentence why.
 
 1) MY IDENTITY + CONSTRAINTS (HOW I WANT TO OPERATE)
 Who I am (today):
-[BRACKET: derive a 2–3 sentence identity statement from recurring themes across MIQ + Driving Fire + VALUES + F4. If unclear: [NEEDS INPUT]]
+[BRACKET: derive a 2–3 sentence identity statement from recurring themes across REAL_REASONS + Driving Fire + VALUES + BECOMING. If unclear: [NEEDS INPUT]]
 
 The pattern I'm leaving:
-[BRACKET: pull from REALITY Misalignments + Costs + any explicit "old pattern" notes in F4 Integration or DOMINO sabotage. If The Reckoning was not completed, pull from F4 Integration and DOMINO sabotage only.]
+[BRACKET: pull from RECKONING Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If The Reckoning was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
 
 My operating constraints (real life):
 Available weekly hours for growth work: [BRACKET: from REV Capacity section; else [NEEDS INPUT]]
 Available weekly hours for delivery/client work: [BRACKET: from REV Capacity section; else [NEEDS INPUT]]
-Family/relationship non-negotiables (times/days): [BRACKET: if present in DOMINO or F4 Social; else [NEEDS INPUT]]
-Health non-negotiables (training/sleep): [BRACKET: if present in F4 Self; else [NEEDS INPUT]]
+Family/relationship non-negotiables (times/days): [BRACKET: if present in VITAL_ACTION or BECOMING Social; else [NEEDS INPUT]]
+Health non-negotiables (training/sleep): [BRACKET: if present in BECOMING Self; else [NEEDS INPUT]]
 Capacity limit (max clients/projects at once): [BRACKET: from REV Capacity; else [NEEDS INPUT]]
 
 My current friction points:
 The most common thing that derails me is:
-[BRACKET: from REALITY Resistance + DOMINO sabotage patterns + REV resistance notes. If The Reckoning not completed, use DOMINO and REV only.]
+[BRACKET: from RECKONING Resistance + VITAL_ACTION sabotage patterns + REV resistance notes. If The Reckoning not completed, use VITAL_ACTION and REV only.]
 
 The "avoidance loop" I default to is:
 [BRACKET: if present; else [NEEDS INPUT]]
 
 The "overwork loop" I default to is:
-[BRACKET: from REALITY Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
+[BRACKET: from RECKONING Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
 
 2) MY TOP 5 CORE VALUES (OPERATIONALIZED)
 Value #1: [BRACKET: VALUES Top 5 #1]
@@ -1465,38 +1465,38 @@ Boundary: [BRACKET: VALUES #5 boundary]
 
 Values Conflict Watchlist (common traps):
 - When I chase ________, I tend to betray value ________.
-  [BRACKET: derive from VALUES reflections + REALITY Misalignments. If not explicit: [NEEDS INPUT]]
+  [BRACKET: derive from VALUES reflections + RECKONING Misalignments. If not explicit: [NEEDS INPUT]]
 - When I feel pressure, I tend to sacrifice ________.
   [BRACKET: same method; else [NEEDS INPUT]]
 
-3) THE NORTH STAR STACK (Real Reasons + Driving Fire + JUST CAUSE)
+3) THE NORTH STAR STACK (Real Reasons + Driving Fire + The Cause Worth Playing For)
 A) My The Real Reasons: Your Life Lists
 1) Experiences I want in this lifetime:
-[BRACKET: MIQ Experiences]
+[BRACKET: REAL_REASONS Experiences]
 
 2) Growth required to live those experiences (who I must become):
-[BRACKET: MIQ Growth]
+[BRACKET: REAL_REASONS Growth]
 
 3) How I want to contribute / give back:
-[BRACKET: MIQ Contribution]
+[BRACKET: REAL_REASONS Contribution]
 
-MIQ "Must Be True" Conditions (non-negotiables for success):
-[BRACKET: REALITY Must Be True. If The Reckoning not completed: [NEEDS INPUT — complete the The Reckoning worksheet to populate this field]]
+Real Reasons "Must Be True" Conditions (non-negotiables for success):
+[BRACKET: RECKONING Must Be True. If The Reckoning not completed: [NEEDS INPUT — complete The Reckoning worksheet to populate this field]]
 
 Current Misalignments (what I'm tolerating):
-[BRACKET: REALITY Misalignments. If not completed: [NEEDS INPUT]]
+[BRACKET: RECKONING Misalignments. If not completed: [NEEDS INPUT]]
 
 What it's costing me:
-[BRACKET: REALITY Costs. If not completed: [NEEDS INPUT]]
+[BRACKET: RECKONING Costs. If not completed: [NEEDS INPUT]]
 
 My Next Right Move:
-[BRACKET: REALITY Next Right Move. If not completed: [NEEDS INPUT]]
+[BRACKET: RECKONING Next Right Move. If not completed: [NEEDS INPUT]]
 
 What resists this change (fear/protective part):
-[BRACKET: REALITY Resistance. If not completed: [NEEDS INPUT]]
+[BRACKET: RECKONING Resistance. If not completed: [NEEDS INPUT]]
 
 Support that makes alignment easier:
-[BRACKET: REALITY Support. If not completed: [NEEDS INPUT]]
+[BRACKET: RECKONING Support. If not completed: [NEEDS INPUT]]
 
 B) My Driving Fire (Purpose)
 Driving Fire Statement (clean draft):
@@ -1540,7 +1540,7 @@ How my business enables the cause (even if indirect): [BRACKET: F4 Service "brid
 A) Required Revenue (Baseline + Life + Impact)
 Baseline Needs (annual): [BRACKET: REV Baseline total]
 Becoming Investments (annual): [BRACKET: REV Becoming total]
-MIQ Desires (annual): [BRACKET: REV MIQ Desires total]
+Real Reasons Desires (annual): [BRACKET: REV Real Reasons Desires total]
 Cause Worth Playing For Tithe (annual): [BRACKET: REV Cause Worth Playing For total]
 Reality Buffer (+10%): [BRACKET: REV buffer amount or compute 10% of Required Revenue if missing]
 Required Annual Number: [BRACKET: REV Required Annual Number]
@@ -1594,7 +1594,7 @@ Capacity Reality
 Max QCs/week without chaos: [BRACKET: REV capacity max QCs/wk]
 Max sales calls/week: [BRACKET: REV max sales calls/wk]
 Max delivery hours/week: [BRACKET: REV max delivery hours/wk]
-Current overload symptoms: [BRACKET: REV overload symptoms; else REALITY Costs + DOMINO sabotage]
+Current overload symptoms: [BRACKET: REV overload symptoms; else RECKONING Costs + VITAL_ACTION sabotage]
 
 If required QCs exceed capacity, recommend in this order:
 1) Raise price / increase ASV
@@ -1604,20 +1604,20 @@ If required QCs exceed capacity, recommend in this order:
 5) Change model (group/retainer/async)
 Only last: increase volume
 
-7) THE Vital Action DOMINO (90-DAY EXECUTION)
-Lead Lane: [BRACKET: DOMINO lead lane]
-My Vital Action (next 90 days): [BRACKET: DOMINO Vital Action in lead lane]
+7) THE VITAL ACTION (90-DAY EXECUTION)
+Lead Lane: [BRACKET: VITAL_ACTION lead lane]
+My Vital Action (next 90 days): [BRACKET: VITAL_ACTION Vital Action in lead lane]
 
 Weekly commitment (time block):
-Day/time: [BRACKET: DOMINO time block]
-Frequency: [BRACKET: DOMINO frequency]
-Protection rule (what is not allowed): [BRACKET: DOMINO protection rule]
+Day/time: [BRACKET: VITAL_ACTION time block]
+Frequency: [BRACKET: VITAL_ACTION frequency]
+Protection rule (what is not allowed): [BRACKET: VITAL_ACTION protection rule]
 
-Sabotage pattern to expect: [BRACKET: DOMINO likely sabotage]
-Clean response plan: [BRACKET: DOMINO clean response]
+Sabotage pattern to expect: [BRACKET: VITAL_ACTION likely sabotage]
+Clean response plan: [BRACKET: VITAL_ACTION clean response]
 
 Right Now (next 10 minutes):
-[BRACKET: DOMINO "Right Now" action]
+[BRACKET: VITAL_ACTION "Right Now" action]
 
 8) HOW YOU SHOULD TALK TO ME (TONE + COACHING STYLE)
 - Be direct, specific, and unsentimental.
@@ -1633,11 +1633,11 @@ ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 NAME: [BRACKET: if provided; else [NEEDS INPUT]]   DATE: [BRACKET: today if not provided]
 
 NORTH STAR STACK
-MIQ 1 (Experiences): [BRACKET: MIQ Experiences distilled to 3–6 bullets]
-MIQ 2 (Growth): [BRACKET: MIQ Growth distilled]
-MIQ 3 (Contribution): [BRACKET: MIQ Contribution distilled]
+Real Reasons 1 (Experiences): [BRACKET: REAL_REASONS Experiences distilled to 3–6 bullets]
+Real Reasons 2 (Growth): [BRACKET: REAL_REASONS Growth distilled]
+Real Reasons 3 (Contribution): [BRACKET: REAL_REASONS Contribution distilled]
 Driving Fire: [BRACKET: Driving Fire statement]
-JUST CAUSE: [BRACKET: Cause Worth Playing For statement]
+The Cause Worth Playing For: [BRACKET: Cause Worth Playing For statement]
 
 TOP 5 VALUES + BOUNDARIES
 1) [BRACKET: Value 1 + boundary]
@@ -1658,22 +1658,22 @@ Target Revenue: [BRACKET]
 ASV: [BRACKET]   Close Rate: [BRACKET]   QCs/week: [BRACKET]
 Lead Lane: [BRACKET]   Capacity Max QCs/week: [BRACKET]
 
-DOMINO (NEXT 90 DAYS)
+VITAL ACTION (NEXT 90 DAYS)
 Lead Lane: [BRACKET]
 Vital Action: [BRACKET]
 Weekly Block: [BRACKET]
-Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR DOMINO "This Week"]
+Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR VITAL_ACTION "This Week"]
 
 ===========================
 PASTE WORKSHEETS BELOW THIS LINE (verbatim)
 ===========================
-[PASTE MIQ WORKSHEET]
-[PASTE REALITY CHECK WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
-[PASTE Driving Fire + JUST CAUSE WORKSHEET]
+[PASTE LIFE LISTS WORKSHEET]
+[PASTE THE RECKONING WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
+[PASTE Driving Fire + Cause Worth Playing For WORKSHEET]
 [PASTE CORE VALUES WORKSHEET]
 [PASTE BECOMING YOU WORKSHEET]
 [PASTE GOALS THAT MATTER WORKSHEET]
-[PASTE Vital Action DOMINO WORKSHEET]
+[PASTE VITAL ACTION PLAN WORKSHEET]
 
 ---
 
@@ -1699,12 +1699,12 @@ NON-NEGOTIABLE PATCH RULES (consistency + precision)
 - If I provide partial updates: merge carefully and keep any old content that isn't explicitly replaced.
 - If an update conflicts with existing content: resolve conflicts using this priority order:
   1) Core Values + Boundaries
-  2) MIQ "Must Be True" conditions
+  2) Real Reasons "Must Be True" conditions
   3) Driving Fire statement
   4) Cause Worth Playing For + Infinite Game integrity
   5) Becoming
   6) From Meaning to Math numbers + capacity
-  7) Vital Action domino
+  7) Vital Action
 - If I say "REMOVE": delete that specific line/item only and leave the rest intact.
 - If a field is requested to update but I did not provide the data: write [NEEDS INPUT] in that specific spot (do not guess).
 - Keep language strong, clear, high-stakes, emotionally resonant—but never marketing fluff.
@@ -1718,15 +1718,15 @@ Each update I give will specify:
 Allowed bracket labels:
 [IDENTITY], [PATTERN], [CONSTRAINTS], [FRICTION]
 [VALUES_1]...[VALUES_5], [VALUES_WATCHLIST]
-[MIQ_EXP], [MIQ_GROW], [MIQ_CONTRIB], [MIQ_MUST_TRUE], [MIQ_MISALIGN], [MIQ_COSTS], [MIQ_NEXT_MOVE], [MIQ_RESIST], [MIQ_SUPPORT]
-[Driving Fire_STATEMENT], [JUST_CAUSE], [INFINITE_GAME_NOTES], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
-[F4_SELF], [F4_SOCIAL], [F4_SKILLS], [F4_SERVICE]
-[REV_BASELINE], [REV_F4_INVEST], [REV_MIQ_DESIRES], [REV_TITHE], [REV_BUFFER], [REV_REQUIRED], [REV_TARGET_ANNUAL], [REV_TARGET_MONTH], [REV_TARGET_WEEK]
+[REAL_REASONS_EXP], [REAL_REASONS_GROW], [REAL_REASONS_CONTRIB], [REAL_REASONS_MUST_TRUE], [REAL_REASONS_MISALIGN], [REAL_REASONS_COSTS], [REAL_REASONS_NEXT_MOVE], [REAL_REASONS_RESIST], [REAL_REASONS_SUPPORT]
+[DRIVING_FIRE_STATEMENT], [CAUSE_WORTH_PLAYING_FOR], [INFINITE_GAME_NOTES], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
+[BECOMING_SELF], [BECOMING_SOCIAL], [BECOMING_SKILLS], [BECOMING_SERVICE]
+[REV_BASELINE], [REV_BECOMING_INVEST], [REV_REAL_REASONS_DESIRES], [REV_TITHE], [REV_BUFFER], [REV_REQUIRED], [REV_TARGET_ANNUAL], [REV_TARGET_MONTH], [REV_TARGET_WEEK]
 [UNIT_ASV], [UNIT_MARGIN], [UNIT_CLOSE], [UNIT_SHOW], [UNIT_QC_TO_SALES]
 [QC_SALES_NEEDED], [QC_SALES_CALLS_NEEDED], [QC_QCS_NEEDED_YEAR], [QC_QCS_MONTH], [QC_QCS_WEEK]
 [LANE_PRIMARY], [REFERRAL_TARGETS], [ADS_TARGETS], [CONV_THRESHOLDS]
 [CAPACITY_LIMITS], [CAPACITY_SYMPTOMS]
-[DOMINO_LEAD_LANE], [DOMINO_ONE_THING], [DOMINO_BLOCK], [DOMINO_PROTECTION], [DOMINO_SABOTAGE], [DOMINO_RESPONSE], [DOMINO_RIGHT_NOW]
+[VITAL_ACTION_LEAD_LANE], [VITAL_ACTION_ONE_THING], [VITAL_ACTION_BLOCK], [VITAL_ACTION_PROTECTION], [VITAL_ACTION_SABOTAGE], [VITAL_ACTION_RESPONSE], [VITAL_ACTION_RIGHT_NOW]
 
 PROCESS
 1) Parse the existing Master Context Doc.
@@ -1802,7 +1802,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 7. "What is the ONE boundary that would make this week feel 30% cleaner?"
 
-8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the domino."
+8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still protect my Vital Action."
 
 ---
 

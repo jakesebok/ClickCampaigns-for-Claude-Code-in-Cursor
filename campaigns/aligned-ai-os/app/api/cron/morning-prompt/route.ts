@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { and, eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { sendMorningPrompt } from "@/lib/twilio";
 import { MORNING_PROMPTS } from "@/lib/ai/prompts";
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     .where(
       and(
         eq(schema.users.smsEnabled, true),
-        eq(schema.users.subscriptionStatus, "active")
+        inArray(schema.users.subscriptionStatus, ["active", "trialing"])
       )
     );
 

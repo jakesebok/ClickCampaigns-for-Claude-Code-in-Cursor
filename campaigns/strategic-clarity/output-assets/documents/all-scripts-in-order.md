@@ -277,7 +277,7 @@ And here's the beautiful part: these answers feed directly into your VAPOS. Your
 
 ### Before You Open the Worksheet
 
-One more thing. When you sit down with the MIQ worksheet, I want you to notice something: your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
+One more thing. When you sit down with your Life Lists, I want you to notice something: your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
 
 Ignore it. All of it.
 
@@ -303,7 +303,7 @@ I'll meet you in the next video where we'll walk through the worksheet together.
 
 Alright, you've got the distinction. End goals versus means goals. You know what we're after. Now let's actually do the work.
 
-Open up your MIQ worksheet. You'll see three columns: **Experiences I Want**, **How I Need to Grow**, and **How I Will Contribute**. Simple. On purpose. We're not overcomplicating this.
+Open up your Life Lists. You'll see three columns: **Experiences I Want**, **How I Need to Grow**, and **How I Will Contribute**. Simple. On purpose. We're not overcomplicating this.
 
 ---
 
@@ -350,7 +350,7 @@ As you write, you might notice something: your brain will try to sneak means goa
 
 When that happens, don't delete it. Just ask: "Why? What's underneath that?" Keep asking until you hit the experience, the feeling, the human thing.
 
-"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in the revenue bridge later.
+"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in From Meaning to Math later.
 
 ---
 
@@ -382,7 +382,7 @@ Let's get after it.
 
 ---
 
-## 5. Video 2.1 — The Golden Circle: Finding Your WHY
+## 5. Video 2.1 — The Golden Circle: Your Driving Fire
 
 **Source:** `video-2.1-why-golden-circle.md`
 
@@ -394,7 +394,7 @@ Okay. Lesson 2. This is one of my favorites, and I'm going to tell you why.
 
 Most people, when you ask them what they do, will tell you *what* they do. "I'm a coach." "I run a marketing agency." "I sell software." Maybe, if they're a little more thoughtful, they'll tell you *how* they do it differently. "I use a proprietary framework." "We focus on relationships, not funnels." "Our approach is more holistic."
 
-But almost nobody can tell you *why* they do it. Not "to make money"—that's a result. Not "to help people"—that's so vague it means nothing. The real WHY. The thing underneath the thing. The reason that would keep you doing this work even if nobody was watching, even if it didn't pay, even if it was hard and thankless and slow.
+But almost nobody can tell you *why* they do it. Not "to make money"—that's a result. Not "to help people"—that's so vague it means nothing. The real Driving Fire. The thing underneath the thing. The reason that would keep you doing this work even if nobody was watching, even if it didn't pay, even if it was hard and thankless and slow.
 
 That's what we're after.
 
@@ -418,7 +418,7 @@ Sinek uses Apple as the classic example. Apple doesn't lead with "we make comput
 
 ---
 
-### Why Your WHY Matters Here
+### Why Your Driving Fire Matters Here
 
 Now, why does this matter for *you* in Strategic Clarity?
 
@@ -432,9 +432,9 @@ Without it, you're making decisions based on opportunity cost, fear of missing o
 
 A couple things I want to be really clear about.
 
-We are not writing a tagline. We're not writing marketing copy. If your Driving Fire sounds like it belongs on a website header, it's probably not your Driving Fire yet. Your WHY should feel almost uncomfortably honest. Like the kind of thing you'd tell a close friend at midnight—not the kind of thing you'd put on a business card.
+We are not writing a tagline. We're not writing marketing copy. If your Driving Fire sounds like it belongs on a website header, it's probably not your Driving Fire yet. Your Driving Fire should feel almost uncomfortably honest. Like the kind of thing you'd tell a close friend at midnight—not the kind of thing you'd put on a business card.
 
-We are also not manufacturing purpose. You already have a WHY. It's already in you. It's been in you your whole life—it shows up in the stories you tell, the things that make you angry, the moments when you felt most alive. Our job isn't to create it. Our job is to *excavate* it.
+We are also not manufacturing purpose. You already have a Driving Fire. It's already in you. It's been in you your whole life—it shows up in the stories you tell, the things that make you angry, the moments when you felt most alive. Our job isn't to create it. Our job is to *excavate* it.
 
 ---
 
@@ -454,11 +454,11 @@ Notice: that's not a service description. It's not "to coach entrepreneurs so th
 
 ---
 
-### Your WHY Lives in Your Stories
+### Your Driving Fire Lives in Your Stories
 
 Here's the beautiful part. You already did the hardest work in the Pre-Work Packet. You wrote your Peak Moments—those four to five stories from your life where you felt most alive.
 
-Your WHY is hiding in those stories. Not in one of them—in the *pattern* across all of them. The common thread. The thing you keep fighting for, protecting, or restoring. The transformation that keeps showing up.
+Your Driving Fire is hiding in those stories. Not in one of them—in the *pattern* across all of them. The common thread. The thing you keep fighting for, protecting, or restoring. The transformation that keeps showing up.
 
 In the next video, we're going to mine those stories for themes. We're going to look for the pattern. And then we're going to draft your Driving Fire.
 
@@ -486,7 +486,7 @@ Don't answer yet. Just let the question sit. We'll work it in the next video.
 
 Alright. You've re-read your Peak Moments. You've got the Golden Circle framework in your head. Now it's time to dig.
 
-Open your Find Your WHY worksheet. We're starting with Exercises 1 and 2—Peak Moments and Theme Mining.
+Open your Driving Fire worksheet. We're starting with Exercises 1 and 2—Peak Moments and Theme Mining.
 
 ---
 
@@ -545,7 +545,7 @@ After you answer those five questions, fill in the Theme Summary box:
 - **My strongest "move from → to" pattern is...**
 - **The sentence that feels most true (raw, messy) is...**
 
-That last one—the messy one—is usually closest to your real WHY. Don't clean it up. Just write it.
+That last one—the messy one—is usually closest to your real Driving Fire. Don't clean it up. Just write it.
 
 ---
 
@@ -559,7 +559,7 @@ A couple tips for the AI session:
 
 - Answer in full sentences. Give it texture. The more you give, the better it mines.
 - When it mirrors something back and it doesn't land, say so. "That doesn't feel right. It's more like..."
-- Don't rush to the WHY statement. Let the pattern emerge. The statement comes from the pattern, not from forcing words into a template.
+- Don't rush to the Driving Fire statement. Let the pattern emerge. The statement comes from the pattern, not from forcing words into a template.
 
 ---
 
@@ -589,7 +589,7 @@ Okay, you've done the mining. You've got themes. You've got a messy sentence tha
 
 ---
 
-### Exercise 3: Draft Your WHY
+### Exercise 3: Draft Your Driving Fire
 
 Open your worksheet to Exercise 3. You're going to write three drafts of your Driving Fire statement using the format:
 
@@ -599,9 +599,9 @@ Three versions. Don't agonize. Don't try to make them perfect. Write one, then w
 
 A few guidelines:
 
-- **Keep it about others, not about you.** Your WHY is about the impact you make, not the credential you hold.
+- **Keep it about others, not about you.** Your Driving Fire is about the impact you make, not the credential you hold.
 - **Avoid jargon.** If you'd be embarrassed to say it to a friend over dinner, simplify it.
-- **Make it timeless.** Your WHY doesn't change with your business model. It's been true since you were a kid. It'll be true when you're eighty.
+- **Make it timeless.** Your Driving Fire doesn't change with your business model. It's been true since you were a kid. It'll be true when you're eighty.
 
 ---
 
@@ -619,21 +619,21 @@ For each draft, note three things:
 
 The draft that makes your chest open, that gives you a little surge of emotion, that makes you think "yeah... *that's* it"—that's your Driving Fire. Even if it's not the best-written one. Even if it's the messiest. The body doesn't lie.
 
-If none of them land? That's okay. It means you're close but not there yet. Go back to your Theme Summary—the raw, messy sentence—and try again. Sometimes the WHY doesn't fit the template. Sometimes you have to write it in plain English first and then shape it into the "To ___ so that ___" format.
+If none of them land? That's okay. It means you're close but not there yet. Go back to your Theme Summary—the raw, messy sentence—and try again. Sometimes the Driving Fire doesn't fit the template. Sometimes you have to write it in plain English first and then shape it into the "To ___ so that ___" format.
 
 ---
 
-### Exercise 5: Strengthen Your WHY
+### Exercise 5: Strengthen Your Driving Fire
 
 Once you've got a working draft, we strengthen it with context. Answer these questions:
 
-- What kind of person is this WHY built to help?
+- What kind of person is this Driving Fire built to help?
 - Before you help, what are they experiencing?
 - After you help, what are they experiencing?
 - What "enemy" are you fighting against?
 - What deeper human need do you serve?
 
-This isn't extra work. This is the context that makes your Driving Fire specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a WHY with teeth.
+This isn't extra work. This is the context that makes your Driving Fire specific enough to be useful. "To inspire people so that they live better lives" is vague. "To challenge burned-out entrepreneurs to reconnect with who they really are so that they build businesses that fuel their life instead of consuming it"—that's a Driving Fire with teeth.
 
 Write your clean working draft at the bottom of Exercise 5.
 
@@ -643,7 +643,7 @@ Write your clean working draft at the bottom of Exercise 5.
 
 Now we zoom out. Way out.
 
-Your WHY is personal. It's about the impact *you* make. Your **Cause Worth Playing For** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely.
+Your Driving Fire is personal. It's about the impact *you* make. Your **Cause Worth Playing For** is about the future state you want to advance. It's bigger than you. It's bigger than your business. And it can be pursued indefinitely.
 
 Simon Sinek talks about this in *The Infinite Game*. A Cause Worth Playing For is:
 - A specific vision of a future state that does not yet exist
@@ -665,7 +665,7 @@ Then choose one and rewrite it clean.
 
 ### Exercise 7: Connect the Dots
 
-Now we bring it all together. Your WHY + your Cause Worth Playing For + your actual work.
+Now we bring it all together. Your Driving Fire + your Cause Worth Playing For + your actual work.
 
 Fill in:
 - **Target audience** (not a demographic—a human state)
@@ -681,7 +681,7 @@ Then write your **Mission Statement**: "I help [target audience] achieve/overcom
 
 At the bottom of the worksheet, write your three final drafts clean:
 
-1. **WHY:** To ________ so that ________.
+1. **Driving Fire:** To ________ so that ________.
 2. **Cause Worth Playing For:** A world where...
 3. **Business Mission Statement:** I help...
 
@@ -896,7 +896,7 @@ Let's get after it.
 
 Lesson 4. We're going to do something different here.
 
-Up until now, we've been excavating. Digging up what's true. Your Real Reasons—what you actually want. Your WHY—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
+Up until now, we've been excavating. Digging up what's true. Your Real Reasons—what you actually want. Your Driving Fire—why you're here. Your values—the principles you live by. All of that is about discovering what's already inside you.
 
 Now we pivot. Now we look forward.
 
@@ -1063,7 +1063,7 @@ So when you ask your AI coach for a weekly plan, it doesn't just look at revenue
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. WHY. Values. The Becoming. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Becoming. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
@@ -1146,7 +1146,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—Real Reasons, WHY, values, Becoming, reality check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
+In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, Becoming, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 
@@ -1223,9 +1223,9 @@ Maybe Personal means hiring a trainer ($6,000/year). Maybe Relationships means a
 
 Add it up. That's your Becoming Total.
 
-Then: your MIQ-based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
+Then: your Real Reasons-based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
 
-Add it up. That's your MIQ Desires Total.
+Add it up. That's your Real Reasons Desires Total.
 
 ---
 
@@ -1277,7 +1277,7 @@ I'll see you in the next one.
 
 ### VIDEO SCRIPT
 
-Alright. You've got your numbers. Baseline Needs. Becoming investments. MIQ Desires. Cause Worth Playing For Tithe. Now we add them up and do the math that changes everything.
+Alright. You've got your numbers. Baseline Needs. Becoming investments. Real Reasons Desires. Cause Worth Playing For Tithe. Now we add them up and do the math that changes everything.
 
 ---
 
@@ -1287,7 +1287,7 @@ Open your worksheet to Step 4. Stack your totals:
 
 - Baseline Needs Total
 - Becoming Total
-- MIQ Desires Total
+- Real Reasons Desires Total
 - Cause Worth Playing For Total
 
 Add them up. That's your **Required Revenue**. This is the number your business *must* produce for your life to function, grow, and make the impact you want.
@@ -1689,7 +1689,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: Real Reasons, WHY, values, Becoming, a The Reckoning, a From Meaning to Math, and a Vital Action Plan installed on your calendar.
+You've now got everything you need: Real Reasons, Driving Fire, values, Becoming, The Reckoning, From Meaning to Math, and Your Vital Action Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAPOS comes online.
 
@@ -1760,7 +1760,7 @@ Here's the process. It's straightforward.
 **Step 5:** Below the line that says "PASTE WORKSHEETS BELOW THIS LINE," paste each of your completed worksheets. In order:
 - Real Reasons
 - The Reckoning (if you completed it—if not, that's fine)
-- Find Your WHY + Cause Worth Playing For
+- Your Driving Fire + The Cause Worth Playing For
 - Core Values Extraction
 - Becoming You
 - The From Meaning to Math (From Meaning to Math)
@@ -1768,7 +1768,7 @@ Here's the process. It's straightforward.
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 
-**Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your Driving Fire feels true. If something's off, tell the AI: "The WHY statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
+**Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your Driving Fire feels true. If something's off, tell the AI: "The Driving Fire statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
 
 **Step 8:** Save your Master Context. Keep it in a document. Whenever you want your AI coach, start a new conversation by pasting it in.
 
@@ -1871,7 +1871,7 @@ This category is for when you need to zoom out.
 
 **Question 10** is a powerhouse: *"Score these 3 options using my Decision Filter and tell me YES / NO / NOT NOW with one sentence each."*
 
-Any time you're weighing options—a new partnership, a course to buy, a client to take on, a project to start—paste this question with your three options. Your AI coach scores each one on values fit, MIQ alignment, revenue contribution, and capacity cost. It takes ten seconds. And it's like having a board of advisors who actually know your life.
+Any time you're weighing options—a new partnership, a course to buy, a client to take on, a project to start—paste this question with your three options. Your AI coach scores each one on values fit, Real Reasons alignment, revenue contribution, and capacity cost. It takes ten seconds. And it's like having a board of advisors who actually know your life.
 
 **Question 18** is for when you're about to get distracted: *"I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me."*
 
@@ -1887,7 +1887,7 @@ This is operational execution.
 
 Run it anytime you need a reality check on whether you're pacing toward your target.
 
-**Question 24** is about selling without selling your soul: *"Write a simple sales call structure aligned to my WHY (no hype) that leads to a clean yes/no."*
+**Question 24** is about selling without selling your soul: *"Write a simple sales call structure aligned to my Driving Fire (no hype) that leads to a clean yes/no."*
 
 Your AI coach will create a sales conversation framework that feels like *you*—not like a script from a guru. Because it knows your values and your Driving Fire, the approach will be authentic, not performative.
 
@@ -1895,7 +1895,7 @@ Your AI coach will create a sales conversation framework that feels like *you*�
 
 ### Marketing + Messaging (Questions 27–34)
 
-**Question 30** is one I love: *"Draft an origin story that ties my WHY to the problem I solve and the enemy I fight."*
+**Question 30** is one I love: *"Draft an origin story that ties my Driving Fire to the problem I solve and the enemy I fight."*
 
 Your AI coach writes your origin story using your actual Peak Moments, your Driving Fire, and your values. Not a fabricated marketing narrative. Your real story, structured for impact.
 
