@@ -2070,9 +2070,11 @@
               var hoursSinceSubmit = (Date.now() - submittedAt.getTime()) / (60 * 60 * 1000);
               submittedThisWeek = hoursSinceSubmit >= 0 && hoursSinceSubmit < 60;
             }
-          } else {
-            var daysSinceSubmit = (Date.now() - submittedAt.getTime()) / (24 * 60 * 60 * 1000);
-            submittedThisWeek = daysSinceSubmit >= 0 && daysSinceSubmit < 7;
+          } else if (win) {
+            // Window closed/before: check if they submitted during the LAST window (Fri 12pm – Sun 6pm)
+            var lastOpensAt = new Date(win.opensAt.getTime() - 7 * 24 * 60 * 60 * 1000);
+            var lastClosesAt = new Date(win.closesAt.getTime() - 7 * 24 * 60 * 60 * 1000);
+            submittedThisWeek = submittedAt >= lastOpensAt && submittedAt <= lastClosesAt;
           }
         }
 
