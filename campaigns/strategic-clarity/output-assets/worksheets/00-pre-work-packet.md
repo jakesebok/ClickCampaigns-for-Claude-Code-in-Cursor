@@ -171,6 +171,14 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 #### Support + Delegation Snapshot
 
+*Who (or what) is already doing work that would otherwise land on you? List contractors, employees, VAs, bookkeepers, designers—anyone you pay to handle tasks. If you're solo, leave the rows blank or write "None" in the first row.*
+
+**How to fill each column:**
+- **Support Type (Role):** Job title or role (e.g. VA, Bookkeeper, Social media manager, Designer)
+- **Tasks They Handle:** What they actually do (e.g. "Invoicing, expense tracking, monthly P&L")
+- **Avg Hours/Week:** How many hours they typically work per week (estimate if you're not sure)
+- **Cost/Month:** What you pay them monthly (or monthly equivalent if you pay per project)
+
 | Support Type (Role) | Tasks They Handle | Avg Hours/Week | Cost/Month |
 |---------------------|-------------------|----------------|------------|
 |                     |                   |                |            |
@@ -184,11 +192,36 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 4 — Flagship Offer Snapshot
+## Exercise 4 — Offer Ecosystem + Flagship Snapshot
 
-**Goal:** Give us the fastest possible path to aligned strategy.
+**Goal:** Give us the fastest possible path to aligned strategy. Your AI Coach needs to see your full offer map—not just the flagship—so it can recommend the right levers (price, conversion, sequencing, capacity).
 
-### A) Offer Basics
+### A) Offer Ecosystem Snapshot
+
+*List every offer you sell—free or paid, one-time or recurring. Include lead magnets, discovery calls, workshops, coaching packages, retainers, courses, anything that generates revenue or feeds your funnel. If you have only one offer, that's fine; list it.*
+
+| Offer Name | Price | Your Time per Client | Duration | Margin (or cost) | Role in Funnel |
+|------------|-------|----------------------|----------|------------------|----------------|
+| e.g. Discovery Call | $0 | 1 hr | 1 session | — | Entry |
+| e.g. 90-Day Intensive | $5,000 | 3 hrs/week | 90 days | ~70% | Flagship |
+| e.g. Monthly Retainer | $800/mo | 2 hrs/month | Ongoing | ~80% | Upsell |
+| | | | | | |
+| | | | | | |
+
+**Column guide:** *Your Time per Client* = hours you spend per client (hrs/week or hrs/month). *Margin* = what you keep after delivery costs (estimate % or $ if you know it). *Role in Funnel* = Entry / Flagship / Upsell / Downsell / Standalone.
+
+**Offer Flow (how they connect):**
+
+| Field | Your Answer |
+|-------|-------------|
+| Entry offer (what people buy or opt into first) |  |
+| Primary revenue driver (which offer brings in most revenue?) |  |
+| Typical upsell path (what do flagship buyers often add?) |  |
+| Downsell (if they say no to your flagship, what do you offer?) |  |
+
+---
+
+### B) Flagship Offer Basics
 
 | Field | Your Answer |
 |-------|-------------|
@@ -200,7 +233,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 | Duration (e.g., 4 weeks, 90 days, ongoing) |  |
 | Price (and payment options) |  |
 
-### B) What Makes It Sell (Positioning + Proof)
+### C) What Makes It Sell (Positioning + Proof)
 
 | Field | Your Answer |
 |-------|-------------|
@@ -210,7 +243,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 | Guarantee / risk reversal (if any) |  |
 | What you refuse to do to sell (boundaries) |  |
 
-### C) Sales Process Snapshot
+### D) Sales Process Snapshot
 
 | Field | Your Answer |
 |-------|-------------|
@@ -220,7 +253,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 | What qualifies someone (must-have criteria) |  |
 | What disqualifies someone (red flags) |  |
 
-### D) Delivery & Operations Reality
+### E) Delivery & Operations Reality
 
 | Field | Your Answer |
 |-------|-------------|

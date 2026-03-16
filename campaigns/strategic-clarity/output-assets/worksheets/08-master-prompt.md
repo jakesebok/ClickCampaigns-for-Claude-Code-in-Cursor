@@ -47,6 +47,7 @@ Use these worksheet tags to find the content:
 [DRIVING_FIRE] = Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fire, Full-Body Test notes, Strengthen answers, Cause Worth Playing For future state answers, Connect the Dots table)
 [VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
 [BECOMING] = The Becoming worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
+[OFFERS] = Pre-Work Packet Exercise 4A (Offer Ecosystem Snapshot: offer table with Name, Price, Time per client, Duration, Margin, Role; plus Offer Flow: entry, primary driver, upsell, downsell)
 [REV] = From Meaning to Math worksheet (Baseline needs, Becoming investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
 [VITAL_ACTION] = Your Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
@@ -208,7 +209,17 @@ Signature contribution I want to be known for: [BRACKET: BECOMING Service signat
 How my business enables the cause (even if indirect): [BRACKET: BECOMING Service "bridge"]
 
 5) FROM MEANING TO MATH + OPERATIONAL NUMBERS (NO GUESSING)
-A) Required Revenue (Baseline + Life + Impact)
+A) Offer Ecosystem (from Pre-Work Packet)
+Offer inventory (list each offer with price, your time/client, duration, margin, role):
+[BRACKET: OFFERS offer table — if not provided, write [NEEDS INPUT]]
+
+Offer flow:
+Entry offer: [BRACKET: OFFERS entry offer]
+Primary revenue driver: [BRACKET: OFFERS primary driver]
+Typical upsell path: [BRACKET: OFFERS upsell path]
+Downsell (if no to flagship): [BRACKET: OFFERS downsell]
+
+B) Required Revenue (Baseline + Life + Impact)
 Baseline Needs (annual): [BRACKET: REV Baseline total]
 Becoming Investments (annual): [BRACKET: REV Becoming total]
 Real Reasons Desires (annual): [BRACKET: REV Real Reasons Desires total]
@@ -216,26 +227,26 @@ Cause Tithe (annual): [BRACKET: REV Cause total]
 Reality Buffer (+10%): [BRACKET: REV buffer amount or compute 10% of Required Revenue if missing]
 Required Annual Number: [BRACKET: REV Required Annual Number]
 
-B) This Year's Revenue Target
+C) This Year's Revenue Target
 Target annual revenue: [BRACKET: REV Target Revenue annual]
 Target monthly revenue: [BRACKET: REV monthly]
 Target weekly revenue: [BRACKET: REV weekly]
 
-C) Unit Economics
+D) Unit Economics
 Average sale value (ASV): [BRACKET: REV ASV]
 Gross margin (approx): [BRACKET: REV margin if present; else [NEEDS INPUT]]
 Close rate (sales calls → clients): [BRACKET: REV close rate]
 Show rate (booked → attended): [BRACKET: REV show rate]
 Qualified conversation → sales call rate: [BRACKET: REV QC→Sales Call rate]
 
-D) Qualified Conversations (QC) Math
+E) Qualified Conversations (QC) Math
 Required sales per year: [BRACKET: REV required sales/year]
 Required sales calls per year: [BRACKET: REV required sales calls/year]
 Required qualified conversations per year: [BRACKET: REV required QCs/year]
 Per month: [BRACKET: REV QCs/month]
 Per week: [BRACKET: REV QCs/week]
 
-E) Lead Source Fork
+F) Lead Source Fork
 Primary lane: [BRACKET: REV selected lane: Referrals/Ads/Hybrid]
 
 REFERRAL LANE (weekly operating targets)

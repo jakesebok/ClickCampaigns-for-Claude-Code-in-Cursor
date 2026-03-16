@@ -204,8 +204,17 @@
             </div>
             <div class="min-w-0 flex-1">
               <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-primary)] mb-2">This week's focus</p>
-              <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
-              <p class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your Vital Action to improve last week. Keep it top of mind.</p>
+              <div id="one-thing-banner-content">
+                <p id="one-thing-banner-text" class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)] leading-snug"></p>
+                <p id="one-thing-banner-subtext" class="text-sm text-[var(--ap-secondary)] mt-1">You set this as your Vital Action to improve last week. Keep it top of mind.</p>
+              </div>
+              <div id="one-thing-banner-vital-action-form" class="hidden">
+                <p class="text-sm text-[var(--ap-secondary)] mb-3">You didn't complete your scorecard this week. Set your Vital Action below so it's front and center for the week ahead.</p>
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <input type="text" id="vital-action-input" placeholder="e.g. Block 2 hours for deep work every morning" class="flex-1 px-4 py-2.5 rounded-lg border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] focus:border-[var(--ap-accent)] focus:outline-none text-[var(--ap-primary)] text-sm" maxlength="500" />
+                  <button type="button" id="vital-action-save-btn" class="px-5 py-2.5 rounded-[100px] bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm transition-colors whitespace-nowrap">Set Vital Action</button>
+                </div>
+              </div>
               <div id="one-thing-banner-expand-wrap" class="hidden mt-4">
                 <button type="button" id="one-thing-banner-expand-btn" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]" aria-expanded="false" aria-controls="one-thing-banner-accordion">
                   <span id="one-thing-banner-chevron" class="inline-flex items-center"></span>
@@ -2042,16 +2051,61 @@
           cardsHtml += '<div class="w-full h-2 rounded-full bg-[var(--ap-border)]/50 mt-2 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-accent)] transition-all duration-300" style="width:' + pct + '%"></div></div>';
           cardsHtml += '</div>';
         });
-        document.getElementById('six-c-cards').innerHTML = cardsHtml;
         var oneThingLatest = (latest6C.one_thing_to_improve && String(latest6C.one_thing_to_improve).trim()) ? String(latest6C.one_thing_to_improve).trim() : null;
-        if (oneThingLatest) {
+        var prevOneThing = (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) ? String(prev6C.one_thing_to_improve).trim() : null;
+        var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+        var linkEl = document.getElementById('six-c-fill-link');
+        var closedMsg = document.getElementById('six-c-window-closed-msg');
+        var urgencyEl = document.getElementById('six-c-window-urgency');
+        var oneThingEl = document.getElementById('six-c-one-thing');
+        var actionRowEl = document.getElementById('six-c-action-row');
+
+        // Determine if latest submission was during this week's window (or recent, e.g. first-time outside window)
+        var submittedThisWeek = false;
+        if (latest6C && latest6C.created_at) {
+          var submittedAt = new Date(latest6C.created_at);
+          if (win && win.canSubmit) {
+            submittedThisWeek = win.opensAt && win.closesAt && submittedAt >= win.opensAt && submittedAt <= win.closesAt;
+            if (!submittedThisWeek) {
+              var hoursSinceSubmit = (Date.now() - submittedAt.getTime()) / (60 * 60 * 1000);
+              submittedThisWeek = hoursSinceSubmit >= 0 && hoursSinceSubmit < 60;
+            }
+          } else {
+            var daysSinceSubmit = (Date.now() - submittedAt.getTime()) / (24 * 60 * 60 * 1000);
+            submittedThisWeek = daysSinceSubmit >= 0 && daysSinceSubmit < 7;
+          }
+        }
+
+        // Determine if user missed the window (has prev subs, didn't submit this week, can't submit now)
+        var missedWindow = !!(win && !win.canSubmit && !submittedThisWeek);
+
+        if (missedWindow) {
+          // Show "no data" for the 6C section
+          var lastFriday = new Date(win.nextOpen.getTime() - 7 * 24 * 60 * 60 * 1000);
+          var lastMonday = new Date(lastFriday.getTime() - 4 * 24 * 60 * 60 * 1000);
+          var rangeStart = lastMonday.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+          var rangeEnd = lastFriday.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+          var noDataMsg = rangeStart === rangeEnd ? 'No data available for the week of ' + rangeStart + '.' : 'No data available for the week of ' + rangeStart + ' – ' + rangeEnd + '.';
+          document.getElementById('six-c-cards').innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-8 px-4 rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-[var(--ap-bg)]/30"><p class="text-[var(--ap-secondary)] font-semibold text-center">' + noDataMsg + '</p><p class="text-[var(--ap-muted)] text-sm text-center mt-1">Your next scorecard will be available Friday at 12pm.</p></div>';
+          // Show Vital Action form in banner (no reflections, no fill button)
           document.getElementById('one-thing-banner').classList.remove('hidden');
-          document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+          document.getElementById('one-thing-banner-content').classList.add('hidden');
+          document.getElementById('one-thing-banner-vital-action-form').classList.remove('hidden');
+          document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
+          var vitalInput = document.getElementById('vital-action-input');
+          if (vitalInput && prevOneThing) vitalInput.placeholder = prevOneThing;
+          if (oneThingEl) oneThingEl.classList.add('hidden');
+          if (actionRowEl) actionRowEl.classList.add('hidden');
+          linkEl.classList.add('hidden');
+          closedMsg.classList.add('hidden');
+          document.getElementById('one-thing-scorecard-cta').classList.add('hidden');
+        } else {
+          document.getElementById('six-c-cards').innerHTML = cardsHtml;
         }
         var weeklyReview = latest6C.weekly_review || {};
         var reflectionKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
         var reflectionLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
-        var hasReflections = reflectionKeys.some(function(k) { return weeklyReview[k] && String(weeklyReview[k]).trim(); });
+        var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReview[k] && String(weeklyReview[k]).trim(); });
         if (hasReflections) {
           function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
           var wrap = document.getElementById('one-thing-banner-expand-wrap');
@@ -2085,77 +2139,87 @@
             setAccordionOpen(false);
           });
         }
-        var oneThingEl = document.getElementById('six-c-one-thing');
-        var actionRowEl = document.getElementById('six-c-action-row');
-        if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
-          oneThingEl.classList.remove('hidden');
-          document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
-          if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
-        } else if (actionRowEl) {
-          actionRowEl.classList.remove('mt-0'); actionRowEl.classList.add('mt-4');
-        }
-        var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
-        var linkEl = document.getElementById('six-c-fill-link');
-        var closedMsg = document.getElementById('six-c-window-closed-msg');
-        var urgencyEl = document.getElementById('six-c-window-urgency');
-
-        // Determine if latest submission was during this week's window (or recent, e.g. first-time outside window)
-        var submittedThisWeek = false;
-        if (latest6C && latest6C.created_at) {
-          var submittedAt = new Date(latest6C.created_at);
-          if (win && win.canSubmit) {
-            submittedThisWeek = win.opensAt && win.closesAt && submittedAt >= win.opensAt && submittedAt <= win.closesAt;
-            if (!submittedThisWeek) {
-              var hoursSinceSubmit = (Date.now() - submittedAt.getTime()) / (60 * 60 * 1000);
-              submittedThisWeek = hoursSinceSubmit >= 0 && hoursSinceSubmit < 60;
-            }
-          } else {
-            // Window closed — treat as submitted if they submitted in the last 7 days (covers first-time outside window)
-            var daysSinceSubmit = (Date.now() - submittedAt.getTime()) / (24 * 60 * 60 * 1000);
-            submittedThisWeek = daysSinceSubmit >= 0 && daysSinceSubmit < 7;
+        if (!missedWindow) {
+          if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
+            oneThingEl.classList.remove('hidden');
+            document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
+            if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
+          } else if (actionRowEl) {
+            actionRowEl.classList.remove('mt-0'); actionRowEl.classList.add('mt-4');
           }
         }
-
+        if (oneThingLatest && !missedWindow) {
+          document.getElementById('one-thing-banner').classList.remove('hidden');
+          document.getElementById('one-thing-banner-content').classList.remove('hidden');
+          document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+          document.getElementById('one-thing-banner-vital-action-form').classList.add('hidden');
+        }
         var scorecardCta = document.getElementById('one-thing-scorecard-cta');
         var scorecardCtaLabel = document.getElementById('one-thing-scorecard-cta-label');
         var scorecardCtaCountdown = document.getElementById('one-thing-scorecard-cta-countdown');
 
-        if (win && win.canSubmit && !submittedThisWeek) {
-          // Window is open — show the CTA strip inside the banner
-          linkEl.classList.add('hidden');
-          closedMsg.classList.add('hidden');
-          urgencyEl.classList.add('hidden');
-
-          // Determine label based on whether it's closing soon
-          if (win.message && win.message.toLowerCase().includes('hour')) {
-            scorecardCtaLabel.textContent = '⏱ One hour left — submit before 6pm today.';
+        if (!missedWindow) {
+          if (win && win.canSubmit && !submittedThisWeek) {
+            // Window is open — show the CTA strip inside the banner
+            linkEl.classList.add('hidden');
+            closedMsg.classList.add('hidden');
+            urgencyEl.classList.add('hidden');
+            if (win.message && win.message.toLowerCase().includes('hour')) {
+              scorecardCtaLabel.textContent = '⏱ Just a few hours left — submit before 6pm today.';
+            } else {
+              scorecardCtaLabel.textContent = 'This week\'s scorecard is open through Sunday at 6pm.';
+            }
+            if (win.countdownMessage) {
+              scorecardCtaCountdown.textContent = win.countdownMessage;
+              scorecardCtaCountdown.classList.remove('hidden');
+            }
+            document.getElementById('one-thing-banner').classList.remove('hidden');
+            scorecardCta.classList.remove('hidden');
+          } else if (submittedThisWeek) {
+            linkEl.classList.add('hidden');
+            closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
+            closedMsg.classList.remove('hidden');
+            var actionRow = document.getElementById('six-c-action-row');
+            if (actionRow) actionRow.classList.remove('hidden');
+            if (scorecardCta) scorecardCta.classList.add('hidden');
           } else {
-            scorecardCtaLabel.textContent = 'This week\'s scorecard is open through Sunday at 6pm.';
+            linkEl.classList.add('hidden');
+            closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
+            closedMsg.classList.remove('hidden');
+            var actionRow = document.getElementById('six-c-action-row');
+            if (actionRow) actionRow.classList.remove('hidden');
+            if (scorecardCta) scorecardCta.classList.add('hidden');
           }
-          if (win.countdownMessage) {
-            scorecardCtaCountdown.textContent = win.countdownMessage;
-            scorecardCtaCountdown.classList.remove('hidden');
-          }
-
-          // Make sure the one-thing banner is visible and show the CTA strip
-          document.getElementById('one-thing-banner').classList.remove('hidden');
-          scorecardCta.classList.remove('hidden');
-        } else if (submittedThisWeek) {
-          linkEl.classList.add('hidden');
-          closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
-          closedMsg.classList.remove('hidden');
-          var actionRow = document.getElementById('six-c-action-row');
-          if (actionRow) actionRow.classList.remove('hidden');
-          if (scorecardCta) scorecardCta.classList.add('hidden');
-        } else {
-          linkEl.classList.add('hidden');
-          closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
-          closedMsg.classList.remove('hidden');
-          var actionRow = document.getElementById('six-c-action-row');
-          if (actionRow) actionRow.classList.remove('hidden');
-          if (scorecardCta) scorecardCta.classList.add('hidden');
         }
         document.getElementById('six-c-section').classList.remove('hidden');
+
+        // Vital Action save (when user missed window)
+        var vitalSaveBtn = document.getElementById('vital-action-save-btn');
+        var vitalInputEl = document.getElementById('vital-action-input');
+        if (vitalSaveBtn && vitalInputEl) {
+          vitalSaveBtn.addEventListener('click', async function() {
+            var val = (vitalInputEl.value || '').trim();
+            if (!val) {
+              alert('Please enter your Vital Action for the week.');
+              return;
+            }
+            vitalSaveBtn.disabled = true;
+            vitalSaveBtn.textContent = 'Saving…';
+            var { error } = await supabase.from('six_c_submissions').insert({
+              email: email,
+              scores: {},
+              one_thing_to_improve: val,
+              weekly_review: null
+            });
+            vitalSaveBtn.disabled = false;
+            vitalSaveBtn.textContent = 'Set Vital Action';
+            if (error) {
+              alert('Could not save: ' + (error.message || 'Unknown error'));
+              return;
+            }
+            window.location.reload();
+          });
+        }
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
       })();
 
