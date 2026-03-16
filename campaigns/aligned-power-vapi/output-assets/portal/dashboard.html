@@ -2095,7 +2095,7 @@
           document.getElementById('one-thing-banner-vital-action-form').classList.remove('hidden');
           document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
           var vitalInput = document.getElementById('vital-action-input');
-          if (vitalInput && prevOneThing) vitalInput.placeholder = prevOneThing;
+          if (vitalInput && (oneThingLatest || prevOneThing)) vitalInput.placeholder = (oneThingLatest || prevOneThing);
           if (oneThingEl) oneThingEl.classList.add('hidden');
           if (actionRowEl) actionRowEl.classList.add('hidden');
           linkEl.classList.add('hidden');
