@@ -3,7 +3,7 @@
  * Schedule: once daily at 17:05 UTC (12:05pm Eastern). Sends 5 min after scorecard opens.
  * - Friday 12:05pm Eastern → "Your scorecard is available"
  * - Saturday 12:05pm Eastern → Saturday reminder
- * - Sunday 12:05pm Eastern → "One hour left to submit" (only Sunday email)
+ * - Sunday 12:05pm Eastern → "Just a few hours left to submit" (only Sunday email)
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
  *      SIX_C_FROM_EMAIL (e.g. scorecard@notifications.alignedpower.coach), SIX_C_REPLY_TO (optional).
@@ -45,7 +45,7 @@ function getReminderType() {
 const SUBJECTS = {
   available:      "Your weekly CEO review is open — 6C's Scorecard",
   saturday:       "Still time this weekend — your 6C's Scorecard is waiting",
-  'one-hour-left': "Last call: one hour left to submit your 6C's Scorecard",
+  'one-hour-left': "Last call: just a few hours left to submit your 6C's Scorecard",
 };
 
 const FROM_NAME = 'Jake Sebok';
@@ -70,7 +70,7 @@ function buildHtmlEmail({ type, firstName }) {
       urgency: null,
     },
     'one-hour-left': {
-      headline: "One hour left.<br>Don't let the week slip.",
+      headline: "Just a few hours left.<br>Don't let the week slip.",
       body: `The window closes at <strong>6pm Eastern today</strong>. Your 6C's Scorecard takes less than five minutes — and it's the five minutes that set the direction for everything else next week.`,
       subtext: `Log in now and get it done before the window closes.`,
       cta: 'Submit Now — Closes at 6pm →',
@@ -169,7 +169,7 @@ A few minutes of reflection now makes next week sharper.
 -- Jake Sebok`,
     'one-hour-left': `${name}
 
-One hour left. The window closes at 6pm Eastern today.
+Just a few hours left. The window closes at 6pm Eastern today.
 
 Log in now and get it done before it closes:
 ${SCORECARD_URL}

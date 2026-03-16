@@ -14,7 +14,7 @@ The cron runs **once per day** at 17:05 UTC (12:05pm Eastern, 5 min after scorec
 |-------------------------------------|--------|
 | Friday | "Your scorecard is available for this week" |
 | Saturday | "Reminder: Get your scorecard in this weekend" |
-| Sunday | "One hour left to submit" (only Sunday email) |
+| Sunday | "Just a few hours left to submit" (only Sunday email) |
 
 ## Setup
 
@@ -30,7 +30,7 @@ Summary:
 `vercel.json` in this folder already defines:
 
 - Path: `/api/cron/6c-reminders`
-- Schedule: `5 17 * * *` (once daily at 17:05 UTC = 12:05pm EST). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “one hour left” only.
+- Schedule: `5 17 * * *` (once daily at 17:05 UTC = 12:05pm EST). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “just a few hours left” only.
 
 After deployment, Cron runs automatically. You can confirm in Vercel → Project → Settings → Crons.
 
@@ -53,5 +53,5 @@ For **status only** (no email): add `?status=1` to the URL. For **one test email
 
 ## Hobby plan note
 
-Vercel Hobby allows only **one cron run per day**. The schedule is set to `5 17 * * *` (once daily at 12:05pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 12:05pm emails plus an additional Sunday 5pm "one hour left" email.
+Vercel Hobby allows only **one cron run per day**. The schedule is set to `5 17 * * *` (once daily at 12:05pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 12:05pm emails plus an additional Sunday 5pm "just a few hours left" email.
 

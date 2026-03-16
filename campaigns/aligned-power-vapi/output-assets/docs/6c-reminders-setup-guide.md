@@ -226,7 +226,7 @@ That usually means the secret in the URL doesn't match what's in Vercel. Try thi
 
 ### When do the real reminders go out?
 
-The system sends reminders **once per day** at **12:05pm Eastern** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens (Friday 12:05pm), a reminder (Saturday 12:05pm), and a "one hour left" notice (Sunday 12:05pm). You don't have to do anything else—Vercel runs this automatically.
+The system sends reminders **once per day** at **12:05pm Eastern** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens (Friday 12:05pm), a reminder (Saturday 12:05pm), and a "just a few hours left" notice (Sunday 12:05pm). You don't have to do anything else—Vercel runs this automatically.
 
 ---
 
