@@ -127,6 +127,7 @@ export default function DashboardPage() {
   const scorecardWindow = getScorecardWindow();
   const latestVapi = vapiResults[0] || null;
   const latestScorecard = scorecardEntries[0] || null;
+  const hasAnyScorecards = scorecardEntries.length > 0;
   let currentOneThing: string | null = null;
   if (latestScorecard?.notes) {
     try {
@@ -302,7 +303,7 @@ export default function DashboardPage() {
             )}
 
             {/* 6Cs Latest */}
-            {latestScorecard ? (
+            {currentWeekSubmitted && latestScorecard ? (
               <Link href="/scorecard" className="block">
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-center justify-between">
@@ -311,11 +312,9 @@ export default function DashboardPage() {
                       <span className="text-sm font-medium text-muted-foreground">
                         6Cs Score
                       </span>
-                      {scorecardWindow.canSubmit && currentWeekSubmitted && (
-                        <span className="text-[10px] font-medium text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded bg-green-500/10">
-                          Submitted
-                        </span>
-                      )}
+                      <span className="text-[10px] font-medium text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded bg-green-500/10">
+                        Submitted
+                      </span>
                     </div>
                     <span className="text-xs text-muted-foreground">
                       Week of {new Date(latestScorecard.weekStart).toLocaleDateString()}
@@ -352,7 +351,24 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </Link>
-            ) : scorecardWindow.canSubmit ? (
+            ) : !currentWeekSubmitted && hasAnyScorecards && scorecardWindow.status === "closed" ? (
+              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px]">
+                <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
+                <p className="text-sm font-medium">6Cs Scorecard</p>
+                <p className="text-sm text-muted-foreground">
+                  {(() => {
+                    const start = new Date(scorecardWindow.opensAt).toLocaleDateString();
+                    const end = new Date(scorecardWindow.closesAt).toLocaleDateString();
+                    return start === end
+                      ? `No data available for the week of ${start}.`
+                      : `No data available for the week of ${start} – ${end}.`;
+                  })()}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Your next scorecard will be available Friday at 12pm.
+                </p>
+              </div>
+            ) : !hasAnyScorecards && scorecardWindow.canSubmit ? (
               <Link href="/scorecard" className="block">
                 <div className="rounded-2xl border-2 border-accent/40 bg-accent/5 p-5 space-y-3 hover:border-accent/60 transition-colors shadow-sm h-full min-h-[280px] flex flex-col items-center justify-center text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20">
@@ -433,9 +449,6 @@ export default function DashboardPage() {
                       );
                     })}
                   </div>
-                  <p className="text-xs text-muted-foreground pt-2 border-t border-border">
-                    High importance, low score — focus here first. These domains matter most to you but need attention.
-                  </p>
                 </div>
               )}
             </div>
