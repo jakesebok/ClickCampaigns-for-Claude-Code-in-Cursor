@@ -42,7 +42,7 @@ And then the part I'm most excited about...
 
 ---
 
-### VAPOS
+### VAP Coach
 
 Everything you write in this module—every worksheet, every answer, every honest moment—feeds a **Master Prompt** that you'll run at the end. That prompt turns your favorite AI into a personalized executive coach, strategic advisor, and virtual assistant that:
 
@@ -53,7 +53,7 @@ Everything you write in this module—every worksheet, every answer, every hones
 - Scores every opportunity through a values-aligned decision filter
 - Intervenes when you're about to default to "work harder" instead of "work smarter"
 
-This isn't generic advice from an AI that doesn't know you. This is *your* VAPOS—your Values-Aligned Performance Operating System. Built on *your* truth. Running on *your* terms.
+This isn't generic advice from an AI that doesn't know you. This is *your* VAP Coach—your Values-Aligned Performance Operating System. Built on *your* truth. Running on *your* terms.
 
 And once it's live? You get the Fire Starters—50 high-leverage questions you can ask anytime—for weekly planning, strategy, sales, marketing, execution, and reviews. All personalized. All aligned. All built on the foundation you're about to create.
 
@@ -77,9 +77,9 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
-**Lesson 8:** We run the Master Prompt and activate your VAPOS.
+**Lesson 8:** We run the Master Prompt and activate your VAP Coach.
 
-**Lesson 9:** We walk through the Fire Starters so you know exactly how to use your VAPOS.
+**Lesson 9:** We walk through the Fire Starters so you know exactly how to use your VAP Coach.
 
 ---
 
@@ -87,7 +87,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAP Coach. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as The Alignment Arc Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 

@@ -207,7 +207,7 @@ export default function VoiceSessionPage() {
                 Speak With Your Coach
               </h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                A live voice conversation with APOS. Ideal for inner work, belief
+                A live voice conversation with Alfred. Ideal for inner work, belief
                 shifts, and NLP exercises — close your eyes, speak freely, and let
                 the process unfold.
               </p>

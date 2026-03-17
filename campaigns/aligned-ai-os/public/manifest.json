@@ -1,6 +1,6 @@
 {
-  "name": "APOS — Aligned Performance Operating System",
-  "short_name": "APOS",
+  "name": "VAP Coach — Values-Aligned Performance Coach",
+  "short_name": "VAP Coach",
   "description": "Your AI-powered performance coach. Values-aligned coaching on demand.",
   "start_url": "/chat",
   "display": "standalone",

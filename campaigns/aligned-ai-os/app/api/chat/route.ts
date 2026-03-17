@@ -147,6 +147,12 @@ export async function POST(req: NextRequest) {
 
   const encoder = new TextEncoder();
   let fullResponse = "";
+  let usage: {
+    input_tokens?: number;
+    output_tokens?: number;
+    cache_read_input_tokens?: number;
+    cache_creation_input_tokens?: number;
+  } | null = null;
 
   const readable = new ReadableStream({
     async start(controller) {
@@ -161,6 +167,24 @@ export async function POST(req: NextRequest) {
             encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
           );
         }
+        if (event.type === "message_start" && "message" in event && event.message?.usage) {
+          const u = event.message.usage;
+          usage = {
+            input_tokens: u.input_tokens ?? 0,
+            output_tokens: u.output_tokens ?? 0,
+            cache_read_input_tokens: u.cache_read_input_tokens ?? 0,
+            cache_creation_input_tokens: u.cache_creation_input_tokens ?? 0,
+          };
+        }
+        if (event.type === "message_delta" && "usage" in event && event.usage) {
+          const u = event.usage;
+          usage = {
+            input_tokens: u.input_tokens ?? 0,
+            output_tokens: u.output_tokens ?? 0,
+            cache_read_input_tokens: u.cache_read_input_tokens ?? 0,
+            cache_creation_input_tokens: u.cache_creation_input_tokens ?? 0,
+          };
+        }
       }
 
       if (conversationId && fullResponse) {
@@ -168,6 +192,18 @@ export async function POST(req: NextRequest) {
           conversationId,
           role: "assistant",
           content: fullResponse,
+        });
+      }
+
+      if (usage && user.id) {
+        await db.insert(schema.apiUsageLogs).values({
+          userId: user.id,
+          endpoint: "chat",
+          model: "claude-sonnet-4-20250514",
+          inputTokens: usage.input_tokens ?? 0,
+          outputTokens: usage.output_tokens ?? 0,
+          cacheReadInputTokens: usage.cache_read_input_tokens ?? 0,
+          cacheCreationInputTokens: usage.cache_creation_input_tokens ?? 0,
         });
       }
 

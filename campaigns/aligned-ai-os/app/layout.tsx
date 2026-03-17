@@ -18,7 +18,7 @@ const fontSerif = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "APOS — Aligned Performance Operating System",
+  title: "VAP Coach — Values-Aligned Performance Coach",
   description:
     "Your AI-powered performance coach. Built on the Strategic Clarity framework by Jake Sebok.",
   manifest: "/manifest.json",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "APOS",
+    title: "VAP Coach",
   },
 };
 

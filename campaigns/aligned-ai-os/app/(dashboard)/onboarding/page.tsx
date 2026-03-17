@@ -48,7 +48,7 @@ export default function OnboardingPage() {
           Alignment Blueprints Created
         </h2>
         <p className="text-muted-foreground max-w-md mb-6">
-          Your worksheets have been synthesized into APOS. Your coach
+          Your worksheets have been synthesized into VAP Coach. Your coach
           now knows your values, goals, revenue targets, and everything you shared.
         </p>
         <div className="flex gap-3">
@@ -77,7 +77,7 @@ export default function OnboardingPage() {
         <div className="max-w-2xl w-full space-y-8">
           <div className="text-center space-y-3">
             <h1 className="text-3xl font-serif font-bold">
-              Build Your APOS Coach
+              Build Your VAP Coach
             </h1>
             <p className="text-muted-foreground max-w-lg mx-auto">
               The more your coach knows about you, the better it can serve you.
@@ -136,7 +136,7 @@ export default function OnboardingPage() {
           </h2>
           <p className="text-muted-foreground">
             Upload your completed Strategic Clarity worksheets from the Intensive
-            (Google Doc exported as .docx, or .txt/.md). APOS will synthesize everything into
+            (Google Doc exported as .docx, or .txt/.md). VAP Coach will synthesize everything into
             your Alignment Blueprints.
           </p>
 
@@ -194,7 +194,7 @@ export default function OnboardingPage() {
             Let&apos;s Build Your Alignment Blueprints
           </h2>
           <p className="text-muted-foreground">
-            APOS will ask you a series of questions to understand your
+            VAP Coach will ask you a series of questions to understand your
             values, goals, and business. This takes about 10-15 minutes and
             creates your Alignment Blueprints.
           </p>

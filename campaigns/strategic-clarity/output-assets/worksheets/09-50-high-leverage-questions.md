@@ -1,8 +1,8 @@
-# Fire Starters: 56 High-Leverage Questions for Your VAPOS
+# Fire Starters: 56 High-Leverage Questions for Your VAP Coach
 
 **Aligned Power — The Alignment Arc**
 
-> These are copy/paste-ready prompts designed to work with your VAPOS. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
+> These are copy/paste-ready prompts designed to work with your VAP Coach. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
 > **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is in play (pasted at the start of the conversation or loaded as persistent context). Get a values-aligned answer in seconds.
 
@@ -148,4 +148,4 @@
 
 ---
 
-*These Fire Starters are designed to work with your VAPOS. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+*These Fire Starters are designed to work with your VAP Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*

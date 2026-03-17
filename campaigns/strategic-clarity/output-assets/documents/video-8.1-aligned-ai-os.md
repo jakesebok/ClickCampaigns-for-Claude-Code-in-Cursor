@@ -1,6 +1,6 @@
-# Video 8.1 — Your VAPOS: Master Prompt
+# Video 8.1 — Your VAP Coach: Master Prompt
 
-**Lesson 8: VAPOS | ~8–12 minutes**
+**Lesson 8: VAP Coach | ~8–12 minutes**
 
 ---
 
@@ -10,7 +10,7 @@ Okay. This is the payoff.
 
 Everything you've built—every worksheet, every honest answer, every number, every value, every vision statement—it all comes together right here.
 
-Welcome to your VAPOS.
+Welcome to your VAP Coach.
 
 ---
 
@@ -24,7 +24,7 @@ We're about to change that.
 
 You're going to take a **Master Prompt**—a structured template we've built—and feed it your completed worksheets. Best way: attach your worksheets file. Alternative: paste them below the designated line. The AI reads everything you've written and generates two documents:
 
-1. **Your VAPOS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
+1. **Your VAP Coach UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
 
 2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your Vital Action. Everything in one glance.
 
@@ -69,7 +69,7 @@ Here's the process. It's straightforward.
 
 ### Monthly Patch Notes
 
-Your VAPOS isn't static. It grows with you.
+Your VAP Coach isn't static. It grows with you.
 
 At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
 
@@ -83,9 +83,9 @@ Think of it like updating the operating system on your phone. Same phone. Better
 
 Here's the thing. I built something I use every day myself.
 
-It's called VAPOS—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+It's called VAP Coach—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
 
-I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at VAPOS.Coach. Check it out. See if it feels easier. No pressure.
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at vap.coach. Check it out. See if it feels easier. No pressure.
 
 Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 

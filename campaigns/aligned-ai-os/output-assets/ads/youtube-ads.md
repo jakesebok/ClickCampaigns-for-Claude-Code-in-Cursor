@@ -17,7 +17,7 @@ Here's why: You've been chasing means goals — the revenue, the title, the laun
 That's not burnout. That's misalignment. And no amount of hustle fixes it.
 
 **[SOLUTION]**
-I run a quarterly half-day workshop called the Strategic Alignment Intensive where you'll name what you actually want, turn it into a revenue number built on your real life, and build APOS — a personalized AI operating system that keeps you aligned every single day.
+I run a quarterly half-day workshop called the Strategic Alignment Intensive where you'll name what you actually want, turn it into a revenue number built on your real life, and build VAP Coach — a personalized AI operating system that keeps you aligned every single day.
 
 **[CTA]**
 $497. Limited to 20 seats. Click the link below to reserve yours.
@@ -56,7 +56,7 @@ In the Strategic Alignment Intensive, I walk you through the exact framework my 
 - Build The Revenue Bridge — turning meaning into math
 - Identify their Vital Action — the single move that makes everything else easier
 
-And at the end, you get APOS — the Aligned Performance Operating System. A personalized AI coach loaded with everything you built. 30 days free.
+And at the end, you get VAP Coach — the Aligned Performance Operating System. A personalized AI coach loaded with everything you built. 30 days free.
 
 **[CTA]**
 $497. Half-day. Limited to 20 seats per quarter. Click below to reserve yours. This will change how you plan your next quarter.

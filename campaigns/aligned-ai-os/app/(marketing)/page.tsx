@@ -25,7 +25,7 @@ export default function LandingPage() {
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <Image
           src="/logo-apos.png"
-          alt="APOS"
+          alt="VAP Coach"
           width={160}
           height={44}
           className="h-9 w-auto"
@@ -55,7 +55,7 @@ export default function LandingPage() {
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          Your values. Your goals. Your real constraints. APOS turns your
+          Your values. Your goals. Your real constraints. VAP Coach turns your
           deepest clarity into a personalized AI coach that keeps you focused,
           aligned, and growing — without burning out.
         </p>
@@ -85,7 +85,7 @@ export default function LandingPage() {
           </h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-16">
             Most AI gives you generic advice because it doesn&apos;t know you.
-            APOS is different. It knows your core values, your revenue
+            VAP Coach is different. It knows your core values, your revenue
             targets, your capacity constraints, and the person you&apos;re
             becoming. Every answer is personalized.
           </p>
@@ -243,7 +243,7 @@ export default function LandingPage() {
           <p className="text-muted-foreground max-w-xl mx-auto">
             Join the quarterly Strategic Alignment Intensive ($497). Build your
             complete Alignment Blueprints with expert guidance. Get 30 days of free
-            APOS access — and an AI coach that knows you 10x deeper than the
+            VAP Coach access — and an AI coach that knows you 10x deeper than the
             guided onboarding.
           </p>
           <Link
@@ -313,7 +313,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <Image
             src="/logo-apos.png"
-            alt="APOS"
+            alt="VAP Coach"
             width={120}
             height={34}
             className="h-7 w-auto opacity-60"

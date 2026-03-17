@@ -92,7 +92,7 @@ That's therapy-grade coaching from an AI that knows your sabotage patterns, your
 
 **Question 42**: *"I'm about to default to 'work harder.' Intervene: give leverage options only—price/offer/model/systems/delegation."*
 
-This one's a boundary. When you feel the pull to grind, you paste this and your AI coach *refuses* to let you hustle. It only gives you leverage options. Because your VAPOS is optimized for alignment + sustainability + impact + revenue—in that order. "Work harder" is always the last resort.
+This one's a boundary. When you feel the pull to grind, you paste this and your AI coach *refuses* to let you hustle. It only gives you leverage options. Because your VAP Coach is optimized for alignment + sustainability + impact + revenue—in that order. "Work harder" is always the last resort.
 
 ---
 
@@ -121,12 +121,12 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Connected your vision to your reality
 - Turned meaning into math
 - Chose one Vital Action and installed it on your calendar
-- Built a VAPOS that holds all of it
+- Built a VAP Coach that holds all of it
 - And now you've got Fire Starters—fifty-six questions that turn that system into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
 
-And the beautiful thing? It grows with you. Monthly Patch Notes keep it current. The worksheets can be revisited quarterly. The Fire Starters never expire. Your VAPOS gets smarter as you get clearer.
+And the beautiful thing? It grows with you. Monthly Patch Notes keep it current. The worksheets can be revisited quarterly. The Fire Starters never expire. Your VAP Coach gets smarter as you get clearer.
 
 ---
 

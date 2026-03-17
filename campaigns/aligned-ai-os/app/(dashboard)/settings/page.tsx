@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
-import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check } from "lucide-react";
+import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check, BarChart3 } from "lucide-react";
 
 type ContextualProfile = {
   revenueStage?: string;
@@ -24,6 +24,7 @@ type UserSettings = {
   trialEndsAt: string | null;
   onboardingComplete: boolean;
   contextualProfile: ContextualProfile | null;
+  isAdmin?: boolean;
 };
 
 const REVENUE_OPTIONS = ["", "Pre-revenue", "Under $100K", "$100K - $500K", "$500K - $1M", "$1M - $5M", "$5M+"];
@@ -39,6 +40,15 @@ export default function SettingsPage() {
   const [patching, setPatching] = useState(false);
   const [patchSuccess, setPatchSuccess] = useState(false);
   const [patchError, setPatchError] = useState<string | null>(null);
+  const [usage, setUsage] = useState<{
+    period: string;
+    requestCount: number;
+    inputTokens: number;
+    outputTokens: number;
+    cacheReadInputTokens: number;
+    cacheHitRate: string | null;
+    estimatedSavingsNote: string | null;
+  } | null>(null);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -46,6 +56,13 @@ export default function SettingsPage() {
       .then(setSettings)
       .catch(() => {})
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/usage?days=30")
+      .then((r) => r.json())
+      .then(setUsage)
+      .catch(() => {});
   }, []);
 
   async function updateSettings(updates: Partial<UserSettings>) {
@@ -395,6 +412,40 @@ export default function SettingsPage() {
               </div>
             )}
           </section>
+
+          {/* API Usage (admin only) */}
+          {settings.isAdmin && usage && (
+            <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+              <h2 className="font-semibold flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Chat Usage & Cache Savings
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {usage.period}. Prompt caching reduces cost when your coach reuses context across turns.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="rounded-lg bg-muted/50 p-3">
+                  <p className="text-xs text-muted-foreground">Chat requests</p>
+                  <p className="font-semibold">{usage.requestCount.toLocaleString()}</p>
+                </div>
+                <div className="rounded-lg bg-muted/50 p-3">
+                  <p className="text-xs text-muted-foreground">Input tokens</p>
+                  <p className="font-semibold">{usage.inputTokens.toLocaleString()}</p>
+                </div>
+                <div className="rounded-lg bg-muted/50 p-3">
+                  <p className="text-xs text-muted-foreground">Output tokens</p>
+                  <p className="font-semibold">{usage.outputTokens.toLocaleString()}</p>
+                </div>
+                <div className="rounded-lg bg-muted/50 p-3">
+                  <p className="text-xs text-muted-foreground">Cache hit rate</p>
+                  <p className="font-semibold">{usage.cacheHitRate ?? "—"}</p>
+                </div>
+              </div>
+              {usage.estimatedSavingsNote && (
+                <p className="text-xs text-muted-foreground">{usage.estimatedSavingsNote}</p>
+              )}
+            </section>
+          )}
 
           {/* Community */}
           <section className="rounded-2xl border border-border bg-card p-6 space-y-4">

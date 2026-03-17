@@ -139,7 +139,7 @@ export default function ChatPage() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-border">
         <div>
-          <h1 className="text-lg font-semibold">Your APOS Coach</h1>
+          <h1 className="text-lg font-semibold">VAP Coach</h1>
           <p className="text-sm text-muted-foreground">
             Values-aligned guidance, personalized to you
           </p>
@@ -161,17 +161,15 @@ export default function ChatPage() {
       >
         {messages.length === 0 && showSuggestions && (
           <div className="max-w-2xl mx-auto space-y-8 pt-8">
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                <Sparkles className="h-6 w-6 text-primary" />
+            {/* Alfred's welcome message — appears as a chat bubble */}
+            <div className="flex justify-start">
+              <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-card border border-border">
+                <p className="text-sm">
+                  Hi, I&apos;m <span className="font-semibold">ALFRED</span>,
+                  your Values-Aligned Performance Coach. What would you like to
+                  work on today?
+                </p>
               </div>
-              <h2 className="text-2xl font-serif font-semibold">
-                What can I help you with?
-              </h2>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                I know your values, your goals, and your real constraints. Ask
-                me anything — or pick a prompt below.
-              </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">

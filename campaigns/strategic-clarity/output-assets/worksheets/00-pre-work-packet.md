@@ -6,7 +6,7 @@
 
 ## What This Powers
 
-Everything you write here feeds directly into your **VAPOS Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
+Everything you write here feeds directly into your **VAP Coach Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
 
 **The details you provide become the operating system that keeps your business expanding without compromising who you are.**
 
@@ -270,4 +270,4 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-*Bring this completed packet with you. Everything you've written powers your VAPOS.*
+*Bring this completed packet with you. Everything you've written powers your VAP Coach.*

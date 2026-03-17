@@ -22,7 +22,7 @@ That's what the Alignment Arc does. It's a framework that pulls out:
 - **The Revenue Bridge** — What your business actually needs to produce—built on *your* life, not a random number.
 - **Your Vital Action** — The one move that makes everything else easier.
 
-All of it feeds into VAPOS—your Values-Aligned Performance Operating System. An AI coach that knows your values, your revenue math, your capacity, and never recommends something that compromises who you are.
+All of it feeds into VAP Coach—your Values-Aligned Performance Operating System. An AI coach that knows your values, your revenue math, your capacity, and never recommends something that compromises who you are.
 
 Phase I was about seeing clearly. Phase II is about building the system that keeps you aligned—with the real you that's been there the whole time.
 

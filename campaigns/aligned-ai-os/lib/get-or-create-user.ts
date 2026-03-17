@@ -1,5 +1,5 @@
 /**
- * Gets the APOS user for the current Clerk session.
+ * Gets the VAP Coach user for the current Clerk session.
  * If the user doesn't exist (e.g. webhook didn't run in local dev), creates them.
  */
 import { auth, currentUser } from "@clerk/nextjs/server";

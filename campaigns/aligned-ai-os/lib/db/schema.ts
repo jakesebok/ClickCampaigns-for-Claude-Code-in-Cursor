@@ -112,7 +112,21 @@ export const scorecardEntries = pgTable("scorecard_entries", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// vapi_results is managed by the portal — APOS reads/writes via REST (lib/portal-data.ts), not Drizzle
+// vapi_results is managed by the portal — VAP Coach reads/writes via REST (lib/portal-data.ts), not Drizzle
+
+export const apiUsageLogs = pgTable("api_usage_logs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  endpoint: text("endpoint").notNull(), // e.g. "chat"
+  model: text("model"),
+  inputTokens: integer("input_tokens").default(0),
+  outputTokens: integer("output_tokens").default(0),
+  cacheReadInputTokens: integer("cache_read_input_tokens").default(0),
+  cacheCreationInputTokens: integer("cache_creation_input_tokens").default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
 
 export const onboardingProgress = pgTable("onboarding_progress", {
   id: uuid("id").defaultRandom().primaryKey(),

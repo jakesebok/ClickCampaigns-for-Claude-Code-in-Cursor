@@ -187,4 +187,4 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ---
 
-*The Future You feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*The Future You feeds directly into your VAP Coach. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*

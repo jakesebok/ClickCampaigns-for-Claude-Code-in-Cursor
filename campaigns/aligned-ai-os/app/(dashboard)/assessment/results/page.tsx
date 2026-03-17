@@ -422,7 +422,7 @@ function ResultsContent() {
               What to Do With These Results
             </h2>
             <p className="text-sm text-muted-foreground">
-              Your APOS coach now has your VAPI scores and can help you create an
+              Your VAP Coach now has your VAPI scores and can help you create an
               action plan based on your priority areas. Start a coaching conversation
               to turn these insights into weekly priorities.
             </p>

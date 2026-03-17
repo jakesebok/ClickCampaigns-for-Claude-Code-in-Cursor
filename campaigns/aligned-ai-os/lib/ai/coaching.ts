@@ -21,6 +21,7 @@ export async function streamCoachingResponse({
   const stream = anthropic.messages.stream({
     model,
     max_tokens: 4096,
+    cache_control: { type: "ephemeral" },
     system: systemPrompt,
     messages: messages.map((m) => ({
       role: m.role,
@@ -39,7 +40,7 @@ export async function generateContextFromWorksheets(
     max_tokens: 8192,
     system: `You are an expert Aligned AI Business Agent. Generate TWO documents from the user's worksheets:
 
-1) VAPOS UPGRADE — MASTER CONTEXT (v1) — the full operating system
+1) VAP Coach — MASTER CONTEXT (v1) — the full operating system
 2) ALIGNMENT BLUEPRINT SUMMARY SHEET — a one-page snapshot
 
 Follow the standard template. Replace every bracketed field using the worksheets. If a field is missing, write [NEEDS INPUT]. Keep language strong, clear, high-stakes, emotionally resonant — never marketing fluff.
@@ -85,12 +86,12 @@ export async function generateGuidedContext(
   return generateContextFromWorksheets(worksheetContent);
 }
 
-const PATCH_SYSTEM_PROMPT = `You are an expert Values-Aligned Performance Agent. Your job is to PATCH the user's existing "VAPOS UPGRADE — MASTER CONTEXT (v1)" without changing its structure.
+const PATCH_SYSTEM_PROMPT = `You are Alfred, the Values-Aligned Performance Coach. Your job is to PATCH the user's existing "VAP Coach — MASTER CONTEXT (v1)" without changing its structure.
 
 TASK
 Update the Master Context Doc using the update notes the user provides. They may write in natural language (e.g., "My Vital Action is now X", "Target revenue is $Y", "I refined my Driving Fire to...") — map their updates to the correct fields.
 You must output TWO things:
-1) The updated VAPOS UPGRADE — MASTER CONTEXT (v1) (same exact headings/order/structure)
+1) The updated VAP Coach — MASTER CONTEXT (v1) (same exact headings/order/structure)
 2) The updated ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
 BLUEPRINT FORMATTING: Use clean Markdown (## for headers, - for bullets, **bold** for key labels). One blank line between sections. No extra prose. Target one page.

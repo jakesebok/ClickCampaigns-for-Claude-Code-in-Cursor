@@ -108,7 +108,7 @@
 
 ---
 
-### Lesson 8: VAPOS — Master Prompt
+### Lesson 8: VAP Coach — Master Prompt
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
@@ -145,7 +145,7 @@ Lesson 6: The Revenue Bridge — What does my business need to produce?
     ↓
 Lesson 7: Vital Action — What's the single move that makes everything else easier?
     ↓
-Lesson 8: VAPOS — Feed it all into the Master Prompt → personalized AI coach
+Lesson 8: VAP Coach — Feed it all into the Master Prompt → personalized AI coach
     ↓
 Lesson 9: Fire Starters — Put the AI coach to work daily
 ```
@@ -181,4 +181,4 @@ All video scripts written in Jake Sebok's voice per `Resources/Jake's Voice/JAKE
 - **Video scripts** are written as teleprompter-ready scripts with natural speech patterns
 - **Master Prompt** updated to reference The Reckoning worksheet with graceful `[NEEDS INPUT]` handling when skipped
 - **The Alignment Arc Intensive** uses the same worksheets, facilitated live—no separate materials needed
-- **VAPOS workflow:** (1) **Generation:** Start a chat with the master prompt; attach completed worksheets file (preferred) or paste below the line. (2) **Ongoing coaching:** Use the generated Master Context as a persistent context document—paste at start of conversations or add to AI project/custom instructions so the coach knows the user every time
+- **VAP Coach workflow:** (1) **Generation:** Start a chat with the master prompt; attach completed worksheets file (preferred) or paste below the line. (2) **Ongoing coaching:** Use the generated Master Context as a persistent context document—paste at start of conversations or add to AI project/custom instructions so the coach knows the user every time

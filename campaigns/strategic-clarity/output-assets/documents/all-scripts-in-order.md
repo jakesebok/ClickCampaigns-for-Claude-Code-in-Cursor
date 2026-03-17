@@ -58,7 +58,7 @@ A few rules:
 
 ### Why It Powers Everything
 
-Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your VAPOS. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your AI coach.
+Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your VAP Coach. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your AI coach.
 
 So when you write a peak moment that seems small? Your AI coach remembers it. When you write an honest number about your revenue? Your AI coach uses it. When you name a quality you admire in someone else? That becomes a core value your AI coach holds you to.
 
@@ -124,7 +124,7 @@ And then the part I'm most excited about...
 
 ---
 
-### Your VAPOS
+### Your VAP Coach
 
 Everything you write in this module—every worksheet, every answer, every honest moment—feeds a **Master Prompt** that you'll run at the end. That prompt turns your favorite AI into a personalized executive coach, strategic advisor, and virtual assistant that:
 
@@ -159,7 +159,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
-**Lesson 8:** We run the Master Prompt and activate your VAPOS.
+**Lesson 8:** We run the Master Prompt and activate your VAP Coach.
 
 **Lesson 9:** We walk through the Fire Starters so you know exactly how to use your new AI coach.
 
@@ -169,7 +169,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your values. Your values feed The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your values. Your values feed The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAP Coach. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as a Strategic Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 
@@ -271,7 +271,7 @@ Your Real Reasons become the *filter*. Every decision, every opportunity, every 
 
 If yes, lean in. If no, it's a distraction—no matter how lucrative it looks.
 
-And here's the beautiful part: these answers feed directly into your VAPOS. Your AI coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
+And here's the beautiful part: these answers feed directly into your VAP Coach. Your AI coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
 
 ---
 
@@ -687,7 +687,7 @@ At the bottom of the worksheet, write your three final drafts clean:
 
 These don't have to be final-final. They're working drafts. They'll sharpen over time. But they should feel *true*—true in your body, not just your head.
 
-And remember: all three feed directly into your VAPOS. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
+And remember: all three feed directly into your VAP Coach. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
 
 That's Lesson 2. Three documents. Three levels of clarity. Take a breath. You've done real work here.
 
@@ -864,7 +864,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 This final table—five values, each with a definition, behaviors, and a boundary—this is one of the most important things you'll create in this entire module.
 
-It feeds directly into your VAPOS as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
+It feeds directly into your VAP Coach as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
 
 And more than that—this table becomes a mirror. You can come back to it in a month, in six months, in a year, and ask: am I living this? Am I embodying these behaviors? Am I holding these boundaries?
 
@@ -1056,7 +1056,7 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-Your Becoming becomes Section 4 of your VAPOS. Your AI coach will know:
+Your Becoming becomes Section 4 of your VAP Coach. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
@@ -1697,7 +1697,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, The Reckoning, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
 
-In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAPOS comes online.
+In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAP Coach comes online.
 
 Almost there. Let's keep going.
 
@@ -1707,7 +1707,7 @@ Almost there. Let's keep going.
 
 ---
 
-## 18. Video 8.1 — Your VAPOS: Master Prompt
+## 18. Video 8.1 — Your VAP Coach: Master Prompt
 
 **Source:** `video-8.1-aligned-ai-os.md` | ~8–12 minutes
 
@@ -1719,7 +1719,7 @@ Okay. This is the payoff.
 
 Everything you've built—every worksheet, every honest answer, every number, every value, every vision statement—it all comes together right here.
 
-Welcome to your VAPOS.
+Welcome to your VAP Coach.
 
 ---
 
@@ -1778,7 +1778,7 @@ Here's the process. It's straightforward.
 
 ### Monthly Patch Notes
 
-Your VAPOS isn't static. It grows with you.
+Your VAP Coach isn't static. It grows with you.
 
 At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
 
@@ -1792,9 +1792,9 @@ Think of it like updating the operating system on your phone. Same phone. Better
 
 Here's the thing. I built something I use every day myself.
 
-It's called VAPOS—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+It's called VAP Coach—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
 
-I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at VAPOS.Coach. Check it out. See if it feels easier. No pressure.
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at vap.coach. Check it out. See if it feels easier. No pressure.
 
 Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 

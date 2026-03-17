@@ -22,7 +22,7 @@ You've been optimizing for means goals (the revenue, the title, the tactic) inst
 The Strategic Alignment Intensive is a half-day workshop where you'll:
 → Name what you *actually* want (not what you think you should want)
 → Turn that into a revenue number built on your real life
-→ Build APOS — a personalized AI coach that keeps you aligned daily
+→ Build VAP Coach — a personalized AI coach that keeps you aligned daily
 
 $497. Held quarterly. Limited to 20 seats.
 
@@ -49,7 +49,7 @@ $497 · Next Intensive coming soon.
 
 ---
 
-## Ad Set 2: APOS Angle
+## Ad Set 2: VAP Coach Angle
 
 ### Ad 2A — The Coach
 
@@ -62,7 +62,7 @@ Imagine an AI coach that knows:
 
 Not a generic chatbot. YOUR operating system. Built on YOUR truth.
 
-That's APOS — the Aligned Performance Operating System. And you build it in the Strategic Alignment Intensive.
+That's VAP Coach — the Aligned Performance Operating System. And you build it in the Strategic Alignment Intensive.
 
 Half-day. $497. Limited seats.
 
@@ -79,7 +79,7 @@ What if your AI coach knew your revenue math and said "this opportunity will cos
 
 What if it refused to give you "hustle harder" advice and only offered alignment-based strategies?
 
-Build it in one half-day. $497 + 30 days free APOS access.
+Build it in one half-day. $497 + 30 days free VAP Coach access.
 
 **Headline:** Values-Aligned Strategy on Demand
 **CTA:** Learn More
@@ -99,9 +99,9 @@ Half-day. $497. You'll build:
 ✓ Your Driving Fire + Cause Worth Playing For
 ✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
-✓ APOS — your personalized AI coach
+✓ VAP Coach — your personalized AI coach
 
-Includes 30 days of free APOS access.
+Includes 30 days of free VAP Coach access.
 
 Limited to 20 seats per quarter.
 
@@ -111,17 +111,17 @@ Limited to 20 seats per quarter.
 
 ---
 
-## Ad Set 4: Retargeting (Intensive Attendees Who Haven't Activated APOS)
+## Ad Set 4: Retargeting (Intensive Attendees Who Haven't Activated VAP Coach)
 
 ### Ad 4A
 
 **Primary Text:**
 You did the work. You built the clarity.
 
-APOS is waiting — pre-loaded with your values, your goals, and your revenue math.
+VAP Coach is waiting — pre-loaded with your values, your goals, and your revenue math.
 
 Activate your 30-day free access now. Use code INTENSIVE30.
 
 **Headline:** Your AI Coach Is Ready
 **CTA:** Activate Now
-**Link:** [APOS app signup page]
+**Link:** [VAP Coach app signup page]

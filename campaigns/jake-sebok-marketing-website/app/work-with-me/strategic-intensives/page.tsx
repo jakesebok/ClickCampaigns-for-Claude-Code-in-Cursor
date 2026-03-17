@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata = {
   title: "Strategic Alignment Intensive — Jake Sebok",
   description:
-    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter. $497. Includes 30 days of APOS access.",
+    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter. $497. Includes 30 days of VAP Coach access.",
 };
 
 export default function StrategicIntensivesPage() {
@@ -83,7 +83,7 @@ export default function StrategicIntensivesPage() {
                   "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
               },
               {
-                title: "30 Days of APOS — Your AI Operating System",
+                title: "30 Days of VAP Coach — Your AI Operating System",
                 description:
                   "A personalized AI coach that knows everything you built today. Your values, your numbers, your Vital Action — coaching on demand, every single day.",
               },
@@ -151,11 +151,11 @@ export default function StrategicIntensivesPage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">
-                  Upload your worksheets → APOS activates
+                  Upload your worksheets → VAP Coach activates
                 </h3>
                 <p className="text-ap-mid">
                   After the Intensive, you upload your completed worksheets into
-                  APOS (Aligned Performance Operating System). The app synthesizes
+                  VAP Coach (Aligned Performance Operating System). The app synthesizes
                   everything into your personalized AI coach — loaded with your
                   values, goals, revenue math, and Vital Action.
                 </p>
@@ -171,7 +171,7 @@ export default function StrategicIntensivesPage() {
                   30 days of daily coaching
                 </h3>
                 <p className="text-ap-mid">
-                  Your APOS coach texts you every morning, tracks your weekly Vital
+                  Alfred texts you every morning, tracks your weekly Vital
                   Action, runs your 6Cs scorecard, and gives you personalized
                   strategy whenever you ask. 30 days of free access included.
                 </p>
@@ -224,7 +224,7 @@ export default function StrategicIntensivesPage() {
               Half-day live workshop + pre-work packet + all worksheets
             </p>
             <p className="text-ap-muted text-sm mb-8">
-              Includes 30 days of APOS access (your personalized AI coach)
+              Includes 30 days of VAP Coach access (your personalized AI coach)
             </p>
 
             <Link

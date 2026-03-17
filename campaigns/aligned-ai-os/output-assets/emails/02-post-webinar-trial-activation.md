@@ -1,6 +1,6 @@
-# Post-Intensive APOS Activation (4 Emails)
+# Post-Intensive VAP Coach Activation (4 Emails)
 
-**Purpose:** Get Intensive attendees to activate their 30-day free APOS trial
+**Purpose:** Get Intensive attendees to activate their 30-day free VAP Coach trial
 **Trigger:** Attended the Strategic Alignment Intensive
 **Sender:** Jake Sebok
 
@@ -8,7 +8,7 @@
 
 ## Email 1: Immediate Post-Intensive (Day 0 — within 1 hour)
 
-**Subject:** Your APOS coach is ready. Here's your access.
+**Subject:** Your VAP Coach is ready. Here's your access.
 **Preview:** 30 days free. Your worksheets are the key.
 
 {{first_name}},
@@ -20,11 +20,11 @@ Your worksheets from today's Intensive are *gold*. And here's how to turn them i
 **Step 1:** Go to [app link] and create your account
 **Step 2:** Use code **INTENSIVE30** for 30 days free
 **Step 3:** Upload your completed worksheets (export your Google Doc as .docx)
-**Step 4:** APOS synthesizes everything into your personalized AI coach
+**Step 4:** VAP Coach synthesizes everything into your personalized AI coach
 
 Your coach will know your values, your Real Reasons, your Driving Fire, your revenue math, and your Vital Action. From day one.
 
-**[Activate APOS →]**
+**[Activate VAP Coach →]**
 
 The sooner you upload, the sooner it starts working for you.
 
@@ -39,14 +39,14 @@ The sooner you upload, the sooner it starts working for you.
 
 {{first_name}},
 
-Quick check-in: have you activated APOS yet?
+Quick check-in: have you activated VAP Coach yet?
 
 The clarity from the Intensive is sharpest right now. The longer you wait, the more those insights fade back into "I should probably do something about that."
 
 Three minutes is all it takes:
 1. Create your account
 2. Upload your worksheets
-3. APOS is live
+3. VAP Coach is live
 
 **[Activate now — code INTENSIVE30 →]**
 
@@ -58,25 +58,25 @@ If you hit any issues, just reply to this email. I've got you.
 
 ## Email 3: Day 5 — First Week Tips
 
-**Subject:** 3 questions to ask APOS this week
+**Subject:** 3 questions to ask VAP Coach this week
 **Preview:** Start here if you're not sure what to ask.
 
 {{first_name}},
 
-If you've activated APOS — here are 3 questions to start with this week:
+If you've activated VAP Coach — here are 3 questions to start with this week:
 
 **1. "Build my week around my Becoming and Vital Action."**
-APOS will create a calendar plan that protects what matters.
+VAP Coach will create a calendar plan that protects what matters.
 
 **2. "What's my current bottleneck? Prove it with the numbers."**
 It'll diagnose whether the issue is lead flow, conversion, capacity, or offer.
 
 **3. "I'm tempted to chase a shiny object. Reorient me."**
-APOS will name what the distraction is trying to give you — and show you how to get it without abandoning your strategy.
+VAP Coach will name what the distraction is trying to give you — and show you how to get it without abandoning your strategy.
 
 Haven't activated yet? Your 30-day window is ticking.
 
-**[Activate APOS →]**
+**[Activate VAP Coach →]**
 
 — Jake
 
@@ -84,20 +84,20 @@ Haven't activated yet? Your 30-day window is ticking.
 
 ## Email 4: Day 10 — Deepening
 
-**Subject:** APOS gets smarter over time
+**Subject:** VAP Coach gets smarter over time
 **Preview:** Here's how to make it even more personalized.
 
 {{first_name}},
 
-If you've been using APOS this week — you've probably noticed something: the answers feel different from what you get from a generic AI.
+If you've been using VAP Coach this week — you've probably noticed something: the answers feel different from what you get from a generic AI.
 
-That's because APOS knows *you*.
+That's because VAP Coach knows *you*.
 
 Here are two ways to make it even smarter:
 
-**1. Do The Reckoning worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make APOS more realistic about your current situation.
+**1. Do The Reckoning worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make VAP Coach more realistic about your current situation.
 
-**2. Submit your first 6Cs Scorecard.** APOS tracks your scores across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — and references trends in future conversations.
+**2. Submit your first 6Cs Scorecard.** VAP Coach tracks your scores across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — and references trends in future conversations.
 
 Keep going. This is the compound effect of alignment.
 

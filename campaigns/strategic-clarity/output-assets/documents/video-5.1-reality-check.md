@@ -46,7 +46,7 @@ Open The Reckoning worksheet. There are six questions. That's it. One page. You 
 
 ### Why This Worksheet Is Optional (But Powerful)
 
-I want to be transparent about something. This worksheet is optional. You can skip it and still run the Master Prompt and still get a functional AI OS. The fields that come from The Reckoning will simply show `[NEEDS INPUT]` in your VAPOS, and your coach will ask you about them later.
+I want to be transparent about something. This worksheet is optional. You can skip it and still run the Master Prompt and still get a functional AI OS. The fields that come from The Reckoning will simply show `[NEEDS INPUT]` in your VAP Coach, and your coach will ask you about them later.
 
 But here's what you gain if you do it: your AI coach becomes significantly smarter about your actual life. It knows not just what you want, but what's in the way. It knows what you're tolerating, what it's costing you, and what part of you might resist the plan. That context is the difference between advice that sounds good and advice that actually works—for *you*, in *your* situation, right now.
 

@@ -15,6 +15,12 @@ export async function GET() {
 
   if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
+  const adminEmails = (process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  const isAdmin = adminEmails.length > 0 && adminEmails.includes((user.email || "").toLowerCase());
+
   return NextResponse.json({
     name: user.name,
     email: user.email,
@@ -27,6 +33,7 @@ export async function GET() {
     trialEndsAt: user.trialEndsAt?.toISOString() || null,
     onboardingComplete: user.onboardingComplete,
     contextualProfile: user.contextualProfile ?? null,
+    isAdmin,
   });
 }
 
