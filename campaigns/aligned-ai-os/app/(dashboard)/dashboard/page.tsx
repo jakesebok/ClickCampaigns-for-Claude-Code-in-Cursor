@@ -35,6 +35,7 @@ import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type 
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import { getScorecardWindow } from "@/lib/scorecard-window";
+import { getWeekStart } from "@/lib/utils";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity, IA: Compass, ME: Brain, AF: Focus,
@@ -83,7 +84,6 @@ const QUAD_COLORS: Record<string, string> = {
 export default function DashboardPage() {
   const [vapiResults, setVapiResults] = useState<VapiResult[]>([]);
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
-  const [currentWeekSubmitted, setCurrentWeekSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [historyExpanded, setHistoryExpanded] = useState(false);
   const [trialBanner, setTrialBanner] = useState<TrialBanner | null>(null);
@@ -100,7 +100,6 @@ export default function DashboardPage() {
         ...(scorecardData.entries || []),
       ];
       setScorecardEntries(allEntries);
-      setCurrentWeekSubmitted(!!scorecardData.currentWeek);
 
       if (settings && settings.trialEndsAt && settings.subscriptionStatus !== "active") {
         const ends = new Date(settings.trialEndsAt).getTime();
@@ -126,7 +125,15 @@ export default function DashboardPage() {
 
   const scorecardWindow = getScorecardWindow();
   const latestVapi = vapiResults[0] || null;
-  const latestScorecard = scorecardEntries[0] || null;
+  const scoredEntries = scorecardEntries.filter(
+    (e) => e.scores && Object.keys(e.scores).length > 0
+  );
+  const latestScorecard = scoredEntries[0] || null;
+  const hasAnyScorecards = scoredEntries.length > 0;
+  const thisWeekStart = getWeekStart();
+  const currentWeekSubmitted = scoredEntries.some(
+    (e) => new Date(e.weekStart).getTime() === thisWeekStart.getTime()
+  );
   const hasAnyScorecards = scorecardEntries.length > 0;
   let currentOneThing: string | null = null;
   if (latestScorecard?.notes) {
