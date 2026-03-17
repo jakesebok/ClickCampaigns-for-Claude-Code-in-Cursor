@@ -80,12 +80,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const trimmedMessages = messages
+  type ChatMessage = { role: "user" | "assistant"; content: string };
+  const trimmedMessages: ChatMessage[] = messages
     .slice(-MAX_MESSAGES_IN_CONTEXT)
-    .map((m: { role: string; content: string }) => ({
+    .filter((m): m is ChatMessage =>
+      (m.role === "user" || m.role === "assistant") && typeof m.content === "string"
+    )
+    .map((m) => ({
       role: m.role,
       content:
-        typeof m.content === "string" && m.content.length > MAX_MESSAGE_LENGTH
+        m.content.length > MAX_MESSAGE_LENGTH
           ? m.content.slice(0, MAX_MESSAGE_LENGTH) + "..."
           : m.content,
     }));
