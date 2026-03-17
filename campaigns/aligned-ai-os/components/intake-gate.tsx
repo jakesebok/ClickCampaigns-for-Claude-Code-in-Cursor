@@ -32,6 +32,18 @@ export function IntakeGate({ children }: { children: React.ReactNode }) {
           router.replace("/intake-context");
           return;
         }
+
+        const subscriptionStatus = data?.subscriptionStatus as string | undefined;
+        const trialEndsAt = data?.trialEndsAt as string | null | undefined;
+        if (subscriptionStatus !== "active" && trialEndsAt) {
+          const ends = new Date(trialEndsAt).getTime();
+          const now = Date.now();
+          if (now > ends) {
+            router.replace("/pricing?trial=expired");
+            return;
+          }
+        }
+
         setReady(true);
       })
       .catch(() => setReady(true));

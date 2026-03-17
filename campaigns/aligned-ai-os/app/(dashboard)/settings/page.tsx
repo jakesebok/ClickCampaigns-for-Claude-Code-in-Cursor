@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { UserButton } from "@clerk/nextjs";
+import { SignOutButton, UserButton } from "@clerk/nextjs";
 import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check, BarChart3, Sun, Moon } from "lucide-react";
 import {
   isPushSupported,
@@ -265,6 +265,13 @@ export default function SettingsPage() {
                 <p className="font-medium">{settings.name || settings.email}</p>
                 <p className="text-sm text-muted-foreground">{settings.email}</p>
               </div>
+            </div>
+            <div className="pt-3">
+              <SignOutButton>
+                <button className="text-xs text-muted-foreground hover:text-destructive transition-colors underline">
+                  Log out
+                </button>
+              </SignOutButton>
             </div>
           </section>
 

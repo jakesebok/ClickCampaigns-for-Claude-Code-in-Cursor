@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   MoreHorizontal,
-  Target,
   ClipboardCheck,
   FileText,
   Activity,
@@ -17,10 +16,8 @@ import { ThemeToggle } from "@/components/theme-toggle";
 const menuItems = [
   { href: "/scorecard", label: "6Cs Scorecard", icon: ClipboardCheck },
   { href: "/assessment", label: "Take Assessment", icon: Activity },
-  { href: "/one-thing", label: "Vital Action", icon: Target },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
-  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export function NavMenuSheet() {
@@ -69,10 +66,17 @@ export function NavMenuSheet() {
                   {item.label}
                 </Link>
               ))}
-              <div className="flex items-center justify-between px-4 py-3 mt-4 pt-4 border-t border-border">
-                <span className="text-sm text-muted-foreground">Theme</span>
-                <ThemeToggle />
-              </div>
+              <button
+                type="button"
+                className="flex items-center justify-between w-full px-4 py-3 mt-4 pt-4 border-t border-border text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-xl"
+                onClick={() => {
+                  setOpen(false);
+                  window.location.href = "/settings";
+                }}
+              >
+                <span>Settings</span>
+                <Settings className="h-4 w-4 text-accent" />
+              </button>
             </nav>
           </div>
         </>

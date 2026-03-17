@@ -68,9 +68,9 @@ type ScorecardEntry = {
   notes: string | null;
 };
 
-type OneThing = {
-  oneThing: string;
-  weekStart: string;
+type TrialBanner = {
+  daysLeft: number;
+  isActive: boolean;
 };
 
 const QUAD_COLORS: Record<string, string> = {
@@ -84,16 +84,16 @@ export default function DashboardPage() {
   const [vapiResults, setVapiResults] = useState<VapiResult[]>([]);
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
   const [currentWeekSubmitted, setCurrentWeekSubmitted] = useState(false);
-  const [oneThing, setOneThing] = useState<OneThing | null>(null);
   const [loading, setLoading] = useState(true);
   const [historyExpanded, setHistoryExpanded] = useState(false);
+  const [trialBanner, setTrialBanner] = useState<TrialBanner | null>(null);
 
   useEffect(() => {
     Promise.all([
       fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
       fetch("/api/scorecard").then((r) => r.json()).catch(() => ({ entries: [], currentWeek: null })),
-      fetch("/api/one-thing").then((r) => r.json()).catch(() => ({ current: null })),
-    ]).then(([vapiData, scorecardData, oneThingData]) => {
+      fetch("/api/settings").then((r) => r.json()).catch(() => null),
+    ]).then(([vapiData, scorecardData, settings]) => {
       setVapiResults(vapiData.results || []);
       const allEntries = [
         ...(scorecardData.currentWeek ? [scorecardData.currentWeek] : []),
@@ -101,7 +101,17 @@ export default function DashboardPage() {
       ];
       setScorecardEntries(allEntries);
       setCurrentWeekSubmitted(!!scorecardData.currentWeek);
-      setOneThing(oneThingData.current || null);
+
+      if (settings && settings.trialEndsAt && settings.subscriptionStatus !== "active") {
+        const ends = new Date(settings.trialEndsAt).getTime();
+        const now = Date.now();
+        const msLeft = ends - now;
+        if (msLeft > 0) {
+          const daysLeft = Math.ceil(msLeft / (1000 * 60 * 60 * 24));
+          setTrialBanner({ daysLeft, isActive: true });
+        }
+      }
+
       setLoading(false);
     });
   }, []);
@@ -117,6 +127,15 @@ export default function DashboardPage() {
   const scorecardWindow = getScorecardWindow();
   const latestVapi = vapiResults[0] || null;
   const latestScorecard = scorecardEntries[0] || null;
+  let currentOneThing: string | null = null;
+  if (latestScorecard?.notes) {
+    try {
+      const parsed = JSON.parse(latestScorecard.notes) as { oneThing?: string };
+      currentOneThing = parsed.oneThing || null;
+    } catch {
+      currentOneThing = null;
+    }
+  }
   const archetype = latestVapi?.archetype as VapiArchetype | undefined;
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
@@ -135,8 +154,27 @@ export default function DashboardPage() {
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Vital Action — top, front and center */}
-          {oneThing ? (
+          {trialBanner?.isActive && (
+            <div className="rounded-2xl border border-amber-400/60 bg-amber-500/10 px-4 py-3 flex items-center justify-between gap-3 text-sm">
+              <div className="space-y-0.5">
+                <p className="font-medium text-amber-900 dark:text-amber-200">
+                  Your free trial ends in {trialBanner.daysLeft} day{trialBanner.daysLeft === 1 ? "" : "s"}.
+                </p>
+                <p className="text-xs text-amber-900/80 dark:text-amber-200/80">
+                  Choose a plan now to keep ALFRED active without interruption.
+                </p>
+              </div>
+              <Link
+                href="/pricing"
+                className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-amber-500 text-amber-950 px-3 py-1.5 text-xs font-semibold hover:bg-amber-400 transition-colors"
+              >
+                View plans
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          )}
+          {/* Vital Action — top, front and center (from latest 6Cs scorecard) */}
+          {currentOneThing ? (
             <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5 flex items-center gap-4">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
                 <Target className="h-5 w-5 text-accent" />
@@ -145,10 +183,10 @@ export default function DashboardPage() {
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   This Week&apos;s Vital Action
                 </p>
-                <p className="font-medium truncate">{oneThing.oneThing}</p>
+                <p className="font-medium truncate">{currentOneThing}</p>
               </div>
               <Link
-                href="/one-thing"
+                href="/scorecard"
                 className="shrink-0 text-accent hover:text-accent/80 transition-colors"
               >
                 <ArrowRight className="h-5 w-5" />
@@ -156,7 +194,7 @@ export default function DashboardPage() {
             </div>
           ) : (
             <Link
-              href="/one-thing"
+              href="/scorecard"
               className="block rounded-2xl border-2 border-dashed border-accent/30 bg-accent/5 p-5 flex items-center gap-4 hover:border-accent/50 transition-colors"
             >
               <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
@@ -166,7 +204,9 @@ export default function DashboardPage() {
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   This Week&apos;s Vital Action
                 </p>
-                <p className="font-medium text-muted-foreground">Set your Vital Action for this week</p>
+                <p className="font-medium text-muted-foreground">
+                  Complete your 6Cs scorecard to set this week&apos;s Vital Action.
+                </p>
               </div>
               <ArrowRight className="h-5 w-5 shrink-0 text-accent" />
             </Link>

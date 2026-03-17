@@ -697,7 +697,8 @@
         html += '<ul class="space-y-2.5 mt-2">';
         top3.forEach(function(d) {
           var c = tierColor(d.tier);
-          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+          var icon = (typeof window !== 'undefined' && window.VAPI_DOMAIN_ICONS && d.code && window.VAPI_DOMAIN_ICONS[d.code]) ? window.VAPI_DOMAIN_ICONS[d.code] : 'circle';
+          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="flex items-center gap-1.5 text-[var(--ap-text)]"><i data-lucide="' + icon + '" class="w-3.5 h-3.5 flex-shrink-0"></i>' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
         });
         html += '</ul></div>';
         html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
@@ -705,7 +706,8 @@
         html += '<ul class="space-y-2.5 mt-2">';
         bottom3.forEach(function(d) {
           var c = tierColor(d.tier);
-          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+          var icon = (typeof window !== 'undefined' && window.VAPI_DOMAIN_ICONS && d.code && window.VAPI_DOMAIN_ICONS[d.code]) ? window.VAPI_DOMAIN_ICONS[d.code] : 'circle';
+          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="flex items-center gap-1.5 text-[var(--ap-text)]"><i data-lucide="' + icon + '" class="w-3.5 h-3.5 flex-shrink-0"></i>' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
         });
         html += '</ul></div></div>';
         html += '</div>'; // end print-strengths-focus-section

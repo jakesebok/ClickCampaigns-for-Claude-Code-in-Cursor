@@ -2116,18 +2116,35 @@
           var rangeEnd = lastFriday.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
           var noDataMsg = rangeStart === rangeEnd ? 'No data available for the week of ' + rangeStart + '.' : 'No data available for the week of ' + rangeStart + ' – ' + rangeEnd + '.';
           document.getElementById('six-c-cards').innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-8 px-4 rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-[var(--ap-bg)]/30"><p class="text-[var(--ap-secondary)] font-semibold text-center">' + noDataMsg + '</p><p class="text-[var(--ap-muted)] text-sm text-center mt-1">Your next scorecard will be available Friday at 12pm.</p></div>';
-          // Show Vital Action form in banner (no reflections, no fill button)
-          document.getElementById('one-thing-banner').classList.remove('hidden');
-          document.getElementById('one-thing-banner-content').classList.add('hidden');
-          document.getElementById('one-thing-banner-vital-action-form').classList.remove('hidden');
-          document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
-          var vitalInput = document.getElementById('vital-action-input');
-          if (vitalInput && (oneThingLatest || prevOneThing)) vitalInput.placeholder = (oneThingLatest || prevOneThing);
-          if (oneThingEl) oneThingEl.classList.add('hidden');
-          if (actionRowEl) actionRowEl.classList.add('hidden');
-          linkEl.classList.add('hidden');
-          closedMsg.classList.add('hidden');
-          document.getElementById('one-thing-scorecard-cta').classList.add('hidden');
+          if (oneThingLatest) {
+            // User submitted a Vital Action manually after missing the window — show final banner state
+            var banner = document.getElementById('one-thing-banner');
+            var bannerContent = document.getElementById('one-thing-banner-content');
+            var bannerForm = document.getElementById('one-thing-banner-vital-action-form');
+            if (banner) banner.classList.remove('hidden');
+            if (bannerContent) bannerContent.classList.remove('hidden');
+            document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+            if (bannerForm) bannerForm.classList.add('hidden');
+            document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
+            if (oneThingEl) oneThingEl.classList.add('hidden');
+            if (actionRowEl) actionRowEl.classList.add('hidden');
+            linkEl.classList.add('hidden');
+            closedMsg.classList.add('hidden');
+            document.getElementById('one-thing-scorecard-cta').classList.add('hidden');
+          } else {
+            // Missed window and no Vital Action yet — show Vital Action form in banner (no reflections, no fill button)
+            document.getElementById('one-thing-banner').classList.remove('hidden');
+            document.getElementById('one-thing-banner-content').classList.add('hidden');
+            document.getElementById('one-thing-banner-vital-action-form').classList.remove('hidden');
+            document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
+            var vitalInput = document.getElementById('vital-action-input');
+            if (vitalInput && (oneThingLatest || prevOneThing)) vitalInput.placeholder = (oneThingLatest || prevOneThing);
+            if (oneThingEl) oneThingEl.classList.add('hidden');
+            if (actionRowEl) actionRowEl.classList.add('hidden');
+            linkEl.classList.add('hidden');
+            closedMsg.classList.add('hidden');
+            document.getElementById('one-thing-scorecard-cta').classList.add('hidden');
+          }
         } else {
           document.getElementById('six-c-cards').innerHTML = cardsHtml;
         }
