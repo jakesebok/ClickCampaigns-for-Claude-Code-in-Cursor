@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { IntakeGate } from "@/components/intake-gate";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -59,14 +60,15 @@ export default function DashboardLayout({
           ))}
         </nav>
 
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-border flex items-center justify-between gap-2">
           <Link
             href="/settings"
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors flex-1"
           >
             <Settings className="h-4 w-4" />
             <span>Settings</span>
           </Link>
+          <ThemeToggle />
         </div>
       </aside>
 

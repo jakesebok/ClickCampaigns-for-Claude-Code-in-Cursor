@@ -3,6 +3,7 @@ import {
   ClerkProvider,
 } from "@clerk/nextjs";
 import { HeaderClient } from "@/components/header-client";
+import { ThemeScript } from "@/components/theme-script";
 import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
@@ -43,7 +44,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body
         className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased`}
       >

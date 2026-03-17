@@ -1,0 +1,16 @@
+/* Dark mode — matches Aligned AI OS app */
+[data-theme="dark"] {
+  --ap-primary: #e8eaf2;
+  --ap-secondary: #b8c4d4;
+  --ap-accent: #FF6B1A;
+  --ap-accent-2: #FF9F6B;
+  --ap-blue: #1e2438;
+  --ap-bg: #161b26;
+  --ap-text: #e8eaf2;
+  --ap-muted: #8a9bb3;
+  --ap-border: #2d3849;
+  --ap-surface: #1e2438;
+  --ap-header-bg: rgba(30,36,56,0.95);
+}
+[data-theme="dark"] .bg-white { background-color: var(--ap-surface) !important; }
+[data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }

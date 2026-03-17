@@ -150,9 +150,10 @@
           }
           var uid = prefix + 'pm-' + q.key + '-' + e.code;
           html += '<div class="pm-card w-full min-w-0 sm:min-w-[240px] max-w-full sm:max-w-[calc(50%-0.25rem)] border border-[var(--ap-border)] rounded-lg overflow-hidden bg-white shrink-0">';
+          var icon = (typeof window !== 'undefined' && window.VAPI_DOMAIN_ICONS && window.VAPI_DOMAIN_ICONS[e.code]) ? window.VAPI_DOMAIN_ICONS[e.code] : 'circle';
           html += '<button type="button" pm-card-toggle onclick="(function(){var c=document.getElementById(\'' + uid + '\');var isHidden=c.classList.toggle(\'hidden\');var chev=document.getElementById(\'' + uid + '-chev\');if(chev)chev.style.transform=isHidden?\'rotate(180deg)\':\'rotate(0deg)\';})()" class="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-[var(--ap-bg)]/60 transition-colors">';
           html += '<div class="flex flex-col min-w-0">';
-          html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate">' + escapeHtml(e.domain) + '</span>';
+          html += '<span class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight truncate flex items-center gap-1.5"><i data-lucide="' + icon + '" class="w-3.5 h-3.5 flex-shrink-0"></i>' + escapeHtml(e.domain) + '</span>';
           html += '<div class="flex items-center gap-2 mt-0.5">';
           html += '<span class="text-xs font-bold" style="color:' + q.accentColor + '">' + e.score + '/10</span>';
           html += '<span class="text-xs text-[var(--ap-muted)]">Priority: ' + e.importance + '/10</span>';

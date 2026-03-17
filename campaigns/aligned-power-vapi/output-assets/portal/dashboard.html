@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script>
-    (function(){var t=localStorage.getItem('ap-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
+    (function(){var t;try{var m=document.cookie.match(/ap-theme=(\w+)/);if(m&&(m[1]==='dark'||m[1]==='light')){t=m[1];try{localStorage.setItem('ap-theme',t);}catch(e){}}else{t=localStorage.getItem('ap-theme');}}catch(e){t=localStorage.getItem('ap-theme');}if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
   </script>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +25,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="/portal/six-c-window.js"></script>
+  <script src="/html/vapi-domain-icons.js"></script>
   <script src="/html/vapi-results-interpretations.js"></script>
   <script src="/html/vapi-priority-matrix.js"></script>
   <script src="/html/vapi-archetypes.js"></script>
@@ -33,7 +34,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       lucide.createIcons();
       function getTheme(){return document.documentElement.getAttribute('data-theme')||'light';}
-      function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('ap-theme',t);updateThemeIcons();}
+      function setTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('ap-theme',t);try{var domain='';if(typeof window!=='undefined'&&window.location&&/alignedpower\.coach$/.test(window.location.hostname))domain='; domain=.alignedpower.coach';document.cookie='ap-theme='+t+'; path=/; max-age=31536000'+domain;}catch(e){}updateThemeIcons();}
       function updateThemeIcons(){var d=getTheme()==='dark';['','-mobile'].forEach(function(s){var li=document.getElementById('theme-icon-light'+s),ld=document.getElementById('theme-icon-dark'+s);if(li){li.classList.toggle('hidden',!d);}if(ld){ld.classList.toggle('hidden',d);}});}
       function toggleTheme(){setTheme(getTheme()==='dark'?'light':'dark');}
       updateThemeIcons();
@@ -58,18 +59,19 @@
       --ap-dark: #0E1624;
       --ap-dark-soft: #1a2435;
     }
+    /* Dark mode — matches Aligned AI OS app (hsl 220 30% 12% etc.) */
     [data-theme="dark"] {
-      --ap-primary: #fafaf9;
-      --ap-secondary: #cbd5e1;
+      --ap-primary: #e8eaf2;
+      --ap-secondary: #b8c4d4;
       --ap-accent: #FF6B1A;
       --ap-accent-2: #FF9F6B;
-      --ap-blue: #1e293b;
-      --ap-bg: #0c0a09;
-      --ap-text: #fafaf9;
-      --ap-muted: #94a3b8;
-      --ap-border: #334155;
-      --ap-surface: #1c1917;
-      --ap-header-bg: rgba(28,25,23,0.95);
+      --ap-blue: #1e2438;
+      --ap-bg: #161b26;
+      --ap-text: #e8eaf2;
+      --ap-muted: #8a9bb3;
+      --ap-border: #2d3849;
+      --ap-surface: #1e2438;
+      --ap-header-bg: rgba(30,36,56,0.95);
     }
     [data-theme="dark"] .bg-white { background-color: var(--ap-surface) !important; }
     [data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }
@@ -296,18 +298,18 @@
                       <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
                       <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
                       <div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Domain</div>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
-                      <button type="button" class="breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH"><i data-lucide="activity" class="w-3 h-3 flex-shrink-0"></i>Physical Health</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA"><i data-lucide="compass" class="w-3 h-3 flex-shrink-0"></i>Inner Alignment</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME"><i data-lucide="brain" class="w-3 h-3 flex-shrink-0"></i>Mental / Emotional</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF"><i data-lucide="focus" class="w-3 h-3 flex-shrink-0"></i>Attention &amp; Focus</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS"><i data-lucide="heart" class="w-3 h-3 flex-shrink-0"></i>Relationship to Self</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA"><i data-lucide="home" class="w-3 h-3 flex-shrink-0"></i>Family</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO"><i data-lucide="users" class="w-3 h-3 flex-shrink-0"></i>Community</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI"><i data-lucide="globe" class="w-3 h-3 flex-shrink-0"></i>World / Impact</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS"><i data-lucide="telescope" class="w-3 h-3 flex-shrink-0"></i>Vision / Strategy</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX"><i data-lucide="rocket" class="w-3 h-3 flex-shrink-0"></i>Execution</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH"><i data-lucide="gauge" class="w-3 h-3 flex-shrink-0"></i>Operational Health</button>
+                      <button type="button" class="breakdown-metric-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC"><i data-lucide="leaf" class="w-3 h-3 flex-shrink-0"></i>Ecology</button>
                     </div>
                   </div>
                 </div>
@@ -340,18 +342,18 @@
                   <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
                   <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
                   <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Domain</div>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
-                  <button type="button" class="breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH"><i data-lucide="activity" class="w-3.5 h-3.5 flex-shrink-0"></i>Physical Health</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA"><i data-lucide="compass" class="w-3.5 h-3.5 flex-shrink-0"></i>Inner Alignment</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME"><i data-lucide="brain" class="w-3.5 h-3.5 flex-shrink-0"></i>Mental / Emotional</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF"><i data-lucide="focus" class="w-3.5 h-3.5 flex-shrink-0"></i>Attention &amp; Focus</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS"><i data-lucide="heart" class="w-3.5 h-3.5 flex-shrink-0"></i>Relationship to Self</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA"><i data-lucide="home" class="w-3.5 h-3.5 flex-shrink-0"></i>Family</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO"><i data-lucide="users" class="w-3.5 h-3.5 flex-shrink-0"></i>Community</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI"><i data-lucide="globe" class="w-3.5 h-3.5 flex-shrink-0"></i>World / Impact</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS"><i data-lucide="telescope" class="w-3.5 h-3.5 flex-shrink-0"></i>Vision / Strategy</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX"><i data-lucide="rocket" class="w-3.5 h-3.5 flex-shrink-0"></i>Execution</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH"><i data-lucide="gauge" class="w-3.5 h-3.5 flex-shrink-0"></i>Operational Health</button>
+                  <button type="button" class="breakdown-metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC"><i data-lucide="leaf" class="w-3.5 h-3.5 flex-shrink-0"></i>Ecology</button>
                 </div>
                 <div id="breakdown-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">
                   <i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)]"></i>
@@ -407,18 +409,18 @@
                   <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
                   <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
                   <div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Domain</div>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
-                  <button type="button" class="progress-metric-dropdown-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH"><i data-lucide="activity" class="w-3 h-3 flex-shrink-0"></i>Physical Health</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA"><i data-lucide="compass" class="w-3 h-3 flex-shrink-0"></i>Inner Alignment</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME"><i data-lucide="brain" class="w-3 h-3 flex-shrink-0"></i>Mental / Emotional</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF"><i data-lucide="focus" class="w-3 h-3 flex-shrink-0"></i>Attention &amp; Focus</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS"><i data-lucide="heart" class="w-3 h-3 flex-shrink-0"></i>Relationship to Self</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA"><i data-lucide="home" class="w-3 h-3 flex-shrink-0"></i>Family</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO"><i data-lucide="users" class="w-3 h-3 flex-shrink-0"></i>Community</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI"><i data-lucide="globe" class="w-3 h-3 flex-shrink-0"></i>World / Impact</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS"><i data-lucide="telescope" class="w-3 h-3 flex-shrink-0"></i>Vision / Strategy</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX"><i data-lucide="rocket" class="w-3 h-3 flex-shrink-0"></i>Execution</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH"><i data-lucide="gauge" class="w-3 h-3 flex-shrink-0"></i>Operational Health</button>
+                  <button type="button" class="progress-metric-dropdown-btn flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC"><i data-lucide="leaf" class="w-3 h-3 flex-shrink-0"></i>Ecology</button>
                 </div>
               </div>
             </div>
@@ -454,18 +456,18 @@
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>
                 <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>
                 <div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Domain</div>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>
-                <button type="button" class="metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH"><i data-lucide="activity" class="w-3.5 h-3.5 flex-shrink-0"></i>Physical Health</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA"><i data-lucide="compass" class="w-3.5 h-3.5 flex-shrink-0"></i>Inner Alignment</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME"><i data-lucide="brain" class="w-3.5 h-3.5 flex-shrink-0"></i>Mental / Emotional</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF"><i data-lucide="focus" class="w-3.5 h-3.5 flex-shrink-0"></i>Attention &amp; Focus</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS"><i data-lucide="heart" class="w-3.5 h-3.5 flex-shrink-0"></i>Relationship to Self</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA"><i data-lucide="home" class="w-3.5 h-3.5 flex-shrink-0"></i>Family</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO"><i data-lucide="users" class="w-3.5 h-3.5 flex-shrink-0"></i>Community</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI"><i data-lucide="globe" class="w-3.5 h-3.5 flex-shrink-0"></i>World / Impact</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS"><i data-lucide="telescope" class="w-3.5 h-3.5 flex-shrink-0"></i>Vision / Strategy</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX"><i data-lucide="rocket" class="w-3.5 h-3.5 flex-shrink-0"></i>Execution</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH"><i data-lucide="gauge" class="w-3.5 h-3.5 flex-shrink-0"></i>Operational Health</button>
+                <button type="button" class="metric-btn flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC"><i data-lucide="leaf" class="w-3.5 h-3.5 flex-shrink-0"></i>Ecology</button>
                 </div>
                 <div id="progress-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">
                   <i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)]"></i>
@@ -1062,22 +1064,47 @@
       needImportanceBackfill = !imp || Object.keys(imp).length === 0;
       latestRowId = latest.id;
 
-      // Importance modal: sliders, submit, confirmation, close
+      // Importance modal: number buttons (1-10), submit, confirmation, close
       (function() {
         var IMP_CODES = ['IMP-PH','IMP-IA','IMP-ME','IMP-AF','IMP-RS','IMP-FA','IMP-CO','IMP-WI','IMP-VS','IMP-EX','IMP-OH','IMP-EC'];
         var DOM_CODES = { 'IMP-PH':'PH','IMP-IA':'IA','IMP-ME':'ME','IMP-AF':'AF','IMP-RS':'RS','IMP-FA':'FA','IMP-CO':'CO','IMP-WI':'WI','IMP-VS':'VS','IMP-EX':'EX','IMP-OH':'OH','IMP-EC':'EC' };
         var impSlidersTouched = {};
         var importanceRatings = {};
 
-        document.querySelectorAll('.imp-slider').forEach(function(slider) {
-          var code = slider.dataset.code;
-          var valEl = document.getElementById('val-' + code);
-          slider.addEventListener('input', function() {
-            var v = parseInt(slider.value, 10);
-            importanceRatings[DOM_CODES[code]] = v;
-            impSlidersTouched[code] = true;
-            if (valEl) valEl.textContent = v;
+        function updateImpButtons(row, val) {
+          row.querySelectorAll('.imp-num-btn').forEach(function(btn) {
+            var v = parseInt(btn.dataset.value, 10);
+            btn.classList.remove('bg-[var(--ap-accent)]', 'text-white', 'bg-[var(--ap-accent)]/20', 'text-[var(--ap-accent)]', 'bg-[var(--ap-bg)]', 'hover:bg-[var(--ap-border)]');
+            if (v === val) {
+              btn.classList.add('bg-[var(--ap-accent)]', 'text-white');
+            } else if (v < val) {
+              btn.classList.add('bg-[var(--ap-accent)]/20', 'text-[var(--ap-accent)]');
+            } else {
+              btn.classList.add('bg-[var(--ap-bg)]', 'hover:bg-[var(--ap-border)]');
+            }
           });
+        }
+
+        document.querySelectorAll('.imp-num-row').forEach(function(row) {
+          var code = row.dataset.code;
+          var valEl = document.getElementById('val-' + code);
+          for (var i = 1; i <= 10; i++) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'imp-num-btn flex-1 h-9 rounded-md text-xs font-medium transition-colors bg-[var(--ap-bg)] hover:bg-[var(--ap-border)]';
+            btn.dataset.value = String(i);
+            btn.dataset.code = code;
+            btn.textContent = i;
+            btn.addEventListener('click', function() {
+              var v = parseInt(this.dataset.value, 10);
+              var c = this.dataset.code;
+              importanceRatings[DOM_CODES[c]] = v;
+              impSlidersTouched[c] = true;
+              if (valEl) valEl.textContent = v;
+              updateImpButtons(row, v);
+            });
+            row.appendChild(btn);
+          }
         });
 
         document.getElementById('importance-form').addEventListener('submit', async function(e) {
@@ -2331,22 +2358,22 @@
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-PH">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your physical health: sleep quality, nutrition, exercise, and physical energy.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-PH">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-PH">
+              <div class="imp-num-row flex gap-1" data-code="IMP-PH"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-IA">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Living in alignment with your values: making space for joy, meaning, and experiences that matter to you.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-IA">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-IA">
+              <div class="imp-num-row flex gap-1" data-code="IMP-IA"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-ME">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your mental and emotional health: stress recovery, emotional regulation, self-talk, and sustainable pace.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-ME">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-ME">
+              <div class="imp-num-row flex gap-1" data-code="IMP-ME"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-AF">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your ability to focus: resisting distraction, protecting deep work time, and directing your attention with intention.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-AF">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-AF">
+              <div class="imp-num-row flex gap-1" data-code="IMP-AF"></div>
             </div>
           </div>
 
@@ -2355,22 +2382,22 @@
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-RS">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your relationship with yourself: self-trust, boundaries, keeping promises to yourself, and self-respect.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-RS">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-RS">
+              <div class="imp-num-row flex gap-1" data-code="IMP-RS"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-FA">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your family relationships: presence, communication, quality time, and emotional availability with the people closest to you.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-FA">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-FA">
+              <div class="imp-num-row flex gap-1" data-code="IMP-FA"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-CO">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your friendships and community: genuine belonging, real connection, and investing in people who know and support you.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-CO">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-CO">
+              <div class="imp-num-row flex gap-1" data-code="IMP-CO"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-WI">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your contribution and impact: serving something beyond your own business or personal gain.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-WI">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-WI">
+              <div class="imp-num-row flex gap-1" data-code="IMP-WI"></div>
             </div>
           </div>
 
@@ -2379,26 +2406,26 @@
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-VS">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your business clarity: knowing where you're headed, having a simple strategy, and saying no to distractions.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-VS">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-VS">
+              <div class="imp-num-row flex gap-1" data-code="IMP-VS"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-EX">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your execution consistency: finishing what you start, following your weekly rhythm, and shipping what matters.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-EX">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EX">
+              <div class="imp-num-row flex gap-1" data-code="IMP-EX"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-OH">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your business systems: tracking metrics, building processes, delegating, and reducing dependence on you.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-OH">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-OH">
+              <div class="imp-num-row flex gap-1" data-code="IMP-OH"></div>
             </div>
             <div class="bg-[var(--ap-bg)] rounded-lg border border-[var(--ap-border)] p-4" data-imp="IMP-EC">
               <label class="block font-semibold text-[var(--ap-secondary)] mb-2 text-sm leading-snug">Your business alignment: ensuring your model, pace, and goals match who you are and the life you actually want.</label>
               <div class="flex items-center justify-between text-xs text-[var(--ap-muted)] mb-2"><span>Not a focus</span><span class="font-bold text-base text-[var(--ap-primary)] imp-val" id="val-IMP-EC">—</span><span>Highest priority</span></div>
-              <input type="range" min="1" max="10" class="imp-slider w-full accent-[var(--ap-primary)]" data-code="IMP-EC">
+              <div class="imp-num-row flex gap-1" data-code="IMP-EC"></div>
             </div>
           </div>
 
-          <div id="importance-error" class="hidden text-sm text-red-600 font-medium mb-4 bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please set all 12 sliders before continuing.</div>
+          <div id="importance-error" class="hidden text-sm text-red-600 font-medium mb-4 bg-red-50 border border-red-200 rounded-lg px-4 py-3">Please rate all 12 areas before continuing.</div>
 
           <button type="submit" id="importance-submit-btn" class="w-full py-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-lg rounded-lg transition-colors">Save &amp; Continue</button>
         </form>

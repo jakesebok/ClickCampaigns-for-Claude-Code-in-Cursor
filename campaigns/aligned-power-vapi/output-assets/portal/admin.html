@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin — Respondent results | Aligned Performance Portal</title>
@@ -21,6 +22,8 @@
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
     }
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-accent:#FF6B1A;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;--ap-header-bg:rgba(30,36,56,0.95);}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     @media (max-width: 767px) { .nav-links-desk { display: none !important; } .nav-hamburger { display: inline-flex !important; } }
