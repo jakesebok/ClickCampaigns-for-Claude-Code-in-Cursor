@@ -222,7 +222,7 @@ function ResultsContent() {
   return (
     <div className="flex flex-col h-full">
       <PageHeader
-        title="VAPI Results"
+        title="Assessment Results"
         subtitle={new Date(result.createdAt).toLocaleDateString("en-US", {
           month: "long",
           day: "numeric",
@@ -534,7 +534,7 @@ function ResultsContent() {
               What to Do With These Results
             </h2>
             <p className="text-sm text-muted-foreground">
-              Your VAP Coach now has your VAPI scores and can help you create an
+              ALFRED now has your VAPI scores and can help you create an
               action plan based on your priority areas. Start a coaching conversation
               to turn these insights into weekly priorities.
             </p>

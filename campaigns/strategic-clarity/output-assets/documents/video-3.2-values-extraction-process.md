@@ -75,7 +75,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 This final table—five values, each with a definition, behaviors, and a boundary—this is one of the most important things you'll create in this entire module.
 
-It feeds directly into your VAP Coach as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
+It feeds directly into your Aligned Freedom Coach as Section 2: your operationalized values. Every recommendation your AI coach makes will be filtered through these five values. Every opportunity will be scored against them. Every time you're about to compromise one, your AI coach will flag it.
 
 And more than that—this table becomes a mirror. You can come back to it in a month, in six months, in a year, and ask: am I living this? Am I embodying these behaviors? Am I holding these boundaries?
 

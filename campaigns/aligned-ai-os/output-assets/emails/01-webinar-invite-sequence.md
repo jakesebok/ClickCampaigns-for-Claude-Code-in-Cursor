@@ -23,9 +23,9 @@ I run a quarterly workshop called the **Strategic Alignment Intensive** where I 
 
 → Name what they *actually* want (not what they think they should want)
 → Turn that into a revenue number built on their real life
-→ Build a personalized AI operating system (VAP Coach) that keeps them aligned every single day
+→ Build a personalized AI operating system (ALFRED) that keeps them aligned every single day
 
-The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free VAP Coach access** — a personalized AI coach loaded with everything you build in the workshop.
+The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — a personalized AI coach loaded with everything you build in the workshop.
 
 **[Reserve My Seat — $497 →]**
 
@@ -59,7 +59,7 @@ In the Strategic Alignment Intensive, I show you how to fix that — in a single
 
 ---
 
-## Email 3: The VAP Coach Angle (Day 4)
+## Email 3: The ALFRED Angle (Day 4)
 
 **Subject:** Your AI doesn't know you. That's about to change.
 **Preview:** Imagine an AI coach that knows your values, your revenue math, and your Vital Action.
@@ -78,11 +78,11 @@ You say: "Build my week."
 
 And it gives you a plan that's filtered through *your* values, built on *your* numbers, and anchored to *your* Vital Action.
 
-That's **VAP Coach** — the Aligned Performance Operating System. And every Intensive attendee gets 30 days free.
+That's **ALFRED** — the Aligned Performance Operating System. And every Intensive attendee gets 30 days free.
 
 **[Reserve my seat — $497 →]**
 
-The Intensive builds the context. VAP Coach makes it operational. Together, they change how you plan, decide, and execute — permanently.
+The Intensive builds the context. ALFRED makes it operational. Together, they change how you plan, decide, and execute — permanently.
 
 — Jake
 
@@ -97,7 +97,7 @@ The Intensive builds the context. VAP Coach makes it operational. Together, they
 
 I ran the Strategic Alignment Intensive with a small group last quarter. Here's what one participant said:
 
-*"For the first time, I can see the direct line from what I value to what I do on Monday morning. VAP Coach is like having a COO who actually understands my life."*
+*"For the first time, I can see the direct line from what I value to what I do on Monday morning. ALFRED is like having a COO who actually understands my life."*
 
 This isn't motivation work. It's decision clarity + operational strategy built on what actually matters to you.
 
@@ -124,7 +124,7 @@ Here's what you'll build:
 ✓ Your Top 5 Values (operational — not a poster on a wall)
 ✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
-✓ 30 days of VAP Coach — your personalized AI coach
+✓ 30 days of ALFRED — your personalized AI coach
 
 **$497. Half-day. Interactive. Limited to 20 seats.**
 

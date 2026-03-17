@@ -4,7 +4,7 @@
 -- Values: 'portal' (default) | 'marketing' | 'app'
 -- - portal: submissions from portal.alignedpower.coach
 -- - marketing: submissions from jakesebok.com / marketing site
--- - app: submissions from VAP Coach (vap.coach)
+-- - app: submissions from Aligned Freedom Coach (vap.coach)
 
 alter table public.vapi_results
   add column if not exists source text default 'portal';

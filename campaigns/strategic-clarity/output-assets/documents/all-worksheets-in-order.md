@@ -20,7 +20,7 @@
 
 ## What This Powers
 
-Everything you write here feeds directly into your **VAP Coach Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
+Everything you write here feeds directly into your **Aligned Freedom Coach Upgrade**—a master prompt that turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It will know your values, desires, purpose, revenue targets, and capacity—so it can keep you focused, flag misaligned decisions, and help you plan without constantly re-explaining what matters.
 
 **The details you provide become the operating system that keeps your business expanding without compromising who you are.**
 
@@ -284,7 +284,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-*Bring this completed packet with you. Everything you've written powers your VAP Coach.*
+*Bring this completed packet with you. Everything you've written powers your Aligned Freedom Coach.*
 
 ---
 
@@ -348,7 +348,7 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 ---
 
-*Your Real Reasons feed directly into your VAP Coach. The more honest you are here, the more powerful your AI coach becomes.*
+*Your Real Reasons feed directly into your Aligned Freedom Coach. The more honest you are here, the more powerful your AI coach becomes.*
 
 ---
 
@@ -548,7 +548,7 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 ---
 
-*Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your VAP Coach. They become the purpose filter for every decision your AI coach helps you make.*
+*Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your Aligned Freedom Coach. They become the purpose filter for every decision your AI coach helps you make.*
 
 ---
 
@@ -703,7 +703,7 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
-*Your Top 5 Core Values feed directly into your VAP Coach. They become the non-negotiable filter for every recommendation your AI coach makes.*
+*Your Top 5 Core Values feed directly into your Aligned Freedom Coach. They become the non-negotiable filter for every recommendation your AI coach makes.*
 
 ---
 
@@ -904,7 +904,7 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ---
 
-*The Future You feeds directly into your VAP Coach. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*The Future You feeds directly into your Aligned Freedom Coach. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
 
 ---
 
@@ -930,7 +930,7 @@ This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
 *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the truest reflection—especially for Misalignments, Costs, and Resistance.
 
-These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAP Coach will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
+These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your Aligned Freedom Coach will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
 **You can do this now, during a Strategic Intensive, or whenever you're ready. No pressure—depth beats speed.**
 
@@ -1001,7 +1001,7 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-*These answers feed into your VAP Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
+*These answers feed into your Aligned Freedom Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
 
 ---
 
@@ -1219,7 +1219,7 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your Revenue Bridge numbers feed directly into your VAP Coach. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your Revenue Bridge numbers feed directly into your Aligned Freedom Coach. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
 
 ---
 
@@ -1365,19 +1365,19 @@ Write it. Sign it.
 
 ---
 
-*Your Vital Action Plan feeds directly into your VAP Coach. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
+*Your Vital Action Plan feeds directly into your Aligned Freedom Coach. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
 
 ---
 
 ---
 
-## 9. VAP Coach — Master Prompt
+## 9. Aligned Freedom Coach — Master Prompt
 
 **Source:** `worksheets/08-master-prompt.md`
 
 ---
 
-# VAP Coach — Master Prompt
+# Aligned Freedom Coach — Master Prompt
 
 **Aligned Power — The Alignment Arc**
 
@@ -1397,7 +1397,7 @@ You are an expert Aligned AI Business Agent. Your job is to produce ONE standard
 
 TASK
 Fill in the template below to generate:
-1) VAP Coach — MASTER CONTEXT (v1)
+1) Aligned Freedom Coach — MASTER CONTEXT (v1)
 2) ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
 SOURCE MATERIAL (use in this priority order)
@@ -1435,11 +1435,11 @@ Use these worksheet tags to find the content:
 Now fill the template.
 
 ===========================
-VAP Coach — MASTER CONTEXT (v1)
+Aligned Freedom Coach — MASTER CONTEXT (v1)
 ===========================
 
 0) YOUR ROLE + RULES (NON-NEGOTIABLES)
-You are Alfred, my Values-Aligned Performance Coach for VAP Coach (vap.coach). Your name is Alfred — an easter egg for Aligned Freedom. You don't announce yourself constantly, but if I refer to you by name or ask who you are, you can say you're Alfred. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout). You combine strategic business coaching with deep inner-work capabilities drawn from Neuro-Linguistic Programming (NLP), belief change, and conversational coaching.
+You are Alfred, my Values-Aligned Performance Coach for Aligned Freedom Coach (vap.coach). Your name is Alfred — an easter egg for Aligned Freedom. You don't announce yourself constantly, but if I refer to you by name or ask who you are, you can say you're Alfred. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout). You combine strategic business coaching with deep inner-work capabilities drawn from Neuro-Linguistic Programming (NLP), belief change, and conversational coaching.
 
 Prime Directive
 Optimize for: alignment + sustainability + impact + revenue — in that order.
@@ -1800,7 +1800,7 @@ Use this prompt each month to update your AI OS without rebuilding from scratch.
 
 ---
 
-You are Alfred, my Values-Aligned Performance Coach. Your job is to PATCH my existing "VAP Coach — MASTER CONTEXT (v1)" without changing its structure.
+You are Alfred, my Values-Aligned Performance Coach. Your job is to PATCH my existing "Aligned Freedom Coach — MASTER CONTEXT (v1)" without changing its structure.
 
 TASK
 Update my existing Master Context Doc using the update notes I will provide.
@@ -1883,23 +1883,23 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-*Your Master Prompt and Monthly Patch Notes are the engine of your VAP Coach. Run the master prompt once to initialize. Run Patch Notes monthly to keep it current.*
+*Your Master Prompt and Monthly Patch Notes are the engine of your Aligned Freedom Coach. Run the master prompt once to initialize. Run Patch Notes monthly to keep it current.*
 
 ---
 
 ---
 
-## 10. Fire Starters: 56 High-Leverage Questions for Your VAP Coach
+## 10. Fire Starters: 56 High-Leverage Questions for Your Aligned Freedom Coach
 
 **Source:** `worksheets/09-50-high-leverage-questions.md`
 
 ---
 
-# Fire Starters: 56 High-Leverage Questions for Your VAP Coach
+# Fire Starters: 56 High-Leverage Questions for Your Aligned Freedom Coach
 
 **Aligned Power — The Alignment Arc**
 
-> These are copy/paste-ready prompts designed to work with your VAP Coach. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
+> These are copy/paste-ready prompts designed to work with your Aligned Freedom Coach. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
 > **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is in play (pasted at the start of the conversation or loaded as persistent context). Get a values-aligned answer in seconds.
 
@@ -2045,4 +2045,4 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-*These questions are designed to work with your VAP Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+*These questions are designed to work with your Aligned Freedom Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*

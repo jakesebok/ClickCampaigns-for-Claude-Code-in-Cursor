@@ -112,7 +112,7 @@ export const scorecardEntries = pgTable("scorecard_entries", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// vapi_results is managed by the portal — VAP Coach reads/writes via REST (lib/portal-data.ts), not Drizzle
+// vapi_results is managed by the portal — Aligned Freedom Coach reads/writes via REST (lib/portal-data.ts), not Drizzle
 
 export const apiUsageLogs = pgTable("api_usage_logs", {
   id: uuid("id").defaultRandom().primaryKey(),

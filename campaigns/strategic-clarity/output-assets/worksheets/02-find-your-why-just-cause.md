@@ -186,4 +186,4 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 ---
 
-*Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your VAP Coach. They become the purpose filter for every decision your AI coach helps you make.*
+*Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your Aligned Freedom Coach. They become the purpose filter for every decision your AI coach helps you make.*

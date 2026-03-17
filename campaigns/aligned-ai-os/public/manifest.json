@@ -1,6 +1,6 @@
 {
-  "name": "VAP Coach — Values-Aligned Performance Coach",
-  "short_name": "VAP Coach",
+  "name": "Aligned Freedom Coach",
+  "short_name": "ALFRED",
   "description": "Your AI-powered performance coach. Values-aligned coaching on demand.",
   "start_url": "/chat",
   "display": "standalone",

@@ -76,7 +76,7 @@ Your Real Reasons become the *filter*. Every decision, every opportunity, every 
 
 If yes, lean in. If no, it's a distraction—no matter how lucrative it looks.
 
-And here's the beautiful part: these answers feed directly into your VAP Coach. Your VAP Coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
+And here's the beautiful part: these answers feed directly into your Aligned Freedom Coach. Your Aligned Freedom Coach will know your end goals—not your means goals—and it will hold you accountable to what you *actually* want. Not what you think you should want. Not what the market says you should chase. What *you* want.
 
 ---
 

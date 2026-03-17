@@ -1,4 +1,4 @@
-# VAP Coach — Aligned Performance Operating System
+# Aligned Freedom Coach (ALFRED) — Aligned Performance Operating System
 
 A personalized AI coaching app built on the Strategic Clarity framework by Jake Sebok. Your values, your goals, your real constraints — powering an AI coach that keeps you focused, aligned, and growing.
 
@@ -72,7 +72,7 @@ app/
 │   ├── onboarding/     # Upload or guided onboarding
 │   └── settings/       # Account, SMS, billing, context
 ├── (marketing)/        # Public pages
-│   ├── page.tsx        # VAP Coach landing page
+│   ├── page.tsx        # ALFRED landing page
 │   └── pricing/        # Pricing page
 └── api/                # All API routes
 
@@ -107,12 +107,12 @@ Each C has 5 statements rated 1-5, reflection prompts, and a final Vital Action 
 The Strategic Alignment Intensive page lives on the marketing website at:
 `jakesebok.com/work-with-me/strategic-intensives`
 
-VAP Coach is linked from that page. Workshop attendees get coupon codes for 30-day free access.
+Aligned Freedom Coach is linked from that page. Workshop attendees get coupon codes for 30-day free access.
 
 ## User Tiers
 
 | Tier | Trial | How they enter |
 |------|-------|---------------|
-| General | 7 days | Signs up on VAP Coach website |
+| General | 7 days | Signs up on Aligned Freedom Coach website |
 | Intensive Attendee | 30 days | Uses `INTENSIVE30` coupon post-workshop |
 | Accelerator Client | 12 months | Uses `COACHING12` coupon from program |

@@ -47,7 +47,7 @@ export default defineConfig({
   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials,
-  // Only manage VAP Coach tables — do NOT touch portal tables (vapi_results, portal_active_clients, six_c_submissions, coach_notes)
+  // Only manage Aligned Freedom Coach tables — do NOT touch portal tables (vapi_results, portal_active_clients, six_c_submissions, coach_notes)
   tablesFilter: [
     "users",
     "context_documents",

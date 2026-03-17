@@ -141,4 +141,4 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
-*Your Top 5 Core Values feed directly into your VAP Coach. They become the non-negotiable filter for every recommendation your AI coach makes.*
+*Your Top 5 Core Values feed directly into your Aligned Freedom Coach. They become the non-negotiable filter for every recommendation your AI coach makes.*

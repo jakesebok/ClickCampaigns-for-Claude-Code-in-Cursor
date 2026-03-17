@@ -1,4 +1,4 @@
-# VAP Coach App — Buglist & Feature Update Context
+# Aligned Freedom Coach (ALFRED) App — Buglist & Feature Update Context
 
 > **Purpose:** Manage implementation in waves without context overflow. Reference this document when resuming work.
 
@@ -8,7 +8,7 @@
 
 | System | Location | Purpose |
 |--------|----------|---------|
-| **App (VAP Coach)** | `campaigns/aligned-ai-os` | Next.js app at vap.coach — user-facing PWA |
+| **App (Aligned Freedom Coach / ALFRED)** | `campaigns/aligned-ai-os` | Next.js app at vap.coach — user-facing PWA |
 | **Portal (Dashboard)** | `campaigns/aligned-power-vapi/output-assets/portal` | HTML/JS at portal.alignedpower.coach — coach/client dashboard |
 
 **Key insight:** App and Portal share the same data (Supabase: `vapi_results`, `six_c_scorecard`, etc.). They must behave as extensions of each other.

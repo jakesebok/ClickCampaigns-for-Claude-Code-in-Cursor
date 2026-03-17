@@ -1,4 +1,4 @@
-# VAP Coach Cost Optimization Notes
+# Aligned Freedom Coach Cost Optimization Notes
 
 **Last updated:** March 2025
 

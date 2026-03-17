@@ -91,15 +91,15 @@ const MESSAGES: Record<
   { title: string; body: string }
 > = {
   available: {
-    title: "VAP Coach",
+    title: "ALFRED",
     body: "Your 6Cs scorecard is open this weekend.",
   },
   saturday: {
-    title: "VAP Coach",
+    title: "ALFRED",
     body: "Don't lose the week without reviewing it. Your 6Cs scorecard is waiting.",
   },
   "one-hour-left": {
-    title: "VAP Coach",
+    title: "ALFRED",
     body: "Just a few hours left to submit your 6Cs scorecard. Closes at 6pm Eastern.",
   },
 };

@@ -132,4 +132,4 @@ Write it. Sign it.
 
 ---
 
-*Your Vital Action Plan feeds directly into your VAP Coach. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
+*Your Vital Action Plan feeds directly into your Aligned Freedom Coach. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*

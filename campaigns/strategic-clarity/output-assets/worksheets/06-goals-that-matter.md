@@ -204,4 +204,4 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your Revenue Bridge numbers feed directly into your VAP Coach. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your Revenue Bridge numbers feed directly into your Aligned Freedom Coach. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*

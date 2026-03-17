@@ -1,24 +1,24 @@
 # Onboarding Drip Sequence (5 Emails)
 
-**Purpose:** Guide new VAP Coach users through onboarding and first-week habits
+**Purpose:** Guide new Aligned Freedom Coach users through onboarding and first-week habits
 **Trigger:** User creates account (any tier)
-**Sender:** Jake Sebok / VAP Coach
+**Sender:** Jake Sebok / Aligned Freedom Coach
 
 ---
 
 ## Email 1: Welcome (Immediately after signup)
 
-**Subject:** Welcome to VAP Coach. Here's how to get the most from it.
+**Subject:** Welcome to Aligned Freedom Coach. Here's how to get the most from it.
 **Preview:** 3 things to do in your first 10 minutes.
 
 {{first_name}},
 
-Welcome to VAP Coach — your Aligned Performance Operating System.
+Welcome to Aligned Freedom Coach — your Aligned Performance Operating System.
 
 Here's how to get started in the next 10 minutes:
 
 **1. Build your context** (most important)
-Go to Settings → Upload your Strategic Clarity worksheets from the Intensive, OR use the Guided Onboarding to answer questions. The more VAP Coach knows about you, the better it serves you.
+Go to Settings → Upload your Strategic Clarity worksheets from the Intensive, OR use the Guided Onboarding to answer questions. The more Aligned Freedom Coach knows about you, the better it serves you.
 
 **2. Set your Vital Action**
 Go to the Vital Action tab and set your focus for this week. One sentence. One aligned move.
@@ -28,7 +28,7 @@ Open the Coach tab and try: "Build my week around my Vital Action."
 
 That's it. 10 minutes and you're off.
 
-**[Open VAP Coach →]**
+**[Open Aligned Freedom Coach →]**
 
 — Jake
 
@@ -59,23 +59,23 @@ Settings → Morning Prompts → Enable.
 
 ## Email 3: Day 3 — Go Deeper
 
-**Subject:** 3 questions to ask VAP Coach this week
+**Subject:** 3 questions to ask Aligned Freedom Coach this week
 **Preview:** Start with these if you're not sure what to ask.
 
 {{first_name}},
 
-If you're wondering what to ask VAP Coach, start here:
+If you're wondering what to ask Aligned Freedom Coach, start here:
 
 **"What game am I actually playing this quarter?"**
-VAP Coach will synthesize your goals, revenue math, and capacity into a clear strategic picture.
+Aligned Freedom Coach will synthesize your goals, revenue math, and capacity into a clear strategic picture.
 
 **"Score this decision using my values."**
-Got an opportunity? A partnership? A new offer? Let VAP Coach run it through your Decision Filter before you commit.
+Got an opportunity? A partnership? A new offer? Let Aligned Freedom Coach run it through your Decision Filter before you commit.
 
 **"I'm overwhelmed. What do I delete?"**
-When everything feels urgent, VAP Coach will identify what's actually aligned vs. what's noise.
+When everything feels urgent, Aligned Freedom Coach will identify what's actually aligned vs. what's noise.
 
-**[Open VAP Coach →]**
+**[Open Aligned Freedom Coach →]**
 
 — Jake
 
@@ -100,7 +100,7 @@ Rate yourself 1-5 on 5 questions in each category:
 
 Then write a brief reflection for each and name your Vital Action for next week.
 
-VAP Coach will reference your scorecard trends in future conversations — it gets smarter every week you submit.
+Aligned Freedom Coach will reference your scorecard trends in future conversations — it gets smarter every week you submit.
 
 **[Do Your 6Cs Scorecard →]**
 
@@ -115,13 +115,13 @@ VAP Coach will reference your scorecard trends in future conversations — it ge
 
 {{first_name}},
 
-You've been using VAP Coach for a week. Here's what's happening under the surface:
+You've been using Aligned Freedom Coach for a week. Here's what's happening under the surface:
 
 Your AI coach is learning your patterns. It sees which questions you ask, which values you reference, where your energy goes. Every conversation makes it smarter about *you*.
 
 This is the compound effect of alignment. Week 1 feels like "useful tool." By week 4, it feels like "indispensable operating system."
 
-Keep going. Ask VAP Coach to run your first Weekly Review today.
+Keep going. Ask Aligned Freedom Coach to run your first Weekly Review today.
 
 **[Run Weekly Review →]**
 

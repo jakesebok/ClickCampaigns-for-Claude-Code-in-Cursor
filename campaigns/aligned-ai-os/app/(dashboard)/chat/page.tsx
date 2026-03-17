@@ -141,7 +141,7 @@ export default function ChatPage() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-border">
         <div>
-          <h1 className="text-lg font-semibold">VAP Coach</h1>
+          <h1 className="text-lg font-semibold">ALFRED</h1>
           <p className="text-sm text-muted-foreground">
             Values-aligned guidance, personalized to you
           </p>
@@ -173,7 +173,7 @@ export default function ChatPage() {
                   <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-card border border-border">
                     <p className="text-sm">
                       Hi, I&apos;m <span className="font-semibold">ALFRED</span>,
-                      your Values-Aligned Performance Coach. What would you like to
+                      your Aligned Freedom Coach. What would you like to
                       work on today?
                     </p>
                   </div>

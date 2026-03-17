@@ -48,7 +48,7 @@ export default function DashboardLayout({
         <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
           <Image
             src="/logo-apos.png"
-            alt="VAP Coach"
+            alt="ALFRED"
             width={140}
             height={40}
             className="h-8 w-auto"

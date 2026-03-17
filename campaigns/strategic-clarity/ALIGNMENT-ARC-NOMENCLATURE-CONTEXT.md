@@ -22,9 +22,9 @@
 | ONE THING / The ONE Thing | Your Vital Action |
 | ONE THING Domino Plan | The Vital Action Plan |
 | Domino Chain | The Arc Chain |
-| Aligned AI OS | VAP Coach |
-| Aligned AI OS Upgrade | VAP Coach Upgrade |
-| 50 High-Leverage Questions | Fire Starters: 50 High-Leverage Questions for Your VAP Coach |
+| Aligned AI OS | Aligned Freedom Coach |
+| Aligned AI OS Upgrade | Aligned Freedom Coach Upgrade |
+| 50 High-Leverage Questions | Fire Starters: 50 High-Leverage Questions for Your Aligned Freedom Coach |
 | Aligned AI Business Agent | Values-Aligned Performance Agent |
 
 ---

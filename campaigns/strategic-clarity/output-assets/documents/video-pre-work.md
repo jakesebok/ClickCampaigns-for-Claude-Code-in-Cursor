@@ -32,7 +32,7 @@ There are four exercises in the packet:
 
 **Exercise 3: The Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
-**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your VAP Coach needs to understand your business to give you useful advice. This is how it learns.
+**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your Aligned Freedom Coach needs to understand your business to give you useful advice. This is how it learns.
 
 ---
 
@@ -52,11 +52,11 @@ A few rules:
 
 ### Why It Powers Everything
 
-Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your VAP Coach. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your VAP Coach.
+Here's the part that might surprise you. Everything you write in this packet—and every worksheet that follows—feeds directly into your Aligned Freedom Coach. That Master Prompt at the end of this module? It takes all of your answers and synthesizes them into a personalized operating system for your Aligned Freedom Coach.
 
-So when you write a peak moment that seems small? Your VAP Coach remembers it. When you write an honest number about your revenue? Your VAP Coach uses it. When you name a quality you admire in someone else? That becomes a core value your VAP Coach holds you to.
+So when you write a peak moment that seems small? Your Aligned Freedom Coach remembers it. When you write an honest number about your revenue? Your Aligned Freedom Coach uses it. When you name a quality you admire in someone else? That becomes a core value your Aligned Freedom Coach holds you to.
 
-The depth of your pre-work determines the quality of your VAP Coach. Garbage in, garbage out. Honesty in, alignment out.
+The depth of your pre-work determines the quality of your Aligned Freedom Coach. Garbage in, garbage out. Honesty in, alignment out.
 
 ---
 

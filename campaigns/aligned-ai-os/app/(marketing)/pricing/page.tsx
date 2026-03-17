@@ -40,13 +40,13 @@ const plans = [
 const tiers = [
   {
     tier: "Strategic Alignment Intensive Attendees",
-    trial: "30-day free VAP Coach access",
+    trial: "30-day free Aligned Freedom Coach access",
     context: "Full Alignment Blueprints from live worksheets",
-    note: "Attend the quarterly $497 Intensive and get 30 days of VAP Coach free.",
+    note: "Attend the quarterly $497 Intensive and get 30 days of Aligned Freedom Coach free.",
   },
   {
     tier: "Aligned Power Coaching Clients",
-    trial: "12 months free VAP Coach access",
+    trial: "12 months free Aligned Freedom Coach access",
     context: "Full Alignment Blueprints from complete Strategic Clarity module",
     note: "Included with Aligned Power Accelerator enrollment.",
   },
@@ -60,7 +60,7 @@ export default function PricingPage() {
         <Link href="/">
           <Image
             src="/logo-apos.png"
-            alt="VAP Coach"
+            alt="Aligned Freedom Coach"
             width={140}
             height={40}
             className="h-8 w-auto"

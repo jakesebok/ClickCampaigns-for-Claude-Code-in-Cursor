@@ -57,7 +57,7 @@ Phase II (Strategic Clarity / The Alignment Arc) is where we:
 - Excavate the real person through Real Reasons, Driving Fire, Values, The Future You
 - Turn that into a revenue number (The Revenue Bridge)
 - Build a Vital Action Plan
-- Install it all into VAP Coach
+- Install it all into Aligned Freedom Coach
 
 Module 1 sets the *why*: we're not fixing a broken person. We're getting back in rapport with the one that's been running the show all along—and aligning our actions with them.
 

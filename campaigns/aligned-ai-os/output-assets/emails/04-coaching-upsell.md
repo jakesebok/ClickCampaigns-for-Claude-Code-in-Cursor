@@ -1,6 +1,6 @@
 # Coaching Program Upsell Sequence (4 Emails)
 
-**Purpose:** Convert engaged VAP Coach users to Aligned Power Accelerator
+**Purpose:** Convert engaged Aligned Freedom Coach users to Aligned Power Accelerator
 **Trigger:** User has been active for 30+ days with high engagement (weekly scorecard, regular chat usage)
 **Sender:** Jake Sebok
 
@@ -9,13 +9,13 @@
 ## Email 1: The Invitation (Day 30+)
 
 **Subject:** You're doing the work. Here's the next level.
-**Preview:** What happens when you add a human coach to VAP Coach.
+**Preview:** What happens when you add a human coach to Aligned Freedom Coach.
 
 {{first_name}},
 
 I've been watching your engagement (not in a creepy way — in a "this person is serious" way).
 
-You're using VAP Coach. You're doing the 6Cs scorecard. You're setting your Vital Action. That puts you in a very small percentage of people who actually follow through.
+You're using Aligned Freedom Coach. You're doing the 6Cs scorecard. You're setting your Vital Action. That puts you in a very small percentage of people who actually follow through.
 
 And here's what I've learned from working with hundreds of entrepreneurs: AI coaching gets you to 70%. The values are clear. The strategy is sound. The weekly plan exists.
 
@@ -23,7 +23,7 @@ The last 30% — the blind spots, the emotional blocks, the "I know what to do b
 
 That's what the **Aligned Power Accelerator** is. It's the full Strategic Clarity framework — but with me and my team, live, over 12 months. With accountability that AI can't replicate.
 
-**And VAP Coach gets even better.** Accelerator clients get 12 months of free VAP Coach access, plus Alignment Blueprints that are 10x deeper than what you have now.
+**And Aligned Freedom Coach gets even better.** Accelerator clients get 12 months of free Aligned Freedom Coach access, plus Alignment Blueprints that are 10x deeper than what you have now.
 
 If you're interested, I'd love to have a conversation.
 
@@ -48,7 +48,7 @@ In the first 90 days of the Accelerator, we:
 - Rebuilt their offer stack around their actual values (dropped 2 services, doubled down on 1)
 - Identified their Vital Action and protected it on the calendar
 - Reverse-engineered The Revenue Bridge (they needed 40% less revenue than they thought)
-- Built an VAP Coach context so deep it's like having a virtual COO
+- Built an Aligned Freedom Coach context so deep it's like having a virtual COO
 
 Result: Revenue stayed flat. Hours dropped by 30%. Satisfaction went through the roof.
 
@@ -62,14 +62,14 @@ That's alignment in action.
 
 ## Email 3: The Comparison (Day 36)
 
-**Subject:** VAP Coach vs. Accelerator — here's the honest difference
+**Subject:** Aligned Freedom Coach vs. Accelerator — here's the honest difference
 **Preview:** What the AI can do, and what it can't.
 
 {{first_name}},
 
 Here's the honest breakdown:
 
-**What VAP Coach gives you:**
+**What Aligned Freedom Coach gives you:**
 ✓ Personalized AI coaching 24/7
 ✓ Weekly planning and review
 ✓ Values-based decision filter
@@ -81,10 +81,10 @@ Here's the honest breakdown:
 ✓ Group accountability with other serious entrepreneurs
 ✓ Full Strategic Clarity module (10x context depth)
 ✓ Strategic Alignment Intensives (quarterly deep-dives)
-✓ 12 months of free VAP Coach access
+✓ 12 months of free Aligned Freedom Coach access
 ✓ Human pattern recognition (the "here's what you're not seeing" factor)
 
-VAP Coach is the daily operating system. The Accelerator is the installation, the troubleshooting, and the upgrades.
+Aligned Freedom Coach is the daily operating system. The Accelerator is the installation, the troubleshooting, and the upgrades.
 
 If you're ready for the full stack:
 
@@ -101,9 +101,9 @@ If you're ready for the full stack:
 
 {{first_name}},
 
-I'm not going to hard-sell you on coaching. If VAP Coach is serving you well, keep using it. That's genuinely great.
+I'm not going to hard-sell you on coaching. If Aligned Freedom Coach is serving you well, keep using it. That's genuinely great.
 
-But if you've been thinking about what the next level looks like — if you've got questions VAP Coach can help with but not fully resolve — I'd love to have a 30-minute conversation.
+But if you've been thinking about what the next level looks like — if you've got questions Aligned Freedom Coach can help with but not fully resolve — I'd love to have a 30-minute conversation.
 
 No pitch. No pressure. Just clarity on whether the Accelerator is the right next step for you right now.
 

@@ -12,7 +12,7 @@ This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
 *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the truest reflection—especially for Misalignments, Costs, and Resistance.
 
-These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAP Coach will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
+These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your Aligned Freedom Coach will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
 **You can do this now, during an Alignment Arc Intensive, or whenever you're ready. No pressure—depth beats speed.**
 
@@ -83,4 +83,4 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-*These answers feed into your VAP Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
+*These answers feed into your Aligned Freedom Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*

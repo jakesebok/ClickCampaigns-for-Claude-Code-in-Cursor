@@ -102,7 +102,7 @@ At the bottom of the worksheet, write your three final drafts clean:
 
 These don't have to be final-final. They're working drafts. They'll sharpen over time. But they should feel *true*—true in your body, not just your head.
 
-And remember: all three feed directly into your VAP Coach. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
+And remember: all three feed directly into your Aligned Freedom Coach. Your AI coach will use your Driving Fire as a purpose filter, your Cause Worth Playing For as a long-term orientation, and your Mission as the bridge between purpose and work.
 
 That's Lesson 2. Three documents. Three levels of clarity. Take a breath. You've done real work here.
 

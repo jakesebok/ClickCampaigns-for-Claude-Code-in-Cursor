@@ -1,5 +1,5 @@
 /**
- * Builds the portal's vapi_results.results JSON format from VAP Coach scoring data.
+ * Builds the portal's vapi_results.results JSON format from Aligned Freedom Coach scoring data.
  * The portal (and marketing site) expect this structure for display.
  */
 import { DOMAINS, ARENAS } from "./quiz-data";

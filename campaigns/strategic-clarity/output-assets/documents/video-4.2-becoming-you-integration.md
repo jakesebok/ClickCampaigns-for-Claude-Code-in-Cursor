@@ -62,7 +62,7 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-The Future You becomes Section 4 of your VAP Coach. Your AI coach will know:
+The Future You becomes Section 4 of your Aligned Freedom Coach. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them

@@ -50,4 +50,4 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 ---
 
-*Your Life Lists feed directly into your VAP Coach. The more honest you are here, the more powerful your AI coach becomes.*
+*Your Life Lists feed directly into your Aligned Freedom Coach. The more honest you are here, the more powerful your AI coach becomes.*

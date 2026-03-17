@@ -1,4 +1,4 @@
-# VAP Coach Setup Guide — For Complete Beginners
+# Aligned Freedom Coach Setup Guide — For Complete Beginners
 
 > You have all your accounts (Clerk, Claude, OpenAI, Stripe, Vercel, Supabase, Twilio). This guide walks you through connecting them, one step at a time. No coding knowledge required.
 
@@ -122,7 +122,7 @@ You'll replace the placeholder text (like `pk_test_...`) with your real keys. **
 1. Go to [console.anthropic.com](https://console.anthropic.com) and sign in.
 2. Click **API Keys** in the left sidebar.
 3. Click **Create Key**.
-4. Give it a name (e.g., "VAP Coach") and copy the key (starts with `sk-ant-`).
+4. Give it a name (e.g., "Aligned Freedom Coach") and copy the key (starts with `sk-ant-`).
 5. In `.env.local`, replace `sk-ant-...` with your key.
 6. Save the file.
 
@@ -213,7 +213,7 @@ You can leave this as `your-cron-secret-here` for now. When you deploy, you'll c
 6. Click **Run**.
 7. Repeat for `schema-six-c-scorecard.sql` and `add-vapi-results-source.sql` (both in the same `supabase` folder).
 
-### Step 4.2 — Create the VAP Coach tables
+### Step 4.2 — Create the Aligned Freedom Coach tables
 
 1. Go back to Terminal.
 2. Make sure you're in the `aligned-ai-os` folder (if not, type the `cd` command from Step 1.3 again).
@@ -235,7 +235,7 @@ You can leave this as `your-cron-secret-here` for now. When you deploy, you'll c
 3. Wait until you see something like: `Ready on http://localhost:3000`
 4. Open your web browser (Chrome, Safari, etc.).
 5. Go to: `http://localhost:3000`
-6. You should see the VAP Coach landing page.
+6. You should see the Aligned Freedom Coach landing page.
 
 ---
 
