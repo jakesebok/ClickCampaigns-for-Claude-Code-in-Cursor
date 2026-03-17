@@ -4,8 +4,12 @@ import { Moon, Sun } from "lucide-react";
 
 function setThemeCookie(theme: string) {
   try {
-    if (typeof window !== "undefined" && /alignedpower\.coach$/.test(window.location.hostname)) {
+    if (typeof window === "undefined") return;
+    const host = window.location.hostname;
+    if (/alignedpower\.coach$/.test(host)) {
       document.cookie = `ap-theme=${theme}; path=/; max-age=31536000; domain=.alignedpower.coach`;
+    } else if (/vap\.coach$/.test(host)) {
+      document.cookie = `ap-theme=${theme}; path=/; max-age=31536000; domain=.vap.coach`;
     }
   } catch {}
 }

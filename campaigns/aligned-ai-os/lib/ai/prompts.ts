@@ -280,86 +280,94 @@ export const MORNING_PROMPTS = [
   "Quick inner check: Is there a part of you resisting today's priorities? What is it trying to protect? What does it need to hear?",
 ];
 
-export const SUGGESTED_QUESTIONS = [
+export type FireStarterPrompt = { label: string; prompt: string };
+
+export type FireStarterCategory = {
+  category: string;
+  prompts: FireStarterPrompt[];
+};
+
+/** Fire Starters: label = button text, prompt = optimized text sent to coach (references Vital Action, revenue, QC quota, master context) */
+export const SUGGESTED_QUESTIONS: FireStarterCategory[] = [
   {
     category: "Weekly Planning",
-    questions: [
-      "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan.",
-      "What are the 3 highest-leverage outcomes for this week?",
-      "What must be deleted or deferred this week so I don't break my system?",
-      "Create a 'Minimum Viable Week' plan for when chaos happens.",
+    prompts: [
+      { label: "Create weekly schedule", prompt: "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan that protects my QC quota and respects my capacity." },
+      { label: "Top 3 outcomes this week", prompt: "What are the 3 highest-leverage outcomes for this week given my Vital Action and revenue goals?" },
+      { label: "What to delete or defer", prompt: "What must be deleted or deferred this week so I don't break my system? Use my master context." },
+      { label: "Minimum Viable Week plan", prompt: "Create a 'Minimum Viable Week' plan for when chaos happens — anchored to my Vital Action and non-negotiables." },
     ],
   },
   {
     category: "Strategy + Focus",
-    questions: [
-      "What game am I actually playing this quarter?",
-      "Score these options using my Decision Filter: [describe options]",
-      "What's my current bottleneck? Prove it with the numbers.",
-      "I'm tempted to chase a shiny object. Reorient me.",
+    prompts: [
+      { label: "What game am I playing?", prompt: "What game am I actually playing this quarter? Connect it to my Real Reasons and revenue target." },
+      { label: "Score options with Decision Filter", prompt: "Score these options using my Decision Filter: [describe options]. Use my values, Driving Fire, and Becoming." },
+      { label: "Find my bottleneck", prompt: "What's my current bottleneck? Prove it with the numbers. Reference my capacity and revenue bridge." },
+      { label: "Reorient me from shiny object", prompt: "I'm tempted to chase a shiny object. Reorient me to my Vital Action and what actually moves revenue." },
     ],
   },
   {
     category: "Sales + Conversations",
-    questions: [
-      "Generate my weekly Qualified Conversation plan.",
-      "My close rate is below target. Diagnose the issue.",
-      "Turn my revenue target into weekly numbers.",
-      "Help me decide: raise price vs improve conversion vs change offer.",
+    prompts: [
+      { label: "Weekly QC plan", prompt: "Generate my weekly Qualified Conversation plan based on my revenue target and capacity." },
+      { label: "Diagnose close rate", prompt: "My close rate is below target. Diagnose the issue using my offer and sales context." },
+      { label: "Revenue → weekly numbers", prompt: "Turn my revenue target into weekly numbers — QC quota, capacity, and what I need to hit." },
+      { label: "Price vs conversion vs offer", prompt: "Help me decide: raise price vs improve conversion vs change offer. Use my revenue math." },
     ],
   },
   {
     category: "Inner Work + Beliefs",
-    questions: [
-      "I know what I should do but I can't make myself do it. Help me figure out what's really going on.",
-      "There's a belief holding me back. Help me find it and shift it.",
-      "Part of me wants to grow and part of me is terrified. Can we work with both parts?",
-      "I keep self-sabotaging at the same point. Walk me through what's underneath that pattern.",
+    prompts: [
+      { label: "I know what to do but can't", prompt: "I know what I should do but I can't make myself do it. Help me figure out what's really going on — especially around my Vital Action." },
+      { label: "Find and shift limiting belief", prompt: "There's a belief holding me back. Help me find it and shift it. Connect it to my Real Reasons." },
+      { label: "Parts work: grow vs terrified", prompt: "Part of me wants to grow and part of me is terrified. Can we work with both parts?" },
+      { label: "Map self-sabotage pattern", prompt: "I keep self-sabotaging at the same point. Walk me through what's underneath that pattern." },
     ],
   },
   {
     category: "State + Confidence",
-    questions: [
-      "I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state.",
-      "My inner critic is loud today. Help me reframe what it's saying.",
-      "I need to access confidence right now. Guide me through building an anchor I can use.",
-      "I'm overwhelmed and can't think clearly. Ground me and help me find the one next move.",
+    prompts: [
+      { label: "Get ready for big conversation", prompt: "I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state." },
+      { label: "Reframe my inner critic", prompt: "My inner critic is loud today. Help me reframe what it's saying." },
+      { label: "Build confidence anchor", prompt: "I need to access confidence right now. Guide me through building an anchor I can use." },
+      { label: "Overwhelmed — find next move", prompt: "I'm overwhelmed and can't think clearly. Ground me and help me find the one next move." },
     ],
   },
   {
     category: "Execution + Mindset",
-    questions: [
-      "I'm stuck. Ask me 3 questions that expose the real fear.",
-      "I'm about to default to 'work harder.' Intervene with leverage options.",
-      "What part of me is resisting this Vital Action? Help me negotiate.",
-      "Build an energy budget for this week.",
+    prompts: [
+      { label: "3 questions to expose fear", prompt: "I'm stuck. Ask me 3 questions that expose the real fear." },
+      { label: "Stop me from working harder", prompt: "I'm about to default to 'work harder.' Intervene with leverage options — pricing, offer, capacity." },
+      { label: "Resistance to Vital Action", prompt: "What part of me is resisting this Vital Action? Help me negotiate." },
+      { label: "Energy budget for the week", prompt: "Build an energy budget for this week that protects my Vital Action and QC quota." },
     ],
   },
   {
     category: "Weekly Review",
-    questions: [
-      "Run my Weekly Review: values, Becoming, QC quota, revenue, capacity.",
-      "What did I do this week that proves I'm becoming my Future Self?",
-      "Diagnose my results: strategy or execution problem?",
-      "Based on the last 30 days, what should I double down on, stop, and redesign?",
+    prompts: [
+      { label: "Run Weekly Review", prompt: "Run my Weekly Review: values, Becoming, QC quota, revenue, capacity. Use my master context." },
+      { label: "Evidence of Future Self", prompt: "What did I do this week that proves I'm becoming my Future Self?" },
+      { label: "Strategy vs execution?", prompt: "Diagnose my results: strategy or execution problem?" },
+      { label: "Double down, stop, redesign", prompt: "Based on the last 30 days, what should I double down on, stop, and redesign?" },
     ],
   },
   {
     category: "VAPI + Alignment",
-    questions: [
-      "Look at my VAPI scores. What's the most important thing for me to focus on this quarter?",
-      "Based on my archetype and VAPI results, build me a 90-day alignment plan.",
-      "Which VAPI domains are dragging down my business arena? What's the root cause?",
-      "Compare my VAPI scores to my 6Cs trends. Where am I making progress and where am I stuck?",
+    prompts: [
+      { label: "VAPI focus this quarter", prompt: "Look at my VAPI scores. What's the most important thing for me to focus on this quarter? Cross-reference my Vital Action." },
+      { label: "90-day alignment plan", prompt: "Based on my archetype and VAPI results, build me a 90-day alignment plan." },
+      { label: "VAPI domains dragging business", prompt: "Which VAPI domains are dragging down my business arena? What's the root cause?" },
+      { label: "VAPI vs 6Cs progress", prompt: "Compare my VAPI scores to my 6Cs trends. Where am I making progress and where am I stuck?" },
     ],
   },
   {
     category: "Deep Patterns",
-    questions: [
-      "What old story about money/success/worth is running in the background? Help me surface it.",
-      "I think I have a pattern around [topic]. Help me map it — triggers, beliefs, secondary gains.",
-      "There's something I've 'always been this way' about. Can we trace it back and update it?",
-      "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted.",
+    prompts: [
+      { label: "Old money/success story", prompt: "What old story about money/success/worth is running in the background? Help me surface it." },
+      { label: "Map a pattern", prompt: "I think I have a pattern around [topic]. Help me map it — triggers, beliefs, secondary gains." },
+      { label: "Trace 'always been this way'", prompt: "There's something I've 'always been this way' about. Can we trace it back and update it?" },
+      { label: "Future-pace 90 days", prompt: "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted. Use my Real Reasons and Becoming." },
     ],
   },
 ];

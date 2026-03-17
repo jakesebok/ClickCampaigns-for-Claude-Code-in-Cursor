@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ClipboardCheck,
   Crosshair,
@@ -13,6 +14,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { SCORECARD_CATEGORIES, calculateScore, getOverallScore } from "@/lib/scorecard";
+import { getScorecardWindow } from "@/lib/scorecard-window";
 
 type ScorecardEntry = {
   id: string;
@@ -99,10 +101,40 @@ export default function ScorecardPage() {
   const scores = getScores();
   const overall = getOverallScore(scores);
 
+  const window = getScorecardWindow();
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!window.canSubmit && !submitted) {
+    return (
+      <div className="flex flex-col h-full">
+        <header className="px-6 py-4 border-b border-border">
+          <h1 className="text-lg font-semibold">6Cs Scorecard</h1>
+          <p className="text-sm text-muted-foreground">Weekly alignment check</p>
+        </header>
+        <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+          <div className="max-w-2xl mx-auto text-center py-12 space-y-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/10">
+              <ClipboardCheck className="h-8 w-8 text-amber-500" />
+            </div>
+            <h2 className="text-xl font-serif font-bold">
+              Scorecard is only available during the weekly window
+            </h2>
+            <p className="text-muted-foreground">{window.message}</p>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+            >
+              ← Back to dashboard
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -165,7 +197,13 @@ export default function ScorecardPage() {
 
   return (
     <div className="flex flex-col h-full">
-      <header className="px-6 py-4 border-b border-border">
+      <header className="px-6 py-4 border-b border-border space-y-3">
+        <div className="rounded-xl border-2 border-accent/30 bg-accent/5 px-4 py-3">
+          <p className="font-semibold text-sm">{window.message}</p>
+          {window.countdownMessage && (
+            <p className="text-muted-foreground text-sm mt-1 font-mono">{window.countdownMessage}</p>
+          )}
+        </div>
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-semibold">6Cs Scorecard</h1>

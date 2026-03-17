@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/morning-prompt",
       "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/6c-reminders",
+      "schedule": "5 17 * * *"
     }
   ]
 }

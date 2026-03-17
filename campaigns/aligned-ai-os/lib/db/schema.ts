@@ -128,6 +128,21 @@ export const apiUsageLogs = pgTable("api_usage_logs", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+/** Web push subscriptions for 6Cs scorecard reminders (Fri/Sat/Sun 12:05pm Eastern) */
+export const pushSubscriptions = pgTable(
+  "push_subscriptions",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    endpoint: text("endpoint").notNull().unique(),
+    keys: jsonb("keys").$type<{ p256dh: string; auth: string }>().notNull(),
+    userAgent: text("user_agent"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  }
+);
+
 export const onboardingProgress = pgTable("onboarding_progress", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id")

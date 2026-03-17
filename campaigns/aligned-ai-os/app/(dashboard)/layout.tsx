@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { IntakeGate } from "@/components/intake-gate";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { NavMenuSheet } from "@/components/nav-menu-sheet";
 import {
   LayoutDashboard,
   MessageSquare,
@@ -24,6 +25,13 @@ const navItems = [
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
   { href: "/settings", label: "Settings", icon: Settings },
+];
+
+const bottomNavItems = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/chat", label: "Coach", icon: MessageSquare },
+  { href: "/voice", label: "Voice", icon: Mic },
+  { href: "/assessment/results", label: "Results", icon: Activity },
 ];
 
 export default function DashboardLayout({
@@ -72,9 +80,9 @@ export default function DashboardLayout({
         </div>
       </aside>
 
-      {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border flex justify-around py-2 px-1 safe-area-bottom">
-        {navItems.slice(0, 5).map((item) => (
+      {/* Mobile bottom nav: Dashboard, Coach, Voice, Results, More */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border flex justify-around items-center py-2 px-1 safe-area-bottom">
+        {bottomNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
@@ -84,6 +92,7 @@ export default function DashboardLayout({
             {item.label}
           </Link>
         ))}
+        <NavMenuSheet />
       </nav>
 
       {/* Main content */}

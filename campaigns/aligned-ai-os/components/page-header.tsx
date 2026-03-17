@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Settings } from "lucide-react";
+import { NotificationBell } from "@/components/notification-bell";
 
 type PageHeaderProps = {
   title: string;
@@ -17,13 +16,7 @@ export function PageHeader({ title, subtitle }: PageHeaderProps) {
           <p className="text-sm text-muted-foreground mt-0.5">{subtitle}</p>
         )}
       </div>
-      <Link
-        href="/settings"
-        className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors shrink-0"
-        aria-label="Settings"
-      >
-        <Settings className="h-5 w-5" />
-      </Link>
+      <NotificationBell />
     </header>
   );
 }

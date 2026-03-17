@@ -2,7 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
-import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check, BarChart3 } from "lucide-react";
+import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check, BarChart3, Sun, Moon } from "lucide-react";
+import {
+  isPushSupported,
+  getPermissionStatus,
+  requestPermission,
+  subscribe,
+  unsubscribe,
+  subscriptionToJson,
+} from "@/lib/push-client";
 
 type ContextualProfile = {
   revenueStage?: string;
@@ -33,13 +41,39 @@ const LIFE_STAGE_OPTIONS = ["", "Single, no children", "Partnered, no children",
 const TIME_OPTIONS = ["", "Less than 1 year", "1-3 years", "3-7 years", "7+ years"];
 const CHALLENGE_OPTIONS = ["", "Growth (not enough revenue or clients)", "Profitability (revenue exists but margins are thin)", "Time freedom (business demands too much of me)", "Clarity (not sure where to focus)", "Burnout (running on empty)", "Transition (changing my model, offer, or direction)"];
 
+function useTheme() {
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof document === "undefined") return "dark";
+    return document.documentElement.classList.contains("dark") ? "dark" : "light";
+  });
+  function setThemeValue(t: "light" | "dark") {
+    document.documentElement.classList.toggle("dark", t === "dark");
+    try {
+      localStorage.setItem("ap-theme", t);
+      const host = window.location.hostname;
+      if (/alignedpower\.coach$/.test(host)) {
+        document.cookie = `ap-theme=${t}; path=/; max-age=31536000; domain=.alignedpower.coach`;
+      } else if (/vap\.coach$/.test(host)) {
+        document.cookie = `ap-theme=${t}; path=/; max-age=31536000; domain=.vap.coach`;
+      }
+    } catch {}
+    setTheme(t);
+  }
+  return [theme, setThemeValue] as const;
+}
+
 export default function SettingsPage() {
+  const [theme, setThemeValue] = useTheme();
   const [settings, setSettings] = useState<UserSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [patchNotes, setPatchNotes] = useState("");
   const [patching, setPatching] = useState(false);
   const [patchSuccess, setPatchSuccess] = useState(false);
   const [patchError, setPatchError] = useState<string | null>(null);
+  const [pushSupported, setPushSupported] = useState(false);
+  const [pushEnabled, setPushEnabled] = useState(false);
+  const [pushLoading, setPushLoading] = useState(false);
+  const [pushError, setPushError] = useState<string | null>(null);
   const [usage, setUsage] = useState<{
     period: string;
     requestCount: number;
@@ -64,6 +98,68 @@ export default function SettingsPage() {
       .then(setUsage)
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    isPushSupported().then(setPushSupported);
+  }, []);
+
+  useEffect(() => {
+    if (!pushSupported) return;
+    fetch("/api/push/status")
+      .then((r) => r.json())
+      .then((d) => setPushEnabled(!!d.subscribed))
+      .catch(() => setPushEnabled(false));
+  }, [pushSupported]);
+
+  async function registerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return null;
+    const reg = await navigator.serviceWorker.register("/sw.js");
+    const regWithReady = reg as unknown as { ready: Promise<ServiceWorkerRegistration> };
+    if (regWithReady.ready) await regWithReady.ready;
+    return reg;
+  }
+
+  async function handlePushToggle(enabled: boolean) {
+    if (!pushSupported) return;
+    setPushLoading(true);
+    setPushError(null);
+    try {
+      if (enabled) {
+        await registerServiceWorker();
+        const perm = await requestPermission();
+        if (perm !== "granted") {
+          setPushError("Notification permission denied.");
+          setPushLoading(false);
+          return;
+        }
+        const sub = await subscribe();
+        if (!sub) {
+          setPushError("Could not subscribe. Check VAPID keys.");
+          setPushLoading(false);
+          return;
+        }
+        const res = await fetch("/api/push/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(subscriptionToJson(sub)),
+        });
+        if (!res.ok) throw new Error("Subscribe failed");
+        setPushEnabled(true);
+      } else {
+        await fetch("/api/push/unsubscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
+        await unsubscribe();
+        setPushEnabled(false);
+      }
+    } catch (e) {
+      setPushError(e instanceof Error ? e.message : "Something went wrong.");
+    } finally {
+      setPushLoading(false);
+    }
+  }
 
   async function updateSettings(updates: Partial<UserSettings>) {
     const res = await fetch("/api/settings", {
@@ -92,6 +188,72 @@ export default function SettingsPage() {
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-2xl mx-auto space-y-6">
+          {/* Appearance */}
+          <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <h2 className="font-semibold flex items-center gap-2">
+              Appearance
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Choose light or dark mode. Matches the portal dashboard style.
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setThemeValue("light")}
+                className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-colors ${
+                  theme === "light" ? "border-accent bg-accent/10" : "border-border hover:border-accent/50"
+                }`}
+              >
+                <Sun className="h-5 w-5" />
+                <span className="font-medium">Light</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setThemeValue("dark")}
+                className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-colors ${
+                  theme === "dark" ? "border-accent bg-accent/10" : "border-border hover:border-accent/50"
+                }`}
+              >
+                <Moon className="h-5 w-5" />
+                <span className="font-medium">Dark</span>
+              </button>
+            </div>
+          </section>
+
+          {/* 6Cs Push Notifications */}
+          {pushSupported && (
+            <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
+              <h2 className="font-semibold flex items-center gap-2">
+                <Bell className="h-4 w-4" />
+                6Cs Scorecard Reminders
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Get a push notification when your weekly 6Cs scorecard is available (Friday–Sunday 12:05pm Eastern).
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Push notifications</span>
+                <button
+                  onClick={() => handlePushToggle(!pushEnabled)}
+                  disabled={pushLoading}
+                  className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${pushEnabled ? "bg-primary" : "bg-muted"}`}
+                >
+                  <div
+                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-transform ${pushEnabled ? "translate-x-5 left-0.5" : "left-0.5"}`}
+                  />
+                </button>
+              </div>
+              {pushLoading && (
+                <p className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  {pushEnabled ? "Subscribing..." : "Unsubscribing..."}
+                </p>
+              )}
+              {pushError && (
+                <p className="text-sm text-destructive">{pushError}</p>
+              )}
+            </section>
+          )}
+
           {/* Account */}
           <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
             <h2 className="font-semibold flex items-center gap-2">

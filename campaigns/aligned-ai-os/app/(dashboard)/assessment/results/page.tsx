@@ -23,6 +23,7 @@ import {
   Shield,
   Eye,
   TrendingDown,
+  TrendingUp,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
@@ -38,6 +39,7 @@ import {
   type VapiArchetype,
   type PriorityQuadrant,
 } from "@/lib/vapi/scoring";
+import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
@@ -45,6 +47,66 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
   RS: Heart, FA: Home, CO: Users, WI: Globe,
   VS: Telescope, EX: Rocket, OH: Gauge, EC: Leaf,
 };
+
+function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
+  const [expanded, setExpanded] = useState(false);
+  const full = ARCHETYPES_FULL[archetype];
+  const short = ARCHETYPE_DESCRIPTIONS[archetype] || "";
+
+  return (
+    <div className="rounded-2xl border border-border p-6 space-y-3">
+      <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+        Your Founder Archetype
+      </h2>
+      <h3 className="text-2xl font-serif font-bold">{archetype}</h3>
+      {full && (
+        <>
+          <p className="text-muted-foreground text-sm italic">{full.tagline}</p>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            {short}
+          </p>
+          <button
+            type="button"
+            onClick={() => setExpanded(!expanded)}
+            className="flex items-center gap-1 text-xs font-medium text-accent hover:underline"
+          >
+            {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+            {expanded ? "Show less" : "Explore archetype"}
+          </button>
+          {expanded && full && (
+            <div className="space-y-4 pt-4 border-t border-border text-sm">
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Full description</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.description}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-green-600 dark:text-green-400 mb-1">Strength</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.strength}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-amber-600 dark:text-amber-400 mb-1">Shadow</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.shadow}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Constraint</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.constraint}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-accent mb-1">Growth path</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.growthPath}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">Program phase</h4>
+                <p className="text-muted-foreground leading-relaxed">{full.programPhase}</p>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+      {!full && <p className="text-muted-foreground text-sm leading-relaxed">{short}</p>}
+    </div>
+  );
+}
 
 const QUADRANT_META: Record<
   PriorityQuadrant,
@@ -71,29 +133,43 @@ function ResultsContent() {
   const router = useRouter();
   const id = searchParams.get("id");
   const [result, setResult] = useState<ResultData | null>(null);
+  const [allResults, setAllResults] = useState<ResultData[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedArenas, setExpandedArenas] = useState<Record<string, boolean>>({});
   const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    if (!id) {
-      fetch("/api/vapi")
-        .then((r) => r.json())
-        .then((data) => {
-          if (data.results?.length) setResult(data.results[0]);
-        })
-        .catch(() => {})
-        .finally(() => setLoading(false));
-      return;
+    if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
+      const el = document.getElementById("where-to-focus");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  }, [result]);
 
-    fetch(`/api/vapi?id=${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.result) setResult(data.result);
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
+  useEffect(() => {
+    const load = async () => {
+      const [allRes, singleRes] = await Promise.all([
+        fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
+        id ? fetch(`/api/vapi?id=${id}`).then((r) => r.json()).catch(() => ({})) : Promise.resolve({}),
+      ]);
+      const all = (allRes.results || []).map((r: { id: string; domainScores: Record<string, number>; arenaScores: Record<string, number>; overallScore: number; archetype: string; importance: Record<string, number>; createdAt: string }) => ({
+        id: r.id,
+        domainScores: r.domainScores || {},
+        arenaScores: r.arenaScores || {},
+        overallScore: r.overallScore,
+        archetype: r.archetype,
+        importance: r.importance || {},
+        createdAt: r.createdAt,
+      }));
+      setAllResults(all);
+      if (id && singleRes.result) {
+        setResult(singleRes.result);
+      } else if (all.length) {
+        setResult(all[0]);
+      } else {
+        setResult(null);
+      }
+    };
+    load().finally(() => setLoading(false));
   }, [id]);
 
   if (loading) {
@@ -209,16 +285,52 @@ function ResultsContent() {
             </div>
           </div>
 
-          {/* Archetype */}
-          <div className="rounded-2xl border border-border p-6 space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-              Your Founder Archetype
-            </h2>
-            <h3 className="text-2xl font-serif font-bold">{archetype}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              {ARCHETYPE_DESCRIPTIONS[archetype] || ""}
-            </p>
-          </div>
+          {/* Archetype — expandable with full content */}
+          <ArchetypeSection archetype={archetype} />
+
+          {/* Progress Over Time — when 2+ assessments */}
+          {allResults.length >= 2 && (
+            <div id="progress-over-time" className="space-y-3 scroll-mt-6">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Progress Over Time
+              </h2>
+              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm">
+                <div className="flex flex-col gap-4">
+                  {[...allResults]
+                    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+                    .map((r, i) => {
+                      const score = r.overallScore / 10;
+                      const tier = getTier(score);
+                      const color = getTierColor(tier);
+                      const pct = Math.min(100, (score / 10) * 100);
+                      return (
+                        <div key={r.id} className="space-y-1.5">
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-muted-foreground">
+                              {new Date(r.createdAt).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
+                            </span>
+                            <span className="font-medium" style={{ color }}>
+                              {score.toFixed(1)} — {tier}
+                            </span>
+                          </div>
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{ width: `${pct}%`, backgroundColor: color }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Arena Scores */}
           <div className="space-y-3">
@@ -348,10 +460,10 @@ function ResultsContent() {
             ))}
           </div>
 
-          {/* Priority Matrix */}
+          {/* Priority Matrix / Where to Focus */}
           {result.importance &&
             Object.keys(result.importance).length > 0 && (
-              <div className="space-y-3">
+              <div id="where-to-focus" className="space-y-3 scroll-mt-6">
                 <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
                   <BarChart3 className="h-4 w-4" />
                   Priority Matrix

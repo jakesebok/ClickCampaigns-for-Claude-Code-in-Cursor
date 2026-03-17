@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Send, Sparkles, Loader2, Mic } from "lucide-react";
+import { Send, Loader2, Mic, ChevronLeft, MessageSquare } from "lucide-react";
+import { NotificationBell } from "@/components/notification-bell";
 import ReactMarkdown from "react-markdown";
 import { SUGGESTED_QUESTIONS } from "@/lib/ai/prompts";
 
@@ -17,6 +18,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -144,14 +146,17 @@ export default function ChatPage() {
             Values-aligned guidance, personalized to you
           </p>
         </div>
-        <Link
-          href="/voice"
-          className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
-          title="Switch to voice session"
-        >
-          <Mic className="h-4 w-4" />
-          <span className="hidden sm:inline">Voice</span>
-        </Link>
+        <div className="flex items-center gap-1">
+          <NotificationBell />
+          <Link
+            href="/voice"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+            title="Switch to voice session"
+          >
+            <Mic className="h-4 w-4" />
+            <span className="hidden sm:inline">Voice</span>
+          </Link>
+        </div>
       </header>
 
       {/* Messages */}
@@ -161,35 +166,72 @@ export default function ChatPage() {
       >
         {messages.length === 0 && showSuggestions && (
           <div className="max-w-2xl mx-auto space-y-8 pt-8">
-            {/* Alfred's welcome message — appears as a chat bubble */}
-            <div className="flex justify-start">
-              <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-card border border-border">
-                <p className="text-sm">
-                  Hi, I&apos;m <span className="font-semibold">ALFRED</span>,
-                  your Values-Aligned Performance Coach. What would you like to
-                  work on today?
-                </p>
-              </div>
-            </div>
+            {!selectedCategory ? (
+              <>
+                {/* Alfred's welcome message */}
+                <div className="flex justify-start">
+                  <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-card border border-border">
+                    <p className="text-sm">
+                      Hi, I&apos;m <span className="font-semibold">ALFRED</span>,
+                      your Values-Aligned Performance Coach. What would you like to
+                      work on today?
+                    </p>
+                  </div>
+                </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {SUGGESTED_QUESTIONS.map((category) => (
-                <div key={category.category} className="space-y-2">
-                  <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider px-1">
-                    {category.category}
-                  </h3>
-                  {category.questions.slice(0, 2).map((q) => (
+                {/* Category buttons — tap to open prompt list */}
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {SUGGESTED_QUESTIONS.map((cat) => (
                     <button
-                      key={q}
-                      onClick={() => handleSubmit(q)}
-                      className="w-full text-left px-4 py-3 rounded-lg border border-border hover:bg-accent text-sm transition-colors"
+                      key={cat.category}
+                      onClick={() => setSelectedCategory(cat.category)}
+                      className="w-full text-left px-4 py-3 rounded-xl border border-border hover:bg-accent/10 hover:border-accent/30 text-sm font-medium transition-colors"
                     >
-                      {q}
+                      {cat.category}
                     </button>
                   ))}
                 </div>
-              ))}
-            </div>
+              </>
+            ) : (
+              /* Prompt list for selected category — back button + prompts + Something else */
+              <div className="space-y-4">
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Back
+                </button>
+                <h2 className="text-lg font-semibold">
+                  {selectedCategory}
+                </h2>
+                <div className="space-y-2">
+                  {SUGGESTED_QUESTIONS.find((c) => c.category === selectedCategory)?.prompts.map((p) => (
+                    <button
+                      key={p.prompt}
+                      onClick={() => {
+                        setSelectedCategory(null);
+                        handleSubmit(p.prompt);
+                      }}
+                      className="w-full text-left px-4 py-3 rounded-xl border border-border hover:bg-accent/10 hover:border-accent/30 text-sm transition-colors"
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => {
+                      setSelectedCategory(null);
+                      setShowSuggestions(false);
+                      inputRef.current?.focus();
+                    }}
+                    className="w-full text-left px-4 py-3 rounded-xl border border-dashed border-border hover:bg-muted/50 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    Something else
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
