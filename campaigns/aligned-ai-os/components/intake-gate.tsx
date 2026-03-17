@@ -39,7 +39,7 @@ export function IntakeGate({ children }: { children: React.ReactNode }) {
           const ends = new Date(trialEndsAt).getTime();
           const now = Date.now();
           if (now > ends) {
-            router.replace("/pricing?trial=expired");
+            router.replace("/subscribe");
             return;
           }
         }

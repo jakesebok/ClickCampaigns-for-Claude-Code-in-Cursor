@@ -23,6 +23,7 @@ export async function createCheckoutSession({
   successUrl,
   cancelUrl,
   trialDays,
+  trialEnd,
   couponId,
 }: {
   customerId: string;
@@ -30,16 +31,24 @@ export async function createCheckoutSession({
   successUrl: string;
   cancelUrl: string;
   trialDays?: number;
+  trialEnd?: number;
   couponId?: string;
 }) {
+  const subscriptionData: { trial_period_days?: number; trial_end?: number } = {};
+  if (trialEnd) {
+    subscriptionData.trial_end = trialEnd;
+  } else if (trialDays) {
+    subscriptionData.trial_period_days = trialDays;
+  }
+
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: successUrl,
     cancel_url: cancelUrl,
-    ...(trialDays && {
-      subscription_data: { trial_period_days: trialDays },
+    ...(Object.keys(subscriptionData).length > 0 && {
+      subscription_data: subscriptionData,
     }),
     ...(couponId && { discounts: [{ coupon: couponId }] }),
   });

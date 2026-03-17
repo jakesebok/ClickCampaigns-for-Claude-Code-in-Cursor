@@ -1,7 +1,6 @@
 "use client";
 
 import { DOMAINS } from "@/lib/vapi/quiz-data";
-import { getTierColor } from "@/lib/vapi/scoring";
 
 const ORDER = ["PH", "IA", "ME", "AF", "RS", "FA", "CO", "WI", "VS", "EX", "OH", "EC"];
 
@@ -31,11 +30,12 @@ type Props = {
 };
 
 export function VapiWheel({ domainScores }: Props) {
-  const cx = 100;
-  const cy = 100;
+  const cx = 140;
+  const cy = 140;
   const r = 85;
-  const rInner = r * 0.4;
+  const rInner = r * 0.42;
   const segmentAngle = 360 / 12;
+  const labelRadius = r + 12;
 
   function cellPath(r0: number, r1: number, a0Rad: number, a1Rad: number) {
     const x1 = cx + r1 * Math.cos(a0Rad);
@@ -49,116 +49,165 @@ export function VapiWheel({ domainScores }: Props) {
     return `M ${cx} ${cy} L ${x1} ${y1} A ${r1} ${r1} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${r0} ${r0} 0 0 0 ${x4} ${y4} Z`;
   }
 
+  function arcPath(startDeg: number, endDeg: number) {
+    const startRad = (startDeg * Math.PI) / 180;
+    const endRad = (endDeg * Math.PI) / 180;
+    const x1 = cx + rInner * Math.cos(startRad);
+    const y1 = cy + rInner * Math.sin(startRad);
+    const x2 = cx + rInner * Math.cos(endRad);
+    const y2 = cy + rInner * Math.sin(endRad);
+    return `M ${x1} ${y1} A ${rInner} ${rInner} 0 0 1 ${x2} ${y2}`;
+  }
+
   return (
-    <svg
-      viewBox="0 0 200 200"
-      className="w-full max-w-[240px] mx-auto"
-      role="img"
-      aria-label="Alignment wheel"
-    >
-      <defs>
-        <filter id="wheelShadow">
-          <feDropShadow dx="0" dy="2" stdDeviation="1" floodOpacity="0.2" />
-        </filter>
-      </defs>
-      {ORDER.map((code, i) => {
-        const domain = DOMAINS.find((d) => d.code === code);
-        const score = Math.max(0, Math.min(10, domainScores[code] ?? 0));
-        const arena = domain?.arena ?? "personal";
-        const fillColor = getTierColor(
-          score >= 8 ? "Dialed" : score >= 6 ? "Functional" : score >= 4 ? "Below the Line" : "In the Red"
-        );
-        const arenaBase = ARENA_COLORS[arena] ?? ARENA_COLORS.personal;
+    <div className="flex items-center justify-center w-full min-w-[200px] max-w-[320px] mx-auto overflow-visible">
+      <svg
+        viewBox="0 0 280 280"
+        className="w-full h-auto overflow-visible"
+        style={{ minWidth: 200 }}
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        role="img"
+        aria-label="Alignment wheel"
+      >
+        <defs>
+          <filter id="wheelShadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="1" floodOpacity="0.2" />
+          </filter>
+        </defs>
+        {/* Arena arc paths for textPath */}
+        <path id="wheel-arena-personal" d={arcPath(-90, 30)} fill="none" />
+        <path id="wheel-arena-relationships" d={arcPath(30, 150)} fill="none" />
+        <path id="wheel-arena-business" d={arcPath(150, 270)} fill="none" />
+        {ORDER.map((code, i) => {
+          const domain = DOMAINS.find((d) => d.code === code);
+          const score = Math.max(0, Math.min(10, domainScores[code] ?? 0));
+          const arena = domain?.arena ?? "personal";
+          const arenaBase = ARENA_COLORS[arena] ?? ARENA_COLORS.personal;
 
-        const a0Rad = ((i * segmentAngle - 90) * Math.PI) / 180;
-        const a1Rad = (((i + 1) * segmentAngle - 90) * Math.PI) / 180;
+          const a0Rad = ((i * segmentAngle - 90) * Math.PI) / 180;
+          const a1Rad = (((i + 1) * segmentAngle - 90) * Math.PI) / 180;
 
-        const segments = [];
-        for (let k = 1; k <= 10; k++) {
-          const r0 = r * ((k - 1) / 10);
-          const r1 = r * (k / 10);
-          const filled = k <= Math.round(score);
-          segments.push(
-            <path
-              key={k}
-              d={cellPath(r0, r1, a0Rad, a1Rad)}
-              fill={filled ? arenaBase : `${arenaBase}20`}
-              fillOpacity={filled ? 0.85 : 0.3}
-              stroke="rgba(0,0,0,0.08)"
+          const segments = [];
+          for (let k = 1; k <= 10; k++) {
+            const r0 = r * ((k - 1) / 10);
+            const r1 = r * (k / 10);
+            const filled = k <= Math.round(score);
+            segments.push(
+              <path
+                key={k}
+                d={cellPath(r0, r1, a0Rad, a1Rad)}
+                fill={filled ? arenaBase : `${arenaBase}20`}
+                fillOpacity={filled ? 0.85 : 0.3}
+                stroke="rgba(0,0,0,0.08)"
+                strokeWidth="0.5"
+              />
+            );
+          }
+
+          return <g key={code}>{segments}</g>;
+        })}
+        {Array.from({ length: 10 }, (_, ring) => (
+          <circle
+            key={ring}
+            cx={cx}
+            cy={cy}
+            r={r * ((ring + 1) / 10)}
+            fill="none"
+            stroke="rgba(255,255,255,0.15)"
+            strokeWidth="0.5"
+          />
+        ))}
+        {ORDER.map((_, i) => {
+          const a0 = ((i * segmentAngle - 90) * Math.PI) / 180;
+          return (
+            <line
+              key={i}
+              x1={cx}
+              y1={cy}
+              x2={cx + r * Math.cos(a0)}
+              y2={cy + r * Math.sin(a0)}
+              stroke="rgba(255,255,255,0.2)"
               strokeWidth="0.5"
             />
           );
-        }
-
-        return <g key={code}>{segments}</g>;
-      })}
-      {Array.from({ length: 10 }, (_, ring) => (
-        <circle
-          key={ring}
-          cx={cx}
-          cy={cy}
-          r={r * ((ring + 1) / 10)}
-          fill="none"
-          stroke="rgba(255,255,255,0.15)"
-          strokeWidth="0.5"
-        />
-      ))}
-      {ORDER.map((_, i) => {
-        const a0 = ((i * segmentAngle - 90) * Math.PI) / 180;
-        return (
-          <line
-            key={i}
-            x1={cx}
-            y1={cy}
-            x2={cx + r * Math.cos(a0)}
-            y2={cy + r * Math.sin(a0)}
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth="0.5"
-          />
-        );
-      })}
-      {/* Domain labels */}
-      {ORDER.map((code, i) => {
-        const labelRadius = r + 14;
-        const midDeg = i * segmentAngle - 90 + segmentAngle / 2;
-        const midRad = (midDeg * Math.PI) / 180;
-        const tx = cx + labelRadius * Math.cos(midRad);
-        const ty = cy + labelRadius * Math.sin(midRad);
-        const anchor =
-          midDeg >= -90 && midDeg < 90
-            ? "start"
-            : Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10
-              ? "middle"
-              : "end";
-        const lines = WHEEL_LABELS[code] || [code];
-        const lineHeight = 9;
-        const firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
-        return (
-          <text
-            key={`label-${code}`}
-            x={tx}
-            y={ty}
-            fontSize="9"
-            fill="var(--accent, #f97316)"
-            fontFamily="system-ui, sans-serif"
-            fontWeight="700"
-            textAnchor={anchor}
-            dominantBaseline="middle"
-            className="select-none"
-          >
-            {lines.map((line, L) => (
-              <tspan
-                key={L}
-                x={tx}
-                dy={L === 0 ? (firstDy ? `${firstDy}px` : 0) : `${lineHeight}px`}
-              >
-                {line}
-              </tspan>
-            ))}
-          </text>
-        );
-      })}
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
-    </svg>
+        })}
+        {/* Arena labels (Personal, Relationships, Business) — theme-aware */}
+        <text
+          fontSize="11"
+          fontFamily="system-ui, sans-serif"
+          fontWeight="700"
+          fill="hsl(var(--foreground))"
+          className="select-none"
+        >
+          <textPath xlinkHref="#wheel-arena-personal" startOffset="50%" textAnchor="middle">
+            Personal
+          </textPath>
+        </text>
+        <text
+          fontSize="11"
+          fontFamily="system-ui, sans-serif"
+          fontWeight="700"
+          fill="hsl(var(--foreground))"
+          className="select-none"
+        >
+          <textPath xlinkHref="#wheel-arena-relationships" startOffset="50%" textAnchor="middle">
+            Relationships
+          </textPath>
+        </text>
+        <text
+          fontSize="11"
+          fontFamily="system-ui, sans-serif"
+          fontWeight="700"
+          fill="hsl(var(--foreground))"
+          className="select-none"
+        >
+          <textPath xlinkHref="#wheel-arena-business" startOffset="50%" textAnchor="middle">
+            Business
+          </textPath>
+        </text>
+        {/* Domain labels — theme-aware */}
+        {ORDER.map((code, i) => {
+          const midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          const midRad = (midDeg * Math.PI) / 180;
+          const tx = cx + labelRadius * Math.cos(midRad);
+          const ty = cy + labelRadius * Math.sin(midRad);
+          const anchor =
+            midDeg >= -90 && midDeg < 90
+              ? "start"
+              : Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10
+                ? "middle"
+                : "end";
+          const lines = WHEEL_LABELS[code] || [code];
+          const lineHeight = 9;
+          const firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          return (
+            <text
+              key={`label-${code}`}
+              x={tx}
+              y={ty}
+              fontSize="9"
+              fill="hsl(var(--foreground))"
+              fontFamily="system-ui, sans-serif"
+              fontWeight="700"
+              textAnchor={anchor}
+              dominantBaseline="middle"
+              className="select-none"
+            >
+              {lines.map((line, L) => (
+                <tspan
+                  key={L}
+                  x={tx}
+                  dy={L === 0 ? (firstDy ? `${firstDy}px` : 0) : `${lineHeight}px`}
+                >
+                  {line}
+                </tspan>
+              ))}
+            </text>
+          );
+        })}
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />
+      </svg>
+    </div>
   );
 }

@@ -53,7 +53,7 @@ export default function RootLayout({
       >
         <ClerkProvider
           afterSignOutUrl="/"
-          signUpForceRedirectUrl="/onboarding"
+          signUpFallbackRedirectUrl="/onboarding"
           signInForceRedirectUrl="/dashboard"
         >
           <HeaderClient />

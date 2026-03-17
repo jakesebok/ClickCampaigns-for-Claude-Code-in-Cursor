@@ -173,10 +173,10 @@ export default function DashboardPage() {
                 </p>
               </div>
               <Link
-                href="/pricing"
+                href="/subscribe"
                 className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-amber-500 text-amber-950 px-3 py-1.5 text-xs font-semibold hover:bg-amber-400 transition-colors"
               >
-                View plans
+                Add payment
                 <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
@@ -232,13 +232,10 @@ export default function DashboardPage() {
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <div className="flex items-center gap-2 mb-2">
                         <Activity className="h-4 w-4 text-accent" />
                         <span className="text-sm font-medium text-muted-foreground">
                           VAPI Score
-                        </span>
-                        <span className="text-xs font-medium text-accent shrink-0 ml-auto">
-                          Explore My Score →
                         </span>
                       </div>
                       <div className="flex items-end gap-3">
@@ -285,6 +282,9 @@ export default function DashboardPage() {
                       {ARCHETYPE_DESCRIPTIONS[archetype]}
                     </p>
                   )}
+                  <p className="text-xs font-medium text-accent pt-1">
+                    Explore My Score →
+                  </p>
                 </div>
               </Link>
             ) : (

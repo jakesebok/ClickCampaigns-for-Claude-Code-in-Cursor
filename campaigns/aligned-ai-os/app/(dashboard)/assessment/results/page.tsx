@@ -237,9 +237,9 @@ function ResultsContent() {
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-3xl mx-auto space-y-8">
           {/* Overall Score + Wheel (matches dashboard alignment at a glance) */}
-          <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="flex-1 space-y-3">
+          <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm overflow-visible">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 overflow-visible">
+              <div className="flex-1 space-y-3 min-w-0">
                 <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                   Overall Score
                 </h2>
@@ -283,7 +283,7 @@ function ResultsContent() {
                   </div>
                 )}
               </div>
-              <div className="flex justify-center shrink-0">
+              <div className="flex justify-center shrink-0 w-full sm:w-auto overflow-visible py-4 sm:py-0">
                 <VapiWheel domainScores={result.domainScores} />
               </div>
             </div>

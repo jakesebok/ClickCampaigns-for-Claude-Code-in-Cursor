@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 import { Check } from "lucide-react";
 
 const features = [
@@ -22,7 +24,7 @@ const plans = [
     period: "/month",
     description: "Full access. Cancel anytime.",
     cta: "Start 7-Day Free Trial",
-    href: "/sign-up?plan=monthly",
+    href: "/api/checkout?plan=monthly",
     highlight: false,
   },
   {
@@ -31,7 +33,7 @@ const plans = [
     period: "/year",
     description: "Save 25%. Less than $1/day.",
     cta: "Start 7-Day Free Trial",
-    href: "/sign-up?plan=annual",
+    href: "/api/checkout?plan=annual",
     highlight: true,
     badge: "Best value",
   },
@@ -52,7 +54,10 @@ const tiers = [
   },
 ];
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const { userId } = await auth();
+  if (userId) redirect("/subscribe");
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -125,7 +130,7 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <Link
+              <a
                 href={plan.href}
                 className={`block w-full py-3 rounded-xl text-center text-sm font-medium transition-colors ${
                   plan.highlight
@@ -134,7 +139,7 @@ export default function PricingPage() {
                 }`}
               >
                 {plan.cta}
-              </Link>
+              </a>
             </div>
           ))}
         </div>
