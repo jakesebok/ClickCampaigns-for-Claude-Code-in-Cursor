@@ -16,3 +16,11 @@ window.VAPI_DOMAIN_ICONS = {
   OH: 'gauge',
   EC: 'leaf',
 };
+
+/** Arena/composite icons for breakdown and progress metric selectors. */
+window.VAPI_ARENA_ICONS = {
+  overall: 'bar-chart-2',
+  Personal: 'user',
+  Relationships: 'heart',
+  Business: 'briefcase',
+};

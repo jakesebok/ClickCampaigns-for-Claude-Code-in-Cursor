@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   MoreHorizontal,
@@ -13,15 +13,34 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-const menuItems = [
+const staticMenuItems = [
   { href: "/scorecard", label: "6Cs Scorecard", icon: ClipboardCheck },
-  { href: "/assessment", label: "Take Assessment", icon: Activity },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
 ];
 
 export function NavMenuSheet() {
   const [open, setOpen] = useState(false);
+  const [hasAssessmentResults, setHasAssessmentResults] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch("/api/vapi")
+      .then((r) => r.json())
+      .then((data) => setHasAssessmentResults((data.results?.length ?? 0) > 0))
+      .catch(() => setHasAssessmentResults(false));
+  }, []);
+
+  const assessmentItem = {
+    href: hasAssessmentResults ? "/assessment/results" : "/assessment",
+    label: hasAssessmentResults ? "Assessment Results" : "Take Assessment",
+    icon: Activity,
+  };
+
+  const menuItems = [
+    staticMenuItems[0],
+    assessmentItem,
+    ...staticMenuItems.slice(1),
+  ];
 
   return (
     <>

@@ -30,6 +30,7 @@ import {
   AlertTriangle,
   ChevronDown,
   ChevronUp,
+  UserCircle,
 } from "lucide-react";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
@@ -134,7 +135,6 @@ export default function DashboardPage() {
   const currentWeekSubmitted = scoredEntries.some(
     (e) => new Date(e.weekStart).getTime() === thisWeekStart.getTime()
   );
-  const hasAnyScorecards = scorecardEntries.length > 0;
   let currentOneThing: string | null = null;
   if (latestScorecard?.notes) {
     try {
@@ -220,19 +220,9 @@ export default function DashboardPage() {
             </Link>
           )}
 
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-              Your alignment at a glance
-            </h2>
-            {latestVapi && (
-              <Link
-                href={`/assessment/results?id=${latestVapi.id}`}
-                className="text-xs font-medium text-accent hover:underline shrink-0"
-              >
-                Explore My Score →
-              </Link>
-            )}
-          </div>
+          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+            Your alignment at a glance
+          </h2>
 
           {/* Score Cards Row */}
           <div className="grid sm:grid-cols-2 gap-4 -mt-2">
@@ -242,10 +232,13 @@ export default function DashboardPage() {
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
                         <Activity className="h-4 w-4 text-accent" />
                         <span className="text-sm font-medium text-muted-foreground">
                           VAPI Score
+                        </span>
+                        <span className="text-xs font-medium text-accent shrink-0 ml-auto">
+                          Explore My Score →
                         </span>
                       </div>
                       <div className="flex items-end gap-3">
@@ -412,7 +405,10 @@ export default function DashboardPage() {
                     <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       Founder Archetype
                     </h2>
-                    <h3 className="text-xl font-serif font-bold">{archetype}</h3>
+                    <h3 className="text-xl font-serif font-bold flex items-center gap-2">
+                      <UserCircle className="h-5 w-5 text-accent shrink-0" />
+                      {archetype}
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
                       {ARCHETYPE_DESCRIPTIONS[archetype]}
                     </p>
@@ -458,6 +454,60 @@ export default function DashboardPage() {
                   </div>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Progress Over Time — when 2+ assessments */}
+          {vapiResults.length >= 2 && (
+            <div id="progress-over-time" className="space-y-3 scroll-mt-6">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Progress Over Time
+              </h2>
+              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm">
+                <div className="flex flex-col gap-4">
+                  {[...vapiResults]
+                    .sort(
+                      (a, b) =>
+                        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+                    )
+                    .map((r) => {
+                      const score = r.overallScore / 10;
+                      const tier = getTier(score);
+                      const color = getTierColor(tier);
+                      const pct = Math.min(100, (score / 10) * 100);
+                      return (
+                        <Link
+                          key={r.id}
+                          href={`/assessment/results?id=${r.id}`}
+                          className="block space-y-1.5 hover:opacity-90 transition-opacity"
+                        >
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-muted-foreground">
+                              {new Date(r.createdAt).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
+                            </span>
+                            <span className="font-medium" style={{ color }}>
+                              {score.toFixed(1)} — {tier}
+                            </span>
+                          </div>
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{
+                                width: `${pct}%`,
+                                backgroundColor: color,
+                              }}
+                            />
+                          </div>
+                        </Link>
+                      );
+                    })}
+                </div>
+              </div>
             </div>
           )}
 

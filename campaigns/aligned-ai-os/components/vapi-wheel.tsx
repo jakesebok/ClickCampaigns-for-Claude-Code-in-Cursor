@@ -4,6 +4,22 @@ import { DOMAINS } from "@/lib/vapi/quiz-data";
 import { getTierColor } from "@/lib/vapi/scoring";
 
 const ORDER = ["PH", "IA", "ME", "AF", "RS", "FA", "CO", "WI", "VS", "EX", "OH", "EC"];
+
+// Short labels for wheel segments (matches portal dashboard)
+const WHEEL_LABELS: Record<string, string[]> = {
+  PH: ["Physical", "Health"],
+  IA: ["Inner", "Alignment"],
+  ME: ["Mental /", "Emotional"],
+  AF: ["Attention", "& Focus"],
+  RS: ["Relationship", "to Self"],
+  FA: ["Family"],
+  CO: ["Community"],
+  WI: ["World /", "Impact"],
+  VS: ["Vision /", "Strategy"],
+  EX: ["Execution"],
+  OH: ["Operational", "Health"],
+  EC: ["Ecology"],
+};
 const ARENA_COLORS: Record<string, string> = {
   personal: "#9e4a5e",
   relationships: "#5b7c9a",
@@ -99,6 +115,47 @@ export function VapiWheel({ domainScores }: Props) {
             stroke="rgba(255,255,255,0.2)"
             strokeWidth="0.5"
           />
+        );
+      })}
+      {/* Domain labels */}
+      {ORDER.map((code, i) => {
+        const labelRadius = r + 14;
+        const midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+        const midRad = (midDeg * Math.PI) / 180;
+        const tx = cx + labelRadius * Math.cos(midRad);
+        const ty = cy + labelRadius * Math.sin(midRad);
+        const anchor =
+          midDeg >= -90 && midDeg < 90
+            ? "start"
+            : Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10
+              ? "middle"
+              : "end";
+        const lines = WHEEL_LABELS[code] || [code];
+        const lineHeight = 9;
+        const firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+        return (
+          <text
+            key={`label-${code}`}
+            x={tx}
+            y={ty}
+            fontSize="9"
+            fill="var(--accent, #f97316)"
+            fontFamily="system-ui, sans-serif"
+            fontWeight="700"
+            textAnchor={anchor}
+            dominantBaseline="middle"
+            className="select-none"
+          >
+            {lines.map((line, L) => (
+              <tspan
+                key={L}
+                x={tx}
+                dy={L === 0 ? (firstDy ? `${firstDy}px` : 0) : `${lineHeight}px`}
+              >
+                {line}
+              </tspan>
+            ))}
+          </text>
         );
       })}
       <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5" />

@@ -3,11 +3,11 @@ import Image from "next/image";
 import { IntakeGate } from "@/components/intake-gate";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { NavMenuSheet } from "@/components/nav-menu-sheet";
+import { AssessmentNavLink } from "@/components/assessment-nav-link";
 import {
   LayoutDashboard,
   MessageSquare,
   Mic,
-  Target,
   ClipboardCheck,
   FileText,
   Activity,
@@ -19,7 +19,7 @@ const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/chat", label: "Coach", icon: MessageSquare },
   { href: "/voice", label: "Voice", icon: Mic },
-  { href: "/assessment", label: "VAPI", icon: Activity },
+  { href: "/assessment", label: "VAPI", icon: Activity, isAssessment: true },
   { href: "/scorecard", label: "6Cs", icon: ClipboardCheck },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
@@ -54,16 +54,24 @@ export default function DashboardLayout({
         </div>
 
         <nav className="flex-1 px-3 py-4 space-y-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
-            >
-              <item.icon className="h-4 w-4" />
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) =>
+            "isAssessment" in item && item.isAssessment ? (
+              <AssessmentNavLink
+                key="vapi"
+                label="VAPI"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+              />
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <div className="p-4 border-t border-border flex items-center justify-between gap-2">

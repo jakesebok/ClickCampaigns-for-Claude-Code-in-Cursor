@@ -26,6 +26,7 @@ import {
   TrendingUp,
   ChevronDown,
   ChevronUp,
+  UserCircle,
 } from "lucide-react";
 import { VapiWheel } from "@/components/vapi-wheel";
 import { PageHeader } from "@/components/page-header";
@@ -58,7 +59,10 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
       <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
         Your Founder Archetype
       </h2>
-      <h3 className="text-2xl font-serif font-bold">{archetype}</h3>
+      <h3 className="text-2xl font-serif font-bold flex items-center gap-2">
+        <UserCircle className="h-6 w-6 text-accent shrink-0" />
+        {archetype}
+      </h3>
       {full && (
         <>
           <p className="text-muted-foreground text-sm italic">{full.tagline}</p>
