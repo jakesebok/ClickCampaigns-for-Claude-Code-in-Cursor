@@ -20,7 +20,7 @@ Fair. Let me explain.
 
 ### The Pre-Work Is the Foundation
 
-Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your values, From Meaning to Math, your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
+Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your values, The Revenue Bridge, your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
 
 Think of it this way. If I hand you the most incredible GPS in the world—one that knows every shortcut, every traffic pattern, every scenic route—but you never tell it where you're starting from? It's useless. Beautiful. Sophisticated. Useless.
 
@@ -34,9 +34,9 @@ There are four exercises in the packet:
 
 **Exercise 1: Values Extraction.** You're going to list five people you admire and five specific qualities you admire in each of them. This is the raw material we'll use to extract your core values. And I mean *specific*—not "she's smart," but "she explains complex things simply without making people feel small." That level. Because vague inputs produce vague values, and vague values produce vague decisions.
 
-**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them.
+**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them. Pro tip: speaking these out loud instead of typing will get you the truest, messiest, most unfiltered outputs. I use Wispr Flow for this—it transcribes and cleans up your speech in real time, no punctuation dictation needed. 14-day free trial, link in the packet. Full disclosure: I'm an affiliate.
 
-**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the From Meaning to Math worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: The Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
 **Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your AI coach needs to understand your business to give you useful advice. This is how it learns.
 
@@ -112,11 +112,11 @@ By the end of this module, you will have:
 
 3. **Your Top 5 Core Values** — operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
 
-4. **The Becoming** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
+4. **The Future You** — who you're becoming across Self (Personal), Social (Relationships), Skills (Business), and Service (Contribution). Growth that doesn't require self-abandonment.
 
 5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
 
-6. **From Meaning to Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
+6. **The Revenue Bridge** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
 
 7. **Your Vital Action Plan** — the single move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
 
@@ -151,11 +151,11 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 3:** We extract your core values. Five of them. Operational. Specific. Non-negotiable.
 
-**Lesson 4:** We map The Becoming. The person you're becoming across every domain that matters.
+**Lesson 4:** We map The Future You. The person you're becoming across every domain that matters.
 
 **Lesson 5:** We do The Reckoning. Before we turn vision into numbers, we name what's in the way.
 
-**Lesson 6:** We build From Meaning to Math. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
+**Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
 
 **Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
@@ -169,7 +169,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your values. Your values feed The Becoming. The Becoming feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your values. Your values feed The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as a Strategic Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 
@@ -311,7 +311,7 @@ Open up your Life Lists. You'll see three columns: **Experiences I Want**, **How
 
 Here's how I want you to approach this:
 
-**Write fast.** Don't filter. Don't edit as you go. Don't try to make it sound good. Just let it pour. Speed produces honesty. Editing produces performance. And we don't need your performance right now—we need your truth.
+**Write fast.** Don't filter. Don't edit as you go. Don't try to make it sound good. Just let it pour. Speed produces honesty. Editing produces performance. And we don't need your performance right now—we need your truth. This would be a perfect place to use something like Wispr Flow or a similar tool—speaking these answers out loud often surfaces the truest, most unfiltered stuff. Link in the worksheet.
 
 **Be specific and sensory.** "I want to travel" is a means goal wearing an end-goal costume. "I want to wake up in a villa in Tuscany with my wife, no phone, no alarm, drinking espresso while the sun comes up" — *that's* an experience. See the difference? One is a placeholder. The other is a life.
 
@@ -350,7 +350,7 @@ As you write, you might notice something: your brain will try to sneak means goa
 
 When that happens, don't delete it. Just ask: "Why? What's underneath that?" Keep asking until you hit the experience, the feeling, the human thing.
 
-"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in From Meaning to Math later.
+"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in The Revenue Bridge later.
 
 ---
 
@@ -366,7 +366,7 @@ Sit with that one for a minute. You don't have to share it with anyone. But nami
 
 ### When You're Done
 
-Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your Driving Fire is hiding in these answers, your values are woven through them, and From Meaning to Math will be built on top of them.
+Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your Driving Fire is hiding in these answers, your values are woven through them, and The Revenue Bridge will be built on top of them.
 
 For now, your only job was to be honest. If you did that, you nailed it.
 
@@ -512,7 +512,7 @@ If you're doing this with a partner or in a group—great. One person asks the q
 
 If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as a values-aligned theme mining coach, walking you through the same process.
 
-Either way, here are the five questions. Answer them quickly. First honest answer wins.
+Either way, here are the five questions. Answer them quickly. First honest answer wins. This would be a perfect place to use something like Wispr Flow or a similar tool—speaking your answers often surfaces the pattern faster than typing. Link in the worksheet.
 
 **1. What do these stories have in common?**
 
@@ -854,7 +854,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 **Definition (in your words)** — not the dictionary. What does this mean to *you*? If you had to explain it to a 15-year-old, what would you say?
 
-**How I will embody it (behaviors)** — what does this look like in action? "I will speak directly and kindly, even when it's uncomfortable." "I will protect my deep work blocks and not apologize for it." "I will ask for help before I'm drowning."
+**How I will embody it (behaviors)** — what does this look like in action? This would be a perfect place to use something like Wispr Flow or a similar tool—speaking your definitions and behaviors often gets you to the real thing faster than typing. Link in the worksheet. "I will speak directly and kindly, even when it's uncomfortable." "I will protect my deep work blocks and not apologize for it." "I will ask for help before I'm drowning."
 
 **What I will not tolerate (boundary)** — this is the line. "I will not tolerate passive-aggressive communication." "I will not compromise my health to meet a deadline." "I will not stay in partnerships where the other person won't have hard conversations."
 
@@ -886,7 +886,7 @@ Let's get after it.
 
 ---
 
-## 10. Video 4.1 — The Becoming
+## 10. Video 4.1 — The Future You
 
 **Source:** `video-4.1-future-four.md` | ~8–12 minutes
 
@@ -904,23 +904,23 @@ This lesson is about the person you're *becoming*. Not the person you wish you w
 
 ---
 
-### The Becoming
+### The Future You
 
-This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Becoming**—the person you're becoming:
+This framework is inspired by Brendon Burchard's work on high performance—four domains of growth that, together, create a whole person. We call it **The Future You**—the person you're becoming:
 
-**1. Self (Personal)** — Your identity. Your standards. The person you are when nobody's watching. How you handle pressure. How you protect your energy. How you make decisions.
+**Self (Personal)** — Your identity. Your standards. The person you are when nobody's watching. How you handle pressure. How you protect your energy. How you make decisions.
 
-**2. Social (Relationships)** — Who you are in your relationships. Not what you get from them—who you *are* in them. The kind of partner, parent, friend, and leader you show up as.
+**Social (Relationships)** — Who you are in your relationships. Not what you get from them—who you *are* in them. The kind of partner, parent, friend, and leader you show up as.
 
-**3. Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands.
+**Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands.
 
-**4. Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Cause Worth Playing For?
+**Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Cause Worth Playing For?
 
 Here's what I love about this framework: it refuses to let you grow in one area at the expense of another. You can't just crush it in business while your relationships crumble. You can't just be an amazing partner while your skills stagnate. The whole point is that growth doesn't require self-abandonment. You grow *as a whole person*—or the growth is fragile.
 
 ---
 
-### Personal: Who Are You Becoming?
+### Self (Personal): Who Are You Becoming?
 
 Let's start with Self.
 
@@ -946,11 +946,11 @@ That contrast is powerful. It makes the growth visible. And it gives your AI coa
 
 ---
 
-### Social: Who Are You in Relationship?
+### Social (Relationships): Who Are You in Relationship?
 
 Most goal-setting frameworks completely ignore relationships. Or they tack them on as an afterthought—"Oh, and also be a good spouse." That's not enough.
 
-The Social future asks you to name the people who matter most. And then—this is the part that gets people—it asks you to imagine what they'd say about you in *twenty years*. Three words each. "How would your partner describe why they love you?" "How would your kids describe the kind of parent you were?"
+The Social (Relationships) future asks you to name the people who matter most. And then—this is the part that gets people—it asks you to imagine what they'd say about you in *twenty years*. Three words each. "How would your partner describe why they love you?" "How would your kids describe the kind of parent you were?"
 
 Then it asks: what would they say about the *last week*?
 
@@ -960,9 +960,9 @@ And the daily intention: "One way I will intentionally upgrade each of these rel
 
 ---
 
-### Skills: What's the Game You're Playing?
+### Skills (Business): What's the Game You're Playing?
 
-The Skills future starts with your Primary Field of Interest—the game you're actually playing. Not the twenty games you could be playing. The one you've chosen.
+The Skills (Business) future starts with your Primary Field of Interest—the game you're actually playing. Not the twenty games you could be playing. The one you've chosen.
 
 Then: three skills you must build *now* to be lethal in that field twelve months from now. And three skills you'll need five to ten years from now. Future-proofing.
 
@@ -972,11 +972,17 @@ The commitment: "The single most leveraged skill for the next 90 days is... The 
 
 ---
 
+### Service (Contribution): How Will You Contribute?
+
+The fourth domain is Service—how your growth serves others. Your Life Lists already captured how you want to contribute. The worksheet makes Future Service explicit: what cause or community you want to serve with excellence, what contribution you want to be known for, and what it would cost to fully fund that impact this year. In The Revenue Bridge, you'll turn that into a real number—a tithe, a donation, a commitment you protect. Service isn't an afterthought. It's part of the future you're building.
+
+---
+
 ### What Comes Next
 
 In the next video, we're going to do the integration work—looking across all four futures for patterns, choosing a 90-day focus, and naming the old pattern that will try to pull you back.
 
-For now, open the Becoming You worksheet. Take 15–20 minutes. Write what you actually want—not what you think you should want.
+For now, open The Future You worksheet. Take 15–20 minutes. Write what you actually want—not what you think you should want. This would be a perfect place to use something like Wispr Flow or a similar tool—especially for the Self and Social sections. Vision casting often flows better when you speak it. Link in the worksheet.
 
 Let your body vote.
 
@@ -994,9 +1000,9 @@ Let your body vote.
 
 ### VIDEO SCRIPT
 
-Okay, you've filled out the four domains. Personal. Relationships. Skills. Service. You've got words and standards and behaviors and proof statements. Now let's step back and look at the whole picture.
+Okay, you've filled out the four domains. Self (Personal). Social (Relationships). Skills (Business). Service (Contribution). You've got words and standards and behaviors and proof statements. Now let's step back and look at the whole picture.
 
-Open the Integration section at the bottom of your Becoming You worksheet.
+Open the Integration section at the bottom of your The Future You worksheet.
 
 ---
 
@@ -1026,7 +1032,7 @@ Now the commitment.
 
 This is not "which one is most important." They're all important. This is: which one is the *lever*? Which one, if it moved, would create movement in the others?
 
-Sometimes it's Self—because if you don't trust yourself, nothing else holds. Sometimes it's Skills—because if you build the capability, the revenue follows and the relationships breathe. Sometimes it's Relationships—because when your home is solid, your capacity for everything else doubles.
+Sometimes it's Self (Personal)—because if you don't trust yourself, nothing else holds. Sometimes it's Skills (Business)—because if you build the capability, the revenue follows and the relationships breathe. Sometimes it's Social (Relationships)—because when your home is solid, your capacity for everything else doubles.
 
 Pick one. Write the reason.
 
@@ -1063,7 +1069,7 @@ So when you ask your AI coach for a weekly plan, it doesn't just look at revenue
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Becoming. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Future You. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
@@ -1093,7 +1099,7 @@ But here's what I've learned—and this is the part nobody likes to hear: **visi
 
 ### The Bridge
 
-Before we turn everything into numbers—before we build the From Meaning to Math and the Vital Action Plan and the weekly actions—we need to stop for a moment and name what's *true right now*.
+Before we turn everything into numbers—before we build the The Revenue Bridge and the Vital Action Plan and the weekly actions—we need to stop for a moment and name what's *true right now*.
 
 Not what we want to be true. What *is* true.
 
@@ -1105,7 +1111,7 @@ This is the The Reckoning.
 
 ### Six Questions
 
-Open the The Reckoning worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one.
+Open the The Reckoning worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one. This would be a perfect place to use something like Wispr Flow or a similar tool—honest reflection often flows more freely when you speak it. Link in the worksheet.
 
 **1. Must Be True.** What must be true in your life for your Real Reasons to actually happen? Not "it would be nice if..." What's non-negotiable? What conditions *must* exist? Maybe it's "I need to be debt-free." Maybe it's "I need to work fewer than 40 hours a week." Maybe it's "I need a partner who supports this vision." Name the requirements.
 
@@ -1146,7 +1152,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, Becoming, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
+In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, The Future You, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 
@@ -1170,7 +1176,7 @@ Let's get after it.
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—Real Reasons, WHY, values, Becoming, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, WHY, values, The Future You, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -1178,7 +1184,7 @@ So now we turn meaning into math.
 
 ---
 
-### The From Meaning to Math
+### The Revenue Bridge: From Meaning To Math
 
 Here's what we're building: a bridge from what you *want* to what your business must *produce*. Not a goal you pulled from a mastermind. Not a number your competitor is chasing. Not "I want to make a million dollars because it sounds impressive."
 
@@ -1211,7 +1217,7 @@ Here's what I want you to notice about this number: it's not exciting. It's not 
 
 Now we go above the floor.
 
-Remember your Becoming? Personal, Relationships, Skills, Service? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
+Remember The Future You? Self (Personal), Social (Relationships), Skills (Business), Service (Impact)? Each of those futures costs something. Not in a mercenary way—in a "this life requires investment" way.
 
 For each domain, answer:
 - What does "better" look like?
@@ -1219,9 +1225,9 @@ For each domain, answer:
 - Annual investment needed
 - First step in the next 30 days
 
-Maybe Personal means hiring a trainer ($6,000/year). Maybe Relationships means a monthly date night and a family trip ($8,000/year). Maybe Skills means a coaching certification ($12,000/year). Maybe Impact means sponsoring a program ($5,000/year).
+Maybe Self (Personal) means hiring a trainer ($6,000/year). Maybe Social (Relationships) means a monthly date night and a family trip ($8,000/year). Maybe Skills (Business) means a coaching certification ($12,000/year). Maybe Service (Impact) means sponsoring a program ($5,000/year).
 
-Add it up. That's your Becoming Total.
+Add it up. That's your Future You Total.
 
 Then: your Real Reasons-based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
 
@@ -1286,7 +1292,7 @@ Alright. You've got your numbers. Baseline Needs. Becoming investments. Real Rea
 Open your worksheet to Step 4. Stack your totals:
 
 - Baseline Needs Total
-- Becoming Total
+- Future You Total
 - Real Reasons Desires Total
 - Cause Worth Playing For Total
 
@@ -1390,7 +1396,7 @@ Let's keep going.
 
 ### VIDEO SCRIPT
 
-Last piece of the From Meaning to Math. Two more steps and you've got a complete operational plan.
+Last piece of the The Revenue Bridge. Two more steps and you've got a complete operational plan.
 
 ---
 
@@ -1457,7 +1463,7 @@ At the bottom of the worksheet, you're going to write three things:
 2. **Because if this changes, everything downstream changes by...** — The cascade effect.
 3. **The first small experiment I will run in the next 7 days is...** — Not a 90-day plan. A 7-day experiment. Small. Testable. Real.
 
-This becomes the setup for Lesson 7—the Vital Action Plan. Your highest-leverage move from the From Meaning to Math is often the seed of your Vital Action.
+This becomes the setup for Lesson 7—the Vital Action Plan. Your highest-leverage move from the The Revenue Bridge is often the seed of your Vital Action.
 
 ---
 
@@ -1681,7 +1687,7 @@ I know it feels dramatic. That's the point. You're making a commitment to yourse
 
 ### One Last Note
 
-If your Lead Lane is Business/Money, go back and check: does your Vital Action support your Required From Meaning to Math? Does it protect the other lanes—or come at their expense? If your business Vital Action is "do 50 cold calls a day" but your Self future says "grounded and present" and your Social future says "protect family dinners"—something's off. Revisit. Realign.
+If your Lead Lane is Business/Money, go back and check: does your Vital Action support your Required The Revenue Bridge? Does it protect the other lanes—or come at their expense? If your business Vital Action is "do 50 cold calls a day" but your Self future says "grounded and present" and your Social future says "protect family dinners"—something's off. Revisit. Realign.
 
 The whole point of Strategic Clarity is that your daily actions serve your whole life. Not just one lane at the cost of the others.
 
@@ -1689,7 +1695,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: Real Reasons, Driving Fire, values, Becoming, The Reckoning, From Meaning to Math, and Your Vital Action Plan installed on your calendar.
+You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, The Reckoning, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAPOS comes online.
 
@@ -1725,9 +1731,9 @@ You know how most people use ChatGPT or Claude? They open it up, they type a que
 
 We're about to change that.
 
-You're going to take a **Master Prompt**—a structured template we've built—and paste all of your completed worksheets underneath it. The AI reads everything you've written and generates two documents:
+You're going to take a **Master Prompt**—a structured template we've built—and feed it your completed worksheets. Best way: attach your worksheets file. Alternative: paste them below the designated line. The AI reads everything you've written and generates two documents:
 
-1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should talk to you and make decisions.
+1. **Your ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
 
 2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your domino. Everything in one glance.
 
@@ -1740,8 +1746,9 @@ Once generated, you paste this Master Context into any AI conversation and you'v
 - **Knows your Vital Action** and includes it in every weekly plan
 - **Scores every opportunity** through a values-aligned decision filter
 - **Reorients you** when you're scattered—back to the Blueprint before giving tactics
+- **Shifts into inner work** when you say things like "I know what to do but I can't make myself do it"—belief change, parts work, state management, drawn from NLP
 
-This isn't a chatbot. This is a coach that *knows you*.
+This isn't a chatbot. This is a coach that *knows you*—and can go deep when strategy alone isn't enough.
 
 ---
 
@@ -1757,20 +1764,39 @@ Here's the process. It's straightforward.
 
 **Step 4:** Paste the prompt.
 
-**Step 5:** Below the line that says "PASTE WORKSHEETS BELOW THIS LINE," paste each of your completed worksheets. In order:
-- Real Reasons
-- The Reckoning (if you completed it—if not, that's fine)
-- Your Driving Fire + The Cause Worth Playing For
-- Core Values Extraction
-- Becoming You
-- The From Meaning to Math (From Meaning to Math)
-- Vital Action Plan
+**Step 5:** Feed it your worksheets. Two options:
+- **Preferred:** If your AI supports file uploads, attach your completed worksheets file—the consolidated "All Worksheets in Order" document works perfectly. One file. Done.
+- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, The Reckoning (optional), Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 
 **Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your Driving Fire feels true. If something's off, tell the AI: "The Driving Fire statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
 
-**Step 8:** Save your Master Context. Keep it in a document. Whenever you want your AI coach, start a new conversation by pasting it in.
+**Step 8:** Save your Master Context. This is your **persistent context document** for ongoing coaching. Use it as the AI's "brain"—paste it at the start of new conversations, or add it to your AI's project settings or custom instructions so it's always in context. That's how your coach stays personalized. Not a one-off chat. A coach that knows you every time.
+
+---
+
+### Monthly Patch Notes
+
+Your VAPOS isn't static. It grows with you.
+
+At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
+
+The Patch Notes prompt preserves the structure and only updates the fields you specify. It even includes a Patch Log so you can track what changed over time.
+
+Think of it like updating the operating system on your phone. Same phone. Better software. Your AI coach gets smarter every month because *you* get clearer every month.
+
+---
+
+### Or—Skip All of That
+
+Here's the thing. I built something I use every day myself.
+
+It's called VAPOS—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at VAPOS.Coach. Check it out. See if it feels easier. No pressure.
+
+Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 
 ---
 
@@ -1791,18 +1817,6 @@ That filter alone is worth the entire module. Because how many times have you sa
 
 ---
 
-### Monthly Patch Notes
-
-Your AI OS isn't static. It grows with you.
-
-At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
-
-The Patch Notes prompt preserves the structure and only updates the fields you specify. It even includes a Patch Log so you can track what changed over time.
-
-Think of it like updating the operating system on your phone. Same phone. Better software. Your AI coach gets smarter every month because *you* get clearer every month.
-
----
-
 ### This Is What You Built
 
 Take a second and think about what you just created.
@@ -1811,7 +1825,7 @@ You didn't just set goals. You excavated what you actually want. You found your 
 
 That's not a workshop exercise. That's an operating system for your life.
 
-And in the next lesson—the final one—I'm going to show you exactly how to use it. Fifty questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, and reviews.
+And in the next lesson—the final one—I'm going to show you exactly how to use it. Fifty-six questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, inner work, and reviews.
 
 Almost done. I'll see you in Lesson 9.
 
@@ -1821,7 +1835,7 @@ Almost done. I'll see you in Lesson 9.
 
 ---
 
-## 19. Video 9.1 — Your AI Coach in Action: 50 High-Leverage Questions
+## 19. Video 9.1 — Your AI Coach in Action: Fire Starters (56 Questions)
 
 **Source:** `video-9.1-ai-coach-50-questions.md` | ~8–15 minutes
 
@@ -1833,15 +1847,15 @@ Alright. Final lesson. And honestly? This might be the most *fun* one.
 
 You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
-I'm going to walk you through the 50 High-Leverage Questions—organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
+I'm going to walk you through the Fire Starters—fifty-six high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to inner work to "I'm spiraling and need to get grounded in 60 seconds."
 
 ---
 
 ### How to Use the Questions
 
-The 50 Questions resource is a copy/paste-ready document. Each question is a prompt. You don't have to memorize them. You don't even have to use them in order. Here's how it works:
+The Fire Starters resource is a copy/paste-ready document. Each question is a prompt. You don't have to memorize them. You don't even have to use them in order. Here's how it works:
 
-1. **Open a conversation** with your AI coach (paste your Master Context in if it's a new session)
+1. **Open a conversation** with your AI coach. Your Master Context should already be in play—either pasted at the start of the conversation, or loaded as persistent context (Claude Projects, ChatGPT custom instructions, etc.). That's how your coach knows you every time.
 2. **Find the question** that matches what you need right now
 3. **Copy it. Paste it. Get a personalized answer.**
 
@@ -1919,13 +1933,19 @@ This one's a boundary. When you feel the pull to grind, you paste this and your 
 
 ---
 
-### Weekly/Monthly Review (Questions 43–50)
+### Inner Work + Beliefs (Questions 43–48)
 
-**Question 43** is the weekly ritual: *"Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
+When strategy isn't enough—beliefs, parts, state. **Question 43**: *"I know what I should do but I can't make myself do it. Help me figure out what's really going on."* **Question 46**: *"I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state."*
+
+---
+
+### Weekly/Monthly Review (Questions 49–56)
+
+**Question 49** is the weekly ritual: *"Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."*
 
 Paste this every Friday. Five minutes. Your AI coach runs the full review and tells you the one thing to adjust next week. It's like having a COO who never forgets and never sugarcoats.
 
-**Question 50** is the monthly big picture: *"Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"*
+**Question 56** is the monthly big picture: *"Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"*
 
 Three categories: double down, stop, redesign. That's your monthly strategic review in one question.
 
@@ -1945,7 +1965,7 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Turned meaning into math
 - Chose one domino and installed it on your calendar
 - Built an AI operating system that holds all of it
-- And now you've got 50 questions that turn that OS into a daily tool
+- And now you've got 56 questions that turn that OS into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
 

@@ -10,6 +10,8 @@
 
 This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
+*Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the truest reflection—especially for Misalignments, Costs, and Resistance.
+
 These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAPOS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
 **You can do this now, during an Alignment Arc Intensive, or whenever you're ready. No pressure—depth beats speed.**
@@ -24,7 +26,6 @@ What must be true in your life for your Real Reasons to actually happen? (Non-ne
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -34,7 +35,6 @@ What are you currently tolerating that contradicts what you said you want? (Wher
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -44,7 +44,6 @@ What is staying in misalignment costing you? (Energy, relationships, peace, mone
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -54,7 +53,6 @@ If you could only do one thing in the next 7 days to move toward alignment, what
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -64,7 +62,6 @@ What part of you might resist this change? (Fear, a protective part, an old stor
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -74,7 +71,6 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 |   |
 |---|
-|   |
 
 ---
 

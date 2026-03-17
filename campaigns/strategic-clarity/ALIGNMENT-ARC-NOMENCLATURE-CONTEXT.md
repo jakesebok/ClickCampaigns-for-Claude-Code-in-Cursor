@@ -16,9 +16,9 @@
 | Your WHY statement | Your Driving Fire statement |
 | Just Cause | The Cause Worth Playing For |
 | Core Values Extraction | Your Values Code: Excavating Your Non-Negotiables |
-| The Future You / Future Four / Future 4 | The Becoming |
+| The Becoming | The Future You |
 | Reality Check | The Reckoning |
-| Revenue Bridge | From Meaning to Math |
+| From Meaning to Math | The Revenue Bridge: From Meaning To Math |
 | ONE THING / The ONE Thing | Your Vital Action |
 | ONE THING Domino Plan | The Vital Action Plan |
 | Domino Chain | The Arc Chain |
@@ -33,6 +33,7 @@
 
 - **The Real Reasons** = phase/concept (what you're trading your life for)
 - **The Life Lists** = worksheet/exercise (three columns: Experiences, Growth, Contribution)
+- **Future Four S-names** = Self (Personal), Social (Relationships), Skills (Business), Service (Contribution)—use S-names first, parenthetical when clarification helps
 
 ---
 
@@ -64,10 +65,10 @@
 - MIQs
 - your WHY
 - Just Cause
-- Future You
+- The Becoming (except in historical/source context)
 - Future Four / Future 4
 - Reality Check
-- Revenue Bridge
+- From Meaning to Math (except in historical/source context)
 - Aligned AI OS
 - Domino Plan
 - load-bearing walls

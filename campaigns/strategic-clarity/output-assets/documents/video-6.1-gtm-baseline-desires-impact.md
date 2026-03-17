@@ -1,6 +1,6 @@
 # Video 6.1 — Baseline, Desires, Impact
 
-**Lesson 6: From Meaning to Math | ~10–15 minutes**
+**Lesson 6: The Revenue Bridge: From Meaning To Math | ~10–15 minutes**
 
 ---
 
@@ -8,7 +8,7 @@
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—Real Reasons, Driving Fire, values, The Becoming, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, Driving Fire, values, The Future You, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -16,7 +16,7 @@ So now we turn meaning into math.
 
 ---
 
-### From Meaning to Math
+### The Revenue Bridge: From Meaning To Math
 
 Here's what we're building: a bridge from what you *want* to what your business must *produce*. Not a goal you pulled from a mastermind. Not a number your competitor is chasing. Not "I want to make a million dollars because it sounds impressive."
 
@@ -45,11 +45,11 @@ Here's what I want you to notice about this number: it's not exciting. It's not 
 
 ---
 
-### Step 2: Fund The Becoming (Stretch Desires)
+### Step 2: Fund The Future You (Stretch Desires)
 
 Now we go above the floor.
 
-Remember The Becoming? Personal, Relationships, Skills, Service? Each of those domains costs something. Not in a mercenary way—in a "this life requires investment" way.
+Remember The Future You? Self (Personal), Social (Relationships), Skills (Business), Service (Impact)? Each of those domains costs something. Not in a mercenary way—in a "this life requires investment" way.
 
 For each domain, answer:
 - What does "better" look like?
@@ -57,9 +57,9 @@ For each domain, answer:
 - Annual investment needed
 - First step in the next 30 days
 
-Maybe Personal means hiring a trainer ($6,000/year). Maybe Relationships means a monthly date night and a family trip ($8,000/year). Maybe Skills means a coaching certification ($12,000/year). Maybe Impact means sponsoring a program ($5,000/year).
+Maybe Self (Personal) means hiring a trainer ($6,000/year). Maybe Social (Relationships) means a monthly date night and a family trip ($8,000/year). Maybe Skills (Business) means a coaching certification ($12,000/year). Maybe Service (Impact) means sponsoring a program ($5,000/year).
 
-Add it up. That's your Becoming Total.
+Add it up. That's your Future You Total.
 
 Then: your Real Reasons–based stretch desires. Remember those experiences you want? Some of them cost money. The Italy trip. The sabbatical. The house renovation. The bucket-list experience. List 1–5 and estimate the annual cost.
 

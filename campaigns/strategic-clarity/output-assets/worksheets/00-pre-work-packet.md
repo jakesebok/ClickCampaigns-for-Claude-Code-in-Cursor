@@ -16,7 +16,7 @@ Everything you write here feeds directly into your **VAPOS Upgrade**—a master 
 
 - [ ] Exercise 1: Values Extraction
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: From Meaning to Math Inputs
+- [ ] Exercise 3: The Revenue Bridge Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
@@ -24,6 +24,8 @@ Everything you write here feeds directly into your **VAPOS Upgrade**—a master 
 ## Exercise 1 — Values Extraction
 
 **Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the workshop.
+
+**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip in Exercise 2 if you want to try it.
 
 ### Step 1: List 5 people you admire
 
@@ -69,6 +71,8 @@ These should be **observable behaviors**, not vague compliments.
 
 **Goal:** Collect real stories that reveal what you're built to do. Your WHY leaves clues in your lived experience.
 
+**Pro tip:** This exercise is all about excavating stories from your past. Speaking them out loud instead of typing will get you the truest, messiest, most unfiltered—and most valuable—outputs. If you haven't tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it's completely changed the game. It understands what you mean to say and cleans up ums, stutters, and filler in real time—and you don't have to dictate punctuation. They offer a 14-day free trial, no card required. *(Full disclosure: I'm an affiliate.)*
+
 Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'm here for." Choose across seasons of life:
 
 - One moment from **childhood**
@@ -87,7 +91,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — From Meaning to Math Inputs
+## Exercise 3 — The Revenue Bridge Inputs
 
 **Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
 

@@ -14,7 +14,7 @@ Fair. Let me explain.
 
 ### The Pre-Work Is the Foundation
 
-Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your Values Code, the math inside From Meaning to Math, and your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
+Everything we build in Strategic Clarity—your Real Reasons, your Driving Fire, your Values Code, the math inside The Revenue Bridge, and your Vital Action—all of it depends on clean inputs. And the Pre-Work Packet is where those inputs live.
 
 Think of it this way. If I hand you the most incredible GPS in the world—one that knows every shortcut, every traffic pattern, every scenic route—but you never tell it where you're starting from? It's useless. Beautiful. Sophisticated. Useless.
 
@@ -28,9 +28,9 @@ There are four exercises in the packet:
 
 **Exercise 1: Values Extraction.** You're going to list five people you admire and five specific qualities you admire in each of them. This is the raw material we'll use to extract your core values. And I mean *specific*—not "she's smart," but "she explains complex things simply without making people feel small." That level. Because vague inputs produce vague values, and vague values produce vague decisions.
 
-**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them.
+**Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them. Pro tip: speaking these out loud instead of typing will get you the truest, messiest, most unfiltered outputs. I use Wispr Flow for this—it transcribes and cleans up your speech in real time, no punctuation dictation needed. 14-day free trial, link in the packet. Full disclosure: I'm an affiliate.
 
-**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes the From Meaning to Math worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: The Revenue Bridge Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
 **Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your VAPOS needs to understand your business to give you useful advice. This is how it learns.
 

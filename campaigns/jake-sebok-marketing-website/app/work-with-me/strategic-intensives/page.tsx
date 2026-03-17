@@ -68,12 +68,12 @@ export default function StrategicIntensivesPage() {
                   "Definition + behaviors + boundary for each. Values that make hard decisions easy.",
               },
               {
-                title: "The Becoming",
+                title: "The Future You",
                 description:
                   "The person you're becoming across self, social, skills, and service. Standards, not wishes.",
               },
               {
-                title: "From Meaning to Math",
+                title: "The Revenue Bridge: From Meaning To Math",
                 description:
                   "Needs + desires + impact = Required Revenue. Reverse-engineered to weekly qualified conversations.",
               },

@@ -1,12 +1,12 @@
 # Video 6.3 — Lead Path Fork + Highest-Leverage Move
 
-**Lesson 6: From Meaning to Math | ~5–8 minutes**
+**Lesson 6: The Revenue Bridge: From Meaning To Math | ~5–8 minutes**
 
 ---
 
 ## VIDEO SCRIPT
 
-Last piece of From Meaning to Math. Two more steps and you've got a complete operational plan.
+Last piece of The Revenue Bridge. Two more steps and you've got a complete operational plan.
 
 ---
 
@@ -73,7 +73,7 @@ At the bottom of the worksheet, you're going to write three things:
 2. **Because if this changes, everything downstream changes by...** — The cascade effect.
 3. **The first small experiment I will run in the next 7 days is...** — Not a 90-day plan. A 7-day experiment. Small. Testable. Real.
 
-This becomes the setup for Lesson 7—Your Vital Action Plan. Your highest-leverage move from From Meaning to Math is often the seed of your Vital Action.
+This becomes the setup for Lesson 7—Your Vital Action Plan. Your highest-leverage move from The Revenue Bridge is often the seed of your Vital Action.
 
 ---
 

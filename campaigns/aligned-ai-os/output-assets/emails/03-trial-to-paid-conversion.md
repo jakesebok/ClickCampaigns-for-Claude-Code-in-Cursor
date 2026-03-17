@@ -100,7 +100,7 @@ But tomorrow, the daily prompts stop. The weekly planning stops. The decision fi
 
 {{first_name}},
 
-Your trial ended today. APOS is paused, but everything you built — your values, your Real Reasons, your Driving Fire, your From Meaning to Math, your Vital Action — is saved.
+Your trial ended today. APOS is paused, but everything you built — your values, your Real Reasons, your Driving Fire, your Revenue Bridge, your Vital Action — is saved.
 
 When you're ready, reactivate and it picks up right where you left off. No re-uploading. No re-answering questions. APOS remembers.
 

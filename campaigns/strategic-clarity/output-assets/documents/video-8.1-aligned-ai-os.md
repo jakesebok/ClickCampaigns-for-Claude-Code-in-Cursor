@@ -22,9 +22,9 @@ You know how most people use ChatGPT or Claude? They open it up, they type a que
 
 We're about to change that.
 
-You're going to take a **Master Prompt**—a structured template we've built—and paste all of your completed worksheets underneath it. The AI reads everything you've written and generates two documents:
+You're going to take a **Master Prompt**—a structured template we've built—and feed it your completed worksheets. Best way: attach your worksheets file. Alternative: paste them below the designated line. The AI reads everything you've written and generates two documents:
 
-1. **Your VAPOS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should talk to you and make decisions.
+1. **Your VAPOS UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
 
 2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your Vital Action. Everything in one glance.
 
@@ -37,8 +37,9 @@ Once generated, you paste this Master Context into any AI conversation and you'v
 - **Knows your Vital Action** and includes it in every weekly plan
 - **Scores every opportunity** through a values-aligned decision filter
 - **Reorients you** when you're scattered—back to the Blueprint before giving tactics
+- **Shifts into inner work** when you say things like "I know what to do but I can't make myself do it"—belief change, parts work, state management, drawn from NLP
 
-This isn't a chatbot. This is a coach that *knows you*.
+This isn't a chatbot. This is a coach that *knows you*—and can go deep when strategy alone isn't enough.
 
 ---
 
@@ -54,20 +55,39 @@ Here's the process. It's straightforward.
 
 **Step 4:** Paste the prompt.
 
-**Step 5:** Below the line that says "PASTE WORKSHEETS BELOW THIS LINE," paste each of your completed worksheets. In order:
-- The Real Reasons (Life Lists)
-- The Reckoning (if you completed it—if not, that's fine)
-- Your Driving Fire + Cause Worth Playing For
-- Your Values Code
-- The Becoming
-- From Meaning to Math
-- Your Vital Action Plan
+**Step 5:** Feed it your worksheets. Two options:
+- **Preferred:** If your AI supports file uploads, attach your completed worksheets file—the consolidated "All Worksheets in Order" document works perfectly. One file. Done.
+- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, The Reckoning (optional), Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 
 **Step 7:** Review what it generated. Check that it captured your values correctly, that your revenue math is right, that your Driving Fire feels true. If something's off, tell the AI: "The Driving Fire statement doesn't capture the full-body test feeling. It should feel more like [this]." It'll adjust.
 
-**Step 8:** Save your Master Context. Keep it in a document. Whenever you want your AI coach, start a new conversation by pasting it in.
+**Step 8:** Save your Master Context. This is your **persistent context document** for ongoing coaching. Use it as the AI's "brain"—paste it at the start of new conversations, or add it to your AI's project settings or custom instructions so it's always in context. That's how your coach stays personalized. Not a one-off chat. A coach that knows you every time.
+
+---
+
+### Monthly Patch Notes
+
+Your VAPOS isn't static. It grows with you.
+
+At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
+
+The Patch Notes prompt preserves the structure and only updates the fields you specify. It even includes a Patch Log so you can track what changed over time.
+
+Think of it like updating the operating system on your phone. Same phone. Better software. Your AI coach gets smarter every month because *you* get clearer every month.
+
+---
+
+### Or—Skip All of That
+
+Here's the thing. I built something I use every day myself.
+
+It's called VAPOS—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at VAPOS.Coach. Check it out. See if it feels easier. No pressure.
+
+Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 
 ---
 
@@ -88,18 +108,6 @@ That filter alone is worth the entire module. Because how many times have you sa
 
 ---
 
-### Monthly Patch Notes
-
-Your VAPOS isn't static. It grows with you.
-
-At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
-
-The Patch Notes prompt preserves the structure and only updates the fields you specify. It even includes a Patch Log so you can track what changed over time.
-
-Think of it like updating the operating system on your phone. Same phone. Better software. Your AI coach gets smarter every month because *you* get clearer every month.
-
----
-
 ### This Is What You Built
 
 Take a second and think about what you just created.
@@ -108,7 +116,7 @@ You didn't just set goals. You excavated what you actually want. You found your 
 
 That's not a workshop exercise. That's an operating system for your life.
 
-And in the next lesson—the final one—I'm going to show you exactly how to use it. Fire Starters: fifty questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, and reviews.
+And in the next lesson—the final one—I'm going to show you exactly how to use it. Fire Starters: fifty-six questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, inner work, and reviews.
 
 Almost done. I'll see you in Lesson 9.
 

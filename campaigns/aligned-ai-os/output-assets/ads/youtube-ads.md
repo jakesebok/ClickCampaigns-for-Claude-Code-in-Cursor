@@ -53,7 +53,7 @@ In the Strategic Alignment Intensive, I walk you through the exact framework my 
 - Name their real end goals — the experiences, growth, and contribution that actually matter
 - Find their Driving Fire — not a marketing statement, the real purpose that passes the full-body test
 - Extract their top 5 values — with behaviors and boundaries, not just words on a wall
-- Build From Meaning to Math — turning meaning into math
+- Build The Revenue Bridge — turning meaning into math
 - Identify their Vital Action — the single move that makes everything else easier
 
 And at the end, you get APOS — the Aligned Performance Operating System. A personalized AI coach loaded with everything you built. 30 days free.

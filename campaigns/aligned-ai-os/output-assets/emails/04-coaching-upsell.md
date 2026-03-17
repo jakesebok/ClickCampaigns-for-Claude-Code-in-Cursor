@@ -23,7 +23,7 @@ The last 30% — the blind spots, the emotional blocks, the "I know what to do b
 
 That's what the **Aligned Power Accelerator** is. It's the full Strategic Clarity framework — but with me and my team, live, over 12 months. With accountability that AI can't replicate.
 
-**And APOS gets even better.** Accelerator clients get 12 months of free APOS access, plus a context document that's 10x deeper than what you have now.
+**And APOS gets even better.** Accelerator clients get 12 months of free APOS access, plus Alignment Blueprints that are 10x deeper than what you have now.
 
 If you're interested, I'd love to have a conversation.
 
@@ -47,7 +47,7 @@ High revenue. Full calendar. Zero alignment. They were succeeding at a game they
 In the first 90 days of the Accelerator, we:
 - Rebuilt their offer stack around their actual values (dropped 2 services, doubled down on 1)
 - Identified their Vital Action and protected it on the calendar
-- Reverse-engineered From Meaning to Math (they needed 40% less revenue than they thought)
+- Reverse-engineered The Revenue Bridge (they needed 40% less revenue than they thought)
 - Built an APOS context so deep it's like having a virtual COO
 
 Result: Revenue stayed flat. Hours dropped by 30%. Satisfaction went through the roof.

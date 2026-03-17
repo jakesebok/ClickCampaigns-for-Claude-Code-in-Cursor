@@ -34,6 +34,8 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 **Goal:** Extract the pattern under the stories. Work fast. First honest answer wins.
 
+*Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the pattern faster than typing—right-brain recollection works better when you're not staring at a blank cell.
+
 **Partner role:** Ask the questions exactly as written, listen for repeats, then mirror back what you hear (no advice).
 
 **Group option:** Round 1 (Person A): 10-min interview + 5-min mirror. Round 2 (Person B): 10-min interview + 5-min mirror.
@@ -50,7 +52,6 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -154,7 +155,6 @@ A Cause Worth Playing For is not a revenue goal. It's a concrete future state th
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -173,7 +173,6 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 |   |
 |---|
-|   |
 
 ---
 

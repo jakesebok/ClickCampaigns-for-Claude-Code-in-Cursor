@@ -122,7 +122,7 @@ Here's what you'll build:
 ✓ Your Most Important Questions (end goals, not means goals)
 ✓ Your Driving Fire + Cause Worth Playing For
 ✓ Your Top 5 Values (operational — not a poster on a wall)
-✓ From Meaning to Math (meaning → math)
+✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
 ✓ 30 days of APOS — your personalized AI coach
 

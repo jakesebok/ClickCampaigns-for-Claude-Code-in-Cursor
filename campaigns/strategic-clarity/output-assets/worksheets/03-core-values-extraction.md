@@ -129,6 +129,8 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ## Your Top 5 Core Values — Final Selection
 
+*Pro tip:* Speaking your definitions and behaviors out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often gets you to the real thing faster than typing.
+
 | # | Core Value | Definition (in your words) | How I Will Embody It (behaviors) | What I Will Not Tolerate (boundary) |
 |---|------------|---------------------------|----------------------------------|-------------------------------------|
 | 1 |            |                           |                                  |                                     |

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
-import { Bell, CreditCard, Upload, ExternalLink } from "lucide-react";
+import { Bell, CreditCard, Upload, ExternalLink, RefreshCw, Loader2, Check } from "lucide-react";
 
 type ContextualProfile = {
   revenueStage?: string;
@@ -35,6 +35,10 @@ const CHALLENGE_OPTIONS = ["", "Growth (not enough revenue or clients)", "Profit
 export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings | null>(null);
   const [loading, setLoading] = useState(true);
+  const [patchNotes, setPatchNotes] = useState("");
+  const [patching, setPatching] = useState(false);
+  const [patchSuccess, setPatchSuccess] = useState(false);
+  const [patchError, setPatchError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -306,21 +310,90 @@ export default function SettingsPage() {
           <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
             <h2 className="font-semibold flex items-center gap-2">
               <Upload className="h-4 w-4" />
-              Context Document
+              Alignment Blueprints
             </h2>
             <p className="text-sm text-muted-foreground">
               {settings.onboardingComplete
-                ? "Your context document is loaded. Upload a new version to update it."
-                : "Complete onboarding to build your context document."}
+                ? "Your Alignment Blueprints are loaded. Update them when something changes, or upload a new version to replace them entirely."
+                : "Complete onboarding to build your Alignment Blueprints."}
             </p>
             <a
-              href={settings.onboardingComplete ? "/onboarding" : "/onboarding"}
+              href="/onboarding"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm hover:bg-secondary transition-colors"
             >
               {settings.onboardingComplete
-                ? "Update Context"
+                ? "Replace Blueprints (Upload New)"
                 : "Complete Onboarding"}
             </a>
+
+            {settings.onboardingComplete && (
+              <div className="pt-4 border-t border-border space-y-3">
+                <h3 className="font-medium flex items-center gap-2 text-sm">
+                  <RefreshCw className="h-4 w-4" />
+                  Update Blueprints
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  Something changed? Describe it in plain language. Your coach will update the right fields.
+                </p>
+                <textarea
+                  value={patchNotes}
+                  onChange={(e) => {
+                    setPatchNotes(e.target.value);
+                    setPatchSuccess(false);
+                    setPatchError(null);
+                  }}
+                  placeholder="e.g., My Vital Action is now [X]. Target revenue is $Y. I refined my Driving Fire to..."
+                  rows={3}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+                <button
+                  onClick={async () => {
+                    if (!patchNotes.trim() || patching) return;
+                    setPatching(true);
+                    setPatchError(null);
+                    setPatchSuccess(false);
+                    try {
+                      const res = await fetch("/api/context/patch", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ updateNotes: patchNotes.trim() }),
+                      });
+                      const data = await res.json();
+                      if (!res.ok) throw new Error(data.error || "Patch failed");
+                      setPatchSuccess(true);
+                      setPatchNotes("");
+                    } catch (err) {
+                      setPatchError(err instanceof Error ? err.message : "Something went wrong");
+                    } finally {
+                      setPatching(false);
+                    }
+                  }}
+                  disabled={!patchNotes.trim() || patching}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {patching ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCw className="h-4 w-4" />
+                      Update Blueprints
+                    </>
+                  )}
+                </button>
+                {patchSuccess && (
+                  <p className="text-sm text-green-600 dark:text-green-400 flex items-center gap-2">
+                    <Check className="h-4 w-4" />
+                    Blueprints updated. Your coach has the latest.
+                  </p>
+                )}
+                {patchError && (
+                  <p className="text-sm text-destructive">{patchError}</p>
+                )}
+              </div>
+            )}
           </section>
 
           {/* Community */}

@@ -16,7 +16,7 @@ Open up your Life Lists. You'll see three columns: **Experiences I Want**, **How
 
 Here's how I want you to approach this:
 
-**Write fast.** Don't filter. Don't edit as you go. Don't try to make it sound good. Just let it pour. Speed produces honesty. Editing produces performance. And we don't need your performance right now—we need your truth.
+**Write fast.** Don't filter. Don't edit as you go. Don't try to make it sound good. Just let it pour. Speed produces honesty. Editing produces performance. And we don't need your performance right now—we need your truth. This would be a perfect place to use something like Wispr Flow or a similar tool—speaking these answers out loud often surfaces the truest, most unfiltered stuff. Link in the worksheet.
 
 **Be specific and sensory.** "I want to travel" is a means goal wearing an end-goal costume. "I want to wake up in a villa in Tuscany with my wife, no phone, no alarm, drinking espresso while the sun comes up" — *that's* an experience. See the difference? One is a placeholder. The other is a life.
 
@@ -55,7 +55,7 @@ As you write, you might notice something: your brain will try to sneak means goa
 
 When that happens, don't delete it. Just ask: "Why? What's underneath that?" Keep asking until you hit the experience, the feeling, the human thing.
 
-"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in From Meaning to Math later.
+"I want to make $500K" → Why? → "So I can take summers off with my kids." → *That's* the experience. Write the summers-off-with-kids part. The $500K goes in The Revenue Bridge later.
 
 ---
 
@@ -71,7 +71,7 @@ Sit with that one for a minute. You don't have to share it with anyone. But nami
 
 ### When You're Done
 
-Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your Driving Fire is hiding in these answers, your values are woven through them, and From Meaning to Math will be built on top of them.
+Don't try to organize or prioritize what you wrote. Just let it sit. We're going to use this raw material in the lessons ahead—your Driving Fire is hiding in these answers, your values are woven through them, and The Revenue Bridge will be built on top of them.
 
 For now, your only job was to be honest. If you did that, you nailed it.
 

@@ -1,14 +1,14 @@
 # Video 4.2 — Integration + 90-Day Focus
 
-**Lesson 4: Becoming You | ~5–8 minutes**
+**Lesson 4: The Future You | ~5–8 minutes**
 
 ---
 
 ## VIDEO SCRIPT
 
-Okay, you've filled out the four domains. Personal. Relationships. Skills. Service. You've got words and standards and behaviors and proof statements. Now let's step back and look at the whole picture.
+Okay, you've filled out the four domains. Self (Personal). Social (Relationships). Skills (Business). Service (Contribution). You've got words and standards and behaviors and proof statements. Now let's step back and look at the whole picture.
 
-Open the Integration section at the bottom of your Becoming You worksheet.
+Open the Integration section at the bottom of your The Future You worksheet.
 
 ---
 
@@ -38,7 +38,7 @@ Now the commitment.
 
 This is not "which one is most important." They're all important. This is: which one is the *lever*? Which one, if it moved, would create movement in the others?
 
-Sometimes it's Self—because if you don't trust yourself, nothing else holds. Sometimes it's Skills—because if you build the capability, the revenue follows and the relationships breathe. Sometimes it's Relationships—because when your home is solid, your capacity for everything else doubles.
+Sometimes it's Self (Personal)—because if you don't trust yourself, nothing else holds. Sometimes it's Skills (Business)—because if you build the capability, the revenue follows and the relationships breathe. Sometimes it's Social (Relationships)—because when your home is solid, your capacity for everything else doubles.
 
 Pick one. Write the reason.
 
@@ -62,20 +62,20 @@ Small. Concrete. Now.
 
 ### How This Feeds the OS
 
-Your Becoming becomes Section 4 of your VAPOS. Your AI coach will know:
+The Future You becomes Section 4 of your VAPOS. Your AI coach will know:
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
 - Your primary field and the most leveraged skill for the next 90 days
 - Your signature contribution and how your business enables your cause
 
-So when you ask your AI coach for a weekly plan, it doesn't just look at revenue targets. It checks: does this week move you toward the person you're becoming across *all four domains*? If your Self domain says "grounded and present" but your plan has zero margin, the AI will flag it. That's alignment by design.
+So when you ask your AI coach for a weekly plan, it doesn't just look at revenue targets. It checks: does this week move you toward the person you're becoming across *all four domains*? If your Self (Personal) future says "grounded and present" but your plan has zero margin, the AI will flag it. That's alignment by design.
 
 ---
 
 ### Reflection
 
-Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Becoming. That's a lot of truth-telling.
+Before we move to the next lesson, take a breath. You've done a lot of vision work in the last four lessons. Real Reasons. Driving Fire. Values. The Future You. That's a lot of truth-telling.
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 

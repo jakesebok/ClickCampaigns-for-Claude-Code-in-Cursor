@@ -65,7 +65,17 @@ export default function ChatPage() {
         }),
       });
 
-      if (!response.ok) throw new Error("Chat request failed");
+      if (!response.ok) {
+        let errMsg = "Chat request failed";
+        try {
+          const errData = await response.json();
+          errMsg = errData.error || errMsg;
+        } catch {
+          const text = await response.text();
+          if (text) errMsg = text;
+        }
+        throw new Error(errMsg);
+      }
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();

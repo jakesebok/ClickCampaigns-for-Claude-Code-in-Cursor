@@ -18,6 +18,8 @@ alwaysApply: false
 
 **The payoff:** All worksheets feed a Master Prompt that turns any AI (ChatGPT, Claude, Gemini) into a personalized executive coach, strategic advisor, and virtual assistant that optimizes for the user's core values and never compromises them.
 
+**VAPOS workflow:** (1) **Generation:** User starts a chat with the master prompt; attaches completed worksheets file (preferred) or pastes below the line. AI outputs Master Context + Blueprint. (2) **Ongoing coaching:** User uses Master Context as persistent context—paste at start of conversations or add to AI project/custom instructions.
+
 ---
 
 ## Module Structure (Final — 18 Videos, 8 Worksheets + Pre-Work)

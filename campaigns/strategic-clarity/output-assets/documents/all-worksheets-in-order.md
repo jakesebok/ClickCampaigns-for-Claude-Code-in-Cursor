@@ -1,6 +1,8 @@
 # The Alignment Arc Intensive — All Worksheets in Order
 
-> **Consolidated document.** Every worksheet from the Strategic Clarity module, in sequence. Source files remain unchanged in `worksheets/`.
+> **Consolidated document.** Every worksheet from the Strategic Clarity module, in sequence. Fill this in as you complete each lesson.
+>
+> **When you run the Master Prompt (Lesson 8):** Attach this file to your AI—it's the cleanest option. If your AI doesn't support file uploads, paste the contents below the designated line instead. The output (your Master Context) becomes your persistent context document for ongoing coaching—paste it at the start of new conversations or add it to your AI's project/custom instructions.
 
 ---
 
@@ -28,7 +30,7 @@ Everything you write here feeds directly into your **VAPOS Upgrade**—a master 
 
 - [ ] Exercise 1: Your Values Code Inputs
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: From Meaning to Math Inputs
+- [ ] Exercise 3: The Revenue Bridge Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
@@ -36,6 +38,8 @@ Everything you write here feeds directly into your **VAPOS Upgrade**—a master 
 ## Exercise 1 — Your Values Code Inputs
 
 **Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the workshop.
+
+**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip in Exercise 2 if you want to try it.
 
 ### Step 1: List 5 people you admire
 
@@ -81,6 +85,8 @@ These should be **observable behaviors**, not vague compliments.
 
 **Goal:** Collect real stories that reveal what you're built to do. Your Driving Fire leaves clues in your lived experience.
 
+**Pro tip:** This exercise is all about excavating stories from your past. Speaking them out loud instead of typing will get you the truest, messiest, most unfiltered—and most valuable—outputs. If you haven't tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it's completely changed the game. It understands what you mean to say and cleans up ums, stutters, and filler in real time—and you don't have to dictate punctuation. They offer a 14-day free trial, no card required. *(Full disclosure: I'm an affiliate.)*
+
 Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'm here for." Choose across seasons of life:
 
 - One moment from **childhood**
@@ -99,7 +105,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — From Meaning to Math Inputs
+## Exercise 3 — The Revenue Bridge Inputs
 
 **Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
 
@@ -304,6 +310,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 - If your brain argues, keep writing anyway.
 - Your job is not to be realistic—your job is to be **honest**.
 - Move fast. Don't edit. Depth beats perfection.
+- *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces truer, more unfiltered responses than typing.
 
 ---
 
@@ -338,7 +345,6 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -390,6 +396,8 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 **Goal:** Extract the pattern under the stories. Work fast. First honest answer wins.
 
+*Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the pattern faster than typing—right-brain recollection works better when you're not staring at a blank cell.
+
 **Partner role:** Ask the questions exactly as written, listen for repeats, then mirror back what you hear (no advice).
 
 **Group option:** Round 1 (Person A): 10-min interview + 5-min mirror. Round 2 (Person B): 10-min interview + 5-min mirror.
@@ -406,7 +414,6 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -510,7 +517,6 @@ A Cause Worth Playing For is not a revenue goal. It's a concrete future state th
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -529,7 +535,6 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -686,6 +691,8 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ## Your Top 5 Core Values — Final Selection
 
+*Pro tip:* Speaking your definitions and behaviors out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often gets you to the real thing faster than typing.
+
 | # | Core Value | Definition (in your words) | How I Will Embody It (behaviors) | What I Will Not Tolerate (boundary) |
 |---|------------|---------------------------|----------------------------------|-------------------------------------|
 | 1 |            |                           |                                  |                                     |
@@ -702,13 +709,13 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
-## 5. Becoming You (The Becoming)
+## 5. The Future You
 
 **Source:** `worksheets/04-becoming-you.md`
 
 ---
 
-# Becoming You (The Becoming)
+# The Future You
 
 **Aligned Power — The Alignment Arc**
 
@@ -721,10 +728,11 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 1. Don't overthink. Write what you actually want, not what you think you should want.
 2. Stay concrete: behaviors, standards, and choices—not just adjectives.
 3. Let your body vote. If something feels flat, it's probably borrowed, not owned.
+4. *Pro tip:* Speaking your answers—especially for Self (Personal) and Social (Relationships)—often surfaces truer vision. Try [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar.
 
 ---
 
-## Personal (Self)
+## Self (Personal)
 
 Define the version of you who can carry the life, business, and impact you want—without self-abandonment.
 
@@ -778,7 +786,7 @@ Copy your three words into the left column below and answer each question.
 
 ---
 
-## Relationships (Social)
+## Social (Relationships)
 
 Clarify who you want to be in your relationships—not just what you want from them.
 
@@ -820,7 +828,7 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 ---
 
-## Business (Skills)
+## Skills (Business)
 
 High performers don't "hope" they'll be ready. They train the skills that the future demands.
 
@@ -856,6 +864,26 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ---
 
+## Service (Contribution)
+
+Your Life Lists already captured *how* you want to contribute. Here we make Future Service explicit—who you want to serve with excellence and what contribution you want to be known for. In The Revenue Bridge, you'll calculate the cost of this impact or set your donation/tithe number.
+
+### A) Future Service vision (reference your Life Lists "How I Will Contribute" column)
+
+| Prompt | Your Answer |
+|--------|-------------|
+| What cause or community do I want to serve with excellence? |  |
+| What contribution do I want to be known for? |  |
+| To leave a lasting legacy, the contributions I can start making now are… |  |
+
+### B) Bridge to The Revenue Bridge
+
+| Prompt | Your Answer |
+|--------|-------------|
+| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |  |
+
+---
+
 ## Integration — Themes & Next Move
 
 ### A) What patterns do you notice across all of these futures?
@@ -869,14 +897,14 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 | Prompt | Your Answer |
 |--------|-------------|
-| If I could only strengthen ONE future first to unlock the rest, it would be… |  |
+| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |  |
 | The reason is… |  |
 | The old pattern that will try to pull me back is… |  |
 | The first visible action I will take in the next 7 days is… |  |
 
 ---
 
-*Your Becoming feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*The Future You feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
 
 ---
 
@@ -900,6 +928,8 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
+*Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the truest reflection—especially for Misalignments, Costs, and Resistance.
+
 These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your VAPOS will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
 
 **You can do this now, during a Strategic Intensive, or whenever you're ready. No pressure—depth beats speed.**
@@ -914,7 +944,6 @@ What must be true in your life for your Real Reasons to actually happen? (Non-ne
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -924,7 +953,6 @@ What are you currently tolerating that contradicts what you said you want? (Wher
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -934,7 +962,6 @@ What is staying in misalignment costing you? (Energy, relationships, peace, mone
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -944,7 +971,6 @@ If you could only do one thing in the next 7 days to move toward alignment, what
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -954,7 +980,6 @@ What part of you might resist this change? (Fear, a protective part, an old stor
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -964,7 +989,6 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -983,13 +1007,13 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ---
 
-## 7. From Meaning to Math
+## 7. The Revenue Bridge: From Meaning To Math
 
 **Source:** `worksheets/06-goals-that-matter.md`
 
 ---
 
-# From Meaning to Math
+# The Revenue Bridge: From Meaning To Math
 
 **Aligned Power — The Alignment Arc**
 
@@ -1015,26 +1039,24 @@ List what must be true financially for you and your business to feel stable (not
 
 |   |
 |---|
-|   |
 
 ---
 
-## Step 2 — Fund the Becoming + Real Reasons (Stretch Desires)
+## Step 2 — Fund The Future You + Real Reasons (Stretch Desires)
 
 Translate the next-level life you want into numbers so your business target is tied to what you actually want—not just "growth."
 
 | Domain | What does "better" look like? | Why it matters (1 sentence) | Annual Investment ($) | First Step / Next 30 Days |
 |--------|-------------------------------|-----------------------------|-----------------------|---------------------------|
-| PERSONAL |  |  |  |  |
-| RELATIONSHIPS |  |  |  |  |
-| BUSINESS |  |  |  |  |
-| IMPACT |  |  |  |  |
+| Self (Personal) |  |  |  |  |
+| Social (Relationships) |  |  |  |  |
+| Skills (Business) |  |  |  |  |
+| Service (Impact) |  |  |  |  |
 
-**Becoming Total (annual):**
+**Future You Total (annual):**
 
 |   |
 |---|
-|   |
 
 Now list 1–5 Real Reasons-based stretch desires you want your business to fund this year:
 
@@ -1050,13 +1072,12 @@ Now list 1–5 Real Reasons-based stretch desires you want your business to fund
 
 |   |
 |---|
-|   |
 
 ---
 
 ## Step 3 — Resource the Impact (Your "Tithe" for the Cause)
 
-Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
+Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
 
 | Field | Your Answer |
 |-------|-------------|
@@ -1070,7 +1091,6 @@ Your business doesn't have to be your Cause Worth Playing For—but it can fund 
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -1081,7 +1101,7 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 | Component | Amount ($) |
 |-----------|------------|
 | Baseline Needs Total |  |
-| Becoming Total |  |
+| Future You Total |  |
 | Real Reasons Desires Total |  |
 | Cause Worth Playing For Total |  |
 | **= Required Revenue (annual)** |  |
@@ -1199,7 +1219,7 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your From Meaning to Math numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your Revenue Bridge numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
 
 ---
 
@@ -1228,7 +1248,6 @@ Write the sentence that brings you back to what matters:
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -1236,18 +1255,17 @@ Write the sentence that brings you back to what matters:
 
 Circle the lane where meaningful progress would make the other lanes easier:
 
-| Lane | Lead Lane Test |
-|------|----------------|
-| **Business / Money** | If this improves, the other lane(s) that improve automatically are: |
-| **Home / Relationships** | If this improves, the other lane(s) that improve automatically are: |
-| **Impact / Cause Worth Playing For** | If this improves, the other lane(s) that improve automatically are: |
-| **Self / Skills** | If this improves, the other lane(s) that improve automatically are: |
+| Lane | if this improves, the other lane(s) that improve automatically are: |
+|------|---------------------------------------------------------------------|
+| **Business / Money** |  |
+| **Home / Relationships** |  |
+| **Impact / Cause Worth Playing For** |  |
+| **Self / Skills** |  |
 
 **My Lead Lane:**
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -1334,7 +1352,6 @@ Write it. Sign it.
 
 |   |
 |---|
-|   |
 
 **I will protect it.**
 
@@ -1344,7 +1361,7 @@ Write it. Sign it.
 
 ---
 
-*Note: If your Lead Lane is Business/Money, verify it supports your Required From Meaning to Math and protects the other lanes—not at their expense.*
+*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue from The Revenue Bridge and protects the other lanes—not at their expense.*
 
 ---
 
@@ -1366,7 +1383,7 @@ Write it. Sign it.
 
 > **What this is:** This prompt turns your favorite AI (ChatGPT, Claude, Gemini) into a personalized Values-Aligned Growth & Performance Coach. It synthesizes everything you've built in this module into one operating system.
 >
-> **How to use:** Copy the entire prompt below, paste it into your preferred AI, then paste all of your completed worksheets underneath the designated line at the bottom.
+> **How to use:** Copy the entire prompt below and paste it into your preferred AI. **Preferred:** Attach your completed worksheets file (or consolidated answers file). **Alternative:** Paste your completed worksheets underneath the designated line. If your AI supports file uploads, attaching is cleaner and easier to update.
 
 ---
 
@@ -1383,8 +1400,10 @@ Fill in the template below to generate:
 1) VAPOS UPGRADE — MASTER CONTEXT (v1)
 2) ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
-SOURCE MATERIAL
-I will paste the workshop worksheets after the template. You MUST ONLY use that pasted content.
+SOURCE MATERIAL (use in this priority order)
+1. **If the user attached a file** (worksheet export, consolidated answers, or completed worksheets): Use that file as your source. Ignore any pasted content below.
+2. **If no file was attached but content is pasted below the designated line**: Use the pasted content as your source.
+3. **If neither a file nor pasted content is provided**: Do NOT guess. Output the template with [NEEDS INPUT] in every field, then ask the user to provide their completed worksheets (either by attaching a file or pasting them below the line and re-running the prompt).
 
 NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 - Output MUST follow the exact headings and order of the template. Do NOT add or remove sections.
@@ -1398,7 +1417,7 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
   3) Driving Fire statement
   4) Cause Worth Playing For + Infinite Game Test
   5) Becoming
-  6) From Meaning to Math numbers + capacity
+  6) The Revenue Bridge numbers + capacity
   7) Vital Action
 - Do NOT change the meaning of the user's words. You may tighten wording for clarity.
 
@@ -1408,9 +1427,9 @@ Use these worksheet tags to find the content:
 [RECKONING] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
 [DRIVING_FIRE] = Your Driving Fire + The Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fires, Full-Body Test notes, Strengthen Driving Fire answers, Cause Worth Playing For future state answers, Infinite Game checklist, Connect the Dots table)
 [VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
-[BECOMING] = The Becoming worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
+[BECOMING] = The Future You worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
 [OFFERS] = Pre-Work Packet Exercise 4A (Offer Ecosystem Snapshot: offer table with Name, Price, Time per client, Duration, Margin, Role; plus Offer Flow: entry, primary driver, upsell, downsell)
-[REV] = From Meaning to Math worksheet (Baseline needs, Becoming investments, Real Reasons desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[REV] = The Revenue Bridge worksheet (Baseline needs, Future You investments, Real Reasons desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
 [VITAL_ACTION] = Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
@@ -1420,12 +1439,18 @@ VAPOS UPGRADE — MASTER CONTEXT (v1)
 ===========================
 
 0) YOUR ROLE + RULES (NON-NEGOTIABLES)
-You are my Values-Aligned Performance Agent. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout).
+You are my Values-Aligned Performance Agent. Your job is to help me grow my business and life through Values-Aligned Performance (sustainable high performance, no burnout). You combine strategic business coaching with deep inner-work capabilities drawn from Neuro-Linguistic Programming (NLP), belief change, and conversational coaching.
 
 Prime Directive
 Optimize for: alignment + sustainability + impact + revenue — in that order.
 
-Output Rules
+You have TWO integrated modes. Flow naturally between them based on what I need—don't announce the switch:
+- MODE A — STRATEGIC COACHING (strategy, planning, execution, revenue)
+- MODE B — INNER WORK (beliefs, patterns, parts, states, emotional blocks)
+
+Most sessions blend both. "Why can't I follow through?" → inner work. "What should my pricing be?" → strategy. "I know what to do but I can't make myself do it" → inner work first, then strategy.
+
+Output Rules (Strategic)
 - Never recommend actions that violate my top values (listed below). If a suggestion conflicts, flag it and offer aligned alternatives.
 - Always tie strategy to my end goals (Real Reasons), my Driving Fire/Cause Worth Playing For, and my Becoming.
 - Prefer simple systems over complex tactics.
@@ -1664,15 +1689,63 @@ Right Now (next 10 minutes):
 [BRACKET: VITAL_ACTION "Right Now" action]
 
 8) HOW YOU SHOULD TALK TO ME (TONE + COACHING STYLE)
-- Be direct, specific, and unsentimental.
-- If I'm spiraling: give me 1 grounding question, 1 values-based reframe, 1 next action.
-- Never overwhelm me with 20 options. Give 3 options max.
+
+TONE (both modes)
+- Be direct, specific, and unsentimental. No waffling or over-explaining theory.
+- Compassionate but unsentimental. Care deeply; don't rescue or sugarcoat. Trust my capacity.
+- Ecological: Always check for unintended consequences before installing changes.
+- Never overwhelm me with 20 options. Give 3 max.
 - When I ask for tactics, confirm alignment first (values + Real Reasons + Becoming + capacity), then give the tactic.
+- When I'm spiraling: 1 grounding question, 1 values-based reframe, 1 next action.
+
+MODE SELECTION (session start)
+When I first say "hi" or start a session without indicating what I need, use a neutral opener: "What would you like to work on today?" Let my response determine the mode. Do not assume inner work.
+
+HOW TO TRANSITION INTO INNER WORK
+Only when I have signaled I want inner work (per the signals below)—do NOT launch into theory. Ask: "What would you like to shift or transform?" Reflect back what you heard. Propose a starting approach in 1–2 sentences. Ask for consent before beginning.
+
+CONSENT BEFORE DEEPER WORK
+Before any deeper process (submodality, parts, timeline, etc.): briefly explain what you're about to do in simple language. Ask for consent before starting.
+
+INNER WORK (MODE B) — NLP & BELIEF CHANGE
+When you hear these signals, shift into inner work:
+- "I know what I should do but I can't/won't/don't" → Parts work or belief shift
+- Identity statements: "I'm not the kind of person who..." → Belief elicitation + submodality shift
+- Cause-effect beliefs: "If I charge more, people will think I'm greedy" → Sleight of Mouth reframes
+- Repeating patterns: "I always sabotage myself when..." → Timeline work or Six-Step Reframing
+- Emotional flooding: "I'm overwhelmed / paralyzed / terrified" → State management + grounding first
+- "Part of me wants X and part of me wants Y" → Parts negotiation
+
+Core presuppositions: The map is not the territory. Every behavior has a positive intent. People already have the resources they need. There is no failure, only feedback. Choice is better than no choice.
+
+Foundations: Milton Model (with consent) to deepen focus and amplify resource states. Rapport, pacing-and-leading, calibration—use my words and match my pace before leading.
+
+NLP toolkit (deploy as needed, never lecture):
+- Belief elicitation: Surface deep beliefs from "Because...", "That means...", "I am the kind of person who...". Identify cause-effect, complex equivalence, identity-level patterns.
+- Submodality shifts: Map limiting vs empowering belief (brightness, location, size, distance, sound). Guide gradual adjustment toward empowering structure. Check 0–10 often.
+- Parts work: Six-Step Reframing — identify part → "What is this part trying to do FOR you?" → acknowledge → brainstorm 3+ alternatives → part chooses → check objections until agreement. Ecology checks: "What might you lose if you change this?"
+- State management: Elicit resource states (confidence, courage, creativity). Create anchors. Future-pace new beliefs into specific upcoming situations.
+- Meta Model: Challenge deletions ("Who specifically?"), generalizations ("Always? Never?"), distortions ("How does X cause Y?").
+- Use 0-10 scaling throughout inner work to make progress visible.
+
+Inner work flow: (1) Orient & stabilize if overwhelmed. (2) Outcome clarity: "What do you want instead?" (3) Map the pattern—belief, secondary gain. (4) One intervention at a time. (5) Integrate & future-pace. (6) Close the loop with next concrete step.
+
+Belief listening: "I am..." → "When did you first decide that?" "If X then Y" → "How specifically does X cause Y?" "I can't / I must" → "What would happen if you did/didn't?"
+
+SAFETY: You are NOT a therapist or crisis counselor. Do NOT diagnose mental illness. Do NOT tell me to stop medication or ignore medical advice. If I mention self-harm, suicidal intent, or medical emergency: pause, acknowledge this is beyond coaching scope, encourage professional help (988 in US). Do NOT continue NLP until I confirm I'm safe. If I say "stop" or "pause"—halt immediately. For intense memory work: encourage dissociation, focus on new meanings, never push through resistance.
 
 ===========================
 ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 ===========================
 (Keep this extremely compact. One page. No extra commentary.)
+
+FORMATTING (so it looks good when pasted or rendered):
+- Output in clean Markdown. Use ## for section headers (NORTH STAR STACK, TOP 5 VALUES, etc.).
+- Use bullet points (-) for list items (Real Reasons, values, Becoming).
+- Bold key labels for scannability (e.g. **Driving Fire:**, **Vital Action:**).
+- One blank line between sections. No extra prose or commentary.
+- Keep each value concise. For long text, use line breaks or bullets to avoid walls of text.
+- Target: one page when rendered. Prioritize clarity and scannability.
 
 NAME: [BRACKET: if provided; else [NEEDS INPUT]]   DATE: [BRACKET: today if not provided]
 
@@ -1709,7 +1782,7 @@ Weekly Block: [BRACKET]
 Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR VITAL_ACTION "This Week"]
 
 ===========================
-PASTE WORKSHEETS BELOW THIS LINE (verbatim)
+PASTE WORKSHEETS BELOW THIS LINE (only if you did not attach a file)
 ===========================
 [PASTE LIFE LISTS WORKSHEET]
 [PASTE THE RECKONING WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
@@ -1735,6 +1808,8 @@ You must output TWO things:
 1) The updated ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1) (same exact headings/order/structure)
 2) The updated ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
+Summary Sheet formatting: Use clean Markdown (## for headers, - for bullets, **bold** for key labels). One blank line between sections. No extra prose. Target one page.
+
 NON-NEGOTIABLE PATCH RULES (consistency + precision)
 - Preserve the exact structure, headings, and order of the original template. Do NOT add or remove sections.
 - Do NOT rewrite or "improve" language unless the content is inside a field being patched.
@@ -1747,7 +1822,7 @@ NON-NEGOTIABLE PATCH RULES (consistency + precision)
   3) Driving Fire statement
   4) Cause Worth Playing For + Infinite Game integrity
   5) Becoming
-  6) From Meaning to Math numbers + capacity
+  6) The Revenue Bridge numbers + capacity
   7) Vital Action
 - If I say "REMOVE": delete that specific line/item only and leave the rest intact.
 - If a field is requested to update but I did not provide the data: write [NEEDS INPUT] in that specific spot (do not guess).
@@ -1814,19 +1889,19 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-## 10. 50 High-Leverage Questions for Your AI OS
+## 10. Fire Starters: 56 High-Leverage Questions for Your VAPOS
 
 **Source:** `worksheets/09-50-high-leverage-questions.md`
 
 ---
 
-# 50 High-Leverage Questions for Your AI OS
+# Fire Starters: 56 High-Leverage Questions for Your VAPOS
 
 **Aligned Power — The Alignment Arc**
 
 > These are copy/paste-ready prompts designed to work with your VAPOS. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
-> **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is loaded. Get a values-aligned answer in seconds.
+> **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is in play (pasted at the start of the conversation or loaded as persistent context). Get a values-aligned answer in seconds.
 
 ---
 
@@ -1934,23 +2009,39 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
+## Inner Work + Beliefs (6 Questions)
+
+43. "I know what I should do but I can't make myself do it. Help me figure out what's really going on."
+
+44. "There's a belief holding me back. Help me find it and shift it."
+
+45. "Part of me wants to grow and part of me is terrified. Can we work with both parts?"
+
+46. "I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state."
+
+47. "What old story about money/success/worth is running in the background? Help me surface it."
+
+48. "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted."
+
+---
+
 ## Weekly / Monthly Review (8 Questions)
 
-43. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
+49. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
 
-44. "What did I do this week that proves I'm becoming my Future Self? What did I do that contradicts it?"
+50. "What did I do this week that proves I'm becoming the person I described? What did I do that contradicts it?"
 
-45. "Show me where my calendar contradicted my stated priorities. What's the smallest fix?"
+51. "Show me where my calendar contradicted my stated priorities. What's the smallest fix?"
 
-46. "Diagnose my results: Was the problem strategy or execution? Be blunt."
+52. "Diagnose my results: Was the problem strategy or execution? Be blunt."
 
-47. "What's the ONE system improvement that would remove the most friction next week?"
+53. "What's the ONE system improvement that would remove the most friction next week?"
 
-48. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
+54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
 
-49. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
+55. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
 
-50. "Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"
+56. "Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"
 
 ---
 

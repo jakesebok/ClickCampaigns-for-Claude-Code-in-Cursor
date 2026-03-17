@@ -1,8 +1,8 @@
-# The Becoming
+# The Future You
 
 **Aligned Power — The Alignment Arc**
 
-> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
+> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, the skills you must build, and the contribution you want to make. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
 
 ---
 
@@ -11,10 +11,11 @@
 1. Don't overthink. Write what you actually want, not what you think you should want.
 2. Stay concrete: behaviors, standards, and choices—not just adjectives.
 3. Let your body vote. If something feels flat, it's probably borrowed, not owned.
+4. *Pro tip:* Speaking your answers—especially for Self (Personal) and Social (Relationships)—often surfaces truer vision. Try [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar.
 
 ---
 
-## Personal (Self)
+## Self (Personal)
 
 Define the version of you who can carry the life, business, and impact you want—without self-abandonment.
 
@@ -68,7 +69,7 @@ Copy your three words into the left column below and answer each question.
 
 ---
 
-## Relationships (Social)
+## Social (Relationships)
 
 Clarify who you want to be in your relationships—not just what you want from them.
 
@@ -110,7 +111,7 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 ---
 
-## Business (Skills)
+## Skills (Business)
 
 High performers don't "hope" they'll be ready. They train the skills that the future demands.
 
@@ -146,6 +147,26 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ---
 
+## Service (Contribution)
+
+Your Life Lists already captured *how* you want to contribute. Here we make Future Service explicit—who you want to serve with excellence and what contribution you want to be known for. In The Revenue Bridge, you'll calculate the cost of this impact or set your donation/tithe number.
+
+### A) Future Service vision (reference your Life Lists "How I Will Contribute" column)
+
+| Prompt | Your Answer |
+|--------|-------------|
+| What cause or community do I want to serve with excellence? |  |
+| What contribution do I want to be known for? |  |
+| To leave a lasting legacy, the contributions I can start making now are… |  |
+
+### B) Bridge to The Revenue Bridge
+
+| Prompt | Your Answer |
+|--------|-------------|
+| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |  |
+
+---
+
 ## Integration — Themes & Next Move
 
 ### A) What patterns do you notice across all of these futures?
@@ -159,11 +180,11 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 | Prompt | Your Answer |
 |--------|-------------|
-| If I could only strengthen ONE domain first to unlock the rest, it would be… |  |
+| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |  |
 | The reason is… |  |
 | The old pattern that will try to pull me back is… |  |
 | The first visible action I will take in the next 7 days is… |  |
 
 ---
 
-*The Becoming feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
+*The Future You feeds directly into your VAPOS. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*

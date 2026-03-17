@@ -45,7 +45,7 @@ export default function OnboardingPage() {
           <Check className="h-8 w-8 text-green-500" />
         </div>
         <h2 className="text-2xl font-serif font-bold mb-3">
-          Context Document Created
+          Alignment Blueprints Created
         </h2>
         <p className="text-muted-foreground max-w-md mb-6">
           Your worksheets have been synthesized into APOS. Your coach
@@ -114,7 +114,7 @@ export default function OnboardingPage() {
               <h3 className="text-lg font-semibold">Guided Questions</h3>
               <p className="text-sm text-muted-foreground">
                 New here? Your AI coach will ask you key questions to build your
-                context. Takes about 10-15 minutes.
+                Alignment Blueprints. Takes about 10-15 minutes.
               </p>
               <div className="flex items-center gap-1 text-sm text-accent">
                 Great for new users
@@ -137,7 +137,7 @@ export default function OnboardingPage() {
           <p className="text-muted-foreground">
             Upload your completed Strategic Clarity worksheets from the Intensive
             (Google Doc exported as .docx, or .txt/.md). APOS will synthesize everything into
-            your personalized context document.
+            your Alignment Blueprints.
           </p>
 
           {error && (
@@ -151,7 +151,7 @@ export default function OnboardingPage() {
               <div className="flex flex-col items-center gap-3">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 <span className="text-sm text-muted-foreground">
-                  Synthesizing your context... this may take a minute
+                  Synthesizing your Alignment Blueprints... this may take a minute
                 </span>
               </div>
             ) : (
@@ -191,12 +191,12 @@ export default function OnboardingPage() {
       <div className="flex flex-col items-center justify-center h-full p-8">
         <div className="max-w-lg w-full space-y-6 text-center">
           <h2 className="text-2xl font-serif font-bold">
-            Let&apos;s Build Your Context
+            Let&apos;s Build Your Alignment Blueprints
           </h2>
           <p className="text-muted-foreground">
             APOS will ask you a series of questions to understand your
             values, goals, and business. This takes about 10-15 minutes and
-            creates a personalized context document.
+            creates your Alignment Blueprints.
           </p>
           <a
             href="/chat?mode=onboarding"

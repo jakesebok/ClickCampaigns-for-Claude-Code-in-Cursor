@@ -97,7 +97,7 @@ Still thinking about the Strategic Alignment Intensive?
 Half-day. $497. You'll build:
 ✓ Your Real Reasons (what you actually want)
 ✓ Your Driving Fire + Cause Worth Playing For
-✓ From Meaning to Math (meaning → math)
+✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
 ✓ APOS — your personalized AI coach
 

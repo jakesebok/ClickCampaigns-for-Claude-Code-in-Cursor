@@ -14,7 +14,7 @@
 | Total Videos | 18 |
 | Total Worksheets | 8 (+ Pre-Work Packet) |
 | Master Prompt | 1 (+ Monthly Patch Notes) |
-| Resource Documents | 1 (50 High-Leverage Questions) |
+| Resource Documents | 1 (56 High-Leverage Questions, incl. Inner Work + Beliefs) |
 
 ---
 
@@ -68,13 +68,13 @@
 
 ---
 
-### Lesson 4: The Becoming
+### Lesson 4: The Future You
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 4.1 — The Becoming | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
+| Video 4.1 — The Future You | `documents/video-4.1-future-four.md` | Script | ~8–12 min |
 | Video 4.2 — Integration + 90-Day Focus | `documents/video-4.2-becoming-you-integration.md` | Script | ~5–8 min |
-| The Becoming Worksheet | `worksheets/04-becoming-you.md` | Worksheet | — |
+| The Future You Worksheet | `worksheets/04-becoming-you.md` | Worksheet | — |
 
 ---
 
@@ -87,14 +87,14 @@
 
 ---
 
-### Lesson 6: From Meaning to Math
+### Lesson 6: The Revenue Bridge: From Meaning To Math
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
 | Video 6.1 — Baseline, Desires, Impact | `documents/video-6.1-gtm-baseline-desires-impact.md` | Script | ~10–15 min |
 | Video 6.2 — The Math (Revenue → QCs) | `documents/video-6.2-gtm-the-math.md` | Script | ~10–12 min |
 | Video 6.3 — Lead Path Fork + Highest-Leverage Move | `documents/video-6.3-gtm-lead-path-leverage.md` | Script | ~5–8 min |
-| From Meaning to Math Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
+| The Revenue Bridge Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
 
 ---
 
@@ -137,11 +137,11 @@ Lesson 2: Driving Fire + Cause Worth Playing For — Why am I here? (Purpose + i
     ↓
 Lesson 3: Your Values Code — What do I stand for? (Operational definitions + boundaries)
     ↓
-Lesson 4: The Becoming — Who am I growing into? (Self/Social/Skills/Service)
+Lesson 4: The Future You — Who am I growing into? Self (Personal), Social (Relationships), Skills (Business), Service (Contribution)
     ↓
 Lesson 5: The Reckoning — What's actually true right now? (Bridge to operationalization)
     ↓
-Lesson 6: From Meaning to Math — What does my business need to produce?
+Lesson 6: The Revenue Bridge — What does my business need to produce?
     ↓
 Lesson 7: Vital Action — What's the single move that makes everything else easier?
     ↓
@@ -160,7 +160,7 @@ Lesson 9: Fire Starters — Put the AI coach to work daily
 | Simon Sinek, *Start With Why* | Golden Circle; Driving Fire (What-How-Why structure) |
 | Simon Sinek, *The Infinite Game* | The Cause Worth Playing For |
 | Sinek et al., *Find Your Why* | Peak Moments, Theme Mining, Driving Fire format |
-| Brendon Burchard, *High Performance Habits* | The Becoming (four domains: Self, Social, Skills, Service) |
+| Brendon Burchard, *High Performance Habits* | The Future You (four domains: Self, Social, Skills, Service) |
 | Gary Keller, *The ONE Thing* | Vital Action (focus, cascade, single-lever logic) |
 
 ---
@@ -181,3 +181,4 @@ All video scripts written in Jake Sebok's voice per `Resources/Jake's Voice/JAKE
 - **Video scripts** are written as teleprompter-ready scripts with natural speech patterns
 - **Master Prompt** updated to reference The Reckoning worksheet with graceful `[NEEDS INPUT]` handling when skipped
 - **The Alignment Arc Intensive** uses the same worksheets, facilitated live—no separate materials needed
+- **VAPOS workflow:** (1) **Generation:** Start a chat with the master prompt; attach completed worksheets file (preferred) or paste below the line. (2) **Ongoing coaching:** Use the generated Master Context as a persistent context document—paste at start of conversations or add to AI project/custom instructions so the coach knows the user every time

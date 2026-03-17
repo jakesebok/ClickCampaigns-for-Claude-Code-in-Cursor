@@ -91,7 +91,7 @@ I know it feels dramatic. That's the point. You're making a commitment to yourse
 
 ### One Last Note
 
-If your Lead Lane is Business/Money, go back and check: does your Vital Action support your Required Revenue from From Meaning to Math? Does it protect the other lanes—or come at their expense? If your business Vital Action is "do 50 cold calls a day" but your Self domain says "grounded and present" and your Social domain says "protect family dinners"—something's off. Revisit. Realign.
+If your Lead Lane is Business/Money, go back and check: does your Vital Action support your Required Revenue from The Revenue Bridge? Does it protect the other lanes—or come at their expense? If your business Vital Action is "do 50 cold calls a day" but your Self (Personal) future says "grounded and present" and your Social (Relationships) future says "protect family dinners"—something's off. Revisit. Realign.
 
 The whole point of Strategic Clarity is that your daily actions serve your whole life. Not just one lane at the cost of the others.
 
@@ -99,7 +99,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: Real Reasons, Driving Fire, values, The Becoming, The Reckoning, From Meaning to Math, and Your Vital Action Plan installed on your calendar.
+You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, The Reckoning, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your VAPOS comes online.
 

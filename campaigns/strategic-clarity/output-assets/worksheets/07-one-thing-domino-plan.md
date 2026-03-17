@@ -15,7 +15,6 @@ Write the sentence that brings you back to what matters:
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -23,18 +22,17 @@ Write the sentence that brings you back to what matters:
 
 Circle the lane where meaningful progress would make the other lanes easier:
 
-| Lane | Lead Lane Test |
-|------|----------------|
-| **Business / Money** | If this improves, the other lane(s) that improve automatically are: |
-| **Home / Relationships** | If this improves, the other lane(s) that improve automatically are: |
-| **Impact / Cause Worth Playing For** | If this improves, the other lane(s) that improve automatically are: |
-| **Self / Skills** | If this improves, the other lane(s) that improve automatically are: |
+| Lane | if this improves, the other lane(s) that improve automatically are: |
+|------|---------------------------------------------------------------------|
+| **Business / Money** |  |
+| **Home / Relationships** |  |
+| **Impact / Cause Worth Playing For** |  |
+| **Self / Skills** |  |
 
 **My Lead Lane:**
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -121,7 +119,6 @@ Write it. Sign it.
 
 |   |
 |---|
-|   |
 
 **I will protect it.**
 
@@ -131,7 +128,7 @@ Write it. Sign it.
 
 ---
 
-*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue from From Meaning to Math and protects the other lanes—not at their expense.*
+*Note: If your Lead Lane is Business/Money, verify it supports your Required Revenue from The Revenue Bridge and protects the other lanes—not at their expense.*
 
 ---
 

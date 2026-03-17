@@ -16,6 +16,7 @@
   - Create "Aligned Monthly" product: $39/month recurring
   - Create "Aligned Annual" product: $349/year recurring
   - Copy price IDs to `.env.local`
+  - Create coupon: `INTENSIVE30` (100% off for 30 days — workshop/video attendees)
   - Create coupon: `CLARITY30` (100% off for 30 days)
   - Create coupon: `COACHING12` (100% off for 365 days)
   - Add webhook endpoint: `https://your-domain.com/api/webhooks/stripe` → `customer.subscription.*`
@@ -33,7 +34,7 @@
 - [ ] Send test chat messages — verify Claude responds with context
 - [ ] Test morning SMS — manually trigger cron endpoint
 - [ ] Test subscription flow — use Stripe test mode
-- [ ] Test coupon codes — CLARITY30 and COACHING12
+- [ ] Test coupon codes — INTENSIVE30, CLARITY30, and COACHING12
 - [ ] Check mobile PWA — install on phone, verify layout
 - [ ] Verify all pages render — landing, pricing, webinar, dashboard
 
@@ -64,6 +65,10 @@
 - [ ] SMS opt-in rate
 - [ ] Context depth scores
 - [ ] Churn rate (who stops using it and when)
+
+## Future Enhancements (Post-Launch)
+
+- [x] **In-app patching** — DONE. Settings → Alignment Blueprints → Update Blueprints. Users describe changes in plain language; AI updates the right fields. No re-upload needed.
 
 ## Soft Launch (Post-Beta)
 

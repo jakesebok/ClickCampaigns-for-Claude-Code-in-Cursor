@@ -1,10 +1,10 @@
-# Fire Starters: 50 High-Leverage Questions for Your VAPOS
+# Fire Starters: 56 High-Leverage Questions for Your VAPOS
 
 **Aligned Power — The Alignment Arc**
 
 > These are copy/paste-ready prompts designed to work with your VAPOS. Your AI coach already knows your values, Real Reasons, Driving Fire, Becoming, revenue targets, and Vital Action—so every answer is personalized to you.
 >
-> **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is loaded. Get a values-aligned answer in seconds.
+> **How to use:** Pick the question that matches what you need right now. Copy it. Paste it into the AI where your Master Context is in play (pasted at the start of the conversation or loaded as persistent context). Get a values-aligned answer in seconds.
 
 ---
 
@@ -112,23 +112,39 @@
 
 ---
 
+## Inner Work + Beliefs (6 Questions)
+
+43. "I know what I should do but I can't make myself do it. Help me figure out what's really going on."
+
+44. "There's a belief holding me back. Help me find it and shift it."
+
+45. "Part of me wants to grow and part of me is terrified. Can we work with both parts?"
+
+46. "I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state."
+
+47. "What old story about money/success/worth is running in the background? Help me surface it."
+
+48. "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted."
+
+---
+
 ## Weekly / Monthly Review (8 Questions)
 
-43. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
+49. "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity—then choose one adjustment."
 
-44. "What did I do this week that proves I'm becoming the person I described? What did I do that contradicts it?"
+50. "What did I do this week that proves I'm becoming the person I described? What did I do that contradicts it?"
 
-45. "Show me where my calendar contradicted my stated priorities. What's the smallest fix?"
+51. "Show me where my calendar contradicted my stated priorities. What's the smallest fix?"
 
-46. "Diagnose my results: Was the problem strategy or execution? Be blunt."
+52. "Diagnose my results: Was the problem strategy or execution? Be blunt."
 
-47. "What's the ONE system improvement that would remove the most friction next week?"
+53. "What's the ONE system improvement that would remove the most friction next week?"
 
-48. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
+54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
 
-49. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
+55. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
 
-50. "Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"
+56. "Based on the last 30 days, what should I double down on, stop, and redesign—so I win without burnout?"
 
 ---
 

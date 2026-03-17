@@ -5,13 +5,13 @@ import { Check } from "lucide-react";
 const features = [
   "Personalized AI coaching chat (powered by Claude)",
   "Values-aligned decision filter",
-  "From Meaning to Math built in",
+  "The Revenue Bridge built in",
   "50 High-Leverage Questions",
   "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
   "Daily SMS morning prompts",
   "Alignment Blueprint dashboard",
-  "Context Patch Notes (monthly updates)",
+  "Alignment Blueprint updates (monthly)",
   "Works on desktop, phone, and tablet (PWA)",
 ];
 
@@ -41,13 +41,13 @@ const tiers = [
   {
     tier: "Strategic Alignment Intensive Attendees",
     trial: "30-day free APOS access",
-    context: "Full context from live worksheets",
+    context: "Full Alignment Blueprints from live worksheets",
     note: "Attend the quarterly $497 Intensive and get 30 days of APOS free.",
   },
   {
     tier: "Aligned Power Coaching Clients",
     trial: "12 months free APOS access",
-    context: "Full context from complete Strategic Clarity module",
+    context: "Full Alignment Blueprints from complete Strategic Clarity module",
     note: "Included with Aligned Power Accelerator enrollment.",
   },
 ];

@@ -1,4 +1,4 @@
-# From Meaning to Math
+# The Revenue Bridge: From Meaning To Math
 
 **Aligned Power — The Alignment Arc**
 
@@ -24,26 +24,24 @@ List what must be true financially for you and your business to feel stable (not
 
 |   |
 |---|
-|   |
 
 ---
 
-## Step 2 — Fund The Becoming + Real Reasons (Stretch Desires)
+## Step 2 — Fund The Future You + Real Reasons (Stretch Desires)
 
 Translate the next-level life you want into numbers so your business target is tied to what you actually want—not just "growth."
 
 | Domain | What does "better" look like? | Why it matters (1 sentence) | Annual Investment ($) | First Step / Next 30 Days |
 |--------|-------------------------------|-----------------------------|-----------------------|---------------------------|
-| PERSONAL |  |  |  |  |
-| RELATIONSHIPS |  |  |  |  |
-| BUSINESS |  |  |  |  |
-| IMPACT |  |  |  |  |
+| Self (Personal) |  |  |  |  |
+| Social (Relationships) |  |  |  |  |
+| Skills (Business) |  |  |  |  |
+| Service (Impact) |  |  |  |  |
 
-**Becoming Total (annual):**
+**Future You Total (annual):**
 
 |   |
 |---|
-|   |
 
 Now list 1–5 Real Reasons–based stretch desires you want your business to fund this year:
 
@@ -59,13 +57,12 @@ Now list 1–5 Real Reasons–based stretch desires you want your business to fu
 
 |   |
 |---|
-|   |
 
 ---
 
 ## Step 3 — Resource the Impact (Your "Tithe" for the Cause)
 
-Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought.
+Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
 
 | Field | Your Answer |
 |-------|-------------|
@@ -79,7 +76,6 @@ Your business doesn't have to be your Cause Worth Playing For—but it can fund 
 
 |   |
 |---|
-|   |
 
 ---
 
@@ -90,7 +86,7 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 | Component | Amount ($) |
 |-----------|------------|
 | Baseline Needs Total |  |
-| Becoming Total |  |
+| Future You Total |  |
 | Real Reasons Desires Total |  |
 | Cause Total |  |
 | **= Required Revenue (annual)** |  |
@@ -208,4 +204,4 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
-*Your From Meaning to Math numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+*Your Revenue Bridge numbers feed directly into your VAPOS. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*

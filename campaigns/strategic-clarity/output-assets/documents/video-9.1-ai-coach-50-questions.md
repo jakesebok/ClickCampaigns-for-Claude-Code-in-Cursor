@@ -10,7 +10,7 @@ Alright. Final lesson. And honestly? This might be the most *fun* one.
 
 You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
-I'm going to walk you through the Fire Starters—fifty high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
+I'm going to walk you through the Fire Starters—fifty-six high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
 
 ---
 
@@ -18,7 +18,7 @@ I'm going to walk you through the Fire Starters—fifty high-leverage questions 
 
 The Fire Starters resource is a copy/paste-ready document. Each question is a prompt. You don't have to memorize them. You don't even have to use them in order. Here's how it works:
 
-1. **Open a conversation** with your AI coach (paste your Master Context in if it's a new session)
+1. **Open a conversation** with your AI coach. Your Master Context should already be in play—either pasted at the start of the conversation, or loaded as persistent context (Claude Projects, ChatGPT custom instructions, etc.). That's how your coach knows you every time.
 2. **Find the question** that matches what you need right now
 3. **Copy it. Paste it. Get a personalized answer.**
 
@@ -122,7 +122,7 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Turned meaning into math
 - Chose one Vital Action and installed it on your calendar
 - Built a VAPOS that holds all of it
-- And now you've got Fire Starters—fifty questions that turn that system into a daily tool
+- And now you've got Fire Starters—fifty-six questions that turn that system into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
 

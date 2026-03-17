@@ -12,6 +12,7 @@
 - If your brain argues, keep writing anyway.
 - Your job is not to be realistic—your job is to be **honest**.
 - Move fast. Don't edit. Depth beats perfection.
+- *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces truer, more unfiltered responses than typing.
 
 ---
 
@@ -46,7 +47,6 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 |   |
 |---|
-|   |
 
 ---
 

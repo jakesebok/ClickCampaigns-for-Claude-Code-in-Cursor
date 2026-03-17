@@ -30,11 +30,11 @@ By the end of this module, you will have:
 
 3. **Your Values Code** — five non-negotiables, operationalized. Meaning: not a list of pretty words on a wall. Each one has a definition, a set of behaviors, and a boundary. Because values without boundaries are just suggestions.
 
-4. **The Becoming** — who you're becoming across Self, Relationships, Skills, and Service. Growth that doesn't require self-abandonment.
+4. **The Future You** — who you're becoming across Self (Personal), Social (Relationships), Skills (Business), and Service (Contribution). Growth that doesn't require self-abandonment.
 
 5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
 
-6. **From Meaning to Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
+6. **The Revenue Bridge: From Meaning To Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
 
 7. **Your Vital Action Plan** — the single aligned move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
 
@@ -69,11 +69,11 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 3:** We excavate Your Values Code. Five of them. Operational. Specific. Non-negotiable.
 
-**Lesson 4:** We map The Becoming. The person you're becoming across every domain that matters.
+**Lesson 4:** We map The Future You. The person you're becoming across every domain that matters.
 
 **Lesson 5:** We face The Reckoning. Before we turn vision into numbers, we name what's in the way.
 
-**Lesson 6:** We build From Meaning to Math. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
+**Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
 
 **Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
@@ -87,7 +87,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Depth beats perfection.** You'll hear me say this a lot. I don't need polished answers. I need honest ones. The messier the truth, the more powerful the output.
 
-**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Becoming. The Becoming feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
+**Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your VAPOS. So don't skip ahead, and don't phone it in.
 
 **This also works live.** If you're doing this as The Alignment Arc Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
 

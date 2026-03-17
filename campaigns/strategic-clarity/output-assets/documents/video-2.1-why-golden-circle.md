@@ -26,7 +26,7 @@ Simon Sinek gave us a useful lens: every organization—every person—operates 
 
 Now, why does this matter for *you* in Strategic Clarity?
 
-Because your Driving Fire is the through-line. It connects your Real Reasons to your Values Code to The Becoming to your revenue to your Vital Action. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your Driving Fire is the thing that says: *does this serve what I'm actually here for?*
+Because your Driving Fire is the through-line. It connects your Real Reasons to your Values Code to The Future You to your revenue to your Vital Action. It's the anchor. When you're scattered—when you've got twelve competing priorities and a full inbox and someone just offered you a "huge opportunity"—your Driving Fire is the thing that says: *does this serve what I'm actually here for?*
 
 Without it, you're making decisions based on opportunity cost, fear of missing out, what the market wants, or what your peers are doing. With it, you're making decisions based on purpose. And purpose doesn't burn out the way ambition does.
 

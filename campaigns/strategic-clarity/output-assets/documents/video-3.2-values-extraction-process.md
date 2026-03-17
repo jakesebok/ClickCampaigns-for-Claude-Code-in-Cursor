@@ -65,7 +65,7 @@ Once you have your Top 5, fill in the final table. For each value:
 
 **Definition (in your words)** — not the dictionary. What does this mean to *you*? If you had to explain it to a 15-year-old, what would you say?
 
-**How I will embody it (behaviors)** — what does this look like in action? "I will speak directly and kindly, even when it's uncomfortable." "I will protect my deep work blocks and not apologize for it." "I will ask for help before I'm drowning."
+**How I will embody it (behaviors)** — what does this look like in action? This would be a perfect place to use something like Wispr Flow or a similar tool—speaking your definitions and behaviors often gets you to the real thing faster than typing. Link in the worksheet. "I will speak directly and kindly, even when it's uncomfortable." "I will protect my deep work blocks and not apologize for it." "I will ask for help before I'm drowning."
 
 **What I will not tolerate (boundary)** — this is the line. "I will not tolerate passive-aggressive communication." "I will not compromise my health to meet a deadline." "I will not stay in partnerships where the other person won't have hard conversations."
 

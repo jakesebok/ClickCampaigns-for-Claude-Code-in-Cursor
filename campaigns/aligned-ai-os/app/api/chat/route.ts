@@ -47,11 +47,48 @@ function formatScorecardContext(entries: PortalSixCRow[]): string {
   return ctx;
 }
 
+const MAX_MESSAGES_IN_CONTEXT = 20; // Last N messages (10 turns) — keeps context focused and cost-controlled
+const MAX_MESSAGE_LENGTH = 4000; // chars per message — prevents abuse and token bloat
+
 export async function POST(req: NextRequest) {
   const { userId: clerkId } = await auth();
   if (!clerkId) return new Response("Unauthorized", { status: 401 });
 
   const { messages, conversationId } = await req.json();
+
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return new Response(
+      JSON.stringify({ error: "messages array is required and must not be empty" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const lastMessage = messages[messages.length - 1];
+  if (lastMessage?.role !== "user" || typeof lastMessage?.content !== "string") {
+    return new Response(
+      JSON.stringify({ error: "Last message must be from user with string content" }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  if (lastMessage.content.length > MAX_MESSAGE_LENGTH) {
+    return new Response(
+      JSON.stringify({
+        error: `Message too long. Please keep messages under ${MAX_MESSAGE_LENGTH} characters.`,
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const trimmedMessages = messages
+    .slice(-MAX_MESSAGES_IN_CONTEXT)
+    .map((m: { role: string; content: string }) => ({
+      role: m.role,
+      content:
+        typeof m.content === "string" && m.content.length > MAX_MESSAGE_LENGTH
+          ? m.content.slice(0, MAX_MESSAGE_LENGTH) + "..."
+          : m.content,
+    }));
 
   const [user] = await db
     .select()
@@ -65,7 +102,10 @@ export async function POST(req: NextRequest) {
     user.subscriptionStatus === "expired" ||
     user.subscriptionStatus === "canceled"
   ) {
-    return new Response("Subscription required", { status: 402 });
+    return new Response(
+      JSON.stringify({ error: "Subscription required. Please renew to continue." }),
+      { status: 402, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const [contextDoc] = await db
@@ -87,7 +127,7 @@ export async function POST(req: NextRequest) {
     enrichedContext = (enrichedContext || "") + formatScorecardContext(sixCRows);
   }
 
-  const lastUserMessage = messages[messages.length - 1];
+  const lastUserMessage = trimmedMessages[trimmedMessages.length - 1];
   if (conversationId && lastUserMessage) {
     await db.insert(schema.messages).values({
       conversationId,
@@ -97,7 +137,7 @@ export async function POST(req: NextRequest) {
   }
 
   const stream = await streamCoachingResponse({
-    messages,
+    messages: trimmedMessages,
     masterContext: enrichedContext,
   });
 

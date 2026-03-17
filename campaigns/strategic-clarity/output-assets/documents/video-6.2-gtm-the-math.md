@@ -1,6 +1,6 @@
 # Video 6.2 — The Math: Revenue → Qualified Conversations
 
-**Lesson 6: From Meaning to Math | ~10–12 minutes**
+**Lesson 6: The Revenue Bridge: From Meaning To Math | ~10–12 minutes**
 
 ---
 
@@ -15,7 +15,7 @@ Alright. You've got your numbers. Baseline Needs. Becoming investments. Real Rea
 Open your worksheet to Step 4. Stack your totals:
 
 - Baseline Needs Total
-- Becoming Total
+- Future You Total
 - Real Reasons Desires Total
 - Cause Total
 

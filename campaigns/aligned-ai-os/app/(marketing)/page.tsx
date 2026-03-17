@@ -94,7 +94,7 @@ export default function LandingPage() {
             {[
               {
                 step: "01",
-                title: "Build your context",
+                title: "Build your Alignment Blueprints",
                 description:
                   "Upload your Alignment Arc worksheets from the Intensive or answer guided questions. Your AI coach learns your values, goals, Driving Fire, and real business numbers.",
                 icon: Target,
@@ -186,7 +186,7 @@ export default function LandingPage() {
               },
               {
                 icon: BarChart3,
-                title: "From Meaning to Math",
+                title: "The Revenue Bridge: From Meaning To Math",
                 description:
                   "Your real numbers — Required Revenue, QCs per week, close rates — built into every strategy recommendation.",
               },
@@ -242,7 +242,7 @@ export default function LandingPage() {
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Join the quarterly Strategic Alignment Intensive ($497). Build your
-            complete context document with expert guidance. Get 30 days of free
+            complete Alignment Blueprints with expert guidance. Get 30 days of free
             APOS access — and an AI coach that knows you 10x deeper than the
             guided onboarding.
           </p>

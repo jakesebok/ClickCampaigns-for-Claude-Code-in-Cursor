@@ -233,7 +233,7 @@ export default function VoiceSessionPage() {
 
             <p className="text-xs text-white/30">
               Uses your microphone. Voice sessions use OpenAI Realtime for
-              natural conversation. Your APOS context, VAPI scores, and 6Cs data
+              natural conversation. Your Alignment Blueprints, VAPI scores, and 6Cs data
               are loaded automatically.
             </p>
           </div>

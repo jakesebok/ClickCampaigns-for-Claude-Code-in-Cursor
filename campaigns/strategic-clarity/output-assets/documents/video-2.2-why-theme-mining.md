@@ -34,7 +34,7 @@ If you're doing this with a partner or in a group—great. One person asks the q
 
 If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as a values-aligned theme mining coach, walking you through the same process.
 
-Either way, here are the five questions. Answer them quickly. First honest answer wins.
+Either way, here are the five questions. Answer them quickly. First honest answer wins. This would be a perfect place to use something like Wispr Flow or a similar tool—speaking your answers often surfaces the pattern faster than typing. Link in the worksheet.
 
 **1. What do these stories have in common?**
 
