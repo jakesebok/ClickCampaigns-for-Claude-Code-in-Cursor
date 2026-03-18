@@ -43,6 +43,8 @@ import {
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 
+type MetricKey = "overall" | `arena:${string}` | `domain:${string}`;
+
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity,  IA: Compass, ME: Brain, AF: Focus,
   RS: Heart, FA: Home, CO: Users, WI: Globe,
@@ -132,6 +134,105 @@ type ResultData = {
   createdAt: string;
 };
 
+function getMetricLabel(metricKey: MetricKey): string {
+  if (metricKey === "overall") return "Overall Score";
+  if (metricKey.startsWith("arena:")) {
+    const key = metricKey.slice(6);
+    return ARENAS.find((arena) => arena.key === key)?.label ?? key;
+  }
+  const code = metricKey.slice(7);
+  return DOMAINS.find((domain) => domain.code === code)?.name ?? code;
+}
+
+function getMetricScore(result: ResultData, metricKey: MetricKey): number | null {
+  if (metricKey === "overall") return result.overallScore / 10;
+  if (metricKey.startsWith("arena:")) return result.arenaScores[metricKey.slice(6)] ?? null;
+  return result.domainScores[metricKey.slice(7)] ?? null;
+}
+
+function getMetricTier(result: ResultData, metricKey: MetricKey): VapiTier | null {
+  const score = getMetricScore(result, metricKey);
+  return score == null ? null : getTier(score);
+}
+
+function getMetricInterpretation(result: ResultData, metricKey: MetricKey): string {
+  const tier = getMetricTier(result, metricKey);
+  if (!tier) return "";
+  if (metricKey === "overall") return "";
+  if (metricKey.startsWith("arena:")) {
+    return ARENA_INTERPRETATIONS[metricKey.slice(6)]?.[tier] ?? "";
+  }
+  return DOMAIN_INTERPRETATIONS[metricKey.slice(7)]?.[tier] ?? "";
+}
+
+function ProgressLineChart({
+  results,
+  metricKey,
+}: {
+  results: ResultData[];
+  metricKey: MetricKey;
+}) {
+  const ordered = [...results].sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
+  const scores = ordered
+    .map((entry) => getMetricScore(entry, metricKey))
+    .filter((score): score is number => score != null);
+
+  if (scores.length === 0) return null;
+
+  const width = 680;
+  const height = 260;
+  const padX = 48;
+  const padTop = 20;
+  const padBottom = 36;
+  const chartHeight = height - padTop - padBottom;
+  const chartWidth = width - padX * 2;
+  const maxY = 10;
+
+  const points = ordered.map((entry, index) => {
+    const score = getMetricScore(entry, metricKey) ?? 0;
+    const x =
+      ordered.length === 1
+        ? width / 2
+        : padX + (index / (ordered.length - 1)) * chartWidth;
+    const y = padTop + ((maxY - score) / maxY) * chartHeight;
+    return { x, y, score, label: new Date(entry.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" }) };
+  });
+
+  const linePath = points
+    .map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`)
+    .join(" ");
+
+  return (
+    <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible">
+        {[0, 2, 4, 6, 8, 10].map((tick) => {
+          const y = padTop + ((maxY - tick) / maxY) * chartHeight;
+          return (
+            <g key={tick}>
+              <line x1={padX} x2={width - padX} y1={y} y2={y} stroke="hsl(var(--border))" strokeDasharray="4 4" />
+              <text x={padX - 12} y={y + 4} textAnchor="end" fontSize="11" fill="hsl(var(--muted-foreground))">
+                {tick}
+              </text>
+            </g>
+          );
+        })}
+        <path d={linePath} fill="none" stroke="hsl(var(--accent))" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+        {points.map((point) => (
+          <g key={point.label}>
+            <circle cx={point.x} cy={point.y} r="5" fill="hsl(var(--accent))" />
+            <circle cx={point.x} cy={point.y} r="2.5" fill="white" />
+            <text x={point.x} y={height - 10} textAnchor="middle" fontSize="11" fill="hsl(var(--muted-foreground))">
+              {point.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 function ResultsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -140,8 +241,10 @@ function ResultsContent() {
   const [allResults, setAllResults] = useState<ResultData[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedArenas, setExpandedArenas] = useState<Record<string, boolean>>({});
-  const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
   const [expandedPriorityDomains, setExpandedPriorityDomains] = useState<Record<string, boolean>>({});
+  const [selectedMetric, setSelectedMetric] = useState<MetricKey>("overall");
+  const [selectedProgressMetric, setSelectedProgressMetric] = useState<MetricKey>("overall");
+  const [arenaCardsExpanded, setArenaCardsExpanded] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
@@ -176,6 +279,22 @@ function ResultsContent() {
     };
     load().finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sync = () => {
+      const expanded = window.innerWidth >= 640;
+      setArenaCardsExpanded(expanded);
+      if (expanded) {
+        setExpandedArenas(
+          Object.fromEntries(ARENAS.map((arena) => [arena.key, true]))
+        );
+      }
+    };
+    sync();
+    window.addEventListener("resize", sync);
+    return () => window.removeEventListener("resize", sync);
+  }, []);
 
   if (loading) {
     return (
@@ -223,6 +342,17 @@ function ResultsContent() {
   const overInvestment = priorityMatrix.filter(
     (p) => p.quadrant === "Possible Over-Investment"
   );
+  const selectedMetricScore = getMetricScore(result, selectedMetric);
+  const selectedMetricTier = getMetricTier(result, selectedMetric);
+  const selectedMetricColor = selectedMetricTier
+    ? getTierColor(selectedMetricTier)
+    : overallColor;
+  const selectedMetricInterpretation = getMetricInterpretation(result, selectedMetric);
+  const metricButtons: MetricKey[] = [
+    "overall",
+    ...ARENAS.map((arena) => `arena:${arena.key}` as MetricKey),
+    ...DOMAINS.map((domain) => `domain:${domain.code}` as MetricKey),
+  ];
 
   return (
     <div className="flex flex-col h-full">
@@ -285,7 +415,13 @@ function ResultsContent() {
                 )}
               </div>
               <div className="flex justify-center shrink-0 w-full sm:w-auto overflow-visible py-4 sm:py-0">
-                <VapiWheel domainScores={result.domainScores} />
+                <VapiWheel
+                  domainScores={result.domainScores}
+                  metricKey={selectedMetric}
+                  onMetricSelect={(metricKey) =>
+                    setSelectedMetric(metricKey as MetricKey)
+                  }
+                />
               </div>
             </div>
           </div>
@@ -293,49 +429,66 @@ function ResultsContent() {
           {/* Archetype — expandable with full content */}
           <ArchetypeSection archetype={archetype} />
 
-          {/* Progress Over Time — when 2+ assessments */}
-          {allResults.length >= 2 && (
-            <div id="progress-over-time" className="space-y-3 scroll-mt-6">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                Progress Over Time
-              </h2>
-              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm">
-                <div className="flex flex-col gap-4">
-                  {[...allResults]
-                    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
-                    .map((r, i) => {
-                      const score = r.overallScore / 10;
-                      const tier = getTier(score);
-                      const color = getTierColor(tier);
-                      const pct = Math.min(100, (score / 10) * 100);
-                      return (
-                        <div key={r.id} className="space-y-1.5">
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-muted-foreground">
-                              {new Date(r.createdAt).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </span>
-                            <span className="font-medium" style={{ color }}>
-                              {score.toFixed(1)} — {tier}
-                            </span>
-                          </div>
-                          <div className="h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all"
-                              style={{ width: `${pct}%`, backgroundColor: color }}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
+          {/* Explore Your Score */}
+          <div className="space-y-3">
+            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+              Explore Your Score
+            </h2>
+            <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm space-y-6">
+              <div className="flex flex-col lg:flex-row gap-6">
+                <div className="flex-1 space-y-3">
+                  <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                    {getMetricLabel(selectedMetric)}
+                  </p>
+                  <div className="flex items-end gap-3">
+                    <span className="text-5xl font-bold font-serif" style={{ color: selectedMetricColor }}>
+                      {selectedMetricScore != null ? selectedMetricScore.toFixed(1) : "—"}
+                    </span>
+                    {selectedMetricTier && (
+                      <span className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white" style={{ backgroundColor: selectedMetricColor }}>
+                        {selectedMetricTier}
+                      </span>
+                    )}
+                  </div>
+                  {selectedMetricInterpretation && (
+                    <p className="text-sm text-muted-foreground leading-relaxed border-t border-border pt-4">
+                      {selectedMetricInterpretation}
+                    </p>
+                  )}
+                </div>
+                <div className="w-full max-w-[320px] mx-auto lg:mx-0">
+                  <VapiWheel
+                    domainScores={result.domainScores}
+                    metricKey={selectedMetric}
+                    onMetricSelect={(metricKey) =>
+                      setSelectedMetric(metricKey as MetricKey)
+                    }
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                  Select a metric
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {metricButtons.map((metricKey) => (
+                    <button
+                      key={metricKey}
+                      type="button"
+                      onClick={() => setSelectedMetric(metricKey)}
+                      className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
+                        selectedMetric === metricKey
+                          ? "border-accent bg-accent/10 text-foreground"
+                          : "border-border bg-background/40 text-muted-foreground hover:border-accent/30 hover:text-foreground"
+                      }`}
+                    >
+                      {getMetricLabel(metricKey)}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Arena Scores */}
           <div className="space-y-3">
@@ -367,7 +520,7 @@ function ResultsContent() {
                     <div className="text-3xl font-bold font-serif" style={{ color }}>
                       {score.toFixed(1)}
                     </div>
-                    {interpretation && (
+                    {!arenaCardsExpanded && interpretation && (
                       <button
                         type="button"
                         onClick={() => setExpandedArenas((e) => ({ ...e, [arena.key]: !isExpanded }))}
@@ -377,7 +530,7 @@ function ResultsContent() {
                         {isExpanded ? "Hide" : "Read interpretation"}
                       </button>
                     )}
-                    {isExpanded && interpretation && (
+                    {(arenaCardsExpanded || isExpanded) && interpretation && (
                       <p className="text-sm text-muted-foreground leading-relaxed pt-2 border-t border-border">
                         {interpretation}
                       </p>
@@ -386,83 +539,6 @@ function ResultsContent() {
                 );
               })}
             </div>
-          </div>
-
-          {/* Domain Breakdown */}
-          <div className="space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-              Domain Breakdown
-            </h2>
-            {ARENAS.map((arena) => (
-              <div key={arena.key} className="space-y-2">
-                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider pt-2">
-                  {arena.label}
-                </h3>
-                {arena.domains.map((code) => {
-                  const domain = DOMAINS.find((d) => d.code === code)!;
-                  const score = result.domainScores[code] || 0;
-                  const tier = getTier(score);
-                  const color = getTierColor(tier);
-                  const Icon = DOMAIN_ICONS[code];
-                  const imp = result.importance?.[code];
-                  const isExpanded = expandedDomains[code] ?? false;
-                  const interpretation = DOMAIN_INTERPRETATIONS[code]?.[tier];
-
-                  return (
-                    <div
-                      key={code}
-                      className="rounded-xl border border-border bg-card/80 p-4 shadow-sm"
-                    >
-                      <div className="flex items-center gap-3">
-                        {Icon && <Icon className="h-5 w-5 text-accent shrink-0" />}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">{domain.name}</span>
-                            {imp != null && (
-                              <span className="text-xs text-muted-foreground">
-                                (importance: {imp}/10)
-                              </span>
-                            )}
-                          </div>
-                          <div className="w-full h-2 bg-muted rounded-full mt-1.5">
-                            <div
-                              className="h-full rounded-full transition-all"
-                              style={{
-                                width: `${(score / 10) * 100}%`,
-                                backgroundColor: color,
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="text-right shrink-0">
-                          <div className="text-sm font-bold" style={{ color }}>
-                            {score.toFixed(1)}
-                          </div>
-                          <div className="text-[10px]" style={{ color }}>
-                            {tier}
-                          </div>
-                        </div>
-                        {interpretation && (
-                          <button
-                            type="button"
-                            onClick={() => setExpandedDomains((e) => ({ ...e, [code]: !isExpanded }))}
-                            className="p-1 rounded text-muted-foreground hover:text-foreground"
-                            aria-label={isExpanded ? "Hide interpretation" : "Read interpretation"}
-                          >
-                            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                          </button>
-                        )}
-                      </div>
-                      {isExpanded && interpretation && (
-                        <p className="text-sm text-muted-foreground leading-relaxed mt-3 pt-3 border-t border-border">
-                          {interpretation}
-                        </p>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
           </div>
 
           {/* Priority Matrix / Where to Focus */}
@@ -563,6 +639,59 @@ function ResultsContent() {
                 )}
               </div>
             )}
+
+          {/* Progress Over Time — portal-style line graph */}
+          {allResults.length >= 2 && (
+            <div id="progress-over-time" className="space-y-3 scroll-mt-6">
+              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Progress Over Time
+              </h2>
+              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm space-y-6">
+                <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="w-full max-w-[320px] mx-auto lg:mx-0">
+                    <VapiWheel
+                      domainScores={result.domainScores}
+                      metricKey={selectedProgressMetric}
+                      onMetricSelect={(metricKey) =>
+                        setSelectedProgressMetric(metricKey as MetricKey)
+                      }
+                    />
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                      {getMetricLabel(selectedProgressMetric)}
+                    </p>
+                    <ProgressLineChart
+                      results={allResults}
+                      metricKey={selectedProgressMetric}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Graph a metric
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {metricButtons.map((metricKey) => (
+                      <button
+                        key={`progress-${metricKey}`}
+                        type="button"
+                        onClick={() => setSelectedProgressMetric(metricKey)}
+                        className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
+                          selectedProgressMetric === metricKey
+                            ? "border-accent bg-accent/10 text-foreground"
+                            : "border-border bg-background/40 text-muted-foreground hover:border-accent/30 hover:text-foreground"
+                        }`}
+                      >
+                        {getMetricLabel(metricKey)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* CTA */}
           <div className="rounded-2xl border border-border p-6 space-y-4 bg-secondary/30">
