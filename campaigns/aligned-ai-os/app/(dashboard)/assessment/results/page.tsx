@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -184,6 +184,16 @@ function getMetricInterpretation(result: ResultData, metricKey: MetricKey): stri
   return DOMAIN_INTERPRETATIONS[metricKey.slice(7)]?.[tier] ?? "";
 }
 
+function getScrollIndicatorState(element: HTMLDivElement | null) {
+  if (!element) {
+    return { showUp: false, showDown: false };
+  }
+  const showUp = element.scrollTop > 8;
+  const showDown =
+    element.scrollHeight - element.scrollTop - element.clientHeight > 8;
+  return { showUp, showDown };
+}
+
 function ProgressLineChart({
   results,
   metricKey,
@@ -205,10 +215,10 @@ function ProgressLineChart({
   if (scores.length === 0) return null;
 
   const width = 680;
-  const height = 400;
+  const height = 520;
   const padX = 48;
   const padTop = 20;
-  const padBottom = 36;
+  const padBottom = 28;
   const chartHeight = height - padTop - padBottom;
   const chartWidth = width - padX * 2;
   const maxY = 10;
@@ -319,6 +329,16 @@ function ResultsContent() {
   const [breakdownDropdownOpen, setBreakdownDropdownOpen] = useState(false);
   const [progressDropdownOpen, setProgressDropdownOpen] = useState(false);
   const [progressView, setProgressView] = useState<"line" | "wheel">("line");
+  const breakdownSidebarRef = useRef<HTMLDivElement | null>(null);
+  const progressSidebarRef = useRef<HTMLDivElement | null>(null);
+  const [breakdownSidebarIndicators, setBreakdownSidebarIndicators] = useState({
+    showUp: false,
+    showDown: false,
+  });
+  const [progressSidebarIndicators, setProgressSidebarIndicators] = useState({
+    showUp: false,
+    showDown: false,
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
@@ -369,6 +389,23 @@ function ResultsContent() {
     window.addEventListener("resize", sync);
     return () => window.removeEventListener("resize", sync);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const syncIndicators = () => {
+      setBreakdownSidebarIndicators(
+        getScrollIndicatorState(breakdownSidebarRef.current)
+      );
+      setProgressSidebarIndicators(
+        getScrollIndicatorState(progressSidebarRef.current)
+      );
+    };
+
+    syncIndicators();
+    window.addEventListener("resize", syncIndicators);
+    return () => window.removeEventListener("resize", syncIndicators);
+  }, [result, allResults, selectedMetric, selectedProgressMetric, progressView]);
 
   if (loading) {
     return (
@@ -644,7 +681,15 @@ function ResultsContent() {
                     Metric
                   </p>
                   <div className="relative flex-1 min-h-0">
-                    <div className="space-y-1 max-h-[370px] overflow-y-auto pr-1">
+                    <div
+                      ref={breakdownSidebarRef}
+                      onScroll={(event) =>
+                        setBreakdownSidebarIndicators(
+                          getScrollIndicatorState(event.currentTarget)
+                        )
+                      }
+                      className="space-y-1 max-h-[370px] overflow-y-auto pr-1"
+                    >
                       {metricGroups.map((group) => (
                         <div key={`sidebar-${group.label}`}>
                           <div className="text-sm font-semibold text-foreground mt-3 first:mt-0">
@@ -672,12 +717,16 @@ function ResultsContent() {
                         </div>
                       ))}
                     </div>
-                    <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
-                      <ChevronUp className="w-5 h-5 text-foreground/70" />
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
-                      <ChevronDown className="w-5 h-5 text-foreground/70" />
-                    </div>
+                    {breakdownSidebarIndicators.showUp && (
+                      <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
+                        <ChevronUp className="w-5 h-5 text-foreground/70" />
+                      </div>
+                    )}
+                    {breakdownSidebarIndicators.showDown && (
+                      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
+                        <ChevronDown className="w-5 h-5 text-foreground/70" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -977,7 +1026,15 @@ function ResultsContent() {
                       Metric
                     </p>
                     <div className="relative flex-1 min-h-0 max-h-[370px]">
-                      <div className="space-y-1 h-full max-h-[370px] overflow-y-auto pr-1">
+                      <div
+                        ref={progressSidebarRef}
+                        onScroll={(event) =>
+                          setProgressSidebarIndicators(
+                            getScrollIndicatorState(event.currentTarget)
+                          )
+                        }
+                        className="space-y-1 h-full max-h-[370px] overflow-y-auto pr-1"
+                      >
                         {metricGroups.map((group) => (
                           <div key={`progress-sidebar-${group.label}`}>
                             <div className="text-sm font-semibold text-foreground mt-3 first:mt-0">
@@ -1005,12 +1062,16 @@ function ResultsContent() {
                           </div>
                         ))}
                       </div>
-                      <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
-                        <ChevronUp className="w-5 h-5 text-foreground/70" />
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
-                        <ChevronDown className="w-5 h-5 text-foreground/70" />
-                      </div>
+                      {progressSidebarIndicators.showUp && (
+                        <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
+                          <ChevronUp className="w-5 h-5 text-foreground/70" />
+                        </div>
+                      )}
+                      {progressSidebarIndicators.showDown && (
+                        <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
+                          <ChevronDown className="w-5 h-5 text-foreground/70" />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

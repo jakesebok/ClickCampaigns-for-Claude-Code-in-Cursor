@@ -1473,8 +1473,11 @@
           });
           breakdownSection.querySelectorAll('.breakdown-mobile-metric-btn').forEach(function(b) {
             var on = b.getAttribute('data-value') === value;
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            b.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]');
             b.classList.toggle('bg-white', on);
-            b.classList.toggle('text-[var(--ap-primary)]', on);
+            b.classList.toggle('text-[var(--ap-primary)]', on && isDarkTheme);
+            b.classList.toggle('text-white', on && !isDarkTheme);
             b.classList.toggle('border-white', on);
             b.classList.toggle('text-[#f7f2e8]', !on);
           });
@@ -1797,8 +1800,11 @@
           });
           document.querySelectorAll('.progress-mobile-metric-btn').forEach(function(btn) {
             var isSelected = btn.getAttribute('data-value') === value;
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            btn.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]');
             btn.classList.toggle('bg-white', isSelected);
-            btn.classList.toggle('text-[var(--ap-primary)]', isSelected);
+            btn.classList.toggle('text-[var(--ap-primary)]', isSelected && isDarkTheme);
+            btn.classList.toggle('text-white', isSelected && !isDarkTheme);
             btn.classList.toggle('border-white', isSelected);
             btn.classList.toggle('text-[#f7f2e8]', !isSelected);
           });
