@@ -1,6 +1,8 @@
-# Aligned Power — The Alignment Arc Pre-Work Packet
+# Aligned Power — Alignment Arc Pre-Work Packet
 
-> **Complete this packet before the workshop.** Plan 30–60 minutes in a quiet space. Fill it digitally—we'll use AI during the workshop, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
+> **Complete this packet before jumping into Phase II | Strategic Clarity.** Plan 60–90 minutes in a quiet space. Fill it digitally—we'll use AI during the exercises, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
+>
+> **Pro tip:** Exercise 2 is all about excavating stories from your past. Speaking these out loud instead of typing them will get the truest, messiest, most unfiltered (and most valuable) outputs. If you haven't ever tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it has completely changed the game for me. It understands what you mean to say and cleans up any ums, stutters, etc in real time. You also don't have to dictate punctuation. It just knows! If you sign up using my link, you'll get a 14-day free trial which is plenty of time to use it for Phase II. *(Full disclosure: I'm an affiliate.)*
 
 ---
 
@@ -14,30 +16,30 @@ Everything you write here feeds directly into your **Aligned Freedom Coach Upgra
 
 ## Pre-Work Checklist
 
-- [ ] Exercise 1: Values Extraction
+- [ ] Exercise 1: Your Values Code Inputs
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: The Revenue Bridge Inputs
+- [ ] Exercise 3: From Meaning to Math Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
 
-## Exercise 1 — Values Extraction
+## Exercise 1 — Your Values Code Inputs
 
-**Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the workshop.
+**Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the exercises.
 
-**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip in Exercise 2 if you want to try it.
+**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip above if you want to try it.
 
 ### Step 1: List 5 people you admire
 
 Aim for variety: leadership, relationships, craft/skill, courage, service.
 
-| Person | How you know of them | Why you admire them (1 sentence) |
-|--------|----------------------|----------------------------------|
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
+| Person | Why you admire them (1 sentence) |
+|--------|----------------------------------|
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
 
 ### Step 2: For each person, list 5 qualities you admire
 
@@ -69,9 +71,7 @@ These should be **observable behaviors**, not vague compliments.
 
 ## Exercise 2 — Peak Moments
 
-**Goal:** Collect real stories that reveal what you're built to do. Your WHY leaves clues in your lived experience.
-
-**Pro tip:** This exercise is all about excavating stories from your past. Speaking them out loud instead of typing will get you the truest, messiest, most unfiltered—and most valuable—outputs. If you haven't tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it's completely changed the game. It understands what you mean to say and cleans up ums, stutters, and filler in real time—and you don't have to dictate punctuation. They offer a 14-day free trial, no card required. *(Full disclosure: I'm an affiliate.)*
+**Goal:** Collect real stories that reveal what you're built to do. Your Driving Fire leaves clues in your lived experience.
 
 Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'm here for." Choose across seasons of life:
 
@@ -80,6 +80,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 - One moment from your **career** (work, leadership, craft, service, or a win that felt meaningful)
 - One moment from the **last 12–24 months**
 - Optional: one moment from a **hard season** (a challenge you met with courage, integrity, or care)
+
+**Pro tip:** The cells will expand as you type/dictate. Don't worry about length. Tell your story until it's finished. This is where Wispr Flow comes in really handy.
 
 | # | Moment / Story (What happened?) |
 |---|----------------------------------|
@@ -91,9 +93,9 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — The Revenue Bridge Inputs
+## Exercise 3 — From Meaning to Math Inputs
 
-**Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
+**Goal:** Gather honest estimates we'll refine during the exercises. If you don't know, write your best guess and mark it with an asterisk (*).
 
 ### A) Baseline Numbers
 
@@ -115,20 +117,19 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### C) Revenue Context (last 12 months)
 
-| Field | Your Number |
-|-------|-------------|
 | Last 12 months gross revenue ($) |  |
+|----------------------------------|--|
 | Average monthly revenue ($) |  |
 | Current average sale value / ASV ($) |  |
-| Primary offer(s) / package name(s) |  |
-| Typical delivery capacity per client (hrs/week or hrs/month) |  |
+| Average profit margin |  |
+| Delivery hours per client per week & month |  |
 | Current active clients (avg per month) |  |
+| How many more clients could you reasonably bring on? |  |
 
 ### D) Qualified Conversation & Conversion Snapshot
 
-| Field | Your Number |
-|-------|-------------|
 | Qualified conversations per week (current) |  |
+|--------------------------------------------|--|
 | Show-up rate for booked calls (%) |  |
 | Close rate on sales conversations (%) |  |
 | A conversation is "qualified" if… |  |
@@ -136,25 +137,23 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### E) Lead Path Fork (choose your primary growth lane)
 
-**Circle one primary lane for the next season.** You can keep the other running, but we'll build your plan around one.
+Check one primary lane for the next season. You can keep the other running, but we'll build your plan around one.
 
 - [ ] **Referral / Relationships**
 - [ ] **Paid Ads / Funnels**
 
 #### If Referral / Relationships is primary:
 
-| Field | Your Number |
-|-------|-------------|
 | Current referral sources (top 3) |  |
+|----------------------------------|--|
 | # of referral partners who send leads consistently |  |
 | Partner conversations per week (networking, follow-ups, outreach) |  |
 | Conversion: partner conversations → qualified conversations (%) |  |
 
 #### If Paid Ads / Funnels is primary:
 
-| Field | Your Number |
-|-------|-------------|
 | Primary platform (Meta / Google / YouTube / etc.) |  |
+|---------------------------------------------------|--|
 | Current monthly ad spend (if any) |  |
 | Click Through Rate (CTR) |  |
 | Landing page Opt-In Rate (%) |  |
@@ -166,9 +165,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### F) Capacity Check
 
-| Field | Your Answer |
-|-------|-------------|
 | Hours/week available for CEO work (sales, marketing, ops) — not delivery |  |
+|--------------------------------------------------------------------------|--|
 | Hours/week currently spent in delivery / fulfillment |  |
 | Hours/week you WANT to spend in delivery / fulfillment (ideal) |  |
 | Non-negotiable boundary you want protected this season |  |
@@ -190,9 +188,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 |                     |                   |                |            |
 |                     |                   |                |            |
 
-| Field | Your Answer |
-|-------|-------------|
 | Total hours/week currently delegated |  |
+|--------------------------------------|--|
 
 ---
 
@@ -216,9 +213,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 **Offer Flow (how they connect):**
 
-| Field | Your Answer |
-|-------|-------------|
 | Entry offer (what people buy or opt into first) |  |
+|-------------------------------------------------|--|
 | Primary revenue driver (which offer brings in most revenue?) |  |
 | Typical upsell path (what do flagship buyers often add?) |  |
 | Downsell (if they say no to your flagship, what do you offer?) |  |
@@ -227,9 +223,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### B) Flagship Offer Basics
 
-| Field | Your Answer |
-|-------|-------------|
 | Flagship offer name |  |
+|---------------------|--|
 | Who it's for (describe the person + situation) |  |
 | Primary problem you solve (plain language) |  |
 | Promise / outcome (what changes?) |  |
@@ -239,9 +234,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### C) What Makes It Sell (Positioning + Proof)
 
-| Field | Your Answer |
-|-------|-------------|
 | Your differentiator (why you vs. alternatives?) |  |
+|-------------------------------------------------|--|
 | Most common objections you hear (top 3) |  |
 | Proof assets you have (testimonials, case studies, credentials) |  |
 | Guarantee / risk reversal (if any) |  |
@@ -249,9 +243,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### D) Sales Process Snapshot
 
-| Field | Your Answer |
-|-------|-------------|
 | How people currently become a client (steps) |  |
+|----------------------------------------------|--|
 | Primary sales conversion event (call, DM, proposal, etc.) |  |
 | Average sales cycle length (first touch → sale) |  |
 | What qualifies someone (must-have criteria) |  |
@@ -259,9 +252,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### E) Delivery & Operations Reality
 
-| Field | Your Answer |
-|-------|-------------|
 | Delivery model (1:1, group, hybrid, productized, retainer, etc.) |  |
+|------------------------------------------------------------------|--|
 | Average delivery time per client (hrs/week or hrs/month) |  |
 | Current bottleneck in delivery (what slows you down?) |  |
 | Top 3 recurring tasks you do personally that could be delegated |  |

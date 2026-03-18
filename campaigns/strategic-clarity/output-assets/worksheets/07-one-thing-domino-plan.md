@@ -85,9 +85,8 @@ Complete this for your **Lead Lane** first. If time allows, repeat for the other
 
 Your Lead Lane Vital Action must have a protected time block. If it isn't on the calendar, it isn't real.
 
-| Field | Your Answer |
-|-------|-------------|
 | Lead Lane Vital Action |  |
+|------------------------|--|
 | Time Block (day / time) |  |
 | Frequency |  |
 | Protection Rule (what you will NOT allow during this block) |  |

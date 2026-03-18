@@ -12,13 +12,35 @@ I'm really glad you're here. And I want to be honest with you right up front—t
 
 (Okay, there *will* be a bald guy. But the pep talks are optional.)
 
-What we're about to do together is connect the dots between who you actually are and what your days actually look like. Because here's the thing most people never say out loud: you can be successful and still feel like something's off. You can be hitting your numbers and still feel scattered. You can have a business that works and a life that doesn't quite fit—and the gap between those two things? That gap is where the quiet resentment lives. That's where the burnout hides. That's where you start making decisions that look smart on paper but cost you something you can't get back.
+---
 
-So here's what Strategic Clarity is about: **closing that gap.**
+### Two Things Are Happening Here
+
+Before we get into the arc, I want to name something important. This module does two things simultaneously—and both of them matter.
+
+**First: Information.** Every exercise you do, every worksheet you complete—it's building a dataset. A deeply personal one. A deeply honest one. About who you are. What you want. What you value. What your business actually looks like. Where the gaps are. That dataset feeds your Aligned Freedom Coach—your personalized AI operating system. The richer the data, the smarter your coach. So everything you write *matters* because it powers everything that follows.
+
+**Second: Transformation.** And this is the part people don't expect. Simply *doing* this work changes you. Not theoretically. Not in six months. Right now. When you name your Real Reasons and realize you've been chasing a means goal for three years—that's an insight you can't unsee. When you excavate your Driving Fire and feel it land in your body—that rewires how you make decisions. The worksheets aren't just forms. They're mirrors. And the reflections are permanent.
+
+So when I say "fill this out honestly"—I'm not just asking for good data. I'm asking you to participate in a process that will shift how you see yourself, your business, and your future. The data serves the coach. The process serves *you*.
 
 ---
 
 ### What We're Actually Doing Here
+
+In the Awareness module, we talked about something critical. That most of us are running a script someone else wrote. That we've been performing a version of ourselves designed to survive—not to thrive. That roughly 95% of our behavior is driven by the subconscious, and unless we surface what's actually running the show, we'll keep building lives that look right but feel wrong.
+
+That's what Strategic Clarity picks up. We're excavating the *real* you. Not manufacturing a better version. Not giving you a new identity to perform. We're digging up the person who's been there the whole time—underneath the masks, the conditioning, the "should"s, the Voice of Reason that keeps you playing small. Right?
+
+Remember what Jim Carrey said? Depression is your body saying: *I'm done playing the role. Done wearing the costume. I don't want to be this character anymore.*
+
+What if the reason you've felt scattered isn't that you lack discipline? What if it's that you've been disciplined about the wrong things—things that were never actually yours to chase? What if the ache, the tension, the "something's off" feeling isn't a flaw? What if it's a compass?
+
+**Strategic Clarity is about closing that gap.** The gap between who you've been performing and who you actually are. The gap between what your calendar says and what your body needs. The gap between the success you're chasing and the life you actually want.
+
+---
+
+### What We're Building
 
 We're going to take the things that matter most to you—your real desires, your deeper purpose, your values, the person you're becoming—and we're going to build a bridge from *that* to your daily calendar. Not your ideal calendar. Your *real* calendar. The one with the kids and the clients and the meetings and the meals you forget to eat.
 
@@ -32,9 +54,9 @@ By the end of this module, you will have:
 
 4. **The Future You** — who you're becoming across Self (Personal), Social (Relationships), Skills (Business), and Service (Contribution). Growth that doesn't require self-abandonment.
 
-5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. What must be true? What are you tolerating? What's it costing you?
+5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. We're not just turning vision into numbers here. We're reckoning your needs against your capacity and identifying the lever that will allow you to get where you're going without breaking what matters. What must be true? What are you tolerating? What's it costing you?
 
-6. **The Revenue Bridge: From Meaning To Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact weekly behaviors that make it real. No "work harder." Leverage.
+6. **The Revenue Bridge: From Meaning To Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real. No "work harder." Leverage.
 
 7. **Your Vital Action Plan** — the single aligned move that, if you protect it, makes everything else easier or unnecessary. Installed on your calendar. Defended from sabotage.
 
@@ -46,7 +68,7 @@ And then the part I'm most excited about...
 
 Everything you write in this module—every worksheet, every answer, every honest moment—feeds a **Master Prompt** that you'll run at the end. That prompt turns your favorite AI into a personalized executive coach, strategic advisor, and virtual assistant that:
 
-- Knows your values and *never* compromises them
+- Knows your values, optimizes for them in every recommendation, and *never* compromises them
 - Knows your Real Reasons and reminds you what you actually want
 - Knows your revenue targets and capacity constraints
 - Knows your Vital Action and keeps you focused on it
@@ -71,9 +93,9 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 4:** We map The Future You. The person you're becoming across every domain that matters.
 
-**Lesson 5:** We face The Reckoning. Before we turn vision into numbers, we name what's in the way.
+**Lesson 5:** We face The Reckoning. We reckon your needs against your capacity and name what's in the way—so the plan we build actually accounts for your real life, not just the aspirational one.
 
-**Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the weekly actions.
+**Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the annual, quarterly, monthly, and weekly actions.
 
 **Lesson 7:** We create Your Vital Action Plan. One protected move per quarter. Installed on the calendar.
 
@@ -89,17 +111,11 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Everything is connected.** Your Real Reasons feed your Driving Fire. Your Driving Fire feeds your Values Code. Your Values Code feeds The Future You. The Future You feeds your revenue math. Your revenue math feeds your Vital Action. And all of it feeds your Aligned Freedom Coach. So don't skip ahead, and don't phone it in.
 
-**This also works live.** If you're doing this as The Alignment Arc Intensive—same worksheets, same arc, facilitated in real time. The module and the intensive are the same system. One is self-paced, one is live. Both produce the same output.
-
 **You've already started.** If you've completed your Pre-Work Packet—and I hope you have—you've already got raw inputs for values, peak moments, and revenue numbers. That's the foundation. Everything from here builds on it.
 
 ---
 
 ### Let's Go
-
-What if the reason you've felt scattered isn't that you lack discipline? What if it's that you've been disciplined about the wrong things—things that were never actually yours to chase?
-
-What if the ache, the tension, the "something's off" feeling isn't a flaw? What if it's a compass?
 
 That's what we're about to find out.
 

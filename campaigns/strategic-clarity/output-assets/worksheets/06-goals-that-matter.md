@@ -64,9 +64,8 @@ Now list 1–5 Real Reasons–based stretch desires you want your business to fu
 
 Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
 
-| Field | Your Answer |
-|-------|-------------|
 | Your Cause Worth Playing For (plain language) |  |
+|-----------------------------------------------|--|
 | Impact target this year (specific) |  |
 | Impact tithe % (suggested: 10%) |  |
 | How you'll resource it (money / time / platform / partnerships) |  |
@@ -196,9 +195,8 @@ Can your current model actually deliver this revenue without breaking your value
 
 Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds Your Vital Action Plan.)*
 
-| Field | Your Answer |
-|-------|-------------|
 | My ONE highest-leverage move is: |  |
+|----------------------------------|--|
 | Because if this changes, everything downstream changes by: |  |
 | The first small experiment I will run in the next 7 days is: |  |
 

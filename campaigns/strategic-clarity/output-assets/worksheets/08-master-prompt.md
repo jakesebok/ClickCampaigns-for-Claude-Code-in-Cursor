@@ -207,7 +207,7 @@ Weekly behavior that proves it: [BRACKET: BECOMING Social daily intention behavi
 
 BECOMING 3 — SKILLS (Primary Field + Skill Training)
 Primary Field of Interest: [BRACKET: BECOMING Skills PFI]
-Most leveraged skill for next 90 days: [BRACKET: BECOMING Skills "single most leveraged skill"]
+Most high-leverage skill for next 90 days: [BRACKET: BECOMING Skills "single most high-leverage skill"]
 Weekly practice (day/time): [BRACKET: BECOMING Skills practice]
 What I stop doing to make room: [BRACKET: BECOMING Skills stop-doing]
 

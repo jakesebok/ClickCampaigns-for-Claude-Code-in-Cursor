@@ -14,13 +14,13 @@ Pick people you genuinely respect. They can be known personally or public figure
 
 *If you did this in the Pre-Work Packet, simply copy and paste your answers.*
 
-| Person | How do you know of them? | What do you admire about them? (1 sentence) |
-|--------|--------------------------|----------------------------------------------|
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
+| Person | Why you admire them (1 sentence) |
+|--------|----------------------------------|
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
 
 ---
 
@@ -40,11 +40,13 @@ Avoid vague traits like "nice" or "smart." Make them specific and observable (ho
 
 ---
 
-## Step 3 — AI-Assisted Translation
+## Step 3 — Translation (Manual or AI-Assisted)
 
 Convert your admired qualities into value-words/phrases and rank them by frequency.
 
-**Instructions:** Copy/paste the filled-in qualities table from Step 2 into the AI prompt below. Run it in your favorite AI. Then paste the results into Step 4.
+**Manual approach:** Read through your twenty-five qualities and ask: *What value does this quality represent?* "Tells the truth even when it's uncomfortable" → Honesty. "Finishes what they start" → Commitment. Write the value-word next to each quality. Then group the duplicates and near-duplicates. Count the frequency. Your top 10–15 by frequency are your candidates.
+
+**AI-assisted approach:** Copy/paste the filled-in qualities table from Step 2 into the AI prompt below. Run it in your favorite AI. Then paste the results into Step 4.
 
 ### AI Prompt (copy/paste):
 

@@ -40,6 +40,8 @@ Here's what happens when you confuse means goals for end goals—and I see this 
 
 You hit the goal, and it doesn't feel like you thought it would. You get the number. You land the client. You launch the thing. And instead of that deep satisfaction you were expecting? You get a brief hit of relief... and then the next goal appears. And the next one. And the next one.
 
+Here's something that changed my life and I hope it changes yours too. The person you are on the journey is the person you're going to be at the destination. If you're thinking about the next big thing right now—that house, that vacation, that revenue milestone—you'll be thinking about the next big thing when you get there, too. The success doesn't change who you are. You have to become the person who's capable of *experiencing* the success you're working to achieve. Otherwise you'll arrive and still be looking over the horizon.
+
 It's a treadmill. And the reason it's a treadmill is that you were chasing the wrong thing. You were chasing the avatar of what you wanted—not the thing itself.
 
 Or worse: you sacrifice something real to get something that was never actually the point. You trade your health for the revenue target. You trade your marriage for the launch. You trade your peace for the title. And then you arrive at the "destination" and realize... this isn't where you wanted to be.
@@ -62,7 +64,7 @@ What qualities do you need to embody? What patterns do you need to outgrow? What
 
 **3. How do I want to contribute?**
 
-Who do you want to serve? What impact do you want to be known for? What problem do you want to help solve? What would make you feel like your time here mattered?
+Who do you want to serve? What impact do you want to be known for? What problem do you want to help solve? Here's the question that cuts deepest: *What do you want to be different simply because you lived?*
 
 That's it. Three questions. And they're going to reorient everything.
 
@@ -82,13 +84,19 @@ And here's the beautiful part: these answers feed directly into your Aligned Fre
 
 ### Before You Open the Worksheet
 
-One more thing. When you sit down with your Life Lists, I want you to notice something: your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
+One more thing—and this is important. Because your definition of success must be aligned, or you *will* sabotage it. Remember what we talked about in the Awareness module? The little scientist in your subconscious—he's running the show. If your conscious goals don't match what the real you actually wants, he will sabotage you. Every. Single. Time. That's not a character flaw. That's your system protecting you from a future that was never yours.
+
+So the stakes here are real. If you fill these Life Lists with what you think you *should* want—if you perform for the worksheet the way you've been performing for the world—you'll build a plan your subconscious will fight. And it will win. Okay?
+
+When you sit down with your Life Lists, I want you to notice something. Your brain is going to try to be practical. It's going to say things like "well, that's not realistic" or "I should probably put something more productive" or "what would my coach think if I wrote that?"
+
+I call that The Voice of Reason. It's that well-behaved, rule-abiding part of you that always wants to explain why your deepest desires are impractical, irresponsible, selfish, unrealistic, or just "too much." It sounds reasonable. It uses logic. It feels like maturity. But it's actually fear in disguise. It was born to protect you from shame, from rejection, from failure. And it did its job—for a while. But what it protects you from is also what it keeps you from.
 
 Ignore it. All of it.
 
 This is not a business plan. This is a life map. And the more honest you are—the more specific, the more sensory, the more *human*—the more powerful everything that follows becomes.
 
-Write what you want. Not what you think you should want.
+Write what you want. Not what you think you should want. Not what The Voice of Reason says is "realistic." What *you* want. You're not here to be reasonable. You're here to be real.
 
 I'll meet you in the next video where we'll walk through your Life Lists together.
 

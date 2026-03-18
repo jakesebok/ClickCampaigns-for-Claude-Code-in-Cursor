@@ -20,17 +20,15 @@ One thing to watch for: make sure your qualities are **specific and observable.*
 
 ---
 
-### Step 3: AI Translation
+### Step 3: Translation (Manual or AI-Assisted)
 
-This is where it gets fun. You're going to take your filled-in qualities table and paste it into the AI prompt on your worksheet.
+Now we translate your twenty-five qualities into value-words. You can do this yourself or use AI—both work.
 
-The prompt asks the AI to:
-1. Convert each quality into a value-word or short phrase
-2. Merge duplicates and near-duplicates
-3. Rank them by frequency—how many times each value-theme shows up across all twenty-five qualities
-4. Give you a definition and behavior examples for the top 10
+**Manual approach:** Read through your twenty-five qualities and ask: *What value does this quality represent?* "Tells the truth even when it's uncomfortable" → Honesty. "Finishes what they start" → Commitment. "Puts family before work" → Presence. Write the value-word next to each quality. Then look for patterns—which value-words keep showing up? Group the duplicates and near-duplicates. Count the frequency. Your top 10–15 by frequency are your candidates.
 
-Why frequency? Because if "honesty" shows up in five different people across five different qualities, that's not a coincidence. That's a core value screaming at you.
+**AI-assisted approach:** There's a prompt in your worksheet. Paste your filled-in qualities table into it. The AI will convert each quality into a value-word, merge duplicates, rank by frequency, and give you definitions and behavior examples for the top 10.
+
+Either way, the principle is the same: frequency reveals what's real. If "honesty" shows up in five different people across five different qualities, that's not a coincidence. That's a core value screaming at you.
 
 Paste the results into Step 4. You should have a ranked list of 10–15 values with definitions.
 
@@ -54,6 +52,8 @@ There's an AI prompt in the worksheet that runs a structured trade-off test. It 
 Here's the critical thing: **answer from your gut, not your head.** Your head will try to pick the "right" answer. Your gut knows which one you'd actually protect when it costs you something.
 
 If you find yourself agonizing over a matchup, it usually means both values are important—but one of them is *the one that holds everything else up*. It's the one that, if it were missing, everything else would collapse. That's the one you choose.
+
+For example: "Honesty vs. Loyalty." Both feel essential. But ask yourself: could you have real loyalty without honesty? Probably not—loyalty built on dishonesty is just codependence. Could you have honesty without loyalty? Yes—you can be honest with anyone. So honesty is the one that holds it up. Honesty wins that round.
 
 ---
 

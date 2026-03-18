@@ -1,20 +1,12 @@
-# The Alignment Arc Intensive — All Worksheets in Order
-
-> **Consolidated document.** Every worksheet from the Strategic Clarity module, in sequence. Fill this in as you complete each lesson.
->
-> **When you run the Master Prompt (Lesson 8):** Attach this file to your AI—it's the cleanest option. If your AI doesn't support file uploads, paste the contents below the designated line instead. The output (your Master Context) becomes your persistent context document for ongoing coaching—paste it at the start of new conversations or add it to your AI's project/custom instructions.
-
----
-
-## 1. Pre-Work Packet
-
-**Source:** `worksheets/00-pre-work-packet.md`
+# Strategic Clarity — All Worksheets (In Order)
 
 ---
 
 # Aligned Power — Alignment Arc Pre-Work Packet
 
-> **Complete this packet before the workshop.** Plan 30–60 minutes in a quiet space. Fill it digitally—we'll use AI during the workshop, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
+> **Complete this packet before jumping into Phase II | Strategic Clarity.** Plan 60–90 minutes in a quiet space. Fill it digitally—we'll use AI during the exercises, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
+>
+> **Pro tip:** Exercise 2 is all about excavating stories from your past. Speaking these out loud instead of typing them will get the truest, messiest, most unfiltered (and most valuable) outputs. If you haven't ever tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it has completely changed the game for me. It understands what you mean to say and cleans up any ums, stutters, etc in real time. You also don't have to dictate punctuation. It just knows! If you sign up using my link, you'll get a 14-day free trial which is plenty of time to use it for Phase II. *(Full disclosure: I'm an affiliate.)*
 
 ---
 
@@ -30,28 +22,28 @@ Everything you write here feeds directly into your **Aligned Freedom Coach Upgra
 
 - [ ] Exercise 1: Your Values Code Inputs
 - [ ] Exercise 2: Peak Moments
-- [ ] Exercise 3: The Revenue Bridge Inputs
+- [ ] Exercise 3: From Meaning to Math Inputs
 - [ ] Exercise 4: Flagship Offer Snapshot
 
 ---
 
 ## Exercise 1 — Your Values Code Inputs
 
-**Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the workshop.
+**Goal:** Collect raw inputs we'll convert into your Top 5 Core Values during the exercises.
 
-**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip in Exercise 2 if you want to try it.
+**Pro tip:** Same as Exercise 2—speaking your answers out loud (instead of typing) often surfaces the truest, most unfiltered responses. See the Wispr Flow tip above if you want to try it.
 
 ### Step 1: List 5 people you admire
 
 Aim for variety: leadership, relationships, craft/skill, courage, service.
 
-| Person | How you know of them | Why you admire them (1 sentence) |
-|--------|----------------------|----------------------------------|
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
-|        |                      |                                  |
+| Person | Why you admire them (1 sentence) |
+|--------|----------------------------------|
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
 
 ### Step 2: For each person, list 5 qualities you admire
 
@@ -85,8 +77,6 @@ These should be **observable behaviors**, not vague compliments.
 
 **Goal:** Collect real stories that reveal what you're built to do. Your Driving Fire leaves clues in your lived experience.
 
-**Pro tip:** This exercise is all about excavating stories from your past. Speaking them out loud instead of typing will get you the truest, messiest, most unfiltered—and most valuable—outputs. If you haven't tried it, I highly recommend [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok). I use it myself and it's completely changed the game. It understands what you mean to say and cleans up ums, stutters, and filler in real time—and you don't have to dictate punctuation. They offer a 14-day free trial, no card required. *(Full disclosure: I'm an affiliate.)*
-
 Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'm here for." Choose across seasons of life:
 
 - One moment from **childhood**
@@ -94,6 +84,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 - One moment from your **career** (work, leadership, craft, service, or a win that felt meaningful)
 - One moment from the **last 12–24 months**
 - Optional: one moment from a **hard season** (a challenge you met with courage, integrity, or care)
+
+**Pro tip:** The cells will expand as you type/dictate. Don't worry about length. Tell your story until it's finished. This is where Wispr Flow comes in really handy.
 
 | # | Moment / Story (What happened?) |
 |---|----------------------------------|
@@ -105,9 +97,9 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## Exercise 3 — The Revenue Bridge Inputs
+## Exercise 3 — From Meaning to Math Inputs
 
-**Goal:** Gather honest estimates we'll refine in the workshop. If you don't know, write your best guess and mark it with an asterisk (*).
+**Goal:** Gather honest estimates we'll refine during the exercises. If you don't know, write your best guess and mark it with an asterisk (*).
 
 ### A) Baseline Numbers
 
@@ -129,20 +121,19 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### C) Revenue Context (last 12 months)
 
-| Field | Your Number |
-|-------|-------------|
 | Last 12 months gross revenue ($) |  |
+|----------------------------------|--|
 | Average monthly revenue ($) |  |
 | Current average sale value / ASV ($) |  |
-| Primary offer(s) / package name(s) |  |
-| Typical delivery capacity per client (hrs/week or hrs/month) |  |
+| Average profit margin |  |
+| Delivery hours per client per week & month |  |
 | Current active clients (avg per month) |  |
+| How many more clients could you reasonably bring on? |  |
 
 ### D) Qualified Conversation & Conversion Snapshot
 
-| Field | Your Number |
-|-------|-------------|
 | Qualified conversations per week (current) |  |
+|--------------------------------------------|--|
 | Show-up rate for booked calls (%) |  |
 | Close rate on sales conversations (%) |  |
 | A conversation is "qualified" if… |  |
@@ -150,25 +141,23 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### E) Lead Path Fork (choose your primary growth lane)
 
-**Circle one primary lane for the next season.** You can keep the other running, but we'll build your plan around one.
+Check one primary lane for the next season. You can keep the other running, but we'll build your plan around one.
 
 - [ ] **Referral / Relationships**
 - [ ] **Paid Ads / Funnels**
 
 #### If Referral / Relationships is primary:
 
-| Field | Your Number |
-|-------|-------------|
 | Current referral sources (top 3) |  |
+|----------------------------------|--|
 | # of referral partners who send leads consistently |  |
 | Partner conversations per week (networking, follow-ups, outreach) |  |
 | Conversion: partner conversations → qualified conversations (%) |  |
 
 #### If Paid Ads / Funnels is primary:
 
-| Field | Your Number |
-|-------|-------------|
 | Primary platform (Meta / Google / YouTube / etc.) |  |
+|---------------------------------------------------|--|
 | Current monthly ad spend (if any) |  |
 | Click Through Rate (CTR) |  |
 | Landing page Opt-In Rate (%) |  |
@@ -180,9 +169,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### F) Capacity Check
 
-| Field | Your Answer |
-|-------|-------------|
 | Hours/week available for CEO work (sales, marketing, ops) — not delivery |  |
+|--------------------------------------------------------------------------|--|
 | Hours/week currently spent in delivery / fulfillment |  |
 | Hours/week you WANT to spend in delivery / fulfillment (ideal) |  |
 | Non-negotiable boundary you want protected this season |  |
@@ -204,9 +192,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 |                     |                   |                |            |
 |                     |                   |                |            |
 
-| Field | Your Answer |
-|-------|-------------|
 | Total hours/week currently delegated |  |
+|--------------------------------------|--|
 
 ---
 
@@ -230,9 +217,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 **Offer Flow (how they connect):**
 
-| Field | Your Answer |
-|-------|-------------|
 | Entry offer (what people buy or opt into first) |  |
+|-------------------------------------------------|--|
 | Primary revenue driver (which offer brings in most revenue?) |  |
 | Typical upsell path (what do flagship buyers often add?) |  |
 | Downsell (if they say no to your flagship, what do you offer?) |  |
@@ -241,9 +227,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### B) Flagship Offer Basics
 
-| Field | Your Answer |
-|-------|-------------|
 | Flagship offer name |  |
+|---------------------|--|
 | Who it's for (describe the person + situation) |  |
 | Primary problem you solve (plain language) |  |
 | Promise / outcome (what changes?) |  |
@@ -253,9 +238,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### C) What Makes It Sell (Positioning + Proof)
 
-| Field | Your Answer |
-|-------|-------------|
 | Your differentiator (why you vs. alternatives?) |  |
+|-------------------------------------------------|--|
 | Most common objections you hear (top 3) |  |
 | Proof assets you have (testimonials, case studies, credentials) |  |
 | Guarantee / risk reversal (if any) |  |
@@ -263,9 +247,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### D) Sales Process Snapshot
 
-| Field | Your Answer |
-|-------|-------------|
 | How people currently become a client (steps) |  |
+|----------------------------------------------|--|
 | Primary sales conversion event (call, DM, proposal, etc.) |  |
 | Average sales cycle length (first touch → sale) |  |
 | What qualifies someone (must-have criteria) |  |
@@ -273,9 +256,8 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ### E) Delivery & Operations Reality
 
-| Field | Your Answer |
-|-------|-------------|
 | Delivery model (1:1, group, hybrid, productized, retainer, etc.) |  |
+|------------------------------------------------------------------|--|
 | Average delivery time per client (hrs/week or hrs/month) |  |
 | Current bottleneck in delivery (what slows you down?) |  |
 | Top 3 recurring tasks you do personally that could be delegated |  |
@@ -285,14 +267,6 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 ---
 
 *Bring this completed packet with you. Everything you've written powers your Aligned Freedom Coach.*
-
----
-
----
-
-## 2. The Real Reasons: Your Life Lists
-
-**Source:** `worksheets/01-miqs.md`
 
 ---
 
@@ -314,28 +288,66 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 ---
 
-## The Three Questions
+## Experiences I Want
 
-### If you get stuck, try these prompts:
+What do I want to feel more often? What do I want my days to look like? Who do I want to be with? What do I want to do "just because I'm alive"?
 
-**Experiences:** What do I want to feel more often? What do I want my days to look like? Who do I want to be with? What do I want to do "just because I'm alive"?
-
-**Growth:** What qualities do I need to embody (courage, boundaries, trust, leadership, calm)? What skills would make my life simpler? What patterns must I outgrow?
-
-**Contribution:** Who do I want to serve and how? What impact do I want to be known for? What problem do I want to help solve?
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
 
 ---
 
-| Experiences I Want | How I Need to Grow | How I Will Contribute |
-|--------------------|--------------------|-----------------------|
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
+## How I Need to Grow
+
+What qualities do I need to embody (courage, boundaries, trust, leadership, calm)? What skills would make my life simpler? What patterns must I outgrow?
+
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+
+---
+
+## How I Will Contribute
+
+Who do I want to serve and how? What impact do I want to be known for? What problem do I want to help solve? What do I want to be different simply because I lived?
+
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
 
 ---
 
@@ -348,15 +360,7 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 
 ---
 
-*Your Real Reasons feed directly into your Aligned Freedom Coach. The more honest you are here, the more powerful your AI coach becomes.*
-
----
-
----
-
-## 3. Your Driving Fire + The Cause Worth Playing For
-
-**Source:** `worksheets/02-find-your-why-just-cause.md`
+*Your Life Lists feed directly into your Aligned Freedom Coach. The more honest you are here, the more powerful your AI coach becomes.*
 
 ---
 
@@ -373,7 +377,7 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 ## What We're Creating
 
 1. **Your Driving Fire (Purpose)** — A clear statement of the impact you exist to make. Format: *To ________ so that ________.*
-2. **Your Cause Worth Playing For (Vision of the Future)** — A specific vision of a future state that does not yet exist, so compelling you're willing to sacrifice to advance it. Bigger than you. Pursued indefinitely.
+2. **The Cause Worth Playing For (Vision of the Future)** — A specific vision of a future state that does not yet exist, so compelling you're willing to sacrifice to advance it. Bigger than you. Pursued indefinitely.
 3. **Business Mission Statement** — Your work as a vehicle for your Driving Fire + Cause.
 
 ---
@@ -398,17 +402,29 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the pattern faster than typing—right-brain recollection works better when you're not staring at a blank cell.
 
-**Partner role:** Ask the questions exactly as written, listen for repeats, then mirror back what you hear (no advice).
+**Strongly recommended:** Do this exercise with another person if at all possible. A partner, a friend, a fellow accelerator member. One person asks the questions, listens for repeats, and mirrors back what they hear. No advice. No fixing. Just listening and reflecting.
 
 **Group option:** Round 1 (Person A): 10-min interview + 5-min mirror. Round 2 (Person B): 10-min interview + 5-min mirror.
 
-| Theme Mining Prompt | Your Answer (plain language) |
-|---------------------|------------------------------|
-| What do these stories have in common? |  |
-| What problem were you helping solve (beneath the surface problem)? |  |
-| What kind of person were you being at your best? |  |
-| What do you consistently fight for, protect, or restore? |  |
-| What do people thank you for that they rarely thank others for? |  |
+| What do these stories have in common? |
+|---------------------------------------|
+|                                       |
+
+| What problem were you helping solve (beneath the surface problem)? |
+|-------------------------------------------------------------------|
+|                                                                   |
+
+| What kind of person were you being at your best? |
+|--------------------------------------------------|
+|                                                  |
+
+| What do you consistently fight for, protect, or restore? |
+|----------------------------------------------------------|
+|                                                          |
+
+| What do people thank you for that they rarely thank others for? |
+|-----------------------------------------------------------------|
+|                                                                 |
 
 **Partner Mirror** (what I heard you fighting for / protecting / restoring):
 
@@ -417,15 +433,17 @@ Paste your Peak Moments from your Pre-Work Packet into the table below, then com
 
 ---
 
-### Solo Option — Simon Sinek AI Theme Mining Prompt
+### Solo Option — Values-Aligned Theme Mining Coach Prompt
 
-If you're completing this alone, copy/paste the prompt below into your preferred AI tool. Then paste your Peak Moments table (from Exercise 1) underneath it.
+If you're completing this alone, copy the prompt below into your preferred AI tool. Then paste your Peak Moments table (from Exercise 1) underneath it.
 
-> You are Simon Sinek (warm, direct, no fluff) acting as my Driving Fire coach. Your job:
+> 📋 **Copy this prompt:**
+>
+> You are a values-aligned theme mining coach (warm, direct, no fluff). Your job:
 > 1) Help me theme-mine my Peak Moments (I will paste them below).
 > 2) Extract the pattern under the stories.
 > 3) Guide me to draft and refine a Driving Fire statement (To ___ so that ___).
-> 4) Help me define a Cause Worth Playing For that passes the Infinite Game test.
+> 4) Help me define a Cause Worth Playing For that sustains an infinite game.
 > 5) Help me translate Driving Fire + Cause into a business mission statement.
 >
 > Rules:
@@ -442,18 +460,38 @@ If you're completing this alone, copy/paste the prompt below into your preferred
 
 ## Theme Summary
 
-| Field | Your Answer |
-|-------|-------------|
-| Repeated words / images / needs I keep seeing |  |
-| The deeper human need underneath these stories is |  |
-| My strongest "move from → to" pattern is |  |
-| The sentence that feels most true (raw, messy) is |  |
+| Repeated words / images / needs I keep seeing |
+|-----------------------------------------------|
+|                                               |
+
+| The deeper human need underneath these stories is |
+|---------------------------------------------------|
+|                                                   |
+
+| My strongest "move from → to" pattern is |
+|------------------------------------------|
+|                                          |
+
+| The sentence that feels most true (raw, messy) is |
+|---------------------------------------------------|
+|                                                   |
 
 ---
 
 ## Exercise 3 — Draft Your Driving Fire
 
-Format: **To [contribution] so that [impact].** Write three versions. Don't overthink.
+Format: **To [contribution] so that [impact].**
+
+Write three versions. The first blank is your *contribution*—the thing you do, the impact you make, the gift you bring. The second blank is the *effect* of that contribution—what becomes possible because you showed up.
+
+Don't agonize. Write one, then write another that says it differently, then write a third that's even simpler. The goal is to triangulate—to find the version that resonates most.
+
+**Guidelines:**
+- **Keep it about others, not about you.** Your Driving Fire is about the impact you make, not the credential you hold.
+- **Avoid jargon.** If you'd be embarrassed to say it to a friend over dinner, simplify it.
+- **Make it timeless.** Your Driving Fire doesn't change with your business model. It's been true since you were a kid. It'll be true when you're eighty.
+
+**Example:** *"To challenge people to reconnect with who they really are, so that they build lives and businesses that actually reflect what matters to them."*
 
 | Draft | To... | ...so that... |
 |-------|-------|---------------|
@@ -465,7 +503,7 @@ Format: **To [contribution] so that [impact].** Write three versions. Don't over
 
 ## Exercise 4 — Full-Body Test
 
-Read each draft out loud. Check your body. We're looking for honesty, not hype.
+Read each draft out loud. Not in your head—*out loud*. Check your body. We're looking for honesty, not hype.
 
 | Draft | Body Reaction (tight / open / neutral) | Emotion (what do you feel?) | Truth Note (what feels true / fake?) |
 |-------|----------------------------------------|-----------------------------|--------------------------------------|
@@ -477,13 +515,25 @@ Read each draft out loud. Check your body. We're looking for honesty, not hype.
 
 ## Exercise 5 — Strengthen Your Driving Fire
 
-| Field | Your Answer |
-|-------|-------------|
-| What kind of person—emotionally and situationally—is this Driving Fire built to help? |  |
-| Before you help, what are they experiencing? |  |
-| After you help, what are they experiencing? |  |
-| What "enemy" are you fighting against? (burnout, fear, chaos, disconnection, confusion, etc.) |  |
-| What deeper human need do you serve? (belonging, freedom, dignity, meaning, agency, peace, etc.) |  |
+| What kind of person—emotionally and situationally—is this WHY built to help? |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+
+| Before you help, what are they experiencing? |
+|----------------------------------------------|
+|                                              |
+
+| After you help, what are they experiencing? |
+|---------------------------------------------|
+|                                             |
+
+| What "enemy" are you fighting against? (burnout, fear, chaos, disconnection, confusion, etc.) |
+|-----------------------------------------------------------------------------------------------|
+|                                                                                               |
+
+| What deeper human need do you serve? (belonging, freedom, dignity, meaning, agency, peace, etc.) |
+|--------------------------------------------------------------------------------------------------|
+|                                                                                                  |
 
 ### Your Driving Fire (Working Draft — Written Clean)
 
@@ -491,7 +541,7 @@ Read each draft out loud. Check your body. We're looking for honesty, not hype.
 |-------|---------------|
 |       |               |
 
-*Optional: If it still feels like performance, rewrite in simpler words until it feels true.*
+*If it still feels like performance, rewrite in simpler words until it feels true.*
 
 ---
 
@@ -499,12 +549,21 @@ Read each draft out loud. Check your body. We're looking for honesty, not hype.
 
 A Cause Worth Playing For is not a revenue goal. It's a concrete future state that's bigger than you and worth advancing for years.
 
-| Field | Your Answer |
-|-------|-------------|
-| In a world with my Cause Worth Playing For advancing… |  |
-| What becomes more true? |  |
-| What becomes less true? |  |
-| Who benefits (and how)? |  |
+| In a world with my Cause Worth Playing For advancing… |
+|-------------------------------------------------------|
+|                                                       |
+
+| What becomes more true? |
+|-------------------------|
+|                         |
+
+| What becomes less true? |
+|-------------------------|
+|                         |
+
+| Who benefits (and how)? |
+|-------------------------|
+|                         |
 
 ### Draft Your Cause Worth Playing For (2 drafts)
 
@@ -522,16 +581,37 @@ A Cause Worth Playing For is not a revenue goal. It's a concrete future state th
 
 ## Exercise 7 — Connect the Dots (Driving Fire → Cause → Your Work)
 
-| Field | Your Answer |
-|-------|-------------|
-| Target audience (human state) |  |
-| Outcome (toward) OR Problem (away) |  |
-| How you do it (method / vehicle) |  |
-| Amazing benefit (life impact) |  |
+| Target audience (human state) |
+|-------------------------------|
+|                               |
 
-### Mission Statement (write clean)
+| Outcome (toward) OR Problem (away) |
+|-------------------------------------|
+|                                     |
 
-I help ____________ achieve/overcome ____________ by ____________ so that ____________.
+| How you do it (method / vehicle) |
+|----------------------------------|
+|                                  |
+
+| Amazing benefit (life impact) |
+|-------------------------------|
+|                               |
+
+### Mission Statement
+
+Your mission can move in one of two directions:
+
+**For 'moving toward' programs** (achieving a big, sexy outcome like attracting $5,000–$10,000 clients, having an incredible marriage, building a freedom-based business):
+
+*"I help [target audience] achieve [outcome] by [how you do it] so that [amazing benefit]."*
+
+**For 'moving away' programs** (solving a painful problem like Type 2 diabetes, IBS, chronic burnout):
+
+*"I help [target audience] overcome [problem] by [how you do it] so that [amazing benefit]."*
+
+**Example:** *"I help burnt-out executives achieve work-life harmony by implementing my 'Energy Architecture' system so that they can be present for their families while doubling their productivity."*
+
+Write your mission statement clean:
 
 |   |
 |---|
@@ -552,14 +632,6 @@ I help ____________ achieve/overcome ____________ by ____________ so that ______
 
 ---
 
----
-
-## 4. Your Values Code: Excavating Your Non-Negotiables
-
-**Source:** `worksheets/03-core-values-extraction.md`
-
----
-
 # Your Values Code: Excavating Your Non-Negotiables
 
 **Aligned Power — The Alignment Arc**
@@ -576,13 +648,13 @@ Pick people you genuinely respect. They can be known personally or public figure
 
 *If you did this in the Pre-Work Packet, simply copy and paste your answers.*
 
-| Person | How do you know of them? | What do you admire about them? (1 sentence) |
-|--------|--------------------------|----------------------------------------------|
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
-|        |                          |                                              |
+| Person | Why you admire them (1 sentence) |
+|--------|----------------------------------|
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
+|        |                                  |
 
 ---
 
@@ -602,11 +674,13 @@ Avoid vague traits like "nice" or "smart." Make them specific and observable (ho
 
 ---
 
-## Step 3 — AI-Assisted Translation
+## Step 3 — Translation (Manual or AI-Assisted)
 
 Convert your admired qualities into value-words/phrases and rank them by frequency.
 
-**Instructions:** Copy/paste the filled-in qualities table from Step 2 into the AI prompt below. Run it in your favorite AI. Then paste the results into Step 4.
+**Manual approach:** Read through your twenty-five qualities and ask: *What value does this quality represent?* "Tells the truth even when it's uncomfortable" → Honesty. "Finishes what they start" → Commitment. Write the value-word next to each quality. Then group the duplicates and near-duplicates. Count the frequency. Your top 10–15 by frequency are your candidates.
+
+**AI-assisted approach:** Copy/paste the filled-in qualities table from Step 2 into the AI prompt below. Run it in your favorite AI. Then paste the results into Step 4.
 
 ### AI Prompt (copy/paste):
 
@@ -707,19 +781,11 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 
 ---
 
----
-
-## 5. The Future You
-
-**Source:** `worksheets/04-becoming-you.md`
-
----
-
 # The Future You
 
 **Aligned Power — The Alignment Arc**
 
-> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, and the skills you must build to get there. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
+> **What this is:** A guided vision-casting worksheet that helps you define the person you're becoming, the relationships you want to create, the skills you must build, and the contribution you want to make. This is not wishful thinking—it's a direction-setting tool that turns your Driving Fire and Cause Worth Playing For into a lived future.
 
 ---
 
@@ -752,13 +818,13 @@ Copy your three words into the left column below and answer each question.
 |---------|---------|---------|
 |         |         |         |
 
-**My future self protects energy by…**
+**The person I'm becoming protects energy by…**
 
 | Word 1: | Word 2: | Word 3: |
 |---------|---------|---------|
 |         |         |         |
 
-**My future self makes decisions by…**
+**The person I'm becoming makes decisions by…**
 
 | Word 1: | Word 2: | Word 3: |
 |---------|---------|---------|
@@ -772,13 +838,13 @@ Copy your three words into the left column below and answer each question.
 
 ### C) Proof (make it measurable)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| If someone watched my last 30 days, the clearest evidence I'm becoming this person would be… |  |
+| If someone watched my last 30 days, the clearest evidence I'm becoming this person would be… |
+|-----------------------------------------------------------------------------------------------|
+|                                                                                               |
 
 **The old version of me would do ________. The future version does ________.**
 
-| Word | Old Version Does… | Future Version Does… |
+| Word | Old Version Does… | Version I'm Becoming Does… |
 |------|-------------------|----------------------|
 |      |                   |                      |
 |      |                   |                      |
@@ -794,8 +860,6 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 | Person | Relationship Context (home / work / other) |
 |--------|---------------------------------------------|
-|        |                                             |
-|        |                                             |
 |        |                                             |
 |        |                                             |
 |        |                                             |
@@ -821,10 +885,13 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 ### D) Daily intention (make it real this week)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| One way I will intentionally upgrade each of these relationships this week is… |  |
-| The specific behavior that proves it is… |  |
+| One way I will intentionally upgrade each of these relationships this week is… |
+|--------------------------------------------------------------------------------|
+|                                                                                |
+
+| The specific behavior that proves it is… |
+|------------------------------------------|
+|                                          |
 
 ---
 
@@ -856,11 +923,17 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### D) Skill-to-calendar commitment
 
-| Prompt | Your Answer |
-|--------|-------------|
-| The single most leveraged skill for the next 90 days is… |  |
-| The smallest weekly practice that makes it real is… (time/day) |  |
-| What will I stop doing to make room for this? |  |
+| The single most high-leverage skill for the next 90 days is… |
+|--------------------------------------------------------------|
+|                                                              |
+
+| The smallest weekly practice that makes it real is… (time/day) |
+|----------------------------------------------------------------|
+|                                                                |
+
+| What will I stop doing to make room for this? |
+|-----------------------------------------------|
+|                                               |
 
 ---
 
@@ -870,17 +943,23 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ### A) Future Service vision (reference your Life Lists "How I Will Contribute" column)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What cause or community do I want to serve with excellence? |  |
-| What contribution do I want to be known for? |  |
-| To leave a lasting legacy, the contributions I can start making now are… |  |
+| What cause or community do I want to serve with excellence? |
+|-------------------------------------------------------------|
+|                                                             |
+
+| What contribution do I want to be known for? |
+|----------------------------------------------|
+|                                              |
+
+| To leave a lasting legacy, the contributions I can start making now are… |
+|--------------------------------------------------------------------------|
+|                                                                          |
 
 ### B) Bridge to The Revenue Bridge
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |  |
+| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |
+|------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                              |
 
 ---
 
@@ -888,31 +967,35 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ### A) What patterns do you notice across all of these futures?
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What keeps showing up as the "real priority" underneath everything? |  |
-| What do you need to stop doing so this future can happen? |  |
+| What keeps showing up as the "real priority" underneath everything? |
+|--------------------------------------------------------------------|
+|                                                                    |
+
+| What do you need to stop doing so this future can happen? |
+|-----------------------------------------------------------|
+|                                                           |
 
 ### B) The 90-day focus
 
-| Prompt | Your Answer |
-|--------|-------------|
-| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |  |
-| The reason is… |  |
-| The old pattern that will try to pull me back is… |  |
-| The first visible action I will take in the next 7 days is… |  |
+| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |
+|-----------------------------------------------------------------------------------------------------------------|
+|                                                                                                                 |
+
+| The reason is… |
+|-----------------|
+|                 |
+
+| The old pattern that will try to pull me back is… |
+|---------------------------------------------------|
+|                                                   |
+
+| The first visible action I will take in the next 7 days is… |
+|--------------------------------------------------------------|
+|                                                              |
 
 ---
 
 *The Future You feeds directly into your Aligned Freedom Coach. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
-
----
-
----
-
-## 6. The Reckoning — Bridge to Operationalization
-
-**Source:** `worksheets/05-reality-check.md`
 
 ---
 
@@ -930,15 +1013,13 @@ This is a bridge—not a burden. Six questions. Be honest, not perfect.
 
 *Pro tip:* Speaking your answers out loud (e.g. [Wispr Flow](https://ref.wisprflow.ai/jacob-sebok) or similar) often surfaces the truest reflection—especially for Misalignments, Costs, and Resistance.
 
-These questions strengthen your Master Prompt and make your AI coach significantly more useful. If you skip this worksheet, your Aligned Freedom Coach will still work—it will just use `[NEEDS INPUT]` for these fields and ask you later.
-
-**You can do this now, during a Strategic Intensive, or whenever you're ready. No pressure—depth beats speed.**
+These questions strengthen your Master Prompt and make your AI coach significantly smarter about your real life—not just your ideal one. Depth beats speed.
 
 ---
 
 ## The Six Questions
 
-### 1. Must Be True
+### 1. Real Reasons Must Be True
 
 What must be true in your life for your Real Reasons to actually happen? (Non-negotiables—the conditions without which your vision stays a wish.)
 
@@ -994,22 +1075,13 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 ## Quick Reflection
 
-| Prompt | Your Answer |
-|--------|-------------|
 | The biggest gap between what I say I want and how I'm currently living is… |  |
+|----------------------------------------------------------------------------|--|
 | The one thing I've been avoiding that would close that gap is… |  |
 
 ---
 
-*These answers feed into your Aligned Freedom Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one.*
-
----
-
----
-
-## 7. The Revenue Bridge: From Meaning To Math
-
-**Source:** `worksheets/06-goals-that-matter.md`
+*These answers feed into your Aligned Freedom Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one. Do the work. Especially the uncomfortable parts.*
 
 ---
 
@@ -1017,7 +1089,7 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 **Aligned Power — The Alignment Arc**
 
-> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the future you're becoming, knock out a few Real Reasons-based stretch desires, and contribute to your Cause Worth Playing For.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the person you're becoming, knock out a few Real Reasons–based stretch desires, and contribute to your Cause Worth Playing For.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
 
@@ -1058,9 +1130,9 @@ Translate the next-level life you want into numbers so your business target is t
 |   |
 |---|
 
-Now list 1–5 Real Reasons-based stretch desires you want your business to fund this year:
+Now list 1–5 Real Reasons–based stretch desires you want your business to fund this year:
 
-| Real Reasons / Desire | Annual Amount ($) |
+| Real Reasons Desire | Annual Amount ($) |
 |--------------|-------------------|
 |              |                   |
 |              |                   |
@@ -1079,15 +1151,14 @@ Now list 1–5 Real Reasons-based stretch desires you want your business to fund
 
 Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
 
-| Field | Your Answer |
-|-------|-------------|
 | Your Cause Worth Playing For (plain language) |  |
+|-----------------------------------------------|--|
 | Impact target this year (specific) |  |
 | Impact tithe % (suggested: 10%) |  |
 | How you'll resource it (money / time / platform / partnerships) |  |
 | Estimated annual contribution ($ + time value) |  |
 
-**Cause Worth Playing For Total (annual):**
+**Cause Total (annual):**
 
 |   |
 |---|
@@ -1103,7 +1174,7 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 | Baseline Needs Total |  |
 | Future You Total |  |
 | Real Reasons Desires Total |  |
-| Cause Worth Playing For Total |  |
+| Cause Total |  |
 | **= Required Revenue (annual)** |  |
 | Reality Buffer (+10%) |  |
 | **= Target Revenue (annual)** |  |
@@ -1209,11 +1280,10 @@ Can your current model actually deliver this revenue without breaking your value
 
 ## Finish — Your Highest-Leverage Move
 
-Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds the Vital Action Plan.)*
+Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds Your Vital Action Plan.)*
 
-| Field | Your Answer |
-|-------|-------------|
 | My ONE highest-leverage move is: |  |
+|----------------------------------|--|
 | Because if this changes, everything downstream changes by: |  |
 | The first small experiment I will run in the next 7 days is: |  |
 
@@ -1223,22 +1293,14 @@ Based on your math + capacity check, choose the ONE lever to pull first. *(This 
 
 ---
 
----
-
-## 8. The Vital Action Plan
-
-**Source:** `worksheets/07-one-thing-domino-plan.md`
-
----
-
-# The Vital Action Plan
+# Your Vital Action Plan
 
 **Aligned Power — The Alignment Arc**
 
 > **How to use:**
 > - Stay operational: write actions, not themes.
-> - Leverage wins: choose the single aligned move that makes other moves easier or unnecessary.
-> - Whole-system focus: you will create Vital Action for each lane, then select one Lead Lane to execute first.
+> - Leverage wins: choose the Vital Action that makes other moves easier or unnecessary.
+> - Whole-system focus: you will create a Vital Action for each lane, then select one Lead Lane to execute first.
 
 ---
 
@@ -1284,7 +1346,7 @@ Write one sentence per lane. Make it measurable or vividly observable.
 
 ## 3) Your Vital Action (10–12 minutes)
 
-Answer for each lane: **"What is my Vital Action—the single aligned move that, if I protect it, makes everything else easier or unnecessary?"**
+Answer for each lane: **"What is my Vital Action—the single aligned move that, by doing it, makes everything else easier or unnecessary?"**
 
 | Lane | My Vital Action (one action) |
 |------|---------------------------|
@@ -1318,9 +1380,8 @@ Complete this for your **Lead Lane** first. If time allows, repeat for the other
 
 Your Lead Lane Vital Action must have a protected time block. If it isn't on the calendar, it isn't real.
 
-| Field | Your Answer |
-|-------|-------------|
 | Lead Lane Vital Action |  |
+|------------------------|--|
 | Time Block (day / time) |  |
 | Frequency |  |
 | Protection Rule (what you will NOT allow during this block) |  |
@@ -1369,14 +1430,6 @@ Write it. Sign it.
 
 ---
 
----
-
-## 9. Aligned Freedom Coach — Master Prompt
-
-**Source:** `worksheets/08-master-prompt.md`
-
----
-
 # Aligned Freedom Coach — Master Prompt
 
 **Aligned Power — The Alignment Arc**
@@ -1393,7 +1446,7 @@ Copy everything between the lines below:
 
 ---
 
-You are an expert Aligned AI Business Agent. Your job is to produce ONE standardized document with the exact same structure every time.
+You are an expert Values-Aligned Performance Agent. Your job is to produce ONE standardized document with the exact same structure every time.
 
 TASK
 Fill in the template below to generate:
@@ -1415,22 +1468,22 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
   1) Core Values + Boundaries
   2) Real Reasons "Must Be True" conditions (from The Reckoning worksheet)
   3) Driving Fire statement
-  4) Cause Worth Playing For + Infinite Game Test
-  5) Becoming
+  4) Cause Worth Playing For
+  5) The Future You
   6) The Revenue Bridge numbers + capacity
   7) Vital Action
 - Do NOT change the meaning of the user's words. You may tighten wording for clarity.
 
 FIELD MAP (where each field comes from)
 Use these worksheet tags to find the content:
-[REAL_REASONS] = Real Reasons (Life Lists) worksheet (Experiences, Growth, Contribution)
+[REAL_REASONS] = The Real Reasons / Life Lists worksheet (Experiences, Growth, Contribution)
 [RECKONING] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
-[DRIVING_FIRE] = Your Driving Fire + The Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fires, Full-Body Test notes, Strengthen Driving Fire answers, Cause Worth Playing For future state answers, Infinite Game checklist, Connect the Dots table)
+[DRIVING_FIRE] = Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fire, Full-Body Test notes, Strengthen answers, Cause Worth Playing For future state answers, Connect the Dots table)
 [VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
 [BECOMING] = The Future You worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
 [OFFERS] = Pre-Work Packet Exercise 4A (Offer Ecosystem Snapshot: offer table with Name, Price, Time per client, Duration, Margin, Role; plus Offer Flow: entry, primary driver, upsell, downsell)
-[REV] = The Revenue Bridge worksheet (Baseline needs, Future You investments, Real Reasons desires, Cause Worth Playing For tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
-[VITAL_ACTION] = Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
+[REV] = The Revenue Bridge worksheet (Baseline needs, Future You investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[VITAL_ACTION] = Your Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
 
@@ -1474,7 +1527,7 @@ Then recommend: YES / NO / NOT NOW with one sentence why.
 
 1) MY IDENTITY + CONSTRAINTS (HOW I WANT TO OPERATE)
 Who I am (today):
-[BRACKET: derive a 2–3 sentence identity statement from recurring themes across REAL_REASONS + Driving Fire + VALUES + BECOMING. If unclear: [NEEDS INPUT]]
+[BRACKET: derive a 2–3 sentence identity statement from recurring themes across REAL_REASONS + DRIVING_FIRE + VALUES + BECOMING. If unclear: [NEEDS INPUT]]
 
 The pattern I'm leaving:
 [BRACKET: pull from RECKONING Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If The Reckoning was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
@@ -1528,8 +1581,8 @@ Values Conflict Watchlist (common traps):
 - When I feel pressure, I tend to sacrifice ________.
   [BRACKET: same method; else [NEEDS INPUT]]
 
-3) THE NORTH STAR STACK (Real Reasons + Driving Fire + The Cause Worth Playing For)
-A) My The Real Reasons: Your Life Lists
+3) THE NORTH STAR STACK (REAL REASONS + DRIVING FIRE + CAUSE WORTH PLAYING FOR)
+A) My Real Reasons (Life Lists)
 1) Experiences I want in this lifetime:
 [BRACKET: REAL_REASONS Experiences]
 
@@ -1559,41 +1612,41 @@ Support that makes alignment easier:
 
 B) My Driving Fire (Purpose)
 Driving Fire Statement (clean draft):
-[BRACKET: Driving Fire final Driving Fire statement if present; else strongest "Current Driving Fire (Working Draft)"]
+[BRACKET: DRIVING_FIRE final statement if present; else strongest "Current Driving Fire (Working Draft)"]
 
-C) My Cause Worth Playing For (Infinite Game)
+C) My Cause Worth Playing For
 Cause Worth Playing For (clean draft):
-[BRACKET: Driving Fire Cause Worth Playing For final draft]
+[BRACKET: DRIVING_FIRE Cause Worth Playing For final draft]
 
-Infinite Game Integrity Notes (what makes this a lifelong game):
-[BRACKET: Driving Fire checklist refinements + "Connect the Dots" sacrifice/boundary lines]
+Integrity Notes (what makes this a lifelong game):
+[BRACKET: DRIVING_FIRE checklist refinements + "Connect the Dots" sacrifice/boundary lines]
 
-This year's Cause Worth Playing For "tithe" target (impact):
+This year's Cause "tithe" target (impact):
 % tithe: [BRACKET: REV tithe % if present; else 10%]
-Method (money / time / platform / partnerships): [BRACKET: REV Cause Worth Playing For resourcing method; else Driving Fire Connect the Dots "vehicle"]
-Annual impact target: [BRACKET: REV Cause Worth Playing For annual contribution target; else [NEEDS INPUT]]
+Method (money / time / platform / partnerships): [BRACKET: REV Cause resourcing method; else DRIVING_FIRE Connect the Dots "vehicle"]
+Annual impact target: [BRACKET: REV Cause annual contribution target; else [NEEDS INPUT]]
 
-4) MY FUTURE 4 (12-MONTH VISION)
-FUTURE 1 — SELF (Identity + Standards)
-3 words I'm becoming: [BRACKET: F4 Self 3 words]
-Standards I keep no matter what: [BRACKET: F4 Self standards/boundary]
-Proof (measurable evidence in 30 days): [BRACKET: F4 Self proof]
+4) MY BECOMING (12-MONTH VISION)
+BECOMING 1 — SELF (Identity + Standards)
+3 words I'm becoming: [BRACKET: BECOMING Self 3 words]
+Standards I keep no matter what: [BRACKET: BECOMING Self standards/boundary]
+Proof (measurable evidence in 30 days): [BRACKET: BECOMING Self proof]
 
-FUTURE 2 — SOCIAL (Relationships/Home)
-The relationships I'm prioritizing: [BRACKET: F4 Social key people or relationship intention]
-The kind of person I am at home: [BRACKET: F4 Social three words / home identity]
-Weekly behavior that proves it: [BRACKET: F4 Social daily intention behavior]
+BECOMING 2 — SOCIAL (Relationships/Home)
+The relationships I'm prioritizing: [BRACKET: BECOMING Social key people or relationship intention]
+The kind of person I am at home: [BRACKET: BECOMING Social three words / home identity]
+Weekly behavior that proves it: [BRACKET: BECOMING Social daily intention behavior]
 
-FUTURE 3 — SKILLS (Primary Field + Skill Training)
-Primary Field of Interest: [BRACKET: F4 Skills PFI]
-Most leveraged skill for next 90 days: [BRACKET: F4 Skills "single most leveraged skill"]
-Weekly practice (day/time): [BRACKET: F4 Skills practice]
-What I stop doing to make room: [BRACKET: F4 Skills stop-doing]
+BECOMING 3 — SKILLS (Primary Field + Skill Training)
+Primary Field of Interest: [BRACKET: BECOMING Skills PFI]
+Most high-leverage skill for next 90 days: [BRACKET: BECOMING Skills "single most high-leverage skill"]
+Weekly practice (day/time): [BRACKET: BECOMING Skills practice]
+What I stop doing to make room: [BRACKET: BECOMING Skills stop-doing]
 
-FUTURE 4 — SERVICE (Contribution/Impact)
-Who benefits most when I'm aligned: [BRACKET: F4 Service beneficiaries]
-Signature contribution I want to be known for: [BRACKET: F4 Service signature contribution]
-How my business enables the cause (even if indirect): [BRACKET: F4 Service "bridge"]
+BECOMING 4 — SERVICE (Contribution/Impact)
+Who benefits most when I'm aligned: [BRACKET: BECOMING Service beneficiaries]
+Signature contribution I want to be known for: [BRACKET: BECOMING Service signature contribution]
+How my business enables the cause (even if indirect): [BRACKET: BECOMING Service "bridge"]
 
 5) FROM MEANING TO MATH + OPERATIONAL NUMBERS (NO GUESSING)
 A) Offer Ecosystem (from Pre-Work Packet)
@@ -1610,7 +1663,7 @@ B) Required Revenue (Baseline + Life + Impact)
 Baseline Needs (annual): [BRACKET: REV Baseline total]
 Becoming Investments (annual): [BRACKET: REV Becoming total]
 Real Reasons Desires (annual): [BRACKET: REV Real Reasons Desires total]
-Cause Worth Playing For Tithe (annual): [BRACKET: REV Cause Worth Playing For total]
+Cause Tithe (annual): [BRACKET: REV Cause total]
 Reality Buffer (+10%): [BRACKET: REV buffer amount or compute 10% of Required Revenue if missing]
 Required Annual Number: [BRACKET: REV Required Annual Number]
 
@@ -1753,8 +1806,8 @@ NORTH STAR STACK
 Real Reasons 1 (Experiences): [BRACKET: REAL_REASONS Experiences distilled to 3–6 bullets]
 Real Reasons 2 (Growth): [BRACKET: REAL_REASONS Growth distilled]
 Real Reasons 3 (Contribution): [BRACKET: REAL_REASONS Contribution distilled]
-Driving Fire: [BRACKET: Driving Fire statement]
-The Cause Worth Playing For: [BRACKET: Cause Worth Playing For statement]
+Driving Fire: [BRACKET: DRIVING_FIRE statement]
+Cause Worth Playing For: [BRACKET: Cause Worth Playing For statement]
 
 TOP 5 VALUES + BOUNDARIES
 1) [BRACKET: Value 1 + boundary]
@@ -1763,7 +1816,7 @@ TOP 5 VALUES + BOUNDARIES
 4) [BRACKET: Value 4 + boundary]
 5) [BRACKET: Value 5 + boundary]
 
-FUTURE 4 (12 months)
+BECOMING (12 months)
 Self: [BRACKET: 3 words + 1 standard]
 Social: [BRACKET: 1 identity line + 1 weekly behavior]
 Skills: [BRACKET: leveraged skill + weekly practice]
@@ -1784,13 +1837,13 @@ Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR VITAL_A
 ===========================
 PASTE WORKSHEETS BELOW THIS LINE (only if you did not attach a file)
 ===========================
-[PASTE LIFE LISTS WORKSHEET]
+[PASTE THE REAL REASONS / LIFE LISTS WORKSHEET]
 [PASTE THE RECKONING WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
-[PASTE Driving Fire + Cause Worth Playing For WORKSHEET]
-[PASTE CORE VALUES WORKSHEET]
-[PASTE BECOMING YOU WORKSHEET]
-[PASTE GOALS THAT MATTER WORKSHEET]
-[PASTE VITAL ACTION PLAN WORKSHEET]
+[PASTE YOUR DRIVING FIRE + CAUSE WORTH PLAYING FOR WORKSHEET]
+[PASTE YOUR VALUES CODE WORKSHEET]
+[PASTE THE BECOMING WORKSHEET]
+[PASTE FROM MEANING TO MATH WORKSHEET]
+[PASTE YOUR VITAL ACTION PLAN WORKSHEET]
 
 ---
 
@@ -1805,7 +1858,7 @@ You are Alfred, my Values-Aligned Performance Coach. Your job is to PATCH my exi
 TASK
 Update my existing Master Context Doc using the update notes I will provide.
 You must output TWO things:
-1) The updated ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1) (same exact headings/order/structure)
+1) The updated Aligned Freedom Coach — MASTER CONTEXT (v1) (same exact headings/order/structure)
 2) The updated ALIGNMENT BLUEPRINT SUMMARY SHEET (ONE PAGE)
 
 Summary Sheet formatting: Use clean Markdown (## for headers, - for bullets, **bold** for key labels). One blank line between sections. No extra prose. Target one page.
@@ -1820,8 +1873,8 @@ NON-NEGOTIABLE PATCH RULES (consistency + precision)
   1) Core Values + Boundaries
   2) Real Reasons "Must Be True" conditions
   3) Driving Fire statement
-  4) Cause Worth Playing For + Infinite Game integrity
-  5) Becoming
+  4) Cause Worth Playing For
+  5) The Future You
   6) The Revenue Bridge numbers + capacity
   7) Vital Action
 - If I say "REMOVE": delete that specific line/item only and leave the rest intact.
@@ -1838,14 +1891,14 @@ Allowed bracket labels:
 [IDENTITY], [PATTERN], [CONSTRAINTS], [FRICTION]
 [VALUES_1]...[VALUES_5], [VALUES_WATCHLIST]
 [REAL_REASONS_EXP], [REAL_REASONS_GROW], [REAL_REASONS_CONTRIB], [REAL_REASONS_MUST_TRUE], [REAL_REASONS_MISALIGN], [REAL_REASONS_COSTS], [REAL_REASONS_NEXT_MOVE], [REAL_REASONS_RESIST], [REAL_REASONS_SUPPORT]
-[DRIVING_FIRE_STATEMENT], [CAUSE_WORTH_PLAYING_FOR], [INFINITE_GAME_NOTES], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
+[DRIVING_FIRE_STATEMENT], [CAUSE_WORTH_PLAYING_FOR], [TITHE_%], [TITHE_METHOD], [IMPACT_TARGET]
 [BECOMING_SELF], [BECOMING_SOCIAL], [BECOMING_SKILLS], [BECOMING_SERVICE]
 [REV_BASELINE], [REV_BECOMING_INVEST], [REV_REAL_REASONS_DESIRES], [REV_TITHE], [REV_BUFFER], [REV_REQUIRED], [REV_TARGET_ANNUAL], [REV_TARGET_MONTH], [REV_TARGET_WEEK]
 [UNIT_ASV], [UNIT_MARGIN], [UNIT_CLOSE], [UNIT_SHOW], [UNIT_QC_TO_SALES]
 [QC_SALES_NEEDED], [QC_SALES_CALLS_NEEDED], [QC_QCS_NEEDED_YEAR], [QC_QCS_MONTH], [QC_QCS_WEEK]
 [LANE_PRIMARY], [REFERRAL_TARGETS], [ADS_TARGETS], [CONV_THRESHOLDS]
 [CAPACITY_LIMITS], [CAPACITY_SYMPTOMS]
-[VITAL_ACTION_LEAD_LANE], [VITAL_ACTION_ONE_THING], [VITAL_ACTION_BLOCK], [VITAL_ACTION_PROTECTION], [VITAL_ACTION_SABOTAGE], [VITAL_ACTION_RESPONSE], [VITAL_ACTION_RIGHT_NOW]
+[VITAL_ACTION_LEAD_LANE], [VITAL_ACTION], [VITAL_ACTION_BLOCK], [VITAL_ACTION_PROTECTION], [VITAL_ACTION_SABOTAGE], [VITAL_ACTION_RESPONSE], [VITAL_ACTION_RIGHT_NOW]
 
 PROCESS
 1) Parse the existing Master Context Doc.
@@ -1887,14 +1940,6 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
----
-
-## 10. Fire Starters: 56 High-Leverage Questions for Your Aligned Freedom Coach
-
-**Source:** `worksheets/09-50-high-leverage-questions.md`
-
----
-
 # Fire Starters: 56 High-Leverage Questions for Your Aligned Freedom Coach
 
 **Aligned Power — The Alignment Arc**
@@ -1921,7 +1966,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 7. "What is the ONE boundary that would make this week feel 30% cleaner?"
 
-8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still protect my Vital Action."
+8. "Create a 'Minimum Viable Week' plan for when chaos happens—so I still honor the Vital Action."
 
 ---
 
@@ -2045,4 +2090,4 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 ---
 
-*These questions are designed to work with your Aligned Freedom Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+*These Fire Starters are designed to work with your Aligned Freedom Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*

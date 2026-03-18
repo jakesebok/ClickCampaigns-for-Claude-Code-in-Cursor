@@ -55,9 +55,9 @@ Copy your three words into the left column below and answer each question.
 
 ### C) Proof (make it measurable)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| If someone watched my last 30 days, the clearest evidence I'm becoming this person would be… |  |
+| If someone watched my last 30 days, the clearest evidence I'm becoming this person would be… |
+|-----------------------------------------------------------------------------------------------|
+|                                                                                               |
 
 **The old version of me would do ________. The future version does ________.**
 
@@ -77,8 +77,6 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 | Person | Relationship Context (home / work / other) |
 |--------|---------------------------------------------|
-|        |                                             |
-|        |                                             |
 |        |                                             |
 |        |                                             |
 |        |                                             |
@@ -104,10 +102,13 @@ Clarify who you want to be in your relationships—not just what you want from t
 
 ### D) Daily intention (make it real this week)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| One way I will intentionally upgrade each of these relationships this week is… |  |
-| The specific behavior that proves it is… |  |
+| One way I will intentionally upgrade each of these relationships this week is… |
+|--------------------------------------------------------------------------------|
+|                                                                                |
+
+| The specific behavior that proves it is… |
+|------------------------------------------|
+|                                          |
 
 ---
 
@@ -139,11 +140,17 @@ High performers don't "hope" they'll be ready. They train the skills that the fu
 
 ### D) Skill-to-calendar commitment
 
-| Prompt | Your Answer |
-|--------|-------------|
-| The single most leveraged skill for the next 90 days is… |  |
-| The smallest weekly practice that makes it real is… (time/day) |  |
-| What will I stop doing to make room for this? |  |
+| The single most high-leverage skill for the next 90 days is… |
+|--------------------------------------------------------------|
+|                                                              |
+
+| The smallest weekly practice that makes it real is… (time/day) |
+|----------------------------------------------------------------|
+|                                                                |
+
+| What will I stop doing to make room for this? |
+|-----------------------------------------------|
+|                                               |
 
 ---
 
@@ -153,17 +160,23 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ### A) Future Service vision (reference your Life Lists "How I Will Contribute" column)
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What cause or community do I want to serve with excellence? |  |
-| What contribution do I want to be known for? |  |
-| To leave a lasting legacy, the contributions I can start making now are… |  |
+| What cause or community do I want to serve with excellence? |
+|-------------------------------------------------------------|
+|                                                             |
+
+| What contribution do I want to be known for? |
+|----------------------------------------------|
+|                                              |
+
+| To leave a lasting legacy, the contributions I can start making now are… |
+|--------------------------------------------------------------------------|
+|                                                                          |
 
 ### B) Bridge to The Revenue Bridge
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |  |
+| What would it cost to fully fund this impact this year? (Or: what annual donation/giving number would align with my values?) |
+|------------------------------------------------------------------------------------------------------------------------------|
+|                                                                                                                              |
 
 ---
 
@@ -171,19 +184,31 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 ### A) What patterns do you notice across all of these futures?
 
-| Prompt | Your Answer |
-|--------|-------------|
-| What keeps showing up as the "real priority" underneath everything? |  |
-| What do you need to stop doing so this future can happen? |  |
+| What keeps showing up as the "real priority" underneath everything? |
+|--------------------------------------------------------------------|
+|                                                                    |
+
+| What do you need to stop doing so this future can happen? |
+|-----------------------------------------------------------|
+|                                                           |
 
 ### B) The 90-day focus
 
-| Prompt | Your Answer |
-|--------|-------------|
-| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |  |
-| The reason is… |  |
-| The old pattern that will try to pull me back is… |  |
-| The first visible action I will take in the next 7 days is… |  |
+| If I could only strengthen ONE domain first to unlock the rest (Self, Social, Skills, or Service), it would be… |
+|-----------------------------------------------------------------------------------------------------------------|
+|                                                                                                                 |
+
+| The reason is… |
+|-----------------|
+|                 |
+
+| The old pattern that will try to pull me back is… |
+|---------------------------------------------------|
+|                                                   |
+
+| The first visible action I will take in the next 7 days is… |
+|--------------------------------------------------------------|
+|                                                              |
 
 ---
 

@@ -24,7 +24,7 @@ Four domains of growth that, together, create a whole person. We call it **The F
 
 **Social (Relationships)** — Who you are in your relationships. Not what you get from them—who you *are* in them. The kind of partner, parent, friend, and leader you show up as.
 
-**Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands.
+**Skills (Business)** — Your primary field of interest and the capabilities you must build to be world-class in it. Not just competence—*craft*. The skills that the future demands. Maybe skills means hiring a coach... like me. Maybe it means getting a certification. Maybe it means learning to sell without feeling slimy. Whatever it is—it's the capability the future version of you needs that the current version doesn't have yet.
 
 **Service (Contribution)** — How your growth serves others. Who benefits when you're aligned? What's your signature contribution? How does your business enable your Cause Worth Playing For?
 
@@ -80,13 +80,13 @@ Then: three skills you must build *now* to be lethal in that field twelve months
 
 High performers don't hope they'll be ready. They train the skills the future demands. And they protect time for skill development on their calendar—not as an afterthought, but as a non-negotiable.
 
-The commitment: "The single most leveraged skill for the next 90 days is... The smallest weekly practice that makes it real is... What I'll stop doing to make room for this is..."
+The commitment: "The single most high-leverage skill for the next 90 days is... The smallest weekly practice that makes it real is... What I'll stop doing to make room for this is..."
 
 ---
 
 ### Service (Contribution): How Will You Contribute?
 
-The fourth domain is Service—how your growth serves others. Your Life Lists already captured how you want to contribute. The worksheet makes Future Service explicit: what cause or community you want to serve with excellence, what contribution you want to be known for, and what it would cost to fully fund that impact this year. In The Revenue Bridge, you'll turn that into a real number—a tithe, a donation, a commitment you protect. Service isn't an afterthought. It's part of the future you're building.
+The fourth domain is Service—how your growth serves others. Your Life Lists already captured how you want to contribute. The worksheet makes Future Service explicit: what cause or community you want to serve with excellence, what contribution you want to be known for, and what it would cost to fully fund that impact this year. Maybe impact means sponsoring a program. Maybe it means building a scholarship fund. Maybe it means pro bono coaching for people who can't afford it. In The Revenue Bridge, you'll turn that into a real number—a tithe, a donation, a commitment you protect. Service isn't an afterthought. It's part of the future you're building.
 
 ---
 

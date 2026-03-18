@@ -18,7 +18,9 @@ That's what we're after. In the Alignment Arc, we call it your Driving Fire.
 
 ### The What-How-Why Structure
 
-Simon Sinek gave us a useful lens: every organization—every person—operates on three levels. **What** you do. **How** you do it differently. **Why** you do it at all. Almost everyone knows their What and How. Almost nobody knows their Why. And here's the key: people don't buy what you do—they buy why you do it. Your Driving Fire is your Why. It's the belief, the cause, the reason your work exists beyond making money.
+If you've read *Start with Why* or watched the second most-watched TEDtalk of all time that goes by the same name—Simon Sinek gave us a useful lens: every organization—every person—operates on three levels. **What** you do. **How** you do it differently. **Why** you do it at all. Almost everyone knows their What and How. Almost nobody knows their Why. And here's the key: people don't buy what you do—they buy why you do it. They're buying belonging to a belief. And it's why they'll buy from *you* too—if you can articulate your Why well enough for them to know that it's theirs too.
+
+Your Driving Fire is your Why. It's the belief, the cause, the reason your work exists beyond making money.
 
 ---
 
@@ -38,7 +40,7 @@ A couple things I want to be really clear about.
 
 We are not writing a tagline. We're not writing marketing copy. If your Driving Fire sounds like it belongs on a website header, it's probably not your Driving Fire yet. It should feel almost uncomfortably honest. Like the kind of thing you'd tell a close friend at midnight—not the kind of thing you'd put on a business card.
 
-We are also not manufacturing purpose. Your Driving Fire is not something we create in this exercise. It has been there your whole life. It shows up in your stories, in what makes you angry, in the moments when you felt most alive. Our job isn't to create it. Our job is to *excavate* it.
+We are also not manufacturing purpose. Your Driving Fire is not something we create in this exercise. It has been there your whole life. It shows up in your stories, in what makes you angry, in the moments when you felt most alive. Our job, like that of an archaeologist, is to excavate it.
 
 ---
 

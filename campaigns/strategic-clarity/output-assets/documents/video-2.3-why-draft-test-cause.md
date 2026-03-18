@@ -30,7 +30,9 @@ A few guidelines:
 
 This is my favorite part.
 
-Read each draft out loud. Not in your head—*out loud*. And check your body. I'm serious. This isn't woo. Your body knows the truth faster than your brain does.
+Read each draft out loud. Not in your head—*out loud*. I promise it makes a difference. I started crying when I read mine. I started the sentence as cool and composed as Clint Eastwood, and I could barely finish it after the words resonated. That's how you know.
+
+Check your body. I'm serious. This isn't woo. Your body knows the truth faster than your brain does.
 
 For each draft, note three things:
 
@@ -88,7 +90,19 @@ Fill in:
 - **How you do it** (your method/vehicle)
 - **Amazing benefit** (the life impact)
 
-Then write your **Mission Statement**: "I help [target audience] achieve/overcome [outcome/problem] by [how] so that [benefit]."
+Then write your **Mission Statement**. Here's what I want you to know: your mission can move in one of two directions.
+
+If your program has a **moving toward** direction—where you're helping people achieve some big, sexy outcome, like attracting $5,000–$10,000 clients, having an incredible marriage, building a freedom-based business—use this structure:
+
+*"I help [target audience] achieve [outcome] by [how you do it] so that [amazing benefit]."*
+
+On the other hand, if your program has a **moving away** direction—where it's more about helping people solve a painful problem, like Type 2 diabetes, IBS, chronic burnout—use this structure:
+
+*"I help [target audience] overcome [problem] by [how you do it] so that [amazing benefit]."*
+
+For example: *"I help burnt-out executives achieve work-life harmony by implementing my 'Energy Architecture' system so that they can be present for their families while doubling their productivity."*
+
+Either direction works. What matters is that it's true.
 
 ---
 

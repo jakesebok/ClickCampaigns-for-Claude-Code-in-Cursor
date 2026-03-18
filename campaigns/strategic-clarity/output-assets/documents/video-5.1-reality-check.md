@@ -44,13 +44,11 @@ Open The Reckoning worksheet. There are six questions. That's it. One page. You 
 
 ---
 
-### Why This Worksheet Is Optional (But Powerful)
+### Why This Worksheet Matters
 
-I want to be transparent about something. This worksheet is optional. You can skip it and still run the Master Prompt and still get a functional AI OS. The fields that come from The Reckoning will simply show `[NEEDS INPUT]` in your Aligned Freedom Coach, and your coach will ask you about them later.
+Your AI coach becomes significantly smarter about your actual life when it has these answers. It knows not just what you want, but what's in the way. It knows what you're tolerating, what it's costing you, and what part of you might resist the plan. That context is the difference between advice that sounds good and advice that actually works—for *you*, in *your* situation, right now.
 
-But here's what you gain if you do it: your AI coach becomes significantly smarter about your actual life. It knows not just what you want, but what's in the way. It knows what you're tolerating, what it's costing you, and what part of you might resist the plan. That context is the difference between advice that sounds good and advice that actually works—for *you*, in *your* situation, right now.
-
-So my strong recommendation: do it. Even if it's uncomfortable. Especially if it's uncomfortable. Depth beats speed.
+Do it. Even if it's uncomfortable. *Especially* if it's uncomfortable. Depth beats speed.
 
 ---
 
@@ -69,7 +67,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, The Future You, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact weekly activities that make it real.
+In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, The Future You, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 

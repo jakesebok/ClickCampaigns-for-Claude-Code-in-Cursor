@@ -57,7 +57,7 @@ Here's the process. It's straightforward.
 
 **Step 5:** Feed it your worksheets. Two options:
 - **Preferred:** If your AI supports file uploads, attach your completed worksheets file—the consolidated "All Worksheets in Order" document works perfectly. One file. Done.
-- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, The Reckoning (optional), Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
+- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, The Reckoning, Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 

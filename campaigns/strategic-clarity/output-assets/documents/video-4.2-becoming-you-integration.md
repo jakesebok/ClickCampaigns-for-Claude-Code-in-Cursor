@@ -66,7 +66,7 @@ The Future You becomes Section 4 of your Aligned Freedom Coach. Your AI coach wi
 
 - The three words you're becoming—and what they look like in practice
 - The relationships you're prioritizing and how you want to show up in them
-- Your primary field and the most leveraged skill for the next 90 days
+- Your primary field and the most high-leverage skill for the next 90 days
 - Your signature contribution and how your business enables your cause
 
 So when you ask your AI coach for a weekly plan, it doesn't just look at revenue targets. It checks: does this week move you toward the person you're becoming across *all four domains*? If your Self (Personal) future says "grounded and present" but your plan has zero margin, the AI will flag it. That's alignment by design.

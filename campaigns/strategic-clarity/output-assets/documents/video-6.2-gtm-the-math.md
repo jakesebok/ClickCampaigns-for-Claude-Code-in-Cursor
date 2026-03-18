@@ -51,13 +51,13 @@ If you close 30% of your sales conversations, you need 100 sales conversations t
 
 This is the quality screen. Not every qualified conversation turns into a sales conversation. If 70% of your QCs lead to a real sales conversation, you need about 143 qualified conversations.
 
-Then: divide by 12 for monthly. Divide by 52 for weekly.
+Then we break it down across every timeframe: divide by 4 for quarterly. Divide by 12 for monthly. Divide by 52 for weekly.
 
-143 ÷ 52 = about 2.75 qualified conversations per week.
+143 per year = about 36 per quarter = about 12 per month = about 2.75 per week.
 
-That's it. That's the number. Everything your life requires—stability, growth, experiences, impact—boils down to roughly 3 qualified conversations per week.
+That's it. That's the number at every level. Everything your life requires—stability, growth, experiences, impact—reverse-engineers to roughly 3 qualified conversations per week. About 12 per month. About 36 per quarter.
 
-Does that feel doable? It should. Because we didn't start with "you need to do 50 cold calls a day." We started with your actual life and reverse-engineered to a weekly behavior that's achievable.
+Does that feel doable? It should. Because we didn't start with "you need to do 50 cold calls a day." We started with your actual life and reverse-engineered the exact annual, quarterly, monthly, and weekly behaviors that make it real.
 
 ---
 

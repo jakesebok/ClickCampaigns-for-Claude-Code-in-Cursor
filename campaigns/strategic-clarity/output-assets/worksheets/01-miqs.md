@@ -16,28 +16,69 @@
 
 ---
 
-## The Three Questions
+## Experiences I Want
 
-### If you get stuck, try these prompts:
+What do I want to feel more often? What do I want my days to look like? Who do I want to be with? What do I want to do "just because I'm alive"?
 
-**Experiences:** What do I want to feel more often? What do I want my days to look like? Who do I want to be with? What do I want to do "just because I'm alive"?
-
-**Growth:** What qualities do I need to embody (courage, boundaries, trust, leadership, calm)? What skills would make my life simpler? What patterns must I outgrow?
-
-**Contribution:** Who do I want to serve and how? What impact do I want to be known for? What problem do I want to help solve?
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
 
 ---
 
-| Experiences I Want | How I Need to Grow | How I Will Contribute |
-|--------------------|--------------------|-----------------------|
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
-|                    |                    |                       |
+## How I Need to Grow
+
+What qualities do I need to embody (courage, boundaries, trust, leadership, calm)? What skills would make my life simpler? What patterns must I outgrow?
+
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+
+---
+
+## How I Will Contribute
+
+Who do I want to serve and how? What impact do I want to be known for? What problem do I want to help solve? What do I want to be different simply because I lived?
+
+|   |
+|---|
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
+|   |
 
 ---
 

@@ -30,7 +30,7 @@ Take your time here. This is where the gold is.
 
 Now we go pattern hunting.
 
-If you're doing this with a partner or in a group—great. One person asks the questions, listens for repeats, and mirrors back what they hear. No advice. No fixing. Just listening and reflecting.
+If at all possible, I want you to do this exercise with another person. A partner. A friend. A fellow accelerator member. Someone who will ask the questions, listen for the repeats, and mirror back what they hear. No advice. No fixing. Just listening and reflecting. There's something about hearing another person say back to you what they're hearing in your stories—it lands differently than reading your own words on a screen. It cuts through the performance faster. If you can make this happen, do it.
 
 If you're doing this solo—that works too. There's an AI prompt in the worksheet specifically designed for this. You paste your Peak Moments table into it, and the AI acts as a values-aligned theme mining coach, walking you through the same process.
 
