@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Bell } from "lucide-react";
-import { getScorecardWindow } from "@/lib/scorecard-window";
+import { getScorecardWindow, isDateInScorecardWindow } from "@/lib/scorecard-window";
 
 export function NotificationBell() {
   const [available, setAvailable] = useState(false);
@@ -17,7 +17,17 @@ export function NotificationBell() {
     fetch("/api/scorecard")
       .then((r) => r.json())
       .then((data) => {
-        setAvailable(!data.currentWeek);
+        const entries = [
+          ...(data.currentWeek ? [data.currentWeek] : []),
+          ...(data.entries || []),
+        ];
+        const submittedThisWindow = entries.some((entry: { createdAt: string }) =>
+          isDateInScorecardWindow(entry.createdAt, {
+            opensAt: win.opensAt,
+            closesAt: win.closesAt,
+          })
+        );
+        setAvailable(!submittedThisWindow);
       })
       .catch(() => setAvailable(false));
   }, []);

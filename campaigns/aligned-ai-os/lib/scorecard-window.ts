@@ -5,18 +5,16 @@
 
 const TZ = "America/New_York";
 
-function getEasternOffsetHours(month: number): number {
-  return month >= 4 && month <= 10 ? 4 : 5;
-}
-
-function toEastern(date: Date): {
+type EasternParts = {
   dayOfWeek: number;
   hour: number;
   minute: number;
   day: number;
   month: number;
   year: number;
-} {
+};
+
+function toEastern(date: Date): EasternParts {
   const fmt = new Intl.DateTimeFormat("en-US", {
     timeZone: TZ,
     weekday: "short",
@@ -51,33 +49,53 @@ function toEastern(date: Date): {
   };
 }
 
-function easternToUTC(
+function getEasternOffsetMinutes(date: Date): number {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ,
+    timeZoneName: "shortOffset",
+  });
+  const tzName = fmt
+    .formatToParts(date)
+    .find((part) => part.type === "timeZoneName")?.value;
+  const match = tzName?.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/);
+  if (!match) return 0;
+  const sign = match[1] === "-" ? -1 : 1;
+  const hours = parseInt(match[2] ?? "0", 10) || 0;
+  const minutes = parseInt(match[3] ?? "0", 10) || 0;
+  return sign * (hours * 60 + minutes);
+}
+
+function easternLocalToUtc(
   year: number,
   month: number,
   day: number,
   hour: number,
   minute: number
-): number {
-  const offset = getEasternOffsetHours(month);
-  return Date.UTC(year, month - 1, day, hour + offset, minute || 0);
+): Date {
+  let utcMs = Date.UTC(year, month - 1, day, hour, minute, 0, 0);
+  for (let i = 0; i < 2; i += 1) {
+    const offsetMinutes = getEasternOffsetMinutes(new Date(utcMs));
+    utcMs = Date.UTC(year, month - 1, day, hour, minute, 0, 0) - offsetMinutes * 60 * 1000;
+  }
+  return new Date(utcMs);
 }
 
-function getThisWeekFridayNoon(e: ReturnType<typeof toEastern>): Date {
-  let daysToFriday = (5 - e.dayOfWeek + 7) % 7;
-  if (e.dayOfWeek === 5 && e.hour >= 12) daysToFriday += 7;
-  if (e.dayOfWeek === 6) daysToFriday += 7;
-  if (e.dayOfWeek === 0 && e.hour >= 18) daysToFriday += 7;
-  const fd = e.day + daysToFriday;
-  return new Date(easternToUTC(e.year, e.month, fd, 12, 0));
-}
-
-function getThisWeekSunday6pm(e: ReturnType<typeof toEastern>): Date {
-  let daysToSunday = (0 - e.dayOfWeek + 7) % 7;
-  if (e.dayOfWeek === 0 && e.hour < 18) daysToSunday = 0;
-  if (e.dayOfWeek === 5 && e.hour >= 12) daysToSunday = 2;
-  if (e.dayOfWeek === 6) daysToSunday = 1;
-  const sd = e.day + daysToSunday;
-  return new Date(easternToUTC(e.year, e.month, sd, 18, 0));
+function shiftEasternDate(
+  e: EasternParts,
+  days: number,
+  hour: number,
+  minute: number
+): Date {
+  const normalized = new Date(
+    Date.UTC(e.year, e.month - 1, e.day + days, hour, minute, 0, 0)
+  );
+  return easternLocalToUtc(
+    normalized.getUTCFullYear(),
+    normalized.getUTCMonth() + 1,
+    normalized.getUTCDate(),
+    normalized.getUTCHours(),
+    normalized.getUTCMinutes()
+  );
 }
 
 export type ScorecardWindowStatus = "before" | "open" | "closed";
@@ -97,18 +115,33 @@ export type ScorecardWindow = {
   closesAtLabel: string;
 };
 
+export type ScorecardWindowBounds = {
+  opensAt: Date;
+  closesAt: Date;
+};
+
 export function getScorecardWindow(): ScorecardWindow {
   const now = new Date();
   const e = toEastern(now);
-  const fridayNoon = getThisWeekFridayNoon(e);
-  const sunday6pm = getThisWeekSunday6pm(e);
   const inWindow =
     (e.dayOfWeek === 5 && e.hour >= 12) ||
     e.dayOfWeek === 6 ||
     (e.dayOfWeek === 0 && e.hour < 18);
+  const isClosedAfterWindow = e.dayOfWeek === 0 && e.hour >= 18;
+  let daysToFriday = (5 - e.dayOfWeek + 7) % 7;
+  if (e.dayOfWeek === 5 && e.hour >= 12) daysToFriday += 7;
+  const fridayNoon = shiftEasternDate(e, daysToFriday, 12, 0);
+  const opensAt = inWindow
+    ? shiftEasternDate(e, e.dayOfWeek === 5 ? 0 : e.dayOfWeek === 6 ? -1 : -2, 12, 0)
+    : fridayNoon;
+  const closesAt = inWindow
+    ? shiftEasternDate(e, e.dayOfWeek === 5 ? 2 : e.dayOfWeek === 6 ? 1 : 0, 18, 0)
+    : shiftEasternDate(e, daysToFriday + 2, 18, 0);
   const status: ScorecardWindowStatus = inWindow
     ? "open"
-    : now < fridayNoon
+    : isClosedAfterWindow
+      ? "closed"
+      : now < fridayNoon
       ? "before"
       : "closed";
 
@@ -132,7 +165,7 @@ export function getScorecardWindow(): ScorecardWindow {
   } else if (status === "open") {
     message =
       "Your scorecard is available now. Fill it out before Sunday 6pm.";
-    const msLeft = sunday6pm.getTime() - now.getTime();
+    const msLeft = closesAt.getTime() - now.getTime();
     if (msLeft <= 0) {
       countdownMessage = "Time's up for this week.";
     } else {
@@ -149,15 +182,6 @@ export function getScorecardWindow(): ScorecardWindow {
       "Your scorecard window has closed. Your next scorecard will be available Friday at 12pm.";
   }
 
-  let closesAt = sunday6pm;
-  if (e.dayOfWeek === 0 && e.hour >= 18) {
-    closesAt = new Date(sunday6pm.getTime() + 7 * 24 * 60 * 60 * 1000);
-  }
-
-  const opensAt = inWindow
-    ? new Date(fridayNoon.getTime() - 7 * 24 * 60 * 60 * 1000)
-    : fridayNoon;
-
   return {
     status,
     canSubmit: status === "open",
@@ -172,6 +196,46 @@ export function getScorecardWindow(): ScorecardWindow {
     nextOpenLabel: "Friday at 12pm",
     closesAtLabel: "Sunday at 6pm",
   };
+}
+
+export function getMostRecentScorecardWindow(
+  win: ScorecardWindow = getScorecardWindow()
+): ScorecardWindowBounds {
+  if (win.status === "open") {
+    return { opensAt: win.opensAt, closesAt: win.closesAt };
+  }
+  const weekMs = 7 * 24 * 60 * 60 * 1000;
+  return {
+    opensAt: new Date(win.opensAt.getTime() - weekMs),
+    closesAt: new Date(win.closesAt.getTime() - weekMs),
+  };
+}
+
+export function isDateInScorecardWindow(
+  date: Date | string,
+  bounds: ScorecardWindowBounds
+): boolean {
+  const ts = new Date(date).getTime();
+  return ts >= bounds.opensAt.getTime() && ts <= bounds.closesAt.getTime();
+}
+
+export function getEasternWeekKey(date: Date | string): string {
+  const eastern = toEastern(new Date(date));
+  const normalized = new Date(
+    Date.UTC(eastern.year, eastern.month - 1, eastern.day, 12, 0, 0, 0)
+  );
+  const mondayOffset = eastern.dayOfWeek === 0 ? -6 : 1 - eastern.dayOfWeek;
+  normalized.setUTCDate(normalized.getUTCDate() + mondayOffset);
+  return `${normalized.getUTCFullYear()}-${String(
+    normalized.getUTCMonth() + 1
+  ).padStart(2, "0")}-${String(normalized.getUTCDate()).padStart(2, "0")}`;
+}
+
+export function isSameEasternCalendarWeek(
+  left: Date | string,
+  right: Date | string = new Date()
+): boolean {
+  return getEasternWeekKey(left) === getEasternWeekKey(right);
 }
 
 export function formatScorecardCountdown(win: ScorecardWindow): string {

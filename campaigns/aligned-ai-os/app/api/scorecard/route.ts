@@ -19,6 +19,7 @@ function portalRowToEntry(row: {
   });
   return {
     id: row.id,
+    createdAt: row.created_at,
     weekStart: weekStart.toISOString(),
     scores: row.scores || {},
     notes,
@@ -80,6 +81,7 @@ export async function POST(req: NextRequest) {
   const weekStart = getWeekStart(new Date(row.created_at));
   return NextResponse.json({
     id: row.id,
+    createdAt: row.created_at,
     weekStart: weekStart.toISOString(),
     scores: row.scores || {},
     notes: JSON.stringify({ reflections, oneThing }),

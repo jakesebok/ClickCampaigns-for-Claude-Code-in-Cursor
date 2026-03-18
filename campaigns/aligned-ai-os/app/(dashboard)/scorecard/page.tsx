@@ -18,6 +18,7 @@ import { getScorecardWindow } from "@/lib/scorecard-window";
 
 type ScorecardEntry = {
   id: string;
+  createdAt: string;
   weekStart: string;
   scores: Record<string, number>;
   notes: string | null;
@@ -41,6 +42,7 @@ export default function ScorecardPage() {
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [step, setStep] = useState<"score" | "reflect" | "onething">("score");
+  const [hasAnySubmissions, setHasAnySubmissions] = useState(false);
 
   useEffect(() => {
     SCORECARD_CATEGORIES.forEach((c) => {
@@ -50,7 +52,12 @@ export default function ScorecardPage() {
     fetch("/api/scorecard")
       .then((r) => r.json())
       .then((data) => {
+        const allEntries = [
+          ...(data.currentWeek ? [data.currentWeek] : []),
+          ...(data.entries || []),
+        ];
         setEntries(data.entries || []);
+        setHasAnySubmissions(allEntries.length > 0);
         if (data.currentWeek) {
           setSubmitted(true);
         }
@@ -102,6 +109,7 @@ export default function ScorecardPage() {
   const overall = getOverallScore(scores);
 
   const window = getScorecardWindow();
+  const canSubmit = window.canSubmit || !hasAnySubmissions;
 
   if (loading) {
     return (
@@ -111,7 +119,7 @@ export default function ScorecardPage() {
     );
   }
 
-  if (!window.canSubmit && !submitted) {
+  if (!canSubmit && !submitted) {
     return (
       <div className="flex flex-col h-full">
         <header className="px-6 py-4 border-b border-border">
@@ -199,8 +207,12 @@ export default function ScorecardPage() {
     <div className="flex flex-col h-full">
       <header className="px-6 py-4 border-b border-border space-y-3">
         <div className="rounded-xl border-2 border-accent/30 bg-accent/5 px-4 py-3">
-          <p className="font-semibold text-sm">{window.message}</p>
-          {window.countdownMessage && (
+          <p className="font-semibold text-sm">
+            {hasAnySubmissions
+              ? window.message
+              : "Complete your first 6Cs scorecard whenever you're ready. After this, future scorecards will open Friday at 12pm and close Sunday at 6pm Eastern."}
+          </p>
+          {hasAnySubmissions && window.countdownMessage && (
             <p className="text-muted-foreground text-sm mt-1 font-mono">{window.countdownMessage}</p>
           )}
         </div>

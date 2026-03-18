@@ -5,12 +5,6 @@
 (function() {
   var TZ = 'America/New_York';
 
-  function getEasternOffsetHours(year, month, day) {
-    var m = month;
-    if (m >= 4 && m <= 10) return 4;
-    return 5;
-  }
-
   function toEastern(date) {
     var fmt = new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false });
     var parts = fmt.formatToParts(date);
@@ -26,41 +20,55 @@
     return o;
   }
 
-  function easternToUTC(year, month, day, hour, minute) {
-    var offset = getEasternOffsetHours(year, month, day);
-    return Date.UTC(year, month - 1, day, hour + offset, minute || 0);
+  function getEasternOffsetMinutes(date) {
+    var fmt = new Intl.DateTimeFormat('en-US', { timeZone: TZ, timeZoneName: 'shortOffset' });
+    var parts = fmt.formatToParts(date);
+    var tzName = '';
+    parts.forEach(function(p) { if (p.type === 'timeZoneName') tzName = p.value; });
+    var match = tzName && tzName.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/);
+    if (!match) return 0;
+    var sign = match[1] === '-' ? -1 : 1;
+    var hours = parseInt(match[2] || '0', 10) || 0;
+    var minutes = parseInt(match[3] || '0', 10) || 0;
+    return sign * ((hours * 60) + minutes);
   }
 
-  function getThisWeekFridayNoon(easternNow) {
-    var y = easternNow.year, m = easternNow.month, d = easternNow.day, dow = easternNow.dayOfWeek;
-    var daysToFriday = (5 - dow + 7) % 7;
-    if (dow === 5 && easternNow.hour >= 12) daysToFriday += 7;
-    if (dow === 6) daysToFriday += 7;
-    if (dow === 0 && easternNow.hour >= 18) daysToFriday += 7;
-    var fd = d + daysToFriday;
-    return new Date(easternToUTC(y, m, fd, 12, 0));
+  function easternLocalToUtc(year, month, day, hour, minute) {
+    var utcMs = Date.UTC(year, month - 1, day, hour, minute || 0, 0, 0);
+    for (var i = 0; i < 2; i += 1) {
+      var offsetMinutes = getEasternOffsetMinutes(new Date(utcMs));
+      utcMs = Date.UTC(year, month - 1, day, hour, minute || 0, 0, 0) - (offsetMinutes * 60 * 1000);
+    }
+    return new Date(utcMs);
   }
 
-  function getThisWeekSunday6pm(easternNow) {
-    var y = easternNow.year, m = easternNow.month, d = easternNow.day, dow = easternNow.dayOfWeek;
-    var daysToSunday = (0 - dow + 7) % 7;
-    if (dow === 0 && easternNow.hour < 18) daysToSunday = 0;
-    if (dow === 5 && easternNow.hour >= 12) daysToSunday = 2;
-    if (dow === 6) daysToSunday = 1;
-    var sd = d + daysToSunday;
-    return new Date(easternToUTC(y, m, sd, 18, 0));
+  function shiftEasternDate(easternNow, days, hour, minute) {
+    var normalized = new Date(Date.UTC(easternNow.year, easternNow.month - 1, easternNow.day + days, hour, minute || 0, 0, 0));
+    return easternLocalToUtc(
+      normalized.getUTCFullYear(),
+      normalized.getUTCMonth() + 1,
+      normalized.getUTCDate(),
+      normalized.getUTCHours(),
+      normalized.getUTCMinutes()
+    );
   }
 
   function getScorecardWindow() {
     var now = new Date();
     var e = toEastern(now);
-    var fridayNoon = getThisWeekFridayNoon(e);
-    var sunday6pm = getThisWeekSunday6pm(e);
     var inWindow = (e.dayOfWeek === 5 && e.hour >= 12) || (e.dayOfWeek === 6) || (e.dayOfWeek === 0 && e.hour < 18);
-    var status = inWindow ? 'open' : (now < fridayNoon ? 'before' : 'closed');
+    var isClosedAfterWindow = e.dayOfWeek === 0 && e.hour >= 18;
+    var daysToFriday = (5 - e.dayOfWeek + 7) % 7;
+    if (e.dayOfWeek === 5 && e.hour >= 12) daysToFriday += 7;
+    var fridayNoon = shiftEasternDate(e, daysToFriday, 12, 0);
+    var opensAt = inWindow
+      ? shiftEasternDate(e, e.dayOfWeek === 5 ? 0 : e.dayOfWeek === 6 ? -1 : -2, 12, 0)
+      : fridayNoon;
+    var closesAt = inWindow
+      ? shiftEasternDate(e, e.dayOfWeek === 5 ? 2 : e.dayOfWeek === 6 ? 1 : 0, 18, 0)
+      : shiftEasternDate(e, daysToFriday + 2, 18, 0);
+    var status = inWindow ? 'open' : (isClosedAfterWindow ? 'closed' : (now < fridayNoon ? 'before' : 'closed'));
     var nextOpen = fridayNoon;
-    var closesAt = sunday6pm;
-    if (e.dayOfWeek === 0 && e.hour >= 18) closesAt = new Date(sunday6pm.getTime() + 7 * 24 * 60 * 60 * 1000);
 
     var message = '';
     var countdownMessage = '';
@@ -88,9 +96,6 @@
       message = 'Your scorecard window has closed. Your next scorecard will be available Friday at 12pm.';
     }
 
-    // opensAt = the Friday noon that started (or will start) the current/upcoming window
-    var opensAt = inWindow ? new Date(fridayNoon.getTime() - 7 * 24 * 60 * 60 * 1000) : fridayNoon;
-
     return {
       status: status,
       canSubmit: status === 'open',
@@ -107,6 +112,37 @@
     };
   }
 
+  function getMostRecentScorecardWindow(win) {
+    var current = win || getScorecardWindow();
+    if (current.status === 'open') {
+      return { opensAt: current.opensAt, closesAt: current.closesAt };
+    }
+    var weekMs = 7 * 24 * 60 * 60 * 1000;
+    return {
+      opensAt: new Date(current.opensAt.getTime() - weekMs),
+      closesAt: new Date(current.closesAt.getTime() - weekMs)
+    };
+  }
+
+  function isDateInScorecardWindow(date, bounds) {
+    var ts = new Date(date).getTime();
+    return ts >= bounds.opensAt.getTime() && ts <= bounds.closesAt.getTime();
+  }
+
+  function getEasternWeekKey(date) {
+    var eastern = toEastern(new Date(date));
+    var normalized = new Date(Date.UTC(eastern.year, eastern.month - 1, eastern.day, 12, 0, 0, 0));
+    var mondayOffset = eastern.dayOfWeek === 0 ? -6 : 1 - eastern.dayOfWeek;
+    normalized.setUTCDate(normalized.getUTCDate() + mondayOffset);
+    var month = String(normalized.getUTCMonth() + 1).padStart(2, '0');
+    var day = String(normalized.getUTCDate()).padStart(2, '0');
+    return normalized.getUTCFullYear() + '-' + month + '-' + day;
+  }
+
+  function isSameEasternCalendarWeek(left, right) {
+    return getEasternWeekKey(left) === getEasternWeekKey(right || new Date());
+  }
+
   function formatCountdown(win) {
     if (win.status !== 'open' || !win.closesAt) return '';
     var now = new Date();
@@ -118,5 +154,8 @@
   }
 
   window.getScorecardWindow = getScorecardWindow;
+  window.getMostRecentScorecardWindow = getMostRecentScorecardWindow;
+  window.isDateInScorecardWindow = isDateInScorecardWindow;
+  window.isSameEasternCalendarWeek = isSameEasternCalendarWeek;
   window.formatScorecardCountdown = formatCountdown;
 })();

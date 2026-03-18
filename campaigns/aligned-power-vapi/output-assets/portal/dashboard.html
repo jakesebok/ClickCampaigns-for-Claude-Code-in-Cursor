@@ -2090,26 +2090,35 @@
         var oneThingEl = document.getElementById('six-c-one-thing');
         var actionRowEl = document.getElementById('six-c-action-row');
 
-        // Determine if latest submission was during this week's window (or recent, e.g. first-time outside window)
+        // Determine whether the latest submission belongs to the active or most recent scorecard window.
         var submittedThisWeek = false;
         if (latest6C && latest6C.created_at) {
-          var submittedAt = new Date(latest6C.created_at);
-          if (win && win.canSubmit) {
-            submittedThisWeek = win.opensAt && win.closesAt && submittedAt >= win.opensAt && submittedAt <= win.closesAt;
-            if (!submittedThisWeek) {
-              var hoursSinceSubmit = (Date.now() - submittedAt.getTime()) / (60 * 60 * 1000);
-              submittedThisWeek = hoursSinceSubmit >= 0 && hoursSinceSubmit < 60;
+          if (win) {
+            var relevantWindow = (typeof getMostRecentScorecardWindow === 'function')
+              ? getMostRecentScorecardWindow(win)
+              : (win.canSubmit
+                  ? { opensAt: win.opensAt, closesAt: win.closesAt }
+                  : {
+                      opensAt: new Date(win.opensAt.getTime() - 7 * 24 * 60 * 60 * 1000),
+                      closesAt: new Date(win.closesAt.getTime() - 7 * 24 * 60 * 60 * 1000)
+                    });
+            if (typeof isDateInScorecardWindow === 'function') {
+              submittedThisWeek = isDateInScorecardWindow(latest6C.created_at, relevantWindow);
+            } else {
+              var submittedAt = new Date(latest6C.created_at);
+              submittedThisWeek = submittedAt >= relevantWindow.opensAt && submittedAt <= relevantWindow.closesAt;
             }
-          } else if (win) {
-            // Window closed/before: check if they submitted during the LAST window (Fri 12pm – Sun 6pm)
-            var lastOpensAt = new Date(win.opensAt.getTime() - 7 * 24 * 60 * 60 * 1000);
-            var lastClosesAt = new Date(win.closesAt.getTime() - 7 * 24 * 60 * 60 * 1000);
-            submittedThisWeek = submittedAt >= lastOpensAt && submittedAt <= lastClosesAt;
           }
         }
 
-        // Determine if user missed the window (has prev subs, didn't submit this week, can't submit now)
-        var missedWindow = !!(win && !win.canSubmit && !submittedThisWeek);
+        var showFirstSubmissionFallback = sixCRows.length === 1 &&
+          !submittedThisWeek &&
+          (typeof isSameEasternCalendarWeek === 'function'
+            ? isSameEasternCalendarWeek(latest6C.created_at, new Date())
+            : false);
+
+        // Determine if user missed the window (returning user, no recent submission, can't submit now)
+        var missedWindow = !!(win && !win.canSubmit && !submittedThisWeek && !showFirstSubmissionFallback);
 
         if (missedWindow) {
           // Show "no data" for the 6C section

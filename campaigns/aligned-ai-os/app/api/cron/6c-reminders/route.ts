@@ -5,10 +5,14 @@
  * Env: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, CRON_SECRET, NEXT_PUBLIC_APP_URL
  */
 import { NextRequest, NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
 import webPush from "web-push";
 import { db, schema } from "@/lib/db";
 import { fetchPortalSixCByEmail } from "@/lib/portal-data";
+import {
+  getScorecardWindow,
+  getMostRecentScorecardWindow,
+  isDateInScorecardWindow,
+} from "@/lib/scorecard-window";
 
 const TZ = "America/New_York";
 
@@ -43,47 +47,17 @@ function nowInEastern() {
 
 function getReminderType(): "available" | "saturday" | "one-hour-left" | null {
   const e = nowInEastern();
-  const isReminderHour = e.hour >= 11 && e.hour <= 14;
-  if (e.dayOfWeek === 5 && isReminderHour) return "available";
-  if (e.dayOfWeek === 6 && isReminderHour) return "saturday";
-  if (e.dayOfWeek === 0 && isReminderHour) return "one-hour-left";
+  const isReminderTime = e.hour === 12 && e.minute === 5;
+  if (e.dayOfWeek === 5 && isReminderTime) return "available";
+  if (e.dayOfWeek === 6 && isReminderTime) return "saturday";
+  if (e.dayOfWeek === 0 && isReminderTime) return "one-hour-left";
   return null;
-}
-
-/** Friday 12pm Eastern of the current scorecard week (used to check if user submitted) */
-function getCurrentWindowStart(): Date {
-  const e = nowInEastern();
-  const now = new Date();
-  const fmt = new Intl.DateTimeFormat("en-US", {
-    timeZone: TZ,
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  });
-  const parts = fmt.formatToParts(now);
-  const o: Record<string, string> = {};
-  parts.forEach((p) => {
-    o[p.type] = p.value;
-  });
-  const day = parseInt(o.day ?? "1", 10);
-  const month = parseInt(o.month ?? "1", 10);
-  const year = parseInt(o.year ?? "2025", 10);
-  let daysBack = 0;
-  if (e.dayOfWeek === 5) daysBack = 0;
-  else if (e.dayOfWeek === 6) daysBack = 1;
-  else if (e.dayOfWeek === 0) daysBack = 2;
-  else return new Date(0);
-  const fridayDay = day - daysBack;
-  const m = month - 1;
-  const isEDT = m >= 2 && m <= 9;
-  const hourUTC = isEDT ? 16 : 17;
-  return new Date(Date.UTC(year, m, fridayDay, hourUTC, 0, 0));
 }
 
 async function hasSubmittedThisWeek(email: string): Promise<boolean> {
   const rows = await fetchPortalSixCByEmail(email);
-  const windowStart = getCurrentWindowStart();
-  return rows.some((r) => new Date(r.created_at) >= windowStart);
+  const currentWindow = getMostRecentScorecardWindow(getScorecardWindow());
+  return rows.some((r) => isDateInScorecardWindow(r.created_at, currentWindow));
 }
 
 const MESSAGES: Record<
@@ -105,10 +79,19 @@ const MESSAGES: Record<
 };
 
 export async function GET(req: NextRequest) {
-  const secret =
+  const cronSecret = (process.env.CRON_SECRET || "").trim();
+  if (!cronSecret) {
+    return NextResponse.json(
+      { error: "CRON_SECRET is not configured" },
+      { status: 500 }
+    );
+  }
+  const secret = (
     req.headers.get("authorization")?.replace(/^Bearer\s+/i, "") ||
-    req.nextUrl.searchParams.get("secret");
-  if (secret !== process.env.CRON_SECRET) {
+    req.nextUrl.searchParams.get("secret") ||
+    ""
+  ).trim();
+  if (secret !== cronSecret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

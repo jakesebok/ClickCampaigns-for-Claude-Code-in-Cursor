@@ -34,11 +34,10 @@ function nowInEastern() {
 
 function getReminderType() {
   const e = nowInEastern();
-  // 17:05 UTC = 12:05pm EST (winter) or 1:05pm EDT (summer); Vercel Hobby ±1hr window
-  const isReminderHour = e.hour >= 11 && e.hour <= 14;
-  if (e.dayOfWeek === 5 && isReminderHour) return 'available';
-  if (e.dayOfWeek === 6 && isReminderHour) return 'saturday';
-  if (e.dayOfWeek === 0 && isReminderHour) return 'one-hour-left';
+  const isReminderTime = e.hour === 12 && e.minute === 5;
+  if (e.dayOfWeek === 5 && isReminderTime) return 'available';
+  if (e.dayOfWeek === 6 && isReminderTime) return 'saturday';
+  if (e.dayOfWeek === 0 && isReminderTime) return 'one-hour-left';
   return null;
 }
 
@@ -183,8 +182,39 @@ function isValidEmail(s) {
   return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
 }
 
-/** Returns { opensAt, closesAt } for this week's scorecard window (Friday 12pm – Sunday 6pm Eastern) as ISO strings. */
-function getThisWeekWindowBounds() {
+function getEasternOffsetMinutes(date) {
+  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: TZ, timeZoneName: 'shortOffset' });
+  const parts = fmt.formatToParts(date);
+  const tzName = (parts.find((p) => p.type === 'timeZoneName') || {}).value || '';
+  const match = tzName.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/);
+  if (!match) return 0;
+  const sign = match[1] === '-' ? -1 : 1;
+  const hours = parseInt(match[2] || '0', 10) || 0;
+  const minutes = parseInt(match[3] || '0', 10) || 0;
+  return sign * ((hours * 60) + minutes);
+}
+
+function easternLocalToUtc(year, month, day, hour, minute) {
+  let utcMs = Date.UTC(year, month - 1, day, hour, minute || 0, 0, 0);
+  for (let i = 0; i < 2; i += 1) {
+    const offsetMinutes = getEasternOffsetMinutes(new Date(utcMs));
+    utcMs = Date.UTC(year, month - 1, day, hour, minute || 0, 0, 0) - (offsetMinutes * 60 * 1000);
+  }
+  return new Date(utcMs);
+}
+
+function shiftEasternDate(parts, days, hour, minute) {
+  const normalized = new Date(Date.UTC(parts.year, parts.month - 1, parts.day + days, hour, minute || 0, 0, 0));
+  return easternLocalToUtc(
+    normalized.getUTCFullYear(),
+    normalized.getUTCMonth() + 1,
+    normalized.getUTCDate(),
+    normalized.getUTCHours(),
+    normalized.getUTCMinutes()
+  );
+}
+
+function getScorecardWindow() {
   const now = new Date();
   const fmt = new Intl.DateTimeFormat('en-US', {
     timeZone: TZ,
@@ -200,26 +230,26 @@ function getThisWeekWindowBounds() {
   const o = {};
   parts.forEach((p) => { o[p.type] = p.value; });
   const dayNames = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 };
-  const dow = dayNames[o.weekday] ?? 0;
-  const y = parseInt(o.year, 10) || 2025;
-  const m = parseInt(o.month, 10) || 1;
-  const d = parseInt(o.day, 10) || 1;
-  const hour = parseInt(o.hour, 10) || 0;
-  // Eastern offset: EDT (Apr–Oct) = 4, EST = 5 (matches six-c-window.js)
-  const offset = (m >= 4 && m <= 10) ? 4 : 5;
-  // Friday noon that started this week's window (Sat: yesterday, Sun: 2 days ago, Fri: today)
-  let fd = d;
-  if (dow === 6) fd = d - 1;
-  else if (dow === 0) fd = d - 2;
-  const fridayNoonUtc = new Date(Date.UTC(y, m - 1, fd, 12 + offset, 0));
-  // Sunday 6pm that closes this week's window (Sat: tomorrow, Sun: today, Fri: in 2 days)
-  let sd = d;
-  if (dow === 5 && hour >= 12) sd = d + 2;
-  else if (dow === 6) sd = d + 1;
-  const sunday6pmUtc = new Date(Date.UTC(y, m - 1, sd, 18 + offset, 0));
+  const eastern = {
+    dayOfWeek: dayNames[o.weekday] ?? 0,
+    year: parseInt(o.year, 10) || 2025,
+    month: parseInt(o.month, 10) || 1,
+    day: parseInt(o.day, 10) || 1,
+    hour: parseInt(o.hour, 10) || 0,
+    minute: parseInt(o.minute, 10) || 0,
+  };
+  const inWindow = (eastern.dayOfWeek === 5 && eastern.hour >= 12) || eastern.dayOfWeek === 6 || (eastern.dayOfWeek === 0 && eastern.hour < 18);
+  let daysToFriday = (5 - eastern.dayOfWeek + 7) % 7;
+  if (eastern.dayOfWeek === 5 && eastern.hour >= 12) daysToFriday += 7;
+  const nextOpen = shiftEasternDate(eastern, daysToFriday, 12, 0);
+  const nextClose = shiftEasternDate(eastern, daysToFriday + 2, 18, 0);
   return {
-    opensAt: fridayNoonUtc.toISOString(),
-    closesAt: sunday6pmUtc.toISOString(),
+    opensAt: (inWindow
+      ? shiftEasternDate(eastern, eastern.dayOfWeek === 5 ? 0 : eastern.dayOfWeek === 6 ? -1 : -2, 12, 0)
+      : nextOpen).toISOString(),
+    closesAt: (inWindow
+      ? shiftEasternDate(eastern, eastern.dayOfWeek === 5 ? 2 : eastern.dayOfWeek === 6 ? 1 : 0, 18, 0)
+      : nextClose).toISOString(),
   };
 }
 
@@ -228,7 +258,10 @@ export async function GET(request) {
   const authHeader = request.headers.get('authorization') || request.headers.get('Authorization') || '';
   const secret = (authHeader.replace(/^Bearer\s+/i, '').trim() || (url && url.searchParams.get('secret')) || '').trim();
   const cronSecret = (process.env.CRON_SECRET || '').trim();
-  if (cronSecret && secret !== cronSecret) {
+  if (!cronSecret) {
+    return new Response(JSON.stringify({ error: 'missing_env', message: 'CRON_SECRET required' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+  if (secret !== cronSecret) {
     return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
   }
 

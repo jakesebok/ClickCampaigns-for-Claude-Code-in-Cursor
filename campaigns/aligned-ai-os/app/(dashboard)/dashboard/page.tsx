@@ -35,8 +35,12 @@ import {
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
-import { getScorecardWindow } from "@/lib/scorecard-window";
-import { getWeekStart } from "@/lib/utils";
+import {
+  getScorecardWindow,
+  getMostRecentScorecardWindow,
+  isDateInScorecardWindow,
+  isSameEasternCalendarWeek,
+} from "@/lib/scorecard-window";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity, IA: Compass, ME: Brain, AF: Focus,
@@ -65,6 +69,7 @@ type VapiResult = {
 
 type ScorecardEntry = {
   id: string;
+  createdAt: string;
   weekStart: string;
   scores: Record<string, number>;
   notes: string | null;
@@ -125,16 +130,30 @@ export default function DashboardPage() {
   }
 
   const scorecardWindow = getScorecardWindow();
+  const mostRecentScorecardWindow = getMostRecentScorecardWindow(scorecardWindow);
   const latestVapi = vapiResults[0] || null;
   const scoredEntries = scorecardEntries.filter(
     (e) => e.scores && Object.keys(e.scores).length > 0
   );
   const latestScorecard = scoredEntries[0] || null;
   const hasAnyScorecards = scoredEntries.length > 0;
-  const thisWeekStart = getWeekStart();
-  const currentWeekSubmitted = scoredEntries.some(
-    (e) => new Date(e.weekStart).getTime() === thisWeekStart.getTime()
-  );
+  const currentWindowSubmitted = scorecardWindow.canSubmit
+    ? scoredEntries.some((e) =>
+        isDateInScorecardWindow(e.createdAt, {
+          opensAt: scorecardWindow.opensAt,
+          closesAt: scorecardWindow.closesAt,
+        })
+      )
+    : scoredEntries.some((e) =>
+        isDateInScorecardWindow(e.createdAt, mostRecentScorecardWindow)
+      );
+  const showFirstSubmissionFallback =
+    scoredEntries.length === 1 &&
+    !!latestScorecard &&
+    !currentWindowSubmitted &&
+    isSameEasternCalendarWeek(latestScorecard.createdAt);
+  const displayedScorecard =
+    currentWindowSubmitted || showFirstSubmissionFallback ? latestScorecard : null;
   let currentOneThing: string | null = null;
   if (latestScorecard?.notes) {
     try {
@@ -303,7 +322,7 @@ export default function DashboardPage() {
             )}
 
             {/* 6Cs Latest */}
-            {currentWeekSubmitted && latestScorecard ? (
+            {displayedScorecard ? (
               <Link href="/scorecard" className="block">
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-center justify-between">
@@ -313,22 +332,24 @@ export default function DashboardPage() {
                         6Cs Score
                       </span>
                       <span className="text-[10px] font-medium text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded bg-green-500/10">
-                        Submitted
+                        {currentWindowSubmitted ? "Submitted" : "First submission"}
                       </span>
                     </div>
                     <span className="text-xs text-muted-foreground">
-                      Week of {new Date(latestScorecard.weekStart).toLocaleDateString()}
+                      {currentWindowSubmitted
+                        ? `Week of ${new Date(displayedScorecard.weekStart).toLocaleDateString()}`
+                        : `Submitted ${new Date(displayedScorecard.createdAt).toLocaleDateString()}`}
                     </span>
                   </div>
                   <div className="flex items-end gap-3 mb-3">
                     <span className="text-4xl font-bold font-serif text-accent">
-                      {getOverallScore(latestScorecard.scores)}%
+                      {getOverallScore(displayedScorecard.scores)}%
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
                     {SCORECARD_CATEGORIES.map((c) => {
                       const Icon = SCORECARD_ICONS[c.icon];
-                      const pct = latestScorecard.scores[c.key] || 0;
+                      const pct = displayedScorecard.scores[c.key] || 0;
                       return (
                         <div
                           key={c.key}
@@ -351,14 +372,14 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </Link>
-            ) : !currentWeekSubmitted && hasAnyScorecards && scorecardWindow.status === "closed" ? (
+            ) : !currentWindowSubmitted && hasAnyScorecards && scorecardWindow.status !== "open" ? (
               <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px]">
                 <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
                 <p className="text-sm font-medium">6Cs Scorecard</p>
                 <p className="text-sm text-muted-foreground">
                   {(() => {
-                    const start = new Date(scorecardWindow.opensAt).toLocaleDateString();
-                    const end = new Date(scorecardWindow.closesAt).toLocaleDateString();
+                    const start = new Date(mostRecentScorecardWindow.opensAt).toLocaleDateString();
+                    const end = new Date(mostRecentScorecardWindow.closesAt).toLocaleDateString();
                     return start === end
                       ? `No data available for the week of ${start}.`
                       : `No data available for the week of ${start} – ${end}.`;
