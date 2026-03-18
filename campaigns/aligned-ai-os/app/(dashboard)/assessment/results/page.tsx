@@ -141,6 +141,7 @@ function ResultsContent() {
   const [loading, setLoading] = useState(true);
   const [expandedArenas, setExpandedArenas] = useState<Record<string, boolean>>({});
   const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
+  const [expandedPriorityDomains, setExpandedPriorityDomains] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
@@ -505,23 +506,54 @@ function ResultsContent() {
                             const Icon = DOMAIN_ICONS[item.domain];
                             const tier = getTier(item.score);
                             const color = getTierColor(tier);
+                            const interpretation = DOMAIN_INTERPRETATIONS[item.domain]?.[tier];
+                            const isExpanded = expandedPriorityDomains[item.domain] ?? false;
                             return (
                               <div
                                 key={item.domain}
-                                className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3"
+                                className="rounded-lg border border-border bg-card/50 p-3"
                               >
-                                {Icon && <Icon className="h-4 w-4 text-accent" />}
-                                <div className="flex-1">
-                                  <span className="text-sm">{item.domainName}</span>
-                                </div>
-                                <div className="text-right text-xs">
-                                  <div className="font-medium" style={{ color }}>
-                                    {item.score.toFixed(1)}
+                                <div className="flex items-center gap-3">
+                                  {Icon && <Icon className="h-4 w-4 text-accent" />}
+                                  <div className="flex-1">
+                                    <span className="text-sm">{item.domainName}</span>
+                                    <div className="text-muted-foreground text-xs mt-0.5">
+                                      Priority: {item.importance}/10
+                                    </div>
                                   </div>
-                                  <div className="text-muted-foreground">
-                                    imp: {item.importance}
+                                  <div className="text-right text-xs">
+                                    <div className="font-medium" style={{ color }}>
+                                      {item.score.toFixed(1)}
+                                    </div>
+                                    <div className="text-muted-foreground">
+                                      {tier}
+                                    </div>
                                   </div>
+                                  {interpretation && (
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setExpandedPriorityDomains((prev) => ({
+                                          ...prev,
+                                          [item.domain]: !isExpanded,
+                                        }))
+                                      }
+                                      className="p-1 rounded text-muted-foreground hover:text-foreground"
+                                      aria-label={isExpanded ? "Hide guidance" : "Read guidance"}
+                                    >
+                                      {isExpanded ? (
+                                        <ChevronUp className="h-4 w-4" />
+                                      ) : (
+                                        <ChevronDown className="h-4 w-4" />
+                                      )}
+                                    </button>
+                                  )}
                                 </div>
+                                {isExpanded && interpretation && (
+                                  <p className="text-sm text-muted-foreground leading-relaxed mt-3 pt-3 border-t border-border">
+                                    {interpretation}
+                                  </p>
+                                )}
                               </div>
                             );
                           })}

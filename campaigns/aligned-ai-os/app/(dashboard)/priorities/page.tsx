@@ -23,6 +23,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { DOMAIN_INTERPRETATIONS } from "@/lib/vapi/interpretations";
 import { getTier, getTierColor, getPriorityMatrix, type PriorityQuadrant } from "@/lib/vapi/scoring";
 import { DOMAINS } from "@/lib/vapi/quiz-data";
 
@@ -69,6 +70,7 @@ const QUAD_META: Record<
 export default function PrioritiesPage() {
   const [vapiResults, setVapiResults] = useState<{ results: Array<{ id: string; domainScores: Record<string, number>; importance: Record<string, number> }> } | null>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     fetch("/api/vapi")
@@ -148,19 +150,53 @@ export default function PrioritiesPage() {
                   {items.map((item) => {
                     const Icon = DOMAIN_ICONS[item.domain];
                     const color = getTierColor(getTier(item.score));
+                    const tier = getTier(item.score);
+                    const interpretation = DOMAIN_INTERPRETATIONS[item.domain]?.[tier];
+                    const isDomainExpanded = expandedDomains[item.domain] ?? false;
                     return (
                       <div
                         key={item.domain}
-                        className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3"
+                        className="rounded-lg border border-border bg-card/50 p-3"
                       >
-                        {Icon && <Icon className="h-4 w-4 text-accent" />}
-                        <span className="text-sm flex-1">{item.domainName}</span>
-                        <div className="text-right text-xs">
-                          <div className="font-medium" style={{ color }}>
-                            {item.score.toFixed(1)}
+                        <div className="flex items-center gap-3">
+                          {Icon && <Icon className="h-4 w-4 text-accent" />}
+                          <div className="flex-1">
+                            <span className="text-sm">{item.domainName}</span>
+                            <div className="text-muted-foreground text-xs mt-0.5">
+                              Priority: {item.importance}/10
+                            </div>
                           </div>
-                          <div className="text-muted-foreground">imp: {item.importance}</div>
+                          <div className="text-right text-xs">
+                            <div className="font-medium" style={{ color }}>
+                              {item.score.toFixed(1)}
+                            </div>
+                            <div className="text-muted-foreground">{tier}</div>
+                          </div>
+                          {interpretation && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setExpandedDomains((prev) => ({
+                                  ...prev,
+                                  [item.domain]: !isDomainExpanded,
+                                }))
+                              }
+                              className="p-1 rounded text-muted-foreground hover:text-foreground"
+                              aria-label={isDomainExpanded ? "Hide guidance" : "Read guidance"}
+                            >
+                              {isDomainExpanded ? (
+                                <ChevronUp className="h-4 w-4" />
+                              ) : (
+                                <ChevronDown className="h-4 w-4" />
+                              )}
+                            </button>
+                          )}
                         </div>
+                        {isDomainExpanded && interpretation && (
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-3 pt-3 border-t border-border">
+                            {interpretation}
+                          </p>
+                        )}
                       </div>
                     );
                   })}

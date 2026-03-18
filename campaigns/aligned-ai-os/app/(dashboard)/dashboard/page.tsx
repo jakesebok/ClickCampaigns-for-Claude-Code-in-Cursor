@@ -422,17 +422,19 @@ export default function DashboardPage() {
               {/* Archetype */}
               {archetype && (
                 <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
-                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm">
+                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm min-h-[320px] flex flex-col justify-between">
                     <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       Founder Archetype
                     </h2>
-                    <h3 className="text-xl font-serif font-bold flex items-center gap-2">
-                      <UserCircle className="h-5 w-5 text-accent shrink-0" />
-                      {archetype}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
-                      {ARCHETYPE_DESCRIPTIONS[archetype]}
-                    </p>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-serif font-bold flex items-center gap-2">
+                        <UserCircle className="h-5 w-5 text-accent shrink-0" />
+                        {archetype}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-5">
+                        {ARCHETYPE_DESCRIPTIONS[archetype]}
+                      </p>
+                    </div>
                     <p className="text-xs text-accent font-medium">Explore archetype →</p>
                   </div>
                 </Link>
@@ -440,7 +442,7 @@ export default function DashboardPage() {
 
               {/* Critical Priorities — always expanded */}
               {criticalPriorities.length > 0 && (
-                <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm">
+                <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm min-h-[320px] flex flex-col">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <AlertTriangle className="h-4 w-4 text-red-500" />
@@ -455,8 +457,17 @@ export default function DashboardPage() {
                       Explore More →
                     </Link>
                   </div>
-                  <div className="space-y-2">
-                    {criticalPriorities.slice(0, 4).map((item) => {
+                  <div className="space-y-2 flex-1">
+                    {Array.from({ length: 3 }, (_, index) => criticalPriorities[index] ?? null).map((item, index) => {
+                      if (!item) {
+                        return (
+                          <div
+                            key={`placeholder-${index}`}
+                            className="rounded-lg border border-border bg-card/30 p-3 h-[58px] opacity-0 pointer-events-none"
+                            aria-hidden
+                          />
+                        );
+                      }
                       const Icon = DOMAIN_ICONS[item.domain];
                       const color = getTierColor(getTier(item.score));
                       return (
