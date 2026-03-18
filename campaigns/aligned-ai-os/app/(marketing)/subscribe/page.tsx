@@ -157,14 +157,14 @@ export default function SubscribePage() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl px-8 py-8 space-y-6 ${
+              className={`rounded-2xl px-8 pb-8 space-y-6 ${
                 plan.highlight
-                  ? "border-2 border-accent relative"
-                  : "border border-border"
+                  ? "border-2 border-accent relative pt-6"
+                  : "border border-border pt-8"
               }`}
             >
               {plan.badge && (
-                <div className="absolute top-4 right-4 px-3 py-0.5 bg-accent text-accent-foreground text-xs rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-accent-foreground text-xs rounded-full">
                   {plan.badge}
                 </div>
               )}
