@@ -199,7 +199,7 @@ function ProgressLineChart({
   if (scores.length === 0) return null;
 
   const width = 680;
-  const height = 260;
+  const height = 340;
   const padX = 48;
   const padTop = 20;
   const padBottom = 36;
@@ -413,7 +413,7 @@ function ResultsContent() {
         <div className="max-w-3xl mx-auto space-y-8">
           {/* Overall Score + Wheel (matches dashboard alignment at a glance) */}
           <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm overflow-visible">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 py-4 border-t border-border/60">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
               <div className={`flex flex-wrap items-baseline gap-3 ${archetype ? "" : "sm:col-span-2"}`}>
                 <span
                   className="text-5xl sm:text-6xl font-bold font-serif"
@@ -430,13 +430,13 @@ function ResultsContent() {
                 </span>
               </div>
               {archetype && (
-                <div className="flex flex-col items-start gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-lg flex items-center justify-center bg-accent/15 text-accent">
+                    <UserCircle className="w-6 h-6" />
+                  </div>
                   <span className="text-sm font-extrabold text-foreground">
                     {archetype}
                   </span>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {ARCHETYPE_DESCRIPTIONS[archetype]}
-                  </p>
                 </div>
               )}
             </div>
@@ -613,6 +613,12 @@ function ResultsContent() {
                         </div>
                       ))}
                     </div>
+                    <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
+                      <ChevronUp className="w-5 h-5 text-foreground/70" />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
+                      <ChevronDown className="w-5 h-5 text-foreground/70" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -631,7 +637,7 @@ function ResultsContent() {
             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Arena Scores
             </h2>
-            <div className="grid sm:grid-cols-3 gap-4 items-start">
+            <div className="grid sm:grid-cols-3 gap-4 items-start sm:items-stretch">
               {ARENAS.map((arena) => {
                 const score = result.arenaScores[arena.key] || 0;
                 const tier = getTier(score);
@@ -642,7 +648,7 @@ function ResultsContent() {
                 return (
                   <div
                     key={arena.key}
-                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm self-start sm:min-h-[260px] flex flex-col"
+                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm self-start sm:self-stretch sm:min-h-[260px] h-auto sm:h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium">{arena.label}</h3>
@@ -939,6 +945,12 @@ function ResultsContent() {
                             })}
                           </div>
                         ))}
+                      </div>
+                      <div className="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-background to-transparent pointer-events-none">
+                        <ChevronUp className="w-5 h-5 text-foreground/70" />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-background to-transparent pointer-events-none">
+                        <ChevronDown className="w-5 h-5 text-foreground/70" />
                       </div>
                     </div>
                   </div>
