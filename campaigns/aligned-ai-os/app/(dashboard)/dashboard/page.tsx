@@ -87,6 +87,13 @@ const QUAD_COLORS: Record<string, string> = {
   "Possible Over-Investment": "bg-blue-500/15 border-blue-500/30",
 };
 
+function getScorecardScoreColor(score: number) {
+  if (score <= 30) return "#ef4444";
+  if (score <= 55) return "#f97316";
+  if (score <= 79) return "#eab308";
+  return "#22c55e";
+}
+
 export default function DashboardPage() {
   const [vapiResults, setVapiResults] = useState<VapiResult[]>([]);
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
@@ -168,6 +175,8 @@ export default function DashboardPage() {
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
   const criticalPriorities = priorityItems.filter((p) => p.quadrant === "Critical Priority");
+  const visibleCriticalPriorities = criticalPriorities.slice(0, 3);
+  const focusPlaceholders = Math.max(0, 3 - visibleCriticalPriorities.length);
 
   const topStrengths = latestVapi
     ? DOMAINS.map((d) => ({ ...d, score: latestVapi.domainScores[d.code] || 0 }))
@@ -342,7 +351,10 @@ export default function DashboardPage() {
                     </span>
                   </div>
                   <div className="flex items-end gap-3 mb-3">
-                    <span className="text-4xl font-bold font-serif text-accent">
+                    <span
+                      className="text-4xl font-bold font-serif"
+                      style={{ color: getScorecardScoreColor(getOverallScore(displayedScorecard.scores)) }}
+                    >
                       {getOverallScore(displayedScorecard.scores)}%
                     </span>
                   </div>
@@ -350,20 +362,21 @@ export default function DashboardPage() {
                     {SCORECARD_CATEGORIES.map((c) => {
                       const Icon = SCORECARD_ICONS[c.icon];
                       const pct = displayedScorecard.scores[c.key] || 0;
+                      const scoreColor = getScorecardScoreColor(pct);
                       return (
                         <div
                           key={c.key}
                           className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
                         >
-                          {Icon && <Icon className="h-5 w-5 text-accent mb-1" />}
+                          {Icon && <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />}
                           <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                             {c.label}
                           </p>
-                          <p className="text-lg font-bold tabular-nums text-accent">{pct}%</p>
+                          <p className="text-lg font-bold tabular-nums" style={{ color: scoreColor }}>{pct}%</p>
                           <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
                             <div
-                              className="h-full rounded-full bg-accent transition-all"
-                              style={{ width: `${pct}%` }}
+                              className="h-full rounded-full transition-all"
+                              style={{ width: `${pct}%`, backgroundColor: scoreColor }}
                             />
                           </div>
                         </div>
@@ -458,16 +471,7 @@ export default function DashboardPage() {
                     </Link>
                   </div>
                   <div className="space-y-2 flex-1">
-                    {Array.from({ length: 3 }, (_, index) => criticalPriorities[index] ?? null).map((item, index) => {
-                      if (!item) {
-                        return (
-                          <div
-                            key={`placeholder-${index}`}
-                            className="rounded-lg border border-border bg-card/30 p-3 h-[58px] opacity-0 pointer-events-none"
-                            aria-hidden
-                          />
-                        );
-                      }
+                    {visibleCriticalPriorities.map((item) => {
                       const Icon = DOMAIN_ICONS[item.domain];
                       const color = getTierColor(getTier(item.score));
                       return (
@@ -483,6 +487,13 @@ export default function DashboardPage() {
                         </div>
                       );
                     })}
+                    {Array.from({ length: focusPlaceholders }, (_, index) => (
+                      <div
+                        key={`placeholder-${index}`}
+                        className="rounded-lg border border-border bg-card/30 p-3 h-[58px] opacity-0 pointer-events-none"
+                        aria-hidden
+                      />
+                    ))}
                   </div>
                 </div>
               )}

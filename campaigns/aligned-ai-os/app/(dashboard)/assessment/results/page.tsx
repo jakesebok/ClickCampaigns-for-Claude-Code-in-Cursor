@@ -27,8 +27,14 @@ import {
   ChevronDown,
   ChevronUp,
   UserCircle,
+  BarChart2,
+  Briefcase,
 } from "lucide-react";
-import { VapiWheel } from "@/components/vapi-wheel";
+import {
+  VapiOverviewWheel,
+  VapiBreakdownWheel,
+  VapiComparativeWheel,
+} from "@/components/vapi-wheel";
 import { PageHeader } from "@/components/page-header";
 import { DOMAIN_INTERPRETATIONS, ARENA_INTERPRETATIONS } from "@/lib/vapi/interpretations";
 import {
@@ -49,6 +55,12 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity,  IA: Compass, ME: Brain, AF: Focus,
   RS: Heart, FA: Home, CO: Users, WI: Globe,
   VS: Telescope, EX: Rocket, OH: Gauge, EC: Leaf,
+};
+
+const ARENA_ICONS: Record<string, React.ElementType> = {
+  personal: UserCircle,
+  relationships: Heart,
+  business: Briefcase,
 };
 
 function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
@@ -142,6 +154,12 @@ function getMetricLabel(metricKey: MetricKey): string {
   }
   const code = metricKey.slice(7);
   return DOMAINS.find((domain) => domain.code === code)?.name ?? code;
+}
+
+function getMetricIcon(metricKey: MetricKey): React.ElementType {
+  if (metricKey === "overall") return BarChart2;
+  if (metricKey.startsWith("arena:")) return ARENA_ICONS[metricKey.slice(6)] ?? UserCircle;
+  return DOMAIN_ICONS[metricKey.slice(7)] ?? Activity;
 }
 
 function getMetricScore(result: ResultData, metricKey: MetricKey): number | null {
@@ -245,6 +263,7 @@ function ResultsContent() {
   const [selectedMetric, setSelectedMetric] = useState<MetricKey>("overall");
   const [selectedProgressMetric, setSelectedProgressMetric] = useState<MetricKey>("overall");
   const [arenaCardsExpanded, setArenaCardsExpanded] = useState(false);
+  const [breakdownDropdownOpen, setBreakdownDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
@@ -348,10 +367,20 @@ function ResultsContent() {
     ? getTierColor(selectedMetricTier)
     : overallColor;
   const selectedMetricInterpretation = getMetricInterpretation(result, selectedMetric);
+  const sortedResults = [...allResults].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+  const latestProgressResult = sortedResults[0] ?? result;
+  const previousProgressResult = sortedResults[1] ?? result;
   const metricButtons: MetricKey[] = [
     "overall",
     ...ARENAS.map((arena) => `arena:${arena.key}` as MetricKey),
     ...DOMAINS.map((domain) => `domain:${domain.code}` as MetricKey),
+  ];
+  const metricGroups: Array<{ label: string; items: MetricKey[] }> = [
+    { label: "Composite", items: ["overall"] },
+    { label: "Arena", items: ARENAS.map((arena) => `arena:${arena.key}` as MetricKey) },
+    { label: "Domain", items: DOMAINS.map((domain) => `domain:${domain.code}` as MetricKey) },
   ];
 
   return (
@@ -415,13 +444,7 @@ function ResultsContent() {
                 )}
               </div>
               <div className="flex justify-center shrink-0 w-full sm:w-auto overflow-visible py-4 sm:py-0">
-                <VapiWheel
-                  domainScores={result.domainScores}
-                  metricKey={selectedMetric}
-                  onMetricSelect={(metricKey) =>
-                    setSelectedMetric(metricKey as MetricKey)
-                  }
-                />
+                <VapiOverviewWheel domainScores={result.domainScores} />
               </div>
             </div>
           </div>
@@ -434,59 +457,133 @@ function ResultsContent() {
             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Explore Your Score
             </h2>
-            <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm space-y-6">
+            <p className="text-sm text-muted-foreground">
+              Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.
+            </p>
+            <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm border-l-4 border-l-accent">
               <div className="flex flex-col lg:flex-row gap-6">
-                <div className="flex-1 space-y-3">
-                  <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                    {getMetricLabel(selectedMetric)}
-                  </p>
-                  <div className="flex items-end gap-3">
-                    <span className="text-5xl font-bold font-serif" style={{ color: selectedMetricColor }}>
+                <div className="flex-1 min-w-0 flex flex-col justify-center">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                      {getMetricLabel(selectedMetric)}
+                    </p>
+                    <div className="lg:hidden relative shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setBreakdownDropdownOpen((open) => !open)}
+                        className="inline-flex items-center gap-1 rounded-full py-1 px-2.5 border border-border bg-background text-[10px] font-medium uppercase tracking-wider text-foreground hover:border-foreground/30 transition-colors max-w-[110px]"
+                        aria-haspopup="listbox"
+                        aria-expanded={breakdownDropdownOpen}
+                      >
+                        <span className="truncate">{getMetricLabel(selectedMetric)}</span>
+                        <ChevronDown
+                          className="w-3 h-3 text-muted-foreground flex-shrink-0 transition-transform"
+                          style={{ transform: breakdownDropdownOpen ? "rotate(180deg)" : undefined }}
+                        />
+                      </button>
+                      {breakdownDropdownOpen && (
+                        <div className="absolute top-full right-0 mt-1 z-20 w-52 bg-background border border-border rounded-lg shadow-lg overflow-hidden max-h-[280px] overflow-y-auto">
+                          <div className="space-y-0.5 p-1.5">
+                            {metricGroups.map((group) => (
+                              <div key={group.label}>
+                                <div className="text-[10px] font-semibold text-foreground mt-1.5 first:mt-0 px-2 py-0.5">
+                                  {group.label}
+                                </div>
+                                {group.items.map((metricKey) => {
+                                  const Icon = getMetricIcon(metricKey);
+                                  const isSelected = selectedMetric === metricKey;
+                                  return (
+                                    <button
+                                      key={`dropdown-${metricKey}`}
+                                      type="button"
+                                      onClick={() => {
+                                        setSelectedMetric(metricKey);
+                                        setBreakdownDropdownOpen(false);
+                                      }}
+                                      className={`flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border ${
+                                        isSelected
+                                          ? "bg-foreground text-background border-foreground"
+                                          : "border-transparent text-foreground hover:bg-secondary hover:border-border"
+                                      }`}
+                                    >
+                                      <Icon className="w-3 h-3 flex-shrink-0" />
+                                      {getMetricLabel(metricKey)}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-baseline gap-2 flex-wrap mb-4">
+                    <span className="text-4xl sm:text-5xl font-bold font-serif text-foreground">
                       {selectedMetricScore != null ? selectedMetricScore.toFixed(1) : "—"}
                     </span>
+                    <span className="text-xl text-muted-foreground">/ 10</span>
                     {selectedMetricTier && (
-                      <span className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white" style={{ backgroundColor: selectedMetricColor }}>
+                      <span
+                        className="font-semibold px-3 py-1 rounded-full text-sm text-white"
+                        style={{ backgroundColor: selectedMetricColor }}
+                      >
                         {selectedMetricTier}
                       </span>
                     )}
                   </div>
-                  {selectedMetricInterpretation && (
-                    <p className="text-sm text-muted-foreground leading-relaxed border-t border-border pt-4">
-                      {selectedMetricInterpretation}
-                    </p>
-                  )}
-                </div>
-                <div className="w-full max-w-[320px] mx-auto lg:mx-0">
-                  <VapiWheel
+                  <VapiBreakdownWheel
                     domainScores={result.domainScores}
                     metricKey={selectedMetric}
-                    onMetricSelect={(metricKey) =>
-                      setSelectedMetric(metricKey as MetricKey)
-                    }
+                    onMetricSelect={(metricKey) => setSelectedMetric(metricKey as MetricKey)}
                   />
+                  <p className="lg:hidden text-center text-xs text-muted-foreground mt-3">
+                    Tap a domain to explore your score
+                  </p>
+                </div>
+                <div className="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-4 flex-col">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                    Metric
+                  </p>
+                  <div className="relative flex-1 min-h-0">
+                    <div className="space-y-1 max-h-[370px] overflow-y-auto pr-1">
+                      {metricGroups.map((group) => (
+                        <div key={`sidebar-${group.label}`}>
+                          <div className="text-sm font-semibold text-foreground mt-3 first:mt-0">
+                            {group.label}
+                          </div>
+                          {group.items.map((metricKey) => {
+                            const Icon = getMetricIcon(metricKey);
+                            const isSelected = selectedMetric === metricKey;
+                            return (
+                              <button
+                                key={`sidebar-${metricKey}`}
+                                type="button"
+                                onClick={() => setSelectedMetric(metricKey)}
+                                className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border ${
+                                  isSelected
+                                    ? "bg-foreground text-background border-foreground"
+                                    : "border-transparent text-foreground hover:bg-secondary hover:border-border"
+                                }`}
+                              >
+                                <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                                {getMetricLabel(metricKey)}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Select a metric
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {metricButtons.map((metricKey) => (
-                    <button
-                      key={metricKey}
-                      type="button"
-                      onClick={() => setSelectedMetric(metricKey)}
-                      className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
-                        selectedMetric === metricKey
-                          ? "border-accent bg-accent/10 text-foreground"
-                          : "border-border bg-background/40 text-muted-foreground hover:border-accent/30 hover:text-foreground"
-                      }`}
-                    >
-                      {getMetricLabel(metricKey)}
-                    </button>
-                  ))}
+              {selectedMetricInterpretation && (
+                <div className="mt-6 border-t border-border pt-4">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {selectedMetricInterpretation}
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -495,7 +592,7 @@ function ResultsContent() {
             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
               Arena Scores
             </h2>
-            <div className="grid sm:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-3 gap-4 items-start">
               {ARENAS.map((arena) => {
                 const score = result.arenaScores[arena.key] || 0;
                 const tier = getTier(score);
@@ -506,7 +603,7 @@ function ResultsContent() {
                 return (
                   <div
                     key={arena.key}
-                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm"
+                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm self-start"
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium">{arena.label}</h3>
@@ -577,7 +674,7 @@ function ResultsContent() {
                             {section.desc}
                           </span>
                         </div>
-                        <div className="grid sm:grid-cols-2 gap-2">
+                        <div className="grid sm:grid-cols-2 gap-2 items-start">
                           {section.items.map((item) => {
                             const Icon = DOMAIN_ICONS[item.domain];
                             const tier = getTier(item.score);
@@ -587,7 +684,7 @@ function ResultsContent() {
                             return (
                               <div
                                 key={item.domain}
-                                className="rounded-lg border border-border bg-card/50 p-3"
+                                className="rounded-lg border border-border bg-card/50 p-3 self-start"
                               >
                                 <div className="flex items-center gap-3">
                                   {Icon && <Icon className="h-4 w-4 text-accent" />}
@@ -650,8 +747,9 @@ function ResultsContent() {
               <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm space-y-6">
                 <div className="flex flex-col lg:flex-row gap-6">
                   <div className="w-full max-w-[320px] mx-auto lg:mx-0">
-                    <VapiWheel
-                      domainScores={result.domainScores}
+                    <VapiComparativeWheel
+                      previousDomainScores={previousProgressResult.domainScores}
+                      currentDomainScores={latestProgressResult.domainScores}
                       metricKey={selectedProgressMetric}
                       onMetricSelect={(metricKey) =>
                         setSelectedProgressMetric(metricKey as MetricKey)

@@ -156,7 +156,7 @@ export default function PrioritiesPage() {
                     return (
                       <div
                         key={item.domain}
-                        className="rounded-lg border border-border bg-card/50 p-3"
+                        className="rounded-lg border border-border bg-card/50 p-3 self-start"
                       >
                         <div className="flex items-center gap-3">
                           {Icon && <Icon className="h-4 w-4 text-accent" />}

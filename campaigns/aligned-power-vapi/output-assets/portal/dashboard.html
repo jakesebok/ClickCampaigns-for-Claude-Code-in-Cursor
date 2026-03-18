@@ -257,9 +257,9 @@
             <p class="eyebrow mb-1">Last week you set your Vital Action</p>
             <p id="six-c-one-thing-text" class="text-[var(--ap-primary)] text-base font-semibold leading-snug mb-0"></p>
           </div>
-          <div id="six-c-action-row" class="mt-8 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+          <div id="six-c-action-row" class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2 sm:gap-3">
             <a id="six-c-fill-link" href="/scorecard" class="hidden inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm px-5 py-2.5 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)] w-fit">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
-            <span id="six-c-window-closed-msg" class="hidden text-xs sm:text-sm text-[var(--ap-muted)] whitespace-nowrap order-last sm:order-none"></span>
+            <span id="six-c-window-closed-msg" class="hidden text-xs sm:text-sm text-[var(--ap-muted)] whitespace-nowrap"></span>
           </div>
         </div>
         <!-- urgency banner kept but hidden — logic now handled in one-thing banner -->
@@ -2070,15 +2070,22 @@
         var labels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
         var icons = { clarity: 'crosshair', coherence: 'link', capacity: 'battery-charging', confidence: 'shield-check', courage: 'zap', connection: 'users' };
         var keys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
+        function scorecardColor(pct) {
+          if (pct <= 30) return '#ef4444';
+          if (pct <= 55) return '#f97316';
+          if (pct <= 79) return '#eab308';
+          return '#22c55e';
+        }
         var cardsHtml = '';
         keys.forEach(function(k) {
           var score = typeof scores[k] === 'number' ? Math.round(scores[k]) : 0;
           var pct = Math.max(0, Math.min(100, score));
+          var color = scorecardColor(pct);
           cardsHtml += '<div class="flex flex-col items-center p-4 rounded-2xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/50 hover:border-[var(--ap-accent)]/40 hover:bg-[var(--ap-accent)]/5 transition-colors duration-200">';
-          cardsHtml += '<i data-lucide="' + (icons[k] || 'circle') + '" class="w-8 h-8 text-[var(--ap-accent)] mb-2" aria-hidden="true"></i>';
+          cardsHtml += '<i data-lucide="' + (icons[k] || 'circle') + '" class="w-8 h-8 mb-2" style="color:' + color + '" aria-hidden="true"></i>';
           cardsHtml += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-primary)] mb-1">' + (labels[k] || k) + '</p>';
-          cardsHtml += '<p class="text-xl font-bold tabular-nums text-[var(--ap-accent)]">' + pct + '<span class="text-xs font-normal text-[var(--ap-accent)]/80">%</span></p>';
-          cardsHtml += '<div class="w-full h-2 rounded-full bg-[var(--ap-border)]/50 mt-2 overflow-hidden"><div class="h-full rounded-full bg-[var(--ap-accent)] transition-all duration-300" style="width:' + pct + '%"></div></div>';
+          cardsHtml += '<p class="text-xl font-bold tabular-nums" style="color:' + color + '">' + pct + '<span class="text-xs font-normal" style="color:' + color + ';opacity:0.8">%</span></p>';
+          cardsHtml += '<div class="w-full h-2 rounded-full bg-[var(--ap-border)]/50 mt-2 overflow-hidden"><div class="h-full rounded-full transition-all duration-300" style="width:' + pct + '%;background-color:' + color + '"></div></div>';
           cardsHtml += '</div>';
         });
         var oneThingLatest = (latest6C.one_thing_to_improve && String(latest6C.one_thing_to_improve).trim()) ? String(latest6C.one_thing_to_improve).trim() : null;
