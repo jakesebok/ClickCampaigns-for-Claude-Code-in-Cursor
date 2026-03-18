@@ -435,7 +435,7 @@ export default function DashboardPage() {
               {/* Archetype */}
               {archetype && (
                 <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
-                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm min-h-[320px] flex flex-col justify-between">
+                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full flex flex-col justify-between">
                     <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       Founder Archetype
                     </h2>
@@ -455,7 +455,7 @@ export default function DashboardPage() {
 
               {/* Critical Priorities — always expanded */}
               {criticalPriorities.length > 0 && (
-                <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm min-h-[320px] flex flex-col">
+                <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <AlertTriangle className="h-4 w-4 text-red-500" />
@@ -470,7 +470,7 @@ export default function DashboardPage() {
                       Explore More →
                     </Link>
                   </div>
-                  <div className="space-y-2 flex-1">
+                  <div className="space-y-2">
                     {visibleCriticalPriorities.map((item) => {
                       const Icon = DOMAIN_ICONS[item.domain];
                       const color = getTierColor(getTier(item.score));
@@ -497,60 +497,6 @@ export default function DashboardPage() {
                   </div>
                 </div>
               )}
-            </div>
-          )}
-
-          {/* Progress Over Time — when 2+ assessments */}
-          {vapiResults.length >= 2 && (
-            <div id="progress-over-time" className="space-y-3 scroll-mt-6">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                Progress Over Time
-              </h2>
-              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm">
-                <div className="flex flex-col gap-4">
-                  {[...vapiResults]
-                    .sort(
-                      (a, b) =>
-                        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-                    )
-                    .map((r) => {
-                      const score = r.overallScore / 10;
-                      const tier = getTier(score);
-                      const color = getTierColor(tier);
-                      const pct = Math.min(100, (score / 10) * 100);
-                      return (
-                        <Link
-                          key={r.id}
-                          href={`/assessment/results?id=${r.id}`}
-                          className="block space-y-1.5 hover:opacity-90 transition-opacity"
-                        >
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-muted-foreground">
-                              {new Date(r.createdAt).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </span>
-                            <span className="font-medium" style={{ color }}>
-                              {score.toFixed(1)} — {tier}
-                            </span>
-                          </div>
-                          <div className="h-2 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all"
-                              style={{
-                                width: `${pct}%`,
-                                backgroundColor: color,
-                              }}
-                            />
-                          </div>
-                        </Link>
-                      );
-                    })}
-                </div>
-              </div>
             </div>
           )}
 

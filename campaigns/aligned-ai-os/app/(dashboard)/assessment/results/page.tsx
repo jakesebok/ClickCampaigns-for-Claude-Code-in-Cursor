@@ -31,7 +31,6 @@ import {
   Briefcase,
 } from "lucide-react";
 import {
-  VapiOverviewWheel,
   VapiBreakdownWheel,
   VapiComparativeWheel,
 } from "@/components/vapi-wheel";
@@ -264,6 +263,8 @@ function ResultsContent() {
   const [selectedProgressMetric, setSelectedProgressMetric] = useState<MetricKey>("overall");
   const [arenaCardsExpanded, setArenaCardsExpanded] = useState(false);
   const [breakdownDropdownOpen, setBreakdownDropdownOpen] = useState(false);
+  const [progressDropdownOpen, setProgressDropdownOpen] = useState(false);
+  const [progressView, setProgressView] = useState<"line" | "wheel">("line");
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#where-to-focus") {
@@ -350,6 +351,9 @@ function ResultsContent() {
   const topStrengths = DOMAINS.map((d) => ({ ...d, score: result.domainScores[d.code] || 0 }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 3);
+  const priorityFocusAreas = DOMAINS.map((d) => ({ ...d, score: result.domainScores[d.code] || 0 }))
+    .sort((a, b) => a.score - b.score)
+    .slice(0, 3);
 
   const criticalPriorities = priorityMatrix.filter(
     (p) => p.quadrant === "Critical Priority"
@@ -372,11 +376,22 @@ function ResultsContent() {
   );
   const latestProgressResult = sortedResults[0] ?? result;
   const previousProgressResult = sortedResults[1] ?? result;
-  const metricButtons: MetricKey[] = [
-    "overall",
-    ...ARENAS.map((arena) => `arena:${arena.key}` as MetricKey),
-    ...DOMAINS.map((domain) => `domain:${domain.code}` as MetricKey),
-  ];
+  const previousProgressScore = getMetricScore(previousProgressResult, selectedProgressMetric);
+  const latestProgressScore = getMetricScore(latestProgressResult, selectedProgressMetric);
+  const previousProgressTier = getMetricTier(previousProgressResult, selectedProgressMetric);
+  const latestProgressTier = getMetricTier(latestProgressResult, selectedProgressMetric);
+  const progressChange =
+    previousProgressScore != null && latestProgressScore != null
+      ? latestProgressScore - previousProgressScore
+      : null;
+  const previousPriority =
+    selectedProgressMetric.startsWith("domain:")
+      ? previousProgressResult.importance?.[selectedProgressMetric.slice(7)] ?? null
+      : null;
+  const latestPriority =
+    selectedProgressMetric.startsWith("domain:")
+      ? latestProgressResult.importance?.[selectedProgressMetric.slice(7)] ?? null
+      : null;
   const metricGroups: Array<{ label: string; items: MetricKey[] }> = [
     { label: "Composite", items: ["overall"] },
     { label: "Arena", items: ARENAS.map((arena) => `arena:${arena.key}` as MetricKey) },
@@ -398,53 +413,77 @@ function ResultsContent() {
         <div className="max-w-3xl mx-auto space-y-8">
           {/* Overall Score + Wheel (matches dashboard alignment at a glance) */}
           <div className="rounded-2xl border border-border bg-card/80 p-6 space-y-6 shadow-sm overflow-visible">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 overflow-visible">
-              <div className="flex-1 space-y-3 min-w-0">
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                  Overall Score
-                </h2>
-                <div className="flex items-end gap-3">
-                  <span
-                    className="text-5xl sm:text-6xl font-bold font-serif"
-                    style={{ color: overallColor }}
-                  >
-                    {(result.overallScore / 10).toFixed(1)}
-                  </span>
-                  <span
-                    className="text-sm font-medium mb-1 px-2 py-0.5 rounded text-white"
-                    style={{ backgroundColor: overallColor }}
-                  >
-                    {overallTier}
-                  </span>
-                </div>
-                {archetype && (
-                  <p className="text-sm text-muted-foreground">
-                    {archetype}
-                  </p>
-                )}
-                {topStrengths.length > 0 && (
-                  <div>
-                    <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
-                      Top Strengths
-                    </p>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1">
-                      {topStrengths.map((d) => {
-                        const Icon = DOMAIN_ICONS[d.code];
-                        const c = getTierColor(getTier(d.score));
-                        return (
-                          <div key={d.code} className="flex items-center gap-1.5 text-xs">
-                            {Icon && <Icon className="h-3 w-3 shrink-0" style={{ color: c }} />}
-                            <span>{d.name.split(" ")[0]}</span>
-                            <span className="font-medium" style={{ color: c }}>{d.score.toFixed(1)}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 py-4 border-t border-border/60">
+              <div className={`flex flex-wrap items-baseline gap-3 ${archetype ? "" : "sm:col-span-2"}`}>
+                <span
+                  className="text-5xl sm:text-6xl font-bold font-serif"
+                  style={{ color: overallColor }}
+                >
+                  {(result.overallScore / 10).toFixed(1)}
+                </span>
+                <span className="text-lg text-muted-foreground">/ 10</span>
+                <span
+                  className="font-semibold px-3 py-1.5 rounded-full text-sm text-white"
+                  style={{ backgroundColor: overallColor }}
+                >
+                  {overallTier}
+                </span>
               </div>
-              <div className="flex justify-center shrink-0 w-full sm:w-auto overflow-visible py-4 sm:py-0">
-                <VapiOverviewWheel domainScores={result.domainScores} />
+              {archetype && (
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-sm font-extrabold text-foreground">
+                    {archetype}
+                  </span>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {ARCHETYPE_DESCRIPTIONS[archetype]}
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 pb-1 border-b border-border/50 w-fit">
+                  Top 3 strengths
+                </p>
+                <ul className="space-y-2.5 mt-2">
+                  {topStrengths.map((d) => {
+                    const Icon = DOMAIN_ICONS[d.code];
+                    const color = getTierColor(getTier(d.score));
+                    return (
+                      <li key={d.code} className="flex items-center justify-between gap-3 text-sm">
+                        <span className="flex items-center gap-1.5 text-foreground">
+                          {Icon && <Icon className="w-3.5 h-3.5 flex-shrink-0" />}
+                          {d.name}
+                        </span>
+                        <span className="font-semibold shrink-0 tabular-nums" style={{ color }}>
+                          {d.score.toFixed(1)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 pb-1 border-b border-border/50 w-fit">
+                  Priority focus areas
+                </p>
+                <ul className="space-y-2.5 mt-2">
+                  {priorityFocusAreas.map((d) => {
+                    const Icon = DOMAIN_ICONS[d.code];
+                    const color = getTierColor(getTier(d.score));
+                    return (
+                      <li key={d.code} className="flex items-center justify-between gap-3 text-sm">
+                        <span className="flex items-center gap-1.5 text-foreground">
+                          {Icon && <Icon className="w-3.5 h-3.5 flex-shrink-0" />}
+                          {d.name}
+                        </span>
+                        <span className="font-semibold shrink-0 tabular-nums" style={{ color }}>
+                          {d.score.toFixed(1)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             </div>
           </div>
@@ -603,7 +642,7 @@ function ResultsContent() {
                 return (
                   <div
                     key={arena.key}
-                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm self-start"
+                    className="rounded-xl border border-border bg-card/80 p-5 space-y-3 shadow-sm self-start sm:min-h-[260px] flex flex-col"
                   >
                     <div className="flex items-center justify-between">
                       <h3 className="font-medium">{arena.label}</h3>
@@ -628,7 +667,7 @@ function ResultsContent() {
                       </button>
                     )}
                     {(arenaCardsExpanded || isExpanded) && interpretation && (
-                      <p className="text-sm text-muted-foreground leading-relaxed pt-2 border-t border-border">
+                      <p className="text-sm text-muted-foreground leading-relaxed pt-2 border-t border-border mt-auto">
                         {interpretation}
                       </p>
                     )}
@@ -745,47 +784,225 @@ function ResultsContent() {
                 Progress Over Time
               </h2>
               <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-sm space-y-6">
-                <div className="flex flex-col lg:flex-row gap-6">
-                  <div className="w-full max-w-[320px] mx-auto lg:mx-0">
-                    <VapiComparativeWheel
-                      previousDomainScores={previousProgressResult.domainScores}
-                      currentDomainScores={latestProgressResult.domainScores}
-                      metricKey={selectedProgressMetric}
-                      onMetricSelect={(metricKey) =>
-                        setSelectedProgressMetric(metricKey as MetricKey)
-                      }
-                    />
-                  </div>
-                  <div className="flex-1 space-y-3">
-                    <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                      {getMetricLabel(selectedProgressMetric)}
-                    </p>
-                    <ProgressLineChart
-                      results={allResults}
-                      metricKey={selectedProgressMetric}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    Graph a metric
-                  </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {metricButtons.map((metricKey) => (
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">View:</span>
+                    <div className="inline-flex rounded-lg border border-border p-0.5 bg-secondary/40" role="tablist" aria-label="Progress view">
                       <button
-                        key={`progress-${metricKey}`}
                         type="button"
-                        onClick={() => setSelectedProgressMetric(metricKey)}
-                        className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
-                          selectedProgressMetric === metricKey
-                            ? "border-accent bg-accent/10 text-foreground"
-                            : "border-border bg-background/40 text-muted-foreground hover:border-accent/30 hover:text-foreground"
+                        role="tab"
+                        aria-selected={progressView === "line"}
+                        onClick={() => setProgressView("line")}
+                        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                          progressView === "line"
+                            ? "bg-background border border-border shadow-sm text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
                         }`}
                       >
-                        {getMetricLabel(metricKey)}
+                        Line Graph
                       </button>
-                    ))}
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={progressView === "wheel"}
+                        onClick={() => setProgressView("wheel")}
+                        className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                          progressView === "wheel"
+                            ? "bg-background border border-border shadow-sm text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Wheel Comparison
+                      </button>
+                    </div>
                   </div>
+                  <div className="lg:hidden flex items-center gap-2 relative">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Metric:</span>
+                    <button
+                      type="button"
+                      onClick={() => setProgressDropdownOpen((open) => !open)}
+                      className="inline-flex items-center gap-1 rounded-full py-1 px-2.5 border border-border bg-background text-[10px] font-medium uppercase tracking-wider text-foreground hover:border-foreground/30 transition-colors max-w-[120px]"
+                      aria-haspopup="listbox"
+                      aria-expanded={progressDropdownOpen}
+                    >
+                      <span className="truncate">{getMetricLabel(selectedProgressMetric)}</span>
+                      <ChevronDown
+                        className="w-3 h-3 text-muted-foreground flex-shrink-0 transition-transform"
+                        style={{ transform: progressDropdownOpen ? "rotate(180deg)" : undefined }}
+                      />
+                    </button>
+                    {progressDropdownOpen && (
+                      <div className="absolute top-full left-0 mt-1 z-20 w-52 bg-background border border-border rounded-lg shadow-lg overflow-hidden max-h-[280px] overflow-y-auto">
+                        <div className="space-y-0.5 p-1.5">
+                          {metricGroups.map((group) => (
+                            <div key={`progress-dropdown-${group.label}`}>
+                              <div className="text-[10px] font-semibold text-foreground mt-1.5 first:mt-0 px-2 py-0.5">
+                                {group.label}
+                              </div>
+                              {group.items.map((metricKey) => {
+                                const Icon = getMetricIcon(metricKey);
+                                const isSelected = selectedProgressMetric === metricKey;
+                                return (
+                                  <button
+                                    key={`progress-dropdown-${metricKey}`}
+                                    type="button"
+                                    onClick={() => {
+                                      setSelectedProgressMetric(metricKey);
+                                      setProgressDropdownOpen(false);
+                                    }}
+                                    className={`flex items-center gap-1.5 w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border ${
+                                      isSelected
+                                        ? "bg-foreground text-background border-foreground"
+                                        : "border-transparent text-foreground hover:bg-secondary hover:border-border"
+                                    }`}
+                                  >
+                                    <Icon className="w-3 h-3 flex-shrink-0" />
+                                    {getMetricLabel(metricKey)}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="flex-1 min-w-0 relative">
+                    {progressView === "line" ? (
+                      <ProgressLineChart results={allResults} metricKey={selectedProgressMetric} />
+                    ) : (
+                      <div className="flex flex-col items-center w-full">
+                        <VapiComparativeWheel
+                          previousDomainScores={previousProgressResult.domainScores}
+                          currentDomainScores={latestProgressResult.domainScores}
+                          metricKey={selectedProgressMetric}
+                          onMetricSelect={(metricKey) =>
+                            setSelectedProgressMetric(metricKey as MetricKey)
+                          }
+                        />
+                        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 w-full text-xs text-muted-foreground">
+                          <div className="flex flex-col gap-y-1 items-start">
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="w-3 h-3 rounded-full bg-gray-500" />
+                              Most Recent ({new Date(latestProgressResult.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })})
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="w-3 h-3 rounded-full bg-gray-400/50" />
+                              Previous ({new Date(previousProgressResult.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })})
+                            </span>
+                          </div>
+                          <div className="flex flex-col gap-y-1 items-start">
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="w-3 h-3 rounded-full bg-green-500" />
+                              Improved
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className="w-3 h-3 rounded-full bg-red-500" />
+                              Declined
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-4 flex-col">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                      Metric
+                    </p>
+                    <div className="relative flex-1 min-h-0 max-h-[370px]">
+                      <div className="space-y-1 h-full max-h-[370px] overflow-y-auto pr-1">
+                        {metricGroups.map((group) => (
+                          <div key={`progress-sidebar-${group.label}`}>
+                            <div className="text-sm font-semibold text-foreground mt-3 first:mt-0">
+                              {group.label}
+                            </div>
+                            {group.items.map((metricKey) => {
+                              const Icon = getMetricIcon(metricKey);
+                              const isSelected = selectedProgressMetric === metricKey;
+                              return (
+                                <button
+                                  key={`progress-sidebar-${metricKey}`}
+                                  type="button"
+                                  onClick={() => setSelectedProgressMetric(metricKey)}
+                                  className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border ${
+                                    isSelected
+                                      ? "bg-foreground text-background border-foreground"
+                                      : "border-transparent text-foreground hover:bg-secondary hover:border-border"
+                                  }`}
+                                >
+                                  <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                                  {getMetricLabel(metricKey)}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 pt-6 border-t border-border">
+                  <h3 className="text-lg text-foreground mb-2">What Changed</h3>
+                  <div className="pl-1 w-fit grid grid-cols-[auto_auto] gap-x-0 items-center">
+                    <span
+                      className={`flex items-center justify-center text-4xl font-bold leading-none w-12 flex-shrink-0 ${
+                        progressChange != null && progressChange > 0
+                          ? "text-green-600"
+                          : progressChange != null && progressChange < 0
+                            ? "text-red-600"
+                            : "text-amber-600"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {progressChange != null ? (progressChange > 0 ? "↑" : progressChange < 0 ? "↓" : "→") : "→"}
+                    </span>
+                    <div className="min-w-0 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 items-center">
+                      <div className="flex flex-col gap-y-1">
+                        <span className="font-semibold text-muted-foreground">
+                          {getMetricLabel(selectedProgressMetric)}: {previousProgressTier && latestProgressTier
+                            ? previousProgressTier === latestProgressTier
+                              ? latestProgressTier
+                              : `${previousProgressTier} → ${latestProgressTier}`
+                            : "Score change"}
+                        </span>
+                        <span className={`text-sm font-medium ${
+                          progressChange != null && progressChange > 0
+                            ? "text-green-600"
+                            : progressChange != null && progressChange < 0
+                              ? "text-red-600"
+                              : "text-muted-foreground"
+                        }`}>
+                          Change: {progressChange != null ? `${progressChange >= 0 ? "+" : ""}${progressChange.toFixed(1)}` : "—"}
+                        </span>
+                      </div>
+                      <div className="text-sm text-muted-foreground flex flex-col gap-y-1">
+                        <span>
+                          Previous: {previousProgressScore != null ? `${previousProgressScore.toFixed(1)} / 10${previousProgressTier ? ` (${previousProgressTier})` : ""}` : "—"}
+                        </span>
+                        <span>
+                          Current: {latestProgressScore != null ? `${latestProgressScore.toFixed(1)} / 10${latestProgressTier ? ` (${latestProgressTier})` : ""}` : "—"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  {selectedProgressMetric.startsWith("domain:") &&
+                    previousPriority != null &&
+                    latestPriority != null &&
+                    Math.abs(latestPriority - previousPriority) >= 3 && (
+                      <div className="mt-3 p-3 bg-secondary/40 border border-border rounded-lg">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-1">
+                          Priority Shift
+                        </p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          You rated {getMetricLabel(selectedProgressMetric)} as {previousPriority}/10 priority last time and {latestPriority}/10 this time.
+                          {latestPriority > previousPriority
+                            ? " This area has become significantly more important to you."
+                            : " This area has moved down your priority list."}
+                        </p>
+                      </div>
+                    )}
                 </div>
               </div>
             </div>

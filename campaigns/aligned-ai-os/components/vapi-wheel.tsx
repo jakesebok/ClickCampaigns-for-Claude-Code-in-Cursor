@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { DOMAINS } from "@/lib/vapi/quiz-data";
 
 const ORDER = ["PH", "IA", "ME", "AF", "RS", "FA", "CO", "WI", "VS", "EX", "OH", "EC"] as const;
@@ -65,15 +65,14 @@ function roundedRings(score: number | undefined) {
   return Math.max(0, Math.min(10, Math.round(clampScore(score))));
 }
 
-function getWheelTransform(metricKey: MetricKey) {
-  const focusScale = 1.28;
-  if (metricKey === "overall") return { scale: 1, rotate: 0 };
+function getWheelTransform(metricKey: MetricKey, scale: number) {
+  if (metricKey === "overall") return { scale, rotate: 0 };
   if (metricKey.startsWith("domain:")) {
     const code = metricKey.slice(7);
     const index = ORDER.indexOf(code as (typeof ORDER)[number]);
-    if (index < 0) return { scale: focusScale, rotate: 0 };
+    if (index < 0) return { scale, rotate: 0 };
     const segmentCenterAngle = -75 + 30 * index;
-    return { scale: focusScale, rotate: -90 - segmentCenterAngle };
+    return { scale, rotate: -90 - segmentCenterAngle };
   }
   if (metricKey.startsWith("arena:")) {
     const arena = metricKey.slice(6);
@@ -83,11 +82,11 @@ function getWheelTransform(metricKey: MetricKey) {
       business: 210,
     };
     return {
-      scale: focusScale,
+      scale,
       rotate: centerAngles[arena] != null ? -90 - centerAngles[arena] : 0,
     };
   }
-  return { scale: 1, rotate: 0 };
+  return { scale, rotate: 0 };
 }
 
 function getSegmentOpacity(metricKey: MetricKey, code: string) {
@@ -101,11 +100,6 @@ function getSegmentOpacity(metricKey: MetricKey, code: string) {
     return normalizeArenaKey(domain?.arena) === arena ? 1 : 0.1;
   }
   return 1;
-}
-
-function getMetricIndex(metricKey: MetricKey) {
-  if (!metricKey.startsWith("domain:")) return -1;
-  return ORDER.indexOf(metricKey.slice(7) as (typeof ORDER)[number]);
 }
 
 function cellPath(
@@ -404,8 +398,16 @@ export function VapiBreakdownWheel({
   metricKey = "overall",
   onMetricSelect,
 }: BreakdownProps) {
-  const transform = getWheelTransform(metricKey);
+  const [isMobile, setIsMobile] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const transform = getWheelTransform(metricKey, isMobile ? 1.18 : 1.22);
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   useEffect(() => {
     if (metricKey === "overall") {
@@ -688,8 +690,16 @@ export function VapiComparativeWheel({
   metricKey = "overall",
   onMetricSelect,
 }: ComparativeProps) {
-  const transform = getWheelTransform(metricKey);
+  const [isMobile, setIsMobile] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const transform = getWheelTransform(metricKey, isMobile ? 1.18 : 1.22);
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
 
   useEffect(() => {
     if (metricKey === "overall") {
@@ -725,8 +735,4 @@ export function VapiComparativeWheel({
       </div>
     </div>
   );
-}
-
-export function useMetricMenu(metricKey: MetricKey) {
-  return useMemo(() => getWheelTransform(metricKey), [metricKey]);
 }
