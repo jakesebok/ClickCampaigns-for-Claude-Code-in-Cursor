@@ -26,7 +26,6 @@ import {
   TrendingUp,
   ChevronDown,
   ChevronUp,
-  UserCircle,
   BarChart2,
   Briefcase,
 } from "lucide-react";
@@ -46,6 +45,7 @@ import {
   type PriorityQuadrant,
 } from "@/lib/vapi/scoring";
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
+import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 
 type MetricKey = "overall" | `arena:${string}` | `domain:${string}`;
@@ -57,7 +57,7 @@ const DOMAIN_ICONS: Record<string, React.ElementType> = {
 };
 
 const ARENA_ICONS: Record<string, React.ElementType> = {
-  personal: UserCircle,
+  personal: BarChart2,
   relationships: Heart,
   business: Briefcase,
 };
@@ -66,6 +66,8 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
   const [expanded, setExpanded] = useState(false);
   const full = ARCHETYPES_FULL[archetype];
   const short = ARCHETYPE_DESCRIPTIONS[archetype] || "";
+  const ArchetypeIcon = getArchetypeIcon(archetype);
+  const archetypeColor = ARCHETYPE_ACCENT_COLORS[archetype];
 
   return (
     <div className="rounded-2xl border border-border p-6 space-y-3">
@@ -73,7 +75,7 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
         Your Founder Archetype
       </h2>
       <h3 className="text-2xl font-serif font-bold flex items-center gap-2">
-        <UserCircle className="h-6 w-6 text-accent shrink-0" />
+        <ArchetypeIcon className="h-6 w-6 shrink-0" style={{ color: archetypeColor }} />
         {archetype}
       </h3>
       {full && (
@@ -157,7 +159,7 @@ function getMetricLabel(metricKey: MetricKey): string {
 
 function getMetricIcon(metricKey: MetricKey): React.ElementType {
   if (metricKey === "overall") return BarChart2;
-  if (metricKey.startsWith("arena:")) return ARENA_ICONS[metricKey.slice(6)] ?? UserCircle;
+  if (metricKey.startsWith("arena:")) return ARENA_ICONS[metricKey.slice(6)] ?? BarChart2;
   return DOMAIN_ICONS[metricKey.slice(7)] ?? Activity;
 }
 
@@ -195,11 +197,15 @@ function ProgressLineChart({
   const scores = ordered
     .map((entry) => getMetricScore(entry, metricKey))
     .filter((score): score is number => score != null);
+  const priorityValues = ordered.map((entry) =>
+    metricKey.startsWith("domain:") ? entry.importance?.[metricKey.slice(7)] ?? null : null
+  );
+  const hasPriorityLine = priorityValues.some((value) => value != null);
 
   if (scores.length === 0) return null;
 
   const width = 680;
-  const height = 340;
+  const height = 400;
   const padX = 48;
   const padTop = 20;
   const padBottom = 36;
@@ -220,6 +226,26 @@ function ProgressLineChart({
   const linePath = points
     .map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`)
     .join(" ");
+  const priorityPoints = ordered.map((entry, index) => {
+    const value = metricKey.startsWith("domain:")
+      ? entry.importance?.[metricKey.slice(7)] ?? null
+      : null;
+    if (value == null) return null;
+    const x =
+      ordered.length === 1
+        ? width / 2
+        : padX + (index / (ordered.length - 1)) * chartWidth;
+    const y = padTop + ((maxY - value) / maxY) * chartHeight;
+    return { x, y, value, label: new Date(entry.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" }) };
+  });
+  const priorityLinePath = priorityPoints
+    .map((point, index) => {
+      if (!point) return "";
+      const prefix = priorityPoints.slice(0, index).some(Boolean) ? "L" : "M";
+      return `${prefix} ${point.x} ${point.y}`;
+    })
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className="rounded-2xl border border-border bg-card/80 p-4 shadow-sm">
@@ -236,6 +262,26 @@ function ProgressLineChart({
           );
         })}
         <path d={linePath} fill="none" stroke="hsl(var(--accent))" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+        {hasPriorityLine && priorityLinePath && (
+          <path
+            d={priorityLinePath}
+            fill="none"
+            stroke="rgba(88,34,51,0.7)"
+            strokeWidth="2"
+            strokeDasharray="5 4"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+        )}
+        <line
+          x1={padX}
+          x2={width - padX}
+          y1={padTop + ((maxY - 8) / maxY) * chartHeight}
+          y2={padTop + ((maxY - 8) / maxY) * chartHeight}
+          stroke="rgba(212, 170, 112, 0.7)"
+          strokeWidth="1.5"
+          strokeDasharray="6 4"
+        />
         {points.map((point) => (
           <g key={point.label}>
             <circle cx={point.x} cy={point.y} r="5" fill="hsl(var(--accent))" />
@@ -245,6 +291,14 @@ function ProgressLineChart({
             </text>
           </g>
         ))}
+        {priorityPoints.map((point) =>
+          point ? (
+            <g key={`priority-${point.label}`}>
+              <circle cx={point.x} cy={point.y} r="4" fill="rgba(88,34,51,0.85)" />
+              <circle cx={point.x} cy={point.y} r="2" fill="white" />
+            </g>
+          ) : null
+        )}
       </svg>
     </div>
   );
@@ -343,6 +397,8 @@ function ResultsContent() {
   const overallTier = getTier(result.overallScore / 10);
   const overallColor = getTierColor(overallTier);
   const archetype = result.archetype as VapiArchetype;
+  const ArchetypeIcon = getArchetypeIcon(archetype);
+  const archetypeColor = ARCHETYPE_ACCENT_COLORS[archetype];
   const priorityMatrix = getPriorityMatrix(
     result.domainScores,
     result.importance || {}
@@ -431,8 +487,11 @@ function ResultsContent() {
               </div>
               {archetype && (
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-lg flex items-center justify-center bg-accent/15 text-accent">
-                    <UserCircle className="w-6 h-6" />
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: `${archetypeColor}20`, color: archetypeColor }}
+                  >
+                    <ArchetypeIcon className="w-6 h-6" />
                   </div>
                   <span className="text-sm font-extrabold text-foreground">
                     {archetype}

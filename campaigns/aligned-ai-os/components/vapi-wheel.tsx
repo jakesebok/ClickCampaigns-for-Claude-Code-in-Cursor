@@ -142,6 +142,7 @@ function WheelSvg({
   onMetricSelect?: (metricKey: MetricKey) => void;
   interactive: boolean;
 }) {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const cx = 160;
   const cy = 160;
   const r = 120;
@@ -150,6 +151,17 @@ function WheelSvg({
   const segmentAngle = 360 / 12;
   const isDomainFocus = metricKey.startsWith("domain:");
   const domainLabelOpacity = metricKey === "overall" ? 1 : 0;
+  const arenaLabelFill = isDomainFocus && !isDarkTheme ? "#111827" : "#f7f2e8";
+  const arenaLabelFilter = isDomainFocus && !isDarkTheme ? "url(#wheelArenaLabelHalo)" : "url(#wheelArenaLabelShadow)";
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const syncTheme = () => setIsDarkTheme(root.classList.contains("dark"));
+    syncTheme();
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <svg
@@ -295,10 +307,10 @@ function WheelSvg({
           key={arena}
           className="wheel-arena-label"
           fontSize="11"
-          fill={isDomainFocus ? "#111827" : "#f7f2e8"}
+          fill={arenaLabelFill}
           fontFamily="Cormorant Garamond,serif"
           fontWeight="700"
-          filter={isDomainFocus ? "url(#wheelArenaLabelHalo)" : "url(#wheelArenaLabelShadow)"}
+          filter={arenaLabelFilter}
           style={{
             cursor: interactive && onMetricSelect ? "pointer" : "default",
             transition: "fill 200ms ease-out",
@@ -456,6 +468,7 @@ function ComparativeSvg({
   metricKey: MetricKey;
   onMetricSelect?: (metricKey: MetricKey) => void;
 }) {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const cx = 160;
   const cy = 160;
   const r = 120;
@@ -465,6 +478,16 @@ function ComparativeSvg({
   const changeThreshold = 0.5;
   const transformOpacityFor = (code: string) => getSegmentOpacity(metricKey, code);
   const isDomainFocus = metricKey.startsWith("domain:");
+  const arenaLabelFill = isDomainFocus && !isDarkTheme ? "#111827" : "#f7f2e8";
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const syncTheme = () => setIsDarkTheme(root.classList.contains("dark"));
+    syncTheme();
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <svg
@@ -652,7 +675,7 @@ function ComparativeSvg({
           key={arena}
           className="wheel-arena-label"
           fontSize="11"
-          fill={isDomainFocus ? "#111827" : "#f7f2e8"}
+          fill={arenaLabelFill}
           fontFamily="Cormorant Garamond,serif"
           fontWeight="700"
           filter="url(#progressArenaLabelShadow)"

@@ -33,6 +33,7 @@ import {
   UserCircle,
 } from "lucide-react";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
+import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
@@ -171,6 +172,8 @@ export default function DashboardPage() {
     }
   }
   const archetype = latestVapi?.archetype as VapiArchetype | undefined;
+  const ArchetypeIcon = archetype ? getArchetypeIcon(archetype) : null;
+  const archetypeColor = archetype ? ARCHETYPE_ACCENT_COLORS[archetype] : undefined;
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
@@ -441,7 +444,9 @@ export default function DashboardPage() {
                     </h2>
                     <div className="space-y-3">
                       <h3 className="text-xl font-serif font-bold flex items-center gap-2">
-                        <UserCircle className="h-5 w-5 text-accent shrink-0" />
+                        {ArchetypeIcon && (
+                          <ArchetypeIcon className="h-5 w-5 shrink-0" style={{ color: archetypeColor }} />
+                        )}
                         {archetype}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed line-clamp-5">

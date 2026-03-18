@@ -1429,9 +1429,10 @@
             });
             var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
             var isDomain = metricKey.indexOf('domain:') === 0;
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
             arenaLabels.forEach(function(el) {
-              el.setAttribute('fill', isDomain ? '#000' : '#f7f2e8');
-              el.setAttribute('filter', isDomain ? 'url(#dashboardArenaLabelHalo)' : 'url(#dashboardArenaLabelShadow)');
+              el.setAttribute('fill', isDomain && !isDarkTheme ? '#000' : '#f7f2e8');
+              el.setAttribute('filter', isDomain && !isDarkTheme ? 'url(#dashboardArenaLabelHalo)' : 'url(#dashboardArenaLabelShadow)');
             });
           }
         }
@@ -1635,6 +1636,13 @@
             }
             var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
             domainLabels.forEach(function(el) { el.style.opacity = '0'; });
+            var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            var isDomain = metricKey.indexOf('domain:') === 0;
+            arenaLabels.forEach(function(el) {
+              el.setAttribute('fill', isDomain && !isDarkTheme ? '#000' : '#f7f2e8');
+              el.setAttribute('filter', 'url(#progressWheelArenaLabelShadow)');
+            });
           }
           progressLabelsTimeout = setTimeout(function() {
             progressLabelsTimeout = null;
