@@ -10,6 +10,8 @@
  *   results     object  — full results payload
  */
 
+import { enrichResultsWithDriver } from "./_lib/vapi-driver-scoring.js";
+
 export async function POST(request) {
   const supabaseUrl     = process.env.SUPABASE_URL;
   const serviceRoleKey  = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -37,6 +39,11 @@ export async function POST(request) {
     });
   }
 
+  const enrichedResults =
+    results && typeof results === 'object'
+      ? enrichResultsWithDriver(results)
+      : {};
+
   const emailNormalized = String(email).trim().toLowerCase();
 
   // Direct REST insert using service role key — bypasses RLS entirely
@@ -52,7 +59,7 @@ export async function POST(request) {
       email: emailNormalized,
       first_name: firstName || null,
       last_name: lastName || null,
-      results: results || {},
+      results: enrichedResults,
     }),
   });
 

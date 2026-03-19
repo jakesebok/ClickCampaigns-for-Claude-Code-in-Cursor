@@ -796,6 +796,8 @@
           importanceRatings: results.importanceRatings,
           priorityMatrix: results.priorityMatrix,
           archetype: results.archetype || null,
+          allResponses: results.allResponses || null,
+          responseCodingVersion: results.responseCodingVersion || null,
         };
         fetch('/api/vapi-assessment-complete', {
           method: 'POST',

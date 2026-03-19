@@ -4,6 +4,7 @@
  */
 import { DOMAINS, ARENAS } from "./quiz-data";
 import { getTier, getPriorityMatrix } from "./scoring";
+import type { VapiDriverName, VapiDriverScores } from "./drivers";
 
 export type PortalVapiResults = {
   overall: number;
@@ -17,6 +18,11 @@ export type PortalVapiResults = {
   importanceRatings: Record<string, number>;
   priorityMatrix: { criticalPriority: unknown[]; protectAndSustain: unknown[]; monitor: unknown[]; overInvestment: unknown[] };
   archetype: string;
+  assignedDriver?: VapiDriverName | null;
+  driverScores?: VapiDriverScores;
+  topDriverScore?: number;
+  allResponses?: Record<string, number>;
+  responseCodingVersion?: string;
   firstName?: string;
   lastName?: string;
 };
@@ -27,10 +33,28 @@ export function buildPortalResultsFormat(params: {
   overall: number;
   archetype: string;
   importance: Record<string, number>;
+  assignedDriver?: VapiDriverName | null;
+  driverScores?: VapiDriverScores;
+  topDriverScore?: number;
+  allResponses?: Record<string, number>;
+  responseCodingVersion?: string;
   firstName?: string;
   lastName?: string;
 }): PortalVapiResults {
-  const { domainScores, arenaScores, overall, archetype, importance, firstName, lastName } = params;
+  const {
+    domainScores,
+    arenaScores,
+    overall,
+    archetype,
+    importance,
+    assignedDriver,
+    driverScores,
+    topDriverScore,
+    allResponses,
+    responseCodingVersion,
+    firstName,
+    lastName,
+  } = params;
 
   const domains = DOMAINS.map((d) => {
     const score = domainScores[d.code] || 0;
@@ -77,6 +101,11 @@ export function buildPortalResultsFormat(params: {
     importanceRatings: importance,
     priorityMatrix,
     archetype,
+    assignedDriver: assignedDriver ?? null,
+    driverScores: driverScores || undefined,
+    topDriverScore: topDriverScore ?? undefined,
+    allResponses: allResponses || undefined,
+    responseCodingVersion: responseCodingVersion || undefined,
     firstName: firstName || undefined,
     lastName: lastName || undefined,
   };

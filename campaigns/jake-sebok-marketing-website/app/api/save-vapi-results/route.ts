@@ -6,6 +6,8 @@
 
 export const dynamic = "force-dynamic";
 
+import { enrichResultsWithDriver } from "@/lib/vapi-driver-scoring";
+
 export async function POST(request: Request) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -41,6 +43,11 @@ export async function POST(request: Request) {
 
   const emailNormalized = String(email).trim().toLowerCase();
 
+  const enrichedResults =
+    results && typeof results === "object"
+      ? enrichResultsWithDriver(results as Record<string, unknown>)
+      : {};
+
   const res = await fetch(`${supabaseUrl}/rest/v1/vapi_results`, {
     method: "POST",
     headers: {
@@ -53,7 +60,7 @@ export async function POST(request: Request) {
       email: emailNormalized,
       first_name: firstName || null,
       last_name: lastName || null,
-      results: results || {},
+      results: enrichedResults,
       source: "marketing",
     }),
   });

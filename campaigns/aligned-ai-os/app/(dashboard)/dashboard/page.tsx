@@ -33,8 +33,10 @@ import {
   UserCircle,
 } from "lucide-react";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
+import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
+import { DRIVER_CONTENT, type VapiDriverName } from "@/lib/vapi/drivers";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
   getScorecardWindow,
@@ -65,6 +67,9 @@ type VapiResult = {
   overallScore: number;
   archetype: string;
   importance: Record<string, number>;
+  assignedDriver: string | null;
+  driverScores: Record<string, number>;
+  topDriverScore: number;
   createdAt: string;
 };
 
@@ -186,6 +191,12 @@ export default function DashboardPage() {
   const archetype = latestVapi?.archetype as VapiArchetype | undefined;
   const ArchetypeIcon = archetype ? getArchetypeIcon(archetype) : null;
   const archetypeColor = archetype ? ARCHETYPE_ACCENT_COLORS[archetype] : undefined;
+  const archetypeTagline = archetype ? ARCHETYPES_FULL[archetype]?.tagline : "";
+  const driverName =
+    latestVapi?.assignedDriver && latestVapi.assignedDriver in DRIVER_CONTENT
+      ? (latestVapi.assignedDriver as VapiDriverName)
+      : null;
+  const driver = driverName ? DRIVER_CONTENT[driverName] : null;
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
@@ -502,18 +513,45 @@ export default function DashboardPage() {
                     <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       Founder Archetype
                     </h2>
-                    <div className="space-y-3">
+                    <div className="space-y-4 flex-1">
                       <h3 className="text-xl font-serif font-bold flex items-center gap-2">
                         {ArchetypeIcon && (
                           <ArchetypeIcon className="h-5 w-5 shrink-0" style={{ color: archetypeColor }} />
                         )}
                         {archetype}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-5">
-                        {ARCHETYPE_DESCRIPTIONS[archetype]}
-                      </p>
+                      {archetypeTagline ? (
+                        <p className="text-sm italic text-muted-foreground leading-relaxed">
+                          {archetypeTagline}
+                        </p>
+                      ) : (
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {ARCHETYPE_DESCRIPTIONS[archetype]}
+                        </p>
+                      )}
+                      <div className="border-t border-border pt-4 space-y-2">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                          Likely Driver
+                        </p>
+                        {driver ? (
+                          <>
+                            <p className="text-sm font-semibold text-foreground">
+                              {driver.name}
+                            </p>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              &quot;{driver.coreBelief}&quot;
+                            </p>
+                          </>
+                        ) : (
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            No clear driver identified
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-xs text-accent font-medium">Explore archetype →</p>
+                    <p className="text-xs text-accent font-medium">
+                      {driver ? "View Full Details →" : "View Details →"}
+                    </p>
                   </div>
                 </Link>
               )}

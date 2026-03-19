@@ -47,6 +47,9 @@ import {
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
+import { DRIVER_CONTENT, DRIVER_FALLBACK, type VapiDriverName } from "@/lib/vapi/drivers";
+import { getDriverTransitionSummary } from "@/lib/vapi/driver-progress";
+import { VAPI_PROGRESS_TRANSITIONS } from "@/lib/vapi/progress-transitions";
 
 type MetricKey = "overall" | `arena:${string}` | `domain:${string}`;
 
@@ -127,6 +130,141 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
   );
 }
 
+function DriverSection({
+  assignedDriver,
+  driverScores,
+  topDriverScore,
+}: {
+  assignedDriver: string | null;
+  driverScores?: Record<string, number>;
+  topDriverScore?: number;
+}) {
+  const [expanded, setExpanded] = useState<
+    Record<"mechanism" | "cost" | "wayOut", boolean>
+  >({
+    mechanism: false,
+    cost: false,
+    wayOut: false,
+  });
+
+  const driverName =
+    assignedDriver && assignedDriver in DRIVER_CONTENT
+      ? (assignedDriver as VapiDriverName)
+      : null;
+  const driver = driverName ? DRIVER_CONTENT[driverName] : null;
+  const strength =
+    driverName && driverScores
+      ? Math.max(topDriverScore ?? 0, driverScores[driverName] ?? 0)
+      : topDriverScore ?? 0;
+  const note =
+    "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
+
+  return (
+    <div
+      id="driver-section"
+      className="scroll-mt-24 rounded-2xl border border-border bg-gradient-to-br from-accent/5 via-card/90 to-background p-6 shadow-sm space-y-5"
+    >
+      <div className="space-y-3">
+        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          What&apos;s Driving This Pattern
+        </p>
+        {driver ? (
+          <>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-2xl font-serif font-bold text-foreground">
+                {driver.name}
+              </h2>
+              <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
+                Pattern strength: {strength} / {driver.maxPossible}
+              </span>
+            </div>
+            <blockquote className="rounded-xl border-l-4 border-accent bg-accent/10 px-4 py-4 text-xl sm:text-2xl font-serif font-semibold leading-tight text-foreground">
+              &quot;{driver.coreBelief}&quot;
+            </blockquote>
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">Core fear:</span>{" "}
+              {driver.coreFear}
+            </p>
+            <p className="text-sm italic text-muted-foreground leading-relaxed">
+              {driver.tagline}
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {driver.description}
+            </p>
+            <div className="space-y-3">
+              {[
+                {
+                  key: "mechanism" as const,
+                  title: "How This Shows Up in Your Scores",
+                  body: driver.mechanism,
+                },
+                {
+                  key: "cost" as const,
+                  title: "What This Is Costing You",
+                  body: driver.whatItCosts,
+                },
+                {
+                  key: "wayOut" as const,
+                  title: "The Way Out",
+                  body: driver.theWayOut,
+                },
+              ].map((section) => {
+                const isOpen = expanded[section.key];
+                return (
+                  <div
+                    key={section.key}
+                    className="rounded-xl border border-border bg-background/70"
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpanded((current) => ({
+                          ...current,
+                          [section.key]: !current[section.key],
+                        }))
+                      }
+                      className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                      aria-expanded={isOpen}
+                    >
+                      <span className="text-sm font-semibold text-foreground">
+                        {section.title}
+                      </span>
+                      {isOpen ? (
+                        <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </button>
+                    {isOpen && (
+                      <div className="border-t border-border px-4 py-4">
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {section.body}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 className="text-2xl font-serif font-bold text-foreground">
+              {DRIVER_FALLBACK.heading}
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {DRIVER_FALLBACK.text}
+            </p>
+          </>
+        )}
+      </div>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        {note}
+      </p>
+    </div>
+  );
+}
+
 const QUADRANT_META: Record<
   PriorityQuadrant,
   { icon: React.ElementType; color: string; bg: string; border: string }
@@ -144,6 +282,9 @@ type ResultData = {
   overallScore: number;
   archetype: string;
   importance: Record<string, number>;
+  assignedDriver: string | null;
+  driverScores: Record<string, number>;
+  topDriverScore: number;
   createdAt: string;
 };
 
@@ -182,6 +323,146 @@ function getMetricInterpretation(result: ResultData, metricKey: MetricKey): stri
     return ARENA_INTERPRETATIONS[metricKey.slice(6)]?.[tier] ?? "";
   }
   return DOMAIN_INTERPRETATIONS[metricKey.slice(7)]?.[tier] ?? "";
+}
+
+type ProgressNarrative = {
+  key: string;
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  body: string;
+  previousBelief?: string | null;
+  currentBelief?: string | null;
+  previousScore?: string;
+  currentScore?: string;
+  change?: string;
+  changeDirection?: "up" | "down" | "same";
+};
+
+const PROGRESS_TRANSITIONS = VAPI_PROGRESS_TRANSITIONS as Record<
+  string,
+  Record<string, string>
+>;
+
+function formatTransitionLabel(previousTier: VapiTier, currentTier: VapiTier) {
+  return previousTier === currentTier
+    ? `Maintained ${currentTier}`
+    : `${previousTier} to ${currentTier}`;
+}
+
+function formatMetricScore(score: number | null, tier: VapiTier | null) {
+  if (score == null) return "--";
+  return `${score.toFixed(1)} / 10${tier ? ` (${tier})` : ""}`;
+}
+
+function getChangeDirection(
+  change: number | null
+): "up" | "down" | "same" {
+  if (change == null || change === 0) return "same";
+  return change > 0 ? "up" : "down";
+}
+
+function getMetricTransitionLookupKey(metricKey: MetricKey) {
+  if (metricKey === "overall") return "overall";
+  if (metricKey.startsWith("arena:")) return getMetricLabel(metricKey);
+  return metricKey.slice(7);
+}
+
+function getMetricTransitionNarrative(
+  previousResult: ResultData,
+  currentResult: ResultData,
+  metricKey: MetricKey
+): ProgressNarrative | null {
+  const previousScore = getMetricScore(previousResult, metricKey);
+  const currentScore = getMetricScore(currentResult, metricKey);
+  const previousTier = getMetricTier(previousResult, metricKey);
+  const currentTier = getMetricTier(currentResult, metricKey);
+
+  if (!previousTier || !currentTier) return null;
+
+  const transitionLabel = formatTransitionLabel(previousTier, currentTier);
+  const transitionText =
+    PROGRESS_TRANSITIONS[getMetricTransitionLookupKey(metricKey)]?.[
+      previousTier === currentTier
+        ? `Maintained ${currentTier}`
+        : `${previousTier} → ${currentTier}`
+    ] ?? "";
+  const change =
+    previousScore != null && currentScore != null
+      ? currentScore - previousScore
+      : null;
+  const metricLabel =
+    metricKey === "overall" ? "Composite Score" : getMetricLabel(metricKey);
+
+  return {
+    key: metricKey,
+    eyebrow:
+      metricKey === "overall"
+        ? "Composite Score Transition"
+        : metricKey.startsWith("arena:")
+          ? "Arena Transition"
+          : "Domain Transition",
+    title: metricLabel,
+    subtitle: transitionLabel,
+    body: transitionText,
+    previousScore: `Previous: ${formatMetricScore(previousScore, previousTier)}`,
+    currentScore: `Current: ${formatMetricScore(currentScore, currentTier)}`,
+    change:
+      change != null
+        ? `Change: ${change >= 0 ? "+" : ""}${change.toFixed(1)}`
+        : undefined,
+    changeDirection: getChangeDirection(change),
+  };
+}
+
+function getArchetypeTransitionNarrative(
+  previousArchetype: string | null,
+  currentArchetype: string | null
+): ProgressNarrative | null {
+  if (!previousArchetype && !currentArchetype) return null;
+
+  if (previousArchetype && currentArchetype && previousArchetype === currentArchetype) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Is Consistent",
+      subtitle: `Still showing up as ${currentArchetype}`,
+      body: `Your score shape still maps most closely to ${currentArchetype}. The same pattern across your personal, relational, and business scores is still present in your results. Revisit the archetype section above to see where this pattern is supporting you and where it is still constraining you.`,
+    };
+  }
+
+  if (previousArchetype && currentArchetype) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: `${previousArchetype} to ${currentArchetype}`,
+      body: `Your latest score pattern now maps most closely to ${currentArchetype} instead of ${previousArchetype}. That suggests the way your personal, relational, and business scores relate to each other has changed. Compare the two archetype sections to see which strengths became more dominant and which constraints have surfaced.`,
+    };
+  }
+
+  if (currentArchetype) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Founder Archetype Identified",
+      subtitle: currentArchetype,
+      body: `This assessment maps clearly to ${currentArchetype}. Use the archetype section above to understand the dominant score shape currently defining your results.`,
+    };
+  }
+
+  return {
+    key: "archetype",
+    eyebrow: "Archetype Transition",
+    title: "Founder Archetype Unclear",
+    body: "Your latest assessment does not map cleanly to a single archetype pattern. Review the score breakdown to see which arena is pulling the pattern away from your prior results.",
+  };
+}
+
+function getDirectionClasses(direction: "up" | "down" | "same" | undefined) {
+  if (direction === "up") return "text-green-600";
+  if (direction === "down") return "text-red-600";
+  return "text-amber-600";
 }
 
 function getScrollIndicatorState(element: HTMLDivElement | null) {
@@ -353,13 +634,27 @@ function ResultsContent() {
         fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
         id ? fetch(`/api/vapi?id=${id}`).then((r) => r.json()).catch(() => ({})) : Promise.resolve({}),
       ]);
-      const all = (allRes.results || []).map((r: { id: string; domainScores: Record<string, number>; arenaScores: Record<string, number>; overallScore: number; archetype: string; importance: Record<string, number>; createdAt: string }) => ({
+      const all = (allRes.results || []).map((r: {
+        id: string;
+        domainScores: Record<string, number>;
+        arenaScores: Record<string, number>;
+        overallScore: number;
+        archetype: string;
+        importance: Record<string, number>;
+        assignedDriver?: string | null;
+        driverScores?: Record<string, number>;
+        topDriverScore?: number;
+        createdAt: string;
+      }) => ({
         id: r.id,
         domainScores: r.domainScores || {},
         arenaScores: r.arenaScores || {},
         overallScore: r.overallScore,
         archetype: r.archetype,
         importance: r.importance || {},
+        assignedDriver: r.assignedDriver || null,
+        driverScores: r.driverScores || {},
+        topDriverScore: r.topDriverScore || 0,
         createdAt: r.createdAt,
       }));
       setAllResults(all);
@@ -469,14 +764,6 @@ function ResultsContent() {
   );
   const latestProgressResult = sortedResults[0] ?? result;
   const previousProgressResult = sortedResults[1] ?? result;
-  const previousProgressScore = getMetricScore(previousProgressResult, selectedProgressMetric);
-  const latestProgressScore = getMetricScore(latestProgressResult, selectedProgressMetric);
-  const previousProgressTier = getMetricTier(previousProgressResult, selectedProgressMetric);
-  const latestProgressTier = getMetricTier(latestProgressResult, selectedProgressMetric);
-  const progressChange =
-    previousProgressScore != null && latestProgressScore != null
-      ? latestProgressScore - previousProgressScore
-      : null;
   const previousPriority =
     selectedProgressMetric.startsWith("domain:")
       ? previousProgressResult.importance?.[selectedProgressMetric.slice(7)] ?? null
@@ -485,6 +772,27 @@ function ResultsContent() {
     selectedProgressMetric.startsWith("domain:")
       ? latestProgressResult.importance?.[selectedProgressMetric.slice(7)] ?? null
       : null;
+  const compositeTransition = getMetricTransitionNarrative(
+    previousProgressResult,
+    latestProgressResult,
+    "overall"
+  );
+  const archetypeTransition = getArchetypeTransitionNarrative(
+    previousProgressResult.archetype || null,
+    latestProgressResult.archetype || null
+  );
+  const driverTransition = getDriverTransitionSummary(
+    (previousProgressResult.assignedDriver as VapiDriverName | null) ?? null,
+    (latestProgressResult.assignedDriver as VapiDriverName | null) ?? null
+  );
+  const selectedMetricTransition =
+    selectedProgressMetric === "overall"
+      ? null
+      : getMetricTransitionNarrative(
+          previousProgressResult,
+          latestProgressResult,
+          selectedProgressMetric
+        );
   const metricGroups: Array<{ label: string; items: MetricKey[] }> = [
     { label: "Composite", items: ["overall"] },
     { label: "Arena", items: ARENAS.map((arena) => `arena:${arena.key}` as MetricKey) },
@@ -586,6 +894,12 @@ function ResultsContent() {
 
           {/* Archetype — expandable with full content */}
           <ArchetypeSection archetype={archetype} />
+
+          <DriverSection
+            assignedDriver={result.assignedDriver}
+            driverScores={result.driverScores}
+            topDriverScore={result.topDriverScore}
+          />
 
           {/* Explore Your Score */}
           <div className="space-y-3">
@@ -1077,47 +1391,78 @@ function ResultsContent() {
                 </div>
                 <div className="mt-6 pt-6 border-t border-border">
                   <h3 className="text-lg text-foreground mb-2">What Changed</h3>
-                  <div className="pl-1 w-fit grid grid-cols-[auto_auto] gap-x-0 items-center">
-                    <span
-                      className={`flex items-center justify-center text-4xl font-bold leading-none w-12 flex-shrink-0 ${
-                        progressChange != null && progressChange > 0
-                          ? "text-green-600"
-                          : progressChange != null && progressChange < 0
-                            ? "text-red-600"
-                            : "text-amber-600"
-                      }`}
-                      aria-hidden="true"
-                    >
-                      {progressChange != null ? (progressChange > 0 ? "↑" : progressChange < 0 ? "↓" : "→") : "→"}
-                    </span>
-                    <div className="min-w-0 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 items-center">
-                      <div className="flex flex-col gap-y-1">
-                        <span className="font-semibold text-muted-foreground">
-                          {getMetricLabel(selectedProgressMetric)}: {previousProgressTier && latestProgressTier
-                            ? previousProgressTier === latestProgressTier
-                              ? latestProgressTier
-                              : `${previousProgressTier} → ${latestProgressTier}`
-                            : "Score change"}
-                        </span>
-                        <span className={`text-sm font-medium ${
-                          progressChange != null && progressChange > 0
-                            ? "text-green-600"
-                            : progressChange != null && progressChange < 0
-                              ? "text-red-600"
-                              : "text-muted-foreground"
-                        }`}>
-                          Change: {progressChange != null ? `${progressChange >= 0 ? "+" : ""}${progressChange.toFixed(1)}` : "—"}
-                        </span>
-                      </div>
-                      <div className="text-sm text-muted-foreground flex flex-col gap-y-1">
-                        <span>
-                          Previous: {previousProgressScore != null ? `${previousProgressScore.toFixed(1)} / 10${previousProgressTier ? ` (${previousProgressTier})` : ""}` : "—"}
-                        </span>
-                        <span>
-                          Current: {latestProgressScore != null ? `${latestProgressScore.toFixed(1)} / 10${latestProgressTier ? ` (${latestProgressTier})` : ""}` : "—"}
-                        </span>
-                      </div>
-                    </div>
+                  <div className="space-y-3">
+                    {[
+                      compositeTransition,
+                      archetypeTransition,
+                      {
+                        key: "driver",
+                        eyebrow: "Driver Transition",
+                        title: driverTransition.heading,
+                        subtitle: driverTransition.subheading,
+                        body: driverTransition.body,
+                        previousBelief: driverTransition.previousBelief,
+                        currentBelief: driverTransition.currentBelief,
+                      } satisfies ProgressNarrative,
+                      selectedMetricTransition,
+                    ]
+                      .filter((item): item is ProgressNarrative => Boolean(item))
+                      .map((item) => (
+                        <div
+                          key={item.key}
+                          className="rounded-xl border border-border bg-secondary/30 p-4 space-y-3"
+                        >
+                          <div className="space-y-1">
+                            <p className="text-[11px] font-semibold uppercase tracking-wider text-accent">
+                              {item.eyebrow}
+                            </p>
+                            <h4 className="text-base font-semibold text-foreground">
+                              {item.title}
+                            </h4>
+                            {item.subtitle && (
+                              <p className="text-sm text-muted-foreground">
+                                {item.subtitle}
+                              </p>
+                            )}
+                          </div>
+                          {(item.previousScore || item.currentScore || item.change) && (
+                            <div className="flex flex-wrap items-start gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                              {item.previousScore && <span>{item.previousScore}</span>}
+                              {item.currentScore && <span>{item.currentScore}</span>}
+                              {item.change && (
+                                <span
+                                  className={`font-medium ${getDirectionClasses(
+                                    item.changeDirection
+                                  )}`}
+                                >
+                                  {item.change}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                          {(item.previousBelief || item.currentBelief) && (
+                            <div className="space-y-2">
+                              {item.previousBelief && item.currentBelief && item.previousBelief !== item.currentBelief ? (
+                                <>
+                                  <blockquote className="rounded-lg border border-border bg-background/70 px-4 py-3 text-sm italic text-muted-foreground line-through opacity-70">
+                                    &quot;{item.previousBelief}&quot;
+                                  </blockquote>
+                                  <blockquote className="rounded-lg border-l-4 border-accent bg-background px-4 py-3 text-sm font-medium italic text-foreground">
+                                    &quot;{item.currentBelief}&quot;
+                                  </blockquote>
+                                </>
+                              ) : (
+                                <blockquote className="rounded-lg border-l-4 border-accent bg-background px-4 py-3 text-sm font-medium italic text-foreground">
+                                  &quot;{item.currentBelief || item.previousBelief}&quot;
+                                </blockquote>
+                              )}
+                            </div>
+                          )}
+                          <p className="text-sm leading-relaxed text-muted-foreground">
+                            {item.body}
+                          </p>
+                        </div>
+                      ))}
                   </div>
                   {selectedProgressMetric.startsWith("domain:") &&
                     previousPriority != null &&

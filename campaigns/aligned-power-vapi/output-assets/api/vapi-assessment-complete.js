@@ -24,10 +24,32 @@
  *   reflectionResponse string  (optional)
  */
 
+import { enrichResultsWithDriver } from './_lib/vapi-driver-scoring.js';
+
 const ADMIN_EMAIL       = 'jacob@alignedpower.coach';
 const PORTAL_URL        = 'https://portal.alignedpower.coach';
 const USER_FROM_EMAIL   = process.env.VAPI_USER_FROM_EMAIL   || 'hello@notifications.alignedpower.coach';
 const ADMIN_FROM_EMAIL  = process.env.VAPI_ADMIN_FROM_EMAIL  || 'assessments@notifications.alignedpower.coach';
+const DRIVER_TIEBREAK_PRIORITY = [
+  "The Achiever's Trap",
+  "The Escape Artist",
+  "The Pleaser's Bind",
+  "The Imposter Loop",
+  "The Perfectionist's Prison",
+  "The Protector",
+  "The Martyr Complex",
+  "The Fog",
+];
+const DRIVER_CORE_BELIEFS = {
+  "The Achiever's Trap": "I am what I produce.",
+  "The Escape Artist": "If I stay busy enough, I won't have to feel this.",
+  "The Pleaser's Bind": "My worth comes from being needed.",
+  "The Imposter Loop": "If they really knew me, they'd know I'm not enough.",
+  "The Perfectionist's Prison": "If it's not perfect, it's not safe to release.",
+  "The Protector": "If I let go of control, everything falls apart.",
+  "The Martyr Complex": "I have to suffer for this to count.",
+  "The Fog": "I don't know what I want, so I can't commit to anything.",
+};
 
 function getTierColor(tier) {
   if (tier === 'Dialed')          return '#22C55E';
@@ -79,7 +101,67 @@ function escHtml(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype }) {
+function buildDomainScoresMap(domains) {
+  const domainScores = {};
+  (domains || []).forEach((domain) => {
+    if (domain && domain.code) domainScores[domain.code] = domain.score;
+  });
+  return domainScores;
+}
+
+function createEmptyDriverScores() {
+  return DRIVER_TIEBREAK_PRIORITY.reduce((acc, name) => {
+    acc[name] = 0;
+    return acc;
+  }, {});
+}
+
+function getDriverSummary(source) {
+  if (!source || typeof source !== 'object') {
+    return { assignedDriver: null, driverScores: createEmptyDriverScores(), topDriverScore: 0 };
+  }
+
+  if (
+    typeof source.topDriverScore === 'number' &&
+    source.driverScores &&
+    typeof source.driverScores === 'object' &&
+    'assignedDriver' in source
+  ) {
+    return {
+      assignedDriver: typeof source.assignedDriver === 'string' ? source.assignedDriver : null,
+      driverScores: source.driverScores,
+      topDriverScore: source.topDriverScore,
+    };
+  }
+
+  const hasResponses = source.allResponses && Object.keys(source.allResponses).length > 0;
+  if (!hasResponses) {
+    return { assignedDriver: null, driverScores: createEmptyDriverScores(), topDriverScore: 0 };
+  }
+
+  const enriched = enrichResultsWithDriver({
+    domainScores: source.domainScores || buildDomainScoresMap(source.domains || []),
+    importanceRatings: source.importanceRatings || {},
+    allResponses: source.allResponses || {},
+    responseCodingVersion: source.responseCodingVersion || null,
+  });
+
+  return {
+    assignedDriver: enriched.assignedDriver || null,
+    driverScores: enriched.driverScores || createEmptyDriverScores(),
+    topDriverScore: typeof enriched.topDriverScore === 'number' ? enriched.topDriverScore : 0,
+  };
+}
+
+function sortDriverScores(driverScores) {
+  return DRIVER_TIEBREAK_PRIORITY.map((name, index) => ({
+    name,
+    score: typeof driverScores?.[name] === 'number' ? driverScores[name] : 0,
+    index,
+  })).sort((a, b) => (b.score - a.score) || (a.index - b.index));
+}
+
+function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype, driverName, driverCoreBelief }) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
   const portalLink = `${PORTAL_URL}/login`;
   const signupLink = `${PORTAL_URL}/signup`;
@@ -127,6 +209,14 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">VAPI Composite Score</p>
       <p style="margin:0;font-size:36px;font-weight:700;color:${overallColor};">${escHtml(String(overall ?? '?'))} <span style="font-size:20px;font-weight:400;color:#3A4A5C;">/ 10</span> &nbsp;<span style="font-size:18px;">${escHtml(overallTier ?? '')}</span></p>
     </div>
+    ${archetype ? `<div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your Founder Archetype</p>
+      <p style="margin:0;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(archetype)}</p>
+    </div>` : ''}
+    <div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">What's Driving This Pattern</p>
+      ${driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> View your full results for details.</p>`}
+    </div>
 
     <!-- Arena scores -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
@@ -136,10 +226,6 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
     ${topCriticalPriority ? `<div style="background:#FFF3EE;border-left:4px solid #F97316;border-radius:4px;padding:16px 20px;margin-bottom:28px;">
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your #1 Critical Priority</p>
       <p style="margin:0;color:#3A4A5C;font-size:16px;font-weight:600;">${escHtml(topCriticalPriority)}</p>
-    </div>` : ''}
-    ${archetype ? `<div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
-      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your Founder Archetype</p>
-      <p style="margin:0;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(archetype)}</p>
     </div>` : ''}
 
     <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.6;">Your full results, including all 12 domain scores, detailed interpretations, and your personalized priority matrix, are waiting for you in the portal.</p>
@@ -183,11 +269,13 @@ Congratulations on completing the VAPI Assessment.
 
 Your VAPI Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 
+${archetype ? `Your Founder Archetype: ${archetype}\n` : ''}
+${driverName ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n` : `What's Driving This Pattern: No clear single driver identified. View your full results for details.\n`}
+
 Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
 Relationships: ${arenaScores.Relationships ?? '?'} / 10 - ${arenaTiers.Relationships ?? ''}
 Business: ${arenaScores.Business ?? '?'} / 10 - ${arenaTiers.Business ?? ''}
 ${topCriticalPriority ? `\nYour #1 Critical Priority: ${topCriticalPriority}\n` : ''}
-${archetype ? `\nYour Founder Archetype: ${archetype}\n` : ''}
 View your full results: ${ctaUrl}
 
 -- Jake Sebok`;
@@ -195,10 +283,16 @@ View your full results: ${ctaUrl}
   return { html, text };
 }
 
-function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp, archetype }) {
+function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp, archetype, driverName, topDriverScore, driverScores, previousDriverName }) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
   const ordinalNum = ordinal(assessmentNumber || 1);
   const accountStatus = hasPortalAccount ? 'Has portal account' : 'No account yet';
+  const sortedDriverScores = sortDriverScores(driverScores);
+  const driverScoresText = sortedDriverScores.map((entry) => `${entry.name}: ${entry.score}`).join(', ');
+  const driverSummary = driverName ? `${driverName} (${topDriverScore} points)` : 'None (no driver met threshold)';
+  const previousDriverSummary = previousDriverName
+    ? `${previousDriverName} (${previousDriverName === driverName ? 'unchanged' : 'changed'})`
+    : null;
 
   const sortedDomains = [...(domains || [])].sort((a,b) => a.score - b.score);
   const domainRows = sortedDomains.map(d => {
@@ -243,6 +337,9 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
       ${archetype ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Founder Archetype:</strong> ${escHtml(archetype)}</td></tr>` : ''}
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver:</strong> ${escHtml(driverSummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver Scores:</strong> ${escHtml(driverScoresText)}</td></tr>
+      ${previousDriverSummary ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Driver:</strong> ${escHtml(previousDriverSummary)}</td></tr>` : ''}
     </table>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
@@ -282,6 +379,10 @@ User: ${userName}
 Email: ${email || 'Not provided'}
 Account Status: ${accountStatus}
 Assessment #: ${ordinalNum} assessment
+${archetype ? `Founder Archetype: ${archetype}\n` : ''}
+Driver: ${driverSummary}
+Driver Scores: ${driverScoresText}
+${previousDriverSummary ? `Previous Driver: ${previousDriverSummary}\n` : ''}
 
 Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 Self: ${arenaScores?.Personal ?? '?'} - ${arenaTiers?.Personal ?? ''}
@@ -305,7 +406,14 @@ Primary Challenge: ${cp.primaryChallenge || 'Not provided'}`;
 
 async function lookupUserByEmail(supabaseUrl, serviceRoleKey, email) {
   // Returns { hasAccount, assessmentNumber, contextualProfile, firstName, lastName }
-  const result = { hasAccount: false, assessmentNumber: 1, contextualProfile: null, firstName: null, lastName: null };
+  const result = {
+    hasAccount: false,
+    assessmentNumber: 1,
+    contextualProfile: null,
+    firstName: null,
+    lastName: null,
+    previousAssessment: null,
+  };
   if (!email || !supabaseUrl || !serviceRoleKey) return result;
 
   const emailNorm = email.trim().toLowerCase();
@@ -345,8 +453,23 @@ async function lookupUserByEmail(supabaseUrl, serviceRoleKey, email) {
     );
     const contentRange = countRes.headers.get('content-range') || '';
     const match = contentRange.match(/\/(\d+)$/);
-    // Count is rows already saved; this call happens after save, so count = this assessment number
-    result.assessmentNumber = match ? parseInt(match[1], 10) : 1;
+    result.assessmentNumber = (match ? parseInt(match[1], 10) : 0) + 1;
+  } catch (e) {}
+
+  try {
+    const latestRes = await fetch(
+      `${supabaseUrl}/rest/v1/vapi_results?email=eq.${encodeURIComponent(emailNorm)}&select=results,created_at&order=created_at.desc&limit=1`,
+      {
+        headers: {
+          'apikey': serviceRoleKey,
+          'Authorization': `Bearer ${serviceRoleKey}`,
+        },
+      }
+    );
+    if (latestRes.ok) {
+      const latestRows = await latestRes.json();
+      result.previousAssessment = Array.isArray(latestRows) && latestRows.length > 0 ? latestRows[0] : null;
+    }
   } catch (e) {}
 
   return result;
@@ -375,9 +498,26 @@ export async function POST(request) {
     arenaScores = {}, arenaTiers = {}, domains = [],
     importanceRatings = {}, priorityMatrix = {},
     archetype: archetypeFromBody,
+    allResponses = {},
+    responseCodingVersion = null,
+    assignedDriver = null,
+    driverScores: driverScoresFromBody = null,
+    topDriverScore: topDriverScoreFromBody = null,
   } = body;
 
   const archetype = archetypeFromBody || determineArchetypeServer({ overall, overallTier, arenaScores, arenaTiers, domains });
+  const driverEvaluation = getDriverSummary({
+    domains,
+    domainScores: buildDomainScoresMap(domains),
+    importanceRatings,
+    allResponses,
+    responseCodingVersion,
+    assignedDriver,
+    driverScores: driverScoresFromBody,
+    topDriverScore: topDriverScoreFromBody,
+  });
+  const driverName = driverEvaluation.assignedDriver || null;
+  const driverCoreBelief = driverName ? DRIVER_CORE_BELIEFS[driverName] : null;
 
   const timestamp = new Date().toISOString();
 
@@ -389,6 +529,10 @@ export async function POST(request) {
   // Use metadata name if quiz didn't capture one
   const resolvedFirstName = firstName || lookup.firstName;
   const resolvedLastName  = lastName  || lookup.lastName;
+  const previousDriverEvaluation = lookup.previousAssessment
+    ? getDriverSummary(lookup.previousAssessment.results || {})
+    : { assignedDriver: null };
+  const previousDriverName = previousDriverEvaluation.assignedDriver || null;
 
   // Determine #1 Critical Priority
   const criticals = priorityMatrix.criticalPriority || [];
@@ -405,7 +549,18 @@ export async function POST(request) {
 
   // Email 1: User
   if (email) {
-    const { html, text } = buildUserEmail({ firstName: resolvedFirstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype });
+    const { html, text } = buildUserEmail({
+      firstName: resolvedFirstName,
+      overall,
+      overallTier,
+      arenaScores,
+      arenaTiers,
+      topCriticalPriority,
+      hasPortalAccount,
+      archetype,
+      driverName,
+      driverCoreBelief,
+    });
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -436,6 +591,10 @@ export async function POST(request) {
     overall, overallTier, arenaScores, arenaTiers, domains,
     importanceRatings, priorityMatrix, contextualProfile,
     assessmentNumber, hasPortalAccount, timestamp, archetype,
+    driverName,
+    topDriverScore: driverEvaluation.topDriverScore || 0,
+    driverScores: driverEvaluation.driverScores || createEmptyDriverScores(),
+    previousDriverName,
   });
   try {
     const res = await fetch('https://api.resend.com/emails', {

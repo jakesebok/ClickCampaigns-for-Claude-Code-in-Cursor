@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { getOrCreateUser } from "@/lib/get-or-create-user";
 import { calculateScores, getArchetype } from "@/lib/vapi/scoring";
 import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
+import {
+  determineDriver,
+  flattenGroupedAnswersToScoredResponses,
+  normalizeResponsesFromStoredMap,
+} from "@/lib/vapi/drivers";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -69,6 +74,38 @@ async function insertPortalVapi(params: {
   return Array.isArray(data) ? data[0] : data;
 }
 
+function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) {
+  if (
+    typeof results.topDriverScore === "number" &&
+    results.driverScores &&
+    typeof results.driverScores === "object" &&
+    "assignedDriver" in results
+  ) {
+    return {
+      assignedDriver:
+        typeof results.assignedDriver === "string"
+          ? (results.assignedDriver as string)
+          : null,
+      driverScores: results.driverScores as Record<string, number>,
+      topDriverScore: results.topDriverScore as number,
+    };
+  }
+
+  const scoredResponses = normalizeResponsesFromStoredMap(
+    (results.allResponses as Record<string, number> | undefined) || {},
+    typeof results.responseCodingVersion === "string"
+      ? (results.responseCodingVersion as string)
+      : null
+  );
+
+  return determineDriver({
+    domainScores: (results.domainScores as Record<string, number>) || {},
+    importanceRatings:
+      (results.importanceRatings as Record<string, number>) || {},
+    scoredResponses,
+  });
+}
+
 export async function GET(req: NextRequest) {
   const user = await getOrCreateUser();
   if (!user)
@@ -84,6 +121,7 @@ export async function GET(req: NextRequest) {
     const row = rows.find((r: { id: string }) => r.id === id);
     if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
     const r = row.results as Record<string, unknown>;
+    const driverEvaluation = getDriverEvaluationFromStoredResults(r);
     return NextResponse.json({
       result: {
         id: row.id,
@@ -92,6 +130,9 @@ export async function GET(req: NextRequest) {
         overallScore: Math.round(((r.overall as number) || 0) * 10),
         archetype: (r.archetype as string) || null,
         importance: (r.importanceRatings as Record<string, number>) || {},
+        assignedDriver: driverEvaluation.assignedDriver,
+        driverScores: driverEvaluation.driverScores,
+        topDriverScore: driverEvaluation.topDriverScore,
         createdAt: row.created_at,
       },
     });
@@ -99,6 +140,7 @@ export async function GET(req: NextRequest) {
 
   const results = rows.map((row: { id: string; results: Record<string, unknown>; created_at: string }) => {
     const r = row.results;
+    const driverEvaluation = getDriverEvaluationFromStoredResults(r);
     return {
       id: row.id,
       domainScores: (r.domainScores as Record<string, number>) || {},
@@ -106,6 +148,9 @@ export async function GET(req: NextRequest) {
       overallScore: Math.round(((r.overall as number) || 0) * 10),
       archetype: (r.archetype as string) || null,
       importance: (r.importanceRatings as Record<string, number>) || {},
+      assignedDriver: driverEvaluation.assignedDriver,
+      driverScores: driverEvaluation.driverScores,
+      topDriverScore: driverEvaluation.topDriverScore,
       createdAt: row.created_at,
     };
   });
@@ -125,6 +170,12 @@ export async function POST(req: NextRequest) {
 
   const scores = calculateScores(answers);
   const archetype = getArchetype(scores.arenas, scores.domains);
+  const scoredResponses = flattenGroupedAnswersToScoredResponses(answers);
+  const driverEvaluation = determineDriver({
+    domainScores: scores.domains,
+    importanceRatings: importance || {},
+    scoredResponses,
+  });
 
   const portalResults = buildPortalResultsFormat({
     domainScores: scores.domains,
@@ -132,6 +183,11 @@ export async function POST(req: NextRequest) {
     overall: scores.overall,
     archetype,
     importance: importance || {},
+    assignedDriver: driverEvaluation.assignedDriver,
+    driverScores: driverEvaluation.driverScores,
+    topDriverScore: driverEvaluation.topDriverScore,
+    allResponses: scoredResponses,
+    responseCodingVersion: "scored_v1",
     firstName: user.name?.split(" ")[0],
     lastName: user.name?.split(" ").slice(1).join(" ") || undefined,
   });
@@ -150,5 +206,8 @@ export async function POST(req: NextRequest) {
     arenaScores: scores.arenas,
     overallScore: Math.round(scores.overall * 10),
     archetype,
+    assignedDriver: driverEvaluation.assignedDriver,
+    driverScores: driverEvaluation.driverScores,
+    topDriverScore: driverEvaluation.topDriverScore,
   });
 }

@@ -24,6 +24,7 @@
   <script src="/html/vapi-domain-icons.js"></script>
   <script src="/html/vapi-results-interpretations.js"></script>
   <script src="/html/vapi-archetypes.js"></script>
+  <script src="/html/vapi-drivers.js"></script>
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -39,6 +40,7 @@
     body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
     .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
+    .driver-details[open] .driver-chevron { transform: rotate(180deg); }
     /* Screen only: larger body text for readability (print view unchanged) */
     @media screen {
       #results-content { font-size: 17px; }
@@ -649,6 +651,13 @@
         return html;
       }
 
+      function buildDriverSection(results) {
+        if (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.buildResultsSection) {
+          return VAPI_DRIVERS.buildResultsSection(results, { id: 'driver-section' });
+        }
+        return '';
+      }
+
       function render(results) {
         var firstName = results.firstName || '';
         var lastName = results.lastName || '';
@@ -687,6 +696,7 @@
 
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
         html += buildArchetypeSection(results);
+        html += buildDriverSection(results);
         html += '</div>'; // end print-hero-block
         // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
         html += '<div class="print-only print-strengths-focus-section">';
@@ -1248,6 +1258,9 @@
           el.classList.remove('hidden');
         });
         document.querySelectorAll('.archetype-details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+        document.querySelectorAll('.driver-details').forEach(function(d) {
           d.setAttribute('open', '');
         });
       });
