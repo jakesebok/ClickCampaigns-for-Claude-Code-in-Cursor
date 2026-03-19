@@ -106,8 +106,11 @@ async function updateVapiResultsRow(id: string, results: Record<string, unknown>
 function hasDriverFields(results: Record<string, unknown>) {
   return (
     typeof results.topDriverScore === "number" &&
+    typeof results.secondDriverScore === "number" &&
     results.driverScores &&
     typeof results.driverScores === "object" &&
+    results.driverGates &&
+    typeof results.driverGates === "object" &&
     "assignedDriver" in results
   );
 }
@@ -137,13 +140,18 @@ function buildBackfilledResults(results: Record<string, unknown>) {
     importanceRatings:
       (results.importanceRatings as Record<string, number>) || {},
     scoredResponses,
+    arenaScores: (results.arenaScores as Record<string, number>) || {},
+    compositeScore:
+      typeof results.overall === "number" ? (results.overall as number) : null,
   });
 
   return {
     ...results,
     assignedDriver: driverEvaluation.assignedDriver,
     driverScores: driverEvaluation.driverScores,
+    driverGates: driverEvaluation.driverGates,
     topDriverScore: driverEvaluation.topDriverScore,
+    secondDriverScore: driverEvaluation.secondDriverScore,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
   };

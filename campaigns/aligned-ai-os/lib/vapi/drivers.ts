@@ -11,6 +11,7 @@ export type VapiDriverName =
   | "The Fog";
 
 export type VapiDriverScores = Record<VapiDriverName, number>;
+export type VapiDriverGates = Record<VapiDriverName, boolean>;
 
 export type VapiDriverContent = {
   name: VapiDriverName;
@@ -28,10 +29,13 @@ export type VapiDriverContent = {
 export type VapiDriverEvaluation = {
   assignedDriver: VapiDriverName | null;
   driverScores: VapiDriverScores;
+  driverGates: VapiDriverGates;
   topDriverScore: number;
+  secondDriverScore: number;
 };
 
-export const DRIVER_THRESHOLD = 8;
+export const DRIVER_THRESHOLD = 6;
+export const DRIVER_MIN_MARGIN = 2;
 
 export const DRIVER_TIEBREAK_PRIORITY: VapiDriverName[] = [
   "The Achiever's Trap",
@@ -61,7 +65,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit isn't stopping. It's decoupling your identity from your output. You need to experience being valuable while producing nothing. That sounds simple and it will be the hardest thing you do in this program. We'll identify the belief underneath the pattern, trace it to its origin, and give the part of you that's been running this program a new role. The goal isn't to kill your drive. It's to make it optional instead of compulsive.",
     programPhase:
       "Phase 3: Internal Alignment. The parts work here is central. The 'productive = worthy' belief needs to be identified, honored for what it was protecting, and reassigned.",
-    maxPossible: 15,
+    maxPossible: 12,
   },
   "The Protector": {
     name: "The Protector",
@@ -79,7 +83,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit isn't dismantling your systems. They're valuable. It's building the capacity to function without them. We'll identify what vulnerability actually threatens in your nervous system, trace the origin of the control pattern, and create small, structured experiments in letting go. The goal isn't to make you less organized. It's to make you less dependent on organization for your sense of safety.",
     programPhase:
       "Phase 3: Internal Alignment. The core work is redefining safety as something that can include other people, not just structures.",
-    maxPossible: 14,
+    maxPossible: 13,
   },
   "The Pleaser's Bind": {
     name: "The Pleaser's Bind",
@@ -97,7 +101,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit isn't becoming selfish. It's learning that your needs are not negotiable. We'll trace the 'needed = loved' belief to its origin, identify where the pleasing pattern is strongest, and build a practice of holding boundaries even when guilt shows up. The goal is to include yourself in the list of people you care about.",
     programPhase:
       "Phase 3: Internal Alignment into Phase 4: Aligned Action. Belief work first, then boundaries and decision rules installed into the PAOS.",
-    maxPossible: 13,
+    maxPossible: 12,
   },
   "The Escape Artist": {
     name: "The Escape Artist",
@@ -115,7 +119,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit is turning around and facing what you've been running from. We'll identify what you're actually avoiding (usually one or two specific things, not the vague cloud it feels like), build emotional capacity to face it, and create space for the conversations and feelings you've been deferring. The goal isn't to stop working. It's to stop using work as anesthesia.",
     programPhase:
       "Phase 1: Awareness (extended) into Phase 3: Internal Alignment. The Escape Artist often needs a longer Phase 1 because the avoidance means they haven't fully confronted what's underneath.",
-    maxPossible: 14,
+    maxPossible: 12,
   },
   "The Perfectionist's Prison": {
     name: "The Perfectionist's Prison",
@@ -132,7 +136,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit is shipping imperfectly on purpose. We'll identify the fear underneath the perfectionism (usually a childhood experience of harsh judgment), reduce the threat response your nervous system attaches to imperfect output, and build a practice of releasing at 80%. The goal isn't lowering your standards. It's separating your safety from your output quality.",
     programPhase:
       "Phase 3: Internal Alignment into Phase 4: Aligned Action. Root belief work first, then structured execution rhythms that make shipping a system rather than a decision.",
-    maxPossible: 14,
+    maxPossible: 12,
   },
   "The Imposter Loop": {
     name: "The Imposter Loop",
@@ -149,7 +153,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit is separating your worth from your performance and building a business you'd be proud to be seen inside of. We'll trace the imposter belief to its origin, dismantle the false narrative that you're not enough, and redesign the parts of your business that don't actually fit you so the model becomes something you trust. When the destination feels safe, the sabotage stops.",
     programPhase:
       "Phase 2: Strategic Clarity into Phase 3: Internal Alignment. Redesign what you're building first so it's genuinely yours, then address the belief that you don't deserve it.",
-    maxPossible: 13,
+    maxPossible: 12,
   },
   "The Martyr Complex": {
     name: "The Martyr Complex",
@@ -166,7 +170,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit is redefining service to include yourself. We'll identify the belief that your needs are less important than everyone else's, trace it to its origin, and build a new operating definition of generosity that doesn't require self-destruction. The goal isn't to stop giving. It's to stop bleeding.",
     programPhase:
       "Phase 3: Internal Alignment. The core belief that 'ease = selfishness' needs to be directly confronted and reassigned.",
-    maxPossible: 14,
+    maxPossible: 12,
   },
   "The Fog": {
     name: "The Fog",
@@ -184,7 +188,7 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "The exit is deciding. Not finding the perfect answer. Deciding. We'll identify what commitment actually threatens in your system (usually a fear of being wrong, being trapped, or missing a better option), reduce the emotional charge around choosing, and build a 90-day commitment practice where you pick a direction and stay with it long enough to learn from it. Clarity comes from action, not from more thinking.",
     programPhase:
       "Phase 2: Strategic Clarity. The Fog needs the most intensive Phase 2. Building the North Star Stack, Revenue Bridge, and Domino Plan gives them a direction that's connected to their values and life rather than abstract business goals.",
-    maxPossible: 14,
+    maxPossible: 13,
   },
 };
 
@@ -201,6 +205,7 @@ const QUESTION_BY_ID = new Map(
 
 const ALL_DRIVER_NAMES = DRIVER_TIEBREAK_PRIORITY.slice();
 const SELF_DOMAIN_CODES = ["PH", "IA", "ME", "AF"];
+const RELATIONSHIPS_DOMAIN_CODES = ["RS", "FA", "CO", "WI"];
 const BUSINESS_DOMAIN_CODES = ["VS", "EX", "OH", "EC"];
 const ALL_DOMAIN_CODES = DOMAINS.map((domain) => domain.code);
 
@@ -217,8 +222,25 @@ function createEmptyDriverScores(): VapiDriverScores {
   };
 }
 
+function createEmptyDriverGates(): VapiDriverGates {
+  return {
+    "The Achiever's Trap": false,
+    "The Escape Artist": false,
+    "The Pleaser's Bind": false,
+    "The Imposter Loop": false,
+    "The Perfectionist's Prison": false,
+    "The Protector": false,
+    "The Martyr Complex": false,
+    "The Fog": false,
+  };
+}
+
 function getNumericValue(value: unknown, fallback: number) {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function countTrue(values: boolean[]) {
+  return values.filter(Boolean).length;
 }
 
 function getAverageImportance(
@@ -241,6 +263,86 @@ function noSingleImportanceAboveOrEqualEight(importanceRatings: Record<string, n
   return ALL_DOMAIN_CODES.every(
     (code) => getNumericValue(importanceRatings[code], 5) < 8
   );
+}
+
+function noSingleImportanceAboveOrEqualSeven(importanceRatings: Record<string, number>) {
+  return ALL_DOMAIN_CODES.every(
+    (code) => getNumericValue(importanceRatings[code], 5) < 7
+  );
+}
+
+function getAverageScore(
+  scores: Record<string, number>,
+  domainCodes: string[]
+) {
+  const values = domainCodes.map((code) => getNumericValue(scores[code], 0));
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function getCompositeScore(
+  domainScores: Record<string, number>,
+  compositeScore?: number | null
+) {
+  if (typeof compositeScore === "number" && Number.isFinite(compositeScore)) {
+    return compositeScore;
+  }
+
+  return getAverageScore(domainScores, ALL_DOMAIN_CODES);
+}
+
+function getArenaScores(
+  domainScores: Record<string, number>,
+  rawArenaScores?: Record<string, number> | null
+) {
+  const self =
+    getNumericValue(
+      rawArenaScores?.personal ??
+        rawArenaScores?.Personal ??
+        rawArenaScores?.self ??
+        rawArenaScores?.Self,
+      Number.NaN
+    ) || 0;
+  const relationships =
+    getNumericValue(
+      rawArenaScores?.relationships ?? rawArenaScores?.Relationships,
+      Number.NaN
+    ) || 0;
+  const business =
+    getNumericValue(
+      rawArenaScores?.business ?? rawArenaScores?.Business,
+      Number.NaN
+    ) || 0;
+
+  return {
+    self:
+      Number.isFinite(self) && self > 0
+        ? self
+        : getAverageScore(domainScores, SELF_DOMAIN_CODES),
+    relationships:
+      Number.isFinite(relationships) && relationships > 0
+        ? relationships
+        : getAverageScore(domainScores, RELATIONSHIPS_DOMAIN_CODES),
+    business:
+      Number.isFinite(business) && business > 0
+        ? business
+        : getAverageScore(domainScores, BUSINESS_DOMAIN_CODES),
+  };
+}
+
+function isArenaHighest(
+  arenaScores: ReturnType<typeof getArenaScores>,
+  key: keyof ReturnType<typeof getArenaScores>
+) {
+  const values = Object.values(arenaScores);
+  return arenaScores[key] === Math.max(...values);
+}
+
+function isArenaLowest(
+  arenaScores: ReturnType<typeof getArenaScores>,
+  key: keyof ReturnType<typeof getArenaScores>
+) {
+  const values = Object.values(arenaScores);
+  return arenaScores[key] === Math.min(...values);
 }
 
 function getResponseScore(
@@ -295,119 +397,238 @@ export function determineDriver(input: {
   domainScores: Record<string, number>;
   importanceRatings: Record<string, number>;
   scoredResponses: Record<string, number>;
+  arenaScores?: Record<string, number> | null;
+  compositeScore?: number | null;
 }): VapiDriverEvaluation {
-  const { domainScores, importanceRatings, scoredResponses } = input;
+  const {
+    domainScores,
+    importanceRatings,
+    scoredResponses,
+    arenaScores: rawArenaScores,
+    compositeScore,
+  } = input;
   const driverScores = createEmptyDriverScores();
+  const driverGates = createEmptyDriverGates();
   const businessVsSelfImportanceDelta =
     getAverageImportance(importanceRatings, BUSINESS_DOMAIN_CODES) -
     getAverageImportance(importanceRatings, SELF_DOMAIN_CODES);
   const importanceStdDev = getImportanceStdDev(importanceRatings);
+  const normalizedArenaScores = getArenaScores(domainScores, rawArenaScores);
+  const normalizedCompositeScore = getCompositeScore(domainScores, compositeScore);
 
-  if (getNumericValue(domainScores.EX, 0) >= 6.0) driverScores["The Achiever's Trap"] += 2;
-  if (getNumericValue(domainScores.PH, 0) < 5.0) driverScores["The Achiever's Trap"] += 2;
-  if (getNumericValue(domainScores.ME, 0) < 5.0) driverScores["The Achiever's Trap"] += 2;
-  if (getNumericValue(domainScores.IA, 0) < 5.0) driverScores["The Achiever's Trap"] += 1;
-  if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Achiever's Trap"] += 1;
-  if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
-  if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
-  if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
-  if (businessVsSelfImportanceDelta >= 2.0) driverScores["The Achiever's Trap"] += 2;
-  if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Achiever's Trap"] += 2;
-
-  if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Protector"] += 2;
-  if (getNumericValue(domainScores.CO, 0) < 5.0) driverScores["The Protector"] += 2;
-  if (getNumericValue(domainScores.OH, 0) >= 6.0) driverScores["The Protector"] += 2;
-  if (getNumericValue(domainScores.EX, 0) >= 6.0) driverScores["The Protector"] += 1;
-  if (getNumericValue(domainScores.FA, 0) < 5.0) driverScores["The Protector"] += 1;
-  if (getNumericValue(domainScores.AF, 0) >= 6.0) driverScores["The Protector"] += 1;
-  if (getNumericValue(importanceRatings.CO, 5) <= 5) driverScores["The Protector"] += 1;
-  if (getNumericValue(importanceRatings.RS, 5) <= 5) driverScores["The Protector"] += 1;
-  if (getNumericValue(importanceRatings.OH, 5) >= 7) driverScores["The Protector"] += 1;
-  if (getNumericValue(scoredResponses.CO6, 7) <= 3) driverScores["The Protector"] += 2;
-
-  if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Pleaser's Bind"] += 2;
-  if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Pleaser's Bind"] += 3;
-  if (
-    getNumericValue(domainScores.FA, 0) >= 6.0 ||
-    getNumericValue(domainScores.CO, 0) >= 6.0
-  ) {
-    driverScores["The Pleaser's Bind"] += 2;
+  const achieverLowSelfDomains = [
+    getNumericValue(domainScores.PH, 0) < 5.0,
+    getNumericValue(domainScores.ME, 0) < 5.0,
+    getNumericValue(domainScores.IA, 0) < 5.0,
+  ];
+  driverGates["The Achiever's Trap"] =
+    getNumericValue(domainScores.EX, 0) >= 6.0 &&
+    countTrue(achieverLowSelfDomains) >= 2;
+  if (driverGates["The Achiever's Trap"]) {
+    if (countTrue(achieverLowSelfDomains) === 3) driverScores["The Achiever's Trap"] += 2;
+    if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Achiever's Trap"] += 1;
+    if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
+    if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
+    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
+    if (businessVsSelfImportanceDelta >= 2.0) driverScores["The Achiever's Trap"] += 2;
+    if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Achiever's Trap"] += 2;
+    if (isArenaHighest(normalizedArenaScores, "business")) driverScores["The Achiever's Trap"] += 1;
+    if (isArenaLowest(normalizedArenaScores, "self")) driverScores["The Achiever's Trap"] += 1;
   }
-  if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
-  if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
-  if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Pleaser's Bind"] += 2;
-  if (
-    getNumericValue(importanceRatings.FA, 5) >= 7 ||
-    getNumericValue(importanceRatings.CO, 5) >= 7
-  ) {
-    driverScores["The Pleaser's Bind"] += 1;
+
+  driverGates["The Protector"] =
+    (getNumericValue(domainScores.OH, 0) >= 6.0 ||
+      getNumericValue(domainScores.EX, 0) >= 6.0) &&
+    (getNumericValue(domainScores.CO, 0) < 5.0 ||
+      getNumericValue(domainScores.RS, 0) < 5.0);
+  if (driverGates["The Protector"]) {
+    if (
+      getNumericValue(domainScores.OH, 0) >= 6.0 &&
+      getNumericValue(domainScores.EX, 0) >= 6.0
+    ) {
+      driverScores["The Protector"] += 2;
+    }
+    if (
+      getNumericValue(domainScores.CO, 0) < 5.0 &&
+      getNumericValue(domainScores.RS, 0) < 5.0
+    ) {
+      driverScores["The Protector"] += 2;
+    }
+    if (getNumericValue(domainScores.FA, 0) < 5.0) driverScores["The Protector"] += 1;
+    if (getNumericValue(domainScores.AF, 0) >= 6.0) driverScores["The Protector"] += 1;
+    if (getNumericValue(importanceRatings.CO, 5) <= 5) driverScores["The Protector"] += 1;
+    if (getNumericValue(importanceRatings.RS, 5) <= 5) driverScores["The Protector"] += 1;
+    if (getNumericValue(importanceRatings.OH, 5) >= 7) driverScores["The Protector"] += 1;
+    if (getNumericValue(scoredResponses.CO6, 7) <= 3) driverScores["The Protector"] += 2;
+    if (isArenaLowest(normalizedArenaScores, "relationships")) driverScores["The Protector"] += 2;
   }
-  if (getNumericValue(domainScores.ME, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
 
-  if (getNumericValue(domainScores.EX, 0) >= 6.0) driverScores["The Escape Artist"] += 2;
-  if (getNumericValue(domainScores.ME, 0) < 5.0) driverScores["The Escape Artist"] += 2;
-  if (getNumericValue(domainScores.FA, 0) < 5.0) driverScores["The Escape Artist"] += 2;
-  if (getNumericValue(domainScores.IA, 0) < 5.0) driverScores["The Escape Artist"] += 2;
-  if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Escape Artist"] += 1;
-  if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Escape Artist"] += 1;
-  if (getNumericValue(importanceRatings.FA, 5) <= 5) driverScores["The Escape Artist"] += 1;
-  if (getNumericValue(scoredResponses.FA6, 7) <= 3) driverScores["The Escape Artist"] += 2;
-  if (getNumericValue(scoredResponses.ME6, 7) <= 3) driverScores["The Escape Artist"] += 1;
+  driverGates["The Pleaser's Bind"] =
+    getNumericValue(domainScores.RS, 0) < 5.0 &&
+    getNumericValue(scoredResponses.RS6, 7) <= 3;
+  if (driverGates["The Pleaser's Bind"]) {
+    if (
+      getNumericValue(domainScores.FA, 0) >= 6.0 ||
+      getNumericValue(domainScores.CO, 0) >= 6.0
+    ) {
+      driverScores["The Pleaser's Bind"] += 2;
+    }
+    if (
+      getNumericValue(domainScores.FA, 0) >= 6.0 &&
+      getNumericValue(domainScores.CO, 0) >= 6.0
+    ) {
+      driverScores["The Pleaser's Bind"] += 1;
+    }
+    if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
+    if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
+    if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Pleaser's Bind"] += 2;
+    if (
+      getNumericValue(importanceRatings.FA, 5) >= 7 ||
+      getNumericValue(importanceRatings.CO, 5) >= 7
+    ) {
+      driverScores["The Pleaser's Bind"] += 1;
+    }
+    if (getNumericValue(domainScores.ME, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
+    if (isArenaHighest(normalizedArenaScores, "relationships")) driverScores["The Pleaser's Bind"] += 2;
+    if (isArenaLowest(normalizedArenaScores, "business")) driverScores["The Pleaser's Bind"] += 1;
+  }
 
-  if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Perfectionist's Prison"] += 3;
-  if (getNumericValue(importanceRatings.EX, 5) >= 7) driverScores["The Perfectionist's Prison"] += 3;
-  if (getNumericValue(domainScores.VS, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 2;
-  if (getNumericValue(domainScores.ME, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
-  if (getNumericValue(domainScores.IA, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
-  if (getNumericValue(domainScores.AF, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
-  if (getNumericValue(scoredResponses.EX6, 7) <= 3) driverScores["The Perfectionist's Prison"] += 2;
-  if (getNumericValue(domainScores.RS, 0) >= 5.0) driverScores["The Perfectionist's Prison"] += 1;
-
-  if (getNumericValue(domainScores.EC, 0) < 5.0) driverScores["The Imposter Loop"] += 3;
-  if (getNumericValue(scoredResponses.EC6, 7) <= 3) driverScores["The Imposter Loop"] += 3;
-  if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
-  if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
-  if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 1;
-  if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
-  if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
-  if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
-
-  if (getNumericValue(domainScores.PH, 0) < 5.0) driverScores["The Martyr Complex"] += 2;
-  if (getNumericValue(domainScores.IA, 0) < 5.0) driverScores["The Martyr Complex"] += 2;
-  if (getNumericValue(domainScores.WI, 0) >= 6.0) driverScores["The Martyr Complex"] += 2;
-  if (getNumericValue(domainScores.FA, 0) >= 6.0) driverScores["The Martyr Complex"] += 2;
-  if (getNumericValue(importanceRatings.WI, 5) >= 7) driverScores["The Martyr Complex"] += 1;
-  if (getNumericValue(importanceRatings.FA, 5) >= 7) driverScores["The Martyr Complex"] += 1;
-  if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Martyr Complex"] += 1;
-  if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Martyr Complex"] += 1;
-  if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Martyr Complex"] += 2;
-
-  if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Fog"] += 3;
-  if (getNumericValue(domainScores.IA, 0) < 5.0) driverScores["The Fog"] += 2;
-  if (getNumericValue(domainScores.EC, 0) < 5.0) driverScores["The Fog"] += 1;
-  if (noSingleImportanceAboveOrEqualEight(importanceRatings)) driverScores["The Fog"] += 3;
-  if (importanceStdDev < 2.0) driverScores["The Fog"] += 2;
-  if (getNumericValue(scoredResponses.VS6, 7) <= 3) driverScores["The Fog"] += 2;
-  if (getNumericValue(importanceRatings.VS, 5) <= 5) driverScores["The Fog"] += 1;
-
-  let assignedDriver: VapiDriverName | null = null;
-  let topDriverScore = 0;
-
-  for (const driverName of ALL_DRIVER_NAMES) {
-    const score = driverScores[driverName];
-    if (score > topDriverScore) {
-      topDriverScore = score;
-      assignedDriver = driverName;
+  driverGates["The Escape Artist"] =
+    getNumericValue(domainScores.EX, 0) >= 5.5 &&
+    getNumericValue(domainScores.IA, 0) < 5.0 &&
+    (getNumericValue(domainScores.FA, 0) < 5.0 ||
+      getNumericValue(domainScores.ME, 0) < 5.0);
+  if (driverGates["The Escape Artist"]) {
+    if (
+      getNumericValue(domainScores.FA, 0) < 5.0 &&
+      getNumericValue(domainScores.ME, 0) < 5.0
+    ) {
+      driverScores["The Escape Artist"] += 2;
+    }
+    if (getNumericValue(domainScores.EX, 0) >= 6.5) driverScores["The Escape Artist"] += 1;
+    if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Escape Artist"] += 1;
+    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Escape Artist"] += 1;
+    if (getNumericValue(importanceRatings.FA, 5) <= 5) driverScores["The Escape Artist"] += 1;
+    if (getNumericValue(scoredResponses.FA6, 7) <= 3) driverScores["The Escape Artist"] += 2;
+    if (getNumericValue(scoredResponses.ME6, 7) <= 3) driverScores["The Escape Artist"] += 1;
+    if (getNumericValue(domainScores.PH, 0) < 5.0) driverScores["The Escape Artist"] += 1;
+    if (isArenaHighest(normalizedArenaScores, "business")) driverScores["The Escape Artist"] += 1;
+    if (
+      countTrue([
+        getNumericValue(importanceRatings.ME, 5) <= 5,
+        getNumericValue(importanceRatings.IA, 5) <= 5,
+        getNumericValue(importanceRatings.FA, 5) <= 5,
+      ]) >= 2
+    ) {
+      driverScores["The Escape Artist"] += 1;
     }
   }
 
-  if (topDriverScore < DRIVER_THRESHOLD) {
-    assignedDriver = null;
+  const perfectionistCapabilityDomains = [
+    getNumericValue(domainScores.ME, 0) >= 6.0,
+    getNumericValue(domainScores.IA, 0) >= 6.0,
+    getNumericValue(domainScores.AF, 0) >= 6.0,
+    getNumericValue(domainScores.VS, 0) >= 6.0,
+  ];
+  driverGates["The Perfectionist's Prison"] =
+    getNumericValue(domainScores.EX, 0) < 5.0 &&
+    countTrue(perfectionistCapabilityDomains) >= 2;
+  if (driverGates["The Perfectionist's Prison"]) {
+    if (getNumericValue(importanceRatings.EX, 5) >= 7) {
+      driverScores["The Perfectionist's Prison"] += 2;
+    }
+    if (getNumericValue(domainScores.VS, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 2;
+    if (getNumericValue(domainScores.ME, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
+    if (getNumericValue(domainScores.IA, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
+    if (getNumericValue(domainScores.AF, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
+    if (getNumericValue(domainScores.RS, 0) >= 5.0) driverScores["The Perfectionist's Prison"] += 1;
+    if (getNumericValue(scoredResponses.EX6, 7) <= 3) driverScores["The Perfectionist's Prison"] += 1;
+    if (countTrue(perfectionistCapabilityDomains) >= 3) {
+      driverScores["The Perfectionist's Prison"] += 2;
+    }
+    if (normalizedCompositeScore >= 5.5) driverScores["The Perfectionist's Prison"] += 1;
   }
+
+  driverGates["The Imposter Loop"] =
+    getNumericValue(domainScores.EC, 0) < 5.0 &&
+    getNumericValue(scoredResponses.EC6, 7) <= 3;
+  if (driverGates["The Imposter Loop"]) {
+    if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
+    if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
+    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 2;
+    if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
+    if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
+    if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
+    if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Imposter Loop"] += 1;
+    if (getNumericValue(scoredResponses.EC5, 7) <= 4) driverScores["The Imposter Loop"] += 2;
+    if (isArenaLowest(normalizedArenaScores, "business")) driverScores["The Imposter Loop"] += 1;
+  }
+
+  driverGates["The Martyr Complex"] =
+    (getNumericValue(domainScores.WI, 0) >= 6.0 ||
+      getNumericValue(domainScores.FA, 0) >= 6.0) &&
+    (getNumericValue(domainScores.PH, 0) < 5.0 ||
+      getNumericValue(domainScores.IA, 0) < 5.0);
+  if (driverGates["The Martyr Complex"]) {
+    if (
+      getNumericValue(domainScores.WI, 0) >= 6.0 &&
+      getNumericValue(domainScores.FA, 0) >= 6.0
+    ) {
+      driverScores["The Martyr Complex"] += 2;
+    }
+    if (
+      getNumericValue(domainScores.PH, 0) < 5.0 &&
+      getNumericValue(domainScores.IA, 0) < 5.0
+    ) {
+      driverScores["The Martyr Complex"] += 2;
+    }
+    if (getNumericValue(importanceRatings.WI, 5) >= 7) driverScores["The Martyr Complex"] += 1;
+    if (getNumericValue(importanceRatings.FA, 5) >= 7) driverScores["The Martyr Complex"] += 1;
+    if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Martyr Complex"] += 1;
+    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Martyr Complex"] += 1;
+    if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Martyr Complex"] += 2;
+    if (isArenaHighest(normalizedArenaScores, "relationships")) driverScores["The Martyr Complex"] += 1;
+    if (isArenaLowest(normalizedArenaScores, "self")) driverScores["The Martyr Complex"] += 1;
+  }
+
+  driverGates["The Fog"] =
+    getNumericValue(domainScores.VS, 0) < 5.0 &&
+    noSingleImportanceAboveOrEqualEight(importanceRatings);
+  if (driverGates["The Fog"]) {
+    if (getNumericValue(domainScores.IA, 0) < 5.0) driverScores["The Fog"] += 2;
+    if (getNumericValue(domainScores.EC, 0) < 5.0) driverScores["The Fog"] += 1;
+    if (importanceStdDev < 2.0) driverScores["The Fog"] += 3;
+    if (getNumericValue(scoredResponses.VS6, 7) <= 3) driverScores["The Fog"] += 2;
+    if (getNumericValue(importanceRatings.VS, 5) <= 5) driverScores["The Fog"] += 1;
+    if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Fog"] += 1;
+    if (noSingleImportanceAboveOrEqualSeven(importanceRatings)) driverScores["The Fog"] += 2;
+    if (normalizedCompositeScore >= 4.0 && normalizedCompositeScore <= 6.5) {
+      driverScores["The Fog"] += 1;
+    }
+  }
+
+  const rankedDrivers = ALL_DRIVER_NAMES.map((driverName, index) => ({
+    driverName,
+    score: driverScores[driverName],
+    index,
+  })).sort((a, b) => b.score - a.score || a.index - b.index);
+
+  const winningDriver = rankedDrivers[0];
+  const runnerUp = rankedDrivers[1];
+  const topDriverScore = winningDriver?.score ?? 0;
+  const secondDriverScore = runnerUp?.score ?? 0;
+  const assignedDriver =
+    winningDriver &&
+    topDriverScore >= DRIVER_THRESHOLD &&
+    topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
+      ? winningDriver.driverName
+      : null;
 
   return {
     assignedDriver,
     driverScores,
+    driverGates,
     topDriverScore,
+    secondDriverScore,
   };
 }

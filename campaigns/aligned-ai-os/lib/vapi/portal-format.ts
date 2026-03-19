@@ -4,7 +4,11 @@
  */
 import { DOMAINS, ARENAS } from "./quiz-data";
 import { getTier, getPriorityMatrix } from "./scoring";
-import type { VapiDriverName, VapiDriverScores } from "./drivers";
+import type {
+  VapiDriverGates,
+  VapiDriverName,
+  VapiDriverScores,
+} from "./drivers";
 
 export type PortalVapiResults = {
   overall: number;
@@ -20,7 +24,9 @@ export type PortalVapiResults = {
   archetype: string;
   assignedDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
+  driverGates?: VapiDriverGates;
   topDriverScore?: number;
+  secondDriverScore?: number;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -35,7 +41,9 @@ export function buildPortalResultsFormat(params: {
   importance: Record<string, number>;
   assignedDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
+  driverGates?: VapiDriverGates;
   topDriverScore?: number;
+  secondDriverScore?: number;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -49,7 +57,9 @@ export function buildPortalResultsFormat(params: {
     importance,
     assignedDriver,
     driverScores,
+    driverGates,
     topDriverScore,
+    secondDriverScore,
     allResponses,
     responseCodingVersion,
     firstName,
@@ -103,7 +113,9 @@ export function buildPortalResultsFormat(params: {
     archetype,
     assignedDriver: assignedDriver ?? null,
     driverScores: driverScores || undefined,
+    driverGates: driverGates || undefined,
     topDriverScore: topDriverScore ?? undefined,
+    secondDriverScore: secondDriverScore ?? undefined,
     allResponses: allResponses || undefined,
     responseCodingVersion: responseCodingVersion || undefined,
     firstName: firstName || undefined,

@@ -123,8 +123,11 @@ function getDriverSummary(source) {
 
   if (
     typeof source.topDriverScore === 'number' &&
+    typeof source.secondDriverScore === 'number' &&
     source.driverScores &&
     typeof source.driverScores === 'object' &&
+    source.driverGates &&
+    typeof source.driverGates === 'object' &&
     'assignedDriver' in source
   ) {
     return {

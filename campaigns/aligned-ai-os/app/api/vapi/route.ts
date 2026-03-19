@@ -77,8 +77,11 @@ async function insertPortalVapi(params: {
 function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) {
   if (
     typeof results.topDriverScore === "number" &&
+    typeof results.secondDriverScore === "number" &&
     results.driverScores &&
     typeof results.driverScores === "object" &&
+    results.driverGates &&
+    typeof results.driverGates === "object" &&
     "assignedDriver" in results
   ) {
     return {
@@ -87,7 +90,42 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
           ? (results.assignedDriver as string)
           : null,
       driverScores: results.driverScores as Record<string, number>,
+      driverGates: results.driverGates as Record<string, boolean>,
       topDriverScore: results.topDriverScore as number,
+      secondDriverScore: results.secondDriverScore as number,
+    };
+  }
+
+  const hasResponses =
+    results.allResponses &&
+    typeof results.allResponses === "object" &&
+    Object.keys(results.allResponses as Record<string, unknown>).length > 0;
+
+  if (!hasResponses) {
+    return {
+      assignedDriver: null,
+      driverScores: {
+        "The Achiever's Trap": 0,
+        "The Escape Artist": 0,
+        "The Pleaser's Bind": 0,
+        "The Imposter Loop": 0,
+        "The Perfectionist's Prison": 0,
+        "The Protector": 0,
+        "The Martyr Complex": 0,
+        "The Fog": 0,
+      },
+      driverGates: {
+        "The Achiever's Trap": false,
+        "The Escape Artist": false,
+        "The Pleaser's Bind": false,
+        "The Imposter Loop": false,
+        "The Perfectionist's Prison": false,
+        "The Protector": false,
+        "The Martyr Complex": false,
+        "The Fog": false,
+      },
+      topDriverScore: 0,
+      secondDriverScore: 0,
     };
   }
 
@@ -103,6 +141,9 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     importanceRatings:
       (results.importanceRatings as Record<string, number>) || {},
     scoredResponses,
+    arenaScores: (results.arenaScores as Record<string, number>) || {},
+    compositeScore:
+      typeof results.overall === "number" ? (results.overall as number) : null,
   });
 }
 
@@ -175,6 +216,8 @@ export async function POST(req: NextRequest) {
     domainScores: scores.domains,
     importanceRatings: importance || {},
     scoredResponses,
+    arenaScores: scores.arenas,
+    compositeScore: scores.overall,
   });
 
   const portalResults = buildPortalResultsFormat({
@@ -185,7 +228,9 @@ export async function POST(req: NextRequest) {
     importance: importance || {},
     assignedDriver: driverEvaluation.assignedDriver,
     driverScores: driverEvaluation.driverScores,
+    driverGates: driverEvaluation.driverGates,
     topDriverScore: driverEvaluation.topDriverScore,
+    secondDriverScore: driverEvaluation.secondDriverScore,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
     firstName: user.name?.split(" ")[0],
