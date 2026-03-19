@@ -259,7 +259,7 @@ export default function DashboardPage() {
           <div className="grid sm:grid-cols-2 gap-4 -mt-2">
             {/* 6Cs Latest */}
             {displayedScorecard ? (
-              <Link href="/scorecard" className="block">
+              <Link href="/scorecard" className="block order-1 sm:order-2">
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -313,7 +313,7 @@ export default function DashboardPage() {
                 </div>
               </Link>
             ) : !currentWindowSubmitted && hasAnyScorecards && scorecardWindow.status !== "open" ? (
-              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px]">
+              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px] order-1 sm:order-2">
                 <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
                 <p className="text-sm font-medium">6Cs Scorecard</p>
                 <p className="text-sm text-muted-foreground">
@@ -330,7 +330,7 @@ export default function DashboardPage() {
                 </p>
               </div>
             ) : !hasAnyScorecards && scorecardWindow.canSubmit ? (
-              <Link href="/scorecard" className="block">
+              <Link href="/scorecard" className="block order-1 sm:order-2">
                 <div className="rounded-2xl border-2 border-accent/40 bg-accent/5 p-5 space-y-3 hover:border-accent/60 transition-colors shadow-sm h-full min-h-[280px] flex flex-col items-center justify-center text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20">
                     <ClipboardCheck className="h-6 w-6 text-accent" />
@@ -342,7 +342,7 @@ export default function DashboardPage() {
                 </div>
               </Link>
             ) : (
-              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px]">
+              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px] order-1 sm:order-2">
                 <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
                 <p className="text-sm font-medium">6Cs Scorecard</p>
                 <p className="text-sm text-muted-foreground">{scorecardWindow.message}</p>
@@ -357,7 +357,7 @@ export default function DashboardPage() {
 
             {/* VAPI Overall */}
             {latestVapi ? (
-              <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
+              <Link href={`/assessment/results?id=${latestVapi.id}`} className="block order-2 sm:order-1">
                 <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -417,7 +417,7 @@ export default function DashboardPage() {
                 </div>
               </Link>
             ) : (
-              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center">
+              <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center order-2 sm:order-1">
                 <Activity className="h-8 w-8 text-muted-foreground/50" />
                 <p className="text-sm text-muted-foreground">
                   Take the VAPI to understand where you&apos;re aligned and where you&apos;re not
