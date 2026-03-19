@@ -100,6 +100,7 @@ export default function DashboardPage() {
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [historyExpanded, setHistoryExpanded] = useState(false);
+  const [vitalActionExpanded, setVitalActionExpanded] = useState(false);
   const [trialBanner, setTrialBanner] = useState<TrialBanner | null>(null);
 
   useEffect(() => {
@@ -163,14 +164,25 @@ export default function DashboardPage() {
   const displayedScorecard =
     currentWindowSubmitted || showFirstSubmissionFallback ? latestScorecard : null;
   let currentOneThing: string | null = null;
+  let currentReflections: Record<string, string> = {};
   if (latestScorecard?.notes) {
     try {
-      const parsed = JSON.parse(latestScorecard.notes) as { oneThing?: string };
+      const parsed = JSON.parse(latestScorecard.notes) as {
+        oneThing?: string;
+        reflections?: Record<string, string>;
+      };
       currentOneThing = parsed.oneThing || null;
+      currentReflections = parsed.reflections || {};
     } catch {
       currentOneThing = null;
+      currentReflections = {};
     }
   }
+  const visibleReflections = SCORECARD_CATEGORIES.map((category) => ({
+    key: category.key,
+    label: category.label,
+    value: currentReflections[category.key]?.trim() || "",
+  })).filter((reflection) => reflection.value);
   const archetype = latestVapi?.archetype as VapiArchetype | undefined;
   const ArchetypeIcon = archetype ? getArchetypeIcon(archetype) : null;
   const archetypeColor = archetype ? ARCHETYPE_ACCENT_COLORS[archetype] : undefined;
@@ -214,22 +226,70 @@ export default function DashboardPage() {
           )}
           {/* Vital Action — top, front and center (from latest 6Cs scorecard) */}
           {currentOneThing ? (
-            <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5 flex items-center gap-4">
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                <Target className="h-5 w-5 text-accent" />
+            <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Target className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    This Week&apos;s Vital Action
+                  </p>
+                  <p className="font-medium leading-snug whitespace-pre-wrap break-words">
+                    {currentOneThing}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  This Week&apos;s Vital Action
-                </p>
-                <p className="font-medium truncate">{currentOneThing}</p>
-              </div>
-              <Link
-                href="/scorecard"
-                className="shrink-0 text-accent hover:text-accent/80 transition-colors"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </Link>
+              {visibleReflections.length > 0 && (
+                <>
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      onClick={() => setVitalActionExpanded((open) => !open)}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                      aria-expanded={vitalActionExpanded}
+                      aria-controls="vital-action-reflections"
+                    >
+                      {vitalActionExpanded ? (
+                        <ChevronUp className="h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4" />
+                      )}
+                      <span>View my 6C reflections</span>
+                    </button>
+                  </div>
+                  {vitalActionExpanded && (
+                    <div
+                      id="vital-action-reflections"
+                      className="mt-4 pt-4 border-t border-border/60 space-y-2"
+                    >
+                      {visibleReflections.map((reflection) => (
+                        <div
+                          key={reflection.key}
+                          className="rounded-xl border border-border bg-background/60 px-4 py-3"
+                        >
+                          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                            {reflection.label}
+                          </p>
+                          <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">
+                            {reflection.value}
+                          </p>
+                        </div>
+                      ))}
+                      <div className="pt-2 flex justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setVitalActionExpanded(false)}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                        >
+                          <ChevronUp className="h-4 w-4" />
+                          <span>Collapse</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           ) : (
             <Link
