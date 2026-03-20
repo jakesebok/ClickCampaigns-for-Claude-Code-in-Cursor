@@ -33,7 +33,7 @@ export default function HomePage() {
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-xl">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary lg:text-gradient-accent mb-4">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
                 <span className="lg:flex lg:items-center lg:gap-2">
                   <span className="hidden lg:block w-3.5 h-0.5 bg-ap-accent rounded flex-shrink-0" />
                   <span>Values-Aligned Performance</span>

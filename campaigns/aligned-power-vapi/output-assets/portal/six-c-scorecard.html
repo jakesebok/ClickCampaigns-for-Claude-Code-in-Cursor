@@ -215,7 +215,12 @@
       function hasMeaningfulScores(row) {
         if (!row || typeof row.scores !== 'object' || row.scores === null) return false;
         return Object.values(row.scores).some(function(value) {
-          return typeof value === 'number' && isFinite(value);
+          if (typeof value === 'number' && isFinite(value)) return true;
+          if (typeof value === 'string' && value.trim() !== '') {
+            var parsed = Number(value);
+            return !Number.isNaN(parsed) && Number.isFinite(parsed);
+          }
+          return false;
         });
       }
 

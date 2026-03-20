@@ -1433,12 +1433,14 @@
       }
       html += '</div></div>';
       html += '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' + accent + '14;border-left:2px solid ' + accent + ';">&quot;' + escapeHtml(previewQuote) + '&quot;</blockquote>';
-      html += '<div class="pt-4 border-t border-[var(--ap-border)]/70 space-y-4">';
-      html += '<a href="' + libraryHref + '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' + accent + '">' + (driverName ? 'Learn more about all driver patterns &gt;' : 'Explore all driver patterns &gt;') + '</a>';
+      html += '<div class="space-y-4">';
       html += '<details class="driver-profile-details group">';
       html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">' + dashboardToggleLabel + ' <i data-lucide="chevron-down" class="driver-profile-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
       html += '<div class="mt-4">' + profileHtml + '</div>';
-      html += '</details></div></div>';
+      html += '</details>';
+      html += '<div class="pt-4 border-t border-[var(--ap-border)]/70">';
+      html += '<a href="' + libraryHref + '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' + accent + '">' + (driverName ? 'Learn more about all driver patterns &gt;' : 'Explore all driver patterns &gt;') + '</a>';
+      html += '</div></div></div>';
     } else {
       html += profileHtml;
     }

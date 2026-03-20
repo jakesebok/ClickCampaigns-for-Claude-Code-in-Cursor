@@ -2352,7 +2352,12 @@
         function hasMeaningfulScores(row) {
           if (!row || typeof row.scores !== 'object' || row.scores === null) return false;
           return Object.values(row.scores).some(function(value) {
-            return typeof value === 'number' && isFinite(value);
+            if (typeof value === 'number' && isFinite(value)) return true;
+            if (typeof value === 'string' && value.trim() !== '') {
+              var parsed = Number(value);
+              return !Number.isNaN(parsed) && Number.isFinite(parsed);
+            }
+            return false;
           });
         }
 
@@ -2501,9 +2506,12 @@
           document.getElementById('six-c-cards').innerHTML = cardsHtml;
         }
         var weeklyReview = latest6C.weekly_review || {};
+        var weeklyReviewReflections = weeklyReview && typeof weeklyReview === 'object' && weeklyReview.reflections && typeof weeklyReview.reflections === 'object'
+          ? weeklyReview.reflections
+          : weeklyReview;
         var reflectionKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
         var reflectionLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
-        var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReview[k] && String(weeklyReview[k]).trim(); });
+        var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim(); });
         var hasFocusAccordion = !missedWindow && !!oneThingLatest;
         if (hasReflections || hasFocusAccordion) {
           function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -2514,7 +2522,7 @@
             html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">This week&apos;s focus</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(oneThingLatest) + '</p></div>';
           }
           reflectionKeys.forEach(function(k) {
-            var val = weeklyReview[k] && String(weeklyReview[k]).trim();
+            var val = weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim();
             if (!val) return;
             var label = reflectionLabels[k] || k;
             html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(val) + '</p></div>';
@@ -2581,6 +2589,7 @@
             scorecardCta.classList.remove('hidden');
           } else if (submittedThisWeek) {
             linkEl.classList.add('hidden');
+            linkEl.style.display = 'none';
             closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
             closedMsg.classList.remove('hidden');
             var actionRow = document.getElementById('six-c-action-row');
@@ -2590,6 +2599,7 @@
             if (ctaLink) ctaLink.classList.add('hidden');
           } else {
             linkEl.classList.add('hidden');
+            linkEl.style.display = 'none';
             closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
             closedMsg.classList.remove('hidden');
             var actionRow = document.getElementById('six-c-action-row');
