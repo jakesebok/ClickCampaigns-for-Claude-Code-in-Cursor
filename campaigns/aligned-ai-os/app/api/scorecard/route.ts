@@ -11,8 +11,12 @@ function portalRowToEntry(row: {
   weekly_review: Record<string, unknown> | null;
 }) {
   const weekStart = getWeekStart(new Date(row.created_at));
-  const reflections =
-    (row.weekly_review?.reflections as Record<string, string>) || {};
+  const rawWeeklyReview = row.weekly_review || {};
+  const nestedReflections =
+    (rawWeeklyReview.reflections as Record<string, string> | undefined) || null;
+  const reflections = nestedReflections
+    ? nestedReflections
+    : (rawWeeklyReview as Record<string, string>);
   const notes = JSON.stringify({
     reflections,
     oneThing: row.one_thing_to_improve || "",

@@ -2509,18 +2509,14 @@
         var weeklyReviewReflections = weeklyReview && typeof weeklyReview === 'object' && weeklyReview.reflections && typeof weeklyReview.reflections === 'object'
           ? weeklyReview.reflections
           : weeklyReview;
-        var reflectionKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
-        var reflectionLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
+        var reflectionKeys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
+        var reflectionLabels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
         var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim(); });
-        var hasFocusAccordion = !missedWindow && !!oneThingLatest;
-        if (hasReflections || hasFocusAccordion) {
+        if (hasReflections) {
           function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
           var wrap = document.getElementById('one-thing-banner-expand-wrap');
           wrap.classList.remove('hidden');
           var html = '';
-          if (hasFocusAccordion) {
-            html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">This week&apos;s focus</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(oneThingLatest) + '</p></div>';
-          }
           reflectionKeys.forEach(function(k) {
             var val = weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim();
             if (!val) return;
@@ -2529,7 +2525,7 @@
           });
           document.getElementById('one-thing-banner-reflections').innerHTML = html;
           var expandText = document.querySelector('#one-thing-banner-expand-btn span:last-child');
-          if (expandText) expandText.textContent = hasReflections ? 'View my 6C reflections' : "View this week's focus";
+          if (expandText) expandText.textContent = 'View my 6C reflections';
           var expandBtn = document.getElementById('one-thing-banner-expand-btn');
           var accordion = document.getElementById('one-thing-banner-accordion');
           var collapseBtn = document.getElementById('one-thing-banner-collapse-btn');
@@ -2550,6 +2546,11 @@
           collapseBtn.addEventListener('click', function() {
             setAccordionOpen(false);
           });
+        } else {
+          var wrapHidden = document.getElementById('one-thing-banner-expand-wrap');
+          if (wrapHidden) wrapHidden.classList.add('hidden');
+          var accordionHidden = document.getElementById('one-thing-banner-accordion');
+          if (accordionHidden) accordionHidden.classList.add('hidden');
         }
         if (!missedWindow) {
           if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {

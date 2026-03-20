@@ -461,9 +461,9 @@
         REFLECTION_PROMPTS.forEach(function(r) {
           var el = form.querySelector('#reflection-' + r.key);
           var val = el && el.value ? String(el.value).trim() : '';
-          if (val) reflections['reflection_' + r.key] = val;
+          if (val) reflections[r.key] = val;
         });
-        var weeklyReview = Object.keys(reflections).length > 0 ? reflections : null;
+        var weeklyReview = Object.keys(reflections).length > 0 ? { reflections: reflections } : null;
 
         var { error } = await supabase.from('six_c_submissions').insert({
           email: email,

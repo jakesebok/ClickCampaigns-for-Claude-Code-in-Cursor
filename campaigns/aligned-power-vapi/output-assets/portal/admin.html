@@ -484,10 +484,11 @@
                   return '<span class="inline-block mr-3"><strong>' + escapeHtml(labels[k] || k) + ':</strong> ' + s + '%</span>';
                 }).join('');
                 var wr = row.weekly_review || {};
-                var refKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
-                var refLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
+                var reflectionValues = wr && typeof wr === 'object' && wr.reflections && typeof wr.reflections === 'object' ? wr.reflections : wr;
+                var refKeys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
+                var refLabels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
                 var refsHtml = refKeys.map(function(k) {
-                  var v = wr[k] && String(wr[k]).trim();
+                  var v = reflectionValues && reflectionValues[k] && String(reflectionValues[k]).trim();
                   if (!v) return '';
                   return '<div class="mb-2"><p class="text-xs font-semibold text-[var(--ap-muted)] mb-0.5">' + escapeHtml(refLabels[k] || k) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(v) + '</p></div>';
                 }).filter(Boolean).join('');
