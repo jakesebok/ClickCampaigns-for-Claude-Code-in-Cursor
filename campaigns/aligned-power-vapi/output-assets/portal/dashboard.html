@@ -129,6 +129,7 @@
     /* Archetype details chevron */
     .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
     .driver-profile-details[open] .driver-profile-chevron { transform: rotate(180deg); }
+    .wf-details[open] .wf-chevron { transform: rotate(180deg); }
     /* Archetype constellation */
     /* Dashboard: larger body text throughout for readability */
     #dashboard-content .text-sm { font-size: 15px; }
@@ -1081,6 +1082,28 @@
         var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
         if (pmHtml) {
           var ctaBlock = '';
+          var previewItems = [];
+          var protectItems = [];
+          var monitorItems = [];
+          ['PH','IA','ME','AF','RS','FA','CO','WI','VS','EX','OH','EC'].forEach(function(code) {
+            var score = domainScores[code];
+            var importance = imp[code];
+            if (score == null || importance == null) return;
+            var item = { code: code, domain: (window.VAPI_PM_DOMAIN_NAMES && window.VAPI_PM_DOMAIN_NAMES[code]) || code };
+            if (importance >= 7 && score < 6) previewItems.push(item);
+            else if (importance >= 7 && score >= 6) protectItems.push(item);
+            else monitorItems.push(item);
+          });
+          if (previewItems.length === 0) previewItems = protectItems.slice(0, 3);
+          if (previewItems.length === 0) previewItems = monitorItems.slice(0, 3);
+          previewItems = previewItems.slice(0, 3);
+          var previewBadges = previewItems.map(function(item) {
+            var label = item.domain || item.code || '';
+            return '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold border border-[var(--ap-border)] bg-[var(--ap-bg)]/70 text-[var(--ap-primary)]">' + escHtml(label) + '</span>';
+          }).join('');
+          var previewText = hasCriticalPriority
+            ? 'Your highest-leverage domains are surfaced here first so you can see exactly where focused effort will move the needle.'
+            : 'Your full priority matrix brings your strongest leverage points and maintenance areas into one place.';
           if (isNonClient) {
             ctaBlock = '<div class="mt-8 pt-6 border-t border-[var(--ap-border)] rounded-xl bg-[var(--ap-accent)]/10 border border-[var(--ap-accent)]/30 p-5">' +
               '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Get support with these areas</p>' +
@@ -1091,7 +1114,20 @@
               '<a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] px-4 py-2 rounded-[100px] transition-colors">Join the community</a>' +
               '</div></div>';
           }
-          wfEl.innerHTML = '<p class="eyebrow mb-1">Priority matrix</p><div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6">' + pmHtml + ctaBlock + '</div>';
+          wfEl.innerHTML = '<p class="eyebrow mb-1">Priority matrix</p>' +
+            '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6 sm:p-8">' +
+              '<div class="space-y-4">' +
+                '<div class="space-y-2">' +
+                  '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">Where to Focus</h2>' +
+                  '<p class="text-base text-[var(--ap-secondary)] leading-relaxed">' + previewText + '</p>' +
+                '</div>' +
+                (previewBadges ? '<div class="flex flex-wrap gap-2">' + previewBadges + '</div>' : '') +
+                '<details class="wf-details group">' +
+                  '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">View full priority matrix <i data-lucide="chevron-down" class="wf-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>' +
+                  '<div class="mt-4">' + pmHtml + ctaBlock + '</div>' +
+                '</details>' +
+              '</div>' +
+            '</div>';
           wfEl.classList.remove('hidden');
           if (ctaBlock && typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
         }
