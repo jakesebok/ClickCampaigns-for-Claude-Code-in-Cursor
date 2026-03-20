@@ -11,6 +11,7 @@ const nextConfig = {
       { source: "/assessment", destination: "/vapi/vapi-landing.html" },
       { source: "/assessment/start", destination: "/vapi/vapi-quiz.html" },
       { source: "/assessment/results", destination: "/vapi/vapi-results.html" },
+      { source: "/assessment/drivers", destination: "/vapi/vapi-driver-library.html" },
     ];
   },
 };

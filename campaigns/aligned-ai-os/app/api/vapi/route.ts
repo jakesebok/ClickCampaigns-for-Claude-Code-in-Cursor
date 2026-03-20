@@ -78,21 +78,33 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
   if (
     typeof results.topDriverScore === "number" &&
     typeof results.secondDriverScore === "number" &&
+    typeof results.primaryToSecondaryMargin === "number" &&
     results.driverScores &&
     typeof results.driverScores === "object" &&
     results.driverGates &&
     typeof results.driverGates === "object" &&
-    "assignedDriver" in results
+    "assignedDriver" in results &&
+    "secondaryDriver" in results &&
+    "secondaryDriverScore" in results
   ) {
     return {
       assignedDriver:
         typeof results.assignedDriver === "string"
           ? (results.assignedDriver as string)
           : null,
+      secondaryDriver:
+        typeof results.secondaryDriver === "string"
+          ? (results.secondaryDriver as string)
+          : null,
       driverScores: results.driverScores as Record<string, number>,
       driverGates: results.driverGates as Record<string, boolean>,
       topDriverScore: results.topDriverScore as number,
       secondDriverScore: results.secondDriverScore as number,
+      secondaryDriverScore:
+        typeof results.secondaryDriverScore === "number"
+          ? (results.secondaryDriverScore as number)
+          : null,
+      primaryToSecondaryMargin: results.primaryToSecondaryMargin as number,
     };
   }
 
@@ -126,6 +138,9 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
       },
       topDriverScore: 0,
       secondDriverScore: 0,
+      secondaryDriver: null,
+      secondaryDriverScore: null,
+      primaryToSecondaryMargin: 0,
     };
   }
 
@@ -172,8 +187,11 @@ export async function GET(req: NextRequest) {
         archetype: (r.archetype as string) || null,
         importance: (r.importanceRatings as Record<string, number>) || {},
         assignedDriver: driverEvaluation.assignedDriver,
+        secondaryDriver: driverEvaluation.secondaryDriver,
         driverScores: driverEvaluation.driverScores,
         topDriverScore: driverEvaluation.topDriverScore,
+        secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+        primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
         createdAt: row.created_at,
       },
     });
@@ -190,8 +208,11 @@ export async function GET(req: NextRequest) {
       archetype: (r.archetype as string) || null,
       importance: (r.importanceRatings as Record<string, number>) || {},
       assignedDriver: driverEvaluation.assignedDriver,
+      secondaryDriver: driverEvaluation.secondaryDriver,
       driverScores: driverEvaluation.driverScores,
       topDriverScore: driverEvaluation.topDriverScore,
+      secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+      primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
       createdAt: row.created_at,
     };
   });
@@ -227,10 +248,13 @@ export async function POST(req: NextRequest) {
     archetype,
     importance: importance || {},
     assignedDriver: driverEvaluation.assignedDriver,
+    secondaryDriver: driverEvaluation.secondaryDriver,
     driverScores: driverEvaluation.driverScores,
     driverGates: driverEvaluation.driverGates,
     topDriverScore: driverEvaluation.topDriverScore,
     secondDriverScore: driverEvaluation.secondDriverScore,
+    secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+    primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
     firstName: user.name?.split(" ")[0],
@@ -252,7 +276,10 @@ export async function POST(req: NextRequest) {
     overallScore: Math.round(scores.overall * 10),
     archetype,
     assignedDriver: driverEvaluation.assignedDriver,
+    secondaryDriver: driverEvaluation.secondaryDriver,
     driverScores: driverEvaluation.driverScores,
     topDriverScore: driverEvaluation.topDriverScore,
+    secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+    primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
   });
 }

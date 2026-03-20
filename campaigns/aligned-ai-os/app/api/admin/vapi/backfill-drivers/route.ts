@@ -107,11 +107,14 @@ function hasDriverFields(results: Record<string, unknown>) {
   return (
     typeof results.topDriverScore === "number" &&
     typeof results.secondDriverScore === "number" &&
+    typeof results.primaryToSecondaryMargin === "number" &&
     results.driverScores &&
     typeof results.driverScores === "object" &&
     results.driverGates &&
     typeof results.driverGates === "object" &&
-    "assignedDriver" in results
+    "assignedDriver" in results &&
+    "secondaryDriver" in results &&
+    "secondaryDriverScore" in results
   );
 }
 
@@ -148,10 +151,13 @@ function buildBackfilledResults(results: Record<string, unknown>) {
   return {
     ...results,
     assignedDriver: driverEvaluation.assignedDriver,
+    secondaryDriver: driverEvaluation.secondaryDriver,
     driverScores: driverEvaluation.driverScores,
     driverGates: driverEvaluation.driverGates,
     topDriverScore: driverEvaluation.topDriverScore,
     secondDriverScore: driverEvaluation.secondDriverScore,
+    secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+    primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
   };

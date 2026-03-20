@@ -28,10 +28,13 @@ export type VapiDriverContent = {
 
 export type VapiDriverEvaluation = {
   assignedDriver: VapiDriverName | null;
+  secondaryDriver: VapiDriverName | null;
   driverScores: VapiDriverScores;
   driverGates: VapiDriverGates;
   topDriverScore: number;
   secondDriverScore: number;
+  secondaryDriverScore: number | null;
+  primaryToSecondaryMargin: number;
 };
 
 export const DRIVER_THRESHOLD = 6;
@@ -144,16 +147,16 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
     coreFear: "Being exposed, visibility, success itself.",
     tagline: "You're building something you secretly believe you don't deserve.",
     description:
-      "Part of you suspects that your success is borrowed time. That the business works despite you, not because of you. That if people saw the real picture, the doubt, the chaos, the gaps, they'd lose confidence. So you keep the mask tight. You don't build systems that would expose how fragile things are. You don't align the business with who you actually are because that would require being honest about who that is. Your Ecology score is low because at some level you know the model isn't right but admitting that feels like admitting YOU aren't right.",
+      "Part of you suspects that your success is borrowed time. That the business works despite you, not because of you. That if people saw the real picture, the doubt, the chaos, the gaps, they'd lose confidence. So you keep the mask tight. But there's another layer: you may also feel that the business itself isn't a true expression of who you are. It's functional but it doesn't feel like yours. The model works but it doesn't match your depth, your values, or the unique way you see the world. So you're caught between two forces: the fear that you're not enough for what you're building, and the suspicion that what you're building isn't enough for who you are. Your Ecology score is low because at some level you know the model isn't right. Your Relationship to Self is strained because you can't trust your own judgment when part of you is always questioning whether you belong in the room you built.",
     mechanism:
-      "Low Ecology paired with low Relationship to Self. EC6 reverse-scored item confirms: you agreed you suspect you're building something that looks impressive but would trap you if it scaled. RS is low because imposter patterns erode self-trust. EC importance is often low because you're avoiding the alignment question entirely.",
+      "Low Ecology paired with low Relationship to Self. EC6 reverse-scored confirms: you agreed you suspect you're building something that looks impressive but would trap you if it scaled. RS is low because imposter patterns erode self-trust. The broadened signal also checks for high Inner Alignment importance paired with low Ecology, which captures the variant where someone deeply values authenticity but feels their business doesn't reflect it. This 'inauthenticity' variant is as damaging as the classic 'not enough' variant because both create internal resistance to growth.",
     whatItCosts:
       "You're building on a foundation of self-doubt. Every win feels temporary. Every compliment feels unearned. You can't fully invest in scaling because part of you doesn't believe you deserve what's on the other side. The self-sabotage isn't random. It's your system protecting you from the exposure that success would bring.",
     theWayOut:
       "The exit is separating your worth from your performance and building a business you'd be proud to be seen inside of. We'll trace the imposter belief to its origin, dismantle the false narrative that you're not enough, and redesign the parts of your business that don't actually fit you so the model becomes something you trust. When the destination feels safe, the sabotage stops.",
     programPhase:
       "Phase 2: Strategic Clarity into Phase 3: Internal Alignment. Redesign what you're building first so it's genuinely yours, then address the belief that you don't deserve it.",
-    maxPossible: 12,
+    maxPossible: 14,
   },
   "The Martyr Complex": {
     name: "The Martyr Complex",
@@ -551,17 +554,31 @@ export function determineDriver(input: {
 
   driverGates["The Imposter Loop"] =
     getNumericValue(domainScores.EC, 0) < 5.0 &&
-    getNumericValue(scoredResponses.EC6, 7) <= 3;
+    (
+      getNumericValue(scoredResponses.EC6, 7) <= 3 ||
+      getNumericValue(domainScores.RS, 0) < 5.0
+    );
   if (driverGates["The Imposter Loop"]) {
+    if (getNumericValue(scoredResponses.EC6, 7) <= 3) driverScores["The Imposter Loop"] += 2;
     if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
+    if (
+      getNumericValue(importanceRatings.IA, 5) >= 7 &&
+      getNumericValue(domainScores.EC, 0) < 5.0
+    ) {
+      driverScores["The Imposter Loop"] += 2;
+    }
     if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
-    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 2;
+    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
-    if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.EC5, 7) <= 4) driverScores["The Imposter Loop"] += 2;
-    if (isArenaLowest(normalizedArenaScores, "business")) driverScores["The Imposter Loop"] += 1;
+    if (
+      getNumericValue(domainScores.ME, 0) < 5.5 &&
+      getNumericValue(importanceRatings.IA, 5) >= 7
+    ) {
+      driverScores["The Imposter Loop"] += 1;
+    }
   }
 
   driverGates["The Martyr Complex"] =
@@ -617,18 +634,31 @@ export function determineDriver(input: {
   const runnerUp = rankedDrivers[1];
   const topDriverScore = winningDriver?.score ?? 0;
   const secondDriverScore = runnerUp?.score ?? 0;
+  const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
   const assignedDriver =
     winningDriver &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? winningDriver.driverName
       : null;
+  const secondaryDriver =
+    assignedDriver &&
+    runnerUp &&
+    secondDriverScore >= DRIVER_THRESHOLD &&
+    driverGates[runnerUp.driverName] &&
+    primaryToSecondaryMargin <= 3
+      ? runnerUp.driverName
+      : null;
+  const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
 
   return {
     assignedDriver,
+    secondaryDriver,
     driverScores,
     driverGates,
     topDriverScore,
     secondDriverScore,
+    secondaryDriverScore,
+    primaryToSecondaryMargin,
   };
 }

@@ -23,10 +23,13 @@ export type PortalVapiResults = {
   priorityMatrix: { criticalPriority: unknown[]; protectAndSustain: unknown[]; monitor: unknown[]; overInvestment: unknown[] };
   archetype: string;
   assignedDriver?: VapiDriverName | null;
+  secondaryDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
   driverGates?: VapiDriverGates;
   topDriverScore?: number;
   secondDriverScore?: number;
+  secondaryDriverScore?: number | null;
+  primaryToSecondaryMargin?: number;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -40,10 +43,13 @@ export function buildPortalResultsFormat(params: {
   archetype: string;
   importance: Record<string, number>;
   assignedDriver?: VapiDriverName | null;
+  secondaryDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
   driverGates?: VapiDriverGates;
   topDriverScore?: number;
   secondDriverScore?: number;
+  secondaryDriverScore?: number | null;
+  primaryToSecondaryMargin?: number;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -56,10 +62,13 @@ export function buildPortalResultsFormat(params: {
     archetype,
     importance,
     assignedDriver,
+    secondaryDriver,
     driverScores,
     driverGates,
     topDriverScore,
     secondDriverScore,
+    secondaryDriverScore,
+    primaryToSecondaryMargin,
     allResponses,
     responseCodingVersion,
     firstName,
@@ -112,10 +121,13 @@ export function buildPortalResultsFormat(params: {
     priorityMatrix,
     archetype,
     assignedDriver: assignedDriver ?? null,
+    secondaryDriver: secondaryDriver ?? null,
     driverScores: driverScores || undefined,
     driverGates: driverGates || undefined,
     topDriverScore: topDriverScore ?? undefined,
     secondDriverScore: secondDriverScore ?? undefined,
+    secondaryDriverScore: secondaryDriverScore ?? undefined,
+    primaryToSecondaryMargin: primaryToSecondaryMargin ?? undefined,
     allResponses: allResponses || undefined,
     responseCodingVersion: responseCodingVersion || undefined,
     firstName: firstName || undefined,

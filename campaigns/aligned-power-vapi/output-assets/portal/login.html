@@ -88,7 +88,7 @@
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var params = new URLSearchParams(window.location.search);
       var redirect = params.get('redirect') || '';
-      var allowedRedirects = ['/dashboard', '/admin', '/settings', '/scorecard', '/coach'];
+      var allowedRedirects = ['/dashboard', '/admin', '/settings', '/scorecard', '/coach', '/portal/driver-library'];
       var redirectTo = (allowedRedirects.indexOf(redirect) !== -1 || (redirect && redirect.startsWith('/coach/client'))) ? redirect : '/dashboard';
 
       var session = await supabase.auth.getSession();
@@ -99,7 +99,12 @@
       var emailParam = params.get('email');
       if (emailParam) document.getElementById('email').value = emailParam;
       var signupLink = document.getElementById('signup-link');
-      if (signupLink && emailParam) signupLink.href = '/signup?email=' + encodeURIComponent(emailParam);
+      if (signupLink) {
+        var signupHref = '/signup';
+        if (emailParam) signupHref += '?email=' + encodeURIComponent(emailParam);
+        if (redirectTo && redirectTo !== '/dashboard') signupHref += (signupHref.indexOf('?') >= 0 ? '&' : '?') + 'redirect=' + encodeURIComponent(redirectTo);
+        signupLink.href = signupHref;
+      }
       document.getElementById('login-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         var email = document.getElementById('email').value.trim();

@@ -1,0 +1,261 @@
+import type { VapiDriverName } from "./drivers";
+
+export const DRIVER_ORDER: VapiDriverName[] = [
+  "The Achiever's Trap",
+  "The Protector",
+  "The Pleaser's Bind",
+  "The Escape Artist",
+  "The Perfectionist's Prison",
+  "The Imposter Loop",
+  "The Martyr Complex",
+  "The Fog",
+];
+
+export const DRIVER_LIBRARY_TITLE = "The 8 Driver Patterns";
+export const DRIVER_LIBRARY_SUBTITLE =
+  "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 8 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all eight will deepen your self-awareness and may reveal secondary patterns worth exploring.";
+export const DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
+  "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
+export const DRIVER_LIBRARY_FOOTER_HEADING =
+  "Ready to Address What's Driving Your Pattern?";
+export const DRIVER_LIBRARY_FOOTER_TEXT =
+  "Understanding your driver is the first step. Changing it requires structured support. The Aligned Power Program is a 12-month coaching partnership designed to identify, address, and rewire the internal patterns keeping you stuck.";
+
+export type DriverLibraryEntry = {
+  howToKnowThisIsYou: string[];
+  howToKnowThisIsntYou: string[];
+  reflectionPrompts: string[];
+  relationshipToOtherDrivers: string;
+};
+
+export const DRIVER_LIBRARY_CONTENT: Record<VapiDriverName, DriverLibraryEntry> = {
+  "The Achiever's Trap": {
+    howToKnowThisIsYou: [
+      "You feel a physical restlessness or anxiety when you're not being productive",
+      "You calculate your value to others based on what you've accomplished recently",
+      "You can't take a full day off without guilt, justification, or sneaking in work",
+      "You feel a crash in mood or self-worth after completing a big project, because the next one hasn't started yet",
+      "You describe rest as \"earned\" and genuinely believe you haven't earned it most of the time",
+      "Compliments about who you are (not what you've done) make you uncomfortable or feel undeserved",
+      "When someone asks \"how are you?\" you instinctively answer with what you've been doing, not how you actually feel",
+    ],
+    howToKnowThisIsntYou: [
+      "You can take a weekend completely off and feel recharged, not guilty",
+      "You genuinely enjoy unstructured time and don't fill it with productivity",
+      "Your self-worth stays stable during slow business periods",
+      "You can celebrate a win without immediately pivoting to the next goal",
+      "You don't feel threatened by the idea of producing less",
+      "If this pattern sounds foreign or extreme to you, it's probably not your primary driver",
+    ],
+    reflectionPrompts: [
+      "When was the last time you felt genuinely valuable while producing absolutely nothing? If you can't remember, what does that tell you?",
+      "If you achieved every business goal you have and then stopped working for 6 months, how would you describe yourself to someone you met at a dinner party? What's left of your identity without the output?",
+      "Who in your early life made you feel that love, attention, or approval was conditional on performance? What did you have to DO to earn their recognition?",
+      "What's the longest you've gone without working in the past year? What happened internally during that time? What feelings surfaced that you normally outrun with activity?",
+      "If your closest friend operated the way you operate and sacrificed what you sacrifice for productivity, what would you honestly say to them?",
+    ],
+    relationshipToOtherDrivers:
+      "The Achiever's Trap is most commonly confused with The Escape Artist. Both produce high execution and neglected personal domains. The difference is the motivation underneath. The Achiever's Trap works because producing IS the reward. The identity is fused with output. The Escape Artist works because stopping is the threat. The activity is a shield against something they don't want to feel. Ask yourself: if you could guarantee that everything in your personal life was perfectly fine, would you still feel compelled to work at this intensity? If yes, that's The Achiever's Trap. If no, and the intensity is actually about avoiding what's waiting when you stop, that's The Escape Artist. These two drivers frequently show up together as primary and secondary.",
+  },
+  "The Protector": {
+    howToKnowThisIsYou: [
+      "You have strong opinions about how things should be done and struggle to let others do things differently",
+      "You'd rather do something yourself than risk someone else doing it wrong",
+      "The idea of being emotionally vulnerable with a friend, partner, or coach makes you instinctively resist",
+      "You trust systems, processes, and data more than you trust people's judgment, including your own intuition",
+      "You rarely ask for help and feel uncomfortable when someone offers it unprompted",
+      "Your closest relationships are the ones where you're in a position of authority, guidance, or control",
+      "If your business systems broke tomorrow, you would feel a level of panic disproportionate to the actual financial impact",
+    ],
+    howToKnowThisIsntYou: [
+      "You delegate easily and trust your team to handle things their way",
+      "You're comfortable not knowing the outcome and can tolerate uncertainty",
+      "You have multiple relationships where you're fully vulnerable and known",
+      "You ask for help regularly without shame or discomfort",
+      "You can name several times recently where you let someone else take the lead and felt fine about it",
+      "Control isn't a word people who know you well would use to describe you",
+    ],
+    reflectionPrompts: [
+      "What's the worst thing that could happen if you let someone else handle the most important thing in your business for a full week without checking in? Describe the scenario in detail. Now ask yourself: how likely is that scenario, really?",
+      "When was the first time in your life that depending on someone led to disappointment or pain? How old were you? What did you decide about other people in that moment?",
+      "Who in your life right now knows the full truth about your fears, doubts, and struggles? If the answer is nobody, what are you protecting by keeping that wall up?",
+      "If vulnerability and control lived on a spectrum, where would you place yourself? Now where would the people closest to you place you? What's the gap between those two answers?",
+      "What would it feel like to need someone and let them know you need them? Not strategically. Genuinely. What emotion comes up when you imagine that?",
+    ],
+    relationshipToOtherDrivers:
+      "The Protector is most commonly confused with The Achiever's Trap. Both produce strong business execution. The difference is what's driving the discipline. The Achiever's Trap works because output is identity. The Protector works because structure is safety. An Achiever is chasing validation. A Protector is preventing chaos. Ask yourself: if you could guarantee that nothing would fall apart, that everything was secure and stable without your oversight, would you relax? If yes, that's The Protector. If you'd immediately look for the next thing to achieve, that's The Achiever's Trap. The Protector also overlaps with The Escape Artist in that both avoid emotional engagement, but the Protector does it through control while the Escape Artist does it through activity.",
+  },
+  "The Pleaser's Bind": {
+    howToKnowThisIsYou: [
+      "You know what everyone around you needs but struggle to articulate what YOU need",
+      "You say yes to requests before you've even checked whether you have the capacity",
+      "You feel a wave of guilt or anxiety when you imagine saying no to someone who's counting on you",
+      "You've kept clients, team members, or relationships past their expiration date because ending it would hurt them",
+      "You measure how good a day was by how helpful you were to others, not by what you accomplished for yourself",
+      "You notice that your schedule fills with other people's priorities and your own work happens in the margins",
+      "When someone is disappointed in you, it doesn't just feel bad. It feels like a threat to your safety or belonging",
+    ],
+    howToKnowThisIsntYou: [
+      "You say no frequently and without residual guilt",
+      "Your priorities consistently come before other people's requests",
+      "You can disappoint someone and recover quickly without replaying it",
+      "Your schedule reflects YOUR goals, not a mosaic of everyone else's needs",
+      "You don't track whether people are happy with you as a background process",
+      "People who know you well would describe you as boundaried, not accommodating",
+    ],
+    reflectionPrompts: [
+      "Think about the last time you said yes to something you wanted to say no to. What was the request, who made it, and what were you afraid would happen if you declined?",
+      "If you stopped being helpful to everyone around you for 30 days and focused entirely on your own goals, what do you think would happen to your relationships? Now ask yourself: is that fear based on evidence or assumption?",
+      "When you were growing up, what role did you play in your family? Were you the peacekeeper, the responsible one, the one who made sure everyone was okay? How is that role still running your life today?",
+      "Make a list of the five things you spent the most energy on this week. How many of them were your priorities versus someone else's? What does that ratio tell you?",
+      "What would it mean about you if someone you care about was disappointed in you and you didn't fix it? Sit with that. What's the belief underneath the urge to repair?",
+    ],
+    relationshipToOtherDrivers:
+      "The Pleaser's Bind is most commonly confused with The Martyr Complex. Both involve self-sacrifice. The difference is the currency. The Pleaser sacrifices to maintain relationships and avoid rejection. The Martyr sacrifices because they believe suffering is noble or required. A Pleaser feels anxious when they stop giving. A Martyr feels guilty when they stop suffering. Ask yourself: if you could guarantee that everyone in your life would still love you even if you said no to everything for a month, would you feel relief? If yes, that's The Pleaser's Bind, because the giving is driven by fear of rejection. If the idea of a month without sacrifice makes you feel selfish or worthless rather than relieved, that's The Martyr Complex. The Pleaser's Bind also frequently pairs with The Imposter Loop as a secondary driver, because chronic people-pleasing erodes self-trust, which feeds the imposter pattern.",
+  },
+  "The Escape Artist": {
+    howToKnowThisIsYou: [
+      "You fill every quiet moment with activity, noise, content, or tasks. Silence feels uncomfortable.",
+      "You've been told by a partner or family member that you're not present even when you're physically there",
+      "When you have a free evening with nothing planned, you feel restless rather than relaxed",
+      "You know there's something you need to deal with (a conversation, a feeling, a decision) and you keep not dealing with it",
+      "Your productivity increases when your personal life gets harder, not decreases",
+      "You've caught yourself scrolling, working, or starting a new project specifically to avoid thinking about something",
+      "If you're honest, you can name the thing you're running from. You just don't want to stop long enough to face it.",
+    ],
+    howToKnowThisIsntYou: [
+      "You can sit in silence comfortably for extended periods",
+      "You regularly process difficult emotions through journaling, therapy, or conversation",
+      "Your work output doesn't spike when your personal life gets stressful",
+      "You don't use busyness as a coping mechanism",
+      "You've had the hard conversations recently and you're not avoiding anything specific",
+      "The idea of an unstructured weekend with nothing to do sounds appealing, not threatening",
+    ],
+    reflectionPrompts: [
+      "If you stopped working and sat in a quiet room with no phone for two hours, what would you start thinking about? What feeling would surface first? Name it specifically.",
+      "What is the conversation you most need to have that you haven't had? Who is it with and what are you afraid will happen if you have it?",
+      "When did busyness first become your coping strategy? Can you trace it back to a specific period, event, or relationship where staying in motion became safer than being still?",
+      "Your partner, child, or closest friend is watching you right now. They can see your schedule, your screen time, your habits. What would they say you're avoiding? Would they be right?",
+      "If the thing you're running from could speak to you, what would it say? What does it need from you that you've been refusing to give?",
+    ],
+    relationshipToOtherDrivers:
+      "The Escape Artist is most commonly confused with The Achiever's Trap. Both look identical from the outside: high output, intense pace, neglected personal life. The difference is the internal experience. The Achiever's Trap feels energized by work, at least in the moment. Work feels like home. The Escape Artist feels driven by work but not nourished by it. Work feels like running. The clearest diagnostic question is this: when you're productive, do you feel full or do you feel relieved? Full points to Achiever's Trap. Relieved (because you successfully avoided something) points to Escape Artist. The Escape Artist also frequently pairs with The Fog as a secondary driver, because constant motion prevents the stillness needed to clarify what you actually want.",
+  },
+  "The Perfectionist's Prison": {
+    howToKnowThisIsYou: [
+      "You have projects, launches, emails, or offers that have been \"almost ready\" for weeks or months",
+      "You revise things past the point of meaningful improvement because releasing them feels dangerous",
+      "You feel a spike of anxiety when you imagine someone judging your work, even someone whose opinion you don't respect",
+      "You research, plan, and prepare extensively but the ratio of preparation to output is wildly skewed toward preparation",
+      "You've turned down or delayed opportunities because you didn't feel \"ready enough\" even though others told you you were",
+      "You can articulate your strategy clearly but your execution doesn't reflect that clarity",
+      "The gap between what you know you should be doing and what you're actually doing is a source of genuine shame",
+    ],
+    howToKnowThisIsntYou: [
+      "You ship regularly, even when the work isn't perfect",
+      "You can tolerate negative feedback without it derailing your next effort",
+      "Your preparation-to-output ratio feels healthy",
+      "You don't sit on finished or near-finished work",
+      "You've launched things that embarrassed you slightly and survived just fine",
+      "Imperfect action feels better to you than perfect inaction",
+    ],
+    reflectionPrompts: [
+      "Name the specific project, offer, email, or decision that's been sitting at 80-90% for the longest. What exactly are you waiting for before you release it? Is that condition real or invented?",
+      "Think about the last time you were publicly judged, criticized, or embarrassed. What actually happened afterward? Did the catastrophe you feared materialize, or did life continue?",
+      "Who in your early life made you feel that mistakes were dangerous? Not just disappointing, but genuinely unsafe. What happened when you got something wrong in that environment?",
+      "If you could guarantee that nobody would judge your next piece of work, that it would exist in a vacuum with zero external evaluation, would you ship it? If the answer is yes, the block isn't quality. It's fear.",
+      "What's the actual, measurable cost of everything you've delayed or never released in the past 12 months? Add it up. Revenue not earned, opportunities not taken, growth not captured. Is that cost higher or lower than the cost of releasing something imperfect?",
+    ],
+    relationshipToOtherDrivers:
+      "The Perfectionist's Prison is most commonly confused with The Fog. Both produce low execution. The difference is that The Perfectionist knows exactly what to do and can't bring themselves to do it, while The Fog genuinely doesn't know what to do because they can't commit to a direction. If you have a clear strategy and a detailed plan but aren't executing it, that's The Perfectionist's Prison. If you don't have a clear strategy and your lack of execution stems from not knowing which direction to go, that's The Fog. The Perfectionist's Prison also frequently pairs with The Imposter Loop as a secondary driver, because the fear of judgment and the fear of being exposed as inadequate share the same root: a belief that your worth depends on being perceived as flawless.",
+  },
+  "The Imposter Loop": {
+    howToKnowThisIsYou: [
+      "You downplay compliments or attribute your success to luck, timing, or other people",
+      "You avoid building visible systems or documentation because they'd expose how \"messy\" things really are",
+      "You feel a flash of dread when you imagine your business getting significantly more attention or visibility",
+      "Part of you believes that if clients saw behind the curtain, they'd leave",
+      "You've stayed small, undercharged, or avoided growth opportunities because scaling felt like it would increase the odds of being \"found out\"",
+      "You oscillate between feeling capable and feeling like a fraud, sometimes within the same day",
+      "You feel like your business works despite you rather than because of you",
+      "The way you run your business doesn't match who you actually are, but changing it would mean admitting the current version isn't authentic",
+    ],
+    howToKnowThisIsntYou: [
+      "You genuinely own your results and feel that your success is earned",
+      "You're comfortable with visibility and don't fear increased scrutiny",
+      "You can name your strengths without qualifying them",
+      "Your business model reflects who you actually are and how you want to work",
+      "You don't avoid growth because of fear. If you avoid it, it's for strategic reasons you can clearly articulate",
+      "Being \"found out\" isn't a concept that resonates with you",
+    ],
+    reflectionPrompts: [
+      "If your most successful client or customer could see every part of your business, the backend, the real numbers, the processes, the gaps, what do you think they'd say? Now ask yourself: is that fear based on reality, or on a story you're telling yourself?",
+      "When did you first start feeling like you were performing a version of yourself rather than being yourself? Was there a specific moment, environment, or relationship where the mask became necessary?",
+      "What parts of your business feel authentically yours, like a genuine expression of who you are? What parts feel like a costume you put on because you thought that's what a successful business owner is supposed to look like?",
+      "If you could rebuild your business from scratch with zero judgment from anyone, what would you do differently? What would you keep? The gap between those two answers reveals the size of the misalignment.",
+      "Complete this sentence: \"If people really knew me, they'd know that I ___.\" Now read what you wrote. Is that actually something that would make them think less of you, or is it something that would make you more relatable?",
+    ],
+    relationshipToOtherDrivers:
+      "The Imposter Loop has two common pairings. When paired with The Perfectionist's Prison, the combined pattern is 'I'm not enough AND nothing I produce will be good enough to prove otherwise.' The perfectionism and the impostor feeling feed each other in a loop that paralyzes action. When paired with The Pleaser's Bind, the combined pattern is 'I'm not enough AND I can only maintain my position by making everyone happy.' The people-pleasing becomes a strategy for preventing the exposure the imposter fears. The Imposter Loop is also sometimes confused with The Fog, but the distinction is clear: The Imposter Loop has a direction but doesn't trust themselves to deserve it. The Fog genuinely doesn't have a direction.",
+  },
+  "The Martyr Complex": {
+    howToKnowThisIsYou: [
+      "You feel guilty when you do something purely for your own enjoyment that doesn't benefit anyone else",
+      "You describe rest as \"selfish\" or feel the need to justify it as recovery \"so I can serve better\"",
+      "You take pride in how much you sacrifice and may even compare your level of sacrifice to others",
+      "Your body is showing signs of neglect (exhaustion, weight changes, chronic pain, illness) but you frame it as \"the cost of doing important work\"",
+      "When someone suggests you take better care of yourself, you list all the reasons you can't right now",
+      "The people you serve (family, clients, community) would be uncomfortable if they knew what it was actually costing you",
+      "You feel most valuable when you're giving, and most empty when you have nothing to give",
+    ],
+    howToKnowThisIsntYou: [
+      "You invest in your own health and enjoyment without guilt",
+      "You can receive help, gifts, and rest without needing to earn them",
+      "You don't equate suffering with nobility or sacrifice with value",
+      "Your giving has clear boundaries and doesn't come at the expense of your own wellbeing",
+      "You can name recent examples of prioritizing yourself without it being connected to serving others better",
+      "People who know you would not describe you as someone who runs themselves into the ground for others",
+    ],
+    reflectionPrompts: [
+      "If you took excellent care of your body, made space for joy every week, and still served your family and community at a high level, would that feel like enough? Or does part of you believe that service without sacrifice isn't real service?",
+      "Where did you learn that your needs come last? Was there a person, a family system, a faith community, or a cultural message that taught you that selflessness requires self-neglect?",
+      "The people you sacrifice the most for: do they know the real cost? If they did, would they want you to continue? If the answer is no, who are you actually sacrificing for?",
+      "When was the last time you did something purely for your own pleasure that had zero productive or service value? If you can't remember, or if the memory comes with guilt, that's the pattern talking.",
+      "Imagine someone you deeply respect, a mentor or someone you admire, operating exactly the way you operate. Neglecting their body. Deferring their joy. Running on empty to serve others. Would you praise them for it or would you tell them to stop? Why is your answer different when it's you?",
+    ],
+    relationshipToOtherDrivers:
+      "The Martyr Complex is most commonly confused with The Pleaser's Bind. Both involve putting others first at personal cost. The distinction is in the underlying belief. The Pleaser gives to maintain relationships and avoid rejection. If the relationship were guaranteed, they'd stop over-giving. The Martyr gives because they believe sacrifice itself is virtuous. Even if no one was watching, even if no relationship depended on it, they'd still feel compelled to put themselves last. The Pleaser's currency is approval. The Martyr's currency is suffering. The Martyr Complex can also pair with The Achiever's Trap, creating a pattern where someone works themselves to the bone serving others AND ties their identity to the output of that service.",
+  },
+  "The Fog": {
+    howToKnowThisIsYou: [
+      "When someone asks what you want, your honest answer is \"I don't know\" more often than you'd like",
+      "You've started and abandoned multiple business ideas, strategies, or directions in the past few years",
+      "You feel equally pulled toward many options and can't rank them",
+      "Making a definitive commitment to one direction gives you a physical sensation of anxiety or constriction",
+      "You consume a lot of content (podcasts, courses, books, frameworks) hoping something will finally click and give you clarity",
+      "Your friends or partner have told you some version of \"just pick something\"",
+      "You can see the merits in every option, which makes choosing any single one feel like losing all the others",
+    ],
+    howToKnowThisIsntYou: [
+      "You have a clear direction and can articulate it simply",
+      "You make decisions relatively quickly and don't agonize over them afterward",
+      "You've been on a consistent strategic path for at least 6 months",
+      "You don't feel paralyzed by options. When you struggle with execution, it's not because you don't know what to do",
+      "Commitment doesn't scare you. You've committed to things recently and felt settled about it",
+      "Your importance ratings on the VAPI had clear peaks and valleys, not a flat line",
+    ],
+    reflectionPrompts: [
+      "If someone put a gun to your head and forced you to pick one business direction, one offer, one audience, and commit to it for 12 months with no option to change, what would you pick? The answer that came to mind first is probably the right one. What stopped you from choosing it already?",
+      "What are you actually afraid would happen if you committed fully to one path and it turned out to be the wrong one? Describe the worst case in detail. Now ask yourself: could you survive that? Could you recover and choose again?",
+      "Is there a decision in your past where you committed to something and it went badly? What happened, and what did you conclude about commitment as a result?",
+      "How much money, time, and energy have you spent in the last 12 months on exploration, research, and \"figuring it out\"? What would you have built if that same investment went into executing one clear plan?",
+      "Is the fog actually confusion, or is it a sophisticated way of avoiding the vulnerability of commitment? If clarity magically appeared tomorrow and you knew exactly what to do, would you actually do it? If the answer isn't an immediate yes, the problem isn't clarity. It's fear.",
+    ],
+    relationshipToOtherDrivers:
+      "The Fog is most commonly confused with The Perfectionist's Prison. Both produce low execution. The distinction is simple: The Perfectionist has a clear plan and can't act. The Fog can't plan because they can't commit. If you know exactly what you'd do next but can't seem to do it, that's The Perfectionist's Prison. If you genuinely don't know what you'd do next because too many options feel equally valid, that's The Fog. The Fog also sometimes pairs with The Escape Artist, because constant exploration and content consumption can function as sophisticated avoidance. The person looks like they're doing important strategic work (researching, learning, considering options) when they're actually using optionality as a shield against the vulnerability of choosing.",
+  },
+};
+
+export function getDriverSectionId(driver: VapiDriverName) {
+  return `driver-${driver.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}

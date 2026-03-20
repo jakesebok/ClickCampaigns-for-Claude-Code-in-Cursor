@@ -88,30 +88,45 @@
       }
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var signupParams = new URLSearchParams(window.location.search);
+      var redirect = signupParams.get('redirect') || '';
+      var allowedRedirects = ['/dashboard', '/admin', '/settings', '/scorecard', '/coach', '/portal/driver-library'];
+      var redirectToAfterAuth = (allowedRedirects.indexOf(redirect) !== -1 || (redirect && redirect.startsWith('/coach/client'))) ? redirect : '/dashboard';
       var session = await supabase.auth.getSession();
       if (session.data.session) {
-        window.location.href = '/dashboard';
+        window.location.href = redirectToAfterAuth;
         return;
       }
-      var signupParams = new URLSearchParams(window.location.search);
       var emailParam = signupParams.get('email');
       if (emailParam) document.getElementById('email').value = emailParam;
       var loginLink = document.getElementById('login-link');
-      if (loginLink && emailParam) loginLink.href = '/login?email=' + encodeURIComponent(emailParam);
+      if (loginLink) {
+        var loginHref = '/login';
+        if (emailParam) loginHref += '?email=' + encodeURIComponent(emailParam);
+        if (redirectToAfterAuth && redirectToAfterAuth !== '/dashboard') loginHref += (loginHref.indexOf('?') >= 0 ? '&' : '?') + 'redirect=' + encodeURIComponent(redirectToAfterAuth);
+        loginLink.href = loginHref;
+      }
       document.getElementById('signup-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         var email = document.getElementById('email').value.trim();
         var password = document.getElementById('password').value;
         var errEl = document.getElementById('signup-error');
         errEl.classList.add('hidden');
-        var redirectTo = 'https://portal.alignedpower.coach/confirm-email';
-        var { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: redirectTo } });
+        var confirmRedirect = 'https://portal.alignedpower.coach/confirm-email';
+        if (redirectToAfterAuth && redirectToAfterAuth !== '/dashboard') {
+          confirmRedirect += '?redirect=' + encodeURIComponent(redirectToAfterAuth);
+        }
+        var { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: confirmRedirect } });
         if (error) {
           errEl.textContent = error.message || 'Sign up failed.';
           errEl.classList.remove('hidden');
           return;
         }
-        window.location.href = '/check-email?email=' + encodeURIComponent(email);
+        var nextHref = '/check-email?email=' + encodeURIComponent(email);
+        if (redirectToAfterAuth && redirectToAfterAuth !== '/dashboard') {
+          nextHref += '&redirect=' + encodeURIComponent(redirectToAfterAuth);
+        }
+        window.location.href = nextHref;
       });
     })();
   </script>

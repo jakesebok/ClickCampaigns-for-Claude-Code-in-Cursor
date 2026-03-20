@@ -107,16 +107,16 @@
       coreFear: "Being exposed, visibility, success itself.",
       tagline: "You're building something you secretly believe you don't deserve.",
       description:
-        "Part of you suspects that your success is borrowed time. That the business works despite you, not because of you. That if people saw the real picture, the doubt, the chaos, the gaps, they'd lose confidence. So you keep the mask tight. You don't build systems that would expose how fragile things are. You don't align the business with who you actually are because that would require being honest about who that is. Your Ecology score is low because at some level you know the model isn't right but admitting that feels like admitting YOU aren't right.",
+        "Part of you suspects that your success is borrowed time. That the business works despite you, not because of you. That if people saw the real picture, the doubt, the chaos, the gaps, they'd lose confidence. So you keep the mask tight. But there's another layer: you may also feel that the business itself isn't a true expression of who you are. It's functional but it doesn't feel like yours. The model works but it doesn't match your depth, your values, or the unique way you see the world. So you're caught between two forces: the fear that you're not enough for what you're building, and the suspicion that what you're building isn't enough for who you are. Your Ecology score is low because at some level you know the model isn't right. Your Relationship to Self is strained because you can't trust your own judgment when part of you is always questioning whether you belong in the room you built.",
       mechanism:
-        "Low Ecology paired with low Relationship to Self. EC6 reverse-scored item confirms: you agreed you suspect you're building something that looks impressive but would trap you if it scaled. RS is low because imposter patterns erode self-trust. EC importance is often low because you're avoiding the alignment question entirely.",
+        "Low Ecology paired with low Relationship to Self. EC6 reverse-scored confirms: you agreed you suspect you're building something that looks impressive but would trap you if it scaled. RS is low because imposter patterns erode self-trust. The broadened signal also checks for high Inner Alignment importance paired with low Ecology, which captures the variant where someone deeply values authenticity but feels their business doesn't reflect it. This 'inauthenticity' variant is as damaging as the classic 'not enough' variant because both create internal resistance to growth.",
       whatItCosts:
         "You're building on a foundation of self-doubt. Every win feels temporary. Every compliment feels unearned. You can't fully invest in scaling because part of you doesn't believe you deserve what's on the other side. The self-sabotage isn't random. It's your system protecting you from the exposure that success would bring.",
       theWayOut:
         "The exit is separating your worth from your performance and building a business you'd be proud to be seen inside of. We'll trace the imposter belief to its origin, dismantle the false narrative that you're not enough, and redesign the parts of your business that don't actually fit you so the model becomes something you trust. When the destination feels safe, the sabotage stops.",
       programPhase:
         "Phase 2: Strategic Clarity into Phase 3: Internal Alignment. Redesign what you're building first so it's genuinely yours, then address the belief that you don't deserve it.",
-      maxPossible: 12,
+      maxPossible: 14,
     },
     "The Martyr Complex": {
       name: "The Martyr Complex",
@@ -166,6 +166,16 @@
   var BUSINESS_DOMAIN_CODES = ["VS", "EX", "OH", "EC"];
   var DRIVER_SIGNAL_QUESTION_IDS = ["PH6", "CO6", "RS6", "FA6", "ME6", "EX6", "EC6", "VS6", "EC5"];
   var REVERSE_SIGNAL_QUESTION_IDS = ["PH6", "CO6", "RS6", "FA6", "ME6", "EX6", "EC6", "VS6"];
+  var DRIVER_ACCENT_COLORS = {
+    "The Achiever's Trap": "#C07B28",
+    "The Protector": "#4A6FA5",
+    "The Pleaser's Bind": "#C27083",
+    "The Escape Artist": "#2E8B7A",
+    "The Perfectionist's Prison": "#6B7B8D",
+    "The Imposter Loop": "#8B6BAE",
+    "The Martyr Complex": "#A0522D",
+    "The Fog": "#9B9586",
+  };
 
   function escapeHtml(value) {
     return String(value == null ? "" : value)
@@ -270,6 +280,126 @@
       "The Martyr Complex": false,
       "The Fog": false,
     };
+  }
+
+  function getDriverLibraryHref() {
+    if (typeof window === "undefined" || !window.location) {
+      return "/assessment/drivers";
+    }
+    return window.location.hostname.indexOf("portal.") >= 0
+      ? "/portal/driver-library"
+      : "/assessment/drivers";
+  }
+
+  function getDriverIconPaths(driverName) {
+    switch (driverName) {
+      case "The Achiever's Trap":
+        return [
+          '<path d="M22 14h20v8c0 9.5-6.1 15.1-10 17.1c-3.9-2-10-7.6-10-17.1z"/>',
+          '<path d="M22 18h-4c-3.3 0-6 2.7-6 6s2.7 6 6 6h4"/>',
+          '<path d="M42 18h4c3.3 0 6 2.7 6 6s-2.7 6-6 6h-4"/>',
+          '<path d="M32 31v9"/>',
+          '<path d="M24 50h16"/>',
+          '<path d="M28 44h8v6h-8z"/>',
+          '<path d="M33 15l2 8l-4 5l5 7l-4 7"/>',
+        ];
+      case "The Protector":
+        return [
+          '<path d="M32 10c8.2 0 14.7 2.3 18 3.9v13.6c0 11.7-7 21.5-18 26.5c-11-5-18-14.8-18-26.5V13.9C17.3 12.3 23.8 10 32 10z"/>',
+          '<circle cx="32" cy="27" r="4.5"/>',
+          '<path d="M32 31.5v9"/>',
+        ];
+      case "The Pleaser's Bind":
+        return [
+          '<path d="M23 39c2.7 2 5.8 3 9 3"/>',
+          '<path d="M41 39c-2.7 2-5.8 3-9 3"/>',
+          '<path d="M20 24v16c0 2.8 2.2 5 5 5h2V31"/>',
+          '<path d="M27 31V19"/>',
+          '<path d="M31 30V17"/>',
+          '<path d="M36 31V19"/>',
+          '<path d="M40 31v14h2c2.8 0 5-2.2 5-5V24"/>',
+          '<path d="M18 10l2 10"/>',
+          '<path d="M25 9l1 10"/>',
+          '<path d="M46 10l-2 10"/>',
+          '<path d="M39 9l-1 10"/>',
+        ];
+      case "The Escape Artist":
+        return [
+          '<path d="M16 14h24v36H16z"/>',
+          '<path d="M40 16l8 6v20l-8 6z"/>',
+          '<circle cx="31" cy="25" r="3"/>',
+          '<path d="M31 28l-3 7l7 5"/>',
+          '<path d="M28 35l-6 4"/>',
+          '<path d="M30 35l3 9"/>',
+          '<path d="M35 33l6 4"/>',
+        ];
+      case "The Perfectionist's Prison":
+        return [
+          '<path d="M20 18h24"/>',
+          '<path d="M22 18c0-5.5 4.5-10 10-10s10 4.5 10 10"/>',
+          '<path d="M20 18v26"/>',
+          '<path d="M28 18v26"/>',
+          '<path d="M36 18v26"/>',
+          '<path d="M44 18v26"/>',
+          '<path d="M20 44h24"/>',
+          '<path d="M44 27h8v12"/>',
+          '<path d="M52 39l-8-4"/>',
+          '<path d="M28 37c2-3 6-3 8 0c1.5 2.2 4 2.7 6 1"/>',
+          '<path d="M31 33h4"/>',
+        ];
+      case "The Imposter Loop":
+        return [
+          '<path d="M18 14c4-4 24-4 28 0c3 3 3 23 0 26c-4 4-24 4-28 0c-3-3-3-23 0-26z"/>',
+          '<path d="M28 42v8"/>',
+          '<path d="M36 42v8"/>',
+          '<path d="M24 50h16"/>',
+          '<path d="M27 23c1.8-2 7.2-2 9 0"/>',
+          '<path d="M29 29c1 1.5 5 1.5 6 0"/>',
+          '<path d="M25 34c2.5 3 11.5 2 14-2"/>',
+          '<path d="M38 24c-1.5 1.2-1.7 8.5 1 11.5"/>',
+        ];
+      case "The Martyr Complex":
+        return [
+          '<path d="M14 28h36"/>',
+          '<path d="M18 24h28c2.2 0 4 1.8 4 4s-1.8 4-4 4H18c-2.2 0-4-1.8-4-4s1.8-4 4-4z"/>',
+          '<path d="M26 24c-1.6 2.2-1.6 5.8 0 8"/>',
+          '<path d="M38 24c-1.6 2.2-1.6 5.8 0 8"/>',
+          '<path d="M11 20c2.6 1.4 3.6 4.5 2.7 7.2c2.4-.8 5.1.3 6.2 2.6"/>',
+          '<path d="M53 20c-2.6 1.4-3.6 4.5-2.7 7.2c-2.4-.8-5.1.3-6.2 2.6"/>',
+        ];
+      case "The Fog":
+      default:
+        return [
+          '<circle cx="32" cy="32" r="18"/>',
+          '<path d="M32 8l4 10l-4 4l-4-4z"/>',
+          '<path d="M32 56l4-10l-4-4l-4 4z"/>',
+          '<path d="M56 32l-10 4l-4-4l4-4z"/>',
+          '<path d="M8 32l10 4l4-4l-4-4z"/>',
+          '<path d="M44.7 19.3l2.3 5.7"/>',
+          '<path d="M19.3 19.3l-2.3 5.7"/>',
+          '<path d="M44.7 44.7l2.3-5.7"/>',
+          '<path d="M19.3 44.7l-2.3-5.7"/>',
+        ];
+    }
+  }
+
+  function getDriverIcon(driverName, size) {
+    var color = DRIVER_ACCENT_COLORS[driverName] || "var(--ap-accent)";
+    var paths = getDriverIconPaths(driverName).join("");
+    var dimension = typeof size === "number" ? size : 64;
+    return (
+      '<svg viewBox="0 0 64 64" width="' +
+      dimension +
+      '" height="' +
+      dimension +
+      '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="' +
+      escapeHtml(driverName) +
+      ' icon"><title>' +
+      escapeHtml(driverName) +
+      "</title>" +
+      paths +
+      "</svg>"
+    ).replace('stroke="currentColor"', 'stroke="' + color + '"');
   }
 
   function getCompositeScore(domainScores, compositeScore) {
@@ -435,17 +565,27 @@
 
     driverGates["The Imposter Loop"] =
       getNumericValue(domainScores.EC, 0) < 5.0 &&
-      getNumericValue(scoredResponses.EC6, 7) <= 3;
+      (
+        getNumericValue(scoredResponses.EC6, 7) <= 3 ||
+        getNumericValue(domainScores.RS, 0) < 5.0
+      );
     if (driverGates["The Imposter Loop"]) {
+      if (getNumericValue(scoredResponses.EC6, 7) <= 3) driverScores["The Imposter Loop"] += 2;
       if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
+      if (
+        getNumericValue(importanceRatings.IA, 5) >= 7 &&
+        getNumericValue(domainScores.EC, 0) < 5.0
+      ) driverScores["The Imposter Loop"] += 2;
       if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
-      if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 2;
+      if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 1;
       if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
       if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
       if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
-      if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Imposter Loop"] += 1;
       if (getNumericValue(scoredResponses.EC5, 7) <= 4) driverScores["The Imposter Loop"] += 2;
-      if (isArenaLowest(arenaScores, "business")) driverScores["The Imposter Loop"] += 1;
+      if (
+        getNumericValue(domainScores.ME, 0) < 5.5 &&
+        getNumericValue(importanceRatings.IA, 5) >= 7
+      ) driverScores["The Imposter Loop"] += 1;
     }
 
     driverGates["The Martyr Complex"] =
@@ -489,18 +629,31 @@
 
     var topDriverScore = rankedDrivers[0] ? rankedDrivers[0].score : 0;
     var secondDriverScore = rankedDrivers[1] ? rankedDrivers[1].score : 0;
+    var primaryToSecondaryMargin = topDriverScore - secondDriverScore;
     var assignedDriver =
       rankedDrivers[0] &&
       topDriverScore >= DRIVER_THRESHOLD &&
       topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
         ? rankedDrivers[0].driverName
         : null;
+    var secondaryDriver =
+      assignedDriver &&
+      rankedDrivers[1] &&
+      secondDriverScore >= DRIVER_THRESHOLD &&
+      driverGates[rankedDrivers[1].driverName] &&
+      primaryToSecondaryMargin <= 3
+        ? rankedDrivers[1].driverName
+        : null;
+    var secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
     return {
       assignedDriver: assignedDriver,
+      secondaryDriver: secondaryDriver,
       driverScores: driverScores,
       driverGates: driverGates,
       topDriverScore: topDriverScore,
       secondDriverScore: secondDriverScore,
+      secondaryDriverScore: secondaryDriverScore,
+      primaryToSecondaryMargin: primaryToSecondaryMargin,
     };
   }
 
@@ -508,28 +661,41 @@
     if (!results || typeof results !== "object") {
       return {
         assignedDriver: null,
+        secondaryDriver: null,
         driverScores: createEmptyDriverScores(),
         driverGates: createEmptyDriverGates(),
         topDriverScore: 0,
         secondDriverScore: 0,
+        secondaryDriverScore: null,
+        primaryToSecondaryMargin: 0,
       };
     }
     if (
       typeof results.topDriverScore === "number" &&
       typeof results.secondDriverScore === "number" &&
+      typeof results.primaryToSecondaryMargin === "number" &&
       results.driverScores &&
       typeof results.driverScores === "object" &&
       results.driverGates &&
       typeof results.driverGates === "object" &&
-      "assignedDriver" in results
+      "assignedDriver" in results &&
+      "secondaryDriver" in results &&
+      "secondaryDriverScore" in results
     ) {
       return {
         assignedDriver:
           typeof results.assignedDriver === "string" ? results.assignedDriver : null,
+        secondaryDriver:
+          typeof results.secondaryDriver === "string" ? results.secondaryDriver : null,
         driverScores: results.driverScores,
         driverGates: results.driverGates,
         topDriverScore: results.topDriverScore,
         secondDriverScore: results.secondDriverScore,
+        secondaryDriverScore:
+          typeof results.secondaryDriverScore === "number"
+            ? results.secondaryDriverScore
+            : null,
+        primaryToSecondaryMargin: results.primaryToSecondaryMargin,
       };
     }
     var hasResponses =
@@ -539,18 +705,24 @@
     if (!hasResponses) {
       return {
         assignedDriver: null,
+        secondaryDriver: null,
         driverScores: createEmptyDriverScores(),
         driverGates: createEmptyDriverGates(),
         topDriverScore: 0,
         secondDriverScore: 0,
+        secondaryDriverScore: null,
+        primaryToSecondaryMargin: 0,
       };
     }
     var evaluation = evaluateDriver(results);
     results.assignedDriver = evaluation.assignedDriver;
+    results.secondaryDriver = evaluation.secondaryDriver;
     results.driverScores = evaluation.driverScores;
     results.driverGates = evaluation.driverGates;
     results.topDriverScore = evaluation.topDriverScore;
     results.secondDriverScore = evaluation.secondDriverScore;
+    results.secondaryDriverScore = evaluation.secondaryDriverScore;
+    results.primaryToSecondaryMargin = evaluation.primaryToSecondaryMargin;
     return evaluation;
   }
 
@@ -560,8 +732,15 @@
       evaluation.assignedDriver && DRIVER_CONTENT[evaluation.assignedDriver]
         ? evaluation.assignedDriver
         : null;
-    var accent = (options && options.accent) || "var(--ap-accent)";
+    var secondaryDriverName =
+      evaluation.secondaryDriver && DRIVER_CONTENT[evaluation.secondaryDriver]
+        ? evaluation.secondaryDriver
+        : null;
+    var accent = driverName
+      ? (DRIVER_ACCENT_COLORS[driverName] || "var(--ap-accent)")
+      : ((options && options.accent) || "var(--ap-accent)");
     var id = (options && options.id) || "driver-section";
+    var libraryHref = (options && options.libraryHref) || getDriverLibraryHref();
     var html =
       '<div id="' +
       id +
@@ -576,6 +755,11 @@
     if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
       html += '<div class="flex flex-col gap-3">';
+      html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5">';
+      html += '<div class="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center" style="background:' + accent + '15;">';
+      html += getDriverIcon(driverName, 64);
+      html += "</div>";
+      html += '<div class="min-w-0 flex-1">';
       html += '<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">';
       html +=
         '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
@@ -614,6 +798,7 @@
         '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
         escapeHtml(driver.description) +
         "</p>";
+      html += "</div></div>";
       [
         ["How This Shows Up in Your Scores", driver.mechanism],
         ["What This Is Costing You", driver.whatItCosts],
@@ -631,6 +816,49 @@
           escapeHtml(section[1]) +
           "</div></details>";
       });
+      html +=
+        '<p class="mt-5 pt-5 border-t border-[var(--ap-border)] text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        escapeHtml(DRIVER_NOTE) +
+        "</p>";
+      html +=
+        '<a href="' +
+        libraryHref +
+        '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
+        accent +
+        '">Learn more about all driver patterns &gt;</a>';
+      if (secondaryDriverName) {
+        var secondaryDriver = DRIVER_CONTENT[secondaryDriverName];
+        var secondaryAccent = DRIVER_ACCENT_COLORS[secondaryDriverName] || accent;
+        html += '<div class="pt-5 mt-2 border-t border-[var(--ap-border)]/80 space-y-3">';
+        html +=
+          '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
+          secondaryAccent +
+          '">Secondary Pattern</p>';
+        html += '<div class="flex items-start gap-3">';
+        html += '<div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background:' + secondaryAccent + '15;">';
+        html += getDriverIcon(secondaryDriverName, 40);
+        html += "</div>";
+        html += '<div class="min-w-0 flex-1 space-y-2">';
+        html +=
+          '<h3 class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)]">' +
+          escapeHtml(secondaryDriver.name) +
+          "</h3>";
+        html +=
+          '<p class="text-sm italic text-[var(--ap-secondary)]">&quot;' +
+          escapeHtml(secondaryDriver.coreBelief) +
+          "&quot;</p>";
+        html +=
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' +
+          escapeHtml(secondaryDriver.tagline) +
+          "</p>";
+        html +=
+          '<a href="' +
+          libraryHref +
+          '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
+          secondaryAccent +
+          '">Learn more about all driver patterns &gt;</a>';
+        html += "</div></div></div>";
+      }
       html += "</div>";
     } else {
       html +=
@@ -641,11 +869,17 @@
         '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
         escapeHtml(DRIVER_FALLBACK.text) +
         "</p>";
+      html +=
+        '<a href="' +
+        libraryHref +
+        '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:opacity-80 transition-colors" data-driver-library-link="1">Learn more about all driver patterns &gt;</a>';
     }
-    html +=
-      '<p class="mt-5 pt-5 border-t border-[var(--ap-border)] text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
-      escapeHtml(DRIVER_NOTE) +
-      "</p>";
+    if (!driverName) {
+      html +=
+        '<p class="mt-5 pt-5 border-t border-[var(--ap-border)] text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        escapeHtml(DRIVER_NOTE) +
+        "</p>";
+    }
     html += "</div></div>";
     return html;
   }
@@ -728,12 +962,15 @@
   }
 
   window.VAPI_DRIVERS = {
+    DRIVER_ACCENT_COLORS: DRIVER_ACCENT_COLORS,
     DRIVER_CONTENT: DRIVER_CONTENT,
     DRIVER_FALLBACK: DRIVER_FALLBACK,
     DRIVER_NOTE: DRIVER_NOTE,
     DRIVER_MAINTAINED_INTERPRETATIONS: DRIVER_MAINTAINED_INTERPRETATIONS,
     ensureEvaluation: ensureEvaluation,
     buildResultsSection: buildResultsSection,
+    getIcon: getDriverIcon,
+    getDriverLibraryHref: getDriverLibraryHref,
     getTransitionSummary: getTransitionSummary,
   };
 })();

@@ -290,17 +290,31 @@ export function enrichResultsWithDriver(results) {
 
   driverGates["The Imposter Loop"] =
     getNumericValue(domainScores.EC, 0) < 5.0 &&
-    getNumericValue(scoredResponses.EC6, 7) <= 3;
+    (
+      getNumericValue(scoredResponses.EC6, 7) <= 3 ||
+      getNumericValue(domainScores.RS, 0) < 5.0
+    );
   if (driverGates["The Imposter Loop"]) {
+    if (getNumericValue(scoredResponses.EC6, 7) <= 3) driverScores["The Imposter Loop"] += 2;
     if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
+    if (
+      getNumericValue(importanceRatings.IA, 5) >= 7 &&
+      getNumericValue(domainScores.EC, 0) < 5.0
+    ) {
+      driverScores["The Imposter Loop"] += 2;
+    }
     if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
-    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 2;
+    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
-    if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.EC5, 7) <= 4) driverScores["The Imposter Loop"] += 2;
-    if (isArenaLowest(arenaScores, "business")) driverScores["The Imposter Loop"] += 1;
+    if (
+      getNumericValue(domainScores.ME, 0) < 5.5 &&
+      getNumericValue(importanceRatings.IA, 5) >= 7
+    ) {
+      driverScores["The Imposter Loop"] += 1;
+    }
   }
 
   driverGates["The Martyr Complex"] =
@@ -344,21 +358,34 @@ export function enrichResultsWithDriver(results) {
 
   const topDriverScore = rankedDrivers[0]?.score ?? 0;
   const secondDriverScore = rankedDrivers[1]?.score ?? 0;
+  const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
   const assignedDriver =
     rankedDrivers[0] &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? rankedDrivers[0].driverName
       : null;
+  const secondaryDriver =
+    assignedDriver &&
+    rankedDrivers[1] &&
+    secondDriverScore >= DRIVER_THRESHOLD &&
+    driverGates[rankedDrivers[1].driverName] &&
+    primaryToSecondaryMargin <= 3
+      ? rankedDrivers[1].driverName
+      : null;
+  const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
 
   return {
     ...results,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
     assignedDriver,
+    secondaryDriver,
     driverScores,
     driverGates,
     topDriverScore,
     secondDriverScore,
+    secondaryDriverScore,
+    primaryToSecondaryMargin,
   };
 }

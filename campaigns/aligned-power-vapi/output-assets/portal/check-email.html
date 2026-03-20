@@ -59,10 +59,15 @@
     (async function() {
       var params = new URLSearchParams(window.location.search);
       var emailParam = params.get('email');
+      var redirectParam = params.get('redirect') || '';
       var resendInput = document.getElementById('resend-email');
       var resendBtn = document.getElementById('resend-btn');
       var resendMsg = document.getElementById('resend-message');
       if (emailParam) resendInput.value = emailParam;
+      var loginLink = document.querySelector('a[href="/login"]');
+      if (loginLink && redirectParam) {
+        loginLink.href = '/login?redirect=' + encodeURIComponent(redirectParam);
+      }
       try {
         var r = await fetch('/api/config');
         if (!r.ok) return;
@@ -73,6 +78,7 @@
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var redirectTo = 'https://portal.alignedpower.coach/confirm-email';
+      if (redirectParam) redirectTo += '?redirect=' + encodeURIComponent(redirectParam);
       resendBtn.addEventListener('click', async function() {
         var email = (resendInput.value || '').trim();
         resendMsg.classList.add('hidden');

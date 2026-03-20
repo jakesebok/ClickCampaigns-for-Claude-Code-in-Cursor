@@ -116,30 +116,63 @@ function createEmptyDriverScores() {
   }, {});
 }
 
+function createEmptyDriverGates() {
+  return DRIVER_TIEBREAK_PRIORITY.reduce((acc, name) => {
+    acc[name] = false;
+    return acc;
+  }, {});
+}
+
 function getDriverSummary(source) {
   if (!source || typeof source !== 'object') {
-    return { assignedDriver: null, driverScores: createEmptyDriverScores(), topDriverScore: 0 };
+    return {
+      assignedDriver: null,
+      secondaryDriver: null,
+      driverScores: createEmptyDriverScores(),
+      driverGates: createEmptyDriverGates(),
+      topDriverScore: 0,
+      secondDriverScore: 0,
+      secondaryDriverScore: null,
+      primaryToSecondaryMargin: 0,
+    };
   }
 
   if (
     typeof source.topDriverScore === 'number' &&
     typeof source.secondDriverScore === 'number' &&
+    typeof source.primaryToSecondaryMargin === 'number' &&
     source.driverScores &&
     typeof source.driverScores === 'object' &&
     source.driverGates &&
     typeof source.driverGates === 'object' &&
-    'assignedDriver' in source
+    'assignedDriver' in source &&
+    'secondaryDriver' in source &&
+    'secondaryDriverScore' in source
   ) {
     return {
       assignedDriver: typeof source.assignedDriver === 'string' ? source.assignedDriver : null,
+      secondaryDriver: typeof source.secondaryDriver === 'string' ? source.secondaryDriver : null,
       driverScores: source.driverScores,
+      driverGates: source.driverGates,
       topDriverScore: source.topDriverScore,
+      secondDriverScore: source.secondDriverScore,
+      secondaryDriverScore: typeof source.secondaryDriverScore === 'number' ? source.secondaryDriverScore : null,
+      primaryToSecondaryMargin: source.primaryToSecondaryMargin,
     };
   }
 
   const hasResponses = source.allResponses && Object.keys(source.allResponses).length > 0;
   if (!hasResponses) {
-    return { assignedDriver: null, driverScores: createEmptyDriverScores(), topDriverScore: 0 };
+    return {
+      assignedDriver: null,
+      secondaryDriver: null,
+      driverScores: createEmptyDriverScores(),
+      driverGates: createEmptyDriverGates(),
+      topDriverScore: 0,
+      secondDriverScore: 0,
+      secondaryDriverScore: null,
+      primaryToSecondaryMargin: 0,
+    };
   }
 
   const enriched = enrichResultsWithDriver({
@@ -151,20 +184,39 @@ function getDriverSummary(source) {
 
   return {
     assignedDriver: enriched.assignedDriver || null,
+    secondaryDriver: enriched.secondaryDriver || null,
     driverScores: enriched.driverScores || createEmptyDriverScores(),
+    driverGates: enriched.driverGates || createEmptyDriverGates(),
     topDriverScore: typeof enriched.topDriverScore === 'number' ? enriched.topDriverScore : 0,
+    secondDriverScore: typeof enriched.secondDriverScore === 'number' ? enriched.secondDriverScore : 0,
+    secondaryDriverScore: typeof enriched.secondaryDriverScore === 'number' ? enriched.secondaryDriverScore : null,
+    primaryToSecondaryMargin: typeof enriched.primaryToSecondaryMargin === 'number' ? enriched.primaryToSecondaryMargin : 0,
   };
 }
 
-function sortDriverScores(driverScores) {
+function sortDriverScores(driverScores, driverGates) {
   return DRIVER_TIEBREAK_PRIORITY.map((name, index) => ({
     name,
     score: typeof driverScores?.[name] === 'number' ? driverScores[name] : 0,
+    gatePassed: !!driverGates?.[name],
     index,
   })).sort((a, b) => (b.score - a.score) || (a.index - b.index));
 }
 
-function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTiers, topCriticalPriority, hasPortalAccount, archetype, driverName, driverCoreBelief }) {
+function buildUserEmail({
+  firstName,
+  overall,
+  overallTier,
+  arenaScores,
+  arenaTiers,
+  topCriticalPriority,
+  hasPortalAccount,
+  archetype,
+  driverName,
+  driverCoreBelief,
+  secondaryDriverName,
+  secondaryDriverCoreBelief,
+}) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
   const portalLink = `${PORTAL_URL}/login`;
   const signupLink = `${PORTAL_URL}/signup`;
@@ -218,7 +270,7 @@ function buildUserEmail({ firstName, overall, overallTier, arenaScores, arenaTie
     </div>` : ''}
     <div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">What's Driving This Pattern</p>
-      ${driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> View your full results for details.</p>`}
+      ${driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> View your full results for details.</p>`}
     </div>
 
     <!-- Arena scores -->
@@ -273,7 +325,11 @@ Congratulations on completing the VAPI Assessment.
 Your VAPI Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 
 ${archetype ? `Your Founder Archetype: ${archetype}\n` : ''}
-${driverName ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n` : `What's Driving This Pattern: No clear single driver identified. View your full results for details.\n`}
+${driverName && secondaryDriverName
+  ? `What's Driving This Pattern\nPrimary: ${driverName} - '${driverCoreBelief}'\nSecondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n`
+  : driverName
+    ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n`
+    : `What's Driving This Pattern: No clear single driver identified. View your full results for details.\n`}
 
 Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
 Relationships: ${arenaScores.Relationships ?? '?'} / 10 - ${arenaTiers.Relationships ?? ''}
@@ -286,16 +342,45 @@ View your full results: ${ctaUrl}
   return { html, text };
 }
 
-function buildAdminEmail({ email, firstName, lastName, overall, overallTier, arenaScores, arenaTiers, domains, importanceRatings, priorityMatrix, contextualProfile, assessmentNumber, hasPortalAccount, timestamp, archetype, driverName, driverCoreBelief, topDriverScore, driverScores, previousDriverName }) {
+function buildAdminEmail({
+  email,
+  firstName,
+  lastName,
+  overall,
+  overallTier,
+  arenaScores,
+  arenaTiers,
+  domains,
+  importanceRatings,
+  priorityMatrix,
+  contextualProfile,
+  assessmentNumber,
+  hasPortalAccount,
+  timestamp,
+  archetype,
+  driverName,
+  secondaryDriverName,
+  topDriverScore,
+  secondaryDriverScore,
+  primaryToSecondaryMargin,
+  driverScores,
+  driverGates,
+  previousDriverName,
+  previousSecondaryDriverName,
+}) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
   const ordinalNum = ordinal(assessmentNumber || 1);
   const accountStatus = hasPortalAccount ? 'Has portal account' : 'No account yet';
-  const sortedDriverScores = sortDriverScores(driverScores);
-  const driverScoresText = sortedDriverScores.map((entry) => `${entry.name}: ${entry.score}`).join(', ');
-  const driverSummary = driverName ? `${driverName} (${topDriverScore} points)` : 'None (no driver met threshold)';
-  const previousDriverSummary = previousDriverName
-    ? `${previousDriverName} (${previousDriverName === driverName ? 'unchanged' : 'changed'})`
-    : null;
+  const sortedDriverScores = sortDriverScores(driverScores, driverGates);
+  const driverScoresText = sortedDriverScores
+    .map((entry) => `${entry.name}: ${entry.score} points [GATE: ${entry.gatePassed ? 'passed' : 'failed'}]`)
+    .join(', ');
+  const primaryDriverSummary = driverName ? `${driverName} (${topDriverScore} points)` : 'None (threshold not met)';
+  const secondaryDriverSummary = secondaryDriverName && typeof secondaryDriverScore === 'number'
+    ? `${secondaryDriverName} (${secondaryDriverScore} points)`
+    : 'None';
+  const previousPrimarySummary = `${previousDriverName || 'None'} (${previousDriverName === driverName ? 'unchanged' : 'changed'})`;
+  const previousSecondarySummary = `${previousSecondaryDriverName || 'None'} (${previousSecondaryDriverName === secondaryDriverName ? 'unchanged' : 'changed'})`;
 
   const sortedDomains = [...(domains || [])].sort((a,b) => a.score - b.score);
   const domainRows = sortedDomains.map(d => {
@@ -340,9 +425,12 @@ function buildAdminEmail({ email, firstName, lastName, overall, overallTier, are
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
       ${archetype ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Founder Archetype:</strong> ${escHtml(archetype)}</td></tr>` : ''}
-      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver:</strong> ${escHtml(driverSummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary Driver:</strong> ${escHtml(primaryDriverSummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Secondary Driver:</strong> ${escHtml(secondaryDriverSummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary-Secondary Margin:</strong> ${escHtml(String(primaryToSecondaryMargin))} points</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver Scores:</strong> ${escHtml(driverScoresText)}</td></tr>
-      ${previousDriverSummary ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Driver:</strong> ${escHtml(previousDriverSummary)}</td></tr>` : ''}
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Primary Driver:</strong> ${escHtml(previousPrimarySummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Secondary Driver:</strong> ${escHtml(previousSecondarySummary)}</td></tr>
     </table>
 
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border:1px solid #DDE3ED;border-radius:8px;overflow:hidden;">
@@ -383,9 +471,12 @@ Email: ${email || 'Not provided'}
 Account Status: ${accountStatus}
 Assessment #: ${ordinalNum} assessment
 ${archetype ? `Founder Archetype: ${archetype}\n` : ''}
-Driver: ${driverSummary}
+Primary Driver: ${primaryDriverSummary}
+Secondary Driver: ${secondaryDriverSummary}
+Primary-Secondary Margin: ${primaryToSecondaryMargin} points
 Driver Scores: ${driverScoresText}
-${previousDriverSummary ? `Previous Driver: ${previousDriverSummary}\n` : ''}
+Previous Primary Driver: ${previousPrimarySummary}
+Previous Secondary Driver: ${previousSecondarySummary}
 
 Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 Self: ${arenaScores?.Personal ?? '?'} - ${arenaTiers?.Personal ?? ''}
@@ -504,8 +595,13 @@ export async function POST(request) {
     allResponses = {},
     responseCodingVersion = null,
     assignedDriver = null,
+    secondaryDriver = null,
     driverScores: driverScoresFromBody = null,
+    driverGates: driverGatesFromBody = null,
     topDriverScore: topDriverScoreFromBody = null,
+    secondDriverScore: secondDriverScoreFromBody = null,
+    secondaryDriverScore: secondaryDriverScoreFromBody = null,
+    primaryToSecondaryMargin: primaryToSecondaryMarginFromBody = null,
   } = body;
 
   const archetype = archetypeFromBody || determineArchetypeServer({ overall, arenaScores, domains });
@@ -516,11 +612,20 @@ export async function POST(request) {
     allResponses,
     responseCodingVersion,
     assignedDriver,
+    secondaryDriver,
     driverScores: driverScoresFromBody,
+    driverGates: driverGatesFromBody,
     topDriverScore: topDriverScoreFromBody,
+    secondDriverScore: secondDriverScoreFromBody,
+    secondaryDriverScore: secondaryDriverScoreFromBody,
+    primaryToSecondaryMargin: primaryToSecondaryMarginFromBody,
   });
   const driverName = driverEvaluation.assignedDriver || null;
   const driverCoreBelief = driverName ? DRIVER_CORE_BELIEFS[driverName] : null;
+  const secondaryDriverName = driverEvaluation.secondaryDriver || null;
+  const secondaryDriverCoreBelief = secondaryDriverName
+    ? DRIVER_CORE_BELIEFS[secondaryDriverName]
+    : null;
 
   const timestamp = new Date().toISOString();
 
@@ -534,8 +639,10 @@ export async function POST(request) {
   const resolvedLastName  = lastName  || lookup.lastName;
   const previousDriverEvaluation = lookup.previousAssessment
     ? getDriverSummary(lookup.previousAssessment.results || {})
-    : { assignedDriver: null };
+    : { assignedDriver: null, secondaryDriver: null };
   const previousDriverName = previousDriverEvaluation.assignedDriver || null;
+  const previousSecondaryDriverName =
+    previousDriverEvaluation.secondaryDriver || null;
 
   // Determine #1 Critical Priority
   const criticals = priorityMatrix.criticalPriority || [];
@@ -563,6 +670,8 @@ export async function POST(request) {
       archetype,
       driverName,
       driverCoreBelief,
+      secondaryDriverName,
+      secondaryDriverCoreBelief,
     });
     try {
       const res = await fetch('https://api.resend.com/emails', {
@@ -595,10 +704,14 @@ export async function POST(request) {
     importanceRatings, priorityMatrix, contextualProfile,
     assessmentNumber, hasPortalAccount, timestamp, archetype,
     driverName,
-    driverCoreBelief,
+    secondaryDriverName,
     topDriverScore: driverEvaluation.topDriverScore || 0,
+    secondaryDriverScore: driverEvaluation.secondaryDriverScore ?? null,
+    primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin || 0,
     driverScores: driverEvaluation.driverScores || createEmptyDriverScores(),
+    driverGates: driverEvaluation.driverGates || createEmptyDriverGates(),
     previousDriverName,
+    previousSecondaryDriverName,
   });
   try {
     const res = await fetch('https://api.resend.com/emails', {

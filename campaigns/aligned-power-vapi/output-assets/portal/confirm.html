@@ -56,8 +56,13 @@
         msgEl.classList.add('text-red-600');
         return;
       }
+      var redirect = params.get('redirect') || '';
+      var loginHref = '/login';
+      if (redirect) loginHref += '?redirect=' + encodeURIComponent(redirect);
+      var loginLink = document.querySelector('a[href="/login"]');
+      if (loginLink) loginLink.href = loginHref;
       setTimeout(function() {
-        window.location.href = '/login';
+        window.location.href = loginHref;
       }, 2500);
     })();
   </script>

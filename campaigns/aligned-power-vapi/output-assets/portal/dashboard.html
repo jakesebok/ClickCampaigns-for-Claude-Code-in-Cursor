@@ -1918,6 +1918,25 @@
             body: 'Your latest assessment does not map cleanly to a single archetype pattern. Review the score breakdown to see which arena is pulling the pattern away from your prior results.'
           };
         }
+        function formatDriverSummaryLine(label, driverName, score) {
+          if (!driverName || typeof score !== 'number') return label + ': None';
+          return label + ': ' + driverName + ' (' + score + ' points)';
+        }
+        function getSecondaryDriverTransitionNote(previousDriver, currentDriver) {
+          if (!previousDriver && currentDriver) {
+            return 'A secondary pattern has emerged: ' + currentDriver + '. This suggests a second internal driver is becoming active alongside your primary pattern. Read more in the Driver Library.';
+          }
+          if (previousDriver && !currentDriver) {
+            return 'Your secondary pattern (' + previousDriver + ') is no longer detected. Your primary driver is now more dominant, or the secondary pattern has been addressed.';
+          }
+          if (previousDriver && currentDriver && previousDriver !== currentDriver) {
+            return 'Your secondary pattern has shifted from ' + previousDriver + ' to ' + currentDriver + '. The underlying influence on your behavior is evolving. Explore both patterns in the Driver Library.';
+          }
+          if (previousDriver && currentDriver && previousDriver === currentDriver) {
+            return 'Your secondary pattern (' + currentDriver + ') remains consistent alongside your primary driver.';
+          }
+          return '';
+        }
         function renderProgressBodyHtml(text) {
           if (!text) return '';
           return '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' +
@@ -1953,7 +1972,20 @@
             }
             html += '</div>';
           }
+          if (section.detailLines && section.detailLines.length) {
+            html += '<div class="space-y-1 text-sm text-[var(--ap-secondary)]">';
+            html += section.detailLines.map(function(line) {
+              return '<p>' + escapeTransitionHtml(line) + '</p>';
+            }).join('');
+            html += '</div>';
+          }
           html += renderProgressBodyHtml(section.body);
+          if (section.supportingNote) {
+            html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + escapeTransitionHtml(section.supportingNote) + '</p>';
+          }
+          if (section.linkHref && section.linkLabel) {
+            html += '<a href="' + escapeTransitionHtml(section.linkHref) + '" class="inline-flex items-center gap-1 text-sm font-medium text-[var(--ap-accent)] hover:underline">' + escapeTransitionHtml(section.linkLabel) + '</a>';
+          }
           html += '</div>';
           return html;
         }
@@ -1975,13 +2007,27 @@
           var currArchetype = currRes.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(currRes) : null);
           var prevDriverEval = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.ensureEvaluation)
             ? VAPI_DRIVERS.ensureEvaluation(prevRes)
-            : { assignedDriver: typeof prevRes.assignedDriver === 'string' ? prevRes.assignedDriver : null };
+            : {
+                assignedDriver: typeof prevRes.assignedDriver === 'string' ? prevRes.assignedDriver : null,
+                secondaryDriver: typeof prevRes.secondaryDriver === 'string' ? prevRes.secondaryDriver : null,
+                topDriverScore: typeof prevRes.topDriverScore === 'number' ? prevRes.topDriverScore : 0,
+                secondaryDriverScore: typeof prevRes.secondaryDriverScore === 'number' ? prevRes.secondaryDriverScore : null
+              };
           var currDriverEval = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.ensureEvaluation)
             ? VAPI_DRIVERS.ensureEvaluation(currRes)
-            : { assignedDriver: typeof currRes.assignedDriver === 'string' ? currRes.assignedDriver : null };
+            : {
+                assignedDriver: typeof currRes.assignedDriver === 'string' ? currRes.assignedDriver : null,
+                secondaryDriver: typeof currRes.secondaryDriver === 'string' ? currRes.secondaryDriver : null,
+                topDriverScore: typeof currRes.topDriverScore === 'number' ? currRes.topDriverScore : 0,
+                secondaryDriverScore: typeof currRes.secondaryDriverScore === 'number' ? currRes.secondaryDriverScore : null
+              };
           var driverTransition = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.getTransitionSummary)
             ? VAPI_DRIVERS.getTransitionSummary(prevDriverEval.assignedDriver || null, currDriverEval.assignedDriver || null)
             : null;
+          var secondaryDriverTransitionNote = getSecondaryDriverTransitionNote(
+            prevDriverEval.secondaryDriver || null,
+            currDriverEval.secondaryDriver || null
+          );
           var sections = [
             getMetricTransitionNarrative(prevRes, currRes, 'overall'),
             getArchetypeTransitionNarrative(prevArchetype || null, currArchetype || null),
@@ -1992,7 +2038,14 @@
               subtitle: driverTransition.subheading,
               body: driverTransition.body,
               previousBelief: driverTransition.previousBelief,
-              currentBelief: driverTransition.currentBelief
+              currentBelief: driverTransition.currentBelief,
+              detailLines: [
+                formatDriverSummaryLine('Primary driver', currDriverEval.assignedDriver || null, currDriverEval.topDriverScore),
+                formatDriverSummaryLine('Secondary driver', currDriverEval.secondaryDriver || null, currDriverEval.secondaryDriverScore)
+              ],
+              supportingNote: secondaryDriverTransitionNote || null,
+              linkHref: '/portal/driver-library',
+              linkLabel: 'Explore all driver patterns in the Driver Library >'
             } : null,
             selectedMetricKey === 'overall' ? null : getMetricTransitionNarrative(prevRes, currRes, selectedMetricKey)
           ].filter(Boolean);

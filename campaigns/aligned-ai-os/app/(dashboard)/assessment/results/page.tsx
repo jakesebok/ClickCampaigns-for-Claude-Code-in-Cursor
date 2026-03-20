@@ -48,10 +48,17 @@ import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 import { DRIVER_CONTENT, DRIVER_FALLBACK, type VapiDriverName } from "@/lib/vapi/drivers";
+import { DRIVER_ACCENT_COLORS, DriverIcon } from "@/lib/vapi/driver-icons";
 import { getDriverTransitionSummary } from "@/lib/vapi/driver-progress";
 import { VAPI_PROGRESS_TRANSITIONS } from "@/lib/vapi/progress-transitions";
 
 type MetricKey = "overall" | `arena:${string}` | `domain:${string}`;
+
+function coerceDriverName(
+  value: string | null | undefined
+): VapiDriverName | null {
+  return value && value in DRIVER_CONTENT ? (value as VapiDriverName) : null;
+}
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity,  IA: Compass, ME: Brain, AF: Focus,
@@ -132,10 +139,12 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
 
 function DriverSection({
   assignedDriver,
+  secondaryDriver,
   driverScores,
   topDriverScore,
 }: {
   assignedDriver: string | null;
+  secondaryDriver?: string | null;
   driverScores?: Record<string, number>;
   topDriverScore?: number;
 }) {
@@ -151,11 +160,19 @@ function DriverSection({
     assignedDriver && assignedDriver in DRIVER_CONTENT
       ? (assignedDriver as VapiDriverName)
       : null;
+  const secondaryDriverName =
+    secondaryDriver && secondaryDriver in DRIVER_CONTENT
+      ? (secondaryDriver as VapiDriverName)
+      : null;
   const driver = driverName ? DRIVER_CONTENT[driverName] : null;
+  const secondary = secondaryDriverName
+    ? DRIVER_CONTENT[secondaryDriverName]
+    : null;
   const strength =
     driverName && driverScores
       ? Math.max(topDriverScore ?? 0, driverScores[driverName] ?? 0)
       : topDriverScore ?? 0;
+  const accent = driverName ? DRIVER_ACCENT_COLORS[driverName] : "#FF6B1A";
   const note =
     "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
 
@@ -170,21 +187,47 @@ function DriverSection({
         </p>
         {driver ? (
           <>
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-serif font-bold text-foreground">
-                {driver.name}
-              </h2>
-              <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border"
+                  style={{
+                    backgroundColor: `${accent}14`,
+                    borderColor: `${accent}33`,
+                  }}
+                >
+                  <DriverIcon driver={driverName!} size={64} />
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-serif font-bold text-foreground">
+                    {driver.name}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Core fear:</span>{" "}
+                    {driver.coreFear}
+                  </p>
+                </div>
+              </div>
+              <span
+                className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider"
+                style={{
+                  borderColor: `${accent}33`,
+                  backgroundColor: `${accent}14`,
+                  color: accent,
+                }}
+              >
                 Pattern strength: {strength} / {driver.maxPossible}
               </span>
             </div>
-            <blockquote className="rounded-xl border-l-4 border-accent bg-accent/10 px-4 py-4 text-xl sm:text-2xl font-serif font-semibold leading-tight text-foreground">
+            <blockquote
+              className="rounded-xl border-l-4 px-4 py-4 text-xl sm:text-2xl font-serif font-semibold leading-tight text-foreground"
+              style={{
+                borderLeftColor: accent,
+                backgroundColor: `${accent}14`,
+              }}
+            >
               &quot;{driver.coreBelief}&quot;
             </blockquote>
-            <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">Core fear:</span>{" "}
-              {driver.coreFear}
-            </p>
             <p className="text-sm italic text-muted-foreground leading-relaxed">
               {driver.tagline}
             </p>
@@ -246,21 +289,73 @@ function DriverSection({
                 );
               })}
             </div>
+            <div className="space-y-4 border-t border-border/70 pt-4">
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                {note}
+              </p>
+              <Link
+                href="/drivers"
+                className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+              >
+                Learn more about all driver patterns <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            {secondary && (
+              <div className="space-y-3 border-t border-border/70 pt-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  Secondary Pattern
+                </p>
+                <div className="flex items-start gap-3">
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border"
+                    style={{
+                      backgroundColor: `${DRIVER_ACCENT_COLORS[secondaryDriverName!]}14`,
+                      borderColor: `${DRIVER_ACCENT_COLORS[secondaryDriverName!]}33`,
+                    }}
+                  >
+                    <DriverIcon driver={secondaryDriverName!} size={40} />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {secondary.name}
+                    </h3>
+                    <p className="text-sm italic text-muted-foreground">
+                      &quot;{secondary.coreBelief}&quot;
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {secondary.tagline}
+                    </p>
+                    <Link
+                      href="/drivers"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+                    >
+                      Learn more about all driver patterns <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
         ) : (
-          <>
+          <div className="space-y-4">
             <h2 className="text-2xl font-serif font-bold text-foreground">
               {DRIVER_FALLBACK.heading}
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {DRIVER_FALLBACK.text}
             </p>
-          </>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              {note}
+            </p>
+            <Link
+              href="/drivers"
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+            >
+              Learn more about all driver patterns <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         )}
       </div>
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        {note}
-      </p>
     </div>
   );
 }
@@ -283,8 +378,11 @@ type ResultData = {
   archetype: string;
   importance: Record<string, number>;
   assignedDriver: string | null;
+  secondaryDriver: string | null;
   driverScores: Record<string, number>;
   topDriverScore: number;
+  secondaryDriverScore: number | null;
+  primaryToSecondaryMargin: number;
   createdAt: string;
 };
 
@@ -337,6 +435,10 @@ type ProgressNarrative = {
   currentScore?: string;
   change?: string;
   changeDirection?: "up" | "down" | "same";
+  detailLines?: string[];
+  supportingNote?: string;
+  linkHref?: string;
+  linkLabel?: string;
 };
 
 const PROGRESS_TRANSITIONS = VAPI_PROGRESS_TRANSITIONS as Record<
@@ -360,6 +462,36 @@ function getChangeDirection(
 ): "up" | "down" | "same" {
   if (change == null || change === 0) return "same";
   return change > 0 ? "up" : "down";
+}
+
+function formatDriverSummaryLine(
+  label: string,
+  driverName: VapiDriverName | null,
+  score: number | null | undefined
+) {
+  if (!driverName || typeof score !== "number") {
+    return `${label}: None`;
+  }
+  return `${label}: ${driverName} (${score} points)`;
+}
+
+function getSecondaryDriverTransitionNote(
+  previousDriver: VapiDriverName | null,
+  currentDriver: VapiDriverName | null
+) {
+  if (!previousDriver && currentDriver) {
+    return `A secondary pattern has emerged: ${currentDriver}. This suggests a second internal driver is becoming active alongside your primary pattern. Read more in the Driver Library.`;
+  }
+  if (previousDriver && !currentDriver) {
+    return `Your secondary pattern (${previousDriver}) is no longer detected. Your primary driver is now more dominant, or the secondary pattern has been addressed.`;
+  }
+  if (previousDriver && currentDriver && previousDriver !== currentDriver) {
+    return `Your secondary pattern has shifted from ${previousDriver} to ${currentDriver}. The underlying influence on your behavior is evolving. Explore both patterns in the Driver Library.`;
+  }
+  if (previousDriver && currentDriver && previousDriver === currentDriver) {
+    return `Your secondary pattern (${currentDriver}) remains consistent alongside your primary driver.`;
+  }
+  return null;
 }
 
 function getMetricTransitionLookupKey(metricKey: MetricKey) {
@@ -642,8 +774,11 @@ function ResultsContent() {
         archetype: string;
         importance: Record<string, number>;
         assignedDriver?: string | null;
+        secondaryDriver?: string | null;
         driverScores?: Record<string, number>;
         topDriverScore?: number;
+        secondaryDriverScore?: number | null;
+        primaryToSecondaryMargin?: number;
         createdAt: string;
       }) => ({
         id: r.id,
@@ -653,8 +788,11 @@ function ResultsContent() {
         archetype: r.archetype,
         importance: r.importance || {},
         assignedDriver: r.assignedDriver || null,
+        secondaryDriver: r.secondaryDriver || null,
         driverScores: r.driverScores || {},
         topDriverScore: r.topDriverScore || 0,
+        secondaryDriverScore: r.secondaryDriverScore ?? null,
+        primaryToSecondaryMargin: r.primaryToSecondaryMargin ?? 0,
         createdAt: r.createdAt,
       }));
       setAllResults(all);
@@ -781,9 +919,25 @@ function ResultsContent() {
     previousProgressResult.archetype || null,
     latestProgressResult.archetype || null
   );
+  const previousPrimaryDriver = coerceDriverName(
+    previousProgressResult.assignedDriver
+  );
+  const currentPrimaryDriver = coerceDriverName(
+    latestProgressResult.assignedDriver
+  );
+  const previousSecondaryDriver = coerceDriverName(
+    previousProgressResult.secondaryDriver
+  );
+  const currentSecondaryDriver = coerceDriverName(
+    latestProgressResult.secondaryDriver
+  );
   const driverTransition = getDriverTransitionSummary(
-    (previousProgressResult.assignedDriver as VapiDriverName | null) ?? null,
-    (latestProgressResult.assignedDriver as VapiDriverName | null) ?? null
+    previousPrimaryDriver,
+    currentPrimaryDriver
+  );
+  const secondaryDriverTransitionNote = getSecondaryDriverTransitionNote(
+    previousSecondaryDriver,
+    currentSecondaryDriver
   );
   const selectedMetricTransition =
     selectedProgressMetric === "overall"
@@ -897,6 +1051,7 @@ function ResultsContent() {
 
           <DriverSection
             assignedDriver={result.assignedDriver}
+            secondaryDriver={result.secondaryDriver}
             driverScores={result.driverScores}
             topDriverScore={result.topDriverScore}
           />
@@ -1403,6 +1558,21 @@ function ResultsContent() {
                         body: driverTransition.body,
                         previousBelief: driverTransition.previousBelief,
                         currentBelief: driverTransition.currentBelief,
+                        detailLines: [
+                          formatDriverSummaryLine(
+                            "Primary driver",
+                            currentPrimaryDriver,
+                            latestProgressResult.topDriverScore
+                          ),
+                          formatDriverSummaryLine(
+                            "Secondary driver",
+                            currentSecondaryDriver,
+                            latestProgressResult.secondaryDriverScore
+                          ),
+                        ],
+                        supportingNote: secondaryDriverTransitionNote ?? undefined,
+                        linkHref: "/drivers",
+                        linkLabel: "Explore all driver patterns in the Driver Library >",
                       } satisfies ProgressNarrative,
                       selectedMetricTransition,
                     ]
@@ -1458,9 +1628,29 @@ function ResultsContent() {
                               )}
                             </div>
                           )}
+                          {item.detailLines && item.detailLines.length > 0 && (
+                            <div className="space-y-1 text-sm text-muted-foreground">
+                              {item.detailLines.map((line) => (
+                                <p key={`${item.key}-${line}`}>{line}</p>
+                              ))}
+                            </div>
+                          )}
                           <p className="text-sm leading-relaxed text-muted-foreground">
                             {item.body}
                           </p>
+                          {item.supportingNote && (
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                              {item.supportingNote}
+                            </p>
+                          )}
+                          {item.linkHref && item.linkLabel && (
+                            <Link
+                              href={item.linkHref}
+                              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+                            >
+                              {item.linkLabel}
+                            </Link>
+                          )}
                         </div>
                       ))}
                   </div>
