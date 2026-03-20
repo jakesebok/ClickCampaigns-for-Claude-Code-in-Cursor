@@ -69,7 +69,7 @@
     .portal-library-desktop-sidebar { display: none; }
     .portal-library-desktop-sections { min-width: 0; }
     .portal-library-sidebar-sticky { position: sticky; top: 6rem; }
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       .portal-library-mobile-nav { display: none; }
       .portal-library-desktop-layout {
         display: grid;
@@ -77,7 +77,7 @@
         grid-template-columns: 260px minmax(0, 1fr);
         align-items: start;
       }
-      .portal-library-desktop-sidebar { display: block; }
+      .portal-library-desktop-sidebar { display: block; align-self: start; }
     }
   </style>
 </head>

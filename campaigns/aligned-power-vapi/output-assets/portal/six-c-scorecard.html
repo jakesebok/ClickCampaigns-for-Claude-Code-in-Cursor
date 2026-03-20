@@ -240,8 +240,11 @@
 
       var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
       var submittedThisWeek = !!(win && win.canSubmit && scoredSubmissions.some(function(row) {
-        return typeof isDateInScorecardWindow === 'function'
-          ? isDateInScorecardWindow(row.created_at, { opensAt: win.opensAt, closesAt: win.closesAt })
+        if (typeof isDateInScorecardWindow === 'function' && isDateInScorecardWindow(row.created_at, { opensAt: win.opensAt, closesAt: win.closesAt })) {
+          return true;
+        }
+        return typeof isSameEasternCalendarWeek === 'function'
+          ? isSameEasternCalendarWeek(row.created_at, new Date())
           : false;
       }));
       if (!hasNoSubmissions && submittedThisWeek) {
@@ -418,8 +421,11 @@
             .order('created_at', { ascending: false })
             .limit(24);
           var alreadySubmittedThisWeek = (liveSubmissions || []).filter(hasMeaningfulScores).some(function(row) {
-            return typeof isDateInScorecardWindow === 'function'
-              ? isDateInScorecardWindow(row.created_at, { opensAt: w.opensAt, closesAt: w.closesAt })
+            if (typeof isDateInScorecardWindow === 'function' && isDateInScorecardWindow(row.created_at, { opensAt: w.opensAt, closesAt: w.closesAt })) {
+              return true;
+            }
+            return typeof isSameEasternCalendarWeek === 'function'
+              ? isSameEasternCalendarWeek(row.created_at, new Date())
               : false;
           });
           if (alreadySubmittedThisWeek) {

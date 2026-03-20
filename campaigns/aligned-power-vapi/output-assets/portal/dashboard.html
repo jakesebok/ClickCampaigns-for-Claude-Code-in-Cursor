@@ -1042,6 +1042,7 @@
           archHtml += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
           archHtml += '</div></details>';
         }
+        archHtml += '<div class="mt-4 pt-4 border-t border-[var(--ap-border)]/70"><a href="/portal/archetype-library" class="inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" style="color:' + archetypeColor + '">Learn more about all founder archetypes &gt;</a></div>';
         archHtml += '</div></div>';
         archSectionEl.innerHTML = archHtml;
         archSectionEl.classList.remove('hidden');
@@ -2442,8 +2443,9 @@
           submittedThisWeek = scoredSixCRows.some(function(row) {
             if (!row || !row.created_at) return false;
             if (typeof isDateInScorecardWindow === 'function') {
-              return isDateInScorecardWindow(row.created_at, relevantWindow);
+              if (isDateInScorecardWindow(row.created_at, relevantWindow)) return true;
             }
+            if (win.canSubmit && typeof isSameEasternCalendarWeek === 'function' && isSameEasternCalendarWeek(row.created_at, new Date())) return true;
             var submittedAt = new Date(row.created_at);
             return submittedAt >= relevantWindow.opensAt && submittedAt <= relevantWindow.closesAt;
           });
@@ -2502,11 +2504,15 @@
         var reflectionKeys = ['reflection_clarity', 'reflection_coherence', 'reflection_capacity', 'reflection_confidence', 'reflection_courage', 'reflection_connection'];
         var reflectionLabels = { reflection_clarity: 'Clarity', reflection_coherence: 'Coherence', reflection_capacity: 'Capacity', reflection_confidence: 'Confidence', reflection_courage: 'Courage', reflection_connection: 'Connection' };
         var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReview[k] && String(weeklyReview[k]).trim(); });
-        if (hasReflections) {
+        var hasFocusAccordion = !missedWindow && !!oneThingLatest;
+        if (hasReflections || hasFocusAccordion) {
           function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
           var wrap = document.getElementById('one-thing-banner-expand-wrap');
           wrap.classList.remove('hidden');
           var html = '';
+          if (hasFocusAccordion) {
+            html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">This week&apos;s focus</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(oneThingLatest) + '</p></div>';
+          }
           reflectionKeys.forEach(function(k) {
             var val = weeklyReview[k] && String(weeklyReview[k]).trim();
             if (!val) return;
@@ -2514,6 +2520,8 @@
             html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(val) + '</p></div>';
           });
           document.getElementById('one-thing-banner-reflections').innerHTML = html;
+          var expandText = document.querySelector('#one-thing-banner-expand-btn span:last-child');
+          if (expandText) expandText.textContent = hasReflections ? 'View my 6C reflections' : "View this week's focus";
           var expandBtn = document.getElementById('one-thing-banner-expand-btn');
           var accordion = document.getElementById('one-thing-banner-accordion');
           var collapseBtn = document.getElementById('one-thing-banner-collapse-btn');
@@ -2578,6 +2586,8 @@
             var actionRow = document.getElementById('six-c-action-row');
             if (actionRow) actionRow.classList.remove('hidden');
             if (scorecardCta) scorecardCta.classList.add('hidden');
+            var ctaLink = document.querySelector('#one-thing-scorecard-cta a[href="/scorecard"]');
+            if (ctaLink) ctaLink.classList.add('hidden');
           } else {
             linkEl.classList.add('hidden');
             closedMsg.textContent = 'Your next scorecard will be available Friday at 12pm.';
@@ -2585,6 +2595,8 @@
             var actionRow = document.getElementById('six-c-action-row');
             if (actionRow) actionRow.classList.remove('hidden');
             if (scorecardCta) scorecardCta.classList.add('hidden');
+            var ctaLinkElse = document.querySelector('#one-thing-scorecard-cta a[href="/scorecard"]');
+            if (ctaLinkElse) ctaLinkElse.classList.add('hidden');
           }
         }
         document.getElementById('six-c-section').classList.remove('hidden');
