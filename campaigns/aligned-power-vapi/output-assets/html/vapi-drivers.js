@@ -1167,17 +1167,8 @@
       : driverName
         ? DRIVER_CONTENT[driverName].tagline
         : null;
-    var previewQuote = isAlignedMomentum
-      ? ALIGNED_MOMENTUM_CONTENT.coreState
-      : driverName
-        ? DRIVER_CONTENT[driverName].coreBelief
-        : fallbackContent.text;
-    var previewIcon = isAlignedMomentum
-      ? getDriverIcon(ALIGNED_MOMENTUM_NAME, 64)
-      : driverName
-        ? getDriverIcon(driverName, 64)
-        : "";
     var profileHtml = "";
+    var dashboardExpandedHtml = "";
     var html = '<div id="' + id + '" class="driver-results-shell">';
     if (context === "results") {
       if (isAlignedMomentum) {
@@ -1272,6 +1263,51 @@
         '">Explore all driver patterns &gt;</a>';
       profileHtml += "</div>";
       profileHtml += "</div>";
+      dashboardExpandedHtml += '<div class="space-y-5">';
+      dashboardExpandedHtml +=
+        '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+        accent +
+        '14;border-left:2px solid ' +
+        accent +
+        ';">&quot;' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.coreState) +
+        "&quot;</blockquote>";
+      dashboardExpandedHtml +=
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.description) +
+        "</p>";
+      [
+        ["How This Shows Up in Your Scores", ALIGNED_MOMENTUM_CONTENT.howThisShowsUp],
+        ["What This Makes Possible", ALIGNED_MOMENTUM_CONTENT.whatThisMakesPossible],
+        ["How to Protect It", ALIGNED_MOMENTUM_CONTENT.howToProtectIt],
+      ].forEach(function (section) {
+        dashboardExpandedHtml +=
+          '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+          surface +
+          ';">';
+        dashboardExpandedHtml +=
+          '<summary class="' +
+          detailsTitleClass +
+          '">' +
+          "<span>" +
+          escapeHtml(section[0]) +
+          '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+        dashboardExpandedHtml +=
+          '<div class="' +
+          detailsBodyClass +
+          '">' +
+          escapeHtml(section[1]) +
+          "</div></details>";
+      });
+      dashboardExpandedHtml +=
+        '<p class="' +
+        noteCopyClass +
+        '">' +
+        escapeHtml(alignedMomentumNote) +
+        "</p>";
+      dashboardExpandedHtml += "</div>";
     } else if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
       profileHtml += '<div class="flex flex-col gap-5">';
@@ -1392,6 +1428,51 @@
         profileHtml += "</div></div></div>";
       }
       profileHtml += "</div>";
+      dashboardExpandedHtml += '<div class="space-y-5">';
+      dashboardExpandedHtml +=
+        '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+        accent +
+        '14;border-left:2px solid ' +
+        accent +
+        ';">&quot;' +
+        escapeHtml(driver.coreBelief) +
+        "&quot;</blockquote>";
+      dashboardExpandedHtml +=
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
+        escapeHtml(driver.description) +
+        "</p>";
+      [
+        ["How This Shows Up in Your Scores", driver.mechanism],
+        ["What This Is Costing You", driver.whatItCosts],
+        ["The Way Out", driver.theWayOut],
+      ].forEach(function (section) {
+        dashboardExpandedHtml +=
+          '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+          surface +
+          ';">';
+        dashboardExpandedHtml +=
+          '<summary class="' +
+          detailsTitleClass +
+          '">' +
+          "<span>" +
+          escapeHtml(section[0]) +
+          '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+        dashboardExpandedHtml +=
+          '<div class="' +
+          detailsBodyClass +
+          '">' +
+          escapeHtml(section[1]) +
+          "</div></details>";
+      });
+      dashboardExpandedHtml +=
+        '<p class="' +
+        noteCopyClass +
+        '">' +
+        escapeHtml(DRIVER_NOTE) +
+        "</p>";
+      dashboardExpandedHtml += "</div>";
     } else {
       profileHtml += '<div class="space-y-4">';
       profileHtml +=
@@ -1417,26 +1498,52 @@
           '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:opacity-80 transition-colors" data-driver-library-link="1">Explore all driver patterns in the Driver Library &gt;</a>';
       }
       profileHtml += "</div>";
+      dashboardExpandedHtml += '<div class="space-y-4">';
+      dashboardExpandedHtml +=
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
+        escapeHtml(fallbackContent.text) +
+        "</p>";
+      dashboardExpandedHtml +=
+        '<p class="' +
+        noteCopyClass +
+        '">' +
+        escapeHtml(DRIVER_NOTE) +
+        "</p>";
+      dashboardExpandedHtml += "</div>";
     }
     profileHtml += "</div>";
     if (useCollapsedDashboard) {
       html += '<div class="p-6 sm:p-8 relative space-y-5">';
       html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
-      html += '<div class="flex items-start gap-4">';
-      if (previewIcon) {
-        html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">' + previewIcon + '</div>';
-      }
-      html += '<div class="min-w-0 flex-1 space-y-2">';
+      html += '<div class="space-y-2">';
       html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
+      if (driverName) {
+        html += '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' + escapeHtml(DRIVER_CONTENT[driverName].coreFear) + '</p>';
+      }
       if (previewTagline) {
         html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + '</p>';
       }
-      html += '</div></div>';
-      html += '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' + accent + '14;border-left:2px solid ' + accent + ';">&quot;' + escapeHtml(previewQuote) + '&quot;</blockquote>';
+      if (driverName) {
+        html +=
+          '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+          accent +
+          '14;color:' +
+          accent +
+          ';border:1px solid ' +
+          accent +
+          '33;">Pattern strength: ' +
+          evaluation.topDriverScore +
+          ' / ' +
+          DRIVER_CONTENT[driverName].maxPossible +
+          "</span>";
+      }
+      html += '</div>';
       html += '<div class="space-y-4">';
       html += '<details class="driver-profile-details group">';
       html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">' + dashboardToggleLabel + ' <i data-lucide="chevron-down" class="driver-profile-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-      html += '<div class="mt-4">' + profileHtml + '</div>';
+      html += '<div class="mt-4">' + dashboardExpandedHtml + '</div>';
       html += '</details>';
       html += '<div class="pt-4 border-t border-[var(--ap-border)]/70">';
       html += '<a href="' + libraryHref + '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' + accent + '">' + (driverName ? 'Learn more about all driver patterns &gt;' : 'Explore all driver patterns &gt;') + '</a>';
