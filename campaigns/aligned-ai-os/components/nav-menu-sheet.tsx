@@ -10,6 +10,8 @@ import {
   Settings,
   BarChart3,
   X,
+  BookOpen,
+  Brain,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -17,6 +19,11 @@ const staticMenuItems = [
   { href: "/scorecard", label: "6Cs Scorecard", icon: ClipboardCheck },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
+];
+
+const exploreMenuItems = [
+  { href: "/archetypes", label: "Archetype Library", icon: BookOpen },
+  { href: "/drivers", label: "Driver Library", icon: Brain },
 ];
 
 export function NavMenuSheet() {
@@ -75,6 +82,22 @@ export function NavMenuSheet() {
             </div>
             <nav className="p-4 space-y-1">
               {menuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-foreground hover:bg-accent/10 transition-colors"
+                >
+                  <item.icon className="h-5 w-5 text-accent" />
+                  {item.label}
+                </Link>
+              ))}
+              <div className="px-4 pt-4 pb-2">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                  Explore
+                </p>
+              </div>
+              {exploreMenuItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

@@ -473,6 +473,7 @@
     var secondaryDriver = primaryDriver ? normalizeDriverName(evaluation.secondaryDriver || null) : null;
     var takeAssessmentHref = opts.takeAssessmentHref || "/assessment";
     var programHref = opts.programHref || "https://jakesebok.com/work-with-me";
+    var archetypeLibraryHref = opts.archetypeLibraryHref || "/portal/archetype-library";
     var primaryAccent = primaryDriver && window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
       ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[primaryDriver]
       : "#FF6B1A";
@@ -496,9 +497,10 @@
     html += '<section class="rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(primaryAccent, "soft") + '">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(DRIVER_LIBRARY_FOOTER_HEADING) + '</h2>' +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_FOOTER_TEXT) + '</p>' +
-      '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">' +
+      '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">' +
         '<a href="' + escapeHtml(programHref) + '" class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ap-accent)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e55a0f]">Learn About the Program <span aria-hidden="true">→</span></a>' +
         '<a href="' + escapeHtml(takeAssessmentHref) + '" class="inline-flex items-center justify-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Retake the VAPI Assessment <span aria-hidden="true">→</span></a>' +
+        '<a href="' + escapeHtml(archetypeLibraryHref) + '" class="inline-flex items-center justify-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Explore the 9 Founder Archetypes <span aria-hidden="true">→</span></a>' +
       '</div>' +
     '</section>';
 

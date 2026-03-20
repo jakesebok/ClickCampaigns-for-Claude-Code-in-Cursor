@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/images/vapi/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The 9 Driver Patterns | Jake Sebok</title>
-  <meta name="description" content="Explore the 9 founder driver patterns underneath VAPI score shapes and deepen your self-awareness.">
+  <title>The 9 Founder Archetypes | Jake Sebok</title>
+  <meta name="description" content="Explore the 9 founder archetypes inside the VAPI Assessment and understand your current operating pattern.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/vapi/vapi-archetypes.js"></script>
   <script src="/vapi/vapi-drivers.js"></script>
-  <script src="/vapi/vapi-driver-library.js"></script>
+  <script src="/vapi/vapi-archetype-library.js"></script>
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -54,19 +55,19 @@
 
   <main class="mx-auto max-w-7xl px-4 py-8 sm:py-10">
     <div id="loading" class="rounded-3xl border border-[var(--ap-border)] bg-[var(--ap-surface)] px-6 py-10 text-center text-[var(--ap-muted)] shadow-sm">
-      Loading the driver library...
+      Loading the archetype library...
     </div>
     <div id="gated-content" class="hidden rounded-3xl border border-[var(--ap-border)] bg-[var(--ap-surface)] px-6 py-10 shadow-sm sm:px-8">
       <div class="max-w-2xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Driver Library</p>
-        <h1 class="mt-3 text-4xl text-[var(--ap-primary)]">Unlock the Full Driver Library</h1>
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Archetype Library</p>
+        <h1 class="mt-3 text-4xl text-[var(--ap-primary)]">Unlock the Full Archetype Library</h1>
         <div class="mt-5 space-y-4 text-sm leading-relaxed text-[var(--ap-secondary)]">
-          <p>The Driver Library is an in-depth exploration of all 9 internal patterns that drive founder behavior. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each pattern connects to the others.</p>
+          <p>The Archetype Library is an in-depth exploration of all 9 founder operating patterns. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each archetype connects to the others.</p>
           <p>Create your free portal account to access the full library, save your VAPI results, and track your progress over time.</p>
         </div>
         <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a id="gated-signup-link" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Fdriver-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <span aria-hidden="true">→</span></a>
-          <a id="gated-login-link" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Fdriver-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
+          <a id="gated-signup-link" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Farchetype-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <span aria-hidden="true">→</span></a>
+          <a id="gated-login-link" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Farchetype-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
         </div>
         <a href="/assessment/results" class="mt-5 inline-flex text-sm font-medium text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Maybe later</a>
       </div>
@@ -94,7 +95,7 @@
       var session = null;
 
       function getPortalAuthHref(path) {
-        var href = 'https://portal.alignedpower.coach/' + path + '?redirect=' + encodeURIComponent('/portal/driver-library');
+        var href = 'https://portal.alignedpower.coach/' + path + '?redirect=' + encodeURIComponent('/portal/archetype-library');
         try {
           var raw = sessionStorage.getItem('vapiResults');
           var results = raw ? JSON.parse(raw) : null;
@@ -109,7 +110,7 @@
         if (response.ok) {
           eval(await response.text());
           if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
-            var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+            var createClient = (await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm')).createClient;
             var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
             var sessionResult = await supabase.auth.getSession();
             session = sessionResult.data.session;
@@ -137,18 +138,18 @@
         return;
       }
 
-      var rendered = window.VAPI_DRIVER_LIBRARY.buildPage({
+      var rendered = window.VAPI_ARCHETYPE_LIBRARY.buildPage({
         results: latestResults,
         takeAssessmentHref: '/assessment/start',
         programHref: '/work-with-me',
-        archetypeLibraryHref: '/assessment/archetypes'
+        driverLibraryHref: '/assessment/drivers'
       });
 
       pageContentEl.innerHTML = rendered.html;
-      window.VAPI_DRIVER_LIBRARY.populateSections(
-        document.getElementById('driver-library-sections'),
-        rendered.primaryDriver,
-        rendered.secondaryDriver
+      window.VAPI_ARCHETYPE_LIBRARY.populateSections(
+        document.getElementById('archetype-library-sections'),
+        rendered.currentArchetype,
+        '/assessment/drivers'
       );
 
       if (loadingEl) loadingEl.classList.add('hidden');

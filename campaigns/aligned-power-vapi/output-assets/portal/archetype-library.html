@@ -5,15 +5,16 @@
   <script src="/portal/theme-init.js"></script>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Driver Library | Aligned Performance Portal</title>
-  <meta name="description" content="Explore the 9 internal driver patterns behind founder behavior inside the Aligned Performance Portal.">
+  <title>Archetype Library | Aligned Performance Portal</title>
+  <meta name="description" content="Explore the 9 founder archetypes inside the Aligned Performance Portal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/html/vapi-archetypes.js"></script>
   <script src="/html/vapi-drivers.js"></script>
-  <script src="/html/vapi-driver-library.js"></script>
+  <script src="/html/vapi-archetype-library.js"></script>
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -54,7 +55,7 @@
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
       <div class="flex items-center gap-3">
         <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
-        <span class="hidden text-[var(--ap-muted)] sm:inline">Driver Library</span>
+        <span class="hidden text-[var(--ap-muted)] sm:inline">Archetype Library</span>
       </div>
       <div class="flex items-center gap-3">
         <button type="button" id="theme-toggle" class="rounded-lg p-2 text-[var(--ap-primary)] hover:bg-[var(--ap-bg)]" aria-label="Toggle theme">
@@ -69,7 +70,7 @@
 
   <main class="mx-auto max-w-7xl px-4 py-8 sm:py-10">
     <div id="loading" class="rounded-3xl border border-[var(--ap-border)] surface px-6 py-10 text-center text-[var(--ap-muted)] shadow-sm">
-      Loading your driver library...
+      Loading your archetype library...
     </div>
     <div id="auth-error" class="hidden rounded-3xl border border-red-300 bg-red-50/90 px-6 py-5 text-sm text-red-700 shadow-sm"></div>
     <div id="page-content" class="hidden space-y-8"></div>
@@ -126,14 +127,14 @@
         return;
       }
 
-      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      var createClient = (await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm')).createClient;
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var sessionResult = await supabase.auth.getSession();
       var session = sessionResult.data.session;
 
       if (!session) {
         if (loadingEl) loadingEl.classList.add('hidden');
-        authErrorEl.textContent = 'You need to log in to view the Driver Library.';
+        authErrorEl.textContent = 'You need to log in to view the Archetype Library.';
         authErrorEl.classList.remove('hidden');
         setTimeout(function() {
           window.location.href = '/login';
@@ -165,18 +166,18 @@
         }
       }
 
-      var rendered = window.VAPI_DRIVER_LIBRARY.buildPage({
+      var rendered = window.VAPI_ARCHETYPE_LIBRARY.buildPage({
         results: latestResults,
         takeAssessmentHref: '/assessment',
         programHref: 'https://jakesebok.com/work-with-me',
-        archetypeLibraryHref: '/portal/archetype-library'
+        driverLibraryHref: '/portal/driver-library'
       });
 
       pageContentEl.innerHTML = rendered.html;
-      window.VAPI_DRIVER_LIBRARY.populateSections(
-        document.getElementById('driver-library-sections'),
-        rendered.primaryDriver,
-        rendered.secondaryDriver
+      window.VAPI_ARCHETYPE_LIBRARY.populateSections(
+        document.getElementById('archetype-library-sections'),
+        rendered.currentArchetype,
+        '/portal/driver-library'
       );
 
       if (loadingEl) loadingEl.classList.add('hidden');

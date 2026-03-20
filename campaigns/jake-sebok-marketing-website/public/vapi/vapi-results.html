@@ -229,6 +229,32 @@
     </div>
   </div>
 
+  <div id="archetype-library-gate" class="hidden fixed inset-0 z-[200]">
+    <div id="archetype-library-gate-backdrop" class="absolute inset-0 bg-[rgba(14,22,36,0.72)] backdrop-blur-sm"></div>
+    <div class="relative flex min-h-full items-center justify-center px-4 py-10">
+      <div class="w-full max-w-xl rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-2xl sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Archetype Library</p>
+            <h2 class="mt-2 text-3xl text-[var(--ap-primary)]">Unlock the Full Archetype Library</h2>
+          </div>
+          <button type="button" id="archetype-library-gate-close" class="rounded-full p-2 text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]" aria-label="Close">
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed text-[var(--ap-secondary)]">
+          <p>The Archetype Library is an in-depth exploration of all 9 founder operating patterns. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each archetype connects to the others.</p>
+          <p>Create your free portal account to access the full library, save your VAPI results, and track your progress over time.</p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a id="archetype-library-gate-signup" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Farchetype-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+          <a id="archetype-library-gate-login" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Farchetype-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
+        </div>
+        <button type="button" id="archetype-library-gate-dismiss" class="mt-5 text-sm font-medium text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Maybe later</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="bg-[var(--ap-primary)] text-white border-t-2 border-[var(--ap-accent)] py-8 mt-12 no-print">
     <div class="max-w-[1080px] mx-auto px-5 sm:px-6">
       <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mb-8 pb-6 border-b border-white/10">
@@ -421,15 +447,8 @@
         }
       } catch (error) {}
 
-      var gateEl = document.getElementById('driver-library-gate');
-      var closeBtn = document.getElementById('driver-library-gate-close');
-      var dismissBtn = document.getElementById('driver-library-gate-dismiss');
-      var backdrop = document.getElementById('driver-library-gate-backdrop');
-      var signupLink = document.getElementById('driver-library-gate-signup');
-      var loginLink = document.getElementById('driver-library-gate-login');
-
-      function getPortalAuthHref(path) {
-        var redirect = 'redirect=' + encodeURIComponent('/portal/driver-library');
+      function getPortalAuthHref(path, targetPath) {
+        var redirect = 'redirect=' + encodeURIComponent(targetPath);
         var raw = sessionStorage.getItem('vapiResults');
         var results = raw ? (function() { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
         var email = results && results.email ? String(results.email).trim().toLowerCase() : '';
@@ -438,33 +457,68 @@
         return href;
       }
 
-      function openGate() {
-        if (signupLink) signupLink.href = getPortalAuthHref('signup');
-        if (loginLink) loginLink.href = getPortalAuthHref('login');
-        if (gateEl) gateEl.classList.remove('hidden');
+      function openGate(config) {
+        if (config.signupLink) config.signupLink.href = getPortalAuthHref('signup', config.targetPath);
+        if (config.loginLink) config.loginLink.href = getPortalAuthHref('login', config.targetPath);
+        if (config.element) config.element.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
       }
 
-      function closeGate() {
-        if (gateEl) gateEl.classList.add('hidden');
+      function closeGate(config) {
+        if (config.element) config.element.classList.add('hidden');
         document.body.style.overflow = '';
       }
 
-      if (closeBtn) closeBtn.addEventListener('click', closeGate);
-      if (dismissBtn) dismissBtn.addEventListener('click', closeGate);
-      if (backdrop) backdrop.addEventListener('click', closeGate);
+      var gateConfigs = {
+        driver: {
+          targetPath: '/portal/driver-library',
+          element: document.getElementById('driver-library-gate'),
+          closeBtn: document.getElementById('driver-library-gate-close'),
+          dismissBtn: document.getElementById('driver-library-gate-dismiss'),
+          backdrop: document.getElementById('driver-library-gate-backdrop'),
+          signupLink: document.getElementById('driver-library-gate-signup'),
+          loginLink: document.getElementById('driver-library-gate-login')
+        },
+        archetype: {
+          targetPath: '/portal/archetype-library',
+          element: document.getElementById('archetype-library-gate'),
+          closeBtn: document.getElementById('archetype-library-gate-close'),
+          dismissBtn: document.getElementById('archetype-library-gate-dismiss'),
+          backdrop: document.getElementById('archetype-library-gate-backdrop'),
+          signupLink: document.getElementById('archetype-library-gate-signup'),
+          loginLink: document.getElementById('archetype-library-gate-login')
+        }
+      };
+
+      Object.keys(gateConfigs).forEach(function(key) {
+        var config = gateConfigs[key];
+        if (config.closeBtn) config.closeBtn.addEventListener('click', function() { closeGate(config); });
+        if (config.dismissBtn) config.dismissBtn.addEventListener('click', function() { closeGate(config); });
+        if (config.backdrop) config.backdrop.addEventListener('click', function() { closeGate(config); });
+      });
 
       document.addEventListener('click', function(event) {
         var link = event.target.closest('[data-driver-library-link="1"]');
-        if (!link) return;
+        var archetypeLink = event.target.closest('[data-archetype-library-link="1"]');
+        if (link) {
+          if (session && session.user) {
+            event.preventDefault();
+            window.open(link.href, '_blank', 'noopener');
+            return;
+          }
+          event.preventDefault();
+          openGate(gateConfigs.driver);
+          return;
+        }
+        if (!archetypeLink) return;
         if (session && session.user) {
           event.preventDefault();
-          window.open(link.href, '_blank', 'noopener');
+          window.open(archetypeLink.href, '_blank', 'noopener');
           return;
         }
         event.preventDefault();
-        openGate();
+        openGate(gateConfigs.archetype);
       });
     })();
   </script>
@@ -769,6 +823,9 @@
           html += '<p class="mt-2 text-[15px] text-[var(--ap-secondary)] leading-relaxed">Your ' + escapeHtml(laggingArenaSummary.lagging.label) + ' arena (' + laggingArenaSummary.lagging.score.toFixed(1) + ') is the area holding you back from full Architect status. Focus here. Your ' + escapeHtml(laggingArenaSummary.second.label) + ' (' + laggingArenaSummary.second.score.toFixed(1) + ') and ' + escapeHtml(laggingArenaSummary.strongest.label) + ' (' + laggingArenaSummary.strongest.score.toFixed(1) + ') are already strong enough. Close this gap and everything reinforces.</p>';
           html += '</div>';
         }
+        html += '<div class="mt-5 pt-4 border-t border-[var(--ap-border)]/70">';
+        html += '<a href="/assessment/archetypes" class="inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-archetype-library-link="1" style="color:' + color + '">Learn more about all founder archetypes &gt;</a>';
+        html += '</div>';
         html += '</div></div>';
         return html;
       }

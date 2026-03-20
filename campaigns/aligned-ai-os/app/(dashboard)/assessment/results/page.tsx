@@ -166,9 +166,31 @@ function ArchetypeSection({
                 </p>
               </div>
             )}
+          <div className="border-t border-border/70 pt-4">
+            <Link
+              href="/archetypes"
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+            >
+              Learn more about all founder archetypes{" "}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
         </>
       )}
-      {!full && <p className="text-muted-foreground text-sm leading-relaxed">{short}</p>}
+      {!full && (
+        <>
+          <p className="text-muted-foreground text-sm leading-relaxed">{short}</p>
+          <div className="border-t border-border/70 pt-4">
+            <Link
+              href="/archetypes"
+              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+            >
+              Learn more about all founder archetypes{" "}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -13,6 +13,8 @@ import {
   Activity,
   Settings,
   BarChart3,
+  BookOpen,
+  Brain,
 } from "lucide-react";
 
 const navItems = [
@@ -23,6 +25,11 @@ const navItems = [
   { href: "/scorecard", label: "6Cs", icon: ClipboardCheck },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
+];
+
+const exploreNavItems = [
+  { href: "/archetypes", label: "Archetype Library", icon: BookOpen },
+  { href: "/drivers", label: "Driver Library", icon: Brain },
 ];
 
 const bottomNavItems = [
@@ -72,6 +79,21 @@ export default function DashboardLayout({
               </Link>
             )
           )}
+          <div className="px-3 pt-5 pb-2">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              Explore
+            </p>
+          </div>
+          {exploreNavItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+            >
+              <item.icon className="h-4 w-4" />
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="p-4 border-t border-border flex items-center justify-between gap-2">
