@@ -341,10 +341,11 @@
               var isPrimary = driverName === primaryDriver;
               var isSecondary = driverName === secondaryDriver;
               return (
-                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[220px] items-center gap-3 rounded-[24px] border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="' +
-                  getLibrarySurface(isPrimary ? accent : isSecondary ? accent : null, isPrimary ? "strong" : isSecondary ? "soft" : "base") +
+                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[210px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
                   (isPrimary ? 'border-color:' + accent + '55;' : '') +
                   (!isPrimary && isSecondary ? 'border-color:' + accent + '33;' : '') +
+                  (isPrimary ? 'background:' + accent + '16;' : '') +
+                  (!isPrimary && isSecondary ? 'background:' + accent + '0D;' : '') +
                 '">' +
                   (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 24) : "") +
                   '<span class="text-sm font-medium text-[var(--ap-primary)]">' + escapeHtml(driverName) + '</span>' +
@@ -354,11 +355,10 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="grid gap-8 lg:grid-cols-[280px,minmax(0,1fr)] lg:items-start">' +
+      '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
         '<aside class="hidden lg:block">' +
-          '<div class="sticky top-8 rounded-[28px] border border-[var(--ap-border)] p-4 shadow-sm backdrop-blur-sm" style="' + getLibrarySurface(primaryDriver && window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[primaryDriver] : null, "soft") + '">' +
-            '<p class="px-3 pb-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
-            '<p class="px-3 pb-3 text-sm leading-relaxed text-[var(--ap-secondary)]">Scroll the patterns and jump directly to the one you want to read.</p>' +
+          '<div class="sticky top-6 rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+            '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
             '<nav class="space-y-2">' +
               DRIVER_ORDER.map(buildItem).join("") +
             '</nav>' +
@@ -385,9 +385,8 @@
     }
 
     return (
-      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 relative overflow-hidden rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(accent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl" style="background:' + accent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div>' +
         '<div class="flex flex-col gap-5 sm:flex-row sm:items-start">' +
           '<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border" style="background:' + accent + '14;border-color:' + accent + '33;">' +
             (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 80) : "") +
@@ -479,9 +478,8 @@
       : "#FF6B1A";
 
     var html =
-      '<section class="relative overflow-hidden rounded-[36px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8 lg:p-10" style="' + getLibrarySurface(primaryAccent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl" style="background:' + primaryAccent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div>' +
         '<p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--ap-accent)]">Driver Library</p>' +
         '<h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-5xl">' + escapeHtml(DRIVER_LIBRARY_TITLE) + '</h1>' +
         '<p class="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_SUBTITLE) + '</p>';
@@ -494,7 +492,7 @@
 
     html += '</div></section>';
     html += buildNavigation(primaryDriver, secondaryDriver);
-    html += '<section class="rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(primaryAccent, "soft") + '">' +
+    html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(DRIVER_LIBRARY_FOOTER_HEADING) + '</h2>' +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_FOOTER_TEXT) + '</p>' +
       '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">' +

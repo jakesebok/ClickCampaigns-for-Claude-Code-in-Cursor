@@ -120,6 +120,9 @@
     .nav-hamburger-panel.nav-open { transform: translateX(0); }
     .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
+    .nav-popover summary { list-style: none; }
+    .nav-popover summary::-webkit-details-marker { display: none; }
+    .nav-popover[open] .nav-popover-chevron { transform: rotate(180deg); }
     /* Importance modal slide-in */
     #importance-modal { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
     #importance-modal.importance-modal--hidden { transform: translateX(100%); }
@@ -149,8 +152,16 @@
           <span id="header-admin-link" class="hidden"><a href="/admin" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Admin</a></span>
           <a href="/settings" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Settings</a>
           <a id="header-6c-link" href="/scorecard" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
-          <a href="/portal/archetype-library" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Archetype Library</a>
-          <a href="/portal/driver-library" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Driver Library</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors">
+              Explore
+              <i data-lucide="chevron-down" class="nav-popover-chevron w-4 h-4 transition-transform duration-200"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <a href="/portal/archetype-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+              <a href="/portal/driver-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+            </div>
+          </details>
           <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
           <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
         </div>
@@ -180,8 +191,11 @@
       <span id="header-admin-link-mobile" class="hidden"><a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
       <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
       <span id="header-6c-link-mobile" class="hidden"><a href="/scorecard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a></span>
-      <a href="/portal/archetype-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
-      <a href="/portal/driver-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+      <div class="mt-2 border-t border-[var(--ap-border)] pt-3">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>
+        <a href="/portal/archetype-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+        <a href="/portal/driver-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+      </div>
       <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
@@ -277,6 +291,8 @@
       <div id="latest-result" class="mb-10"></div>
 
       <div id="archetype-section" class="mb-10 hidden"></div>
+
+      <div id="driver-section" class="mb-10 hidden"></div>
 
       <div id="where-to-focus-section" class="mb-10 hidden"></div>
 
@@ -667,6 +683,7 @@
         document.getElementById('empty-state').classList.remove('hidden');
         document.getElementById('latest-result').classList.add('hidden');
         document.getElementById('archetype-section').classList.add('hidden');
+        document.getElementById('driver-section').classList.add('hidden');
         document.getElementById('history-list').classList.add('hidden');
         var errEl = document.getElementById('empty-state-error');
         if (error) {
@@ -938,20 +955,6 @@
       var archetypeMeta = latestArchetype && typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[latestArchetype] ? VAPI_ARCHETYPES[latestArchetype] : null;
       var archetypeColor = archetypeMeta && archetypeMeta.color_accent ? archetypeMeta.color_accent : 'var(--ap-accent)';
       var archIconSvg = latestArchetype && (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(latestArchetype, archetypeColor) : '';
-      var latestDriverEvaluation = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.ensureEvaluation)
-        ? VAPI_DRIVERS.ensureEvaluation(latest.results)
-        : {
-            assignedDriver: typeof latest.results.assignedDriver === 'string' ? latest.results.assignedDriver : null,
-            driverScores: latest.results.driverScores || {},
-            topDriverScore: typeof latest.results.topDriverScore === 'number' ? latest.results.topDriverScore : 0,
-          };
-      var latestDriverName = latestDriverEvaluation.assignedDriver || null;
-      var latestDriverMeta = latestDriverName && typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.DRIVER_CONTENT
-        ? VAPI_DRIVERS.DRIVER_CONTENT[latestDriverName]
-        : null;
-      var latestDriverFallbackLabel = latestDriverEvaluation.driverFallbackType === 'high_performer'
-        ? 'No dominant driver pattern detected'
-        : 'No clear driver identified';
       latestHtml += '<div class="flex items-center gap-2.5 mb-3">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2.5 py-1 rounded-md">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-sm">' + escHtml(formatDate(latest.created_at)) + '</span>';
@@ -1015,17 +1018,6 @@
         archHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + archetypeColor + '">Your Founder Archetype</p>';
         archHtml += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escHtml(latestArchetype) + '</h2>';
         if (archTagline)         archHtml += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escHtml(archTagline) + '</p>';
-        archHtml += '<div class="mt-5 pt-5 border-t border-[var(--ap-border)] space-y-2">';
-        archHtml += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)]">Likely Driver</p>';
-        if (latestDriverMeta) {
-          archHtml += '<p class="text-lg font-extrabold text-[var(--ap-primary)]">' + escHtml(latestDriverMeta.name) + '</p>';
-          archHtml += '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">&quot;' + escHtml(latestDriverMeta.coreBelief) + '&quot;</p>';
-          archHtml += '<button type="button" class="view-result inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f] transition-colors" data-id="' + latest.id + '" data-hash="driver-section">View Full Details <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
-        } else {
-          archHtml += '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' + latestDriverFallbackLabel + '</p>';
-          archHtml += '<button type="button" class="view-result inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f] transition-colors" data-id="' + latest.id + '" data-hash="driver-section">View Details <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
-        }
-        archHtml += '</div>';
         archHtml += '</div></div>';
         if (archetypeMeta && (archetypeMeta.description || archetypeMeta.strength || archetypeMeta.growth_path)) {
           archHtml += '<details class="archetype-details mt-4 group">';
@@ -1049,6 +1041,18 @@
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
         var constEl = archSectionEl.querySelector('.archetype-constellation');
         if (constEl && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.initConstellationTooltips) VAPI_ARCHETYPE.initConstellationTooltips(constEl);
+      }
+
+      var driverSectionEl = document.getElementById('driver-section');
+      if (driverSectionEl && typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && typeof VAPI_DRIVERS.buildResultsSection === 'function') {
+        driverSectionEl.innerHTML = VAPI_DRIVERS.buildResultsSection(latest.results, {
+          id: 'dashboard-driver-card',
+          libraryHref: '/portal/driver-library'
+        });
+        var driverCardEl = driverSectionEl.querySelector('.driver-section');
+        if (driverCardEl) driverCardEl.classList.remove('mb-10');
+        driverSectionEl.classList.remove('hidden');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
       }
 
       // Where to Focus — full priority matrix (only when latest has importance ratings)
