@@ -1082,28 +1082,14 @@
         var pmHtml = window.VAPI_PM.buildPriorityMatrix(latest.results);
         if (pmHtml) {
           var ctaBlock = '';
-          var previewItems = [];
-          var protectItems = [];
-          var monitorItems = [];
-          ['PH','IA','ME','AF','RS','FA','CO','WI','VS','EX','OH','EC'].forEach(function(code) {
-            var score = domainScores[code];
-            var importance = imp[code];
-            if (score == null || importance == null) return;
-            var item = { code: code, domain: (window.VAPI_PM_DOMAIN_NAMES && window.VAPI_PM_DOMAIN_NAMES[code]) || code };
-            if (importance >= 7 && score < 6) previewItems.push(item);
-            else if (importance >= 7 && score >= 6) protectItems.push(item);
-            else monitorItems.push(item);
-          });
-          if (previewItems.length === 0) previewItems = protectItems.slice(0, 3);
-          if (previewItems.length === 0) previewItems = monitorItems.slice(0, 3);
-          previewItems = previewItems.slice(0, 3);
-          var previewBadges = previewItems.map(function(item) {
-            var label = item.domain || item.code || '';
-            return '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold border border-[var(--ap-border)] bg-[var(--ap-bg)]/70 text-[var(--ap-primary)]">' + escHtml(label) + '</span>';
-          }).join('');
-          var previewText = hasCriticalPriority
-            ? 'Your highest-leverage domains are surfaced here first so you can see exactly where focused effort will move the needle.'
-            : 'Your full priority matrix brings your strongest leverage points and maintenance areas into one place.';
+          var previewText = 'Based on your scores and the importance ratings you set, here is where your energy is best directed right now.';
+          var quadrantPreview = '' +
+            '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">' +
+              '<div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3"><p class="text-sm font-semibold text-red-600">Critical Priority</p></div>' +
+              '<div class="rounded-xl border border-green-200 bg-green-50 px-4 py-3"><p class="text-sm font-semibold text-green-600">Protect &amp; Sustain</p></div>' +
+              '<div class="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"><p class="text-sm font-semibold text-gray-600">Monitor</p></div>' +
+              '<div class="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3"><p class="text-sm font-semibold text-amber-600">Possible Over-Investment</p></div>' +
+            '</div>';
           if (isNonClient) {
             ctaBlock = '<div class="mt-8 pt-6 border-t border-[var(--ap-border)] rounded-xl bg-[var(--ap-accent)]/10 border border-[var(--ap-accent)]/30 p-5">' +
               '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-2">Get support with these areas</p>' +
@@ -1121,10 +1107,10 @@
                   '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">Where to Focus</h2>' +
                   '<p class="text-base text-[var(--ap-secondary)] leading-relaxed">' + previewText + '</p>' +
                 '</div>' +
-                (previewBadges ? '<div class="flex flex-wrap gap-2">' + previewBadges + '</div>' : '') +
+                quadrantPreview +
                 '<details class="wf-details group">' +
                   '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">View full priority matrix <i data-lucide="chevron-down" class="wf-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>' +
-                  '<div class="mt-4">' + pmHtml + ctaBlock + '</div>' +
+                  '<div class="mt-4 space-y-4"><p class="text-sm text-[var(--ap-secondary)] leading-relaxed"><strong>Click any domain below to expand and read your personalized guidance.</strong></p>' + pmHtml.replace(/<h2 class="where-to-focus[\s\S]*?<\/p>/, '') + ctaBlock + '</div>' +
                 '</details>' +
               '</div>' +
             '</div>';
