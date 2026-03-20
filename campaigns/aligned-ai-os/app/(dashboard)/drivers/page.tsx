@@ -595,6 +595,17 @@ export default function DriversPage() {
                           {extras.relationshipToOtherDrivers}
                         </p>
                       </div>
+
+                      {extras.commonArchetypes && (
+                        <div className="space-y-2">
+                          <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                            Common Archetypes
+                          </h3>
+                          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                            {extras.commonArchetypes}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </section>
                 );

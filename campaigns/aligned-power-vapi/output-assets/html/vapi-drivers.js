@@ -1,6 +1,7 @@
 (function () {
   var DRIVER_THRESHOLD = 6;
   var DRIVER_MIN_MARGIN = 2;
+  var DRIVER_SECONDARY_THRESHOLD = 4;
   var ALIGNED_MOMENTUM_NAME = "Aligned Momentum";
   var DRIVER_TIEBREAK_PRIORITY = [
     "The Achiever's Trap",
@@ -11,6 +12,7 @@
     "The Protector",
     "The Martyr Complex",
     "The Fog",
+    "The Scattered Mind",
     "The Builder's Gap",
   ];
   var DRIVER_CONTENT = {
@@ -155,6 +157,25 @@
         "Phase 2: Strategic Clarity. The Fog needs the most intensive Phase 2. Building the North Star Stack, Revenue Bridge, and Domino Plan gives them a direction that's connected to their values and life rather than abstract business goals.",
       maxPossible: 13,
     },
+    "The Scattered Mind": {
+      name: "The Scattered Mind",
+      coreBelief: "I'll be able to focus when the conditions are right.",
+      coreFear:
+        "That the conditions will never be right. That this is just how your mind works. That the gap between what you know you're capable of and what you actually produce will never close.",
+      tagline:
+        "You know exactly what matters. Your attention just won't stay there.",
+      description:
+        "Your mind moves. It always has. When you sit down to do something that matters, your attention holds for a few minutes and then splinters. You find yourself somewhere else, another tab, another thought, another task, without remembering the decision to leave. It's not that you don't care. You care deeply. It's not that you're avoiding something painful. Your emotional life is stable. It's that sustained attention doesn't come naturally, and the world is full of things that pull you away. So you adapt. You work in bursts. You rely on deadlines and pressure to create focus. You start things with clarity and watch them fragment before completion. You build workarounds instead of systems because systems require the sustained effort your mind resists. And underneath it all, there's a quiet exhaustion from fighting your own attention every single day.",
+      mechanism:
+        "Attention & Focus is compromised while Mental/Emotional Health is functional or high, which is the key differentiator from The Escape Artist. Your scores show fragmentation without emotional avoidance: low AF paired with weak Execution and Operational Health, plus high Inner Alignment or high AF importance. You know what matters. You care about it. Your attention just won't stay with it long enough to build momentum.",
+      whatItCosts:
+        "The things that matter most to you require sustained effort to build. Relationships deepen through presence. Businesses grow through consistent execution. Skills develop through deliberate practice. But sustained effort is exactly what your scattered attention makes difficult. So you stay in motion without accumulating momentum. You have insights that never become implementations. You have starts that never become finishes. The people around you see someone capable and aligned who somehow doesn't produce at the level they expect. And you see the same thing, which is the hardest part, knowing that the gap isn't about clarity or motivation or values. It's about a mind that won't stay where you point it.",
+      theWayOut:
+        "The Scattered Mind isn't addressed through more insight about yourself. You already understand the pattern. It's addressed through structure that works with your mind instead of against it. That means environment design: removing the things that pull your attention, creating physical spaces that support focus, building friction between you and distraction. It means rhythm design: working in shorter blocks with built-in breaks, using body-doubling or accountability to create external structure, protecting your highest-attention hours for your most important work. It means system design: externalizing your memory and commitments so your mind doesn't have to hold everything, simplifying your task landscape so there are fewer places for attention to scatter. And for some people, it means exploring whether ADHD is part of the picture, not as a label but as a door to strategies and support designed specifically for minds that work this way. The goal isn't to become someone with effortless focus. The goal is to build a life where your particular mind can do its best work.",
+      programPhase:
+        "Phase 1 (Physical + Environmental Foundation) and Phase 2 (Strategic Clarity + Structure). The Scattered Mind is addressed through external scaffolding: environment design, rhythm and routine, systems that reduce cognitive load. Phase 3 work may surface secondary patterns once attention is stabilized, but the primary intervention is structural.",
+      maxPossible: 10,
+    },
     "The Builder's Gap": {
       name: "The Builder's Gap",
       coreBelief:
@@ -194,7 +215,7 @@
   };
   var DRIVER_STANDARD_FALLBACK = {
     heading: "No Clear Driver Identified",
-    text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 9 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
+    text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 10 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
   };
   var DRIVER_FALLBACK = DRIVER_STANDARD_FALLBACK;
   var DRIVER_NOTE =
@@ -215,6 +236,7 @@
     "The Imposter Loop": "#8B6BAE",
     "The Martyr Complex": "#A0522D",
     "The Fog": "#9B9586",
+    "The Scattered Mind": "#2E86AB",
     "The Builder's Gap": "#B87333",
   };
 
@@ -307,6 +329,7 @@
       "The Protector": 0,
       "The Martyr Complex": 0,
       "The Fog": 0,
+      "The Scattered Mind": 0,
       "The Builder's Gap": 0,
     };
   }
@@ -321,6 +344,7 @@
       "The Protector": false,
       "The Martyr Complex": false,
       "The Fog": false,
+      "The Scattered Mind": false,
       "The Builder's Gap": false,
     };
   }
@@ -468,6 +492,23 @@
           '<path d="M19.3 19.3l-2.3 5.7"/>',
           '<path d="M44.7 44.7l2.3-5.7"/>',
           '<path d="M19.3 44.7l-2.3-5.7"/>',
+        ];
+      case "The Scattered Mind":
+        return [
+          '<circle cx="32" cy="32" r="2.5"/>',
+          '<path d="M32 32L22 22"/>',
+          '<path d="M22 22L16 16" stroke-dasharray="2.5 4"/>',
+          '<path d="M32 32L18 32"/>',
+          '<path d="M18 32L12 32" stroke-dasharray="2.5 4"/>',
+          '<path d="M32 32L22 43"/>',
+          '<path d="M22 43L16 49" stroke-dasharray="2.5 4"/>',
+          '<path d="M32 32L32 18"/>',
+          '<path d="M32 32L43 21"/>',
+          '<path d="M43 21L49 15" stroke-dasharray="2.5 4"/>',
+          '<path d="M32 32L46 32"/>',
+          '<path d="M32 32L42 43"/>',
+          '<path d="M42 43L48 49" stroke-dasharray="2.5 4"/>',
+          '<path d="M32 32L32 46"/>',
         ];
       case "The Builder's Gap":
         return [
@@ -716,6 +757,20 @@
       if (compositeScore >= 4.0 && compositeScore <= 6.5) driverScores["The Fog"] += 1;
     }
 
+    driverGates["The Scattered Mind"] =
+      getNumericValue(domainScores.AF, 0) <= 5.0 &&
+      getNumericValue(domainScores.ME, 0) >= 6.0;
+    if (driverGates["The Scattered Mind"]) {
+      if (getNumericValue(domainScores.AF, 0) <= 3.0) driverScores["The Scattered Mind"] += 2;
+      if (getNumericValue(domainScores.EX, 0) <= 5.0) driverScores["The Scattered Mind"] += 2;
+      if (getNumericValue(domainScores.OH, 0) <= 5.0) driverScores["The Scattered Mind"] += 2;
+      if (getNumericValue(domainScores.IA, 0) >= 7.0) driverScores["The Scattered Mind"] += 2;
+      if (
+        getNumericValue(importanceRatings.AF, 5) >= 5 &&
+        getNumericValue(domainScores.AF, 0) <= 4.0
+      ) driverScores["The Scattered Mind"] += 2;
+    }
+
     var builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(function (code) {
       return getNumericValue(domainScores[code], 0) < 5.5;
     });
@@ -773,7 +828,7 @@
     var secondaryDriver =
       dysfunctionDriver &&
       rankedDrivers[1] &&
-      secondDriverScore >= DRIVER_THRESHOLD &&
+      secondDriverScore >= DRIVER_SECONDARY_THRESHOLD &&
       driverGates[rankedDrivers[1].driverName] &&
       primaryToSecondaryMargin <= 3
         ? rankedDrivers[1].driverName
@@ -1572,6 +1627,8 @@
       "The Martyr Complex is still operating. You're still sacrificing your health and inner life for the people and causes you serve. Your contribution and family scores remain strong while your body and alignment continue to deteriorate. The belief that your needs come last hasn't shifted. The generosity is genuine but the cost is unsustainable. You cannot pour from an empty vessel, and the vessel is getting emptier.",
     "The Fog":
       "The Fog hasn't lifted. You still can't commit to a clear direction, your importance ratings are still flat, and your vision and alignment scores remain low. Another assessment period has passed in exploration mode. The fog feels like confusion but it functions as protection. At some point, the cost of not choosing exceeds the cost of choosing wrong. You may have already passed that point.",
+    "The Scattered Mind":
+      "The Scattered Mind remains your primary pattern. Your attention continues to fragment in ways that block sustained execution despite your alignment and emotional stability. This pattern is persistent. If the approaches you've tried haven't shifted it, consider what's missing: Is your environment still full of capture points? Do you have external accountability for focus blocks? Have you explored whether ADHD support might help? The path forward is structural. Build the scaffolding your mind needs to do its work.",
     "The Builder's Gap":
       "The Builder's Gap is still the pattern. You still have a strong personal foundation and genuine relational wealth, but the business infrastructure still hasn't been built. Another assessment period has passed and the strategy, execution, operations, or some combination remain underdeveloped. The belief that building a business machine somehow threatens your authenticity hasn't been addressed. Every month this gap persists is a month your gifts stay stranded at a fraction of their potential reach. The people who need what you offer are waiting for you to build the vehicle that delivers it.",
   };
@@ -1604,6 +1661,18 @@
       previousDysfunctionDriver &&
       resolvedCurrentState === "aligned_momentum"
     ) {
+      if (previousDysfunctionDriver === "The Scattered Mind") {
+        return {
+          heading: "A Significant Shift",
+          subheading: "The Scattered Mind → Aligned Momentum",
+          previousBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+          currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+          body:
+            "Your previous assessment identified The Scattered Mind, attention that fragmented despite your alignment and emotional stability. That pattern is no longer dominant. Your scores now reflect broad strength without a detectable dysfunction driver. This is a meaningful transition because scattered attention is persistent and rarely resolves on its own. Whatever changed, environment redesign, new rhythms and systems, support for ADHD, or simply building capacity over time, it's working. Your mind is now serving your values instead of scattering away from them. Protect the structures that made this possible.",
+          direction: "up",
+        };
+      }
+
       return {
         heading: "A Significant Shift",
         subheading: previousDysfunctionDriver + " → " + ALIGNED_MOMENTUM_NAME,
@@ -1664,6 +1733,51 @@
     }
 
     if (previousDysfunctionDriver && currentDysfunctionDriver) {
+      if (
+        previousDysfunctionDriver === "The Scattered Mind" &&
+        currentDysfunctionDriver === "The Scattered Mind"
+      ) {
+        return {
+          heading: "Pattern Continues",
+          subheading: "The Scattered Mind persists",
+          previousBelief: null,
+          currentBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+          body: DRIVER_MAINTAINED_INTERPRETATIONS["The Scattered Mind"],
+          direction: "same",
+        };
+      }
+      if (
+        previousDysfunctionDriver !== "The Scattered Mind" &&
+        currentDysfunctionDriver === "The Scattered Mind"
+      ) {
+        return {
+          heading: "A Different Pattern Has Emerged",
+          subheading: previousDysfunctionDriver + " → The Scattered Mind",
+          previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+          currentBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+          body:
+            "Your previous assessment identified " +
+            previousDysfunctionDriver +
+            " as your primary pattern. This time, The Scattered Mind has emerged. This shift sometimes happens when other internal patterns are addressed and an underlying attention pattern becomes more visible. The core belief now shaping your results is: 'I'll be able to focus when the conditions are right.' Read the full driver description. The Scattered Mind is addressed through environment design and structural support, not insight work.",
+          direction: "same",
+        };
+      }
+      if (
+        previousDysfunctionDriver === "The Scattered Mind" &&
+        currentDysfunctionDriver !== "The Scattered Mind"
+      ) {
+        return {
+          heading: "Your Pattern Has Shifted",
+          subheading: "The Scattered Mind → " + currentDysfunctionDriver,
+          previousBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+          currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+          body:
+            "Your previous assessment showed The Scattered Mind as your primary pattern. This time, " +
+            currentDysfunctionDriver +
+            " has emerged. This could mean your attention capacity has improved and a different pattern is now more visible, or it could mean conditions have changed. Read your new driver description carefully.",
+          direction: "same",
+        };
+      }
       if (previousDysfunctionDriver === currentDysfunctionDriver) {
         return {
           heading: "Your Internal Pattern Is Consistent",

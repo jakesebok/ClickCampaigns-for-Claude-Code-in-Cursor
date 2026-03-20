@@ -20,6 +20,7 @@ function determineDriver(results) {
     "The Protector",
     "The Martyr Complex",
     "The Fog",
+    "The Scattered Mind",
     "The Builder's Gap",
   ].map((name, index) => ({
     name,

@@ -1,5 +1,6 @@
 const DRIVER_THRESHOLD = 6;
 const DRIVER_MIN_MARGIN = 2;
+const DRIVER_SECONDARY_THRESHOLD = 4;
 const ALIGNED_MOMENTUM_NAME = "Aligned Momentum";
 const DRIVER_TIEBREAK_PRIORITY = [
   "The Achiever's Trap",
@@ -10,6 +11,7 @@ const DRIVER_TIEBREAK_PRIORITY = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Scattered Mind",
   "The Builder's Gap",
 ];
 
@@ -42,6 +44,7 @@ function createEmptyDriverScores() {
     "The Protector": 0,
     "The Martyr Complex": 0,
     "The Fog": 0,
+    "The Scattered Mind": 0,
     "The Builder's Gap": 0,
   };
 }
@@ -56,6 +59,7 @@ function createEmptyDriverGates() {
     "The Protector": false,
     "The Martyr Complex": false,
     "The Fog": false,
+    "The Scattered Mind": false,
     "The Builder's Gap": false,
   };
 }
@@ -370,6 +374,30 @@ export function enrichResultsWithDriver(results) {
     if (compositeScore >= 4.0 && compositeScore <= 6.5) driverScores["The Fog"] += 1;
   }
 
+  driverGates["The Scattered Mind"] =
+    getNumericValue(domainScores.AF, 0) <= 5.0 &&
+    getNumericValue(domainScores.ME, 0) >= 6.0;
+  if (driverGates["The Scattered Mind"]) {
+    if (getNumericValue(domainScores.AF, 0) <= 3.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.EX, 0) <= 5.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.OH, 0) <= 5.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.IA, 0) >= 7.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (
+      getNumericValue(importanceRatings.AF, 5) >= 5 &&
+      getNumericValue(domainScores.AF, 0) <= 4.0
+    ) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+  }
+
   const builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(
     (code) => getNumericValue(domainScores[code], 0) < 5.5
   );
@@ -423,7 +451,7 @@ export function enrichResultsWithDriver(results) {
   const secondaryDriver =
     dysfunctionDriver &&
     rankedDrivers[1] &&
-    secondDriverScore >= DRIVER_THRESHOLD &&
+    secondDriverScore >= DRIVER_SECONDARY_THRESHOLD &&
     driverGates[rankedDrivers[1].driverName] &&
     primaryToSecondaryMargin <= 3
       ? rankedDrivers[1].driverName

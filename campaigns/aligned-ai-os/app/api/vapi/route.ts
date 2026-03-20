@@ -208,6 +208,7 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
         "The Protector": 0,
         "The Martyr Complex": 0,
         "The Fog": 0,
+        "The Scattered Mind": 0,
         "The Builder's Gap": 0,
       },
       driverGates: {
@@ -219,6 +220,7 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
         "The Protector": false,
         "The Martyr Complex": false,
         "The Fog": false,
+        "The Scattered Mind": false,
         "The Builder's Gap": false,
       },
       topDriverScore: 0,

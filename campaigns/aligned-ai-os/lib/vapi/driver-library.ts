@@ -12,19 +12,20 @@ export const DRIVER_ORDER: VapiDriverName[] = [
   "The Imposter Loop",
   "The Martyr Complex",
   "The Fog",
+  "The Scattered Mind",
   "The Builder's Gap",
 ];
 
-export const DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns";
+export const DRIVER_LIBRARY_TITLE = "The 10 Driver Patterns + Aligned Momentum";
 export const DRIVER_LIBRARY_SUBTITLE =
-  "Underneath every score pattern is an internal operating system. For most founders, that system includes a belief, a fear, and a coping strategy that silently works against their goals. These are the 9 most common dysfunction drivers. But when no dysfunction driver is present and your scores reflect broad, genuine strength, something different appears: Aligned Momentum. That's the state every driver pattern is building toward.";
+  "Underneath every score pattern is an internal operating system. For most founders, that system includes a belief, a fear, and a coping strategy that silently works against their goals. These are the 10 most common dysfunction drivers. But when no dysfunction driver is present and your scores reflect broad, genuine strength, something different appears: Aligned Momentum. That's the state every driver pattern is building toward.";
 export const DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
   "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
 export const DRIVER_LIBRARY_FOOTER_HEADING =
   "Ready to Address What's Driving Your Pattern?";
 export const DRIVER_LIBRARY_FOOTER_TEXT =
   "Understanding your driver is the first step. Changing it requires structured support. The Aligned Power Program is a 12-month coaching partnership designed to identify, address, and rewire the internal patterns keeping you stuck.";
-export const DRIVER_LIBRARY_DIVIDER_HEADING = "The 9 Dysfunction Drivers";
+export const DRIVER_LIBRARY_DIVIDER_HEADING = "The 10 Dysfunction Drivers";
 export const DRIVER_LIBRARY_DIVIDER_TEXT =
   "These are the internal patterns that silently work against founders. Each one represents a belief, a fear, and a coping strategy that produces predictable score signatures. Aligned Momentum is what becomes possible when these patterns are identified and addressed.";
 
@@ -33,12 +34,13 @@ export type DriverLibraryEntry = {
   howToKnowThisIsntYou: string[];
   reflectionPrompts: string[];
   relationshipToOtherDrivers: string;
+  commonArchetypes?: string;
 };
 
 export const ALIGNED_MOMENTUM_LIBRARY_CONTENT: DriverLibraryEntry = {
   howToKnowThisIsYou: [
     "Your VAPI composite is 7.0 or above with no more than one domain significantly below the rest",
-    "You don't recognize yourself in any of the 9 dysfunction drivers, or if you see traces, they feel like old patterns rather than current ones",
+    "You don't recognize yourself in any of the 10 dysfunction drivers, or if you see traces, they feel like old patterns rather than current ones",
     "Your business results and your personal wellbeing don't feel like they're competing with each other",
     "You can sustain your current pace without running on adrenaline, guilt, or fear",
     "The way you work matches who you actually are. You're not performing a version of success that belongs to someone else.",
@@ -291,6 +293,36 @@ export const DRIVER_LIBRARY_CONTENT: Record<VapiDriverName, DriverLibraryEntry> 
     ],
     relationshipToOtherDrivers:
       "The Fog is most commonly confused with The Perfectionist's Prison. Both produce low execution. The distinction is simple: The Perfectionist has a clear plan and can't act. The Fog can't plan because they can't commit. If you know exactly what you'd do next but can't seem to do it, that's The Perfectionist's Prison. If you genuinely don't know what you'd do next because too many options feel equally valid, that's The Fog. The Fog also sometimes pairs with The Escape Artist, because constant exploration and content consumption can function as sophisticated avoidance. The person looks like they're doing important strategic work (researching, learning, considering options) when they're actually using optionality as a shield against the vulnerability of choosing.",
+  },
+  "The Scattered Mind": {
+    howToKnowThisIsYou: [
+      "You sit down to work on something important and notice, 15 minutes later, that you're somewhere else entirely without remembering the moment you left",
+      "You know exactly what you should be doing. Clarity has never been your problem. Staying with it is.",
+      "You've developed workarounds: waiting for deadlines, working in coffee shops, using pressure and urgency to manufacture focus",
+      "Your best work happens in rare windows of unexpected concentration, and you've never figured out how to create those windows on purpose",
+      "You start things with genuine intention and watch them stall before completion, not because you lost interest in the outcome but because your attention moved on",
+      "You feel a persistent low-level exhaustion from managing your own mind all day",
+      "People who know you would say you're smart, capable, and full of ideas but also inconsistent, hard to pin down, or \"all over the place\"",
+      "You've wondered whether ADHD might be part of your experience, or you've been diagnosed and are still figuring out what that means for how you work",
+    ],
+    howToKnowThisIsntYou: [
+      "If your attention problems come with significant anxiety, depression, or emotional dysregulation, The Escape Artist may be a better fit, your distraction might be avoidance rather than fragmentation",
+      "If you can focus well when you're interested but struggle with tasks that feel meaningless or misaligned, the issue might be Inner Alignment rather than scattered attention",
+      "If your execution is strong but pointed in the wrong direction, you're The Engine, not The Scattered Mind",
+      "If you can sustain deep work reliably when your environment supports it, you may not have this pattern, you may just need better environment design",
+      "The Scattered Mind is specifically about attention fragmentation despite alignment and emotional stability. If either of those foundations is shaky, start there first.",
+    ],
+    reflectionPrompts: [
+      "Think about the last time you sustained focus on difficult, non-urgent work for more than 90 minutes without interruption. How long ago was it? What conditions made it possible? If you can't remember one, what does that tell you?",
+      "What workarounds have you built to function despite scattered attention? Deadlines? Pressure? Body-doubling? Last-minute intensity? Make a list. These workarounds reveal how you've adapted and also what it costs you to operate this way.",
+      "Describe your relationship with your physical environment when you're trying to focus. What pulls your attention? What supports it? If you were designing the perfect environment for your particular mind, what would it include? What would it exclude?",
+      "What have you tried before to address this pattern? What worked temporarily? What didn't work at all? What have you never tried but always wondered about?",
+      "If you could reliably convert 3 focused hours per day into your most important work, what would change in your business and life within 6 months? Be specific. This is what's at stake, not becoming a different person, but building a structure that lets your mind do what it's capable of.",
+    ],
+    relationshipToOtherDrivers:
+      "The Scattered Mind is most often confused with The Escape Artist. Both involve difficulty sustaining focus. The key differentiator is emotional regulation. The Escape Artist uses distraction to avoid something painful, their Mental/Emotional Health score is low because the distraction is a coping mechanism. The Scattered Mind experiences fragmentation despite emotional stability, their Mental/Emotional Health score is functional or high because they're not running from anything. Their attention simply doesn't hold. The Scattered Mind can also resemble The Builder's Gap because both show strong alignment paired with weak execution. The difference is the mechanism: The Builder's Gap hasn't built business infrastructure; The Scattered Mind can't sustain focus long enough to build anything. Some founders have both patterns, in which case the assessment will show one as primary and one as secondary based on which scores higher.",
+    commonArchetypes:
+      "The Scattered Mind most commonly appears alongside The Seeker archetype (high self-awareness, low business output), The Guardian archetype (strong relationships, weak business), or The Drifter (everything at a moderate plateau). It rarely appears with The Performer or archetypes that require sustained high execution, the fragmented attention makes that level of output nearly impossible to maintain.",
   },
   "The Builder's Gap": {
     howToKnowThisIsYou: [

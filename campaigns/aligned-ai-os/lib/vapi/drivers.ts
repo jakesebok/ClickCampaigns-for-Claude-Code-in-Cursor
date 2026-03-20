@@ -9,6 +9,7 @@ export type VapiDriverName =
   | "The Protector"
   | "The Martyr Complex"
   | "The Fog"
+  | "The Scattered Mind"
   | "The Builder's Gap";
 
 export const ALIGNED_MOMENTUM_NAME = "Aligned Momentum" as const;
@@ -64,6 +65,7 @@ export type VapiDriverEvaluation = {
 
 export const DRIVER_THRESHOLD = 6;
 export const DRIVER_MIN_MARGIN = 2;
+const DRIVER_SECONDARY_THRESHOLD = 4;
 
 export const DRIVER_TIEBREAK_PRIORITY: VapiDriverName[] = [
   "The Achiever's Trap",
@@ -74,6 +76,7 @@ export const DRIVER_TIEBREAK_PRIORITY: VapiDriverName[] = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Scattered Mind",
   "The Builder's Gap",
 ];
 
@@ -219,6 +222,25 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "Phase 2: Strategic Clarity. The Fog needs the most intensive Phase 2. Building the North Star Stack, Revenue Bridge, and Domino Plan gives them a direction that's connected to their values and life rather than abstract business goals.",
     maxPossible: 13,
   },
+  "The Scattered Mind": {
+    name: "The Scattered Mind",
+    coreBelief: "I'll be able to focus when the conditions are right.",
+    coreFear:
+      "That the conditions will never be right. That this is just how your mind works. That the gap between what you know you're capable of and what you actually produce will never close.",
+    tagline:
+      "You know exactly what matters. Your attention just won't stay there.",
+    description:
+      "Your mind moves. It always has. When you sit down to do something that matters, your attention holds for a few minutes and then splinters. You find yourself somewhere else, another tab, another thought, another task, without remembering the decision to leave. It's not that you don't care. You care deeply. It's not that you're avoiding something painful. Your emotional life is stable. It's that sustained attention doesn't come naturally, and the world is full of things that pull you away. So you adapt. You work in bursts. You rely on deadlines and pressure to create focus. You start things with clarity and watch them fragment before completion. You build workarounds instead of systems because systems require the sustained effort your mind resists. And underneath it all, there's a quiet exhaustion from fighting your own attention every single day.",
+    mechanism:
+      "Attention & Focus is compromised while Mental/Emotional Health is functional or high, which is the key differentiator from The Escape Artist. Your scores show fragmentation without emotional avoidance: low AF paired with weak Execution and Operational Health, plus high Inner Alignment or high AF importance. You know what matters. You care about it. Your attention just won't stay with it long enough to build momentum.",
+    whatItCosts:
+      "The things that matter most to you require sustained effort to build. Relationships deepen through presence. Businesses grow through consistent execution. Skills develop through deliberate practice. But sustained effort is exactly what your scattered attention makes difficult. So you stay in motion without accumulating momentum. You have insights that never become implementations. You have starts that never become finishes. The people around you see someone capable and aligned who somehow doesn't produce at the level they expect. And you see the same thing, which is the hardest part, knowing that the gap isn't about clarity or motivation or values. It's about a mind that won't stay where you point it.",
+    theWayOut:
+      "The Scattered Mind isn't addressed through more insight about yourself. You already understand the pattern. It's addressed through structure that works with your mind instead of against it. That means environment design: removing the things that pull your attention, creating physical spaces that support focus, building friction between you and distraction. It means rhythm design: working in shorter blocks with built-in breaks, using body-doubling or accountability to create external structure, protecting your highest-attention hours for your most important work. It means system design: externalizing your memory and commitments so your mind doesn't have to hold everything, simplifying your task landscape so there are fewer places for attention to scatter. And for some people, it means exploring whether ADHD is part of the picture, not as a label but as a door to strategies and support designed specifically for minds that work this way. The goal isn't to become someone with effortless focus. The goal is to build a life where your particular mind can do its best work.",
+    programPhase:
+      "Phase 1 (Physical + Environmental Foundation) and Phase 2 (Strategic Clarity + Structure). The Scattered Mind is addressed through external scaffolding: environment design, rhythm and routine, systems that reduce cognitive load. Phase 3 work may surface secondary patterns once attention is stabilized, but the primary intervention is structural.",
+    maxPossible: 10,
+  },
   "The Builder's Gap": {
     name: "The Builder's Gap",
     coreBelief:
@@ -260,7 +282,7 @@ export const ALIGNED_MOMENTUM_CONTENT: VapiAlignedMomentumContent = {
 
 export const DRIVER_STANDARD_FALLBACK = {
   heading: "No Clear Driver Identified",
-  text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 9 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
+  text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 10 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
 };
 
 export const DRIVER_FALLBACK = DRIVER_STANDARD_FALLBACK;
@@ -287,6 +309,7 @@ function createEmptyDriverScores(): VapiDriverScores {
     "The Protector": 0,
     "The Martyr Complex": 0,
     "The Fog": 0,
+    "The Scattered Mind": 0,
     "The Builder's Gap": 0,
   };
 }
@@ -301,6 +324,7 @@ function createEmptyDriverGates(): VapiDriverGates {
     "The Protector": false,
     "The Martyr Complex": false,
     "The Fog": false,
+    "The Scattered Mind": false,
     "The Builder's Gap": false,
   };
 }
@@ -768,6 +792,30 @@ export function determineDriver(input: {
     }
   }
 
+  driverGates["The Scattered Mind"] =
+    getNumericValue(domainScores.AF, 0) <= 5.0 &&
+    getNumericValue(domainScores.ME, 0) >= 6.0;
+  if (driverGates["The Scattered Mind"]) {
+    if (getNumericValue(domainScores.AF, 0) <= 3.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.EX, 0) <= 5.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.OH, 0) <= 5.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (getNumericValue(domainScores.IA, 0) >= 7.0) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+    if (
+      getNumericValue(importanceRatings.AF, 5) >= 5 &&
+      getNumericValue(domainScores.AF, 0) <= 4.0
+    ) {
+      driverScores["The Scattered Mind"] += 2;
+    }
+  }
+
   const builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(
     (code) => getNumericValue(domainScores[code], 0) < 5.5
   );
@@ -842,7 +890,7 @@ export function determineDriver(input: {
   const secondaryDriver =
     dysfunctionDriver &&
     runnerUp &&
-    secondDriverScore >= DRIVER_THRESHOLD &&
+    secondDriverScore >= DRIVER_SECONDARY_THRESHOLD &&
     driverGates[runnerUp.driverName] &&
     primaryToSecondaryMargin <= 3
       ? runnerUp.driverName

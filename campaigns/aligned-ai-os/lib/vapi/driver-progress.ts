@@ -27,6 +27,8 @@ export const DRIVER_MAINTAINED_INTERPRETATIONS: Record<
     "The Martyr Complex is still operating. You're still sacrificing your health and inner life for the people and causes you serve. Your contribution and family scores remain strong while your body and alignment continue to deteriorate. The belief that your needs come last hasn't shifted. The generosity is genuine but the cost is unsustainable. You cannot pour from an empty vessel, and the vessel is getting emptier.",
   "The Fog":
     "The Fog hasn't lifted. You still can't commit to a clear direction, your importance ratings are still flat, and your vision and alignment scores remain low. Another assessment period has passed in exploration mode. The fog feels like confusion but it functions as protection. At some point, the cost of not choosing exceeds the cost of choosing wrong. You may have already passed that point.",
+  "The Scattered Mind":
+    "The Scattered Mind remains your primary pattern. Your attention continues to fragment in ways that block sustained execution despite your alignment and emotional stability. This pattern is persistent. If the approaches you've tried haven't shifted it, consider what's missing: Is your environment still full of capture points? Do you have external accountability for focus blocks? Have you explored whether ADHD support might help? The path forward is structural. Build the scaffolding your mind needs to do its work.",
   "The Builder's Gap":
     "The Builder's Gap is still the pattern. You still have a strong personal foundation and genuine relational wealth, but the business infrastructure still hasn't been built. Another assessment period has passed and the strategy, execution, operations, or some combination remain underdeveloped. The belief that building a business machine somehow threatens your authenticity hasn't been addressed. Every month this gap persists is a month your gifts stay stranded at a fraction of their potential reach. The people who need what you offer are waiting for you to build the vehicle that delivers it.",
 };
@@ -74,6 +76,17 @@ export function getDriverTransitionSummary(
     previousDysfunctionDriver &&
     currentState === "aligned_momentum"
   ) {
+    if (previousDysfunctionDriver === "The Scattered Mind") {
+      return {
+        heading: "A Significant Shift",
+        subheading: "The Scattered Mind → Aligned Momentum",
+        previousBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+        currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        body: "Your previous assessment identified The Scattered Mind, attention that fragmented despite your alignment and emotional stability. That pattern is no longer dominant. Your scores now reflect broad strength without a detectable dysfunction driver. This is a meaningful transition because scattered attention is persistent and rarely resolves on its own. Whatever changed, environment redesign, new rhythms and systems, support for ADHD, or simply building capacity over time, it's working. Your mind is now serving your values instead of scattering away from them. Protect the structures that made this possible.",
+        direction: "up",
+      };
+    }
+
     return {
       heading: "A Significant Shift",
       subheading: `${previousDysfunctionDriver} → ${ALIGNED_MOMENTUM_NAME}`,
@@ -122,6 +135,50 @@ export function getDriverTransitionSummary(
   }
 
   if (previousDysfunctionDriver && currentDysfunctionDriver) {
+    if (
+      previousDysfunctionDriver === "The Scattered Mind" &&
+      currentDysfunctionDriver === "The Scattered Mind"
+    ) {
+      return {
+        heading: "Pattern Continues",
+        subheading: "The Scattered Mind persists",
+        previousBelief: null,
+        currentBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+        body: DRIVER_MAINTAINED_INTERPRETATIONS["The Scattered Mind"],
+        direction: "same",
+      };
+    }
+
+    if (
+      previousDysfunctionDriver !== "The Scattered Mind" &&
+      currentDysfunctionDriver === "The Scattered Mind"
+    ) {
+      return {
+        heading: "A Different Pattern Has Emerged",
+        subheading: `${previousDysfunctionDriver} → The Scattered Mind`,
+        previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+        currentBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+        body: "Your previous assessment identified " +
+          previousDysfunctionDriver +
+          " as your primary pattern. This time, The Scattered Mind has emerged. This shift sometimes happens when other internal patterns are addressed and an underlying attention pattern becomes more visible. The core belief now shaping your results is: 'I'll be able to focus when the conditions are right.' Read the full driver description. The Scattered Mind is addressed through environment design and structural support, not insight work.",
+        direction: "same",
+      };
+    }
+
+    if (
+      previousDysfunctionDriver === "The Scattered Mind" &&
+      currentDysfunctionDriver !== "The Scattered Mind"
+    ) {
+      return {
+        heading: "Your Pattern Has Shifted",
+        subheading: `The Scattered Mind → ${currentDysfunctionDriver}`,
+        previousBelief: DRIVER_CONTENT["The Scattered Mind"].coreBelief,
+        currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+        body: `Your previous assessment showed The Scattered Mind as your primary pattern. This time, ${currentDysfunctionDriver} has emerged. This could mean your attention capacity has improved and a different pattern is now more visible, or it could mean conditions have changed. Read your new driver description carefully.`,
+        direction: "same",
+      };
+    }
+
     if (previousDysfunctionDriver === currentDysfunctionDriver) {
       return {
         heading: "Your Internal Pattern Is Consistent",

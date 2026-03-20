@@ -36,6 +36,9 @@ const ADMIN_FROM_EMAIL  = process.env.VAPI_ADMIN_FROM_EMAIL  || 'assessments@not
 const ALIGNED_MOMENTUM_NAME = 'Aligned Momentum';
 const ALIGNED_MOMENTUM_TAGLINE =
   "Your internal operating system is working with your goals, not against them.";
+const SCATTERED_MIND_NAME = "The Scattered Mind";
+const SCATTERED_MIND_TAGLINE =
+  "You know exactly what matters. Your attention just won't stay there.";
 const DRIVER_TIEBREAK_PRIORITY = [
   "The Achiever's Trap",
   "The Escape Artist",
@@ -45,6 +48,7 @@ const DRIVER_TIEBREAK_PRIORITY = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Scattered Mind",
   "The Builder's Gap",
 ];
 const DRIVER_CORE_BELIEFS = {
@@ -56,6 +60,7 @@ const DRIVER_CORE_BELIEFS = {
   "The Protector": "If I let go of control, everything falls apart.",
   "The Martyr Complex": "I have to suffer for this to count.",
   "The Fog": "I don't know what I want, so I can't commit to anything.",
+  "The Scattered Mind": "I'll be able to focus when the conditions are right.",
   "The Builder's Gap": "Caring about people and doing good work should be enough. I shouldn't have to become a 'business person' to make this work.",
 };
 const ARCHETYPE_TAGLINES = {
@@ -116,6 +121,39 @@ function determineArchetypeServer(results) {
     if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2) return 'The Seeker';
   }
   return 'The Drifter';
+}
+
+function formatScoreNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? value.toFixed(1) : '?';
+}
+
+function getScatteredMindDiagnostics(domains, importanceRatings) {
+  const domainScores = buildDomainScoresMap(domains || []);
+  const af = typeof domainScores.AF === 'number' ? domainScores.AF : null;
+  const me = typeof domainScores.ME === 'number' ? domainScores.ME : null;
+  const ex = typeof domainScores.EX === 'number' ? domainScores.EX : null;
+  const oh = typeof domainScores.OH === 'number' ? domainScores.OH : null;
+  const ia = typeof domainScores.IA === 'number' ? domainScores.IA : null;
+  const afImportance = typeof importanceRatings?.AF === 'number' ? importanceRatings.AF : null;
+  const signals = [];
+
+  if (typeof af === 'number' && af <= 3.0) signals.push('Severe attention fragmentation');
+  if (typeof ex === 'number' && ex <= 5.0) signals.push('Execution collapse');
+  if (typeof oh === 'number' && oh <= 5.0) signals.push('Operational breakdown');
+  if (typeof ia === 'number' && ia >= 7.0) signals.push('Alignment gap (clarity not translating)');
+  if (typeof afImportance === 'number' && afImportance >= 5 && typeof af === 'number' && af <= 4.0) {
+    signals.push('Importance contradiction');
+  }
+
+  return {
+    gateSummary:
+      'Passed (AF: ' +
+      formatScoreNumber(af) +
+      ' <= 5.0, ME: ' +
+      formatScoreNumber(me) +
+      ' >= 6.0)',
+    signalsSummary: signals.length ? signals.join(', ') : 'None',
+  };
 }
 
 function getLaggingArenaSummary(arenaScores = {}, personalLabel = 'Self') {
@@ -330,6 +368,30 @@ function buildUserEmail({
   }).join('');
 
   const overallColor = getTierColor(overallTier);
+  const isScatteredMindPrimary =
+    driverState === 'dysfunction_driver' && driverName === SCATTERED_MIND_NAME;
+  const driverSummaryHtml = driverState === 'aligned_momentum'
+    ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${ALIGNED_MOMENTUM_NAME}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>`
+    : isScatteredMindPrimary
+      ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${SCATTERED_MIND_NAME}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">${escHtml(SCATTERED_MIND_TAGLINE)}</p><p style="margin:8px 0 0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>The core belief:</strong> '${escHtml(driverCoreBelief)}'</p>${secondaryDriverName ? `<p style="margin:8px 0 0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary:</strong> ${escHtml(secondaryDriverName)} <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : ''}`
+      : driverName && secondaryDriverName
+        ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>`
+        : driverName
+          ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>`
+          : driverFallbackType === 'aligned_momentum'
+            ? `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>${ALIGNED_MOMENTUM_NAME}</strong> ${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>`
+            : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> Explore the Driver Library for deeper self-reflection, or discuss with your coach.</p>`;
+  const driverSummaryText = driverState === 'aligned_momentum'
+    ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
+    : isScatteredMindPrimary
+      ? `What's Driving This Pattern: ${SCATTERED_MIND_NAME}\n${SCATTERED_MIND_TAGLINE}\n\nThe core belief: '${driverCoreBelief}'\n${secondaryDriverName ? `Secondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n` : ''}`
+      : driverName && secondaryDriverName
+        ? `What's Driving This Pattern\nPrimary: ${driverName} - '${driverCoreBelief}'\nSecondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n`
+        : driverName
+          ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n`
+          : driverFallbackType === 'aligned_momentum'
+            ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
+            : `What's Driving This Pattern: No clear single driver identified.\nExplore the Driver Library for deeper self-reflection, or discuss with your coach.\n`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -366,7 +428,7 @@ function buildUserEmail({
     </div>` : ''}
     <div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">${driverState === 'aligned_momentum' ? "What's Fueling This Pattern" : "What's Driving This Pattern"}</p>
-      ${driverState === 'aligned_momentum' ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${ALIGNED_MOMENTUM_NAME}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>` : driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : driverFallbackType === 'aligned_momentum' ? `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>${ALIGNED_MOMENTUM_NAME}</strong> ${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> Explore the Driver Library for deeper self-reflection, or discuss with your coach.</p>`}
+      ${driverSummaryHtml}
     </div>
 
     <!-- Arena scores -->
@@ -421,15 +483,7 @@ Congratulations on completing the VAPI Assessment.
 Your VAPI Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 
 ${archetype ? `Your Founder Archetype: ${archetype}\n${archetypeTagline ? `'${archetypeTagline}'\n` : ''}${laggingArenaSummary ? `Your lagging arena: ${laggingArenaSummary.label} (${laggingArenaSummary.score.toFixed(1)})\n` : ''}` : ''}
-${driverState === 'aligned_momentum'
-  ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
-  : driverName && secondaryDriverName
-  ? `What's Driving This Pattern\nPrimary: ${driverName} - '${driverCoreBelief}'\nSecondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n`
-  : driverName
-    ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n`
-    : driverFallbackType === 'aligned_momentum'
-      ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
-      : `What's Driving This Pattern: No clear single driver identified.\nExplore the Driver Library for deeper self-reflection, or discuss with your coach.\n`}
+${driverSummaryText}
 
 Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
 Relationships: ${arenaScores.Relationships ?? '?'} / 10 - ${arenaTiers.Relationships ?? ''}
@@ -505,6 +559,10 @@ function buildAdminEmail({
       : driverState === 'dysfunction_driver'
         ? 'Dysfunction Driver'
         : 'No Driver';
+  const scatteredMindDiagnostics =
+    driverState === 'dysfunction_driver' && driverName === SCATTERED_MIND_NAME
+      ? getScatteredMindDiagnostics(domains, importanceRatings || {})
+      : null;
 
   const sortedDomains = [...(domains || [])].sort((a,b) => a.score - b.score);
   const domainRows = sortedDomains.map(d => {
@@ -552,6 +610,7 @@ function buildAdminEmail({
       ${laggingArenaSummary ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Lagging Arena:</strong> ${escHtml(laggingArenaSummary.label)} (${escHtml(laggingArenaSummary.score.toFixed(1))})</td></tr>` : ''}
       ${previousArchetypeName ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Archetype:</strong> ${escHtml(previousArchetypeName)} (${previousArchetypeName === archetype ? 'unchanged' : 'changed'})</td></tr>` : ''}
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary Driver:</strong> ${escHtml(primaryDriverSummary)}</td></tr>
+      ${scatteredMindDiagnostics ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Gate Status:</strong> ${escHtml(scatteredMindDiagnostics.gateSummary)}</td></tr><tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Signals Fired:</strong> ${escHtml(scatteredMindDiagnostics.signalsSummary)}</td></tr>` : ''}
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Secondary Driver:</strong> ${escHtml(secondaryDriverSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver State:</strong> ${escHtml(driverStateSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary-Secondary Margin:</strong> ${escHtml(String(primaryToSecondaryMargin))} points</td></tr>
@@ -601,6 +660,7 @@ Assessment #: ${ordinalNum} assessment
 ${archetype ? `Founder Archetype: ${archetype}\n` : ''}
 ${laggingArenaSummary ? `Lagging Arena: ${laggingArenaSummary.label} (${laggingArenaSummary.score.toFixed(1)})\n` : ''}${previousArchetypeName ? `Previous Archetype: ${previousArchetypeName} (${previousArchetypeName === archetype ? 'unchanged' : 'changed'})\n` : ''}
 Primary Driver: ${primaryDriverSummary}
+${scatteredMindDiagnostics ? `Gate Status: ${scatteredMindDiagnostics.gateSummary}\nSignals Fired: ${scatteredMindDiagnostics.signalsSummary}\n` : ''}Secondary Driver: ${secondaryDriverSummary}
 Secondary Driver: ${secondaryDriverSummary}
 Primary-Secondary Margin: ${primaryToSecondaryMargin} points
 Driver Scores: ${driverScoresText}
