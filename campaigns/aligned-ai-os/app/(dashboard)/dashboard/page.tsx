@@ -36,7 +36,11 @@ import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type 
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
-import { DRIVER_CONTENT, type VapiDriverName } from "@/lib/vapi/drivers";
+import {
+  DRIVER_CONTENT,
+  type VapiDriverFallbackType,
+  type VapiDriverName,
+} from "@/lib/vapi/drivers";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
   getScorecardWindow,
@@ -70,6 +74,7 @@ type VapiResult = {
   assignedDriver: string | null;
   driverScores: Record<string, number>;
   topDriverScore: number;
+  driverFallbackType: VapiDriverFallbackType;
   createdAt: string;
 };
 
@@ -114,7 +119,12 @@ export default function DashboardPage() {
       fetch("/api/scorecard").then((r) => r.json()).catch(() => ({ entries: [], currentWeek: null })),
       fetch("/api/settings").then((r) => r.json()).catch(() => null),
     ]).then(([vapiData, scorecardData, settings]) => {
-      setVapiResults(vapiData.results || []);
+      setVapiResults(
+        (vapiData.results || []).map((row: VapiResult) => ({
+          ...row,
+          driverFallbackType: row.driverFallbackType || "standard",
+        }))
+      );
       const allEntries = [
         ...(scorecardData.currentWeek ? [scorecardData.currentWeek] : []),
         ...(scorecardData.entries || []),
@@ -197,6 +207,10 @@ export default function DashboardPage() {
       ? (latestVapi.assignedDriver as VapiDriverName)
       : null;
   const driver = driverName ? DRIVER_CONTENT[driverName] : null;
+  const driverFallbackLabel =
+    latestVapi?.driverFallbackType === "high_performer"
+      ? "No dominant driver pattern detected"
+      : "No clear driver identified";
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
@@ -544,7 +558,7 @@ export default function DashboardPage() {
                           </>
                         ) : (
                           <p className="text-sm text-muted-foreground leading-relaxed">
-                            No clear driver identified
+                            {driverFallbackLabel}
                           </p>
                         )}
                       </div>

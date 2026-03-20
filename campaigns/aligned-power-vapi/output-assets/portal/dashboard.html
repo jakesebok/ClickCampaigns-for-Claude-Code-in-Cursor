@@ -945,6 +945,9 @@
       var latestDriverMeta = latestDriverName && typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.DRIVER_CONTENT
         ? VAPI_DRIVERS.DRIVER_CONTENT[latestDriverName]
         : null;
+      var latestDriverFallbackLabel = latestDriverEvaluation.driverFallbackType === 'high_performer'
+        ? 'No dominant driver pattern detected'
+        : 'No clear driver identified';
       latestHtml += '<div class="flex items-center gap-2.5 mb-3">';
       latestHtml += '<span class="text-[10px] font-semibold uppercase tracking-widest text-[var(--ap-accent)] bg-[var(--ap-accent)]/10 px-2.5 py-1 rounded-md">Latest</span>';
       latestHtml += '<span class="text-[var(--ap-muted)] text-sm">' + escHtml(formatDate(latest.created_at)) + '</span>';
@@ -1015,7 +1018,7 @@
           archHtml += '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">&quot;' + escHtml(latestDriverMeta.coreBelief) + '&quot;</p>';
           archHtml += '<button type="button" class="view-result inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f] transition-colors" data-id="' + latest.id + '" data-hash="driver-section">View Full Details <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
         } else {
-          archHtml += '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">No clear driver identified</p>';
+          archHtml += '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' + latestDriverFallbackLabel + '</p>';
           archHtml += '<button type="button" class="view-result inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:text-[#e55a0f] transition-colors" data-id="' + latest.id + '" data-hash="driver-section">View Details <i data-lucide="arrow-right" class="w-4 h-4"></i></button>';
         }
         archHtml += '</div>';
@@ -1884,6 +1887,63 @@
         }
         function getArchetypeTransitionNarrative(previousArchetype, currentArchetype) {
           if (!previousArchetype && !currentArchetype) return null;
+          function isArchitectFamily(value) {
+            return value === 'The Architect' || value === 'The Rising Architect';
+          }
+          if (previousArchetype === 'The Rising Architect' && currentArchetype === 'The Rising Architect') {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Is Consistent',
+              subtitle: 'Still showing up as The Rising Architect',
+              body: "You're still almost there. Your overall profile remains strong and near-integrated, but the lagging arena from your last assessment still hasn't closed the gap. The comfort of 'almost there' is the real risk at this level. You have the capability and the foundation. What you need is the willingness to give your weakest arena the same intensity you gave everything else. Look at the specific domains pulling that arena down. They are your highest-leverage targets for the next assessment period."
+            };
+          }
+          if (previousArchetype && currentArchetype === 'The Rising Architect' && previousArchetype !== 'The Architect' && previousArchetype !== 'The Rising Architect') {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Has Shifted',
+              subtitle: previousArchetype + ' to The Rising Architect',
+              body: "You've moved from an imbalanced or deficit pattern into near-integration. Most of your arenas are operating at a high level. One area is still lagging but the gap is closeable. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus."
+            };
+          }
+          if (previousArchetype === 'The Rising Architect' && currentArchetype === 'The Architect') {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Has Shifted',
+              subtitle: 'The Rising Architect to The Architect',
+              body: "You closed the gap. The arena that was lagging has caught up and all three arenas are now operating at the Dialed level. You've achieved genuine integration. This is the rarest and most valuable state on this assessment. Protect it."
+            };
+          }
+          if (previousArchetype === 'The Architect' && currentArchetype === 'The Rising Architect') {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Has Shifted',
+              subtitle: 'The Architect to The Rising Architect',
+              body: "You've lost the integration you had built. One arena has slipped below full Architect level, even though most of your profile is still strong. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus before the gap widens."
+            };
+          }
+          if (previousArchetype === 'The Rising Architect' && currentArchetype && currentArchetype !== 'The Architect') {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Has Shifted',
+              subtitle: 'The Rising Architect to ' + currentArchetype,
+              body: "You've moved away from near-integration. The lagging arena that kept you just short of Architect status is no longer the only issue in the pattern. Compare your latest archetype and score breakdown carefully to see where the reinforcing cycle weakened."
+            };
+          }
+          if (previousArchetype && currentArchetype === 'The Architect' && !isArchitectFamily(previousArchetype)) {
+            return {
+              key: 'archetype',
+              eyebrow: 'Archetype Transition',
+              title: 'Your Founder Archetype Has Shifted',
+              subtitle: previousArchetype + ' to The Architect',
+              body: "You've moved into genuine integration. Your personal, relational, and business arenas are now reinforcing each other instead of competing. Protect this. The systems and habits that got you here are worth defending."
+            };
+          }
           if (previousArchetype && currentArchetype && previousArchetype === currentArchetype) {
             return {
               key: 'archetype',

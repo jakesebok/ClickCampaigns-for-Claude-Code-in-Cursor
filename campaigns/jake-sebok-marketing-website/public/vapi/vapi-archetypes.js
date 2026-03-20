@@ -21,6 +21,17 @@
       growth_path: "The Architect's path is deepening, not fixing. The work is staying honest, raising the ceiling, and expanding your impact without sacrificing what you've built. Mastery isn't a destination. It's a practice.",
       program_phase: "Phase 5: Embodied Execution. You don't need to find clarity or remove blocks. You need to sustain and deepen what's already working."
     },
+    'The Rising Architect': {
+      name: 'The Rising Architect',
+      tagline: 'Almost there. One arena is holding the rest back.',
+      color_accent: '#4A7C9B',
+      description: "The integration is close. Most of your life and business is operating at a high level and multiple domains are Dialed. But one arena hasn't caught up yet, and that gap is preventing the full reinforcing cycle that defines The Architect. You're not stagnating. You're not in crisis. You're not drifting. You're building toward something genuinely rare, and you're closer than most founders ever get. The work now is precise: identify the specific arena lagging behind and give it the focused attention it needs to close the gap. You don't need a transformation. You need a targeted push.",
+      strength: "Broad high performance. You've built genuine capability across nearly every dimension of your life and business. Most founders sacrifice one arena entirely to prop up another. You haven't. The foundation for full integration already exists. That foundation is your greatest asset.",
+      shadow: "Neglecting the lagging arena because everything else feels good enough. When 11 out of 12 domains are strong, the temptation is to coast on the overall picture and ignore the one or two areas pulling the average down. That gap is small enough to ignore, which is exactly what makes it persistent. The last 10% of integration delivers disproportionate returns because it's what turns a strong life into a reinforcing one.",
+      constraint: "A single under-invested arena. Your challenge isn't systemic. It's specific. One area of your life or business hasn't received the same attention and discipline you've given everything else. Identifying that area and treating it with the same seriousness you brought to your strengths is the entire game.",
+      growth_path: "The Rising Architect's path is targeted, not transformational. Identify the weakest arena. Find the 1-2 domains within it dragging the average down. Give those domains the same focused intensity you brought to the areas that are already Dialed. You're one sustained push away from The Architect. Don't let the comfort of 'almost there' prevent you from finishing the build.",
+      program_phase: "Phase 5: Embodied Execution. Like The Architect, you don't need to find clarity or remove deep internal blocks. You need targeted work on a specific gap while maintaining everything else. The coaching work is about precision and accountability, not excavation."
+    },
     'The Phoenix': {
       name: 'The Phoenix',
       tagline: 'In the fire. Not finished.',
@@ -138,7 +149,17 @@
     // PRIORITY 1: THE ARCHITECT
     if (s >= 8.0 && r >= 8.0 && b >= 8.0) return 'The Architect';
 
-    // PRIORITY 2: THE PHOENIX
+    // PRIORITY 2: THE RISING ARCHITECT
+    var nearArchitectCount = 0;
+    if (s != null && s >= 7.5) nearArchitectCount++;
+    if (r != null && r >= 7.5) nearArchitectCount++;
+    if (b != null && b >= 7.5) nearArchitectCount++;
+    var lowestArena = Math.min(s, r, b);
+    if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
+      return 'The Rising Architect';
+    }
+
+    // PRIORITY 3: THE PHOENIX
     var arenasLow = 0;
     if (s != null && s <= 4.5) arenasLow++;
     if (r != null && r <= 4.5) arenasLow++;
@@ -146,33 +167,33 @@
     if (overall != null && overall <= 4.5) return 'The Phoenix';
     if (arenasLow >= 2) return 'The Phoenix';
 
-    // PRIORITY 3: THE ENGINE
+    // PRIORITY 4: THE ENGINE
     if (exScore != null && exScore >= 7.0 && ((ecScore != null && ecScore <= 5.0) || (vsScore != null && vsScore <= 5.0))) return 'The Engine';
 
-    // PRIORITY 4: THE DRIFTER
+    // PRIORITY 5: THE DRIFTER
     var allMid = s != null && r != null && b != null &&
       s >= 5.0 && s <= 7.9 && r >= 5.0 && r <= 7.9 && b >= 5.0 && b <= 7.9;
     var spread = Math.max(s, r, b) - Math.min(s, r, b);
     if (allMid && spread <= 2.0) return 'The Drifter';
 
-    // PRIORITY 5: THE PERFORMER (Business highest, Self lowest, spread >= 2)
+    // PRIORITY 6: THE PERFORMER (Business highest, Self lowest, spread >= 2)
     if (s != null && r != null && b != null) {
       var maxA = Math.max(s, r, b);
       var minA = Math.min(s, r, b);
       if (b === maxA && s === minA && (b - s) >= 2.0) return 'The Performer';
     }
 
-    // PRIORITY 6: THE GHOST (Business highest, Relationships lowest, spread >= 2)
+    // PRIORITY 7: THE GHOST (Business highest, Relationships lowest, spread >= 2)
     if (s != null && r != null && b != null) {
       if (b === Math.max(s, r, b) && r === Math.min(s, r, b) && (b - r) >= 2.0) return 'The Ghost';
     }
 
-    // PRIORITY 7: THE GUARDIAN (Relationships highest, Business lowest, spread >= 2)
+    // PRIORITY 8: THE GUARDIAN (Relationships highest, Business lowest, spread >= 2)
     if (s != null && r != null && b != null) {
       if (r === Math.max(s, r, b) && b === Math.min(s, r, b) && (r - b) >= 2.0) return 'The Guardian';
     }
 
-    // PRIORITY 8: THE SEEKER (Self highest, Business lowest, spread >= 2)
+    // PRIORITY 9: THE SEEKER (Self highest, Business lowest, spread >= 2)
     if (s != null && r != null && b != null) {
       if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2.0) return 'The Seeker';
     }
@@ -181,13 +202,37 @@
     return 'The Drifter';
   }
 
+  function getLaggingArenaSummary(results) {
+    var arenaScores = results && results.arenaScores ? results.arenaScores : {};
+    var ranked = [
+      { key: 'Personal', label: 'Personal', score: parseFloat(arenaScores[SELF] ?? arenaScores.Personal ?? 0) || 0 },
+      { key: 'Relationships', label: 'Relationships', score: parseFloat(arenaScores.Relationships ?? 0) || 0 },
+      { key: 'Business', label: 'Business', score: parseFloat(arenaScores.Business ?? 0) || 0 }
+    ].sort(function(a, b) { return a.score - b.score; });
+    return {
+      lagging: ranked[0],
+      second: ranked[1],
+      strongest: ranked[2]
+    };
+  }
+
   /**
-   * Return Lucide icon element for archetype. Uses Lucide's professionally designed icons.
-   * Caller must run lucide.createIcons() after injecting to render. Color inherits from style.
+   * Return icon element for archetype. Most archetypes use Lucide icons. Rising Architect uses a custom inline SVG.
    */
   function getArchetypeIcon(archetypeName, color) {
     var meta = ARCHETYPES[archetypeName];
     var c = color || (meta && meta.color_accent) || '#0E1624';
+    if (archetypeName === 'The Rising Architect') {
+      return '' +
+        '<svg viewBox="0 0 64 64" fill="none" stroke="' + c + '" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="The Rising Architect icon" class="w-full h-full">' +
+          '<title>The Rising Architect</title>' +
+          '<path d="M20 43.5C14.2 37.8 14.2 28.6 20 22.9C25.8 17.2 35.2 17.2 41 22.9" />' +
+          '<path d="M17 24C22.7 18.2 31.9 18.2 37.6 24C43.4 29.8 43.4 39.1 37.6 44.8" />' +
+          '<path d="M43.5 21C49.2 26.8 49.2 36.1 43.5 41.9C37.7 47.6 28.4 47.6 22.6 41.9" />' +
+          '<path d="M46.5 40.5C40.7 46.2 31.4 46.2 25.6 40.5C19.9 34.8 19.9 25.5 25.6 19.8" stroke-dasharray="4 3" />' +
+          '<circle cx="32" cy="32" r="3.5" />' +
+        '</svg>';
+    }
     var lucideIcons = {
       'The Architect': 'drafting-compass',
       'The Phoenix': 'flame',
@@ -207,6 +252,7 @@
   var CONSTELLATION = {
     positions: {
       'The Architect': { x: 200, y: 35 },
+      'The Rising Architect': { x: 265, y: 95 },
       'The Phoenix': { x: 70, y: 230 },
       'The Engine': { x: 330, y: 70 },
       'The Drifter': { x: 200, y: 140 },
@@ -216,6 +262,9 @@
       'The Seeker': { x: 200, y: 230 }
     },
     connections: [
+      ['The Architect', 'The Rising Architect'],
+      ['The Rising Architect', 'The Drifter'],
+      ['The Rising Architect', 'The Engine'],
       ['The Architect', 'The Phoenix'],
       ['The Architect', 'The Engine'],
       ['The Architect', 'The Drifter'],
@@ -334,6 +383,7 @@
     determine: determineArchetype,
     getIcon: getArchetypeIcon,
     get: function(name) { return ARCHETYPES[name] || null; },
+    getLaggingArenaSummary: getLaggingArenaSummary,
     buildConstellation: buildConstellationSVG,
     initConstellationTooltips: initConstellationTooltips
   };

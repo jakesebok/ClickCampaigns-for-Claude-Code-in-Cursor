@@ -10,6 +10,7 @@ export const DRIVER_ACCENT_COLORS: Record<VapiDriverName, string> = {
   "The Imposter Loop": "#8B6BAE",
   "The Martyr Complex": "#A0522D",
   "The Fog": "#9B9586",
+  "The Builder's Gap": "#B87333",
 };
 
 function getDriverIconPaths(driver: VapiDriverName) {
@@ -114,6 +115,16 @@ function getDriverIconPaths(driver: VapiDriverName) {
           <path d="M19.3 19.3l-2.3 5.7" />
           <path d="M44.7 44.7l2.3-5.7" />
           <path d="M19.3 44.7l-2.3-5.7" />
+        </>
+      );
+    case "The Builder's Gap":
+      return (
+        <>
+          <path d="M12 44h40" />
+          <path d="M18 44V28" />
+          <path d="M30 44V22" />
+          <path d="M42 44V31" />
+          <path d="M30 22V14" strokeDasharray="3 4" />
         </>
       );
   }

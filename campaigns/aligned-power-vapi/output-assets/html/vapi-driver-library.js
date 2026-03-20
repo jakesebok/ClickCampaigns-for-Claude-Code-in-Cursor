@@ -7,12 +7,13 @@
     "The Perfectionist's Prison",
     "The Imposter Loop",
     "The Martyr Complex",
-    "The Fog"
+    "The Fog",
+    "The Builder's Gap"
   ];
 
-  var DRIVER_LIBRARY_TITLE = "The 8 Driver Patterns";
+  var DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns";
   var DRIVER_LIBRARY_SUBTITLE =
-    "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 8 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all eight will deepen your self-awareness and may reveal secondary patterns worth exploring.";
+    "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 9 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all nine will deepen your self-awareness and may reveal secondary patterns worth exploring.";
   var DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
     "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
   var DRIVER_LIBRARY_FOOTER_HEADING =
@@ -245,6 +246,34 @@
       ],
       relationshipToOtherDrivers:
         "The Fog is most commonly confused with The Perfectionist's Prison. Both produce low execution. The distinction is simple: The Perfectionist has a clear plan and can't act. The Fog can't plan because they can't commit. If you know exactly what you'd do next but can't seem to do it, that's The Perfectionist's Prison. If you genuinely don't know what you'd do next because too many options feel equally valid, that's The Fog. The Fog also sometimes pairs with The Escape Artist, because constant exploration and content consumption can function as sophisticated avoidance. The person looks like they're doing important strategic work (researching, learning, considering options) when they're actually using optionality as a shield against the vulnerability of choosing."
+    },
+    "The Builder's Gap": {
+      howToKnowThisIsYou: [
+        "You genuinely care about your clients and the quality of your work but your business feels disorganized or chaotic behind the scenes",
+        "You've been told you should \"systemize\" or \"get more structured\" and the advice makes you feel like people want you to become someone you're not",
+        "You associate words like \"operations,\" \"funnels,\" \"KPIs,\" or \"SOPs\" with something cold or corporate that doesn't match your identity",
+        "You could describe your ideal client, your values, and your purpose clearly, but you couldn't describe your business strategy in three sentences",
+        "Your income fluctuates significantly month to month because you don't have predictable systems for generating and converting clients",
+        "You over-deliver to a small group of people because you don't have the infrastructure to serve more",
+        "You feel like you're always one good system away from everything clicking, but you never build the system"
+      ],
+      howToKnowThisIsntYou: [
+        "You have strong business systems and your operations run without your constant involvement",
+        "Your strategy is clear and you've been executing it consistently for 6+ months",
+        "You don't resist the idea of business infrastructure. You've built it and it works.",
+        "Your business challenges are about scaling or optimizing, not about building the basics",
+        "The word \"systems\" doesn't make you feel like you'd be selling out",
+        "Your business revenue is predictable within a reasonable range month to month"
+      ],
+      reflectionPrompts: [
+        "When you imagine your business running on real systems, with a documented strategy, a predictable pipeline, standard operating procedures, and delegated tasks, what feeling comes up? If the answer is anything other than relief, what's the resistance about?",
+        "Who in your life or experience made \"business\" feel like it was at odds with being a good, authentic, caring person? Where did you learn that structure and soul couldn't coexist?",
+        "If you could build the business infrastructure you need while guaranteeing it wouldn't change who you are or how you show up with clients, would you build it immediately? If yes, the obstacle isn't capability. It's a belief about what building requires you to become.",
+        "How much revenue did you leave on the table in the past 12 months because you didn't have the systems to capture, nurture, or convert the interest that already existed? Be specific. What could that money have funded in your life?",
+        "Think about someone you admire who runs a well-structured business AND shows up with warmth, authenticity, and genuine care. They exist. What's different about them? Is it possible that the thing you're resisting is exactly what would let you serve people the way you actually want to?"
+      ],
+      relationshipToOtherDrivers:
+        "The Builder's Gap is most commonly confused with The Fog. Both produce weak Business scores. The critical difference is that The Fog can't choose a direction because commitment feels dangerous. The Builder's Gap often HAS a direction (their Ecology score is usually healthy, meaning the model fits) but hasn't built the infrastructure to execute it. The Fog is paralyzed by optionality. The Builder's Gap is paralyzed by an identity conflict about what 'building a business' requires them to become. The Builder's Gap can also resemble The Perfectionist's Prison, but the distinction is that the Perfectionist has the plan and can't ship because of fear of judgment. The Builder's Gap often doesn't have the plan yet because they haven't engaged with the strategic and operational work required to create one. It's not that they're afraid to execute. It's that they haven't built the thing to execute on."
     }
   };
 
@@ -271,6 +300,16 @@
 
   function buildDriverAnchor(driver) {
     return '<a href="#' + getDriverSectionId(driver) + '" class="font-semibold text-[var(--ap-accent)] hover:underline">' + escapeHtml(driver) + '</a>';
+  }
+
+  function getLibrarySurface(accent, strength) {
+    if (accent && strength === "strong") {
+      return 'background:linear-gradient(180deg,' + accent + '12 0%, var(--ap-surface, #ffffff) 68%);';
+    }
+    if (accent && strength === "soft") {
+      return 'background:linear-gradient(180deg,' + accent + '0D 0%, var(--ap-surface, #ffffff) 72%);';
+    }
+    return 'background:var(--ap-surface, #ffffff);';
   }
 
   function buildNavigation(primaryDriver, secondaryDriver) {
@@ -302,9 +341,10 @@
               var isPrimary = driverName === primaryDriver;
               var isSecondary = driverName === secondaryDriver;
               return (
-                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[210px] items-center gap-3 rounded-2xl border bg-white px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="' +
-                  (isPrimary ? 'border-color:' + accent + '55;background:' + accent + '16;' : '') +
-                  (!isPrimary && isSecondary ? 'border-color:' + accent + '33;background:' + accent + '0D;' : '') +
+                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[220px] items-center gap-3 rounded-[24px] border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="' +
+                  getLibrarySurface(isPrimary ? accent : isSecondary ? accent : null, isPrimary ? "strong" : isSecondary ? "soft" : "base") +
+                  (isPrimary ? 'border-color:' + accent + '55;' : '') +
+                  (!isPrimary && isSecondary ? 'border-color:' + accent + '33;' : '') +
                 '">' +
                   (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 24) : "") +
                   '<span class="text-sm font-medium text-[var(--ap-primary)]">' + escapeHtml(driverName) + '</span>' +
@@ -314,10 +354,11 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
+      '<div class="grid gap-8 lg:grid-cols-[280px,minmax(0,1fr)] lg:items-start">' +
         '<aside class="hidden lg:block">' +
-          '<div class="sticky top-6 rounded-3xl border border-[var(--ap-border)] bg-white p-4 shadow-sm">' +
-            '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
+          '<div class="sticky top-8 rounded-[28px] border border-[var(--ap-border)] p-4 shadow-sm backdrop-blur-sm" style="' + getLibrarySurface(primaryDriver && window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[primaryDriver] : null, "soft") + '">' +
+            '<p class="px-3 pb-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
+            '<p class="px-3 pb-3 text-sm leading-relaxed text-[var(--ap-secondary)]">Scroll the patterns and jump directly to the one you want to read.</p>' +
             '<nav class="space-y-2">' +
               DRIVER_ORDER.map(buildItem).join("") +
             '</nav>' +
@@ -344,7 +385,9 @@
     }
 
     return (
-      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-sm sm:p-8">' +
+      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 relative overflow-hidden rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(accent, "strong") + '">' +
+        '<div class="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl" style="background:' + accent + '14;"></div>' +
+        '<div class="relative">' +
         '<div class="flex flex-col gap-5 sm:flex-row sm:items-start">' +
           '<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border" style="background:' + accent + '14;border-color:' + accent + '33;">' +
             (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 80) : "") +
@@ -412,7 +455,7 @@
             '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How This Relates to Other Patterns</h3>' +
             '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(extras.relationshipToOtherDrivers) + '</p>' +
           '</div>' +
-        '</div>' +
+        '</div></div>' +
       '</section>'
     );
   }
@@ -430,22 +473,27 @@
     var secondaryDriver = primaryDriver ? normalizeDriverName(evaluation.secondaryDriver || null) : null;
     var takeAssessmentHref = opts.takeAssessmentHref || "/assessment";
     var programHref = opts.programHref || "https://jakesebok.com/work-with-me";
+    var primaryAccent = primaryDriver && window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
+      ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[primaryDriver]
+      : "#FF6B1A";
 
     var html =
-      '<section class="rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-sm sm:p-8">' +
+      '<section class="relative overflow-hidden rounded-[36px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8 lg:p-10" style="' + getLibrarySurface(primaryAccent, "strong") + '">' +
+        '<div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl" style="background:' + primaryAccent + '14;"></div>' +
+        '<div class="relative">' +
         '<p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--ap-accent)]">Driver Library</p>' +
         '<h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-5xl">' + escapeHtml(DRIVER_LIBRARY_TITLE) + '</h1>' +
         '<p class="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_SUBTITLE) + '</p>';
 
     if (primaryDriver) {
-      html += '<div class="mt-6 rounded-2xl border border-[var(--ap-accent)]/20 bg-[var(--ap-accent)]/10 px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]">Your primary driver: ' + buildDriverAnchor(primaryDriver) + '. Your secondary driver: ' + (secondaryDriver ? buildDriverAnchor(secondaryDriver) : 'None identified') + '.</div>';
+      html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + primaryAccent + '12;border-color:' + primaryAccent + '26;">Your primary driver: ' + buildDriverAnchor(primaryDriver) + '. Your secondary driver: ' + (secondaryDriver ? buildDriverAnchor(secondaryDriver) : 'None identified') + '.</div>';
     } else {
-      html += '<div class="mt-6 flex flex-col gap-4 rounded-2xl border border-[var(--ap-border)] bg-[var(--ap-bg)] px-5 py-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-sm leading-relaxed text-[var(--ap-secondary)]">' + escapeHtml(DRIVER_LIBRARY_EMPTY_RESULTS_BANNER) + '</p><a href="' + escapeHtml(takeAssessmentHref) + '" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Take the Assessment <span aria-hidden="true">→</span></a></div>';
+      html += '<div class="mt-6 flex flex-col gap-4 rounded-2xl border border-[var(--ap-border)] px-5 py-4 sm:flex-row sm:items-center sm:justify-between" style="background:var(--ap-surface, #ffffff);"><p class="text-sm leading-relaxed text-[var(--ap-secondary)]">' + escapeHtml(DRIVER_LIBRARY_EMPTY_RESULTS_BANNER) + '</p><a href="' + escapeHtml(takeAssessmentHref) + '" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Take the Assessment <span aria-hidden="true">→</span></a></div>';
     }
 
-    html += '</section>';
+    html += '</div></section>';
     html += buildNavigation(primaryDriver, secondaryDriver);
-    html += '<section class="rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-sm sm:p-8">' +
+    html += '<section class="rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(primaryAccent, "soft") + '">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(DRIVER_LIBRARY_FOOTER_HEADING) + '</h2>' +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_FOOTER_TEXT) + '</p>' +
       '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">' +

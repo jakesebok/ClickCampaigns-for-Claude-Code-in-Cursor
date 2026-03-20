@@ -8,10 +8,12 @@ export type VapiDriverName =
   | "The Perfectionist's Prison"
   | "The Protector"
   | "The Martyr Complex"
-  | "The Fog";
+  | "The Fog"
+  | "The Builder's Gap";
 
 export type VapiDriverScores = Record<VapiDriverName, number>;
 export type VapiDriverGates = Record<VapiDriverName, boolean>;
+export type VapiDriverFallbackType = "none" | "high_performer" | "standard";
 
 export type VapiDriverContent = {
   name: VapiDriverName;
@@ -35,6 +37,7 @@ export type VapiDriverEvaluation = {
   secondDriverScore: number;
   secondaryDriverScore: number | null;
   primaryToSecondaryMargin: number;
+  driverFallbackType: VapiDriverFallbackType;
 };
 
 export const DRIVER_THRESHOLD = 6;
@@ -49,6 +52,7 @@ export const DRIVER_TIEBREAK_PRIORITY: VapiDriverName[] = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Builder's Gap",
 ];
 
 export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
@@ -193,12 +197,39 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
       "Phase 2: Strategic Clarity. The Fog needs the most intensive Phase 2. Building the North Star Stack, Revenue Bridge, and Domino Plan gives them a direction that's connected to their values and life rather than abstract business goals.",
     maxPossible: 13,
   },
+  "The Builder's Gap": {
+    name: "The Builder's Gap",
+    coreBelief:
+      "Caring about people and doing good work should be enough. I shouldn't have to become a 'business person' to make this work.",
+    coreFear:
+      "That building real business infrastructure will force me to become someone cold, transactional, or inauthentic.",
+    tagline:
+      "You have everything except the machine. The foundation is strong but the business hasn't been built to match it.",
+    description:
+      "You're not broken. You're not in crisis. You're not avoiding something painful or running from something scary. You're genuinely strong in the areas that most founders neglect: your health, your emotional regulation, your relationships, your sense of self. The people in your life feel your presence. Your values are clear. Your business model even makes sense on paper. But the business itself isn't built. Your strategy shifts more than it should. Your execution is inconsistent. Your operations are fragile or nonexistent. You know what you want to build and why it matters. You just haven't built the infrastructure to make it real. The gap isn't internal. It's structural. But here's the part that makes this a driver and not just a skills gap: there's a reason you haven't built it, and that reason is usually a quiet belief that building a real business machine means becoming someone you don't want to be.",
+    mechanism:
+      "This driver produces a distinctive signature: strong Self and Relationships arena scores paired with a Business arena that's clearly the weakest. Multiple Business domains sit below 5.5 while personal and relational domains are Functional or Dialed. The telling signal is often a healthy Ecology score (6.0+), which means the business model itself is aligned with who you are. The problem isn't what you're building. It's that you haven't built the systems, strategy, and execution rhythms to bring it to life. Importance ratings typically confirm the pattern: you rate Business domains as high priority because you know they need work, but the work keeps not getting done.",
+    whatItCosts:
+      "Your gifts are stranded. The relationships you've built, the trust people have in you, the aligned model you've designed, none of it reaches its potential because the business infrastructure doesn't exist to deliver it at scale. You're probably underearning relative to your capability. You may be over-delivering to a small number of people because you don't have the systems to serve more. The people who need what you offer can't find you, buy from you, or experience your full value because the machine between your gift and your market hasn't been built. Every month this continues, the gap between your potential impact and your actual impact widens.",
+    theWayOut:
+      "The exit is accepting that building business infrastructure is not a betrayal of who you are. It's the vehicle that lets who you are reach the people who need it. Systems aren't cold. They're how you scale your warmth. Strategy isn't corporate. It's how you focus your energy. Operations aren't soulless. They're how you stop being the bottleneck so your actual gift can breathe. We'll identify the specific belief that's kept you from building the machine, reframe business-building as an act of service rather than a compromise of values, and then install the strategy, execution rhythm, and operational basics that translate your strengths into a functioning business.",
+    programPhase:
+      "Phase 2: Strategic Clarity into Phase 4: Aligned Action. The Builder's Gap needs strategic clarity first (what exactly am I building and in what order) and then an operating system to execute it. Phase 3 may be lighter than other drivers unless the belief that 'business = inauthentic' runs deep.",
+    maxPossible: 14,
+  },
 };
 
-export const DRIVER_FALLBACK = {
-  heading: "No Clear Driver Identified",
-  text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't.",
+export const DRIVER_HIGH_PERFORMER_FALLBACK = {
+  heading: "No Dominant Driver Pattern Detected",
+  text: "Your scores don't indicate a dominant internal driver pattern, and that's actually meaningful. Most founders who take this assessment reveal a clear belief or coping strategy that's systematically distorting their results across multiple domains. You don't. Your profile shows broad strength with targeted gaps rather than a systemic pattern of self-sabotage, avoidance, or misalignment. This means your growth work is precision work, not excavation work. You don't need to uncover a hidden pattern. You need to close specific gaps. Focus on the domains in your Critical Priority quadrant. Those are your highest-leverage moves. The driver system is designed to catch the internal patterns that silently undermine founders across multiple areas of life. When it doesn't find one, that's not a gap in the assessment. It's a signal that your internal operating system is functioning well and your remaining challenges are specific, not systemic.",
 };
+
+export const DRIVER_STANDARD_FALLBACK = {
+  heading: "No Clear Driver Identified",
+  text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 9 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
+};
+
+export const DRIVER_FALLBACK = DRIVER_STANDARD_FALLBACK;
 
 const QUESTION_BY_ID = new Map(
   DOMAINS.flatMap((domain) =>
@@ -222,6 +253,7 @@ function createEmptyDriverScores(): VapiDriverScores {
     "The Protector": 0,
     "The Martyr Complex": 0,
     "The Fog": 0,
+    "The Builder's Gap": 0,
   };
 }
 
@@ -235,7 +267,48 @@ function createEmptyDriverGates(): VapiDriverGates {
     "The Protector": false,
     "The Martyr Complex": false,
     "The Fog": false,
+    "The Builder's Gap": false,
   };
+}
+
+export function getDriverFallbackContent(
+  fallbackType: VapiDriverFallbackType
+) {
+  return fallbackType === "high_performer"
+    ? DRIVER_HIGH_PERFORMER_FALLBACK
+    : DRIVER_STANDARD_FALLBACK;
+}
+
+export function getDriverFallbackType(params: {
+  domainScores: Record<string, number>;
+  compositeScore?: number | null;
+  assignedDriver?: VapiDriverName | null;
+}): VapiDriverFallbackType {
+  if (params.assignedDriver) {
+    return "none";
+  }
+
+  const normalizedCompositeScore = getCompositeScore(
+    params.domainScores,
+    params.compositeScore
+  );
+  const domainsBelowThreshold = ALL_DOMAIN_CODES.filter(
+    (code) => getNumericValue(params.domainScores[code], 0) < 5.5
+  ).length;
+
+  if (normalizedCompositeScore >= 7.0 && domainsBelowThreshold <= 1) {
+    return "high_performer";
+  }
+
+  return "standard";
+}
+
+export function getDriverFallbackLabel(
+  fallbackType: VapiDriverFallbackType
+) {
+  if (fallbackType === "high_performer") return "High Performer";
+  if (fallbackType === "standard") return "Standard";
+  return "N/A (driver was assigned)";
 }
 
 function getNumericValue(value: unknown, fallback: number) {
@@ -624,6 +697,60 @@ export function determineDriver(input: {
     }
   }
 
+  const builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(
+    (code) => getNumericValue(domainScores[code], 0) < 5.5
+  );
+  const builderStrongPersonalRelationalDomains = [
+    getNumericValue(domainScores.PH, 0) >= 6.5,
+    getNumericValue(domainScores.ME, 0) >= 6.5,
+    getNumericValue(domainScores.IA, 0) >= 6.5,
+    getNumericValue(domainScores.RS, 0) >= 6.5,
+    getNumericValue(domainScores.FA, 0) >= 6.5,
+    getNumericValue(domainScores.CO, 0) >= 6.5,
+  ];
+  driverGates["The Builder's Gap"] =
+    isArenaLowest(normalizedArenaScores, "business") &&
+    (
+      normalizedArenaScores.self >= 6.0 ||
+      normalizedArenaScores.relationships >= 6.0
+    ) &&
+    countTrue(builderWeakBusinessDomains) >= 2;
+  if (driverGates["The Builder's Gap"]) {
+    if (
+      normalizedArenaScores.self >= 6.5 ||
+      normalizedArenaScores.relationships >= 6.5
+    ) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (
+      normalizedArenaScores.self >= 6.5 &&
+      normalizedArenaScores.relationships >= 6.5
+    ) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (countTrue(builderWeakBusinessDomains) >= 3) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (getNumericValue(domainScores.EC, 0) >= 6.0) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (getNumericValue(importanceRatings.EX, 5) >= 7) {
+      driverScores["The Builder's Gap"] += 1;
+    }
+    if (getNumericValue(importanceRatings.VS, 5) >= 7) {
+      driverScores["The Builder's Gap"] += 1;
+    }
+    if (getNumericValue(importanceRatings.OH, 5) >= 5) {
+      driverScores["The Builder's Gap"] += 1;
+    }
+    if (countTrue(builderStrongPersonalRelationalDomains) >= 3) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (normalizedCompositeScore >= 5.5) {
+      driverScores["The Builder's Gap"] += 1;
+    }
+  }
+
   const rankedDrivers = ALL_DRIVER_NAMES.map((driverName, index) => ({
     driverName,
     score: driverScores[driverName],
@@ -650,6 +777,11 @@ export function determineDriver(input: {
       ? runnerUp.driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+  const driverFallbackType = getDriverFallbackType({
+    domainScores,
+    compositeScore: normalizedCompositeScore,
+    assignedDriver,
+  });
 
   return {
     assignedDriver,
@@ -660,5 +792,6 @@ export function determineDriver(input: {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverFallbackType,
   };
 }

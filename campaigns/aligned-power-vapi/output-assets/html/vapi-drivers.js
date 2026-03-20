@@ -10,6 +10,7 @@
     "The Protector",
     "The Martyr Complex",
     "The Fog",
+    "The Builder's Gap",
   ];
   var DRIVER_CONTENT = {
     "The Achiever's Trap": {
@@ -153,11 +154,36 @@
         "Phase 2: Strategic Clarity. The Fog needs the most intensive Phase 2. Building the North Star Stack, Revenue Bridge, and Domino Plan gives them a direction that's connected to their values and life rather than abstract business goals.",
       maxPossible: 13,
     },
+    "The Builder's Gap": {
+      name: "The Builder's Gap",
+      coreBelief:
+        "Caring about people and doing good work should be enough. I shouldn't have to become a 'business person' to make this work.",
+      coreFear:
+        "That building real business infrastructure will force me to become someone cold, transactional, or inauthentic.",
+      tagline:
+        "You have everything except the machine. The foundation is strong but the business hasn't been built to match it.",
+      description:
+        "You're not broken. You're not in crisis. You're not avoiding something painful or running from something scary. You're genuinely strong in the areas that most founders neglect: your health, your emotional regulation, your relationships, your sense of self. The people in your life feel your presence. Your values are clear. Your business model even makes sense on paper. But the business itself isn't built. Your strategy shifts more than it should. Your execution is inconsistent. Your operations are fragile or nonexistent. You know what you want to build and why it matters. You just haven't built the infrastructure to make it real. The gap isn't internal. It's structural. But here's the part that makes this a driver and not just a skills gap: there's a reason you haven't built it, and that reason is usually a quiet belief that building a real business machine means becoming someone you don't want to be.",
+      mechanism:
+        "This driver produces a distinctive signature: strong Self and Relationships arena scores paired with a Business arena that's clearly the weakest. Multiple Business domains sit below 5.5 while personal and relational domains are Functional or Dialed. The telling signal is often a healthy Ecology score (6.0+), which means the business model itself is aligned with who you are. The problem isn't what you're building. It's that you haven't built the systems, strategy, and execution rhythms to bring it to life. Importance ratings typically confirm the pattern: you rate Business domains as high priority because you know they need work, but the work keeps not getting done.",
+      whatItCosts:
+        "Your gifts are stranded. The relationships you've built, the trust people have in you, the aligned model you've designed, none of it reaches its potential because the business infrastructure doesn't exist to deliver it at scale. You're probably underearning relative to your capability. You may be over-delivering to a small number of people because you don't have the systems to serve more. The people who need what you offer can't find you, buy from you, or experience your full value because the machine between your gift and your market hasn't been built. Every month this continues, the gap between your potential impact and your actual impact widens.",
+      theWayOut:
+        "The exit is accepting that building business infrastructure is not a betrayal of who you are. It's the vehicle that lets who you are reach the people who need it. Systems aren't cold. They're how you scale your warmth. Strategy isn't corporate. It's how you focus your energy. Operations aren't soulless. They're how you stop being the bottleneck so your actual gift can breathe. We'll identify the specific belief that's kept you from building the machine, reframe business-building as an act of service rather than a compromise of values, and then install the strategy, execution rhythm, and operational basics that translate your strengths into a functioning business.",
+      programPhase:
+        "Phase 2: Strategic Clarity into Phase 4: Aligned Action. The Builder's Gap needs strategic clarity first (what exactly am I building and in what order) and then an operating system to execute it. Phase 3 may be lighter than other drivers unless the belief that 'business = inauthentic' runs deep.",
+      maxPossible: 14,
+    },
   };
-  var DRIVER_FALLBACK = {
+  var DRIVER_HIGH_PERFORMER_FALLBACK = {
+    heading: "No Dominant Driver Pattern Detected",
+    text: "Your scores don't indicate a dominant internal driver pattern, and that's actually meaningful. Most founders who take this assessment reveal a clear belief or coping strategy that's systematically distorting their results across multiple domains. You don't. Your profile shows broad strength with targeted gaps rather than a systemic pattern of self-sabotage, avoidance, or misalignment. This means your growth work is precision work, not excavation work. You don't need to uncover a hidden pattern. You need to close specific gaps. Focus on the domains in your Critical Priority quadrant. Those are your highest-leverage moves. The driver system is designed to catch the internal patterns that silently undermine founders across multiple areas of life. When it doesn't find one, that's not a gap in the assessment. It's a signal that your internal operating system is functioning well and your remaining challenges are specific, not systemic.",
+  };
+  var DRIVER_STANDARD_FALLBACK = {
     heading: "No Clear Driver Identified",
-    text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't.",
+    text: "Your score pattern doesn't map strongly to a single internal driver. This can mean one of several things: your pattern is genuinely complex and influenced by multiple drivers rather than one dominant one, you're in a transitional period where old patterns are shifting, or the behavioral data from the assessment needs to be supplemented with deeper reflection. This is not a problem. It simply means the quantitative data alone can't pinpoint the root cause with enough confidence. Your detailed domain scores, archetype, and priority matrix still provide a clear picture of where to focus. If you're working with a coach, your intake reflection and first session will surface what the numbers alone couldn't. You can also explore all 9 driver patterns in the Driver Library to see if one resonates through self-reflection rather than algorithmic detection.",
   };
+  var DRIVER_FALLBACK = DRIVER_STANDARD_FALLBACK;
   var DRIVER_NOTE =
     "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
   var ALL_DOMAIN_CODES = ["PH", "IA", "ME", "AF", "RS", "FA", "CO", "WI", "VS", "EX", "OH", "EC"];
@@ -175,6 +201,7 @@
     "The Imposter Loop": "#8B6BAE",
     "The Martyr Complex": "#A0522D",
     "The Fog": "#9B9586",
+    "The Builder's Gap": "#B87333",
   };
 
   function escapeHtml(value) {
@@ -266,6 +293,7 @@
       "The Protector": 0,
       "The Martyr Complex": 0,
       "The Fog": 0,
+      "The Builder's Gap": 0,
     };
   }
 
@@ -279,7 +307,26 @@
       "The Protector": false,
       "The Martyr Complex": false,
       "The Fog": false,
+      "The Builder's Gap": false,
     };
+  }
+
+  function getDriverFallbackType(domainScores, compositeScore, assignedDriver) {
+    if (assignedDriver) return "none";
+
+    var domainsBelowThreshold = ALL_DOMAIN_CODES.filter(function (code) {
+      return getNumericValue(domainScores[code], 0) < 5.5;
+    }).length;
+
+    return compositeScore >= 7.0 && domainsBelowThreshold <= 1
+      ? "high_performer"
+      : "standard";
+  }
+
+  function getDriverFallbackContent(fallbackType) {
+    return fallbackType === "high_performer"
+      ? DRIVER_HIGH_PERFORMER_FALLBACK
+      : DRIVER_STANDARD_FALLBACK;
   }
 
   function getDriverLibraryHref() {
@@ -368,7 +415,6 @@
           '<path d="M53 20c-2.6 1.4-3.6 4.5-2.7 7.2c-2.4-.8-5.1.3-6.2 2.6"/>',
         ];
       case "The Fog":
-      default:
         return [
           '<circle cx="32" cy="32" r="18"/>',
           '<path d="M32 8l4 10l-4 4l-4-4z"/>',
@@ -380,6 +426,16 @@
           '<path d="M44.7 44.7l2.3-5.7"/>',
           '<path d="M19.3 44.7l-2.3-5.7"/>',
         ];
+      case "The Builder's Gap":
+        return [
+          '<path d="M12 44h40"/>',
+          '<path d="M18 44V28"/>',
+          '<path d="M30 44V22"/>',
+          '<path d="M42 44V31"/>',
+          '<path d="M30 22V14" stroke-dasharray="3 4"/>',
+        ];
+      default:
+        return [];
     }
   }
 
@@ -617,6 +673,41 @@
       if (compositeScore >= 4.0 && compositeScore <= 6.5) driverScores["The Fog"] += 1;
     }
 
+    var builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(function (code) {
+      return getNumericValue(domainScores[code], 0) < 5.5;
+    });
+    var builderStrongPersonalRelationalDomains = [
+      getNumericValue(domainScores.PH, 0) >= 6.5,
+      getNumericValue(domainScores.ME, 0) >= 6.5,
+      getNumericValue(domainScores.IA, 0) >= 6.5,
+      getNumericValue(domainScores.RS, 0) >= 6.5,
+      getNumericValue(domainScores.FA, 0) >= 6.5,
+      getNumericValue(domainScores.CO, 0) >= 6.5,
+    ];
+    driverGates["The Builder's Gap"] =
+      isArenaLowest(arenaScores, "business") &&
+      (arenaScores.self >= 6.0 || arenaScores.relationships >= 6.0) &&
+      countTrue(builderWeakBusinessDomains) >= 2;
+    if (driverGates["The Builder's Gap"]) {
+      if (arenaScores.self >= 6.5 || arenaScores.relationships >= 6.5) {
+        driverScores["The Builder's Gap"] += 2;
+      }
+      if (arenaScores.self >= 6.5 && arenaScores.relationships >= 6.5) {
+        driverScores["The Builder's Gap"] += 2;
+      }
+      if (countTrue(builderWeakBusinessDomains) >= 3) {
+        driverScores["The Builder's Gap"] += 2;
+      }
+      if (getNumericValue(domainScores.EC, 0) >= 6.0) driverScores["The Builder's Gap"] += 2;
+      if (getNumericValue(importanceRatings.EX, 5) >= 7) driverScores["The Builder's Gap"] += 1;
+      if (getNumericValue(importanceRatings.VS, 5) >= 7) driverScores["The Builder's Gap"] += 1;
+      if (getNumericValue(importanceRatings.OH, 5) >= 5) driverScores["The Builder's Gap"] += 1;
+      if (countTrue(builderStrongPersonalRelationalDomains) >= 3) {
+        driverScores["The Builder's Gap"] += 2;
+      }
+      if (compositeScore >= 5.5) driverScores["The Builder's Gap"] += 1;
+    }
+
     var rankedDrivers = DRIVER_TIEBREAK_PRIORITY.map(function (driverName, index) {
       return {
         driverName: driverName,
@@ -645,6 +736,11 @@
         ? rankedDrivers[1].driverName
         : null;
     var secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+    var driverFallbackType = getDriverFallbackType(
+      domainScores,
+      compositeScore,
+      assignedDriver
+    );
     return {
       assignedDriver: assignedDriver,
       secondaryDriver: secondaryDriver,
@@ -654,6 +750,7 @@
       secondDriverScore: secondDriverScore,
       secondaryDriverScore: secondaryDriverScore,
       primaryToSecondaryMargin: primaryToSecondaryMargin,
+      driverFallbackType: driverFallbackType,
     };
   }
 
@@ -668,6 +765,7 @@
         secondDriverScore: 0,
         secondaryDriverScore: null,
         primaryToSecondaryMargin: 0,
+        driverFallbackType: "standard",
       };
     }
     if (
@@ -696,6 +794,11 @@
             ? results.secondaryDriverScore
             : null,
         primaryToSecondaryMargin: results.primaryToSecondaryMargin,
+        driverFallbackType: getDriverFallbackType(
+          (results && results.domainScores) || {},
+          getCompositeScore((results && results.domainScores) || {}, results && results.overall),
+          typeof results.assignedDriver === "string" ? results.assignedDriver : null
+        ),
       };
     }
     var hasResponses =
@@ -712,6 +815,11 @@
         secondDriverScore: 0,
         secondaryDriverScore: null,
         primaryToSecondaryMargin: 0,
+        driverFallbackType: getDriverFallbackType(
+          (results && results.domainScores) || {},
+          getCompositeScore((results && results.domainScores) || {}, results && results.overall),
+          null
+        ),
       };
     }
     var evaluation = evaluateDriver(results);
@@ -723,6 +831,7 @@
     results.secondDriverScore = evaluation.secondDriverScore;
     results.secondaryDriverScore = evaluation.secondaryDriverScore;
     results.primaryToSecondaryMargin = evaluation.primaryToSecondaryMargin;
+    results.driverFallbackType = evaluation.driverFallbackType;
     return evaluation;
   }
 
@@ -739,53 +848,39 @@
     var accent = driverName
       ? (DRIVER_ACCENT_COLORS[driverName] || "var(--ap-accent)")
       : ((options && options.accent) || "var(--ap-accent)");
+    var fallbackContent = getDriverFallbackContent(evaluation.driverFallbackType || "standard");
     var id = (options && options.id) || "driver-section";
     var libraryHref = (options && options.libraryHref) || getDriverLibraryHref();
+    var surface = "var(--ap-surface, #ffffff)";
     var html =
       '<div id="' +
       id +
-      '" class="driver-section bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden mb-10 relative scroll-mt-24" style="border-left:4px solid ' +
+      '" class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:linear-gradient(135deg,' +
       accent +
-      ';">';
-    html += '<div class="p-6 sm:p-8 relative">';
+      '12 0%,' +
+      surface +
+      ' 28%,' +
+      surface +
+      ' 100%);">';
+    html += '<div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style="background:' + accent + '16;"></div>';
+    html += '<div class="p-6 sm:p-8 relative space-y-5">';
     html +=
-      '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-2" style="color:' +
+      '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
       accent +
       '">What\'s Driving This Pattern</p>';
     if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
-      html += '<div class="flex flex-col gap-3">';
-      html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5">';
-      html += '<div class="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center" style="background:' + accent + '15;">';
+      html += '<div class="flex flex-col gap-5">';
+      html += '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">';
+      html += '<div class="flex items-start gap-4">';
+      html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
       html += getDriverIcon(driverName, 64);
       html += "</div>";
-      html += '<div class="min-w-0 flex-1">';
-      html += '<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">';
+      html += '<div class="min-w-0 space-y-2">';
       html +=
         '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
         escapeHtml(driver.name) +
         "</h2>";
-      html +=
-        '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
-        accent +
-        '12;color:' +
-        accent +
-        ';border:1px solid color-mix(in srgb,' +
-        accent +
-        " 20%, transparent)\">Pattern strength: " +
-        evaluation.topDriverScore +
-        " / " +
-        driver.maxPossible +
-        "</span>";
-      html += "</div>";
-      html +=
-        '<blockquote class="rounded-xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
-        accent +
-        '12;border-left:4px solid ' +
-        accent +
-        ';">&quot;' +
-        escapeHtml(driver.coreBelief) +
-        "&quot;</blockquote>";
       html +=
         '<p class="text-sm text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
         escapeHtml(driver.coreFear) +
@@ -794,18 +889,41 @@
         '<p class="text-[15px] italic text-[var(--ap-secondary)] leading-relaxed">' +
         escapeHtml(driver.tagline) +
         "</p>";
+      html += '</div></div>';
+      html +=
+        '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+        accent +
+        '14;color:' +
+        accent +
+        ';border:1px solid ' +
+        accent +
+        '33;">Pattern strength: ' +
+        evaluation.topDriverScore +
+        ' / ' +
+        driver.maxPossible +
+        "</span>";
+      html += "</div>";
+      html +=
+        '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+        accent +
+        '14;border-left:4px solid ' +
+        accent +
+        ';">&quot;' +
+        escapeHtml(driver.coreBelief) +
+        "&quot;</blockquote>";
       html +=
         '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
         escapeHtml(driver.description) +
         "</p>";
-      html += "</div></div>";
       [
         ["How This Shows Up in Your Scores", driver.mechanism],
         ["What This Is Costing You", driver.whatItCosts],
         ["The Way Out", driver.theWayOut],
       ].forEach(function (section) {
         html +=
-          '<details class="driver-details mt-3 rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/55 group">';
+          '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+          surface +
+          ';">';
         html +=
           '<summary class="cursor-pointer flex items-center justify-between gap-3 px-4 py-3 text-[15px] font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden">' +
           "<span>" +
@@ -816,8 +934,9 @@
           escapeHtml(section[1]) +
           "</div></details>";
       });
+      html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
       html +=
-        '<p class="mt-5 pt-5 border-t border-[var(--ap-border)] text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
       html +=
@@ -826,21 +945,20 @@
         '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
         accent +
         '">Learn more about all driver patterns &gt;</a>';
+      html += '</div>';
       if (secondaryDriverName) {
         var secondaryDriver = DRIVER_CONTENT[secondaryDriverName];
         var secondaryAccent = DRIVER_ACCENT_COLORS[secondaryDriverName] || accent;
-        html += '<div class="pt-5 mt-2 border-t border-[var(--ap-border)]/80 space-y-3">';
+        html += '<div class="space-y-3 border-t border-[var(--ap-border)]/70 pt-5">';
         html +=
-          '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
-          secondaryAccent +
-          '">Secondary Pattern</p>';
+          '<p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ap-muted)]">Secondary Pattern</p>';
         html += '<div class="flex items-start gap-3">';
-        html += '<div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background:' + secondaryAccent + '15;">';
+        html += '<div class="flex-shrink-0 w-10 h-10 rounded-xl border flex items-center justify-center" style="background:' + secondaryAccent + '14;border-color:' + secondaryAccent + '33;">';
         html += getDriverIcon(secondaryDriverName, 40);
         html += "</div>";
         html += '<div class="min-w-0 flex-1 space-y-2">';
         html +=
-          '<h3 class="text-lg sm:text-xl font-semibold text-[var(--ap-primary)]">' +
+          '<h3 class="text-lg font-semibold text-[var(--ap-primary)]">' +
           escapeHtml(secondaryDriver.name) +
           "</h3>";
         html +=
@@ -861,24 +979,26 @@
       }
       html += "</div>";
     } else {
+      html += '<div class="space-y-4">';
       html +=
-        '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-3">' +
-        escapeHtml(DRIVER_FALLBACK.heading) +
+        '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+        escapeHtml(fallbackContent.heading) +
         "</h2>";
       html +=
         '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
-        escapeHtml(DRIVER_FALLBACK.text) +
+        escapeHtml(fallbackContent.text) +
         "</p>";
       html +=
-        '<a href="' +
-        libraryHref +
-        '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:opacity-80 transition-colors" data-driver-library-link="1">Learn more about all driver patterns &gt;</a>';
-    }
-    if (!driverName) {
-      html +=
-        '<p class="mt-5 pt-5 border-t border-[var(--ap-border)] text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
+      if ((evaluation.driverFallbackType || "standard") === "standard") {
+        html +=
+          '<a href="' +
+          libraryHref +
+          '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:opacity-80 transition-colors" data-driver-library-link="1">Explore all driver patterns in the Driver Library &gt;</a>';
+      }
+      html += "</div>";
     }
     html += "</div></div>";
     return html;
@@ -901,6 +1021,8 @@
       "The Martyr Complex is still operating. You're still sacrificing your health and inner life for the people and causes you serve. Your contribution and family scores remain strong while your body and alignment continue to deteriorate. The belief that your needs come last hasn't shifted. The generosity is genuine but the cost is unsustainable. You cannot pour from an empty vessel, and the vessel is getting emptier.",
     "The Fog":
       "The Fog hasn't lifted. You still can't commit to a clear direction, your importance ratings are still flat, and your vision and alignment scores remain low. Another assessment period has passed in exploration mode. The fog feels like confusion but it functions as protection. At some point, the cost of not choosing exceeds the cost of choosing wrong. You may have already passed that point.",
+    "The Builder's Gap":
+      "The Builder's Gap is still the pattern. You still have a strong personal foundation and genuine relational wealth, but the business infrastructure still hasn't been built. Another assessment period has passed and the strategy, execution, operations, or some combination remain underdeveloped. The belief that building a business machine somehow threatens your authenticity hasn't been addressed. Every month this gap persists is a month your gifts stay stranded at a fraction of their potential reach. The people who need what you offer are waiting for you to build the vehicle that delivers it.",
   };
 
   function getTransitionSummary(previousDriver, currentDriver) {
@@ -965,12 +1087,15 @@
     DRIVER_ACCENT_COLORS: DRIVER_ACCENT_COLORS,
     DRIVER_CONTENT: DRIVER_CONTENT,
     DRIVER_FALLBACK: DRIVER_FALLBACK,
+    DRIVER_HIGH_PERFORMER_FALLBACK: DRIVER_HIGH_PERFORMER_FALLBACK,
+    DRIVER_STANDARD_FALLBACK: DRIVER_STANDARD_FALLBACK,
     DRIVER_NOTE: DRIVER_NOTE,
     DRIVER_MAINTAINED_INTERPRETATIONS: DRIVER_MAINTAINED_INTERPRETATIONS,
     ensureEvaluation: ensureEvaluation,
     buildResultsSection: buildResultsSection,
     getIcon: getDriverIcon,
     getDriverLibraryHref: getDriverLibraryHref,
+    getDriverFallbackContent: getDriverFallbackContent,
     getTransitionSummary: getTransitionSummary,
   };
 })();

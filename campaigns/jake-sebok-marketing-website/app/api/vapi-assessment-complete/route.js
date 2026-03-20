@@ -42,6 +42,7 @@ const DRIVER_TIEBREAK_PRIORITY = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Builder's Gap",
 ];
 const DRIVER_CORE_BELIEFS = {
   "The Achiever's Trap": "I am what I produce.",
@@ -52,6 +53,18 @@ const DRIVER_CORE_BELIEFS = {
   "The Protector": "If I let go of control, everything falls apart.",
   "The Martyr Complex": "I have to suffer for this to count.",
   "The Fog": "I don't know what I want, so I can't commit to anything.",
+  "The Builder's Gap": "Caring about people and doing good work should be enough. I shouldn't have to become a 'business person' to make this work.",
+};
+const ARCHETYPE_TAGLINES = {
+  'The Architect': "You've built a life and business that actually work together.",
+  'The Rising Architect': 'Almost there. One arena is holding the rest back.',
+  'The Phoenix': 'In the fire. Not finished.',
+  'The Engine': 'Building fast. Building wrong.',
+  'The Drifter': 'Fine everywhere. Exceptional nowhere.',
+  'The Performer': 'Impressive output. Crumbling foundation.',
+  'The Ghost': 'Building an empire. Disappearing from your own life.',
+  'The Guardian': 'All heart. Needs a vehicle.',
+  'The Seeker': 'Deeply self-aware. Stuck in insight.',
 };
 
 function getTierColor(tier) {
@@ -78,6 +91,11 @@ function determineArchetypeServer(results) {
   const overall = typeof results.overall === 'number' ? results.overall : (Object.keys(domainScores).length ? Object.values(domainScores).reduce((a, v) => a + (v || 0), 0) / 12 : null);
   const exScore = domainScores.EX; const ecScore = domainScores.EC; const vsScore = domainScores.VS;
   if (s >= 8 && r >= 8 && b >= 8) return 'The Architect';
+  const nearArchitectCount = [s, r, b].filter((score) => score != null && score >= 7.5).length;
+  const lowestArena = Math.min(s, r, b);
+  if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
+    return 'The Rising Architect';
+  }
   let arenasLow = 0;
   if (s != null && s <= 4.5) arenasLow++;
   if (r != null && r <= 4.5) arenasLow++;
@@ -95,6 +113,15 @@ function determineArchetypeServer(results) {
     if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2) return 'The Seeker';
   }
   return 'The Drifter';
+}
+
+function getLaggingArenaSummary(arenaScores = {}, personalLabel = 'Self') {
+  const ranked = [
+    { key: 'personal', label: personalLabel, score: parseFloat(String(arenaScores.Personal ?? arenaScores.Self ?? 0)) || 0 },
+    { key: 'relationships', label: 'Relationships', score: parseFloat(String(arenaScores.Relationships ?? 0)) || 0 },
+    { key: 'business', label: 'Business', score: parseFloat(String(arenaScores.Business ?? 0)) || 0 },
+  ].sort((a, b) => a.score - b.score);
+  return ranked[0];
 }
 
 function escHtml(s) {
@@ -123,6 +150,24 @@ function createEmptyDriverGates() {
   }, {});
 }
 
+function getCompositeScore(domainScores, overall) {
+  if (typeof overall === 'number' && Number.isFinite(overall)) return overall;
+  const values = Object.values(domainScores || {});
+  return values.length ? values.reduce((sum, value) => sum + (value || 0), 0) / values.length : 0;
+}
+
+function getDriverFallbackType(domainScores, overall, assignedDriver) {
+  if (assignedDriver) return 'none';
+  const normalizedScores = domainScores || {};
+  const compositeScore = getCompositeScore(normalizedScores, overall);
+  const domainsBelowThreshold = Object.values(normalizedScores).filter(
+    (score) => typeof score === 'number' && score < 5.5
+  ).length;
+  return compositeScore >= 7.0 && domainsBelowThreshold <= 1
+    ? 'high_performer'
+    : 'standard';
+}
+
 function getDriverSummary(source) {
   if (!source || typeof source !== 'object') {
     return {
@@ -134,6 +179,7 @@ function getDriverSummary(source) {
       secondDriverScore: 0,
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
+      driverFallbackType: 'standard',
     };
   }
 
@@ -158,6 +204,11 @@ function getDriverSummary(source) {
       secondDriverScore: source.secondDriverScore,
       secondaryDriverScore: typeof source.secondaryDriverScore === 'number' ? source.secondaryDriverScore : null,
       primaryToSecondaryMargin: source.primaryToSecondaryMargin,
+      driverFallbackType: getDriverFallbackType(
+        source.domainScores || buildDomainScoresMap(source.domains || []),
+        source.overall,
+        typeof source.assignedDriver === 'string' ? source.assignedDriver : null
+      ),
     };
   }
 
@@ -172,6 +223,11 @@ function getDriverSummary(source) {
       secondDriverScore: 0,
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
+      driverFallbackType: getDriverFallbackType(
+        source.domainScores || buildDomainScoresMap(source.domains || []),
+        source.overall,
+        null
+      ),
     };
   }
 
@@ -191,6 +247,11 @@ function getDriverSummary(source) {
     secondDriverScore: typeof enriched.secondDriverScore === 'number' ? enriched.secondDriverScore : 0,
     secondaryDriverScore: typeof enriched.secondaryDriverScore === 'number' ? enriched.secondaryDriverScore : null,
     primaryToSecondaryMargin: typeof enriched.primaryToSecondaryMargin === 'number' ? enriched.primaryToSecondaryMargin : 0,
+    driverFallbackType: enriched.driverFallbackType || getDriverFallbackType(
+      enriched.domainScores || source.domainScores || buildDomainScoresMap(source.domains || []),
+      enriched.overall ?? source.overall,
+      enriched.assignedDriver || null
+    ),
   };
 }
 
@@ -212,10 +273,13 @@ function buildUserEmail({
   topCriticalPriority,
   hasPortalAccount,
   archetype,
+  archetypeTagline,
+  laggingArenaSummary,
   driverName,
   driverCoreBelief,
   secondaryDriverName,
   secondaryDriverCoreBelief,
+  driverFallbackType,
 }) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
   const portalLink = `${PORTAL_URL}/login`;
@@ -267,10 +331,12 @@ function buildUserEmail({
     ${archetype ? `<div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Your Founder Archetype</p>
       <p style="margin:0;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(archetype)}</p>
+      ${archetypeTagline ? `<p style="margin:6px 0 0;color:#3A4A5C;font-size:15px;font-style:italic;">${escHtml(archetypeTagline)}</p>` : ''}
+      ${laggingArenaSummary ? `<p style="margin:8px 0 0;color:#3A4A5C;font-size:14px;line-height:1.6;"><strong>Your lagging arena:</strong> ${escHtml(laggingArenaSummary.label)} (${escHtml(laggingArenaSummary.score.toFixed(1))})</p>` : ''}
     </div>` : ''}
     <div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
       <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">What's Driving This Pattern</p>
-      ${driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> View your full results for details.</p>`}
+      ${driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : driverFallbackType === 'high_performer' ? `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No dominant driver pattern detected.</strong> Your growth work is targeted, not systemic. See your Critical Priority domains for your highest-leverage moves.</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> Explore the Driver Library for deeper self-reflection, or discuss with your coach.</p>`}
     </div>
 
     <!-- Arena scores -->
@@ -324,12 +390,14 @@ Congratulations on completing the VAPI Assessment.
 
 Your VAPI Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 
-${archetype ? `Your Founder Archetype: ${archetype}\n` : ''}
+${archetype ? `Your Founder Archetype: ${archetype}\n${archetypeTagline ? `'${archetypeTagline}'\n` : ''}${laggingArenaSummary ? `Your lagging arena: ${laggingArenaSummary.label} (${laggingArenaSummary.score.toFixed(1)})\n` : ''}` : ''}
 ${driverName && secondaryDriverName
   ? `What's Driving This Pattern\nPrimary: ${driverName} - '${driverCoreBelief}'\nSecondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n`
   : driverName
     ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n`
-    : `What's Driving This Pattern: No clear single driver identified. View your full results for details.\n`}
+    : driverFallbackType === 'high_performer'
+      ? `What's Driving This Pattern: No dominant driver pattern detected.\nYour growth work is targeted, not systemic. See your Critical Priority domains for your highest-leverage moves.\n`
+      : `What's Driving This Pattern: No clear single driver identified.\nExplore the Driver Library for deeper self-reflection, or discuss with your coach.\n`}
 
 Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
 Relationships: ${arenaScores.Relationships ?? '?'} / 10 - ${arenaTiers.Relationships ?? ''}
@@ -358,6 +426,7 @@ function buildAdminEmail({
   hasPortalAccount,
   timestamp,
   archetype,
+  laggingArenaSummary,
   driverName,
   secondaryDriverName,
   topDriverScore,
@@ -365,8 +434,10 @@ function buildAdminEmail({
   primaryToSecondaryMargin,
   driverScores,
   driverGates,
+  previousArchetypeName,
   previousDriverName,
   previousSecondaryDriverName,
+  driverFallbackType,
 }) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
   const ordinalNum = ordinal(assessmentNumber || 1);
@@ -381,6 +452,8 @@ function buildAdminEmail({
     : 'None';
   const previousPrimarySummary = `${previousDriverName || 'None'} (${previousDriverName === driverName ? 'unchanged' : 'changed'})`;
   const previousSecondarySummary = `${previousSecondaryDriverName || 'None'} (${previousSecondaryDriverName === secondaryDriverName ? 'unchanged' : 'changed'})`;
+  const fallbackTypeSummary =
+    driverName ? 'N/A (driver was assigned)' : driverFallbackType === 'high_performer' ? 'High Performer' : 'Standard';
 
   const sortedDomains = [...(domains || [])].sort((a,b) => a.score - b.score);
   const domainRows = sortedDomains.map(d => {
@@ -425,10 +498,13 @@ function buildAdminEmail({
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Account Status:</strong> ${escHtml(accountStatus)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Assessment #:</strong> ${escHtml(ordinalNum)} assessment</td></tr>
       ${archetype ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Founder Archetype:</strong> ${escHtml(archetype)}</td></tr>` : ''}
+      ${laggingArenaSummary ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Lagging Arena:</strong> ${escHtml(laggingArenaSummary.label)} (${escHtml(laggingArenaSummary.score.toFixed(1))})</td></tr>` : ''}
+      ${previousArchetypeName ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Archetype:</strong> ${escHtml(previousArchetypeName)} (${previousArchetypeName === archetype ? 'unchanged' : 'changed'})</td></tr>` : ''}
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary Driver:</strong> ${escHtml(primaryDriverSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Secondary Driver:</strong> ${escHtml(secondaryDriverSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary-Secondary Margin:</strong> ${escHtml(String(primaryToSecondaryMargin))} points</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver Scores:</strong> ${escHtml(driverScoresText)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Fallback Type:</strong> ${escHtml(fallbackTypeSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Primary Driver:</strong> ${escHtml(previousPrimarySummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Secondary Driver:</strong> ${escHtml(previousSecondarySummary)}</td></tr>
     </table>
@@ -471,10 +547,12 @@ Email: ${email || 'Not provided'}
 Account Status: ${accountStatus}
 Assessment #: ${ordinalNum} assessment
 ${archetype ? `Founder Archetype: ${archetype}\n` : ''}
+${laggingArenaSummary ? `Lagging Arena: ${laggingArenaSummary.label} (${laggingArenaSummary.score.toFixed(1)})\n` : ''}${previousArchetypeName ? `Previous Archetype: ${previousArchetypeName} (${previousArchetypeName === archetype ? 'unchanged' : 'changed'})\n` : ''}
 Primary Driver: ${primaryDriverSummary}
 Secondary Driver: ${secondaryDriverSummary}
 Primary-Secondary Margin: ${primaryToSecondaryMargin} points
 Driver Scores: ${driverScoresText}
+Fallback Type: ${fallbackTypeSummary}
 Previous Primary Driver: ${previousPrimarySummary}
 Previous Secondary Driver: ${previousSecondarySummary}
 
@@ -602,9 +680,13 @@ export async function POST(request) {
     secondDriverScore: secondDriverScoreFromBody = null,
     secondaryDriverScore: secondaryDriverScoreFromBody = null,
     primaryToSecondaryMargin: primaryToSecondaryMarginFromBody = null,
+    driverFallbackType = null,
   } = body;
 
   const archetype = archetypeFromBody || determineArchetypeServer({ overall, arenaScores, domains });
+  const archetypeTagline = archetype ? ARCHETYPE_TAGLINES[archetype] || null : null;
+  const laggingArenaSummary =
+    archetype === 'The Rising Architect' ? getLaggingArenaSummary(arenaScores) : null;
   const driverEvaluation = getDriverSummary({
     domains,
     domainScores: buildDomainScoresMap(domains),
@@ -619,6 +701,8 @@ export async function POST(request) {
     secondDriverScore: secondDriverScoreFromBody,
     secondaryDriverScore: secondaryDriverScoreFromBody,
     primaryToSecondaryMargin: primaryToSecondaryMarginFromBody,
+    driverFallbackType,
+    overall,
   });
   const driverName = driverEvaluation.assignedDriver || null;
   const driverCoreBelief = driverName ? DRIVER_CORE_BELIEFS[driverName] : null;
@@ -640,6 +724,9 @@ export async function POST(request) {
   const previousDriverEvaluation = lookup.previousAssessment
     ? getDriverSummary(lookup.previousAssessment.results || {})
     : { assignedDriver: null, secondaryDriver: null };
+  const previousArchetypeName = lookup.previousAssessment
+    ? lookup.previousAssessment.results?.archetype || determineArchetypeServer(lookup.previousAssessment.results || {})
+    : null;
   const previousDriverName = previousDriverEvaluation.assignedDriver || null;
   const previousSecondaryDriverName =
     previousDriverEvaluation.secondaryDriver || null;
@@ -668,10 +755,13 @@ export async function POST(request) {
       topCriticalPriority,
       hasPortalAccount,
       archetype,
+      archetypeTagline,
+      laggingArenaSummary,
       driverName,
       driverCoreBelief,
       secondaryDriverName,
       secondaryDriverCoreBelief,
+      driverFallbackType: driverEvaluation.driverFallbackType || 'standard',
     });
     try {
       const res = await fetch('https://api.resend.com/emails', {
@@ -703,6 +793,7 @@ export async function POST(request) {
     overall, overallTier, arenaScores, arenaTiers, domains,
     importanceRatings, priorityMatrix, contextualProfile,
     assessmentNumber, hasPortalAccount, timestamp, archetype,
+    laggingArenaSummary,
     driverName,
     secondaryDriverName,
     topDriverScore: driverEvaluation.topDriverScore || 0,
@@ -710,8 +801,10 @@ export async function POST(request) {
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin || 0,
     driverScores: driverEvaluation.driverScores || createEmptyDriverScores(),
     driverGates: driverEvaluation.driverGates || createEmptyDriverGates(),
+    previousArchetypeName,
     previousDriverName,
     previousSecondaryDriverName,
+    driverFallbackType: driverEvaluation.driverFallbackType || 'standard',
   });
   try {
     const res = await fetch('https://api.resend.com/emails', {

@@ -6,7 +6,8 @@ type DriverName =
   | "The Perfectionist's Prison"
   | "The Protector"
   | "The Martyr Complex"
-  | "The Fog";
+  | "The Fog"
+  | "The Builder's Gap";
 
 type DriverScores = Record<DriverName, number>;
 type DriverGates = Record<DriverName, boolean>;
@@ -22,6 +23,7 @@ const DRIVER_TIEBREAK_PRIORITY: DriverName[] = [
   "The Protector",
   "The Martyr Complex",
   "The Fog",
+  "The Builder's Gap",
 ];
 
 const SELF_DOMAIN_CODES = ["PH", "IA", "ME", "AF"];
@@ -52,6 +54,7 @@ function createEmptyDriverScores(): DriverScores {
     "The Protector": 0,
     "The Martyr Complex": 0,
     "The Fog": 0,
+    "The Builder's Gap": 0,
   };
 }
 
@@ -65,7 +68,24 @@ function createEmptyDriverGates(): DriverGates {
     "The Protector": false,
     "The Martyr Complex": false,
     "The Fog": false,
+    "The Builder's Gap": false,
   };
+}
+
+function getDriverFallbackType(
+  domainScores: Record<string, number>,
+  compositeScore: number,
+  assignedDriver: DriverName | null
+) {
+  if (assignedDriver) return "none";
+
+  const domainsBelowThreshold = ALL_DOMAIN_CODES.filter(
+    (code) => getNumericValue(domainScores[code], 0) < 5.5
+  ).length;
+
+  return compositeScore >= 7.0 && domainsBelowThreshold <= 1
+    ? "high_performer"
+    : "standard";
 }
 
 function getNumericValue(value: unknown, fallback: number) {
@@ -432,6 +452,41 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
     if (compositeScore >= 4.0 && compositeScore <= 6.5) driverScores["The Fog"] += 1;
   }
 
+  const builderWeakBusinessDomains = BUSINESS_DOMAIN_CODES.map(
+    (code) => getNumericValue(domainScores[code], 0) < 5.5
+  );
+  const builderStrongPersonalRelationalDomains = [
+    getNumericValue(domainScores.PH, 0) >= 6.5,
+    getNumericValue(domainScores.ME, 0) >= 6.5,
+    getNumericValue(domainScores.IA, 0) >= 6.5,
+    getNumericValue(domainScores.RS, 0) >= 6.5,
+    getNumericValue(domainScores.FA, 0) >= 6.5,
+    getNumericValue(domainScores.CO, 0) >= 6.5,
+  ];
+  driverGates["The Builder's Gap"] =
+    isArenaLowest(arenaScores, "business") &&
+    (arenaScores.self >= 6.0 || arenaScores.relationships >= 6.0) &&
+    countTrue(builderWeakBusinessDomains) >= 2;
+  if (driverGates["The Builder's Gap"]) {
+    if (arenaScores.self >= 6.5 || arenaScores.relationships >= 6.5) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (arenaScores.self >= 6.5 && arenaScores.relationships >= 6.5) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (countTrue(builderWeakBusinessDomains) >= 3) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (getNumericValue(domainScores.EC, 0) >= 6.0) driverScores["The Builder's Gap"] += 2;
+    if (getNumericValue(importanceRatings.EX, 5) >= 7) driverScores["The Builder's Gap"] += 1;
+    if (getNumericValue(importanceRatings.VS, 5) >= 7) driverScores["The Builder's Gap"] += 1;
+    if (getNumericValue(importanceRatings.OH, 5) >= 5) driverScores["The Builder's Gap"] += 1;
+    if (countTrue(builderStrongPersonalRelationalDomains) >= 3) {
+      driverScores["The Builder's Gap"] += 2;
+    }
+    if (compositeScore >= 5.5) driverScores["The Builder's Gap"] += 1;
+  }
+
   const rankedDrivers = DRIVER_TIEBREAK_PRIORITY.map((driverName, index) => ({
     driverName,
     score: driverScores[driverName],
@@ -456,6 +511,11 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
       ? rankedDrivers[1].driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+  const driverFallbackType = getDriverFallbackType(
+    domainScores,
+    compositeScore,
+    assignedDriver
+  );
 
   return {
     ...results,
@@ -469,5 +529,6 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverFallbackType,
   };
 }

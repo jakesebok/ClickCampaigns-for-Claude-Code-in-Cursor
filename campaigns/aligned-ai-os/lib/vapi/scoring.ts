@@ -10,6 +10,7 @@ export type VapiTier = "Dialed" | "Functional" | "Below the Line" | "In the Red"
 
 export type VapiArchetype =
   | "The Architect"
+  | "The Rising Architect"
   | "The Phoenix"
   | "The Engine"
   | "The Drifter"
@@ -30,6 +31,14 @@ export type PriorityItem = {
   score: number;
   importance: number;
   quadrant: PriorityQuadrant;
+};
+
+export type VapiArenaKey = "personal" | "relationships" | "business";
+
+export type RankedArena = {
+  key: VapiArenaKey;
+  label: "Personal" | "Self" | "Relationships" | "Business";
+  score: number;
 };
 
 export function scoreQuestion(raw: number, reverse: boolean): number {
@@ -102,12 +111,19 @@ export function getArchetype(arenas: Record<string, number>, domains: Record<str
   const allArenas = [p, r, b];
   const spread = Math.max(...allArenas) - Math.min(...allArenas);
   const belowCount = allArenas.filter((a) => a <= 4.5).length;
+  const arenasNearArchitect = allArenas.filter((a) => a >= 7.5).length;
+  const lowestArena = Math.min(...allArenas);
 
   if (p >= 8 && r >= 8 && b >= 8) return "The Architect";
   const overall = (p + r + b) / 3;
+  if (overall >= 7.0 && arenasNearArchitect >= 2 && lowestArena >= 6.5) {
+    return "The Rising Architect";
+  }
   if (overall <= 4.5 || belowCount >= 2) return "The Phoenix";
   if ((domains.EX || 0) >= 7 && ((domains.EC || 0) <= 5 || (domains.VS || 0) <= 5))
     return "The Engine";
+  const allMid = p >= 5 && p <= 7.9 && r >= 5 && r <= 7.9 && b >= 5 && b <= 7.9;
+  if (allMid && spread <= 2) return "The Drifter";
   if (b === Math.max(...allArenas) && p === Math.min(...allArenas) && spread >= 2)
     return "The Performer";
   if (b === Math.max(...allArenas) && r === Math.min(...allArenas) && spread >= 2)
@@ -117,6 +133,19 @@ export function getArchetype(arenas: Record<string, number>, domains: Record<str
   if (p === Math.max(...allArenas) && b === Math.min(...allArenas) && spread >= 2)
     return "The Seeker";
   return "The Drifter";
+}
+
+export function getRankedArenas(
+  arenas: Record<string, number>,
+  options?: { personalLabel?: "Personal" | "Self" }
+): RankedArena[] {
+  const personalLabel = options?.personalLabel ?? "Personal";
+  const ranked: RankedArena[] = [
+    { key: "personal", label: personalLabel, score: arenas.personal || 0 },
+    { key: "relationships", label: "Relationships", score: arenas.relationships || 0 },
+    { key: "business", label: "Business", score: arenas.business || 0 },
+  ];
+  return ranked.sort((a, b) => a.score - b.score);
 }
 
 export function getPriorityMatrix(
@@ -140,6 +169,8 @@ export function getPriorityMatrix(
 export const ARCHETYPE_DESCRIPTIONS: Record<VapiArchetype, string> = {
   "The Architect":
     "You're aligned across all three arenas. Your life, relationships, and business are working together. The work now is maintenance, refinement, and protecting what you've built.",
+  "The Rising Architect":
+    "You're close to full integration. Two arenas are already operating near Architect level and one lagging arena is keeping the reinforcing cycle from fully locking in. The work now is targeted, not transformational.",
   "The Phoenix":
     "You're in a season of rebuilding. Multiple areas need attention. This isn't failure — it's the foundation for your next chapter. Start with the one area that would create the most relief.",
   "The Engine":

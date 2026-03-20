@@ -108,6 +108,7 @@ function hasDriverFields(results: Record<string, unknown>) {
     typeof results.topDriverScore === "number" &&
     typeof results.secondDriverScore === "number" &&
     typeof results.primaryToSecondaryMargin === "number" &&
+    typeof results.driverFallbackType === "string" &&
     results.driverScores &&
     typeof results.driverScores === "object" &&
     results.driverGates &&
@@ -158,6 +159,7 @@ function buildBackfilledResults(results: Record<string, unknown>) {
     secondDriverScore: driverEvaluation.secondDriverScore,
     secondaryDriverScore: driverEvaluation.secondaryDriverScore,
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+    driverFallbackType: driverEvaluation.driverFallbackType,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
   };

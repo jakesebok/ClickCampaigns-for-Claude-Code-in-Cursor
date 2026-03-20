@@ -5,7 +5,9 @@ import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
 import {
   determineDriver,
   flattenGroupedAnswersToScoredResponses,
+  getDriverFallbackType,
   normalizeResponsesFromStoredMap,
+  type VapiDriverName,
 } from "@/lib/vapi/drivers";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -37,6 +39,10 @@ function normalizeArenaScores(raw: Record<string, number> | null | undefined): R
     out[key] = typeof v === "number" ? v : 0;
   }
   return out;
+}
+
+function normalizeDriverName(value: unknown): VapiDriverName | null {
+  return typeof value === "string" ? (value as VapiDriverName) : null;
 }
 
 async function insertPortalVapi(params: {
@@ -87,15 +93,11 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     "secondaryDriver" in results &&
     "secondaryDriverScore" in results
   ) {
+    const assignedDriver = normalizeDriverName(results.assignedDriver);
+    const secondaryDriver = normalizeDriverName(results.secondaryDriver);
     return {
-      assignedDriver:
-        typeof results.assignedDriver === "string"
-          ? (results.assignedDriver as string)
-          : null,
-      secondaryDriver:
-        typeof results.secondaryDriver === "string"
-          ? (results.secondaryDriver as string)
-          : null,
+      assignedDriver,
+      secondaryDriver,
       driverScores: results.driverScores as Record<string, number>,
       driverGates: results.driverGates as Record<string, boolean>,
       topDriverScore: results.topDriverScore as number,
@@ -105,6 +107,12 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
           ? (results.secondaryDriverScore as number)
           : null,
       primaryToSecondaryMargin: results.primaryToSecondaryMargin as number,
+      driverFallbackType: getDriverFallbackType({
+        domainScores: (results.domainScores as Record<string, number>) || {},
+        compositeScore:
+          typeof results.overall === "number" ? (results.overall as number) : null,
+        assignedDriver,
+      }),
     };
   }
 
@@ -125,6 +133,7 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
         "The Protector": 0,
         "The Martyr Complex": 0,
         "The Fog": 0,
+        "The Builder's Gap": 0,
       },
       driverGates: {
         "The Achiever's Trap": false,
@@ -135,12 +144,18 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
         "The Protector": false,
         "The Martyr Complex": false,
         "The Fog": false,
+        "The Builder's Gap": false,
       },
       topDriverScore: 0,
       secondDriverScore: 0,
       secondaryDriver: null,
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
+      driverFallbackType: getDriverFallbackType({
+        domainScores: (results.domainScores as Record<string, number>) || {},
+        compositeScore:
+          typeof results.overall === "number" ? (results.overall as number) : null,
+      }),
     };
   }
 
@@ -192,6 +207,7 @@ export async function GET(req: NextRequest) {
         topDriverScore: driverEvaluation.topDriverScore,
         secondaryDriverScore: driverEvaluation.secondaryDriverScore,
         primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+        driverFallbackType: driverEvaluation.driverFallbackType,
         createdAt: row.created_at,
       },
     });
@@ -213,6 +229,7 @@ export async function GET(req: NextRequest) {
       topDriverScore: driverEvaluation.topDriverScore,
       secondaryDriverScore: driverEvaluation.secondaryDriverScore,
       primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+      driverFallbackType: driverEvaluation.driverFallbackType,
       createdAt: row.created_at,
     };
   });
@@ -255,6 +272,7 @@ export async function POST(req: NextRequest) {
     secondDriverScore: driverEvaluation.secondDriverScore,
     secondaryDriverScore: driverEvaluation.secondaryDriverScore,
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+    driverFallbackType: driverEvaluation.driverFallbackType,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
     firstName: user.name?.split(" ")[0],
@@ -281,5 +299,6 @@ export async function POST(req: NextRequest) {
     topDriverScore: driverEvaluation.topDriverScore,
     secondaryDriverScore: driverEvaluation.secondaryDriverScore,
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+    driverFallbackType: driverEvaluation.driverFallbackType,
   });
 }

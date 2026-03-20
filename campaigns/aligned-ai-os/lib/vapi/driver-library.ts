@@ -9,11 +9,12 @@ export const DRIVER_ORDER: VapiDriverName[] = [
   "The Imposter Loop",
   "The Martyr Complex",
   "The Fog",
+  "The Builder's Gap",
 ];
 
-export const DRIVER_LIBRARY_TITLE = "The 8 Driver Patterns";
+export const DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns";
 export const DRIVER_LIBRARY_SUBTITLE =
-  "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 8 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all eight will deepen your self-awareness and may reveal secondary patterns worth exploring.";
+  "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 9 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all nine will deepen your self-awareness and may reveal secondary patterns worth exploring.";
 export const DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
   "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
 export const DRIVER_LIBRARY_FOOTER_HEADING =
@@ -253,6 +254,34 @@ export const DRIVER_LIBRARY_CONTENT: Record<VapiDriverName, DriverLibraryEntry> 
     ],
     relationshipToOtherDrivers:
       "The Fog is most commonly confused with The Perfectionist's Prison. Both produce low execution. The distinction is simple: The Perfectionist has a clear plan and can't act. The Fog can't plan because they can't commit. If you know exactly what you'd do next but can't seem to do it, that's The Perfectionist's Prison. If you genuinely don't know what you'd do next because too many options feel equally valid, that's The Fog. The Fog also sometimes pairs with The Escape Artist, because constant exploration and content consumption can function as sophisticated avoidance. The person looks like they're doing important strategic work (researching, learning, considering options) when they're actually using optionality as a shield against the vulnerability of choosing.",
+  },
+  "The Builder's Gap": {
+    howToKnowThisIsYou: [
+      "You genuinely care about your clients and the quality of your work but your business feels disorganized or chaotic behind the scenes",
+      "You've been told you should \"systemize\" or \"get more structured\" and the advice makes you feel like people want you to become someone you're not",
+      "You associate words like \"operations,\" \"funnels,\" \"KPIs,\" or \"SOPs\" with something cold or corporate that doesn't match your identity",
+      "You could describe your ideal client, your values, and your purpose clearly, but you couldn't describe your business strategy in three sentences",
+      "Your income fluctuates significantly month to month because you don't have predictable systems for generating and converting clients",
+      "You over-deliver to a small group of people because you don't have the infrastructure to serve more",
+      "You feel like you're always one good system away from everything clicking, but you never build the system",
+    ],
+    howToKnowThisIsntYou: [
+      "You have strong business systems and your operations run without your constant involvement",
+      "Your strategy is clear and you've been executing it consistently for 6+ months",
+      "You don't resist the idea of business infrastructure. You've built it and it works.",
+      "Your business challenges are about scaling or optimizing, not about building the basics",
+      "The word \"systems\" doesn't make you feel like you'd be selling out",
+      "Your business revenue is predictable within a reasonable range month to month",
+    ],
+    reflectionPrompts: [
+      "When you imagine your business running on real systems, with a documented strategy, a predictable pipeline, standard operating procedures, and delegated tasks, what feeling comes up? If the answer is anything other than relief, what's the resistance about?",
+      "Who in your life or experience made \"business\" feel like it was at odds with being a good, authentic, caring person? Where did you learn that structure and soul couldn't coexist?",
+      "If you could build the business infrastructure you need while guaranteeing it wouldn't change who you are or how you show up with clients, would you build it immediately? If yes, the obstacle isn't capability. It's a belief about what building requires you to become.",
+      "How much revenue did you leave on the table in the past 12 months because you didn't have the systems to capture, nurture, or convert the interest that already existed? Be specific. What could that money have funded in your life?",
+      "Think about someone you admire who runs a well-structured business AND shows up with warmth, authenticity, and genuine care. They exist. What's different about them? Is it possible that the thing you're resisting is exactly what would let you serve people the way you actually want to?",
+    ],
+    relationshipToOtherDrivers:
+      "The Builder's Gap is most commonly confused with The Fog. Both produce weak Business scores. The critical difference is that The Fog can't choose a direction because commitment feels dangerous. The Builder's Gap often HAS a direction (their Ecology score is usually healthy, meaning the model fits) but hasn't built the infrastructure to execute it. The Fog is paralyzed by optionality. The Builder's Gap is paralyzed by an identity conflict about what 'building a business' requires them to become. The Builder's Gap can also resemble The Perfectionist's Prison, but the distinction is that the Perfectionist has the plan and can't ship because of fear of judgment. The Builder's Gap often doesn't have the plan yet because they haven't engaged with the strategic and operational work required to create one. It's not that they're afraid to execute. It's that they haven't built the thing to execute on.",
   },
 };
 

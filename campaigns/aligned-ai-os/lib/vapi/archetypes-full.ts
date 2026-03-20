@@ -26,6 +26,21 @@ export const ARCHETYPES_FULL: Record<VapiArchetype, ArchetypeFull> = {
     programPhase:
       "Phase 5: Embodied Execution. You don't need to find clarity or remove blocks. You need to sustain and deepen what's already working.",
   },
+  "The Rising Architect": {
+    tagline: "Almost there. One arena is holding the rest back.",
+    description:
+      "The integration is close. Most of your life and business is operating at a high level and multiple domains are Dialed. But one arena hasn't caught up yet, and that gap is preventing the full reinforcing cycle that defines The Architect. You're not stagnating. You're not in crisis. You're not drifting. You're building toward something genuinely rare, and you're closer than most founders ever get. The work now is precise: identify the specific arena lagging behind and give it the focused attention it needs to close the gap. You don't need a transformation. You need a targeted push.",
+    strength:
+      "Broad high performance. You've built genuine capability across nearly every dimension of your life and business. Most founders sacrifice one arena entirely to prop up another. You haven't. The foundation for full integration already exists. That foundation is your greatest asset.",
+    shadow:
+      "Neglecting the lagging arena because everything else feels good enough. When 11 out of 12 domains are strong, the temptation is to coast on the overall picture and ignore the one or two areas pulling the average down. That gap is small enough to ignore, which is exactly what makes it persistent. The last 10% of integration delivers disproportionate returns because it's what turns a strong life into a reinforcing one.",
+    constraint:
+      "A single under-invested arena. Your challenge isn't systemic. It's specific. One area of your life or business hasn't received the same attention and discipline you've given everything else. Identifying that area and treating it with the same seriousness you brought to your strengths is the entire game.",
+    growthPath:
+      "The Rising Architect's path is targeted, not transformational. Identify the weakest arena. Find the 1-2 domains within it dragging the average down. Give those domains the same focused intensity you brought to the areas that are already Dialed. You're one sustained push away from The Architect. Don't let the comfort of 'almost there' prevent you from finishing the build.",
+    programPhase:
+      "Phase 5: Embodied Execution. Like The Architect, you don't need to find clarity or remove deep internal blocks. You need targeted work on a specific gap while maintaining everything else. The coaching work is about precision and accountability, not excavation.",
+  },
   "The Phoenix": {
     tagline: "In the fire. Not finished.",
     description:

@@ -5,6 +5,7 @@
 import { DOMAINS, ARENAS } from "./quiz-data";
 import { getTier, getPriorityMatrix } from "./scoring";
 import type {
+  VapiDriverFallbackType,
   VapiDriverGates,
   VapiDriverName,
   VapiDriverScores,
@@ -30,6 +31,7 @@ export type PortalVapiResults = {
   secondDriverScore?: number;
   secondaryDriverScore?: number | null;
   primaryToSecondaryMargin?: number;
+  driverFallbackType?: VapiDriverFallbackType;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -50,6 +52,7 @@ export function buildPortalResultsFormat(params: {
   secondDriverScore?: number;
   secondaryDriverScore?: number | null;
   primaryToSecondaryMargin?: number;
+  driverFallbackType?: VapiDriverFallbackType;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
   firstName?: string;
@@ -69,6 +72,7 @@ export function buildPortalResultsFormat(params: {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverFallbackType,
     allResponses,
     responseCodingVersion,
     firstName,
@@ -128,6 +132,7 @@ export function buildPortalResultsFormat(params: {
     secondDriverScore: secondDriverScore ?? undefined,
     secondaryDriverScore: secondaryDriverScore ?? undefined,
     primaryToSecondaryMargin: primaryToSecondaryMargin ?? undefined,
+    driverFallbackType: driverFallbackType ?? undefined,
     allResponses: allResponses || undefined,
     responseCodingVersion: responseCodingVersion || undefined,
     firstName: firstName || undefined,

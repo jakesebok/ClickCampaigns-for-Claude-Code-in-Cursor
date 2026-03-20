@@ -40,6 +40,7 @@ import {
   getTierColor,
   ARCHETYPE_DESCRIPTIONS,
   getPriorityMatrix,
+  getRankedArenas,
   type VapiTier,
   type VapiArchetype,
   type PriorityQuadrant,
@@ -47,7 +48,12 @@ import {
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
-import { DRIVER_CONTENT, DRIVER_FALLBACK, type VapiDriverName } from "@/lib/vapi/drivers";
+import {
+  DRIVER_CONTENT,
+  getDriverFallbackContent,
+  type VapiDriverFallbackType,
+  type VapiDriverName,
+} from "@/lib/vapi/drivers";
 import { DRIVER_ACCENT_COLORS, DriverIcon } from "@/lib/vapi/driver-icons";
 import { getDriverTransitionSummary } from "@/lib/vapi/driver-progress";
 import { VAPI_PROGRESS_TRANSITIONS } from "@/lib/vapi/progress-transitions";
@@ -72,12 +78,25 @@ const ARENA_ICONS: Record<string, React.ElementType> = {
   business: Briefcase,
 };
 
-function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
+function ArchetypeSection({
+  archetype,
+  arenaScores,
+}: {
+  archetype: VapiArchetype;
+  arenaScores: Record<string, number>;
+}) {
   const [expanded, setExpanded] = useState(false);
   const full = ARCHETYPES_FULL[archetype];
   const short = ARCHETYPE_DESCRIPTIONS[archetype] || "";
   const ArchetypeIcon = getArchetypeIcon(archetype);
   const archetypeColor = ARCHETYPE_ACCENT_COLORS[archetype];
+  const rankedArenas =
+    archetype === "The Rising Architect"
+      ? getRankedArenas(arenaScores)
+      : null;
+  const laggingArena = rankedArenas?.[0];
+  const secondArena = rankedArenas?.[1];
+  const strongestArena = rankedArenas?.[2];
 
   return (
     <div className="rounded-2xl border border-border p-6 space-y-3">
@@ -130,6 +149,23 @@ function ArchetypeSection({ archetype }: { archetype: VapiArchetype }) {
               </div>
             </div>
           )}
+          {archetype === "The Rising Architect" &&
+            laggingArena &&
+            secondArena &&
+            strongestArena && (
+              <div className="rounded-xl border border-accent/25 bg-accent/5 p-4 text-sm">
+                <p className="text-xs font-medium uppercase tracking-wider text-accent">
+                  Your Lagging Arena
+                </p>
+                <p className="mt-2 text-muted-foreground leading-relaxed">
+                  Your {laggingArena.label} arena ({laggingArena.score.toFixed(1)}) is the
+                  area holding you back from full Architect status. Focus here. Your{" "}
+                  {secondArena.label} ({secondArena.score.toFixed(1)}) and{" "}
+                  {strongestArena.label} ({strongestArena.score.toFixed(1)}) are already
+                  strong enough. Close this gap and everything reinforces.
+                </p>
+              </div>
+            )}
         </>
       )}
       {!full && <p className="text-muted-foreground text-sm leading-relaxed">{short}</p>}
@@ -142,11 +178,13 @@ function DriverSection({
   secondaryDriver,
   driverScores,
   topDriverScore,
+  driverFallbackType,
 }: {
   assignedDriver: string | null;
   secondaryDriver?: string | null;
   driverScores?: Record<string, number>;
   topDriverScore?: number;
+  driverFallbackType?: VapiDriverFallbackType;
 }) {
   const [expanded, setExpanded] = useState<
     Record<"mechanism" | "cost" | "wayOut", boolean>
@@ -175,6 +213,7 @@ function DriverSection({
   const accent = driverName ? DRIVER_ACCENT_COLORS[driverName] : "#FF6B1A";
   const note =
     "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
+  const fallbackContent = getDriverFallbackContent(driverFallbackType || "standard");
 
   return (
     <div
@@ -339,20 +378,23 @@ function DriverSection({
         ) : (
           <div className="space-y-4">
             <h2 className="text-2xl font-serif font-bold text-foreground">
-              {DRIVER_FALLBACK.heading}
+              {fallbackContent.heading}
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {DRIVER_FALLBACK.text}
+              {fallbackContent.text}
             </p>
             <p className="text-xs leading-relaxed text-muted-foreground">
               {note}
             </p>
-            <Link
-              href="/drivers"
-              className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
-            >
-              Learn more about all driver patterns <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            {driverFallbackType !== "high_performer" && (
+              <Link
+                href="/drivers"
+                className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+              >
+                Explore all driver patterns in the Driver Library{" "}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
           </div>
         )}
       </div>
@@ -383,6 +425,7 @@ type ResultData = {
   topDriverScore: number;
   secondaryDriverScore: number | null;
   primaryToSecondaryMargin: number;
+  driverFallbackType: VapiDriverFallbackType;
   createdAt: string;
 };
 
@@ -552,6 +595,91 @@ function getArchetypeTransitionNarrative(
   currentArchetype: string | null
 ): ProgressNarrative | null {
   if (!previousArchetype && !currentArchetype) return null;
+
+  const isArchitectFamily = (value: string | null) =>
+    value === "The Architect" || value === "The Rising Architect";
+
+  if (
+    previousArchetype === "The Rising Architect" &&
+    currentArchetype === "The Rising Architect"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Is Consistent",
+      subtitle: "Still showing up as The Rising Architect",
+      body: "You're still almost there. Your overall profile remains strong and near-integrated, but the lagging arena from your last assessment still hasn't closed the gap. The comfort of 'almost there' is the real risk at this level. You have the capability and the foundation. What you need is the willingness to give your weakest arena the same intensity you gave everything else. Look at the specific domains pulling that arena down. They are your highest-leverage targets for the next assessment period.",
+    };
+  }
+
+  if (
+    previousArchetype &&
+    currentArchetype === "The Rising Architect" &&
+    previousArchetype !== "The Architect" &&
+    previousArchetype !== "The Rising Architect"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: `${previousArchetype} to The Rising Architect`,
+      body: "You've moved from an imbalanced or deficit pattern into near-integration. Most of your arenas are operating at a high level. One area is still lagging but the gap is closeable. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus.",
+    };
+  }
+
+  if (
+    previousArchetype === "The Rising Architect" &&
+    currentArchetype === "The Architect"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: "The Rising Architect to The Architect",
+      body: "You closed the gap. The arena that was lagging has caught up and all three arenas are now operating at the Dialed level. You've achieved genuine integration. This is the rarest and most valuable state on this assessment. Protect it.",
+    };
+  }
+
+  if (
+    previousArchetype === "The Architect" &&
+    currentArchetype === "The Rising Architect"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: "The Architect to The Rising Architect",
+      body: "You've lost the integration you had built. One arena has slipped below full Architect level, even though most of your profile is still strong. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus before the gap widens.",
+    };
+  }
+
+  if (
+    previousArchetype === "The Rising Architect" &&
+    currentArchetype &&
+    currentArchetype !== "The Architect"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: `The Rising Architect to ${currentArchetype}`,
+      body: "You've moved away from near-integration. The lagging arena that kept you just short of Architect status is no longer the only issue in the pattern. Compare your latest archetype and score breakdown carefully to see where the reinforcing cycle weakened.",
+    };
+  }
+
+  if (
+    previousArchetype &&
+    currentArchetype === "The Architect" &&
+    !isArchitectFamily(previousArchetype)
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Your Founder Archetype Has Shifted",
+      subtitle: `${previousArchetype} to The Architect`,
+      body: "You've moved into genuine integration. Your personal, relational, and business arenas are now reinforcing each other instead of competing. Protect this. The systems and habits that got you here are worth defending.",
+    };
+  }
 
   if (previousArchetype && currentArchetype && previousArchetype === currentArchetype) {
     return {
@@ -779,6 +907,7 @@ function ResultsContent() {
         topDriverScore?: number;
         secondaryDriverScore?: number | null;
         primaryToSecondaryMargin?: number;
+        driverFallbackType?: VapiDriverFallbackType;
         createdAt: string;
       }) => ({
         id: r.id,
@@ -793,11 +922,15 @@ function ResultsContent() {
         topDriverScore: r.topDriverScore || 0,
         secondaryDriverScore: r.secondaryDriverScore ?? null,
         primaryToSecondaryMargin: r.primaryToSecondaryMargin ?? 0,
+        driverFallbackType: r.driverFallbackType || "standard",
         createdAt: r.createdAt,
       }));
       setAllResults(all);
       if (id && singleRes.result) {
-        setResult(singleRes.result);
+        setResult({
+          ...singleRes.result,
+          driverFallbackType: singleRes.result.driverFallbackType || "standard",
+        });
       } else if (all.length) {
         setResult(all[0]);
       } else {
@@ -1047,13 +1180,14 @@ function ResultsContent() {
           </div>
 
           {/* Archetype — expandable with full content */}
-          <ArchetypeSection archetype={archetype} />
+          <ArchetypeSection archetype={archetype} arenaScores={result.arenaScores} />
 
           <DriverSection
             assignedDriver={result.assignedDriver}
             secondaryDriver={result.secondaryDriver}
             driverScores={result.driverScores}
             topDriverScore={result.topDriverScore}
+            driverFallbackType={result.driverFallbackType}
           />
 
           {/* Explore Your Score */}

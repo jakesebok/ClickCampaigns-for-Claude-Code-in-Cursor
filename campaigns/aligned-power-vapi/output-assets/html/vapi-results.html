@@ -619,6 +619,9 @@
         var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
         var tagline = meta && meta.tagline ? meta.tagline : '';
         var iconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(archetypeName, color) : '';
+        var laggingArenaSummary = archetypeName === 'The Rising Architect' && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getLaggingArenaSummary
+          ? VAPI_ARCHETYPE.getLaggingArenaSummary(results)
+          : null;
         var html = '<div class="archetype-section bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden mb-10 relative" style="border-left:4px solid ' + color + ';">';
         html += '<div class="p-6 sm:p-8 relative">';
         html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
@@ -646,6 +649,12 @@
           if (meta.program_phase) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
           html += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
           html += '</div></details>';
+        }
+        if (laggingArenaSummary && laggingArenaSummary.lagging && laggingArenaSummary.second && laggingArenaSummary.strongest) {
+          html += '<div class="mt-5 rounded-xl border p-4" style="border-color:' + color + '33;background:' + color + '10;">';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + color + '">Your Lagging Arena</p>';
+          html += '<p class="mt-2 text-[15px] text-[var(--ap-secondary)] leading-relaxed">Your ' + escapeHtml(laggingArenaSummary.lagging.label) + ' arena (' + laggingArenaSummary.lagging.score.toFixed(1) + ') is the area holding you back from full Architect status. Focus here. Your ' + escapeHtml(laggingArenaSummary.second.label) + ' (' + laggingArenaSummary.second.score.toFixed(1) + ') and ' + escapeHtml(laggingArenaSummary.strongest.label) + ' (' + laggingArenaSummary.strongest.score.toFixed(1) + ') are already strong enough. Close this gap and everything reinforces.</p>';
+          html += '</div>';
         }
         html += '</div></div>';
         return html;
