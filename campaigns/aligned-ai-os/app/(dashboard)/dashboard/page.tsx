@@ -37,9 +37,14 @@ import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { ARENAS, DOMAINS } from "@/lib/vapi/quiz-data";
 import {
+  ALIGNED_MOMENTUM_CONTENT,
+  ALIGNED_MOMENTUM_NAME,
   DRIVER_CONTENT,
+  getDriverState,
+  type VapiAssignedDriverName,
   type VapiDriverFallbackType,
   type VapiDriverName,
+  type VapiDriverState,
 } from "@/lib/vapi/drivers";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
@@ -74,6 +79,7 @@ type VapiResult = {
   assignedDriver: string | null;
   driverScores: Record<string, number>;
   topDriverScore: number;
+  driverState: VapiDriverState;
   driverFallbackType: VapiDriverFallbackType;
   createdAt: string;
 };
@@ -106,6 +112,14 @@ function getScorecardScoreColor(score: number) {
 }
 
 export default function DashboardPage() {
+  const coerceAssignedDriverName = (
+    value: string | null | undefined
+  ): VapiAssignedDriverName | null => {
+    if (!value) return null;
+    if (value === ALIGNED_MOMENTUM_NAME) return ALIGNED_MOMENTUM_NAME;
+    return value in DRIVER_CONTENT ? (value as VapiDriverName) : null;
+  };
+
   const [vapiResults, setVapiResults] = useState<VapiResult[]>([]);
   const [scorecardEntries, setScorecardEntries] = useState<ScorecardEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,6 +136,12 @@ export default function DashboardPage() {
       setVapiResults(
         (vapiData.results || []).map((row: VapiResult) => ({
           ...row,
+          driverState:
+            row.driverState ||
+            getDriverState({
+              assignedDriver: coerceAssignedDriverName(row.assignedDriver),
+              driverFallbackType: row.driverFallbackType || "standard",
+            }),
           driverFallbackType: row.driverFallbackType || "standard",
         }))
       );
@@ -203,14 +223,22 @@ export default function DashboardPage() {
   const archetypeColor = archetype ? ARCHETYPE_ACCENT_COLORS[archetype] : undefined;
   const archetypeTagline = archetype ? ARCHETYPES_FULL[archetype]?.tagline : "";
   const driverName =
-    latestVapi?.assignedDriver && latestVapi.assignedDriver in DRIVER_CONTENT
+    latestVapi?.assignedDriver &&
+    latestVapi.assignedDriver in DRIVER_CONTENT
       ? (latestVapi.assignedDriver as VapiDriverName)
       : null;
+  const driverState = latestVapi
+    ? latestVapi.driverState ||
+      getDriverState({
+        assignedDriver: coerceAssignedDriverName(latestVapi.assignedDriver),
+        driverFallbackType: latestVapi.driverFallbackType || "standard",
+      })
+    : "no_driver";
+  const isAlignedMomentum =
+    driverState === "aligned_momentum" ||
+    latestVapi?.assignedDriver === ALIGNED_MOMENTUM_NAME;
   const driver = driverName ? DRIVER_CONTENT[driverName] : null;
-  const driverFallbackLabel =
-    latestVapi?.driverFallbackType === "high_performer"
-      ? "No dominant driver pattern detected"
-      : "No clear driver identified";
+  const driverFallbackLabel = "No clear driver identified";
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
@@ -545,9 +573,20 @@ export default function DashboardPage() {
                       )}
                       <div className="border-t border-border pt-4 space-y-2">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                          Likely Driver
+                          {isAlignedMomentum
+                            ? "What&apos;s Fueling This"
+                            : "Likely Driver"}
                         </p>
-                        {driver ? (
+                        {isAlignedMomentum ? (
+                          <>
+                            <p className="text-sm font-semibold text-foreground">
+                              {ALIGNED_MOMENTUM_CONTENT.name}
+                            </p>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              &quot;{ALIGNED_MOMENTUM_CONTENT.coreState}&quot;
+                            </p>
+                          </>
+                        ) : driver ? (
                           <>
                             <p className="text-sm font-semibold text-foreground">
                               {driver.name}
@@ -564,7 +603,9 @@ export default function DashboardPage() {
                       </div>
                     </div>
                     <p className="text-xs text-accent font-medium">
-                      {driver ? "View Full Details →" : "View Details →"}
+                      {driver || isAlignedMomentum
+                        ? "View Full Details →"
+                        : "View Details →"}
                     </p>
                   </div>
                 </Link>

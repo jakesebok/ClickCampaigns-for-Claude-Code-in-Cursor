@@ -33,6 +33,9 @@ const ADMIN_EMAIL       = 'jacob@alignedpower.coach';
 const PORTAL_URL        = 'https://portal.alignedpower.coach';
 const USER_FROM_EMAIL   = process.env.VAPI_USER_FROM_EMAIL   || 'hello@notifications.alignedpower.coach';
 const ADMIN_FROM_EMAIL  = process.env.VAPI_ADMIN_FROM_EMAIL  || 'assessments@notifications.alignedpower.coach';
+const ALIGNED_MOMENTUM_NAME = 'Aligned Momentum';
+const ALIGNED_MOMENTUM_TAGLINE =
+  "Your internal operating system is working with your goals, not against them.";
 const DRIVER_TIEBREAK_PRIORITY = [
   "The Achiever's Trap",
   "The Escape Artist",
@@ -157,15 +160,23 @@ function getCompositeScore(domainScores, overall) {
 }
 
 function getDriverFallbackType(domainScores, overall, assignedDriver) {
-  if (assignedDriver) return 'none';
+  if (assignedDriver && assignedDriver !== ALIGNED_MOMENTUM_NAME) return 'none';
   const normalizedScores = domainScores || {};
   const compositeScore = getCompositeScore(normalizedScores, overall);
   const domainsBelowThreshold = Object.values(normalizedScores).filter(
     (score) => typeof score === 'number' && score < 5.5
   ).length;
   return compositeScore >= 7.0 && domainsBelowThreshold <= 1
-    ? 'high_performer'
+    ? 'aligned_momentum'
     : 'standard';
+}
+
+function getDriverState(assignedDriver, driverFallbackType) {
+  if (assignedDriver === ALIGNED_MOMENTUM_NAME || driverFallbackType === 'aligned_momentum' || driverFallbackType === 'high_performer') {
+    return 'aligned_momentum';
+  }
+  if (assignedDriver) return 'dysfunction_driver';
+  return 'no_driver';
 }
 
 function getDriverSummary(source) {
@@ -204,6 +215,12 @@ function getDriverSummary(source) {
       secondDriverScore: source.secondDriverScore,
       secondaryDriverScore: typeof source.secondaryDriverScore === 'number' ? source.secondaryDriverScore : null,
       primaryToSecondaryMargin: source.primaryToSecondaryMargin,
+      driverState: typeof source.driverState === 'string'
+        ? source.driverState
+        : getDriverState(
+            typeof source.assignedDriver === 'string' ? source.assignedDriver : null,
+            typeof source.driverFallbackType === 'string' ? source.driverFallbackType : null
+          ),
       driverFallbackType: getDriverFallbackType(
         source.domainScores || buildDomainScoresMap(source.domains || []),
         source.overall,
@@ -223,6 +240,14 @@ function getDriverSummary(source) {
       secondDriverScore: 0,
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
+      driverState: getDriverState(
+        null,
+        getDriverFallbackType(
+          source.domainScores || buildDomainScoresMap(source.domains || []),
+          source.overall,
+          null
+        )
+      ),
       driverFallbackType: getDriverFallbackType(
         source.domainScores || buildDomainScoresMap(source.domains || []),
         source.overall,
@@ -247,6 +272,10 @@ function getDriverSummary(source) {
     secondDriverScore: typeof enriched.secondDriverScore === 'number' ? enriched.secondDriverScore : 0,
     secondaryDriverScore: typeof enriched.secondaryDriverScore === 'number' ? enriched.secondaryDriverScore : null,
     primaryToSecondaryMargin: typeof enriched.primaryToSecondaryMargin === 'number' ? enriched.primaryToSecondaryMargin : 0,
+    driverState: enriched.driverState || getDriverState(
+      enriched.assignedDriver || null,
+      enriched.driverFallbackType || null
+    ),
     driverFallbackType: enriched.driverFallbackType || getDriverFallbackType(
       enriched.domainScores || source.domainScores || buildDomainScoresMap(source.domains || []),
       enriched.overall ?? source.overall,
@@ -279,6 +308,7 @@ function buildUserEmail({
   driverCoreBelief,
   secondaryDriverName,
   secondaryDriverCoreBelief,
+  driverState,
   driverFallbackType,
 }) {
   const name = firstName ? `Hi ${escHtml(firstName)},` : 'Hi there,';
@@ -335,8 +365,8 @@ function buildUserEmail({
       ${laggingArenaSummary ? `<p style="margin:8px 0 0;color:#3A4A5C;font-size:14px;line-height:1.6;"><strong>Your lagging arena:</strong> ${escHtml(laggingArenaSummary.label)} (${escHtml(laggingArenaSummary.score.toFixed(1))})</p>` : ''}
     </div>` : ''}
     <div style="background:#F5F7FA;border-radius:8px;padding:16px 20px;margin-bottom:24px;border:1px solid #DDE3ED;">
-      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">What's Driving This Pattern</p>
-      ${driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : driverFallbackType === 'high_performer' ? `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No dominant driver pattern detected.</strong> Your growth work is targeted, not systemic. See your Critical Priority domains for your highest-leverage moves.</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> Explore the Driver Library for deeper self-reflection, or discuss with your coach.</p>`}
+      <p style="margin:0 0 4px;color:#7A8FA8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">${driverState === 'aligned_momentum' ? "What's Fueling This Pattern" : "What's Driving This Pattern"}</p>
+      ${driverState === 'aligned_momentum' ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${ALIGNED_MOMENTUM_NAME}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>` : driverName && secondaryDriverName ? `<p style="margin:0 0 6px;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Primary: ${escHtml(driverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(driverCoreBelief)}'</em></span></p><p style="margin:0;color:#0E1624;font-size:15px;line-height:1.6;"><strong>Secondary: ${escHtml(secondaryDriverName)}</strong> <span style="color:#3A4A5C;">- <em>'${escHtml(secondaryDriverCoreBelief)}'</em></span></p>` : driverName ? `<p style="margin:0 0 4px;color:#0E1624;font-size:18px;font-weight:700;">${escHtml(driverName)}</p><p style="margin:0;color:#3A4A5C;font-size:15px;font-style:italic;">'${escHtml(driverCoreBelief)}'</p>` : driverFallbackType === 'aligned_momentum' ? `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>${ALIGNED_MOMENTUM_NAME}</strong> ${escHtml(ALIGNED_MOMENTUM_TAGLINE)}</p>` : `<p style="margin:0;color:#3A4A5C;font-size:15px;line-height:1.6;"><strong>No clear single driver identified.</strong> Explore the Driver Library for deeper self-reflection, or discuss with your coach.</p>`}
     </div>
 
     <!-- Arena scores -->
@@ -391,12 +421,14 @@ Congratulations on completing the VAPI Assessment.
 Your VAPI Composite Score: ${overall ?? '?'} / 10 - ${overallTier ?? ''}
 
 ${archetype ? `Your Founder Archetype: ${archetype}\n${archetypeTagline ? `'${archetypeTagline}'\n` : ''}${laggingArenaSummary ? `Your lagging arena: ${laggingArenaSummary.label} (${laggingArenaSummary.score.toFixed(1)})\n` : ''}` : ''}
-${driverName && secondaryDriverName
+${driverState === 'aligned_momentum'
+  ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
+  : driverName && secondaryDriverName
   ? `What's Driving This Pattern\nPrimary: ${driverName} - '${driverCoreBelief}'\nSecondary: ${secondaryDriverName} - '${secondaryDriverCoreBelief}'\n`
   : driverName
     ? `What's Driving This Pattern: ${driverName}\n'${driverCoreBelief}'\n`
-    : driverFallbackType === 'high_performer'
-      ? `What's Driving This Pattern: No dominant driver pattern detected.\nYour growth work is targeted, not systemic. See your Critical Priority domains for your highest-leverage moves.\n`
+    : driverFallbackType === 'aligned_momentum'
+      ? `What's Fueling This Pattern: ${ALIGNED_MOMENTUM_NAME}\n${ALIGNED_MOMENTUM_TAGLINE}\n`
       : `What's Driving This Pattern: No clear single driver identified.\nExplore the Driver Library for deeper self-reflection, or discuss with your coach.\n`}
 
 Self: ${arenaScores.Personal ?? '?'} / 10 - ${arenaTiers.Personal ?? ''}
@@ -437,6 +469,8 @@ function buildAdminEmail({
   previousArchetypeName,
   previousDriverName,
   previousSecondaryDriverName,
+  driverState,
+  previousDriverState,
   driverFallbackType,
 }) {
   const userName = [firstName, lastName].filter(Boolean).join(' ') || email || 'Anonymous';
@@ -446,14 +480,31 @@ function buildAdminEmail({
   const driverScoresText = sortedDriverScores
     .map((entry) => `${entry.name}: ${entry.score} points [GATE: ${entry.gatePassed ? 'passed' : 'failed'}]`)
     .join(', ');
-  const primaryDriverSummary = driverName ? `${driverName} (${topDriverScore} points)` : 'None (threshold not met)';
+  const primaryDriverSummary =
+    driverState === 'dysfunction_driver' && driverName
+      ? `${driverName} (${topDriverScore} points)`
+      : 'None (threshold not met)';
   const secondaryDriverSummary = secondaryDriverName && typeof secondaryDriverScore === 'number'
     ? `${secondaryDriverName} (${secondaryDriverScore} points)`
     : 'None';
-  const previousPrimarySummary = `${previousDriverName || 'None'} (${previousDriverName === driverName ? 'unchanged' : 'changed'})`;
+  const previousPrimaryLabel =
+    previousDriverState === 'aligned_momentum'
+      ? ALIGNED_MOMENTUM_NAME
+      : previousDriverName || 'None';
+  const currentPrimaryLabel =
+    driverState === 'aligned_momentum'
+      ? ALIGNED_MOMENTUM_NAME
+      : driverName || 'None';
+  const previousPrimarySummary = `${previousPrimaryLabel} (${previousPrimaryLabel === currentPrimaryLabel ? 'unchanged' : 'changed'})`;
   const previousSecondarySummary = `${previousSecondaryDriverName || 'None'} (${previousSecondaryDriverName === secondaryDriverName ? 'unchanged' : 'changed'})`;
   const fallbackTypeSummary =
-    driverName ? 'N/A (driver was assigned)' : driverFallbackType === 'high_performer' ? 'High Performer' : 'Standard';
+    driverState === 'dysfunction_driver' ? 'N/A (driver was assigned)' : driverFallbackType === 'aligned_momentum' ? 'Aligned Momentum' : 'Standard';
+  const driverStateSummary =
+    driverState === 'aligned_momentum'
+      ? 'Aligned Momentum (no dysfunction driver detected, high performer criteria met)'
+      : driverState === 'dysfunction_driver'
+        ? 'Dysfunction Driver'
+        : 'No Driver';
 
   const sortedDomains = [...(domains || [])].sort((a,b) => a.score - b.score);
   const domainRows = sortedDomains.map(d => {
@@ -502,6 +553,7 @@ function buildAdminEmail({
       ${previousArchetypeName ? `<tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Previous Archetype:</strong> ${escHtml(previousArchetypeName)} (${previousArchetypeName === archetype ? 'unchanged' : 'changed'})</td></tr>` : ''}
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary Driver:</strong> ${escHtml(primaryDriverSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Secondary Driver:</strong> ${escHtml(secondaryDriverSummary)}</td></tr>
+      <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver State:</strong> ${escHtml(driverStateSummary)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Primary-Secondary Margin:</strong> ${escHtml(String(primaryToSecondaryMargin))} points</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Driver Scores:</strong> ${escHtml(driverScoresText)}</td></tr>
       <tr><td style="padding:5px 12px;color:#3A4A5C;"><strong>Fallback Type:</strong> ${escHtml(fallbackTypeSummary)}</td></tr>
@@ -552,6 +604,7 @@ Primary Driver: ${primaryDriverSummary}
 Secondary Driver: ${secondaryDriverSummary}
 Primary-Secondary Margin: ${primaryToSecondaryMargin} points
 Driver Scores: ${driverScoresText}
+Driver State: ${driverStateSummary}
 Fallback Type: ${fallbackTypeSummary}
 Previous Primary Driver: ${previousPrimarySummary}
 Previous Secondary Driver: ${previousSecondarySummary}
@@ -681,9 +734,13 @@ export async function POST(request) {
     secondaryDriverScore: secondaryDriverScoreFromBody = null,
     primaryToSecondaryMargin: primaryToSecondaryMarginFromBody = null,
     driverFallbackType = null,
+    driverState = null,
   } = body;
 
-  const archetype = archetypeFromBody || determineArchetypeServer({ overall, arenaScores, domains });
+  const archetype =
+    determineArchetypeServer({ overall, arenaScores, domains }) ||
+    archetypeFromBody ||
+    null;
   const archetypeTagline = archetype ? ARCHETYPE_TAGLINES[archetype] || null : null;
   const laggingArenaSummary =
     archetype === 'The Rising Architect' ? getLaggingArenaSummary(arenaScores) : null;
@@ -702,11 +759,15 @@ export async function POST(request) {
     secondaryDriverScore: secondaryDriverScoreFromBody,
     primaryToSecondaryMargin: primaryToSecondaryMarginFromBody,
     driverFallbackType,
+    driverState,
     overall,
   });
-  const driverName = driverEvaluation.assignedDriver || null;
+  const driverStateName = driverEvaluation.driverState || 'no_driver';
+  const driverName =
+    driverStateName === 'dysfunction_driver' ? driverEvaluation.assignedDriver || null : null;
   const driverCoreBelief = driverName ? DRIVER_CORE_BELIEFS[driverName] : null;
-  const secondaryDriverName = driverEvaluation.secondaryDriver || null;
+  const secondaryDriverName =
+    driverStateName === 'dysfunction_driver' ? driverEvaluation.secondaryDriver || null : null;
   const secondaryDriverCoreBelief = secondaryDriverName
     ? DRIVER_CORE_BELIEFS[secondaryDriverName]
     : null;
@@ -723,9 +784,11 @@ export async function POST(request) {
   const resolvedLastName  = lastName  || lookup.lastName;
   const previousDriverEvaluation = lookup.previousAssessment
     ? getDriverSummary(lookup.previousAssessment.results || {})
-    : { assignedDriver: null, secondaryDriver: null };
+    : { assignedDriver: null, secondaryDriver: null, driverState: 'no_driver' };
   const previousArchetypeName = lookup.previousAssessment
-    ? lookup.previousAssessment.results?.archetype || determineArchetypeServer(lookup.previousAssessment.results || {})
+    ? determineArchetypeServer(lookup.previousAssessment.results || {}) ||
+      lookup.previousAssessment.results?.archetype ||
+      null
     : null;
   const previousDriverName = previousDriverEvaluation.assignedDriver || null;
   const previousSecondaryDriverName =
@@ -761,6 +824,7 @@ export async function POST(request) {
       driverCoreBelief,
       secondaryDriverName,
       secondaryDriverCoreBelief,
+      driverState: driverStateName,
       driverFallbackType: driverEvaluation.driverFallbackType || 'standard',
     });
     try {
@@ -804,6 +868,8 @@ export async function POST(request) {
     previousArchetypeName,
     previousDriverName,
     previousSecondaryDriverName,
+    driverState: driverStateName,
+    previousDriverState: previousDriverEvaluation.driverState || 'no_driver',
     driverFallbackType: driverEvaluation.driverFallbackType || 'standard',
   });
   try {

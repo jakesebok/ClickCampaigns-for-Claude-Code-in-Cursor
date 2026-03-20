@@ -5,10 +5,12 @@
 import { DOMAINS, ARENAS } from "./quiz-data";
 import { getTier, getPriorityMatrix } from "./scoring";
 import type {
+  VapiAssignedDriverName,
   VapiDriverFallbackType,
   VapiDriverGates,
   VapiDriverName,
   VapiDriverScores,
+  VapiDriverState,
 } from "./drivers";
 
 export type PortalVapiResults = {
@@ -23,7 +25,7 @@ export type PortalVapiResults = {
   importanceRatings: Record<string, number>;
   priorityMatrix: { criticalPriority: unknown[]; protectAndSustain: unknown[]; monitor: unknown[]; overInvestment: unknown[] };
   archetype: string;
-  assignedDriver?: VapiDriverName | null;
+  assignedDriver?: VapiAssignedDriverName | null;
   secondaryDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
   driverGates?: VapiDriverGates;
@@ -31,6 +33,7 @@ export type PortalVapiResults = {
   secondDriverScore?: number;
   secondaryDriverScore?: number | null;
   primaryToSecondaryMargin?: number;
+  driverState?: VapiDriverState;
   driverFallbackType?: VapiDriverFallbackType;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
@@ -44,7 +47,7 @@ export function buildPortalResultsFormat(params: {
   overall: number;
   archetype: string;
   importance: Record<string, number>;
-  assignedDriver?: VapiDriverName | null;
+  assignedDriver?: VapiAssignedDriverName | null;
   secondaryDriver?: VapiDriverName | null;
   driverScores?: VapiDriverScores;
   driverGates?: VapiDriverGates;
@@ -52,6 +55,7 @@ export function buildPortalResultsFormat(params: {
   secondDriverScore?: number;
   secondaryDriverScore?: number | null;
   primaryToSecondaryMargin?: number;
+  driverState?: VapiDriverState;
   driverFallbackType?: VapiDriverFallbackType;
   allResponses?: Record<string, number>;
   responseCodingVersion?: string;
@@ -72,6 +76,7 @@ export function buildPortalResultsFormat(params: {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverState,
     driverFallbackType,
     allResponses,
     responseCodingVersion,
@@ -132,6 +137,7 @@ export function buildPortalResultsFormat(params: {
     secondDriverScore: secondDriverScore ?? undefined,
     secondaryDriverScore: secondaryDriverScore ?? undefined,
     primaryToSecondaryMargin: primaryToSecondaryMargin ?? undefined,
+    driverState: driverState ?? undefined,
     driverFallbackType: driverFallbackType ?? undefined,
     allResponses: allResponses || undefined,
     responseCodingVersion: responseCodingVersion || undefined,

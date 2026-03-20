@@ -11,9 +11,19 @@ export type VapiDriverName =
   | "The Fog"
   | "The Builder's Gap";
 
+export const ALIGNED_MOMENTUM_NAME = "Aligned Momentum" as const;
+
+export type VapiAssignedDriverName =
+  | VapiDriverName
+  | typeof ALIGNED_MOMENTUM_NAME;
+
 export type VapiDriverScores = Record<VapiDriverName, number>;
 export type VapiDriverGates = Record<VapiDriverName, boolean>;
-export type VapiDriverFallbackType = "none" | "high_performer" | "standard";
+export type VapiDriverFallbackType = "none" | "aligned_momentum" | "standard";
+export type VapiDriverState =
+  | "dysfunction_driver"
+  | "aligned_momentum"
+  | "no_driver";
 
 export type VapiDriverContent = {
   name: VapiDriverName;
@@ -28,8 +38,19 @@ export type VapiDriverContent = {
   maxPossible: number;
 };
 
+export type VapiAlignedMomentumContent = {
+  name: typeof ALIGNED_MOMENTUM_NAME;
+  tagline: string;
+  colorAccent: string;
+  coreState: string;
+  description: string;
+  howThisShowsUp: string;
+  whatThisMakesPossible: string;
+  howToProtectIt: string;
+};
+
 export type VapiDriverEvaluation = {
-  assignedDriver: VapiDriverName | null;
+  assignedDriver: VapiAssignedDriverName | null;
   secondaryDriver: VapiDriverName | null;
   driverScores: VapiDriverScores;
   driverGates: VapiDriverGates;
@@ -37,6 +58,7 @@ export type VapiDriverEvaluation = {
   secondDriverScore: number;
   secondaryDriverScore: number | null;
   primaryToSecondaryMargin: number;
+  driverState: VapiDriverState;
   driverFallbackType: VapiDriverFallbackType;
 };
 
@@ -219,9 +241,21 @@ export const DRIVER_CONTENT: Record<VapiDriverName, VapiDriverContent> = {
   },
 };
 
-export const DRIVER_HIGH_PERFORMER_FALLBACK = {
-  heading: "No Dominant Driver Pattern Detected",
-  text: "Your scores don't indicate a dominant internal driver pattern, and that's actually meaningful. Most founders who take this assessment reveal a clear belief or coping strategy that's systematically distorting their results across multiple domains. You don't. Your profile shows broad strength with targeted gaps rather than a systemic pattern of self-sabotage, avoidance, or misalignment. This means your growth work is precision work, not excavation work. You don't need to uncover a hidden pattern. You need to close specific gaps. Focus on the domains in your Critical Priority quadrant. Those are your highest-leverage moves. The driver system is designed to catch the internal patterns that silently undermine founders across multiple areas of life. When it doesn't find one, that's not a gap in the assessment. It's a signal that your internal operating system is functioning well and your remaining challenges are specific, not systemic.",
+export const ALIGNED_MOMENTUM_CONTENT: VapiAlignedMomentumContent = {
+  name: ALIGNED_MOMENTUM_NAME,
+  tagline:
+    "Your internal operating system is working with your goals, not against them.",
+  colorAccent: "#B8960C",
+  coreState:
+    "Your beliefs support your ambition. Your habits serve your vision. Your nervous system trusts the direction you're heading.",
+  description:
+    "Most founders who take this assessment discover an internal pattern working against them: a belief, a fear, or a coping strategy that silently sabotages their results across multiple domains. You don't have one. That's not a neutral finding. It's a significant one. Your internal operating system is aligned with what you're building. Your beliefs support your ambition rather than undermining it. Your habits serve your vision rather than contradicting it. Your nervous system trusts the direction you're heading rather than pumping the brakes. This alignment is what allows you to perform at a high level across multiple arenas simultaneously without the burnout, self-sabotage, or internal warfare that most founders experience. It's not the absence of a problem. It's the presence of something most people spend years trying to build.",
+  howThisShowsUp:
+    "Your scores are strong across the board with no more than one isolated gap. Your importance ratings and your actual performance are congruent, meaning you're investing where you say it matters. Your reverse-scored items don't reveal hidden contradictions between what you believe and how you behave. The typical signatures of dysfunction drivers, identity fused with output, chronic avoidance, people-pleasing, perfectionist paralysis, ecological misalignment, are absent or minimal. Your system is clean.",
+  whatThisMakesPossible:
+    "When your internal operating system isn't fighting your goals, everything compounds in the right direction. Your health supports your focus. Your focus supports your execution. Your execution supports your business. Your business supports your relationships. Your relationships support your resilience. And your resilience supports your health. This is the reinforcing cycle that most founders never experience because a dysfunction driver somewhere in the chain breaks the loop. Your loop is intact. That's your greatest strategic advantage and it's invisible to everyone competing with you who's still fighting themselves.",
+  howToProtectIt:
+    "Aligned Momentum is not permanent. It's maintained. The practices, boundaries, relationships, and self-awareness that produced this state require ongoing investment. The most common threats are complacency, assuming the work is done, lifestyle creep, gradually adding demands that erode your margins, and unprocessed change, a life transition that shifts your internal landscape without you noticing. Protect this state by continuing to audit honestly, retaking this assessment regularly, and treating your alignment as an asset that requires maintenance rather than an achievement you can file away.",
 };
 
 export const DRIVER_STANDARD_FALLBACK = {
@@ -274,16 +308,31 @@ function createEmptyDriverGates(): VapiDriverGates {
 export function getDriverFallbackContent(
   fallbackType: VapiDriverFallbackType
 ) {
-  return fallbackType === "high_performer"
-    ? DRIVER_HIGH_PERFORMER_FALLBACK
-    : DRIVER_STANDARD_FALLBACK;
+  return fallbackType === "standard"
+    ? DRIVER_STANDARD_FALLBACK
+    : {
+        heading: ALIGNED_MOMENTUM_CONTENT.name,
+        text: ALIGNED_MOMENTUM_CONTENT.description,
+      };
 }
 
 export function getDriverFallbackType(params: {
   domainScores: Record<string, number>;
   compositeScore?: number | null;
-  assignedDriver?: VapiDriverName | null;
+  assignedDriver?: VapiAssignedDriverName | null;
+  driverState?: VapiDriverState | null;
 }): VapiDriverFallbackType {
+  if (params.driverState === "dysfunction_driver") {
+    return "none";
+  }
+
+  if (
+    params.driverState === "aligned_momentum" ||
+    params.assignedDriver === ALIGNED_MOMENTUM_NAME
+  ) {
+    return "aligned_momentum";
+  }
+
   if (params.assignedDriver) {
     return "none";
   }
@@ -297,7 +346,7 @@ export function getDriverFallbackType(params: {
   ).length;
 
   if (normalizedCompositeScore >= 7.0 && domainsBelowThreshold <= 1) {
-    return "high_performer";
+    return "aligned_momentum";
   }
 
   return "standard";
@@ -306,9 +355,31 @@ export function getDriverFallbackType(params: {
 export function getDriverFallbackLabel(
   fallbackType: VapiDriverFallbackType
 ) {
-  if (fallbackType === "high_performer") return "High Performer";
+  if (fallbackType === "aligned_momentum") return "Aligned Momentum";
   if (fallbackType === "standard") return "Standard";
   return "N/A (driver was assigned)";
+}
+
+export function isDysfunctionDriverName(value: unknown): value is VapiDriverName {
+  return typeof value === "string" && value in DRIVER_CONTENT;
+}
+
+export function getDriverState(params: {
+  assignedDriver?: VapiAssignedDriverName | null;
+  driverFallbackType?: VapiDriverFallbackType | null;
+}): VapiDriverState {
+  if (
+    params.assignedDriver === ALIGNED_MOMENTUM_NAME ||
+    params.driverFallbackType === "aligned_momentum"
+  ) {
+    return "aligned_momentum";
+  }
+
+  if (isDysfunctionDriverName(params.assignedDriver)) {
+    return "dysfunction_driver";
+  }
+
+  return "no_driver";
 }
 
 function getNumericValue(value: unknown, fallback: number) {
@@ -762,14 +833,14 @@ export function determineDriver(input: {
   const topDriverScore = winningDriver?.score ?? 0;
   const secondDriverScore = runnerUp?.score ?? 0;
   const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-  const assignedDriver =
+  const dysfunctionDriver =
     winningDriver &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? winningDriver.driverName
       : null;
   const secondaryDriver =
-    assignedDriver &&
+    dysfunctionDriver &&
     runnerUp &&
     secondDriverScore >= DRIVER_THRESHOLD &&
     driverGates[runnerUp.driverName] &&
@@ -777,11 +848,22 @@ export function determineDriver(input: {
       ? runnerUp.driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
-  const driverFallbackType = getDriverFallbackType({
+  const inferredFallbackType = getDriverFallbackType({
     domainScores,
     compositeScore: normalizedCompositeScore,
-    assignedDriver,
+    assignedDriver: dysfunctionDriver,
   });
+  const driverState =
+    dysfunctionDriver
+      ? "dysfunction_driver"
+      : inferredFallbackType === "aligned_momentum"
+        ? "aligned_momentum"
+        : "no_driver";
+  const assignedDriver =
+    dysfunctionDriver ??
+    (driverState === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null);
+  const driverFallbackType =
+    driverState === "dysfunction_driver" ? "none" : inferredFallbackType;
 
   return {
     assignedDriver,
@@ -792,6 +874,7 @@ export function determineDriver(input: {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverState,
     driverFallbackType,
   };
 }

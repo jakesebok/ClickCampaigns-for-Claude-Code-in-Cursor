@@ -1,7 +1,11 @@
 import type { SVGProps } from "react";
-import type { VapiDriverName } from "./drivers";
+import {
+  ALIGNED_MOMENTUM_NAME,
+  type VapiAssignedDriverName,
+} from "./drivers";
 
-export const DRIVER_ACCENT_COLORS: Record<VapiDriverName, string> = {
+export const DRIVER_ACCENT_COLORS: Record<VapiAssignedDriverName, string> = {
+  [ALIGNED_MOMENTUM_NAME]: "#B8960C",
   "The Achiever's Trap": "#C07B28",
   "The Protector": "#4A6FA5",
   "The Pleaser's Bind": "#C27083",
@@ -13,8 +17,18 @@ export const DRIVER_ACCENT_COLORS: Record<VapiDriverName, string> = {
   "The Builder's Gap": "#B87333",
 };
 
-function getDriverIconPaths(driver: VapiDriverName) {
+function getDriverIconPaths(driver: VapiAssignedDriverName) {
   switch (driver) {
+    case ALIGNED_MOMENTUM_NAME:
+      return (
+        <>
+          <circle cx="32" cy="32" r="8" />
+          <circle cx="32" cy="32" r="16" />
+          <circle cx="32" cy="32" r="24" />
+          <path d="M32 50V15" />
+          <path d="M26 21l6-7l6 7" />
+        </>
+      );
     case "The Achiever's Trap":
       return (
         <>
@@ -131,7 +145,7 @@ function getDriverIconPaths(driver: VapiDriverName) {
 }
 
 type DriverIconProps = Omit<SVGProps<SVGSVGElement>, "color"> & {
-  driver: VapiDriverName;
+  driver: VapiAssignedDriverName;
   size?: number;
 };
 

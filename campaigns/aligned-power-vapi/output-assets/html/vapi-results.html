@@ -613,7 +613,7 @@
       }
 
       function buildArchetypeSection(results) {
-        var archetypeName = results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null);
+        var archetypeName = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null) || results.archetype || null;
         if (!archetypeName) return '';
         var meta = (typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[archetypeName]) ? VAPI_ARCHETYPES[archetypeName] : null;
         var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
@@ -688,7 +688,7 @@
         var top3 = results.top3 || [];
         var bottom3 = results.bottom3 || [];
         var acquiescence = results.acquiescence;
-        results.archetype = results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null);
+        results.archetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null) || results.archetype || null;
 
         var html = '';
 

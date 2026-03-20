@@ -1,6 +1,7 @@
 (function () {
   var DRIVER_THRESHOLD = 6;
   var DRIVER_MIN_MARGIN = 2;
+  var ALIGNED_MOMENTUM_NAME = "Aligned Momentum";
   var DRIVER_TIEBREAK_PRIORITY = [
     "The Achiever's Trap",
     "The Escape Artist",
@@ -175,9 +176,21 @@
       maxPossible: 14,
     },
   };
-  var DRIVER_HIGH_PERFORMER_FALLBACK = {
-    heading: "No Dominant Driver Pattern Detected",
-    text: "Your scores don't indicate a dominant internal driver pattern, and that's actually meaningful. Most founders who take this assessment reveal a clear belief or coping strategy that's systematically distorting their results across multiple domains. You don't. Your profile shows broad strength with targeted gaps rather than a systemic pattern of self-sabotage, avoidance, or misalignment. This means your growth work is precision work, not excavation work. You don't need to uncover a hidden pattern. You need to close specific gaps. Focus on the domains in your Critical Priority quadrant. Those are your highest-leverage moves. The driver system is designed to catch the internal patterns that silently undermine founders across multiple areas of life. When it doesn't find one, that's not a gap in the assessment. It's a signal that your internal operating system is functioning well and your remaining challenges are specific, not systemic.",
+  var ALIGNED_MOMENTUM_CONTENT = {
+    name: ALIGNED_MOMENTUM_NAME,
+    tagline:
+      "Your internal operating system is working with your goals, not against them.",
+    colorAccent: "#B8960C",
+    coreState:
+      "Your beliefs support your ambition. Your habits serve your vision. Your nervous system trusts the direction you're heading.",
+    description:
+      "Most founders who take this assessment discover an internal pattern working against them: a belief, a fear, or a coping strategy that silently sabotages their results across multiple domains. You don't have one. That's not a neutral finding. It's a significant one. Your internal operating system is aligned with what you're building. Your beliefs support your ambition rather than undermining it. Your habits serve your vision rather than contradicting it. Your nervous system trusts the direction you're heading rather than pumping the brakes. This alignment is what allows you to perform at a high level across multiple arenas simultaneously without the burnout, self-sabotage, or internal warfare that most founders experience. It's not the absence of a problem. It's the presence of something most people spend years trying to build.",
+    howThisShowsUp:
+      "Your scores are strong across the board with no more than one isolated gap. Your importance ratings and your actual performance are congruent, meaning you're investing where you say it matters. Your reverse-scored items don't reveal hidden contradictions between what you believe and how you behave. The typical signatures of dysfunction drivers, identity fused with output, chronic avoidance, people-pleasing, perfectionist paralysis, ecological misalignment, are absent or minimal. Your system is clean.",
+    whatThisMakesPossible:
+      "When your internal operating system isn't fighting your goals, everything compounds in the right direction. Your health supports your focus. Your focus supports your execution. Your execution supports your business. Your business supports your relationships. Your relationships support your resilience. And your resilience supports your health. This is the reinforcing cycle that most founders never experience because a dysfunction driver somewhere in the chain breaks the loop. Your loop is intact. That's your greatest strategic advantage and it's invisible to everyone competing with you who's still fighting themselves.",
+    howToProtectIt:
+      "Aligned Momentum is not permanent. It's maintained. The practices, boundaries, relationships, and self-awareness that produced this state require ongoing investment. The most common threats are complacency, assuming the work is done, lifestyle creep, gradually adding demands that erode your margins, and unprocessed change, a life transition that shifts your internal landscape without you noticing. Protect this state by continuing to audit honestly, retaking this assessment regularly, and treating your alignment as an asset that requires maintenance rather than an achievement you can file away.",
   };
   var DRIVER_STANDARD_FALLBACK = {
     heading: "No Clear Driver Identified",
@@ -193,6 +206,7 @@
   var DRIVER_SIGNAL_QUESTION_IDS = ["PH6", "CO6", "RS6", "FA6", "ME6", "EX6", "EC6", "VS6", "EC5"];
   var REVERSE_SIGNAL_QUESTION_IDS = ["PH6", "CO6", "RS6", "FA6", "ME6", "EX6", "EC6", "VS6"];
   var DRIVER_ACCENT_COLORS = {
+    "Aligned Momentum": "#B8960C",
     "The Achiever's Trap": "#C07B28",
     "The Protector": "#4A6FA5",
     "The Pleaser's Bind": "#C27083",
@@ -311,7 +325,11 @@
     };
   }
 
-  function getDriverFallbackType(domainScores, compositeScore, assignedDriver) {
+  function getDriverFallbackType(domainScores, compositeScore, assignedDriver, driverState) {
+    if (driverState === "dysfunction_driver") return "none";
+    if (driverState === "aligned_momentum" || assignedDriver === ALIGNED_MOMENTUM_NAME) {
+      return "aligned_momentum";
+    }
     if (assignedDriver) return "none";
 
     var domainsBelowThreshold = ALL_DOMAIN_CODES.filter(function (code) {
@@ -319,14 +337,31 @@
     }).length;
 
     return compositeScore >= 7.0 && domainsBelowThreshold <= 1
-      ? "high_performer"
+      ? "aligned_momentum"
       : "standard";
   }
 
+  function getDriverState(assignedDriver, driverFallbackType) {
+    if (
+      assignedDriver === ALIGNED_MOMENTUM_NAME ||
+      driverFallbackType === "aligned_momentum" ||
+      driverFallbackType === "high_performer"
+    ) {
+      return "aligned_momentum";
+    }
+    if (assignedDriver && DRIVER_CONTENT[assignedDriver]) {
+      return "dysfunction_driver";
+    }
+    return "no_driver";
+  }
+
   function getDriverFallbackContent(fallbackType) {
-    return fallbackType === "high_performer"
-      ? DRIVER_HIGH_PERFORMER_FALLBACK
-      : DRIVER_STANDARD_FALLBACK;
+    return fallbackType === "standard"
+      ? DRIVER_STANDARD_FALLBACK
+      : {
+          heading: ALIGNED_MOMENTUM_CONTENT.name,
+          text: ALIGNED_MOMENTUM_CONTENT.description,
+        };
   }
 
   function getDriverLibraryHref() {
@@ -340,6 +375,14 @@
 
   function getDriverIconPaths(driverName) {
     switch (driverName) {
+      case ALIGNED_MOMENTUM_NAME:
+        return [
+          '<circle cx="32" cy="32" r="8"/>',
+          '<circle cx="32" cy="32" r="16"/>',
+          '<circle cx="32" cy="32" r="24"/>',
+          '<path d="M32 50V15"/>',
+          '<path d="M26 21l6-7l6 7"/>',
+        ];
       case "The Achiever's Trap":
         return [
           '<path d="M22 14h20v8c0 9.5-6.1 15.1-10 17.1c-3.9-2-10-7.6-10-17.1z"/>',
@@ -721,14 +764,14 @@
     var topDriverScore = rankedDrivers[0] ? rankedDrivers[0].score : 0;
     var secondDriverScore = rankedDrivers[1] ? rankedDrivers[1].score : 0;
     var primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-    var assignedDriver =
+    var dysfunctionDriver =
       rankedDrivers[0] &&
       topDriverScore >= DRIVER_THRESHOLD &&
       topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
         ? rankedDrivers[0].driverName
         : null;
     var secondaryDriver =
-      assignedDriver &&
+      dysfunctionDriver &&
       rankedDrivers[1] &&
       secondDriverScore >= DRIVER_THRESHOLD &&
       driverGates[rankedDrivers[1].driverName] &&
@@ -736,10 +779,24 @@
         ? rankedDrivers[1].driverName
         : null;
     var secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+    var inferredFallbackType = getDriverFallbackType(
+      domainScores,
+      compositeScore,
+      dysfunctionDriver
+    );
+    var driverState = dysfunctionDriver
+      ? "dysfunction_driver"
+      : inferredFallbackType === "aligned_momentum"
+        ? "aligned_momentum"
+        : "no_driver";
+    var assignedDriver =
+      dysfunctionDriver ||
+      (driverState === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null);
     var driverFallbackType = getDriverFallbackType(
       domainScores,
       compositeScore,
-      assignedDriver
+      assignedDriver,
+      driverState
     );
     return {
       assignedDriver: assignedDriver,
@@ -750,6 +807,7 @@
       secondDriverScore: secondDriverScore,
       secondaryDriverScore: secondaryDriverScore,
       primaryToSecondaryMargin: primaryToSecondaryMargin,
+      driverState: driverState,
       driverFallbackType: driverFallbackType,
     };
   }
@@ -765,6 +823,7 @@
         secondDriverScore: 0,
         secondaryDriverScore: null,
         primaryToSecondaryMargin: 0,
+        driverState: "no_driver",
         driverFallbackType: "standard",
       };
     }
@@ -782,7 +841,14 @@
     ) {
       return {
         assignedDriver:
-          typeof results.assignedDriver === "string" ? results.assignedDriver : null,
+          typeof results.assignedDriver === "string"
+            ? (
+                results.assignedDriver === ALIGNED_MOMENTUM_NAME ||
+                DRIVER_CONTENT[results.assignedDriver]
+              )
+              ? results.assignedDriver
+              : null
+            : null,
         secondaryDriver:
           typeof results.secondaryDriver === "string" ? results.secondaryDriver : null,
         driverScores: results.driverScores,
@@ -794,10 +860,22 @@
             ? results.secondaryDriverScore
             : null,
         primaryToSecondaryMargin: results.primaryToSecondaryMargin,
+        driverState: getDriverState(
+          typeof results.assignedDriver === "string" ? results.assignedDriver : null,
+          typeof results.driverFallbackType === "string"
+            ? results.driverFallbackType
+            : null
+        ),
         driverFallbackType: getDriverFallbackType(
           (results && results.domainScores) || {},
           getCompositeScore((results && results.domainScores) || {}, results && results.overall),
-          typeof results.assignedDriver === "string" ? results.assignedDriver : null
+          typeof results.assignedDriver === "string" ? results.assignedDriver : null,
+          getDriverState(
+            typeof results.assignedDriver === "string" ? results.assignedDriver : null,
+            typeof results.driverFallbackType === "string"
+              ? results.driverFallbackType
+              : null
+          )
         ),
       };
     }
@@ -805,9 +883,15 @@
       results.allResponses &&
       typeof results.allResponses === "object" &&
       Object.keys(results.allResponses).length > 0;
+    var inferredFallbackType = getDriverFallbackType(
+      (results && results.domainScores) || {},
+      getCompositeScore((results && results.domainScores) || {}, results && results.overall),
+      null
+    );
     if (!hasResponses) {
       return {
-        assignedDriver: null,
+        assignedDriver:
+          inferredFallbackType === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null,
         secondaryDriver: null,
         driverScores: createEmptyDriverScores(),
         driverGates: createEmptyDriverGates(),
@@ -815,11 +899,11 @@
         secondDriverScore: 0,
         secondaryDriverScore: null,
         primaryToSecondaryMargin: 0,
-        driverFallbackType: getDriverFallbackType(
-          (results && results.domainScores) || {},
-          getCompositeScore((results && results.domainScores) || {}, results && results.overall),
-          null
-        ),
+        driverState:
+          inferredFallbackType === "aligned_momentum"
+            ? "aligned_momentum"
+            : "no_driver",
+        driverFallbackType: inferredFallbackType,
       };
     }
     var evaluation = evaluateDriver(results);
@@ -831,27 +915,38 @@
     results.secondDriverScore = evaluation.secondDriverScore;
     results.secondaryDriverScore = evaluation.secondaryDriverScore;
     results.primaryToSecondaryMargin = evaluation.primaryToSecondaryMargin;
+    results.driverState = evaluation.driverState;
     results.driverFallbackType = evaluation.driverFallbackType;
     return evaluation;
   }
 
   function buildResultsSection(results, options) {
     var evaluation = ensureEvaluation(results);
+    var driverState =
+      evaluation.driverState ||
+      getDriverState(evaluation.assignedDriver || null, evaluation.driverFallbackType || null);
+    var isAlignedMomentum = driverState === "aligned_momentum";
     var driverName =
-      evaluation.assignedDriver && DRIVER_CONTENT[evaluation.assignedDriver]
+      !isAlignedMomentum && evaluation.assignedDriver && DRIVER_CONTENT[evaluation.assignedDriver]
         ? evaluation.assignedDriver
         : null;
     var secondaryDriverName =
-      evaluation.secondaryDriver && DRIVER_CONTENT[evaluation.secondaryDriver]
+      !isAlignedMomentum &&
+      evaluation.secondaryDriver &&
+      DRIVER_CONTENT[evaluation.secondaryDriver]
         ? evaluation.secondaryDriver
         : null;
-    var accent = driverName
-      ? (DRIVER_ACCENT_COLORS[driverName] || "var(--ap-accent)")
-      : ((options && options.accent) || "var(--ap-accent)");
+    var accent = isAlignedMomentum
+      ? ALIGNED_MOMENTUM_CONTENT.colorAccent
+      : driverName
+        ? (DRIVER_ACCENT_COLORS[driverName] || "var(--ap-accent)")
+        : ((options && options.accent) || "var(--ap-accent)");
     var fallbackContent = getDriverFallbackContent(evaluation.driverFallbackType || "standard");
     var id = (options && options.id) || "driver-section";
     var libraryHref = (options && options.libraryHref) || getDriverLibraryHref();
     var surface = "var(--ap-surface, #ffffff)";
+    var alignedMomentumNote =
+      "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding.";
     var html =
       '<div id="' +
       id +
@@ -867,8 +962,70 @@
     html +=
       '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
       accent +
-      '">What\'s Driving This Pattern</p>';
-    if (driverName) {
+      '">' +
+      (isAlignedMomentum ? "What's Fueling This Pattern" : "What's Driving This Pattern") +
+      "</p>";
+    if (isAlignedMomentum) {
+      html += '<div class="flex flex-col gap-5">';
+      html += '<div class="flex items-start gap-4">';
+      html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
+      html += getDriverIcon(ALIGNED_MOMENTUM_NAME, 64);
+      html += "</div>";
+      html += '<div class="min-w-0 space-y-2">';
+      html +=
+        '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.name) +
+        "</h2>";
+      html +=
+        '<p class="text-[15px] italic text-[var(--ap-secondary)] leading-relaxed">' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.tagline) +
+        "</p>";
+      html += "</div></div>";
+      html +=
+        '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+        accent +
+        '14;border-left:4px solid ' +
+        accent +
+        ';">&quot;' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.coreState) +
+        "&quot;</blockquote>";
+      html +=
+        '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+        escapeHtml(ALIGNED_MOMENTUM_CONTENT.description) +
+        "</p>";
+      [
+        ["How This Shows Up in Your Scores", ALIGNED_MOMENTUM_CONTENT.howThisShowsUp],
+        ["What This Makes Possible", ALIGNED_MOMENTUM_CONTENT.whatThisMakesPossible],
+        ["How to Protect It", ALIGNED_MOMENTUM_CONTENT.howToProtectIt],
+      ].forEach(function (section) {
+        html +=
+          '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+          surface +
+          ';">';
+        html +=
+          '<summary class="cursor-pointer flex items-center justify-between gap-3 px-4 py-3 text-[15px] font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden">' +
+          "<span>" +
+          escapeHtml(section[0]) +
+          '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+        html +=
+          '<div class="border-t border-[var(--ap-border)] px-4 py-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+          escapeHtml(section[1]) +
+          "</div></details>";
+      });
+      html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
+      html +=
+        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        escapeHtml(alignedMomentumNote) +
+        "</p>";
+      html +=
+        '<a href="' +
+        libraryHref +
+        '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
+        accent +
+        '">Explore all driver patterns &gt;</a>';
+      html += "</div>";
+      html += "</div>";
+    } else if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
       html += '<div class="flex flex-col gap-5">';
       html += '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">';
@@ -1025,52 +1182,142 @@
       "The Builder's Gap is still the pattern. You still have a strong personal foundation and genuine relational wealth, but the business infrastructure still hasn't been built. Another assessment period has passed and the strategy, execution, operations, or some combination remain underdeveloped. The belief that building a business machine somehow threatens your authenticity hasn't been addressed. Every month this gap persists is a month your gifts stay stranded at a fraction of their potential reach. The people who need what you offer are waiting for you to build the vehicle that delivers it.",
   };
 
-  function getTransitionSummary(previousDriver, currentDriver) {
-    if (previousDriver && currentDriver) {
-      if (previousDriver === currentDriver) {
+  function getTransitionSummary(previousDriver, currentDriver, previousState, currentState) {
+    var resolvedPreviousState = previousState || getDriverState(previousDriver || null, null);
+    var resolvedCurrentState = currentState || getDriverState(currentDriver || null, null);
+    var previousDysfunctionDriver =
+      previousDriver && DRIVER_CONTENT[previousDriver] ? previousDriver : null;
+    var currentDysfunctionDriver =
+      currentDriver && DRIVER_CONTENT[currentDriver] ? currentDriver : null;
+
+    if (
+      resolvedPreviousState === "aligned_momentum" &&
+      resolvedCurrentState === "aligned_momentum"
+    ) {
+      return {
+        heading: "Alignment Sustained",
+        subheading: "Aligned Momentum continues",
+        previousBelief: null,
+        currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        body:
+          "Your internal operating system continues to work with your goals rather than against them. No dysfunction driver was detected in either your previous or current assessment. Sustaining this across multiple assessment periods is rare and reflects genuine, embedded alignment rather than a good month. The practices and boundaries producing this state are working. Continue to audit honestly, protect your margins, and treat this alignment as something that requires ongoing maintenance rather than a permanent achievement.",
+        direction: "up",
+      };
+    }
+
+    if (
+      resolvedPreviousState === "dysfunction_driver" &&
+      previousDysfunctionDriver &&
+      resolvedCurrentState === "aligned_momentum"
+    ) {
+      return {
+        heading: "A Significant Shift",
+        subheading: previousDysfunctionDriver + " → " + ALIGNED_MOMENTUM_NAME,
+        previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+        currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        body:
+          "Your previous assessment identified " +
+          previousDysfunctionDriver +
+          " as the internal pattern driving your results. That pattern is no longer dominant. Your scores now reflect broad, genuine strength without a detectable dysfunction driver underneath them. This is one of the most meaningful transitions on this assessment. The belief that was working against you, '" +
+          DRIVER_CONTENT[previousDysfunctionDriver].coreBelief +
+          ",' has been addressed enough that it's no longer shaping your results. What's fueling your pattern now is alignment itself. Protect it.",
+        direction: "up",
+      };
+    }
+
+    if (
+      resolvedPreviousState === "aligned_momentum" &&
+      resolvedCurrentState === "dysfunction_driver" &&
+      currentDysfunctionDriver
+    ) {
+      return {
+        heading: "A Pattern Has Emerged",
+        subheading: ALIGNED_MOMENTUM_NAME + " → " + currentDysfunctionDriver,
+        previousBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+        body:
+          "Your previous assessment showed Aligned Momentum, meaning no dysfunction driver was detected. This time, " +
+          currentDysfunctionDriver +
+          " has emerged. The core belief driving your current pattern is: '" +
+          DRIVER_CONTENT[currentDysfunctionDriver].coreBelief +
+          ".' This doesn't erase the alignment you had. It means something shifted, whether through increased demands, a life change, or a reactivation of an old pattern, and an internal driver is now influencing your results. Read the full driver description and pay attention to the 'Way Out' section. You've been aligned before. You know what it feels like. The path back is familiar.",
+        direction: "down",
+      };
+    }
+
+    if (resolvedPreviousState === "no_driver" && resolvedCurrentState === "aligned_momentum") {
+      return {
+        heading: "Alignment Clarified",
+        subheading: "Aligned Momentum identified",
+        previousBelief: null,
+        currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        body:
+          "Your previous assessment couldn't identify a clear pattern. This time, your scores are strong enough and clean enough to confirm Aligned Momentum. Your internal operating system is working with your goals. This clarity likely reflects genuine improvement in the areas that were previously ambiguous.",
+        direction: "up",
+      };
+    }
+
+    if (resolvedPreviousState === "aligned_momentum" && resolvedCurrentState === "no_driver") {
+      return {
+        heading: "Alignment Uncertain",
+        subheading: "Aligned Momentum no longer confirmed",
+        previousBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+        currentBelief: null,
+        body:
+          "Your previous assessment showed Aligned Momentum, but your current scores don't meet the criteria to confirm it. No dysfunction driver was detected either, which means you're in an ambiguous zone. This often happens during transitions: increased demands, life changes, or natural fluctuations. Your scores aren't in crisis. They're just not as cleanly strong as they were. Focus on the domains that dipped and rebuild from there.",
+        direction: "same",
+      };
+    }
+
+    if (previousDysfunctionDriver && currentDysfunctionDriver) {
+      if (previousDysfunctionDriver === currentDysfunctionDriver) {
         return {
           heading: "Your Internal Pattern Is Consistent",
-          subheading: "Still driven by " + currentDriver,
+          subheading: "Still driven by " + currentDysfunctionDriver,
           previousBelief: null,
-          currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
-          body: DRIVER_MAINTAINED_INTERPRETATIONS[currentDriver],
+          currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+          body: DRIVER_MAINTAINED_INTERPRETATIONS[currentDysfunctionDriver],
+          direction: "same",
         };
       }
       return {
         heading: "Your Internal Pattern Has Shifted",
-        subheading: previousDriver + " to " + currentDriver,
-        previousBelief: DRIVER_CONTENT[previousDriver].coreBelief,
-        currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
+        subheading: previousDysfunctionDriver + " to " + currentDysfunctionDriver,
+        previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+        currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
         body:
           "Your internal driver has shifted from " +
-          previousDriver +
+          previousDysfunctionDriver +
           " to " +
-          currentDriver +
+          currentDysfunctionDriver +
           ".\n\nPreviously, the pattern underneath your scores was rooted in the belief: '" +
-          DRIVER_CONTENT[previousDriver].coreBelief +
+          DRIVER_CONTENT[previousDysfunctionDriver].coreBelief +
           "'\n\nNow, the data suggests a different pattern is primary, rooted in: '" +
-          DRIVER_CONTENT[currentDriver].coreBelief +
+          DRIVER_CONTENT[currentDysfunctionDriver].coreBelief +
           "'\n\nThis shift can mean the original pattern was successfully addressed and a deeper or different pattern has surfaced, which is common and healthy in coaching work. It can also mean life circumstances changed in a way that activated a different coping strategy. Read your new driver description carefully. It reveals what's most likely driving your current scores and where the coaching work should focus next.",
+        direction: "same",
       };
     }
-    if (!previousDriver && currentDriver) {
+    if (!previousDysfunctionDriver && currentDysfunctionDriver) {
       return {
         heading: "Internal Pattern Identified",
-        subheading: "Your likely driver: " + currentDriver,
+        subheading: "Your likely driver: " + currentDysfunctionDriver,
         previousBelief: null,
-        currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
+        currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
         body:
           "Your previous assessment didn't produce a strong enough signal to identify a driver. This time, the pattern is clearer. Read the full driver description in your results to understand what's likely underneath your scores.",
+        direction: "same",
       };
     }
-    if (previousDriver && !currentDriver) {
+    if (previousDysfunctionDriver && !currentDysfunctionDriver) {
       return {
         heading: "Internal Pattern Unclear",
-        subheading: "Previously: " + previousDriver,
-        previousBelief: DRIVER_CONTENT[previousDriver].coreBelief,
+        subheading: "Previously: " + previousDysfunctionDriver,
+        previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
         currentBelief: null,
         body:
           "Your previous assessment identified a clear internal driver, but your current scores don't map strongly to any single pattern. This can mean the old pattern is dissolving, which is progress, that you're in a transitional period, or that multiple drivers are now competing. Your domain scores and priority matrix will give you more specific direction.",
+        direction: "same",
       };
     }
     return {
@@ -1080,10 +1327,13 @@
       currentBelief: null,
       body:
         "Neither of your most recent assessments produced a strong enough signal to identify a single internal driver. Use your domain scores, archetype, and priority matrix to see where the clearest action is available right now.",
+      direction: "same",
     };
   }
 
   window.VAPI_DRIVERS = {
+    ALIGNED_MOMENTUM_NAME: ALIGNED_MOMENTUM_NAME,
+    ALIGNED_MOMENTUM_CONTENT: ALIGNED_MOMENTUM_CONTENT,
     DRIVER_ACCENT_COLORS: DRIVER_ACCENT_COLORS,
     DRIVER_CONTENT: DRIVER_CONTENT,
     DRIVER_FALLBACK: DRIVER_FALLBACK,
@@ -1096,6 +1346,7 @@
     getIcon: getDriverIcon,
     getDriverLibraryHref: getDriverLibraryHref,
     getDriverFallbackContent: getDriverFallbackContent,
+    getDriverState: getDriverState,
     getTransitionSummary: getTransitionSummary,
   };
 })();

@@ -9,6 +9,13 @@ type DriverName =
   | "The Fog"
   | "The Builder's Gap";
 
+const ALIGNED_MOMENTUM_NAME = "Aligned Momentum" as const;
+type AssignedDriverName = DriverName | typeof ALIGNED_MOMENTUM_NAME;
+type DriverState =
+  | "dysfunction_driver"
+  | "aligned_momentum"
+  | "no_driver";
+
 type DriverScores = Record<DriverName, number>;
 type DriverGates = Record<DriverName, boolean>;
 
@@ -75,8 +82,16 @@ function createEmptyDriverGates(): DriverGates {
 function getDriverFallbackType(
   domainScores: Record<string, number>,
   compositeScore: number,
-  assignedDriver: DriverName | null
+  assignedDriver: AssignedDriverName | null,
+  driverState?: DriverState | null
 ) {
+  if (driverState === "dysfunction_driver") return "none";
+  if (
+    driverState === "aligned_momentum" ||
+    assignedDriver === ALIGNED_MOMENTUM_NAME
+  ) {
+    return "aligned_momentum";
+  }
   if (assignedDriver) return "none";
 
   const domainsBelowThreshold = ALL_DOMAIN_CODES.filter(
@@ -84,7 +99,7 @@ function getDriverFallbackType(
   ).length;
 
   return compositeScore >= 7.0 && domainsBelowThreshold <= 1
-    ? "high_performer"
+    ? "aligned_momentum"
     : "standard";
 }
 
@@ -496,14 +511,14 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
   const topDriverScore = rankedDrivers[0]?.score ?? 0;
   const secondDriverScore = rankedDrivers[1]?.score ?? 0;
   const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-  const assignedDriver =
+  const dysfunctionDriver =
     rankedDrivers[0] &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? rankedDrivers[0].driverName
       : null;
   const secondaryDriver =
-    assignedDriver &&
+    dysfunctionDriver &&
     rankedDrivers[1] &&
     secondDriverScore >= DRIVER_THRESHOLD &&
     driverGates[rankedDrivers[1].driverName] &&
@@ -511,10 +526,24 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
       ? rankedDrivers[1].driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+  const inferredFallbackType = getDriverFallbackType(
+    domainScores,
+    compositeScore,
+    dysfunctionDriver
+  );
+  const driverState: DriverState = dysfunctionDriver
+    ? "dysfunction_driver"
+    : inferredFallbackType === "aligned_momentum"
+      ? "aligned_momentum"
+      : "no_driver";
+  const assignedDriver =
+    dysfunctionDriver ??
+    (driverState === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null);
   const driverFallbackType = getDriverFallbackType(
     domainScores,
     compositeScore,
-    assignedDriver
+    assignedDriver,
+    driverState
   );
 
   return {
@@ -529,6 +558,7 @@ export function enrichResultsWithDriver(results: Record<string, unknown>) {
     secondDriverScore,
     secondaryDriverScore,
     primaryToSecondaryMargin,
+    driverState,
     driverFallbackType,
   };
 }

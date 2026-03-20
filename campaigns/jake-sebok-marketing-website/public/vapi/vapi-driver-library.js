@@ -1,4 +1,5 @@
 (function() {
+  var ALIGNED_MOMENTUM_NAME = "Aligned Momentum";
   var DRIVER_ORDER = [
     "The Achiever's Trap",
     "The Protector",
@@ -11,15 +12,47 @@
     "The Builder's Gap"
   ];
 
-  var DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns";
+  var DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns + Aligned Momentum";
   var DRIVER_LIBRARY_SUBTITLE =
-    "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 9 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all nine will deepen your self-awareness and may reveal secondary patterns worth exploring.";
+    "Underneath every score pattern is an internal operating system. For most founders, that system includes a belief, a fear, and a coping strategy that silently works against their goals. These are the 9 most common dysfunction drivers. But when no dysfunction driver is present and your scores reflect broad, genuine strength, something different appears: Aligned Momentum. That's the state every driver pattern is building toward.";
   var DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
     "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
   var DRIVER_LIBRARY_FOOTER_HEADING =
     "Ready to Address What's Driving Your Pattern?";
   var DRIVER_LIBRARY_FOOTER_TEXT =
     "Understanding your driver is the first step. Changing it requires structured support. The Aligned Power Program is a 12-month coaching partnership designed to identify, address, and rewire the internal patterns keeping you stuck.";
+  var DRIVER_LIBRARY_DIVIDER_HEADING = "The 9 Dysfunction Drivers";
+  var DRIVER_LIBRARY_DIVIDER_TEXT =
+    "These are the internal patterns that silently work against founders. Each one represents a belief, a fear, and a coping strategy that produces predictable score signatures. Aligned Momentum is what becomes possible when these patterns are identified and addressed.";
+
+  var ALIGNED_MOMENTUM_LIBRARY_CONTENT = {
+    howToKnowThisIsYou: [
+      "Your VAPI composite is 7.0 or above with no more than one domain significantly below the rest",
+      "You don't recognize yourself in any of the 9 dysfunction drivers, or if you see traces, they feel like old patterns rather than current ones",
+      "Your business results and your personal wellbeing don't feel like they're competing with each other",
+      "You can sustain your current pace without running on adrenaline, guilt, or fear",
+      "The way you work matches who you actually are. You're not performing a version of success that belongs to someone else.",
+      "You have genuine relationships where you're known, not just respected",
+      "Your internal voice is mostly honest and supportive rather than critical, fearful, or avoidant",
+      "When stress comes, you recover. You don't spiral, shut down, or burn it all to the ground."
+    ],
+    howToKnowThisIsntYou: [
+      "If reading the dysfunction drivers produced a strong \"that's me\" reaction to any of them, trust that reaction over the algorithm",
+      "If your high scores are maintained through unsustainable effort, willpower, or performance rather than genuine alignment, the momentum isn't real",
+      "If your life looks good on paper but doesn't feel good in your body, something the assessment didn't fully capture may be present",
+      "If you're suppressing or numbing to maintain your scores rather than genuinely thriving, explore The Escape Artist and The Achiever's Trap more carefully",
+      "Aligned Momentum should feel like relief when you read it, not like a performance you need to maintain"
+    ],
+    reflectionPrompts: [
+      "What specific practices, boundaries, or decisions are most responsible for the alignment you've built? Name them concretely. These are the things you cannot afford to stop doing.",
+      "When was the last time your alignment was tested by a major stressor, a business setback, a health scare, a relationship conflict? How did you respond? Did the system hold, or did you see cracks? What did you learn about where your alignment is strongest and where it's most fragile?",
+      "If you could give your past self, the version of you that was operating from one of the dysfunction drivers, one piece of advice about what actually produced this state, what would it be? The answer reveals what you've learned that others haven't yet.",
+      "What is the next edge for you? Aligned Momentum is not a finish line. Where do you feel the pull toward growth? What domain or arena, if deepened further, would expand what's possible for you?",
+      "Who in your life needs what you've built? Not your business output. Your operating system. The way you've learned to align your internal world with your external results. How could you share that with others in a way that creates impact beyond your own life?"
+    ],
+    relationshipToOtherDrivers:
+      "Aligned Momentum is not the opposite of any single driver. It's what emerges when no driver is dominant. Most founders who reach this state did so by identifying and addressing a specific dysfunction driver earlier in their journey. The Achiever learned to decouple identity from output. The Pleaser learned to hold boundaries. The Perfectionist learned to ship imperfectly. The Escape Artist turned around and faced what they were running from. Aligned Momentum is the result of that work, not the absence of having needed it. If you're here, you likely remember what it felt like to operate from a dysfunction pattern. That memory is valuable. It's what makes you capable of helping others who are still in it."
+  };
 
   var DRIVER_LIBRARY_CONTENT = {
     "The Achiever's Trap": {
@@ -302,6 +335,10 @@
     return '<a href="#' + getDriverSectionId(driver) + '" class="font-semibold text-[var(--ap-accent)] hover:underline">' + escapeHtml(driver) + '</a>';
   }
 
+  function buildStateAnchor(name) {
+    return '<a href="#' + getDriverSectionId(name) + '" class="font-semibold text-[var(--ap-accent)] hover:underline">' + escapeHtml(name) + '</a>';
+  }
+
   function getLibrarySurface(accent, strength) {
     if (accent && strength === "strong") {
       return 'background:linear-gradient(180deg,' + accent + '12 0%, var(--ap-surface, #ffffff) 68%);';
@@ -312,7 +349,10 @@
     return 'background:var(--ap-surface, #ffffff);';
   }
 
-  function buildNavigation(primaryDriver, secondaryDriver) {
+  function buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum) {
+    var alignedAccent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
+      ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME]
+      : "#B8960C";
     function buildItem(driverName) {
       var accent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
         ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[driverName]
@@ -334,6 +374,13 @@
       '<div class="space-y-4 lg:hidden">' +
         '<div class="-mx-2 overflow-x-auto px-2 pb-1">' +
           '<div class="flex min-w-max gap-3">' +
+            '<a href="#' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="flex min-w-[210px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
+              (isAlignedMomentum ? 'border-color:' + alignedAccent + '55;background:' + alignedAccent + '16;' : '') +
+            '">' +
+              (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(ALIGNED_MOMENTUM_NAME, 24) : "") +
+              '<span class="text-sm text-[var(--ap-primary)]" style="font-weight:' + (isAlignedMomentum ? '700' : '500') + ';">' + escapeHtml(ALIGNED_MOMENTUM_NAME) + '</span>' +
+            '</a>' +
+            '<div class="flex items-center px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Dysfunction Drivers</div>' +
             DRIVER_ORDER.map(function(driverName) {
               var accent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
                 ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[driverName]
@@ -341,10 +388,11 @@
               var isPrimary = driverName === primaryDriver;
               var isSecondary = driverName === secondaryDriver;
               return (
-                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[220px] items-center gap-3 rounded-[24px] border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="' +
-                  getLibrarySurface(isPrimary ? accent : isSecondary ? accent : null, isPrimary ? "strong" : isSecondary ? "soft" : "base") +
+                '<a href="#' + getDriverSectionId(driverName) + '" class="flex min-w-[210px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
                   (isPrimary ? 'border-color:' + accent + '55;' : '') +
                   (!isPrimary && isSecondary ? 'border-color:' + accent + '33;' : '') +
+                  (isPrimary ? 'background:' + accent + '16;' : '') +
+                  (!isPrimary && isSecondary ? 'background:' + accent + '0D;' : '') +
                 '">' +
                   (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 24) : "") +
                   '<span class="text-sm font-medium text-[var(--ap-primary)]">' + escapeHtml(driverName) + '</span>' +
@@ -354,12 +402,18 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="grid gap-8 lg:grid-cols-[280px,minmax(0,1fr)] lg:items-start">' +
+      '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
         '<aside class="hidden lg:block">' +
-          '<div class="sticky top-8 rounded-[28px] border border-[var(--ap-border)] p-4 shadow-sm backdrop-blur-sm" style="' + getLibrarySurface(primaryDriver && window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[primaryDriver] : null, "soft") + '">' +
-            '<p class="px-3 pb-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
-            '<p class="px-3 pb-3 text-sm leading-relaxed text-[var(--ap-secondary)]">Scroll the patterns and jump directly to the one you want to read.</p>' +
+          '<div class="sticky top-6 rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+            '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
             '<nav class="space-y-2">' +
+              '<a href="#' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="flex items-center gap-3 rounded-2xl border px-3 py-3 transition-colors hover:border-[var(--ap-accent)]/30" style="' +
+                (isAlignedMomentum ? 'border-color:' + alignedAccent + '55;background:' + alignedAccent + '16;' : '') +
+              '">' +
+                (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(ALIGNED_MOMENTUM_NAME, 24) : "") +
+                '<span class="text-sm leading-snug text-[var(--ap-primary)]" style="font-weight:' + (isAlignedMomentum ? '700' : '500') + ';">' + escapeHtml(ALIGNED_MOMENTUM_NAME) + '</span>' +
+              '</a>' +
+              '<p class="px-3 pt-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Dysfunction Drivers</p>' +
               DRIVER_ORDER.map(buildItem).join("") +
             '</nav>' +
           '</div>' +
@@ -385,9 +439,8 @@
     }
 
     return (
-      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 relative overflow-hidden rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(accent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl" style="background:' + accent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section id="' + getDriverSectionId(driverName) + '" class="scroll-mt-24 rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div>' +
         '<div class="flex flex-col gap-5 sm:flex-row sm:items-start">' +
           '<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border" style="background:' + accent + '14;border-color:' + accent + '33;">' +
             (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(driverName, 80) : "") +
@@ -460,6 +513,84 @@
     );
   }
 
+  function buildAlignedMomentumSection(isAlignedMomentum) {
+    var aligned = window.VAPI_DRIVERS && window.VAPI_DRIVERS.ALIGNED_MOMENTUM_CONTENT
+      ? window.VAPI_DRIVERS.ALIGNED_MOMENTUM_CONTENT
+      : null;
+    var accent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
+      ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME]
+      : "#B8960C";
+
+    if (!aligned) {
+      return "";
+    }
+
+    return (
+      '<section id="' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="scroll-mt-24 rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div class="flex flex-col gap-5 sm:flex-row sm:items-start">' +
+          '<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border" style="background:' + accent + '14;border-color:' + accent + '33;">' +
+            (window.VAPI_DRIVERS && window.VAPI_DRIVERS.getIcon ? window.VAPI_DRIVERS.getIcon(ALIGNED_MOMENTUM_NAME, 80) : "") +
+          '</div>' +
+          '<div class="min-w-0 space-y-3">' +
+            '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-4xl">' + escapeHtml(aligned.name) + '</h2>' +
+            '<p class="text-sm italic leading-relaxed text-[var(--ap-secondary)]">' + escapeHtml(aligned.tagline) + '</p>' +
+            '<blockquote class="text-xl italic leading-tight text-[var(--ap-primary)] sm:text-2xl">&quot;' + escapeHtml(aligned.coreState) + '&quot;</blockquote>' +
+          '</div>' +
+        '</div>' +
+        (isAlignedMomentum
+          ? '<div class="mt-5 rounded-2xl border px-4 py-3 text-sm font-semibold" style="background:' + accent + '16;border-color:' + accent + '33;color:' + accent + ';">This is your current state.</div>'
+          : '') +
+        '<div class="mt-8 space-y-8">' +
+          '<div class="space-y-2">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">The State</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(aligned.description) + '</p>' +
+          '</div>' +
+          '<div class="space-y-2">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How This Shows Up in Your Scores</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(aligned.howThisShowsUp) + '</p>' +
+          '</div>' +
+          '<div class="space-y-2">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">What This Makes Possible</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(aligned.whatThisMakesPossible) + '</p>' +
+          '</div>' +
+          '<div class="space-y-2">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How to Protect It</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(aligned.howToProtectIt) + '</p>' +
+          '</div>' +
+          '<div class="space-y-3">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How to Know If This Is You</h3>' +
+            '<ul class="space-y-2 text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' +
+              ALIGNED_MOMENTUM_LIBRARY_CONTENT.howToKnowThisIsYou.map(function(item) {
+                return '<li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ap-accent)]"></span><span>' + escapeHtml(item) + '</span></li>';
+              }).join("") +
+            '</ul>' +
+          '</div>' +
+          '<div class="space-y-3">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How to Know If This Isn\'t You</h3>' +
+            '<ul class="space-y-2 text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' +
+              ALIGNED_MOMENTUM_LIBRARY_CONTENT.howToKnowThisIsntYou.map(function(item) {
+                return '<li class="flex gap-3"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ap-border)]"></span><span>' + escapeHtml(item) + '</span></li>';
+              }).join("") +
+            '</ul>' +
+          '</div>' +
+          '<div class="space-y-3">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Reflection Prompts</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)]">If this pattern resonates, sit with these questions. Don\'t rush. Write your answers somewhere private.</p>' +
+            '<ol class="space-y-3 text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' +
+              ALIGNED_MOMENTUM_LIBRARY_CONTENT.reflectionPrompts.map(function(prompt, index) {
+                return '<li class="flex gap-3"><span class="font-semibold text-[var(--ap-primary)]">' + (index + 1) + '.</span><span>' + escapeHtml(prompt) + '</span></li>';
+              }).join("") +
+            '</ol>' +
+          '</div>' +
+          '<div class="space-y-2">' +
+            '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">How This Relates to Drivers</h3>' +
+            '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(ALIGNED_MOMENTUM_LIBRARY_CONTENT.relationshipToOtherDrivers) + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
   function buildPage(options) {
     var opts = options || {};
     var results = opts.results || null;
@@ -467,8 +598,12 @@
       ? window.VAPI_DRIVERS.ensureEvaluation(results)
       : {
           assignedDriver: results && typeof results.assignedDriver === "string" ? results.assignedDriver : null,
-          secondaryDriver: results && typeof results.secondaryDriver === "string" ? results.secondaryDriver : null
+          secondaryDriver: results && typeof results.secondaryDriver === "string" ? results.secondaryDriver : null,
+          driverState: results && typeof results.driverState === "string" ? results.driverState : "no_driver"
         };
+    var isAlignedMomentum =
+      evaluation.driverState === "aligned_momentum" ||
+      evaluation.assignedDriver === ALIGNED_MOMENTUM_NAME;
     var primaryDriver = normalizeDriverName(evaluation.assignedDriver || null);
     var secondaryDriver = primaryDriver ? normalizeDriverName(evaluation.secondaryDriver || null) : null;
     var takeAssessmentHref = opts.takeAssessmentHref || "/assessment";
@@ -479,22 +614,23 @@
       : "#FF6B1A";
 
     var html =
-      '<section class="relative overflow-hidden rounded-[36px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8 lg:p-10" style="' + getLibrarySurface(primaryAccent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl" style="background:' + primaryAccent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div>' +
         '<p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--ap-accent)]">Driver Library</p>' +
         '<h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-5xl">' + escapeHtml(DRIVER_LIBRARY_TITLE) + '</h1>' +
         '<p class="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_SUBTITLE) + '</p>';
 
-    if (primaryDriver) {
+    if (isAlignedMomentum) {
+      html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + (window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME] : '#B8960C') + '12;border-color:' + (window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME] : '#B8960C') + '26;">Your current state: ' + buildStateAnchor(ALIGNED_MOMENTUM_NAME) + '.</div>';
+    } else if (primaryDriver) {
       html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + primaryAccent + '12;border-color:' + primaryAccent + '26;">Your primary driver: ' + buildDriverAnchor(primaryDriver) + '. Your secondary driver: ' + (secondaryDriver ? buildDriverAnchor(secondaryDriver) : 'None identified') + '.</div>';
     } else {
       html += '<div class="mt-6 flex flex-col gap-4 rounded-2xl border border-[var(--ap-border)] px-5 py-4 sm:flex-row sm:items-center sm:justify-between" style="background:var(--ap-surface, #ffffff);"><p class="text-sm leading-relaxed text-[var(--ap-secondary)]">' + escapeHtml(DRIVER_LIBRARY_EMPTY_RESULTS_BANNER) + '</p><a href="' + escapeHtml(takeAssessmentHref) + '" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Take the Assessment <span aria-hidden="true">→</span></a></div>';
     }
 
     html += '</div></section>';
-    html += buildNavigation(primaryDriver, secondaryDriver);
-    html += '<section class="rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(primaryAccent, "soft") + '">' +
+    html += buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum);
+    html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(DRIVER_LIBRARY_FOOTER_HEADING) + '</h2>' +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_FOOTER_TEXT) + '</p>' +
       '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">' +
@@ -507,15 +643,22 @@
     return {
       html: html,
       primaryDriver: primaryDriver,
-      secondaryDriver: secondaryDriver
+      secondaryDriver: secondaryDriver,
+      isAlignedMomentum: isAlignedMomentum
     };
   }
 
-  function populateSections(root, primaryDriver, secondaryDriver) {
+  function populateSections(root, primaryDriver, secondaryDriver, isAlignedMomentum) {
     if (!root) return;
-    root.innerHTML = DRIVER_ORDER.map(function(driverName) {
-      return buildSection(driverName, primaryDriver, secondaryDriver);
-    }).join("");
+    root.innerHTML =
+      buildAlignedMomentumSection(isAlignedMomentum) +
+      '<div class="rounded-3xl border border-[var(--ap-border)] px-6 py-5 text-center shadow-sm" style="background:color-mix(in srgb, var(--ap-bg) 65%, white 35%);">' +
+        '<p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--ap-muted)]">' + escapeHtml(DRIVER_LIBRARY_DIVIDER_HEADING) + '</p>' +
+        '<p class="mt-3 text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_DIVIDER_TEXT) + '</p>' +
+      '</div>' +
+      DRIVER_ORDER.map(function(driverName) {
+        return buildSection(driverName, primaryDriver, secondaryDriver);
+      }).join("");
   }
 
   window.VAPI_DRIVER_LIBRARY = {

@@ -278,7 +278,9 @@
       var badges = [];
       if (vapiRows.length > 0) badges.push('<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--ap-primary)]/15 text-[var(--ap-primary)]">' + vapiRows.length + ' VAPI</span>');
       if (sixcRows.length > 0) badges.push('<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[var(--ap-accent)]/20 text-[var(--ap-secondary)]">' + sixcRows.length + ' 6C</span>');
-      var latestArchetype = vapiRows.length > 0 && vapiRows[0].results ? (vapiRows[0].results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(vapiRows[0].results) : null)) : null;
+      var latestArchetype = vapiRows.length > 0 && vapiRows[0].results
+        ? ((typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(vapiRows[0].results) : null) || vapiRows[0].results.archetype || null)
+        : null;
       if (latestArchetype) {
         var archMeta = typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[latestArchetype] ? VAPI_ARCHETYPES[latestArchetype] : null;
         var archColor = archMeta && archMeta.color_accent ? archMeta.color_accent : 'var(--ap-accent)';
@@ -360,7 +362,7 @@
           var detailId = 'vapi-detail-' + i;
           var pmResults = buildPmResults(row);
           var pmHtml = (typeof VAPI_PM !== 'undefined' && VAPI_PM.buildPriorityMatrix) ? VAPI_PM.buildPriorityMatrix(pmResults, 'vapi-' + i) : '';
-          var rowArchetype = row.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(row.results) : null);
+          var rowArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(row.results) : null) || row.results.archetype || null;
           var archMeta = rowArchetype && typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[rowArchetype] ? VAPI_ARCHETYPES[rowArchetype] : null;
           var archColor = archMeta && archMeta.color_accent ? archMeta.color_accent : 'var(--ap-accent)';
           vapiHtml += '<tr class="vapi-row cursor-pointer hover:bg-[var(--ap-bg)]/40" data-detail-id="' + detailId + '">' +

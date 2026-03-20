@@ -1,5 +1,9 @@
 import {
+  ALIGNED_MOMENTUM_CONTENT,
+  ALIGNED_MOMENTUM_NAME,
   DRIVER_CONTENT,
+  type VapiAssignedDriverName,
+  type VapiDriverState,
   type VapiDriverName,
 } from "./drivers";
 
@@ -33,49 +37,131 @@ export type DriverTransitionSummary = {
   previousBelief: string | null;
   currentBelief: string | null;
   body: string;
+  direction: "up" | "down" | "same";
 };
 
 export function getDriverTransitionSummary(
-  previousDriver: VapiDriverName | null,
-  currentDriver: VapiDriverName | null
+  previousState: VapiDriverState,
+  currentState: VapiDriverState,
+  previousDriver: VapiAssignedDriverName | null,
+  currentDriver: VapiAssignedDriverName | null
 ): DriverTransitionSummary {
-  if (previousDriver && currentDriver) {
-    if (previousDriver === currentDriver) {
+  const previousDysfunctionDriver =
+    previousDriver && previousDriver in DRIVER_CONTENT
+      ? (previousDriver as VapiDriverName)
+      : null;
+  const currentDysfunctionDriver =
+    currentDriver && currentDriver in DRIVER_CONTENT
+      ? (currentDriver as VapiDriverName)
+      : null;
+
+  if (
+    previousState === "aligned_momentum" &&
+    currentState === "aligned_momentum"
+  ) {
+    return {
+      heading: "Alignment Sustained",
+      subheading: "Aligned Momentum continues",
+      previousBelief: null,
+      currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+      body: "Your internal operating system continues to work with your goals rather than against them. No dysfunction driver was detected in either your previous or current assessment. Sustaining this across multiple assessment periods is rare and reflects genuine, embedded alignment rather than a good month. The practices and boundaries producing this state are working. Continue to audit honestly, protect your margins, and treat this alignment as something that requires ongoing maintenance rather than a permanent achievement.",
+      direction: "up",
+    };
+  }
+
+  if (
+    previousState === "dysfunction_driver" &&
+    previousDysfunctionDriver &&
+    currentState === "aligned_momentum"
+  ) {
+    return {
+      heading: "A Significant Shift",
+      subheading: `${previousDysfunctionDriver} → ${ALIGNED_MOMENTUM_NAME}`,
+      previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+      currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+      body: `Your previous assessment identified ${previousDysfunctionDriver} as the internal pattern driving your results. That pattern is no longer dominant. Your scores now reflect broad, genuine strength without a detectable dysfunction driver underneath them. This is one of the most meaningful transitions on this assessment. The belief that was working against you, '${DRIVER_CONTENT[previousDysfunctionDriver].coreBelief},' has been addressed enough that it's no longer shaping your results. What's fueling your pattern now is alignment itself. Protect it.`,
+      direction: "up",
+    };
+  }
+
+  if (
+    previousState === "aligned_momentum" &&
+    currentState === "dysfunction_driver" &&
+    currentDysfunctionDriver
+  ) {
+    return {
+      heading: "A Pattern Has Emerged",
+      subheading: `${ALIGNED_MOMENTUM_NAME} → ${currentDysfunctionDriver}`,
+      previousBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+      currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+      body: `Your previous assessment showed Aligned Momentum, meaning no dysfunction driver was detected. This time, ${currentDysfunctionDriver} has emerged. The core belief driving your current pattern is: '${DRIVER_CONTENT[currentDysfunctionDriver].coreBelief}.' This doesn't erase the alignment you had. It means something shifted, whether through increased demands, a life change, or a reactivation of an old pattern, and an internal driver is now influencing your results. Read the full driver description and pay attention to the 'Way Out' section. You've been aligned before. You know what it feels like. The path back is familiar.`,
+      direction: "down",
+    };
+  }
+
+  if (previousState === "no_driver" && currentState === "aligned_momentum") {
+    return {
+      heading: "Alignment Clarified",
+      subheading: "Aligned Momentum identified",
+      previousBelief: null,
+      currentBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+      body: "Your previous assessment couldn't identify a clear pattern. This time, your scores are strong enough and clean enough to confirm Aligned Momentum. Your internal operating system is working with your goals. This clarity likely reflects genuine improvement in the areas that were previously ambiguous.",
+      direction: "up",
+    };
+  }
+
+  if (previousState === "aligned_momentum" && currentState === "no_driver") {
+    return {
+      heading: "Alignment Uncertain",
+      subheading: "Aligned Momentum no longer confirmed",
+      previousBelief: ALIGNED_MOMENTUM_CONTENT.coreState,
+      currentBelief: null,
+      body: "Your previous assessment showed Aligned Momentum, but your current scores don't meet the criteria to confirm it. No dysfunction driver was detected either, which means you're in an ambiguous zone. This often happens during transitions: increased demands, life changes, or natural fluctuations. Your scores aren't in crisis. They're just not as cleanly strong as they were. Focus on the domains that dipped and rebuild from there.",
+      direction: "same",
+    };
+  }
+
+  if (previousDysfunctionDriver && currentDysfunctionDriver) {
+    if (previousDysfunctionDriver === currentDysfunctionDriver) {
       return {
         heading: "Your Internal Pattern Is Consistent",
-        subheading: `Still driven by ${currentDriver}`,
+        subheading: `Still driven by ${currentDysfunctionDriver}`,
         previousBelief: null,
-        currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
-        body: DRIVER_MAINTAINED_INTERPRETATIONS[currentDriver],
+        currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+        body: DRIVER_MAINTAINED_INTERPRETATIONS[currentDysfunctionDriver],
+        direction: "same",
       };
     }
 
     return {
       heading: "Your Internal Pattern Has Shifted",
-      subheading: `${previousDriver} to ${currentDriver}`,
-      previousBelief: DRIVER_CONTENT[previousDriver].coreBelief,
-      currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
-      body: `Your internal driver has shifted from ${previousDriver} to ${currentDriver}.\n\nPreviously, the pattern underneath your scores was rooted in the belief: '${DRIVER_CONTENT[previousDriver].coreBelief}'\n\nNow, the data suggests a different pattern is primary, rooted in: '${DRIVER_CONTENT[currentDriver].coreBelief}'\n\nThis shift can mean the original pattern was successfully addressed and a deeper or different pattern has surfaced, which is common and healthy in coaching work. It can also mean life circumstances changed in a way that activated a different coping strategy. Read your new driver description carefully. It reveals what's most likely driving your current scores and where the coaching work should focus next.`,
+      subheading: `${previousDysfunctionDriver} to ${currentDysfunctionDriver}`,
+      previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
+      currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
+      body: `Your internal driver has shifted from ${previousDysfunctionDriver} to ${currentDysfunctionDriver}.\n\nPreviously, the pattern underneath your scores was rooted in the belief: '${DRIVER_CONTENT[previousDysfunctionDriver].coreBelief}'\n\nNow, the data suggests a different pattern is primary, rooted in: '${DRIVER_CONTENT[currentDysfunctionDriver].coreBelief}'\n\nThis shift can mean the original pattern was successfully addressed and a deeper or different pattern has surfaced, which is common and healthy in coaching work. It can also mean life circumstances changed in a way that activated a different coping strategy. Read your new driver description carefully. It reveals what's most likely driving your current scores and where the coaching work should focus next.`,
+      direction: "same",
     };
   }
 
-  if (!previousDriver && currentDriver) {
+  if (!previousDysfunctionDriver && currentDysfunctionDriver) {
     return {
       heading: "Internal Pattern Identified",
-      subheading: `Your likely driver: ${currentDriver}`,
+      subheading: `Your likely driver: ${currentDysfunctionDriver}`,
       previousBelief: null,
-      currentBelief: DRIVER_CONTENT[currentDriver].coreBelief,
+      currentBelief: DRIVER_CONTENT[currentDysfunctionDriver].coreBelief,
       body: "Your previous assessment didn't produce a strong enough signal to identify a driver. This time, the pattern is clearer. Read the full driver description in your results to understand what's likely underneath your scores.",
+      direction: "same",
     };
   }
 
-  if (previousDriver && !currentDriver) {
+  if (previousDysfunctionDriver && !currentDysfunctionDriver) {
     return {
       heading: "Internal Pattern Unclear",
-      subheading: `Previously: ${previousDriver}`,
-      previousBelief: DRIVER_CONTENT[previousDriver].coreBelief,
+      subheading: `Previously: ${previousDysfunctionDriver}`,
+      previousBelief: DRIVER_CONTENT[previousDysfunctionDriver].coreBelief,
       currentBelief: null,
       body: "Your previous assessment identified a clear internal driver, but your current scores don't map strongly to any single pattern. This can mean the old pattern is dissolving, which is progress, that you're in a transitional period, or that multiple drivers are now competing. Your domain scores and priority matrix will give you more specific direction.",
+      direction: "same",
     };
   }
 
@@ -85,5 +171,6 @@ export function getDriverTransitionSummary(
     previousBelief: null,
     currentBelief: null,
     body: "Neither of your most recent assessments produced a strong enough signal to identify a single internal driver. Use your domain scores, archetype, and priority matrix to see where the clearest action is available right now.",
+    direction: "same",
   };
 }

@@ -951,7 +951,7 @@
       function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
       var latestHtml = '<div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] overflow-hidden shadow-sm">';
       latestHtml += '<div class="p-5 sm:p-7 lg:p-9 text-left">';
-      var latestArchetype = latest.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(latest.results) : null);
+      var latestArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(latest.results) : null) || latest.results.archetype || null;
       var archetypeMeta = latestArchetype && typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[latestArchetype] ? VAPI_ARCHETYPES[latestArchetype] : null;
       var archetypeColor = archetypeMeta && archetypeMeta.color_accent ? archetypeMeta.color_accent : 'var(--ap-accent)';
       var archIconSvg = latestArchetype && (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(latestArchetype, archetypeColor) : '';
@@ -1677,8 +1677,8 @@
             updateProgressWheelLabels(t.rotate);
           }, 660);
         }
-        var currArchetype = progressCurr.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressCurr.results) : null);
-        var prevArchetype = progressPrev.results.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressPrev.results) : null);
+        var currArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressCurr.results) : null) || progressCurr.results.archetype || null;
+        var prevArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(progressPrev.results) : null) || progressPrev.results.archetype || null;
         var archetypeChanged = currArchetype && prevArchetype && currArchetype !== prevArchetype;
         var legendHtml = '<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 w-full">' +
           '<div class="flex flex-col gap-y-1 items-start">' +
@@ -1990,7 +1990,22 @@
           if (!driverName || typeof score !== 'number') return label + ': None';
           return label + ': ' + driverName + ' (' + score + ' points)';
         }
-        function getSecondaryDriverTransitionNote(previousDriver, currentDriver) {
+        function formatPrimaryDriverDetailLine(driverState, driverName, score) {
+          if (driverState === 'aligned_momentum' || driverName === 'Aligned Momentum') {
+            return 'Current state: Aligned Momentum';
+          }
+          return formatDriverSummaryLine('Primary driver', driverName, score);
+        }
+        function formatSecondaryDriverDetailLine(driverState, driverName, score) {
+          if (driverState === 'aligned_momentum') {
+            return 'Secondary driver: None';
+          }
+          return formatDriverSummaryLine('Secondary driver', driverName, score);
+        }
+        function getSecondaryDriverTransitionNote(previousState, currentState, previousDriver, currentDriver) {
+          if (previousState === 'aligned_momentum' || currentState === 'aligned_momentum') {
+            return '';
+          }
           if (!previousDriver && currentDriver) {
             return 'A secondary pattern has emerged: ' + currentDriver + '. This suggests a second internal driver is becoming active alongside your primary pattern. Read more in the Driver Library.';
           }
@@ -2071,8 +2086,8 @@
           }
           var prevRes = sortedByDate[sortedByDate.length - 2].results;
           var currRes = sortedByDate[sortedByDate.length - 1].results;
-          var prevArchetype = prevRes.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(prevRes) : null);
-          var currArchetype = currRes.archetype || (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(currRes) : null);
+          var prevArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(prevRes) : null) || prevRes.archetype || null;
+          var currArchetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(currRes) : null) || currRes.archetype || null;
           var prevDriverEval = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.ensureEvaluation)
             ? VAPI_DRIVERS.ensureEvaluation(prevRes)
             : {
@@ -2090,9 +2105,16 @@
                 secondaryDriverScore: typeof currRes.secondaryDriverScore === 'number' ? currRes.secondaryDriverScore : null
               };
           var driverTransition = (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.getTransitionSummary)
-            ? VAPI_DRIVERS.getTransitionSummary(prevDriverEval.assignedDriver || null, currDriverEval.assignedDriver || null)
+            ? VAPI_DRIVERS.getTransitionSummary(
+                prevDriverEval.assignedDriver || null,
+                currDriverEval.assignedDriver || null,
+                prevDriverEval.driverState || 'no_driver',
+                currDriverEval.driverState || 'no_driver'
+              )
             : null;
           var secondaryDriverTransitionNote = getSecondaryDriverTransitionNote(
+            prevDriverEval.driverState || 'no_driver',
+            currDriverEval.driverState || 'no_driver',
             prevDriverEval.secondaryDriver || null,
             currDriverEval.secondaryDriver || null
           );
@@ -2107,9 +2129,18 @@
               body: driverTransition.body,
               previousBelief: driverTransition.previousBelief,
               currentBelief: driverTransition.currentBelief,
+              changeDirection: driverTransition.direction,
               detailLines: [
-                formatDriverSummaryLine('Primary driver', currDriverEval.assignedDriver || null, currDriverEval.topDriverScore),
-                formatDriverSummaryLine('Secondary driver', currDriverEval.secondaryDriver || null, currDriverEval.secondaryDriverScore)
+                formatPrimaryDriverDetailLine(
+                  currDriverEval.driverState || 'no_driver',
+                  currDriverEval.assignedDriver || null,
+                  currDriverEval.topDriverScore
+                ),
+                formatSecondaryDriverDetailLine(
+                  currDriverEval.driverState || 'no_driver',
+                  currDriverEval.secondaryDriver || null,
+                  currDriverEval.secondaryDriverScore
+                )
               ],
               supportingNote: secondaryDriverTransitionNote || null,
               linkHref: '/portal/driver-library',

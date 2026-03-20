@@ -203,7 +203,7 @@
   }
 
   function getLaggingArenaSummary(results) {
-    var arenaScores = results && results.arenaScores ? results.arenaScores : {};
+    var arenaScores = results && results.arenaScores ? results.arenaScores : (results || {});
     var ranked = [
       { key: 'Personal', label: 'Personal', score: parseFloat(arenaScores[SELF] ?? arenaScores.Personal ?? 0) || 0 },
       { key: 'Relationships', label: 'Relationships', score: parseFloat(arenaScores.Relationships ?? 0) || 0 },

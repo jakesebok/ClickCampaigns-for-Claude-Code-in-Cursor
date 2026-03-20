@@ -1,4 +1,7 @@
-import type { VapiDriverName } from "./drivers";
+import {
+  ALIGNED_MOMENTUM_NAME,
+  type VapiDriverName,
+} from "./drivers";
 
 export const DRIVER_ORDER: VapiDriverName[] = [
   "The Achiever's Trap",
@@ -14,13 +17,16 @@ export const DRIVER_ORDER: VapiDriverName[] = [
 
 export const DRIVER_LIBRARY_TITLE = "The 9 Driver Patterns";
 export const DRIVER_LIBRARY_SUBTITLE =
-  "Underneath every score pattern is an internal operating system: a belief, a fear, and a coping strategy that's been running the show. These are the 9 most common driver patterns we see in founders. Your assessment identified your most likely driver, but reading all nine will deepen your self-awareness and may reveal secondary patterns worth exploring.";
+  "Underneath every score pattern is an internal operating system. For most founders, that system includes a belief, a fear, and a coping strategy that silently works against their goals. These are the 9 most common dysfunction drivers. But when no dysfunction driver is present and your scores reflect broad, genuine strength, something different appears: Aligned Momentum. That's the state every driver pattern is building toward.";
 export const DRIVER_LIBRARY_EMPTY_RESULTS_BANNER =
   "Take the VAPI Assessment to discover which of these patterns is most likely driving your results.";
 export const DRIVER_LIBRARY_FOOTER_HEADING =
   "Ready to Address What's Driving Your Pattern?";
 export const DRIVER_LIBRARY_FOOTER_TEXT =
   "Understanding your driver is the first step. Changing it requires structured support. The Aligned Power Program is a 12-month coaching partnership designed to identify, address, and rewire the internal patterns keeping you stuck.";
+export const DRIVER_LIBRARY_DIVIDER_HEADING = "The 9 Dysfunction Drivers";
+export const DRIVER_LIBRARY_DIVIDER_TEXT =
+  "These are the internal patterns that silently work against founders. Each one represents a belief, a fear, and a coping strategy that produces predictable score signatures. Aligned Momentum is what becomes possible when these patterns are identified and addressed.";
 
 export type DriverLibraryEntry = {
   howToKnowThisIsYou: string[];
@@ -28,6 +34,37 @@ export type DriverLibraryEntry = {
   reflectionPrompts: string[];
   relationshipToOtherDrivers: string;
 };
+
+export const ALIGNED_MOMENTUM_LIBRARY_CONTENT: DriverLibraryEntry = {
+  howToKnowThisIsYou: [
+    "Your VAPI composite is 7.0 or above with no more than one domain significantly below the rest",
+    "You don't recognize yourself in any of the 9 dysfunction drivers, or if you see traces, they feel like old patterns rather than current ones",
+    "Your business results and your personal wellbeing don't feel like they're competing with each other",
+    "You can sustain your current pace without running on adrenaline, guilt, or fear",
+    "The way you work matches who you actually are. You're not performing a version of success that belongs to someone else.",
+    "You have genuine relationships where you're known, not just respected",
+    "Your internal voice is mostly honest and supportive rather than critical, fearful, or avoidant",
+    "When stress comes, you recover. You don't spiral, shut down, or burn it all to the ground.",
+  ],
+  howToKnowThisIsntYou: [
+    "If reading the dysfunction drivers produced a strong \"that's me\" reaction to any of them, trust that reaction over the algorithm",
+    "If your high scores are maintained through unsustainable effort, willpower, or performance rather than genuine alignment, the momentum isn't real",
+    "If your life looks good on paper but doesn't feel good in your body, something the assessment didn't fully capture may be present",
+    "If you're suppressing or numbing to maintain your scores rather than genuinely thriving, explore The Escape Artist and The Achiever's Trap more carefully",
+    "Aligned Momentum should feel like relief when you read it, not like a performance you need to maintain",
+  ],
+  reflectionPrompts: [
+    "What specific practices, boundaries, or decisions are most responsible for the alignment you've built? Name them concretely. These are the things you cannot afford to stop doing.",
+    "When was the last time your alignment was tested by a major stressor, a business setback, a health scare, a relationship conflict? How did you respond? Did the system hold, or did you see cracks? What did you learn about where your alignment is strongest and where it's most fragile?",
+    "If you could give your past self, the version of you that was operating from one of the dysfunction drivers, one piece of advice about what actually produced this state, what would it be? The answer reveals what you've learned that others haven't yet.",
+    "What is the next edge for you? Aligned Momentum is not a finish line. Where do you feel the pull toward growth? What domain or arena, if deepened further, would expand what's possible for you?",
+    "Who in your life needs what you've built? Not your business output. Your operating system. The way you've learned to align your internal world with your external results. How could you share that with others in a way that creates impact beyond your own life?",
+  ],
+  relationshipToOtherDrivers:
+    "Aligned Momentum is not the opposite of any single driver. It's what emerges when no driver is dominant. Most founders who reach this state did so by identifying and addressing a specific dysfunction driver earlier in their journey. The Achiever learned to decouple identity from output. The Pleaser learned to hold boundaries. The Perfectionist learned to ship imperfectly. The Escape Artist turned around and faced what they were running from. Aligned Momentum is the result of that work, not the absence of having needed it. If you're here, you likely remember what it felt like to operate from a dysfunction pattern. That memory is valuable. It's what makes you capable of helping others who are still in it.",
+};
+
+export type DriverLibrarySectionName = VapiDriverName | typeof ALIGNED_MOMENTUM_NAME;
 
 export const DRIVER_LIBRARY_CONTENT: Record<VapiDriverName, DriverLibraryEntry> = {
   "The Achiever's Trap": {
@@ -285,6 +322,6 @@ export const DRIVER_LIBRARY_CONTENT: Record<VapiDriverName, DriverLibraryEntry> 
   },
 };
 
-export function getDriverSectionId(driver: VapiDriverName) {
+export function getDriverSectionId(driver: DriverLibrarySectionName) {
   return `driver-${driver.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
 }

@@ -49,10 +49,15 @@ import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import { ARCHETYPE_ACCENT_COLORS, getArchetypeIcon } from "@/lib/vapi/archetype-icons";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 import {
+  ALIGNED_MOMENTUM_CONTENT,
+  ALIGNED_MOMENTUM_NAME,
   DRIVER_CONTENT,
   getDriverFallbackContent,
+  getDriverState,
+  type VapiAssignedDriverName,
   type VapiDriverFallbackType,
   type VapiDriverName,
+  type VapiDriverState,
 } from "@/lib/vapi/drivers";
 import { DRIVER_ACCENT_COLORS, DriverIcon } from "@/lib/vapi/driver-icons";
 import { getDriverTransitionSummary } from "@/lib/vapi/driver-progress";
@@ -64,6 +69,14 @@ function coerceDriverName(
   value: string | null | undefined
 ): VapiDriverName | null {
   return value && value in DRIVER_CONTENT ? (value as VapiDriverName) : null;
+}
+
+function coerceAssignedDriverName(
+  value: string | null | undefined
+): VapiAssignedDriverName | null {
+  if (!value) return null;
+  if (value === ALIGNED_MOMENTUM_NAME) return ALIGNED_MOMENTUM_NAME;
+  return value in DRIVER_CONTENT ? (value as VapiDriverName) : null;
 }
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
@@ -200,28 +213,37 @@ function DriverSection({
   secondaryDriver,
   driverScores,
   topDriverScore,
+  driverState,
   driverFallbackType,
 }: {
   assignedDriver: string | null;
   secondaryDriver?: string | null;
   driverScores?: Record<string, number>;
   topDriverScore?: number;
+  driverState?: VapiDriverState;
   driverFallbackType?: VapiDriverFallbackType;
 }) {
-  const [expanded, setExpanded] = useState<
-    Record<"mechanism" | "cost" | "wayOut", boolean>
-  >({
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({
     mechanism: false,
     cost: false,
     wayOut: false,
+    alignedShowUp: false,
+    alignedPossible: false,
+    alignedProtect: false,
   });
 
+  const resolvedDriverState = getDriverState({
+    assignedDriver: coerceAssignedDriverName(assignedDriver),
+    driverFallbackType,
+  });
+  const normalizedDriverState = driverState || resolvedDriverState;
+  const isAlignedMomentum = normalizedDriverState === "aligned_momentum";
   const driverName =
-    assignedDriver && assignedDriver in DRIVER_CONTENT
+    !isAlignedMomentum && assignedDriver && assignedDriver in DRIVER_CONTENT
       ? (assignedDriver as VapiDriverName)
       : null;
   const secondaryDriverName =
-    secondaryDriver && secondaryDriver in DRIVER_CONTENT
+    !isAlignedMomentum && secondaryDriver && secondaryDriver in DRIVER_CONTENT
       ? (secondaryDriver as VapiDriverName)
       : null;
   const driver = driverName ? DRIVER_CONTENT[driverName] : null;
@@ -232,9 +254,15 @@ function DriverSection({
     driverName && driverScores
       ? Math.max(topDriverScore ?? 0, driverScores[driverName] ?? 0)
       : topDriverScore ?? 0;
-  const accent = driverName ? DRIVER_ACCENT_COLORS[driverName] : "#FF6B1A";
+  const accent = isAlignedMomentum
+    ? ALIGNED_MOMENTUM_CONTENT.colorAccent
+    : driverName
+      ? DRIVER_ACCENT_COLORS[driverName]
+      : "#FF6B1A";
   const note =
     "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
+  const alignedMomentumNote =
+    "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding.";
   const fallbackContent = getDriverFallbackContent(driverFallbackType || "standard");
 
   return (
@@ -244,9 +272,113 @@ function DriverSection({
     >
       <div className="space-y-3">
         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-          What&apos;s Driving This Pattern
+          {isAlignedMomentum
+            ? "What&apos;s Fueling This Pattern"
+            : "What&apos;s Driving This Pattern"}
         </p>
-        {driver ? (
+        {isAlignedMomentum ? (
+          <>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border"
+                  style={{
+                    backgroundColor: `${accent}14`,
+                    borderColor: `${accent}33`,
+                  }}
+                >
+                  <DriverIcon driver={ALIGNED_MOMENTUM_NAME} size={64} />
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-serif font-bold text-foreground">
+                    {ALIGNED_MOMENTUM_CONTENT.name}
+                  </h2>
+                  <p className="text-sm italic text-muted-foreground leading-relaxed">
+                    {ALIGNED_MOMENTUM_CONTENT.tagline}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <blockquote
+              className="rounded-xl border-l-4 px-4 py-4 text-xl sm:text-2xl font-serif font-semibold leading-tight text-foreground"
+              style={{
+                borderLeftColor: accent,
+                backgroundColor: `${accent}14`,
+              }}
+            >
+              &quot;{ALIGNED_MOMENTUM_CONTENT.coreState}&quot;
+            </blockquote>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {ALIGNED_MOMENTUM_CONTENT.description}
+            </p>
+            <div className="space-y-3">
+              {[
+                {
+                  key: "alignedShowUp",
+                  title: "How This Shows Up in Your Scores",
+                  body: ALIGNED_MOMENTUM_CONTENT.howThisShowsUp,
+                },
+                {
+                  key: "alignedPossible",
+                  title: "What This Makes Possible",
+                  body: ALIGNED_MOMENTUM_CONTENT.whatThisMakesPossible,
+                },
+                {
+                  key: "alignedProtect",
+                  title: "How to Protect It",
+                  body: ALIGNED_MOMENTUM_CONTENT.howToProtectIt,
+                },
+              ].map((section) => {
+                const isOpen = expanded[section.key];
+                return (
+                  <div
+                    key={section.key}
+                    className="rounded-xl border border-border bg-background/70"
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpanded((current) => ({
+                          ...current,
+                          [section.key]: !current[section.key],
+                        }))
+                      }
+                      className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                      aria-expanded={isOpen}
+                    >
+                      <span className="text-sm font-semibold text-foreground">
+                        {section.title}
+                      </span>
+                      {isOpen ? (
+                        <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                      )}
+                    </button>
+                    {isOpen && (
+                      <div className="border-t border-border px-4 py-4">
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {section.body}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="space-y-4 border-t border-border/70 pt-4">
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                {alignedMomentumNote}
+              </p>
+              <Link
+                href="/drivers"
+                className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+              >
+                Explore all driver patterns <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </>
+        ) : driver ? (
           <>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-start gap-4">
@@ -408,7 +540,7 @@ function DriverSection({
             <p className="text-xs leading-relaxed text-muted-foreground">
               {note}
             </p>
-            {driverFallbackType !== "high_performer" && (
+            {normalizedDriverState === "no_driver" && (
               <Link
                 href="/drivers"
                 className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
@@ -447,6 +579,7 @@ type ResultData = {
   topDriverScore: number;
   secondaryDriverScore: number | null;
   primaryToSecondaryMargin: number;
+  driverState: VapiDriverState;
   driverFallbackType: VapiDriverFallbackType;
   createdAt: string;
 };
@@ -540,10 +673,44 @@ function formatDriverSummaryLine(
   return `${label}: ${driverName} (${score} points)`;
 }
 
+function formatPrimaryDriverDetailLine(
+  driverState: VapiDriverState,
+  driverName: VapiAssignedDriverName | null,
+  score: number | null | undefined
+) {
+  if (driverState === "aligned_momentum" || driverName === ALIGNED_MOMENTUM_NAME) {
+    return `Current state: ${ALIGNED_MOMENTUM_NAME}`;
+  }
+  return formatDriverSummaryLine(
+    "Primary driver",
+    driverName && driverName in DRIVER_CONTENT ? (driverName as VapiDriverName) : null,
+    score
+  );
+}
+
+function formatSecondaryDriverDetailLine(
+  driverState: VapiDriverState,
+  driverName: VapiDriverName | null,
+  score: number | null | undefined
+) {
+  if (driverState === "aligned_momentum") {
+    return "Secondary driver: None";
+  }
+  return formatDriverSummaryLine("Secondary driver", driverName, score);
+}
+
 function getSecondaryDriverTransitionNote(
+  previousState: VapiDriverState,
+  currentState: VapiDriverState,
   previousDriver: VapiDriverName | null,
   currentDriver: VapiDriverName | null
 ) {
+  if (
+    previousState === "aligned_momentum" ||
+    currentState === "aligned_momentum"
+  ) {
+    return null;
+  }
   if (!previousDriver && currentDriver) {
     return `A secondary pattern has emerged: ${currentDriver}. This suggests a second internal driver is becoming active alongside your primary pattern. Read more in the Driver Library.`;
   }
@@ -929,6 +1096,7 @@ function ResultsContent() {
         topDriverScore?: number;
         secondaryDriverScore?: number | null;
         primaryToSecondaryMargin?: number;
+        driverState?: VapiDriverState;
         driverFallbackType?: VapiDriverFallbackType;
         createdAt: string;
       }) => ({
@@ -944,6 +1112,12 @@ function ResultsContent() {
         topDriverScore: r.topDriverScore || 0,
         secondaryDriverScore: r.secondaryDriverScore ?? null,
         primaryToSecondaryMargin: r.primaryToSecondaryMargin ?? 0,
+        driverState:
+          r.driverState ||
+          getDriverState({
+            assignedDriver: coerceAssignedDriverName(r.assignedDriver),
+            driverFallbackType: r.driverFallbackType || "standard",
+          }),
         driverFallbackType: r.driverFallbackType || "standard",
         createdAt: r.createdAt,
       }));
@@ -951,6 +1125,15 @@ function ResultsContent() {
       if (id && singleRes.result) {
         setResult({
           ...singleRes.result,
+          driverState:
+            singleRes.result.driverState ||
+            getDriverState({
+              assignedDriver: coerceAssignedDriverName(
+                singleRes.result.assignedDriver
+              ),
+              driverFallbackType:
+                singleRes.result.driverFallbackType || "standard",
+            }),
           driverFallbackType: singleRes.result.driverFallbackType || "standard",
         });
       } else if (all.length) {
@@ -1074,10 +1257,10 @@ function ResultsContent() {
     previousProgressResult.archetype || null,
     latestProgressResult.archetype || null
   );
-  const previousPrimaryDriver = coerceDriverName(
+  const previousAssignedDriver = coerceAssignedDriverName(
     previousProgressResult.assignedDriver
   );
-  const currentPrimaryDriver = coerceDriverName(
+  const currentAssignedDriver = coerceAssignedDriverName(
     latestProgressResult.assignedDriver
   );
   const previousSecondaryDriver = coerceDriverName(
@@ -1087,10 +1270,14 @@ function ResultsContent() {
     latestProgressResult.secondaryDriver
   );
   const driverTransition = getDriverTransitionSummary(
-    previousPrimaryDriver,
-    currentPrimaryDriver
+    previousProgressResult.driverState,
+    latestProgressResult.driverState,
+    previousAssignedDriver,
+    currentAssignedDriver
   );
   const secondaryDriverTransitionNote = getSecondaryDriverTransitionNote(
+    previousProgressResult.driverState,
+    latestProgressResult.driverState,
     previousSecondaryDriver,
     currentSecondaryDriver
   );
@@ -1209,6 +1396,7 @@ function ResultsContent() {
             secondaryDriver={result.secondaryDriver}
             driverScores={result.driverScores}
             topDriverScore={result.topDriverScore}
+            driverState={result.driverState}
             driverFallbackType={result.driverFallbackType}
           />
 
@@ -1714,14 +1902,15 @@ function ResultsContent() {
                         body: driverTransition.body,
                         previousBelief: driverTransition.previousBelief,
                         currentBelief: driverTransition.currentBelief,
+                        changeDirection: driverTransition.direction,
                         detailLines: [
-                          formatDriverSummaryLine(
-                            "Primary driver",
-                            currentPrimaryDriver,
+                          formatPrimaryDriverDetailLine(
+                            latestProgressResult.driverState,
+                            currentAssignedDriver,
                             latestProgressResult.topDriverScore
                           ),
-                          formatDriverSummaryLine(
-                            "Secondary driver",
+                          formatSecondaryDriverDetailLine(
+                            latestProgressResult.driverState,
                             currentSecondaryDriver,
                             latestProgressResult.secondaryDriverScore
                           ),

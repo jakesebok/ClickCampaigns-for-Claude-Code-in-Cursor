@@ -3,10 +3,15 @@ import { getOrCreateUser } from "@/lib/get-or-create-user";
 import { calculateScores, getArchetype } from "@/lib/vapi/scoring";
 import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
 import {
+  ALIGNED_MOMENTUM_NAME,
   determineDriver,
   flattenGroupedAnswersToScoredResponses,
   getDriverFallbackType,
+  getDriverState,
+  isDysfunctionDriverName,
   normalizeResponsesFromStoredMap,
+  type VapiAssignedDriverName,
+  type VapiDriverState,
   type VapiDriverName,
 } from "@/lib/vapi/drivers";
 
@@ -41,8 +46,55 @@ function normalizeArenaScores(raw: Record<string, number> | null | undefined): R
   return out;
 }
 
-function normalizeDriverName(value: unknown): VapiDriverName | null {
-  return typeof value === "string" ? (value as VapiDriverName) : null;
+function normalizeDysfunctionDriverName(value: unknown): VapiDriverName | null {
+  return isDysfunctionDriverName(value) ? value : null;
+}
+
+function normalizeAssignedDriverName(value: unknown): VapiAssignedDriverName | null {
+  if (value === ALIGNED_MOMENTUM_NAME) return ALIGNED_MOMENTUM_NAME;
+  return normalizeDysfunctionDriverName(value);
+}
+
+function normalizeDriverState(value: unknown): VapiDriverState | null {
+  return value === "dysfunction_driver" ||
+    value === "aligned_momentum" ||
+    value === "no_driver"
+    ? value
+    : null;
+}
+
+function normalizeStoredDriverFallbackType(value: unknown) {
+  if (value === "aligned_momentum" || value === "standard" || value === "none") {
+    return value;
+  }
+  if (value === "high_performer") {
+    return "aligned_momentum" as const;
+  }
+  return null;
+}
+
+function deriveArchetypeFromStoredResults(
+  results: Record<string, unknown>,
+  normalizedArenaScores: Record<string, number>
+) {
+  const domainScores = (results.domainScores as Record<string, number>) || {};
+  const hasArenaScores =
+    typeof normalizedArenaScores.personal === "number" &&
+    typeof normalizedArenaScores.relationships === "number" &&
+    typeof normalizedArenaScores.business === "number";
+
+  if (hasArenaScores && Object.keys(domainScores).length > 0) {
+    return getArchetype(
+      {
+        personal: normalizedArenaScores.personal,
+        relationships: normalizedArenaScores.relationships,
+        business: normalizedArenaScores.business,
+      },
+      domainScores
+    );
+  }
+
+  return (results.archetype as string) || null;
 }
 
 async function insertPortalVapi(params: {
@@ -93,8 +145,22 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     "secondaryDriver" in results &&
     "secondaryDriverScore" in results
   ) {
-    const assignedDriver = normalizeDriverName(results.assignedDriver);
-    const secondaryDriver = normalizeDriverName(results.secondaryDriver);
+    const storedAssignedDriver = normalizeAssignedDriverName(results.assignedDriver);
+    const storedDriverState = normalizeDriverState(results.driverState);
+    const normalizedStoredFallbackType = normalizeStoredDriverFallbackType(
+      results.driverFallbackType
+    );
+    const secondaryDriver = normalizeDysfunctionDriverName(results.secondaryDriver);
+    const driverState =
+      storedDriverState ??
+      getDriverState({
+        assignedDriver: storedAssignedDriver,
+        driverFallbackType: normalizedStoredFallbackType,
+      });
+    const assignedDriver =
+      driverState === "aligned_momentum"
+        ? ALIGNED_MOMENTUM_NAME
+        : storedAssignedDriver;
     return {
       assignedDriver,
       secondaryDriver,
@@ -107,11 +173,13 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
           ? (results.secondaryDriverScore as number)
           : null,
       primaryToSecondaryMargin: results.primaryToSecondaryMargin as number,
+      driverState,
       driverFallbackType: getDriverFallbackType({
         domainScores: (results.domainScores as Record<string, number>) || {},
         compositeScore:
           typeof results.overall === "number" ? (results.overall as number) : null,
         assignedDriver,
+        driverState,
       }),
     };
   }
@@ -121,9 +189,16 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     typeof results.allResponses === "object" &&
     Object.keys(results.allResponses as Record<string, unknown>).length > 0;
 
+  const fallbackType = getDriverFallbackType({
+    domainScores: (results.domainScores as Record<string, number>) || {},
+    compositeScore:
+      typeof results.overall === "number" ? (results.overall as number) : null,
+  });
+
   if (!hasResponses) {
     return {
-      assignedDriver: null,
+      assignedDriver:
+        fallbackType === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null,
       driverScores: {
         "The Achiever's Trap": 0,
         "The Escape Artist": 0,
@@ -151,11 +226,9 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
       secondaryDriver: null,
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
-      driverFallbackType: getDriverFallbackType({
-        domainScores: (results.domainScores as Record<string, number>) || {},
-        compositeScore:
-          typeof results.overall === "number" ? (results.overall as number) : null,
-      }),
+      driverState:
+        fallbackType === "aligned_momentum" ? "aligned_momentum" : "no_driver",
+      driverFallbackType: fallbackType,
     };
   }
 
@@ -192,14 +265,18 @@ export async function GET(req: NextRequest) {
     const row = rows.find((r: { id: string }) => r.id === id);
     if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
     const r = row.results as Record<string, unknown>;
+    const normalizedArenaScores = normalizeArenaScores(
+      r.arenaScores as Record<string, number>
+    );
+    const archetype = deriveArchetypeFromStoredResults(r, normalizedArenaScores);
     const driverEvaluation = getDriverEvaluationFromStoredResults(r);
     return NextResponse.json({
       result: {
         id: row.id,
         domainScores: (r.domainScores as Record<string, number>) || {},
-        arenaScores: normalizeArenaScores(r.arenaScores as Record<string, number>),
+        arenaScores: normalizedArenaScores,
         overallScore: Math.round(((r.overall as number) || 0) * 10),
-        archetype: (r.archetype as string) || null,
+        archetype,
         importance: (r.importanceRatings as Record<string, number>) || {},
         assignedDriver: driverEvaluation.assignedDriver,
         secondaryDriver: driverEvaluation.secondaryDriver,
@@ -207,6 +284,7 @@ export async function GET(req: NextRequest) {
         topDriverScore: driverEvaluation.topDriverScore,
         secondaryDriverScore: driverEvaluation.secondaryDriverScore,
         primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+        driverState: driverEvaluation.driverState,
         driverFallbackType: driverEvaluation.driverFallbackType,
         createdAt: row.created_at,
       },
@@ -215,13 +293,17 @@ export async function GET(req: NextRequest) {
 
   const results = rows.map((row: { id: string; results: Record<string, unknown>; created_at: string }) => {
     const r = row.results;
+    const normalizedArenaScores = normalizeArenaScores(
+      r.arenaScores as Record<string, number>
+    );
+    const archetype = deriveArchetypeFromStoredResults(r, normalizedArenaScores);
     const driverEvaluation = getDriverEvaluationFromStoredResults(r);
     return {
       id: row.id,
       domainScores: (r.domainScores as Record<string, number>) || {},
-      arenaScores: normalizeArenaScores(r.arenaScores as Record<string, number>),
+      arenaScores: normalizedArenaScores,
       overallScore: Math.round(((r.overall as number) || 0) * 10),
-      archetype: (r.archetype as string) || null,
+      archetype,
       importance: (r.importanceRatings as Record<string, number>) || {},
       assignedDriver: driverEvaluation.assignedDriver,
       secondaryDriver: driverEvaluation.secondaryDriver,
@@ -229,6 +311,7 @@ export async function GET(req: NextRequest) {
       topDriverScore: driverEvaluation.topDriverScore,
       secondaryDriverScore: driverEvaluation.secondaryDriverScore,
       primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+      driverState: driverEvaluation.driverState,
       driverFallbackType: driverEvaluation.driverFallbackType,
       createdAt: row.created_at,
     };
@@ -272,6 +355,7 @@ export async function POST(req: NextRequest) {
     secondDriverScore: driverEvaluation.secondDriverScore,
     secondaryDriverScore: driverEvaluation.secondaryDriverScore,
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+    driverState: driverEvaluation.driverState,
     driverFallbackType: driverEvaluation.driverFallbackType,
     allResponses: scoredResponses,
     responseCodingVersion: "scored_v1",
@@ -299,6 +383,7 @@ export async function POST(req: NextRequest) {
     topDriverScore: driverEvaluation.topDriverScore,
     secondaryDriverScore: driverEvaluation.secondaryDriverScore,
     primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+    driverState: driverEvaluation.driverState,
     driverFallbackType: driverEvaluation.driverFallbackType,
   });
 }

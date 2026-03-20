@@ -7,14 +7,23 @@ const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL |
 function determineArchetype(results) {
   if (!results) return null;
   const arenaScores = results.arenaScores || {};
-  const domainScores = {};
+  const domainScores = { ...(results.domainScores || {}) };
   (results.domains || []).forEach((d) => { if (d && d.code) domainScores[d.code] = d.score; });
-  const s = parseFloat(arenaScores.Personal ?? arenaScores.Self) ?? null;
-  const r = parseFloat(arenaScores.Relationships) ?? null;
-  const b = parseFloat(arenaScores.Business) ?? null;
-  const overall = typeof results.overall === 'number' ? results.overall : (Object.keys(domainScores).length ? Object.values(domainScores).reduce((a, v) => a + (v || 0), 0) / 12 : null);
+  const toNumber = (value) => {
+    const num = typeof value === 'number' ? value : parseFloat(value);
+    return Number.isFinite(num) ? num : null;
+  };
+  const s = toNumber(arenaScores.Personal ?? arenaScores.Self);
+  const r = toNumber(arenaScores.Relationships);
+  const b = toNumber(arenaScores.Business);
+  const overall = typeof results.overall === 'number'
+    ? results.overall
+    : (Object.keys(domainScores).length ? Object.values(domainScores).reduce((a, v) => a + (v || 0), 0) / 12 : null);
   const exScore = domainScores.EX; const ecScore = domainScores.EC; const vsScore = domainScores.VS;
   if (s >= 8 && r >= 8 && b >= 8) return 'The Architect';
+  const nearArchitectCount = [s, r, b].filter((score) => score != null && score >= 7.5).length;
+  const lowestArena = Math.min(s, r, b);
+  if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) return 'The Rising Architect';
   let arenasLow = 0;
   if (s != null && s <= 4.5) arenasLow++;
   if (r != null && r <= 4.5) arenasLow++;
@@ -110,7 +119,7 @@ export async function GET(request) {
       if (!k) return;
       if (!byEmail[k]) {
         const results = r.results || {};
-        const archetype = results.archetype || determineArchetype(results);
+        const archetype = determineArchetype(results) || results.archetype || null;
         byEmail[k] = {
           email: r.email,
           name: [r.first_name, r.last_name].filter(Boolean).join(' ') || r.email || '—',
@@ -126,7 +135,7 @@ export async function GET(request) {
       if (!byEmail[k].lastVapiAt || r.created_at > byEmail[k].lastVapiAt) {
         byEmail[k].lastVapiAt = r.created_at;
         const results = r.results || {};
-        byEmail[k].archetype = results.archetype || determineArchetype(results);
+        byEmail[k].archetype = determineArchetype(results) || results.archetype || null;
       }
     });
 
