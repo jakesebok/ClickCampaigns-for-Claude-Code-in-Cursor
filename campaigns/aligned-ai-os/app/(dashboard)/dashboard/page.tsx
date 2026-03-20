@@ -46,6 +46,7 @@ import {
   type VapiDriverName,
   type VapiDriverState,
 } from "@/lib/vapi/drivers";
+import { DriverIcon } from "@/lib/vapi/driver-icons";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
   getScorecardWindow,
@@ -238,6 +239,9 @@ export default function DashboardPage() {
     driverState === "aligned_momentum" ||
     latestVapi?.assignedDriver === ALIGNED_MOMENTUM_NAME;
   const driver = driverName ? DRIVER_CONTENT[driverName] : null;
+  const dashboardDriverName: VapiAssignedDriverName | null = isAlignedMomentum
+    ? ALIGNED_MOMENTUM_NAME
+    : driverName;
   const driverFallbackLabel = "No clear driver identified";
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
@@ -579,18 +583,32 @@ export default function DashboardPage() {
                         </p>
                         {isAlignedMomentum ? (
                           <>
-                            <p className="text-sm font-semibold text-foreground">
-                              {ALIGNED_MOMENTUM_CONTENT.name}
-                            </p>
+                            <div className="flex items-center gap-2">
+                              <DriverIcon
+                                driver={dashboardDriverName!}
+                                size={18}
+                                className="h-[18px] w-[18px] shrink-0"
+                              />
+                              <p className="text-sm font-semibold text-foreground">
+                                {ALIGNED_MOMENTUM_CONTENT.name}
+                              </p>
+                            </div>
                             <p className="text-sm text-muted-foreground leading-relaxed">
                               &quot;{ALIGNED_MOMENTUM_CONTENT.coreState}&quot;
                             </p>
                           </>
                         ) : driver ? (
                           <>
-                            <p className="text-sm font-semibold text-foreground">
-                              {driver.name}
-                            </p>
+                            <div className="flex items-center gap-2">
+                              <DriverIcon
+                                driver={dashboardDriverName!}
+                                size={18}
+                                className="h-[18px] w-[18px] shrink-0"
+                              />
+                              <p className="text-sm font-semibold text-foreground">
+                                {driver.name}
+                              </p>
+                            </div>
                             <p className="text-sm text-muted-foreground leading-relaxed">
                               &quot;{driver.coreBelief}&quot;
                             </p>

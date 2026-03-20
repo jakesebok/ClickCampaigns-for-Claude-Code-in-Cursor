@@ -61,6 +61,145 @@
       .print-only { display: block !important; }
       body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       main { padding-bottom: 2.5rem; }
+      .driver-section { display: none !important; }
+      .driver-print-shell {
+        display: block !important;
+        background: #fff !important;
+        border: 1px solid var(--ap-border);
+        border-radius: 1.2rem;
+        box-shadow: none !important;
+        overflow: hidden;
+      }
+      .driver-print-page {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        break-after: page;
+        page-break-after: always;
+        min-height: 8.55in;
+      }
+      .driver-print-first {
+        break-before: page;
+        page-break-before: always;
+      }
+      .driver-print-inner {
+        padding: 1rem 1.15rem 1.2rem;
+        min-height: 8.55in;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .driver-print-eyebrow {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        margin: 0;
+      }
+      .driver-print-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      .driver-print-icon,
+      .driver-print-secondary-icon {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .driver-print-icon { width: 3.6rem; height: 3.6rem; }
+      .driver-print-secondary-icon { width: 2.35rem; height: 2.35rem; border-radius: 0.7rem; }
+      .driver-print-title,
+      .driver-print-continued-title {
+        font-size: 1.9rem !important;
+        line-height: 1.05 !important;
+        margin: 0;
+        color: var(--ap-primary);
+      }
+      .driver-print-continued-title { margin-bottom: 0.25rem; }
+      .driver-print-core-fear,
+      .driver-print-tagline,
+      .driver-print-body,
+      .driver-print-detail-body,
+      .driver-print-note,
+      .driver-print-secondary-belief,
+      .driver-print-secondary-tagline {
+        font-family: "Outfit", sans-serif;
+        color: var(--ap-secondary);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .driver-print-core-fear,
+      .driver-print-tagline { font-size: 0.95rem !important; }
+      .driver-print-core-fear span { color: var(--ap-primary); font-weight: 600; }
+      .driver-print-tagline { font-style: italic; }
+      .driver-print-body,
+      .driver-print-detail-body { font-size: 0.99rem !important; }
+      .driver-print-quote {
+        margin: 0;
+        padding: 0.8rem 0.95rem;
+        border-radius: 0.9rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.45rem !important;
+        line-height: 1.2 !important;
+        font-weight: 700;
+        color: var(--ap-primary);
+      }
+      .driver-print-strength {
+        display: inline-flex;
+        width: fit-content;
+        border: 1px solid var(--ap-border);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .driver-print-detail {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        padding: 0.8rem 0.95rem;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .driver-print-detail-title,
+      .driver-print-secondary-label,
+      .driver-print-secondary-name {
+        margin: 0 0 0.35rem 0;
+        font-family: "Outfit", sans-serif;
+        color: var(--ap-primary);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+      .driver-print-note {
+        margin-top: auto;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--ap-border);
+        font-size: 0.85rem !important;
+      }
+      .driver-print-secondary {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        padding: 0.8rem 0.95rem;
+      }
+      .driver-print-secondary-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .driver-print-secondary-belief {
+        font-size: 0.9rem !important;
+        font-style: italic;
+      }
+      .driver-print-secondary-tagline {
+        font-size: 0.88rem !important;
+        margin-top: 0.2rem;
+      }
 
       /* Prevent individual cards from splitting mid-card (excludes priority matrix — handled separately) */
       #results-content .rounded-xl:not(.pm-quadrant),
@@ -832,7 +971,7 @@
 
       function buildDriverSection(results) {
         if (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.buildResultsSection) {
-          return VAPI_DRIVERS.buildResultsSection(results, { id: 'driver-section' });
+          return VAPI_DRIVERS.buildResultsSection(results, { id: 'driver-section', context: 'results' });
         }
         return '';
       }

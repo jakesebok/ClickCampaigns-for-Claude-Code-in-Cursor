@@ -1047,7 +1047,8 @@
       if (driverSectionEl && typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && typeof VAPI_DRIVERS.buildResultsSection === 'function') {
         driverSectionEl.innerHTML = VAPI_DRIVERS.buildResultsSection(latest.results, {
           id: 'dashboard-driver-card',
-          libraryHref: '/portal/driver-library'
+          libraryHref: '/portal/driver-library',
+          context: 'dashboard'
         });
         var driverCardEl = driverSectionEl.querySelector('.driver-section');
         if (driverCardEl) driverCardEl.classList.remove('mb-10');

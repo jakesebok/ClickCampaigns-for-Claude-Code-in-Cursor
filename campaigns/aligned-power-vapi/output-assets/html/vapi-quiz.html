@@ -413,7 +413,7 @@
           slide.dataset.questionId = q.id;
           var scaleHtml = SCALE.map(function(label, idx) {
             var v = SCALE_VALUES[idx];
-            return '<button type="button" class="scale-btn w-full text-left px-[0.69rem] py-[0.275rem] sm:py-[0.41rem] rounded border border-[var(--ap-border)] bg-white font-medium text-[var(--ap-secondary)] mt-[0.14rem] sm:mt-[0.275rem] flex items-center justify-between text-[0.825rem] sm:text-[0.96rem] leading-snug" data-value="' + v + '"><span>' + label + '</span><span class="scale-btn-check text-white text-[0.75rem]" aria-hidden="true">✓</span></button>';
+            return '<button type="button" class="scale-btn w-full min-h-[3.1rem] sm:min-h-0 text-left px-[0.75rem] py-[0.58rem] sm:py-[0.41rem] rounded border border-[var(--ap-border)] bg-white font-medium text-[var(--ap-secondary)] mt-[0.14rem] sm:mt-[0.275rem] flex items-center justify-between text-[0.825rem] sm:text-[0.96rem] leading-snug" data-value="' + v + '"><span>' + label + '</span><span class="scale-btn-check text-white text-[0.75rem]" aria-hidden="true">✓</span></button>';
           }).join('');
           slide.innerHTML = '<div class="quiz-slide-inner question-slide-inner">' +
             '<h2 class="font-cormorant text-base sm:text-2xl text-[var(--ap-primary)] mb-2 sm:mb-6 leading-snug sm:leading-tight">' + q.text + '</h2>' +

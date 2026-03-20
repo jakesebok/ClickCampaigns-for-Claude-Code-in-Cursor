@@ -920,8 +920,191 @@
     return evaluation;
   }
 
+  function buildPrintDetailBlock(title, body) {
+    return (
+      '<div class="driver-print-detail">' +
+      '<p class="driver-print-detail-title">' +
+      escapeHtml(title) +
+      "</p>" +
+      '<p class="driver-print-detail-body">' +
+      escapeHtml(body) +
+      "</p></div>"
+    );
+  }
+
+  function buildPrintAlignedMomentumSection(accent) {
+    return (
+      '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
+      accent +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      accent +
+      '">What\'s Fueling This Pattern</p>' +
+      '<div class="driver-print-header">' +
+      '<div class="driver-print-icon" style="background:' +
+      accent +
+      '14;border-color:' +
+      accent +
+      '33;">' +
+      getDriverIcon(ALIGNED_MOMENTUM_NAME, 52) +
+      "</div>" +
+      '<div class="driver-print-heading-copy">' +
+      '<h2 class="driver-print-title">' +
+      escapeHtml(ALIGNED_MOMENTUM_CONTENT.name) +
+      "</h2>" +
+      '<p class="driver-print-tagline">' +
+      escapeHtml(ALIGNED_MOMENTUM_CONTENT.tagline) +
+      "</p></div></div>" +
+      '<blockquote class="driver-print-quote" style="background:' +
+      accent +
+      '10;border-left:2px solid ' +
+      accent +
+      ';">&quot;' +
+      escapeHtml(ALIGNED_MOMENTUM_CONTENT.coreState) +
+      "&quot;</blockquote>" +
+      '<p class="driver-print-body">' +
+      escapeHtml(ALIGNED_MOMENTUM_CONTENT.description) +
+      "</p>" +
+      buildPrintDetailBlock(
+        "How This Shows Up in Your Scores",
+        ALIGNED_MOMENTUM_CONTENT.howThisShowsUp
+      ) +
+      buildPrintDetailBlock(
+        "What This Makes Possible",
+        ALIGNED_MOMENTUM_CONTENT.whatThisMakesPossible
+      ) +
+      buildPrintDetailBlock("How to Protect It", ALIGNED_MOMENTUM_CONTENT.howToProtectIt) +
+      '<p class="driver-print-note">' +
+      escapeHtml(
+        "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding."
+      ) +
+      "</p></div></div>"
+    );
+  }
+
+  function buildPrintDriverPages(evaluation, driverName, secondaryDriverName, accent) {
+    var driver = DRIVER_CONTENT[driverName];
+    var secondaryDriver = secondaryDriverName ? DRIVER_CONTENT[secondaryDriverName] : null;
+    var secondaryAccent = secondaryDriverName
+      ? (DRIVER_ACCENT_COLORS[secondaryDriverName] || accent)
+      : accent;
+    var firstPage =
+      '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
+      accent +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      accent +
+      '">What\'s Driving This Pattern</p>' +
+      '<div class="driver-print-header">' +
+      '<div class="driver-print-icon" style="background:' +
+      accent +
+      '14;border-color:' +
+      accent +
+      '33;">' +
+      getDriverIcon(driverName, 52) +
+      "</div>" +
+      '<div class="driver-print-heading-copy">' +
+      '<h2 class="driver-print-title">' +
+      escapeHtml(driver.name) +
+      "</h2>" +
+      '<p class="driver-print-core-fear"><span>Core fear:</span> ' +
+      escapeHtml(driver.coreFear) +
+      "</p>" +
+      '<p class="driver-print-tagline">' +
+      escapeHtml(driver.tagline) +
+      "</p></div></div>" +
+      '<div class="driver-print-strength" style="background:' +
+      accent +
+      '10;color:' +
+      accent +
+      ';border-color:' +
+      accent +
+      '22;">Pattern strength: ' +
+      evaluation.topDriverScore +
+      " / " +
+      driver.maxPossible +
+      "</div>" +
+      '<blockquote class="driver-print-quote" style="background:' +
+      accent +
+      '10;border-left:2px solid ' +
+      accent +
+      ';">&quot;' +
+      escapeHtml(driver.coreBelief) +
+      "&quot;</blockquote>" +
+      '<p class="driver-print-body">' +
+      escapeHtml(driver.description) +
+      "</p>" +
+      buildPrintDetailBlock("How This Shows Up in Your Scores", driver.mechanism) +
+      "</div></div>";
+    var secondPage =
+      '<div class="print-only driver-print-shell driver-print-page driver-print-second" style="border-left:4px solid ' +
+      accent +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      accent +
+      '">What\'s Driving This Pattern</p>' +
+      '<h3 class="driver-print-continued-title">' +
+      escapeHtml(driver.name) +
+      "</h3>" +
+      buildPrintDetailBlock("What This Is Costing You", driver.whatItCosts) +
+      buildPrintDetailBlock("The Way Out", driver.theWayOut);
+    if (secondaryDriver) {
+      secondPage +=
+        '<div class="driver-print-secondary" style="background:' +
+        secondaryAccent +
+        '10;border-color:' +
+        secondaryAccent +
+        '33;">' +
+        '<p class="driver-print-secondary-label">Secondary Pattern</p>' +
+        '<div class="driver-print-secondary-row">' +
+        '<div class="driver-print-secondary-icon" style="background:' +
+        secondaryAccent +
+        '14;border-color:' +
+        secondaryAccent +
+        '33;">' +
+        getDriverIcon(secondaryDriverName, 32) +
+        "</div>" +
+        '<div class="driver-print-secondary-copy">' +
+        '<p class="driver-print-secondary-name">' +
+        escapeHtml(secondaryDriver.name) +
+        "</p>" +
+        '<p class="driver-print-secondary-belief">&quot;' +
+        escapeHtml(secondaryDriver.coreBelief) +
+        "&quot;</p>" +
+        '<p class="driver-print-secondary-tagline">' +
+        escapeHtml(secondaryDriver.tagline) +
+        "</p></div></div></div>";
+    }
+    secondPage +=
+      '<p class="driver-print-note">' +
+      escapeHtml(DRIVER_NOTE) +
+      "</p></div></div>";
+    return firstPage + secondPage;
+  }
+
+  function buildPrintFallbackSection(heading, body, accent) {
+    return (
+      '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
+      accent +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      accent +
+      '">What\'s Driving This Pattern</p>' +
+      '<h2 class="driver-print-title">' +
+      escapeHtml(heading) +
+      "</h2>" +
+      '<p class="driver-print-body">' +
+      escapeHtml(body) +
+      "</p>" +
+      '<p class="driver-print-note">' +
+      escapeHtml(DRIVER_NOTE) +
+      "</p></div></div>"
+    );
+  }
+
   function buildResultsSection(results, options) {
     var evaluation = ensureEvaluation(results);
+    var context = (options && options.context) === "dashboard" ? "dashboard" : "results";
     var driverState =
       evaluation.driverState ||
       getDriverState(evaluation.assignedDriver || null, evaluation.driverFallbackType || null);
@@ -945,18 +1128,48 @@
     var id = (options && options.id) || "driver-section";
     var libraryHref = (options && options.libraryHref) || getDriverLibraryHref();
     var surface = "var(--ap-surface, #ffffff)";
+    var bodyCopyClass =
+      context === "dashboard"
+        ? "text-base text-[var(--ap-secondary)] leading-relaxed"
+        : "text-base sm:text-[17px] text-[var(--ap-secondary)] leading-relaxed";
+    var summaryCopyClass =
+      context === "dashboard"
+        ? "text-base italic text-[var(--ap-secondary)] leading-relaxed"
+        : "text-base sm:text-[17px] italic text-[var(--ap-secondary)] leading-relaxed";
+    var noteCopyClass =
+      context === "dashboard"
+        ? "text-sm text-[var(--ap-muted)] leading-relaxed"
+        : "text-[15px] sm:text-base text-[var(--ap-muted)] leading-relaxed";
+    var detailsTitleClass =
+      context === "dashboard"
+        ? "cursor-pointer flex items-center justify-between gap-3 px-4 py-3.5 text-base font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden"
+        : "cursor-pointer flex items-center justify-between gap-3 px-4 py-3.5 text-base sm:text-[17px] font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden";
+    var detailsBodyClass =
+      context === "dashboard"
+        ? "border-t border-[var(--ap-border)] px-4 py-4 text-base text-[var(--ap-secondary)] leading-relaxed"
+        : "border-t border-[var(--ap-border)] px-4 py-4 text-base sm:text-[17px] text-[var(--ap-secondary)] leading-relaxed";
     var alignedMomentumNote =
       "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding.";
-    var html =
-      '<div id="' +
-      id +
-      '" class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:linear-gradient(135deg,' +
+    var html = '<div id="' + id + '" class="driver-results-shell">';
+    if (context === "results") {
+      if (isAlignedMomentum) {
+        html += buildPrintAlignedMomentumSection(accent);
+      } else if (driverName) {
+        html += buildPrintDriverPages(evaluation, driverName, secondaryDriverName, accent);
+      } else {
+        html += buildPrintFallbackSection(fallbackContent.heading, fallbackContent.text, accent);
+      }
+    }
+    html +=
+      '<div class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:linear-gradient(135deg,' +
       accent +
       '12 0%,' +
       surface +
       ' 28%,' +
       surface +
-      ' 100%);">';
+      ' 100%);border-left:4px solid ' +
+      accent +
+      ';">';
     html += '<div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style="background:' + accent + '16;"></div>';
     html += '<div class="p-6 sm:p-8 relative space-y-5">';
     html +=
@@ -977,20 +1190,24 @@
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.name) +
         "</h2>";
       html +=
-        '<p class="text-[15px] italic text-[var(--ap-secondary)] leading-relaxed">' +
+        '<p class="' +
+        summaryCopyClass +
+        '">' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.tagline) +
         "</p>";
       html += "</div></div>";
       html +=
         '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
         accent +
-        '14;border-left:4px solid ' +
+        '14;border-left:2px solid ' +
         accent +
         ';">&quot;' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.coreState) +
         "&quot;</blockquote>";
       html +=
-        '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.description) +
         "</p>";
       [
@@ -1003,18 +1220,24 @@
           surface +
           ';">';
         html +=
-          '<summary class="cursor-pointer flex items-center justify-between gap-3 px-4 py-3 text-[15px] font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden">' +
+          '<summary class="' +
+          detailsTitleClass +
+          '">' +
           "<span>" +
           escapeHtml(section[0]) +
           '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
         html +=
-          '<div class="border-t border-[var(--ap-border)] px-4 py-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+          '<div class="' +
+          detailsBodyClass +
+          '">' +
           escapeHtml(section[1]) +
           "</div></details>";
       });
       html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
       html +=
-        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        '<p class="' +
+        noteCopyClass +
+        '">' +
         escapeHtml(alignedMomentumNote) +
         "</p>";
       html +=
@@ -1039,11 +1262,13 @@
         escapeHtml(driver.name) +
         "</h2>";
       html +=
-        '<p class="text-sm text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+        '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
         escapeHtml(driver.coreFear) +
         "</p>";
       html +=
-        '<p class="text-[15px] italic text-[var(--ap-secondary)] leading-relaxed">' +
+        '<p class="' +
+        summaryCopyClass +
+        '">' +
         escapeHtml(driver.tagline) +
         "</p>";
       html += '</div></div>';
@@ -1063,13 +1288,15 @@
       html +=
         '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
         accent +
-        '14;border-left:4px solid ' +
+        '14;border-left:2px solid ' +
         accent +
         ';">&quot;' +
         escapeHtml(driver.coreBelief) +
         "&quot;</blockquote>";
       html +=
-        '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
         escapeHtml(driver.description) +
         "</p>";
       [
@@ -1082,18 +1309,24 @@
           surface +
           ';">';
         html +=
-          '<summary class="cursor-pointer flex items-center justify-between gap-3 px-4 py-3 text-[15px] font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)] list-none [&::-webkit-details-marker]:hidden">' +
+          '<summary class="' +
+          detailsTitleClass +
+          '">' +
           "<span>" +
           escapeHtml(section[0]) +
           '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
         html +=
-          '<div class="border-t border-[var(--ap-border)] px-4 py-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+          '<div class="' +
+          detailsBodyClass +
+          '">' +
           escapeHtml(section[1]) +
           "</div></details>";
       });
       html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
       html +=
-        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        '<p class="' +
+        noteCopyClass +
+        '">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
       html +=
@@ -1119,11 +1352,11 @@
           escapeHtml(secondaryDriver.name) +
           "</h3>";
         html +=
-          '<p class="text-sm italic text-[var(--ap-secondary)]">&quot;' +
+          '<p class="text-base italic text-[var(--ap-secondary)]">&quot;' +
           escapeHtml(secondaryDriver.coreBelief) +
           "&quot;</p>";
         html +=
-          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' +
+          '<p class="text-base text-[var(--ap-secondary)] leading-relaxed">' +
           escapeHtml(secondaryDriver.tagline) +
           "</p>";
         html +=
@@ -1142,11 +1375,15 @@
         escapeHtml(fallbackContent.heading) +
         "</h2>";
       html +=
-        '<p class="text-[15px] text-[var(--ap-secondary)] leading-relaxed">' +
+        '<p class="' +
+        bodyCopyClass +
+        '">' +
         escapeHtml(fallbackContent.text) +
         "</p>";
       html +=
-        '<p class="text-xs sm:text-sm text-[var(--ap-muted)] leading-relaxed">' +
+        '<p class="' +
+        noteCopyClass +
+        '">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
       if ((evaluation.driverFallbackType || "standard") === "standard") {
@@ -1157,7 +1394,7 @@
       }
       html += "</div>";
     }
-    html += "</div></div>";
+    html += "</div></div></div>";
     return html;
   }
 
