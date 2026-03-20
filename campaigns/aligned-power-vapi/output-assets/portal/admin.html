@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/html/vapi-archetypes.js"></script>
+  <script src="/html/vapi-drivers.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
   <style>
     :root {
@@ -32,20 +34,47 @@
     .nav-hamburger-panel.nav-open { transform: translateX(0); }
     .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
     .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
+    .nav-popover summary { list-style: none; }
+    .nav-popover summary::-webkit-details-marker { display: none; }
+    .nav-popover[open] .nav-popover-chevron { transform: rotate(180deg); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+  <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="admin">
     <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/admin" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
-        <span>Portal Admin</span>
+        <span>Aligned Performance Portal</span>
       </a>
       <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5"></i>
+        </button>
         <div class="nav-links-desk flex items-center gap-4">
-          <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
-          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Assessment</a>
-          <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+          <a href="/scorecard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[var(--ap-primary)] transition-colors hover:text-[var(--ap-accent)]">
+              Explore
+              <i data-lucide="chevron-down" class="nav-popover-chevron w-4 h-4 transition-transform duration-200"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <a href="/portal/archetype-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+              <a href="/portal/driver-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+            </div>
+          </details>
+          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)] transition-colors" aria-label="Open account menu">
+              <i data-lucide="settings-2" class="w-5 h-5"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <a href="/coach" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach Dashboard</a>
+              <a href="/admin" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-accent)] bg-[var(--ap-bg)]">Admin Dashboard</a>
+              <a href="/settings" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+              <button type="button" id="logout-btn" class="block w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+            </div>
+          </details>
         </div>
         <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -62,8 +91,23 @@
       </button>
     </div>
     <nav class="p-4 flex flex-col gap-1">
-      <a href="/dashboard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
-      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Assessment</a>
+      <div class="flex items-center justify-between py-3 px-3 border-b border-[var(--ap-border)] mb-2">
+        <span class="text-sm font-semibold text-[var(--ap-primary)]">Theme</span>
+        <button type="button" id="theme-toggle-mobile" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light-mobile" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark-mobile" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <a href="/scorecard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
+      <div class="mt-2 border-t border-[var(--ap-border)] pt-3">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>
+        <a href="/portal/archetype-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+        <a href="/portal/driver-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+      </div>
+      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+      <a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach Dashboard</a>
+      <a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-accent)] bg-[var(--ap-bg)]">Admin Dashboard</a>
+      <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
       <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
     </nav>
   </div>
@@ -198,6 +242,31 @@
 
       document.getElementById('admin-content').classList.remove('hidden');
 
+      function updateThemeIcons() {
+        var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        var lightIcon = document.getElementById('theme-icon-light');
+        var darkIcon = document.getElementById('theme-icon-dark');
+        var lightIconMobile = document.getElementById('theme-icon-light-mobile');
+        var darkIconMobile = document.getElementById('theme-icon-dark-mobile');
+        if (lightIcon) lightIcon.classList.toggle('hidden', !dark);
+        if (darkIcon) darkIcon.classList.toggle('hidden', dark);
+        if (lightIconMobile) lightIconMobile.classList.toggle('hidden', !dark);
+        if (darkIconMobile) darkIconMobile.classList.toggle('hidden', dark);
+      }
+      function toggleTheme() {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try {
+          localStorage.setItem('ap-theme', next);
+          document.cookie = 'ap-theme=' + next + '; path=/; max-age=31536000; domain=.alignedpower.coach';
+        } catch (error) {}
+        updateThemeIcons();
+      }
+      updateThemeIcons();
+      var themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+      var themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
       function doLogout() { supabase.auth.signOut().then(function() { window.location.href = '/login'; }); }
       document.getElementById('logout-btn').addEventListener('click', doLogout);
       var logoutMobile = document.getElementById('logout-btn-mobile');
@@ -267,6 +336,31 @@
       function escapeHtml(s) {
         if (s == null) return '';
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      function getArchetypeName(results) {
+        if (!results) return null;
+        return (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null) || results.archetype || null;
+      }
+      function getDriverName(results) {
+        if (!results) return null;
+        if (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS.ensureEvaluation) {
+          var evaluation = VAPI_DRIVERS.ensureEvaluation(results);
+          return evaluation && evaluation.assignedDriver ? evaluation.assignedDriver : null;
+        }
+        return results.assignedDriver || null;
+      }
+      function buildArchetypeBadge(name) {
+        if (!name) return '';
+        var meta = typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[name] ? VAPI_ARCHETYPES[name] : null;
+        var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
+        return '<span class="text-[10px] font-medium px-1.5 py-0.5 rounded" style="color:' + color + ';background:' + color + '20;">' + escapeHtml(name) + '</span>';
+      }
+      function buildDriverBadge(name) {
+        if (!name) return '';
+        var color = typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS.DRIVER_ACCENT_COLORS && VAPI_DRIVERS.DRIVER_ACCENT_COLORS[name]
+          ? VAPI_DRIVERS.DRIVER_ACCENT_COLORS[name]
+          : 'var(--ap-accent)';
+        return '<span class="text-[10px] font-medium px-1.5 py-0.5 rounded" style="color:' + color + ';background:' + color + '20;">' + escapeHtml(name) + '</span>';
       }
 
       // Group rows by email (one respondent per email); each group sorted by created_at desc
@@ -340,9 +434,11 @@
           aBody.innerHTML = detailRows.map(function(row) {
             var score = overallScore(row);
             var scoreStr = score != null ? (Math.round(score * 10) / 10) + ' / 10' : '—';
+            var rowArchetype = getArchetypeName(row.results);
+            var rowDriver = getDriverName(row.results);
             return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + formatDate(row.created_at) + '</td>' +
-              '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + '</td>' +
+              '<td class="px-4 py-3 text-sm font-semibold text-[var(--ap-secondary)]">' + escapeHtml(scoreStr) + (rowArchetype ? ' ' + buildArchetypeBadge(rowArchetype) : '') + (rowDriver ? ' ' + buildDriverBadge(rowDriver) : '') + '</td>' +
               '<td class="px-4 py-3"><button type="button" class="view-report inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-primary)] py-1.5 px-3 rounded-lg border border-[var(--ap-border)] hover:border-[var(--ap-primary)] transition-colors">View report <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button></td>' +
               '</tr>';
           }).join('');
@@ -443,8 +539,11 @@
           }
           tbody.innerHTML = filtered.map(function(r) {
             var isActive = !!activeClientsMap[r.emailKey];
+            var latestRow = r.rows && r.rows[0] ? r.rows[0] : null;
+            var latestArchetype = latestRow ? getArchetypeName(latestRow.results) : null;
+            var latestDriver = latestRow ? getDriverName(latestRow.results) : null;
             return '<tr class="hover:bg-[var(--ap-bg)]/40">' +
-              '<td class="px-4 py-3 font-medium text-[var(--ap-primary)]">' + escapeHtml(r.name) + '</td>' +
+              '<td class="px-4 py-3 font-medium text-[var(--ap-primary)]"><div class="space-y-1"><div>' + escapeHtml(r.name) + '</div><div class="flex flex-wrap gap-1.5">' + (latestArchetype ? buildArchetypeBadge(latestArchetype) : '') + (latestDriver ? buildDriverBadge(latestDriver) : '') + '</div></div></td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(r.email) + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + r.count + '</td>' +
               '<td class="px-4 py-3 text-sm text-[var(--ap-muted)]">' + formatDate(r.latestAt) + '</td>' +

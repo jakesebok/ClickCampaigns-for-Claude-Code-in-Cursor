@@ -1128,6 +1128,11 @@
     var id = (options && options.id) || "driver-section";
     var libraryHref = (options && options.libraryHref) || getDriverLibraryHref();
     var surface = "var(--ap-surface, #ffffff)";
+    var useCollapsedDashboard = context === "dashboard";
+    var cardBackground =
+      context === "dashboard"
+        ? surface
+        : "linear-gradient(135deg," + accent + "12 0%," + surface + " 28%," + surface + " 100%)";
     var bodyCopyClass =
       context === "dashboard"
         ? "text-base text-[var(--ap-secondary)] leading-relaxed"
@@ -1150,6 +1155,29 @@
         : "border-t border-[var(--ap-border)] px-4 py-4 text-base sm:text-[17px] text-[var(--ap-secondary)] leading-relaxed";
     var alignedMomentumNote =
       "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding.";
+    var dashboardToggleLabel = "Read full pattern driver profile";
+    var previewHeading = isAlignedMomentum ? "What's Fueling This" : "What's Driving This";
+    var previewTitle = isAlignedMomentum
+      ? ALIGNED_MOMENTUM_CONTENT.name
+      : driverName
+        ? DRIVER_CONTENT[driverName].name
+        : fallbackContent.heading;
+    var previewTagline = isAlignedMomentum
+      ? ALIGNED_MOMENTUM_CONTENT.tagline
+      : driverName
+        ? DRIVER_CONTENT[driverName].tagline
+        : null;
+    var previewQuote = isAlignedMomentum
+      ? ALIGNED_MOMENTUM_CONTENT.coreState
+      : driverName
+        ? DRIVER_CONTENT[driverName].coreBelief
+        : fallbackContent.text;
+    var previewIcon = isAlignedMomentum
+      ? getDriverIcon(ALIGNED_MOMENTUM_NAME, 64)
+      : driverName
+        ? getDriverIcon(driverName, 64)
+        : "";
+    var profileHtml = "";
     var html = '<div id="' + id + '" class="driver-results-shell">';
     if (context === "results") {
       if (isAlignedMomentum) {
@@ -1161,42 +1189,38 @@
       }
     }
     html +=
-      '<div class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:linear-gradient(135deg,' +
-      accent +
-      '12 0%,' +
-      surface +
-      ' 28%,' +
-      surface +
-      ' 100%);border-left:4px solid ' +
+      '<div class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:' +
+      cardBackground +
+      ';border-left:4px solid ' +
       accent +
       ';">';
     html += '<div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full blur-3xl" style="background:' + accent + '16;"></div>';
-    html += '<div class="p-6 sm:p-8 relative space-y-5">';
-    html +=
+    profileHtml += '<div class="p-6 sm:p-8 relative space-y-5">';
+    profileHtml +=
       '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
       accent +
       '">' +
       (isAlignedMomentum ? "What's Fueling This Pattern" : "What's Driving This Pattern") +
       "</p>";
     if (isAlignedMomentum) {
-      html += '<div class="flex flex-col gap-5">';
-      html += '<div class="flex items-start gap-4">';
-      html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
-      html += getDriverIcon(ALIGNED_MOMENTUM_NAME, 64);
-      html += "</div>";
-      html += '<div class="min-w-0 space-y-2">';
-      html +=
+      profileHtml += '<div class="flex flex-col gap-5">';
+      profileHtml += '<div class="flex items-start gap-4">';
+      profileHtml += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
+      profileHtml += getDriverIcon(ALIGNED_MOMENTUM_NAME, 64);
+      profileHtml += "</div>";
+      profileHtml += '<div class="min-w-0 space-y-2">';
+      profileHtml +=
         '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.name) +
         "</h2>";
-      html +=
+      profileHtml +=
         '<p class="' +
         summaryCopyClass +
         '">' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.tagline) +
         "</p>";
-      html += "</div></div>";
-      html +=
+      profileHtml += "</div></div>";
+      profileHtml +=
         '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
         accent +
         '14;border-left:2px solid ' +
@@ -1204,7 +1228,7 @@
         ';">&quot;' +
         escapeHtml(ALIGNED_MOMENTUM_CONTENT.coreState) +
         "&quot;</blockquote>";
-      html +=
+      profileHtml +=
         '<p class="' +
         bodyCopyClass +
         '">' +
@@ -1215,64 +1239,64 @@
         ["What This Makes Possible", ALIGNED_MOMENTUM_CONTENT.whatThisMakesPossible],
         ["How to Protect It", ALIGNED_MOMENTUM_CONTENT.howToProtectIt],
       ].forEach(function (section) {
-        html +=
+        profileHtml +=
           '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
           surface +
           ';">';
-        html +=
+        profileHtml +=
           '<summary class="' +
           detailsTitleClass +
           '">' +
           "<span>" +
           escapeHtml(section[0]) +
           '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-        html +=
+        profileHtml +=
           '<div class="' +
           detailsBodyClass +
           '">' +
           escapeHtml(section[1]) +
           "</div></details>";
       });
-      html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
-      html +=
+      profileHtml += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
+      profileHtml +=
         '<p class="' +
         noteCopyClass +
         '">' +
         escapeHtml(alignedMomentumNote) +
         "</p>";
-      html +=
+      profileHtml +=
         '<a href="' +
         libraryHref +
         '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
         accent +
         '">Explore all driver patterns &gt;</a>';
-      html += "</div>";
-      html += "</div>";
+      profileHtml += "</div>";
+      profileHtml += "</div>";
     } else if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
-      html += '<div class="flex flex-col gap-5">';
-      html += '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">';
-      html += '<div class="flex items-start gap-4">';
-      html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
-      html += getDriverIcon(driverName, 64);
-      html += "</div>";
-      html += '<div class="min-w-0 space-y-2">';
-      html +=
+      profileHtml += '<div class="flex flex-col gap-5">';
+      profileHtml += '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">';
+      profileHtml += '<div class="flex items-start gap-4">';
+      profileHtml += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">';
+      profileHtml += getDriverIcon(driverName, 64);
+      profileHtml += "</div>";
+      profileHtml += '<div class="min-w-0 space-y-2">';
+      profileHtml +=
         '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
         escapeHtml(driver.name) +
         "</h2>";
-      html +=
+      profileHtml +=
         '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
         escapeHtml(driver.coreFear) +
         "</p>";
-      html +=
+      profileHtml +=
         '<p class="' +
         summaryCopyClass +
         '">' +
         escapeHtml(driver.tagline) +
         "</p>";
-      html += '</div></div>';
-      html +=
+      profileHtml += '</div></div>';
+      profileHtml +=
         '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
         accent +
         '14;color:' +
@@ -1284,8 +1308,8 @@
         ' / ' +
         driver.maxPossible +
         "</span>";
-      html += "</div>";
-      html +=
+      profileHtml += "</div>";
+      profileHtml +=
         '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
         accent +
         '14;border-left:2px solid ' +
@@ -1293,7 +1317,7 @@
         ';">&quot;' +
         escapeHtml(driver.coreBelief) +
         "&quot;</blockquote>";
-      html +=
+      profileHtml +=
         '<p class="' +
         bodyCopyClass +
         '">' +
@@ -1304,97 +1328,121 @@
         ["What This Is Costing You", driver.whatItCosts],
         ["The Way Out", driver.theWayOut],
       ].forEach(function (section) {
-        html +=
+        profileHtml +=
           '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
           surface +
           ';">';
-        html +=
+        profileHtml +=
           '<summary class="' +
           detailsTitleClass +
           '">' +
           "<span>" +
           escapeHtml(section[0]) +
           '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
-        html +=
+        profileHtml +=
           '<div class="' +
           detailsBodyClass +
           '">' +
           escapeHtml(section[1]) +
           "</div></details>";
       });
-      html += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
-      html +=
+      profileHtml += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
+      profileHtml +=
         '<p class="' +
         noteCopyClass +
         '">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
-      html +=
+      profileHtml +=
         '<a href="' +
         libraryHref +
         '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
         accent +
         '">Learn more about all driver patterns &gt;</a>';
-      html += '</div>';
+      profileHtml += '</div>';
       if (secondaryDriverName) {
         var secondaryDriver = DRIVER_CONTENT[secondaryDriverName];
         var secondaryAccent = DRIVER_ACCENT_COLORS[secondaryDriverName] || accent;
-        html += '<div class="space-y-3 border-t border-[var(--ap-border)]/70 pt-5">';
-        html +=
+        profileHtml += '<div class="space-y-3 border-t border-[var(--ap-border)]/70 pt-5">';
+        profileHtml +=
           '<p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ap-muted)]">Secondary Pattern</p>';
-        html += '<div class="flex items-start gap-3">';
-        html += '<div class="flex-shrink-0 w-10 h-10 rounded-xl border flex items-center justify-center" style="background:' + secondaryAccent + '14;border-color:' + secondaryAccent + '33;">';
-        html += getDriverIcon(secondaryDriverName, 40);
-        html += "</div>";
-        html += '<div class="min-w-0 flex-1 space-y-2">';
-        html +=
+        profileHtml += '<div class="flex items-start gap-3">';
+        profileHtml += '<div class="flex-shrink-0 w-10 h-10 rounded-xl border flex items-center justify-center" style="background:' + secondaryAccent + '14;border-color:' + secondaryAccent + '33;">';
+        profileHtml += getDriverIcon(secondaryDriverName, 40);
+        profileHtml += "</div>";
+        profileHtml += '<div class="min-w-0 flex-1 space-y-2">';
+        profileHtml +=
           '<h3 class="text-lg font-semibold text-[var(--ap-primary)]">' +
           escapeHtml(secondaryDriver.name) +
           "</h3>";
-        html +=
+        profileHtml +=
           '<p class="text-base italic text-[var(--ap-secondary)]">&quot;' +
           escapeHtml(secondaryDriver.coreBelief) +
           "&quot;</p>";
-        html +=
+        profileHtml +=
           '<p class="text-base text-[var(--ap-secondary)] leading-relaxed">' +
           escapeHtml(secondaryDriver.tagline) +
           "</p>";
-        html +=
+        profileHtml +=
           '<a href="' +
           libraryHref +
           '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
           secondaryAccent +
           '">Learn more about all driver patterns &gt;</a>';
-        html += "</div></div></div>";
+        profileHtml += "</div></div></div>";
       }
-      html += "</div>";
+      profileHtml += "</div>";
     } else {
-      html += '<div class="space-y-4">';
-      html +=
+      profileHtml += '<div class="space-y-4">';
+      profileHtml +=
         '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
         escapeHtml(fallbackContent.heading) +
         "</h2>";
-      html +=
+      profileHtml +=
         '<p class="' +
         bodyCopyClass +
         '">' +
         escapeHtml(fallbackContent.text) +
         "</p>";
-      html +=
+      profileHtml +=
         '<p class="' +
         noteCopyClass +
         '">' +
         escapeHtml(DRIVER_NOTE) +
         "</p>";
       if ((evaluation.driverFallbackType || "standard") === "standard") {
-        html +=
+        profileHtml +=
           '<a href="' +
           libraryHref +
           '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:opacity-80 transition-colors" data-driver-library-link="1">Explore all driver patterns in the Driver Library &gt;</a>';
       }
-      html += "</div>";
+      profileHtml += "</div>";
     }
-    html += "</div></div></div>";
+    profileHtml += "</div>";
+    if (useCollapsedDashboard) {
+      html += '<div class="p-6 sm:p-8 relative space-y-5">';
+      html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
+      html += '<div class="flex items-start gap-4">';
+      if (previewIcon) {
+        html += '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' + accent + '14;border-color:' + accent + '33;">' + previewIcon + '</div>';
+      }
+      html += '<div class="min-w-0 flex-1 space-y-2">';
+      html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
+      if (previewTagline) {
+        html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + '</p>';
+      }
+      html += '</div></div>';
+      html += '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' + accent + '14;border-left:2px solid ' + accent + ';">&quot;' + escapeHtml(previewQuote) + '&quot;</blockquote>';
+      html += '<div class="pt-4 border-t border-[var(--ap-border)]/70 space-y-4">';
+      html += '<a href="' + libraryHref + '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' + accent + '">' + (driverName ? 'Learn more about all driver patterns &gt;' : 'Explore all driver patterns &gt;') + '</a>';
+      html += '<details class="driver-profile-details group">';
+      html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">' + dashboardToggleLabel + ' <i data-lucide="chevron-down" class="driver-profile-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+      html += '<div class="mt-4">' + profileHtml + '</div>';
+      html += '</details></div></div>';
+    } else {
+      html += profileHtml;
+    }
+    html += "</div></div>";
     return html;
   }
 

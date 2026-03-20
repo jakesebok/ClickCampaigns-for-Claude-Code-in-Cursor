@@ -4,6 +4,40 @@
 
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 
+function determineDriver(results) {
+  if (!results || typeof results !== 'object') return null;
+  if (typeof results.assignedDriver === 'string' && results.assignedDriver) {
+    return results.assignedDriver;
+  }
+  const driverScores = results.driverScores || {};
+  const driverGates = results.driverGates || {};
+  const ranking = [
+    "The Achiever's Trap",
+    "The Escape Artist",
+    "The Pleaser's Bind",
+    "The Imposter Loop",
+    "The Perfectionist's Prison",
+    "The Protector",
+    "The Martyr Complex",
+    "The Fog",
+    "The Builder's Gap",
+  ].map((name, index) => ({
+    name,
+    score: typeof driverScores[name] === 'number' ? driverScores[name] : 0,
+    index,
+    gate: !!driverGates[name],
+  })).sort((a, b) => (b.score - a.score) || (a.index - b.index));
+
+  const top = ranking[0];
+  const second = ranking[1];
+  const composite = typeof results.overall === 'number' ? results.overall : null;
+  const domains = results.domainScores || {};
+  const lowDomains = Object.keys(domains).filter((code) => typeof domains[code] === 'number' && domains[code] < 5.5).length;
+  if (top && top.score >= 6 && second && (top.score - second.score) >= 2) return top.name;
+  if (composite != null && composite >= 7 && lowDomains <= 1) return 'Aligned Momentum';
+  return null;
+}
+
 function determineArchetype(results) {
   if (!results) return null;
   const arenaScores = results.arenaScores || {};
@@ -129,6 +163,7 @@ export async function GET(request) {
           sixcCount: 0,
           isActiveClient: activeSet.has(k),
           archetype: archetype || null,
+          driver: determineDriver(results),
         };
       }
       byEmail[k].assessmentCount++;
@@ -136,6 +171,7 @@ export async function GET(request) {
         byEmail[k].lastVapiAt = r.created_at;
         const results = r.results || {};
         byEmail[k].archetype = determineArchetype(results) || results.archetype || null;
+        byEmail[k].driver = determineDriver(results);
       }
     });
 
