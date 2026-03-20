@@ -349,7 +349,9 @@
     return 'background:var(--ap-surface, #ffffff);';
   }
 
-  function buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum) {
+  function buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum, options) {
+    var opts = options || {};
+    var stickyTopClass = opts.sidebarTopClass || "top-6";
     var alignedAccent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
       ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME]
       : "#B8960C";
@@ -404,7 +406,7 @@
       '</div>' +
       '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
         '<aside class="hidden lg:block">' +
-          '<div class="sticky top-6 rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+          '<div class="sticky ' + stickyTopClass + ' rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
             '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
             '<nav class="space-y-2">' +
               '<a href="#' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="flex items-center gap-3 rounded-2xl border px-3 py-3 transition-colors hover:border-[var(--ap-accent)]/30" style="' +
@@ -629,7 +631,7 @@
     }
 
     html += '</div></section>';
-    html += buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum);
+    html += buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum, opts);
     html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(DRIVER_LIBRARY_FOOTER_HEADING) + '</h2>' +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(DRIVER_LIBRARY_FOOTER_TEXT) + '</p>' +

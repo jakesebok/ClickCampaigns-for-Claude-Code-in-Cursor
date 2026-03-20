@@ -48,25 +48,98 @@
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
     html { scroll-behavior: smooth; }
     .surface { background: var(--ap-surface); }
+    @media (max-width: 767px) {
+      .nav-links-desk { display: none !important; }
+      .nav-cta-bar { display: inline-flex !important; }
+      [data-nav-role="client"] .nav-cta-bar, [data-nav-role="admin"] .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: inline-flex !important; }
+    }
+    @media (min-width: 768px) {
+      .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: none !important; }
+    }
+    .nav-hamburger-panel { transform: translateX(100%); transition: transform 0.25s ease-out; }
+    .nav-hamburger-panel.nav-open { transform: translateX(0); }
+    .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
+    .nav-popover summary { list-style: none; }
+    .nav-popover summary::-webkit-details-marker { display: none; }
+    .nav-popover[open] .nav-popover-chevron { transform: rotate(180deg); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="sticky top-0 z-20 border-b border-[var(--ap-border)] bg-[var(--ap-header-bg)] backdrop-blur-sm">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
-      <div class="flex items-center gap-3">
-        <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
-        <span class="hidden text-[var(--ap-muted)] sm:inline">Archetype Library</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <button type="button" id="theme-toggle" class="rounded-lg p-2 text-[var(--ap-primary)] hover:bg-[var(--ap-bg)]" aria-label="Toggle theme">
-          <i data-lucide="sun" id="theme-icon-light" class="hidden h-5 w-5"></i>
-          <i data-lucide="moon" id="theme-icon-dark" class="h-5 w-5"></i>
+  <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="nonclient">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>Aligned Performance Portal</span>
+      </a>
+      <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5"></i>
         </button>
-        <a href="/assessment" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] sm:inline">Retake assessment</a>
-        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+        <a href="/assessment" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+        <div class="nav-links-desk flex items-center gap-4">
+          <a id="header-6c-link" href="/scorecard" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[var(--ap-accent)] transition-colors">
+              Explore
+              <i data-lucide="chevron-down" class="nav-popover-chevron w-4 h-4 transition-transform duration-200"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <a href="/portal/archetype-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-accent)] bg-[var(--ap-bg)]">Archetype Library</a>
+              <a href="/portal/driver-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+            </div>
+          </details>
+          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)] transition-colors" aria-label="Open account menu">
+              <i data-lucide="settings-2" class="w-5 h-5"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <span id="header-coach-link" class="hidden"><a href="/coach" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach Dashboard</a></span>
+              <span id="header-admin-link" class="hidden"><a href="/admin" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin Dashboard</a></span>
+              <a href="/settings" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+              <button type="button" id="logout-btn" class="block w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+            </div>
+          </details>
+        </div>
+        <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </div>
   </header>
+  <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-[100] md:hidden" aria-hidden="true"></div>
+  <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-[101] md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
+    <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
+      <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
+      <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="p-4 flex flex-col gap-1">
+      <div class="flex items-center justify-between py-3 px-3 border-b border-[var(--ap-border)] mb-2">
+        <span class="text-sm font-semibold text-[var(--ap-primary)]">Theme</span>
+        <button type="button" id="theme-toggle-mobile" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light-mobile" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark-mobile" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <span id="header-coach-link-mobile" class="hidden"><a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
+      <span id="header-admin-link-mobile" class="hidden"><a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
+      <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+      <span id="header-6c-link-mobile" class="hidden"><a href="/scorecard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a></span>
+      <div class="mt-2 border-t border-[var(--ap-border)] pt-3">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>
+        <a href="/portal/archetype-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-accent)] bg-[var(--ap-bg)]">Archetype Library</a>
+        <a href="/portal/driver-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+      </div>
+      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+      <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+    </nav>
+  </div>
 
   <main class="mx-auto max-w-6xl px-4 py-8 sm:py-10">
     <div id="loading" class="rounded-3xl border border-[var(--ap-border)] surface px-6 py-10 text-center text-[var(--ap-muted)] shadow-sm">
@@ -112,6 +185,8 @@
       updateThemeIcons();
       var themeToggle = document.getElementById('theme-toggle');
       if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+      var themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 
       var loadingEl = document.getElementById('loading');
       var authErrorEl = document.getElementById('auth-error');
@@ -142,6 +217,36 @@
         return;
       }
 
+      var email = (session.user.email || '').trim().toLowerCase();
+      var latestResults = null;
+      var header = document.getElementById('portal-header');
+      var clientResult = await supabase
+        .from('portal_active_clients')
+        .select('active_client')
+        .eq('email', email)
+        .maybeSingle();
+      var isActiveClient = !!(clientResult.data && clientResult.data.active_client);
+
+      if (email === 'jacob@alignedpower.coach') {
+        var coachEl = document.getElementById('header-coach-link');
+        if (coachEl) coachEl.classList.remove('hidden');
+        var adminEl = document.getElementById('header-admin-link');
+        if (adminEl) adminEl.classList.remove('hidden');
+        var coachMobile = document.getElementById('header-coach-link-mobile');
+        if (coachMobile) coachMobile.classList.remove('hidden');
+        var adminMobile = document.getElementById('header-admin-link-mobile');
+        if (adminMobile) adminMobile.classList.remove('hidden');
+        if (header) header.setAttribute('data-nav-role', 'admin');
+      } else if (header && isActiveClient) {
+        header.setAttribute('data-nav-role', 'client');
+      }
+      if (isActiveClient) {
+        var scorecardLink = document.getElementById('header-6c-link');
+        if (scorecardLink) scorecardLink.classList.remove('hidden');
+        var scorecardMobile = document.getElementById('header-6c-link-mobile');
+        if (scorecardMobile) scorecardMobile.classList.remove('hidden');
+      }
+
       var logoutBtn = document.getElementById('logout-btn');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', async function() {
@@ -149,9 +254,24 @@
           window.location.href = '/login';
         });
       }
-
-      var email = (session.user.email || '').trim().toLowerCase();
-      var latestResults = null;
+      var logoutMobile = document.getElementById('logout-btn-mobile');
+      if (logoutMobile) {
+        logoutMobile.addEventListener('click', async function() {
+          await supabase.auth.signOut();
+          window.location.href = '/login';
+        });
+      }
+      (function initHamburger() {
+        var btn = document.getElementById('nav-hamburger-btn');
+        var panel = document.getElementById('nav-hamburger-panel');
+        var backdrop = document.getElementById('nav-hamburger-backdrop');
+        var closeBtn = document.getElementById('nav-hamburger-close');
+        function open() { if (panel) panel.classList.add('nav-open'); if (backdrop) backdrop.classList.add('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu'); } document.body.style.overflow = 'hidden'; }
+        function close() { if (panel) panel.classList.remove('nav-open'); if (backdrop) backdrop.classList.remove('nav-open'); if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu'); } document.body.style.overflow = ''; }
+        if (btn) btn.addEventListener('click', function() { panel.classList.contains('nav-open') ? close() : open(); });
+        if (backdrop) backdrop.addEventListener('click', close);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+      })();
 
       if (email) {
         var rowResult = await supabase
@@ -170,7 +290,8 @@
         results: latestResults,
         takeAssessmentHref: '/assessment',
         programHref: 'https://jakesebok.com/work-with-me',
-        driverLibraryHref: '/portal/driver-library'
+        driverLibraryHref: '/portal/driver-library',
+        sidebarTopClass: 'top-24'
       });
 
       pageContentEl.innerHTML = rendered.html;

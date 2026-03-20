@@ -356,7 +356,9 @@
       .join("");
   }
 
-  function buildNavigation(currentArchetype) {
+  function buildNavigation(currentArchetype, options) {
+    var opts = options || {};
+    var stickyTopClass = opts.sidebarTopClass || "top-6";
     function buildDesktopItem(archetypeName) {
       var accent = window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[archetypeName]
         ? window.VAPI_ARCHETYPES[archetypeName].color_accent
@@ -400,7 +402,7 @@
       "</div>" +
       '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
         '<aside class="hidden lg:block">' +
-          '<div class="sticky top-6 rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+          '<div class="sticky ' + stickyTopClass + ' rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
             '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Archetypes</p>' +
             '<nav class="space-y-2">' +
               ARCHETYPE_ORDER.map(buildDesktopItem).join("") +
@@ -527,7 +529,7 @@
     }
 
     html += "</div></section>";
-    html += buildNavigation(currentArchetype);
+    html += buildNavigation(currentArchetype, opts);
     html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_HEADING) + "</h2>" +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_TEXT) + "</p>" +
