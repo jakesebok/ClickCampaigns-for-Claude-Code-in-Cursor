@@ -1925,6 +1925,20 @@
             changeDirection: getProgressChangeDirection(change)
           };
         }
+        function getSelectedProgressInterpretationNarrative(currRes, metricKey) {
+          if (metricKey === 'overall') return null;
+          var body = getInterpretation(currRes, metricKey);
+          var currScore = getScoreForMetric(currRes, metricKey);
+          var currTier = getTierForMetric(currRes, metricKey);
+          if (!body || currScore == null || !currTier) return null;
+          return {
+            key: 'interpretation:' + metricKey,
+            eyebrow: metricKey.indexOf('arena:') === 0 ? 'Arena Interpretation' : 'Domain Interpretation',
+            title: getMetricLabel(metricKey),
+            subtitle: 'Current: ' + formatMetricScoreText(currScore, currTier),
+            body: body
+          };
+        }
         function getArchetypeTransitionNarrative(previousArchetype, currentArchetype) {
           if (!previousArchetype && !currentArchetype) return null;
           function isArchitectFamily(value) {
@@ -2151,7 +2165,9 @@
             currDriverEval.secondaryDriver || null
           );
           var sections = [
-            getMetricTransitionNarrative(prevRes, currRes, 'overall'),
+            selectedMetricKey === 'overall'
+              ? getMetricTransitionNarrative(prevRes, currRes, 'overall')
+              : getSelectedProgressInterpretationNarrative(currRes, selectedMetricKey),
             getArchetypeTransitionNarrative(prevArchetype || null, currArchetype || null),
             driverTransition ? {
               key: 'driver',
@@ -2177,8 +2193,7 @@
               supportingNote: secondaryDriverTransitionNote || null,
               linkHref: '/portal/driver-library',
               linkLabel: 'Explore all driver patterns in the Driver Library >'
-            } : null,
-            selectedMetricKey === 'overall' ? null : getMetricTransitionNarrative(prevRes, currRes, selectedMetricKey)
+            } : null
           ].filter(Boolean);
           sectionsEl.innerHTML = sections.map(renderProgressNarrativeCard).join('');
           if (!sections.length) {
@@ -2196,11 +2211,15 @@
               var domCode = selectedMetricKey.slice(7);
               var prevImp = (prevRes.importanceRatings || {})[domCode];
               var currImp = (currRes.importanceRatings || {})[domCode];
+              var prevScoreForDomain = getScoreForMetric(prevRes, selectedMetricKey);
+              var currScoreForDomain = getScoreForMetric(currRes, selectedMetricKey);
+              var scoreChange = (currScoreForDomain != null && prevScoreForDomain != null)
+                ? currScoreForDomain - prevScoreForDomain
+                : 0;
               if (prevImp != null && currImp != null) {
                 var impDiff = currImp - prevImp;
                 var domLabel = getMetricLabel(selectedMetricKey);
                 if (Math.abs(impDiff) >= 3) {
-                  var scoreChange = change != null ? change : 0;
                   if (impDiff > 0) {
                     // Importance increased
                     var tail = scoreChange >= 0.5

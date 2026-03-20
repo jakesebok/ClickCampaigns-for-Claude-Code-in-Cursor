@@ -779,6 +779,29 @@ function getMetricTransitionNarrative(
   };
 }
 
+function getSelectedProgressInterpretationNarrative(
+  result: ResultData,
+  metricKey: MetricKey
+): ProgressNarrative | null {
+  if (metricKey === "overall") return null;
+
+  const body = getMetricInterpretation(result, metricKey);
+  const score = getMetricScore(result, metricKey);
+  const tier = getMetricTier(result, metricKey);
+
+  if (!body || score == null || !tier) return null;
+
+  return {
+    key: `interpretation:${metricKey}`,
+    eyebrow: metricKey.startsWith("arena:")
+      ? "Arena Interpretation"
+      : "Domain Interpretation",
+    title: getMetricLabel(metricKey),
+    subtitle: `Current: ${formatMetricScore(score, tier)}`,
+    body,
+  };
+}
+
 function getArchetypeTransitionNarrative(
   previousArchetype: string | null,
   currentArchetype: string | null
@@ -1281,14 +1304,6 @@ function ResultsContent() {
     previousSecondaryDriver,
     currentSecondaryDriver
   );
-  const selectedMetricTransition =
-    selectedProgressMetric === "overall"
-      ? null
-      : getMetricTransitionNarrative(
-          previousProgressResult,
-          latestProgressResult,
-          selectedProgressMetric
-        );
   const metricGroups: Array<{ label: string; items: MetricKey[] }> = [
     { label: "Composite", items: ["overall"] },
     { label: "Arena", items: ARENAS.map((arena) => `arena:${arena.key}` as MetricKey) },
@@ -1892,7 +1907,12 @@ function ResultsContent() {
                   <h3 className="text-lg text-foreground mb-2">What Changed</h3>
                   <div className="space-y-3">
                     {[
-                      compositeTransition,
+                      selectedProgressMetric === "overall"
+                        ? compositeTransition
+                        : getSelectedProgressInterpretationNarrative(
+                            latestProgressResult,
+                            selectedProgressMetric
+                          ),
                       archetypeTransition,
                       {
                         key: "driver",
@@ -1919,7 +1939,6 @@ function ResultsContent() {
                         linkHref: "/drivers",
                         linkLabel: "Explore all driver patterns in the Driver Library >",
                       } satisfies ProgressNarrative,
-                      selectedMetricTransition,
                     ]
                       .filter((item): item is ProgressNarrative => Boolean(item))
                       .map((item) => (
