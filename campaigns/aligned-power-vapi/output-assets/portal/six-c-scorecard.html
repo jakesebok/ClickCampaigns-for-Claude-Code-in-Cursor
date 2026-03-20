@@ -212,8 +212,21 @@
         return;
       }
 
-      var { data: existingSubmissions } = await supabase.from('six_c_submissions').select('id').eq('email', email).limit(1);
-      var hasNoSubmissions = !existingSubmissions || existingSubmissions.length === 0;
+      function hasMeaningfulScores(row) {
+        if (!row || typeof row.scores !== 'object' || row.scores === null) return false;
+        return Object.values(row.scores).some(function(value) {
+          return typeof value === 'number' && isFinite(value);
+        });
+      }
+
+      var { data: existingSubmissions } = await supabase
+        .from('six_c_submissions')
+        .select('id, created_at, scores')
+        .eq('email', email)
+        .order('created_at', { ascending: false })
+        .limit(24);
+      var scoredSubmissions = (existingSubmissions || []).filter(hasMeaningfulScores);
+      var hasNoSubmissions = scoredSubmissions.length === 0;
 
       // Fetch previous week's one thing to use as placeholder (for returning users)
       if (!hasNoSubmissions) {
@@ -226,6 +239,16 @@
       }
 
       var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+      var submittedThisWeek = !!(win && win.canSubmit && scoredSubmissions.some(function(row) {
+        return typeof isDateInScorecardWindow === 'function'
+          ? isDateInScorecardWindow(row.created_at, { opensAt: win.opensAt, closesAt: win.closesAt })
+          : false;
+      }));
+      if (!hasNoSubmissions && submittedThisWeek) {
+        document.getElementById('window-closed').classList.remove('hidden');
+        document.getElementById('window-closed-message').textContent = 'You already completed this week\'s 6C scorecard. Your next scorecard will be available Friday at 12pm.';
+        return;
+      }
       if (!hasNoSubmissions && (!win || !win.canSubmit)) {
         document.getElementById('window-closed').classList.remove('hidden');
         document.getElementById('window-closed-message').textContent = win ? win.message : 'The 6C\'s Scorecard is available Friday 12pm – Sunday 6pm (Eastern).';
@@ -380,10 +403,28 @@
 
       document.getElementById('six-c-form').addEventListener('submit', async function(e) {
         e.preventDefault();
+        var w = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
         if (!hasNoSubmissions) {
-          var w = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
           if (!w || !w.canSubmit) {
             alert('The scorecard window has closed. Your next opportunity is Friday at 12pm – Sunday 6pm.');
+            return;
+          }
+        }
+        if (w && w.canSubmit) {
+          var { data: liveSubmissions } = await supabase
+            .from('six_c_submissions')
+            .select('id, created_at, scores')
+            .eq('email', email)
+            .order('created_at', { ascending: false })
+            .limit(24);
+          var alreadySubmittedThisWeek = (liveSubmissions || []).filter(hasMeaningfulScores).some(function(row) {
+            return typeof isDateInScorecardWindow === 'function'
+              ? isDateInScorecardWindow(row.created_at, { opensAt: w.opensAt, closesAt: w.closesAt })
+              : false;
+          });
+          if (alreadySubmittedThisWeek) {
+            alert('You already completed this week\'s 6C scorecard.');
+            window.location.href = '/dashboard';
             return;
           }
         }

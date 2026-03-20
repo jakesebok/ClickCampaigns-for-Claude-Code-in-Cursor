@@ -358,7 +358,10 @@
 
   function buildNavigation(currentArchetype, options) {
     var opts = options || {};
-    var stickyTopClass = opts.sidebarTopClass || "top-6";
+    var stickyTopStyle = opts.sidebarTopStyle || "";
+    if (!stickyTopStyle && opts.sidebarTopPx) stickyTopStyle = "top:" + opts.sidebarTopPx + "px;";
+    if (!stickyTopStyle && opts.sidebarTopClass === "top-24") stickyTopStyle = "top:6rem;";
+    if (!stickyTopStyle) stickyTopStyle = "top:1.5rem;";
     function buildDesktopItem(archetypeName) {
       var accent = window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[archetypeName]
         ? window.VAPI_ARCHETYPES[archetypeName].color_accent
@@ -377,7 +380,7 @@
     }
 
     return (
-      '<div class="space-y-4 lg:hidden">' +
+      '<div class="portal-library-mobile-nav space-y-4">' +
         '<div class="-mx-2 overflow-x-auto px-2 pb-1">' +
           '<div class="flex min-w-max gap-3">' +
             ARCHETYPE_ORDER.map(function(archetypeName) {
@@ -400,16 +403,16 @@
           "</div>" +
         "</div>" +
       "</div>" +
-      '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
-        '<aside class="hidden lg:block">' +
-          '<div class="sticky ' + stickyTopClass + ' rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+      '<div class="portal-library-desktop-layout">' +
+        '<aside class="portal-library-desktop-sidebar">' +
+          '<div class="portal-library-sidebar-sticky rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="' + stickyTopStyle + 'background:var(--ap-surface, #ffffff);">' +
             '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Archetypes</p>' +
             '<nav class="space-y-2">' +
               ARCHETYPE_ORDER.map(buildDesktopItem).join("") +
             "</nav>" +
           "</div>" +
         "</aside>" +
-        '<div id="archetype-library-sections" class="space-y-8"></div>' +
+        '<div id="archetype-library-sections" class="portal-library-desktop-sections space-y-8"></div>' +
       "</div>"
     );
   }

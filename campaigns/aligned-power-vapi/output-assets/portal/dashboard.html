@@ -2348,6 +2348,13 @@
       }
 
       (async function check6C() {
+        function hasMeaningfulScores(row) {
+          if (!row || typeof row.scores !== 'object' || row.scores === null) return false;
+          return Object.values(row.scores).some(function(value) {
+            return typeof value === 'number' && isFinite(value);
+          });
+        }
+
         var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
         if (!activeRow || !activeRow.active_client) return;
         document.getElementById('header-6c-link').classList.remove('hidden');
@@ -2355,8 +2362,9 @@
         if (sixcMobile) sixcMobile.classList.remove('hidden');
         var header = document.getElementById('portal-header');
         if (header && header.getAttribute('data-nav-role') !== 'admin') header.setAttribute('data-nav-role', 'client');
-        var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(2);
-        if (sixCErr || !sixCRows || sixCRows.length === 0) {
+        var { data: sixCRows, error: sixCErr } = await supabase.from('six_c_submissions').select('id, created_at, scores, one_thing_to_improve, weekly_review').eq('email', email).order('created_at', { ascending: false }).limit(24);
+        var scoredSixCRows = (sixCRows || []).filter(hasMeaningfulScores);
+        if (sixCErr || !scoredSixCRows.length) {
           document.getElementById('six-c-section').classList.remove('hidden');
           document.getElementById('six-c-cards').innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-8 px-4 rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-[var(--ap-bg)]/30"><div class="w-14 h-14 rounded-full bg-[var(--ap-accent)]/20 flex items-center justify-center mb-4"><i data-lucide="clipboard-list" class="w-8 h-8 text-[var(--ap-accent)]" aria-hidden="true"></i></div><p class="text-[var(--ap-secondary)] font-semibold text-center mb-1">No scorecard yet</p><p class="text-[var(--ap-muted)] text-sm text-center">Complete your first 6C scorecard whenever you\'re ready.</p></div>';
           // Check if window is currently open for first-timers
@@ -2387,8 +2395,8 @@
           if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
           return;
         }
-        var latest6C = sixCRows[0];
-        var prev6C = sixCRows[1] || null;
+        var latest6C = scoredSixCRows[0];
+        var prev6C = scoredSixCRows[1] || null;
         var scores = latest6C.scores || {};
         var labels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
         var icons = { clarity: 'crosshair', coherence: 'link', capacity: 'battery-charging', confidence: 'shield-check', courage: 'zap', connection: 'users' };
@@ -2420,28 +2428,28 @@
         var oneThingEl = document.getElementById('six-c-one-thing');
         var actionRowEl = document.getElementById('six-c-action-row');
 
-        // Determine whether the latest submission belongs to the active or most recent scorecard window.
+        // Determine whether any scored submission belongs to the active or most recent scorecard window.
         var submittedThisWeek = false;
-        if (latest6C && latest6C.created_at) {
-          if (win) {
-            var relevantWindow = (typeof getMostRecentScorecardWindow === 'function')
-              ? getMostRecentScorecardWindow(win)
-              : (win.canSubmit
-                  ? { opensAt: win.opensAt, closesAt: win.closesAt }
-                  : {
-                      opensAt: new Date(win.opensAt.getTime() - 7 * 24 * 60 * 60 * 1000),
-                      closesAt: new Date(win.closesAt.getTime() - 7 * 24 * 60 * 60 * 1000)
-                    });
+        if (win) {
+          var relevantWindow = (typeof getMostRecentScorecardWindow === 'function')
+            ? getMostRecentScorecardWindow(win)
+            : (win.canSubmit
+                ? { opensAt: win.opensAt, closesAt: win.closesAt }
+                : {
+                    opensAt: new Date(win.opensAt.getTime() - 7 * 24 * 60 * 60 * 1000),
+                    closesAt: new Date(win.closesAt.getTime() - 7 * 24 * 60 * 60 * 1000)
+                  });
+          submittedThisWeek = scoredSixCRows.some(function(row) {
+            if (!row || !row.created_at) return false;
             if (typeof isDateInScorecardWindow === 'function') {
-              submittedThisWeek = isDateInScorecardWindow(latest6C.created_at, relevantWindow);
-            } else {
-              var submittedAt = new Date(latest6C.created_at);
-              submittedThisWeek = submittedAt >= relevantWindow.opensAt && submittedAt <= relevantWindow.closesAt;
+              return isDateInScorecardWindow(row.created_at, relevantWindow);
             }
-          }
+            var submittedAt = new Date(row.created_at);
+            return submittedAt >= relevantWindow.opensAt && submittedAt <= relevantWindow.closesAt;
+          });
         }
 
-        var showFirstSubmissionFallback = sixCRows.length === 1 &&
+        var showFirstSubmissionFallback = scoredSixCRows.length === 1 &&
           !submittedThisWeek &&
           (typeof isSameEasternCalendarWeek === 'function'
             ? isSameEasternCalendarWeek(latest6C.created_at, new Date())

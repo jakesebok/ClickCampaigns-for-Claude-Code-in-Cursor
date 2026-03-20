@@ -64,6 +64,21 @@
     .nav-popover summary { list-style: none; }
     .nav-popover summary::-webkit-details-marker { display: none; }
     .nav-popover[open] .nav-popover-chevron { transform: rotate(180deg); }
+    .portal-library-mobile-nav { display: block; }
+    .portal-library-desktop-layout { display: block; }
+    .portal-library-desktop-sidebar { display: none; }
+    .portal-library-desktop-sections { min-width: 0; }
+    .portal-library-sidebar-sticky { position: sticky; top: 6rem; }
+    @media (min-width: 1024px) {
+      .portal-library-mobile-nav { display: none; }
+      .portal-library-desktop-layout {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 260px minmax(0, 1fr);
+        align-items: start;
+      }
+      .portal-library-desktop-sidebar { display: block; }
+    }
   </style>
 </head>
 <body class="min-h-screen antialiased">

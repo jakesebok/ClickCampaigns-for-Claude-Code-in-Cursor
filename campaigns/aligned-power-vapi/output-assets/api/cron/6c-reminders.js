@@ -34,11 +34,16 @@ function nowInEastern() {
 
 function getReminderType() {
   const e = nowInEastern();
-  const isReminderTime = e.hour === 12 && e.minute === 5;
+  const isReminderTime = e.hour === 12 && e.minute >= 0 && e.minute <= 10;
   if (e.dayOfWeek === 5 && isReminderTime) return 'available';
   if (e.dayOfWeek === 6 && isReminderTime) return 'saturday';
   if (e.dayOfWeek === 0 && isReminderTime) return 'one-hour-left';
   return null;
+}
+
+function hasMeaningfulScores(row) {
+  if (!row || typeof row.scores !== 'object' || row.scores === null) return false;
+  return Object.values(row.scores).some((value) => typeof value === 'number' && Number.isFinite(value));
 }
 
 const SUBJECTS = {
@@ -328,7 +333,7 @@ export async function GET(request) {
         status: true,
         eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
         reminderType: type,
-        message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun 12:05pm Eastern only).',
+        message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun shortly after 12pm Eastern only).',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
@@ -361,7 +366,7 @@ export async function GET(request) {
   // Friday: send to all. Saturday/Sunday: only to those who haven't submitted this week.
   if (type === 'saturday' || type === 'one-hour-left') {
     const { opensAt, closesAt } = getThisWeekWindowBounds();
-    const subsUrl = `${supabaseUrl}/rest/v1/six_c_submissions?select=email&created_at=gte.${encodeURIComponent(opensAt)}&created_at=lte.${encodeURIComponent(closesAt)}`;
+    const subsUrl = `${supabaseUrl}/rest/v1/six_c_submissions?select=email,scores&created_at=gte.${encodeURIComponent(opensAt)}&created_at=lte.${encodeURIComponent(closesAt)}`;
     const subsRes = await fetch(subsUrl, {
       method: 'GET',
       headers: {
@@ -374,6 +379,7 @@ export async function GET(request) {
     if (subsRes.ok) {
       const subs = await subsRes.json();
       (Array.isArray(subs) ? subs : []).forEach((r) => {
+        if (!hasMeaningfulScores(r)) return;
         const e = (r.email || '').trim().toLowerCase();
         if (e) submittedEmails.add(e);
       });

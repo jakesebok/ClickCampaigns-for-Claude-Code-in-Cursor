@@ -47,17 +47,28 @@ function nowInEastern() {
 
 function getReminderType(): "available" | "saturday" | "one-hour-left" | null {
   const e = nowInEastern();
-  const isReminderTime = e.hour === 12 && e.minute === 5;
+  const isReminderTime = e.hour === 12 && e.minute >= 0 && e.minute <= 10;
   if (e.dayOfWeek === 5 && isReminderTime) return "available";
   if (e.dayOfWeek === 6 && isReminderTime) return "saturday";
   if (e.dayOfWeek === 0 && isReminderTime) return "one-hour-left";
   return null;
 }
 
+function hasMeaningfulScores(
+  row: { scores: Record<string, number> | null | undefined }
+): boolean {
+  if (!row?.scores || typeof row.scores !== "object") return false;
+  return Object.values(row.scores).some(
+    (value) => typeof value === "number" && Number.isFinite(value)
+  );
+}
+
 async function hasSubmittedThisWeek(email: string): Promise<boolean> {
   const rows = await fetchPortalSixCByEmail(email);
   const currentWindow = getMostRecentScorecardWindow(getScorecardWindow());
-  return rows.some((r) => isDateInScorecardWindow(r.created_at, currentWindow));
+  return rows.some(
+    (r) => hasMeaningfulScores(r) && isDateInScorecardWindow(r.created_at, currentWindow)
+  );
 }
 
 const MESSAGES: Record<

@@ -351,7 +351,10 @@
 
   function buildNavigation(primaryDriver, secondaryDriver, isAlignedMomentum, options) {
     var opts = options || {};
-    var stickyTopClass = opts.sidebarTopClass || "top-6";
+    var stickyTopStyle = opts.sidebarTopStyle || "";
+    if (!stickyTopStyle && opts.sidebarTopPx) stickyTopStyle = "top:" + opts.sidebarTopPx + "px;";
+    if (!stickyTopStyle && opts.sidebarTopClass === "top-24") stickyTopStyle = "top:6rem;";
+    if (!stickyTopStyle) stickyTopStyle = "top:1.5rem;";
     var alignedAccent = window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS
       ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME]
       : "#B8960C";
@@ -373,7 +376,7 @@
     }
 
     return (
-      '<div class="space-y-4 lg:hidden">' +
+      '<div class="portal-library-mobile-nav space-y-4">' +
         '<div class="-mx-2 overflow-x-auto px-2 pb-1">' +
           '<div class="flex min-w-max gap-3">' +
             '<a href="#' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="flex min-w-[210px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
@@ -404,9 +407,9 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">' +
-        '<aside class="hidden lg:block">' +
-          '<div class="sticky ' + stickyTopClass + ' rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+      '<div class="portal-library-desktop-layout">' +
+        '<aside class="portal-library-desktop-sidebar">' +
+          '<div class="portal-library-sidebar-sticky rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="' + stickyTopStyle + 'background:var(--ap-surface, #ffffff);">' +
             '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Drivers</p>' +
             '<nav class="space-y-2">' +
               '<a href="#' + getDriverSectionId(ALIGNED_MOMENTUM_NAME) + '" class="flex items-center gap-3 rounded-2xl border px-3 py-3 transition-colors hover:border-[var(--ap-accent)]/30" style="' +
@@ -420,7 +423,7 @@
             '</nav>' +
           '</div>' +
         '</aside>' +
-        '<div id="driver-library-sections" class="space-y-8"></div>' +
+        '<div id="driver-library-sections" class="portal-library-desktop-sections space-y-8"></div>' +
       '</div>'
     );
   }
