@@ -88,8 +88,30 @@ function countTrue(values) {
   return values.filter(Boolean).length;
 }
 
+function getImportanceValue(importanceRatings, code) {
+  const value = importanceRatings[code];
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function hasCompleteImportanceRatings(importanceRatings, domainCodes) {
+  return domainCodes.every((code) => getImportanceValue(importanceRatings, code) !== null);
+}
+
+function importanceAtLeast(importanceRatings, code, threshold) {
+  const value = getImportanceValue(importanceRatings, code);
+  return value !== null && value >= threshold;
+}
+
+function importanceAtMost(importanceRatings, code, threshold) {
+  const value = getImportanceValue(importanceRatings, code);
+  return value !== null && value <= threshold;
+}
+
 function getAverageImportance(importanceRatings, domainCodes) {
-  const values = domainCodes.map((code) => getNumericValue(importanceRatings[code], 5));
+  if (!hasCompleteImportanceRatings(importanceRatings, domainCodes)) {
+    return 5;
+  }
+  const values = domainCodes.map((code) => getImportanceValue(importanceRatings, code) ?? 5);
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
@@ -99,7 +121,10 @@ function getAverageScore(scores, domainCodes) {
 }
 
 function getImportanceStdDev(importanceRatings) {
-  const values = ALL_DOMAIN_CODES.map((code) => getNumericValue(importanceRatings[code], 5));
+  if (!hasCompleteImportanceRatings(importanceRatings, ALL_DOMAIN_CODES)) {
+    return Number.POSITIVE_INFINITY;
+  }
+  const values = ALL_DOMAIN_CODES.map((code) => getImportanceValue(importanceRatings, code) ?? 5);
   const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
   const variance =
     values.reduce((sum, value) => sum + ((value - mean) ** 2), 0) / values.length;
@@ -107,11 +132,17 @@ function getImportanceStdDev(importanceRatings) {
 }
 
 function noSingleImportanceAboveOrEqualEight(importanceRatings) {
-  return ALL_DOMAIN_CODES.every((code) => getNumericValue(importanceRatings[code], 5) < 8);
+  if (!hasCompleteImportanceRatings(importanceRatings, ALL_DOMAIN_CODES)) {
+    return false;
+  }
+  return ALL_DOMAIN_CODES.every((code) => (getImportanceValue(importanceRatings, code) ?? 0) < 8);
 }
 
 function noSingleImportanceAboveOrEqualSeven(importanceRatings) {
-  return ALL_DOMAIN_CODES.every((code) => getNumericValue(importanceRatings[code], 5) < 7);
+  if (!hasCompleteImportanceRatings(importanceRatings, ALL_DOMAIN_CODES)) {
+    return false;
+  }
+  return ALL_DOMAIN_CODES.every((code) => (getImportanceValue(importanceRatings, code) ?? 0) < 7);
 }
 
 function normalizeStoredResponses(allResponses, responseCodingVersion) {
@@ -182,7 +213,7 @@ function isArenaLowest(arenaScores, key) {
 
 export function enrichResultsWithDriver(results) {
   const domainScores = results.domainScores || {};
-  const importanceRatings = results.importanceRatings || {};
+  const importanceRatings = results.importanceRatings || results.importanceScores || {};
   const scoredResponses = normalizeStoredResponses(
     results.allResponses || {},
     typeof results.responseCodingVersion === "string" ? results.responseCodingVersion : null
@@ -207,9 +238,9 @@ export function enrichResultsWithDriver(results) {
   if (driverGates["The Achiever's Trap"]) {
     if (countTrue(achieverLowSelfDomains) === 3) driverScores["The Achiever's Trap"] += 2;
     if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Achiever's Trap"] += 1;
-    if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
-    if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
-    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Achiever's Trap"] += 1;
+    if (importanceAtMost(importanceRatings, "PH", 5)) driverScores["The Achiever's Trap"] += 1;
+    if (importanceAtMost(importanceRatings, "ME", 5)) driverScores["The Achiever's Trap"] += 1;
+    if (importanceAtMost(importanceRatings, "IA", 5)) driverScores["The Achiever's Trap"] += 1;
     if (businessVsSelfImportanceDelta >= 2.0) driverScores["The Achiever's Trap"] += 2;
     if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Achiever's Trap"] += 2;
     if (isArenaHighest(arenaScores, "business")) driverScores["The Achiever's Trap"] += 1;
@@ -236,9 +267,9 @@ export function enrichResultsWithDriver(results) {
     }
     if (getNumericValue(domainScores.FA, 0) < 5.0) driverScores["The Protector"] += 1;
     if (getNumericValue(domainScores.AF, 0) >= 6.0) driverScores["The Protector"] += 1;
-    if (getNumericValue(importanceRatings.CO, 5) <= 5) driverScores["The Protector"] += 1;
-    if (getNumericValue(importanceRatings.RS, 5) <= 5) driverScores["The Protector"] += 1;
-    if (getNumericValue(importanceRatings.OH, 5) >= 7) driverScores["The Protector"] += 1;
+    if (importanceAtMost(importanceRatings, "CO", 5)) driverScores["The Protector"] += 1;
+    if (importanceAtMost(importanceRatings, "RS", 5)) driverScores["The Protector"] += 1;
+    if (importanceAtLeast(importanceRatings, "OH", 7)) driverScores["The Protector"] += 1;
     if (getNumericValue(scoredResponses.CO6, 7) <= 3) driverScores["The Protector"] += 2;
     if (isArenaLowest(arenaScores, "relationships")) driverScores["The Protector"] += 2;
   }
@@ -255,8 +286,8 @@ export function enrichResultsWithDriver(results) {
     }
     if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
     if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
-    if (getNumericValue(importanceRatings.RS, 5) >= 7) driverScores["The Pleaser's Bind"] += 2;
-    if (getNumericValue(importanceRatings.FA, 5) >= 7 || getNumericValue(importanceRatings.CO, 5) >= 7) {
+    if (importanceAtLeast(importanceRatings, "RS", 7)) driverScores["The Pleaser's Bind"] += 2;
+    if (importanceAtLeast(importanceRatings, "FA", 7) || importanceAtLeast(importanceRatings, "CO", 7)) {
       driverScores["The Pleaser's Bind"] += 1;
     }
     if (getNumericValue(domainScores.ME, 0) < 5.0) driverScores["The Pleaser's Bind"] += 1;
@@ -273,18 +304,18 @@ export function enrichResultsWithDriver(results) {
       driverScores["The Escape Artist"] += 2;
     }
     if (getNumericValue(domainScores.EX, 0) >= 6.5) driverScores["The Escape Artist"] += 1;
-    if (getNumericValue(importanceRatings.ME, 5) <= 5) driverScores["The Escape Artist"] += 1;
-    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Escape Artist"] += 1;
-    if (getNumericValue(importanceRatings.FA, 5) <= 5) driverScores["The Escape Artist"] += 1;
+    if (importanceAtMost(importanceRatings, "ME", 5)) driverScores["The Escape Artist"] += 1;
+    if (importanceAtMost(importanceRatings, "IA", 5)) driverScores["The Escape Artist"] += 1;
+    if (importanceAtMost(importanceRatings, "FA", 5)) driverScores["The Escape Artist"] += 1;
     if (getNumericValue(scoredResponses.FA6, 7) <= 3) driverScores["The Escape Artist"] += 2;
     if (getNumericValue(scoredResponses.ME6, 7) <= 3) driverScores["The Escape Artist"] += 1;
     if (getNumericValue(domainScores.PH, 0) < 5.0) driverScores["The Escape Artist"] += 1;
     if (isArenaHighest(arenaScores, "business")) driverScores["The Escape Artist"] += 1;
     if (
       countTrue([
-        getNumericValue(importanceRatings.ME, 5) <= 5,
-        getNumericValue(importanceRatings.IA, 5) <= 5,
-        getNumericValue(importanceRatings.FA, 5) <= 5,
+        importanceAtMost(importanceRatings, "ME", 5),
+        importanceAtMost(importanceRatings, "IA", 5),
+        importanceAtMost(importanceRatings, "FA", 5),
       ]) >= 2
     ) {
       driverScores["The Escape Artist"] += 1;
@@ -301,7 +332,7 @@ export function enrichResultsWithDriver(results) {
     getNumericValue(domainScores.EX, 0) < 5.0 &&
     countTrue(perfectionistCapabilityDomains) >= 2;
   if (driverGates["The Perfectionist's Prison"]) {
-    if (getNumericValue(importanceRatings.EX, 5) >= 7) driverScores["The Perfectionist's Prison"] += 2;
+    if (importanceAtLeast(importanceRatings, "EX", 7)) driverScores["The Perfectionist's Prison"] += 2;
     if (getNumericValue(domainScores.VS, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 2;
     if (getNumericValue(domainScores.ME, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
     if (getNumericValue(domainScores.IA, 0) >= 6.0) driverScores["The Perfectionist's Prison"] += 1;
@@ -322,20 +353,20 @@ export function enrichResultsWithDriver(results) {
     if (getNumericValue(scoredResponses.EC6, 7) <= 3) driverScores["The Imposter Loop"] += 2;
     if (getNumericValue(domainScores.RS, 0) < 5.0) driverScores["The Imposter Loop"] += 2;
     if (
-      getNumericValue(importanceRatings.IA, 5) >= 7 &&
+      importanceAtLeast(importanceRatings, "IA", 7) &&
       getNumericValue(domainScores.EC, 0) < 5.0
     ) {
       driverScores["The Imposter Loop"] += 2;
     }
     if (getNumericValue(domainScores.EX, 0) >= 5.0) driverScores["The Imposter Loop"] += 1;
-    if (getNumericValue(importanceRatings.EC, 5) <= 5) driverScores["The Imposter Loop"] += 1;
+    if (importanceAtMost(importanceRatings, "EC", 5)) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.VS, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.RS6, 7) <= 3) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(domainScores.OH, 0) < 5.0) driverScores["The Imposter Loop"] += 1;
     if (getNumericValue(scoredResponses.EC5, 7) <= 4) driverScores["The Imposter Loop"] += 2;
     if (
       getNumericValue(domainScores.ME, 0) < 5.5 &&
-      getNumericValue(importanceRatings.IA, 5) >= 7
+      importanceAtLeast(importanceRatings, "IA", 7)
     ) {
       driverScores["The Imposter Loop"] += 1;
     }
@@ -351,10 +382,10 @@ export function enrichResultsWithDriver(results) {
     if (getNumericValue(domainScores.PH, 0) < 5.0 && getNumericValue(domainScores.IA, 0) < 5.0) {
       driverScores["The Martyr Complex"] += 2;
     }
-    if (getNumericValue(importanceRatings.WI, 5) >= 7) driverScores["The Martyr Complex"] += 1;
-    if (getNumericValue(importanceRatings.FA, 5) >= 7) driverScores["The Martyr Complex"] += 1;
-    if (getNumericValue(importanceRatings.PH, 5) <= 5) driverScores["The Martyr Complex"] += 1;
-    if (getNumericValue(importanceRatings.IA, 5) <= 5) driverScores["The Martyr Complex"] += 1;
+    if (importanceAtLeast(importanceRatings, "WI", 7)) driverScores["The Martyr Complex"] += 1;
+    if (importanceAtLeast(importanceRatings, "FA", 7)) driverScores["The Martyr Complex"] += 1;
+    if (importanceAtMost(importanceRatings, "PH", 5)) driverScores["The Martyr Complex"] += 1;
+    if (importanceAtMost(importanceRatings, "IA", 5)) driverScores["The Martyr Complex"] += 1;
     if (getNumericValue(scoredResponses.PH6, 7) <= 3) driverScores["The Martyr Complex"] += 2;
     if (isArenaHighest(arenaScores, "relationships")) driverScores["The Martyr Complex"] += 1;
     if (isArenaLowest(arenaScores, "self")) driverScores["The Martyr Complex"] += 1;
@@ -368,7 +399,7 @@ export function enrichResultsWithDriver(results) {
     if (getNumericValue(domainScores.EC, 0) < 5.0) driverScores["The Fog"] += 1;
     if (importanceStdDev < 2.0) driverScores["The Fog"] += 3;
     if (getNumericValue(scoredResponses.VS6, 7) <= 3) driverScores["The Fog"] += 2;
-    if (getNumericValue(importanceRatings.VS, 5) <= 5) driverScores["The Fog"] += 1;
+    if (importanceAtMost(importanceRatings, "VS", 5)) driverScores["The Fog"] += 1;
     if (getNumericValue(domainScores.EX, 0) < 5.0) driverScores["The Fog"] += 1;
     if (noSingleImportanceAboveOrEqualSeven(importanceRatings)) driverScores["The Fog"] += 2;
     if (compositeScore >= 4.0 && compositeScore <= 6.5) driverScores["The Fog"] += 1;
@@ -391,7 +422,7 @@ export function enrichResultsWithDriver(results) {
       driverScores["The Scattered Mind"] += 2;
     }
     if (
-      getNumericValue(importanceRatings.AF, 5) >= 5 &&
+      importanceAtLeast(importanceRatings, "AF", 5) &&
       getNumericValue(domainScores.AF, 0) <= 4.0
     ) {
       driverScores["The Scattered Mind"] += 2;
@@ -424,9 +455,9 @@ export function enrichResultsWithDriver(results) {
       driverScores["The Builder's Gap"] += 2;
     }
     if (getNumericValue(domainScores.EC, 0) >= 6.0) driverScores["The Builder's Gap"] += 2;
-    if (getNumericValue(importanceRatings.EX, 5) >= 7) driverScores["The Builder's Gap"] += 1;
-    if (getNumericValue(importanceRatings.VS, 5) >= 7) driverScores["The Builder's Gap"] += 1;
-    if (getNumericValue(importanceRatings.OH, 5) >= 5) driverScores["The Builder's Gap"] += 1;
+    if (importanceAtLeast(importanceRatings, "EX", 7)) driverScores["The Builder's Gap"] += 1;
+    if (importanceAtLeast(importanceRatings, "VS", 7)) driverScores["The Builder's Gap"] += 1;
+    if (importanceAtLeast(importanceRatings, "OH", 5)) driverScores["The Builder's Gap"] += 1;
     if (countTrue(builderStrongPersonalRelationalDomains) >= 3) {
       driverScores["The Builder's Gap"] += 2;
     }

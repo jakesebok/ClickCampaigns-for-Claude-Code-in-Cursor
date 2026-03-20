@@ -132,7 +132,36 @@ async function insertPortalVapi(params: {
   return Array.isArray(data) ? data[0] : data;
 }
 
-function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) {
+function getDriverEvaluationFromStoredResults(
+  results: Record<string, unknown>
+): ReturnType<typeof determineDriver> {
+  const hasResponses = !!(
+    results.allResponses &&
+    typeof results.allResponses === "object" &&
+    Object.keys(results.allResponses as Record<string, unknown>).length > 0
+  );
+
+  if (hasResponses) {
+    const scoredResponses = normalizeResponsesFromStoredMap(
+      (results.allResponses as Record<string, number> | undefined) || {},
+      typeof results.responseCodingVersion === "string"
+        ? (results.responseCodingVersion as string)
+        : null
+    );
+
+    return determineDriver({
+      domainScores: (results.domainScores as Record<string, number>) || {},
+      importanceRatings:
+        ((results.importanceRatings as Record<string, number>) ||
+          (results.importanceScores as Record<string, number>) ||
+          {}),
+      scoredResponses,
+      arenaScores: (results.arenaScores as Record<string, number>) || {},
+      compositeScore:
+        typeof results.overall === "number" ? (results.overall as number) : null,
+    });
+  }
+
   if (
     typeof results.topDriverScore === "number" &&
     typeof results.secondDriverScore === "number" &&
@@ -184,11 +213,6 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     };
   }
 
-  const hasResponses =
-    results.allResponses &&
-    typeof results.allResponses === "object" &&
-    Object.keys(results.allResponses as Record<string, unknown>).length > 0;
-
   const fallbackType = getDriverFallbackType({
     domainScores: (results.domainScores as Record<string, number>) || {},
     compositeScore:
@@ -234,22 +258,41 @@ function getDriverEvaluationFromStoredResults(results: Record<string, unknown>) 
     };
   }
 
-  const scoredResponses = normalizeResponsesFromStoredMap(
-    (results.allResponses as Record<string, number> | undefined) || {},
-    typeof results.responseCodingVersion === "string"
-      ? (results.responseCodingVersion as string)
-      : null
-  );
-
-  return determineDriver({
-    domainScores: (results.domainScores as Record<string, number>) || {},
-    importanceRatings:
-      (results.importanceRatings as Record<string, number>) || {},
-    scoredResponses,
-    arenaScores: (results.arenaScores as Record<string, number>) || {},
-    compositeScore:
-      typeof results.overall === "number" ? (results.overall as number) : null,
-  });
+  return {
+    assignedDriver: fallbackType === "aligned_momentum" ? ALIGNED_MOMENTUM_NAME : null,
+    driverScores: {
+      "The Achiever's Trap": 0,
+      "The Escape Artist": 0,
+      "The Pleaser's Bind": 0,
+      "The Imposter Loop": 0,
+      "The Perfectionist's Prison": 0,
+      "The Protector": 0,
+      "The Martyr Complex": 0,
+      "The Fog": 0,
+      "The Scattered Mind": 0,
+      "The Builder's Gap": 0,
+    },
+    driverGates: {
+      "The Achiever's Trap": false,
+      "The Escape Artist": false,
+      "The Pleaser's Bind": false,
+      "The Imposter Loop": false,
+      "The Perfectionist's Prison": false,
+      "The Protector": false,
+      "The Martyr Complex": false,
+      "The Fog": false,
+      "The Scattered Mind": false,
+      "The Builder's Gap": false,
+    },
+    topDriverScore: 0,
+    secondDriverScore: 0,
+    secondaryDriver: null,
+    secondaryDriverScore: null,
+    primaryToSecondaryMargin: 0,
+    driverState:
+      fallbackType === "aligned_momentum" ? "aligned_momentum" : "no_driver",
+    driverFallbackType: fallbackType,
+  };
 }
 
 export async function GET(req: NextRequest) {
@@ -279,7 +322,10 @@ export async function GET(req: NextRequest) {
         arenaScores: normalizedArenaScores,
         overallScore: Math.round(((r.overall as number) || 0) * 10),
         archetype,
-        importance: (r.importanceRatings as Record<string, number>) || {},
+        importance:
+          ((r.importanceRatings as Record<string, number>) ||
+            (r.importanceScores as Record<string, number>) ||
+            {}),
         assignedDriver: driverEvaluation.assignedDriver,
         secondaryDriver: driverEvaluation.secondaryDriver,
         driverScores: driverEvaluation.driverScores,
@@ -306,7 +352,10 @@ export async function GET(req: NextRequest) {
       arenaScores: normalizedArenaScores,
       overallScore: Math.round(((r.overall as number) || 0) * 10),
       archetype,
-      importance: (r.importanceRatings as Record<string, number>) || {},
+      importance:
+        ((r.importanceRatings as Record<string, number>) ||
+          (r.importanceScores as Record<string, number>) ||
+          {}),
       assignedDriver: driverEvaluation.assignedDriver,
       secondaryDriver: driverEvaluation.secondaryDriver,
       driverScores: driverEvaluation.driverScores,

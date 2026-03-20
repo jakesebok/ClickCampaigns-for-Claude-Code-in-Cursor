@@ -232,6 +232,38 @@ function getDriverSummary(source) {
     };
   }
 
+  const hasResponses = source.allResponses && Object.keys(source.allResponses).length > 0;
+  if (hasResponses) {
+    const enriched = enrichResultsWithDriver({
+      domainScores: source.domainScores || buildDomainScoresMap(source.domains || []),
+      importanceRatings: source.importanceRatings || source.importanceScores || {},
+      arenaScores: source.arenaScores || {},
+      overall: source.overall,
+      allResponses: source.allResponses || {},
+      responseCodingVersion: source.responseCodingVersion || null,
+    });
+
+    return {
+      assignedDriver: enriched.assignedDriver || null,
+      secondaryDriver: enriched.secondaryDriver || null,
+      driverScores: enriched.driverScores || createEmptyDriverScores(),
+      driverGates: enriched.driverGates || createEmptyDriverGates(),
+      topDriverScore: typeof enriched.topDriverScore === 'number' ? enriched.topDriverScore : 0,
+      secondDriverScore: typeof enriched.secondDriverScore === 'number' ? enriched.secondDriverScore : 0,
+      secondaryDriverScore: typeof enriched.secondaryDriverScore === 'number' ? enriched.secondaryDriverScore : null,
+      primaryToSecondaryMargin: typeof enriched.primaryToSecondaryMargin === 'number' ? enriched.primaryToSecondaryMargin : 0,
+      driverState: enriched.driverState || getDriverState(
+        enriched.assignedDriver || null,
+        enriched.driverFallbackType || null
+      ),
+      driverFallbackType: enriched.driverFallbackType || getDriverFallbackType(
+        enriched.domainScores || source.domainScores || buildDomainScoresMap(source.domains || []),
+        enriched.overall ?? source.overall,
+        enriched.assignedDriver || null
+      ),
+    };
+  }
+
   if (
     typeof source.topDriverScore === 'number' &&
     typeof source.secondDriverScore === 'number' &&
@@ -266,8 +298,6 @@ function getDriverSummary(source) {
       ),
     };
   }
-
-  const hasResponses = source.allResponses && Object.keys(source.allResponses).length > 0;
   if (!hasResponses) {
     return {
       assignedDriver: null,
@@ -293,33 +323,6 @@ function getDriverSummary(source) {
       ),
     };
   }
-
-  const enriched = enrichResultsWithDriver({
-    domainScores: source.domainScores || buildDomainScoresMap(source.domains || []),
-    importanceRatings: source.importanceRatings || {},
-    allResponses: source.allResponses || {},
-    responseCodingVersion: source.responseCodingVersion || null,
-  });
-
-  return {
-    assignedDriver: enriched.assignedDriver || null,
-    secondaryDriver: enriched.secondaryDriver || null,
-    driverScores: enriched.driverScores || createEmptyDriverScores(),
-    driverGates: enriched.driverGates || createEmptyDriverGates(),
-    topDriverScore: typeof enriched.topDriverScore === 'number' ? enriched.topDriverScore : 0,
-    secondDriverScore: typeof enriched.secondDriverScore === 'number' ? enriched.secondDriverScore : 0,
-    secondaryDriverScore: typeof enriched.secondaryDriverScore === 'number' ? enriched.secondaryDriverScore : null,
-    primaryToSecondaryMargin: typeof enriched.primaryToSecondaryMargin === 'number' ? enriched.primaryToSecondaryMargin : 0,
-    driverState: enriched.driverState || getDriverState(
-      enriched.assignedDriver || null,
-      enriched.driverFallbackType || null
-    ),
-    driverFallbackType: enriched.driverFallbackType || getDriverFallbackType(
-      enriched.domainScores || source.domainScores || buildDomainScoresMap(source.domains || []),
-      enriched.overall ?? source.overall,
-      enriched.assignedDriver || null
-    ),
-  };
 }
 
 function sortDriverScores(driverScores, driverGates) {

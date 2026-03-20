@@ -143,7 +143,9 @@ function buildBackfilledResults(results: Record<string, unknown>) {
   const driverEvaluation = determineDriver({
     domainScores: (results.domainScores as Record<string, number>) || {},
     importanceRatings:
-      (results.importanceRatings as Record<string, number>) || {},
+      ((results.importanceRatings as Record<string, number>) ||
+        (results.importanceScores as Record<string, number>) ||
+        {}),
     scoredResponses,
     arenaScores: (results.arenaScores as Record<string, number>) || {},
     compositeScore:
