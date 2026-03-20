@@ -11,8 +11,10 @@ import {
   isDysfunctionDriverName,
   normalizeResponsesFromStoredMap,
   type VapiAssignedDriverName,
+  type VapiDriverGates,
   type VapiDriverState,
   type VapiDriverName,
+  type VapiDriverScores,
 } from "@/lib/vapi/drivers";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -193,8 +195,8 @@ function getDriverEvaluationFromStoredResults(
     return {
       assignedDriver,
       secondaryDriver,
-      driverScores: results.driverScores as Record<string, number>,
-      driverGates: results.driverGates as Record<string, boolean>,
+      driverScores: results.driverScores as VapiDriverScores,
+      driverGates: results.driverGates as VapiDriverGates,
       topDriverScore: results.topDriverScore as number,
       secondDriverScore: results.secondDriverScore as number,
       secondaryDriverScore:

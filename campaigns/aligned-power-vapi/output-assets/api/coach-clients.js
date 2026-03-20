@@ -2,10 +2,39 @@
 // Merges vapi_results, six_c_submissions, portal_active_clients.
 // Requires SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 
+import { enrichResultsWithDriver } from './_lib/vapi-driver-scoring.js';
+
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
+
+function buildDomainScores(results) {
+  const domainScores = { ...(results?.domainScores || {}) };
+  (results?.domains || []).forEach((domain) => {
+    if (domain?.code) domainScores[domain.code] = domain.score;
+  });
+  return domainScores;
+}
 
 function determineDriver(results) {
   if (!results || typeof results !== 'object') return null;
+  const domainScores = buildDomainScores(results);
+  const hasResponses =
+    results.allResponses &&
+    typeof results.allResponses === 'object' &&
+    Object.keys(results.allResponses).length > 0;
+  const canEvaluate = hasResponses || Object.keys(domainScores).length > 0;
+  if (canEvaluate) {
+    const enriched = enrichResultsWithDriver({
+      domainScores,
+      importanceRatings: results.importanceRatings || results.importanceScores || {},
+      arenaScores: results.arenaScores || {},
+      overall: typeof results.overall === 'number' ? results.overall : null,
+      allResponses: results.allResponses || {},
+      responseCodingVersion: results.responseCodingVersion || null,
+    });
+    if (typeof enriched.assignedDriver === 'string' && enriched.assignedDriver) {
+      return enriched.assignedDriver;
+    }
+  }
   if (typeof results.assignedDriver === 'string' && results.assignedDriver) {
     return results.assignedDriver;
   }
@@ -32,7 +61,7 @@ function determineDriver(results) {
   const top = ranking[0];
   const second = ranking[1];
   const composite = typeof results.overall === 'number' ? results.overall : null;
-  const domains = results.domainScores || {};
+  const domains = domainScores;
   const lowDomains = Object.keys(domains).filter((code) => typeof domains[code] === 'number' && domains[code] < 5.5).length;
   if (top && top.score >= 6 && second && (top.score - second.score) >= 2) return top.name;
   if (composite != null && composite >= 7 && lowDomains <= 1) return 'Aligned Momentum';
