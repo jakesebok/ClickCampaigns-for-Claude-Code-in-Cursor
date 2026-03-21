@@ -45,7 +45,7 @@ export default function LandingPage() {
       <section className="px-6 py-24 max-w-4xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-sm text-muted-foreground mb-8 animate-float">
           <Star className="h-3.5 w-3.5 text-accent" />
-          Built on the Strategic Clarity framework
+          Built on the Alignment Arc Framework
         </div>
 
         <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6">

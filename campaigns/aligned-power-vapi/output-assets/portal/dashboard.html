@@ -105,6 +105,21 @@
     .wheel-domain-label { transition: opacity 0.4s ease-out; }
     .breakdown-metric-btn.bm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
     #metric-list .metric-btn:hover { color: var(--ap-primary) !important; }
+    [data-theme="dark"] .dashboard-menu-selected-dark {
+      background-color: var(--ap-surface) !important;
+      color: var(--ap-primary) !important;
+      border-color: var(--ap-border) !important;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    [data-theme="dark"] .dashboard-menu-selected-dark:hover {
+      background-color: color-mix(in srgb, var(--ap-surface) 86%, var(--ap-accent) 14%) !important;
+      color: var(--ap-primary) !important;
+      border-color: color-mix(in srgb, var(--ap-border) 74%, var(--ap-accent) 26%) !important;
+    }
+    [data-theme="dark"] .dashboard-menu-selected-dark .lucide,
+    [data-theme="dark"] .dashboard-menu-selected-dark svg {
+      color: var(--ap-primary) !important;
+    }
     /* Mobile nav: hamburger + Take Assessment for non-clients */
     @media (max-width: 767px) {
       .nav-links-desk { display: none !important; }
@@ -1522,20 +1537,23 @@
         function setBreakdownSelection(value) {
           breakdownSection.querySelectorAll('.breakdown-metric-btn').forEach(function(b) {
             var on = b.getAttribute('data-value') === value;
-            b.classList.toggle('bg-[var(--ap-primary)]', on);
-            b.classList.toggle('text-white', on);
-            b.classList.toggle('border-[var(--ap-primary)]', on);
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            b.classList.toggle('bg-[var(--ap-primary)]', on && !isDarkTheme);
+            b.classList.toggle('text-white', on && !isDarkTheme);
+            b.classList.toggle('border-[var(--ap-primary)]', on && !isDarkTheme);
+            b.classList.toggle('dashboard-menu-selected-dark', on && isDarkTheme);
             b.classList.toggle('bm-selected', on);
             b.classList.toggle('text-[var(--ap-text)]', !on);
           });
           breakdownSection.querySelectorAll('.breakdown-mobile-metric-btn').forEach(function(b) {
             var on = b.getAttribute('data-value') === value;
             var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
-            b.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]');
-            b.classList.toggle('bg-white', on);
+            b.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]', 'dashboard-menu-selected-dark');
+            b.classList.toggle('bg-white', on && !isDarkTheme);
+            b.classList.toggle('dashboard-menu-selected-dark', on && isDarkTheme);
             b.classList.toggle('text-[var(--ap-primary)]', on && isDarkTheme);
             b.classList.toggle('text-white', on && !isDarkTheme);
-            b.classList.toggle('border-white', on);
+            b.classList.toggle('border-white', on && !isDarkTheme);
             b.classList.toggle('text-[#f7f2e8]', !on);
           });
         }
@@ -1841,28 +1859,33 @@
         function setSelectedMetric(value) {
           document.querySelectorAll('#metric-list .metric-btn').forEach(function(btn) {
             var isSelected = btn.getAttribute('data-value') === value;
-            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected);
-            btn.classList.toggle('text-white', isSelected);
-            btn.classList.toggle('border-[var(--ap-primary)]', isSelected);
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected && !isDarkTheme);
+            btn.classList.toggle('text-white', isSelected && !isDarkTheme);
+            btn.classList.toggle('border-[var(--ap-primary)]', isSelected && !isDarkTheme);
+            btn.classList.toggle('dashboard-menu-selected-dark', isSelected && isDarkTheme);
             btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
           });
           var progressDropdownLabel = document.getElementById('progress-metric-dropdown-label');
           if (progressDropdownLabel) progressDropdownLabel.textContent = getMetricLabel(value);
           document.querySelectorAll('.progress-metric-dropdown-btn').forEach(function(btn) {
             var isSelected = btn.getAttribute('data-value') === value;
-            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected);
-            btn.classList.toggle('text-white', isSelected);
-            btn.classList.toggle('border-[var(--ap-primary)]', isSelected);
+            var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
+            btn.classList.toggle('bg-[var(--ap-primary)]', isSelected && !isDarkTheme);
+            btn.classList.toggle('text-white', isSelected && !isDarkTheme);
+            btn.classList.toggle('border-[var(--ap-primary)]', isSelected && !isDarkTheme);
+            btn.classList.toggle('dashboard-menu-selected-dark', isSelected && isDarkTheme);
             btn.classList.toggle('text-[var(--ap-text)]', !isSelected);
           });
           document.querySelectorAll('.progress-mobile-metric-btn').forEach(function(btn) {
             var isSelected = btn.getAttribute('data-value') === value;
             var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
-            btn.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]');
-            btn.classList.toggle('bg-white', isSelected);
+            btn.classList.remove('bg-[var(--ap-primary)]', 'text-white', 'border-[var(--ap-primary)]', 'text-[var(--ap-text)]', 'dashboard-menu-selected-dark');
+            btn.classList.toggle('bg-white', isSelected && !isDarkTheme);
+            btn.classList.toggle('dashboard-menu-selected-dark', isSelected && isDarkTheme);
             btn.classList.toggle('text-[var(--ap-primary)]', isSelected && isDarkTheme);
             btn.classList.toggle('text-white', isSelected && !isDarkTheme);
-            btn.classList.toggle('border-white', isSelected);
+            btn.classList.toggle('border-white', isSelected && !isDarkTheme);
             btn.classList.toggle('text-[#f7f2e8]', !isSelected);
           });
         }
@@ -2296,22 +2319,25 @@
         var PROGRESS_DOMAIN_ORDER = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
         function setProgressView(view) {
           var isLine = view === 'line';
+          var isDarkTheme = typeof getTheme === 'function' && getTheme() === 'dark';
           if (progressChartContainer) progressChartContainer.classList.toggle('hidden', !isLine);
           if (progressWheelContainer) progressWheelContainer.classList.toggle('hidden', isLine);
           if (!isLine) updateProgressWheel(selectedMetricKey);
           if (progressViewLine) {
             progressViewLine.setAttribute('aria-selected', isLine ? 'true' : 'false');
-            progressViewLine.classList.toggle('bg-white', isLine);
+            progressViewLine.classList.toggle('bg-white', isLine && !isDarkTheme);
             progressViewLine.classList.toggle('border', isLine);
             progressViewLine.classList.toggle('shadow-sm', isLine);
+            progressViewLine.classList.toggle('dashboard-menu-selected-dark', isLine && isDarkTheme);
             progressViewLine.classList.toggle('text-[var(--ap-primary)]', isLine);
             progressViewLine.classList.toggle('text-[var(--ap-text)]', !isLine);
           }
           if (progressViewWheel) {
             progressViewWheel.setAttribute('aria-selected', !isLine ? 'true' : 'false');
-            progressViewWheel.classList.toggle('bg-white', !isLine);
+            progressViewWheel.classList.toggle('bg-white', !isLine && !isDarkTheme);
             progressViewWheel.classList.toggle('border', !isLine);
             progressViewWheel.classList.toggle('shadow-sm', !isLine);
+            progressViewWheel.classList.toggle('dashboard-menu-selected-dark', !isLine && isDarkTheme);
             progressViewWheel.classList.toggle('text-[var(--ap-primary)]', !isLine);
             progressViewWheel.classList.toggle('text-[var(--ap-text)]', isLine);
           }
@@ -2563,7 +2589,7 @@
             var val = weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim();
             if (!val) return;
             var label = reflectionLabels[k] || k;
-            html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white/80 px-4 py-3 shadow-sm"><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-secondary)] leading-relaxed">' + esc(val) + '</p></div>';
+            html += '<div class="rounded-xl border border-[var(--ap-border)] bg-[var(--ap-bg)]/60 px-4 py-3 shadow-sm"><p class="text-[11px] font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">' + esc(label) + '</p><p class="text-sm text-[var(--ap-primary)] leading-relaxed">' + esc(val) + '</p></div>';
           });
           document.getElementById('one-thing-banner-reflections').innerHTML = html;
           var expandText = document.querySelector('#one-thing-banner-expand-btn span:last-child');

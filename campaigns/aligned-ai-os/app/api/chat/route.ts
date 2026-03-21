@@ -7,6 +7,7 @@ import { getTier } from "@/lib/vapi/scoring";
 import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import { fetchPortalVapiByEmail, fetchPortalSixCByEmail, type PortalVapiRow, type PortalSixCRow } from "@/lib/portal-data";
+import { hasBillingBypass } from "@/lib/internal-access";
 
 function formatVapiContext(row: PortalVapiRow): string {
   const r = row.results as Record<string, unknown>;
@@ -102,9 +103,12 @@ export async function POST(req: NextRequest) {
 
   if (!user) return new Response("User not found", { status: 404 });
 
+  const bypassBilling = hasBillingBypass(user.email);
+
   if (
-    user.subscriptionStatus === "expired" ||
-    user.subscriptionStatus === "canceled"
+    !bypassBilling &&
+    (user.subscriptionStatus === "expired" ||
+      user.subscriptionStatus === "canceled")
   ) {
     return new Response(
       JSON.stringify({ error: "Subscription required. Please renew to continue." }),

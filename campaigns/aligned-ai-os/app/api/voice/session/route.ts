@@ -7,6 +7,7 @@ import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import { buildVoiceSystemPrompt } from "@/lib/voice/prompts";
 import { fetchPortalVapiByEmail, fetchPortalSixCByEmail } from "@/lib/portal-data";
+import { hasBillingBypass } from "@/lib/internal-access";
 
 const OPENAI_REALTIME_URL = "https://api.openai.com/v1/realtime/sessions";
 
@@ -31,9 +32,12 @@ export async function POST() {
   if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
 
+  const bypassBilling = hasBillingBypass(user.email);
+
   if (
-    user.subscriptionStatus === "expired" ||
-    user.subscriptionStatus === "canceled"
+    !bypassBilling &&
+    (user.subscriptionStatus === "expired" ||
+      user.subscriptionStatus === "canceled")
   ) {
     return NextResponse.json(
       { error: "Active subscription required for voice sessions" },

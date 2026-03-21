@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
+import { hasBillingBypass } from "@/lib/internal-access";
 
 export async function GET() {
   const { userId: clerkId } = await auth();
@@ -15,11 +16,9 @@ export async function GET() {
 
   if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-  const adminEmails = (process.env.ADMIN_EMAILS || "")
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
-  const isAdmin = adminEmails.length > 0 && adminEmails.includes((user.email || "").toLowerCase());
+  const isAdmin = hasBillingBypass(user.email);
+  const effectiveSubscriptionStatus = isAdmin ? "active" : user.subscriptionStatus;
+  const effectiveTrialEndsAt = isAdmin ? null : user.trialEndsAt?.toISOString() || null;
 
   return NextResponse.json({
     name: user.name,
@@ -29,8 +28,8 @@ export async function GET() {
     smsTime: user.smsTime,
     timezone: user.timezone,
     tier: user.tier,
-    subscriptionStatus: user.subscriptionStatus,
-    trialEndsAt: user.trialEndsAt?.toISOString() || null,
+    subscriptionStatus: effectiveSubscriptionStatus,
+    trialEndsAt: effectiveTrialEndsAt,
     onboardingComplete: user.onboardingComplete,
     contextualProfile: user.contextualProfile ?? null,
     isAdmin,
