@@ -159,7 +159,7 @@ export default function SubscribePage() {
               key={plan.name}
               className={`rounded-2xl px-8 pb-8 space-y-6 ${
                 plan.highlight
-                  ? "border-2 border-accent relative pt-6"
+                  ? "border-2 border-accent relative pt-5"
                   : "border border-border pt-8"
               }`}
             >
