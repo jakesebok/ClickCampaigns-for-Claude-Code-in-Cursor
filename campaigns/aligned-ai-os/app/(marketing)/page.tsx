@@ -69,7 +69,7 @@ export default function LandingPage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="https://jakesebok.com/work-with-me/strategic-intensives"
+            href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
             className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-accent/30 text-foreground hover:bg-accent/10 hover:border-accent/50 transition-colors"
           >
             Attend the Workshop
@@ -247,7 +247,7 @@ export default function LandingPage() {
             guided onboarding.
           </p>
           <Link
-            href="https://jakesebok.com/work-with-me/strategic-intensives"
+            href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
           >
             Learn About the Intensive
@@ -323,7 +323,7 @@ export default function LandingPage() {
               Pricing
             </Link>
             <Link
-              href="https://jakesebok.com/work-with-me/strategic-intensives"
+              href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
               className="hover:text-foreground"
             >
               Workshop

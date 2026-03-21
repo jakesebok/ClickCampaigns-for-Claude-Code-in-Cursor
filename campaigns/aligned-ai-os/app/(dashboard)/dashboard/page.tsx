@@ -246,9 +246,16 @@ export default function DashboardPage() {
   const priorityItems = latestVapi
     ? getPriorityMatrix(latestVapi.domainScores, latestVapi.importance || {})
     : [];
-  const criticalPriorities = priorityItems.filter((p) => p.quadrant === "Critical Priority");
-  const visibleCriticalPriorities = criticalPriorities.slice(0, 3);
-  const focusPlaceholders = Math.max(0, 3 - visibleCriticalPriorities.length);
+  const criticalPriorities = priorityItems
+    .filter((p) => p.quadrant === "Critical Priority")
+    .sort((a, b) => a.score - b.score);
+  const nonCriticalPriorities = priorityItems
+    .filter((p) => p.quadrant !== "Critical Priority")
+    .sort((a, b) => a.score - b.score);
+  const focusHereFirstItems = [
+    ...criticalPriorities.slice(0, 3),
+    ...nonCriticalPriorities.slice(0, Math.max(0, 3 - criticalPriorities.length)),
+  ].slice(0, 3);
 
   const topStrengths = latestVapi
     ? DOMAINS.map((d) => ({ ...d, score: latestVapi.domainScores[d.code] || 0 }))
@@ -630,7 +637,7 @@ export default function DashboardPage() {
               )}
 
               {/* Critical Priorities — always expanded */}
-              {criticalPriorities.length > 0 && (
+              {focusHereFirstItems.length > 0 && (
                 <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-5 space-y-3 shadow-sm">
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
@@ -647,7 +654,7 @@ export default function DashboardPage() {
                     </Link>
                   </div>
                   <div className="space-y-2">
-                    {visibleCriticalPriorities.map((item) => {
+                    {focusHereFirstItems.map((item) => {
                       const Icon = DOMAIN_ICONS[item.domain];
                       const color = getTierColor(getTier(item.score));
                       return (
@@ -663,13 +670,6 @@ export default function DashboardPage() {
                         </div>
                       );
                     })}
-                    {Array.from({ length: focusPlaceholders }, (_, index) => (
-                      <div
-                        key={`placeholder-${index}`}
-                        className="rounded-lg border border-border bg-card/30 p-3 h-[58px] opacity-0 pointer-events-none"
-                        aria-hidden
-                      />
-                    ))}
                   </div>
                 </div>
               )}

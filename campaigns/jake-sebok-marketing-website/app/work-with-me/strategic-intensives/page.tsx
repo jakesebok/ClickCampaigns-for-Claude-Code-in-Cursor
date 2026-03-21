@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata = {
   title: "Strategic Alignment Intensive — Jake Sebok",
   description:
-    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter. $497. Includes 30 days of ALFRED access.",
+    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter and leave with a custom AI Operating System master prompt.",
 };
 
 export default function StrategicIntensivesPage() {
@@ -38,7 +38,8 @@ export default function StrategicIntensivesPage() {
             The Strategic Alignment Intensive fixes that in a single half-day.
             You&apos;ll connect your daily actions directly to the outcomes that
             actually matter — and walk away with a personalized AI operating
-            system that keeps you on track every day after.
+            system master prompt that turns your AI of choice into a coach,
+            strategic advisor, and executive assistant that actually knows you.
           </p>
         </div>
       </section>
@@ -83,9 +84,9 @@ export default function StrategicIntensivesPage() {
                   "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
               },
               {
-                title: "30 Days of ALFRED — Your AI Operating System",
+                title: "Your AI Operating System Master Prompt",
                 description:
-                  "A personalized AI coach that knows everything you built today. Your values, your numbers, your Vital Action — coaching on demand, every single day.",
+                  "A custom master prompt that turns Claude, ChatGPT, Gemini, or another AI into your personalized coach, strategic advisor, and executive assistant. It knows your values, goals, revenue math, standards, and Vital Action because you built that context in the workshop.",
               },
             ].map((item) => (
               <div
@@ -151,13 +152,14 @@ export default function StrategicIntensivesPage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">
-                  Upload your worksheets → ALFRED activates
+                  Turn your workshop outputs into your AI Operating System
                 </h3>
                 <p className="text-ap-mid">
-                  After the Intensive, you upload your completed worksheets into
-                  ALFRED (Aligned Performance Operating System). The app synthesizes
-                  everything into your personalized AI coach — loaded with your
-                  values, goals, revenue math, and Vital Action.
+                  We use what you build in the Intensive to create the master
+                  prompt that powers your AI Operating System. That prompt can
+                  run inside Claude, ChatGPT, Gemini, or another model and turns
+                  it into a system that knows your values, goals, revenue math,
+                  strategic priorities, and Vital Action.
                 </p>
               </div>
             </div>
@@ -168,12 +170,13 @@ export default function StrategicIntensivesPage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">
-                  30 days of daily coaching
+                  Leave with a system you can use immediately
                 </h3>
                 <p className="text-ap-mid">
-                  Alfred texts you every morning, tracks your weekly Vital
-                  Action, runs your 6Cs scorecard, and gives you personalized
-                  strategy whenever you ask. 30 days of free access included.
+                  You leave with a working master prompt and the strategic
+                  context to use it right away. The deliverable is not generic
+                  AI advice. It&apos;s a custom operating system built from what we
+                  excavate together in the workshop.
                 </p>
               </div>
             </div>
@@ -221,10 +224,7 @@ export default function StrategicIntensivesPage() {
               $497
             </h2>
             <p className="text-ap-mid text-lg mb-2">
-              Half-day live workshop + pre-work packet + all worksheets
-            </p>
-            <p className="text-ap-muted text-sm mb-8">
-              Includes 30 days of ALFRED access (your personalized AI coach)
+              Half-day live workshop + pre-work packet + all worksheets + your AI Operating System master prompt
             </p>
 
             <Link
