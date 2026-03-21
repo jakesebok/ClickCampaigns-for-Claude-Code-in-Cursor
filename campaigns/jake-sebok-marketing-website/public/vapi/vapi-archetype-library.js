@@ -293,6 +293,12 @@
       .replace(/\"/g, "&quot;");
   }
 
+  function renderInlineStrongHtml(value) {
+    return escapeHtml(value)
+      .replace(/&lt;strong&gt;/g, "<strong>")
+      .replace(/&lt;\/strong&gt;/g, "</strong>");
+  }
+
   function getArchetypeSectionId(archetype) {
     return "archetype-" + String(archetype)
       .toLowerCase()
@@ -356,7 +362,12 @@
       .join("");
   }
 
-  function buildNavigation(currentArchetype) {
+  function buildNavigation(currentArchetype, options) {
+    var opts = options || {};
+    var stickyTopStyle = opts.sidebarTopStyle || "";
+    if (!stickyTopStyle && opts.sidebarTopPx) stickyTopStyle = "top:" + opts.sidebarTopPx + "px;";
+    if (!stickyTopStyle && opts.sidebarTopClass === "top-24") stickyTopStyle = "top:6rem;";
+    if (!stickyTopStyle) stickyTopStyle = "top:1.5rem;";
     function buildDesktopItem(archetypeName) {
       var accent = window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[archetypeName]
         ? window.VAPI_ARCHETYPES[archetypeName].color_accent
@@ -375,7 +386,7 @@
     }
 
     return (
-      '<div class="space-y-4 lg:hidden">' +
+      '<div class="portal-library-mobile-nav space-y-4">' +
         '<div class="-mx-2 overflow-x-auto px-2 pb-1">' +
           '<div class="flex min-w-max gap-3">' +
             ARCHETYPE_ORDER.map(function(archetypeName) {
@@ -384,9 +395,9 @@
                 : "var(--ap-accent)";
               var isCurrent = archetypeName === currentArchetype;
               return (
-                '<a href="#' + getArchetypeSectionId(archetypeName) + '" class="flex min-w-[220px] items-center gap-3 rounded-[24px] border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="' +
-                  getLibrarySurface(isCurrent ? accent : null, isCurrent ? "strong" : "base") +
+                '<a href="#' + getArchetypeSectionId(archetypeName) + '" class="flex min-w-[220px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
                   (isCurrent ? "border-color:" + accent + "55;" : "") +
+                  (isCurrent ? "background:" + accent + "16;" : "") +
                 '">' +
                   '<div class="h-6 w-6 shrink-0" style="color:' + accent + ';">' +
                     (window.VAPI_ARCHETYPE && window.VAPI_ARCHETYPE.getIcon ? window.VAPI_ARCHETYPE.getIcon(archetypeName, accent) : "") +
@@ -398,17 +409,16 @@
           "</div>" +
         "</div>" +
       "</div>" +
-      '<div class="grid gap-8 lg:grid-cols-[280px,minmax(0,1fr)] lg:items-start">' +
-        '<aside class="hidden lg:block">' +
-          '<div class="sticky top-8 rounded-[28px] border border-[var(--ap-border)] p-4 shadow-sm backdrop-blur-sm" style="' + getLibrarySurface(currentArchetype && window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[currentArchetype] ? window.VAPI_ARCHETYPES[currentArchetype].color_accent : null, "soft") + '">' +
-            '<p class="px-3 pb-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Archetypes</p>' +
-            '<p class="px-3 pb-3 text-sm leading-relaxed text-[var(--ap-secondary)]">Scroll the archetypes and jump directly to the one you want to read.</p>' +
+      '<div class="portal-library-desktop-layout">' +
+        '<aside class="portal-library-desktop-sidebar">' +
+          '<div class="portal-library-sidebar-sticky rounded-3xl border border-[var(--ap-border)] p-4 shadow-sm" style="' + stickyTopStyle + 'background:var(--ap-surface, #ffffff);">' +
+            '<p class="px-3 pb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">All Archetypes</p>' +
             '<nav class="space-y-2">' +
               ARCHETYPE_ORDER.map(buildDesktopItem).join("") +
             "</nav>" +
           "</div>" +
         "</aside>" +
-        '<div id="archetype-library-sections" class="space-y-8"></div>' +
+        '<div id="archetype-library-sections" class="portal-library-desktop-sections space-y-8"></div>' +
       "</div>"
     );
   }
@@ -422,9 +432,8 @@
     if (!full || !extras) return "";
 
     return (
-      '<section id="' + getArchetypeSectionId(archetypeName) + '" class="scroll-mt-24 relative overflow-hidden rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(accent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl" style="background:' + accent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section id="' + getArchetypeSectionId(archetypeName) + '" class="scroll-mt-24 rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:linear-gradient(180deg,' + accent + '12 0%, var(--ap-surface, #ffffff) 32%);">' +
+        '<div>' +
           '<div class="flex flex-col gap-5 sm:flex-row sm:items-start">' +
             '<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl border" style="background:' + accent + '14;border-color:' + accent + '33;">' +
               (window.VAPI_ARCHETYPE && window.VAPI_ARCHETYPE.getIcon ? window.VAPI_ARCHETYPE.getIcon(archetypeName, accent) : "") +
@@ -440,7 +449,7 @@
           '<div class="mt-8 space-y-8">' +
             '<div class="space-y-2">' +
               '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">The Pattern</h3>' +
-              '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(full.description || "") + "</p>" +
+              '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + renderInlineStrongHtml(full.description || "") + "</p>" +
             "</div>" +
             '<div class="space-y-2">' +
               '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Your Strength</h3>' +
@@ -516,9 +525,8 @@
       : "#FF6B1A";
 
     var html =
-      '<section class="relative overflow-hidden rounded-[36px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8 lg:p-10" style="' + getLibrarySurface(currentAccent, "strong") + '">' +
-        '<div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl" style="background:' + currentAccent + '14;"></div>' +
-        '<div class="relative">' +
+      '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+        '<div>' +
           '<p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--ap-accent)]">Archetype Library</p>' +
           '<h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-5xl">' + escapeHtml(ARCHETYPE_LIBRARY_TITLE) + "</h1>" +
           '<p class="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(ARCHETYPE_LIBRARY_SUBTITLE) + "</p>";
@@ -530,8 +538,8 @@
     }
 
     html += "</div></section>";
-    html += buildNavigation(currentArchetype);
-    html += '<section class="rounded-[32px] border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="' + getLibrarySurface(currentAccent, "soft") + '">' +
+    html += buildNavigation(currentArchetype, opts);
+    html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_HEADING) + "</h2>" +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_TEXT) + "</p>" +
       '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">' +

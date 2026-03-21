@@ -293,6 +293,12 @@
       .replace(/\"/g, "&quot;");
   }
 
+  function renderInlineStrongHtml(value) {
+    return escapeHtml(value)
+      .replace(/&lt;strong&gt;/g, "<strong>")
+      .replace(/&lt;\/strong&gt;/g, "</strong>");
+  }
+
   function getArchetypeSectionId(archetype) {
     return "archetype-" + String(archetype)
       .toLowerCase()
@@ -443,7 +449,7 @@
           '<div class="mt-8 space-y-8">' +
             '<div class="space-y-2">' +
               '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">The Pattern</h3>' +
-              '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(full.description || "") + "</p>" +
+              '<p class="text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + renderInlineStrongHtml(full.description || "") + "</p>" +
             "</div>" +
             '<div class="space-y-2">' +
               '<h3 class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Your Strength</h3>' +
