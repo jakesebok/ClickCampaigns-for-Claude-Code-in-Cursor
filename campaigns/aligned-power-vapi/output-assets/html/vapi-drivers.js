@@ -1607,16 +1607,11 @@
       html += '<div class="p-6 sm:p-8 relative space-y-5">';
       html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
       html += '<div class="space-y-2">';
-      html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
       if (driverName) {
-        html += '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' + escapeHtml(DRIVER_CONTENT[driverName].coreFear) + '</p>';
-      }
-      if (previewTagline) {
-        html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + '</p>';
-      }
-      if (driverName) {
+        html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
+        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
         html +=
-          '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+          '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
           accent +
           '14;color:' +
           accent +
@@ -1627,6 +1622,15 @@
           ' / ' +
           DRIVER_CONTENT[driverName].maxPossible +
           "</span>";
+        html += '</div>';
+      } else {
+        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
+      }
+      if (driverName) {
+        html += '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' + escapeHtml(DRIVER_CONTENT[driverName].coreFear) + '</p>';
+      }
+      if (previewTagline) {
+        html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + '</p>';
       }
       html += '</div>';
       html += '<div class="space-y-4">';
