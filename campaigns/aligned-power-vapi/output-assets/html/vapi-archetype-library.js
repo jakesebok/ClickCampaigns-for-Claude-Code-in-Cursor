@@ -385,25 +385,49 @@
       );
     }
 
+    var chevronRight =
+      '<svg class="h-5 w-5 shrink-0 text-[var(--ap-muted)]" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
     return (
-      '<div class="portal-library-mobile-nav space-y-4">' +
-        '<div class="-mx-2 overflow-x-auto px-2 pb-1">' +
-          '<div class="flex min-w-max gap-3">' +
+      '<div class="portal-library-mobile-nav md:hidden">' +
+        '<div id="portal-lib-mobile-back" class="mb-4 hidden items-center">' +
+          '<button type="button" id="portal-lib-mobile-back-btn" class="inline-flex items-center gap-2 rounded-full border border-[var(--ap-border)] bg-[var(--ap-surface)] px-4 py-2.5 text-sm font-semibold text-[var(--ap-primary)] shadow-sm">' +
+            '<svg class="h-5 w-5 shrink-0" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>' +
+            "All archetypes" +
+          "</button>" +
+        "</div>" +
+        '<div id="portal-lib-mobile-index" class="overflow-hidden rounded-3xl border border-[var(--ap-border)] shadow-sm" style="background:var(--ap-surface, #ffffff);">' +
+          '<div class="border-b border-[var(--ap-border)] bg-gradient-to-r from-[var(--ap-accent)]/[0.07] via-transparent to-transparent px-5 py-4">' +
+            '<p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>' +
+            '<p class="mt-1 font-semibold text-xl tracking-tight text-[var(--ap-primary)]" style="font-family: Cormorant Garamond, serif;">Pick an archetype</p>' +
+            '<p class="mt-1 text-sm text-[var(--ap-secondary)]">Open a profile, read deeply, then come back here for the next one.</p>' +
+          "</div>" +
+          '<div class="grid grid-cols-1 gap-px bg-[var(--ap-border)] sm:grid-cols-2">' +
             ARCHETYPE_ORDER.map(function(archetypeName) {
-              var accent = window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[archetypeName]
-                ? window.VAPI_ARCHETYPES[archetypeName].color_accent
-                : "var(--ap-accent)";
+              var meta = window.VAPI_ARCHETYPES && window.VAPI_ARCHETYPES[archetypeName];
+              var accent = meta && meta.color_accent ? meta.color_accent : "#FF6B1A";
               var isCurrent = archetypeName === currentArchetype;
+              var tag = meta && meta.tagline ? meta.tagline : "";
+              var sid = getArchetypeSectionId(archetypeName);
               return (
-                '<a href="#' + getArchetypeSectionId(archetypeName) + '" class="flex min-w-[220px] items-center gap-3 rounded-2xl border px-4 py-3 shadow-sm transition-colors hover:border-[var(--ap-accent)]/30" style="background:var(--ap-surface, #ffffff);' +
-                  (isCurrent ? "border-color:" + accent + "55;" : "") +
-                  (isCurrent ? "background:" + accent + "16;" : "") +
+                '<button type="button" class="portal-lib-pick flex w-full items-start gap-4 p-4 text-left sm:p-5" data-lib-section="' + escapeHtml(sid) + '" style="background:var(--ap-surface, #ffffff);' +
+                  (isCurrent ? "background-color:color-mix(in srgb," + accent + " 8%, var(--ap-surface, #ffffff));" : "") +
                 '">' +
-                  '<div class="h-6 w-6 shrink-0" style="color:' + accent + ';">' +
+                  '<div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border" style="background:' + accent + '14;border-color:' + accent + '40;">' +
                     (window.VAPI_ARCHETYPE && window.VAPI_ARCHETYPE.getIcon ? window.VAPI_ARCHETYPE.getIcon(archetypeName, accent) : "") +
                   "</div>" +
-                  '<span class="text-sm font-medium text-[var(--ap-primary)]">' + escapeHtml(archetypeName) + "</span>" +
-                "</a>"
+                  '<div class="min-w-0 flex-1">' +
+                    '<div class="flex items-start justify-between gap-2">' +
+                      '<span class="font-semibold leading-snug text-[var(--ap-primary)]">' + escapeHtml(archetypeName) + "</span>" +
+                      chevronRight +
+                    "</div>" +
+                    (tag
+                      ? '<p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-[var(--ap-secondary)] sm:text-sm">' + escapeHtml(tag) + "</p>"
+                      : "") +
+                    (isCurrent
+                      ? '<span class="mt-2 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide" style="background:' + accent + '20;color:' + accent + ';">Your pattern</span>'
+                      : "") +
+                  "</div>" +
+                "</button>"
               );
             }).join("") +
           "</div>" +
@@ -525,7 +549,7 @@
       : "#FF6B1A";
 
     var html =
-      '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+      '<section id="portal-lib-intro" class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
         '<div>' +
           '<p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--ap-accent)]">Archetype Library</p>' +
           '<h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--ap-primary)] sm:text-5xl">' + escapeHtml(ARCHETYPE_LIBRARY_TITLE) + "</h1>" +
@@ -539,7 +563,7 @@
 
     html += "</div></section>";
     html += buildNavigation(currentArchetype, opts);
-    html += '<section class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
+    html += '<section id="portal-lib-footer" class="rounded-3xl border border-[var(--ap-border)] p-6 shadow-sm sm:p-8" style="background:var(--ap-surface, #ffffff);">' +
       '<h2 class="text-3xl font-bold tracking-tight text-[var(--ap-primary)]">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_HEADING) + "</h2>" +
       '<p class="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ap-secondary)] sm:text-base">' + escapeHtml(ARCHETYPE_LIBRARY_FOOTER_TEXT) + "</p>" +
       '<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">' +
@@ -562,6 +586,101 @@
     }).join("");
   }
 
+  function attachArchetypeLibraryMobileNav(pageContentEl) {
+    if (!pageContentEl) return;
+    var mm = window.matchMedia("(max-width: 767px)");
+    function isMobile() {
+      return mm.matches;
+    }
+    var indexEl = pageContentEl.querySelector("#portal-lib-mobile-index");
+    var backBar = pageContentEl.querySelector("#portal-lib-mobile-back");
+    var backBtn = pageContentEl.querySelector("#portal-lib-mobile-back-btn");
+    var sectionsRoot = pageContentEl.querySelector("#archetype-library-sections");
+    var intro = pageContentEl.querySelector("#portal-lib-intro");
+    var footer = pageContentEl.querySelector("#portal-lib-footer");
+    if (!indexEl || !backBar || !backBtn || !sectionsRoot) return;
+
+    function clearActive() {
+      Array.prototype.forEach.call(sectionsRoot.querySelectorAll("section"), function(s) {
+        s.classList.remove("portal-lib-active-mobile");
+      });
+    }
+
+    function showList() {
+      document.body.classList.remove("portal-lib-archetype-detail");
+      clearActive();
+      indexEl.classList.remove("hidden");
+      backBar.classList.add("hidden");
+      backBar.classList.remove("flex");
+      if (intro) intro.classList.remove("hidden");
+      if (footer) footer.classList.remove("hidden");
+      window.scrollTo(0, 0);
+      try {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      } catch (e) {}
+    }
+
+    function showDetail(sectionId) {
+      if (!isMobile()) return;
+      document.body.classList.add("portal-lib-archetype-detail");
+      clearActive();
+      var target = document.getElementById(sectionId);
+      if (target) target.classList.add("portal-lib-active-mobile");
+      indexEl.classList.add("hidden");
+      backBar.classList.remove("hidden");
+      backBar.classList.add("flex");
+      if (intro) intro.classList.add("hidden");
+      if (footer) footer.classList.add("hidden");
+      window.scrollTo(0, 0);
+      try {
+        history.replaceState(null, "", "#" + sectionId);
+      } catch (e) {}
+    }
+
+    function syncMode() {
+      if (!isMobile()) {
+        document.body.classList.remove("portal-lib-archetype-detail");
+        clearActive();
+        indexEl.classList.remove("hidden");
+        backBar.classList.add("hidden");
+        backBar.classList.remove("flex");
+        if (intro) intro.classList.remove("hidden");
+        if (footer) footer.classList.remove("hidden");
+        return;
+      }
+      var h = (window.location.hash || "").replace(/^#/, "");
+      if (h && document.getElementById(h) && sectionsRoot.querySelector("#" + h)) {
+        showDetail(h);
+      } else {
+        showList();
+      }
+    }
+
+    backBtn.addEventListener("click", showList);
+
+    indexEl.addEventListener("click", function(e) {
+      var btn = e.target.closest("[data-lib-section]");
+      if (!btn || !isMobile()) return;
+      var sid = btn.getAttribute("data-lib-section");
+      if (sid) showDetail(sid);
+    });
+
+    pageContentEl.addEventListener("click", function(e) {
+      if (!isMobile()) return;
+      var a = e.target.closest('a[href^="#archetype-"]');
+      if (!a) return;
+      var id = (a.getAttribute("href") || "").replace(/^#/, "");
+      if (id && document.getElementById(id)) {
+        e.preventDefault();
+        showDetail(id);
+      }
+    });
+
+    mm.addEventListener("change", syncMode);
+    window.addEventListener("hashchange", syncMode);
+    syncMode();
+  }
+
   window.VAPI_ARCHETYPE_LIBRARY = {
     ARCHETYPE_ORDER: ARCHETYPE_ORDER,
     ARCHETYPE_LIBRARY_CONTENT: ARCHETYPE_LIBRARY_CONTENT,
@@ -569,6 +688,7 @@
     ARCHETYPE_LIBRARY_SUBTITLE: ARCHETYPE_LIBRARY_SUBTITLE,
     getSectionId: getArchetypeSectionId,
     buildPage: buildPage,
-    populateSections: populateSections
+    populateSections: populateSections,
+    attachMobileNav: attachArchetypeLibraryMobileNav
   };
 })();

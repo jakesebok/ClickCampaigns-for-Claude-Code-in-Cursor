@@ -35,6 +35,29 @@
       min-height: 100vh;
     }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    .portal-library-desktop-layout { display: block; }
+    .portal-library-desktop-sidebar { display: none; }
+    .portal-library-desktop-sections { min-width: 0; }
+    .portal-library-sidebar-sticky { position: sticky; top: 5.5rem; }
+    @media (max-width: 767px) {
+      body:not(.portal-lib-archetype-detail) #archetype-library-sections {
+        display: none !important;
+      }
+      body.portal-lib-archetype-detail #archetype-library-sections {
+        display: block !important;
+      }
+      body.portal-lib-archetype-detail #archetype-library-sections section:not(.portal-lib-active-mobile) {
+        display: none !important;
+      }
+    }
+    @media (min-width: 768px) {
+      .portal-library-desktop-layout {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 260px minmax(0, 1fr);
+      }
+      .portal-library-desktop-sidebar { display: block; }
+    }
   </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -154,6 +177,9 @@
 
       if (loadingEl) loadingEl.classList.add('hidden');
       pageContentEl.classList.remove('hidden');
+      if (window.VAPI_ARCHETYPE_LIBRARY && window.VAPI_ARCHETYPE_LIBRARY.attachMobileNav) {
+        window.VAPI_ARCHETYPE_LIBRARY.attachMobileNav(pageContentEl);
+      }
       lucide.createIcons();
     })();
   </script>

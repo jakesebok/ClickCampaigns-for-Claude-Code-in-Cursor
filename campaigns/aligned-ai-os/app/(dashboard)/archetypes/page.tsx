@@ -1,9 +1,11 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { useMediaLg } from "@/lib/hooks/use-media-lg";
+import { cn } from "@/lib/utils";
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
 import {
   ARCHETYPE_LIBRARY_CONTENT,
@@ -35,14 +37,33 @@ function asArchetypeName(
   return value && value in ARCHETYPES_FULL ? (value as VapiArchetype) : null;
 }
 
-function ArchetypeAnchor({ archetype }: { archetype: VapiArchetype }) {
+function ArchetypeBrowseLink({
+  archetype,
+  isLg,
+  onPick,
+}: {
+  archetype: VapiArchetype;
+  isLg: boolean;
+  onPick: (a: VapiArchetype) => void;
+}) {
+  if (isLg) {
+    return (
+      <a
+        href={`#${getArchetypeSectionId(archetype)}`}
+        className="font-semibold text-accent hover:underline"
+      >
+        {archetype}
+      </a>
+    );
+  }
   return (
-    <a
-      href={`#${getArchetypeSectionId(archetype)}`}
+    <button
+      type="button"
       className="font-semibold text-accent hover:underline"
+      onClick={() => onPick(archetype)}
     >
       {archetype}
-    </a>
+    </button>
   );
 }
 
@@ -80,6 +101,63 @@ function renderCommonDrivers(commonDrivers: string) {
 export default function ArchetypesPage() {
   const [latestResult, setLatestResult] = useState<LibraryResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileFocus, setMobileFocus] = useState<VapiArchetype | null>(null);
+  const isLg = useMediaLg();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = useCallback(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, []);
+
+  const openMobileArchetype = useCallback(
+    (archetype: VapiArchetype) => {
+      setMobileFocus(archetype);
+      scrollToTop();
+      const id = getArchetypeSectionId(archetype);
+      window.history.replaceState(null, "", `#${id}`);
+    },
+    [scrollToTop]
+  );
+
+  const closeMobileArchetype = useCallback(() => {
+    setMobileFocus(null);
+    scrollToTop();
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}`
+    );
+  }, [scrollToTop]);
+
+  useEffect(() => {
+    if (isLg) {
+      setMobileFocus(null);
+      return;
+    }
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const match = ARCHETYPE_LIBRARY_ORDER.find(
+      (a) => getArchetypeSectionId(a) === hash
+    );
+    if (match) setMobileFocus(match);
+  }, [isLg]);
+
+  useEffect(() => {
+    const onHash = () => {
+      if (isLg) return;
+      const h = window.location.hash.slice(1);
+      if (!h) {
+        setMobileFocus(null);
+        return;
+      }
+      const match = ARCHETYPE_LIBRARY_ORDER.find(
+        (a) => getArchetypeSectionId(a) === h
+      );
+      if (match) setMobileFocus(match);
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [isLg]);
 
   useEffect(() => {
     const load = async () => {
@@ -118,9 +196,17 @@ export default function ArchetypesPage() {
   return (
     <div className="flex h-full flex-col">
       <PageHeader title="Archetype Library" />
-      <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-6 scrollbar-thin"
+      >
         <div className="mx-auto max-w-6xl space-y-8">
-          <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8">
+          <section
+            className={cn(
+              "rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+              !isLg && mobileFocus && "hidden"
+            )}
+          >
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-accent">
               Archetype Library
             </p>
@@ -137,7 +223,12 @@ export default function ArchetypesPage() {
             ) : currentArchetype ? (
               <div className="mt-6 rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm leading-relaxed text-foreground">
                 Your current archetype:{" "}
-                <ArchetypeAnchor archetype={currentArchetype} />.
+                <ArchetypeBrowseLink
+                  archetype={currentArchetype}
+                  isLg={isLg}
+                  onPick={openMobileArchetype}
+                />
+                .
               </div>
             ) : (
               <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-border bg-background/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
@@ -154,39 +245,80 @@ export default function ArchetypesPage() {
             )}
           </section>
 
-          <div className="space-y-4 lg:hidden">
-            <div className="-mx-2 overflow-x-auto px-2 pb-1">
-              <div className="flex min-w-max gap-3">
-                {ARCHETYPE_LIBRARY_ORDER.map((archetype) => {
-                  const accent = ARCHETYPE_ACCENT_COLORS[archetype];
-                  const ArchetypeIcon = getArchetypeIcon(archetype);
-                  const isCurrent = archetype === currentArchetype;
-                  return (
-                    <a
-                      key={`mobile-${archetype}`}
-                      href={`#${getArchetypeSectionId(archetype)}`}
-                      className="flex min-w-[220px] items-center gap-3 rounded-2xl border bg-card/80 px-4 py-3 shadow-sm transition-colors hover:border-accent/30"
-                      style={{
-                        borderColor: isCurrent ? `${accent}55` : undefined,
-                        backgroundColor: isCurrent ? `${accent}16` : undefined,
-                      }}
-                    >
-                      <ArchetypeIcon
-                        className="h-6 w-6 shrink-0"
-                        style={{ color: accent }}
-                      />
-                      <span
-                        className="text-sm leading-snug text-foreground"
-                        style={{ fontWeight: isCurrent ? 700 : 500 }}
+          {/* Mobile / tablet: master list (native-style index, not horizontal chips) */}
+          {!isLg && !mobileFocus && (
+            <div className="lg:hidden">
+              <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+                <div className="border-b border-border bg-gradient-to-r from-accent/[0.07] via-transparent to-transparent px-5 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    Explore
+                  </p>
+                  <p className="mt-1 font-serif text-xl font-bold tracking-tight text-foreground">
+                    Pick an archetype
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Open a profile, read deeply, then come back here for the next one.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2">
+                  {ARCHETYPE_LIBRARY_ORDER.map((archetype) => {
+                    const accent = ARCHETYPE_ACCENT_COLORS[archetype];
+                    const full = ARCHETYPES_FULL[archetype];
+                    const ArchetypeIcon = getArchetypeIcon(archetype);
+                    const isCurrent = archetype === currentArchetype;
+                    return (
+                      <button
+                        key={`mobile-index-${archetype}`}
+                        type="button"
+                        onClick={() => openMobileArchetype(archetype)}
+                        className="flex w-full items-start gap-4 bg-card p-4 text-left transition-colors hover:bg-muted/40 sm:p-5"
                       >
-                        {archetype}
-                      </span>
-                    </a>
-                  );
-                })}
+                        <div
+                          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border"
+                          style={{
+                            backgroundColor: `${accent}14`,
+                            borderColor: `${accent}40`,
+                          }}
+                        >
+                          <ArchetypeIcon
+                            className="h-7 w-7"
+                            style={{ color: accent }}
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-start justify-between gap-2">
+                            <span className="font-semibold leading-snug text-foreground">
+                              {archetype}
+                            </span>
+                            <ChevronRight
+                              className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+                              aria-hidden
+                            />
+                          </div>
+                          {full?.tagline ? (
+                            <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                              {full.tagline}
+                            </p>
+                          ) : null}
+                          {isCurrent ? (
+                            <span
+                              className="mt-2 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+                              style={{
+                                backgroundColor: `${accent}20`,
+                                color: accent,
+                              }}
+                            >
+                              Your pattern
+                            </span>
+                          ) : null}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">
             <aside className="hidden lg:block">
@@ -227,6 +359,18 @@ export default function ArchetypesPage() {
             </aside>
 
             <div className="space-y-8">
+              {!isLg && mobileFocus ? (
+                <div className="sticky top-0 z-20 -mx-1 mb-2 flex items-center gap-2 border-b border-border bg-background/90 px-2 py-3 backdrop-blur-md lg:hidden">
+                  <button
+                    type="button"
+                    onClick={closeMobileArchetype}
+                    className="inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  >
+                    <ChevronLeft className="h-5 w-5" aria-hidden />
+                    All archetypes
+                  </button>
+                </div>
+              ) : null}
               {ARCHETYPE_LIBRARY_ORDER.map((archetype) => {
                 const full = ARCHETYPES_FULL[archetype];
                 const extras = ARCHETYPE_LIBRARY_CONTENT[archetype];
@@ -238,7 +382,10 @@ export default function ArchetypesPage() {
                   <section
                     key={archetype}
                     id={getArchetypeSectionId(archetype)}
-                    className="scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8"
+                    className={cn(
+                      "scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+                      !isLg && mobileFocus !== archetype && "hidden"
+                    )}
                     style={{
                       backgroundImage: `linear-gradient(180deg, ${accent}12 0%, transparent 32%)`,
                     }}
@@ -418,7 +565,12 @@ export default function ArchetypesPage() {
             </div>
           </div>
 
-          <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8">
+          <section
+            className={cn(
+              "rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+              !isLg && mobileFocus && "hidden"
+            )}
+          >
             <h2 className="text-3xl font-serif font-bold tracking-tight text-foreground">
               {ARCHETYPE_LIBRARY_FOOTER_HEADING}
             </h2>

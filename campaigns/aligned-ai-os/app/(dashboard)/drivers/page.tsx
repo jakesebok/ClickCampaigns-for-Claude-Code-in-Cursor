@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
+import { useMediaLg } from "@/lib/hooks/use-media-lg";
+import { cn } from "@/lib/utils";
 import {
   ALIGNED_MOMENTUM_CONTENT,
   ALIGNED_MOMENTUM_NAME,
@@ -38,28 +40,131 @@ function asDriverName(value: string | null | undefined): VapiDriverName | null {
   return value && value in DRIVER_CONTENT ? (value as VapiDriverName) : null;
 }
 
-function DriverAnchor({ driver }: { driver: VapiDriverName }) {
+type MobileDriverFocus = typeof ALIGNED_MOMENTUM_NAME | VapiDriverName;
+
+function DriverBrowseLink({
+  driver,
+  isLg,
+  onPick,
+}: {
+  driver: VapiDriverName;
+  isLg: boolean;
+  onPick: (d: VapiDriverName) => void;
+}) {
+  if (isLg) {
+    return (
+      <a
+        href={`#${getDriverSectionId(driver)}`}
+        className="font-semibold text-accent hover:underline"
+      >
+        {driver}
+      </a>
+    );
+  }
   return (
-    <a href={`#${getDriverSectionId(driver)}`} className="font-semibold text-accent hover:underline">
+    <button
+      type="button"
+      className="font-semibold text-accent hover:underline"
+      onClick={() => onPick(driver)}
+    >
       {driver}
-    </a>
+    </button>
   );
 }
 
-function StateAnchor({ name }: { name: typeof ALIGNED_MOMENTUM_NAME }) {
+function StateBrowseLink({
+  name,
+  isLg,
+  onPick,
+}: {
+  name: typeof ALIGNED_MOMENTUM_NAME;
+  isLg: boolean;
+  onPick: (key: typeof ALIGNED_MOMENTUM_NAME) => void;
+}) {
+  if (isLg) {
+    return (
+      <a
+        href={`#${getDriverSectionId(name)}`}
+        className="font-semibold text-accent hover:underline"
+      >
+        {name}
+      </a>
+    );
+  }
   return (
-    <a
-      href={`#${getDriverSectionId(name)}`}
+    <button
+      type="button"
       className="font-semibold text-accent hover:underline"
+      onClick={() => onPick(name)}
     >
       {name}
-    </a>
+    </button>
   );
 }
 
 export default function DriversPage() {
   const [latestResult, setLatestResult] = useState<LibraryResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileFocus, setMobileFocus] = useState<MobileDriverFocus | null>(null);
+  const isLg = useMediaLg();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = useCallback(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, []);
+
+  const openMobileDriver = useCallback(
+    (key: MobileDriverFocus) => {
+      setMobileFocus(key);
+      scrollToTop();
+      window.history.replaceState(null, "", `#${getDriverSectionId(key)}`);
+    },
+    [scrollToTop]
+  );
+
+  const closeMobileDriver = useCallback(() => {
+    setMobileFocus(null);
+    scrollToTop();
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}`
+    );
+  }, [scrollToTop]);
+
+  useEffect(() => {
+    if (isLg) {
+      setMobileFocus(null);
+      return;
+    }
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    if (hash === getDriverSectionId(ALIGNED_MOMENTUM_NAME)) {
+      setMobileFocus(ALIGNED_MOMENTUM_NAME);
+      return;
+    }
+    const driverMatch = DRIVER_ORDER.find((d) => getDriverSectionId(d) === hash);
+    if (driverMatch) setMobileFocus(driverMatch);
+  }, [isLg]);
+
+  useEffect(() => {
+    const onHash = () => {
+      if (isLg) return;
+      const h = window.location.hash.slice(1);
+      if (!h) {
+        setMobileFocus(null);
+        return;
+      }
+      if (h === getDriverSectionId(ALIGNED_MOMENTUM_NAME)) {
+        setMobileFocus(ALIGNED_MOMENTUM_NAME);
+        return;
+      }
+      const driverMatch = DRIVER_ORDER.find((d) => getDriverSectionId(d) === h);
+      if (driverMatch) setMobileFocus(driverMatch);
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [isLg]);
 
   useEffect(() => {
     const load = async () => {
@@ -108,9 +213,17 @@ export default function DriversPage() {
   return (
     <div className="flex h-full flex-col">
       <PageHeader title="Driver Library" />
-      <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-6 scrollbar-thin"
+      >
         <div className="mx-auto max-w-6xl space-y-8">
-          <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8">
+          <section
+            className={cn(
+              "rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+              !isLg && mobileFocus && "hidden"
+            )}
+          >
             <p className="text-sm font-medium uppercase tracking-[0.28em] text-accent">
               Driver Library
             </p>
@@ -131,14 +244,29 @@ export default function DriversPage() {
                   borderColor: `${alignedAccent}26`,
                 }}
               >
-                Your current state: <StateAnchor name={ALIGNED_MOMENTUM_NAME} />.
+                Your current state:{" "}
+                <StateBrowseLink
+                  name={ALIGNED_MOMENTUM_NAME}
+                  isLg={isLg}
+                  onPick={openMobileDriver}
+                />
+                .
               </div>
             ) : primaryDriver ? (
               <div className="mt-6 rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm leading-relaxed text-foreground">
-                Your primary driver: <DriverAnchor driver={primaryDriver} />. Your secondary
-                driver:{" "}
+                Your primary driver:{" "}
+                <DriverBrowseLink
+                  driver={primaryDriver}
+                  isLg={isLg}
+                  onPick={openMobileDriver}
+                />
+                . Your secondary driver:{" "}
                 {secondaryDriver ? (
-                  <DriverAnchor driver={secondaryDriver} />
+                  <DriverBrowseLink
+                    driver={secondaryDriver}
+                    isLg={isLg}
+                    onPick={openMobileDriver}
+                  />
                 ) : (
                   "None identified"
                 )}
@@ -159,60 +287,132 @@ export default function DriversPage() {
             )}
           </section>
 
-          <div className="space-y-4 lg:hidden">
-            <div className="-mx-2 overflow-x-auto px-2 pb-1">
-              <div className="flex min-w-max gap-3">
-                <a
-                  href={`#${getDriverSectionId(ALIGNED_MOMENTUM_NAME)}`}
-                  className="flex min-w-[210px] items-center gap-3 rounded-2xl border bg-card/80 px-4 py-3 shadow-sm transition-colors hover:border-accent/30"
+          {!isLg && !mobileFocus && (
+            <div className="lg:hidden space-y-6">
+              <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+                <div className="border-b border-border bg-gradient-to-r from-accent/[0.07] via-transparent to-transparent px-5 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    Explore
+                  </p>
+                  <p className="mt-1 font-serif text-xl font-bold tracking-tight text-foreground">
+                    Pick a pattern
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Full profiles open one at a time—use back to browse the rest.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openMobileDriver(ALIGNED_MOMENTUM_NAME)}
+                  className="flex w-full items-start gap-4 border-b border-border bg-card p-4 text-left transition-colors hover:bg-muted/40 sm:p-5"
                   style={{
-                    borderColor: isAlignedMomentum ? `${alignedAccent}55` : undefined,
-                    backgroundColor: isAlignedMomentum ? `${alignedAccent}16` : undefined,
+                    borderColor: isAlignedMomentum ? `${alignedAccent}44` : undefined,
+                    backgroundColor: isAlignedMomentum ? `${alignedAccent}0D` : undefined,
                   }}
                 >
-                  <DriverIcon driver={ALIGNED_MOMENTUM_NAME} size={24} />
-                  <span
-                    className="text-sm text-foreground"
-                    style={{ fontWeight: isAlignedMomentum ? 700 : 500 }}
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border"
+                    style={{
+                      backgroundColor: `${alignedAccent}14`,
+                      borderColor: `${alignedAccent}40`,
+                    }}
                   >
-                    {ALIGNED_MOMENTUM_NAME}
-                  </span>
-                </a>
-                <div className="flex items-center px-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                  Dysfunction Drivers
-                </div>
-                {DRIVER_ORDER.map((driverName) => {
-                  const accent = DRIVER_ACCENT_COLORS[driverName];
-                  const isPrimary = driverName === primaryDriver;
-                  const isSecondary = driverName === secondaryDriver;
-                  return (
-                    <a
-                      key={`mobile-${driverName}`}
-                      href={`#${getDriverSectionId(driverName)}`}
-                      className="flex min-w-[210px] items-center gap-3 rounded-2xl border bg-card/80 px-4 py-3 shadow-sm transition-colors hover:border-accent/30"
-                      style={{
-                        borderColor: isPrimary
-                          ? `${accent}55`
-                          : isSecondary
-                            ? `${accent}33`
-                            : undefined,
-                        backgroundColor: isPrimary
-                          ? `${accent}16`
-                          : isSecondary
-                            ? `${accent}0D`
-                            : undefined,
-                      }}
-                    >
-                      <DriverIcon driver={driverName} size={24} />
-                      <span className="text-sm font-medium text-foreground">
-                        {driverName}
+                    <DriverIcon driver={ALIGNED_MOMENTUM_NAME} size={28} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="font-semibold leading-snug text-foreground">
+                        {ALIGNED_MOMENTUM_NAME}
                       </span>
-                    </a>
-                  );
-                })}
+                      <ChevronRight
+                        className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+                        aria-hidden
+                      />
+                    </div>
+                    <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {ALIGNED_MOMENTUM_CONTENT.tagline}
+                    </p>
+                    {isAlignedMomentum ? (
+                      <span
+                        className="mt-2 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+                        style={{
+                          backgroundColor: `${alignedAccent}20`,
+                          color: alignedAccent,
+                        }}
+                        >
+                        Your state
+                      </span>
+                    ) : null}
+                  </div>
+                </button>
+                <p className="px-5 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                  Dysfunction patterns
+                </p>
+                <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2">
+                  {DRIVER_ORDER.map((driverName) => {
+                    const accent = DRIVER_ACCENT_COLORS[driverName];
+                    const driver = DRIVER_CONTENT[driverName];
+                    const isPrimary = driverName === primaryDriver;
+                    const isSecondary = driverName === secondaryDriver;
+                    return (
+                      <button
+                        key={`mobile-index-${driverName}`}
+                        type="button"
+                        onClick={() => openMobileDriver(driverName)}
+                        className="flex w-full items-start gap-4 bg-card p-4 text-left transition-colors hover:bg-muted/40 sm:p-5"
+                      >
+                        <div
+                          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border"
+                          style={{
+                            backgroundColor: `${accent}14`,
+                            borderColor: `${accent}40`,
+                          }}
+                        >
+                          <DriverIcon driver={driverName} size={28} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-start justify-between gap-2">
+                            <span className="font-semibold leading-snug text-foreground">
+                              {driverName}
+                            </span>
+                            <ChevronRight
+                              className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+                              aria-hidden
+                            />
+                          </div>
+                          <p className="mt-1.5 line-clamp-2 text-xs italic leading-relaxed text-muted-foreground sm:text-sm">
+                            {driver.tagline}
+                          </p>
+                          {isPrimary ? (
+                            <span
+                              className="mt-2 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+                              style={{
+                                backgroundColor: `${accent}20`,
+                                color: accent,
+                              }}
+                            >
+                              Primary
+                            </span>
+                          ) : null}
+                          {!isPrimary && isSecondary ? (
+                            <span
+                              className="mt-2 inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+                              style={{
+                                backgroundColor: `${accent}14`,
+                                color: accent,
+                              }}
+                            >
+                              Secondary
+                            </span>
+                          ) : null}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="grid gap-8 lg:grid-cols-[260px,minmax(0,1fr)]">
             <aside className="hidden lg:block">
@@ -277,9 +477,24 @@ export default function DriversPage() {
             </aside>
 
             <div className="space-y-8">
+              {!isLg && mobileFocus ? (
+                <div className="sticky top-0 z-20 -mx-1 mb-2 flex items-center gap-2 border-b border-border bg-background/90 px-2 py-3 backdrop-blur-md lg:hidden">
+                  <button
+                    type="button"
+                    onClick={closeMobileDriver}
+                    className="inline-flex items-center gap-1 rounded-full px-2 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  >
+                    <ChevronLeft className="h-5 w-5" aria-hidden />
+                    All patterns
+                  </button>
+                </div>
+              ) : null}
               <section
                 id={getDriverSectionId(ALIGNED_MOMENTUM_NAME)}
-                className="scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8"
+                className={cn(
+                  "scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+                  !isLg && mobileFocus !== ALIGNED_MOMENTUM_NAME && "hidden"
+                )}
               >
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                   <div
@@ -413,7 +628,7 @@ export default function DriversPage() {
                 </div>
               </section>
 
-              <div className="rounded-3xl border border-border bg-background/50 px-6 py-5 text-center shadow-sm">
+              <div className="hidden rounded-3xl border border-border bg-background/50 px-6 py-5 text-center shadow-sm lg:block">
                 <p className="text-sm font-semibold uppercase tracking-[0.28em] text-muted-foreground">
                   {DRIVER_LIBRARY_DIVIDER_HEADING}
                 </p>
@@ -433,7 +648,10 @@ export default function DriversPage() {
                   <section
                     key={driverName}
                     id={getDriverSectionId(driverName)}
-                    className="scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8"
+                    className={cn(
+                      "scroll-mt-24 rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+                      !isLg && mobileFocus !== driverName && "hidden"
+                    )}
                   >
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                       <div
@@ -613,7 +831,12 @@ export default function DriversPage() {
             </div>
           </div>
 
-          <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8">
+          <section
+            className={cn(
+              "rounded-3xl border border-border bg-card/80 p-6 shadow-sm sm:p-8",
+              !isLg && mobileFocus && "hidden"
+            )}
+          >
             <h2 className="text-3xl font-serif font-bold tracking-tight text-foreground">
               {DRIVER_LIBRARY_FOOTER_HEADING}
             </h2>
