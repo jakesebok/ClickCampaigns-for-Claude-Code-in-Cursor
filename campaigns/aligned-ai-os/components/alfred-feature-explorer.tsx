@@ -18,9 +18,10 @@
  * Demo data (Vital Action text, 6Cs numbers, sample coach reply) is illustrative; UI strings match the app.
  */
 
-import { useCallback, useEffect, useRef, useState, type ComponentType } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ComponentType } from "react";
 import {
   Activity,
+  AlertTriangle,
   BarChart3,
   BarChart2,
   BatteryCharging,
@@ -33,39 +34,52 @@ import {
   ChevronRight,
   ChevronUp,
   ClipboardCheck,
-  Loader2,
+  Compass,
   Crosshair,
+  Eye,
   FileText,
+  Focus,
+  Gauge,
   Ghost,
   DollarSign,
+  Globe,
   Heart,
+  Home,
   LayoutDashboard,
   Leaf,
   Link2,
+  Loader2,
   MessageSquare,
   Mic,
-  Send,
   MoreHorizontal,
+  Rocket,
+  Send,
   Settings,
+  Shield,
   ShieldCheck,
   Target,
+  Telescope,
+  TrendingDown,
   Users,
   X,
   Zap,
 } from "lucide-react";
 import {
+  ARCHETYPE_LIBRARY_ROWS_DEMO,
+  ARCHETYPE_LIBRARY_SUBTITLE_DEMO,
   ASSESSMENT_DRIVER_SECTION_NOTE,
   CHAT_SUBTITLE,
   COACH_DEMO_INNER_THREAD_OPENER,
   COACH_DEMO_WEEKLY_THREAD_OPENER,
   DEMO_COMPOSITE_VAPI_SCORE,
   DEMO_FOCUS_HERE_FIRST_DOMAINS,
+  DEMO_PRIORITY_MATRIX_BY_QUADRANT,
   DEMO_RESULTS_DOMAIN_SAMPLES,
+  DRIVER_LIBRARY_ORDER_LIST,
   DRIVER_LIBRARY_SUBTITLE,
+  DRIVER_LIBRARY_TITLE,
   WEEKLY_DEMO_CASUAL_USER_MESSAGE,
   WEEKLY_PLANNING_DEMO_TURNS,
-  DRIVER_LIBRARY_TITLE,
-  DRIVER_ORDER_PREVIEW,
   ESCAPE_ARTIST_ACCENT,
   ESCAPE_ARTIST_DRIVER,
   ESCAPE_ARTIST_LIBRARY,
@@ -82,6 +96,7 @@ import {
   WEEKLY_PLANNING_PROMPTS,
   demoVapiGetTier,
   demoVapiTierColor,
+  type DemoPriorityQuadrant,
 } from "./alfred-feature-explorer-data";
 
 type CoachThreadPrompt =
@@ -658,7 +673,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
       if (driversPhase === "escapeDetail") {
         return {
           kicker: "Driver Library",
-          title: "The Escape Artist (full profile)",
+          title: "Turn a label into a playbook",
           body: "A driver profile names the pattern beneath the pattern—how it shows up in life, what it costs, and what “healthy” looks like for you. Reading the full write-up turns a label into language you can use in Coach, in marriage, and in leadership without shame spirals. When the story is explicit, you can negotiate with it instead of obeying it. The payoff is behavioral: you finally have a playbook for the exit that fits your actual constraints—not a meme about discipline.",
         };
       }
@@ -788,7 +803,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           onMouseLeave={() => setPhoneHover(false)}
         >
           <div
-            className="relative w-full rounded-[2.5rem] border-[6px] border-[#1a2332] bg-[#1a2332] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-shadow duration-300 ease-out"
+            className="relative w-full rounded-[2.5rem] border-2 border-black bg-neutral-950 shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-shadow duration-300 ease-out"
             style={{ aspectRatio: "9 / 19" }}
           >
             <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem]">
@@ -1193,6 +1208,7 @@ type CoachDemoChatSequenceProps = {
 function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
   const { replayKey, opener, reduceMotion, onBack, scriptTurns, firstUserMessage, variant } = props;
   const scrollRef = useRef<HTMLDivElement>(null);
+  const composerRef = useRef<HTMLTextAreaElement>(null);
   const [messages, setMessages] = useState<CoachDemoBubble[]>([]);
   const [streamBuffer, setStreamBuffer] = useState("");
   const [composerValue, setComposerValue] = useState("");
@@ -1204,6 +1220,17 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
     if (!el) return;
     el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
   }, [messages, streamBuffer, composerValue, thinking, reduceMotion]);
+
+  useLayoutEffect(() => {
+    const ta = composerRef.current;
+    if (!ta) return;
+    ta.style.height = "auto";
+    const maxH = 120;
+    const sh = ta.scrollHeight;
+    const next = Math.min(maxH, Math.max(36, sh));
+    ta.style.height = `${next}px`;
+    ta.style.overflowY = sh > maxH ? "auto" : "hidden";
+  }, [composerValue]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1366,11 +1393,12 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
       <div className="shrink-0 border-t border-white/10 p-3">
         <div className="flex items-end gap-2">
           <textarea
+            ref={composerRef}
             readOnly
             value={composerValue}
-            rows={2}
+            rows={1}
             placeholder="Ask your coach anything..."
-            className="flex-1 resize-none rounded-xl border border-white/10 bg-[#0E1624] px-3 py-2 text-[10px] text-white/90 placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-ap-accent/35 min-h-[40px] max-h-[88px]"
+            className="flex-1 resize-none rounded-xl border border-white/10 bg-[#0E1624] px-3 py-2 text-[10px] text-white/90 placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-ap-accent/35 min-h-[36px] max-h-[120px] leading-snug"
           />
           <button
             type="button"
@@ -1921,11 +1949,6 @@ function ResultsDeepScreen() {
 }
 
 function ScorecardDemoScreen() {
-  const cats = [
-    { label: "Clarity", icon: Crosshair, pct: 72, open: true },
-    { label: "Coherence", icon: Link2, pct: 68, open: false },
-    { label: "Capacity", icon: BatteryCharging, pct: 55, open: false },
-  ] as const;
   return (
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2">
@@ -1936,34 +1959,40 @@ function ScorecardDemoScreen() {
         Answer once per window. Reflection + “one thing” capture what actually happened—feeds Alfred and your review.
       </div>
       <div className="space-y-2">
-        {cats.map(({ label, icon: Icon, pct, open }) => (
-          <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
-            <div className="flex items-center justify-between px-2.5 py-2">
-              <div className="flex items-center gap-2 min-w-0">
-                <Icon className="h-3.5 w-3.5 text-ap-accent shrink-0" />
-                <span className="text-[11px] font-semibold text-white truncate">{label}</span>
-              </div>
-              <span className="text-xs font-bold tabular-nums text-white">{pct}%</span>
-            </div>
-            {open && (
-              <div className="border-t border-white/10 px-2.5 py-2 space-y-1.5 bg-[#0E1624]/80">
-                <p className="text-[8px] text-white/40 uppercase tracking-wider">5 questions · 1–5 scale</p>
-                <div className="flex gap-1">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <div
-                      key={n}
-                      className={`flex-1 h-6 rounded-md border text-[9px] flex items-center justify-center ${
-                        n === 4 ? "border-ap-accent bg-ap-accent/20 text-white" : "border-white/10 text-white/35"
-                      }`}
-                    >
-                      {n}
-                    </div>
-                  ))}
+        {SIX_CS_DEMO.map(({ label, icon: Icon, pct }, idx) => {
+          const open = idx === 0;
+          const c = scoreBarColor(pct);
+          return (
+            <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
+              <div className="flex items-center justify-between px-2.5 py-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: c }} />
+                  <span className="text-[11px] font-semibold text-white truncate">{label}</span>
                 </div>
+                <span className="text-xs font-bold tabular-nums" style={{ color: c }}>
+                  {pct}%
+                </span>
               </div>
-            )}
-          </div>
-        ))}
+              {open && (
+                <div className="border-t border-white/10 px-2.5 py-2 space-y-1.5 bg-[#0E1624]/80">
+                  <p className="text-[8px] text-white/40 uppercase tracking-wider">5 questions · 1–5 scale</p>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <div
+                        key={n}
+                        className={`flex-1 h-6 rounded-md border text-[9px] flex items-center justify-center ${
+                          n === 4 ? "border-ap-accent bg-ap-accent/20 text-white" : "border-white/10 text-white/35"
+                        }`}
+                      >
+                        {n}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
       <div className="rounded-xl border border-dashed border-white/15 px-2.5 py-2 text-[9px] text-white/45">
         Submit locks the week; history builds trend lines Alfred uses in planning prompts.
@@ -1972,38 +2001,126 @@ function ScorecardDemoScreen() {
   );
 }
 
+const PRIORITY_QUAD_UI: Record<
+  DemoPriorityQuadrant,
+  { Icon: typeof AlertTriangle; shell: string; title: string; desc: string }
+> = {
+  "Critical Priority": {
+    Icon: AlertTriangle,
+    shell: "border-red-500/30 bg-red-500/10",
+    title: "text-red-300",
+    desc: "High importance, low score — focus here first",
+  },
+  "Protect & Sustain": {
+    Icon: Shield,
+    shell: "border-emerald-500/30 bg-emerald-500/10",
+    title: "text-emerald-300",
+    desc: "High importance, high score — don't neglect these",
+  },
+  Monitor: {
+    Icon: Eye,
+    shell: "border-amber-500/25 bg-amber-500/10",
+    title: "text-amber-200",
+    desc: "Lower importance, lower score — keep an eye on these",
+  },
+  "Possible Over-Investment": {
+    Icon: TrendingDown,
+    shell: "border-sky-500/25 bg-sky-500/10",
+    title: "text-sky-200",
+    desc: "Lower importance, high score — could redirect energy",
+  },
+};
+
+const PRIORITY_DOMAIN_ICON: Record<string, ComponentType<{ className?: string }>> = {
+  PH: Activity,
+  IA: Compass,
+  ME: Brain,
+  AF: Focus,
+  RS: Heart,
+  FA: Home,
+  CO: Users,
+  WI: Globe,
+  VS: Telescope,
+  EX: Rocket,
+  OH: Gauge,
+  EC: Leaf,
+};
+
 function PrioritiesDemoScreen() {
-  const cells = [
-    { title: "Critical", sub: "High importance · low score", tone: "border-red-500/30 bg-red-500/10 text-red-200" },
-    { title: "Protect", sub: "High importance · high score", tone: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200" },
-    { title: "Monitor", sub: "Lower priority watch list", tone: "border-amber-500/25 bg-amber-500/10 text-amber-100" },
-    { title: "Over-invest?", sub: "Strong score · lower stated priority", tone: "border-sky-500/25 bg-sky-500/10 text-sky-200" },
-  ] as const;
+  const [expandedQuad, setExpandedQuad] = useState<Record<DemoPriorityQuadrant, boolean>>({
+    "Critical Priority": true,
+    "Protect & Sustain": false,
+    Monitor: false,
+    "Possible Over-Investment": false,
+  });
+
   return (
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2">
         <h1 className="text-sm font-semibold text-white">Priorities</h1>
         <p className="text-[10px] text-white/45 mt-1">Explore your priority matrix</p>
       </header>
-      <div className="grid grid-cols-2 gap-1.5">
-        {cells.map((c) => (
-          <div key={c.title} className={`rounded-xl border p-2 ${c.tone}`}>
-            <p className="text-[10px] font-bold">{c.title}</p>
-            <p className="text-[8px] opacity-80 mt-1 leading-snug">{c.sub}</p>
-          </div>
-        ))}
+      <p className="text-[9px] text-white/45 leading-relaxed">
+        Same quadrants as /priorities: importance you stated in the VAPI vs domain scores. Expand a section to see
+        domains, scores, and tiers.
+      </p>
+      <div className="space-y-2 max-h-[min(340px,62vh)] overflow-y-auto pr-0.5">
+        {DEMO_PRIORITY_MATRIX_BY_QUADRANT.map(({ quadrant, items }) => {
+          const meta = PRIORITY_QUAD_UI[quadrant];
+          const QIcon = meta.Icon;
+          const isOpen = expandedQuad[quadrant];
+          return (
+            <div key={quadrant} className={`rounded-xl border overflow-hidden shadow-sm ${meta.shell}`}>
+              <button
+                type="button"
+                onClick={() => setExpandedQuad((e) => ({ ...e, [quadrant]: !e[quadrant] }))}
+                className="flex w-full items-center justify-between gap-2 px-2.5 py-2 text-left hover:bg-black/10 transition-colors"
+              >
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <QIcon className={`h-3.5 w-3.5 shrink-0 ${meta.title}`} />
+                  <span className={`text-[10px] font-semibold truncate ${meta.title}`}>{quadrant}</span>
+                </div>
+                {isOpen ? (
+                  <ChevronUp className="h-3.5 w-3.5 shrink-0 text-white/50" />
+                ) : (
+                  <ChevronDown className="h-3.5 w-3.5 shrink-0 text-white/50" />
+                )}
+              </button>
+              <p className="px-2.5 pb-1.5 text-[8px] text-white/50 leading-snug">{meta.desc}</p>
+              {isOpen && (
+                <div className="border-t border-white/10 bg-[#0E1624]/80 px-2 py-2 space-y-1.5">
+                  {items.map((item) => {
+                    const Icon = PRIORITY_DOMAIN_ICON[item.code] ?? Activity;
+                    const tier = demoVapiGetTier(item.score);
+                    const col = demoVapiTierColor(item.score);
+                    return (
+                      <div
+                        key={item.code}
+                        className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-2 py-1.5"
+                      >
+                        <Icon className="h-3.5 w-3.5 text-ap-accent shrink-0" />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[10px] text-white/90 leading-tight">{item.name}</p>
+                          <p className="text-[8px] text-white/40 mt-0.5">Priority {item.importance}/10</p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="text-[10px] font-semibold tabular-nums" style={{ color: col }}>
+                            {item.score.toFixed(1)}
+                          </p>
+                          <p className="text-[8px] text-white/45">{tier}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.04] p-2.5 space-y-1.5">
-        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Example row</p>
-        <div className="flex items-center gap-2">
-          <Activity className="h-3.5 w-3.5 text-ap-accent shrink-0" />
-          <span className="text-[10px] text-white/80 flex-1">Physical Health</span>
-          <span className="text-[9px] text-red-300 font-semibold">Critical</span>
-        </div>
-        <p className="text-[9px] text-white/45 leading-relaxed">
-          Tap any domain in-app for the full interpretation block from DOMAIN_INTERPRETATIONS.
-        </p>
-      </div>
+      <p className="text-[8px] text-white/40 leading-relaxed">
+        In-app, each row links to Coach with your priority context preloaded.
+      </p>
     </div>
   );
 }
@@ -2012,6 +2129,7 @@ function BlueprintDemoScreen() {
   const sections = [
     { icon: Target, label: "North Star Stack" },
     { icon: Heart, label: "Core Values" },
+    { icon: Compass, label: "The Future You" },
     { icon: DollarSign, label: "Revenue + Operations" },
     { icon: Crosshair, label: "Vital Action (90 Days)" },
   ] as const;
@@ -2027,6 +2145,11 @@ function BlueprintDemoScreen() {
           <p className="text-[10px] font-bold text-ap-accent">78%</p>
         </div>
       </header>
+      <p className="text-[9px] text-white/45 leading-relaxed">
+        Sample user: B2B founder, <span className="text-white/70">The Ghost</span> +{" "}
+        <span className="text-white/70">Escape Artist</span> pattern. Blueprint is what Alfred loads into Coach so you
+        are not re-pasting your life story every week.
+      </p>
       <div className="flex flex-wrap gap-1">
         {sections.map(({ icon: Icon, label }) => (
           <span
@@ -2041,48 +2164,125 @@ function BlueprintDemoScreen() {
       <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-2">
         <p className="text-[10px] font-semibold text-white">North Star Stack</p>
         <p className="text-[9px] text-white/55 leading-relaxed">
-          Becoming: present CEO and partner · Real Reasons: time sovereignty, legacy with kids · Driving Fire: build the
-          OS without sacrificing the marriage.
+          <span className="text-white/75">Identity:</span> Calm, present CEO who closes without living in Slack.{" "}
+          <span className="text-white/75">Real Reasons:</span> Kid bedtimes, marriage not last on the list, proof I can
+          build without disappearing. <span className="text-white/75">Driving Fire:</span> Replace hero-mode revenue with
+          a system that runs when I step away.
         </p>
-        <p className="text-[9px] text-white/40 italic">Markdown sections match /blueprint rendering in production.</p>
       </div>
+      <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-1.5">
+        <p className="text-[10px] font-semibold text-white">Core Values (top 3)</p>
+        <ul className="text-[9px] text-white/55 leading-relaxed list-disc pl-3.5 space-y-0.5">
+          <li>Integrity over performative hustle</li>
+          <li>Family edges are real edges (dinner, weekends)</li>
+          <li>Depth with a small circle over wide shallow network</li>
+        </ul>
+      </div>
+      <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-1.5">
+        <p className="text-[10px] font-semibold text-white">The Future You · 12 months</p>
+        <p className="text-[9px] text-white/55 leading-relaxed">
+          Revenue stable with a real bench (not just me). Mornings owned for strategy and QCs, not notifications. Partner
+          says I am “here” again; two close friendships feel reciprocal, not transactional.
+        </p>
+      </div>
+      <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-1.5">
+        <p className="text-[10px] font-semibold text-white">Revenue + Operations</p>
+        <p className="text-[9px] text-white/55 leading-relaxed">
+          Bridge this quarter: <span className="text-white/80">12 qualified conversations / week</span>, ~28% close,
+          average deal in band with current offer. Bottleneck is outbound + follow-up, not delivery. Ops: one weekly
+          pipeline review, CRM hygiene Friday 4 p.m.
+        </p>
+      </div>
+      <div className="rounded-xl border border-ap-accent/30 bg-ap-accent/10 p-2.5 space-y-1">
+        <p className="text-[10px] font-semibold text-white">Vital Action (90 days)</p>
+        <p className="text-[9px] text-white/80 leading-relaxed">
+          Defend <span className="font-semibold">two 90-minute morning focus blocks</span> Mon–Thu before Slack or email.
+          Non-negotiables already in context: <span className="font-semibold">dinner by 6:30</span>,{" "}
+          <span className="font-semibold">no Slack after 8 p.m.</span>
+        </p>
+      </div>
+      <p className="text-[8px] text-white/40 leading-relaxed">
+        Full app renders your uploaded Strategic Clarity / onboarding answers as markdown here—the same text Alfred sees
+        in Coach.
+      </p>
     </div>
   );
 }
 
 function ArchetypesDemoScreen() {
-  const rows = [
-    { name: "The Ghost", active: true },
-    { name: "The Operator", active: false },
-    { name: "The Visionary", active: false },
-  ] as const;
   return (
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2">
-        <p className="text-[9px] font-semibold text-ap-accent uppercase tracking-wider">Library</p>
+        <p className="text-[9px] font-semibold text-ap-accent uppercase tracking-wider">Archetype Library</p>
         <h1 className="text-sm font-semibold text-white mt-1">{ARCHETYPE_LIBRARY_DEMO_TITLE}</h1>
-        <p className="text-[10px] text-white/45 mt-1 leading-relaxed">
-          Same archetype essays as /archetypes—browse patterns before you lock your story.
-        </p>
+        <p className="text-[9px] text-white/45 mt-1 leading-relaxed">{ARCHETYPE_LIBRARY_SUBTITLE_DEMO}</p>
       </header>
-      <div className="space-y-1.5">
-        {rows.map(({ name, active }) => (
-          <div
-            key={name}
-            className={`flex items-center gap-2 rounded-xl border px-2.5 py-2 ${
-              active ? "border-ap-accent/40 bg-ap-accent/10" : "border-white/10 bg-white/[0.03]"
-            }`}
-          >
-            <span className={`text-[11px] font-medium flex-1 min-w-0 ${active ? "text-white" : "text-white/50"}`}>
-              {name}
-            </span>
-            {active ? <span className="text-[8px] font-bold uppercase text-ap-accent shrink-0">Yours</span> : null}
-            <ChevronRight className="h-4 w-4 text-white/30 shrink-0" />
-          </div>
-        ))}
+      <div className="rounded-xl border border-white/10 bg-white/[0.04] px-2.5 py-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Your current archetype</p>
+        <p className="text-[10px] text-white/85 mt-1">
+          <span className="font-semibold text-ap-accent">The Ghost</span>
+          <span className="text-white/45"> · matches your latest VAPI</span>
+        </p>
       </div>
-      <p className="text-[9px] text-white/40 leading-relaxed">
-        Full entries include strength, shadow, constraint, growth path, and program phase—mirroring archetypes-full.ts.
+      <div>
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45 mb-1">Explore</p>
+        <p className="text-[11px] font-cormorant font-bold text-white">Pick an archetype</p>
+        <p className="text-[9px] text-white/45 mt-0.5 leading-snug">
+          Same nine profiles and essays as /archetypes—scroll to browse.
+        </p>
+      </div>
+      <div className="space-y-1 max-h-[min(300px,55vh)] overflow-y-auto pr-0.5">
+        {ARCHETYPE_LIBRARY_ROWS_DEMO.map((row) => {
+          const isYours = row.name === "The Ghost";
+          return (
+            <div
+              key={row.name}
+              className={`flex w-full items-start gap-2 rounded-xl border px-2 py-2 text-left ${
+                isYours ? "border-ap-accent/35 bg-ap-accent/10" : "border-white/10 bg-white/[0.03]"
+              }`}
+            >
+              <div
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${
+                  isYours ? "" : "border-white/10 bg-white/[0.04]"
+                }`}
+                style={
+                  isYours
+                    ? {
+                        backgroundColor: `${GHOST_ARCHETYPE_ACCENT}18`,
+                        borderColor: `${GHOST_ARCHETYPE_ACCENT}44`,
+                      }
+                    : undefined
+                }
+              >
+                {isYours ? (
+                  <Ghost className="h-4 w-4" style={{ color: GHOST_ARCHETYPE_ACCENT }} />
+                ) : (
+                  <span className="text-[9px] font-bold text-white/30">+</span>
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-start justify-between gap-1">
+                  <span className={`text-[10px] font-semibold leading-snug ${isYours ? "text-white" : "text-white/65"}`}>
+                    {row.name}
+                  </span>
+                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/25" />
+                </div>
+                <p className="text-[8px] text-white/45 mt-1 leading-snug line-clamp-2">{row.tagline}</p>
+                {isYours ? (
+                  <span
+                    className="mt-1 inline-block rounded-full px-2 py-0.5 text-[7px] font-bold uppercase tracking-wide text-ap-accent"
+                    style={{ backgroundColor: `${GHOST_ARCHETYPE_ACCENT}22` }}
+                  >
+                    Your pattern
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <p className="text-[8px] text-white/40 leading-relaxed">
+        Full profile: strength, shadow, constraint, growth path, program phase (archetypes-full.ts).
       </p>
     </div>
   );
@@ -2150,44 +2350,58 @@ function DriversScreen({
             <p className="text-sm font-cormorant font-bold text-white">Pick a pattern</p>
             <p className="text-[9px] text-white/45 mt-0.5">Full profiles open one at a time—use back to browse the rest.</p>
           </div>
-          <p className="px-3 py-2 text-[8px] font-semibold uppercase tracking-wider text-white/45">Dysfunction patterns</p>
-          <button
-            type="button"
-            onClick={onOpenEscape}
-            className="flex w-full items-start gap-3 border-t border-white/10 bg-white/[0.03] p-3 text-left hover:bg-white/[0.06]"
-          >
-            <div
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border"
-              style={{
-                backgroundColor: `${ESCAPE_ARTIST_ACCENT}14`,
-                borderColor: `${ESCAPE_ARTIST_ACCENT}40`,
-              }}
-            >
-              <EscapeArtistGlyph size={26} />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-start justify-between gap-2">
-                <span className="text-[11px] font-semibold text-white leading-snug">{ESCAPE_ARTIST_DRIVER.name}</span>
-                <ChevronRight className="h-4 w-4 shrink-0 text-white/40" />
-              </div>
-              <p className="text-[9px] italic text-white/45 mt-1 line-clamp-2">{ESCAPE_ARTIST_DRIVER.tagline}</p>
-              <span
-                className="mt-1.5 inline-block rounded-full px-2 py-0.5 text-[8px] font-bold uppercase tracking-wide"
-                style={{ backgroundColor: `${ESCAPE_ARTIST_ACCENT}22`, color: ESCAPE_ARTIST_ACCENT }}
-              >
-                Primary
-              </span>
-            </div>
-          </button>
-          {DRIVER_ORDER_PREVIEW.map((name) => (
-            <div
-              key={name}
-              className="flex w-full items-center gap-3 border-t border-white/10 bg-[#0E1624]/80 p-3 opacity-50"
-            >
-              <div className="h-10 w-10 rounded-xl bg-white/5 shrink-0" />
-              <span className="text-[10px] text-white/50">{name}</span>
-            </div>
-          ))}
+          <p className="px-3 py-2 text-[8px] font-semibold uppercase tracking-wider text-white/45">
+            The 10 dysfunction drivers
+          </p>
+          <div className="max-h-[min(280px,52vh)] overflow-y-auto">
+            {DRIVER_LIBRARY_ORDER_LIST.map((name) => {
+              const isEscape = name === ESCAPE_ARTIST_DRIVER.name;
+              if (isEscape) {
+                return (
+                  <button
+                    key={name}
+                    type="button"
+                    onClick={onOpenEscape}
+                    className="flex w-full items-start gap-3 border-t border-white/10 bg-white/[0.03] p-3 text-left hover:bg-white/[0.06]"
+                  >
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border"
+                      style={{
+                        backgroundColor: `${ESCAPE_ARTIST_ACCENT}14`,
+                        borderColor: `${ESCAPE_ARTIST_ACCENT}40`,
+                      }}
+                    >
+                      <EscapeArtistGlyph size={26} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="text-[11px] font-semibold text-white leading-snug">{name}</span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-white/40" />
+                      </div>
+                      <p className="text-[9px] italic text-white/45 mt-1 line-clamp-2">{ESCAPE_ARTIST_DRIVER.tagline}</p>
+                      <span
+                        className="mt-1.5 inline-block rounded-full px-2 py-0.5 text-[8px] font-bold uppercase tracking-wide"
+                        style={{ backgroundColor: `${ESCAPE_ARTIST_ACCENT}22`, color: ESCAPE_ARTIST_ACCENT }}
+                      >
+                        Primary
+                      </span>
+                    </div>
+                  </button>
+                );
+              }
+              return (
+                <div
+                  key={name}
+                  className="flex w-full items-center gap-3 border-t border-white/10 bg-[#0E1624]/80 p-3 opacity-[0.42] pointer-events-none select-none grayscale"
+                  aria-hidden
+                >
+                  <div className="h-10 w-10 rounded-xl bg-white/5 shrink-0" />
+                  <span className="text-[10px] text-white/45 flex-1 min-w-0">{name}</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-white/15" />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );

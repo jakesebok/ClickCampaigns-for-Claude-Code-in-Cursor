@@ -10,7 +10,7 @@ export function AlfredHeroPhone({ className = "" }: { className?: string }) {
     <div className={className}>
       <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px] alfred-hero-float-after">
         <div
-          className="relative rounded-[2.5rem] border-[6px] border-[#1a2332] bg-[#1a2332] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset]"
+          className="relative rounded-[2.5rem] border-2 border-black bg-neutral-950 shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset]"
           style={{ aspectRatio: "9 / 19" }}
         >
           <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem]">

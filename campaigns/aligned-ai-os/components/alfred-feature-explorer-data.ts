@@ -150,16 +150,16 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Sample skeleton (adjust for your time zone):\n\n**Mon:** 8:00–10:30 deep work (Vital Action). 10:30–12:00 QC. Lunch. 1:00–3:00 delivery. 3:30–4:30 admin buffer.\n**Tue:** QC-heavy morning + one 90-minute deep block mid-day.\n**Wed:** Like Mon with a shorter QC window if energy dips.\n**Thu:** QC + one partnership / follow-up block.\n**Fri:** Lighter QC, weekly review, 60 minutes for Becoming / inner work that supports next week's Vital Action.",
+      "Here is **Monday only**, using your real edges: Vital Action first, QCs before noon, hard stop for family dinner, no Slack after 8.\n\n**Mon** · 8:00–10:30 Deep work (Vital Action block; phone on Do Not Disturb). 10:45–12:00 Two QC blocks with a 10-minute buffer between. Lunch. 1:00–3:00 Delivery / build time. 3:30–4:30 Admin buffer. 5:30 Hard wrap so you can hit **dinner by 6:30**. After 8 p.m., **no Slack**.\n\nIf a meeting tries to land in the first block, treat it like a calendar error and move it. Once Monday is honest, we mirror the same rules onto Tue–Fri around your fixed commitments.",
   },
   {
     role: "user",
-    content: "friday becoming is always the one i skip lol",
+    content: "friday skill development is always the one i skip lol",
   },
   {
     role: "assistant",
     content:
-      "Then we name it and protect it anyway—same rule as the family edge.\n\n**What to say no to:** anything that steals the first morning block or pushes QC to \"later tonight.\" If something has to slip, we delete a *meeting*—not the Vital Action block, not dinner, not the 8 p.m. Slack boundary.\n\nSend your fixed commitments (pickups, standing calls) and I'll drop them in and re-balance.",
+      "Totally normal—and skipping it is how next week’s Vital Action starves.\n\nTry **30 minutes** this Friday, same time, boring calendar label (“skill development”), same room if you can. Protect it like dinner: if something has to slip, we delete a **meeting**, not the morning Vital Action block, not dinner, and not the 8 p.m. Slack edge.\n\nSend your fixed commitments (pickups, standing calls) and I will drop them into **Tuesday–Friday** with the same structure.",
   },
 ];
 
@@ -243,12 +243,22 @@ export const DRIVER_LIBRARY_TITLE = "The 10 Driver Patterns + Aligned Momentum";
 export const DRIVER_LIBRARY_SUBTITLE =
   "Underneath every score pattern is an internal operating system. For most founders, that system includes a belief, a fear, and a coping strategy that silently works against their goals. These are the 10 most common dysfunction drivers. But when no dysfunction driver is present and your scores reflect broad, genuine strength, something different appears: Aligned Momentum. That's the state every driver pattern is building toward.";
 
-/** lib/vapi/driver-library.ts — DRIVER_ORDER (first 3 shown as non-interactive preview rows in demo) */
-export const DRIVER_ORDER_PREVIEW = [
+/** lib/vapi/driver-library.ts — DRIVER_ORDER (all 10 dysfunction drivers; demo list is non-interactive except Escape Artist). */
+export const DRIVER_LIBRARY_ORDER_LIST = [
   "The Achiever's Trap",
   "The Protector",
   "The Pleaser's Bind",
+  "The Escape Artist",
+  "The Perfectionist's Prison",
+  "The Imposter Loop",
+  "The Martyr Complex",
+  "The Fog",
+  "The Scattered Mind",
+  "The Builder's Gap",
 ] as const;
+
+/** @deprecated Use DRIVER_LIBRARY_ORDER_LIST */
+export const DRIVER_ORDER_PREVIEW = DRIVER_LIBRARY_ORDER_LIST;
 
 /**
  * Mirrors aligned-ai-os `lib/vapi/scoring.ts` — `getTier` + `getTierColor` (1–10 VAPI scale).
@@ -308,6 +318,94 @@ export const DEMO_RESULTS_DOMAIN_SAMPLES = [
   { code: "EC", name: "Ecology", score: 4.5 },
 ] as const;
 
+/** lib/vapi/archetype-library.ts — ARCHETYPE_LIBRARY_ORDER + archetypes-full.ts taglines (demo library list). */
+export const ARCHETYPE_LIBRARY_ROWS_DEMO = [
+  {
+    name: "The Architect",
+    tagline: "You've built a life and business that actually work together.",
+  },
+  {
+    name: "The Journeyman",
+    tagline:
+      "You've built real skill across the board. One arena is lagging, and that's the final edge to sharpen.",
+  },
+  {
+    name: "The Performer",
+    tagline: "Impressive output. Crumbling foundation.",
+  },
+  {
+    name: "The Ghost",
+    tagline: "Building an empire. Disappearing from your own life.",
+  },
+  {
+    name: "The Guardian",
+    tagline: "All heart. Needs a vehicle.",
+  },
+  {
+    name: "The Seeker",
+    tagline: "Deeply self-aware. Stuck in insight.",
+  },
+  {
+    name: "The Drifter",
+    tagline: "Fine everywhere. Exceptional nowhere.",
+  },
+  {
+    name: "The Engine",
+    tagline: "Building fast. Building wrong.",
+  },
+  {
+    name: "The Phoenix",
+    tagline: "In the fire. Not finished.",
+  },
+] as const;
+
+/** Shortened from lib/vapi/archetype-library.ts for the mock screen. */
+export const ARCHETYPE_LIBRARY_SUBTITLE_DEMO =
+  "Your archetype is how your energy is spread across Self, Relationships, and Business right now—not a life sentence. As scores move, the pattern can move with them. Reading all nine helps you see where you are and what you are building toward.";
+
+export type DemoPriorityQuadrant =
+  | "Critical Priority"
+  | "Protect & Sustain"
+  | "Monitor"
+  | "Possible Over-Investment";
+
+/** Same rules as getPriorityMatrix (importance 1–10, score from demo user). */
+export const DEMO_PRIORITY_MATRIX_BY_QUADRANT: {
+  quadrant: DemoPriorityQuadrant;
+  items: { code: string; name: string; score: number; importance: number }[];
+}[] = [
+  {
+    quadrant: "Critical Priority",
+    items: [
+      { code: "PH", name: "Physical Health", score: 3.5, importance: 9 },
+      { code: "ME", name: "Mental / Emotional Health", score: 5.0, importance: 8 },
+      { code: "RS", name: "Relationship to Self", score: 3.8, importance: 8 },
+      { code: "FA", name: "Family", score: 4.0, importance: 9 },
+      { code: "CO", name: "Community", score: 4.2, importance: 8 },
+      { code: "EC", name: "Ecology", score: 4.5, importance: 8 },
+    ],
+  },
+  {
+    quadrant: "Protect & Sustain",
+    items: [
+      { code: "VS", name: "Vision / Strategy", score: 8.9, importance: 9 },
+      { code: "EX", name: "Execution", score: 8.9, importance: 10 },
+      { code: "OH", name: "Operational Health", score: 8.9, importance: 8 },
+    ],
+  },
+  {
+    quadrant: "Monitor",
+    items: [{ code: "WI", name: "World / Impact", score: 4.4, importance: 4 }],
+  },
+  {
+    quadrant: "Possible Over-Investment",
+    items: [
+      { code: "IA", name: "Inner Alignment", score: 8.2, importance: 6 },
+      { code: "AF", name: "Attention & Focus", score: 8.1, importance: 6 },
+    ],
+  },
+];
+
 /**
  * Illustrative coach reply for the exact "Calendar: Becoming + Vital Action" prompt.
  * Grounded in COACHING_SYSTEM_PROMPT rules (Vital Action, QC, capacity, boundaries).
@@ -329,7 +427,7 @@ Your blueprint lists **dinner with family by 6:30** as non-negotiable and **no S
 - **Tue:** QC-focused morning. One 90-minute deep-work block mid-day for the thing only you can do.  
 - **Wed:** Same pattern as Monday with a shorter QC window if your energy dips mid-week.  
 - **Thu:** QC + one partnership or follow-up block.  
-- **Fri:** Lighter QC, weekly review, and protect a 60-minute "Becoming" block (reading, reflection, or the inner work that supports next week's Vital Action).
+- **Fri:** Lighter QC, weekly review, and protect a 60-minute **skill development** block (reading, reflection, or the work that supports next week's Vital Action).
 
 **What to say no to**  
 Anything that steals the first morning block or pushes QC to "later tonight" is a red flag. If something has to slip, we delete a *meeting*, not the Vital Action block, and not the family edge.
