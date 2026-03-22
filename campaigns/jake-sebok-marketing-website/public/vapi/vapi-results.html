@@ -318,6 +318,18 @@
 
     <div id="continue-journey" class="space-y-6 no-print mt-12 scroll-mt-24">
       <h2 class="text-2xl text-[var(--ap-primary)]">Continue your alignment journey</h2>
+      <div class="rounded-2xl border-2 border-[var(--ap-accent)] bg-gradient-to-br from-[var(--ap-accent)]/15 to-[var(--ap-primary)]/5 shadow-lg p-6 sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-2">Next step</p>
+        <h3 class="text-xl sm:text-2xl text-[var(--ap-primary)] mb-3">Turn this snapshot into a daily coach — ALFRED</h3>
+        <p class="text-[var(--ap-secondary)] text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">You&apos;ve seen your scores and patterns. <strong class="text-[var(--ap-primary)]">Aligned Freedom Coach (ALFRED)</strong> is the app where that picture meets your week—VAPI™ context, Founder Archetype, 6Cs, and Vital Actions, so you&apos;re not guessing alone after you close this tab.</p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+          <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-[100px] bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3.5 transition-colors shadow-md shadow-[var(--ap-accent)]/20">
+            Open ALFRED
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="https://jakesebok.com/who-is-alfred" class="inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[var(--ap-primary)]/25 hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3.5 transition-colors">What is ALFRED?</a>
+        </div>
+      </div>
       <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
         <h3 class="text-xl text-[var(--ap-primary)] mb-2">Free Aligned Freedom course</h3>
         <p class="text-[var(--ap-secondary)] text-sm mb-4">Put names to your gaps, diagnose what’s really going on, and see what it’s costing you and what’s possible when you stop staying stuck. Your VAPI results are your baseline; the course builds from here.</p>
@@ -1148,6 +1160,22 @@
           html += '<p class="text-sm text-[var(--ap-secondary)] mt-3 leading-relaxed">' + text + '</p>';
           html += '</div>';
         });
+        html += '</div>';
+
+        // ALFRED — mid-page CTA (after arena overview, before priority matrix)
+        html += '<div class="no-print alf-inline-cta rounded-xl border-2 border-[var(--ap-accent)] bg-gradient-to-br from-[var(--ap-accent)]/12 to-[var(--ap-primary)]/5 p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+        html += '<div class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--ap-accent)]/25 flex items-center justify-center" aria-hidden="true">';
+        html += '<i data-lucide="sparkles" class="w-5 h-5 text-[var(--ap-accent)]"></i>';
+        html += '</div>';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-1">Continue your journey</p>';
+        html += '<p class="font-semibold text-[var(--ap-primary)] mb-1">Put this snapshot to work with ALFRED</p>';
+        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Aligned Freedom Coach uses your VAPI™ results, archetype, and check-ins—so your AI coach stays values-aligned when life gets loud.</p>';
+        html += '</div>';
+        html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0 w-full sm:w-auto">';
+        html += '<a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-[100px] transition-colors whitespace-nowrap">Open ALFRED <i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>';
+        html += '<a href="https://jakesebok.com/who-is-alfred" class="inline-flex items-center justify-center gap-2 text-sm font-semibold border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] px-4 py-2.5 rounded-[100px] transition-colors whitespace-nowrap">What is ALFRED?</a>';
+        html += '</div>';
         html += '</div>';
 
         // Priority Matrix teaser — full matrix lives in portal dashboard

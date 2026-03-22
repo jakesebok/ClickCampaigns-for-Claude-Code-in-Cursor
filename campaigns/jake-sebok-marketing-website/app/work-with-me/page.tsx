@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+const ALFRED_APP_URL = "https://alfredai.coach";
+
 export const metadata = {
   title: "Work With Me — Jake Sebok",
   description:
-    "Free VAPI™ Assessment, Aligned Freedom Workshop, ALFRED (Aligned Freedom Coach), Strategic Alignment Intensives, and the Aligned Power Accelerator. Find the right entry point for your values-aligned journey.",
+    "Free VAPI™ Assessment, Aligned Freedom Workshop, Freedom Builders, Strategic Alignment Intensives, communities, and the Aligned Power Accelerator. Plus Aligned Freedom Coach (ALFRED) for daily execution.",
 };
 
 const offerings = [
@@ -37,13 +39,6 @@ const offerings = [
       "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
     cta: "Learn More",
     href: "/work-with-me/strategic-intensives",
-  },
-  {
-    title: "ALFRED — Aligned Freedom Coach",
-    description:
-      "The only app Jake sells. Your Aligned AIOS context plus VAPI™, Founder Archetype, weekly 6Cs, and Vital Actions—so your AI coach stays aligned when you’re tired, busy, or tempted to say yes to the wrong thing.",
-    cta: "Meet ALFRED",
-    href: "/who-is-alfred",
   },
   {
     title: "Aligned Leaders Community",
@@ -80,10 +75,8 @@ export default function WorkWithMePage() {
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
             The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, and the monthly
-            Aligned Freedom Workshop. From there, you can join the free
-            community, invest in intensives, meet{" "}
-            <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), or apply for the flagship
-            Accelerator program.
+            Aligned Freedom Workshop. From there, you can join the free community, invest in intensives, join paid
+            communities, or apply for the flagship Accelerator program.
           </p>
         </div>
       </section>
@@ -145,6 +138,52 @@ export default function WorkWithMePage() {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ALFRED — separate from program cards (product bridge, not another “offering” tile) */}
+      <section className="py-12 sm:py-16 bg-ap-off border-y border-ap-border">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <div className="max-w-[800px] mx-auto rounded-[24px] border border-ap-border bg-white p-8 sm:p-10 sm:flex sm:items-center sm:gap-10 sm:justify-between">
+            <div className="mb-8 sm:mb-0">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+                Aligned Freedom Coach
+              </p>
+              <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary leading-tight mb-4">
+                Need the work to survive the week—not just the workshop?
+              </h2>
+              <p className="text-lg font-semibold text-ap-mid leading-relaxed">
+                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell: coaching that keeps your
+                VAPI™ results, Founder Archetype, weekly 6Cs, and Vital Action in the room when you&apos;re tired, busy,
+                or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above—same alignment
+                standard.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 shrink-0 sm:min-w-[200px]">
+              <Link
+                href="/who-is-alfred"
+                className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3.5 rounded-pill text-center"
+              >
+                How ALFRED fits
+              </Link>
+              <a
+                href={ALFRED_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3.5 rounded-pill border-[1.5px] border-ap-border text-ap-primary hover:border-ap-accent hover:text-gradient-accent transition-all"
+              >
+                Open the app
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>

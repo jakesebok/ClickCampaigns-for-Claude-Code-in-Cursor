@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/who-is-alfred", label: "ALFRED" },
   {
     href: "/work-with-me",
     label: "Work With Me",
@@ -130,6 +129,16 @@ export function Header() {
             );
           })}
           <Link
+            href="/who-is-alfred"
+            className={`inline-flex items-center rounded-pill border-[1.5px] font-semibold text-sm px-4 py-2.5 transition-all ${
+              pathname === "/who-is-alfred"
+                ? "border-ap-accent text-gradient-accent bg-ap-accent/5"
+                : "border-ap-accent/35 text-ap-primary hover:border-ap-accent hover:text-gradient-accent"
+            }`}
+          >
+            ALFRED
+          </Link>
+          <Link
             href="/assessment"
             className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3 rounded-pill transition-all"
           >
@@ -241,6 +250,17 @@ export function Header() {
                 </Link>
               );
             })}
+            <Link
+              href="/who-is-alfred"
+              className={`inline-flex justify-center rounded-pill border-[1.5px] font-semibold text-sm py-3 px-6 ${
+                pathname === "/who-is-alfred"
+                  ? "border-ap-accent text-gradient-accent bg-ap-accent/5"
+                  : "border-ap-accent/35 text-ap-primary"
+              }`}
+              onClick={() => setMobileOpen(false)}
+            >
+              ALFRED
+            </Link>
             <Link
               href="/assessment"
               className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold text-sm py-3 px-6 rounded-pill"
