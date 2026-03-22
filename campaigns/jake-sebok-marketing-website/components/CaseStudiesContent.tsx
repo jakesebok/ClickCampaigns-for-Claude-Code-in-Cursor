@@ -117,9 +117,9 @@ function StoryIndex({
           key={s.id}
           type="button"
           onClick={() => onSelect(s.id)}
-          className="group relative text-left rounded-[24px] overflow-hidden border-2 border-ap-border hover:border-ap-accent/60 bg-white transition-all duration-300 hover:shadow-xl hover:shadow-ap-accent/10 focus:outline-none focus:ring-2 focus:ring-ap-accent focus:ring-offset-2"
+          className="group relative text-left rounded-[16px] overflow-hidden border border-ap-border hover:border-ap-accent/60 bg-white transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ap-accent focus:ring-offset-2"
         >
-          <div className="relative aspect-[4/3] sm:aspect-[5/4] overflow-hidden">
+          <div className="relative aspect-[5/4] overflow-hidden">
             <Image
               src={s.image}
               alt={s.name}
@@ -128,17 +128,17 @@ function StoryIndex({
               sizes="(max-width: 640px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/90 via-ap-primary/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.2em] text-ap-accent mb-1">
+            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.2em] text-ap-accent mb-0.5">
                 {s.title}
               </p>
-              <h2 className="font-outfit font-bold text-xl sm:text-2xl text-white mb-2">
+              <h2 className="font-outfit font-bold text-lg text-white mb-1">
                 {s.name}
               </h2>
-              <p className="text-white/90 text-sm sm:text-base font-medium line-clamp-2">
+              <p className="text-white/90 text-sm font-medium line-clamp-2">
                 {s.headline}
               </p>
-              <span className="inline-flex items-center gap-2 mt-3 text-ap-accent font-semibold text-sm group-hover:gap-3 transition-all">
+              <span className="inline-flex items-center gap-2 mt-2 text-ap-accent font-semibold text-xs group-hover:gap-3 transition-all">
                 Read story
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -162,31 +162,24 @@ function TransformationCard({
   after: string;
 }) {
   return (
-    <div className="group rounded-[20px] overflow-hidden border border-ap-border hover:border-ap-accent/40 bg-white transition-colors duration-300">
-      <div className="p-6 sm:p-8">
-        <h4 className="font-outfit font-semibold text-ap-primary mb-4 text-lg">
-          {title}
-        </h4>
-        {before ? (
-          <div className="space-y-4">
-            <div>
-              <span className="inline-block font-semibold text-ap-muted text-xs uppercase tracking-wider mb-1">
-                Before
-              </span>
-              <p className="text-ap-mid font-medium leading-relaxed">{before}</p>
-            </div>
-            <div className="w-full h-px bg-ap-border" />
-            <div>
-              <span className="inline-block font-semibold text-ap-accent text-xs uppercase tracking-wider mb-1">
-                After
-              </span>
-              <p className="text-ap-primary font-semibold leading-relaxed">{after}</p>
-            </div>
+    <div className="rounded-[16px] border border-ap-border border-l-4 border-l-ap-accent bg-white p-5 hover:border-ap-accent/40 transition-colors">
+      <h4 className="font-outfit font-semibold text-ap-primary mb-3 text-base">
+        {title}
+      </h4>
+      {before ? (
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div>
+            <span className="font-semibold text-ap-muted text-xs uppercase tracking-wider">Before</span>
+            <p className="text-ap-mid text-sm font-medium leading-relaxed mt-1">{before}</p>
           </div>
-        ) : (
-          <p className="text-ap-mid font-medium leading-relaxed">{after}</p>
-        )}
-      </div>
+          <div>
+            <span className="font-semibold text-ap-accent text-xs uppercase tracking-wider">After</span>
+            <p className="text-ap-primary text-sm font-semibold leading-relaxed mt-1">{after}</p>
+          </div>
+        </div>
+      ) : (
+        <p className="text-ap-mid text-sm font-medium leading-relaxed">{after}</p>
+      )}
     </div>
   );
 }
@@ -200,98 +193,80 @@ function StorySection({
 }) {
   const isAlt = variant === "alt";
   return (
-    <section id={data.id} className="scroll-mt-24">
-      {/* Cinematic hero */}
-      <div className="relative min-h-[70vh] sm:min-h-[85vh] flex flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={data.image}
-            alt={data.name}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-ap-primary via-ap-primary/60 to-ap-primary/20"
-            aria-hidden
-          />
-        </div>
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 pb-16 sm:pb-24 pt-32">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
-            {data.eyebrow}
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-6 max-w-3xl">
-            {data.headline}
-          </h2>
-          <blockquote className="max-w-2xl">
-            <p className="font-cormorant italic text-xl sm:text-2xl lg:text-3xl text-white/95 leading-snug">
-              &ldquo;{data.pullQuote}&rdquo;
-            </p>
-            <footer className="mt-4 flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-white/40 flex-shrink-0">
-                <Image src={data.image} alt="" fill className="object-cover" sizes="48px" />
+    <section
+      id={data.id}
+      className={`scroll-mt-24 py-12 sm:py-16 ${isAlt ? "bg-ap-bg" : "bg-white"}`}
+    >
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left: image + quotes — sticky so you stay connected to the person */}
+          <div className={`lg:col-span-5 ${isAlt ? "lg:order-2" : ""}`}>
+            <div className="lg:sticky lg:top-24 space-y-4">
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-lg">
+                <Image
+                  src={data.image}
+                  alt={data.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
               </div>
-              <div>
-                <cite className="font-semibold text-white not-italic">{data.name}</cite>
-                <p className="text-white/70 text-sm">{data.title}</p>
+              <div className="rounded-[16px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-off p-5">
+                <p className="font-cormorant italic text-base text-ap-primary leading-snug mb-3">
+                  &ldquo;{data.shortQuote}&rdquo;
+                </p>
+                <p className="font-semibold text-ap-primary text-sm">— {data.name}</p>
               </div>
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className={`py-16 sm:py-24 ${isAlt ? "bg-ap-bg" : "bg-white"}`}>
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className={`lg:col-span-5 ${isAlt ? "lg:order-2" : ""}`}>
-              <div className="lg:sticky lg:top-24 space-y-6">
-                <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-off p-6 sm:p-8">
-                  <p className="font-cormorant italic text-lg text-ap-primary mb-4">
-                    &ldquo;{data.shortQuote}&rdquo;
+              {"longQuote" in data && data.longQuote && (
+                <div className="rounded-[16px] bg-ap-primary text-white p-5 border-t-2 border-ap-accent">
+                  <p className="font-cormorant italic text-sm leading-snug mb-2">
+                    &ldquo;{data.longQuote}&rdquo;
                   </p>
-                  <p className="font-semibold text-ap-primary">— {data.name}</p>
+                  <p className="text-white/80 text-xs">— {data.name}</p>
                 </div>
-                {"longQuote" in data && data.longQuote && (
-                  <div className="rounded-[20px] bg-ap-primary text-white p-6 sm:p-8 border-t-2 border-ap-accent">
-                    <p className="font-cormorant italic text-lg mb-4">
-                      &ldquo;{data.longQuote}&rdquo;
-                    </p>
-                    <p className="text-white/80 text-sm">— {data.name}</p>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
-            <div className={`lg:col-span-7 space-y-10 ${isAlt ? "lg:order-1" : ""}`}>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed">
-                {data.setup}
-              </p>
-              <div>
-                <h3 className="font-outfit font-bold text-xl text-ap-primary mb-6">
-                  The transformation
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {data.transformations.map((t) => (
+          </div>
+
+          {/* Right: headline, setup, transformations — balanced column */}
+          <div className={`lg:col-span-7 space-y-6 ${isAlt ? "lg:order-1" : ""}`}>
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-1">
+              {data.eyebrow}
+            </p>
+            <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary leading-tight">
+              {data.headline}
+            </h2>
+            <p className="text-ap-mid font-semibold leading-relaxed">
+              {data.setup}
+            </p>
+            <div>
+              <h3 className="font-outfit font-semibold text-ap-primary mb-4 text-lg">
+                The transformation
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {data.transformations.map((t, i) => (
+                  <div
+                    key={t.title}
+                    className={data.transformations.length % 2 === 1 && i === data.transformations.length - 1 ? "sm:col-span-2" : ""}
+                  >
                     <TransformationCard
-                      key={t.title}
                       title={t.title}
                       before={t.before}
                       after={t.after}
                     />
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-              <Link
-                href="/work-with-me"
-                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
-              >
-                Start Your Transformation
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
             </div>
+            <Link
+              href="/work-with-me"
+              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
+            >
+              Start Your Transformation
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </div>
@@ -307,8 +282,8 @@ export function CaseStudiesContent() {
 
   return (
     <>
-      {/* Hero — compact, with story index */}
-      <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 bg-ap-bg overflow-hidden">
+      {/* Hero — story index */}
+      <section className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 bg-ap-bg overflow-hidden">
         <div
           className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
           style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
@@ -318,10 +293,10 @@ export function CaseStudiesContent() {
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             Client Stories
           </p>
-          <h1 className="font-outfit font-bold text-4xl sm:text-5xl lg:text-6xl text-ap-primary leading-tight mb-6">
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-4">
             Real results. Real transformation.
           </h1>
-          <p className="text-xl font-semibold text-ap-mid max-w-2xl leading-relaxed mb-12">
+          <p className="text-lg font-semibold text-ap-mid max-w-2xl leading-relaxed mb-8">
             These are the stories of entrepreneurs who chose alignment over the grind, and what happened when they did.
           </p>
 
@@ -339,7 +314,7 @@ export function CaseStudiesContent() {
       <StorySection data={thaddeusData} variant="alt" />
 
       {/* More Results — horizontal scroll */}
-      <section className="py-16 sm:py-24 bg-white overflow-hidden">
+      <section className="py-12 sm:py-16 bg-white overflow-hidden">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6 mb-10">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             More Results
@@ -382,9 +357,9 @@ export function CaseStudiesContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-24 bg-ap-bg">
+      <section className="py-12 sm:py-16 bg-ap-bg">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="relative overflow-hidden rounded-[24px] bg-ap-primary p-12 sm:p-20 text-center border-t-2 border-ap-accent">
+          <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-10 sm:p-14 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl text-white mb-6">

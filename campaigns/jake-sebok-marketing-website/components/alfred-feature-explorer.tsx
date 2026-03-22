@@ -1349,7 +1349,7 @@ function ResultsDeepScreen() {
 
       <section className="rounded-2xl border border-dashed border-white/15 p-3">
         <p className="text-[9px] text-white/45 leading-relaxed">
-          Full app adds comparative wheels, expandable archetype sections, lagging-arena callouts for Rising Architect,
+          Full app adds comparative wheels, expandable archetype sections, lagging-arena callouts for The Journeyman,
           transition summaries, and deep links into Priorities and Blueprint from each block.
         </p>
         <p className="text-[10px] font-medium text-ap-accent mt-2">Explore My Score (wheel) →</p>

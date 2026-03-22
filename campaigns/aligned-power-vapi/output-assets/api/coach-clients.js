@@ -87,7 +87,7 @@ function determineArchetype(results) {
   if (s >= 8 && r >= 8 && b >= 8) return 'The Architect';
   const nearArchitectCount = [s, r, b].filter((score) => score != null && score >= 7.5).length;
   const lowestArena = Math.min(s, r, b);
-  if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) return 'The Rising Architect';
+  if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) return 'The Journeyman';
   let arenasLow = 0;
   if (s != null && s <= 4.5) arenasLow++;
   if (r != null && r <= 4.5) arenasLow++;

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrCreateUser } from "@/lib/get-or-create-user";
-import { calculateScores, getArchetype } from "@/lib/vapi/scoring";
+import {
+  calculateScores,
+  getArchetype,
+  normalizeVapiArchetypeName,
+} from "@/lib/vapi/scoring";
 import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
 import {
   ALIGNED_MOMENTUM_NAME,
@@ -96,7 +100,7 @@ function deriveArchetypeFromStoredResults(
     );
   }
 
-  return (results.archetype as string) || null;
+  return normalizeVapiArchetypeName(results.archetype as string) || null;
 }
 
 async function insertPortalVapi(params: {

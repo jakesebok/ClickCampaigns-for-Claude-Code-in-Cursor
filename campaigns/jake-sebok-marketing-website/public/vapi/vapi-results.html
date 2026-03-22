@@ -937,7 +937,7 @@
         var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
         var tagline = meta && meta.tagline ? meta.tagline : '';
         var iconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(archetypeName, color) : '';
-        var laggingArenaSummary = archetypeName === 'The Rising Architect' && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getLaggingArenaSummary
+        var laggingArenaSummary = archetypeName === 'The Journeyman' && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getLaggingArenaSummary
           ? VAPI_ARCHETYPE.getLaggingArenaSummary(results)
           : null;
         var html = '<div class="archetype-section bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden mb-10 relative" style="border-left:4px solid ' + color + ';">';
@@ -970,8 +970,8 @@
         }
         if (laggingArenaSummary && laggingArenaSummary.lagging && laggingArenaSummary.second && laggingArenaSummary.strongest) {
           html += '<div class="mt-5 rounded-xl border p-4" style="border-color:' + color + '33;background:' + color + '10;">';
-          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + color + '">Your Lagging Arena</p>';
-          html += '<p class="mt-2 text-[15px] text-[var(--ap-secondary)] leading-relaxed">Your ' + escapeHtml(laggingArenaSummary.lagging.label) + ' arena (' + laggingArenaSummary.lagging.score.toFixed(1) + ') is the area holding you back from full Architect status. Focus here. Your ' + escapeHtml(laggingArenaSummary.second.label) + ' (' + laggingArenaSummary.second.score.toFixed(1) + ') and ' + escapeHtml(laggingArenaSummary.strongest.label) + ' (' + laggingArenaSummary.strongest.score.toFixed(1) + ') are already strong enough. Close this gap and everything reinforces.</p>';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + color + '">Your lagging arena</p>';
+          html += '<p class="mt-2 text-[15px] text-[var(--ap-secondary)] leading-relaxed">Your lagging arena is ' + escapeHtml(laggingArenaSummary.lagging.label) + '. At ' + laggingArenaSummary.lagging.score.toFixed(1) + ', it\'s solid, but it\'s not keeping pace with your strength elsewhere. This is your current edge. Examine the domains within this arena. One or two are likely pulling the average down. That\'s where focused attention will have the highest leverage. You don\'t need to overhaul anything. You need to bring this arena into alignment with what you\'ve already built.</p>';
           html += '</div>';
         }
         html += '<div class="mt-5 pt-4 border-t border-[var(--ap-border)]/70">';

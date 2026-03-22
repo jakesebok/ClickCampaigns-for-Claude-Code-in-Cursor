@@ -30,7 +30,7 @@
 | `{{overallTier}}` | e.g. `Functional` |
 | `{{arenaPersonal}}`, `{{arenaRelationships}}`, `{{arenaBusiness}}` | arena scores |
 | `{{tierPersonal}}`, `{{tierRelationships}}`, `{{tierBusiness}}` | arena tiers |
-| `{{archetype}}` | e.g. `The Rising Architect` |
+| `{{archetype}}` | e.g. `The Journeyman` |
 | `{{archetypeTagline}}` | from `ARCHETYPE_TAGLINES` in API |
 | `{{driver}}` | primary dysfunction pattern name |
 | `{{driverCoreBelief}}` | from `DRIVER_CORE_BELIEFS` |

@@ -45,7 +45,7 @@ function determineArchetypeFromResults(results) {
   const nearArchitectCount = [personal, relationships, business].filter((score) => score >= 7.5).length;
   const lowestArena = Math.min(personal, relationships, business);
   if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
-    return 'The Rising Architect';
+    return 'The Journeyman';
   }
 
   const arenasLow = [personal, relationships, business].filter((score) => score <= 4.5).length;

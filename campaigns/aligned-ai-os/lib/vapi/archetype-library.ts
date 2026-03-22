@@ -24,7 +24,7 @@ export const ARCHETYPE_LIBRARY_FOOTER_TEXT =
 
 export const ARCHETYPE_LIBRARY_ORDER: VapiArchetype[] = [
   "The Architect",
-  "The Rising Architect",
+  "The Journeyman",
   "The Performer",
   "The Ghost",
   "The Guardian",
@@ -59,7 +59,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "If any arena feels like it's being propped up by sacrificing another, you're not here yet",
       "If your health, relationships, or business would collapse under moderate stress, the integration isn't real",
       "If you feel like you're performing well but running on fumes, you may be a Performer, not an Architect",
-      "If you're strong in two arenas but neglecting a third, you're likely a Rising Architect",
+      "If you're strong in two arenas but neglecting a third, you're likely The Journeyman",
       "The Architect doesn't just look good on paper. It FEELS sustainable in your body.",
     ],
     reflectionPrompts: [
@@ -70,37 +70,37 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "Are you growing or maintaining? There's a difference. The Architect who stops growing eventually starts drifting. What's your next edge?",
     ],
     relationshipToOtherArchetypes:
-      "The Architect is the destination that every other archetype is building toward, but it's most closely related to The Rising Architect, which represents the near-miss. If your scores drop in one arena, you'll likely transition to Rising Architect first before falling further. The most common regression paths from Architect are: to Rising Architect (one arena softens), to Performer (Self arena collapses while Business stays strong), or to Ghost (Relationships arena erodes while you're focused elsewhere). The Architect's greatest long-term risk is becoming a Drifter through complacency, where 'good enough' replaces the intentional maintenance that built the integration in the first place.",
+      "The Architect is the destination that every other archetype is building toward, but it's most closely related to The Journeyman, which represents the near-miss. If your scores drop in one arena, you'll likely transition to The Journeyman first before falling further. The most common regression paths from Architect are: to The Journeyman (one arena softens), to Performer (Self arena collapses while Business stays strong), or to Ghost (Relationships arena erodes while you're focused elsewhere). The Architect's greatest long-term risk is becoming a Drifter through complacency, where 'good enough' replaces the intentional maintenance that built the integration in the first place.",
     commonDrivers:
       "The Architect typically shows 'No Driver Identified' with the High Performer fallback. If a driver does appear, it's usually faint and represents a residual pattern rather than an active one. The most common residual drivers are The Achiever's Trap (old habits of tying identity to output) or The Protector (lingering control patterns), but these are typically secondary drivers at low point totals rather than dominant patterns.",
   },
-  "The Rising Architect": {
+  "The Journeyman": {
     howToKnowThisIsYou: [
-      "Most areas of your life feel genuinely strong, but one specific area nags at you",
-      "You know exactly which arena is lagging. When you read the description, the lagging arena wasn't a surprise.",
-      "You're not in crisis anywhere. Your lowest scores are still Functional or high Below the Line, not In the Red.",
-      "You've built real capability across most domains and the overall picture feels close to what you want",
-      "Other people might look at your life and think you have it figured out. You know there's one piece missing.",
-      "The gap feels closeable. It's not a transformation you need. It's a targeted push.",
+      "Your composite score is 7.0 or above, reflecting genuine strength across the board",
+      "At least two of your three arenas score 7.5 or higher",
+      "Your lowest arena is still 6.5 or above, functional, not broken",
+      "You don't have any single area in crisis, but you can feel that one arena isn't keeping pace with the others",
+      "You've put in real work to get here. This isn't accidental or temporary.",
+      "You're close to having it all dialed, and that proximity is both motivating and slightly frustrating",
+      "People who know your situation would say you're doing well across the board, but you know there's a gap you haven't fully closed",
     ],
     howToKnowThisIsntYou: [
-      "If multiple arenas feel broken or neglected, you're probably not here yet",
-      "If your composite is below 7.0, the gap is wider than one arena",
-      "If you can't identify a single lagging arena because everything feels equally mediocre, you're more likely a Drifter",
-      "If the area you're struggling with feels like it requires deep internal work (not just focus and discipline), a different archetype probably fits better",
-      "The Rising Architect has already done most of the hard building. If you feel like you haven't started, look at the other archetypes.",
+      "If any arena is below 6.0, you likely have a more significant imbalance that places you in a different archetype (Guardian, Seeker, Performer, or Ghost)",
+      "If all three arenas are above 8.0 with a composite of 8.0+, you're an Architect, not a Journeyman",
+      "If your composite is below 7.0, you're likely a Drifter or one of the imbalance archetypes",
+      "The Journeyman is defined by being close to full integration. If you have major gaps or major strengths without the broad foundation, another archetype fits better.",
     ],
     reflectionPrompts: [
-      "Look at your lagging arena. Why has it received less attention than the other two? Was it a conscious deprioritization or unconscious neglect? What story have you been telling yourself about why it's okay for that arena to lag?",
-      "What would change in your life if that lagging arena caught up to the other two? Be specific. Not 'things would be better.' How would your days, your energy, your relationships, or your income actually change?",
-      "Is there a belief or identity story that makes investing in your weak arena feel uncomfortable? For example, if Business is lagging, do you believe that focusing on business means sacrificing something else? If Self is lagging, do you believe that slowing down means falling behind?",
-      "What specifically would you need to do in the next 90 days to close the gap? Not vaguely. Name 2-3 concrete actions or habits that would move your weakest arena from where it is to where it needs to be.",
-      "What's the cost of staying 'almost there' for another year? The Rising Architect's biggest risk is that 'close enough' becomes permanent. What would you tell a friend in your exact position?",
+      "Look at your lagging arena. Without checking the specific domain scores, what's your gut sense about what's pulling it down? Your intuition likely already knows where the gap is. Name it.",
+      "What would it take to bring your lagging arena up by 0.5 to 1.0 points over the next 90 days? Not a complete overhaul, just consistent attention. What specific actions would that require?",
+      "What are you currently doing to maintain your two stronger arenas? Make sure any focus on the lagging arena doesn't come at the cost of what's already working. How will you protect those foundations?",
+      "What has prevented you from closing this gap already? Is it attention? Priority? Skill? Belief? Something structural? Name the actual barrier, not the surface-level excuse.",
+      "Imagine you close this gap and reach Architect-level integration. What becomes possible that isn't possible now? How would your experience of your business, relationships, and self actually change? Make it concrete.",
     ],
     relationshipToOtherArchetypes:
-      "The Rising Architect is the bridge between every other archetype and The Architect. It's the most common archetype that people transition INTO when they're improving, and the most common one that Architects transition TO when one arena slips. The Rising Architect is most often confused with The Drifter because both can show balanced-looking scores, but the difference is altitude: the Drifter is balanced in the middle (5s and 6s), while the Rising Architect is balanced near the top (7s and 8s) with one specific gap. If you were previously a Guardian, Seeker, or Performer, becoming a Rising Architect means the arena you were neglecting has significantly improved.",
+      "The Journeyman sits directly below The Architect in the progression. The difference is narrow but meaningful: The Architect has closed all the gaps, while The Journeyman has one arena still trailing. The Journeyman is most commonly confused with The Drifter because both show relatively balanced scores. The difference is altitude: The Drifter is balanced in the middle (composite 5.5-6.5) while The Journeyman is balanced near the top (composite 7.0+). The most common path to Journeyman is from one of the imbalance archetypes (Guardian, Seeker, Performer) after the weak arena has been strengthened. The path forward from Journeyman is singular: close the gap in the lagging arena and become The Architect.",
     commonDrivers:
-      "The Rising Architect often shows no driver or a faint secondary driver. When a driver does appear, it typically relates to the specific lagging arena. If Self is lagging: The Achiever's Trap or The Escape Artist. If Relationships is lagging: The Protector. If Business is lagging: The Builder's Gap or The Fog. The driver, if present, usually explains WHY the lagging arena hasn't caught up despite strength everywhere else.",
+      "The Journeyman often shows no driver at all, or Aligned Momentum, because the psychological patterns that produce dysfunction have largely been addressed. When a driver does appear, it's typically a mild or residual version of whatever pattern was present before they reached this level. The Fog occasionally appears when the Journeyman has broad strength but hasn't fully clarified what's next. The Builder's Gap occasionally appears when the lagging arena is Business and the gap is specifically in operational systems or execution.",
   },
   "The Performer": {
     howToKnowThisIsYou: [
@@ -127,7 +127,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "Imagine a version of your life where your business produces 80% of current results but your health, energy, and presence are fully restored. Would you take that trade? If not, what does that tell you about what you're actually optimizing for?",
     ],
     relationshipToOtherArchetypes:
-      "The Performer is most commonly confused with The Ghost. Both have strong Business scores. The difference is where the sacrifice shows up. The Performer sacrifices their personal foundation (health, emotional regulation, alignment, focus). The Ghost sacrifices their relationships (family presence, community, connection, contribution). Some founders are both simultaneously, which shows up as high Business with both Self AND Relationships lagging. If that's you, the archetype algorithm catches whichever gap is larger, but the reality is you're a Performer AND a Ghost. The Performer's most common improvement path is to Rising Architect, which happens when they rebuild their Self arena while maintaining Business. The most common regression is to Phoenix, which happens when the unsustainable pace finally collapses.",
+      "The Performer is most commonly confused with The Ghost. Both have strong Business scores. The difference is where the sacrifice shows up. The Performer sacrifices their personal foundation (health, emotional regulation, alignment, focus). The Ghost sacrifices their relationships (family presence, community, connection, contribution). Some founders are both simultaneously, which shows up as high Business with both Self AND Relationships lagging. If that's you, the archetype algorithm catches whichever gap is larger, but the reality is you're a Performer AND a Ghost. The Performer's most common improvement path is to The Journeyman, which happens when they rebuild their Self arena while maintaining Business. The most common regression is to Phoenix, which happens when the unsustainable pace finally collapses.",
     commonDrivers:
       "The Performer is most commonly paired with The Achiever's Trap (identity fused with output), The Escape Artist (using work to avoid something painful), or The Protector (using control and discipline as safety mechanisms). When you see a Performer, the driver tells you WHY they're performing at this unsustainable level. The Achiever performs because producing IS their identity. The Escape Artist performs because stopping means feeling. The Protector performs because their systems and output are the only things they trust.",
   },
@@ -157,7 +157,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "If your business disappeared tomorrow, which relationships would survive? Which ones have enough depth and investment to hold? If that list is shorter than you'd like, that's not a scheduling problem. It's a priority problem.",
     ],
     relationshipToOtherArchetypes:
-      "The Ghost is most commonly confused with The Performer. Both have strong Business scores and both are sacrificing something to maintain them. The difference is what's being sacrificed. The Performer sacrifices Self (health, emotions, alignment). The Ghost sacrifices Relationships (family, community, connection, contribution). In practice, many founders are a blend of both, but the archetype algorithm catches whichever deficit is larger. The Ghost's most common improvement path is to Rising Architect, which happens when they invest in Relationships while maintaining Business. The most common regression is to Phoenix, which happens when the isolation compounds into emotional crisis or the relationships deteriorate past the point of easy repair.",
+      "The Ghost is most commonly confused with The Performer. Both have strong Business scores and both are sacrificing something to maintain them. The difference is what's being sacrificed. The Performer sacrifices Self (health, emotions, alignment). The Ghost sacrifices Relationships (family, community, connection, contribution). In practice, many founders are a blend of both, but the archetype algorithm catches whichever deficit is larger. The Ghost's most common improvement path is to The Journeyman, which happens when they invest in Relationships while maintaining Business. The most common regression is to Phoenix, which happens when the isolation compounds into emotional crisis or the relationships deteriorate past the point of easy repair.",
     commonDrivers:
       "The Ghost is most commonly paired with The Protector (walls keep people out), The Escape Artist (work is a hiding place from relational vulnerability), or The Achiever's Trap (relationships can't compete with the dopamine of output). When you see a Ghost, the driver reveals the WHY behind the isolation. The Protector isolates through control and self-reliance. The Escape Artist isolates through constant activity. The Achiever isolates because relationships don't produce measurable results.",
   },
@@ -175,7 +175,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "If your Business scores are strong and your Relationships scores are weak, you're the inverse of this pattern (likely a Ghost or Performer)",
       "If you don't struggle with pricing, sales, or business structure, the Guardian's core tension isn't present",
       "If you prioritize your own business goals as easily as you prioritize other people's needs, this isn't you",
-      "If your relational generosity doesn't come at the expense of your business traction, you may be an Architect or Rising Architect who happens to be relationally strong",
+      "If your relational generosity doesn't come at the expense of your business traction, you may be an Architect or Journeyman who happens to be relationally strong",
       "The Guardian's defining feature is that relational strength and business weakness coexist, and the relational strength is part of what prevents the business from growing",
     ],
     reflectionPrompts: [
@@ -186,7 +186,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "If you could build the business infrastructure your gifts deserve, systems that let you serve more people at a higher level without burning out, would the people in your life support that? If so, what's actually stopping you? If not, what does that tell you about those relationships?",
     ],
     relationshipToOtherArchetypes:
-      "The Guardian is the mirror image of The Ghost and The Performer. Where those archetypes over-invest in Business at the expense of Self or Relationships, The Guardian over-invests in Relationships at the expense of Business. The Guardian's most common improvement path is to Rising Architect, which happens when they build Business fundamentals while maintaining relational strength. The most common lateral shift is to Seeker, which happens when a Guardian turns inward and starts doing personal development work but still doesn't build the business. The most common regression is to Phoenix, which happens when the financial strain of an underbuilt business eventually collapses the personal and relational stability that was holding everything together.",
+      "The Guardian is the mirror image of The Ghost and The Performer. Where those archetypes over-invest in Business at the expense of Self or Relationships, The Guardian over-invests in Relationships at the expense of Business. The Guardian's most common improvement path is to The Journeyman, which happens when they build Business fundamentals while maintaining relational strength. The most common lateral shift is to Seeker, which happens when a Guardian turns inward and starts doing personal development work but still doesn't build the business. The most common regression is to Phoenix, which happens when the financial strain of an underbuilt business eventually collapses the personal and relational stability that was holding everything together.",
     commonDrivers:
       "The Guardian is most commonly paired with The Builder's Gap (strong foundation, unbuilt business machine), The Pleaser's Bind (can't say no, can't prioritize own work), or The Martyr Complex (believes sacrifice is required for service). When you see a Guardian, the driver explains WHY the business hasn't been built. The Builder's Gap Guardian has the aligned model but hasn't constructed the infrastructure. The Pleaser Guardian keeps giving away the time they should be spending on business. The Martyr Guardian believes that profiting from their gifts would somehow taint the gift.",
   },
@@ -215,7 +215,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "Think about someone you know who has less self-awareness than you but better business results. What do they do that you don't? The answer is almost certainly simpler and less elegant than you'd like it to be.",
     ],
     relationshipToOtherArchetypes:
-      "The Seeker is the inverse of The Performer. The Performer acts without enough self-awareness. The Seeker is aware without enough action. In theory, combining the Seeker's insight with the Performer's execution would create an Architect. The Seeker's most common improvement path is to Rising Architect, which happens when they finally translate their self-knowledge into consistent business output. The most common lateral shift is to Guardian, which happens when a Seeker channels their energy into relationships and service instead of business building, adding relational richness but still not solving the business gap. The most common regression is to Drifter, which happens when the Seeker's awareness becomes so generalized that it loses its edge and everything settles into comfortable mediocrity.",
+      "The Seeker is the inverse of The Performer. The Performer acts without enough self-awareness. The Seeker is aware without enough action. In theory, combining the Seeker's insight with the Performer's execution would create an Architect. The Seeker's most common improvement path is to The Journeyman, which happens when they finally translate their self-knowledge into consistent business output. The most common lateral shift is to Guardian, which happens when a Seeker channels their energy into relationships and service instead of business building, adding relational richness but still not solving the business gap. The most common regression is to Drifter, which happens when the Seeker's awareness becomes so generalized that it loses its edge and everything settles into comfortable mediocrity.",
     commonDrivers:
       "The Seeker is most commonly paired with The Perfectionist's Prison (knows the plan but can't ship because of fear of judgment), The Fog (has self-awareness but can't commit to a direction), or The Builder's Gap (has the personal foundation but hasn't built the business machine). When you see a Seeker, the driver explains the specific block between insight and action. The Perfectionist Seeker is afraid of imperfection. The Fog Seeker can't choose among too many options. The Builder's Gap Seeker has the aligned model but resists the operational work of building it.",
   },
@@ -231,7 +231,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
     ],
     howToKnowThisIsntYou: [
       "If any arena is clearly strong while another is clearly struggling, you're not a Drifter. You have an imbalance, not a plateau.",
-      "If your composite score is above 7.5, you're likely a Rising Architect, not a Drifter",
+      "If your composite score is above 7.5, you're likely The Journeyman, not a Drifter",
       "If your composite is below 4.5, you're likely a Phoenix",
       "If you have clear passion and direction but can't execute, you're a Seeker or Perfectionist's Prison, not a Drifter",
       "The Drifter's defining feature is the absence of extremes. If you feel strong emotions about your situation, whether frustration, ambition, fear, or excitement, a different archetype probably fits.",
@@ -244,7 +244,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "Who in your life is comfortable with you staying exactly where you are? And who would challenge you to want more? Which group do you spend more time with?",
     ],
     relationshipToOtherArchetypes:
-      "The Drifter is most commonly confused with The Rising Architect because both show relatively balanced scores. The difference is altitude. The Rising Architect is balanced near the top with a composite of 7.0+ and specific domains in the Dialed range. The Drifter is balanced in the middle with Functional-range scores and nothing exceptional. The Drifter's most common improvement path is to any of the imbalance archetypes first (Guardian, Seeker, Performer) as they start investing heavily in one area, and then to Rising Architect as the other areas catch up. Going directly from Drifter to Architect is rare because it requires simultaneous improvement across all three arenas. The most common regression is to Phoenix, which happens when the comfortable middle erodes and multiple areas slide below the line.",
+      "The Drifter is most commonly confused with The Journeyman because both show relatively balanced scores. The difference is altitude. The Journeyman is balanced near the top with a composite of 7.0+ and specific domains in the Dialed range. The Drifter is balanced in the middle with Functional-range scores and nothing exceptional. The Drifter's most common improvement path is to any of the imbalance archetypes first (Guardian, Seeker, Performer) as they start investing heavily in one area, and then to The Journeyman as the other areas catch up. Going directly from Drifter to Architect is rare because it requires simultaneous improvement across all three arenas. The most common regression is to Phoenix, which happens when the comfortable middle erodes and multiple areas slide below the line.",
     commonDrivers:
       "The Drifter is most commonly paired with The Fog (can't commit to a direction), The Builder's Gap (has values but hasn't built the machine), or no driver at all. The Fog Drifter can't choose what to focus on. The Builder's Gap Drifter has relational and personal strength but hasn't translated it into business. When a Drifter shows no driver, it often means the plateau isn't driven by a deep psychological pattern but by a lack of strategic commitment. That's a Phase 2 problem, not a Phase 3 problem.",
   },
@@ -273,7 +273,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "If a trusted advisor looked at your business model and said 'This is well-executed but it's not the right model for who you are,' how would you feel? Defensive? Relieved? If relieved, you already have your answer.",
     ],
     relationshipToOtherArchetypes:
-      "The Engine is most commonly confused with The Performer because both show strong execution. The difference is the source of tension. The Performer's problem is sustainability. They're building the right thing but burning themselves out doing it. The Engine's problem is direction. They're executing sustainably but building the wrong thing. The Engine's most common improvement path is to Performer first (they fix the strategy but the execution intensity creates personal strain), then to Rising Architect as they rebalance. Going directly to Rising Architect requires simultaneously fixing the model AND maintaining the execution, which is possible but demanding. The most common regression is to Phoenix, which happens when the misalignment eventually produces a crisis of meaning that collapses motivation and output simultaneously.",
+      "The Engine is most commonly confused with The Performer because both show strong execution. The difference is the source of tension. The Performer's problem is sustainability. They're building the right thing but burning themselves out doing it. The Engine's problem is direction. They're executing sustainably but building the wrong thing. The Engine's most common improvement path is to Performer first (they fix the strategy but the execution intensity creates personal strain), then to The Journeyman as they rebalance. Going directly to The Journeyman requires simultaneously fixing the model AND maintaining the execution, which is possible but demanding. The most common regression is to Phoenix, which happens when the misalignment eventually produces a crisis of meaning that collapses motivation and output simultaneously.",
     commonDrivers:
       "The Engine is most commonly paired with The Imposter Loop (building something they don't believe they deserve or that doesn't feel authentically theirs), The Escape Artist (using execution to avoid confronting the strategic question), or The Achiever's Trap (can't stop executing even when the direction is wrong because output is identity). When you see an Engine, the driver explains WHY they keep building in the wrong direction. The Imposter Engine doesn't trust themselves to choose correctly. The Escape Engine is avoiding the vulnerability of strategic honesty. The Achiever Engine can't stop producing long enough to question the trajectory.",
   },
@@ -302,7 +302,7 @@ export const ARCHETYPE_LIBRARY_CONTENT: Record<
       "What would you need to hear from someone who truly understood your situation? Say it to yourself right now. Write it down. You probably already know what you need. You just need permission to start.",
     ],
     relationshipToOtherArchetypes:
-      "The Phoenix is the crisis state that any other archetype can fall into when enough things break simultaneously. It's not a personality type. It's a situational reality. The most common paths INTO the Phoenix are from The Performer (burnout collapses everything), The Ghost (isolation compounds into emotional crisis), and The Engine (misalignment produces a crisis of meaning). The most common paths OUT of the Phoenix are to The Guardian (relationships stabilize first), The Seeker (self-awareness rebuilds first), or The Drifter (everything stabilizes to a functional-but-flat baseline). Going from Phoenix directly to Architect or Rising Architect in a single assessment period would be extraordinary and would represent one of the most significant transformations a person can make.",
+      "The Phoenix is the crisis state that any other archetype can fall into when enough things break simultaneously. It's not a personality type. It's a situational reality. The most common paths INTO the Phoenix are from The Performer (burnout collapses everything), The Ghost (isolation compounds into emotional crisis), and The Engine (misalignment produces a crisis of meaning). The most common paths OUT of the Phoenix are to The Guardian (relationships stabilize first), The Seeker (self-awareness rebuilds first), or The Drifter (everything stabilizes to a functional-but-flat baseline). Going from Phoenix directly to Architect or The Journeyman in a single assessment period would be extraordinary and would represent one of the most significant transformations a person can make.",
     commonDrivers:
       "The Phoenix often shows no driver because the crisis is too broad for any single driver pattern to emerge clearly. When a driver is detected, it's usually the pattern that CAUSED the collapse rather than the current state: The Achiever's Trap (burned out from unsustainable output), The Escape Artist (whatever was being avoided finally caught up), or The Martyr Complex (gave everything away until there was nothing left). Identifying the driver that preceded the Phoenix state is valuable for coaching because it reveals what not to rebuild when the recovery begins.",
   },

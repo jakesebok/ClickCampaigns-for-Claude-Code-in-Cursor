@@ -63,9 +63,15 @@ const DRIVER_CORE_BELIEFS = {
   "The Scattered Mind": "I'll be able to focus when the conditions are right.",
   "The Builder's Gap": "Caring about people and doing good work should be enough. I shouldn't have to become a 'business person' to make this work.",
 };
+function normalizeArchetypeName(name) {
+  if (name === 'The Rising Architect') return 'The Journeyman';
+  return name;
+}
+
 const ARCHETYPE_TAGLINES = {
   'The Architect': "You've built a life and business that actually work together.",
-  'The Rising Architect': 'Almost there. One arena is holding the rest back.',
+  'The Journeyman':
+    "You've built real skill across the board. One arena is lagging, and that's the final edge to sharpen.",
   'The Phoenix': 'In the fire. Not finished.',
   'The Engine': 'Building fast. Building wrong.',
   'The Drifter': 'Fine everywhere. Exceptional nowhere.',
@@ -102,7 +108,7 @@ function determineArchetypeServer(results) {
   const nearArchitectCount = [s, r, b].filter((score) => score != null && score >= 7.5).length;
   const lowestArena = Math.min(s, r, b);
   if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
-    return 'The Rising Architect';
+    return 'The Journeyman';
   }
   let arenasLow = 0;
   if (s != null && s <= 4.5) arenasLow++;
@@ -800,13 +806,14 @@ export async function POST(request) {
     driverState = null,
   } = body;
 
-  const archetype =
+  let archetype =
     determineArchetypeServer({ overall, arenaScores, domains }) ||
     archetypeFromBody ||
     null;
+  archetype = archetype ? normalizeArchetypeName(archetype) : null;
   const archetypeTagline = archetype ? ARCHETYPE_TAGLINES[archetype] || null : null;
   const laggingArenaSummary =
-    archetype === 'The Rising Architect' ? getLaggingArenaSummary(arenaScores) : null;
+    archetype === 'The Journeyman' ? getLaggingArenaSummary(arenaScores) : null;
   const driverEvaluation = getDriverSummary({
     domains,
     domainScores: buildDomainScoresMap(domains),
@@ -849,9 +856,11 @@ export async function POST(request) {
     ? getDriverSummary(lookup.previousAssessment.results || {})
     : { assignedDriver: null, secondaryDriver: null, driverState: 'no_driver' };
   const previousArchetypeName = lookup.previousAssessment
-    ? determineArchetypeServer(lookup.previousAssessment.results || {}) ||
-      lookup.previousAssessment.results?.archetype ||
-      null
+    ? normalizeArchetypeName(
+        determineArchetypeServer(lookup.previousAssessment.results || {}) ||
+          lookup.previousAssessment.results?.archetype ||
+          null
+      )
     : null;
   const previousDriverName = previousDriverEvaluation.assignedDriver || null;
   const previousSecondaryDriverName =

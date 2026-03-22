@@ -57,7 +57,7 @@ function determineArchetypeFromResults(results: Record<string, unknown>) {
   ).length;
   const lowestArena = Math.min(personal, relationships, business);
   if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
-    return "The Rising Architect";
+    return "The Journeyman";
   }
 
   const arenasLow = [personal, relationships, business].filter(

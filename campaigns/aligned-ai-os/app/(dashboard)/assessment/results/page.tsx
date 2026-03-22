@@ -41,6 +41,7 @@ import {
   ARCHETYPE_DESCRIPTIONS,
   getPriorityMatrix,
   getRankedArenas,
+  normalizeVapiArchetypeName,
   type VapiTier,
   type VapiArchetype,
   type PriorityQuadrant,
@@ -104,7 +105,7 @@ function ArchetypeSection({
   const ArchetypeIcon = getArchetypeIcon(archetype);
   const archetypeColor = ARCHETYPE_ACCENT_COLORS[archetype];
   const rankedArenas =
-    archetype === "The Rising Architect"
+    archetype === "The Journeyman"
       ? getRankedArenas(arenaScores)
       : null;
   const laggingArena = rankedArenas?.[0];
@@ -162,20 +163,22 @@ function ArchetypeSection({
               </div>
             </div>
           )}
-          {archetype === "The Rising Architect" &&
+          {archetype === "The Journeyman" &&
             laggingArena &&
             secondArena &&
             strongestArena && (
               <div className="rounded-xl border border-accent/25 bg-accent/5 p-4 text-sm">
                 <p className="text-xs font-medium uppercase tracking-wider text-accent">
-                  Your Lagging Arena
+                  Your lagging arena
                 </p>
                 <p className="mt-2 text-muted-foreground leading-relaxed">
-                  Your {laggingArena.label} arena ({laggingArena.score.toFixed(1)}) is the
-                  area holding you back from full Architect status. Focus here. Your{" "}
-                  {secondArena.label} ({secondArena.score.toFixed(1)}) and{" "}
-                  {strongestArena.label} ({strongestArena.score.toFixed(1)}) are already
-                  strong enough. Close this gap and everything reinforces.
+                  Your lagging arena is {laggingArena.label}. At{" "}
+                  {laggingArena.score.toFixed(1)}, it&apos;s solid, but it&apos;s not
+                  keeping pace with your strength elsewhere. This is your current edge.
+                  Examine the domains within this arena. One or two are likely pulling the
+                  average down. That&apos;s where focused attention will have the highest
+                  leverage. You don&apos;t need to overhaul anything. You need to bring
+                  this arena into alignment with what you&apos;ve already built.
                 </p>
               </div>
             )}
@@ -802,124 +805,145 @@ function getSelectedProgressInterpretationNarrative(
   };
 }
 
+function getLaggingArenaSnapshot(arenaScores: Record<string, number> | undefined) {
+  if (!arenaScores || Object.keys(arenaScores).length === 0) return null;
+  const ranked = getRankedArenas(arenaScores);
+  const low = ranked[0];
+  if (!low) return null;
+  return { key: low.key, label: low.label, score: low.score };
+}
+
 function getArchetypeTransitionNarrative(
   previousArchetype: string | null,
-  currentArchetype: string | null
+  currentArchetype: string | null,
+  context?: {
+    previousArenas?: Record<string, number>;
+    currentArenas?: Record<string, number>;
+  }
 ): ProgressNarrative | null {
   if (!previousArchetype && !currentArchetype) return null;
 
+  const prev =
+    normalizeVapiArchetypeName(previousArchetype) ?? previousArchetype;
+  const curr = normalizeVapiArchetypeName(currentArchetype) ?? currentArchetype;
+
   const isArchitectFamily = (value: string | null) =>
-    value === "The Architect" || value === "The Rising Architect";
+    value === "The Architect" || value === "The Journeyman";
 
-  if (
-    previousArchetype === "The Rising Architect" &&
-    currentArchetype === "The Rising Architect"
-  ) {
+  const lagPrev = getLaggingArenaSnapshot(context?.previousArenas);
+  const lagCurr = getLaggingArenaSnapshot(context?.currentArenas);
+
+  if (prev === "The Journeyman" && curr === "The Journeyman") {
+    let body: string;
+    if (lagPrev && lagCurr && lagPrev.key !== lagCurr.key) {
+      body = `You remain a Journeyman, but your lagging arena has shifted from ${lagPrev.label} to ${lagCurr.label}. This sometimes happens when focus on one area causes another to slip. Rebalance your attention to close the new gap without losing ground on what improved.`;
+    } else if (lagPrev && lagCurr && lagPrev.key === lagCurr.key) {
+      const delta = lagCurr.score - lagPrev.score;
+      if (delta > 0.05) {
+        body = `You remain a Journeyman, but your lagging arena has improved from ${lagPrev.score.toFixed(1)} to ${lagCurr.score.toFixed(1)}. You're making progress toward full integration. Continue the focused work.`;
+      } else {
+        body = `You remain a Journeyman with ${lagCurr.label} still trailing. Your foundation is strong, but the gap hasn't closed yet. Revisit what's preventing progress in this arena.`;
+      }
+    } else {
+      body =
+        "You remain a Journeyman. Your foundation is strong; keep working the lagging arena until the gap closes.";
+    }
     return {
       key: "archetype",
       eyebrow: "Archetype Transition",
-      title: "Your Founder Archetype Is Consistent",
-      subtitle: "Still showing up as The Rising Architect",
-      body: "You're still almost there. Your overall profile remains strong and near-integrated, but the lagging arena from your last assessment still hasn't closed the gap. The comfort of 'almost there' is the real risk at this level. You have the capability and the foundation. What you need is the willingness to give your weakest arena the same intensity you gave everything else. Look at the specific domains pulling that arena down. They are your highest-leverage targets for the next assessment period.",
+      title: "Journeyman Sustained",
+      subtitle: "The Journeyman continues",
+      body,
     };
   }
 
   if (
-    previousArchetype &&
-    currentArchetype === "The Rising Architect" &&
-    previousArchetype !== "The Architect" &&
-    previousArchetype !== "The Rising Architect"
+    prev &&
+    curr === "The Journeyman" &&
+    prev !== "The Architect" &&
+    prev !== "The Journeyman"
+  ) {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Significant Progress",
+      subtitle: `${prev} to The Journeyman`,
+      body: "You've moved from an imbalanced or deficit pattern into The Journeyman. This represents substantial progress: your composite score is now 7.0 or above with strength across all three arenas. You're no longer dealing with major imbalances or deficits. One arena is still trailing the others, and that's your current growth edge. Close that gap and you reach Architect-level integration.",
+    };
+  }
+
+  if (prev === "The Journeyman" && curr === "The Architect") {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Full Integration Achieved",
+      subtitle: "The Journeyman to The Architect",
+      body: "You've closed the gap. Your previous assessment showed you as a Journeyman with one arena lagging. That arena has now come into alignment with the others. You're operating as an Architect: fully integrated strength across Business, Relationships, and Self. This is the result of focused work on the area that was trailing. Protect this integration. The work now is maintenance and continued growth from a position of strength.",
+    };
+  }
+
+  if (prev === "The Architect" && curr === "The Journeyman") {
+    const lowLabel = lagCurr?.label ?? "lowest";
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "A Gap Has Opened",
+      subtitle: "The Architect to The Journeyman",
+      body: `Your previous assessment showed Architect-level integration. This time, one arena has fallen below the others, moving you to The Journeyman. This isn't a crisis: your overall foundation remains strong, but something has slipped. Identify what changed in your ${lowLabel} arena and address it before the gap widens.`,
+    };
+  }
+
+  if (prev === "The Journeyman" && curr && curr !== "The Architect") {
+    return {
+      key: "archetype",
+      eyebrow: "Archetype Transition",
+      title: "Ground Lost",
+      subtitle: `The Journeyman to ${curr}`,
+      body: `Your previous assessment showed you as a Journeyman: strong across all arenas with one slightly trailing. This time, more significant gaps have emerged, moving you to ${curr}. Something has shifted. Read your new archetype description to understand the current pattern and what it requires.`,
+    };
+  }
+
+  if (
+    prev &&
+    curr === "The Architect" &&
+    !isArchitectFamily(prev)
   ) {
     return {
       key: "archetype",
       eyebrow: "Archetype Transition",
       title: "Your Founder Archetype Has Shifted",
-      subtitle: `${previousArchetype} to The Rising Architect`,
-      body: "You've moved from an imbalanced or deficit pattern into near-integration. Most of your arenas are operating at a high level. One area is still lagging but the gap is closeable. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus.",
-    };
-  }
-
-  if (
-    previousArchetype === "The Rising Architect" &&
-    currentArchetype === "The Architect"
-  ) {
-    return {
-      key: "archetype",
-      eyebrow: "Archetype Transition",
-      title: "Your Founder Archetype Has Shifted",
-      subtitle: "The Rising Architect to The Architect",
-      body: "You closed the gap. The arena that was lagging has caught up and all three arenas are now operating at the Dialed level. You've achieved genuine integration. This is the rarest and most valuable state on this assessment. Protect it.",
-    };
-  }
-
-  if (
-    previousArchetype === "The Architect" &&
-    currentArchetype === "The Rising Architect"
-  ) {
-    return {
-      key: "archetype",
-      eyebrow: "Archetype Transition",
-      title: "Your Founder Archetype Has Shifted",
-      subtitle: "The Architect to The Rising Architect",
-      body: "You've lost the integration you had built. One arena has slipped below full Architect level, even though most of your profile is still strong. Read your Rising Architect results carefully. The lagging arena callout shows you exactly where to focus before the gap widens.",
-    };
-  }
-
-  if (
-    previousArchetype === "The Rising Architect" &&
-    currentArchetype &&
-    currentArchetype !== "The Architect"
-  ) {
-    return {
-      key: "archetype",
-      eyebrow: "Archetype Transition",
-      title: "Your Founder Archetype Has Shifted",
-      subtitle: `The Rising Architect to ${currentArchetype}`,
-      body: "You've moved away from near-integration. The lagging arena that kept you just short of Architect status is no longer the only issue in the pattern. Compare your latest archetype and score breakdown carefully to see where the reinforcing cycle weakened.",
-    };
-  }
-
-  if (
-    previousArchetype &&
-    currentArchetype === "The Architect" &&
-    !isArchitectFamily(previousArchetype)
-  ) {
-    return {
-      key: "archetype",
-      eyebrow: "Archetype Transition",
-      title: "Your Founder Archetype Has Shifted",
-      subtitle: `${previousArchetype} to The Architect`,
+      subtitle: `${prev} to The Architect`,
       body: "You've moved into genuine integration. Your personal, relational, and business arenas are now reinforcing each other instead of competing. Protect this. The systems and habits that got you here are worth defending.",
     };
   }
 
-  if (previousArchetype && currentArchetype && previousArchetype === currentArchetype) {
+  if (prev && curr && prev === curr) {
     return {
       key: "archetype",
       eyebrow: "Archetype Transition",
       title: "Your Founder Archetype Is Consistent",
-      subtitle: `Still showing up as ${currentArchetype}`,
-      body: `Your score shape still maps most closely to ${currentArchetype}. The same pattern across your personal, relational, and business scores is still present in your results. Revisit the archetype section above to see where this pattern is supporting you and where it is still constraining you.`,
+      subtitle: `Still showing up as ${curr}`,
+      body: `Your score shape still maps most closely to ${curr}. The same pattern across your personal, relational, and business scores is still present in your results. Revisit the archetype section above to see where this pattern is supporting you and where it is still constraining you.`,
     };
   }
 
-  if (previousArchetype && currentArchetype) {
+  if (prev && curr) {
     return {
       key: "archetype",
       eyebrow: "Archetype Transition",
       title: "Your Founder Archetype Has Shifted",
-      subtitle: `${previousArchetype} to ${currentArchetype}`,
-      body: `Your latest score pattern now maps most closely to ${currentArchetype} instead of ${previousArchetype}. That suggests the way your personal, relational, and business scores relate to each other has changed. Compare the two archetype sections to see which strengths became more dominant and which constraints have surfaced.`,
+      subtitle: `${prev} to ${curr}`,
+      body: `Your latest score pattern now maps most closely to ${curr} instead of ${prev}. That suggests the way your personal, relational, and business scores relate to each other has changed. Compare the two archetype sections to see which strengths became more dominant and which constraints have surfaced.`,
     };
   }
 
-  if (currentArchetype) {
+  if (curr) {
     return {
       key: "archetype",
       eyebrow: "Archetype Transition",
       title: "Founder Archetype Identified",
-      subtitle: currentArchetype,
-      body: `This assessment maps clearly to ${currentArchetype}. Use the archetype section above to understand the dominant score shape currently defining your results.`,
+      subtitle: curr,
+      body: `This assessment maps clearly to ${curr}. Use the archetype section above to understand the dominant score shape currently defining your results.`,
     };
   }
 
@@ -1127,7 +1151,7 @@ function ResultsContent() {
         domainScores: r.domainScores || {},
         arenaScores: r.arenaScores || {},
         overallScore: r.overallScore,
-        archetype: r.archetype,
+        archetype: normalizeVapiArchetypeName(r.archetype) ?? r.archetype,
         importance: r.importance || {},
         assignedDriver: r.assignedDriver || null,
         secondaryDriver: r.secondaryDriver || null,
@@ -1146,8 +1170,12 @@ function ResultsContent() {
       }));
       setAllResults(all);
       if (id && singleRes.result) {
+        const sr = singleRes.result as Record<string, unknown>;
         setResult({
           ...singleRes.result,
+          archetype:
+            normalizeVapiArchetypeName(sr.archetype as string) ??
+            (sr.archetype as string),
           driverState:
             singleRes.result.driverState ||
             getDriverState({
@@ -1227,7 +1255,8 @@ function ResultsContent() {
 
   const overallTier = getTier(result.overallScore / 10);
   const overallColor = getTierColor(overallTier);
-  const archetype = result.archetype as VapiArchetype;
+  const archetype = (normalizeVapiArchetypeName(result.archetype) ??
+    result.archetype) as VapiArchetype;
   const ArchetypeIcon = getArchetypeIcon(archetype);
   const archetypeColor = ARCHETYPE_ACCENT_COLORS[archetype];
   const priorityMatrix = getPriorityMatrix(
@@ -1278,7 +1307,11 @@ function ResultsContent() {
   );
   const archetypeTransition = getArchetypeTransitionNarrative(
     previousProgressResult.archetype || null,
-    latestProgressResult.archetype || null
+    latestProgressResult.archetype || null,
+    {
+      previousArenas: previousProgressResult.arenaScores,
+      currentArenas: latestProgressResult.arenaScores,
+    }
   );
   const previousAssignedDriver = coerceAssignedDriverName(
     previousProgressResult.assignedDriver
