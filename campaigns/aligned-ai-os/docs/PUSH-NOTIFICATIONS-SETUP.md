@@ -61,9 +61,21 @@ npm run db:generate
 
 ## 5. Cron Schedule
 
-The cron runs at **17:05 UTC** (12:05pm Eastern) daily. Vercel invokes `/api/cron/6c-reminders` with the `CRON_SECRET` in the `Authorization: Bearer` header.
+| Job | Route | Schedule (`vercel.json`) | Purpose |
+|-----|--------|---------------------------|---------|
+| 6Cs reminders | `/api/cron/6c-reminders` | `5 16 * * *` and `5 17 * * *` (UTC) | Weekend scorecard nudges (logic inside route enforces Fri–Sun Eastern window). |
+| Daily Spark | `/api/cron/morning-prompt` | `0 12 * * *` (once daily, **12:00 UTC**) | One push per opted-in user with an active push subscription. Opens dashboard (`?dailySpark=1`). **No SMS.** |
 
-**Vercel Hobby:** Only one cron job runs per day. The app defines both `morning-prompt` and `6c-reminders`; on Hobby, only one may execute. Upgrade to Vercel Pro for multiple daily crons, or consolidate into a single cron that dispatches by time.
+**No hourly cron:** Daily Spark does **not** use per-user local delivery times. Everyone gets the same UTC send time; change `0 12 * * *` if you want a different global slot (e.g. `0 14 * * *` for 9am Eastern in standard time).
+
+Authorize with `Authorization: Bearer $CRON_SECRET` or `?secret=` (same pattern as 6Cs cron).
+
+**Vercel Hobby:** If only one cron per day is allowed, merge jobs into a single route or upgrade to Pro so both 6Cs and Daily Spark can run.
+
+### Daily Spark requirements
+
+- User: **Daily Spark** on in Settings, **active/trialing** subscription, and **browser push** enabled (same `push_subscriptions` table as 6Cs).
+- Env: `NEXT_PUBLIC_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `CRON_SECRET`, `NEXT_PUBLIC_APP_URL`.
 
 ---
 

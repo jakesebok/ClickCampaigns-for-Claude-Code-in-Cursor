@@ -275,22 +275,31 @@ export default function SettingsPage() {
             </div>
           </section>
 
-          {/* Morning coach notifications */}
+          {/* Daily Spark (push) — `sms_enabled` / `sms_time` DB columns; no SMS */}
           <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
             <h2 className="font-semibold flex items-center gap-2">
               <Bell className="h-4 w-4" />
-              Morning coach notifications
+              Daily Spark
             </h2>
+
+            <p className="text-xs text-muted-foreground -mt-2">
+              We don&apos;t text you. Turn on{" "}
+              <span className="text-foreground font-medium">Browser notifications</span>{" "}
+              in the section above, then opt in here. You&apos;ll get{" "}
+              <span className="text-foreground font-medium">one push per day</span> (same
+              server time for everyone — default 12:00 UTC, roughly morning US Eastern).
+              Tap the notification to open your dashboard.
+            </p>
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm">Morning nudge from your coach</p>
+                <p className="text-sm">Daily Spark push</p>
                 <p className="text-xs text-muted-foreground">
-                  Short, values-aligned prompts that engage you before the day runs away—in-app or via your configured
-                  channels.
+                  Short, values-aligned prompt when the daily job runs.
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() =>
                   updateSettings({ smsEnabled: !settings.smsEnabled })
                 }
@@ -302,44 +311,33 @@ export default function SettingsPage() {
               </button>
             </div>
 
-            {settings.smsEnabled && (
-              <div className="space-y-3 pt-2">
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="text-sm text-muted-foreground">
-                      Preferred time
-                    </label>
-                    <input
-                      type="time"
-                      value={settings.smsTime}
-                      onChange={(e) =>
-                        updateSettings({ smsTime: e.target.value })
-                      }
-                      className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm text-muted-foreground">
-                      Timezone
-                    </label>
-                    <select
-                      value={settings.timezone}
-                      onChange={(e) =>
-                        updateSettings({ timezone: e.target.value })
-                      }
-                      className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
-                    >
-                      <option value="America/New_York">Eastern</option>
-                      <option value="America/Chicago">Central</option>
-                      <option value="America/Denver">Mountain</option>
-                      <option value="America/Los_Angeles">Pacific</option>
-                      <option value="America/Anchorage">Alaska</option>
-                      <option value="Pacific/Honolulu">Hawaii</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+            {settings.smsEnabled && pushSupported && !pushEnabled && (
+              <p className="text-xs text-amber-600 dark:text-amber-400">
+                Turn on browser notifications above — Daily Spark can&apos;t be delivered
+                without a push subscription.
+              </p>
             )}
+
+            <div>
+              <label className="text-sm text-muted-foreground">Your timezone (profile)</label>
+              <select
+                value={settings.timezone}
+                onChange={(e) =>
+                  updateSettings({ timezone: e.target.value })
+                }
+                className="mt-1 w-full max-w-md rounded-lg border border-border bg-background px-3 py-2 text-sm"
+              >
+                <option value="America/New_York">Eastern</option>
+                <option value="America/Chicago">Central</option>
+                <option value="America/Denver">Mountain</option>
+                <option value="America/Los_Angeles">Pacific</option>
+                <option value="America/Anchorage">Alaska</option>
+                <option value="Pacific/Honolulu">Hawaii</option>
+              </select>
+              <p className="text-xs text-muted-foreground mt-1">
+                Does not change Daily Spark delivery time (single daily cron for all users).
+              </p>
+            </div>
           </section>
 
           {/* Subscription */}

@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import {
+  Suspense,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Send, Loader2, Mic, ChevronLeft, MessageSquare } from "lucide-react";
 import { NotificationBell } from "@/components/notification-bell";
@@ -13,7 +20,8 @@ type Message = {
   content: string;
 };
 
-export default function ChatPage() {
+function ChatPageInner() {
+  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
@@ -21,6 +29,12 @@ export default function ChatPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const messagesRef = useRef<Message[]>([]);
+  const urlPromptConsumed = useRef(false);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   const scrollToBottom = useCallback(() => {
     scrollRef.current?.scrollTo({
@@ -33,112 +47,135 @@ export default function ChatPage() {
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  async function handleSubmit(content?: string) {
-    const messageContent = content || input.trim();
-    if (!messageContent || isStreaming) return;
+  const handleSubmit = useCallback(
+    async (content?: string) => {
+      const messageContent =
+        content !== undefined ? content.trim() : input.trim();
+      if (!messageContent || isStreaming) return;
 
-    setInput("");
-    setShowSuggestions(false);
-    setIsStreaming(true);
+      setInput("");
+      setShowSuggestions(false);
+      setIsStreaming(true);
 
-    const userMessage: Message = {
-      id: crypto.randomUUID(),
-      role: "user",
-      content: messageContent,
-    };
+      const userMessage: Message = {
+        id: crypto.randomUUID(),
+        role: "user",
+        content: messageContent,
+      };
 
-    const assistantMessage: Message = {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content: "",
-    };
+      const assistantMessage: Message = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "",
+      };
 
-    setMessages((prev) => [...prev, userMessage, assistantMessage]);
+      const prior = messagesRef.current;
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-        }),
-      });
+      setMessages((prev) => [...prev, userMessage, assistantMessage]);
 
-      if (!response.ok) {
-        let errMsg = "Chat request failed";
-        try {
-          const errData = await response.json();
-          errMsg = errData.error || errMsg;
-        } catch {
-          const text = await response.text();
-          if (text) errMsg = text;
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [...prior, userMessage].map((m) => ({
+              role: m.role,
+              content: m.content,
+            })),
+          }),
+        });
+
+        if (!response.ok) {
+          let errMsg = "Chat request failed";
+          try {
+            const errData = await response.json();
+            errMsg = errData.error || errMsg;
+          } catch {
+            const text = await response.text();
+            if (text) errMsg = text;
+          }
+          throw new Error(errMsg);
         }
-        throw new Error(errMsg);
-      }
 
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
 
-      if (!reader) throw new Error("No response stream");
+        if (!reader) throw new Error("No response stream");
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
 
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n");
+          const chunk = decoder.decode(value);
+          const lines = chunk.split("\n");
 
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const data = line.slice(6);
-            if (data === "[DONE]") break;
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const data = line.slice(6);
+              if (data === "[DONE]") break;
 
-            try {
-              const parsed = JSON.parse(data);
-              if (parsed.text) {
-                setMessages((prev) => {
-                  const updated = [...prev];
-                  const last = updated[updated.length - 1];
-                  if (last.role === "assistant") {
-                    last.content += parsed.text;
-                  }
-                  return updated;
-                });
+              try {
+                const parsed = JSON.parse(data);
+                if (parsed.text) {
+                  setMessages((prev) => {
+                    const updated = [...prev];
+                    const last = updated[updated.length - 1];
+                    if (last.role === "assistant") {
+                      last.content += parsed.text;
+                    }
+                    return updated;
+                  });
+                }
+              } catch {
+                // skip malformed chunks
               }
-            } catch {
-              // skip malformed chunks
             }
           }
         }
+      } catch {
+        setMessages((prev) => {
+          const updated = [...prev];
+          const last = updated[updated.length - 1];
+          if (last.role === "assistant") {
+            last.content =
+              "I'm having trouble connecting right now. Please try again in a moment.";
+          }
+          return updated;
+        });
+      } finally {
+        setIsStreaming(false);
       }
-    } catch (error) {
-      setMessages((prev) => {
-        const updated = [...prev];
-        const last = updated[updated.length - 1];
-        if (last.role === "assistant") {
-          last.content =
-            "I'm having trouble connecting right now. Please try again in a moment.";
-        }
-        return updated;
-      });
-    } finally {
-      setIsStreaming(false);
+    },
+    [input, isStreaming]
+  );
+
+  useEffect(() => {
+    if (urlPromptConsumed.current) return;
+    const raw = searchParams.get("q") ?? searchParams.get("prompt");
+    if (!raw?.trim()) return;
+    urlPromptConsumed.current = true;
+    let text: string;
+    try {
+      text = decodeURIComponent(raw.replace(/\+/g, " "));
+    } catch {
+      text = raw;
     }
-  }
+    setShowSuggestions(false);
+    const t = window.setTimeout(() => {
+      void handleSubmit(text);
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [searchParams, handleSubmit]);
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit();
+      void handleSubmit();
     }
   }
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-border">
         <div>
           <h1 className="text-lg font-semibold">ALFRED</h1>
@@ -159,7 +196,6 @@ export default function ChatPage() {
         </div>
       </header>
 
-      {/* Messages */}
       <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto px-4 py-6 space-y-6 scrollbar-thin"
@@ -168,22 +204,21 @@ export default function ChatPage() {
           <div className="max-w-2xl mx-auto space-y-8 pt-8">
             {!selectedCategory ? (
               <>
-                {/* Alfred's welcome message */}
                 <div className="flex justify-start">
                   <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-card border border-border">
                     <p className="text-sm">
                       Hi, I&apos;m <span className="font-semibold">ALFRED</span>,
-                      your Aligned Freedom Coach. What would you like to
-                      work on today?
+                      your Aligned Freedom Coach. What would you like to work on
+                      today?
                     </p>
                   </div>
                 </div>
 
-                {/* Category buttons — tap to open prompt list */}
                 <div className="grid gap-3 sm:grid-cols-2">
                   {SUGGESTED_QUESTIONS.map((cat) => (
                     <button
                       key={cat.category}
+                      type="button"
                       onClick={() => setSelectedCategory(cat.category)}
                       className="w-full text-left px-4 py-3 rounded-xl border border-border hover:bg-accent/10 hover:border-accent/30 text-sm font-medium transition-colors"
                     >
@@ -193,25 +228,26 @@ export default function ChatPage() {
                 </div>
               </>
             ) : (
-              /* Prompt list for selected category — back button + prompts + Something else */
               <div className="space-y-4">
                 <button
+                  type="button"
                   onClick={() => setSelectedCategory(null)}
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ChevronLeft className="h-4 w-4" />
                   Back
                 </button>
-                <h2 className="text-lg font-semibold">
-                  {selectedCategory}
-                </h2>
+                <h2 className="text-lg font-semibold">{selectedCategory}</h2>
                 <div className="space-y-2">
-                  {SUGGESTED_QUESTIONS.find((c) => c.category === selectedCategory)?.prompts.map((p) => (
+                  {SUGGESTED_QUESTIONS.find(
+                    (c) => c.category === selectedCategory
+                  )?.prompts.map((p) => (
                     <button
                       key={p.prompt}
+                      type="button"
                       onClick={() => {
                         setSelectedCategory(null);
-                        handleSubmit(p.prompt);
+                        void handleSubmit(p.prompt);
                       }}
                       className="w-full text-left px-4 py-3 rounded-xl border border-border hover:bg-accent/10 hover:border-accent/30 text-sm transition-colors"
                     >
@@ -219,6 +255,7 @@ export default function ChatPage() {
                     </button>
                   ))}
                   <button
+                    type="button"
                     onClick={() => {
                       setSelectedCategory(null);
                       setShowSuggestions(false);
@@ -267,7 +304,6 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* Input */}
       <div className="border-t border-border p-4">
         <div className="max-w-3xl mx-auto flex items-end gap-3">
           <div className="flex-1 relative">
@@ -283,7 +319,8 @@ export default function ChatPage() {
             />
           </div>
           <button
-            onClick={() => handleSubmit()}
+            type="button"
+            onClick={() => void handleSubmit()}
             disabled={!input.trim() || isStreaming}
             className="flex items-center justify-center h-12 w-12 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
@@ -292,5 +329,19 @@ export default function ChatPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col h-full items-center justify-center text-muted-foreground text-sm">
+          Loading coach…
+        </div>
+      }
+    >
+      <ChatPageInner />
+    </Suspense>
   );
 }

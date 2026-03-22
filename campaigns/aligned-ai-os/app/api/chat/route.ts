@@ -3,50 +3,9 @@ import { NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { streamCoachingResponse } from "@/lib/ai/coaching";
-import { getTier } from "@/lib/vapi/scoring";
-import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
-import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
-import { fetchPortalVapiByEmail, fetchPortalSixCByEmail, type PortalVapiRow, type PortalSixCRow } from "@/lib/portal-data";
+import { formatScorecardCoachContext, formatVapiCoachContext } from "@/lib/ai/coach-context";
+import { fetchPortalVapiByEmail, fetchPortalSixCByEmail } from "@/lib/portal-data";
 import { hasBillingBypass } from "@/lib/internal-access";
-
-function formatVapiContext(row: PortalVapiRow): string {
-  const r = row.results as Record<string, unknown>;
-  const ds = (r.domainScores as Record<string, number>) || {};
-  const as2 = (r.arenaScores as Record<string, number>) || {};
-  const overall = (r.overall as number) || 0;
-  const tier = getTier(overall);
-
-  let ctx = `\n\n---\nVAPI ASSESSMENT (${new Date(row.created_at).toLocaleDateString()})`;
-  ctx += `\nOverall: ${overall.toFixed(1)}/10 — ${tier}`;
-  ctx += `\nArchetype: ${(r.archetype as string) || ""}`;
-
-  for (const arena of ARENAS) {
-    const arenaKey = arena.label === "Personal" ? "personal" : arena.label === "Relationships" ? "relationships" : "business";
-    const arenaScore = as2[arena.label] ?? as2[arenaKey] ?? 0;
-    ctx += `\n\n${arena.label}: ${arenaScore.toFixed(1)}/10 — ${getTier(arenaScore)}`;
-    for (const code of arena.domains) {
-      const domain = DOMAINS.find((d) => d.code === code)!;
-      ctx += `\n  ${domain.name}: ${(ds[code] || 0).toFixed(1)} — ${getTier(ds[code] as number || 0)}`;
-    }
-  }
-
-  return ctx;
-}
-
-function formatScorecardContext(entries: PortalSixCRow[]): string {
-  if (!entries.length) return "";
-  let ctx = `\n\n---\nRECENT 6Cs SCORECARDS`;
-  for (const entry of entries.slice(0, 4)) {
-    const scores = entry.scores || {};
-    const overall = getOverallScore(scores);
-    ctx += `\n\nWeek of ${new Date(entry.created_at).toLocaleDateString()}: ${overall}%`;
-    for (const c of SCORECARD_CATEGORIES) {
-      ctx += `\n  ${c.label}: ${scores[c.key] || 0}%`;
-    }
-    if (entry.one_thing_to_improve) ctx += `\n  Vital Action: ${entry.one_thing_to_improve}`;
-  }
-  return ctx;
-}
 
 const MAX_MESSAGES_IN_CONTEXT = 20; // Last N messages (10 turns) — keeps context focused and cost-controlled
 const MAX_MESSAGE_LENGTH = 4000; // chars per message — prevents abuse and token bloat
@@ -129,10 +88,10 @@ export async function POST(req: NextRequest) {
 
   let enrichedContext = contextDoc?.masterContext || null;
   if (vapiRows.length > 0) {
-    enrichedContext = (enrichedContext || "") + formatVapiContext(vapiRows[0]);
+    enrichedContext = (enrichedContext || "") + formatVapiCoachContext(vapiRows[0]);
   }
   if (sixCRows.length > 0) {
-    enrichedContext = (enrichedContext || "") + formatScorecardContext(sixCRows);
+    enrichedContext = (enrichedContext || "") + formatScorecardCoachContext(sixCRows);
   }
 
   const lastUserMessage = trimmedMessages[trimmedMessages.length - 1];

@@ -27,6 +27,11 @@ import {
   getDriverSectionId,
 } from "@/lib/vapi/driver-library";
 import { DRIVER_ACCENT_COLORS, DriverIcon } from "@/lib/vapi/driver-icons";
+import {
+  chatQueryUrl,
+  buildDriverCoachPrompt,
+  buildAlignedMomentumCoachPrompt,
+} from "@/lib/chat-deep-links";
 
 type LibraryResult = {
   id: string;
@@ -241,39 +246,56 @@ export default function DriversPage() {
                 Loading your latest driver profile...
               </div>
             ) : isAlignedMomentum ? (
-              <div className="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-foreground"
-                style={{
-                  backgroundColor: `${alignedAccent}12`,
-                  borderColor: `${alignedAccent}26`,
-                }}
-              >
-                Your current state:{" "}
-                <StateBrowseLink
-                  name={ALIGNED_MOMENTUM_NAME}
-                  isLg={isLg}
-                  onPick={openMobileDriver}
-                />
-                .
-              </div>
-            ) : primaryDriver ? (
-              <div className="mt-6 rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm leading-relaxed text-foreground">
-                Your primary driver:{" "}
-                <DriverBrowseLink
-                  driver={primaryDriver}
-                  isLg={isLg}
-                  onPick={openMobileDriver}
-                />
-                . Your secondary driver:{" "}
-                {secondaryDriver ? (
-                  <DriverBrowseLink
-                    driver={secondaryDriver}
+              <div className="mt-6 space-y-3">
+                <div
+                  className="rounded-2xl border px-5 py-4 text-sm leading-relaxed text-foreground"
+                  style={{
+                    backgroundColor: `${alignedAccent}12`,
+                    borderColor: `${alignedAccent}26`,
+                  }}
+                >
+                  Your current state:{" "}
+                  <StateBrowseLink
+                    name={ALIGNED_MOMENTUM_NAME}
                     isLg={isLg}
                     onPick={openMobileDriver}
                   />
-                ) : (
-                  "None identified"
-                )}
-                .
+                  .
+                </div>
+                <Link
+                  href={chatQueryUrl(buildAlignedMomentumCoachPrompt())}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+                >
+                  Coach on protecting momentum <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            ) : primaryDriver ? (
+              <div className="mt-6 space-y-3">
+                <div className="rounded-2xl border border-accent/20 bg-accent/10 px-5 py-4 text-sm leading-relaxed text-foreground">
+                  Your primary driver:{" "}
+                  <DriverBrowseLink
+                    driver={primaryDriver}
+                    isLg={isLg}
+                    onPick={openMobileDriver}
+                  />
+                  . Your secondary driver:{" "}
+                  {secondaryDriver ? (
+                    <DriverBrowseLink
+                      driver={secondaryDriver}
+                      isLg={isLg}
+                      onPick={openMobileDriver}
+                    />
+                  ) : (
+                    "None identified"
+                  )}
+                  .
+                </div>
+                <Link
+                  href={chatQueryUrl(buildDriverCoachPrompt(primaryDriver))}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+                >
+                  Discuss this driver with Alfred <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             ) : (
               <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-border bg-background/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">

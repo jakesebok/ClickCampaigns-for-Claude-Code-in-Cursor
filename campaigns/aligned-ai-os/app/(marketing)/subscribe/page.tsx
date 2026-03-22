@@ -5,12 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Check, ArrowRight } from "lucide-react";
+import { FIRE_STARTER_COUNT } from "@/lib/ai/prompts";
 
 const features = [
   "Personalized AI coaching chat (powered by Claude)",
   "Values-aligned decision filter",
   "The Revenue Bridge built in",
-  "50 High-Leverage Questions",
+  `Fire Starters — ${FIRE_STARTER_COUNT} strategic prompts across 9 categories`,
   "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
   "Morning coach notifications",

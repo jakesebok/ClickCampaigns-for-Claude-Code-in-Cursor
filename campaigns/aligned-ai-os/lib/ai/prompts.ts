@@ -171,11 +171,14 @@ Listen for and respond to:
 VAPI INTEGRATION
 ==================================================
 If VAPI assessment data is available below, use it:
-- Reference their Founder Archetype and what it means for their growth strategy
+- Reference their Founder Archetype and what it means for their growth strategy (the "Archetype essence" line is your one-sentence coaching cue — not a label to over-explain)
 - Use domain and arena scores to identify where they're aligned and where the gaps are
-- Cross-reference VAPI Critical Priorities (high importance + low score) with their current Vital Action
+- **FOCUS HERE FIRST** = domains listed under "Critical Priority" / "FOCUS HERE FIRST" in their context. These are high-importance, low-score areas — weight them heavily in weekly plans, Vital Action design, and tradeoff conversations unless the user explicitly chooses otherwise
+- If a **DRIVER PATTERN** is named (primary/secondary/state), coach exits and boundaries that fit that pattern — not generic discipline or hustle framing
+- Cross-reference VAPI Critical Priorities with their current Vital Action; if Vital Action ignores every critical domain, flag the tension
 - When they ask for advice, check if the relevant domain is "In the Red" or "Below the Line" — if so, acknowledge the gap and make the advice proportional to their current capacity
-- Use 6Cs scorecard trends to track weekly progress: Clarity, Coherence, Capacity, Confidence, Courage, Connection
+- Use 6Cs scorecard trends (including week-over-week deltas and "lowest C" when provided) to track progress and to spot where the nervous system or values are slipping
+- When **Weekly review (structured)** appears under 6Cs, use it as first-person signal of what actually happened that week
 
 VAPI-TO-INNER-WORK MAPPING (use when VAPI scores reveal inner work opportunities):
 - Inner Alignment low → Belief work around permission, obligation, identity ("I have to..." beliefs)
@@ -287,87 +290,371 @@ export type FireStarterCategory = {
   prompts: FireStarterPrompt[];
 };
 
-/** Fire Starters: label = button text, prompt = optimized text sent to coach (references Vital Action, revenue, QC quota, master context) */
+/**
+ * Fire Starters: label = button text; prompt = text sent to coach.
+ * 50 core prompts = original Strategic Clarity / AFC curriculum set (terminology: Becoming, Vital Action, Real Reasons, Driving Fire, Revenue Bridge).
+ * +12 = Inner Work, VAPI/sense-making, Deep Patterns (app enhancements).
+ */
 export const SUGGESTED_QUESTIONS: FireStarterCategory[] = [
   {
     category: "Weekly Planning",
     prompts: [
-      { label: "Create weekly schedule", prompt: "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan that protects my QC quota and respects my capacity." },
-      { label: "Top 3 outcomes this week", prompt: "What are the 3 highest-leverage outcomes for this week given my Vital Action and revenue goals?" },
-      { label: "What to delete or defer", prompt: "What must be deleted or deferred this week so I don't break my system? Use my master context." },
-      { label: "Minimum Viable Week plan", prompt: "Create a 'Minimum Viable Week' plan for when chaos happens — anchored to my Vital Action and non-negotiables." },
+      {
+        label: "Calendar: Becoming + Vital Action",
+        prompt:
+          "Build my week around my Becoming line and my Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables. Use my master context.",
+      },
+      {
+        label: "Top 3 outcomes (4 life arenas)",
+        prompt:
+          "What are the 3 highest-leverage outcomes for this week across Business, Home, Self/Skills, and Impact — based on my primary growth lane and blueprint? Use my Vital Action and Real Reasons.",
+      },
+      {
+        label: "Values violations audit",
+        prompt:
+          "Audit my week for values violations before we plan: where am I about to trade a core value for speed, approval, or money? Use my stated values from my master context and suggest aligned moves.",
+      },
+      {
+        label: "Delete or defer this week",
+        prompt:
+          "Given my capacity limits from my master context, what must be deleted or deferred this week so I don't break my system?",
+      },
+      {
+        label: "Revenue Bridge → QC + outreach",
+        prompt:
+          "Translate my Revenue Bridge / required revenue math into this week's Qualified Conversations quota and the exact outreach actions to hit it. Use my master context.",
+      },
+      {
+        label: "Ideal week template (90 days)",
+        prompt:
+          "Design my reusable Mon–Fri 'ideal week' template for the next 90 days — anchored to Vital Action, QC quota, and boundaries from my blueprint.",
+      },
+      {
+        label: "ONE boundary for a cleaner week",
+        prompt:
+          "What is the ONE boundary that would make this week feel 30% cleaner? Help me install it using my values and capacity.",
+      },
+      {
+        label: "Minimum Viable Week",
+        prompt:
+          "Create a 'Minimum Viable Week' plan for when chaos happens — so I still honor my Vital Action (the domino). Use my master context.",
+      },
     ],
   },
   {
     category: "Strategy + Focus",
     prompts: [
-      { label: "What game am I playing?", prompt: "What game am I actually playing this quarter? Connect it to my Real Reasons and revenue target." },
-      { label: "Score options with Decision Filter", prompt: "Score these options using my Decision Filter: [describe options]. Use my values, Driving Fire, and Becoming." },
-      { label: "Find my bottleneck", prompt: "What's my current bottleneck? Prove it with the numbers. Reference my capacity and revenue bridge." },
-      { label: "Reorient me from shiny object", prompt: "I'm tempted to chase a shiny object. Reorient me to my Vital Action and what actually moves revenue." },
+      {
+        label: "What game am I playing?",
+        prompt:
+          "Given my Real Reasons (MIQs), WHY / Just Cause / Driving Fire, and my Revenue Bridge, what game am I actually playing this quarter?",
+      },
+      {
+        label: "Decision Filter: 3 options",
+        prompt:
+          "Score these 3 options using my Decision Filter and tell me YES / NO / NOT NOW with one sentence each: [describe the three options]. Use my values, Driving Fire, and Becoming.",
+      },
+      {
+        label: "Find my bottleneck (prove it)",
+        prompt:
+          "What is my current bottleneck: lead flow, conversion, capacity, offer, pricing, or positioning? Prove it with the numbers we have in my master context and Revenue Bridge.",
+      },
+      {
+        label: "Stop doing if I trusted strategy",
+        prompt:
+          "What would I stop doing immediately if I trusted my strategy? Push me to be specific and aligned with my Real Reasons.",
+      },
+      {
+        label: "Simplest plan: revenue + Becoming",
+        prompt:
+          "What is the simplest plan that hits my revenue target and protects my Becoming line? Use my master context.",
+      },
+      {
+        label: "10 values betrayal moves",
+        prompt:
+          "List 10 ways I might unintentionally betray my values while pursuing growth — and the aligned counter-move for each. Use my stated values.",
+      },
+      {
+        label: "One 10% lever this month",
+        prompt:
+          "If we could only improve one lever by 10% this month, which lever changes everything downstream? Tie it to my Vital Action and revenue math.",
+      },
+      {
+        label: "Pressure-test my offer",
+        prompt:
+          "Pressure-test my current offer against my values and capacity. What must change? Use my master context.",
+      },
+      {
+        label: "90-day ladder: Vital Action → daily",
+        prompt:
+          "Build a 90-day strategy that ladders from my Vital Action → weekly QC quota → daily actions. Use my blueprint.",
+      },
+      {
+        label: "Shiny object — reorient",
+        prompt:
+          "I'm tempted to chase a shiny object. Reorient me back to my Real Reasons and show me what this distraction is trying to give me. Connect to my Vital Action.",
+      },
     ],
   },
   {
     category: "Sales + Conversations",
     prompts: [
-      { label: "Weekly QC plan", prompt: "Generate my weekly Qualified Conversation plan based on my revenue target and capacity." },
-      { label: "Diagnose close rate", prompt: "My close rate is below target. Diagnose the issue using my offer and sales context." },
-      { label: "Revenue → weekly numbers", prompt: "Turn my revenue target into weekly numbers — QC quota, capacity, and what I need to hit." },
-      { label: "Price vs conversion vs offer", prompt: "Help me decide: raise price vs improve conversion vs change offer. Use my revenue math." },
+      {
+        label: "Weekly QC plan by lane",
+        prompt:
+          "Generate my weekly Qualified Conversation plan based on my lane (Referrals / Ads / Hybrid): actions, time blocks, and talk tracks. Use my revenue target and capacity from master context.",
+      },
+      {
+        label: "Qualification screen",
+        prompt:
+          "Design a qualification screen that protects my time and improves conversion. Include must-have criteria and disqualifiers. Align to my offer and values.",
+      },
+      {
+        label: "Diagnose close rate",
+        prompt:
+          "My close rate is below target. Diagnose whether the issue is lead quality, offer, messaging, or sales process — then give me the fix order. Use my context.",
+      },
+      {
+        label: "Revenue → sales + QCs (weekly)",
+        prompt:
+          "Turn my revenue target into 'sales needed, sales calls needed, QCs needed' and tell me the weekly numbers. Use my Revenue Bridge.",
+      },
+      {
+        label: "Values-aligned follow-up (7 touches)",
+        prompt:
+          "Create a follow-up system that matches my values (no desperation). Give a 7-touch sequence for my typical sale.",
+      },
+      {
+        label: "Sales call structure (WHY, no hype)",
+        prompt:
+          "Write a simple sales call structure aligned to my WHY / Driving Fire (no hype) that leads to a clean yes or no.",
+      },
+      {
+        label: "Price vs conversion vs offer",
+        prompt:
+          "Help me decide: raise price vs improve conversion vs change offer. Use capacity math and values fit from my master context.",
+      },
+      {
+        label: "2-minute QC scoreboard",
+        prompt:
+          "Create a 'QC scoreboard' I can review in 2 minutes each day. Tie it to my weekly quota and pipeline.",
+      },
+    ],
+  },
+  {
+    category: "Marketing + Messaging",
+    prompts: [
+      {
+        label: "'What I do' statement",
+        prompt:
+          "Write my 'what I do' statement so it connects my business to my Just Cause / Driving Fire and Real Reasons without sounding like generic marketing. Use my blueprint.",
+      },
+      {
+        label: "3 themes → content pillars",
+        prompt:
+          "Extract my 3 most compelling themes from my Real Reasons + Values and turn them into content pillars with examples.",
+      },
+      {
+        label: "10 hooks (misalignment)",
+        prompt:
+          "Create 10 hooks that call out the misalignment my ideal client is living in — without shame. Ground in my Real Reasons and offer.",
+      },
+      {
+        label: "Origin story draft",
+        prompt:
+          "Draft an origin story that ties my WHY to the problem I solve and the 'enemy' I fight (misalignment, bad defaults, etc.). Use my master context.",
+      },
+      {
+        label: "Messaging audit + rewrite",
+        prompt:
+          "Audit my current messaging for values conflict, vagueness, or hustle culture. Rewrite key lines aligned to my voice and boundaries.",
+      },
+      {
+        label: "Offer page outline",
+        prompt:
+          "Create an offer page outline that sells the outcome while protecting my capacity and values. Use my blueprint.",
+      },
+      {
+        label: "One week of content (Vital Action)",
+        prompt:
+          "Write a week of content that supports my Vital Action (not random posting). Include CTAs that fit my QC plan.",
+      },
+      {
+        label: "Referral narrative (one paragraph)",
+        prompt:
+          "Build a referral narrative: the one paragraph people can repeat about me that makes intros easy. Keep it accurate to my Real Reasons and offer.",
+      },
+    ],
+  },
+  {
+    category: "Execution + Nervous System",
+    prompts: [
+      {
+        label: "3 questions + one next action",
+        prompt:
+          "When I'm stuck or avoiding, ask me 3 questions that expose the real fear, then give one next action that fits my values and Vital Action.",
+      },
+      {
+        label: "Pre-work + shutdown rituals",
+        prompt:
+          "Design my 'pre-work ritual' and 'shutdown ritual' to protect presence at home and reduce overwork loops. Use my boundaries from master context.",
+      },
+      {
+        label: "Flooded / anxious (3 min)",
+        prompt:
+          "I'm flooded or anxious. Give me a 3-minute regulation protocol and then one micro-task to regain momentum toward my Vital Action.",
+      },
+      {
+        label: "Resistance to Vital Action",
+        prompt:
+          "What part of me is resisting this Vital Action — and what is it trying to protect? Help me negotiate a plan that honors both.",
+      },
+      {
+        label: "Friction plan for derailers",
+        prompt:
+          "Create a 'friction plan' for my top derailers: triggers, stories, replacement behaviors, and boundaries. Use my patterns from context if visible.",
+      },
+      {
+        label: "Pressure → purpose narrative",
+        prompt:
+          "Rewrite my inner narrative from pressure to purpose using my WHY / Driving Fire and Real Reasons.",
+      },
+      {
+        label: "Energy budget (week)",
+        prompt:
+          "Build an 'energy budget' for the week: what drains me, what fuels me, and what gets protected — including Vital Action and QC blocks.",
+      },
+      {
+        label: "Stop me working harder",
+        prompt:
+          "I'm about to default to 'work harder.' Intervene: give leverage options only — price, offer, model, systems, delegation — using my capacity reality.",
+      },
+    ],
+  },
+  {
+    category: "Weekly + Monthly Review",
+    prompts: [
+      {
+        label: "Run Weekly Review",
+        prompt:
+          "Run my Weekly Review: check values alignment, Becoming progress, QC quota, revenue progress, and capacity — then choose one adjustment. Use my master context.",
+      },
+      {
+        label: "Evidence vs contradiction (Future Self)",
+        prompt:
+          "What did I do this week that proves I'm becoming my Future Self / Becoming line? What did I do that contradicts it? Be direct.",
+      },
+      {
+        label: "Calendar vs priorities",
+        prompt:
+          "Show me where my calendar contradicted my stated priorities. What's the smallest fix for next week?",
+      },
+      {
+        label: "Strategy vs execution (blunt)",
+        prompt:
+          "Diagnose my results: Was the problem strategy or execution? Be blunt. Use what you know from my context.",
+      },
+      {
+        label: "ONE system improvement",
+        prompt:
+          "What's the ONE system improvement that would remove the most friction next week?",
+      },
+      {
+        label: "Monthly: Revenue Bridge vs reality",
+        prompt:
+          "Monthly check: Compare my Revenue Bridge / required revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?",
+      },
+      {
+        label: "What am I tolerating?",
+        prompt:
+          "Tell me the truth: what am I tolerating that's keeping me in misalignment?",
+      },
+      {
+        label: "Double down, stop, redesign",
+        prompt:
+          "Based on the last 30 days, what should I double down on, stop, and redesign — so I win without burnout?",
+      },
     ],
   },
   {
     category: "Inner Work + Beliefs",
     prompts: [
-      { label: "I know what to do but can't", prompt: "I know what I should do but I can't make myself do it. Help me figure out what's really going on — especially around my Vital Action." },
-      { label: "Find and shift limiting belief", prompt: "There's a belief holding me back. Help me find it and shift it. Connect it to my Real Reasons." },
-      { label: "Parts work: grow vs terrified", prompt: "Part of me wants to grow and part of me is terrified. Can we work with both parts?" },
-      { label: "Map self-sabotage pattern", prompt: "I keep self-sabotaging at the same point. Walk me through what's underneath that pattern." },
-    ],
-  },
-  {
-    category: "State + Confidence",
-    prompts: [
-      { label: "Get ready for big conversation", prompt: "I have a big conversation/pitch/launch coming up and I feel anxious. Help me get into a resourceful state." },
-      { label: "Reframe my inner critic", prompt: "My inner critic is loud today. Help me reframe what it's saying." },
-      { label: "Build confidence anchor", prompt: "I need to access confidence right now. Guide me through building an anchor I can use." },
-      { label: "Overwhelmed — find next move", prompt: "I'm overwhelmed and can't think clearly. Ground me and help me find the one next move." },
-    ],
-  },
-  {
-    category: "Execution + Mindset",
-    prompts: [
-      { label: "3 questions to expose fear", prompt: "I'm stuck. Ask me 3 questions that expose the real fear." },
-      { label: "Stop me from working harder", prompt: "I'm about to default to 'work harder.' Intervene with leverage options — pricing, offer, capacity." },
-      { label: "Resistance to Vital Action", prompt: "What part of me is resisting this Vital Action? Help me negotiate." },
-      { label: "Energy budget for the week", prompt: "Build an energy budget for this week that protects my Vital Action and QC quota." },
-    ],
-  },
-  {
-    category: "Weekly Review",
-    prompts: [
-      { label: "Run Weekly Review", prompt: "Run my Weekly Review: values, Becoming, QC quota, revenue, capacity. Use my master context." },
-      { label: "Evidence of Future Self", prompt: "What did I do this week that proves I'm becoming my Future Self?" },
-      { label: "Strategy vs execution?", prompt: "Diagnose my results: strategy or execution problem?" },
-      { label: "Double down, stop, redesign", prompt: "Based on the last 30 days, what should I double down on, stop, and redesign?" },
+      {
+        label: "I know what to do but can't",
+        prompt:
+          "I know what I should do but I can't make myself do it. Help me figure out what's really going on — especially around my Vital Action.",
+      },
+      {
+        label: "Find and shift limiting belief",
+        prompt:
+          "There's a belief holding me back. Help me find it and shift it. Connect it to my Real Reasons.",
+      },
+      {
+        label: "Parts work: grow vs terrified",
+        prompt:
+          "Part of me wants to grow and part of me is terrified. Can we work with both parts?",
+      },
+      {
+        label: "Map self-sabotage pattern",
+        prompt:
+          "I keep self-sabotaging at the same point. Walk me through what's underneath that pattern.",
+      },
     ],
   },
   {
     category: "VAPI + Alignment",
     prompts: [
-      { label: "VAPI focus this quarter", prompt: "Look at my VAPI scores. What's the most important thing for me to focus on this quarter? Cross-reference my Vital Action." },
-      { label: "90-day alignment plan", prompt: "Based on my archetype and VAPI results, build me a 90-day alignment plan." },
-      { label: "VAPI domains dragging business", prompt: "Which VAPI domains are dragging down my business arena? What's the root cause?" },
-      { label: "VAPI vs 6Cs progress", prompt: "Compare my VAPI scores to my 6Cs trends. Where am I making progress and where am I stuck?" },
+      {
+        label: "VAPI focus this quarter",
+        prompt:
+          "Look at my VAPI scores. What's the most important thing for me to focus on this quarter? Cross-reference my Vital Action.",
+      },
+      {
+        label: "90-day alignment plan (VAPI)",
+        prompt:
+          "Based on my archetype and VAPI results, build me a 90-day alignment plan.",
+      },
+      {
+        label: "VAPI domains dragging business",
+        prompt:
+          "Which VAPI domains are dragging down my business arena? What's the root cause?",
+      },
+      {
+        label: "VAPI vs 6Cs progress",
+        prompt:
+          "Compare my VAPI scores to my 6Cs trends. Where am I making progress and where am I stuck?",
+      },
     ],
   },
   {
     category: "Deep Patterns",
     prompts: [
-      { label: "Old money/success story", prompt: "What old story about money/success/worth is running in the background? Help me surface it." },
-      { label: "Map a pattern", prompt: "I think I have a pattern around [topic]. Help me map it — triggers, beliefs, secondary gains." },
-      { label: "Trace 'always been this way'", prompt: "There's something I've 'always been this way' about. Can we trace it back and update it?" },
-      { label: "Future-pace 90 days", prompt: "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted. Use my Real Reasons and Becoming." },
+      {
+        label: "Old money/success story",
+        prompt:
+          "What old story about money/success/worth is running in the background? Help me surface it.",
+      },
+      {
+        label: "Map a pattern",
+        prompt:
+          "I think I have a pattern around [topic]. Help me map it — triggers, beliefs, secondary gains.",
+      },
+      {
+        label: "Trace 'always been this way'",
+        prompt:
+          "There's something I've 'always been this way' about. Can we trace it back and update it?",
+      },
+      {
+        label: "Future-pace 90 days",
+        prompt:
+          "I want to future-pace: walk me through the next 90 days as the version of me who's already shifted. Use my Real Reasons and Becoming.",
+      },
     ],
   },
 ];
+
+/** Total Fire Starter prompts in SUGGESTED_QUESTIONS (single source of truth for marketing copy). */
+export const FIRE_STARTER_COUNT = SUGGESTED_QUESTIONS.reduce(
+  (n, cat) => n + cat.prompts.length,
+  0
+);

@@ -2,9 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
-import { getTier } from "@/lib/vapi/scoring";
-import { DOMAINS, ARENAS } from "@/lib/vapi/quiz-data";
-import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
+import { formatScorecardCoachContext, formatVapiCoachContext } from "@/lib/ai/coach-context";
 import { buildVoiceSystemPrompt } from "@/lib/voice/prompts";
 import { fetchPortalVapiByEmail, fetchPortalSixCByEmail } from "@/lib/portal-data";
 import { hasBillingBypass } from "@/lib/internal-access";
@@ -56,42 +54,15 @@ export async function POST() {
     fetchPortalSixCByEmail(user.email),
   ]);
 
-  let vapiSummary: string | null = null;
-  if (vapiRows.length > 0) {
-    const row = vapiRows[0];
-    const r = row.results as Record<string, unknown>;
-    const ds = (r.domainScores as Record<string, number>) || {};
-    const as2 = (r.arenaScores as Record<string, number>) || {};
-    const overall = (r.overall as number) || 0;
+  const vapiSummary =
+    vapiRows.length > 0
+      ? formatVapiCoachContext(vapiRows[0]).replace(/^\n+/, "")
+      : null;
 
-    let ctx = `VAPI ASSESSMENT (${new Date(row.created_at).toLocaleDateString()})`;
-    ctx += `\nOverall: ${overall.toFixed(1)}/10 — ${getTier(overall)}`;
-    ctx += `\nArchetype: ${(r.archetype as string) || ""}`;
-    for (const arena of ARENAS) {
-      const arenaScore = as2[arena.label] ?? as2[arena.key] ?? 0;
-      ctx += `\n${arena.label}: ${arenaScore.toFixed(1)}`;
-      for (const code of arena.domains) {
-        const domain = DOMAINS.find((d) => d.code === code)!;
-        ctx += ` | ${domain.name}: ${(ds[code] || 0).toFixed(1)}`;
-      }
-    }
-    vapiSummary = ctx;
-  }
-
-  let scorecardSummary: string | null = null;
-  if (sixCRows.length > 0) {
-    let ctx = "RECENT 6Cs SCORECARDS";
-    for (const entry of sixCRows.slice(0, 3)) {
-      const scores = entry.scores || {};
-      const overall = getOverallScore(scores);
-      ctx += `\nWeek ${new Date(entry.created_at).toLocaleDateString()}: ${overall}%`;
-      for (const c of SCORECARD_CATEGORIES) {
-        ctx += ` | ${c.label}: ${scores[c.key] || 0}%`;
-      }
-      if (entry.one_thing_to_improve) ctx += ` | Vital Action: ${entry.one_thing_to_improve}`;
-    }
-    scorecardSummary = ctx;
-  }
+  const scorecardSummary =
+    sixCRows.length > 0
+      ? formatScorecardCoachContext(sixCRows).replace(/^\n+/, "")
+      : null;
 
   const instructions = buildVoiceSystemPrompt({
     masterContext: contextDoc?.masterContext || null,

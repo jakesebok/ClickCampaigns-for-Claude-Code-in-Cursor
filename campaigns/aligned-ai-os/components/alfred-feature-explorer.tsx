@@ -66,8 +66,9 @@ import {
   GHOST_ARCHETYPE_ACCENT,
   GHOST_ARCHETYPE_DESCRIPTION,
   INNER_WORK_BELIEFS_PROMPTS,
+  INNER_WORK_DEMO_CASUAL_USER_MESSAGE,
   INNER_WORK_DEMO_LABEL,
-  SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY,
+  INNER_WORK_LIMITING_BELIEF_DEMO_TURNS,
   SAMPLE_SCHEDULE_REPLY,
   WEEKLY_PLANNING_DEMO_LABEL,
   WEEKLY_PLANNING_PROMPTS,
@@ -583,7 +584,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           return {
             kicker: "Coach",
             title: "Find the belief, then stress-test it against your Real Reasons",
-            body: "Same chat choreography as production: opener, your exact Fire Starter prompt typed and sent, spinner while the model works, then a streamed reply. The script is illustrative; live answers pull from your Real Reasons, blueprint, Vital Action, and scores.",
+            body: "The preview types like a real person would—messy, no jargon about frameworks—while Alfred still weaves in what you already put in your blueprint (presence at home, Vital Action, and what you said matters). Each line is its own bubble; the full dance is opener, your message, spinner, then back-and-forth with streamed replies. Live chat does the same from your actual data.",
           };
         }
         return {
@@ -609,7 +610,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
       return {
         kicker: "Coach tab",
         title: "Organized prompts, not a blank chat",
-        body: "Fire Starters sort coaching by the week you are actually in—strategy, inner work, sales, execution, review, assessment sense-making, and deeper pattern work—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality. Inner Work + Beliefs is where stuckness gets language: the belief under “I can’t,” parts in conflict, and the self-sabotage loop—always tied back to what you said actually matters.",
+        body: "Fire Starters sort coaching by the week you are actually in—weekly planning, strategy, sales, marketing and messaging, nervous-system execution, review, inner work, VAPI sense-making, and deep patterns—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality. Marketing + Messaging turns your Real Reasons into hooks and narratives. Inner Work + Beliefs is where stuckness gets language: the belief under “I can’t,” parts in conflict, and the self-sabotage loop—always tied back to what you said actually matters.",
       };
     }
     if (tab === "voice") {
@@ -1140,34 +1141,33 @@ function FocusRow({
   );
 }
 
-/** Mirrors chat/page.tsx: assistant types first, user types in textarea + send, Loader2 while model thinks, then streamed assistant reply. */
-function CoachDemoChatSequence({
-  replayKey,
-  opener,
-  userPrompt,
-  assistantReply,
-  reduceMotion,
-  onBack,
-}: {
+type CoachDemoBubble = { role: "user" | "assistant"; content: string };
+
+type CoachDemoChatSequenceProps = {
   replayKey: number;
   opener: string;
-  userPrompt: string;
-  assistantReply: string;
   reduceMotion: boolean;
   onBack: () => void;
-}) {
+} & (
+  | { variant: "weekly"; firstUserMessage: string; assistantReply: string }
+  | { variant: "inner"; firstUserMessage: string; scriptTurns: readonly CoachDemoBubble[] }
+);
+
+/** Mirrors chat/page.tsx: real bubbles, textarea + Send, Loader2 while thinking, streamed assistant text. Inner variant alternates multiple bubbles (no labeled Alfred/You blocks). */
+function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
+  const { replayKey, opener, reduceMotion, onBack } = props;
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [assistantOpening, setAssistantOpening] = useState("");
+  const [messages, setMessages] = useState<CoachDemoBubble[]>([]);
+  const [streamBuffer, setStreamBuffer] = useState("");
   const [composerValue, setComposerValue] = useState("");
-  const [userSent, setUserSent] = useState(false);
   const [thinking, setThinking] = useState(false);
-  const [assistantFinal, setAssistantFinal] = useState("");
+  const [pendingUserTarget, setPendingUserTarget] = useState<string | null>(null);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
-  }, [assistantOpening, composerValue, userSent, thinking, assistantFinal, reduceMotion]);
+  }, [messages, streamBuffer, composerValue, thinking, reduceMotion]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1178,51 +1178,93 @@ function CoachDemoChatSequence({
         }, ms);
       });
 
-    async function run() {
-      setAssistantOpening("");
+    async function streamAssistant(text: string) {
+      const chunk = 12;
+      const streamMs = 14;
+      setStreamBuffer("");
+      for (let pos = 0; pos <= text.length; pos += chunk) {
+        if (cancelled) return;
+        setStreamBuffer(text.slice(0, Math.min(text.length, pos + chunk)));
+        await sleep(streamMs);
+      }
+      if (cancelled) return;
+      setMessages((m) => [...m, { role: "assistant", content: text }]);
+      setStreamBuffer("");
+    }
+
+    async function typeUserInComposer(text: string) {
+      const userMs = 10;
+      setPendingUserTarget(text);
       setComposerValue("");
-      setUserSent(false);
+      for (let i = 0; i <= text.length; i++) {
+        if (cancelled) return;
+        setComposerValue(text.slice(0, i));
+        await sleep(userMs);
+      }
+      await sleep(260);
+      if (cancelled) return;
+      setComposerValue("");
+      setPendingUserTarget(null);
+      setMessages((m) => [...m, { role: "user", content: text }]);
+    }
+
+    async function run() {
+      setMessages([]);
+      setStreamBuffer("");
+      setComposerValue("");
       setThinking(false);
-      setAssistantFinal("");
+      setPendingUserTarget(null);
 
       if (reduceMotion) {
-        setAssistantOpening(opener);
-        setUserSent(true);
-        setAssistantFinal(assistantReply);
+        if (props.variant === "weekly") {
+          setMessages([
+            { role: "assistant", content: opener },
+            { role: "user", content: props.firstUserMessage },
+            { role: "assistant", content: props.assistantReply },
+          ]);
+        } else {
+          setMessages([
+            { role: "assistant", content: opener },
+            { role: "user", content: props.firstUserMessage },
+            ...props.scriptTurns,
+          ]);
+        }
         return;
       }
 
       const openMs = 13;
-      for (let i = 0; i <= opener.length; i++) {
+      for (let i = 1; i <= opener.length; i++) {
         if (cancelled) return;
-        setAssistantOpening(opener.slice(0, i));
+        setMessages([{ role: "assistant", content: opener.slice(0, i) }]);
         await sleep(openMs);
       }
       await sleep(380);
       if (cancelled) return;
 
-      const userMs = 10;
-      for (let i = 0; i <= userPrompt.length; i++) {
-        if (cancelled) return;
-        setComposerValue(userPrompt.slice(0, i));
-        await sleep(userMs);
-      }
-      await sleep(260);
+      await typeUserInComposer(props.firstUserMessage);
       if (cancelled) return;
 
-      setComposerValue("");
-      setUserSent(true);
       setThinking(true);
       await sleep(1250);
       if (cancelled) return;
-
       setThinking(false);
-      const chunk = 12;
-      const streamMs = 14;
-      for (let pos = 0; pos <= assistantReply.length; pos += chunk) {
+
+      if (props.variant === "weekly") {
+        await streamAssistant(props.assistantReply);
+        return;
+      }
+
+      for (const turn of props.scriptTurns) {
         if (cancelled) return;
-        setAssistantFinal(assistantReply.slice(0, Math.min(assistantReply.length, pos + chunk)));
-        await sleep(streamMs);
+        if (turn.role === "assistant") {
+          setThinking(true);
+          await sleep(1100);
+          if (cancelled) return;
+          setThinking(false);
+          await streamAssistant(turn.content);
+        } else {
+          await typeUserInComposer(turn.content);
+        }
       }
     }
 
@@ -1230,16 +1272,21 @@ function CoachDemoChatSequence({
     return () => {
       cancelled = true;
     };
-  }, [opener, userPrompt, assistantReply, reduceMotion, replayKey]);
+  }, [
+    opener,
+    reduceMotion,
+    replayKey,
+    props.variant,
+    props.firstUserMessage,
+    props.variant === "weekly" ? props.assistantReply : "",
+    props.variant === "inner" ? props.scriptTurns : null,
+  ]);
 
-  const showOpeningBubble = assistantOpening.length > 0;
-  const showFinalBubble = assistantFinal.length > 0;
   const canSendDemo =
-    composerValue === userPrompt &&
-    userPrompt.length > 0 &&
-    !userSent &&
+    pendingUserTarget !== null &&
+    composerValue === pendingUserTarget &&
     !thinking &&
-    assistantFinal.length === 0;
+    streamBuffer === "";
 
   return (
     <div className="flex flex-1 flex-col min-h-0">
@@ -1256,21 +1303,24 @@ function CoachDemoChatSequence({
           Back
         </button>
 
-        {showOpeningBubble && (
-          <div className="flex justify-start">
-            <div className="max-w-[92%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/85 leading-relaxed">
-              <p className="whitespace-pre-wrap">{assistantOpening}</p>
+        {messages
+          .filter((msg) => msg.content.length > 0)
+          .map((msg, idx) => (
+          <div
+            key={`demo-msg-${idx}-${msg.role}-${msg.content.slice(0, 12)}`}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`max-w-[92%] rounded-2xl px-3 py-2.5 leading-relaxed ${
+                msg.role === "user"
+                  ? "bg-ap-accent text-white text-[11px]"
+                  : "bg-white/[0.06] border border-white/10 text-[10px] text-white/85"
+              }`}
+            >
+              <p className="whitespace-pre-wrap">{msg.content}</p>
             </div>
           </div>
-        )}
-
-        {userSent && (
-          <div className="flex justify-end">
-            <div className="max-w-[92%] rounded-2xl px-3 py-2 bg-ap-accent text-white text-[11px] leading-relaxed">
-              <p className="whitespace-pre-wrap">{userPrompt}</p>
-            </div>
-          </div>
-        )}
+        ))}
 
         {thinking && (
           <div className="flex justify-start">
@@ -1283,10 +1333,10 @@ function CoachDemoChatSequence({
           </div>
         )}
 
-        {showFinalBubble && (
+        {streamBuffer.length > 0 && (
           <div className="flex justify-start">
             <div className="max-w-[95%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/80 leading-relaxed">
-              <p className="whitespace-pre-wrap">{assistantFinal}</p>
+              <p className="whitespace-pre-wrap">{streamBuffer}</p>
             </div>
           </div>
         )}
@@ -1366,22 +1416,27 @@ function CoachScreen({
       </header>
 
       {showAnimatedFullDemo && threadPrompt ? (
-        <CoachDemoChatSequence
-          replayKey={coachDemoReplayKey}
-          opener={
-            threadPrompt.family === "weekly"
-              ? COACH_DEMO_WEEKLY_THREAD_OPENER
-              : COACH_DEMO_INNER_THREAD_OPENER
-          }
-          userPrompt={threadPrompt.item.prompt}
-          assistantReply={
-            threadPrompt.family === "weekly"
-              ? SAMPLE_SCHEDULE_REPLY
-              : SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY
-          }
-          reduceMotion={reduceMotion}
-          onBack={onBackFromThread}
-        />
+        threadPrompt.family === "weekly" ? (
+          <CoachDemoChatSequence
+            variant="weekly"
+            replayKey={coachDemoReplayKey}
+            opener={COACH_DEMO_WEEKLY_THREAD_OPENER}
+            firstUserMessage={threadPrompt.item.prompt}
+            assistantReply={SAMPLE_SCHEDULE_REPLY}
+            reduceMotion={reduceMotion}
+            onBack={onBackFromThread}
+          />
+        ) : (
+          <CoachDemoChatSequence
+            variant="inner"
+            replayKey={coachDemoReplayKey}
+            opener={COACH_DEMO_INNER_THREAD_OPENER}
+            firstUserMessage={INNER_WORK_DEMO_CASUAL_USER_MESSAGE}
+            scriptTurns={INNER_WORK_LIMITING_BELIEF_DEMO_TURNS}
+            reduceMotion={reduceMotion}
+            onBack={onBackFromThread}
+          />
+        )
       ) : (
         <>
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 min-h-0">
@@ -1516,8 +1571,6 @@ function CoachScreen({
               <div className="max-w-[95%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/80 leading-relaxed space-y-2 whitespace-pre-wrap">
                 {threadPrompt.family === "weekly" && threadPrompt.item.label === WEEKLY_PLANNING_DEMO_LABEL ? (
                   SAMPLE_SCHEDULE_REPLY
-                ) : threadPrompt.family === "inner" && threadPrompt.item.label === INNER_WORK_DEMO_LABEL ? (
-                  SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY
                 ) : threadPrompt.family === "weekly" ? (
                   <>
                     <p>

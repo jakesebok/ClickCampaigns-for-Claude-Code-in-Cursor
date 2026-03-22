@@ -37,7 +37,9 @@ export const users = pgTable("users", {
   stripeSubscriptionId: text("stripe_subscription_id"),
   trialEndsAt: timestamp("trial_ends_at"),
   couponCode: text("coupon_code"),
+  /** Daily Spark push (legacy column name `sms_enabled` — not used for SMS) */
   smsEnabled: boolean("sms_enabled").default(false),
+  /** Legacy HH:mm — not used when Daily Spark runs on a single daily cron (see vercel.json). */
   smsTime: text("sms_time").default("07:00"),
   timezone: text("timezone").default("America/New_York"),
   onboardingComplete: boolean("onboarding_complete").default(false),
@@ -128,7 +130,7 @@ export const apiUsageLogs = pgTable("api_usage_logs", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-/** Web push subscriptions for 6Cs scorecard reminders (Fri/Sat/Sun 12:05pm Eastern) */
+/** Web push subscriptions (6Cs weekend reminders + Daily Spark when enabled) */
 export const pushSubscriptions = pgTable(
   "push_subscriptions",
   {

@@ -49,6 +49,12 @@ import {
 import { DriverIcon } from "@/lib/vapi/driver-icons";
 import { SCORECARD_CATEGORIES, getOverallScore } from "@/lib/scorecard";
 import {
+  chatQueryUrl,
+  buildArchetypeCoachPrompt,
+  buildDashboardPriorityPrompt,
+  buildSixCsTrendCoachPrompt,
+} from "@/lib/chat-deep-links";
+import {
   getScorecardWindow,
   getMostRecentScorecardWindow,
   isDateInScorecardWindow,
@@ -257,6 +263,49 @@ export default function DashboardPage() {
     ...nonCriticalPriorities.slice(0, Math.max(0, 3 - criticalPriorities.length)),
   ].slice(0, 3);
 
+  const archetypeDriverSummary = isAlignedMomentum
+    ? `state: ${ALIGNED_MOMENTUM_NAME}`
+    : driver
+      ? `likely driver "${driver.name}"`
+      : latestVapi?.assignedDriver
+        ? `assigned pattern "${latestVapi.assignedDriver}"`
+        : "";
+
+  let sixCsCoachHref: string | null = null;
+  if (scoredEntries.length >= 1) {
+    const latestS = scoredEntries[0].scores || {};
+    const prevS = scoredEntries[1]?.scores;
+    let weakest = {
+      label: SCORECARD_CATEGORIES[0].label,
+      val: 101,
+    };
+    for (const c of SCORECARD_CATEGORIES) {
+      const v = latestS[c.key] || 0;
+      if (v < weakest.val) weakest = { label: c.label, val: v };
+    }
+    let declineLabel: string | undefined;
+    let declineDelta: number | undefined;
+    if (prevS) {
+      let worstD = 0;
+      for (const c of SCORECARD_CATEGORIES) {
+        const d = (latestS[c.key] || 0) - (prevS[c.key] || 0);
+        if (d < worstD) {
+          worstD = d;
+          declineLabel = c.label;
+          declineDelta = d;
+        }
+      }
+    }
+    sixCsCoachHref = chatQueryUrl(
+      buildSixCsTrendCoachPrompt({
+        weakestLabel: weakest.label,
+        weakestPct: weakest.val,
+        declinedLabel: declineLabel,
+        declineDelta: declineDelta,
+      })
+    );
+  }
+
   const topStrengths = latestVapi
     ? DOMAINS.map((d) => ({ ...d, score: latestVapi.domainScores[d.code] || 0 }))
         .sort((a, b) => b.score - a.score)
@@ -383,59 +432,73 @@ export default function DashboardPage() {
           <div className="grid sm:grid-cols-2 gap-4 -mt-2">
             {/* 6Cs Latest */}
             {displayedScorecard ? (
-              <Link href="/scorecard" className="block order-1 sm:order-2">
-                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full min-h-[280px] flex flex-col">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <ClipboardCheck className="h-4 w-4 text-accent" />
-                      <span className="text-sm font-medium text-muted-foreground">
-                        6Cs Score
-                      </span>
-                      <span className="text-[10px] font-medium text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded bg-green-500/10">
-                        {currentWindowSubmitted ? "Submitted" : "First submission"}
-                      </span>
-                    </div>
-                    <span className="text-xs text-muted-foreground">
-                      {currentWindowSubmitted
-                        ? `Week of ${new Date(displayedScorecard.weekStart).toLocaleDateString()}`
-                        : `Submitted ${new Date(displayedScorecard.createdAt).toLocaleDateString()}`}
+              <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 shadow-sm h-full min-h-[280px] flex flex-col order-1 sm:order-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <ClipboardCheck className="h-4 w-4 text-accent shrink-0" />
+                    <span className="text-sm font-medium text-muted-foreground">
+                      6Cs Score
+                    </span>
+                    <span className="text-[10px] font-medium text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded bg-green-500/10 shrink-0">
+                      {currentWindowSubmitted ? "Submitted" : "First submission"}
                     </span>
                   </div>
-                  <div className="flex items-end gap-3 mb-3">
-                    <span
-                      className="text-4xl font-bold font-serif"
-                      style={{ color: getScorecardScoreColor(getOverallScore(displayedScorecard.scores)) }}
-                    >
-                      {getOverallScore(displayedScorecard.scores)}%
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {SCORECARD_CATEGORIES.map((c) => {
-                      const Icon = SCORECARD_ICONS[c.icon];
-                      const pct = displayedScorecard.scores[c.key] || 0;
-                      const scoreColor = getScorecardScoreColor(pct);
-                      return (
-                        <div
-                          key={c.key}
-                          className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
-                        >
-                          {Icon && <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />}
-                          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                            {c.label}
-                          </p>
-                          <p className="text-lg font-bold tabular-nums" style={{ color: scoreColor }}>{pct}%</p>
-                          <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all"
-                              style={{ width: `${pct}%`, backgroundColor: scoreColor }}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <span className="text-xs text-muted-foreground text-right shrink-0">
+                    {currentWindowSubmitted
+                      ? `Week of ${new Date(displayedScorecard.weekStart).toLocaleDateString()}`
+                      : `Submitted ${new Date(displayedScorecard.createdAt).toLocaleDateString()}`}
+                  </span>
                 </div>
-              </Link>
+                <div className="flex items-end gap-3 mb-3">
+                  <span
+                    className="text-4xl font-bold font-serif"
+                    style={{ color: getScorecardScoreColor(getOverallScore(displayedScorecard.scores)) }}
+                  >
+                    {getOverallScore(displayedScorecard.scores)}%
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-2 flex-1">
+                  {SCORECARD_CATEGORIES.map((c) => {
+                    const Icon = SCORECARD_ICONS[c.icon];
+                    const pct = displayedScorecard.scores[c.key] || 0;
+                    const scoreColor = getScorecardScoreColor(pct);
+                    return (
+                      <div
+                        key={c.key}
+                        className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
+                      >
+                        {Icon && <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />}
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          {c.label}
+                        </p>
+                        <p className="text-lg font-bold tabular-nums" style={{ color: scoreColor }}>{pct}%</p>
+                        <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all"
+                            style={{ width: `${pct}%`, backgroundColor: scoreColor }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2 border-t border-border">
+                  <Link
+                    href="/scorecard"
+                    className="text-xs text-accent font-medium hover:underline"
+                  >
+                    Open scorecard →
+                  </Link>
+                  {sixCsCoachHref && (
+                    <Link
+                      href={sixCsCoachHref}
+                      className="text-xs text-accent font-medium hover:underline"
+                    >
+                      Coach on 6Cs →
+                    </Link>
+                  )}
+                </div>
+              </div>
             ) : !currentWindowSubmitted && hasAnyScorecards && scorecardWindow.status !== "open" ? (
               <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px] order-1 sm:order-2">
                 <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
@@ -561,79 +624,90 @@ export default function DashboardPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               {/* Archetype */}
               {archetype && (
-                <Link href={`/assessment/results?id=${latestVapi.id}`} className="block">
-                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 hover:border-accent/30 transition-colors shadow-sm h-full flex flex-col justify-between">
-                    <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                      Founder Archetype
-                    </h2>
-                    <div className="space-y-4 flex-1">
-                      <h3 className="text-xl font-serif font-bold flex items-center gap-2">
-                        {ArchetypeIcon && (
-                          <ArchetypeIcon className="h-5 w-5 shrink-0" style={{ color: archetypeColor }} />
-                        )}
-                        {archetype}
-                      </h3>
-                      {archetypeTagline ? (
-                        <p className="text-sm italic text-muted-foreground leading-relaxed">
-                          {archetypeTagline}
-                        </p>
+                <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 shadow-sm h-full flex flex-col justify-between">
+                  <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                    Founder Archetype
+                  </h2>
+                  <div className="space-y-4 flex-1">
+                    <h3 className="text-xl font-serif font-bold flex items-center gap-2">
+                      {ArchetypeIcon && (
+                        <ArchetypeIcon className="h-5 w-5 shrink-0" style={{ color: archetypeColor }} />
+                      )}
+                      {archetype}
+                    </h3>
+                    {archetypeTagline ? (
+                      <p className="text-sm italic text-muted-foreground leading-relaxed">
+                        {archetypeTagline}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {ARCHETYPE_DESCRIPTIONS[archetype]}
+                      </p>
+                    )}
+                    <div className="border-t border-border pt-4 space-y-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                        {isAlignedMomentum
+                          ? "What's Fueling This"
+                          : "Likely Driver"}
+                      </p>
+                      {isAlignedMomentum ? (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <DriverIcon
+                              driver={dashboardDriverName!}
+                              size={18}
+                              className="h-[18px] w-[18px] shrink-0"
+                            />
+                            <p className="text-sm font-semibold text-foreground">
+                              {ALIGNED_MOMENTUM_CONTENT.name}
+                            </p>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            &quot;{ALIGNED_MOMENTUM_CONTENT.coreState}&quot;
+                          </p>
+                        </>
+                      ) : driver ? (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <DriverIcon
+                              driver={dashboardDriverName!}
+                              size={18}
+                              className="h-[18px] w-[18px] shrink-0"
+                            />
+                            <p className="text-sm font-semibold text-foreground">
+                              {driver.name}
+                            </p>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            &quot;{driver.coreBelief}&quot;
+                          </p>
+                        </>
                       ) : (
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          {ARCHETYPE_DESCRIPTIONS[archetype]}
+                          {driverFallbackLabel}
                         </p>
                       )}
-                      <div className="border-t border-border pt-4 space-y-2">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                          {isAlignedMomentum
-                            ? "What's Fueling This"
-                            : "Likely Driver"}
-                        </p>
-                        {isAlignedMomentum ? (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <DriverIcon
-                                driver={dashboardDriverName!}
-                                size={18}
-                                className="h-[18px] w-[18px] shrink-0"
-                              />
-                              <p className="text-sm font-semibold text-foreground">
-                                {ALIGNED_MOMENTUM_CONTENT.name}
-                              </p>
-                            </div>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              &quot;{ALIGNED_MOMENTUM_CONTENT.coreState}&quot;
-                            </p>
-                          </>
-                        ) : driver ? (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <DriverIcon
-                                driver={dashboardDriverName!}
-                                size={18}
-                                className="h-[18px] w-[18px] shrink-0"
-                              />
-                              <p className="text-sm font-semibold text-foreground">
-                                {driver.name}
-                              </p>
-                            </div>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              &quot;{driver.coreBelief}&quot;
-                            </p>
-                          </>
-                        ) : (
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {driverFallbackLabel}
-                          </p>
-                        )}
-                      </div>
                     </div>
-                    <p className="text-xs text-accent font-medium">
-                      {driver || isAlignedMomentum
-                        ? "View Full Details →"
-                        : "View Details →"}
-                    </p>
                   </div>
-                </Link>
+                  <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2 border-t border-border">
+                    <Link
+                      href={`/assessment/results?id=${latestVapi.id}`}
+                      className="text-xs text-accent font-medium hover:underline"
+                    >
+                      {driver || isAlignedMomentum
+                        ? "View full assessment →"
+                        : "View assessment →"}
+                    </Link>
+                    <Link
+                      href={chatQueryUrl(
+                        buildArchetypeCoachPrompt(archetype, archetypeDriverSummary)
+                      )}
+                      className="text-xs text-accent font-medium hover:underline"
+                    >
+                      Coach this archetype →
+                    </Link>
+                  </div>
+                </div>
               )}
 
               {/* Critical Priorities — always expanded */}
@@ -658,16 +732,20 @@ export default function DashboardPage() {
                       const Icon = DOMAIN_ICONS[item.domain];
                       const color = getTierColor(getTier(item.score));
                       return (
-                        <div
+                        <Link
                           key={item.domain}
-                          className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3"
+                          href={chatQueryUrl(buildDashboardPriorityPrompt(item))}
+                          className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3 hover:border-accent/40 transition-colors"
                         >
                           {Icon && <Icon className="h-4 w-4 text-accent" />}
                           <span className="text-sm flex-1">{item.domainName}</span>
-                          <span className="text-sm font-bold" style={{ color }}>
+                          <span className="text-xs text-muted-foreground hidden sm:inline">
+                            Coach →
+                          </span>
+                          <span className="text-sm font-bold shrink-0" style={{ color }}>
                             {item.score.toFixed(1)}
                           </span>
-                        </div>
+                        </Link>
                       );
                     })}
                   </div>
@@ -743,11 +821,21 @@ export default function DashboardPage() {
           {/* 6Cs History Trend */}
           {scorecardEntries.length > 1 && (
             <div className="space-y-3 min-w-0">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-accent" />
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                  6Cs Trend
-                </h2>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <TrendingUp className="h-4 w-4 text-accent shrink-0" />
+                  <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                    6Cs Trend
+                  </h2>
+                </div>
+                {sixCsCoachHref && (
+                  <Link
+                    href={sixCsCoachHref}
+                    className="text-xs text-accent font-medium hover:underline shrink-0 whitespace-nowrap"
+                  >
+                    Coach on 6Cs →
+                  </Link>
+                )}
               </div>
               <div className="rounded-xl border border-border overflow-hidden w-full min-w-0">
                 <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: "touch" }}>

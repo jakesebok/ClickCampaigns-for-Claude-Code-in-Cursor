@@ -26,6 +26,7 @@ import { PageHeader } from "@/components/page-header";
 import { DOMAIN_INTERPRETATIONS } from "@/lib/vapi/interpretations";
 import { getTier, getTierColor, getPriorityMatrix, type PriorityQuadrant } from "@/lib/vapi/scoring";
 import { DOMAINS } from "@/lib/vapi/quiz-data";
+import { chatQueryUrl, buildDashboardPriorityPrompt } from "@/lib/chat-deep-links";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity, IA: Compass, ME: Brain, AF: Focus,
@@ -166,11 +167,17 @@ export default function PrioritiesPage() {
                               Priority: {item.importance}/10
                             </div>
                           </div>
-                          <div className="text-right text-xs">
+                          <div className="text-right text-xs shrink-0">
                             <div className="font-medium" style={{ color }}>
                               {item.score.toFixed(1)}
                             </div>
                             <div className="text-muted-foreground">{tier}</div>
+                            <Link
+                              href={chatQueryUrl(buildDashboardPriorityPrompt(item))}
+                              className="text-accent font-medium hover:underline mt-1 inline-block"
+                            >
+                              Coach
+                            </Link>
                           </div>
                           {interpretation && (
                             <button

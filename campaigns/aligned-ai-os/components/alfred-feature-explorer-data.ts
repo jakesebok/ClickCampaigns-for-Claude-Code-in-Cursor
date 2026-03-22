@@ -10,39 +10,40 @@ export const FIRE_STARTER_CATEGORIES = [
   "Weekly Planning",
   "Strategy + Focus",
   "Sales + Conversations",
+  "Marketing + Messaging",
+  "Execution + Nervous System",
+  "Weekly + Monthly Review",
   "Inner Work + Beliefs",
-  "State + Confidence",
-  "Execution + Mindset",
-  "Weekly Review",
   "VAPI + Alignment",
   "Deep Patterns",
 ] as const;
 
-/** Weekly Planning prompts — label + exact prompt string sent to /api/chat */
+/** Weekly Planning prompts — label + exact prompt string sent to /api/chat (first four in app) */
 export const WEEKLY_PLANNING_PROMPTS: { label: string; prompt: string }[] = [
   {
-    label: "Create weekly schedule",
+    label: "Calendar: Becoming + Vital Action",
     prompt:
-      "Build my week around my Becoming and Vital Action. Give me a realistic calendar plan that protects my QC quota and respects my capacity.",
+      "Build my week around my Becoming line and my Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables. Use my master context.",
   },
   {
-    label: "Top 3 outcomes this week",
+    label: "Top 3 outcomes (4 life arenas)",
     prompt:
-      "What are the 3 highest-leverage outcomes for this week given my Vital Action and revenue goals?",
+      "What are the 3 highest-leverage outcomes for this week across Business, Home, Self/Skills, and Impact — based on my primary growth lane and blueprint? Use my Vital Action and Real Reasons.",
   },
   {
-    label: "What to delete or defer",
-    prompt: "What must be deleted or deferred this week so I don't break my system? Use my master context.",
+    label: "Values violations audit",
+    prompt:
+      "Audit my week for values violations before we plan: where am I about to trade a core value for speed, approval, or money? Use my stated values from my master context and suggest aligned moves.",
   },
   {
-    label: "Minimum Viable Week plan",
+    label: "Delete or defer this week",
     prompt:
-      "Create a 'Minimum Viable Week' plan for when chaos happens — anchored to my Vital Action and non-negotiables.",
+      "Given my capacity limits from my master context, what must be deleted or deferred this week so I don't break my system?",
   },
 ];
 
 /** Demo: highlighted sub-prompt in Weekly Planning list (matches tour + full sample reply). */
-export const WEEKLY_PLANNING_DEMO_LABEL = "Create weekly schedule" as const;
+export const WEEKLY_PLANNING_DEMO_LABEL = "Calendar: Becoming + Vital Action" as const;
 
 /**
  * Inner Work + Beliefs — Fire Starters submenu.
@@ -72,31 +73,44 @@ export const INNER_WORK_BELIEFS_PROMPTS: { label: string; prompt: string }[] = [
 export const INNER_WORK_DEMO_LABEL = "Find and shift limiting belief" as const;
 
 /**
- * Illustrative thread for INNER_WORK_DEMO_LABEL — same user message as production; sample Alfred turns only.
+ * Casual first user message for the Inner Work animated demo (not the Fire Starter string).
+ * Shows you can type like a human; Alfred still ties to blueprint / Real Reasons from context.
  */
-export const SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY = `**Alfred**  
-You asked to tie this to your **Real Reasons** and shift the belief—not just vent. I’m working from your blueprint and Vital Action, not a generic script.
+export const INNER_WORK_DEMO_CASUAL_USER_MESSAGE =
+  "ok this is gonna sound dramatic but i have this constant fear that if im not basically living in slack/email the whole business unravels. like im the only adult in the room. i hate it but its loud today";
 
-**Alfred**  
-When you picture actually honoring your Real Reasons this week, what’s the *first* “yeah, but…” your mind offers? Say it in one blunt sentence.
-
-**You**  
-Yeah, but if I’m not always on, the business stalls—and then I’m failing everyone.
-
-**Alfred**  
-That’s a belief wearing a strategy costume: *constant availability = safety + love.* Let’s separate facts from the story. Does one more hour of Slack *actually* protect revenue—or does it mostly quiet the fear that you’re only allowed to rest after you’ve earned it?
-
-**You**  
-…Mostly the fear.
-
-**Alfred**  
-**Kinder truth that still fits your Real Reasons:** *Boundaries don’t erase ambition—they protect the person who has to execute.*  
-
-**Evidence check:** Name one recent day when you protected a block for your Vital Action or family—and something important still shipped. That memory is your counterexample to “always on or it all falls apart.”
-
-**One install before you open email:** Say out loud: *“Rest doesn’t erase my standards—it protects who I’m becoming.”* Then put your Vital Action block on the calendar like a client meeting. If guilt shows up, don’t debate it—name it: “That’s the old belief,” and sit with it for sixty seconds without fixing anything.
-
-Reply with where that belief spikes loudest (mornings, after the kids are down, quiet pipeline)—I’ll anchor the next move to your real week.`;
+/**
+ * Alternating assistant / user bubbles after the casual first message (animated demo only).
+ * Each entry is one chat bubble—no **Alfred** / **You** labels in copy.
+ */
+export const INNER_WORK_LIMITING_BELIEF_DEMO_TURNS: readonly {
+  role: "user" | "assistant";
+  content: string;
+}[] = [
+  {
+    role: "assistant",
+    content:
+      "I'm not here to shame the pace—that anxiety is real. I'm also looking at what you wrote about wanting presence at home and the Vital Action you set around defending focus time; those aren't opposites if we separate the story from the facts.\n\nBlunt question: when you imagine actually honoring that this week, what's the first \"yeah, but…\" your brain hands you?",
+  },
+  {
+    role: "user",
+    content: "yeah but if i step back even a little people will realize im not actually essential",
+  },
+  {
+    role: "assistant",
+    content:
+      "That's a belief wearing a strategy costume—*always on = proof I matter.* Two quick tests: when you protected even 90 minutes for deep work or closed the laptop for dinner last week, did the business actually blow up—or did it mostly… keep moving?\n\nAnd honestly—does another hour of Slack change pipeline this week, or does it mostly numb the discomfort of being still?",
+  },
+  {
+    role: "user",
+    content: "it didnt blow up. fine. mostly numbs it. ugh.",
+  },
+  {
+    role: "assistant",
+    content:
+      "Good data. Kinder sentence that still matches what you said you want about time with your people and your standard at work: *rest doesn't erase my standard—it protects the nervous system that has to carry the standard.*\n\nTomorrow: put your Vital Action block on the calendar like a client meeting. When guilt shows up, don't debate—label it out loud: \"old belief,\" sit with it for sixty seconds, then choose your next move.\n\nTell me when that fear spikes loudest (mornings, after kids are down, slow pipeline days)—I'll tie the next step to your real week, not a lecture.",
+  },
+];
 
 /** First assistant message in the animated Coach thread demo (Weekly Planning full demo). */
 export const COACH_DEMO_WEEKLY_THREAD_OPENER =
@@ -104,7 +118,7 @@ export const COACH_DEMO_WEEKLY_THREAD_OPENER =
 
 /** First assistant message in the animated Coach thread demo (Inner Work full demo). */
 export const COACH_DEMO_INNER_THREAD_OPENER =
-  "I'm here with your Real Reasons and blueprint context. When you're ready, send the belief work in your own words—or paste the exact Fire Starter prompt you chose.";
+  "Type it messy if you need to—I already have your blueprint, Real Reasons, and Vital Action in context. I'll connect the dots; you don't have to spell the framework.";
 
 /** lib/vapi/scoring.ts — ARCHETYPE_DESCRIPTIONS["The Ghost"] */
 export const GHOST_ARCHETYPE_DESCRIPTION =
@@ -184,7 +198,7 @@ export const DRIVER_ORDER_PREVIEW = [
 ] as const;
 
 /**
- * Illustrative coach reply for the exact "Create weekly schedule" prompt.
+ * Illustrative coach reply for the exact "Calendar: Becoming + Vital Action" prompt.
  * Grounded in COACHING_SYSTEM_PROMPT rules (Vital Action, QC, capacity, boundaries).
  * Not API output; demo only.
  */

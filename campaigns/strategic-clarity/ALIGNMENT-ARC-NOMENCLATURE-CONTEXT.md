@@ -24,7 +24,7 @@
 | Domino Chain | The Arc Chain |
 | Aligned AI OS (deprecated label) | **Aligned AIOS** — master prompt + blueprint from Strategic Clarity (use in any AI chat) |
 | Aligned AI OS Upgrade (deprecated) | **Aligned AIOS** master context / upgrade |
-| 50 High-Leverage Questions | **Fire Starters** — **56** strategic prompts for Aligned Freedom Coach (**ALFRED**) |
+| 50 High-Leverage Questions | **Fire Starters** — **62** strategic prompts in **9** categories for Aligned Freedom Coach (**ALFRED**); 50 map to the original curriculum set + 12 for inner work, VAPI, and deep patterns |
 | Aligned AI Business Agent | Values-Aligned Performance Agent |
 
 ---

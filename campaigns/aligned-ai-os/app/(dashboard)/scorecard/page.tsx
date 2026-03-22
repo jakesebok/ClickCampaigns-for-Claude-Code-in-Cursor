@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import {
   ClipboardCheck,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { SCORECARD_CATEGORIES, calculateScore, getOverallScore } from "@/lib/scorecard";
 import { getScorecardWindow } from "@/lib/scorecard-window";
+import { chatQueryUrl, buildSixCsTrendCoachPrompt } from "@/lib/chat-deep-links";
 
 type ScorecardEntry = {
   id: string;
@@ -108,6 +109,48 @@ export default function ScorecardPage() {
   const scores = getScores();
   const overall = getOverallScore(scores);
 
+  const sixCsCoachHref = useMemo(() => {
+    const list = entries.filter(
+      (e) => e.scores && Object.keys(e.scores).length > 0
+    );
+    if (list.length < 1) {
+      return chatQueryUrl(
+        "I submitted my latest 6Cs scorecard. Help me interpret what moved, what my lowest C is signaling, and one Vital Action adjustment for next week."
+      );
+    }
+    const latestS = list[0].scores;
+    const prevS = list[1]?.scores;
+    let weakest = {
+      label: SCORECARD_CATEGORIES[0].label,
+      val: 101,
+    };
+    for (const c of SCORECARD_CATEGORIES) {
+      const v = latestS[c.key] || 0;
+      if (v < weakest.val) weakest = { label: c.label, val: v };
+    }
+    let declineLabel: string | undefined;
+    let declineDelta: number | undefined;
+    if (prevS) {
+      let worstD = 0;
+      for (const c of SCORECARD_CATEGORIES) {
+        const d = (latestS[c.key] || 0) - (prevS[c.key] || 0);
+        if (d < worstD) {
+          worstD = d;
+          declineLabel = c.label;
+          declineDelta = d;
+        }
+      }
+    }
+    return chatQueryUrl(
+      buildSixCsTrendCoachPrompt({
+        weakestLabel: weakest.label,
+        weakestPct: weakest.val,
+        declinedLabel: declineLabel,
+        declineDelta: declineDelta,
+      })
+    );
+  }, [entries]);
+
   const window = getScorecardWindow();
   const canSubmit = window.canSubmit || !hasAnySubmissions;
 
@@ -166,6 +209,12 @@ export default function ScorecardPage() {
               Your AI coach now has this week&apos;s 6Cs data. Ask it to run your
               weekly review for personalized insights.
             </p>
+            <Link
+              href={sixCsCoachHref}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+            >
+              Open Alfred with a 6Cs-focused prompt →
+            </Link>
 
             {entries.length > 0 && (
               <div className="space-y-3 pt-8 border-t border-border text-left">
@@ -216,8 +265,8 @@ export default function ScorecardPage() {
             <p className="text-muted-foreground text-sm mt-1 font-mono">{window.countdownMessage}</p>
           )}
         </div>
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="min-w-0">
             <h1 className="text-lg font-semibold">6Cs Scorecard</h1>
             <p className="text-sm text-muted-foreground">
               {step === "score" && "Rate each statement 1-5 for this week"}
@@ -225,12 +274,22 @@ export default function ScorecardPage() {
               {step === "onething" && "The Vital Action that makes everything else easier"}
             </p>
           </div>
-          {allAnswered() && (
-            <div className="text-center">
-              <div className="text-2xl font-bold font-serif text-accent">{overall}%</div>
-              <div className="text-xs text-muted-foreground">Overall</div>
-            </div>
-          )}
+          <div className="flex items-center gap-3 shrink-0">
+            {hasAnySubmissions && (
+              <Link
+                href={sixCsCoachHref}
+                className="text-xs sm:text-sm font-medium text-accent hover:underline whitespace-nowrap"
+              >
+                Coach on 6Cs →
+              </Link>
+            )}
+            {allAnswered() && (
+              <div className="text-center">
+                <div className="text-2xl font-bold font-serif text-accent">{overall}%</div>
+                <div className="text-xs text-muted-foreground">Overall</div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 

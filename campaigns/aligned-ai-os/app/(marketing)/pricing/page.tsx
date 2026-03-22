@@ -3,12 +3,13 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Check } from "lucide-react";
+import { FIRE_STARTER_COUNT } from "@/lib/ai/prompts";
 
 const features = [
   "Personalized AI coaching chat (powered by Claude)",
   "Values-aligned decision filter",
   "The Revenue Bridge built in",
-  "Fire Starters — 56 strategic prompts",
+  `Fire Starters — ${FIRE_STARTER_COUNT} strategic prompts across 9 categories`,
   "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
   "Morning coach notifications",

@@ -22,6 +22,8 @@ This document summarizes cost-saving measures from Anthropic's recommendations a
 Turn 1: Full processing (cache write, ~25% more than base).
 Turn 2+: Most tokens read from cache (~90% savings on cached portion).
 
+**Note (2025):** Chat/voice now append richer VAPI + 6Cs blocks (Focus Here First, driver pattern, archetype essence, score deltas, `weekly_review` JSON). First-turn token count may be slightly higher; caching still applies on follow-up turns.
+
 **SDK change:** Upgraded `@anthropic-ai/sdk` from 0.39.0 to 0.78.0 for native `cache_control` support.
 
 ---
