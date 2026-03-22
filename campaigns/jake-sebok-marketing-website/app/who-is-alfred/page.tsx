@@ -150,17 +150,19 @@ export default function WhoIsAlfredPage() {
         className="py-14 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden scroll-mt-24"
       >
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            Who&apos;s in the room with you?
-          </h2>
-          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-3">
-            Every legendary operator had someone in the earpiece: calm, informed, unafraid to say the quiet part out
-            loud. ALFRED is that steady presence for founders, minus the cave and the cape.
-          </p>
-          <p className="text-sm text-ap-muted font-medium max-w-[720px] mb-12">
-            Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On Dashboard,
-            hover a highlighted card on desktop to jump the tour, or use pause and the dots.
-          </p>
+          <div className="max-w-[720px] mx-auto mb-12 text-center">
+            <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
+              Who&apos;s in the room with you?
+            </h2>
+            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3">
+              Every legendary operator had someone in the earpiece: calm, informed, unafraid to say the quiet part out
+              loud. ALFRED is that steady presence for founders, minus the cave and the cape.
+            </p>
+            <p className="text-sm text-ap-muted font-medium leading-relaxed">
+              Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On
+              Dashboard, hover a highlighted card on desktop to jump the tour, or use pause and the dots.
+            </p>
+          </div>
           <AlfredFeatureExplorer />
         </div>
       </section>
@@ -322,16 +324,21 @@ export default function WhoIsAlfredPage() {
       <section className="pb-20 sm:pb-28 pt-4 bg-ap-bg">
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
           <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 sm:p-10 text-center">
-            <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-3">
+            <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-4">
               Why the name &quot;ALFRED&quot;?
             </h2>
-            <p className="text-ap-mid font-medium leading-relaxed mb-6 text-left sm:text-center max-w-[640px] mx-auto">
+            <p className="text-ap-mid font-medium leading-relaxed mb-4 max-w-[560px] mx-auto">
               <strong className="text-ap-primary">ALFRED</strong> is short for{" "}
-              <strong className="text-ap-primary">Aligned Freedom Coach</strong>—the product name on the tin. There is
-              also a deliberate wink at the other famous Alfred: the one in the earpiece who had Batman&apos;s six,
-              remembered everything that mattered, and never needed the spotlight. If you like word-nerd trivia, the
-              Old English roots are <em>ælf</em> and <em>ræd</em>—elf + counsel, advice, wisdom—so you are allowed to
-              read it as <em>trusted counsel</em>, not a random startup syllable salad.
+              <strong className="text-ap-primary">Aligned Freedom Coach</strong>.
+            </p>
+            <p className="text-ap-mid font-medium leading-relaxed mb-4 max-w-[560px] mx-auto">
+              We might also be nodding at another famous Alfred: the one in the earpiece who had Bruce&apos;s six,
+              remembered everything that mattered, and never needed the spotlight.
+            </p>
+            <p className="text-ap-mid font-medium leading-relaxed mb-8 max-w-[560px] mx-auto">
+              <span className="font-semibold text-ap-primary">AND…</span> if you like word-nerd trivia, the Old English
+              roots of the name are literally counsel, advice, wisdom—so you are allowed to read it as{" "}
+              <em>trusted counsel</em>, not just a random syllable salad.
             </p>
             <p className="text-ap-mid font-medium mb-8">
               Not ready yet? Start free with{" "}
