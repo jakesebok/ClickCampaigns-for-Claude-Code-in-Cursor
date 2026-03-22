@@ -273,8 +273,8 @@ function DriverSection({
       <div className="space-y-3">
         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
           {isAlignedMomentum
-            ? "What&apos;s Fueling This Pattern"
-            : "What&apos;s Driving This Pattern"}
+            ? "What's Fueling This Pattern"
+            : "What's Driving This Pattern"}
         </p>
         {isAlignedMomentum ? (
           <>

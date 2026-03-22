@@ -297,7 +297,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    This Week&apos;s Vital Action
+                    This Week's Vital Action
                   </p>
                   <p className="font-medium leading-snug whitespace-pre-wrap break-words">
                     {currentOneThing}
@@ -365,7 +365,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  This Week&apos;s Vital Action
+                  This Week's Vital Action
                 </p>
                 <p className="font-medium text-muted-foreground">
                   Complete your 6Cs scorecard to set this week&apos;s Vital Action.
@@ -585,7 +585,7 @@ export default function DashboardPage() {
                       <div className="border-t border-border pt-4 space-y-2">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                           {isAlignedMomentum
-                            ? "What&apos;s Fueling This"
+                            ? "What's Fueling This"
                             : "Likely Driver"}
                         </p>
                         {isAlignedMomentum ? (

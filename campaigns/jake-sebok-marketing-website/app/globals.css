@@ -55,3 +55,67 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px -5px rgba(255, 107, 26, 0.35);
 }
+
+/* ALFRED product hero — phone + logo (who-is-alfred) */
+@keyframes alfred-hero-logo-reveal {
+  0% {
+    opacity: 0;
+    filter: blur(22px);
+    transform: scale(0.86);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes alfred-hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes alfred-hero-halo {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.14);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .alfred-hero-logo-reveal {
+    animation: alfred-hero-logo-reveal 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .alfred-hero-float-after {
+    animation: alfred-hero-float 8s ease-in-out 4s infinite;
+  }
+
+  .alfred-hero-halo-pulse {
+    animation: alfred-hero-halo 5.5s ease-in-out 4s infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alfred-hero-logo-reveal,
+  .alfred-hero-float-after,
+  .alfred-hero-halo-pulse {
+    animation: none !important;
+  }
+
+  .alfred-hero-logo-reveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}

@@ -588,7 +588,7 @@ export default function DriversPage() {
 
                   <div className="space-y-3">
                     <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                      How to Know If This Isn&apos;t You
+                      How to Know If This Isn't You
                     </h3>
                     <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {ALIGNED_MOMENTUM_LIBRARY_CONTENT.howToKnowThisIsntYou.map((item) => (
@@ -776,7 +776,7 @@ export default function DriversPage() {
 
                       <div className="space-y-3">
                         <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                          How to Know If This Isn&apos;t You
+                          How to Know If This Isn't You
                         </h3>
                         <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
                           {extras.howToKnowThisIsntYou.map((item) => (

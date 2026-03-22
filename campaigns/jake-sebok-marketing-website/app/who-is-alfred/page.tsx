@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AlfredFeatureExplorer } from "@/components/alfred-feature-explorer";
+import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
 
 const ALFRED_APP_URL = "https://alfredai.coach";
 
@@ -55,54 +56,69 @@ const dailyItems = [
 export default function WhoIsAlfredPage() {
   return (
     <>
-      <section className="pt-16 sm:pt-24 pb-14 sm:pb-20 bg-ap-bg">
-        <div className="max-w-[800px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-            Aligned Freedom Coach
-          </p>
-          <h1 className="font-outfit font-bold text-4xl sm:text-[2.75rem] text-ap-primary leading-[1.12] mb-6">
-            The coach that still knows your priorities when you&apos;re tired, busy, or about to say yes to the wrong
-            thing.
-          </h1>
-          <p className="text-xl sm:text-2xl font-semibold text-ap-mid leading-relaxed mb-6">
-            I built <span className="text-ap-primary">ALFRED</span> (Aligned Freedom Coach) because I wanted something
-            that would challenge me and optimize for{" "}
-            <span className="text-gradient-accent">what I actually want</span>, not whatever looks shiny at 11 p.m.
-            Your assessment, archetype, pattern, weekly check-ins, and the mission, vision, and values work too many
-            founders file away? Here they stay current, in the conversation, and in front of you when resolve runs thin.
-          </p>
-          <p className="text-lg font-medium text-ap-mid leading-relaxed mb-10">
-            Generic AI hands you clever paragraphs. This is coaching tethered to your real commitments, so you are not
-            re-explaining your life every time you need a steady voice.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <a
-              href={ALFRED_APP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
-            >
-              Open Aligned Freedom Coach
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-            <Link
-              href="/assessment"
-              className="inline-flex items-center justify-center px-6 py-3.5 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
-            >
-              Take VAPI™ first
-            </Link>
+      <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] gap-8 sm:gap-10 lg:gap-14 xl:gap-16 items-center">
+            <div className="max-w-xl lg:max-w-none">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
+                Aligned Freedom Coach
+              </p>
+              <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.75rem] text-ap-primary leading-[1.1] mb-5 sm:mb-6">
+                The coach that still knows your priorities when you&apos;re tired, busy, or about to say yes to the
+                wrong thing.
+              </h1>
+
+              <AlfredHeroPhone className="lg:hidden mb-8" />
+
+              <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-4">
+                I built <span className="text-ap-primary">ALFRED</span> (Aligned Freedom Coach) because I wanted something
+                that would challenge me and optimize for{" "}
+                <span className="text-gradient-accent">what I actually want</span>, not whatever looks shiny at 11 p.m.
+                Your assessment, archetype, pattern, weekly check-ins, and the mission, vision, and values work too many
+                founders file away? Here they stay current, in the conversation, and in front of you when resolve runs
+                thin.
+              </p>
+              <p className="text-base sm:text-lg font-medium text-ap-mid leading-relaxed mb-8">
+                Generic AI hands you clever paragraphs. This is coaching tethered to your real commitments, so you are
+                not re-explaining your life every time you need a steady voice.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                <a
+                  href={ALFRED_APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
+                >
+                  Open Aligned Freedom Coach
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+                <Link
+                  href="/assessment"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
+                >
+                  Take VAPI™ first
+                </Link>
+              </div>
+              <p className="text-ap-muted text-sm mt-4">
+                {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for Intensive
+                and Accelerator clients.
+              </p>
+            </div>
+
+            <AlfredHeroPhone className="hidden lg:block relative w-full max-w-md mx-auto lg:max-w-none lg:mx-0" />
           </div>
-          <p className="text-ap-muted text-sm mt-4">
-            {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for Intensive and
-            Accelerator clients.
-          </p>
         </div>
       </section>
 
@@ -129,7 +145,10 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden">
+      <section
+        id="alfred-product-explorer"
+        className="py-14 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden scroll-mt-24"
+      >
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
             Who&apos;s in the room with you?
@@ -140,8 +159,8 @@ export default function WhoIsAlfredPage() {
             leverage.
           </p>
           <p className="text-sm text-ap-muted font-medium max-w-[720px] mb-12">
-            Explore the phone: hover each panel on desktop to jump the tour. Pause anytime. On mobile, use the dots and
-            arrows.
+            Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On Dashboard,
+            hover a highlighted card on desktop to jump the tour, or use pause and the dots.
           </p>
           <AlfredFeatureExplorer />
         </div>
