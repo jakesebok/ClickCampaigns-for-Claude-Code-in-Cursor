@@ -86,7 +86,15 @@ Before I create any assets, I'll ask you for:
 - Describe your brand and I'll create the docs for you
 - Proceed without (not recommended for final assets)
 
-**Jake Sebok voice:** When the user says "Write like Jake Sebok" or requests content in Jake's voice, read and apply `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` for voice, structure, themes, and signature phrases.
+**Repo-level brand kit (Jake Sebok, this repository):** Jake’s master brand files live at **`brand-kit/`** on the repository root, not inside a campaign folder. Use them for his offers, the marketing site (`campaigns/jake-sebok-marketing-website/`), and any asset that should match his official positioning.
+
+| Location | Contents |
+|----------|----------|
+| `brand-kit/brand-knowledge-base-document/` | BrandBaser / knowledge base (e.g. `.txt` export with offers, audience, pricing) |
+| `brand-kit/brand-style-guide/jake-sebok-style-guide.md` | Visual and typography guidance |
+| `brand-kit/JAKE-SEBOK-BRAND-LEXICON-AND-REMEDIATION-CHECKLIST.md` | Frozen customer-facing terms (VAPI™, Aligned AIOS, Aligned Power™, etc.) and web copy rules |
+
+**Jake Sebok voice:** When the user says "Write like Jake Sebok" or requests content in Jake's voice, read **`Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md`** (voice, structure, themes, signature phrases) and **`brand-kit/JAKE-SEBOK-BRAND-LEXICON-AND-REMEDIATION-CHECKLIST.md`** (frozen terms and marketing-site rules, e.g. no em dashes in customer-facing web prose).
 
 ---
 
@@ -650,6 +658,7 @@ Which pages do you need? Or say "all" for the complete funnel.
 | Task skill files | `skills-and-instructions/skills/tasks/[type]/SKILL.md` |
 | Campaign output | `campaigns/[name]/output-assets/` |
 | Campaign brand files | `campaigns/[name]/brand-kit/` |
+| **Jake Sebok brand kit (repo root)** | `brand-kit/` (knowledge base, style guide, lexicon) |
 | **Jake Sebok writing style** | `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` |
 
 ---

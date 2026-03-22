@@ -9,9 +9,14 @@ export const metadata = {
 export default function ApplyPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="pt-16 sm:pt-24 pb-12 sm:pb-16 bg-ap-bg">
-        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+      {/* Hero — subtle orange geometric */}
+      <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6">
           <Link
             href="/work-with-me"
             className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-gradient-accent mb-8 transition-colors"

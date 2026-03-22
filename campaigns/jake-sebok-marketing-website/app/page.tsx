@@ -52,7 +52,7 @@ export default function HomePage() {
                 success.
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
-                Burnout isn&apos;t proof you need to grind harder. It&apos;s a sign you&apos;re building the wrong thing. When what you build matches who you are, effort becomes momentum and your impact finally catches up to your ambition.
+                Inconsistent execution and low motivation aren&apos;t proof you need to grind harder. They&apos;re signs you&apos;re building the wrong thing. When what you build matches who you are, effort becomes momentum and your impact finally catches up to your ambition.
               </p>
               <div className="flex flex-wrap gap-3 items-stretch">
                 <Link
@@ -77,7 +77,7 @@ export default function HomePage() {
               <div className="space-y-4 max-w-[280px] text-right">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
                 <p className="font-semibold italic text-xl text-white leading-snug">
-                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;
                 </p>
                 <div className="flex items-center justify-end gap-3">
                   <div className="relative w-24 h-24 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
@@ -210,7 +210,7 @@ export default function HomePage() {
         <div className="max-w-xl mx-auto space-y-4">
           <div className="w-10 h-0.5 bg-white/40 rounded" />
           <p className="font-semibold italic text-xl text-white leading-snug">
-            &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
+            &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;
           </p>
           <div className="flex items-center gap-3 justify-end sm:justify-start">
             <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
@@ -235,9 +235,7 @@ export default function HomePage() {
             The Truth
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            You don&apos;t have a strategy problem. Or a discipline problem.
-            <br className="hidden lg:block" />
-            You have an <span className="text-gradient-accent">alignment</span> problem.
+            It isn&apos;t a strategy problem. It&apos;s not even a discipline problem. It&apos;s an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
             Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
@@ -260,7 +258,7 @@ export default function HomePage() {
             The Work
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            Don&apos;t optimize for output. Optimize for <span className="text-gradient-accent">alignment</span>.
+            Optimize for <span className="text-gradient-accent">alignment</span>, not output.
           </h2>
           <p className="text-ap-mid text-xl font-semibold mb-12 max-w-2xl">
             More effort won&apos;t fix it. More strategy won&apos;t either. When your mind, your body, and your direction aren&apos;t working together, effort becomes resistance. That changes here. Take your first steps on the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
@@ -356,7 +354,7 @@ export default function HomePage() {
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
-      {/* Testimonials — carousel */}
+      {/* Testimonials — carousel (full width) */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
@@ -365,7 +363,11 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
             What happens when alignment replaces the grind.
           </h2>
+        </div>
+        <div className="w-full overflow-hidden">
           <TestimonialCarousel testimonials={testimonials} />
+        </div>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="mt-8 text-center">
             <Link
               href="/case-studies"
@@ -560,71 +562,6 @@ export default function HomePage() {
               >
                 explore how it works
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* Aligned Power + Start here */}
-      <section className="bg-white border-b border-ap-border">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6 py-10 sm:py-14">
-          <p className="text-center text-ap-mid font-semibold text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mb-10">
-            <span className="font-outfit font-bold text-ap-primary">Aligned Power™</span> is Jake&apos;s methodology—and the name of the{" "}
-            <span className="text-ap-primary">Aligned Power Accelerator</span>, the 12-month group program for entrepreneurs building a business that fits who they actually are.
-          </p>
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary text-center mb-2">
-            Start here
-          </h2>
-          <p className="text-center text-ap-muted text-sm font-semibold uppercase tracking-wider mb-8">
-            Two paths. Same commitment to alignment.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg p-8 flex flex-col">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-                Feeling stuck or scattered?
-              </p>
-              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
-                Get a clear snapshot first
-              </h3>
-              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
-                Take the free VAPI™ Assessment—72 questions across 12 domains and 3 arenas. See your Founder Archetype, your strengths, and your top priorities so you know what to address before you pour more fuel on the fire.
-              </p>
-              <Link
-                href="/assessment"
-                className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all w-full sm:w-auto self-start"
-              >
-                Take the VAPI™
-              </Link>
-            </div>
-            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-white p-8 flex flex-col">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-                Ready to build the machine?
-              </p>
-              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
-                Strategic clarity + your Aligned AIOS
-              </h3>
-              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
-                The Strategic Alignment Intensive is a half-day workshop where you build the worksheets that generate your{" "}
-                <strong className="text-ap-primary">Aligned AIOS</strong> master prompt—then scale daily execution with{" "}
-                <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), the app that knows your values, math, and Vital Actions.
-              </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <Link
-                  href="/work-with-me/strategic-intensives"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-primary text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all"
-                >
-                  Strategic Alignment Intensive
-                </Link>
-                <Link
-                  href="/who-is-alfred"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-sm sm:text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
-                >
-                  Meet ALFRED
-                </Link>
-              </div>
             </div>
           </div>
         </div>

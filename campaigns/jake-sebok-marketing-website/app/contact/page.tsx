@@ -9,8 +9,13 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
-      <div className="max-w-[640px] mx-auto px-5 sm:px-6">
+    <section className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 bg-ap-bg overflow-hidden">
+      <div
+        className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+        style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+        aria-hidden
+      />
+      <div className="relative z-10 max-w-[640px] mx-auto px-5 sm:px-6">
         <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
           Get in Touch
         </p>

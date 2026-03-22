@@ -104,7 +104,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-6 pb-4 -mx-5 px-5 sm:-mx-6 sm:px-6 scrollbar-hide transition-[height] duration-300 ease-out items-start"
+        className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory gap-6 pb-4 px-5 sm:px-6 lg:px-8 scrollbar-hide transition-[height] duration-300 ease-out items-start"
         style={{
           scrollSnapType: "x mandatory",
           WebkitOverflowScrolling: "touch",

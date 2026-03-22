@@ -13,9 +13,14 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+      {/* Hero — subtle orange geometric */}
+      <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             The Story
           </p>
@@ -26,14 +31,20 @@ export default function AboutPage() {
             Master Certified Professional Coach, founder, full-time dad to three amazing kids.
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
-              <Image
-                src="/images/jake/jacob-sebok-laughing.jpeg"
-                alt="Jake Sebok"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div>
+              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
+                <Image
+                  src="/images/jake/jacob-sebok-laughing.jpeg"
+                  alt="Jake Sebok"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="mt-6">
+                <p className="text-sm font-semibold text-ap-primary mb-3">Connect with me</p>
+                <SocialLinks variant="contact" />
+              </div>
             </div>
             <div className="space-y-6">
               <p className="text-ap-mid text-xl font-semibold leading-relaxed">
@@ -65,10 +76,6 @@ export default function AboutPage() {
                 Believe me, friends. Your best days are ahead. Let&apos;s do this
                 together.
               </p>
-              <div className="pt-6">
-                <p className="text-sm font-semibold text-ap-primary mb-3">Connect with me</p>
-                <SocialLinks variant="contact" />
-              </div>
             </div>
           </div>
         </div>
@@ -91,11 +98,11 @@ export default function AboutPage() {
               <ul className="space-y-2 text-ap-mid text-xl font-semibold mb-4">
                 <li>• Master Certified Professional Coach (MCPC)</li>
                 <li>• Certified Professional Life Coach (CPLC)</li>
-                <li>• NLP Practitioner (addresses the root cause of self-sabotage)</li>
+                <li>• NLP Practitioner</li>
                 <li>• CrossFit Level 2 Coach</li>
               </ul>
               <p className="text-xl font-semibold text-ap-muted">
-                ICF-accredited. Master Certified is the top tier, earned through hundreds of coaching hours and rigorous assessment.
+                ICF-accredited. The International Coaching Federation sets the global standard for coaching ethics, competence, and training—so you know you&apos;re working with someone who&apos;s been rigorously vetted.
               </p>
             </div>
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">
@@ -103,7 +110,7 @@ export default function AboutPage() {
                 Proven in the arena
               </h3>
               <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
-                Leadership roles across multiple industries. Built a team and scaled revenue 20x in nine months. Scaled businesses to multi-million dollar revenue. I&apos;ve always prioritized people over metrics, and the results followed.
+                Leadership roles across multiple industries. Built a team and scaled internal revenue 20x in nine months. Drove multi-million dollar growth for clients. I&apos;ve always prioritized people over metrics, and the results followed.
               </p>
               <p className="text-ap-mid text-xl font-semibold leading-relaxed">
                 My approach blends real results with deep humanity. I&apos;m not an observer of this path. I&apos;ve walked it, fallen into the traps, and found my way out. Now I help others do the same.
@@ -117,7 +124,7 @@ export default function AboutPage() {
               I coach the whole human being, not just the business
             </h3>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
-              Where competitors optimize for output, I optimize for alignment. I use NLP-based parts work to address the root cause of self-sabotage. I build Alignment Blueprints from your actual values, not inherited or assumed ones. Milestone-based pricing shifts risk to me, not you.
+              Where competitors optimize for output, I optimize for alignment. I use NLP-based parts work to address the root cause of self-sabotage. I build Alignment Blueprints from your actual values, not inherited or assumed ones.
             </p>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed">
               This isn&apos;t peak performance. It&apos;s sustainable performance, because peaks imply valleys and valleys carry a cost you were never willing to pay.

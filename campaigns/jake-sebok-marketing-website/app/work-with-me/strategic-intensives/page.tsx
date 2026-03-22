@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export const metadata = {
   title: "Strategic Alignment Intensive — Jake Sebok",
@@ -10,24 +9,20 @@ export const metadata = {
 export default function StrategicIntensivesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
-        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+      {/* Hero — subtle orange geometric */}
+      <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             Quarterly Workshop · $497
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Strategic Alignment Intensive
           </h1>
-          <div className="relative aspect-video rounded-[20px] overflow-hidden mb-10">
-            <Image
-              src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200"
-              alt="Strategic Alignment Intensive workshop"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 720px"
-            />
-          </div>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-6">
             Most goal-setting is backwards. You name the revenue target, you
             reverse-engineer the tactics, and you hustle until the number hits.

@@ -20,7 +20,7 @@ const offerings = [
   {
     title: "Aligned Freedom Workshop",
     description:
-      "90-minute monthly workshop. Get clarity, cut through the noise, and connect with a community of entrepreneurs who refuse to stay stuck.",
+      "90-minute monthly workshop. Surface the beliefs and patterns holding you back—get coached live in the room. Clarity. Community. No fluff.",
     cta: "Join the Next Workshop",
     href: "/work-with-me/freedom-workshop",
     free: true,
@@ -28,7 +28,7 @@ const offerings = [
   {
     title: "Freedom Builders Community",
     description:
-      "Community with the Aligned Freedom Course. Learn at your own pace, connect with like-minded founders, and build the foundation for aligned growth.",
+      "Often the next step after the VAPI™. The Aligned Freedom Course lives inside the community—framework + peers to build the foundation for aligned growth.",
     cta: "Learn More",
     href: "/work-with-me/freedom-builders",
     free: true,
@@ -43,7 +43,7 @@ const offerings = [
   {
     title: "Aligned Leaders Community",
     description:
-      "Ongoing support and accountability. Weekly calls, resources, and a cohort of aligned entrepreneurs.",
+      "$97/mo or $997/yr: weekly live calls, accountability, and a curated cohort of values-aligned founders. Depth and belonging between Freedom Builders and the Aligned Power Accelerator.",
     cta: "Learn More",
     href: "/work-with-me/aligned-leaders",
   },
@@ -60,13 +60,14 @@ const offerings = [
 export default function WorkWithMePage() {
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-cover bg-right"
-        style={{ backgroundImage: "url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800)" }}
-      >
-        <div className="absolute inset-0 bg-ap-bg/95" />
-        <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
+      {/* Hero — subtle orange geometric */}
+      <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             How We Work
           </p>
@@ -74,9 +75,7 @@ export default function WorkWithMePage() {
             Your place. Your pace.
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
-            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, and the monthly
-            Aligned Freedom Workshop. From there, you can join the free community, invest in intensives, join paid
-            communities, or apply for the flagship Accelerator program.
+            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, what&apos;s driving dysfunction, and the levers you can pull to move forward. The monthly Aligned Freedom Workshop is also free—we go beneath the tactics, surface what&apos;s holding you back, and I coach you live in the room. From there, you can join the free community, invest in intensives, or commit to more accountability in groups of like-minded founders. If you feel like it&apos;s a good fit, you can even apply for the flagship Aligned Power Accelerator program where the real magic happens.
           </p>
         </div>
       </section>
@@ -151,12 +150,12 @@ export default function WorkWithMePage() {
                 Aligned Freedom Coach
               </p>
               <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary leading-tight mb-4">
-                Need the work to survive the week—not just the workshop?
+                Need your commitment to survive past the workshop?
               </h2>
               <p className="text-lg font-semibold text-ap-mid leading-relaxed">
-                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell: coaching that keeps your
+                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. Coaching that keeps your
                 VAPI™ results, Founder Archetype, weekly 6Cs, and Vital Action in the room when you&apos;re tired, busy,
-                or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above—same alignment
+                or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above. Same alignment
                 standard.
               </p>
             </div>

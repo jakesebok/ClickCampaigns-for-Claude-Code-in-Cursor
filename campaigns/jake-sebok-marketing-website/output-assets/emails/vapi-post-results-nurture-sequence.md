@@ -157,7 +157,7 @@ If you’re not ready for an app subscription or a cohort yet, **you still belon
    [Freedom Builders](https://jakesebok.com/work-with-me/freedom-builders)  
    *(Aligned Business Foundations bundle / individual courses live inside this world—start free, add depth when it’s honest.)*
 
-2. **Aligned Freedom Workshop** (monthly, 90 minutes) — one evening to cut through noise and reconnect to what matters:  
+2. **Aligned Freedom Workshop** (monthly, 90 min) — surface what's holding you back and get coached live in the room. Clarity, community, no fluff:  
    [Next workshop](https://jakesebok.com/work-with-me/freedom-workshop)
 
 3. **VAPI™ again later** — especially after a real season of change. Your {{assessmentOrdinal}} snapshot is a dot, not your identity:  

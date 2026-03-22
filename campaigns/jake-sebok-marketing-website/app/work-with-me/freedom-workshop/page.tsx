@@ -1,36 +1,31 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export const metadata = {
   title: "Aligned Freedom Workshop — Jake Sebok",
   description:
-    "Free 90-minute monthly workshop. Get clarity, cut through the noise, and connect with entrepreneurs who refuse to stay stuck.",
+    "Free 90-minute monthly workshop. Surface what's holding you back and get coached live. Clarity, community, no fluff.",
 };
 
 export default function FreedomWorkshopPage() {
   return (
-    <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
-      <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-          Aligned Freedom Workshop
-        </p>
-        <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-          Join the next free workshop
-        </h1>
-        <div className="relative aspect-video rounded-[20px] overflow-hidden mb-10">
-          <Image
-            src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            alt="Workshop and collaboration"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 720px"
-          />
-        </div>
-        <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
-          90 minutes. Clarity. Community. No fluff. Connect with entrepreneurs who
-          refuse to stay stuck and get a clear next step for your alignment
-          journey.
-        </p>
+    <>
+      {/* Hero — subtle orange geometric */}
+      <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
+          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
+            Aligned Freedom Workshop
+          </p>
+          <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
+            Join the next free workshop
+          </h1>
+          <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
+            90 minutes. No fluff. In this interactive workshop, we get beneath the tactics—the beliefs, habits, and subconscious patterns that keep you spinning. I coach you live in the room so you leave with a real shift, not just another idea to file away. Connect with entrepreneurs who refuse to stay stuck. Clarity. Community.
+          </p>
         <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 mb-10">
           <h2 className="font-outfit font-semibold text-ap-primary mb-4">
             Webinar registration coming soon
@@ -75,7 +70,8 @@ export default function FreedomWorkshopPage() {
             ← Back to offerings
           </Link>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
