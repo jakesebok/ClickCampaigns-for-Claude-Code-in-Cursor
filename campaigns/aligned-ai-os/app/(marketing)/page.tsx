@@ -9,7 +9,7 @@ const AlfredLandingDemoSection = dynamic(
     })),
   {
     loading: () => (
-      <div className="border-y border-border bg-muted/30 py-24 text-center text-sm text-muted-foreground">
+      <div className="dark border-y border-accent/25 bg-[hsl(222_36%_7%)] py-24 text-center text-sm text-muted-foreground">
         Loading interactive preview…
       </div>
     ),

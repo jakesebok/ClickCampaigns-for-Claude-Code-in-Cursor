@@ -3,16 +3,24 @@
 import { AlfredFeatureExplorer } from "@/components/alfred-feature-explorer";
 
 /**
- * Dark-band section so the explorer matches alfredai.coach’s shell (no white strip).
- * Typography uses the `app-dark` embed variant inside the explorer.
+ * Full-width “product theater” band: reads as its own chapter vs the light hero (not another pale strip).
+ * `dark` scopes shadcn tokens so copy + `app-dark` explorer stay legible on slate.
  */
 export function AlfredLandingDemoSection() {
   return (
     <section
       id="product-tour"
-      className="scroll-mt-20 border-y border-border bg-card/30 py-16 text-foreground md:py-24"
+      className="dark scroll-mt-20 relative overflow-hidden border-y border-accent/25 bg-[hsl(222_36%_7%)] py-16 text-foreground shadow-[inset_0_1px_0_0_hsl(21_100%_55%/0.12)] md:py-24"
     >
-      <div className="mx-auto max-w-[1100px] px-5 sm:px-6">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-25%,hsl(21_100%_55%/0.14),transparent_55%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-[1100px] px-5 sm:px-6">
         <div className="mx-auto mb-12 max-w-[720px] text-center">
           <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
             Inside the app
