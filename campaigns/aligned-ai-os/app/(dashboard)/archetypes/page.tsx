@@ -200,7 +200,7 @@ export default function ArchetypesPage() {
         ref={scrollRef}
         className={cn(
           "flex-1 overflow-y-auto px-6 pb-6 scrollbar-thin",
-          !isLg && mobileFocus ? "pt-0" : "pt-6"
+          !isLg && mobileFocus ? "pt-0 -mt-px" : "pt-6"
         )}
       >
         <div className="mx-auto max-w-6xl space-y-8">
@@ -363,7 +363,7 @@ export default function ArchetypesPage() {
 
             <div className="space-y-8">
               {!isLg && mobileFocus ? (
-                <div className="sticky top-0 z-20 -mx-6 mb-0 flex items-center gap-2 border-b border-border bg-background px-6 py-3 lg:hidden">
+                <div className="sticky -top-px z-30 -mx-6 mb-0 flex items-center gap-2 border-b border-border bg-background px-6 py-3 lg:hidden">
                   <button
                     type="button"
                     onClick={closeMobileArchetype}

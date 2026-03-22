@@ -18,6 +18,13 @@
 
 **Clarifier:** **Aligned AIOS** = master prompt + blueprint from Strategic Clarity (Intensive or Accelerator Phase II). **ALFRED** = only app sold; includes AIOS-level coaching **plus** VAPI™, archetype, driver, 6Cs, Vital Actions.
 
+### Web copy: emphasis (marketing site)
+
+- Prefer **normal weight body** with meaning carried by structure and verbs.
+- Use **bold (`<strong>`) sparingly**; avoid stacking bold phrases in the same paragraph.
+- For the **one or two** moments that deserve pop in a section, use the **brand orange gradient text** class (`text-gradient-accent`), same idea as the homepage hero line (“someone else’s”). Do not overuse or it stops registering.
+- Avoid **em dashes (—)** in customer-facing marketing prose; use a period, comma, or parenthetical instead unless quoting a title that contains one.
+
 ---
 
 ## Remediation checklist

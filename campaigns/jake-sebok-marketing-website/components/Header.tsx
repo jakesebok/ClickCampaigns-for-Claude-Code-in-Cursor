@@ -130,10 +130,10 @@ export function Header() {
           })}
           <Link
             href="/who-is-alfred"
-            className={`inline-flex items-center rounded-pill border-[1.5px] font-semibold text-sm px-4 py-2.5 transition-all ${
+            className={`text-sm font-semibold underline underline-offset-[0.35em] decoration-2 transition-colors ${
               pathname === "/who-is-alfred"
-                ? "border-ap-accent text-gradient-accent bg-ap-accent/5"
-                : "border-ap-accent/35 text-ap-primary hover:border-ap-accent hover:text-gradient-accent"
+                ? "text-gradient-accent decoration-ap-accent"
+                : "text-ap-accent decoration-ap-accent/55 hover:decoration-ap-accent hover:text-gradient-accent"
             }`}
           >
             ALFRED
@@ -252,10 +252,10 @@ export function Header() {
             })}
             <Link
               href="/who-is-alfred"
-              className={`inline-flex justify-center rounded-pill border-[1.5px] font-semibold text-sm py-3 px-6 ${
+              className={`w-fit text-sm font-semibold underline underline-offset-[0.35em] decoration-2 py-1 ${
                 pathname === "/who-is-alfred"
-                  ? "border-ap-accent text-gradient-accent bg-ap-accent/5"
-                  : "border-ap-accent/35 text-ap-primary"
+                  ? "text-gradient-accent decoration-ap-accent"
+                  : "text-ap-accent decoration-ap-accent/55 hover:decoration-ap-accent hover:text-gradient-accent"
               }`}
               onClick={() => setMobileOpen(false)}
             >

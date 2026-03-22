@@ -1,19 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { AlfredFeatureExplorer } from "@/components/alfred-feature-explorer";
 
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED) is the only app Jake sells: AI coaching wired to your VAPI™ results, Founder Archetype, dysfunction pattern, weekly 6Cs, Vital Actions, and Aligned AIOS context—so alignment survives real life.";
+  "Aligned Freedom Coach (ALFRED): AI coaching that keeps your assessment, archetype, pattern, weekly check-ins, and strategic context alive in the room so accountability survives real life.";
 
 export const metadata: Metadata = {
-  title: "Aligned Freedom Coach (ALFRED) — Coaching That Remembers Your Scores | Jake Sebok",
+  title: "Aligned Freedom Coach (ALFRED): Coaching That Keeps Your Priorities Alive | Jake Sebok",
   description: ogDescription,
   alternates: {
     canonical: "/who-is-alfred",
   },
   openGraph: {
-    title: "Aligned Freedom Coach (ALFRED) — Coaching That Remembers Your Scores",
+    title: "Aligned Freedom Coach (ALFRED): Coaching That Keeps Your Priorities Alive",
     description: ogDescription,
     url: "https://jakesebok.com/who-is-alfred",
     siteName: "Jake Sebok",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
         url: "/images/logo-jake-sebok-horizontal.png",
         width: 1200,
         height: 630,
-        alt: "Jake Sebok — Aligned Freedom Coach (ALFRED)",
+        alt: "Jake Sebok | Aligned Freedom Coach (ALFRED)",
       },
     ],
   },
@@ -36,45 +37,18 @@ export const metadata: Metadata = {
   },
 };
 
-const intelligenceItems = [
-  {
-    title: "VAPI™ snapshot",
-    body: "Your composite score, three arenas (Personal, Relationships, Business), and twelve domains—so advice is weighted to what you said actually matters.",
-  },
-  {
-    title: "Founder Archetype",
-    body: "Structural read on how your arenas interact—not a personality quiz. The coach knows whether you’re building fast, drifting, or protecting what’s sacred.",
-  },
-  {
-    title: "Primary dysfunction pattern",
-    body: "The story you default to under stress (achievement, pleasing, fog, scattered focus, and more). Named so you can catch it earlier—not so you can shame yourself harder.",
-  },
-  {
-    title: "Weekly 6Cs scorecard",
-    body: "Clarity, Coherence, Capacity, Confidence, Courage, Connection—rated and reflected so your week has a spine, not just a task list.",
-  },
-  {
-    title: "Vital Action",
-    body: "One honest commitment that connects values to revenue and life design. The app keeps it visible when everything else is noisy.",
-  },
-  {
-    title: "Aligned AIOS context",
-    body: "If you’ve done Strategic Clarity (Accelerator Phase II or the Intensive), your master prompt and blueprint live here too—same mission, persistent memory.",
-  },
-];
-
 const dailyItems = [
   {
     title: "Coaching chat",
-    body: "Ask hard questions in plain language. Get answers that already know your bottlenecks—not generic hustle scripts.",
+    body: "Plain language when you’re stuck. Answers that already know your bottlenecks instead of recycled hustle advice.",
   },
   {
     title: "Alignment Blueprint",
-    body: "Your strategic context, viewable in one place. Less re-pasting worksheets. More forward motion.",
+    body: "Your strategic story in one place so you stop re-pasting the same context into a blank chat window.",
   },
   {
     title: "Morning SMS (optional)",
-    body: "A nudge that meets you where you are—without turning your life into a productivity performance.",
+    body: "A short nudge that matches your pace, not a performance contest.",
   },
 ];
 
@@ -87,19 +61,19 @@ export default function WhoIsAlfredPage() {
             Aligned Freedom Coach
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-[2.75rem] text-ap-primary leading-[1.12] mb-6">
-            The coach that still knows your VAPI™ when you&apos;re tired, busy, or about to say yes to the wrong thing.
+            The coach that still knows your priorities when you&apos;re tired, busy, or about to say yes to the wrong
+            thing.
           </h1>
           <p className="text-xl sm:text-2xl font-semibold text-ap-mid leading-relaxed mb-6">
-            <strong className="text-ap-primary">ALFRED</strong> is{" "}
-            <strong className="text-ap-primary">Aligned Freedom Coach</strong>—the only app I sell. It&apos;s where your
-            assessment, archetype, pattern, weekly check-ins, and (when you have it) your{" "}
-            <strong className="text-ap-primary">Aligned AIOS</strong> context stop being a PDF and start being a{" "}
-            <em>daily relationship</em> with alignment.
+            I built <span className="text-ap-primary">ALFRED</span> (Aligned Freedom Coach) because I wanted something
+            that would challenge me and optimize for{" "}
+            <span className="text-gradient-accent">what I actually want</span>, not whatever looks shiny at 11 p.m.
+            Your assessment, archetype, pattern, weekly check-ins, and the mission, vision, and values work too many
+            founders file away? Here they stay current, in the conversation, and in front of you when resolve runs thin.
           </p>
           <p className="text-lg font-medium text-ap-mid leading-relaxed mb-10">
-            Generic AI gives you clever paragraphs. ALFRED gives you{" "}
-            <strong className="text-ap-primary">coaching tethered to your real scores and commitments</strong>—so you
-            don&apos;t have to re-explain your life every time you need help.
+            Generic AI hands you clever paragraphs. This is coaching tethered to your real commitments, so you are not
+            re-explaining your life every time you need a steady voice.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
             <a
@@ -135,48 +109,41 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
-            Why another “AI coach” isn’t what you need
+            Not just another AI coach
           </h2>
           <div className="max-w-[720px] space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
             <p>
-              You already have access to models that can sound wise for thirty seconds. The breakdown happens on{" "}
-              <strong className="text-ap-primary">Wednesday</strong>, when you&apos;re depleted, your boundaries slip,
-              and the chat has <strong className="text-ap-primary">zero memory</strong> of what you discovered about
-              yourself last month.
+              You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
+              dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
             </p>
             <p>
-              ALFRED exists for the gap between <em>insight</em> and <em>embodiment</em>—when you need someone in your
-              corner who remembers that your Relationships arena is fragile, that your archetype skews toward
-              over-performance, or that your Vital Action this week is the one thing that protects your health{" "}
-              <em>and</em> your revenue.
+              ALFRED is for the stretch between insight and follow-through: the voice that recalls where your
+              relationships are stretched thin, how your archetype tends to over-correct, and the one commitment that
+              protects both your health and your revenue this week.
             </p>
-            <p className="text-ap-primary font-semibold">
-              You&apos;re not broken for needing repetition. You&apos;re human. The app is the scaffold—not the savior.
+            <p>
+              Repetition is not a character flaw. It is how humans stay honest. The app holds the frame so you can do the
+              work.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-ap-bg">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6">
+      <section className="py-14 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden">
+        <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            What stays in the room with you
+            Who&apos;s in the room with you?
           </h2>
-          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
-            This is the difference between “chat with AI” and{" "}
-            <strong className="text-ap-primary">coaching with your actual baseline loaded</strong>.
+          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-3">
+            Every legendary operator had someone in the earpiece: calm, informed, unafraid to say the quiet part out
+            loud. ALFRED is that steady presence for founders, minus the cave and the cape. A little wink, a lot of
+            leverage.
           </p>
-          <ul className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-            {intelligenceItems.map((item) => (
-              <li
-                key={item.title}
-                className="bg-white rounded-[20px] border border-ap-border p-6 sm:p-7 shadow-sm"
-              >
-                <h3 className="font-outfit font-bold text-lg text-ap-primary mb-2">{item.title}</h3>
-                <p className="text-ap-mid font-medium leading-relaxed">{item.body}</p>
-              </li>
-            ))}
-          </ul>
+          <p className="text-sm text-ap-muted font-medium max-w-[720px] mb-12">
+            Explore the phone: hover each panel on desktop to jump the tour. Pause anytime. On mobile, use the dots and
+            arrows.
+          </p>
+          <AlfredFeatureExplorer />
         </div>
       </section>
 
@@ -186,7 +153,7 @@ export default function WhoIsAlfredPage() {
             How it shows up in a real week
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
-            Simple surfaces. No gamified shame. Built for owner-operators who already have enough tabs open.
+            Simple surfaces. No shame scoreboards. Built for people who already have too many tabs open.
           </p>
           <ul className="grid sm:grid-cols-3 gap-6">
             {dailyItems.map((item) => (
@@ -205,7 +172,8 @@ export default function WhoIsAlfredPage() {
             Aligned AIOS vs ALFRED
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Same north star. Different leverage. You might use both; most serious operators eventually want the app.
+            Same north star. Different leverage. Many folks run both for a while; operators who want persistence usually
+            land in the app.
           </p>
           <div className="overflow-x-auto rounded-[20px] border border-ap-border bg-white">
             <table className="w-full text-left text-sm sm:text-base">
@@ -219,31 +187,40 @@ export default function WhoIsAlfredPage() {
               <tbody className="text-ap-mid font-medium">
                 <tr className="border-b border-ap-border">
                   <td className="p-4 sm:p-5 text-ap-primary font-semibold">What it is</td>
-                  <td className="p-4 sm:p-5">Master prompt + blueprint from Strategic Clarity—runs in ChatGPT, Claude, Gemini, etc.</td>
+                  <td className="p-4 sm:p-5">
+                    Master prompt and blueprint from Strategic Clarity. Runs inside ChatGPT, Claude, Gemini, or similar.
+                  </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Dedicated app: persistent memory, scorecards, Vital Action, integrations with your assessment data.
+                    A dedicated app with memory, scorecards, Vital Action, and your assessment data wired in.
                   </td>
                 </tr>
                 <tr className="border-b border-ap-border">
                   <td className="p-4 sm:p-5 text-ap-primary font-semibold">Best for</td>
                   <td className="p-4 sm:p-5">“I want my favorite model to know my worksheets.”</td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    “I want alignment to survive my actual calendar—and I’m tired of re-pasting context.”
+                    “I want this to survive my real calendar without re-pasting context every night.”
                   </td>
                 </tr>
                 <tr>
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Live VAPI™ + weekly rhythm</td>
-                  <td className="p-4 sm:p-5">You bring what you paste; model doesn’t natively track your 6Cs week to week.</td>
+                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Live rhythm</td>
+                  <td className="p-4 sm:p-5">You paste what you remember; the model does not track your week for you.</td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Built-in: VAPI™, archetype, pattern, 6Cs, Vital Action—updated as you use the product.
+                    Built-in cadence: assessment, archetype, pattern, weekly check-ins, Vital Action, updated as you use
+                    it.
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="text-sm text-ap-muted mt-4 max-w-[720px]">
-            Aligned AIOS is generated at the end of <strong className="text-ap-mid">Phase II (Strategic Clarity)</strong>{" "}
-            in the Accelerator or in a <Link href="/work-with-me/strategic-intensives" className="text-gradient-accent font-semibold hover:underline">Strategic Alignment Intensive</Link>.
+            Aligned AIOS ships at the end of Phase II (Strategic Clarity) inside the Accelerator or through a{" "}
+            <Link
+              href="/work-with-me/strategic-intensives"
+              className="text-gradient-accent font-semibold hover:underline"
+            >
+              Strategic Alignment Intensive
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -255,9 +232,8 @@ export default function WhoIsAlfredPage() {
           </h2>
           <div className="space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
             <p>
-              ALFRED is priced like <strong className="text-ap-primary">less than a single coaching session per month</strong>{" "}
-              with <strong className="text-ap-primary">everything included</strong>—no upsell maze inside the app. See
-              current numbers on the{" "}
+              Priced under what most people pay for a single coaching session each month, with everything included and
+              no upsell maze inside the app. Current numbers live on the{" "}
               <a
                 href={`${ALFRED_APP_URL}/pricing`}
                 target="_blank"
@@ -269,10 +245,9 @@ export default function WhoIsAlfredPage() {
               .
             </p>
             <p>
-              <strong className="text-ap-primary">Strategic Alignment Intensive</strong> attendees and{" "}
-              <strong className="text-ap-primary">Aligned Power Accelerator</strong> clients receive extended trial
-              access via the codes shared in program—because the app is designed to extend what we build in the room, not
-              replace it.
+              Strategic Alignment Intensive attendees and Aligned Power Accelerator clients receive extended trial
+              access through the codes shared in program, because the tool is meant to extend what gets built in the
+              room, not replace it.
             </p>
           </div>
         </div>
@@ -286,7 +261,8 @@ export default function WhoIsAlfredPage() {
               <ul className="space-y-3 text-ap-mid font-medium leading-relaxed">
                 <li className="flex gap-2">
                   <span className="text-ap-accent shrink-0">→</span>
-                  Founders who already took VAPI™ and want execution support that respects the report—not generic tips.
+                  Founders who want execution support that respects their assessment and stated priorities, not generic
+                  tips.
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ap-accent shrink-0">→</span>
@@ -294,7 +270,7 @@ export default function WhoIsAlfredPage() {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ap-accent shrink-0">→</span>
-                  Anyone building or refreshing Aligned AIOS who wants that intelligence to live somewhere durable.
+                  Anyone who wants their strategic context to live somewhere durable, not in a drawer.
                 </li>
               </ul>
             </div>
@@ -302,12 +278,12 @@ export default function WhoIsAlfredPage() {
               <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-4">Who it isn&apos;t for</h2>
               <ul className="space-y-3 text-ap-mid font-medium leading-relaxed">
                 <li className="flex gap-2">
-                  <span className="text-ap-muted shrink-0">—</span>
-                  Anyone looking for a magic button that builds the business without honest weekly choices.
+                  <span className="text-ap-muted shrink-0">·</span>
+                  Anyone expecting a magic button that builds the business without honest weekly choices.
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-ap-muted shrink-0">—</span>
-                  People who won&apos;t engage with reflection—the 6Cs and Vital Action only work if you show up.
+                  <span className="text-ap-muted shrink-0">·</span>
+                  People unwilling to engage reflection. The rhythm only works if you show up.
                 </li>
               </ul>
             </div>
@@ -322,17 +298,15 @@ export default function WhoIsAlfredPage() {
               The name &quot;ALFRED&quot;?
             </h2>
             <p className="text-ap-mid font-medium leading-relaxed mb-8">
-              It&apos;s the acronym for <strong className="text-ap-primary">Al</strong>igned{" "}
-              <strong className="text-ap-primary">Fre</strong>e<strong className="text-ap-primary">d</strong>om Coach—a
-              handle with personality. Same product as <strong className="text-ap-primary">Aligned Freedom Coach</strong>
-              . Pick whichever helps you actually open the app.
+              Short for Aligned Freedom Coach: Al, Fre, Dom. Same product whether you say ALFRED or the full name. Use
+              whichever one gets you to open the app.
             </p>
             <p className="text-ap-mid font-medium mb-8">
-              Not ready for the app yet? Start free:{" "}
+              Not ready yet? Start free with{" "}
               <Link href="/work-with-me/freedom-builders" className="text-gradient-accent font-semibold hover:underline">
-                Freedom Builders + Aligned Freedom Course
+                Freedom Builders and the Aligned Freedom Course
               </Link>
-              ,{" "}
+              , join a{" "}
               <Link href="/work-with-me/freedom-workshop" className="text-gradient-accent font-semibold hover:underline">
                 monthly workshop
               </Link>
