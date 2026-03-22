@@ -1026,6 +1026,7 @@
 
         html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
         html += buildArchetypeSection(results);
+        html += '<div id="journeyman-growth-edge-mount"></div>';
         html += buildDriverSection(results);
         html += '</div>'; // end print-hero-block
         // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
@@ -1227,6 +1228,22 @@
         attachAlignmentLightbox();
         initExploreSection(results, domains);
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        if (results.archetype === 'The Journeyman') {
+          import('/vapi/lib/vapi-journeyman-display.js').then(function(mod) {
+            var mount = document.getElementById('journeyman-growth-edge-mount');
+            if (!mount || !mod.buildJourneymanGrowthEdgeHtml) return;
+            var edgeHtml = mod.buildJourneymanGrowthEdgeHtml(results, { escapeHtml: escapeHtml });
+            if (edgeHtml) {
+              mount.outerHTML = edgeHtml;
+              if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+            } else {
+              mount.remove();
+            }
+          }).catch(function() {
+            var m = document.getElementById('journeyman-growth-edge-mount');
+            if (m) m.remove();
+          });
+        }
         var constEl = document.querySelector('.archetype-constellation');
         if (constEl && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.initConstellationTooltips) VAPI_ARCHETYPE.initConstellationTooltips(constEl);
         document.dispatchEvent(new CustomEvent('vapi-results-rendered'));
@@ -1601,6 +1618,12 @@
           el.classList.remove('hidden');
         });
         document.querySelectorAll('.driver-details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+        document.querySelectorAll('.archetype-details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+        document.querySelectorAll('#journeyman-growth-edge details').forEach(function(d) {
           d.setAttribute('open', '');
         });
       });

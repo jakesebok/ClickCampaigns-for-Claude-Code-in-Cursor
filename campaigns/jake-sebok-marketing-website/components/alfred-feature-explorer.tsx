@@ -55,6 +55,8 @@ import {
   COACH_DEMO_INNER_THREAD_OPENER,
   COACH_DEMO_WEEKLY_THREAD_OPENER,
   DRIVER_LIBRARY_SUBTITLE,
+  WEEKLY_DEMO_CASUAL_USER_MESSAGE,
+  WEEKLY_PLANNING_DEMO_TURNS,
   DRIVER_LIBRARY_TITLE,
   DRIVER_ORDER_PREVIEW,
   ESCAPE_ARTIST_ACCENT,
@@ -576,14 +578,14 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           return {
             kicker: "Coach",
             title: "Weekly Planning, with room to go deep",
-            body: "The preview plays like the live chat: Alfred’s first message appears, your Fire Starter types into the composer (Send lights up like the real app), then a thinking spinner and a long reply that streams in chunk by chunk—same rhythm as production streaming. The final answer is sample copy; in your account it is generated from your blueprint, 6Cs, Vital Action, and quota context.",
+            body: "Multi-bubble thread: opener, your casual line in the composer, then Alfred streams answers in separate bubbles—with deliberate pauses between turns so you can read before the next beat. The script is sample copy; in your account it is generated from your blueprint, Vital Action, QC math, and boundaries.",
           };
         }
         if (isInnerLimitingBeliefDemo) {
           return {
             kicker: "Coach",
             title: "Find the belief, then stress-test it against your Real Reasons",
-            body: "The preview types like a real person would—messy, no jargon about frameworks—while Alfred still weaves in what you already put in your blueprint (presence at home, Vital Action, and what you said matters). Each line is its own bubble; the full dance is opener, your message, spinner, then back-and-forth with streamed replies. Live chat does the same from your actual data.",
+            body: "The preview types like a real person would—messy, no jargon about frameworks—while Alfred still weaves in what you already put in your blueprint (presence at home, Vital Action, and what you said matters). Each turn is its own bubble with space to read before the next message. Live chat does the same from your actual data.",
           };
         }
         return {
@@ -1144,17 +1146,17 @@ type CoachDemoBubble = { role: "user" | "assistant"; content: string };
 
 type CoachDemoChatSequenceProps = {
   replayKey: number;
+  variant: "weekly" | "inner";
   opener: string;
+  firstUserMessage: string;
+  scriptTurns: readonly CoachDemoBubble[];
   reduceMotion: boolean;
   onBack: () => void;
-} & (
-  | { variant: "weekly"; firstUserMessage: string; assistantReply: string }
-  | { variant: "inner"; firstUserMessage: string; scriptTurns: readonly CoachDemoBubble[] }
-);
+};
 
-/** Mirrors chat/page.tsx: real bubbles, textarea + Send, Loader2 while thinking, streamed assistant text. Inner variant alternates multiple bubbles (no labeled Alfred/You blocks). */
+/** Slower pacing + pauses between bubbles so the demo is readable. Weekly and Inner both use multi-bubble scripts. */
 function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
-  const { replayKey, opener, reduceMotion, onBack } = props;
+  const { replayKey, opener, reduceMotion, onBack, scriptTurns, firstUserMessage, variant } = props;
   const scrollRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<CoachDemoBubble[]>([]);
   const [streamBuffer, setStreamBuffer] = useState("");
@@ -1177,34 +1179,45 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
         }, ms);
       });
 
+    /** Slower than earlier builds—time to read before the next beat. */
+    const OPEN_MS_PER_CHAR = 24;
+    const READ_AFTER_OPENER_MS = 800;
+    const USER_MS_PER_CHAR = 18;
+    const PAUSE_BEFORE_SEND_MS = 650;
+    const READ_AFTER_USER_BUBBLE_MS = 1000;
+    const THINKING_FIRST_MS = 2200;
+    const THINKING_BETWEEN_MS = 2000;
+    const STREAM_CHUNK_CHARS = 9;
+    const STREAM_CHUNK_MS = 28;
+    const READ_AFTER_ASSISTANT_MS = 1200;
+
     async function streamAssistant(text: string) {
-      const chunk = 12;
-      const streamMs = 14;
       setStreamBuffer("");
-      for (let pos = 0; pos <= text.length; pos += chunk) {
+      for (let pos = 0; pos <= text.length; pos += STREAM_CHUNK_CHARS) {
         if (cancelled) return;
-        setStreamBuffer(text.slice(0, Math.min(text.length, pos + chunk)));
-        await sleep(streamMs);
+        setStreamBuffer(text.slice(0, Math.min(text.length, pos + STREAM_CHUNK_CHARS)));
+        await sleep(STREAM_CHUNK_MS);
       }
       if (cancelled) return;
       setMessages((m) => [...m, { role: "assistant", content: text }]);
       setStreamBuffer("");
+      await sleep(READ_AFTER_ASSISTANT_MS);
     }
 
     async function typeUserInComposer(text: string) {
-      const userMs = 10;
       setPendingUserTarget(text);
       setComposerValue("");
       for (let i = 0; i <= text.length; i++) {
         if (cancelled) return;
         setComposerValue(text.slice(0, i));
-        await sleep(userMs);
+        await sleep(USER_MS_PER_CHAR);
       }
-      await sleep(260);
+      await sleep(PAUSE_BEFORE_SEND_MS);
       if (cancelled) return;
       setComposerValue("");
       setPendingUserTarget(null);
       setMessages((m) => [...m, { role: "user", content: text }]);
+      await sleep(READ_AFTER_USER_BUBBLE_MS);
     }
 
     async function run() {
@@ -1215,49 +1228,31 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
       setPendingUserTarget(null);
 
       if (reduceMotion) {
-        if (props.variant === "weekly") {
-          setMessages([
-            { role: "assistant", content: opener },
-            { role: "user", content: props.firstUserMessage },
-            { role: "assistant", content: props.assistantReply },
-          ]);
-        } else {
-          setMessages([
-            { role: "assistant", content: opener },
-            { role: "user", content: props.firstUserMessage },
-            ...props.scriptTurns,
-          ]);
-        }
+        setMessages([{ role: "assistant", content: opener }, { role: "user", content: firstUserMessage }, ...scriptTurns]);
         return;
       }
 
-      const openMs = 13;
       for (let i = 1; i <= opener.length; i++) {
         if (cancelled) return;
         setMessages([{ role: "assistant", content: opener.slice(0, i) }]);
-        await sleep(openMs);
+        await sleep(OPEN_MS_PER_CHAR);
       }
-      await sleep(380);
+      await sleep(READ_AFTER_OPENER_MS);
       if (cancelled) return;
 
-      await typeUserInComposer(props.firstUserMessage);
+      await typeUserInComposer(firstUserMessage);
       if (cancelled) return;
 
       setThinking(true);
-      await sleep(1250);
+      await sleep(THINKING_FIRST_MS);
       if (cancelled) return;
       setThinking(false);
 
-      if (props.variant === "weekly") {
-        await streamAssistant(props.assistantReply);
-        return;
-      }
-
-      for (const turn of props.scriptTurns) {
+      for (const turn of scriptTurns) {
         if (cancelled) return;
         if (turn.role === "assistant") {
           setThinking(true);
-          await sleep(1100);
+          await sleep(THINKING_BETWEEN_MS);
           if (cancelled) return;
           setThinking(false);
           await streamAssistant(turn.content);
@@ -1271,15 +1266,7 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
     return () => {
       cancelled = true;
     };
-  }, [
-    opener,
-    reduceMotion,
-    replayKey,
-    props.variant,
-    props.firstUserMessage,
-    props.variant === "weekly" ? props.assistantReply : "",
-    props.variant === "inner" ? props.scriptTurns : null,
-  ]);
+  }, [opener, reduceMotion, replayKey, variant, firstUserMessage, scriptTurns]);
 
   const canSendDemo =
     pendingUserTarget !== null &&
@@ -1415,27 +1402,27 @@ function CoachScreen({
       </header>
 
       {showAnimatedFullDemo && threadPrompt ? (
-        threadPrompt.family === "weekly" ? (
-          <CoachDemoChatSequence
-            variant="weekly"
-            replayKey={coachDemoReplayKey}
-            opener={COACH_DEMO_WEEKLY_THREAD_OPENER}
-            firstUserMessage={threadPrompt.item.prompt}
-            assistantReply={SAMPLE_SCHEDULE_REPLY}
-            reduceMotion={reduceMotion}
-            onBack={onBackFromThread}
-          />
-        ) : (
-          <CoachDemoChatSequence
-            variant="inner"
-            replayKey={coachDemoReplayKey}
-            opener={COACH_DEMO_INNER_THREAD_OPENER}
-            firstUserMessage={INNER_WORK_DEMO_CASUAL_USER_MESSAGE}
-            scriptTurns={INNER_WORK_LIMITING_BELIEF_DEMO_TURNS}
-            reduceMotion={reduceMotion}
-            onBack={onBackFromThread}
-          />
-        )
+        <CoachDemoChatSequence
+          variant={threadPrompt.family === "weekly" ? "weekly" : "inner"}
+          replayKey={coachDemoReplayKey}
+          opener={
+            threadPrompt.family === "weekly"
+              ? COACH_DEMO_WEEKLY_THREAD_OPENER
+              : COACH_DEMO_INNER_THREAD_OPENER
+          }
+          firstUserMessage={
+            threadPrompt.family === "weekly"
+              ? WEEKLY_DEMO_CASUAL_USER_MESSAGE
+              : INNER_WORK_DEMO_CASUAL_USER_MESSAGE
+          }
+          scriptTurns={
+            threadPrompt.family === "weekly"
+              ? WEEKLY_PLANNING_DEMO_TURNS
+              : INNER_WORK_LIMITING_BELIEF_DEMO_TURNS
+          }
+          reduceMotion={reduceMotion}
+          onBack={onBackFromThread}
+        />
       ) : (
         <>
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 min-h-0">

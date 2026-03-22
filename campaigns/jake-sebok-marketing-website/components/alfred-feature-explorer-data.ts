@@ -114,7 +114,54 @@ export const INNER_WORK_LIMITING_BELIEF_DEMO_TURNS: readonly {
 
 /** First assistant message in the animated Coach thread demo (Weekly Planning full demo). */
 export const COACH_DEMO_WEEKLY_THREAD_OPENER =
-  "I've pulled in your Becoming line, Vital Action, QC quota, and the boundaries from your blueprint. When you're ready, type what you want to work on for the week—the same way you'd use a Fire Starter in the live app.";
+  "I've got your Vital Action, QC target from your revenue bridge, and the boundaries in your blueprint. Type it like a text if you want—I'll build the week around what you already committed to.";
+
+/**
+ * Casual first user line for the Weekly Planning animated demo (not the Fire Starter string).
+ */
+export const WEEKLY_DEMO_CASUAL_USER_MESSAGE =
+  "hey can you help me build an actual week around my vital action + my qc number... i keep *meaning* to then tuesday hits and im just reacting to slack all day";
+
+/**
+ * Weekly Planning demo: alternating bubbles after the casual first message (same rhythm as Inner Work demo).
+ */
+export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
+  role: "user" | "assistant";
+  content: string;
+}[] = [
+  {
+    role: "assistant",
+    content:
+      "Got it. I'm anchoring three things from your context: your Vital Action is defending focus blocks, your bridge implies **12 qualified conversations** this week, and your blueprint treats **dinner by 6:30** and **no Slack after 8** as hard edges—not nice-to-haves. We build the calendar around those first.",
+  },
+  {
+    role: "user",
+    content: "yeah thats the leak. mornings i *say* deep work then slack eats them",
+  },
+  {
+    role: "assistant",
+    content:
+      "Then we protect the first block like a client meeting. For QCs: I'd place **three** Tuesday morning, **three** Thursday morning, and **two** each Mon / Wed / Fri **before noon**—so afternoons stay for delivery and the work only you can do.",
+  },
+  {
+    role: "user",
+    content: "ok show me what monday actually looks like roughly",
+  },
+  {
+    role: "assistant",
+    content:
+      "Sample skeleton (adjust for your time zone):\n\n**Mon:** 8:00–10:30 deep work (Vital Action). 10:30–12:00 QC. Lunch. 1:00–3:00 delivery. 3:30–4:30 admin buffer.\n**Tue:** QC-heavy morning + one 90-minute deep block mid-day.\n**Wed:** Like Mon with a shorter QC window if energy dips.\n**Thu:** QC + one partnership / follow-up block.\n**Fri:** Lighter QC, weekly review, 60 minutes for Becoming / inner work that supports next week's Vital Action.",
+  },
+  {
+    role: "user",
+    content: "friday becoming is always the one i skip lol",
+  },
+  {
+    role: "assistant",
+    content:
+      "Then we name it and protect it anyway—same rule as the family edge.\n\n**What to say no to:** anything that steals the first morning block or pushes QC to \"later tonight.\" If something has to slip, we delete a *meeting*—not the Vital Action block, not dinner, not the 8 p.m. Slack boundary.\n\nSend your fixed commitments (pickups, standing calls) and I'll drop them in and re-balance.",
+  },
+];
 
 /** First assistant message in the animated Coach thread demo (Inner Work full demo). */
 export const COACH_DEMO_INNER_THREAD_OPENER =

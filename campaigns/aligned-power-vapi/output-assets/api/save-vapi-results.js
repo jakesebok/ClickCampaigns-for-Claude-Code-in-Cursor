@@ -11,6 +11,7 @@
  */
 
 import { enrichResultsWithDriver } from "./_lib/vapi-driver-scoring.js";
+import { enrichResultsWithJourneyman } from "../lib/vapi-journeyman-analysis.js";
 
 function determineArchetypeFromResults(results) {
   const arenaScores = results?.arenaScores || {};
@@ -141,6 +142,7 @@ export async function POST(request) {
     if (archetype) {
       enrichedResults.archetype = archetype;
     }
+    enrichResultsWithJourneyman(enrichedResults);
   }
 
   const emailNormalized = String(email).trim().toLowerCase();

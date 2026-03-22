@@ -1054,6 +1054,25 @@
       document.getElementById('latest-result').innerHTML = latestHtml;
       if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
 
+      if (latestArchetype === 'The Journeyman') {
+        import('/lib/vapi-journeyman-display.js').then(function(mod) {
+          var wrap = document.getElementById('latest-result');
+          if (!wrap || !mod.buildJourneymanGrowthEdgeHtml) return;
+          try {
+            var r = JSON.parse(JSON.stringify(latest.results));
+            r.archetype = 'The Journeyman';
+            var edgeHtml = mod.buildJourneymanGrowthEdgeHtml(r, { escapeHtml: escHtml });
+            if (edgeHtml) {
+              var holder = document.createElement('div');
+              holder.innerHTML = edgeHtml;
+              var section = holder.firstElementChild;
+              if (section) wrap.appendChild(section);
+              if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+            }
+          } catch (e) { console.warn('[Journeyman growth edge]', e); }
+        }).catch(function() { /* module unavailable */ });
+      }
+
       // Archetype section — full profile card from results page
       var archSectionEl = document.getElementById('archetype-section');
       if (latestArchetype && archSectionEl) {
