@@ -79,9 +79,10 @@ export default function WhoIsAlfredPage() {
                 I built <span className="text-ap-primary">ALFRED</span> (Aligned Freedom Coach) because I wanted something
                 that would challenge me and optimize for{" "}
                 <span className="text-gradient-accent">what I actually want</span>, not whatever looks shiny at 11 p.m.
-                Your assessment, archetype, pattern, weekly check-ins, and the mission, vision, and values work too many
-                founders file away? Here they stay current, in the conversation, and in front of you when resolve runs
-                thin.
+                The mission, vision, values docs that you throw in a drawer and forget about?{"  "}
+                Here, along with your assessment results, founder archetype, and weekly reflections, they stay current
+                and alive in the conversation, so they&apos;re in front of you and guiding your decisions when resolve
+                runs thin.
               </p>
               <p className="text-base sm:text-lg font-medium text-ap-mid leading-relaxed mb-8">
                 Generic AI hands you clever paragraphs. This is coaching tethered to your real commitments, so you are
