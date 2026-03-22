@@ -41,6 +41,71 @@ export const WEEKLY_PLANNING_PROMPTS: { label: string; prompt: string }[] = [
   },
 ];
 
+/** Demo: highlighted sub-prompt in Weekly Planning list (matches tour + full sample reply). */
+export const WEEKLY_PLANNING_DEMO_LABEL = "Create weekly schedule" as const;
+
+/**
+ * Inner Work + Beliefs — Fire Starters submenu.
+ * Verbatim from aligned-ai-os `lib/ai/prompts.ts` → SUGGESTED_QUESTIONS (category "Inner Work + Beliefs").
+ */
+export const INNER_WORK_BELIEFS_PROMPTS: { label: string; prompt: string }[] = [
+  {
+    label: "I know what to do but can't",
+    prompt:
+      "I know what I should do but I can't make myself do it. Help me figure out what's really going on — especially around my Vital Action.",
+  },
+  {
+    label: "Find and shift limiting belief",
+    prompt: "There's a belief holding me back. Help me find it and shift it. Connect it to my Real Reasons.",
+  },
+  {
+    label: "Parts work: grow vs terrified",
+    prompt: "Part of me wants to grow and part of me is terrified. Can we work with both parts?",
+  },
+  {
+    label: "Map self-sabotage pattern",
+    prompt: "I keep self-sabotaging at the same point. Walk me through what's underneath that pattern.",
+  },
+];
+
+/** Sub-prompt that carries the full limiting-belief demo in the mock thread (matches production label). */
+export const INNER_WORK_DEMO_LABEL = "Find and shift limiting belief" as const;
+
+/**
+ * Illustrative thread for INNER_WORK_DEMO_LABEL — same user message as production; sample Alfred turns only.
+ */
+export const SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY = `**Alfred**  
+You asked to tie this to your **Real Reasons** and shift the belief—not just vent. I’m working from your blueprint and Vital Action, not a generic script.
+
+**Alfred**  
+When you picture actually honoring your Real Reasons this week, what’s the *first* “yeah, but…” your mind offers? Say it in one blunt sentence.
+
+**You**  
+Yeah, but if I’m not always on, the business stalls—and then I’m failing everyone.
+
+**Alfred**  
+That’s a belief wearing a strategy costume: *constant availability = safety + love.* Let’s separate facts from the story. Does one more hour of Slack *actually* protect revenue—or does it mostly quiet the fear that you’re only allowed to rest after you’ve earned it?
+
+**You**  
+…Mostly the fear.
+
+**Alfred**  
+**Kinder truth that still fits your Real Reasons:** *Boundaries don’t erase ambition—they protect the person who has to execute.*  
+
+**Evidence check:** Name one recent day when you protected a block for your Vital Action or family—and something important still shipped. That memory is your counterexample to “always on or it all falls apart.”
+
+**One install before you open email:** Say out loud: *“Rest doesn’t erase my standards—it protects who I’m becoming.”* Then put your Vital Action block on the calendar like a client meeting. If guilt shows up, don’t debate it—name it: “That’s the old belief,” and sit with it for sixty seconds without fixing anything.
+
+Reply with where that belief spikes loudest (mornings, after the kids are down, quiet pipeline)—I’ll anchor the next move to your real week.`;
+
+/** First assistant message in the animated Coach thread demo (Weekly Planning full demo). */
+export const COACH_DEMO_WEEKLY_THREAD_OPENER =
+  "I've pulled in your Becoming line, Vital Action, QC quota, and the boundaries from your blueprint. When you're ready, type what you want to work on for the week—the same way you'd use a Fire Starter in the live app.";
+
+/** First assistant message in the animated Coach thread demo (Inner Work full demo). */
+export const COACH_DEMO_INNER_THREAD_OPENER =
+  "I'm here with your Real Reasons and blueprint context. When you're ready, send the belief work in your own words—or paste the exact Fire Starter prompt you chose.";
+
 /** lib/vapi/scoring.ts — ARCHETYPE_DESCRIPTIONS["The Ghost"] */
 export const GHOST_ARCHETYPE_DESCRIPTION =
   "Business is strong but relationships are fading. You're building something impressive — but the people who matter are watching you disappear. Reconnect before the distance becomes permanent.";

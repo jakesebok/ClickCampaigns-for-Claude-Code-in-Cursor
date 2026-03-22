@@ -6,7 +6,7 @@
  * Sources (campaigns/aligned-ai-os):
  * - app/(dashboard)/layout.tsx — mobile bottom nav, More menu pattern
  * - app/(dashboard)/dashboard/page.tsx — dashboard section order, 6Cs layout, VAPI, Focus Here First, archetype + driver
- * - app/(dashboard)/chat/page.tsx — header, welcome copy, Fire Starters from SUGGESTED_QUESTIONS
+ * - app/(dashboard)/chat/page.tsx — header, welcome copy, Fire Starters, textarea + Send, streaming assistant + Loader2
  * - lib/ai/prompts.ts — Weekly Planning prompt strings
  * - app/(dashboard)/drivers/page.tsx — Driver Library layout, primary driver banner, detail sections
  * - lib/vapi/drivers.ts, driver-library.ts, archetypes-full.ts, scoring.ts — copy in alfred-feature-explorer-data.ts
@@ -30,6 +30,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardCheck,
+  Loader2,
   Crosshair,
   FileText,
   Ghost,
@@ -40,6 +41,7 @@ import {
   Link2,
   MessageSquare,
   Mic,
+  Send,
   MoreHorizontal,
   Settings,
   ShieldCheck,
@@ -50,6 +52,8 @@ import {
 } from "lucide-react";
 import {
   CHAT_SUBTITLE,
+  COACH_DEMO_INNER_THREAD_OPENER,
+  COACH_DEMO_WEEKLY_THREAD_OPENER,
   DRIVER_LIBRARY_SUBTITLE,
   DRIVER_LIBRARY_TITLE,
   DRIVER_ORDER_PREVIEW,
@@ -60,9 +64,25 @@ import {
   GHOST_ARCHETYPE,
   GHOST_ARCHETYPE_ACCENT,
   GHOST_ARCHETYPE_DESCRIPTION,
+  INNER_WORK_BELIEFS_PROMPTS,
+  INNER_WORK_DEMO_LABEL,
+  SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY,
   SAMPLE_SCHEDULE_REPLY,
+  WEEKLY_PLANNING_DEMO_LABEL,
   WEEKLY_PLANNING_PROMPTS,
 } from "./alfred-feature-explorer-data";
+
+type CoachThreadPrompt =
+  | null
+  | { family: "weekly"; item: (typeof WEEKLY_PLANNING_PROMPTS)[number] }
+  | { family: "inner"; item: (typeof INNER_WORK_BELIEFS_PROMPTS)[number] };
+
+function isCoachFullDemoThread(p: NonNullable<CoachThreadPrompt>): boolean {
+  return (
+    (p.family === "weekly" && p.item.label === WEEKLY_PLANNING_DEMO_LABEL) ||
+    (p.family === "inner" && p.item.label === INNER_WORK_DEMO_LABEL)
+  );
+}
 
 type AppTab =
   | "dashboard"
@@ -118,13 +138,18 @@ const DASHBOARD_TOUR = [
 
 /** Weekly Planning thread stop in the full app tour (must match a WEEKLY_PLANNING_PROMPTS label). */
 const TOUR_WEEKLY_THREAD_PROMPT =
-  WEEKLY_PLANNING_PROMPTS.find((p) => p.label === "Create weekly schedule") ?? WEEKLY_PLANNING_PROMPTS[0];
+  WEEKLY_PLANNING_PROMPTS.find((p) => p.label === WEEKLY_PLANNING_DEMO_LABEL) ?? WEEKLY_PLANNING_PROMPTS[0];
+
+const TOUR_INNER_THREAD_PROMPT =
+  INNER_WORK_BELIEFS_PROMPTS.find((p) => p.label === INNER_WORK_DEMO_LABEL) ?? INNER_WORK_BELIEFS_PROMPTS[0];
 
 type AppTourStep =
   | { kind: "dashboard"; focus: TourFocus; dotLabel: string }
   | { kind: "coach_home"; dotLabel: string }
   | { kind: "coach_weekly"; dotLabel: string }
   | { kind: "coach_thread"; dotLabel: string }
+  | { kind: "coach_inner"; dotLabel: string }
+  | { kind: "coach_inner_thread"; dotLabel: string }
   | { kind: "voice"; dotLabel: string }
   | { kind: "results"; dotLabel: string }
   | { kind: "drivers_list"; dotLabel: string }
@@ -142,6 +167,8 @@ const APP_TOUR_STEPS: AppTourStep[] = [
   { kind: "coach_home", dotLabel: "Coach — Fire Starters" },
   { kind: "coach_weekly", dotLabel: "Coach — Weekly planning menu" },
   { kind: "coach_thread", dotLabel: "Coach — Weekly planning thread" },
+  { kind: "coach_inner", dotLabel: "Coach — Inner Work menu" },
+  { kind: "coach_inner_thread", dotLabel: "Coach — Limiting belief thread" },
   { kind: "voice", dotLabel: "Voice" },
   { kind: "results", dotLabel: "Assessment results" },
   { kind: "drivers_list", dotLabel: "Driver library" },
@@ -283,7 +310,8 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   const [tab, setTab] = useState<AppTab>("dashboard");
   const [coachPhase, setCoachPhase] = useState<CoachPhase>("home");
   const [coachCategory, setCoachCategory] = useState<string | null>(null);
-  const [coachThreadPrompt, setCoachThreadPrompt] = useState<(typeof WEEKLY_PLANNING_PROMPTS)[number] | null>(null);
+  const [coachThreadPrompt, setCoachThreadPrompt] = useState<CoachThreadPrompt>(null);
+  const [coachDemoReplayKey, setCoachDemoReplayKey] = useState(0);
   const [driversPhase, setDriversPhase] = useState<DriversPhase>("list");
   const [moreOpen, setMoreOpen] = useState(false);
 
@@ -358,7 +386,23 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
         setTab("coach");
         setCoachPhase("thread");
         setCoachCategory("Weekly Planning");
-        setCoachThreadPrompt(TOUR_WEEKLY_THREAD_PROMPT);
+        setCoachThreadPrompt({ family: "weekly", item: TOUR_WEEKLY_THREAD_PROMPT });
+        setCoachDemoReplayKey((k) => k + 1);
+        setDriversPhase("list");
+        break;
+      case "coach_inner":
+        setTab("coach");
+        setCoachPhase("category");
+        setCoachCategory("Inner Work + Beliefs");
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "coach_inner_thread":
+        setTab("coach");
+        setCoachPhase("thread");
+        setCoachCategory("Inner Work + Beliefs");
+        setCoachThreadPrompt({ family: "inner", item: TOUR_INNER_THREAD_PROMPT });
+        setCoachDemoReplayKey((k) => k + 1);
         setDriversPhase("list");
         break;
       case "voice":
@@ -522,13 +566,29 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
     }
     if (tab === "coach") {
       if (coachPhase === "thread" && coachThreadPrompt) {
-        const isFullDemo = coachThreadPrompt.label === "Create weekly schedule";
+        const label = coachThreadPrompt.item.label;
+        const isWeeklyScheduleDemo =
+          coachThreadPrompt.family === "weekly" && label === WEEKLY_PLANNING_DEMO_LABEL;
+        const isInnerLimitingBeliefDemo =
+          coachThreadPrompt.family === "inner" && label === INNER_WORK_DEMO_LABEL;
+        if (isWeeklyScheduleDemo) {
+          return {
+            kicker: "Coach",
+            title: "Weekly Planning, with room to go deep",
+            body: "The preview plays like the live chat: Alfred’s first message appears, your Fire Starter types into the composer (Send lights up like the real app), then a thinking spinner and a long reply that streams in chunk by chunk—same rhythm as production streaming. The final answer is sample copy; in your account it is generated from your blueprint, 6Cs, Vital Action, and quota context.",
+          };
+        }
+        if (isInnerLimitingBeliefDemo) {
+          return {
+            kicker: "Coach",
+            title: "Find the belief, then stress-test it against your Real Reasons",
+            body: "Same chat choreography as production: opener, your exact Fire Starter prompt typed and sent, spinner while the model works, then a streamed reply. The script is illustrative; live answers pull from your Real Reasons, blueprint, Vital Action, and scores.",
+          };
+        }
         return {
           kicker: "Coach",
-          title: isFullDemo ? "Weekly Planning, with room to go deep" : "Coaching frames, not blank-chat roulette",
-          body: isFullDemo
-            ? "The orange bubble is the Weekly Planning starter Alfred uses—so you open the week from structure instead of a blinking cursor when everything is loud. The gray bubble shows what that depth looks like when your Alignment Blueprint, VAPI read, 6Cs, Vital Action, and quota context are in the room. In the live app, replies are generated from your data, not a script—so you move faster from overwhelm to a calendar you can defend, without re-litigating your life story every Sunday night."
-            : `The frame you see is how Alfred opens “${coachThreadPrompt.label}”—a deliberate question instead of generic brainstorming. In the app, answers pull from your blueprint, scores, and commitments so guidance stays specific to your tradeoffs. Here the preview stays short; only “Create weekly schedule” expands into a long illustration of that personalized planning voice—open that prompt in the preview if you want to see the full example.`,
+          title: "Coaching frames, not blank-chat roulette",
+          body: `The frame you see is how Alfred opens “${label}”—a deliberate question instead of generic brainstorming. In the app, answers pull from your blueprint, scores, driver pattern, and commitments. This preview only expands into long written examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}”; choose those prompts in the mock to see full illustrations.`,
         };
       }
       if (coachPhase === "category" && coachCategory === "Weekly Planning") {
@@ -538,10 +598,17 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           body: "These starters walk you through building the schedule, naming leverage outcomes, making ruthless cuts, and sizing a minimum viable week when chaos hits—so the calendar stops being a wish list. They translate your Alignment Blueprint into concrete tradeoffs instead of leaving you to invent structure from scratch. You leave with a week you can defend and boundaries you can name out loud. Stack enough of those weeks and you stop losing quarters to quiet drift.",
         };
       }
+      if (coachPhase === "category" && coachCategory === "Inner Work + Beliefs") {
+        return {
+          kicker: "Fire Starters",
+          title: "Inner Work + Beliefs",
+          body: "These prompts are for the layer strategy slides past: the belief underneath the frustration, the avoidance dressed up as productivity, shame masquerading as standards, and the hard conversation you keep rescheduling. Alfred threads them through your driver narrative and blueprint so you are not performing insight—you are negotiating with a pattern that has a name.",
+        };
+      }
       return {
         kicker: "Coach tab",
         title: "Organized prompts, not a blank chat",
-        body: "Fire Starters sort coaching by the week you are actually in—strategy, inner work, sales, execution, review, assessment sense-making, and deeper pattern work—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality, which keeps optimism honest. The nested prompts turn that collision into moves: a week you can defend, leverage you can name, cuts you can stomach, and a fallback plan when everything goes sideways—so execution stops being a personality test every Monday.",
+        body: "Fire Starters sort coaching by the week you are actually in—strategy, inner work, sales, execution, review, assessment sense-making, and deeper pattern work—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality. Inner Work + Beliefs is where stuckness gets language: the belief under “I can’t,” parts in conflict, and the self-sabotage loop—always tied back to what you said actually matters.",
       };
     }
     if (tab === "voice") {
@@ -715,8 +782,14 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
                       phase={coachPhase}
                       category={coachCategory}
                       threadPrompt={coachThreadPrompt}
+                      reduceMotion={reduceMotion}
+                      coachDemoReplayKey={coachDemoReplayKey}
                       onSelectWeekly={() => {
                         setCoachCategory("Weekly Planning");
+                        setCoachPhase("category");
+                      }}
+                      onSelectInnerWork={() => {
+                        setCoachCategory("Inner Work + Beliefs");
                         setCoachPhase("category");
                       }}
                       onBackCategory={() => {
@@ -731,6 +804,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
                       onPickPrompt={(p) => {
                         setCoachThreadPrompt(p);
                         setCoachPhase("thread");
+                        setCoachDemoReplayKey((k) => k + 1);
                       }}
                     />
                   )}
@@ -1065,25 +1139,211 @@ function FocusRow({
   );
 }
 
+/** Mirrors chat/page.tsx: assistant types first, user types in textarea + send, Loader2 while model thinks, then streamed assistant reply. */
+function CoachDemoChatSequence({
+  replayKey,
+  opener,
+  userPrompt,
+  assistantReply,
+  reduceMotion,
+  onBack,
+}: {
+  replayKey: number;
+  opener: string;
+  userPrompt: string;
+  assistantReply: string;
+  reduceMotion: boolean;
+  onBack: () => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [assistantOpening, setAssistantOpening] = useState("");
+  const [composerValue, setComposerValue] = useState("");
+  const [userSent, setUserSent] = useState(false);
+  const [thinking, setThinking] = useState(false);
+  const [assistantFinal, setAssistantFinal] = useState("");
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
+  }, [assistantOpening, composerValue, userSent, thinking, assistantFinal, reduceMotion]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) =>
+      new Promise<void>((resolve) => {
+        setTimeout(() => {
+          if (!cancelled) resolve();
+        }, ms);
+      });
+
+    async function run() {
+      setAssistantOpening("");
+      setComposerValue("");
+      setUserSent(false);
+      setThinking(false);
+      setAssistantFinal("");
+
+      if (reduceMotion) {
+        setAssistantOpening(opener);
+        setUserSent(true);
+        setAssistantFinal(assistantReply);
+        return;
+      }
+
+      const openMs = 13;
+      for (let i = 0; i <= opener.length; i++) {
+        if (cancelled) return;
+        setAssistantOpening(opener.slice(0, i));
+        await sleep(openMs);
+      }
+      await sleep(380);
+      if (cancelled) return;
+
+      const userMs = 10;
+      for (let i = 0; i <= userPrompt.length; i++) {
+        if (cancelled) return;
+        setComposerValue(userPrompt.slice(0, i));
+        await sleep(userMs);
+      }
+      await sleep(260);
+      if (cancelled) return;
+
+      setComposerValue("");
+      setUserSent(true);
+      setThinking(true);
+      await sleep(1250);
+      if (cancelled) return;
+
+      setThinking(false);
+      const chunk = 12;
+      const streamMs = 14;
+      for (let pos = 0; pos <= assistantReply.length; pos += chunk) {
+        if (cancelled) return;
+        setAssistantFinal(assistantReply.slice(0, Math.min(assistantReply.length, pos + chunk)));
+        await sleep(streamMs);
+      }
+    }
+
+    void run();
+    return () => {
+      cancelled = true;
+    };
+  }, [opener, userPrompt, assistantReply, reduceMotion, replayKey]);
+
+  const showOpeningBubble = assistantOpening.length > 0;
+  const showFinalBubble = assistantFinal.length > 0;
+  const canSendDemo =
+    composerValue === userPrompt &&
+    userPrompt.length > 0 &&
+    !userSent &&
+    !thinking &&
+    assistantFinal.length === 0;
+
+  return (
+    <div className="flex flex-1 flex-col min-h-0">
+      <div
+        ref={scrollRef}
+        className="flex-1 min-h-0 overflow-y-auto px-3 py-4 space-y-3 scroll-smooth"
+      >
+        <button
+          type="button"
+          onClick={onBack}
+          className="flex items-center gap-1 text-[11px] text-white/50 hover:text-white shrink-0"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back
+        </button>
+
+        {showOpeningBubble && (
+          <div className="flex justify-start">
+            <div className="max-w-[92%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/85 leading-relaxed">
+              <p className="whitespace-pre-wrap">{assistantOpening}</p>
+            </div>
+          </div>
+        )}
+
+        {userSent && (
+          <div className="flex justify-end">
+            <div className="max-w-[92%] rounded-2xl px-3 py-2 bg-ap-accent text-white text-[11px] leading-relaxed">
+              <p className="whitespace-pre-wrap">{userPrompt}</p>
+            </div>
+          </div>
+        )}
+
+        {thinking && (
+          <div className="flex justify-start">
+            <div
+              className="rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10"
+              aria-label="Coach is thinking"
+            >
+              <Loader2 className="h-4 w-4 animate-spin text-white/45" aria-hidden />
+            </div>
+          </div>
+        )}
+
+        {showFinalBubble && (
+          <div className="flex justify-start">
+            <div className="max-w-[95%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/80 leading-relaxed">
+              <p className="whitespace-pre-wrap">{assistantFinal}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="shrink-0 border-t border-white/10 p-3">
+        <div className="flex items-end gap-2">
+          <textarea
+            readOnly
+            value={composerValue}
+            rows={2}
+            placeholder="Ask your coach anything..."
+            className="flex-1 resize-none rounded-xl border border-white/10 bg-[#0E1624] px-3 py-2 text-[10px] text-white/90 placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-ap-accent/35 min-h-[40px] max-h-[88px]"
+          />
+          <button
+            type="button"
+            disabled={!canSendDemo}
+            className={`h-9 w-9 shrink-0 rounded-xl bg-ap-accent text-white flex items-center justify-center transition-transform disabled:opacity-35 disabled:cursor-not-allowed disabled:scale-100 ${
+              canSendDemo ? "ring-2 ring-white/70 scale-105" : ""
+            }`}
+            aria-label="Send message"
+          >
+            <Send className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CoachScreen({
   phase,
   category,
   threadPrompt,
+  reduceMotion,
+  coachDemoReplayKey,
   onSelectWeekly,
+  onSelectInnerWork,
   onBackCategory,
   onBackFromThread,
   onPickPrompt,
 }: {
   phase: CoachPhase;
   category: string | null;
-  threadPrompt: (typeof WEEKLY_PLANNING_PROMPTS)[number] | null;
+  threadPrompt: CoachThreadPrompt;
+  reduceMotion: boolean;
+  coachDemoReplayKey: number;
   onSelectWeekly: () => void;
+  onSelectInnerWork: () => void;
   onBackCategory: () => void;
   onBackFromThread: () => void;
-  onPickPrompt: (p: (typeof WEEKLY_PLANNING_PROMPTS)[number]) => void;
+  onPickPrompt: (p: NonNullable<CoachThreadPrompt>) => void;
 }) {
+  const showAnimatedFullDemo =
+    phase === "thread" && threadPrompt !== null && isCoachFullDemoThread(threadPrompt);
+
   return (
-    <div className="flex flex-col min-h-full text-left">
+    <div className="flex flex-col flex-1 min-h-0 min-w-0 w-full text-left">
       <header className="flex items-start justify-between gap-2 px-3 py-3 border-b border-white/10 shrink-0">
         <div>
           <h1 className="text-sm font-semibold text-white">ALFRED</h1>
@@ -1104,7 +1364,26 @@ function CoachScreen({
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4">
+      {showAnimatedFullDemo && threadPrompt ? (
+        <CoachDemoChatSequence
+          replayKey={coachDemoReplayKey}
+          opener={
+            threadPrompt.family === "weekly"
+              ? COACH_DEMO_WEEKLY_THREAD_OPENER
+              : COACH_DEMO_INNER_THREAD_OPENER
+          }
+          userPrompt={threadPrompt.item.prompt}
+          assistantReply={
+            threadPrompt.family === "weekly"
+              ? SAMPLE_SCHEDULE_REPLY
+              : SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY
+          }
+          reduceMotion={reduceMotion}
+          onBack={onBackFromThread}
+        />
+      ) : (
+        <>
+      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4 min-h-0">
         {phase === "home" && (
           <>
             <div className="rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10">
@@ -1116,12 +1395,13 @@ function CoachScreen({
             <div className="grid grid-cols-1 gap-2">
               {FIRE_STARTER_CATEGORIES.map((cat) => {
                 const isWeekly = cat === "Weekly Planning";
-                if (isWeekly) {
+                const isInner = cat === "Inner Work + Beliefs";
+                if (isWeekly || isInner) {
                   return (
                     <button
                       key={cat}
                       type="button"
-                      onClick={onSelectWeekly}
+                      onClick={isWeekly ? onSelectWeekly : onSelectInnerWork}
                       className="alfred-coach-weekly-highlight w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/80 bg-ap-accent/15 hover:bg-ap-accent/22 text-[11px] font-semibold text-white transition-colors"
                     >
                       {cat}
@@ -1154,16 +1434,23 @@ function CoachScreen({
             </button>
             <h2 className="text-sm font-semibold text-white">Weekly Planning</h2>
             <div className="space-y-2">
-              {WEEKLY_PLANNING_PROMPTS.map((p) => (
-                <button
-                  key={p.label}
-                  type="button"
-                  onClick={() => onPickPrompt(p)}
-                  className="w-full text-left px-3 py-2.5 rounded-xl border border-white/10 hover:border-ap-accent/40 hover:bg-ap-accent/10 text-[11px] text-white/85 transition-colors"
-                >
-                  {p.label}
-                </button>
-              ))}
+              {WEEKLY_PLANNING_PROMPTS.map((p) => {
+                const featured = p.label === WEEKLY_PLANNING_DEMO_LABEL;
+                return (
+                  <button
+                    key={p.label}
+                    type="button"
+                    onClick={() => onPickPrompt({ family: "weekly", item: p })}
+                    className={
+                      featured
+                        ? "alfred-coach-weekly-highlight w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/80 bg-ap-accent/15 hover:bg-ap-accent/22 text-[11px] font-semibold text-white transition-colors"
+                        : "w-full text-left px-3 py-2.5 rounded-xl border border-white/10 hover:border-ap-accent/40 hover:bg-ap-accent/10 text-[11px] text-white/85 transition-colors"
+                    }
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
               <div className="w-full text-left px-3 py-2.5 rounded-xl border border-dashed border-white/15 text-[11px] text-white/45 flex items-center gap-2">
                 <MessageSquare className="h-3.5 w-3.5" />
                 Something else
@@ -1172,7 +1459,44 @@ function CoachScreen({
           </div>
         )}
 
-        {phase === "thread" && threadPrompt && (
+        {phase === "category" && category === "Inner Work + Beliefs" && (
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={onBackCategory}
+              className="flex items-center gap-1 text-[11px] text-white/50 hover:text-white"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Back
+            </button>
+            <h2 className="text-sm font-semibold text-white">Inner Work + Beliefs</h2>
+            <div className="space-y-2">
+              {INNER_WORK_BELIEFS_PROMPTS.map((p) => {
+                const featured = p.label === INNER_WORK_DEMO_LABEL;
+                return (
+                  <button
+                    key={p.label}
+                    type="button"
+                    onClick={() => onPickPrompt({ family: "inner", item: p })}
+                    className={
+                      featured
+                        ? "alfred-coach-weekly-highlight w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/80 bg-ap-accent/15 hover:bg-ap-accent/22 text-[11px] font-semibold text-white transition-colors"
+                        : "w-full text-left px-3 py-2.5 rounded-xl border border-white/10 hover:border-ap-accent/40 hover:bg-ap-accent/10 text-[11px] text-white/85 transition-colors"
+                    }
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
+              <div className="w-full text-left px-3 py-2.5 rounded-xl border border-dashed border-white/15 text-[11px] text-white/45 flex items-center gap-2">
+                <MessageSquare className="h-3.5 w-3.5" />
+                Something else
+              </div>
+            </div>
+          </div>
+        )}
+
+        {phase === "thread" && threadPrompt && !isCoachFullDemoThread(threadPrompt) && (
           <div className="space-y-3 pb-4">
             <button
               type="button"
@@ -1184,25 +1508,37 @@ function CoachScreen({
             </button>
             <div className="flex justify-end">
               <div className="max-w-[92%] rounded-2xl px-3 py-2 bg-ap-accent text-white text-[11px] leading-relaxed">
-                {threadPrompt.prompt}
+                {threadPrompt.item.prompt}
               </div>
             </div>
             <div className="flex justify-start">
               <div className="max-w-[95%] rounded-2xl px-3 py-2.5 bg-white/[0.06] border border-white/10 text-[10px] text-white/80 leading-relaxed space-y-2 whitespace-pre-wrap">
-                {threadPrompt.label === "Create weekly schedule" ? (
+                {threadPrompt.family === "weekly" && threadPrompt.item.label === WEEKLY_PLANNING_DEMO_LABEL ? (
                   SAMPLE_SCHEDULE_REPLY
+                ) : threadPrompt.family === "inner" && threadPrompt.item.label === INNER_WORK_DEMO_LABEL ? (
+                  SAMPLE_INNER_WORK_LIMITING_BELIEF_REPLY
+                ) : threadPrompt.family === "weekly" ? (
+                  <>
+                    <p>
+                      In the live app, Alfred answers from your blueprint, Vital Action, 6Cs rhythm, and quota context so
+                      the week stays grounded in what you already committed to—not a generic planning template.
+                    </p>
+                    <p>
+                      This preview shows the full written walkthrough for{" "}
+                      <span className="text-ap-accent">{WEEKLY_PLANNING_DEMO_LABEL}</span> only. Tap Back and choose that
+                      prompt to see it.
+                    </p>
+                  </>
                 ) : (
                   <>
                     <p>
-                      In the live app, Alfred streams an answer that pulls from your Alignment Blueprint (Real Reasons,
-                      Driving Fire, values, Becoming), your Vital Action, weekly QC quota, revenue bridge, and the
-                      boundaries you have on family time—exactly the way the system prompt in{" "}
-                      <span className="text-white/90">lib/ai/prompts.ts</span> describes.
+                      In the live app, Alfred threads inner-work prompts through your blueprint, Real Reasons, Vital
+                      Action, and assessment context—so you are not getting canned therapy quotes.
                     </p>
                     <p>
-                      This short demo only includes the long-form written example for{" "}
-                      <span className="text-ap-accent">Create weekly schedule</span>. Tap Back, choose that prompt, and
-                      you will see a full illustration of the personalized planning voice.
+                      The long sample conversation appears for{" "}
+                      <span className="text-ap-accent">{INNER_WORK_DEMO_LABEL}</span>. Tap Back and choose that prompt to
+                      read it.
                     </p>
                   </>
                 )}
@@ -1222,6 +1558,8 @@ function CoachScreen({
           </div>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }
