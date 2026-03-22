@@ -19,8 +19,7 @@ const navLinks = [
       { href: "/work-with-me/aligned-leaders", label: "Aligned Leaders Community" },
     ],
   },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/contact", label: "Contact" },
+  { href: "/case-studies", label: "Client Stories" },
 ];
 
 export function Header() {
@@ -136,7 +135,7 @@ export function Header() {
                 : "text-ap-accent decoration-ap-accent/55 hover:decoration-ap-accent hover:text-gradient-accent"
             }`}
           >
-            ALFRED
+            Who is ALFRED?
           </Link>
           <Link
             href="/assessment"
@@ -259,7 +258,7 @@ export function Header() {
               }`}
               onClick={() => setMobileOpen(false)}
             >
-              ALFRED
+              Who is ALFRED?
             </Link>
             <Link
               href="/assessment"

@@ -7,9 +7,9 @@ const moreResultsTestimonials = testimonials.filter(
 );
 
 export const metadata = {
-  title: "Case Studies — Jake Sebok | Real Results from Values-Aligned Coaching",
+  title: "Client Stories — Jake Sebok | Real People, Real Alignment",
   description:
-    "See how Dr. Marshall Gevers and Thaddeus John went from stuck and distracted to clarity, confidence, and real business results. Values-aligned coaching that delivers.",
+    "Read how Marshall and Thaddeus went from stuck and scattered to clarity, confidence, and momentum—values-aligned coaching, told as human stories.",
 };
 
 export default function CaseStudiesPage() {
@@ -19,7 +19,7 @@ export default function CaseStudiesPage() {
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-            Case Studies
+            Client Stories
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
             Real results. Real transformation.
@@ -30,7 +30,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* Marshall Gevers — Featured Case Study */}
+      {/* Marshall Gevers — featured story */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
@@ -61,7 +61,7 @@ export default function CaseStudiesPage() {
             <div className="lg:col-span-7 space-y-8">
               <div>
                 <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-2">
-                  Featured Case Study
+                  Featured story
                 </p>
                 <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From &ldquo;I hate owning a business&rdquo; to excited to go to work every day
@@ -119,7 +119,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* Thaddeus John — Case Study */}
+      {/* Thaddeus John */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
@@ -150,7 +150,7 @@ export default function CaseStudiesPage() {
             <div className="lg:col-span-7 space-y-8">
               <div>
                 <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-2">
-                  Case Study
+                  Client story
                 </p>
                 <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
                   From stuck and scattered to clarity, conviction, and a calendar full of clients
@@ -256,7 +256,7 @@ export default function CaseStudiesPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
             <div className="relative">
               <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
-                Ready to write your own case study?
+                Ready for your own story?
               </h2>
               <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. Discover your Founder Archetype and get clarity on where you stand, then let&apos;s build something that feels like an extension of who you are.

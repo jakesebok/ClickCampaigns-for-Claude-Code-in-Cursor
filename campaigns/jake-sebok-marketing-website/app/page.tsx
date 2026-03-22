@@ -134,68 +134,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Aligned Power + Start here */}
-      <section className="bg-white border-b border-ap-border">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6 py-10 sm:py-14">
-          <p className="text-center text-ap-mid font-semibold text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mb-10">
-            <span className="font-outfit font-bold text-ap-primary">Aligned Power™</span> is Jake&apos;s methodology—and the name of the{" "}
-            <span className="text-ap-primary">Aligned Power Accelerator</span>, the 12-month group program for entrepreneurs building a business that fits who they actually are.
-          </p>
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary text-center mb-2">
-            Start here
-          </h2>
-          <p className="text-center text-ap-muted text-sm font-semibold uppercase tracking-wider mb-8">
-            Two paths. Same commitment to alignment.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg p-8 flex flex-col">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-                Feeling stuck or scattered?
-              </p>
-              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
-                Get a clear snapshot first
-              </h3>
-              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
-                Take the free VAPI™ Assessment—72 questions across 12 domains and 3 arenas. See your Founder Archetype, your strengths, and your top priorities so you know what to address before you pour more fuel on the fire.
-              </p>
-              <Link
-                href="/assessment"
-                className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all w-full sm:w-auto self-start"
-              >
-                Take the VAPI™
-              </Link>
-            </div>
-            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-white p-8 flex flex-col">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-                Ready to build the machine?
-              </p>
-              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
-                Strategic clarity + your Aligned AIOS
-              </h3>
-              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
-                The Strategic Alignment Intensive is a half-day workshop where you build the worksheets that generate your{" "}
-                <strong className="text-ap-primary">Aligned AIOS</strong> master prompt—then scale daily execution with{" "}
-                <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), the app that knows your values, math, and Vital Actions.
-              </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <Link
-                  href="/work-with-me/strategic-intensives"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-primary text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all"
-                >
-                  Strategic Alignment Intensive
-                </Link>
-                <Link
-                  href="/who-is-alfred"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-sm sm:text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
-                >
-                  Meet ALFRED
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
@@ -274,7 +212,7 @@ export default function HomePage() {
           <p className="font-semibold italic text-xl text-white leading-snug">
             &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you actually&nbsp;are.&rdquo;
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-end sm:justify-start">
             <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
               <Image
                 src="/images/jake/MMC Profile.jpeg"
@@ -411,6 +349,33 @@ export default function HomePage() {
                 No trade-offs. The work we do together is built on that belief.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Orange rule */}
+      <div className="h-0.5 bg-ap-accent" />
+
+      {/* Testimonials — carousel */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+            What People Say
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
+            What happens when alignment replaces the grind.
+          </h2>
+          <TestimonialCarousel testimonials={testimonials} />
+          <div className="mt-8 text-center">
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
+            >
+              Read Marshall&apos;s story: from dreading work to excited every day
+              <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -603,26 +568,64 @@ export default function HomePage() {
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 
-      {/* Testimonials — carousel */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            What People Say
+      {/* Aligned Power + Start here */}
+      <section className="bg-white border-b border-ap-border">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6 py-10 sm:py-14">
+          <p className="text-center text-ap-mid font-semibold text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mb-10">
+            <span className="font-outfit font-bold text-ap-primary">Aligned Power™</span> is Jake&apos;s methodology—and the name of the{" "}
+            <span className="text-ap-primary">Aligned Power Accelerator</span>, the 12-month group program for entrepreneurs building a business that fits who they actually are.
           </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
-            What happens when alignment replaces the grind.
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary text-center mb-2">
+            Start here
           </h2>
-          <TestimonialCarousel testimonials={testimonials} />
-          <div className="mt-8 text-center">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
-            >
-              Read Marshall&apos;s story: from dreading work to excited every day
-              <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+          <p className="text-center text-ap-muted text-sm font-semibold uppercase tracking-wider mb-8">
+            Two paths. Same commitment to alignment.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg p-8 flex flex-col">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+                Feeling stuck or scattered?
+              </p>
+              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
+                Get a clear snapshot first
+              </h3>
+              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
+                Take the free VAPI™ Assessment—72 questions across 12 domains and 3 arenas. See your Founder Archetype, your strengths, and your top priorities so you know what to address before you pour more fuel on the fire.
+              </p>
+              <Link
+                href="/assessment"
+                className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all w-full sm:w-auto self-start"
+              >
+                Take the VAPI™
+              </Link>
+            </div>
+            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-white p-8 flex flex-col">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+                Ready to build the machine?
+              </p>
+              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
+                Strategic clarity + your Aligned AIOS
+              </h3>
+              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
+                The Strategic Alignment Intensive is a half-day workshop where you build the worksheets that generate your{" "}
+                <strong className="text-ap-primary">Aligned AIOS</strong> master prompt—then scale daily execution with{" "}
+                <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), the app that knows your values, math, and Vital Actions.
+              </p>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <Link
+                  href="/work-with-me/strategic-intensives"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-primary text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all"
+                >
+                  Strategic Alignment Intensive
+                </Link>
+                <Link
+                  href="/who-is-alfred"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-sm sm:text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
+                >
+                  Meet ALFRED
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

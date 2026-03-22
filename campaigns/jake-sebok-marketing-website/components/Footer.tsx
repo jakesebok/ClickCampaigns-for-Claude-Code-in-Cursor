@@ -48,7 +48,7 @@ export function Footer() {
               About
             </Link>
             <Link href="/who-is-alfred" className="text-ap-muted hover:text-white transition-colors">
-              ALFRED
+              Who is ALFRED?
             </Link>
             <Link href="/work-with-me" className="text-ap-muted hover:text-white transition-colors">
               Work With Me

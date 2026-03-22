@@ -124,10 +124,13 @@ const SIX_CS_DEMO = [
   { label: "Capacity", icon: BatteryCharging, pct: 68 },
   { label: "Confidence", icon: ShieldCheck, pct: 76 },
   { label: "Courage", icon: Zap, pct: 84 },
-  { label: "Connection", icon: Users, pct: 32 },
+  { label: "Connection", icon: Users, pct: 28 },
 ] as const;
 
-const OVERALL_6C = 77;
+/** Average of SIX_CS_DEMO pcts (matches app getOverallScore rounding). */
+const OVERALL_6C = Math.round(
+  SIX_CS_DEMO.reduce((sum, c) => sum + c.pct, 0) / SIX_CS_DEMO.length
+);
 
 function scoreBarColor(pct: number): string {
   if (pct <= 30) return "#ef4444";
