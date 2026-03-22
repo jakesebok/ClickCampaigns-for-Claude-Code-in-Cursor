@@ -48,8 +48,8 @@ const dailyItems = [
     body: "Your strategic story in one place so you stop re-pasting the same context into a blank chat window.",
   },
   {
-    title: "Morning notifications (optional)",
-    body: "A short nudge from your coach when you want the day framed before the inbox does. Engaging, not a performance contest.",
+    title: "Daily Sparks",
+    body: "Little coaching pings when you want the day framed before the inbox does—encouraging, on-brand, never a scoreboard.",
   },
 ];
 
@@ -236,7 +236,7 @@ export default function WhoIsAlfredPage() {
                     No honest weekly structure unless you invent and police it yourself.
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Built-in cadence: dashboard, coach, voice, results, scorecard, and optional morning nudges so
+                    Built-in cadence: dashboard, coach, voice, results, scorecard, and Daily Sparks so
                     alignment shows up when willpower thins, not only when you remember to open a chat.
                   </td>
                 </tr>

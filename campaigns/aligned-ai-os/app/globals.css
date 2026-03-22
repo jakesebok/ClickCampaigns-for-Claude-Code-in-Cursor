@@ -81,6 +81,36 @@
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
+
+  /* Interactive landing: coach Weekly Planning pulse (alfred-feature-explorer) */
+  @keyframes alfred-coach-weekly-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 1px rgba(255, 107, 26, 0.35),
+        0 0 18px -6px rgba(255, 107, 26, 0.45);
+    }
+    50% {
+      box-shadow:
+        0 0 0 2px rgba(255, 107, 26, 0.55),
+        0 0 26px -4px rgba(255, 107, 26, 0.65);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .alfred-coach-weekly-highlight {
+      animation: alfred-coach-weekly-glow 2.4s ease-in-out infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .alfred-coach-weekly-highlight {
+      animation: none !important;
+      box-shadow:
+        0 0 0 2px rgba(255, 107, 26, 0.45),
+        0 0 22px -4px rgba(255, 107, 26, 0.5);
+    }
+  }
 }
 
 /* Clerk: ensure social buttons (Google, etc.) are readable on dark theme */

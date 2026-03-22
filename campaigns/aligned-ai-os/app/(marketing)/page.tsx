@@ -1,5 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const AlfredLandingDemoSection = dynamic(
+  () =>
+    import("@/components/alfred-landing-demo-section").then((m) => ({
+      default: m.AlfredLandingDemoSection,
+    })),
+  {
+    loading: () => (
+      <div className="border-y border-border bg-muted/30 py-24 text-center text-sm text-muted-foreground">
+        Loading interactive preview…
+      </div>
+    ),
+  }
+);
 import {
   ArrowRight,
   Shield,
@@ -75,7 +90,15 @@ export default function LandingPage() {
             Attend the Workshop
           </Link>
         </div>
+        <p className="mt-8 text-sm text-muted-foreground">
+          <Link href="#product-tour" className="font-medium text-accent hover:underline">
+            See an interactive product tour
+          </Link>{" "}
+          — dashboard, coach, voice, and more.
+        </p>
       </section>
+
+      <AlfredLandingDemoSection />
 
       {/* How It Works */}
       <section className="px-6 py-24 bg-card/80 border-y border-border">
@@ -110,7 +133,7 @@ export default function LandingPage() {
                 step: "03",
                 title: "Stay aligned daily",
                 description:
-                  "Morning coach notifications, weekly Vital Action tracking, 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
+                  "Daily Sparks, weekly Vital Action tracking, and the 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
                 icon: Bell,
               },
             ].map((item) => (
@@ -198,9 +221,9 @@ export default function LandingPage() {
               },
               {
                 icon: Bell,
-                title: "Morning coach notifications",
+                title: "Daily Sparks",
                 description:
-                  "Optional nudges from your coach when you want the day framed before the inbox does—values-aligned, not generic blasts.",
+                  "Coaching nudges when you want the day framed before the inbox does—values-aligned and on-brand, not generic blasts.",
               },
               {
                 icon: CheckCircle2,

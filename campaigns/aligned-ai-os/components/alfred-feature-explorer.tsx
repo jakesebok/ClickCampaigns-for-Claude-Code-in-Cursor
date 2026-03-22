@@ -2,6 +2,7 @@
 
 /**
  * Interactive mock of authenticated ALFRED (Aligned Freedom Coach).
+ * Deployed on alfredai.coach (landing) and kept in sync with jakesebok.com’s explorer when UX changes.
  *
  * Sources (campaigns/aligned-ai-os):
  * - app/(dashboard)/layout.tsx — mobile bottom nav, More menu pattern
