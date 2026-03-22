@@ -117,7 +117,7 @@
 
 ---
 
-### Lesson 9: Fire Starters (50 High-Leverage Questions)
+### Lesson 9: Fire Starters (56 prompts)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|

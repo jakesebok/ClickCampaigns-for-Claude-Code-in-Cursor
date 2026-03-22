@@ -1,6 +1,6 @@
-# Aligned Freedom Coach (ALFRED) — Aligned Performance Operating System
+# Aligned Freedom Coach (ALFRED)
 
-A personalized AI coaching app built on the Strategic Clarity framework by Jake Sebok. Your values, your goals, your real constraints — powering an AI coach that keeps you focused, aligned, and growing.
+A personalized AI coaching app built on the Strategic Clarity framework by Jake Sebok. **ALFRED** is the only app Jake sells; it runs your **Aligned AIOS** master context (from the Intensive or Accelerator) together with VAPI™, archetype, 6Cs, and Vital Actions. Your values, your goals, your real constraints — powering an AI coach that keeps you focused, aligned, and growing.
 
 ## Tech Stack
 

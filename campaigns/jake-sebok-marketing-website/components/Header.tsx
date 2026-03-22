@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/who-is-alfred", label: "ALFRED" },
   {
     href: "/work-with-me",
     label: "Work With Me",
@@ -66,16 +67,29 @@ export function Header() {
                   <button
                     type="button"
                     onClick={() => setWorkWithMeOpen(!workWithMeOpen)}
-                    className={`text-sm font-semibold transition-colors flex items-center gap-1 ${
-                      isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
-                    }`}
+                    className="group text-sm font-semibold transition-colors flex items-center gap-1"
                   >
-                    {link.label}
+                    <span
+                      className={
+                        isActive
+                          ? "text-gradient-accent"
+                          : "text-ap-mid group-hover:text-gradient-accent"
+                      }
+                    >
+                      {link.label}
+                    </span>
                     <svg
-                      className={`w-4 h-4 transition-transform ${workWithMeOpen ? "rotate-180" : ""}`}
+                      className={`w-4 h-4 shrink-0 transition-transform ${
+                        workWithMeOpen ? "rotate-180" : ""
+                      } ${
+                        isActive
+                          ? "text-ap-accent"
+                          : "text-ap-mid group-hover:text-ap-accent"
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
@@ -165,16 +179,29 @@ export function Header() {
                     <button
                       type="button"
                       onClick={() => setMobileWorkWithMeOpen(!mobileWorkWithMeOpen)}
-                      className={`font-semibold flex items-center justify-between w-full text-left py-1 ${
-                        isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
-                      }`}
+                      className="group font-semibold flex items-center justify-between w-full text-left py-1"
                     >
-                      {link.label}
+                      <span
+                        className={
+                          isActive
+                            ? "text-gradient-accent"
+                            : "text-ap-mid group-hover:text-gradient-accent"
+                        }
+                      >
+                        {link.label}
+                      </span>
                       <svg
-                        className={`w-4 h-4 transition-transform flex-shrink-0 ml-2 ${mobileWorkWithMeOpen ? "rotate-180" : ""}`}
+                        className={`w-4 h-4 shrink-0 ml-2 transition-transform ${
+                          mobileWorkWithMeOpen ? "rotate-180" : ""
+                        } ${
+                          isActive
+                            ? "text-ap-accent"
+                            : "text-ap-mid group-hover:text-ap-accent"
+                        }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        aria-hidden
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>

@@ -154,7 +154,7 @@ Ask it:
 
 Aligned Freedom Coach will pull from your 6Cs, your Vital Action, your revenue math, and your conversations. You'll get a clear picture of where you are and what to protect or adjust for next week.
 
-This is the compound effect. Week 1 feels like "useful tool." By week 4, it feels like "indispensable operating system."
+This is the compound effect. Week 1 feels like "useful tool." By week 4, it feels like an indispensable **Aligned AIOS** inside **ALFRED**.
 
 **[Run Weekly Review →]**
 
@@ -175,7 +175,7 @@ You've been using Aligned Freedom Coach for a week. Here's what's happening unde
 
 Your AI coach is learning your patterns. It sees which questions you ask, which values you reference, where your energy goes. Every conversation makes it smarter about *you*.
 
-This is the compound effect of alignment. Week 1 feels like "useful tool." By week 4, it feels like "indispensable operating system."
+This is the compound effect of alignment. Week 1 feels like "useful tool." By week 4, it feels like an indispensable **Aligned AIOS** inside **ALFRED**.
 
 Your trial is wrapping up. You'll get separate emails about continuing — $39/month or $349/year. For now, keep the momentum. Ask Aligned Freedom Coach to run your first Weekly Review today if you haven't yet.
 

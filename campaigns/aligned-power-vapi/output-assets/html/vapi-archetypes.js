@@ -107,7 +107,7 @@
       shadow: "Insight without action becomes its own trap. You may be using self-development as a sophisticated form of procrastination: always preparing, never launching. The next book, the next course, the next journal entry, the next realization. At some point, you have to stop seeking and start building.",
       constraint: "A gap between internal clarity and external execution. Often driven by perfectionism, fear of failure that's louder than fear of stagnation, or a belief that the right insight will eventually make action effortless. It won't. Action makes action effortless.",
       growth_path: "The Seeker's path is learning that execution IS the final form of self-development. You're building toward The Architect, but the bridge is built by doing, not by understanding more.",
-      program_phase: "Phase 4: Aligned Action. The Seeker doesn't need more clarity. They need a Personal Alignment Operating System that translates their awareness into rhythms, boundaries, and structures that produce output. They need to stop preparing and start operating."
+      program_phase: "Phase 4: Aligned Action. The Seeker doesn't need more clarity. They need an Aligned AIOS that translates their awareness into rhythms, boundaries, and structures that produce output. They need to stop preparing and start operating."
     }
   };
 

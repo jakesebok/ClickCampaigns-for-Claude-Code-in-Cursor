@@ -23,9 +23,9 @@ I run a quarterly workshop called the **Strategic Alignment Intensive** where I 
 
 → Name what they *actually* want (not what they think they should want)
 → Turn that into a revenue number built on their real life
-→ Build a personalized AI operating system (ALFRED) that keeps them aligned every single day
+→ Build their **Aligned AIOS** master prompt from the worksheets (the system that turns any AI into *their* coach)
 
-The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — a personalized AI coach loaded with everything you build in the workshop.
+The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — **ALFRED** is *Aligned Freedom Coach*, the app where that intelligence runs with your workshop outputs, VAPI™ scores, archetype, 6Cs, and Vital Actions.
 
 **[Reserve My Seat — $497 →]**
 
@@ -78,11 +78,11 @@ You say: "Build my week."
 
 And it gives you a plan that's filtered through *your* values, built on *your* numbers, and anchored to *your* Vital Action.
 
-That's **ALFRED** — the Aligned Performance Operating System. And every Intensive attendee gets 30 days free.
+That's **ALFRED** — **Aligned Freedom Coach** (same product). It's not the same thing as the **Aligned AIOS** prompt you build in the room; ALFRED is the app that *runs* that intelligence — plus your live VAPI™, archetype, driver pattern, 6Cs, and Vital Actions. Every Intensive attendee gets 30 days free.
 
 **[Reserve my seat — $497 →]**
 
-The Intensive builds the context. ALFRED makes it operational. Together, they change how you plan, decide, and execute — permanently.
+The Intensive builds your **Aligned AIOS**. ALFRED makes it operational every day. Together, they change how you plan, decide, and execute — permanently.
 
 — Jake
 

@@ -27,6 +27,7 @@
 - Aspiring or early-stage coaches, healers, creators, and consultants
 - Personas: coach who can't explain what they do; healer who feels fraudulent charging; creator building prettier prisons; awakened soul who can't play the game that pays the bills
 - **Not**: scaling operators with a working business — this is for the *building* phase
+- **Ecosystem note:** Coaching, VAPI™, and ALFRED serve **two avatars**—**Builders** (install alignment early) and **Operators** (re-align what already works). This book leans *builder / vocation*; see `Resources/Jake's Voice/jake-sebok-knowledge-base.md` for the full ICP map.
 
 ---
 

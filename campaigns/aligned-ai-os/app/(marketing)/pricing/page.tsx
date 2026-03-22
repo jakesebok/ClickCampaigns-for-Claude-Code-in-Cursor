@@ -8,7 +8,7 @@ const features = [
   "Personalized AI coaching chat (powered by Claude)",
   "Values-aligned decision filter",
   "The Revenue Bridge built in",
-  "50 High-Leverage Questions",
+  "Fire Starters — 56 strategic prompts",
   "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
   "Daily SMS morning prompts",

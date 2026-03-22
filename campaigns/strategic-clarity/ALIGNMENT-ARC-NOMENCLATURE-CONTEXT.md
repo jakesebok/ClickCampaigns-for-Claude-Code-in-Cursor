@@ -22,15 +22,17 @@
 | ONE THING / The ONE Thing | Your Vital Action |
 | ONE THING Domino Plan | The Vital Action Plan |
 | Domino Chain | The Arc Chain |
-| Aligned AI OS | Aligned Freedom Coach |
-| Aligned AI OS Upgrade | Aligned Freedom Coach Upgrade |
-| 50 High-Leverage Questions | Fire Starters: 50 High-Leverage Questions for Your Aligned Freedom Coach |
+| Aligned AI OS (deprecated label) | **Aligned AIOS** — master prompt + blueprint from Strategic Clarity (use in any AI chat) |
+| Aligned AI OS Upgrade (deprecated) | **Aligned AIOS** master context / upgrade |
+| 50 High-Leverage Questions | **Fire Starters** — **56** strategic prompts for Aligned Freedom Coach (**ALFRED**) |
 | Aligned AI Business Agent | Values-Aligned Performance Agent |
 
 ---
 
 ## Key Distinctions
 
+- **Aligned AIOS** = the master prompt + blueprint you generate from worksheets (works in ChatGPT, Claude, Gemini, etc.).
+- **ALFRED / Aligned Freedom Coach** = the app — same intelligence, plus VAPI™, Founder Archetype, driver pattern, 6Cs, Vital Actions, and persistent coaching.
 - **The Real Reasons** = phase/concept (what you're trading your life for)
 - **The Life Lists** = worksheet/exercise (three columns: Experiences, Growth, Contribution)
 - **Future Four S-names** = Self (Personal), Social (Relationships), Skills (Business), Service (Contribution)—use S-names first, parenthetical when clarification helps
@@ -69,7 +71,7 @@
 - Future Four / Future 4
 - Reality Check
 - From Meaning to Math (except in historical/source context)
-- Aligned AI OS
+- Aligned AI OS (use **Aligned AIOS** instead)
 - Domino Plan
 - load-bearing walls
 - Strategic Clarity Intensive

@@ -134,6 +134,68 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Aligned Power + Start here */}
+      <section className="bg-white border-b border-ap-border">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6 py-10 sm:py-14">
+          <p className="text-center text-ap-mid font-semibold text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mb-10">
+            <span className="font-outfit font-bold text-ap-primary">Aligned Power™</span> is Jake&apos;s methodology—and the name of the{" "}
+            <span className="text-ap-primary">Aligned Power Accelerator</span>, the 12-month group program for entrepreneurs building a business that fits who they actually are.
+          </p>
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary text-center mb-2">
+            Start here
+          </h2>
+          <p className="text-center text-ap-muted text-sm font-semibold uppercase tracking-wider mb-8">
+            Two paths. Same commitment to alignment.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-ap-bg p-8 flex flex-col">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+                Feeling stuck or scattered?
+              </p>
+              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
+                Get a clear snapshot first
+              </h3>
+              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
+                Take the free VAPI™ Assessment—72 questions across 12 domains and 3 arenas. See your Founder Archetype, your strengths, and your top priorities so you know what to address before you pour more fuel on the fire.
+              </p>
+              <Link
+                href="/assessment"
+                className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all w-full sm:w-auto self-start"
+              >
+                Take the VAPI™
+              </Link>
+            </div>
+            <div className="rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent bg-white p-8 flex flex-col">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+                Ready to build the machine?
+              </p>
+              <h3 className="font-outfit font-bold text-xl text-ap-primary mb-3">
+                Strategic clarity + your Aligned AIOS
+              </h3>
+              <p className="text-ap-mid font-medium leading-relaxed mb-6 flex-1">
+                The Strategic Alignment Intensive is a half-day workshop where you build the worksheets that generate your{" "}
+                <strong className="text-ap-primary">Aligned AIOS</strong> master prompt—then scale daily execution with{" "}
+                <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), the app that knows your values, math, and Vital Actions.
+              </p>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <Link
+                  href="/work-with-me/strategic-intensives"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-primary text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-pill transition-all"
+                >
+                  Strategic Alignment Intensive
+                </Link>
+                <Link
+                  href="/who-is-alfred"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-sm sm:text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
+                >
+                  Meet ALFRED
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Orange rule */}
       <div className="h-0.5 bg-ap-accent" />
 

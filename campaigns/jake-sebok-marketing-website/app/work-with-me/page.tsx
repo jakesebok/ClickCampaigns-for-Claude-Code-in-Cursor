@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Work With Me — Jake Sebok",
   description:
-    "Free VAPI Assessment, Aligned Freedom Workshop, Freedom Builders Community, Aligned Power Accelerator. Find the right entry point for your values-aligned journey.",
+    "Free VAPI™ Assessment, Aligned Freedom Workshop, ALFRED (Aligned Freedom Coach), Strategic Alignment Intensives, and the Aligned Power Accelerator. Find the right entry point for your values-aligned journey.",
 };
 
 const offerings = [
@@ -37,6 +37,13 @@ const offerings = [
       "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
     cta: "Learn More",
     href: "/work-with-me/strategic-intensives",
+  },
+  {
+    title: "ALFRED — Aligned Freedom Coach",
+    description:
+      "The only app Jake sells. Your Aligned AIOS context plus VAPI™, Founder Archetype, weekly 6Cs, and Vital Actions—so your AI coach stays aligned when you’re tired, busy, or tempted to say yes to the wrong thing.",
+    cta: "Meet ALFRED",
+    href: "/who-is-alfred",
   },
   {
     title: "Aligned Leaders Community",
@@ -74,7 +81,8 @@ export default function WorkWithMePage() {
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
             The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, and the monthly
             Aligned Freedom Workshop. From there, you can join the free
-            community, invest in intensives, or apply for the flagship
+            community, invest in intensives, meet{" "}
+            <strong className="text-ap-primary">ALFRED</strong> (Aligned Freedom Coach), or apply for the flagship
             Accelerator program.
           </p>
         </div>

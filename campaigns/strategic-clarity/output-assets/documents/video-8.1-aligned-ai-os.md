@@ -10,7 +10,7 @@ Okay. This is the payoff.
 
 Everything you've built—every worksheet, every honest answer, every number, every value, every vision statement—it all comes together right here.
 
-Welcome to your Aligned Freedom Coach.
+Welcome to your **Aligned AIOS** — this is the master prompt payoff.
 
 ---
 
@@ -24,7 +24,7 @@ We're about to change that.
 
 You're going to take a **Master Prompt**—a structured template we've built—and feed it your completed worksheets. Best way: attach your worksheets file. Alternative: paste them below the designated line. The AI reads everything you've written and generates two documents:
 
-1. **Your Aligned Freedom Coach UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
+1. **Your ALIGNED AIOS UPGRADE — MASTER CONTEXT (v1)** — This is your **Aligned AIOS**. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
 
 2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your Vital Action. Everything in one glance.
 
@@ -69,7 +69,7 @@ Here's the process. It's straightforward.
 
 ### Monthly Patch Notes
 
-Your Aligned Freedom Coach isn't static. It grows with you.
+Your Aligned AIOS isn't static. It grows with you.
 
 At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
 
@@ -83,9 +83,9 @@ Think of it like updating the operating system on your phone. Same phone. Better
 
 Here's the thing. I built something I use every day myself.
 
-It's called Aligned Freedom Coach—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+It's called **ALFRED** — **Aligned Freedom Coach** — the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in. ALFRED also layers in your VAPI™ scores, Founder Archetype, driver pattern, 6Cs, and Vital Actions — **Aligned AIOS on steroids.**
 
-I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at vap.coach. Check it out. See if it feels easier. No pressure.
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at **alfredai.coach**. Check it out. See if it feels easier. No pressure.
 
 Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 
@@ -93,7 +93,7 @@ Either way—you've got everything you need. The manual process works. The app i
 
 ### The Decision Filter
 
-One of the most powerful features built into your OS is the Decision Filter. Any time you ask your AI coach about an opportunity, a strategy, a partnership, a pivot—it will score it on six dimensions:
+One of the most powerful features built into your Aligned AIOS is the Decision Filter. Any time you ask your AI coach about an opportunity, a strategy, a partnership, a pivot—it will score it on six dimensions:
 
 1. Values fit
 2. Moves your Real Reasons forward
@@ -114,7 +114,7 @@ Take a second and think about what you just created.
 
 You didn't just set goals. You excavated what you actually want. You found your purpose. You defined your values—with teeth. You mapped the person you're becoming. You named what's in the way. You turned meaning into math. You chose one Vital Action and protected it. And then you poured all of it into an AI that will hold you accountable to *your* truth every single day.
 
-That's not a workshop exercise. That's an operating system for your life.
+That's not a workshop exercise. That's an **Aligned AIOS** for your life.
 
 And in the next lesson—the final one—I'm going to show you exactly how to use it. Fire Starters: fifty-six questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, inner work, and reviews.
 

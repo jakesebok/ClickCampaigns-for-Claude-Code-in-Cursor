@@ -47,6 +47,9 @@ export function Footer() {
             <Link href="/about" className="text-ap-muted hover:text-white transition-colors">
               About
             </Link>
+            <Link href="/who-is-alfred" className="text-ap-muted hover:text-white transition-colors">
+              ALFRED
+            </Link>
             <Link href="/work-with-me" className="text-ap-muted hover:text-white transition-colors">
               Work With Me
             </Link>

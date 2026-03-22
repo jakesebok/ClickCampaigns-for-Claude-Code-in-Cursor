@@ -17,6 +17,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://jakesebok.com"),
   title: "Jake Sebok — Values-Aligned Performance Coaching for Entrepreneurs",
   description:
     "Help entrepreneurs who feel trapped by their businesses rediscover their vision and build something sustainable, values-driven, and fully alive.",

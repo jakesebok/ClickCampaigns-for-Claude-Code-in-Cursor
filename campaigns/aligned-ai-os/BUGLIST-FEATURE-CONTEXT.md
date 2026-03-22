@@ -8,7 +8,7 @@
 
 | System | Location | Purpose |
 |--------|----------|---------|
-| **App (Aligned Freedom Coach / ALFRED)** | `campaigns/aligned-ai-os` | Next.js app at vap.coach — user-facing PWA |
+| **App (Aligned Freedom Coach / ALFRED)** | `campaigns/aligned-ai-os` | Next.js PWA — public URL **alfredai.coach** (legacy deploy host may still be vap.coach until DNS cutover) |
 | **Portal (Dashboard)** | `campaigns/aligned-power-vapi/output-assets/portal` | HTML/JS at portal.alignedpower.coach — coach/client dashboard |
 
 **Key insight:** App and Portal share the same data (Supabase: `vapi_results`, `six_c_scorecard`, etc.). They must behave as extensions of each other.

@@ -84,7 +84,7 @@ Here's the honest breakdown:
 ✓ 12 months of free Aligned Freedom Coach access
 ✓ Human pattern recognition (the "here's what you're not seeing" factor)
 
-Aligned Freedom Coach is the daily operating system. The Accelerator is the installation, the troubleshooting, and the upgrades.
+ALFRED (Aligned Freedom Coach) is where your **Aligned AIOS** runs daily—with VAPI™, 6Cs, and Vital Actions in one place. The Accelerator is the installation, the troubleshooting, and the upgrades.
 
 If you're ready for the full stack:
 

@@ -1,6 +1,6 @@
 # Strategic Clarity Module — Game Plan & Questions
 
-> For Jake's high-ticket coaching program, Stage 2. Connects daily actions to desired outcomes. Feeds the Aligned AI OS (master prompt) for Strategic Intensives.
+> For Jake's high-ticket coaching program, Stage 2. Connects daily actions to desired outcomes. Feeds the Aligned AIOS (master prompt) for Strategic Intensives.
 
 ---
 
@@ -28,9 +28,9 @@
 | **Becoming You** | The Future You: Personal (Self), Relationships (Social), Business (Skills), Service. Standards, proof, 90-day focus | Master Prompt |
 | **From Meaning to Math (The Revenue Bridge)** | Baseline Needs → Future You + MIQ Desires → Just Cause Tithe → Required Revenue → QC math → Capacity check | Master Prompt |
 | **ONE THING Domino Plan** | Lead Lane, Someday outcomes, ONE THING per lane, Domino chain (Someday → Right Now), Calendar install, Sabotage | Master Prompt |
-| **Master Prompt** | Synthesizes all worksheets into Aligned AI OS Upgrade + Alignment Blueprint Summary | AI Coach |
+| **Master Prompt** | Synthesizes all worksheets into Aligned AIOS Upgrade + Alignment Blueprint Summary | AI Coach |
 | **Monthly Patch Notes** | Update prompt for ongoing refinement | AI Coach |
-| **50 High-Leverage Questions** | Prompts for the AI OS | AI Coach |
+| **Fire Starters (56 prompts)** | Prompts for Aligned AIOS / ALFRED | AI Coach |
 
 ---
 
@@ -78,7 +78,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 **Strategic Clarity** — Connect your daily actions to the outcomes you actually want. Stop chasing means goals (money, titles, tactics) and start building a life and business that funds your end goals (experiences, growth, contribution) without compromising who you are.
 
-**Outcome:** By the end, you'll have clarity on your MIQs, WHY, Just Cause, Top 5 Values, Future You, Required Revenue, and ONE THING—plus an Aligned AI OS that keeps you focused and values-aligned.
+**Outcome:** By the end, you'll have clarity on your MIQs, WHY, Just Cause, Top 5 Values, Future You, Required Revenue, and ONE THING—plus an Aligned AIOS that keeps you focused and values-aligned.
 
 ---
 
@@ -86,7 +86,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 | Element | Format | Content |
 |---------|--------|---------|
-| **Video 0.1** | 5–15 min | Welcome to Strategic Clarity. What this module is, why it matters, and what you'll walk away with. The big idea: connect your daily actions directly to the outcomes you actually want. Overview of the arc (MIQs → WHY → Values → Future You → Reality Check → Revenue Bridge → ONE THING → AI OS). Set the tone: this isn't motivation work—it's decision clarity + operational strategy built on what actually matters to you. Introduce the Aligned AI OS payoff at the end. |
+| **Video 0.1** | 5–15 min | Welcome to Strategic Clarity. What this module is, why it matters, and what you'll walk away with. The big idea: connect your daily actions directly to the outcomes you actually want. Overview of the arc (MIQs → WHY → Values → Future You → Reality Check → Revenue Bridge → ONE THING → Aligned AIOS). Set the tone: this isn't motivation work—it's decision clarity + operational strategy built on what actually matters to you. Introduce the Aligned AIOS payoff at the end. |
 
 ---
 
@@ -95,7 +95,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 | Item | Format | Purpose |
 |------|--------|---------|
 | **Pre-Work Packet** (existing) | Google Doc | Values raw inputs, Peak Moments, Revenue Bridge numbers, Flagship Offer Snapshot. Empty tables for typing. Powers all live work. |
-| **Video: Why Pre-Work Matters** | 5–8 min | Set expectations. "Everything you write powers your Aligned AI OS. Depth beats perfection. Don't solve yet—collect clean inputs." |
+| **Video: Why Pre-Work Matters** | 5–8 min | Set expectations. "Everything you write powers your Aligned AIOS. Depth beats perfection. Don't solve yet—collect clean inputs." |
 
 ---
 
@@ -190,26 +190,26 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 ---
 
-### Lesson 8: Your Aligned AI OS — Master Prompt
+### Lesson 8: Your Aligned AIOS — Master Prompt
 
 **Core idea:** Everything you've written becomes the operating system. Paste worksheets into the master prompt → get your personalized AI coach.
 
 | Element | Format | Content |
 |---------|--------|---------|
-| **Video 8.1** | 8–12 min | What the AI OS does. Values filter. MIQ/WHY/Cause alignment. No hustle advice. Capacity-first. How to run the prompt: paste worksheets, get Master Context + Alignment Blueprint. Monthly Patch Notes for ongoing updates. |
+| **Video 8.1** | 8–12 min | What Aligned AIOS does. Values filter. MIQ/WHY/Cause alignment. No hustle advice. Capacity-first. How to run the prompt: paste worksheets, get Master Context + Alignment Blueprint. Monthly Patch Notes for ongoing updates. |
 | **Worksheet** | Google Doc | Master Prompt (existing). Monthly Patch Notes prompt. |
-| **Deliverable** | Output | ALIGNED AI OS UPGRADE — MASTER CONTEXT (v1). ALIGNMENT BLUEPRINT SUMMARY SHEET. |
+| **Deliverable** | Output | ALIGNED AIOS UPGRADE — MASTER CONTEXT (v1). ALIGNMENT BLUEPRINT SUMMARY SHEET. |
 
 ---
 
-### Lesson 9: Your AI Coach in Action — 50 High-Leverage Questions
+### Lesson 9: Your AI Coach in Action — Fire Starters (56 prompts)
 
-**Core idea:** Now that your AI OS is live, here's how to actually use it. Walk through the 50 High-Leverage Questions organized by use case so you know exactly how to leverage your new coach for weekly planning, strategy, sales, marketing, execution, and reviews.
+**Core idea:** Now that your Aligned AIOS is live, here's how to actually use it. Walk through the Fire Starters (56 prompts) organized by use case so you know exactly how to leverage your new coach for weekly planning, strategy, sales, marketing, execution, and reviews.
 
 | Element | Format | Content |
 |---------|--------|---------|
 | **Video 9.1** | 8–15 min | How to use your AI coach day-to-day. Walk through the question categories (Weekly Planning, Strategy + Focus, Qualified Conversations + Sales, Marketing + Messaging, Execution + Nervous System, Weekly/Monthly Review). Demo 3–5 favorites. Show what a real session looks like. Celebrate what they built—this is the payoff. |
-| **Resource** | Google Doc | 50 High-Leverage Questions (existing). Organized by category with copy/paste ready prompts. |
+| **Resource** | Google Doc | Fire Starters (56 prompts) (existing). Organized by category with copy/paste ready prompts. |
 
 ---
 
@@ -226,10 +226,10 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 | 5 | Reality Check (Bridge) | 1 | Reality Check |
 | 6 | From Meaning to Math (The Revenue Bridge) | 3 | The Revenue Bridge |
 | 7 | ONE THING Domino Plan | 2 | ONE THING Domino |
-| 8 | Aligned AI OS — Master Prompt | 1 | Master Prompt + Patch Notes |
-| 9 | AI Coach in Action — 50 Questions | 1 | 50 High-Leverage Questions |
+| 8 | Aligned AIOS — Master Prompt | 1 | Master Prompt + Patch Notes |
+| 9 | AI Coach in Action — Fire Starters | 1 | Fire Starters (56 prompts) |
 
-**Total:** 18 videos, 8 worksheets (+ Pre-Work), 1 master prompt system, 50 high-leverage questions.
+**Total:** 18 videos, 8 worksheets (+ Pre-Work), 1 master prompt system (Aligned AIOS), Fire Starters (56 prompts).
 
 ---
 
@@ -237,7 +237,7 @@ Create a **one-page "Reality Check"** worksheet that sits between **Becoming You
 
 | Item | Decision |
 |------|----------|
-| **Order** | MIQs → WHY → Values → Becoming You → Reality Check → GTM → ONE THING → AI OS ✓ |
+| **Order** | MIQs → WHY → Values → Becoming You → Reality Check → GTM → ONE THING → Aligned AIOS ✓ |
 | **Strategic Intensives** | Same worksheets, facilitated live. No separate intensive-only materials. ✓ |
 | **Video style** | Jake Sebok voice (JAKE-SEBOK-WRITING-STYLE.md). 5–15 min, as long as needed. Teaching + context + why it matters + facilitate the exercise. ✓ |
 | **Worksheet format** | Google Doc. All blanks = empty tables so users can type directly. ✓ |

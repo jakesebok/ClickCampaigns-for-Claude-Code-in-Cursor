@@ -18,7 +18,7 @@ I'm really glad you're here. And I want to be honest with you right up front—t
 
 Before we get into the arc, I want to name something important. This module does two things simultaneously—and both of them matter.
 
-**First: Information.** Every exercise you do, every worksheet you complete—it's building a dataset. A deeply personal one. A deeply honest one. About who you are. What you want. What you value. What your business actually looks like. Where the gaps are. That dataset feeds your Aligned Freedom Coach—your personalized AI operating system. The richer the data, the smarter your coach. So everything you write *matters* because it powers everything that follows.
+**First: Information.** Every exercise you do, every worksheet you complete—it's building a dataset. A deeply personal one. A deeply honest one. About who you are. What you want. What you value. What your business actually looks like. Where the gaps are. That dataset feeds your **Aligned AIOS**—the master prompt layer that turns any AI into your coach. In **ALFRED** (Aligned Freedom Coach), the same context runs with your VAPI™, archetype, 6Cs, and Vital Actions. The richer the data, the smarter your coach. So everything you write *matters* because it powers everything that follows.
 
 **Second: Transformation.** And this is the part people don't expect. Simply *doing* this work changes you. Not theoretically. Not in six months. Right now. When you name your Real Reasons and realize you've been chasing a means goal for three years—that's an insight you can't unsee. When you excavate your Driving Fire and feel it land in your body—that rewires how you make decisions. The worksheets aren't just forms. They're mirrors. And the reflections are permanent.
 
@@ -75,9 +75,9 @@ Everything you write in this module—every worksheet, every answer, every hones
 - Scores every opportunity through a values-aligned decision filter
 - Intervenes when you're about to default to "work harder" instead of "work smarter"
 
-This isn't generic advice from an AI that doesn't know you. This is *your* Aligned Freedom Coach—your Values-Aligned Performance Operating System. Built on *your* truth. Running on *your* terms.
+This isn't generic advice from an AI that doesn't know you. This is *your* **Aligned AIOS**—and in the app, *your* **ALFRED** (Aligned Freedom Coach). Built on *your* truth. Running on *your* terms.
 
-And once it's live? You get the Fire Starters—50 high-leverage questions you can ask anytime—for weekly planning, strategy, sales, marketing, execution, and reviews. All personalized. All aligned. All built on the foundation you're about to create.
+And once it's live? You get the **Fire Starters**—**56** strategic prompts you can ask anytime—for weekly planning, strategy, sales, marketing, execution, and reviews. All personalized. All aligned. All built on the foundation you're about to create.
 
 ---
 

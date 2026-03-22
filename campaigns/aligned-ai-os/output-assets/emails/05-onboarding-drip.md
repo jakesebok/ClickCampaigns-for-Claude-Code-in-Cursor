@@ -13,7 +13,7 @@
 
 {{first_name}},
 
-Welcome to Aligned Freedom Coach — your Aligned Performance Operating System.
+Welcome to Aligned Freedom Coach (**ALFRED**) — your app for values-aligned coaching. Your **Aligned AIOS** master context from the Intensive or Accelerator lives here alongside your VAPI™ results, 6Cs, and Vital Actions.
 
 Here's how to get started in the next 10 minutes:
 
@@ -119,7 +119,7 @@ You've been using Aligned Freedom Coach for a week. Here's what's happening unde
 
 Your AI coach is learning your patterns. It sees which questions you ask, which values you reference, where your energy goes. Every conversation makes it smarter about *you*.
 
-This is the compound effect of alignment. Week 1 feels like "useful tool." By week 4, it feels like "indispensable operating system."
+This is the compound effect of alignment. Week 1 feels like "useful tool." By week 4, it feels like an indispensable **Aligned AIOS** inside **ALFRED**.
 
 Keep going. Ask Aligned Freedom Coach to run your first Weekly Review today.
 

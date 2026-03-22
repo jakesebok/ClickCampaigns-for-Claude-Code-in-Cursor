@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata = {
   title: "Strategic Alignment Intensive — Jake Sebok",
   description:
-    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter and leave with a custom AI Operating System master prompt.",
+    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter and leave with a custom Aligned AIOS master prompt.",
 };
 
 export default function StrategicIntensivesPage() {
@@ -37,8 +37,8 @@ export default function StrategicIntensivesPage() {
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
             The Strategic Alignment Intensive fixes that in a single half-day.
             You&apos;ll connect your daily actions directly to the outcomes that
-            actually matter — and walk away with a personalized AI operating
-            system master prompt that turns your AI of choice into a coach,
+            actually matter — and walk away with a personalized{" "}
+            <strong className="text-ap-primary">Aligned AIOS</strong> master prompt that turns your AI of choice into a coach,
             strategic advisor, and executive assistant that actually knows you.
           </p>
         </div>
@@ -84,7 +84,7 @@ export default function StrategicIntensivesPage() {
                   "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
               },
               {
-                title: "Your AI Operating System Master Prompt",
+                title: "Your Aligned AIOS Master Prompt",
                 description:
                   "A custom master prompt that turns Claude, ChatGPT, Gemini, or another AI into your personalized coach, strategic advisor, and executive assistant. It knows your values, goals, revenue math, standards, and Vital Action because you built that context in the workshop.",
               },
@@ -152,11 +152,11 @@ export default function StrategicIntensivesPage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">
-                  Turn your workshop outputs into your AI Operating System
+                  Turn your workshop outputs into your Aligned AIOS
                 </h3>
                 <p className="text-ap-mid">
                   We use what you build in the Intensive to create the master
-                  prompt that powers your AI Operating System. That prompt can
+                  prompt that powers your Aligned AIOS. That prompt can
                   run inside Claude, ChatGPT, Gemini, or another model and turns
                   it into a system that knows your values, goals, revenue math,
                   strategic priorities, and Vital Action.
@@ -175,7 +175,7 @@ export default function StrategicIntensivesPage() {
                 <p className="text-ap-mid">
                   You leave with a working master prompt and the strategic
                   context to use it right away. The deliverable is not generic
-                  AI advice. It&apos;s a custom operating system built from what we
+                  AI advice. It&apos;s a custom Aligned AIOS built from what we
                   excavate together in the workshop.
                 </p>
               </div>
@@ -224,7 +224,7 @@ export default function StrategicIntensivesPage() {
               $497
             </h2>
             <p className="text-ap-mid text-lg mb-2">
-              Half-day live workshop + pre-work packet + all worksheets + your AI Operating System master prompt
+              Half-day live workshop + pre-work packet + all worksheets + your Aligned AIOS master prompt
             </p>
 
             <Link

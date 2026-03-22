@@ -16,9 +16,11 @@ alwaysApply: false
 
 **Strategic Clarity** is Stage 2 of Jake Sebok's high-ticket coaching program (Aligned Power). It connects a person's daily actions directly to the outcomes they wish to see. It also runs as a live **Strategic Intensive** (same worksheets, facilitated live).
 
-**The payoff:** All worksheets feed a Master Prompt that turns any AI (ChatGPT, Claude, Gemini) into a personalized executive coach, strategic advisor, and virtual assistant that optimizes for the user's core values and never compromises them.
+**The payoff:** All worksheets feed a Master Prompt that produces **Aligned AIOS** — the context that turns any AI (ChatGPT, Claude, Gemini) into a personalized executive coach that optimizes for the user's core values and never compromises them.
 
-**Aligned Freedom Coach workflow:** (1) **Generation:** User starts a chat with the master prompt; attaches completed worksheets file (preferred) or pastes below the line. AI outputs Master Context + Blueprint. (2) **Ongoing coaching:** User uses Master Context as persistent context—paste at start of conversations or add to AI project/custom instructions.
+**Optional app:** **ALFRED** (Aligned Freedom Coach) at **alfredai.coach** runs the same intelligence with VAPI™, archetype, 6Cs, Vital Actions, and patching built in.
+
+**Bring-your-own-AI workflow:** (1) **Generation:** User starts a chat with the master prompt; attaches completed worksheets file (preferred) or pastes below the line. AI outputs Master Context + Blueprint. (2) **Ongoing coaching:** User uses Master Context as persistent context—paste at start of conversations or add to AI project/custom instructions.
 
 ---
 
@@ -35,8 +37,8 @@ alwaysApply: false
 | 5 | Reality Check (Bridge) | 1 (5.1) | Reality Check |
 | 6 | From Meaning to Math (The Revenue Bridge) | 3 (6.1, 6.2, 6.3) | The Revenue Bridge |
 | 7 | ONE THING Domino Plan | 2 (7.1, 7.2) | ONE THING Domino |
-| 8 | Aligned AI OS — Master Prompt | 1 (8.1) | Master Prompt + Patch Notes |
-| 9 | AI Coach in Action — 50 Questions | 1 (9.1) | 50 High-Leverage Questions |
+| 8 | Aligned AIOS — Master Prompt | 1 (8.1) | Master Prompt + Patch Notes |
+| 9 | AI Coach in Action — Fire Starters | 1 (9.1) | Fire Starters (56 prompts) |
 
 ---
 
@@ -44,7 +46,7 @@ alwaysApply: false
 
 | Item | Decision |
 |------|----------|
-| **Order** | MIQs → WHY → Values → Becoming You → Reality Check → GTM → ONE THING → AI OS → 50 Questions |
+| **Order** | MIQs → WHY → Values → Becoming You → Reality Check → GTM → ONE THING → Aligned AIOS → Fire Starters |
 | **Strategic Intensives** | Same worksheets, facilitated live. No separate intensive-only materials. |
 | **Video style** | Jake Sebok voice (`Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md`). 5–15 min each. Teaching + context + why it matters + facilitate the exercise. |
 | **Worksheet format** | Google Doc. All blanks = empty tables so users can type directly. |
@@ -103,11 +105,11 @@ The `Clarity Worksheets.docx` contains complete drafts of ALL worksheets. Key de
 
 7. **ONE THING Domino Plan** — Re-anchor → Lead Lane → Someday Outcomes (4 lanes) → ONE THING per lane → Domino Chain (Someday → Right Now) → Calendar Install → Sabotage Plan → Commitment. Well-developed.
 
-8. **Master Prompt** — Full template with field map, priority order for conflicts, output rules. Generates ALIGNED AI OS UPGRADE + ALIGNMENT BLUEPRINT SUMMARY SHEET.
+8. **Master Prompt** — Full template with field map, priority order for conflicts, output rules. Generates ALIGNED AIOS UPGRADE + ALIGNMENT BLUEPRINT SUMMARY SHEET.
 
 9. **Monthly Patch Notes** — Update prompt for ongoing refinement. References bracket labels for precise field updates.
 
-10. **50 High-Leverage Questions** — Organized by: Weekly Planning (8), Strategy + Focus (10), QC + Sales (8), Marketing + Messaging (8), Execution + Nervous System (8), Weekly/Monthly Review (8).
+10. **Fire Starters (56 prompts)** — Organized by: Weekly Planning (8), Strategy + Focus (10), QC + Sales (8), Marketing + Messaging (8), Execution + Nervous System (8), Weekly/Monthly Review (8).
 
 ### What Needs to Be Created (NEW)
 - **Reality Check worksheet** (Lesson 5) — Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support. One page. Empty tables.
@@ -132,7 +134,7 @@ The `Clarity Worksheets.docx` contains complete drafts of ALL worksheets. Key de
 - [x] **1.7** Refine From Meaning to Math / Revenue Bridge worksheet
 - [x] **1.8** Refine ONE THING Domino Plan worksheet
 - [x] **1.9** Update Master Prompt — Reality Check refs + [NEEDS INPUT] handling
-- [x] **1.10** Refine 50 High-Leverage Questions
+- [x] **1.10** Refine Fire Starters (56 prompts)
 
 ### Phase 2: Video Scripts (18 scripts in Jake's voice) — DONE 2026-03-10
 - [x] **2.1** Video 0.1 — Module Introduction
@@ -152,7 +154,7 @@ The `Clarity Worksheets.docx` contains complete drafts of ALL worksheets. Key de
 - [x] **2.15** Video 6.3 — GTM: Lead Path Fork + Highest-Leverage Move
 - [x] **2.16** Video 7.1 — ONE THING: The Question + Lead Lane
 - [x] **2.17** Video 7.2 — ONE THING: Domino Chain + Calendar Install
-- [x] **2.18** Video 8.1 — Aligned AI OS: Master Prompt
+- [x] **2.18** Video 8.1 — Aligned AIOS: Master Prompt
 - [x] **2.19** Video 9.1 — AI Coach in Action: 50 Questions
 
 ### Phase 3: Final Assembly — DONE 2026-03-10

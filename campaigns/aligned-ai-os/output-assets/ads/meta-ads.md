@@ -22,7 +22,7 @@ You've been optimizing for means goals (the revenue, the title, the tactic) inst
 The Strategic Alignment Intensive is a half-day workshop where you'll:
 → Name what you *actually* want (not what you think you should want)
 → Turn that into a revenue number built on your real life
-→ Build Aligned Freedom Coach — a personalized AI coach that keeps you aligned daily
+→ Build your **Aligned AIOS** master prompt (then run it in **ALFRED** — Aligned Freedom Coach — with 30 days free for attendees)
 
 $497. Held quarterly. Limited to 20 seats.
 
@@ -39,7 +39,7 @@ What if it's that you've been disciplined about the wrong things?
 
 The Strategic Alignment Intensive helps you connect your daily actions directly to the outcomes you actually want. In a single half-day.
 
-Walk away with a personalized AI operating system that knows your values, goals, and numbers.
+Walk away with your **Aligned AIOS** master prompt — and optional **ALFRED** (Aligned Freedom Coach) access so your coach knows your values, goals, and numbers daily.
 
 $497 · Next Intensive coming soon.
 
@@ -60,9 +60,9 @@ Imagine an AI coach that knows:
 • Your Vital Action for the quarter
 • The sabotage pattern that derails you every time
 
-Not a generic chatbot. YOUR operating system. Built on YOUR truth.
+Not a generic chatbot. **Your** Aligned AIOS — the master prompt built from your workshop. **ALFRED** (Aligned Freedom Coach) is the app where that intelligence runs daily, with your VAPI™, archetype, 6Cs, and Vital Actions.
 
-That's Aligned Freedom Coach — the Aligned Performance Operating System. And you build it in the Strategic Alignment Intensive.
+You build the Aligned AIOS in the Strategic Alignment Intensive — then load it into ALFRED.
 
 Half-day. $497. Limited seats.
 

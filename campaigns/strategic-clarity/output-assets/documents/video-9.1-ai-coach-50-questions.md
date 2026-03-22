@@ -8,7 +8,7 @@
 
 Alright. Final lesson. And honestly? This might be the most *fun* one.
 
-You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
+You've built your **Aligned AIOS**. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
 I'm going to walk you through the Fire Starters—fifty-six high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
 
