@@ -110,7 +110,7 @@ export default function LandingPage() {
                 step: "03",
                 title: "Stay aligned daily",
                 description:
-                  "Morning SMS prompts, weekly Vital Action tracking, 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
+                  "Morning coach notifications, weekly Vital Action tracking, 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
                 icon: Bell,
               },
             ].map((item) => (
@@ -198,9 +198,9 @@ export default function LandingPage() {
               },
               {
                 icon: Bell,
-                title: "Morning SMS Prompts",
+                title: "Morning coach notifications",
                 description:
-                  "A values-aligned prompt every morning. Set your intention before the inbox sets it for you.",
+                  "Optional nudges from your coach when you want the day framed before the inbox does—values-aligned, not generic blasts.",
               },
               {
                 icon: CheckCircle2,

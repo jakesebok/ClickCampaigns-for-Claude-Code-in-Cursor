@@ -32,7 +32,7 @@
 - [ ] Upload test worksheets — verify parsing works
 - [ ] Complete guided onboarding — verify questions flow
 - [ ] Send test chat messages — verify Claude responds with context
-- [ ] Test morning SMS — manually trigger cron endpoint
+- [ ] Test morning notification path — manually trigger cron endpoint (if legacy delivery enabled)
 - [ ] Test subscription flow — use Stripe test mode
 - [ ] Test coupon codes — INTENSIVE30, CLARITY30, and COACHING12
 - [ ] Check mobile PWA — install on phone, verify layout
@@ -62,7 +62,7 @@
 - [ ] Messages sent per user per day
 - [ ] Scorecard completion rate
 - [ ] Vital Action completion rate
-- [ ] SMS opt-in rate
+- [ ] Morning notification opt-in rate
 - [ ] Context depth scores
 - [ ] Churn rate (who stops using it and when)
 

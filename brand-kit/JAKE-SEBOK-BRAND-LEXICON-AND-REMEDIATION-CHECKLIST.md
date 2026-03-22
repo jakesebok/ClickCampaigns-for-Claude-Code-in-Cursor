@@ -9,7 +9,7 @@
 | Use this | Not this (deprecated) |
 |----------|------------------------|
 | **Aligned AIOS** | Aligned AI OS, Aligned Performance Operating System, generic “AI operating system” without context |
-| **Aligned Freedom Coach** or **ALFRED** (same product) | Treating ALFRED as a different product from the app |
+| **Aligned Freedom Coach** / **ALFRED** (short form; same app) | Treating ALFRED as a different product from the app |
 | **ALFRED** = **AL**igned **FRE**e**D**om Coach | — |
 | **Aligned Power™** for methodology + **Aligned Power Accelerator** for the 12-month program | Ambiguous “the program” without naming |
 | **Fire Starters** (56 prompts) | “50 High-Leverage Questions,” “50 questions” |

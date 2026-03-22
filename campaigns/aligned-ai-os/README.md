@@ -9,7 +9,7 @@ A personalized AI coaching app built on the Strategic Clarity framework by Jake 
 - **Database:** Supabase (PostgreSQL via Drizzle ORM)
 - **AI:** Anthropic Claude (Sonnet for coaching, Haiku for check-ins)
 - **Payments:** Stripe (subscriptions, trials, coupons)
-- **SMS:** Twilio (daily morning prompts)
+- **Notifications:** Morning coach nudges (in-app / push-first; optional Twilio helpers in `lib/twilio` for legacy delivery if configured)
 - **Styling:** Tailwind CSS (Aligned Power brand — navy `#0E1624`, orange `#FF6B1A`)
 - **Fonts:** Outfit (headlines) + Cormorant Garamond (body)
 - **Hosting:** Vercel
@@ -38,7 +38,7 @@ Fill in all the values in `.env.local`:
 | **Supabase** | Create project, get URL + anon key + service role key + connection string | [supabase.com](https://supabase.com) |
 | **Anthropic** | Get API key | [console.anthropic.com](https://console.anthropic.com) |
 | **Stripe** | Create products (Monthly $39, Annual $349), get keys, set up webhook | [stripe.com](https://stripe.com) |
-| **Twilio** | Get account SID, auth token, buy a phone number | [twilio.com](https://twilio.com) |
+| **Twilio** | Optional: only if enabling legacy text delivery | [twilio.com](https://twilio.com) |
 
 ### 3. Push database schema
 
@@ -70,7 +70,7 @@ app/
 │   ├── one-thing/      # Weekly Vital Action tracker
 │   ├── scorecard/      # 6Cs weekly scorecard (full framework)
 │   ├── onboarding/     # Upload or guided onboarding
-│   └── settings/       # Account, SMS, billing, context
+│   └── settings/       # Account, notifications, billing, context
 ├── (marketing)/        # Public pages
 │   ├── page.tsx        # ALFRED landing page
 │   └── pricing/        # Pricing page
@@ -80,7 +80,7 @@ lib/
 ├── ai/                 # Claude integration + prompts
 ├── db/                 # Drizzle schema + client
 ├── stripe/             # Stripe helpers
-├── twilio/             # SMS helpers
+├── twilio/             # Optional legacy delivery helpers
 ├── scorecard.ts        # 6Cs framework (Clarity, Coherence, Capacity, Confidence, Courage, Connection)
 └── utils.ts
 

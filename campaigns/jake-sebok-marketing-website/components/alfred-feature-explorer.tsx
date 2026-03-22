@@ -11,6 +11,8 @@
  * - app/(dashboard)/drivers/page.tsx — Driver Library layout, primary driver banner, detail sections
  * - lib/vapi/drivers.ts, driver-library.ts, archetypes-full.ts, scoring.ts — copy in alfred-feature-explorer-data.ts
  * - app/(dashboard)/voice/page.tsx — idle voice marketing copy
+ * - app/(dashboard)/assessment/results/page.tsx — results depth pattern
+ * - app/(dashboard)/scorecard/page.tsx, priorities/page.tsx, blueprint/page.tsx — More menu screens
  *
  * Demo data (Vital Action text, 6Cs numbers, sample coach reply) is illustrative; UI strings match the app.
  */
@@ -19,16 +21,20 @@ import { useCallback, useEffect, useRef, useState, type ComponentType } from "re
 import {
   Activity,
   BarChart3,
+  BarChart2,
   BatteryCharging,
   Bell,
   BookOpen,
   Brain,
+  Briefcase,
   ChevronLeft,
   ChevronRight,
   ClipboardCheck,
   Crosshair,
   FileText,
   Ghost,
+  DollarSign,
+  Heart,
   LayoutDashboard,
   Leaf,
   Link2,
@@ -58,38 +64,54 @@ import {
   WEEKLY_PLANNING_PROMPTS,
 } from "./alfred-feature-explorer-data";
 
-type AppTab = "dashboard" | "coach" | "voice" | "results" | "drivers";
+type AppTab =
+  | "dashboard"
+  | "coach"
+  | "voice"
+  | "results"
+  | "drivers"
+  | "scorecard"
+  | "priorities"
+  | "blueprint"
+  | "archetypes"
+  | "settings";
 type CoachPhase = "home" | "category" | "thread";
 type DriversPhase = "list" | "escapeDetail";
 type TourFocus = "leverage" | "weekly" | "priorities" | "pattern";
 
+const MORE_ROUTE_TABS: AppTab[] = ["scorecard", "priorities", "blueprint", "archetypes", "settings"];
+
+function isMoreRouteTab(t: AppTab): boolean {
+  return MORE_ROUTE_TABS.includes(t);
+}
+
 const DASHBOARD_TOUR = [
   {
     id: "leverage",
-    kicker: "Execution",
-    title: "Vital Action stays above the fold",
-    body: "Same as the live app: your Vital Action is the first heavy card on the dashboard so the week has a spine before you scroll.",
+    kicker: "Your week",
+    title: "One commitment, always in sight",
+    body: "Your Vital Action is the non-negotiable you chose when the noise was quiet. Seeing it first cuts decision fatigue: you stop re-litigating the week every morning, protect time for what actually moves revenue and identity, and build calendar honesty before the week frays.",
     focus: "leverage" as const,
   },
   {
     id: "weekly",
-    kicker: "Rhythm",
-    title: "6Cs where you see it on mobile",
-    body: "On a phone, your latest 6Cs card sits directly under Vital Action, with the same icons, labels, and color logic as production.",
+    kicker: "Performance rhythm",
+    title: "A weekly honest read you can act on",
+    body: "The 6Cs scorecard is a fast integrity check on how you are actually operating—not a judgment wall. When you submit it on rhythm, you catch drift early, name the one category that is quietly stealing capacity, and give Alfred a truthful signal so your weekly review becomes execution coaching instead of spreadsheet shame.",
     focus: "weekly" as const,
   },
   {
     id: "priorities",
-    kicker: "Baseline",
-    title: "VAPI + Focus Here First",
-    body: "Under that, the dashboard surfaces your composite read and the domains that need attention first, pulled from your real assessment logic in the app.",
+    kicker: "Ground truth",
+    title: "Scores weighted by what you said matters",
+    body: "Your composite VAPI read plus Focus Here First is the difference between guessing where you are strong and knowing where you are borrowing from the future. You get a ranked, importance-aware picture so you correct course mid-quarter—not after the year is gone.",
     focus: "priorities" as const,
   },
   {
     id: "pattern",
-    kicker: "Structure",
-    title: "Archetype + driver, then deeper",
-    body: "Founder Archetype and Likely Driver use the same library copy as ALFRED. “View Full Details” is how users jump into the Driver Library in the product.",
+    kicker: "Self-awareness",
+    title: "Archetype and driver: how you perform under stress",
+    body: "Archetype and likely driver translate your assessment into a language for your patterns—so coaching is not generic advice. When Alfred references them, recommendations fit how you actually behave when pressure hits, and View Full Details opens the full library depth when you are ready to go there.",
     focus: "pattern" as const,
   },
 ];
@@ -230,7 +252,56 @@ export function AlfredFeatureExplorer() {
     }
   };
 
+  const goMoreDestination = (label: (typeof MORE_LINKS)[number]["label"] | "Settings") => {
+    setMoreOpen(false);
+    setPaused(true);
+    if (label === "6Cs Scorecard") selectTab("scorecard");
+    else if (label === "Priorities") selectTab("priorities");
+    else if (label === "Blueprint") selectTab("blueprint");
+    else if (label === "Assessment Results") selectTab("results");
+    else if (label === "Archetype Library") selectTab("archetypes");
+    else if (label === "Driver Library") {
+      setTab("drivers");
+      setDriversPhase("list");
+    } else if (label === "Settings") selectTab("settings");
+  };
+
   const leftTitleAndBody = () => {
+    if (tab === "scorecard") {
+      return {
+        kicker: "6Cs scorecard",
+        title: "A weekly operating rhythm, not a vibe check",
+        body: "Structured prompts across Clarity through Connection turn subjective weeks into comparable data. Over time you see which dimension quietly erodes execution, catch the story you tell when you are overloaded, and give Alfred a clean signal for planning and accountability—without living in a spreadsheet.",
+      };
+    }
+    if (tab === "priorities") {
+      return {
+        kicker: "Priorities",
+        title: "Importance × score, not generic advice",
+        body: "The matrix maps what you said matters against how you are actually performing. Critical Priority surfaces the leaks that will hurt you if ignored; Protect & Sustain guards what is already working; the other quadrants show where you may be over-investing or under-watching. It is the map for where to spend this month’s focus.",
+      };
+    }
+    if (tab === "blueprint") {
+      return {
+        kicker: "Alignment Blueprint",
+        title: "The context layer behind every answer",
+        body: "North Star, values, Becoming, revenue math, Vital Action, and boundaries live in one living document. When you coach with Alfred, he is not guessing—he is reasoning from the same strategic clarity you committed to, so plans and pushes stay aligned with the life you said you want.",
+      };
+    }
+    if (tab === "archetypes") {
+      return {
+        kicker: "Archetype library",
+        title: "Nine founder patterns, same assessment spine",
+        body: "Your archetype is a shorthand for how strength and shadow tend to show up across arenas. Browsing the library helps you decode tension faster, name what you are optimizing for, and have sharper conversations with Alfred about tradeoffs—before a blind spot becomes an expensive quarter.",
+      };
+    }
+    if (tab === "settings") {
+      return {
+        kicker: "Settings",
+        title: "Account, notifications, and preferences",
+        body: "In the live app, this is where you tune how Alfred reaches you, manage account details, and adjust experience settings. The demo shows the same information architecture so you know what to expect when you onboard.",
+      };
+    }
     if (tab === "coach") {
       if (coachPhase === "thread" && coachThreadPrompt) {
         const isFullDemo = coachThreadPrompt.label === "Create weekly schedule";
@@ -246,13 +317,13 @@ export function AlfredFeatureExplorer() {
         return {
           kicker: "Fire Starters",
           title: "Weekly Planning",
-          body: "These four buttons mirror the Weekly Planning category in the Coach tab. Each label maps to the prompt string defined in SUGGESTED_QUESTIONS inside the ALFRED codebase.",
+          body: "These prompts are the same strings production sends—schedule building, leverage outcomes, ruthless cuts, and a minimum viable week when chaos hits. Use them to see how Alfred operationalizes your blueprint when the calendar gets loud.",
         };
       }
       return {
         kicker: "Coach tab",
-        title: "Same Fire Starters as production",
-        body: "Categories and copy come straight from SUGGESTED_QUESTIONS in lib/ai/prompts.ts. Tap Weekly Planning to see the nested prompt list, then run the schedule builder to preview how Alfred weaves Vital Action, QC quota, and boundaries into a week.",
+        title: "Fire Starters from your real prompt library",
+        body: "In this demo, only Weekly Planning is tappable so you can drill into sub-prompts and the long schedule example. The other categories are shown exactly as they appear in the app; open ALFRED to run Strategy, Inner Work, VAPI, and the rest with full streaming replies.",
       };
     }
     if (tab === "voice") {
@@ -264,9 +335,9 @@ export function AlfredFeatureExplorer() {
     }
     if (tab === "results") {
       return {
-        kicker: "Results",
-        title: "Assessment snapshot",
-        body: "The Results tab in the bottom nav routes to /assessment/results in ALFRED. Here you see the same composite read pattern the dashboard links to before you open the full wheel and domains.",
+        kicker: "Assessment results",
+        title: "Depth you can act on—not a single number",
+        body: "The full results surface mirrors /assessment/results: composite tier, archetype story, arena and domain breakdowns, interpretations, priority patterns, and driver tie-ins. It is the reference you return to when you are deciding what to fix first and what to protect.",
       };
     }
     if (tab === "drivers") {
@@ -293,8 +364,8 @@ export function AlfredFeatureExplorer() {
   const left = leftTitleAndBody();
 
   return (
-    <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] gap-10 lg:gap-12 items-start">
-      <div className="order-2 lg:order-1 min-w-0 space-y-6">
+    <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] gap-10 lg:gap-14 xl:gap-16 items-center">
+      <div className="order-2 lg:order-1 min-w-0 space-y-6 lg:py-4">
         <div>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
             {left.kicker}
@@ -366,132 +437,144 @@ export function AlfredFeatureExplorer() {
       </div>
 
       <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-        <div className="relative w-full max-w-[340px]">
+        <div className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]">
           <div
-            className="relative flex flex-col rounded-[2.5rem] border-[6px] border-[#151c2e] bg-[#151c2e] shadow-[0_25px_60px_-15px_rgba(14,22,36,0.45)] overflow-hidden"
-            style={{ height: "min(72vh, 620px)", maxHeight: "620px" }}
+            className="relative w-full rounded-[2.5rem] border-[6px] border-[#1a2332] bg-[#1a2332] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset]"
+            style={{ aspectRatio: "9 / 19" }}
           >
-            <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
+            <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem]">
+              <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
 
-            <div className="flex-1 min-h-0 flex flex-col bg-[#0E1624] text-white/90">
-              <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
-                {tab === "dashboard" && (
-                  <DashboardScreen
-                    tourFocus={tourFocus}
-                    onJumpFocus={jumpTourFocus}
-                    onViewDriverDetails={openDriversToEscape}
-                  />
-                )}
-                {tab === "coach" && (
-                  <CoachScreen
-                    phase={coachPhase}
-                    category={coachCategory}
-                    threadPrompt={coachThreadPrompt}
-                    onSelectCategory={(c) => {
-                      setCoachCategory(c);
-                      setCoachPhase("category");
-                    }}
-                    onBackCategory={() => {
-                      setCoachPhase("home");
-                      setCoachCategory(null);
-                      setCoachThreadPrompt(null);
-                    }}
-                    onBackFromThread={() => {
-                      setCoachPhase("category");
-                      setCoachThreadPrompt(null);
-                    }}
-                    onPickPrompt={(p) => {
-                      setCoachThreadPrompt(p);
-                      setCoachPhase("thread");
-                    }}
-                  />
-                )}
-                {tab === "voice" && <VoiceIdleScreen />}
-                {tab === "results" && <ResultsPreviewScreen />}
-                {tab === "drivers" && (
-                  <DriversScreen
-                    phase={driversPhase}
-                    onOpenEscape={() => setDriversPhase("escapeDetail")}
-                    onBackList={() => setDriversPhase("list")}
-                  />
-                )}
-              </div>
+              <div className="relative flex flex-1 min-h-0 flex-col bg-[#0E1624] text-white/90">
+                <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+                  {tab === "dashboard" && (
+                    <DashboardScreen
+                      tourFocus={tourFocus}
+                      onJumpFocus={jumpTourFocus}
+                      onViewDriverDetails={openDriversToEscape}
+                    />
+                  )}
+                  {tab === "coach" && (
+                    <CoachScreen
+                      phase={coachPhase}
+                      category={coachCategory}
+                      threadPrompt={coachThreadPrompt}
+                      onSelectWeekly={() => {
+                        setCoachCategory("Weekly Planning");
+                        setCoachPhase("category");
+                      }}
+                      onBackCategory={() => {
+                        setCoachPhase("home");
+                        setCoachCategory(null);
+                        setCoachThreadPrompt(null);
+                      }}
+                      onBackFromThread={() => {
+                        setCoachPhase("category");
+                        setCoachThreadPrompt(null);
+                      }}
+                      onPickPrompt={(p) => {
+                        setCoachThreadPrompt(p);
+                        setCoachPhase("thread");
+                      }}
+                    />
+                  )}
+                  {tab === "voice" && <VoiceIdleScreen />}
+                  {tab === "results" && <ResultsDeepScreen />}
+                  {tab === "drivers" && (
+                    <DriversScreen
+                      phase={driversPhase}
+                      onOpenEscape={() => setDriversPhase("escapeDetail")}
+                      onBackList={() => setDriversPhase("list")}
+                    />
+                  )}
+                  {tab === "scorecard" && <ScorecardDemoScreen />}
+                  {tab === "priorities" && <PrioritiesDemoScreen />}
+                  {tab === "blueprint" && <BlueprintDemoScreen />}
+                  {tab === "archetypes" && <ArchetypesDemoScreen />}
+                  {tab === "settings" && <SettingsDemoScreen />}
+                </div>
 
-              {moreOpen && (
-                <div className="absolute inset-0 z-20 flex flex-col justify-end bg-black/50" onClick={() => setMoreOpen(false)}>
+                {moreOpen && (
                   <div
-                    className="rounded-t-2xl border-t border-white/10 bg-[#121a28] max-h-[55%] overflow-y-auto"
-                    onClick={(e) => e.stopPropagation()}
+                    className="absolute inset-0 z-20 flex flex-col justify-end bg-black/50"
+                    onClick={() => setMoreOpen(false)}
                   >
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                      <span className="font-semibold text-sm">Menu</span>
-                      <button
-                        type="button"
-                        className="p-2 rounded-lg text-white/60 hover:bg-white/10"
-                        aria-label="Close menu"
-                        onClick={() => setMoreOpen(false)}
-                      >
-                        <X className="h-5 w-5" />
-                      </button>
-                    </div>
-                    <nav className="p-2">
-                      {MORE_LINKS.map((item) => (
+                    <div
+                      className="rounded-t-2xl border-t border-white/10 bg-[#121a28] max-h-[55%] overflow-y-auto"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                        <span className="font-semibold text-sm">Menu</span>
                         <button
-                          key={item.label}
                           type="button"
-                          className="flex w-full items-center gap-3 px-3 py-3 rounded-xl text-left text-sm font-medium hover:bg-white/5"
+                          className="p-2 rounded-lg text-white/60 hover:bg-white/10"
+                          aria-label="Close menu"
                           onClick={() => setMoreOpen(false)}
                         >
-                          <item.icon className="h-5 w-5 text-ap-accent shrink-0" />
-                          {item.label}
+                          <X className="h-5 w-5" />
                         </button>
-                      ))}
-                      <button
-                        type="button"
-                        className="flex w-full items-center justify-between px-3 py-3 mt-2 border-t border-white/10 text-sm text-white/60"
-                        onClick={() => setMoreOpen(false)}
-                      >
-                        <span>Settings</span>
-                        <Settings className="h-4 w-4 text-ap-accent" />
-                      </button>
-                    </nav>
+                      </div>
+                      <nav className="p-2">
+                        {MORE_LINKS.map((item) => (
+                          <button
+                            key={item.label}
+                            type="button"
+                            className="flex w-full items-center gap-3 px-3 py-3 rounded-xl text-left text-sm font-medium hover:bg-white/5 text-white/90"
+                            onClick={() => goMoreDestination(item.label)}
+                          >
+                            <item.icon className="h-5 w-5 text-ap-accent shrink-0" />
+                            {item.label}
+                          </button>
+                        ))}
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between px-3 py-3 mt-2 border-t border-white/10 text-sm text-white/80 hover:bg-white/5 rounded-xl"
+                          onClick={() => goMoreDestination("Settings")}
+                        >
+                          <span>Settings</span>
+                          <Settings className="h-4 w-4 text-ap-accent" />
+                        </button>
+                      </nav>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              <nav className="shrink-0 border-t border-white/10 bg-[#121a28] flex justify-around items-center py-1.5 px-0.5">
-                <NavPill
-                  active={tab === "dashboard"}
-                  icon={LayoutDashboard}
-                  label="Dashboard"
-                  onClick={() => selectTab("dashboard")}
-                />
-                <NavPill
-                  active={tab === "coach"}
-                  icon={MessageSquare}
-                  label="Coach"
-                  onClick={() => selectTab("coach")}
-                />
-                <NavPill active={tab === "voice"} icon={Mic} label="Voice" onClick={() => selectTab("voice")} />
-                <NavPill
-                  active={tab === "results"}
-                  icon={Activity}
-                  label="Results"
-                  onClick={() => selectTab("results")}
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMoreOpen((o) => !o);
-                  }}
-                  className={`flex flex-col items-center gap-0.5 px-1.5 py-1 text-[10px] max-w-[64px] ${
-                    moreOpen ? "text-ap-accent" : "text-white/45 hover:text-white/80"
-                  }`}
-                >
-                  <MoreHorizontal className="h-5 w-5" />
-                  More
-                </button>
-              </nav>
+                <nav className="shrink-0 border-t border-white/10 bg-[#121a28] flex justify-around items-center py-1.5 px-0.5">
+                  <NavPill
+                    active={tab === "dashboard"}
+                    icon={LayoutDashboard}
+                    label="Dashboard"
+                    onClick={() => selectTab("dashboard")}
+                  />
+                  <NavPill
+                    active={tab === "coach"}
+                    icon={MessageSquare}
+                    label="Coach"
+                    onClick={() => selectTab("coach")}
+                  />
+                  <NavPill active={tab === "voice"} icon={Mic} label="Voice" onClick={() => selectTab("voice")} />
+                  <NavPill
+                    active={tab === "results"}
+                    icon={Activity}
+                    label="Results"
+                    onClick={() => selectTab("results")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMoreOpen((o) => !o);
+                    }}
+                    className={`flex flex-col items-center gap-0.5 px-1.5 py-1 text-[10px] max-w-[64px] ${
+                      moreOpen || isMoreRouteTab(tab)
+                        ? "text-ap-accent"
+                        : "text-white/45 hover:text-white/80"
+                    }`}
+                  >
+                    <MoreHorizontal className="h-5 w-5" />
+                    More
+                  </button>
+                </nav>
+              </div>
             </div>
           </div>
 
@@ -720,7 +803,7 @@ function CoachScreen({
   phase,
   category,
   threadPrompt,
-  onSelectCategory,
+  onSelectWeekly,
   onBackCategory,
   onBackFromThread,
   onPickPrompt,
@@ -728,7 +811,7 @@ function CoachScreen({
   phase: CoachPhase;
   category: string | null;
   threadPrompt: (typeof WEEKLY_PLANNING_PROMPTS)[number] | null;
-  onSelectCategory: (c: string) => void;
+  onSelectWeekly: () => void;
   onBackCategory: () => void;
   onBackFromThread: () => void;
   onPickPrompt: (p: (typeof WEEKLY_PLANNING_PROMPTS)[number]) => void;
@@ -765,16 +848,33 @@ function CoachScreen({
               </p>
             </div>
             <div className="grid grid-cols-1 gap-2">
-              {FIRE_STARTER_CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => onSelectCategory(cat)}
-                  className="w-full text-left px-3 py-2.5 rounded-xl border border-white/10 hover:border-ap-accent/40 hover:bg-ap-accent/10 text-[11px] font-medium text-white/90 transition-colors"
-                >
-                  {cat}
-                </button>
-              ))}
+              {FIRE_STARTER_CATEGORIES.map((cat) => {
+                const isWeekly = cat === "Weekly Planning";
+                if (isWeekly) {
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={onSelectWeekly}
+                      className="w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/50 bg-ap-accent/10 hover:bg-ap-accent/15 text-[11px] font-medium text-white transition-colors shadow-[0_0_0_1px_rgba(255,107,26,0.12)]"
+                    >
+                      <span className="block text-[9px] font-semibold uppercase tracking-wider text-ap-accent mb-1">
+                        Try in demo
+                      </span>
+                      {cat}
+                    </button>
+                  );
+                }
+                return (
+                  <div
+                    key={cat}
+                    className="w-full text-left px-3 py-2.5 rounded-xl border border-white/5 bg-white/[0.02] text-[11px] font-medium text-white/38 select-none"
+                    title="Open ALFRED to explore this category in the full app."
+                  >
+                    {cat}
+                  </div>
+                );
+              })}
             </div>
           </>
         )}
@@ -806,25 +906,6 @@ function CoachScreen({
                 Something else
               </div>
             </div>
-          </div>
-        )}
-
-        {phase === "category" && category && category !== "Weekly Planning" && (
-          <div className="space-y-3">
-            <button
-              type="button"
-              onClick={onBackCategory}
-              className="flex items-center gap-1 text-[11px] text-white/50 hover:text-white"
-            >
-              <ChevronLeft className="h-4 w-4" />
-              Back
-            </button>
-            <h2 className="text-sm font-semibold text-white">{category}</h2>
-            <p className="text-[11px] text-white/50 leading-relaxed">
-              In the app, this category expands to its Fire Starter list from{" "}
-              <span className="text-white/70">lib/ai/prompts.ts</span>. For this demo, open{" "}
-              <span className="text-ap-accent">Weekly Planning</span> to see the full drill-down and a sample reply.
-            </p>
           </div>
         )}
 
@@ -912,20 +993,330 @@ function VoiceIdleScreen() {
   );
 }
 
-function ResultsPreviewScreen() {
+const ARCHETYPE_LIBRARY_DEMO_TITLE = "The 9 Founder Archetypes";
+
+function ResultsDeepScreen() {
+  const arenaRow = [
+    { label: "Personal", icon: BarChart2, score: "6.2", note: "Habits & health baseline" },
+    { label: "Relationships", icon: Heart, score: "4.1", note: "Presence vs achievement tradeoff" },
+    { label: "Business", icon: Briefcase, score: "7.8", note: "Execution engine strong" },
+  ] as const;
+  const domainSamples = [
+    { code: "RS", name: "Relationships", score: "3.8", flag: "Focus Here First" },
+    { code: "FA", name: "Family", score: "4.0", flag: "Focus Here First" },
+    { code: "EX", name: "Execution", score: "8.1", flag: "Protect & sustain" },
+    { code: "ME", name: "Mental / Emotional", score: "3.2", flag: "Critical priority" },
+  ] as const;
+
   return (
-    <div className="p-4 space-y-4">
-      <p className="text-[9px] font-medium text-ap-accent uppercase tracking-wider">Your Results</p>
-      <h2 className="text-lg font-cormorant font-bold text-white">Your VAPI™ Scores</h2>
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-        <p className="text-[10px] text-white/55 mb-2">Latest snapshot</p>
+    <div className="p-3 pb-6 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2 mb-1">
+        <p className="text-[9px] font-medium text-ap-accent uppercase tracking-wider">Your Results</p>
+        <h1 className="text-sm font-semibold text-white mt-1">Assessment results</h1>
+        <p className="text-[9px] text-white/45 mt-0.5">Mirrors /assessment/results structure (condensed)</p>
+      </header>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Composite VAPI</p>
         <div className="flex items-end gap-2">
-          <span className="text-3xl font-bold font-cormorant text-white">7.4</span>
-          <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500 text-[#0E1624] font-semibold mb-1">Functional</span>
+          <span className="text-3xl font-bold font-cormorant tabular-nums text-white">7.4</span>
+          <span className="text-[9px] font-semibold px-2 py-0.5 rounded bg-amber-500 text-[#0E1624] mb-1">Functional</span>
         </div>
-        <p className="text-[10px] text-white/50 mt-2">The Ghost · Tap through arenas and domains in the full app.</p>
-        <p className="text-[10px] font-medium text-ap-accent mt-3">Open full results →</p>
+        <p className="text-[10px] text-white/55 leading-relaxed">
+          You have some systems and predictability, but it is patchy. This is where leverage lives—tighten the machine
+          before drift becomes a crisis.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Founder archetype</p>
+        <div className="flex items-start gap-2">
+          <Ghost className="h-5 w-5 shrink-0 mt-0.5" style={{ color: GHOST_ARCHETYPE_ACCENT }} />
+          <div className="min-w-0">
+            <h2 className="text-base font-cormorant font-bold text-white leading-tight">The Ghost</h2>
+            <p className="text-[10px] italic text-white/55 mt-1">{GHOST_ARCHETYPE.tagline}</p>
+            <p className="text-[10px] text-white/50 mt-2 leading-relaxed line-clamp-4">{GHOST_ARCHETYPE.description}</p>
+            <p className="text-[10px] font-medium text-ap-accent mt-2">Explore archetype →</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Arena breakdown</p>
+        <div className="grid grid-cols-3 gap-1.5">
+          {arenaRow.map(({ label, icon: Icon, score, note }) => (
+            <div key={label} className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2">
+              <Icon className="h-3.5 w-3.5 text-ap-accent mb-1" />
+              <p className="text-[9px] font-semibold text-white/80">{label}</p>
+              <p className="text-lg font-cormorant font-bold text-white tabular-nums">{score}</p>
+              <p className="text-[8px] text-white/40 leading-snug mt-1">{note}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Domains & interpretations</p>
+        <div className="space-y-1.5">
+          {domainSamples.map((d) => (
+            <div
+              key={d.code}
+              className="flex items-center gap-2 rounded-lg border border-white/10 bg-[#0E1624]/60 px-2 py-1.5"
+            >
+              <span className="text-[9px] font-mono text-white/35 w-6">{d.code}</span>
+              <span className="text-[10px] text-white/80 flex-1 truncate">{d.name}</span>
+              <span className="text-[10px] font-bold tabular-nums text-amber-200/90">{d.score}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-[9px] text-white/45 leading-relaxed">
+          Each domain expands to the same interpretation blocks as production (strengths, watch-outs, coaching hooks).
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-red-500/30 bg-red-500/10 p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-red-300/90">Focus here first</p>
+        <p className="text-[10px] text-white/75 leading-relaxed">
+          Ranked leaks where importance outruns score—so you stop debating what to fix and start protecting what is
+          already working.
+        </p>
+        <div className="space-y-1">
+          <FocusRow icon={Users} name="Relationships" score={3.8} />
+          <FocusRow icon={Activity} name="Family" score={4.0} />
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Priority matrix snapshot</p>
+        <div className="grid grid-cols-2 gap-1.5 text-[8px]">
+          <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-2 text-white/80">
+            <p className="font-semibold text-red-300">Critical</p>
+            <p className="text-white/50 mt-1">2 domains</p>
+          </div>
+          <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-2 text-white/80">
+            <p className="font-semibold text-emerald-300">Protect</p>
+            <p className="text-white/50 mt-1">Execution, ops</p>
+          </div>
+          <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-2 text-white/80">
+            <p className="font-semibold text-amber-200">Monitor</p>
+            <p className="text-white/50 mt-1">Watch lightly</p>
+          </div>
+          <div className="rounded-lg border border-sky-500/20 bg-sky-500/10 p-2 text-white/80">
+            <p className="font-semibold text-sky-300">Over-invest?</p>
+            <p className="text-white/50 mt-1">Redirect energy</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-ap-accent/25 bg-ap-accent/10 p-3 space-y-2">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Driver tie-in</p>
+        <p className="text-[10px] text-white/80 leading-relaxed">
+          Likely driver: <span className="font-semibold text-ap-accent">{ESCAPE_ARTIST_DRIVER.name}</span> — patterns
+          from scoring feed the same driver narrative you will see in Coach and Library.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-dashed border-white/15 p-3">
+        <p className="text-[9px] text-white/45 leading-relaxed">
+          Full app adds comparative wheels, expandable archetype sections, lagging-arena callouts for Rising Architect,
+          transition summaries, and deep links into Priorities and Blueprint from each block.
+        </p>
+        <p className="text-[10px] font-medium text-ap-accent mt-2">Explore My Score (wheel) →</p>
+      </section>
+    </div>
+  );
+}
+
+function ScorecardDemoScreen() {
+  const cats = [
+    { label: "Clarity", icon: Crosshair, pct: 72, open: true },
+    { label: "Coherence", icon: Link2, pct: 68, open: false },
+    { label: "Capacity", icon: BatteryCharging, pct: 55, open: false },
+  ] as const;
+  return (
+    <div className="p-3 pb-5 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2">
+        <h1 className="text-sm font-semibold text-white">6Cs Scorecard</h1>
+        <p className="text-[10px] text-white/45 mt-1">Weekly submission window · same categories as production</p>
+      </header>
+      <div className="rounded-xl border border-ap-accent/20 bg-ap-accent/10 px-2.5 py-2 text-[9px] text-white/80 leading-relaxed">
+        Answer once per window. Reflection + “one thing” capture what actually happened—feeds Alfred and your review.
       </div>
+      <div className="space-y-2">
+        {cats.map(({ label, icon: Icon, pct, open }) => (
+          <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] overflow-hidden">
+            <div className="flex items-center justify-between px-2.5 py-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <Icon className="h-3.5 w-3.5 text-ap-accent shrink-0" />
+                <span className="text-[11px] font-semibold text-white truncate">{label}</span>
+              </div>
+              <span className="text-xs font-bold tabular-nums text-white">{pct}%</span>
+            </div>
+            {open && (
+              <div className="border-t border-white/10 px-2.5 py-2 space-y-1.5 bg-[#0E1624]/80">
+                <p className="text-[8px] text-white/40 uppercase tracking-wider">5 questions · 1–5 scale</p>
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <div
+                      key={n}
+                      className={`flex-1 h-6 rounded-md border text-[9px] flex items-center justify-center ${
+                        n === 4 ? "border-ap-accent bg-ap-accent/20 text-white" : "border-white/10 text-white/35"
+                      }`}
+                    >
+                      {n}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="rounded-xl border border-dashed border-white/15 px-2.5 py-2 text-[9px] text-white/45">
+        Submit locks the week; history builds trend lines Alfred uses in planning prompts.
+      </div>
+    </div>
+  );
+}
+
+function PrioritiesDemoScreen() {
+  const cells = [
+    { title: "Critical", sub: "High importance · low score", tone: "border-red-500/30 bg-red-500/10 text-red-200" },
+    { title: "Protect", sub: "High importance · high score", tone: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200" },
+    { title: "Monitor", sub: "Lower priority watch list", tone: "border-amber-500/25 bg-amber-500/10 text-amber-100" },
+    { title: "Over-invest?", sub: "Strong score · lower stated priority", tone: "border-sky-500/25 bg-sky-500/10 text-sky-200" },
+  ] as const;
+  return (
+    <div className="p-3 pb-5 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2">
+        <h1 className="text-sm font-semibold text-white">Priorities</h1>
+        <p className="text-[10px] text-white/45 mt-1">Explore your priority matrix</p>
+      </header>
+      <div className="grid grid-cols-2 gap-1.5">
+        {cells.map((c) => (
+          <div key={c.title} className={`rounded-xl border p-2 ${c.tone}`}>
+            <p className="text-[10px] font-bold">{c.title}</p>
+            <p className="text-[8px] opacity-80 mt-1 leading-snug">{c.sub}</p>
+          </div>
+        ))}
+      </div>
+      <div className="rounded-xl border border-white/10 bg-white/[0.04] p-2.5 space-y-1.5">
+        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Example row</p>
+        <div className="flex items-center gap-2">
+          <Activity className="h-3.5 w-3.5 text-ap-accent shrink-0" />
+          <span className="text-[10px] text-white/80 flex-1">Physical Health</span>
+          <span className="text-[9px] text-red-300 font-semibold">Critical</span>
+        </div>
+        <p className="text-[9px] text-white/45 leading-relaxed">
+          Tap any domain in-app for the full interpretation block from DOMAIN_INTERPRETATIONS.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function BlueprintDemoScreen() {
+  const sections = [
+    { icon: Target, label: "North Star Stack" },
+    { icon: Heart, label: "Core Values" },
+    { icon: DollarSign, label: "Revenue + Operations" },
+    { icon: Crosshair, label: "Vital Action (90 Days)" },
+  ] as const;
+  return (
+    <div className="p-3 pb-5 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2 flex items-start justify-between gap-2">
+        <div>
+          <h1 className="text-sm font-semibold text-white">Alignment Blueprint</h1>
+          <p className="text-[9px] text-white/45 mt-1">Version 3 · Updated Mar 18, 2026</p>
+        </div>
+        <div className="text-right shrink-0">
+          <p className="text-[8px] text-white/40">Context depth</p>
+          <p className="text-[10px] font-bold text-ap-accent">78%</p>
+        </div>
+      </header>
+      <div className="flex flex-wrap gap-1">
+        {sections.map(({ icon: Icon, label }) => (
+          <span
+            key={label}
+            className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05] px-2 py-1 text-[8px] text-white/70"
+          >
+            <Icon className="h-3 w-3 text-ap-accent" />
+            {label}
+          </span>
+        ))}
+      </div>
+      <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-2">
+        <p className="text-[10px] font-semibold text-white">North Star Stack</p>
+        <p className="text-[9px] text-white/55 leading-relaxed">
+          Becoming: present CEO and partner · Real Reasons: time sovereignty, legacy with kids · Driving Fire: build the
+          OS without sacrificing the marriage.
+        </p>
+        <p className="text-[9px] text-white/40 italic">Markdown sections match /blueprint rendering in production.</p>
+      </div>
+    </div>
+  );
+}
+
+function ArchetypesDemoScreen() {
+  const rows = [
+    { name: "The Ghost", active: true },
+    { name: "The Operator", active: false },
+    { name: "The Visionary", active: false },
+  ] as const;
+  return (
+    <div className="p-3 pb-5 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2">
+        <p className="text-[9px] font-semibold text-ap-accent uppercase tracking-wider">Library</p>
+        <h1 className="text-sm font-semibold text-white mt-1">{ARCHETYPE_LIBRARY_DEMO_TITLE}</h1>
+        <p className="text-[10px] text-white/45 mt-1 leading-relaxed">
+          Same archetype essays as /archetypes—browse patterns before you lock your story.
+        </p>
+      </header>
+      <div className="space-y-1.5">
+        {rows.map(({ name, active }) => (
+          <div
+            key={name}
+            className={`flex items-center gap-2 rounded-xl border px-2.5 py-2 ${
+              active ? "border-ap-accent/40 bg-ap-accent/10" : "border-white/10 bg-white/[0.03]"
+            }`}
+          >
+            <span className={`text-[11px] font-medium flex-1 min-w-0 ${active ? "text-white" : "text-white/50"}`}>
+              {name}
+            </span>
+            {active ? <span className="text-[8px] font-bold uppercase text-ap-accent shrink-0">Yours</span> : null}
+            <ChevronRight className="h-4 w-4 text-white/30 shrink-0" />
+          </div>
+        ))}
+      </div>
+      <p className="text-[9px] text-white/40 leading-relaxed">
+        Full entries include strength, shadow, constraint, growth path, and program phase—mirroring archetypes-full.ts.
+      </p>
+    </div>
+  );
+}
+
+function SettingsDemoScreen() {
+  const rows = ["Account & profile", "Notifications", "Appearance / theme", "Privacy & data", "Sign out"] as const;
+  return (
+    <div className="p-3 pb-5 space-y-3 text-left">
+      <header className="border-b border-white/10 pb-2">
+        <h1 className="text-sm font-semibold text-white">Settings</h1>
+        <p className="text-[10px] text-white/45 mt-1">Account controls and preferences</p>
+      </header>
+      <div className="rounded-xl border border-white/10 divide-y divide-white/10 overflow-hidden">
+        {rows.map((label) => (
+          <div
+            key={label}
+            className="flex items-center justify-between px-2.5 py-2.5 text-[11px] text-white/80 bg-white/[0.02]"
+          >
+            <span>{label}</span>
+            <ChevronRight className="h-4 w-4 text-white/25" />
+          </div>
+        ))}
+      </div>
+      <p className="text-[9px] text-white/40 leading-relaxed">
+        Demo only—connects to live account screens inside ALFRED.
+      </p>
     </div>
   );
 }

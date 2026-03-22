@@ -41,7 +41,7 @@ That's it. 10 minutes and you're off.
 
 {{first_name}},
 
-Quick tip: Turn on morning SMS prompts in Settings.
+Quick tip: Turn on morning coach notifications in Settings when you want the day framed before the inbox does.
 
 Every morning, at a time you choose, you'll get a short, values-aligned text. Something like:
 

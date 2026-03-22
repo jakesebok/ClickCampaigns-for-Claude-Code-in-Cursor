@@ -30,7 +30,7 @@ Programs guide clients through five stages: **Awareness, Strategic Clarity, Inte
 | Term | What it is |
 |------|------------|
 | **Aligned Freedom Coach** | The customer-facing name of the **only app** Jake sells. |
-| **ALFRED** | The same product as Aligned Freedom Coach. Acronym: **AL**igned **FRE**e**D**om Coach. Use **ALFRED** when you want personality and recall; use **Aligned Freedom Coach** in formal/legal contexts as needed. |
+| **ALFRED** | Short for **Aligned Freedom Coach**—the same product. Use **ALFRED** for personality and recall; use **Aligned Freedom Coach** in formal/legal contexts. (Name wink: the steady “guy in the earpiece”; Old English roots *ælf* + *ræd* → counsel / trusted advice.) |
 | **Aligned AIOS** | The **master prompt + blueprint** users generate at the end of **Phase II (Strategic Clarity)** in the Accelerator **or** in the **Strategic Alignment Intensive**. It turns ChatGPT, Claude, Gemini, or another model into a personalized, values-aligned coach using their workshop outputs. *Not* a separate app—**it’s the prompt layer.** |
 | **ALFRED vs Aligned AIOS** | **Aligned AIOS** is the “bring-your-own-AI” operating context from worksheets. **ALFRED** is that intelligence **plus** live integration: VAPI™ scores, Founder Archetype, primary dysfunction driver pattern, weekly **6Cs** scores, **Vital Actions**, and ongoing coaching—**Aligned AIOS on steroids**, inside one app. |
 

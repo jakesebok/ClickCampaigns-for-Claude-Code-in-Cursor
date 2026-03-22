@@ -275,18 +275,19 @@ export default function SettingsPage() {
             </div>
           </section>
 
-          {/* SMS Notifications */}
+          {/* Morning coach notifications */}
           <section className="rounded-2xl border border-border bg-card p-6 space-y-4">
             <h2 className="font-semibold flex items-center gap-2">
               <Bell className="h-4 w-4" />
-              Morning Prompts (SMS)
+              Morning coach notifications
             </h2>
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm">Daily SMS prompt</p>
+                <p className="text-sm">Morning nudge from your coach</p>
                 <p className="text-xs text-muted-foreground">
-                  Get a values-aligned prompt every morning
+                  Short, values-aligned prompts that engage you before the day runs away—in-app or via your configured
+                  channels.
                 </p>
               </div>
               <button
@@ -303,25 +304,10 @@ export default function SettingsPage() {
 
             {settings.smsEnabled && (
               <div className="space-y-3 pt-2">
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    value={settings.phone}
-                    onChange={(e) =>
-                      setSettings({ ...settings, phone: e.target.value })
-                    }
-                    onBlur={() => updateSettings({ phone: settings.phone })}
-                    placeholder="+1 555 123 4567"
-                    className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
-                  />
-                </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="text-sm text-muted-foreground">
-                      Send Time
+                      Preferred time
                     </label>
                     <input
                       type="time"

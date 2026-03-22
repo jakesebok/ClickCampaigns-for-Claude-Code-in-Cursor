@@ -48,8 +48,8 @@ const dailyItems = [
     body: "Your strategic story in one place so you stop re-pasting the same context into a blank chat window.",
   },
   {
-    title: "Morning SMS (optional)",
-    body: "A short nudge that matches your pace, not a performance contest.",
+    title: "Morning notifications (optional)",
+    body: "A short nudge from your coach when you want the day framed before the inbox does—engaging, not a performance contest.",
   },
 ];
 
@@ -155,8 +155,7 @@ export default function WhoIsAlfredPage() {
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-3">
             Every legendary operator had someone in the earpiece: calm, informed, unafraid to say the quiet part out
-            loud. ALFRED is that steady presence for founders, minus the cave and the cape. A little wink, a lot of
-            leverage.
+            loud. ALFRED is that steady presence for founders, minus the cave and the cape.
           </p>
           <p className="text-sm text-ap-muted font-medium max-w-[720px] mb-12">
             Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On Dashboard,
@@ -188,51 +187,61 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-ap-bg">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            Aligned AIOS vs ALFRED
+            The usual AI coach vs ALFRED
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Same north star. Different leverage. Many folks run both for a while; operators who want persistence usually
-            land in the app.
+            Most “AI coaches” are a clever model in a blank chat: impressive for a minute, amnesiac by Tuesday. ALFRED is
+            built for the stretch between a good answer and a lived week—your blueprint, assessment, archetype, pattern,
+            scorecard, and Vital Action stay in the room so the voice you hear is actually about you.
           </p>
           <div className="overflow-x-auto rounded-[20px] border border-ap-border bg-white">
             <table className="w-full text-left text-sm sm:text-base">
               <thead>
                 <tr className="border-b border-ap-border bg-ap-off">
                   <th className="p-4 sm:p-5 font-outfit font-bold text-ap-primary"> </th>
-                  <th className="p-4 sm:p-5 font-outfit font-bold text-ap-primary">Aligned AIOS</th>
+                  <th className="p-4 sm:p-5 font-outfit font-bold text-ap-primary">Typical AI chat coach</th>
                   <th className="p-4 sm:p-5 font-outfit font-bold text-ap-accent">ALFRED</th>
                 </tr>
               </thead>
               <tbody className="text-ap-mid font-medium">
                 <tr className="border-b border-ap-border">
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">What it is</td>
+                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Memory of you</td>
                   <td className="p-4 sm:p-5">
-                    Master prompt and blueprint from Strategic Clarity. Runs inside ChatGPT, Claude, Gemini, or similar.
+                    Context lives in whatever you paste today. Threads, tabs, and models forget your last hard decision.
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    A dedicated app with memory, scorecards, Vital Action, and your assessment data wired in.
+                    Your Alignment Blueprint, VAPI™ read, archetype, driver pattern, 6Cs, and Vital Action stay loaded—so
+                    you are not re-opening your life story every night.
                   </td>
                 </tr>
                 <tr className="border-b border-ap-border">
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Best for</td>
-                  <td className="p-4 sm:p-5">“I want my favorite model to know my worksheets.”</td>
+                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Advice quality</td>
+                  <td className="p-4 sm:p-5">
+                    Generic hustle templates dressed up in your industry’s keywords—no values filter, no consequence map.
+                  </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    “I want this to survive my real calendar without re-pasting context every night.”
+                    Answers run through your stated values, capacity, and revenue math, with Fire Starters and coaching
+                    prompts wired to the same framework Jake uses in the room.
                   </td>
                 </tr>
                 <tr>
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Live rhythm</td>
-                  <td className="p-4 sm:p-5">You paste what you remember; the model does not track your week for you.</td>
+                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Operating rhythm</td>
+                  <td className="p-4 sm:p-5">
+                    No honest weekly structure unless you invent and police it yourself.
+                  </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Built-in cadence: assessment, archetype, pattern, weekly check-ins, Vital Action, updated as you use
-                    it.
+                    Built-in cadence: dashboard, coach, voice, results, scorecard, and optional morning nudges so
+                    alignment shows up when willpower thins—not only when you remember to open a chat.
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="text-sm text-ap-muted mt-4 max-w-[720px]">
-            Aligned AIOS ships at the end of Phase II (Strategic Clarity) inside the Accelerator or through a{" "}
+            Your <strong className="text-ap-mid">Aligned AIOS</strong> master prompt from Strategic Clarity still runs in
+            ChatGPT, Claude, or Gemini whenever you want it. ALFRED is for founders who want that same strategic spine{" "}
+            <em>plus</em> persistence, assessment depth, and a product that does not quit when the week gets loud. It
+            ships after Phase II in the Accelerator or through a{" "}
             <Link
               href="/work-with-me/strategic-intensives"
               className="text-gradient-accent font-semibold hover:underline"
@@ -314,11 +323,15 @@ export default function WhoIsAlfredPage() {
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
           <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 sm:p-10 text-center">
             <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-3">
-              The name &quot;ALFRED&quot;?
+              Why the name &quot;ALFRED&quot;?
             </h2>
-            <p className="text-ap-mid font-medium leading-relaxed mb-8">
-              Short for Aligned Freedom Coach: Al, Fre, Dom. Same product whether you say ALFRED or the full name. Use
-              whichever one gets you to open the app.
+            <p className="text-ap-mid font-medium leading-relaxed mb-6 text-left sm:text-center max-w-[640px] mx-auto">
+              <strong className="text-ap-primary">ALFRED</strong> is short for{" "}
+              <strong className="text-ap-primary">Aligned Freedom Coach</strong>—the product name on the tin. There is
+              also a deliberate wink at the other famous Alfred: the one in the earpiece who had Batman&apos;s six,
+              remembered everything that mattered, and never needed the spotlight. If you like word-nerd trivia, the
+              Old English roots are <em>ælf</em> and <em>ræd</em>—elf + counsel, advice, wisdom—so you are allowed to
+              read it as <em>trusted counsel</em>, not a random startup syllable salad.
             </p>
             <p className="text-ap-mid font-medium mb-8">
               Not ready yet? Start free with{" "}

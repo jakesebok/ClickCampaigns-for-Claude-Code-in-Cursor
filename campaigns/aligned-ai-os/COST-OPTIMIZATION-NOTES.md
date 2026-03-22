@@ -48,7 +48,7 @@ Batch is for "I have 1,000 documents to process and I'll check back in an hour."
 - **Context generation:** Structured output, template filling, conflict resolution. Needs Sonnet.
 - **Context patch:** Same complexity.
 
-We don't have any "simple" Anthropic tasks. Voice uses OpenAI Realtime (separate cost). Morning prompts use Twilio SMS (no AI).
+We don't have any "simple" Anthropic tasks. Voice uses OpenAI Realtime (separate cost). Morning prompts may use Twilio or push/in-app paths depending on configuration (no AI in the nudge itself).
 
 **Verdict:** Sonnet is the right model. No downgrade recommended.
 

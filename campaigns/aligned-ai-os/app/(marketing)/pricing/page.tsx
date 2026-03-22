@@ -11,7 +11,7 @@ const features = [
   "Fire Starters — 56 strategic prompts",
   "Weekly Vital Action tracking",
   "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
-  "Daily SMS morning prompts",
+  "Morning coach notifications",
   "Alignment Blueprint dashboard",
   "Alignment Blueprint updates (monthly)",
   "Works on desktop, phone, and tablet (PWA)",

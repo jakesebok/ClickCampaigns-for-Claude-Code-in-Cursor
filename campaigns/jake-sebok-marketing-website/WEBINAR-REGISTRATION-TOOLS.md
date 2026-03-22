@@ -3,7 +3,7 @@
 For **Aligned Freedom Workshop** (monthly, free) and **Strategic Alignment Intensives** (quarterly, paid), you'll need a way to:
 
 1. Collect registrations
-2. Send automated reminders (email + optional SMS)
+2. Send automated reminders (email; add other channels if your stack supports them)
 3. Host the event (Zoom, etc.) or link to a scheduler
 
 ## Recommended Tools
