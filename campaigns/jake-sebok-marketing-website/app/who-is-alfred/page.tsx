@@ -49,7 +49,7 @@ const dailyItems = [
   },
   {
     title: "Daily Sparks",
-    body: "Little coaching pings when you want the day framed before the inbox does—encouraging, on-brand, never a scoreboard.",
+    body: "Light coaching prompts when you want to name how you are showing up before your inbox names it for you. Encouraging, on-brand, and never a performance scoreboard.",
   },
 ];
 
@@ -58,8 +58,8 @@ export default function WhoIsAlfredPage() {
     <>
       <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
         <div
-          className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
-          style={{ clipPath: "polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="pointer-events-none absolute top-0 right-0 z-0 h-[58%] w-[min(92vw,640px)] sm:h-[52%] sm:w-[min(88vw,720px)] lg:h-full lg:w-[min(68vw,860px)] xl:w-[min(62vw,920px)] bg-ap-accent/[0.26] shadow-[-28px_0_60px_-20px_rgba(255,107,26,0.45)]"
+          style={{ clipPath: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           aria-hidden
         />
         <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">

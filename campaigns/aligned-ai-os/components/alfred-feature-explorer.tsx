@@ -28,8 +28,10 @@ import {
   BookOpen,
   Brain,
   Briefcase,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   ClipboardCheck,
   Loader2,
   Crosshair,
@@ -52,9 +54,13 @@ import {
   Zap,
 } from "lucide-react";
 import {
+  ASSESSMENT_DRIVER_SECTION_NOTE,
   CHAT_SUBTITLE,
   COACH_DEMO_INNER_THREAD_OPENER,
   COACH_DEMO_WEEKLY_THREAD_OPENER,
+  DEMO_COMPOSITE_VAPI_SCORE,
+  DEMO_FOCUS_HERE_FIRST_DOMAINS,
+  DEMO_RESULTS_DOMAIN_SAMPLES,
   DRIVER_LIBRARY_SUBTITLE,
   WEEKLY_DEMO_CASUAL_USER_MESSAGE,
   WEEKLY_PLANNING_DEMO_TURNS,
@@ -74,6 +80,8 @@ import {
   SAMPLE_SCHEDULE_REPLY,
   WEEKLY_PLANNING_DEMO_LABEL,
   WEEKLY_PLANNING_PROMPTS,
+  demoVapiGetTier,
+  demoVapiTierColor,
 } from "./alfred-feature-explorer-data";
 
 type CoachThreadPrompt =
@@ -108,6 +116,13 @@ const MORE_ROUTE_TABS: AppTab[] = ["scorecard", "priorities", "blueprint", "arch
 function isMoreRouteTab(t: AppTab): boolean {
   return MORE_ROUTE_TABS.includes(t);
 }
+
+/** Icons for `DEMO_FOCUS_HERE_FIRST_DOMAINS` (matches production DOMAIN_ICONS). */
+const DEMO_FHF_ICONS: Record<string, ComponentType<{ className?: string }>> = {
+  PH: Activity,
+  CO: Users,
+  EC: Leaf,
+};
 
 const DASHBOARD_TOUR = [
   {
@@ -972,8 +987,9 @@ function DashboardScreen({
   onJumpFocus: (f: TourFocus) => void;
   onViewDriverDetails: () => void;
 }) {
-  const vapiTierColor = "#EAB308";
-  const vapiTierLabel = "Functional";
+  const vapiComposite = DEMO_COMPOSITE_VAPI_SCORE;
+  const vapiTierLabel = demoVapiGetTier(vapiComposite);
+  const vapiTierColor = demoVapiTierColor(vapiComposite);
 
   return (
     <div className="p-3 pb-4 space-y-3 text-left">
@@ -1069,9 +1085,11 @@ function DashboardScreen({
             <span className="text-[10px] font-medium text-white/50">VAPI Score</span>
           </div>
           <div className="flex items-end gap-2">
-            <span className="text-2xl font-bold font-cormorant tabular-nums text-white">7.4</span>
+            <span className="text-2xl font-bold font-cormorant tabular-nums text-white">
+              {vapiComposite.toFixed(1)}
+            </span>
             <span
-              className="text-[9px] font-medium px-1.5 py-0.5 rounded text-[#0E1624] mb-0.5"
+              className="text-[9px] font-medium px-1.5 py-0.5 rounded text-white mb-0.5"
               style={{ backgroundColor: vapiTierColor }}
             >
               {vapiTierLabel}
@@ -1090,9 +1108,10 @@ function DashboardScreen({
             <span className="text-[9px] font-medium text-white/50 uppercase tracking-wider">Focus Here First</span>
           </div>
           <div className="space-y-1.5">
-            <FocusRow icon={Activity} name="Physical Health" score={3.5} />
-            <FocusRow icon={Users} name="Community" score={4.2} />
-            <FocusRow icon={Leaf} name="Ecology" score={4.5} />
+            {DEMO_FOCUS_HERE_FIRST_DOMAINS.map((d) => {
+              const Icon = DEMO_FHF_ICONS[d.code] ?? Activity;
+              return <FocusRow key={d.code} icon={Icon} name={d.name} score={d.score} />;
+            })}
           </div>
         </div>
       </div>
@@ -1148,7 +1167,12 @@ function FocusRow({
     <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-[#0E1624]/80 px-2 py-1.5">
       <Icon className="h-3.5 w-3.5 text-ap-accent shrink-0" />
       <span className="text-[10px] text-white/75 flex-1 truncate">{name}</span>
-      <span className="text-[10px] font-bold tabular-nums text-amber-300">{score.toFixed(1)}</span>
+      <span
+        className="text-[10px] font-bold tabular-nums shrink-0"
+        style={{ color: demoVapiTierColor(score) }}
+      >
+        {score.toFixed(1)}
+      </span>
     </div>
   );
 }
@@ -1647,36 +1671,147 @@ function VoiceIdleScreen() {
 
 const ARCHETYPE_LIBRARY_DEMO_TITLE = "The 9 Founder Archetypes";
 
+/** Demo `topDriverScore` for pattern strength pill (production uses scored VAPI). */
+const DEMO_RESULTS_DRIVER_PATTERN_STRENGTH = 8;
+
+function ResultsDriverPatternSection() {
+  const [expanded, setExpanded] = useState({
+    mechanism: false,
+    cost: false,
+    wayOut: false,
+  });
+  const accent = ESCAPE_ARTIST_ACCENT;
+  const d = ESCAPE_ARTIST_DRIVER;
+
+  const accordionSections = [
+    { key: "mechanism" as const, title: "How This Shows Up in Your Scores", body: d.mechanism },
+    { key: "cost" as const, title: "What This Is Costing You", body: d.whatItCosts },
+    { key: "wayOut" as const, title: "The Way Out", body: d.theWayOut },
+  ];
+
+  return (
+    <section
+      id="driver-section"
+      className="rounded-2xl border border-white/10 bg-gradient-to-br from-ap-accent/[0.12] via-white/[0.04] to-[#0E1624]/90 p-3 shadow-sm space-y-2.5"
+    >
+      <p className="text-[9px] font-medium text-white/50 uppercase tracking-wider">
+        What&apos;s Driving This Pattern
+      </p>
+
+      <div className="flex flex-col gap-2">
+        <div className="flex items-start gap-2.5">
+          <div
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border"
+            style={{
+              backgroundColor: `${accent}14`,
+              borderColor: `${accent}33`,
+            }}
+          >
+            <EscapeArtistGlyph size={28} />
+          </div>
+          <div className="min-w-0 flex-1 space-y-1">
+            <h2 className="text-sm font-cormorant font-bold text-white leading-tight">{d.name}</h2>
+            <p className="text-[9px] text-white/55 leading-snug">
+              <span className="font-semibold text-white/80">Core fear:</span> {d.coreFear}
+            </p>
+          </div>
+        </div>
+        <span
+          className="inline-flex w-fit items-center rounded-full border px-2 py-0.5 text-[8px] font-semibold uppercase tracking-wider"
+          style={{
+            borderColor: `${accent}33`,
+            backgroundColor: `${accent}14`,
+            color: accent,
+          }}
+        >
+          Pattern strength: {DEMO_RESULTS_DRIVER_PATTERN_STRENGTH} / {d.maxPossible}
+        </span>
+      </div>
+
+      <blockquote
+        className="rounded-xl border-l-4 px-2.5 py-2 text-[11px] font-cormorant font-semibold leading-snug text-white"
+        style={{
+          borderLeftColor: accent,
+          backgroundColor: `${accent}14`,
+        }}
+      >
+        &quot;{d.coreBelief}&quot;
+      </blockquote>
+
+      <p className="text-[9px] italic text-white/50 leading-relaxed">{d.tagline}</p>
+      <p className="text-[9px] text-white/55 leading-relaxed">{d.description}</p>
+
+      <div className="space-y-1.5">
+        {accordionSections.map((section) => {
+          const isOpen = expanded[section.key];
+          return (
+            <div key={section.key} className="rounded-xl border border-white/10 bg-[#0E1624]/70">
+              <button
+                type="button"
+                onClick={() =>
+                  setExpanded((cur) => ({ ...cur, [section.key]: !cur[section.key] }))
+                }
+                className="flex w-full items-center justify-between gap-2 px-2.5 py-2 text-left"
+                aria-expanded={isOpen}
+              >
+                <span className="text-[9px] font-semibold text-white/90 leading-snug">{section.title}</span>
+                {isOpen ? (
+                  <ChevronUp className="h-3.5 w-3.5 shrink-0 text-white/45" />
+                ) : (
+                  <ChevronDown className="h-3.5 w-3.5 shrink-0 text-white/45" />
+                )}
+              </button>
+              {isOpen && (
+                <div className="border-t border-white/10 px-2.5 py-2">
+                  <p className="text-[8px] leading-relaxed text-white/55">{section.body}</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="space-y-2 border-t border-white/10 pt-2.5">
+        <p className="text-[8px] leading-relaxed text-white/45">{ASSESSMENT_DRIVER_SECTION_NOTE}</p>
+        <p className="text-[9px] font-medium text-ap-accent">Learn more about all driver patterns →</p>
+      </div>
+    </section>
+  );
+}
+
 function ResultsDeepScreen() {
   const arenaRow = [
-    { label: "Personal", icon: BarChart2, score: "6.2", note: "Habits & health baseline" },
-    { label: "Relationships", icon: Heart, score: "4.1", note: "Presence vs achievement tradeoff" },
-    { label: "Business", icon: Briefcase, score: "7.8", note: "Execution engine strong" },
+    { label: "Personal", icon: BarChart2, score: 6.2, note: "Habits & health baseline" },
+    { label: "Relationships", icon: Heart, score: 4.1, note: "Presence vs achievement tradeoff" },
+    { label: "Business", icon: Briefcase, score: 7.8, note: "Execution engine strong" },
   ] as const;
-  const domainSamples = [
-    { code: "RS", name: "Relationships", score: "3.8", flag: "Focus Here First" },
-    { code: "FA", name: "Family", score: "4.0", flag: "Focus Here First" },
-    { code: "EX", name: "Execution", score: "8.1", flag: "Protect & sustain" },
-    { code: "ME", name: "Mental / Emotional", score: "3.2", flag: "Critical priority" },
-  ] as const;
+  const vapiComposite = DEMO_COMPOSITE_VAPI_SCORE;
+  const compositeTier = demoVapiGetTier(vapiComposite);
+  const compositeTierColor = demoVapiTierColor(vapiComposite);
 
   return (
     <div className="p-3 pb-6 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2 mb-1">
         <p className="text-[9px] font-medium text-ap-accent uppercase tracking-wider">Your Results</p>
         <h1 className="text-sm font-semibold text-white mt-1">Assessment results</h1>
-        <p className="text-[9px] text-white/45 mt-0.5">Mirrors /assessment/results structure (condensed)</p>
       </header>
 
       <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
         <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Composite VAPI</p>
         <div className="flex items-end gap-2">
-          <span className="text-3xl font-bold font-cormorant tabular-nums text-white">7.4</span>
-          <span className="text-[9px] font-semibold px-2 py-0.5 rounded bg-amber-500 text-[#0E1624] mb-1">Functional</span>
+          <span className="text-3xl font-bold font-cormorant tabular-nums text-white">
+            {vapiComposite.toFixed(1)}
+          </span>
+          <span
+            className="text-[9px] font-semibold px-2 py-0.5 rounded text-white mb-1"
+            style={{ backgroundColor: compositeTierColor }}
+          >
+            {compositeTier}
+          </span>
         </div>
         <p className="text-[10px] text-white/55 leading-relaxed">
-          You have some systems and predictability, but it is patchy. This is where leverage lives—tighten the machine
-          before drift becomes a crisis.
+          Mid-pack overall: business systems run hot while personal and relationship arenas need attention. Same story as
+          your Focus Here First list—this is where leverage lives before drift becomes a crisis.
         </p>
       </section>
 
@@ -1693,6 +1828,8 @@ function ResultsDeepScreen() {
         </div>
       </section>
 
+      <ResultsDriverPatternSection />
+
       <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
         <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Arena breakdown</p>
         <div className="grid grid-cols-3 gap-1.5">
@@ -1700,7 +1837,12 @@ function ResultsDeepScreen() {
             <div key={label} className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2">
               <Icon className="h-3.5 w-3.5 text-ap-accent mb-1" />
               <p className="text-[9px] font-semibold text-white/80">{label}</p>
-              <p className="text-lg font-cormorant font-bold text-white tabular-nums">{score}</p>
+              <p
+                className="text-lg font-cormorant font-bold tabular-nums"
+                style={{ color: demoVapiTierColor(score) }}
+              >
+                {score.toFixed(1)}
+              </p>
               <p className="text-[8px] text-white/40 leading-snug mt-1">{note}</p>
             </div>
           ))}
@@ -1710,14 +1852,19 @@ function ResultsDeepScreen() {
       <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-2">
         <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Domains & interpretations</p>
         <div className="space-y-1.5">
-          {domainSamples.map((d) => (
+          {DEMO_RESULTS_DOMAIN_SAMPLES.map((d) => (
             <div
               key={d.code}
               className="flex items-center gap-2 rounded-lg border border-white/10 bg-[#0E1624]/60 px-2 py-1.5"
             >
               <span className="text-[9px] font-mono text-white/35 w-6">{d.code}</span>
               <span className="text-[10px] text-white/80 flex-1 truncate">{d.name}</span>
-              <span className="text-[10px] font-bold tabular-nums text-amber-200/90">{d.score}</span>
+              <span
+                className="text-[10px] font-bold tabular-nums shrink-0"
+                style={{ color: demoVapiTierColor(d.score) }}
+              >
+                {d.score.toFixed(1)}
+              </span>
             </div>
           ))}
         </div>
@@ -1733,8 +1880,10 @@ function ResultsDeepScreen() {
           already working.
         </p>
         <div className="space-y-1">
-          <FocusRow icon={Users} name="Relationships" score={3.8} />
-          <FocusRow icon={Activity} name="Family" score={4.0} />
+          {DEMO_FOCUS_HERE_FIRST_DOMAINS.map((d) => {
+            const Icon = DEMO_FHF_ICONS[d.code] ?? Activity;
+            return <FocusRow key={d.code} icon={Icon} name={d.name} score={d.score} />;
+          })}
         </div>
       </section>
 
@@ -1743,7 +1892,7 @@ function ResultsDeepScreen() {
         <div className="grid grid-cols-2 gap-1.5 text-[8px]">
           <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-2 text-white/80">
             <p className="font-semibold text-red-300">Critical</p>
-            <p className="text-white/50 mt-1">2 domains</p>
+            <p className="text-white/50 mt-1">3 domains (Focus Here First)</p>
           </div>
           <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 p-2 text-white/80">
             <p className="font-semibold text-emerald-300">Protect</p>
@@ -1758,14 +1907,6 @@ function ResultsDeepScreen() {
             <p className="text-white/50 mt-1">Redirect energy</p>
           </div>
         </div>
-      </section>
-
-      <section className="rounded-2xl border border-ap-accent/25 bg-ap-accent/10 p-3 space-y-2">
-        <p className="text-[8px] font-semibold uppercase tracking-wider text-white/45">Driver tie-in</p>
-        <p className="text-[10px] text-white/80 leading-relaxed">
-          Likely driver: <span className="font-semibold text-ap-accent">{ESCAPE_ARTIST_DRIVER.name}</span> — patterns
-          from scoring feed the same driver narrative you will see in Coach and Library.
-        </p>
       </section>
 
       <section className="rounded-2xl border border-dashed border-white/15 p-3">

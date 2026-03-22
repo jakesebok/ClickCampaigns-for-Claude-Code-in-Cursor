@@ -223,7 +223,7 @@ export default function LandingPage() {
                 icon: Bell,
                 title: "Daily Sparks",
                 description:
-                  "Coaching nudges when you want the day framed before the inbox does—values-aligned and on-brand, not generic blasts.",
+                  "Light coaching prompts when you want to name how you are showing up before your inbox names it for you. Values-aligned, on-brand, and not generic blasts.",
               },
               {
                 icon: CheckCircle2,

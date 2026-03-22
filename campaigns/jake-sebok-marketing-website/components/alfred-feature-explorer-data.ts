@@ -178,6 +178,10 @@ export const GHOST_ARCHETYPE = {
     "The Ghost has strong business metrics. You might even have your personal health and habits together. But the people in your life are experiencing your absence. Your family gets whatever's left after work takes its share. Your friendships are thin or transactional. You've optimized for achievement and accidentally optimized away the connections that make achievement meaningful.",
 } as const;
 
+/** app/(dashboard)/assessment/results/page.tsx — DriverSection disclaimer (verbatim) */
+export const ASSESSMENT_DRIVER_SECTION_NOTE =
+  "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
+
 /** lib/vapi/drivers.ts — The Escape Artist */
 export const ESCAPE_ARTIST_DRIVER = {
   name: "The Escape Artist",
@@ -195,6 +199,8 @@ export const ESCAPE_ARTIST_DRIVER = {
     "The exit is turning around and facing what you've been running from. We'll identify what you're actually avoiding (usually one or two specific things, not the vague cloud it feels like), build emotional capacity to face it, and create space for the conversations and feelings you've been deferring. The goal isn't to stop working. It's to stop using work as anesthesia.",
   programPhase:
     "Phase 1: Awareness (extended) into Phase 3: Internal Alignment. The Escape Artist often needs a longer Phase 1 because the avoidance means they haven't fully confronted what's underneath.",
+  /** lib/vapi/drivers.ts — DRIVER_CONTENT["The Escape Artist"].maxPossible */
+  maxPossible: 12,
 } as const;
 
 /** lib/vapi/driver-library.ts — DRIVER_LIBRARY_CONTENT["The Escape Artist"] */
@@ -242,6 +248,64 @@ export const DRIVER_ORDER_PREVIEW = [
   "The Achiever's Trap",
   "The Protector",
   "The Pleaser's Bind",
+] as const;
+
+/**
+ * Mirrors aligned-ai-os `lib/vapi/scoring.ts` — `getTier` + `getTierColor` (1–10 VAPI scale).
+ * Used in the mock phone so score colors match production.
+ */
+export type DemoVapiTier = "Dialed" | "Functional" | "Below the Line" | "In the Red";
+
+export function demoVapiGetTier(score: number): DemoVapiTier {
+  if (score >= 8) return "Dialed";
+  if (score >= 6) return "Functional";
+  if (score >= 4) return "Below the Line";
+  return "In the Red";
+}
+
+export function demoVapiTierColor(score: number): string {
+  switch (demoVapiGetTier(score)) {
+    case "Dialed":
+      return "#22C55E";
+    case "Functional":
+      return "#EAB308";
+    case "Below the Line":
+      return "#F97316";
+    case "In the Red":
+      return "#EF4444";
+  }
+}
+
+/**
+ * Mean of the 12 domain scores in `DEMO_RESULTS_DOMAIN_SAMPLES` (rounded to one decimal like production).
+ * Keeps dashboard + results composite VAPI consistent with the domain table and arena averages.
+ */
+export const DEMO_COMPOSITE_VAPI_SCORE = 6.0;
+
+/** One fictional user: same Focus Here First rows on dashboard and results. */
+export const DEMO_FOCUS_HERE_FIRST_DOMAINS = [
+  { code: "PH", name: "Physical Health", score: 3.5 },
+  { code: "CO", name: "Community", score: 4.2 },
+  { code: "EC", name: "Ecology", score: 4.5 },
+] as const;
+
+/**
+ * Full domain set for the results demo. Averages: Personal 6.2, Relationships 4.1, Business 7.8; overall 6.0.
+ * Labels match `IMPORTANCE_DOMAINS` in quiz-data where applicable.
+ */
+export const DEMO_RESULTS_DOMAIN_SAMPLES = [
+  { code: "PH", name: "Physical Health", score: 3.5 },
+  { code: "ME", name: "Mental / Emotional Health", score: 5.0 },
+  { code: "IA", name: "Inner Alignment", score: 8.2 },
+  { code: "AF", name: "Attention & Focus", score: 8.1 },
+  { code: "RS", name: "Relationship to Self", score: 3.8 },
+  { code: "FA", name: "Family", score: 4.0 },
+  { code: "CO", name: "Community", score: 4.2 },
+  { code: "WI", name: "World / Impact", score: 4.4 },
+  { code: "VS", name: "Vision / Strategy", score: 8.9 },
+  { code: "EX", name: "Execution", score: 8.9 },
+  { code: "OH", name: "Operational Health", score: 8.9 },
+  { code: "EC", name: "Ecology", score: 4.5 },
 ] as const;
 
 /**
