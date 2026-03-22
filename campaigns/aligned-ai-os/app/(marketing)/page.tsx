@@ -94,7 +94,7 @@ export default function LandingPage() {
           <Link href="#product-tour" className="font-medium text-accent hover:underline">
             See an interactive product tour
           </Link>{" "}
-          — dashboard, coach, voice, and more.
+          — dashboard, coach, voice, and more. Hover the phone there to pause auto-advance while you explore.
         </p>
       </section>
 

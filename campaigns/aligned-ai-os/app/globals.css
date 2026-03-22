@@ -110,6 +110,10 @@
         0 0 0 2px rgba(255, 107, 26, 0.45),
         0 0 22px -4px rgba(255, 107, 26, 0.5);
     }
+
+    .alfred-phone-scroll {
+      scroll-behavior: auto !important;
+    }
   }
 }
 

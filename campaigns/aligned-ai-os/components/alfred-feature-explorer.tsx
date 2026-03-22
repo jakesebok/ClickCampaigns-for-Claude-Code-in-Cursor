@@ -2,7 +2,7 @@
 
 /**
  * Interactive mock of authenticated ALFRED (Aligned Freedom Coach).
- * Deployed on alfredai.coach (landing) and kept in sync with jakesebok.com’s explorer when UX changes.
+ * Deployed on alfredai.coach (landing) and jakesebok.com — keep copies in sync when UX changes.
  *
  * Sources (campaigns/aligned-ai-os):
  * - app/(dashboard)/layout.tsx — mobile bottom nav, More menu pattern
@@ -18,7 +18,7 @@
  * Demo data (Vital Action text, 6Cs numbers, sample coach reply) is illustrative; UI strings match the app.
  */
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ComponentType } from "react";
+import { useCallback, useEffect, useRef, useState, type ComponentType } from "react";
 import {
   Activity,
   BarChart3,
@@ -185,6 +185,24 @@ function firstTourIndexForNavTab(tab: AppTab): number {
 
 const INTERVAL_MS = 5500;
 
+const PHONE_SCROLL_PADDING_PX = 14;
+
+/** Scroll *only* the phone body—never call scrollIntoView (it scrolls the whole page). */
+function scrollTargetIntoPhoneContainer(
+  container: HTMLElement,
+  target: HTMLElement,
+  behavior: ScrollBehavior
+) {
+  const cRect = container.getBoundingClientRect();
+  const tRect = target.getBoundingClientRect();
+  const maxScroll = Math.max(0, container.scrollHeight - container.clientHeight);
+  const nextTop = Math.min(
+    maxScroll,
+    Math.max(0, container.scrollTop + (tRect.top - cRect.top) - PHONE_SCROLL_PADDING_PX)
+  );
+  container.scrollTo({ top: nextTop, behavior });
+}
+
 const SIX_CS_DEMO = [
   { label: "Clarity", icon: Crosshair, pct: 84 },
   { label: "Coherence", icon: Link2, pct: 88 },
@@ -209,8 +227,8 @@ function scoreBarColor(pct: number): string {
 function focusClass(active: boolean, hoverable: boolean) {
   return [
     active
-      ? "ring-2 ring-[var(--ap-accent)] ring-offset-2 ring-offset-[#0E1624] z-10 scale-[1.01] transition-all duration-500"
-      : "opacity-[0.38] transition-all duration-500",
+      ? "ring-2 ring-[var(--ap-accent)] ring-offset-2 ring-offset-[#0E1624] z-10 scale-[1.01] transition-[opacity,transform,box-shadow] duration-500 ease-out"
+      : "opacity-[0.38] transition-opacity duration-500 ease-out",
     hoverable ? "cursor-pointer lg:hover:opacity-100" : "",
   ]
     .filter(Boolean)
@@ -250,7 +268,10 @@ const MORE_LINKS = [
   { label: "Driver Library", icon: Brain },
 ] as const;
 
-export function AlfredFeatureExplorer() {
+export type AlfredFeatureExplorerEmbed = "marketing" | "app-dark";
+
+export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredFeatureExplorerEmbed } = {}) {
+  const isAppDark = embed === "app-dark";
   const [tab, setTab] = useState<AppTab>("dashboard");
   const [coachPhase, setCoachPhase] = useState<CoachPhase>("home");
   const [coachCategory, setCoachCategory] = useState<string | null>(null);
@@ -261,6 +282,7 @@ export function AlfredFeatureExplorer() {
   const [tourIndex, setTourIndex] = useState(0);
   const [dashboardFocus, setDashboardFocus] = useState<TourFocus>("leverage");
   const [paused, setPaused] = useState(false);
+  const [phoneHover, setPhoneHover] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const phoneScrollRef = useRef<HTMLDivElement>(null);
@@ -353,20 +375,32 @@ export function AlfredFeatureExplorer() {
 
   useEffect(() => {
     clearTick();
-    if (paused || reduceMotion) return;
+    if (paused || reduceMotion || phoneHover) return;
     tickRef.current = setInterval(() => {
       setTourIndex((i) => (i + 1) % APP_TOUR_STEP_COUNT);
     }, INTERVAL_MS);
     return clearTick;
-  }, [paused, reduceMotion, clearTick]);
+  }, [paused, reduceMotion, phoneHover, clearTick]);
 
-  useLayoutEffect(() => {
+  /** Non-dashboard tabs: smooth scroll to top inside the phone only. */
+  useEffect(() => {
+    const container = phoneScrollRef.current;
+    if (!container || tab === "dashboard") return;
+    container.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }, [tab, reduceMotion]);
+
+  /** Dashboard: bring the focused card into view inside the phone only (does not scroll the page). */
+  useEffect(() => {
     if (tab !== "dashboard") return;
     const container = phoneScrollRef.current;
     if (!container) return;
     const el = container.querySelector(`[data-tour-section="${dashboardFocus}"]`);
     if (!(el instanceof HTMLElement)) return;
-    el.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+    const behavior: ScrollBehavior = reduceMotion ? "auto" : "smooth";
+    const id = window.requestAnimationFrame(() => {
+      scrollTargetIntoPhoneContainer(container, el, behavior);
+    });
+    return () => window.cancelAnimationFrame(id);
   }, [tab, dashboardFocus, reduceMotion]);
 
   const goTour = (dir: -1 | 1) => {
@@ -529,24 +563,42 @@ export function AlfredFeatureExplorer() {
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
             {left.kicker}
           </p>
-          <h3 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary leading-tight mb-4">
+          <h3
+            className={`font-outfit font-bold text-2xl sm:text-3xl leading-tight mb-4 ${
+              isAppDark ? "text-foreground" : "text-ap-primary"
+            }`}
+          >
             {left.title}
           </h3>
-          <p className="text-ap-mid font-medium leading-relaxed text-base sm:text-lg">{left.body}</p>
+          <p
+            className={`font-medium leading-relaxed text-base sm:text-lg ${
+              isAppDark ? "text-muted-foreground" : "text-ap-mid"
+            }`}
+          >
+            {left.body}
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3" role="group" aria-label="App tour controls">
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
-            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-4 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent hover:text-gradient-accent transition-colors"
+            className={`inline-flex items-center justify-center rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+              isAppDark
+                ? "border-border bg-secondary text-foreground hover:border-accent hover:text-accent"
+                : "border-ap-border bg-white text-ap-primary hover:border-ap-accent hover:text-gradient-accent"
+            }`}
           >
             {paused || reduceMotion ? "Play tour" : "Pause"}
           </button>
           <button
             type="button"
             onClick={() => goTour(-1)}
-            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
+            className={`inline-flex items-center justify-center rounded-full border px-3 py-2 text-sm font-semibold transition-colors ${
+              isAppDark
+                ? "border-border bg-secondary text-foreground hover:border-accent"
+                : "border-ap-border bg-white text-ap-primary hover:border-ap-accent"
+            }`}
             aria-label="Previous tour stop"
           >
             ←
@@ -554,12 +606,19 @@ export function AlfredFeatureExplorer() {
           <button
             type="button"
             onClick={() => goTour(1)}
-            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
+            className={`inline-flex items-center justify-center rounded-full border px-3 py-2 text-sm font-semibold transition-colors ${
+              isAppDark
+                ? "border-border bg-secondary text-foreground hover:border-accent"
+                : "border-ap-border bg-white text-ap-primary hover:border-ap-accent"
+            }`}
             aria-label="Next tour stop"
           >
             →
           </button>
-          <span className="text-sm text-ap-muted font-medium tabular-nums" aria-live="polite">
+          <span
+            className={`text-sm font-medium tabular-nums ${isAppDark ? "text-muted-foreground" : "text-ap-muted"}`}
+            aria-live="polite"
+          >
             {tourIndex + 1} / {APP_TOUR_STEP_COUNT}
           </span>
         </div>
@@ -575,8 +634,12 @@ export function AlfredFeatureExplorer() {
                 setPaused(true);
                 setTourIndex(i);
               }}
-              className={`h-1.5 rounded-full transition-all ${
-                i === tourIndex ? "w-6 bg-ap-accent" : "w-1.5 bg-ap-border hover:bg-ap-muted"
+              className={`h-1.5 rounded-full transition-all duration-300 ease-out ${
+                i === tourIndex
+                  ? "w-6 bg-ap-accent"
+                  : isAppDark
+                    ? "w-1.5 bg-border hover:bg-muted-foreground/40"
+                    : "w-1.5 bg-ap-border hover:bg-ap-muted"
               }`}
               aria-label={`Tour: ${s.dotLabel}`}
             />
@@ -584,7 +647,7 @@ export function AlfredFeatureExplorer() {
         </div>
 
         {paused && (
-          <p className="text-sm text-ap-muted font-medium max-w-xl">
+          <p className={`text-sm font-medium max-w-xl ${isAppDark ? "text-muted-foreground" : "text-ap-muted"}`}>
             Tour paused—use the phone&apos;s bottom nav or More menu to explore. Play resumes from this stop, or use the
             dots to jump.
           </p>
@@ -592,16 +655,23 @@ export function AlfredFeatureExplorer() {
       </div>
 
       <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-        <div className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]">
+        <div
+          className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]"
+          onMouseEnter={() => setPhoneHover(true)}
+          onMouseLeave={() => setPhoneHover(false)}
+        >
           <div
-            className="relative w-full rounded-[2.5rem] border-[6px] border-[#1a2332] bg-[#1a2332] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset]"
+            className="relative w-full rounded-[2.5rem] border-[6px] border-[#1a2332] bg-[#1a2332] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),0_0_0_1px_rgba(255,255,255,0.05)_inset] transition-shadow duration-300 ease-out"
             style={{ aspectRatio: "9 / 19" }}
           >
             <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem]">
               <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
 
               <div className="relative flex flex-1 min-h-0 flex-col bg-[#0E1624] text-white/90">
-                <div ref={phoneScrollRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+                <div
+                  ref={phoneScrollRef}
+                  className="alfred-phone-scroll flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-smooth"
+                >
                   {tab === "dashboard" && (
                     <DashboardScreen
                       tourFocus={dashboardFocus}
@@ -734,7 +804,11 @@ export function AlfredFeatureExplorer() {
             </div>
           </div>
 
-          <p className="text-center text-xs text-ap-muted mt-4 max-w-[320px] mx-auto leading-relaxed">
+          <p
+            className={`text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
+              isAppDark ? "text-muted-foreground" : "text-ap-muted"
+            }`}
+          >
             This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
             product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
             answers ground in your assessment, blueprint, scorecard, and commitments.
