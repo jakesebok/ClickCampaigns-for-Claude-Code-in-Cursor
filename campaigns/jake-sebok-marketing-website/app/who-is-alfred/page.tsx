@@ -161,10 +161,11 @@ export default function WhoIsAlfredPage() {
             </p>
             <p className="text-sm text-ap-muted font-medium leading-relaxed">
               The tour runs automatically through Dashboard highlights, Coach, Voice, Results, drivers, and the screens
-              under More—or use the bottom nav and menu to explore on your own. Pause anytime, then use prev/next or the
-              dots to jump stops. Hover the phone to freeze auto-advance while you interact. On desktop, hover a dimmed
-              Dashboard card to jump to that highlight; only the preview scrolls inside the device—your place on this
-              page stays put.
+              under More—starting only after you scroll this block into view so you land on the first stop, not whatever
+              step the timer would have reached above the fold. Use the bottom nav and menu to explore on your own; pause
+              anytime, then use prev/next or the dots to jump stops. Hover the phone to freeze auto-advance while you
+              interact. On desktop, hover a dimmed Dashboard card to jump to that highlight; only the preview scrolls
+              inside the device—your place on this page stays put.
             </p>
           </div>
           <AlfredFeatureExplorer />

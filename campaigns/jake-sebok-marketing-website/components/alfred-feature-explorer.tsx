@@ -184,22 +184,31 @@ function firstTourIndexForNavTab(tab: AppTab): number {
 
 const INTERVAL_MS = 5500;
 
-const PHONE_SCROLL_PADDING_PX = 14;
-
 /** Scroll *only* the phone body—never call scrollIntoView (it scrolls the whole page). */
-function scrollTargetIntoPhoneContainer(
+function scrollPhoneForDashboardFocus(
   container: HTMLElement,
   target: HTMLElement,
+  mode: "top" | "center",
   behavior: ScrollBehavior
 ) {
+  const maxScroll = Math.max(0, container.scrollHeight - container.clientHeight);
+  if (mode === "top") {
+    container.scrollTo({ top: 0, behavior });
+    return;
+  }
   const cRect = container.getBoundingClientRect();
   const tRect = target.getBoundingClientRect();
-  const maxScroll = Math.max(0, container.scrollHeight - container.clientHeight);
-  const nextTop = Math.min(
-    maxScroll,
-    Math.max(0, container.scrollTop + (tRect.top - cRect.top) - PHONE_SCROLL_PADDING_PX)
-  );
+  const targetTop = container.scrollTop + (tRect.top - cRect.top);
+  const targetH = target.offsetHeight;
+  const viewH = container.clientHeight;
+  const centeredTop = targetTop - (viewH - targetH) / 2;
+  const nextTop = Math.min(maxScroll, Math.max(0, centeredTop));
   container.scrollTo({ top: nextTop, behavior });
+}
+
+function dashboardFocusScrollMode(focus: TourFocus): "top" | "center" {
+  if (focus === "leverage" || focus === "weekly") return "top";
+  return "center";
 }
 
 const SIX_CS_DEMO = [
@@ -285,6 +294,24 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   const [reduceMotion, setReduceMotion] = useState(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const phoneScrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [sectionInView, setSectionInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setSectionInView(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        setSectionInView(entry.isIntersecting && entry.intersectionRatio >= 0.12);
+      },
+      { root: null, threshold: [0, 0.12, 0.15, 0.25, 0.5] }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -374,12 +401,12 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
 
   useEffect(() => {
     clearTick();
-    if (paused || reduceMotion || phoneHover) return;
+    if (paused || reduceMotion || phoneHover || !sectionInView) return;
     tickRef.current = setInterval(() => {
       setTourIndex((i) => (i + 1) % APP_TOUR_STEP_COUNT);
     }, INTERVAL_MS);
     return clearTick;
-  }, [paused, reduceMotion, phoneHover, clearTick]);
+  }, [paused, reduceMotion, phoneHover, sectionInView, clearTick]);
 
   /** Non-dashboard tabs: smooth scroll to top inside the phone only. */
   useEffect(() => {
@@ -388,19 +415,21 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
     container.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   }, [tab, reduceMotion]);
 
-  /** Dashboard: bring the focused card into view inside the phone only (does not scroll the page). */
+  /** Dashboard: auto-scroll inside the phone only while the same conditions as the auto-tour timer (not when paused or hovering the phone). */
   useEffect(() => {
     if (tab !== "dashboard") return;
+    if (paused || reduceMotion || phoneHover || !sectionInView) return;
     const container = phoneScrollRef.current;
     if (!container) return;
     const el = container.querySelector(`[data-tour-section="${dashboardFocus}"]`);
     if (!(el instanceof HTMLElement)) return;
     const behavior: ScrollBehavior = reduceMotion ? "auto" : "smooth";
+    const mode = dashboardFocusScrollMode(dashboardFocus);
     const id = window.requestAnimationFrame(() => {
-      scrollTargetIntoPhoneContainer(container, el, behavior);
+      scrollPhoneForDashboardFocus(container, el, mode, behavior);
     });
     return () => window.cancelAnimationFrame(id);
-  }, [tab, dashboardFocus, reduceMotion]);
+  }, [tab, dashboardFocus, reduceMotion, paused, phoneHover, sectionInView]);
 
   const goTour = (dir: -1 | 1) => {
     setPaused(true);
@@ -556,7 +585,10 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   const left = leftTitleAndBody();
 
   return (
-    <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] gap-10 lg:gap-14 xl:gap-16 items-center">
+    <div
+      ref={sectionRef}
+      className="grid lg:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] gap-10 lg:gap-14 xl:gap-16 items-center w-full min-w-0"
+    >
       <div className="order-2 lg:order-1 min-w-0 space-y-6 lg:py-4">
         <div>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
@@ -941,7 +973,7 @@ function DashboardScreen({
         data-tour-section="priorities"
         role="presentation"
         onMouseEnter={() => onJumpFocus("priorities")}
-        className={`space-y-2 ${focusClass(tourFocus === "priorities", true)}`}
+        className={`space-y-2 rounded-2xl ${focusClass(tourFocus === "priorities", true)}`}
       >
         <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
           <div className="flex items-center gap-1.5 mb-2">

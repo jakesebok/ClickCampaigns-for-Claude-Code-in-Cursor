@@ -22,8 +22,8 @@ export function AlfredLandingDemoSection() {
           </h2>
           <p className="text-lg font-medium leading-relaxed text-muted-foreground">
             Interactive preview: dashboard, Coach, Voice, results, drivers, and the screens behind More—same rhythm as
-            the live product. The tour runs automatically; pause anytime or use the dots to jump. Hover the phone to
-            freeze the tour while you tap around.
+            the live product. Auto-advance begins once you scroll this section into view so you always start on the first
+            stop. Pause anytime or use the dots to jump. Hover the phone to freeze the tour while you tap around.
           </p>
         </div>
         <AlfredFeatureExplorer embed="app-dark" />
