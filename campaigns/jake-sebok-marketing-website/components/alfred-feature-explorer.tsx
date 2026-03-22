@@ -212,7 +212,15 @@ function firstTourIndexForNavTab(tab: AppTab): number {
   }
 }
 
-const INTERVAL_MS = 5500;
+/** Default dwell on each tour stop when auto-advancing (ms). */
+const TOUR_DEFAULT_DWELL_MS = 6000;
+/** Longer dwell for Coach chat-thread demos so the scripted conversation can play. */
+const TOUR_CHAT_THREAD_DWELL_MS = 22000;
+
+function tourStepDwellMs(step: AppTourStep): number {
+  if (step.kind === "coach_thread" || step.kind === "coach_inner_thread") return TOUR_CHAT_THREAD_DWELL_MS;
+  return TOUR_DEFAULT_DWELL_MS;
+}
 
 /** Scroll *only* the phone body—never call scrollIntoView (it scrolls the whole page). */
 function scrollPhoneForDashboardFocus(
@@ -323,7 +331,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   const [paused, setPaused] = useState(false);
   const [phoneHover, setPhoneHover] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const tickRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const phoneScrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [sectionInView, setSectionInView] = useState(false);
@@ -353,8 +361,8 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   }, []);
 
   const clearTick = useCallback(() => {
-    if (tickRef.current) {
-      clearInterval(tickRef.current);
+    if (tickRef.current !== null) {
+      clearTimeout(tickRef.current);
       tickRef.current = null;
     }
   }, []);
@@ -449,11 +457,13 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   useEffect(() => {
     clearTick();
     if (paused || reduceMotion || phoneHover || !sectionInView) return;
-    tickRef.current = setInterval(() => {
+    const step = APP_TOUR_STEPS[tourIndex];
+    const ms = tourStepDwellMs(step);
+    tickRef.current = setTimeout(() => {
       setTourIndex((i) => (i + 1) % APP_TOUR_STEP_COUNT);
-    }, INTERVAL_MS);
+    }, ms);
     return clearTick;
-  }, [paused, reduceMotion, phoneHover, sectionInView, clearTick]);
+  }, [tourIndex, paused, reduceMotion, phoneHover, sectionInView, clearTick]);
 
   /** Non-dashboard tabs: smooth scroll to top inside the phone only. */
   useEffect(() => {
@@ -1179,17 +1189,17 @@ function CoachDemoChatSequence(props: CoachDemoChatSequenceProps) {
         }, ms);
       });
 
-    /** Slower than earlier builds—time to read before the next beat. */
-    const OPEN_MS_PER_CHAR = 24;
-    const READ_AFTER_OPENER_MS = 800;
-    const USER_MS_PER_CHAR = 18;
-    const PAUSE_BEFORE_SEND_MS = 650;
-    const READ_AFTER_USER_BUBBLE_MS = 1000;
-    const THINKING_FIRST_MS = 2200;
-    const THINKING_BETWEEN_MS = 2000;
-    const STREAM_CHUNK_CHARS = 9;
-    const STREAM_CHUNK_MS = 28;
-    const READ_AFTER_ASSISTANT_MS = 1200;
+    /** Typing: faster than the previous “slow” pass, still readable between beats. */
+    const OPEN_MS_PER_CHAR = 17;
+    const READ_AFTER_OPENER_MS = 550;
+    const USER_MS_PER_CHAR = 13;
+    const PAUSE_BEFORE_SEND_MS = 420;
+    const READ_AFTER_USER_BUBBLE_MS = 720;
+    const THINKING_FIRST_MS = 1600;
+    const THINKING_BETWEEN_MS = 1450;
+    const STREAM_CHUNK_CHARS = 11;
+    const STREAM_CHUNK_MS = 20;
+    const READ_AFTER_ASSISTANT_MS = 880;
 
     async function streamAssistant(text: string) {
       setStreamBuffer("");
