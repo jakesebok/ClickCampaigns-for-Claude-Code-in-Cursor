@@ -92,6 +92,21 @@ body {
   }
 }
 
+/* Coach explorer: draw the eye to Weekly Planning without extra copy */
+@keyframes alfred-coach-weekly-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 107, 26, 0.35),
+      0 0 18px -6px rgba(255, 107, 26, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(255, 107, 26, 0.55),
+      0 0 26px -4px rgba(255, 107, 26, 0.65);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .alfred-hero-logo-reveal {
     animation: alfred-hero-logo-reveal 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -104,12 +119,17 @@ body {
   .alfred-hero-halo-pulse {
     animation: alfred-hero-halo 5.5s ease-in-out 4s infinite;
   }
+
+  .alfred-coach-weekly-highlight {
+    animation: alfred-coach-weekly-glow 2.4s ease-in-out infinite;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .alfred-hero-logo-reveal,
   .alfred-hero-float-after,
-  .alfred-hero-halo-pulse {
+  .alfred-hero-halo-pulse,
+  .alfred-coach-weekly-highlight {
     animation: none !important;
   }
 
@@ -117,5 +137,11 @@ body {
     opacity: 1;
     filter: none;
     transform: none;
+  }
+
+  .alfred-coach-weekly-highlight {
+    box-shadow:
+      0 0 0 2px rgba(255, 107, 26, 0.45),
+      0 0 22px -4px rgba(255, 107, 26, 0.5);
   }
 }

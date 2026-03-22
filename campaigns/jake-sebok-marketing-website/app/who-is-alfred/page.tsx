@@ -6,7 +6,7 @@ import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED): AI coaching that keeps your assessment, archetype, pattern, weekly check-ins, and strategic context alive in the room so accountability survives real life.";
+  "Aligned Freedom Coach (ALFRED): coaching that keeps your assessment, archetype, pattern, weekly check-ins, and strategic context in the conversation when real life gets loud.";
 
 export const metadata: Metadata = {
   title: "Aligned Freedom Coach (ALFRED): Coaching That Keeps Your Priorities Alive | Jake Sebok",
@@ -49,7 +49,7 @@ const dailyItems = [
   },
   {
     title: "Morning notifications (optional)",
-    body: "A short nudge from your coach when you want the day framed before the inbox does—engaging, not a performance contest.",
+    body: "A short nudge from your coach when you want the day framed before the inbox does. Engaging, not a performance contest.",
   },
 ];
 
@@ -85,8 +85,8 @@ export default function WhoIsAlfredPage() {
                 runs thin.
               </p>
               <p className="text-base sm:text-lg font-medium text-ap-mid leading-relaxed mb-8">
-                Generic AI hands you clever paragraphs. This is coaching tethered to your real commitments, so you are
-                not re-explaining your life every time you need a steady voice.
+                Generic AI hands you clever paragraphs. This is coaching that remembers what you committed to, so you
+                are not re-explaining your life every time you need a steady voice.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <a
@@ -126,7 +126,7 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
-            Not just another AI coach
+            This is not a generic chat coach
           </h2>
           <div className="max-w-[720px] space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
             <p>
@@ -134,9 +134,9 @@ export default function WhoIsAlfredPage() {
               dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
             </p>
             <p>
-              ALFRED is for the stretch between insight and follow-through: the voice that recalls where your
-              relationships are stretched thin, how your archetype tends to over-correct, and the one commitment that
-              protects both your health and your revenue this week.
+              ALFRED is built for the gap between a good insight and actually following through. It is the voice that
+              remembers where your relationships are stretched thin, how your archetype tends to over-correct, and the
+              one commitment that protects both your health and your revenue this week.
             </p>
             <p>
               Repetition is not a character flaw. It is how humans stay honest. The app holds the frame so you can do the
@@ -156,8 +156,8 @@ export default function WhoIsAlfredPage() {
               Who&apos;s in the room with you?
             </h2>
             <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3">
-              Every legendary operator had someone in the earpiece: calm, informed, unafraid to say the quiet part out
-              loud. ALFRED is that steady presence for founders, minus the cave and the cape.
+              Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part out
+              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
             <p className="text-sm text-ap-muted font-medium leading-relaxed">
               Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On
@@ -193,9 +193,9 @@ export default function WhoIsAlfredPage() {
             The usual AI coach vs ALFRED
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Most “AI coaches” are a clever model in a blank chat: impressive for a minute, amnesiac by Tuesday. ALFRED is
-            built for the stretch between a good answer and a lived week—your blueprint, assessment, archetype, pattern,
-            scorecard, and Vital Action stay in the room so the voice you hear is actually about you.
+            Most “AI coaches” are a clever model in a blank chat: impressive for a minute, amnesiac by Tuesday. ALFRED
+            is built for the stretch between a good answer and a lived week. Your blueprint, assessment, archetype,
+            pattern, scorecard, and Vital Action stay in the room so the voice you hear is about you, not a template.
           </p>
           <div className="overflow-x-auto rounded-[20px] border border-ap-border bg-white">
             <table className="w-full text-left text-sm sm:text-base">
@@ -213,14 +213,15 @@ export default function WhoIsAlfredPage() {
                     Context lives in whatever you paste today. Threads, tabs, and models forget your last hard decision.
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Your Alignment Blueprint, VAPI™ read, archetype, driver pattern, 6Cs, and Vital Action stay loaded—so
+                    Your Alignment Blueprint, VAPI™ read, archetype, driver pattern, 6Cs, and Vital Action stay loaded, so
                     you are not re-opening your life story every night.
                   </td>
                 </tr>
                 <tr className="border-b border-ap-border">
                   <td className="p-4 sm:p-5 text-ap-primary font-semibold">Advice quality</td>
                   <td className="p-4 sm:p-5">
-                    Generic hustle templates dressed up in your industry’s keywords—no values filter, no consequence map.
+                    Generic hustle templates dressed up in your industry’s keywords. No real values filter, no map of
+                    what it would cost you to say yes.
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
                     Answers run through your stated values, capacity, and revenue math, with Fire Starters and coaching
@@ -234,7 +235,7 @@ export default function WhoIsAlfredPage() {
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
                     Built-in cadence: dashboard, coach, voice, results, scorecard, and optional morning nudges so
-                    alignment shows up when willpower thins—not only when you remember to open a chat.
+                    alignment shows up when willpower thins, not only when you remember to open a chat.
                   </td>
                 </tr>
               </tbody>
@@ -242,9 +243,9 @@ export default function WhoIsAlfredPage() {
           </div>
           <p className="text-sm text-ap-muted mt-4 max-w-[720px]">
             Your <strong className="text-ap-mid">Aligned AIOS</strong> master prompt from Strategic Clarity still runs in
-            ChatGPT, Claude, or Gemini whenever you want it. ALFRED is for founders who want that same strategic spine{" "}
-            <em>plus</em> persistence, assessment depth, and a product that does not quit when the week gets loud. It
-            ships after Phase II in the Accelerator or through a{" "}
+            ChatGPT, Claude, or Gemini whenever you want it. ALFRED is for founders who want that same strategic spine
+            with persistence, assessment depth, and a product that does not quit when the week gets loud. It ships after
+            Phase II in the Accelerator or through a{" "}
             <Link
               href="/work-with-me/strategic-intensives"
               className="text-gradient-accent font-semibold hover:underline"
@@ -333,13 +334,12 @@ export default function WhoIsAlfredPage() {
               <strong className="text-ap-primary">Aligned Freedom Coach</strong>.
             </p>
             <p className="text-ap-mid font-medium leading-relaxed mb-4 max-w-[560px] mx-auto">
-              We might also be nodding at another famous Alfred: the one in the earpiece who had Bruce&apos;s six,
-              remembered everything that mattered, and never needed the spotlight.
+              The name also tips its hat to the other famous Alfred: the one in the earpiece who had Bruce&apos;s six,
+              remembered what mattered, and never needed the spotlight.
             </p>
             <p className="text-ap-mid font-medium leading-relaxed mb-8 max-w-[560px] mx-auto">
-              <span className="font-semibold text-ap-primary">AND…</span> if you like word-nerd trivia, the Old English
-              roots of the name are literally counsel, advice, wisdom—so you are allowed to read it as{" "}
-              <em>trusted counsel</em>, not just a random syllable salad.
+              If you like word-nerd trivia, the Old English roots boil down to counsel, advice, wisdom. Read it as{" "}
+              <em>trusted counsel</em>, not a random syllable salad.
             </p>
             <p className="text-ap-mid font-medium mb-8">
               Not ready yet? Start free with{" "}
@@ -354,7 +354,7 @@ export default function WhoIsAlfredPage() {
               <Link href="/work-with-me/apply" className="text-gradient-accent font-semibold hover:underline">
                 apply to the Accelerator
               </Link>{" "}
-              when you want the full container.
+              when you want the full program.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
               <a

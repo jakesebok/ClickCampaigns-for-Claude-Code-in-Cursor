@@ -111,7 +111,7 @@ const DASHBOARD_TOUR = [
     id: "pattern",
     kicker: "Self-awareness",
     title: "Archetype and driver: how you perform under stress",
-    body: "Archetype and likely driver translate your assessment into a language for your patterns—so coaching is not generic advice. When Alfred references them, recommendations fit how you actually behave when pressure hits, and View Full Details opens the full library depth when you are ready to go there.",
+    body: "Archetype and likely driver translate your assessment into a language for your patterns, so coaching is not generic advice. When Alfred references them, recommendations fit how you actually behave when pressure hits. When you want the deeper read, the Archetype and Driver libraries unpack those patterns: what is underneath, what it is costing you, and how to move forward.",
     focus: "pattern" as const,
   },
 ];
@@ -320,20 +320,20 @@ export function AlfredFeatureExplorer() {
         return {
           kicker: "Fire Starters",
           title: "Weekly Planning",
-          body: "These prompts are the same strings production sends—schedule building, leverage outcomes, ruthless cuts, and a minimum viable week when chaos hits. Use them to see how Alfred operationalizes your blueprint when the calendar gets loud.",
+          body: "These prompts are the same strings the app sends: schedule building, leverage outcomes, ruthless cuts, and a minimum viable week when chaos hits. They show how Alfred operationalizes your blueprint when the calendar gets loud.",
         };
       }
       return {
         kicker: "Coach tab",
-        title: "Fire Starters from your real prompt library",
-        body: "In this demo, only Weekly Planning is tappable so you can drill into sub-prompts and the long schedule example. The other categories are shown exactly as they appear in the app; open ALFRED to run Strategy, Inner Work, VAPI, and the rest with full streaming replies.",
+        title: "Organized prompts, not a blank chat",
+        body: "Fire Starters group coaching by the kind of week you are in: strategy, inner work, sales, execution, weekly review, VAPI, and deeper pattern work. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and QC math. The nested prompts there help you build a week you can defend, name leverage outcomes, cut what cannot stay, and fall back to a minimum viable week when everything goes sideways.",
       };
     }
     if (tab === "voice") {
       return {
         kicker: "Voice",
         title: "Speak with Alfred",
-        body: "Idle-state copy matches the Voice screen in the app: live session, inner-work friendly, mic disclaimer. Starting a session requires the real app and OpenAI Realtime credentials.",
+        body: "Core beliefs rarely shift when you are only typing—you can edit away the uncomfortable truth. Voice keeps mindset work embodied: you hear your own story out loud, stay with the feeling long enough to question it, and rehearse a new stance in live dialogue instead of silent draft mode. That back-and-forth is what loosens fixed narratives and makes identity-level change stick. In ALFRED, Voice is tuned for that inner-work rhythm; live sessions start when you are in the app.",
       };
     }
     if (tab === "results") {
@@ -859,11 +859,8 @@ function CoachScreen({
                       key={cat}
                       type="button"
                       onClick={onSelectWeekly}
-                      className="w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/50 bg-ap-accent/10 hover:bg-ap-accent/15 text-[11px] font-medium text-white transition-colors shadow-[0_0_0_1px_rgba(255,107,26,0.12)]"
+                      className="alfred-coach-weekly-highlight w-full text-left px-3 py-2.5 rounded-xl border-2 border-ap-accent/80 bg-ap-accent/15 hover:bg-ap-accent/22 text-[11px] font-semibold text-white transition-colors"
                     >
-                      <span className="block text-[9px] font-semibold uppercase tracking-wider text-ap-accent mb-1">
-                        Try in demo
-                      </span>
                       {cat}
                     </button>
                   );
