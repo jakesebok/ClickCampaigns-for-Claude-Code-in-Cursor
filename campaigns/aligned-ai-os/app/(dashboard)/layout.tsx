@@ -15,6 +15,7 @@ import {
   BarChart3,
   BookOpen,
   Brain,
+  ListChecks,
 } from "lucide-react";
 
 const navItems = [
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/voice", label: "Voice", icon: Mic },
   { href: "/assessment", label: "VAPI", icon: Activity, isAssessment: true },
   { href: "/scorecard", label: "6Cs", icon: ClipboardCheck },
+  { href: "/my-plan", label: "My Plan", icon: ListChecks },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
 ];

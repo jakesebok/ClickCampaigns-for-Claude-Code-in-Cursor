@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Plan | Aligned Performance Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', function() { if (window.lucide) lucide.createIcons(); });</script>
+  <style>
+    :root {
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
+    }
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-accent:#FF6B1A;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
+    h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>Aligned Performance Portal</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-16 text-[var(--ap-muted)]">Loading your plan…</div>
+    <div id="wrong-surface" class="hidden rounded-2xl border-2 border-[var(--ap-border)] bg-white p-8 text-center">
+      <p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Your plan lives in ALFRED</p>
+      <p class="text-sm text-[var(--ap-secondary)] mb-6">You completed your latest VAPI in the ALFRED app. Open My Plan there to track your 28-day sprint.</p>
+      <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px]">Open ALFRED</a>
+    </div>
+    <div id="no-sprint" class="hidden rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-white/80 p-8 text-center">
+      <p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">No plan yet</p>
+      <p class="text-sm text-[var(--ap-secondary)] mb-6">Complete the VAPI assessment while logged in (or from the marketing site with your portal email). Your personalized 28-day plan will appear here.</p>
+      <a href="/assessment" class="inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px]">Take assessment</a>
+    </div>
+    <div id="plan-content" class="hidden">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--ap-accent)] mb-2">28-day sprint</p>
+      <h1 id="plan-title" class="text-3xl text-[var(--ap-primary)] mb-2">My Plan</h1>
+      <p id="plan-summary" class="text-[var(--ap-secondary)] mb-8"></p>
+      <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6">
+        <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)] mb-2">From your coach</p>
+        <p id="coach-context-text" class="text-sm text-[var(--ap-secondary)] whitespace-pre-wrap"></p>
+      </div>
+      <div id="weeks-container" class="space-y-8"></div>
+    </div>
+  </main>
+
+  <script type="module">
+    (async function() {
+      var cfg = await (async function() {
+        try {
+          var r = await fetch('/api/config');
+          if (!r.ok) return { error: true };
+          eval(await r.text());
+          return window.SUPABASE_URL ? {} : { error: true };
+        } catch (e) { return { error: true }; }
+      })();
+
+      var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      var { data: { session } } = await supabase.auth.getSession();
+
+      document.getElementById('loading').classList.add('hidden');
+      if (cfg.error || !session) {
+        window.location.href = '/login?redirect=' + encodeURIComponent('/my-plan');
+        return;
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', function() {
+        supabase.auth.signOut().then(function() { window.location.href = '/login'; });
+      });
+
+      var token = session.access_token;
+      var res = await fetch('/api/sprint-get-me', { headers: { Authorization: 'Bearer ' + token } });
+      var json = await res.json().catch(function() { return {}; });
+
+      if (!res.ok || json.error) {
+        document.getElementById('no-sprint').classList.remove('hidden');
+        return;
+      }
+
+      var sprint = json.sprint;
+      if (!sprint) {
+        document.getElementById('no-sprint').classList.remove('hidden');
+        return;
+      }
+
+      if (sprint.primary_surface === 'alfred') {
+        document.getElementById('wrong-surface').classList.remove('hidden');
+        return;
+      }
+
+      var payload = sprint.payload || {};
+      document.getElementById('plan-title').textContent = payload.title || 'My Plan';
+      document.getElementById('plan-summary').textContent = payload.summary || '';
+
+      if (sprint.coach_context && String(sprint.coach_context).trim()) {
+        document.getElementById('coach-context-box').classList.remove('hidden');
+        document.getElementById('coach-context-text').textContent = sprint.coach_context.trim();
+      }
+
+      var weeks = payload.weeks || [];
+      var reflections = payload.weekReflections || {};
+      var wrap = document.getElementById('weeks-container');
+      wrap.innerHTML = weeks.map(function(w) {
+        var wn = w.weekNumber || 0;
+        var tasks = (w.tasks || []).map(function(t) {
+          var checked = t.completed ? ' checked' : '';
+          return '<label class="flex gap-3 items-start p-3 rounded-xl border border-[var(--ap-border)] bg-white cursor-pointer hover:border-[var(--ap-accent)]/50">' +
+            '<input type="checkbox" class="task-cb mt-1 w-4 h-4 accent-[var(--ap-accent)]" data-id="' + escapeAttr(t.id) + '"' + checked + ' />' +
+            '<span><span class="font-semibold text-[var(--ap-primary)] block">' + escapeHtml(t.title) + '</span>' +
+            '<span class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(t.description || '') + '</span></span></label>';
+        }).join('');
+        var refVal = reflections[String(wn)] || '';
+        return '<section class="rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 shadow-sm">' +
+          '<h2 class="text-xl text-[var(--ap-primary)] mb-1">Week ' + wn + '</h2>' +
+          '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-4">' + escapeHtml(w.theme || '') + '</p>' +
+          '<div class="space-y-2 mb-4">' + tasks + '</div>' +
+          '<label class="block text-xs font-bold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Reflection</label>' +
+          '<textarea rows="3" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-white text-sm text-[var(--ap-primary)]" data-week="' + wn + '" placeholder="What shifted this week?">' + escapeHtml(refVal) + '</textarea></section>';
+      }).join('');
+
+      function escapeHtml(s) {
+        if (s == null) return '';
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s).replace(/"/g, '&quot;');
+      }
+
+      function debounce(fn, ms) {
+        var t;
+        return function() {
+          clearTimeout(t);
+          var a = arguments;
+          t = setTimeout(function() { fn.apply(null, a); }, ms);
+        };
+      }
+
+      async function savePatch(taskUpdates, weekReflections) {
+        await fetch('/api/sprint-patch-me', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ taskUpdates: taskUpdates || undefined, weekReflections: weekReflections || undefined }),
+        });
+      }
+
+      var pendingTasks = {};
+      wrap.querySelectorAll('.task-cb').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+          pendingTasks[cb.getAttribute('data-id')] = cb.checked;
+          debouncedSaveTasks();
+        });
+      });
+
+      var debouncedSaveTasks = debounce(function() {
+        if (Object.keys(pendingTasks).length === 0) return;
+        var u = Object.assign({}, pendingTasks);
+        pendingTasks = {};
+        savePatch(u, null);
+      }, 500);
+
+      wrap.querySelectorAll('.week-ref').forEach(function(ta) {
+        var wk = ta.getAttribute('data-week');
+        ta.addEventListener('blur', function() {
+          var o = {};
+          o[wk] = ta.value;
+          savePatch(null, o);
+        });
+      });
+
+      document.getElementById('plan-content').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    })();
+  </script>
+</body>
+</html>

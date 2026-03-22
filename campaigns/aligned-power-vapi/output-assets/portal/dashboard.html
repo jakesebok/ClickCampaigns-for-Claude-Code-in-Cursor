@@ -165,6 +165,7 @@
         </button>
         <a href="/assessment" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
         <div class="nav-links-desk flex items-center gap-4">
+          <a id="header-my-plan-link" href="/my-plan" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">My Plan</a>
           <a id="header-6c-link" href="/scorecard" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
           <details class="nav-popover relative">
             <summary class="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors">
@@ -214,6 +215,7 @@
       <span id="header-coach-link-mobile" class="hidden"><a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
       <span id="header-admin-link-mobile" class="hidden"><a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
       <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+      <span id="header-my-plan-link-mobile" class="hidden"><a href="/my-plan" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Plan</a></span>
       <span id="header-6c-link-mobile" class="hidden"><a href="/scorecard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a></span>
       <div class="mt-2 border-t border-[var(--ap-border)] pt-3">
         <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>
@@ -252,6 +254,31 @@
             <a href="https://jakesebok.com/who-is-alfred" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3 rounded-[100px] transition-colors bg-[var(--ap-surface)]">What is ALFRED?</a>
           </div>
         </div>
+      </div>
+
+      <div id="my-plan-dashboard-card" class="hidden mb-10 rounded-2xl border-2 border-[var(--ap-primary)]/20 bg-white p-6 sm:p-8 dashboard-card">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+          <div class="flex gap-4 items-start">
+            <div class="shrink-0 w-12 h-12 rounded-2xl bg-[var(--ap-primary)]/10 flex items-center justify-center" aria-hidden="true">
+              <i data-lucide="list-checks" class="w-7 h-7 text-[var(--ap-accent)]"></i>
+            </div>
+            <div>
+              <p class="eyebrow mb-1">Your 28-day sprint</p>
+              <h2 class="text-xl text-[var(--ap-primary)] mb-1 leading-tight font-extrabold" style="font-family: Outfit, sans-serif;">My Plan</h2>
+              <p id="my-plan-card-summary" class="text-[var(--ap-secondary)] text-sm leading-relaxed"></p>
+            </div>
+          </div>
+          <a href="/my-plan" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors whitespace-nowrap">
+            Open My Plan
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="my-plan-alfred-card" class="hidden mb-10 rounded-2xl border border-[var(--ap-border)] bg-white/80 p-6">
+        <p class="text-sm font-semibold text-[var(--ap-primary)] mb-1">Your plan is in ALFRED</p>
+        <p class="text-sm text-[var(--ap-secondary)] mb-4">Your latest VAPI was completed in the ALFRED app. Track your 28-day sprint there.</p>
+        <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-bold text-[var(--ap-accent)]">Open ALFRED <i data-lucide="external-link" class="w-4 h-4"></i></a>
       </div>
 
       <div id="nonclient-cta-banner" class="hidden mb-8 p-5 rounded-2xl border-2 border-[var(--ap-accent)]/40 bg-[var(--ap-accent)]/10">
@@ -639,6 +666,35 @@
         var header = document.getElementById('portal-header');
         if (header) header.setAttribute('data-nav-role', 'admin');
       }
+
+      (function showMyPlanNav() {
+        var h = document.getElementById('header-my-plan-link');
+        if (h) h.classList.remove('hidden');
+        var hm = document.getElementById('header-my-plan-link-mobile');
+        if (hm) hm.classList.remove('hidden');
+      })();
+
+      (async function loadMyPlanCard() {
+        try {
+          var token = session.access_token;
+          var r = await fetch('/api/sprint-get-me', { headers: { Authorization: 'Bearer ' + token } });
+          var j = await r.json();
+          if (!r.ok || !j.sprint) return;
+          if (j.sprint.primary_surface === 'portal') {
+            var card = document.getElementById('my-plan-dashboard-card');
+            if (card) {
+              card.classList.remove('hidden');
+              var sum = (j.sprint.payload && j.sprint.payload.summary) ? j.sprint.payload.summary : 'Your personalized 28-day focus from VAPI.';
+              var el = document.getElementById('my-plan-card-summary');
+              if (el) el.textContent = sum;
+            }
+          } else if (j.sprint.primary_surface === 'alfred') {
+            var ac = document.getElementById('my-plan-alfred-card');
+            if (ac) ac.classList.remove('hidden');
+          }
+        } catch (e) { /* ignore */ }
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      })();
 
       // Onboarding modal: show if not yet completed
       var userMeta = session.user.user_metadata || {};

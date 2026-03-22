@@ -391,7 +391,20 @@
         if (!results.archetype && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine) {
           results.archetype = VAPI_ARCHETYPE.determine(results);
         }
-        console.log('[VAPI save] Saving via /api/save-vapi-results for:', results.email);
+        var source = 'marketing';
+        try {
+          var cr = await fetch('/api/config');
+          if (cr.ok) {
+            eval(await cr.text());
+            if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+              var { createClient: createSb } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+              var sb = createSb(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+              var { data: sessWrap } = await sb.auth.getSession();
+              if (sessWrap && sessWrap.session && sessWrap.session.user) source = 'portal';
+            }
+          }
+        } catch (srcErr) { /* keep marketing */ }
+        console.log('[VAPI save] Saving via /api/save-vapi-results for:', results.email, 'source:', source);
         var saveRes = await fetch('/api/save-vapi-results', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -400,6 +413,7 @@
             firstName: results.firstName || null,
             lastName: results.lastName || null,
             results: results,
+            source: source,
           }),
         });
         var saveJson = await saveRes.json();

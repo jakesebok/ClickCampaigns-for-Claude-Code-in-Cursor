@@ -8,102 +8,12 @@
  *   firstName   string
  *   lastName    string
  *   results     object  — full results payload
+ *   source      string  — optional: marketing | portal (default marketing)
  */
 
-import { enrichResultsWithDriver } from "./_lib/vapi-driver-scoring.js";
-import { enrichResultsWithJourneyman } from "../lib/vapi-journeyman-analysis.js";
-
-function determineArchetypeFromResults(results) {
-  const arenaScores = results?.arenaScores || {};
-  const domainScores = { ...(results?.domainScores || {}) };
-  (results?.domains || []).forEach((domain) => {
-    if (domain && domain.code) {
-      domainScores[domain.code] = domain.score ?? 0;
-    }
-  });
-
-  const toNumber = (value) => {
-    const num = typeof value === 'number' ? value : parseFloat(value);
-    return Number.isFinite(num) ? num : null;
-  };
-
-  const personal = toNumber(arenaScores.Personal ?? arenaScores.Self);
-  const relationships = toNumber(arenaScores.Relationships);
-  const business = toNumber(arenaScores.Business);
-  const overall = toNumber(results?.overall);
-  const exScore = toNumber(domainScores.EX);
-  const ecScore = toNumber(domainScores.EC);
-  const vsScore = toNumber(domainScores.VS);
-
-  if (personal == null || relationships == null || business == null) {
-    return results?.archetype || null;
-  }
-
-  if (personal >= 8.0 && relationships >= 8.0 && business >= 8.0) {
-    return 'The Architect';
-  }
-
-  const nearArchitectCount = [personal, relationships, business].filter((score) => score >= 7.5).length;
-  const lowestArena = Math.min(personal, relationships, business);
-  if (overall != null && overall >= 7.0 && nearArchitectCount >= 2 && lowestArena >= 6.5) {
-    return 'The Journeyman';
-  }
-
-  const arenasLow = [personal, relationships, business].filter((score) => score <= 4.5).length;
-  if ((overall != null && overall <= 4.5) || arenasLow >= 2) {
-    return 'The Phoenix';
-  }
-
-  if (exScore != null && exScore >= 7.0 && ((ecScore != null && ecScore <= 5.0) || (vsScore != null && vsScore <= 5.0))) {
-    return 'The Engine';
-  }
-
-  const highestArena = Math.max(personal, relationships, business);
-  if (
-    personal >= 5.0 &&
-    personal <= 7.9 &&
-    relationships >= 5.0 &&
-    relationships <= 7.9 &&
-    business >= 5.0 &&
-    business <= 7.9 &&
-    highestArena - lowestArena <= 2.0
-  ) {
-    return 'The Drifter';
-  }
-
-  if (business > personal && business > relationships && business - personal >= 2.0) {
-    return 'The Performer';
-  }
-
-  if (
-    business > personal &&
-    business > relationships &&
-    relationships < personal &&
-    business - relationships >= 2.0
-  ) {
-    return 'The Ghost';
-  }
-
-  if (
-    relationships > personal &&
-    relationships > business &&
-    business < personal &&
-    relationships - business >= 2.0
-  ) {
-    return 'The Guardian';
-  }
-
-  if (
-    personal > relationships &&
-    personal > business &&
-    business < relationships &&
-    personal - business >= 2.0
-  ) {
-    return 'The Seeker';
-  }
-
-  return 'The Drifter';
-}
+import { enrichVapiResultsForStorage } from "./_lib/vapi-enrich-for-storage.js";
+import { buildSprintPayload } from "./_lib/sprint-from-vapi.js";
+import { upsertActiveSprint } from "./_lib/sprint-upsert.js";
 
 export async function POST(request) {
   const supabaseUrl     = process.env.SUPABASE_URL;
@@ -124,7 +34,7 @@ export async function POST(request) {
     });
   }
 
-  const { email, firstName, lastName, results } = body;
+  const { email, firstName, lastName, results, source } = body;
 
   if (!email) {
     return new Response(JSON.stringify({ error: 'missing_email', message: 'email is required' }), {
@@ -133,21 +43,20 @@ export async function POST(request) {
   }
 
   const enrichedResults =
-    results && typeof results === 'object'
-      ? enrichResultsWithDriver(results)
-      : {};
-
-  if (results && typeof results === 'object') {
-    const archetype = determineArchetypeFromResults(results);
-    if (archetype) {
-      enrichedResults.archetype = archetype;
-    }
-    enrichResultsWithJourneyman(enrichedResults);
-  }
+    results && typeof results === 'object' ? enrichVapiResultsForStorage(results) : {};
 
   const emailNormalized = String(email).trim().toLowerCase();
+  const assessmentSource = typeof source === 'string' && source.trim() ? source.trim() : 'marketing';
 
   // Direct REST insert using service role key — bypasses RLS entirely
+  const insertPayload = {
+    email: emailNormalized,
+    first_name: firstName || null,
+    last_name: lastName || null,
+    results: enrichedResults,
+    source: assessmentSource,
+  };
+
   const res = await fetch(`${supabaseUrl}/rest/v1/vapi_results`, {
     method: 'POST',
     headers: {
@@ -156,22 +65,67 @@ export async function POST(request) {
       'Authorization': `Bearer ${serviceRoleKey}`,
       'Prefer': 'return=representation',
     },
-    body: JSON.stringify({
-      email: emailNormalized,
-      first_name: firstName || null,
-      last_name: lastName || null,
-      results: enrichedResults,
-    }),
+    body: JSON.stringify(insertPayload),
   });
 
   if (!res.ok) {
     const detail = await res.text();
+    const retryWithoutSource =
+      res.status === 400 &&
+      /source|column/i.test(detail) &&
+      'source' in insertPayload;
+    if (retryWithoutSource) {
+      delete insertPayload.source;
+      const res2 = await fetch(`${supabaseUrl}/rest/v1/vapi_results`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': serviceRoleKey,
+          'Authorization': `Bearer ${serviceRoleKey}`,
+          'Prefer': 'return=representation',
+        },
+        body: JSON.stringify(insertPayload),
+      });
+      if (!res2.ok) {
+        const d2 = await res2.text();
+        return new Response(JSON.stringify({ error: 'insert_failed', status: res2.status, detail: d2.slice(0, 500) }), {
+          status: 500, headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      const data2 = await res2.json();
+      const row2 = Array.isArray(data2) ? data2[0] : data2;
+      try {
+        const sprintRow = buildSprintPayload(enrichedResults, {
+          userEmail: emailNormalized,
+          vapiResultId: row2?.id || null,
+          assessmentSource,
+        });
+        await upsertActiveSprint({ supabaseUrl, serviceKey: serviceRoleKey, row: sprintRow });
+      } catch (e) {
+        console.error('[save-vapi-results] sprint upsert failed', e);
+      }
+      return new Response(JSON.stringify({ ok: true, data: data2, sprint_note: 'run supabase/sprints.sql + add vapi_results.source if missing' }), {
+        status: 200, headers: { 'Content-Type': 'application/json' }
+      });
+    }
     return new Response(JSON.stringify({ error: 'insert_failed', status: res.status, detail: detail.slice(0, 500) }), {
       status: 500, headers: { 'Content-Type': 'application/json' }
     });
   }
 
   const data = await res.json();
+  const row0 = Array.isArray(data) ? data[0] : data;
+  try {
+    const sprintRow = buildSprintPayload(enrichedResults, {
+      userEmail: emailNormalized,
+      vapiResultId: row0?.id || null,
+      assessmentSource,
+    });
+    await upsertActiveSprint({ supabaseUrl, serviceKey: serviceRoleKey, row: sprintRow });
+  } catch (e) {
+    console.error('[save-vapi-results] sprint upsert failed', e);
+  }
+
   return new Response(JSON.stringify({ ok: true, data }), {
     status: 200, headers: { 'Content-Type': 'application/json' }
   });

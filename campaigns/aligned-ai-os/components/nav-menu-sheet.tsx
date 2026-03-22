@@ -12,11 +12,13 @@ import {
   X,
   BookOpen,
   Brain,
+  ListChecks,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const staticMenuItems = [
   { href: "/scorecard", label: "6Cs Scorecard", icon: ClipboardCheck },
+  { href: "/my-plan", label: "My Plan", icon: ListChecks },
   { href: "/priorities", label: "Priorities", icon: BarChart3 },
   { href: "/blueprint", label: "Blueprint", icon: FileText },
 ];

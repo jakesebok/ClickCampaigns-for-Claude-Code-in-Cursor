@@ -15,7 +15,8 @@
     { "source": "/scorecard", "destination": "/portal/six-c-scorecard.html" },
     { "source": "/coach", "destination": "/portal/coach.html" },
     { "source": "/coach/client", "destination": "/portal/coach-client.html" },
-    { "source": "/admin", "destination": "/portal/admin.html" }
+    { "source": "/admin", "destination": "/portal/admin.html" },
+    { "source": "/my-plan", "destination": "/portal/my-plan.html" }
   ],
   "redirects": [
     { "source": "/:path*", "has": [{ "type": "host", "value": "alignedpower.coach" }], "destination": "https://portal.alignedpower.coach/:path*", "permanent": true },
@@ -34,7 +35,8 @@
     { "source": "/portal/six-c-scorecard.html", "destination": "/scorecard", "permanent": true },
     { "source": "/portal/coach.html", "destination": "/coach", "permanent": true },
     { "source": "/portal/coach-client.html", "destination": "/coach/client", "permanent": true },
-    { "source": "/portal/admin.html", "destination": "/admin", "permanent": true }
+    { "source": "/portal/admin.html", "destination": "/admin", "permanent": true },
+    { "source": "/portal/my-plan.html", "destination": "/my-plan", "permanent": true }
   ],
   "crons": [
     {

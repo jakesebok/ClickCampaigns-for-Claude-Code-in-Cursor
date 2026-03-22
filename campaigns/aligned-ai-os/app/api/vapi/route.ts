@@ -425,8 +425,29 @@ export async function POST(req: NextRequest) {
     firstName: user.name?.split(" ")[0],
     lastName: user.name?.split(" ").slice(1).join(" ") || undefined,
     results: portalResults,
-    source: "app",
+    source: "alfred",
   });
+
+  const portalBase =
+    process.env.PORTAL_BASE_URL?.replace(/\/$/, "") ||
+    process.env.NEXT_PUBLIC_PORTAL_URL?.replace(/\/$/, "");
+  const sprintSyncSecret =
+    process.env.PORTAL_SPRINT_SYNC_SECRET || process.env.SPRINT_SYNC_SECRET;
+  if (portalBase && sprintSyncSecret && row?.id && user.email) {
+    void fetch(`${portalBase}/api/sprint-upsert-from-assessment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-sprint-sync-secret": sprintSyncSecret,
+      },
+      body: JSON.stringify({
+        email: user.email,
+        results: portalResults,
+        assessment_source: "alfred",
+        vapi_result_id: row.id,
+      }),
+    }).catch(() => undefined);
+  }
 
   return NextResponse.json({
     id: row.id,
