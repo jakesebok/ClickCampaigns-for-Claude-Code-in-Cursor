@@ -160,8 +160,10 @@ export default function WhoIsAlfredPage() {
               loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
             <p className="text-sm text-ap-muted font-medium leading-relaxed">
-              Use the in-phone bottom nav (Dashboard, Coach, Voice, Results, More) to move around the demo. On
-              Dashboard, hover a highlighted card on desktop to jump the tour, or use pause and the dots.
+              The tour runs automatically through Dashboard highlights, Coach, Voice, Results, drivers, and the screens
+              under More—or use the bottom nav and menu to explore on your own. Pause anytime, then use prev/next or the
+              dots to jump stops. On desktop, hover a dimmed Dashboard card to jump to that highlight; the phone scrolls
+              so each focus stays in view.
             </p>
           </div>
           <AlfredFeatureExplorer />

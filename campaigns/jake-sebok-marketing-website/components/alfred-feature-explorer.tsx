@@ -17,7 +17,7 @@
  * Demo data (Vital Action text, 6Cs numbers, sample coach reply) is illustrative; UI strings match the app.
  */
 
-import { useCallback, useEffect, useRef, useState, type ComponentType } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ComponentType } from "react";
 import {
   Activity,
   BarChart3,
@@ -116,6 +116,72 @@ const DASHBOARD_TOUR = [
   },
 ];
 
+/** Weekly Planning thread stop in the full app tour (must match a WEEKLY_PLANNING_PROMPTS label). */
+const TOUR_WEEKLY_THREAD_PROMPT =
+  WEEKLY_PLANNING_PROMPTS.find((p) => p.label === "Create weekly schedule") ?? WEEKLY_PLANNING_PROMPTS[0];
+
+type AppTourStep =
+  | { kind: "dashboard"; focus: TourFocus; dotLabel: string }
+  | { kind: "coach_home"; dotLabel: string }
+  | { kind: "coach_weekly"; dotLabel: string }
+  | { kind: "coach_thread"; dotLabel: string }
+  | { kind: "voice"; dotLabel: string }
+  | { kind: "results"; dotLabel: string }
+  | { kind: "drivers_list"; dotLabel: string }
+  | { kind: "drivers_detail"; dotLabel: string }
+  | { kind: "more_tab"; tab: "scorecard" | "priorities" | "blueprint" | "archetypes" | "settings"; dotLabel: string };
+
+const APP_TOUR_STEPS: AppTourStep[] = [
+  ...DASHBOARD_TOUR.map(
+    (s): AppTourStep => ({
+      kind: "dashboard",
+      focus: s.focus,
+      dotLabel: s.title,
+    })
+  ),
+  { kind: "coach_home", dotLabel: "Coach — Fire Starters" },
+  { kind: "coach_weekly", dotLabel: "Coach — Weekly planning menu" },
+  { kind: "coach_thread", dotLabel: "Coach — Weekly planning thread" },
+  { kind: "voice", dotLabel: "Voice" },
+  { kind: "results", dotLabel: "Assessment results" },
+  { kind: "drivers_list", dotLabel: "Driver library" },
+  { kind: "drivers_detail", dotLabel: "Driver — full profile" },
+  { kind: "more_tab", tab: "scorecard", dotLabel: "6Cs scorecard" },
+  { kind: "more_tab", tab: "priorities", dotLabel: "Priorities" },
+  { kind: "more_tab", tab: "blueprint", dotLabel: "Alignment Blueprint" },
+  { kind: "more_tab", tab: "archetypes", dotLabel: "Archetype library" },
+  { kind: "more_tab", tab: "settings", dotLabel: "Settings" },
+];
+
+const APP_TOUR_STEP_COUNT = APP_TOUR_STEPS.length;
+
+function firstTourIndexForNavTab(tab: AppTab): number {
+  switch (tab) {
+    case "dashboard":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "dashboard" && s.focus === "leverage");
+    case "coach":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "coach_home");
+    case "voice":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "voice");
+    case "results":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "results");
+    case "drivers":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "drivers_list");
+    case "scorecard":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "more_tab" && s.tab === "scorecard");
+    case "priorities":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "more_tab" && s.tab === "priorities");
+    case "blueprint":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "more_tab" && s.tab === "blueprint");
+    case "archetypes":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "more_tab" && s.tab === "archetypes");
+    case "settings":
+      return APP_TOUR_STEPS.findIndex((s) => s.kind === "more_tab" && s.tab === "settings");
+    default:
+      return 0;
+  }
+}
+
 const INTERVAL_MS = 5500;
 
 const SIX_CS_DEMO = [
@@ -192,12 +258,11 @@ export function AlfredFeatureExplorer() {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const [tourIndex, setTourIndex] = useState(0);
+  const [dashboardFocus, setDashboardFocus] = useState<TourFocus>("leverage");
   const [paused, setPaused] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const tourStep = DASHBOARD_TOUR[tourIndex];
-  const tourFocus = tourStep.focus;
+  const phoneScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -215,58 +280,145 @@ export function AlfredFeatureExplorer() {
   }, []);
 
   useEffect(() => {
+    const step = APP_TOUR_STEPS[tourIndex];
+    setMoreOpen(false);
+    switch (step.kind) {
+      case "dashboard":
+        setTab("dashboard");
+        setDashboardFocus(step.focus);
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "coach_home":
+        setTab("coach");
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "coach_weekly":
+        setTab("coach");
+        setCoachPhase("category");
+        setCoachCategory("Weekly Planning");
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "coach_thread":
+        setTab("coach");
+        setCoachPhase("thread");
+        setCoachCategory("Weekly Planning");
+        setCoachThreadPrompt(TOUR_WEEKLY_THREAD_PROMPT);
+        setDriversPhase("list");
+        break;
+      case "voice":
+        setTab("voice");
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "results":
+        setTab("results");
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "drivers_list":
+        setTab("drivers");
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+      case "drivers_detail":
+        setTab("drivers");
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("escapeDetail");
+        break;
+      case "more_tab":
+        setTab(step.tab);
+        setCoachPhase("home");
+        setCoachCategory(null);
+        setCoachThreadPrompt(null);
+        setDriversPhase("list");
+        break;
+    }
+  }, [tourIndex]);
+
+  useEffect(() => {
     clearTick();
-    if (tab !== "dashboard" || paused || reduceMotion) return;
+    if (paused || reduceMotion) return;
     tickRef.current = setInterval(() => {
-      setTourIndex((i) => (i + 1) % DASHBOARD_TOUR.length);
+      setTourIndex((i) => (i + 1) % APP_TOUR_STEP_COUNT);
     }, INTERVAL_MS);
     return clearTick;
-  }, [tab, paused, reduceMotion, clearTick]);
+  }, [paused, reduceMotion, clearTick]);
+
+  useLayoutEffect(() => {
+    if (tab !== "dashboard") return;
+    const container = phoneScrollRef.current;
+    if (!container) return;
+    const el = container.querySelector(`[data-tour-section="${dashboardFocus}"]`);
+    if (!(el instanceof HTMLElement)) return;
+    el.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+  }, [tab, dashboardFocus, reduceMotion]);
 
   const goTour = (dir: -1 | 1) => {
     setPaused(true);
-    setTourIndex((i) => (i + dir + DASHBOARD_TOUR.length) % DASHBOARD_TOUR.length);
+    setTourIndex((i) => (i + dir + APP_TOUR_STEP_COUNT) % APP_TOUR_STEP_COUNT);
   };
 
   const jumpTourFocus = (focus: TourFocus) => {
-    const i = DASHBOARD_TOUR.findIndex((s) => s.focus === focus);
-    if (i >= 0) {
+    const globalIndex = APP_TOUR_STEPS.findIndex((s) => s.kind === "dashboard" && s.focus === focus);
+    if (globalIndex >= 0) {
       setPaused(true);
-      setTourIndex(i);
+      setTourIndex(globalIndex);
     }
   };
 
   const openDriversToEscape = () => {
-    setTab("drivers");
-    setDriversPhase("escapeDetail");
+    const idx = APP_TOUR_STEPS.findIndex((s) => s.kind === "drivers_detail");
     setPaused(true);
+    if (idx >= 0) setTourIndex(idx);
   };
 
   const selectTab = (next: AppTab) => {
-    setTab(next);
+    setPaused(true);
     setMoreOpen(false);
-    if (next === "coach") {
-      setCoachPhase("home");
-      setCoachCategory(null);
-      setCoachThreadPrompt(null);
-    }
-    if (next === "drivers") {
-      setDriversPhase("list");
-    }
+    const idx = firstTourIndexForNavTab(next);
+    if (idx >= 0) setTourIndex(idx);
   };
 
   const goMoreDestination = (label: (typeof MORE_LINKS)[number]["label"] | "Settings") => {
     setMoreOpen(false);
     setPaused(true);
-    if (label === "6Cs Scorecard") selectTab("scorecard");
-    else if (label === "Priorities") selectTab("priorities");
-    else if (label === "Blueprint") selectTab("blueprint");
-    else if (label === "Assessment Results") selectTab("results");
-    else if (label === "Archetype Library") selectTab("archetypes");
-    else if (label === "Driver Library") {
-      setTab("drivers");
-      setDriversPhase("list");
-    } else if (label === "Settings") selectTab("settings");
+    if (label === "6Cs Scorecard") {
+      const i = firstTourIndexForNavTab("scorecard");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Priorities") {
+      const i = firstTourIndexForNavTab("priorities");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Blueprint") {
+      const i = firstTourIndexForNavTab("blueprint");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Assessment Results") {
+      const i = firstTourIndexForNavTab("results");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Archetype Library") {
+      const i = firstTourIndexForNavTab("archetypes");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Driver Library") {
+      const i = firstTourIndexForNavTab("drivers");
+      if (i >= 0) setTourIndex(i);
+    } else if (label === "Settings") {
+      const i = firstTourIndexForNavTab("settings");
+      if (i >= 0) setTourIndex(i);
+    }
   };
 
   const leftTitleAndBody = () => {
@@ -301,8 +453,8 @@ export function AlfredFeatureExplorer() {
     if (tab === "settings") {
       return {
         kicker: "Settings",
-        title: "Account, notifications, and preferences",
-        body: "In the live app, this is where you tune how Alfred reaches you, manage account details, and adjust experience settings. The demo shows the same information architecture so you know what to expect when you onboard.",
+        title: "You decide how Alfred shows up",
+        body: "Account details, notifications, and experience preferences live in one place—no scavenger hunt through mystery menus. When you set how Alfred reaches you, the product stays helpful instead of noisy, which protects focus and trust during hard weeks. The deeper win is psychological: configuration feels like choosing a coaching relationship, not tolerating defaults that fight your rhythm.",
       };
     }
     if (tab === "coach") {
@@ -310,23 +462,23 @@ export function AlfredFeatureExplorer() {
         const isFullDemo = coachThreadPrompt.label === "Create weekly schedule";
         return {
           kicker: "Coach",
-          title: isFullDemo ? "Prompt + full sample reply" : "Exact prompt string",
+          title: isFullDemo ? "Weekly Planning, with room to go deep" : "Coaching frames, not blank-chat roulette",
           body: isFullDemo
-            ? `The orange bubble is the exact Weekly Planning prompt from lib/ai/prompts.ts. Alfred answers over streaming with your Alignment Blueprint, VAPI, 6Cs, Vital Action, and QC math loaded. The gray bubble is a written illustration of that kind of answer, not a live API response.`
-            : `The orange bubble shows the real prompt sent for “${coachThreadPrompt.label}.” In production, Alfred responds with your context. This demo only expands the long sample for “Create weekly schedule.”`,
+            ? "The orange bubble is the Weekly Planning starter Alfred uses—so you open the week from structure instead of a blinking cursor when everything is loud. The gray bubble shows what that depth looks like when your Alignment Blueprint, VAPI read, 6Cs, Vital Action, and quota context are in the room. In the live app, replies are generated from your data, not a script—so you move faster from overwhelm to a calendar you can defend, without re-litigating your life story every Sunday night."
+            : `The frame you see is how Alfred opens “${coachThreadPrompt.label}”—a deliberate question instead of generic brainstorming. In the app, answers pull from your blueprint, scores, and commitments so guidance stays specific to your tradeoffs. Here the preview stays short; only “Create weekly schedule” expands into a long illustration of that personalized planning voice—open that prompt in the preview if you want to see the full example.`,
         };
       }
       if (coachPhase === "category" && coachCategory === "Weekly Planning") {
         return {
           kicker: "Fire Starters",
           title: "Weekly Planning",
-          body: "These prompts are the same strings the app sends: schedule building, leverage outcomes, ruthless cuts, and a minimum viable week when chaos hits. They show how Alfred operationalizes your blueprint when the calendar gets loud.",
+          body: "These starters walk you through building the schedule, naming leverage outcomes, making ruthless cuts, and sizing a minimum viable week when chaos hits—so the calendar stops being a wish list. They translate your Alignment Blueprint into concrete tradeoffs instead of leaving you to invent structure from scratch. You leave with a week you can defend and boundaries you can name out loud. Stack enough of those weeks and you stop losing quarters to quiet drift.",
         };
       }
       return {
         kicker: "Coach tab",
         title: "Organized prompts, not a blank chat",
-        body: "Fire Starters group coaching by the kind of week you are in: strategy, inner work, sales, execution, weekly review, VAPI, and deeper pattern work. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and QC math. The nested prompts there help you build a week you can defend, name leverage outcomes, cut what cannot stay, and fall back to a minimum viable week when everything goes sideways.",
+        body: "Fire Starters sort coaching by the week you are actually in—strategy, inner work, sales, execution, review, assessment sense-making, and deeper pattern work—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality, which keeps optimism honest. The nested prompts turn that collision into moves: a week you can defend, leverage you can name, cuts you can stomach, and a fallback plan when everything goes sideways—so execution stops being a personality test every Monday.",
       };
     }
     if (tab === "voice") {
@@ -340,7 +492,7 @@ export function AlfredFeatureExplorer() {
       return {
         kicker: "Assessment results",
         title: "Depth you can act on—not a single number",
-        body: "The full results surface mirrors /assessment/results: composite tier, archetype story, arena and domain breakdowns, interpretations, priority patterns, and driver tie-ins. It is the reference you return to when you are deciding what to fix first and what to protect.",
+        body: "You get a composite read, archetype story, arena and domain breakdowns, interpretations, priority patterns, and driver tie-ins—so the assessment becomes a map, not a vanity score. That depth turns “I feel off” into named leaks and named strengths you can defend under pressure. You stop debating what to fix first because the page ranks urgency against what you said matters. The compounding benefit is confidence: you return to one trusted reference when the quarter gets noisy, instead of re-inventing the diagnosis every time.",
       };
     }
     if (tab === "drivers") {
@@ -348,20 +500,23 @@ export function AlfredFeatureExplorer() {
         return {
           kicker: "Driver Library",
           title: "The Escape Artist (full profile)",
-          body: "Every heading and paragraph inside the phone is copied from lib/vapi/drivers.ts and lib/vapi/driver-library.ts—the same blocks the Driver Library page renders for each pattern, including how it shows up in scores and the path out.",
+          body: "A driver profile names the pattern beneath the pattern—how it shows up in life, what it costs, and what “healthy” looks like for you. Reading the full write-up turns a label into language you can use in Coach, in marriage, and in leadership without shame spirals. When the story is explicit, you can negotiate with it instead of obeying it. The payoff is behavioral: you finally have a playbook for the exit that fits your actual constraints—not a meme about discipline.",
         };
       }
       return {
         kicker: "Driver Library",
-        title: "Primary driver → full write-up",
-        body: "The banner language matches the mobile Driver Library index in the app. Tap The Escape Artist to open the same long-form sections users read on /drivers.",
+        title: "From signal to story",
+        body: "The banner spotlights your primary driver so you are not drowning in psychology jargon on a Tuesday night. Opening a profile delivers the long-form narrative—how the pattern reads in scores, relationships, and execution, plus the path out. That continuity matters because founders stop treating symptoms and start working the root. Tap The Escape Artist in the preview to feel how deep the library goes before you are in the live app.",
       };
     }
-    return {
-      kicker: tourStep.kicker,
-      title: tourStep.title,
-      body: tourStep.body,
-    };
+    {
+      const dash = DASHBOARD_TOUR.find((s) => s.focus === dashboardFocus) ?? DASHBOARD_TOUR[0];
+      return {
+        kicker: dash.kicker,
+        title: dash.title,
+        body: dash.body,
+      };
+    }
   };
 
   const left = leftTitleAndBody();
@@ -379,62 +534,58 @@ export function AlfredFeatureExplorer() {
           <p className="text-ap-mid font-medium leading-relaxed text-base sm:text-lg">{left.body}</p>
         </div>
 
-        {tab === "dashboard" && (
-          <div
-            className="flex flex-wrap items-center gap-3"
-            role="group"
-            aria-label="Dashboard tour controls"
+        <div className="flex flex-wrap items-center gap-3" role="group" aria-label="App tour controls">
+          <button
+            type="button"
+            onClick={() => setPaused((p) => !p)}
+            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-4 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent hover:text-gradient-accent transition-colors"
           >
-            <button
-              type="button"
-              onClick={() => setPaused((p) => !p)}
-              className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-4 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent hover:text-gradient-accent transition-colors"
-            >
-              {paused || reduceMotion ? "Play tour" : "Pause"}
-            </button>
-            <button
-              type="button"
-              onClick={() => goTour(-1)}
-              className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
-              aria-label="Previous tour stop"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => goTour(1)}
-              className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
-              aria-label="Next tour stop"
-            >
-              →
-            </button>
-          </div>
-        )}
+            {paused || reduceMotion ? "Play tour" : "Pause"}
+          </button>
+          <button
+            type="button"
+            onClick={() => goTour(-1)}
+            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
+            aria-label="Previous tour stop"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            onClick={() => goTour(1)}
+            className="inline-flex items-center justify-center rounded-full border border-ap-border bg-white px-3 py-2 text-sm font-semibold text-ap-primary hover:border-ap-accent transition-colors"
+            aria-label="Next tour stop"
+          >
+            →
+          </button>
+          <span className="text-sm text-ap-muted font-medium tabular-nums" aria-live="polite">
+            {tourIndex + 1} / {APP_TOUR_STEP_COUNT}
+          </span>
+        </div>
 
-        {tab === "dashboard" && (
-          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Dashboard highlights">
-            {DASHBOARD_TOUR.map((s, i) => (
-              <button
-                key={s.id}
-                type="button"
-                role="tab"
-                aria-selected={i === tourIndex}
-                onClick={() => {
-                  setPaused(true);
-                  setTourIndex(i);
-                }}
-                className={`h-2 rounded-full transition-all ${
-                  i === tourIndex ? "w-8 bg-ap-accent" : "w-2 bg-ap-border hover:bg-ap-muted"
-                }`}
-                aria-label={`Highlight: ${s.title}`}
-              />
-            ))}
-          </div>
-        )}
+        <div className="flex flex-wrap gap-1.5 max-w-xl" role="tablist" aria-label="Tour stops">
+          {APP_TOUR_STEPS.map((s, i) => (
+            <button
+              key={`tour-stop-${i}`}
+              type="button"
+              role="tab"
+              aria-selected={i === tourIndex}
+              onClick={() => {
+                setPaused(true);
+                setTourIndex(i);
+              }}
+              className={`h-1.5 rounded-full transition-all ${
+                i === tourIndex ? "w-6 bg-ap-accent" : "w-1.5 bg-ap-border hover:bg-ap-muted"
+              }`}
+              aria-label={`Tour: ${s.dotLabel}`}
+            />
+          ))}
+        </div>
 
-        {tab !== "dashboard" && (
-          <p className="text-sm text-ap-muted font-medium">
-            Tip: use the bottom navigation inside the phone to move between Dashboard, Coach, Voice, Results, and More.
+        {paused && (
+          <p className="text-sm text-ap-muted font-medium max-w-xl">
+            Tour paused—use the phone&apos;s bottom nav or More menu to explore. Play resumes from this stop, or use the
+            dots to jump.
           </p>
         )}
       </div>
@@ -449,10 +600,10 @@ export function AlfredFeatureExplorer() {
               <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
 
               <div className="relative flex flex-1 min-h-0 flex-col bg-[#0E1624] text-white/90">
-                <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+                <div ref={phoneScrollRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
                   {tab === "dashboard" && (
                     <DashboardScreen
-                      tourFocus={tourFocus}
+                      tourFocus={dashboardFocus}
                       onJumpFocus={jumpTourFocus}
                       onViewDriverDetails={openDriversToEscape}
                     />
@@ -565,6 +716,7 @@ export function AlfredFeatureExplorer() {
                   <button
                     type="button"
                     onClick={() => {
+                      setPaused(true);
                       setMoreOpen((o) => !o);
                     }}
                     className={`flex flex-col items-center gap-0.5 px-1.5 py-1 text-[10px] max-w-[64px] ${
@@ -582,8 +734,9 @@ export function AlfredFeatureExplorer() {
           </div>
 
           <p className="text-center text-xs text-ap-muted mt-4 max-w-[320px] mx-auto leading-relaxed">
-            Interactive demo of ALFRED UI. Copy and layout trace to{" "}
-            <span className="text-ap-mid">campaigns/aligned-ai-os</span>. Coach reply is illustrative sample data.
+            This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
+            product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
+            answers ground in your assessment, blueprint, scorecard, and commitments.
           </p>
         </div>
       </div>
@@ -643,6 +796,7 @@ function DashboardScreen({
       </header>
 
       <div
+        data-tour-section="leverage"
         role="presentation"
         onMouseEnter={() => onJumpFocus("leverage")}
         className={`rounded-2xl border-2 border-ap-accent/40 bg-ap-accent/[0.08] p-3 ${focusClass(tourFocus === "leverage", true)}`}
@@ -667,6 +821,7 @@ function DashboardScreen({
       </p>
 
       <div
+        data-tour-section="weekly"
         role="presentation"
         onMouseEnter={() => onJumpFocus("weekly")}
         className={`rounded-2xl border border-white/10 bg-white/[0.04] p-3 shadow-sm ${focusClass(tourFocus === "weekly", true)}`}
@@ -709,6 +864,7 @@ function DashboardScreen({
       </div>
 
       <div
+        data-tour-section="priorities"
         role="presentation"
         onMouseEnter={() => onJumpFocus("priorities")}
         className={`space-y-2 ${focusClass(tourFocus === "priorities", true)}`}
@@ -748,6 +904,7 @@ function DashboardScreen({
       </div>
 
       <div
+        data-tour-section="pattern"
         role="presentation"
         onMouseEnter={() => onJumpFocus("pattern")}
         className={`rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-3 ${focusClass(tourFocus === "pattern", true)}`}
