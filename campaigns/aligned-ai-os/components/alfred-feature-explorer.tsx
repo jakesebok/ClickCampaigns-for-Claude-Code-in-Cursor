@@ -954,7 +954,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           </div>
 
           <p
-            className={`text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
+            className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
               isAppDark ? "text-muted-foreground" : "text-ap-muted"
             }`}
           >
