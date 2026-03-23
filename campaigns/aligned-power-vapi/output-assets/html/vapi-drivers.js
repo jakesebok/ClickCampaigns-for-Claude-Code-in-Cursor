@@ -1178,7 +1178,7 @@
       '<p class="driver-print-body" style="margin-bottom:18px;">' +
       escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) +
       "</p>" +
-      '<div class="driver-print-coequal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">' +
+      '<div class="driver-print-coequal-grid" style="display:grid;grid-template-columns:1fr;gap:18px;">' +
       buildPrintCoEqualDriverBlock(primaryKey, d1, acc1, evaluation.topDriverScore) +
       buildPrintCoEqualDriverBlock(secondaryKey, d2, acc2, evaluation.secondDriverScore) +
       "</div>" +
