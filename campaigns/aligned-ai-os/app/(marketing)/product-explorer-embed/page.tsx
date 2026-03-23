@@ -19,7 +19,7 @@ export default function ProductExplorerEmbedPage() {
       </Script>
       <style>{`
         .alfred-embed-mode body {
-          background: #2d3953 !important;
+          background: hsl(222 36% 7%) !important;
         }
         .alfred-embed-mode header {
           display: none !important;
@@ -47,9 +47,17 @@ export default function ProductExplorerEmbedPage() {
 
       <section
         id="product-tour-embed"
-        className="dark min-h-screen overflow-hidden bg-[#2d3953] px-4 py-4 sm:px-6 sm:py-6"
+        className="dark relative min-h-screen overflow-hidden border-y border-accent/25 bg-[hsl(222_36%_7%)] px-4 pb-4 pt-12 text-foreground shadow-[inset_0_1px_0_0_hsl(21_100%_55%/0.12)] sm:px-6 sm:pb-6 sm:pt-16"
       >
-        <div className="mx-auto max-w-[1100px]">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_-25%,hsl(21_100%_55%/0.14),transparent_55%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-[1100px]">
           <AlfredFeatureExplorer embed="app-dark" />
         </div>
       </section>

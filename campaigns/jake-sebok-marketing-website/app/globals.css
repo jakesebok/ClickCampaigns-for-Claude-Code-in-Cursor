@@ -12,6 +12,46 @@
   --ap-border: #DDE3ED;
   --ap-bg: #F5F7FA;
   --ap-off: #EEF1F7;
+
+  /* Shadcn-style HSL tokens — used by AlfredFeatureExplorer (app-dark). Matches alfredai.coach/globals.css */
+  --background: 220 28% 96%;
+  --foreground: 218 44% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 44% 10%;
+  --primary: 218 44% 10%;
+  --primary-foreground: 220 28% 96%;
+  --secondary: 220 18% 94%;
+  --secondary-foreground: 218 44% 10%;
+  --muted: 220 18% 94%;
+  --muted-foreground: 213 17% 57%;
+  --accent: 21 100% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 18% 90%;
+  --input: 220 18% 90%;
+  --ring: 21 100% 55%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 220 30% 12%;
+  --foreground: 220 25% 92%;
+  --card: 220 28% 16%;
+  --card-foreground: 220 25% 92%;
+  --primary: 21 100% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 28% 20%;
+  --secondary-foreground: 220 25% 92%;
+  --muted: 220 25% 22%;
+  --muted-foreground: 220 15% 65%;
+  --accent: 21 100% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 220 28% 96%;
+  --border: 220 25% 24%;
+  --input: 220 25% 22%;
+  --ring: 21 100% 55%;
 }
 
 html {
