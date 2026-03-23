@@ -18,17 +18,22 @@ export default function AlfredProductExplorerEmbedPage() {
         {`document.documentElement.classList.add("alfred-embed-mode");`}
       </Script>
       <style>{`
+        .alfred-embed-mode,
+        .alfred-embed-mode body {
+          background: transparent !important;
+        }
         .alfred-embed-mode header,
         .alfred-embed-mode footer {
           display: none !important;
         }
-        .alfred-embed-mode body > main {
-          min-height: 100vh;
+        .alfred-embed-mode body > main,
+        .alfred-embed-mode body > main > * {
+          background: transparent !important;
         }
       `}</style>
       <section
         id="alfred-product-explorer"
-        className="min-h-screen bg-ap-bg overflow-hidden px-4 py-6 sm:px-6 sm:py-10"
+        className="overflow-hidden bg-transparent px-4 py-3 sm:px-6 sm:py-6"
       >
         <div className="mx-auto max-w-[1100px]">
           <AlfredFeatureExplorer />
