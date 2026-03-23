@@ -1687,7 +1687,7 @@
         return x;
       }
       profileHtml += '<p class="' + noteCopyClass + '">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + "</p>";
-      profileHtml += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+      profileHtml += '<div class="grid grid-cols-1 gap-6">';
       profileHtml += buildCoEqualDriverCard(driverName, dCoPri, accCoPri, evaluation.topDriverScore);
       profileHtml += buildCoEqualDriverCard(secondaryDriverName, dCoSec, accCoSec, evaluation.secondDriverScore);
       profileHtml += "</div>";
