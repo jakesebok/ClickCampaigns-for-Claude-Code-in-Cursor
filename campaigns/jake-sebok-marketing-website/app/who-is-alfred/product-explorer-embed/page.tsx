@@ -30,13 +30,25 @@ export default function AlfredProductExplorerEmbedPage() {
         .alfred-embed-mode body > main > * {
           background: transparent !important;
         }
-        .alfred-embed-mode #alfred-product-explorer [class*="max-w-[260px]"] {
-          max-width: 255px !important;
+        /* Remove marketing disclaimer line under the phone for embed use. */
+        .alfred-embed-mode #alfred-product-explorer p[class*="hidden lg:block"][class*="text-xs"][class*="text-center"] {
+          display: none !important;
+        }
+        /* Match ALFRED product-tour control button styling (no white outline). */
+        .alfred-embed-mode #alfred-product-explorer [role="group"][aria-label="App tour controls"] button {
+          border-color: transparent !important;
+          background: rgba(51, 65, 85, 0.62) !important;
+          color: rgb(226, 232, 240) !important;
+          box-shadow: none !important;
+        }
+        .alfred-embed-mode #alfred-product-explorer [role="group"][aria-label="App tour controls"] button:hover {
+          background: rgba(71, 85, 105, 0.7) !important;
+          color: rgb(251, 146, 60) !important;
         }
       `}</style>
       <section
         id="alfred-product-explorer"
-        className="overflow-hidden bg-[#2d3953] px-4 py-3 sm:px-6 sm:py-6"
+        className="dark overflow-hidden bg-[#2d3953] px-4 py-3 sm:px-6 sm:py-6"
       >
         <div className="mx-auto max-w-[1100px]">
           <AlfredFeatureExplorer embed="app-dark" />
