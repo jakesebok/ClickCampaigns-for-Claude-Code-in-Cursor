@@ -103,55 +103,6 @@ const thaddeusData = {
     "I feel like Jake understands me at a deep level. I have a clear understanding of what I'm building and why it matters, and it's rare to find someone who holds that kind of space. Jake doesn't tell me what to do. He calls forth what was already there.",
 };
 
-function StoryIndex({
-  stories,
-  onSelect,
-}: {
-  stories: { id: string; name: string; title: string; image: string; headline: string }[];
-  onSelect: (id: string) => void;
-}) {
-  return (
-    <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-      {stories.map((s) => (
-        <button
-          key={s.id}
-          type="button"
-          onClick={() => onSelect(s.id)}
-          className="group relative text-left rounded-[16px] overflow-hidden border border-ap-border hover:border-ap-accent/60 bg-white transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ap-accent focus:ring-offset-2"
-        >
-          <div className="relative aspect-[5/4] overflow-hidden">
-            <Image
-              src={s.image}
-              alt={s.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/90 via-ap-primary/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.2em] text-ap-accent mb-0.5">
-                {s.title}
-              </p>
-              <h2 className="font-outfit font-bold text-lg text-white mb-1">
-                {s.name}
-              </h2>
-              <p className="text-white/90 text-sm font-medium line-clamp-2">
-                {s.headline}
-              </p>
-              <span className="inline-flex items-center gap-2 mt-2 text-ap-accent font-semibold text-xs group-hover:gap-3 transition-all">
-                Read story
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </button>
-      ))}
-    </div>
-  );
-}
-
 function TransformationCard({
   title,
   before,
@@ -276,14 +227,9 @@ function StorySection({
 }
 
 export function CaseStudiesContent() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <>
-      {/* Hero — story index */}
+      {/* Hero */}
       <section className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 bg-ap-bg overflow-hidden">
         <div
           className="pointer-events-none absolute top-0 right-0 w-[min(100%,520px)] h-[45%] lg:h-full lg:w-[38%] bg-ap-accent/10"
@@ -300,14 +246,6 @@ export function CaseStudiesContent() {
           <p className="text-lg font-semibold text-ap-mid max-w-2xl leading-relaxed mb-8">
             These are the stories of entrepreneurs who chose alignment over the grind, and what happened when they did.
           </p>
-
-          <StoryIndex
-            stories={[
-              { ...marshallData, headline: marshallData.headline },
-              { ...thaddeusData, headline: thaddeusData.headline },
-            ]}
-            onSelect={scrollTo}
-          />
         </div>
       </section>
 
