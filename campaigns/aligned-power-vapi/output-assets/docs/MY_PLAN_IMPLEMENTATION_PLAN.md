@@ -49,6 +49,21 @@
 
 New block at top of `coach.html`: list active sprints, edit coach context / private notes, regenerate from latest VAPI per client email.
 
+## One-time backfill (no UI)
+
+For everyone who already has a `vapi_results` row but no `sprints` row yet, run once from your machine (not Vercel):
+
+```bash
+cd campaigns/aligned-power-vapi/output-assets
+export SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
+export SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
+node scripts/backfill-sprints-from-vapi.js --dry-run   # optional: preview
+node scripts/backfill-sprints-from-vapi.js             # writes upserts
+# Single email: node scripts/backfill-sprints-from-vapi.js --email=client@example.com
+```
+
+Uses the same enrichment + `buildSprintPayload` + `upsertActiveSprint` as live saves. Latest assessment per email wins (ordered by `created_at` desc). Existing active sprints are **updated** in place (same as coach Regenerate).
+
 ## Payload shape (`sprints.payload` JSON)
 
 - `version`, `title`, `summary`, `archetype`, `driver`, `generatedAt`

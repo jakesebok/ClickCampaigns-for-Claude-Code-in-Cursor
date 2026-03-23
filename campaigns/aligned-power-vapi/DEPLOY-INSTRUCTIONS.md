@@ -31,7 +31,7 @@ You’ll do **4 main things**: set up Supabase (database + auth), put your proje
 
 **Optional — Admin portal:** If you use the coach/admin area to view any respondent’s results, run the SQL in **supabase/admin-policy.sql** the same way (New query → paste file → Run). That allows the admin user (jacob@alignedpower.coach) to see all assessment results.
 
-**My Plan (28-day sprints):** Run **`output-assets/supabase/sprints.sql`** in the SQL Editor (same workflow). That adds the `sprints` table and optionally `vapi_results.source`. See **`output-assets/docs/MY_PLAN_IMPLEMENTATION_PLAN.md`** for APIs and Alfred sync env vars (`PORTAL_BASE_URL`, `PORTAL_SPRINT_SYNC_SECRET` on the Alfred app).
+**My Plan (28-day sprints):** Run **`output-assets/supabase/sprints.sql`** in the SQL Editor (same workflow). That adds the `sprints` table and optionally `vapi_results.source`. See **`output-assets/docs/MY_PLAN_IMPLEMENTATION_PLAN.md`** for APIs and Alfred sync env vars (`PORTAL_BASE_URL`, `PORTAL_SPRINT_SYNC_SECRET` on the Alfred app). **One-time backfill** for existing assessments: run **`output-assets/scripts/backfill-sprints-from-vapi.js`** locally with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (documented in that plan).
 
 **Vercel Hobby (12 function limit):** Portal APIs use a **single** function, **`api/gw.js`**, with handlers in **`lib/portal-server/handlers/`**. See **`output-assets/docs/API_GATEWAY.md`**. Your site still calls `/api/config`, `/api/save-vapi-results`, etc.; Vercel rewrites those to the gateway.
 

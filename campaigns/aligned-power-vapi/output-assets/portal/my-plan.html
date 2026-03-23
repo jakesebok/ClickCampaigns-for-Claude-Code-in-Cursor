@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="/portal/theme-init.js"></script>
+  <script>
+    (function(){var t;try{var m=document.cookie.match(/ap-theme=(\w+)/);if(m&&(m[1]==='dark'||m[1]==='light')){t=m[1];try{localStorage.setItem('ap-theme',t);}catch(e){}}else{t=localStorage.getItem('ap-theme');}}catch(e){t=localStorage.getItem('ap-theme');}if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();
+  </script>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Plan | Aligned Performance Portal</title>
@@ -21,28 +23,122 @@
       --ap-text: #0E1624;
       --ap-muted: #7A8FA8;
       --ap-border: #DDE3ED;
+      --ap-surface: #ffffff;
+      --ap-header-bg: rgba(255,255,255,0.95);
     }
-    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-accent:#FF6B1A;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
-    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    [data-theme="dark"] {
+      --ap-primary: #e8eaf2;
+      --ap-secondary: #b8c4d4;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #161b26;
+      --ap-text: #e8eaf2;
+      --ap-muted: #8a9bb3;
+      --ap-border: #2d3849;
+      --ap-surface: #1e2438;
+      --ap-header-bg: rgba(30,36,56,0.95);
+    }
+    [data-theme="dark"] .bg-white { background-color: var(--ap-surface) !important; }
+    [data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    .plan-rich strong { font-family: Outfit, sans-serif; font-weight: 700; }
+    @media (max-width: 767px) {
+      .nav-links-desk { display: none !important; }
+      .nav-cta-bar { display: inline-flex !important; }
+      [data-nav-role="client"] .nav-cta-bar, [data-nav-role="admin"] .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: inline-flex !important; }
+    }
+    @media (min-width: 768px) {
+      .nav-cta-bar { display: none !important; }
+      .nav-hamburger { display: none !important; }
+    }
+    .nav-hamburger-panel { transform: translateX(100%); transition: transform 0.25s ease-out; }
+    .nav-hamburger-panel.nav-open { transform: translateX(0); }
+    .nav-hamburger-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .nav-hamburger-backdrop.nav-open { opacity: 1; pointer-events: auto; }
+    .nav-popover summary { list-style: none; }
+    .nav-popover summary::-webkit-details-marker { display: none; }
+    .nav-popover[open] .nav-popover-chevron { transform: rotate(180deg); }
   </style>
 </head>
 <body class="min-h-screen antialiased">
-  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
-    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+  <header id="portal-header" class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm" data-nav-role="nonclient">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
       <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)] hover:opacity-90 transition-opacity">
         <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
         <span>Aligned Performance Portal</span>
       </a>
-      <div class="flex items-center gap-3">
-        <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
-        <button type="button" id="logout-btn" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Log out</button>
+      <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5"></i>
+        </button>
+        <a href="/assessment" class="nav-cta-bar hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+        <div class="nav-links-desk flex items-center gap-4">
+          <a id="header-my-plan-link" href="/my-plan" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">My Plan</a>
+          <a id="header-6c-link" href="/scorecard" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">6C's Scorecard</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors">
+              Explore
+              <i data-lucide="chevron-down" class="nav-popover-chevron w-4 h-4 transition-transform duration-200"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <a href="/portal/archetype-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+              <a href="/portal/driver-library" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+            </div>
+          </details>
+          <a href="/assessment" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+          <details class="nav-popover relative">
+            <summary class="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)] transition-colors" aria-label="Open account menu">
+              <i data-lucide="settings-2" class="w-5 h-5"></i>
+            </summary>
+            <div class="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-[var(--ap-border)] bg-white/95 p-2 shadow-lg backdrop-blur-sm">
+              <span id="header-coach-link" class="hidden"><a href="/coach" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach Dashboard</a></span>
+              <span id="header-admin-link" class="hidden"><a href="/admin" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin Dashboard</a></span>
+              <a href="/settings" class="block rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+              <button type="button" id="logout-btn" class="block w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+            </div>
+          </details>
+        </div>
+        <button type="button" id="nav-hamburger-btn" class="nav-hamburger hidden p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="nav-hamburger-panel">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </div>
   </header>
+  <div id="nav-hamburger-backdrop" class="nav-hamburger-backdrop fixed inset-0 bg-black/30 z-[100] md:hidden" aria-hidden="true"></div>
+  <div id="nav-hamburger-panel" class="nav-hamburger-panel fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white shadow-xl z-[101] md:hidden overflow-y-auto" role="dialog" aria-label="Navigation menu" aria-modal="true">
+    <div class="p-4 flex items-center justify-between border-b border-[var(--ap-border)]">
+      <span class="font-semibold text-[var(--ap-primary)]">Menu</span>
+      <button type="button" id="nav-hamburger-close" class="p-2 -mr-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Close menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="p-4 flex flex-col gap-1">
+      <div class="flex items-center justify-between py-3 px-3 border-b border-[var(--ap-border)] mb-2">
+        <span class="text-sm font-semibold text-[var(--ap-primary)]">Theme</span>
+        <button type="button" id="theme-toggle-mobile" class="p-2 rounded-lg text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Toggle dark mode">
+          <i data-lucide="sun" id="theme-icon-light-mobile" class="w-5 h-5 hidden"></i>
+          <i data-lucide="moon" id="theme-icon-dark-mobile" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <span id="header-coach-link-mobile" class="hidden"><a href="/coach" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Coach</a></span>
+      <span id="header-admin-link-mobile" class="hidden"><a href="/admin" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Admin</a></span>
+      <a href="/settings" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Settings</a>
+      <span id="header-my-plan-link-mobile" class="hidden"><a href="/my-plan" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">My Plan</a></span>
+      <span id="header-6c-link-mobile" class="hidden"><a href="/scorecard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">6C's Scorecard</a></span>
+      <div class="mt-2 border-t border-[var(--ap-border)] pt-3">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-muted)]">Explore</p>
+        <a href="/portal/archetype-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Archetype Library</a>
+        <a href="/portal/driver-library" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Driver Library</a>
+      </div>
+      <a href="/assessment" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Take Assessment</a>
+      <a href="/dashboard" class="block py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-accent)]">Dashboard</a>
+      <button type="button" id="logout-btn-mobile" class="block w-full text-left py-3 px-3 rounded-lg text-sm font-semibold text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]">Log out</button>
+    </nav>
+  </div>
 
-  <main class="max-w-3xl mx-auto px-4 py-10">
+  <main class="max-w-4xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-16 text-[var(--ap-muted)]">Loading your plan…</div>
     <div id="wrong-surface" class="hidden rounded-2xl border-2 border-[var(--ap-border)] bg-white p-8 text-center">
       <p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Your plan lives in ALFRED</p>
@@ -60,16 +156,16 @@
       <p id="plan-summary" class="text-[var(--ap-secondary)] mb-8"></p>
       <div id="plan-context" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 space-y-4 text-sm text-[var(--ap-secondary)]">
         <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)]">Why this focus</p>
-        <p id="ctx-why" class="leading-relaxed whitespace-pre-wrap"></p>
+        <div id="ctx-why" class="plan-rich leading-relaxed"></div>
         <div id="ctx-extra" class="space-y-3 border-t border-[var(--ap-border)] pt-4"></div>
       </div>
       <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/30 p-6">
         <p class="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200 mb-2">A pattern to watch</p>
-        <p id="pattern-watch-text" class="text-sm text-amber-950 dark:text-amber-100 leading-relaxed whitespace-pre-wrap"></p>
+        <div id="pattern-watch-text" class="plan-rich text-sm text-amber-950 dark:text-amber-100 leading-relaxed"></div>
       </div>
       <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6">
         <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)] mb-2">From your coach</p>
-        <p id="coach-context-text" class="text-sm text-[var(--ap-secondary)] whitespace-pre-wrap"></p>
+        <div id="coach-context-text" class="plan-rich text-sm text-[var(--ap-secondary)]"></div>
       </div>
       <div id="weeks-container" class="space-y-8"></div>
     </div>
@@ -77,18 +173,115 @@
 
   <script type="module">
     (async function() {
-      var cfg = await (async function() {
+      function escapeHtml(s) {
+        if (s == null) return '';
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s).replace(/"/g, '&quot;');
+      }
+      /** Safe subset: **bold**, paragraphs, line breaks (from Journeyman deep-dive markdown). */
+      function formatPlanHtml(raw) {
+        if (raw == null || !String(raw).trim()) return '';
+        var t = escapeHtml(String(raw));
+        t = t.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-[var(--ap-primary)]">$1</strong>');
+        var parts = t.split(/\n\n+/);
+        return parts
+          .map(function (p) {
+            return '<p class="mb-3 last:mb-0">' + p.replace(/\n/g, '<br>') + '</p>';
+          })
+          .join('');
+      }
+      /** Same bold rules, no &lt;p&gt; (for use inside labels / one-line fields). */
+      function formatPlanInline(raw) {
+        if (raw == null || !String(raw).trim()) return '';
+        var t = escapeHtml(String(raw));
+        t = t.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-[var(--ap-primary)]">$1</strong>');
+        return t.replace(/\n/g, '<br>');
+      }
+
+      function initTheme() {
+        function getTheme() {
+          return document.documentElement.getAttribute('data-theme') || 'light';
+        }
+        function setTheme(t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('ap-theme', t);
+          try {
+            var domain = '';
+            if (typeof window !== 'undefined' && window.location && /alignedpower\.coach$/.test(window.location.hostname))
+              domain = '; domain=.alignedpower.coach';
+            document.cookie = 'ap-theme=' + t + '; path=/; max-age=31536000' + domain;
+          } catch (e) {}
+          updateThemeIcons();
+        }
+        function updateThemeIcons() {
+          var d = getTheme() === 'dark';
+          ['', '-mobile'].forEach(function (s) {
+            var li = document.getElementById('theme-icon-light' + s);
+            var ld = document.getElementById('theme-icon-dark' + s);
+            if (li) li.classList.toggle('hidden', !d);
+            if (ld) ld.classList.toggle('hidden', d);
+          });
+        }
+        function toggleTheme() {
+          setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+        }
+        updateThemeIcons();
+        var tb = document.getElementById('theme-toggle');
+        var tbm = document.getElementById('theme-toggle-mobile');
+        if (tb) tb.addEventListener('click', toggleTheme);
+        if (tbm) tbm.addEventListener('click', toggleTheme);
+      }
+      initTheme();
+
+      function initHamburger() {
+        var btn = document.getElementById('nav-hamburger-btn');
+        var panel = document.getElementById('nav-hamburger-panel');
+        var backdrop = document.getElementById('nav-hamburger-backdrop');
+        var closeBtn = document.getElementById('nav-hamburger-close');
+        function open() {
+          if (panel) panel.classList.add('nav-open');
+          if (backdrop) backdrop.classList.add('nav-open');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'true');
+            btn.setAttribute('aria-label', 'Close menu');
+          }
+          document.body.style.overflow = 'hidden';
+        }
+        function close() {
+          if (panel) panel.classList.remove('nav-open');
+          if (backdrop) backdrop.classList.remove('nav-open');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'Open menu');
+          }
+          document.body.style.overflow = '';
+        }
+        if (btn) btn.addEventListener('click', function () {
+          panel.classList.contains('nav-open') ? close() : open();
+        });
+        if (backdrop) backdrop.addEventListener('click', close);
+        if (closeBtn) closeBtn.addEventListener('click', close);
+      }
+      initHamburger();
+
+      var cfg = await (async function () {
         try {
           var r = await fetch('/api/config');
           if (!r.ok) return { error: true };
           eval(await r.text());
           return window.SUPABASE_URL ? {} : { error: true };
-        } catch (e) { return { error: true }; }
+        } catch (e) {
+          return { error: true };
+        }
       })();
 
       var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-      var { data: { session } } = await supabase.auth.getSession();
+      var {
+        data: { session },
+      } = await supabase.auth.getSession();
 
       document.getElementById('loading').classList.add('hidden');
       if (cfg.error || !session) {
@@ -96,36 +289,80 @@
         return;
       }
 
-      document.getElementById('logout-btn').addEventListener('click', function() {
-        supabase.auth.signOut().then(function() { window.location.href = '/login'; });
-      });
-
+      var email = (session.user.email || '').trim().toLowerCase();
       var token = session.access_token;
+      var header = document.getElementById('portal-header');
+
+      if (email === 'jacob@alignedpower.coach') {
+        ['header-coach-link', 'header-admin-link', 'header-coach-link-mobile', 'header-admin-link-mobile'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.remove('hidden');
+        });
+        if (header) header.setAttribute('data-nav-role', 'admin');
+      }
+
+      ['header-my-plan-link', 'header-my-plan-link-mobile'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove('hidden');
+      });
+      var mpl = document.getElementById('header-my-plan-link');
+      if (mpl) {
+        mpl.classList.add('text-[var(--ap-accent)]');
+        mpl.setAttribute('aria-current', 'page');
+      }
+      var mplWrap = document.getElementById('header-my-plan-link-mobile');
+      if (mplWrap) {
+        var mpla = mplWrap.querySelector('a');
+        if (mpla) {
+          mpla.classList.add('text-[var(--ap-accent)]');
+          mpla.setAttribute('aria-current', 'page');
+        }
+      }
+
+      var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
+      if (activeRow && activeRow.active_client) {
+        if (header && header.getAttribute('data-nav-role') !== 'admin') header.setAttribute('data-nav-role', 'client');
+        ['header-6c-link', 'header-6c-link-mobile'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.remove('hidden');
+        });
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', function () {
+        supabase.auth.signOut().then(function () {
+          window.location.href = '/login';
+        });
+      });
+      var logoutMobile = document.getElementById('logout-btn-mobile');
+      if (logoutMobile)
+        logoutMobile.addEventListener('click', function () {
+          supabase.auth.signOut().then(function () {
+            window.location.href = '/login';
+          });
+        });
+
       var res = await fetch('/api/sprint-get-me', { headers: { Authorization: 'Bearer ' + token } });
-      var json = await res.json().catch(function() { return {}; });
+      var json = await res.json().catch(function () {
+        return {};
+      });
 
       if (!res.ok || json.error) {
         document.getElementById('no-sprint').classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
         return;
       }
 
       var sprint = json.sprint;
       if (!sprint) {
         document.getElementById('no-sprint').classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
         return;
       }
 
       if (sprint.primary_surface === 'alfred') {
         document.getElementById('wrong-surface').classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
         return;
-      }
-
-      function escapeHtml(s) {
-        if (s == null) return '';
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
-      function escapeAttr(s) {
-        return escapeHtml(s).replace(/"/g, '&quot;');
       }
 
       var payload = sprint.payload || {};
@@ -135,14 +372,19 @@
       var ctx = payload.context || {};
       if (ctx.whyItMatters && String(ctx.whyItMatters).trim()) {
         document.getElementById('plan-context').classList.remove('hidden');
-        document.getElementById('ctx-why').textContent = ctx.whyItMatters.trim();
+        document.getElementById('ctx-why').innerHTML = formatPlanHtml(ctx.whyItMatters.trim());
         var extra = document.getElementById('ctx-extra');
         extra.innerHTML = '';
         function addCtx(label, key) {
           var v = ctx[key];
           if (!v || !String(v).trim()) return;
           var d = document.createElement('div');
-          d.innerHTML = '<p class="text-xs font-bold text-[var(--ap-primary)] mb-1">' + escapeHtml(label) + '</p><p class="leading-relaxed whitespace-pre-wrap">' + escapeHtml(String(v).trim()) + '</p>';
+          d.innerHTML =
+            '<p class="text-xs font-bold text-[var(--ap-primary)] mb-1">' +
+            escapeHtml(label) +
+            '</p><div class="plan-rich leading-relaxed">' +
+            formatPlanHtml(String(v).trim()) +
+            '</div>';
           extra.appendChild(d);
         }
         addCtx('What this usually indicates', 'usuallyIndicates');
@@ -155,41 +397,69 @@
 
       if (payload.driverModifier && String(payload.driverModifier).trim()) {
         document.getElementById('pattern-watch-box').classList.remove('hidden');
-        document.getElementById('pattern-watch-text').textContent = payload.driverModifier.trim();
+        document.getElementById('pattern-watch-text').innerHTML = formatPlanHtml(payload.driverModifier.trim());
       }
 
       if (sprint.coach_context && String(sprint.coach_context).trim()) {
         document.getElementById('coach-context-box').classList.remove('hidden');
-        document.getElementById('coach-context-text').textContent = sprint.coach_context.trim();
+        document.getElementById('coach-context-text').innerHTML = formatPlanHtml(sprint.coach_context.trim());
       }
 
       var weeks = payload.weeks || [];
       var reflections = payload.weekReflections || {};
       var wrap = document.getElementById('weeks-container');
-      wrap.innerHTML = weeks.map(function(w) {
-        var wn = w.weekNumber || 0;
-        var tasks = (w.tasks || []).map(function(t) {
-          var checked = t.completed ? ' checked' : '';
-          return '<label class="flex gap-3 items-start p-3 rounded-xl border border-[var(--ap-border)] bg-white cursor-pointer hover:border-[var(--ap-accent)]/50">' +
-            '<input type="checkbox" class="task-cb mt-1 w-4 h-4 accent-[var(--ap-accent)]" data-id="' + escapeAttr(t.id) + '"' + checked + ' />' +
-            '<span><span class="font-semibold text-[var(--ap-primary)] block">' + escapeHtml(t.title) + '</span>' +
-            '<span class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(t.description || '') + '</span></span></label>';
-        }).join('');
-        var refVal = reflections[String(wn)] || '';
-        return '<section class="rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 shadow-sm">' +
-          '<h2 class="text-xl text-[var(--ap-primary)] mb-1">Week ' + wn + '</h2>' +
-          '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-4">' + escapeHtml(w.theme || '') + '</p>' +
-          '<div class="space-y-2 mb-4">' + tasks + '</div>' +
-          '<label class="block text-xs font-bold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Reflection</label>' +
-          '<textarea rows="3" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-white text-sm text-[var(--ap-primary)]" data-week="' + wn + '" placeholder="What shifted this week?">' + escapeHtml(refVal) + '</textarea></section>';
-      }).join('');
+      wrap.innerHTML = weeks
+        .map(function (w) {
+          var wn = w.weekNumber || 0;
+          var tasks = (w.tasks || [])
+            .map(function (t) {
+              var checked = t.completed ? ' checked' : '';
+              return (
+                '<label class="flex gap-3 items-start p-3 rounded-xl border border-[var(--ap-border)] bg-white cursor-pointer hover:border-[var(--ap-accent)]/50">' +
+                '<input type="checkbox" class="task-cb mt-1 w-4 h-4 accent-[var(--ap-accent)]" data-id="' +
+                escapeAttr(t.id) +
+                '"' +
+                checked +
+                ' />' +
+                '<span><span class="font-semibold text-[var(--ap-primary)] block plan-rich">' +
+                formatPlanInline(t.title) +
+                '</span>' +
+                '<span class="text-sm text-[var(--ap-secondary)] plan-rich block mt-1">' +
+                formatPlanInline(t.description || '') +
+                '</span></span></label>'
+              );
+            })
+            .join('');
+          var refVal = reflections[String(wn)] || '';
+          return (
+            '<section class="rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 shadow-sm">' +
+            '<h2 class="text-xl text-[var(--ap-primary)] mb-1">Week ' +
+            wn +
+            '</h2>' +
+            '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-4 plan-rich">' +
+            formatPlanInline(w.theme || '') +
+            '</p>' +
+            '<div class="space-y-2 mb-4">' +
+            tasks +
+            '</div>' +
+            '<label class="block text-xs font-bold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Reflection</label>' +
+            '<textarea rows="3" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-white text-sm text-[var(--ap-primary)]" data-week="' +
+            wn +
+            '" placeholder="What shifted this week?">' +
+            escapeHtml(refVal) +
+            '</textarea></section>'
+          );
+        })
+        .join('');
 
       function debounce(fn, ms) {
         var t;
-        return function() {
+        return function () {
           clearTimeout(t);
           var a = arguments;
-          t = setTimeout(function() { fn.apply(null, a); }, ms);
+          t = setTimeout(function () {
+            fn.apply(null, a);
+          }, ms);
         };
       }
 
@@ -202,23 +472,23 @@
       }
 
       var pendingTasks = {};
-      wrap.querySelectorAll('.task-cb').forEach(function(cb) {
-        cb.addEventListener('change', function() {
+      wrap.querySelectorAll('.task-cb').forEach(function (cb) {
+        cb.addEventListener('change', function () {
           pendingTasks[cb.getAttribute('data-id')] = cb.checked;
           debouncedSaveTasks();
         });
       });
 
-      var debouncedSaveTasks = debounce(function() {
+      var debouncedSaveTasks = debounce(function () {
         if (Object.keys(pendingTasks).length === 0) return;
         var u = Object.assign({}, pendingTasks);
         pendingTasks = {};
         savePatch(u, null);
       }, 500);
 
-      wrap.querySelectorAll('.week-ref').forEach(function(ta) {
+      wrap.querySelectorAll('.week-ref').forEach(function (ta) {
         var wk = ta.getAttribute('data-week');
-        ta.addEventListener('blur', function() {
+        ta.addEventListener('blur', function () {
           var o = {};
           o[wk] = ta.value;
           savePatch(null, o);
