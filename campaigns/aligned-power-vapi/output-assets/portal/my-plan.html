@@ -261,12 +261,21 @@
           .trim();
       }
 
+      function normalizeTaskPrefix(s) {
+        return normalizeTaskText(s)
+          .replace(/\.\.\.$|…$/g, '')
+          .replace(/[\s:.;,\-–—]+$/g, '')
+          .trim()
+          .toLowerCase();
+      }
+
       /** One visual block when title/description repeat; full width so text is not clipped in flex rows. */
       function buildTaskCheckboxInnerHtml(t) {
         var title = normalizeTaskText(t.title);
         var desc = normalizeTaskText(t.description || '');
         var tl = title.toLowerCase();
         var dl = desc.toLowerCase();
+        var titlePrefix = normalizeTaskPrefix(title);
         var onlyTitle = '';
         var onlyBody = '';
         if (!desc) {
@@ -274,6 +283,8 @@
         } else if (!title) {
           onlyBody = desc;
         } else if (dl === tl) {
+          onlyBody = desc;
+        } else if (titlePrefix && dl.indexOf(titlePrefix) === 0) {
           onlyBody = desc;
         } else if (dl.indexOf(tl) === 0) {
           var rest = desc.slice(title.length).replace(/^[\s:.;,\-–—]+/g, '').trim();

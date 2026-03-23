@@ -1168,44 +1168,118 @@
     var d2 = DRIVER_CONTENT[secondaryKey];
     var acc1 = DRIVER_ACCENT_COLORS[primaryKey] || "var(--ap-accent)";
     var acc2 = DRIVER_ACCENT_COLORS[secondaryKey] || "var(--ap-accent)";
-    var firstPage =
-      '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
-      acc1 +
-      ';"><div class="driver-print-inner">' +
-      '<p class="driver-print-eyebrow" style="color:' +
-      acc1 +
-      '">Your Primary Patterns</p>' +
-      '<p class="driver-print-body" style="margin-bottom:18px;">' +
-      escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) +
-      "</p>" +
-      '<div class="driver-print-coequal-grid" style="display:grid;grid-template-columns:1fr;gap:18px;">' +
-      buildPrintCoEqualDriverBlock(primaryKey, d1, acc1, evaluation.topDriverScore) +
-      buildPrintCoEqualDriverBlock(secondaryKey, d2, acc2, evaluation.secondDriverScore) +
-      "</div>" +
-      "</div></div>";
-    var secondPage =
-      '<div class="print-only driver-print-shell driver-print-page driver-print-second" style="border-left:4px solid ' +
-      acc1 +
-      ';"><div class="driver-print-inner">' +
-      '<p class="driver-print-eyebrow" style="color:' +
-      acc1 +
-      '">Your Primary Patterns (continued)</p>' +
-      '<h3 class="driver-print-continued-title">' +
-      escapeHtml(d1.name) +
-      "</h3>" +
-      buildPrintDetailBlock("How This Shows Up in Your Scores", d1.mechanism) +
-      buildPrintDetailBlock("What This Is Costing You", d1.whatItCosts) +
-      buildPrintDetailBlock("The Way Out", d1.theWayOut) +
-      '<h3 class="driver-print-continued-title" style="margin-top:28px;">' +
-      escapeHtml(d2.name) +
-      "</h3>" +
-      buildPrintDetailBlock("How This Shows Up in Your Scores", d2.mechanism) +
-      buildPrintDetailBlock("What This Is Costing You", d2.whatItCosts) +
-      buildPrintDetailBlock("The Way Out", d2.theWayOut) +
-      '<p class="driver-print-note">' +
-      escapeHtml(DRIVER_NOTE) +
-      "</p></div></div>";
-    return firstPage + secondPage;
+    function buildCoEqualPatternFirstPage(driverKey, driver, accent, score, eyebrow, includeExplainer) {
+      var html =
+        '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
+        accent +
+        ';"><div class="driver-print-inner">' +
+        '<p class="driver-print-eyebrow" style="color:' +
+        accent +
+        '">' +
+        escapeHtml(eyebrow) +
+        "</p>";
+      if (includeExplainer) {
+        html +=
+          '<p class="driver-print-body" style="margin-bottom:18px;">' +
+          escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) +
+          "</p>";
+      }
+      html +=
+        '<div class="driver-print-header">' +
+        '<div class="driver-print-icon" style="background:' +
+        accent +
+        '14;border-color:' +
+        accent +
+        '33;">' +
+        getDriverIcon(driverKey, 52) +
+        "</div>" +
+        '<div class="driver-print-heading-copy">' +
+        '<h2 class="driver-print-title">' +
+        escapeHtml(driver.name) +
+        "</h2>" +
+        '<p class="driver-print-core-fear"><span>Core fear:</span> ' +
+        escapeHtml(driver.coreFear) +
+        "</p>" +
+        '<p class="driver-print-tagline">' +
+        escapeHtml(driver.tagline) +
+        "</p></div></div>" +
+        '<div class="driver-print-strength" style="background:' +
+        accent +
+        '10;color:' +
+        accent +
+        ';border-color:' +
+        accent +
+        '22;">Pattern strength: ' +
+        score +
+        " / " +
+        driver.maxPossible +
+        "</div>" +
+        '<blockquote class="driver-print-quote" style="background:' +
+        accent +
+        '10;border-left:2px solid ' +
+        accent +
+        ';">&quot;' +
+        escapeHtml(driver.coreBelief) +
+        "&quot;</blockquote>" +
+        '<p class="driver-print-body">' +
+        escapeHtml(driver.description) +
+        "</p>" +
+        buildPrintDetailBlock("How This Shows Up in Your Scores", driver.mechanism) +
+        "</div></div>";
+      return html;
+    }
+
+    function buildCoEqualPatternSecondPage(driver, accent, eyebrow, includeNote) {
+      var html =
+        '<div class="print-only driver-print-shell driver-print-page driver-print-second" style="border-left:4px solid ' +
+        accent +
+        ';"><div class="driver-print-inner">' +
+        '<p class="driver-print-eyebrow" style="color:' +
+        accent +
+        '">' +
+        escapeHtml(eyebrow) +
+        "</p>" +
+        '<h3 class="driver-print-continued-title">' +
+        escapeHtml(driver.name) +
+        "</h3>" +
+        buildPrintDetailBlock("What This Is Costing You", driver.whatItCosts) +
+        buildPrintDetailBlock("The Way Out", driver.theWayOut);
+      if (includeNote) {
+        html += '<p class="driver-print-note">' + escapeHtml(DRIVER_NOTE) + "</p>";
+      }
+      html += "</div></div>";
+      return html;
+    }
+
+    var p1a = buildCoEqualPatternFirstPage(
+      primaryKey,
+      d1,
+      acc1,
+      evaluation.topDriverScore,
+      "Your Primary Patterns",
+      true
+    );
+    var p1b = buildCoEqualPatternSecondPage(
+      d1,
+      acc1,
+      "Your Primary Patterns (continued)",
+      false
+    );
+    var p2a = buildCoEqualPatternFirstPage(
+      secondaryKey,
+      d2,
+      acc2,
+      evaluation.secondDriverScore,
+      "Your Primary Patterns",
+      false
+    );
+    var p2b = buildCoEqualPatternSecondPage(
+      d2,
+      acc2,
+      "Your Primary Patterns (continued)",
+      true
+    );
+    return p1a + p1b + p2a + p2b;
   }
 
   function buildPrintDriverPages(evaluation, driverName, secondaryDriverName, accent) {
@@ -2015,7 +2089,7 @@
         }
         if (driverName) {
           html +=
-            '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+            '<p class="text-base text-[var(--ap-secondary)] ml-[5rem] sm:ml-[6.5rem]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
             escapeHtml(DRIVER_CONTENT[driverName].coreFear) +
             "</p>";
         }

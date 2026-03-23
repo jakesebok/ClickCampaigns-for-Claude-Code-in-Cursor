@@ -5,6 +5,14 @@ export function normalizeSprintTaskText(s: string | undefined): string {
     .trim();
 }
 
+function normalizeForPrefixMatch(s: string): string {
+  return normalizeSprintTaskText(s)
+    .replace(/\.\.\.$|…$/g, "")
+    .replace(/[\s:.;,\-–—]+$/g, "")
+    .trim()
+    .toLowerCase();
+}
+
 export type SprintTaskDisplayMode = "title" | "body" | "both";
 
 /**
@@ -18,10 +26,14 @@ export function getSprintTaskDisplay(t: {
   const desc = normalizeSprintTaskText(t.description);
   const tl = title.toLowerCase();
   const dl = desc.toLowerCase();
+  const titlePrefix = normalizeForPrefixMatch(title);
 
   if (!desc) return { mode: "title", title, body: "" };
   if (!title) return { mode: "body", title: "", body: desc };
   if (dl === tl) return { mode: "body", title: "", body: desc };
+  if (titlePrefix && dl.startsWith(titlePrefix)) {
+    return { mode: "body", title: "", body: desc };
+  }
   if (dl.startsWith(tl)) {
     const rest = desc.slice(title.length).replace(/^[\s:.;,\-–—]+/g, "").trim();
     if (!rest) return { mode: "title", title, body: "" };
