@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/who-is-alfred/product-explorer-embed"],
     },
     sitemap: "https://jakesebok.com/sitemap.xml",
   };
