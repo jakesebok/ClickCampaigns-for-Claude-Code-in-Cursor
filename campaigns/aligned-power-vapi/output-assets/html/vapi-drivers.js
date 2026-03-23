@@ -1974,22 +1974,26 @@
       } else {
         html += '<div class="space-y-2">';
         if (driverName) {
-          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)] ml-[3.25rem] sm:ml-[3.75rem]">Your Primary Driver</p>';
-          html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
-          html += '<div class="flex items-center gap-3">';
+          html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">';
+          html += '<div class="flex items-start gap-4 sm:gap-6">';
           html +=
-            '<span class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl border shrink-0" style="background:' +
+            '<span class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-xl shrink-0" style="background:' +
             accent +
-            '14;border-color:' +
+            '20;">' +
+            '<span class="w-10 h-10 sm:w-12 sm:h-12" style="color:' +
             accent +
-            '33;">' +
-            getDriverIcon(driverName, 40) +
+            ';">' +
+            getDriverIcon(driverName, 48) +
+            "</span>" +
             "</span>";
+          html += '<div class="min-w-0 flex-1">';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + accent + '">Your Primary Driver</p>';
           html +=
-            '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+            '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' +
             escapeHtml(previewTitle) +
             "</h2>";
-          html += "</div>";
+          html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline || "") + "</p>";
+          html += "</div></div>";
           html +=
             '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
             accent +
@@ -2015,7 +2019,7 @@
             escapeHtml(DRIVER_CONTENT[driverName].coreFear) +
             "</p>";
         }
-        if (previewTagline) {
+        if (!driverName && previewTagline) {
           html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + "</p>";
         }
         html += "</div>";
