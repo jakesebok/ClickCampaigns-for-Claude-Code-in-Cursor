@@ -168,9 +168,9 @@ function getScatteredMindDiagnostics(domains, importanceRatings) {
 
   return {
     gateSummary:
-      'Passed (AF: ' +
+      'Passed (Attention & Focus: ' +
       formatScoreNumber(af) +
-      ' <= 5.0, ME: ' +
+      ' <= 5.0, Mental / Emotional Health: ' +
       formatScoreNumber(me) +
       ' >= 6.0)',
     signalsSummary: signals.length ? signals.join(', ') : 'None',
