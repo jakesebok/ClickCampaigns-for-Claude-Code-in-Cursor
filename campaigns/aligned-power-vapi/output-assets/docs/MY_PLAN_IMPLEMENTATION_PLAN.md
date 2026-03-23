@@ -20,8 +20,9 @@
 
 | Piece | Location |
 |-------|----------|
-| Sprint generation | `api/_lib/sprint-from-vapi.js`, `api/_lib/vapi-enrich-for-storage.js` |
-| Upsert active sprint | `api/_lib/sprint-upsert.js` |
+| Sprint generation | `lib/portal-server/sprint-from-vapi.js`, `lib/portal-server/vapi-enrich-for-storage.js` |
+| Upsert active sprint | `lib/portal-server/sprint-upsert.js` |
+| API entry (Vercel Hobby) | `api/gw.js` + `lib/portal-server/handlers/*` (see `docs/API_GATEWAY.md`) |
 | Save VAPI + sprint | `api/save-vapi-results.js` (`source`: `marketing` \| `portal`) |
 | Internal sync (Alfred) | `api/sprint-upsert-from-assessment.js` (header `x-sprint-sync-secret`) |
 | User APIs | `api/sprint-get-me.js`, `api/sprint-patch-me.js` |

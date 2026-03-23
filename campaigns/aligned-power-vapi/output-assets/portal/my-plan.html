@@ -58,6 +58,15 @@
       <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--ap-accent)] mb-2">28-day sprint</p>
       <h1 id="plan-title" class="text-3xl text-[var(--ap-primary)] mb-2">My Plan</h1>
       <p id="plan-summary" class="text-[var(--ap-secondary)] mb-8"></p>
+      <div id="plan-context" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 space-y-4 text-sm text-[var(--ap-secondary)]">
+        <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)]">Why this focus</p>
+        <p id="ctx-why" class="leading-relaxed whitespace-pre-wrap"></p>
+        <div id="ctx-extra" class="space-y-3 border-t border-[var(--ap-border)] pt-4"></div>
+      </div>
+      <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/30 p-6">
+        <p class="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200 mb-2">A pattern to watch</p>
+        <p id="pattern-watch-text" class="text-sm text-amber-950 dark:text-amber-100 leading-relaxed whitespace-pre-wrap"></p>
+      </div>
       <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6">
         <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)] mb-2">From your coach</p>
         <p id="coach-context-text" class="text-sm text-[var(--ap-secondary)] whitespace-pre-wrap"></p>
@@ -111,9 +120,43 @@
         return;
       }
 
+      function escapeHtml(s) {
+        if (s == null) return '';
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s).replace(/"/g, '&quot;');
+      }
+
       var payload = sprint.payload || {};
       document.getElementById('plan-title').textContent = payload.title || 'My Plan';
       document.getElementById('plan-summary').textContent = payload.summary || '';
+
+      var ctx = payload.context || {};
+      if (ctx.whyItMatters && String(ctx.whyItMatters).trim()) {
+        document.getElementById('plan-context').classList.remove('hidden');
+        document.getElementById('ctx-why').textContent = ctx.whyItMatters.trim();
+        var extra = document.getElementById('ctx-extra');
+        extra.innerHTML = '';
+        function addCtx(label, key) {
+          var v = ctx[key];
+          if (!v || !String(v).trim()) return;
+          var d = document.createElement('div');
+          d.innerHTML = '<p class="text-xs font-bold text-[var(--ap-primary)] mb-1">' + escapeHtml(label) + '</p><p class="leading-relaxed whitespace-pre-wrap">' + escapeHtml(String(v).trim()) + '</p>';
+          extra.appendChild(d);
+        }
+        addCtx('What this usually indicates', 'usuallyIndicates');
+        addCtx('Hidden cost', 'hiddenCost');
+        addCtx('Leverage point', 'leveragePoint');
+        addCtx('How you will know it is working', 'howToKnow');
+        if (!extra.children.length) extra.classList.add('hidden');
+        else extra.classList.remove('hidden');
+      }
+
+      if (payload.driverModifier && String(payload.driverModifier).trim()) {
+        document.getElementById('pattern-watch-box').classList.remove('hidden');
+        document.getElementById('pattern-watch-text').textContent = payload.driverModifier.trim();
+      }
 
       if (sprint.coach_context && String(sprint.coach_context).trim()) {
         document.getElementById('coach-context-box').classList.remove('hidden');
@@ -140,14 +183,6 @@
           '<label class="block text-xs font-bold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Reflection</label>' +
           '<textarea rows="3" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-white text-sm text-[var(--ap-primary)]" data-week="' + wn + '" placeholder="What shifted this week?">' + escapeHtml(refVal) + '</textarea></section>';
       }).join('');
-
-      function escapeHtml(s) {
-        if (s == null) return '';
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
-      function escapeAttr(s) {
-        return escapeHtml(s).replace(/"/g, '&quot;');
-      }
 
       function debounce(fn, ms) {
         var t;

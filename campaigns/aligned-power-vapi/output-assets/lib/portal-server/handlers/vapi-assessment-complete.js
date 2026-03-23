@@ -1,7 +1,4 @@
-/** @type {import('next').RouteSegmentConfig} */
-export const dynamic = "force-dynamic";
-
-import { enrichResultsWithDriver } from "@/lib/vapi-driver-scoring";
+import { enrichResultsWithDriver } from "../vapi-driver-scoring.js";
 
 /**
  * POST /api/vapi-assessment-complete

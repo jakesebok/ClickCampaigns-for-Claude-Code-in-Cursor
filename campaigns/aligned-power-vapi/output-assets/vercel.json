@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/gw?r=$1" },
     { "source": "/", "destination": "/portal/index.html" },
     { "source": "/assessment", "destination": "/html/vapi-landing.html" },
     { "source": "/assessment/start", "destination": "/html/vapi-quiz.html" },

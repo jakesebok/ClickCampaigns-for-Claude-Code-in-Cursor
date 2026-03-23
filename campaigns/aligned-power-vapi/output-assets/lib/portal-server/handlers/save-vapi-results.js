@@ -11,9 +11,9 @@
  *   source      string  — optional: marketing | portal (default marketing)
  */
 
-import { enrichVapiResultsForStorage } from "./_lib/vapi-enrich-for-storage.js";
-import { buildSprintPayload } from "./_lib/sprint-from-vapi.js";
-import { upsertActiveSprint } from "./_lib/sprint-upsert.js";
+import { enrichVapiResultsForStorage } from "../vapi-enrich-for-storage.js";
+import { buildSprintPayload } from "../sprint-from-vapi.js";
+import { upsertActiveSprint } from "../sprint-upsert.js";
 
 export async function POST(request) {
   const supabaseUrl     = process.env.SUPABASE_URL;

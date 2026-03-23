@@ -2,7 +2,7 @@
 // Merges vapi_results, six_c_submissions, portal_active_clients.
 // Requires SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY.
 
-import { enrichResultsWithDriver } from './_lib/vapi-driver-scoring.js';
+import { enrichResultsWithDriver } from '../vapi-driver-scoring.js';
 
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || 'jacob@alignedpower.coach').trim().toLowerCase();
 

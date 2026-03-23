@@ -4,9 +4,9 @@
  * Body: { email: string }
  */
 
-import { enrichVapiResultsForStorage } from "./_lib/vapi-enrich-for-storage.js";
-import { buildSprintPayload } from "./_lib/sprint-from-vapi.js";
-import { upsertActiveSprint } from "./_lib/sprint-upsert.js";
+import { enrichVapiResultsForStorage } from "../vapi-enrich-for-storage.js";
+import { buildSprintPayload } from "../sprint-from-vapi.js";
+import { upsertActiveSprint } from "../sprint-upsert.js";
 
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || process.env.PORTAL_ADMIN_EMAIL || "jacob@alignedpower.coach")
   .trim()

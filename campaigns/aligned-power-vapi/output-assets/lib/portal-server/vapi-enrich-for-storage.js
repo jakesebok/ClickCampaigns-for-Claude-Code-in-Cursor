@@ -3,7 +3,7 @@
  */
 
 import { enrichResultsWithDriver } from "./vapi-driver-scoring.js";
-import { enrichResultsWithJourneyman } from "../../lib/vapi-journeyman-analysis.js";
+import { enrichResultsWithJourneyman } from "../vapi-journeyman-analysis.js";
 
 export function determineArchetypeFromResults(results) {
   const arenaScores = results?.arenaScores || {};

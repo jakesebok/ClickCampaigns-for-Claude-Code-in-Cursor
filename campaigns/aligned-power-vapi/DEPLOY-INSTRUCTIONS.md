@@ -33,6 +33,8 @@ You’ll do **4 main things**: set up Supabase (database + auth), put your proje
 
 **My Plan (28-day sprints):** Run **`output-assets/supabase/sprints.sql`** in the SQL Editor (same workflow). That adds the `sprints` table and optionally `vapi_results.source`. See **`output-assets/docs/MY_PLAN_IMPLEMENTATION_PLAN.md`** for APIs and Alfred sync env vars (`PORTAL_BASE_URL`, `PORTAL_SPRINT_SYNC_SECRET` on the Alfred app).
 
+**Vercel Hobby (12 function limit):** Portal APIs use a **single** function, **`api/gw.js`**, with handlers in **`lib/portal-server/handlers/`**. See **`output-assets/docs/API_GATEWAY.md`**. Your site still calls `/api/config`, `/api/save-vapi-results`, etc.; Vercel rewrites those to the gateway.
+
 ### 1.3 Get your Project URL and API key
 
 You need two values for Vercel later: **Project URL** and a **public API key** (either the Publishable key or the Legacy anon key—both work).

@@ -3,10 +3,17 @@
  * Reuses journeyman deep dives / pair notes / arena fallbacks when archetype is The Journeyman.
  */
 
-import { buildDomainScoresMap, JOURNEYMAN_DOMAIN_NAMES } from "../../lib/vapi-journeyman-analysis.js";
-import { JOURNEYMAN_DEEP_DIVES } from "../../lib/journeyman/index.js";
-import { JOURNEYMAN_PAIR_NOTES } from "../../lib/journeyman/pairs.js";
-import { JOURNEYMAN_ARENA_FALLBACKS } from "../../lib/journeyman/fallbacks.js";
+import { buildDomainScoresMap, JOURNEYMAN_DOMAIN_NAMES } from "../vapi-journeyman-analysis.js";
+import { JOURNEYMAN_DEEP_DIVES } from "../journeyman/index.js";
+import { JOURNEYMAN_PAIR_NOTES } from "../journeyman/pairs.js";
+import { JOURNEYMAN_ARENA_FALLBACKS } from "../journeyman/fallbacks.js";
+import {
+  determineUserLevel,
+  getOpenerForLevel,
+  getDriverModifier,
+  resolveDriverSlug,
+} from "../action-plan-content/index.js";
+import { selectFocusDomain } from "../action-plan-content/focus-domain.js";
 
 /** @param {string|undefined} s */
 export function normalizeAssessmentSource(s) {
@@ -229,6 +236,60 @@ function buildJourneymanWeeks(analysis, domainScores) {
   return ensureFourWeeks([]);
 }
 
+/**
+ * Four-week structure from one domain's Journeyman deep dive (non-Journeyman archetypes).
+ * @param {string} domainCode
+ * @param {Record<string, number>} domainScores
+ */
+function buildWeeksFromSingleDomainDeepDive(domainCode, domainScores) {
+  const code = String(domainCode || "").trim();
+  const raw = JOURNEYMAN_DEEP_DIVES[code];
+  if (!raw) return null;
+  const interp = interpolateDeepDiveStrings(raw, code, domainScores);
+  const blocks = parseThirtyDayWeekBlocks(interp.thirtyDayFocus);
+  if (!blocks.length) return null;
+  const weeks = blocks.map((b) => ({
+    weekNumber: b.weekNumber,
+    theme: b.theme,
+    tasks: bulletsToTasks(b.body, b.weekNumber),
+    body: b.body,
+  }));
+  return ensureFourWeeks(weeks);
+}
+
+/**
+ * Layered context: level opener replaces deep-dive whyMatters when present; other fields from deep dive.
+ * @param {string} focusDomain
+ * @param {"high-performer"|"mid-level"|"rebuilding"} level
+ * @param {Record<string, number>} domainScores
+ */
+function buildPlanContext(focusDomain, level, domainScores) {
+  const code = String(focusDomain || "").trim();
+  const dd = JOURNEYMAN_DEEP_DIVES[code];
+  const opener = getOpenerForLevel(code, level);
+  const label = JOURNEYMAN_DOMAIN_NAMES[code] || code;
+  /** @type {Record<string, string>} */
+  const ctx = {};
+  if (dd) {
+    const interp = interpolateDeepDiveStrings(dd, code, domainScores);
+    ctx.whyItMatters = (opener || interp.whyMatters || "").trim();
+    if (interp.usuallyIndicates?.trim()) ctx.usuallyIndicates = interp.usuallyIndicates.trim();
+    if (interp.hiddenCost?.trim()) ctx.hiddenCost = interp.hiddenCost.trim();
+    if (interp.leveragePoint?.trim()) ctx.leveragePoint = interp.leveragePoint.trim();
+    if (interp.howToKnow?.trim()) ctx.howToKnow = interp.howToKnow.trim();
+  } else {
+    ctx.whyItMatters = (
+      opener ||
+      `Your sprint centers on ${label} as the domain with the strongest signal for growth from your latest scores. Small, steady moves there compound.`
+    ).trim();
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(ctx)) {
+    if (typeof v === "string" && v.trim()) out[k] = v.trim();
+  }
+  return out;
+}
+
 function bulletsFromText(text, weekNum) {
   const chunk = String(text || "")
     .split(/\n/)
@@ -307,28 +368,41 @@ export function buildSprintPayload(results, meta) {
   const primary_surface = primarySurfaceFromSource(meta.assessmentSource);
   const archetype = results?.archetype || "The Drifter";
   const driver = results?.assignedDriver ?? results?.driver ?? null;
+  const driverStr = typeof driver === "string" ? driver : null;
   const domainScores = buildDomainScoresMap(results);
+  const focusDomain = selectFocusDomain(results);
+  const level = determineUserLevel(results?.overall);
+  const driverSlugForPlan = resolveDriverSlug(driverStr);
+  const planContext = buildPlanContext(focusDomain, level, domainScores);
+  const driverModifier = getDriverModifier(focusDomain, driverSlugForPlan);
+  const focusLabel = JOURNEYMAN_DOMAIN_NAMES[focusDomain] || focusDomain;
 
   /** @type {ReturnType<ensureFourWeeks>} */
   let weeks;
   if (archetype === "The Journeyman" && results?.journeymanAnalysis) {
     weeks = buildJourneymanWeeks(results.journeymanAnalysis, domainScores);
   } else {
-    weeks = buildGenericWeeks(archetype, typeof driver === "string" ? driver : null);
+    const wd = buildWeeksFromSingleDomainDeepDive(focusDomain, domainScores);
+    weeks = wd || buildGenericWeeks(archetype, driverStr);
   }
 
   const title = `Your 28-day plan`;
   const summary =
     archetype === "The Journeyman" && results?.journeymanAnalysis?.classification
-      ? `Tailored from your Journeyman pattern (${results.journeymanAnalysis.classification.replace(/_/g, " ").toLowerCase()}).`
-      : `Based on your VAPI profile: ${archetype}${driver && driver !== "Aligned Momentum" ? ` · Primary driver: ${driver}` : ""}.`;
+      ? `Tailored from your Journeyman pattern (${results.journeymanAnalysis.classification.replace(/_/g, " ").toLowerCase()}). Layered focus: ${focusLabel}.`
+      : `Based on your VAPI profile: ${archetype}${driverStr && driverStr !== "Aligned Momentum" ? ` · Primary driver: ${driverStr}` : ""}. Primary focus domain: ${focusLabel}.`;
 
   const payload = {
     version: 1,
     title,
     summary,
     archetype,
-    driver: typeof driver === "string" ? driver : null,
+    driver: driverStr,
+    focusDomain,
+    focusDomainLabel: focusLabel,
+    userLevel: level,
+    context: planContext,
+    ...(driverModifier ? { driverModifier } : {}),
     weeks,
     generatedAt: new Date().toISOString(),
   };

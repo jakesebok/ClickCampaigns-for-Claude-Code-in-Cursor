@@ -7,9 +7,9 @@
  * Body: { email, results, assessment_source?, vapi_result_id? }
  */
 
-import { enrichVapiResultsForStorage } from "./_lib/vapi-enrich-for-storage.js";
-import { buildSprintPayload } from "./_lib/sprint-from-vapi.js";
-import { upsertActiveSprint } from "./_lib/sprint-upsert.js";
+import { enrichVapiResultsForStorage } from "../vapi-enrich-for-storage.js";
+import { buildSprintPayload } from "../sprint-from-vapi.js";
+import { upsertActiveSprint } from "../sprint-upsert.js";
 
 function verifySyncSecret(request) {
   const secret = process.env.PORTAL_SPRINT_SYNC_SECRET || process.env.SPRINT_SYNC_SECRET || "";

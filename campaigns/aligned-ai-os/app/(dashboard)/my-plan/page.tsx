@@ -5,6 +5,14 @@ import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { Loader2, ExternalLink } from "lucide-react";
 
+type PlanContext = {
+  whyItMatters?: string;
+  usuallyIndicates?: string;
+  hiddenCost?: string;
+  leveragePoint?: string;
+  howToKnow?: string;
+};
+
 type SprintRow = {
   id: string;
   primary_surface: string;
@@ -12,6 +20,11 @@ type SprintRow = {
   payload: {
     title?: string;
     summary?: string;
+    focusDomain?: string;
+    focusDomainLabel?: string;
+    userLevel?: string;
+    context?: PlanContext;
+    driverModifier?: string;
     weeks?: {
       weekNumber: number;
       theme?: string;
@@ -111,6 +124,7 @@ export default function MyPlanPage() {
   const payload = sprint.payload || {};
   const weeks = payload.weeks || [];
   const reflections = payload.weekReflections || {};
+  const planCtx = payload.context || {};
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -121,6 +135,55 @@ export default function MyPlanPage() {
         />
       </div>
       <div className="flex-1 overflow-y-auto px-4 py-6 md:px-8 pb-24 space-y-6">
+        {planCtx.whyItMatters?.trim() ? (
+          <div className="rounded-xl border border-border bg-card p-4 space-y-3 text-sm text-muted-foreground">
+            <p className="text-xs font-semibold uppercase tracking-wider text-foreground">Why this focus</p>
+            <p className="leading-relaxed whitespace-pre-wrap">{planCtx.whyItMatters.trim()}</p>
+            {(planCtx.usuallyIndicates ||
+              planCtx.hiddenCost ||
+              planCtx.leveragePoint ||
+              planCtx.howToKnow) && (
+              <div className="space-y-3 border-t border-border pt-3">
+                {planCtx.usuallyIndicates?.trim() ? (
+                  <div>
+                    <p className="text-xs font-semibold text-foreground mb-1">What this usually indicates</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{planCtx.usuallyIndicates.trim()}</p>
+                  </div>
+                ) : null}
+                {planCtx.hiddenCost?.trim() ? (
+                  <div>
+                    <p className="text-xs font-semibold text-foreground mb-1">Hidden cost</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{planCtx.hiddenCost.trim()}</p>
+                  </div>
+                ) : null}
+                {planCtx.leveragePoint?.trim() ? (
+                  <div>
+                    <p className="text-xs font-semibold text-foreground mb-1">Leverage point</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{planCtx.leveragePoint.trim()}</p>
+                  </div>
+                ) : null}
+                {planCtx.howToKnow?.trim() ? (
+                  <div>
+                    <p className="text-xs font-semibold text-foreground mb-1">How you will know it is working</p>
+                    <p className="leading-relaxed whitespace-pre-wrap">{planCtx.howToKnow.trim()}</p>
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        {payload.driverModifier?.trim() ? (
+          <div className="rounded-xl border-2 border-amber-500/50 bg-amber-500/10 dark:bg-amber-950/40 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-amber-950 dark:text-amber-200 mb-2">
+              A pattern to watch
+            </p>
+            <p className="text-sm text-amber-950 dark:text-amber-100 leading-relaxed whitespace-pre-wrap">
+              {payload.driverModifier.trim()}
+            </p>
+          </div>
+        ) : null}
+
         {sprint.coach_context?.trim() ? (
           <div className="rounded-xl border border-accent/40 bg-accent/5 p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
