@@ -41,7 +41,10 @@ export default function MyPlanPage() {
   const lastSprintIdRef = useRef<string | null>(null);
   const [reflectionDrafts, setReflectionDrafts] = useState<Record<string, string>>({});
   const [reflectionStatus, setReflectionStatus] = useState<Record<string, string>>({});
-  const reflectionTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  // DOM timers (`window.setTimeout`) return `number` in the browser.
+  // In this project, Node types can cause `setTimeout` to be typed as `NodeJS.Timeout`,
+  // which then clashes when we store `window.setTimeout(...)` results.
+  const reflectionTimers = useRef<Record<string, number>>({});
 
   const load = useCallback(() => {
     fetch("/api/sprint/me")
