@@ -25,14 +25,14 @@ export function MyPlanCalloutLargeApp() {
         </div>
         <div className="min-w-0 flex-1 space-y-3">
           <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-            Your 30-Day Action Plan Is Ready
+            Your 28-Day Action Plan Is Ready
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            You&apos;ve just learned your Archetype, your Driver, and where you&apos;re strong and struggling
+            You&apos;ve just learned your Archetype, your pattern driver, and where you&apos;re strong and struggling
             across 12 domains. That&apos;s the diagnosis.
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Now comes the prescription: a personalized 30-day plan that targets your highest-leverage growth
+            Now comes the prescription: a personalized 28-day sprint (My Plan) that targets your highest-leverage growth
             area, with week-by-week actions, not just insight.
           </p>
           <Link
@@ -59,8 +59,8 @@ export function MyPlanInlineCalloutApp({
     variant === "archetype" ? "What to do with this?" : "This driver has a counter-move.";
   const body =
     variant === "archetype"
-      ? "Your Archetype reveals patterns, but patterns can shift. Your personalized 30-day plan targets the specific domain holding you back."
-      : "Your 30-day plan includes specific guidance for working with (not against) this pattern.";
+      ? "Your Archetype reveals patterns, but patterns can shift. Your personalized 28-day sprint (My Plan) targets the specific domain holding you back."
+      : "Your 28-day My Plan includes specific guidance for working with (not against) this pattern.";
 
   return (
     <div
@@ -119,7 +119,7 @@ export function MyPlanDashboardReminder({ hasAssessment }: { hasAssessment: bool
         <X className="h-5 w-5" />
       </button>
       <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">My Plan</p>
-      <h2 className="mb-2 text-lg font-bold text-foreground">Your 30-day plan is waiting</h2>
+      <h2 className="mb-2 text-lg font-bold text-foreground">Your 28-day plan is waiting</h2>
       <p className="mb-4 text-sm text-muted-foreground">
         Based on your assessment results, we&apos;ve created a personalized action plan for your growth edge.
       </p>

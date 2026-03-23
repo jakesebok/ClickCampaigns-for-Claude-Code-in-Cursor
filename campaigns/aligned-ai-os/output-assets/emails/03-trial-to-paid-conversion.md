@@ -20,6 +20,7 @@ Your Aligned Freedom Coach trial ends in 7 days. Before you decide, I want you t
 - Your Driving Fire and Cause Worth Playing For
 - Your revenue math — Required Revenue, QCs per week, capacity limits
 - Your Vital Action Plan
+- Your VAPI™ read — Founder Archetype, pattern driver, and your personalized 28-day My Plan (when you completed VAPI with the same email)
 
 All of that — personalized to *you* — powers every conversation. If you let the trial expire, you lose access to the coach that knows all of this.
 

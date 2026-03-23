@@ -5,14 +5,14 @@ const ALFRED_APP_URL = "https://alfredai.coach";
 export const metadata = {
   title: "Work With Me — Jake Sebok",
   description:
-    "Free VAPI™ Assessment, Aligned Freedom Workshop, Freedom Builders, Strategic Alignment Intensives, communities, and the Aligned Power Accelerator. Plus Aligned Freedom Coach (ALFRED) for daily execution.",
+    "Free VAPI™ Assessment (Founder Archetype, pattern driver, 28-day My Plan with matching email), workshops, intensives, communities, Accelerator, and Aligned Freedom Coach (ALFRED).",
 };
 
 const offerings = [
   {
     title: "Free VAPI™ Assessment",
     description:
-      "72 questions. ~12 minutes. Discover your Founder Archetype and get an honest snapshot across 12 life and business domains. Get your personalized baseline and clarity on where to focus.",
+      "72 questions. ~12 minutes. Discover your Founder Archetype, your pattern driver, and an honest snapshot across 12 life and business domains. Same email as your free portal or ALFRED account unlocks your personalized 28-day My Plan—week-by-week actions, not just scores.",
     cta: "Take the Assessment",
     href: "/assessment",
     free: true,
@@ -75,7 +75,7 @@ export default function WorkWithMePage() {
             Your place. Your pace.
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
-            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, what&apos;s driving dysfunction, and the levers you can pull to move forward. The monthly Aligned Freedom Workshop is also free—we go beneath the tactics, surface what&apos;s holding you back, and I coach you live in the room. From there, you can join the free community, invest in intensives, or commit to more accountability in groups of like-minded founders. If you feel like it&apos;s a good fit, you can even apply for the flagship Aligned Power Accelerator program where the real magic happens.
+            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, your pattern driver (what&apos;s really driving the dysfunction), and the levers you can pull to move forward—with a 28-day My Plan when you use the same email as your portal or ALFRED account. The monthly Aligned Freedom Workshop is also free—we go beneath the tactics, surface what&apos;s holding you back, and I coach you live in the room. From there, you can join the free community, invest in intensives, or commit to more accountability in groups of like-minded founders. If you feel like it&apos;s a good fit, you can even apply for the flagship Aligned Power Accelerator program where the real magic happens.
           </p>
         </div>
       </section>
@@ -154,8 +154,8 @@ export default function WorkWithMePage() {
               </h2>
               <p className="text-lg font-semibold text-ap-mid leading-relaxed">
                 <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. Coaching that keeps your
-                VAPI™ results, Founder Archetype, weekly 6Cs, and Vital Action in the room when you&apos;re tired, busy,
-                or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above. Same alignment
+                VAPI™ results, Founder Archetype, pattern driver, 28-day My Plan, weekly 6Cs, and Vital Action in the room
+                when you&apos;re tired, busy, or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above. Same alignment
                 standard.
               </p>
             </div>

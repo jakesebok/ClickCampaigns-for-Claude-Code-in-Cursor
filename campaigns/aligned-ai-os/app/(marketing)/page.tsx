@@ -94,7 +94,8 @@ export default function LandingPage() {
           <Link href="#product-tour" className="font-medium text-accent hover:underline">
             See an interactive product tour
           </Link>{" "}
-          — dashboard, coach, voice, and more. Hover the phone there to pause auto-advance while you explore.
+          — dashboard, coach, voice, My Plan (your 28-day sprint from VAPI), and more. Hover the phone there to pause
+          auto-advance while you explore.
         </p>
       </section>
 
@@ -133,7 +134,7 @@ export default function LandingPage() {
                 step: "03",
                 title: "Stay aligned daily",
                 description:
-                  "Daily Sparks, weekly Vital Action tracking, and the 6Cs scorecard. Your coach keeps you focused on what actually matters to you.",
+                  "Daily Sparks, weekly Vital Action tracking, the 6Cs scorecard, and your pattern driver + personalized 28-day My Plan from VAPI (same email as your account). Your coach keeps you focused on what actually matters to you.",
                 icon: Bell,
               },
             ].map((item) => (
@@ -218,6 +219,12 @@ export default function LandingPage() {
                 title: "Vital Action Tracking",
                 description:
                   "Set your weekly Vital Action. Get mid-week check-ins. End-of-week reflections. Stay focused on the move that matters most.",
+              },
+              {
+                icon: Crosshair,
+                title: "Pattern driver + 28-day My Plan",
+                description:
+                  "Your VAPI™ results surface your Founder Archetype and pattern driver. Complete the assessment with the same email as this account and open My Plan—week-by-week actions from your scores, not a generic checklist.",
               },
               {
                 icon: Bell,

@@ -99,7 +99,7 @@ Half-day. $497. You'll build:
 ✓ Your Driving Fire + Cause Worth Playing For
 ✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
-✓ Aligned Freedom Coach — your personalized AI coach
+✓ Aligned Freedom Coach — your personalized AI coach (VAPI™, pattern driver, 28-day My Plan with matching email, 6Cs, Vital Actions)
 
 Includes 30 days of free Aligned Freedom Coach access.
 

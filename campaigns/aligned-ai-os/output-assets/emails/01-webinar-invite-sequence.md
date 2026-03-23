@@ -25,7 +25,7 @@ I run a quarterly workshop called the **Strategic Alignment Intensive** where I 
 → Turn that into a revenue number built on their real life
 → Build their **Aligned AIOS** master prompt from the worksheets (the system that turns any AI into *their* coach)
 
-The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — **ALFRED** is *Aligned Freedom Coach*, the app where that intelligence runs with your workshop outputs, VAPI™ scores, archetype, 6Cs, and Vital Actions.
+The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — **ALFRED** is *Aligned Freedom Coach*, the app where that intelligence runs with your workshop outputs, VAPI™ scores, archetype, pattern driver, 28-day My Plan (same email), 6Cs, and Vital Actions.
 
 **[Reserve My Seat — $497 →]**
 
@@ -78,7 +78,7 @@ You say: "Build my week."
 
 And it gives you a plan that's filtered through *your* values, built on *your* numbers, and anchored to *your* Vital Action.
 
-That's **ALFRED** — **Aligned Freedom Coach** (same product). It's not the same thing as the **Aligned AIOS** prompt you build in the room; ALFRED is the app that *runs* that intelligence — plus your live VAPI™, archetype, driver pattern, 6Cs, and Vital Actions. Every Intensive attendee gets 30 days free.
+That's **ALFRED** — **Aligned Freedom Coach** (same product). It's not the same thing as the **Aligned AIOS** prompt you build in the room; ALFRED is the app that *runs* that intelligence — plus your live VAPI™, archetype, pattern driver, personalized 28-day My Plan (same email as your account), 6Cs, and Vital Actions. Every Intensive attendee gets 30 days free.
 
 **[Reserve my seat — $497 →]**
 
@@ -124,7 +124,7 @@ Here's what you'll build:
 ✓ Your Top 5 Values (operational — not a poster on a wall)
 ✓ The Revenue Bridge: From Meaning To Math (meaning → math)
 ✓ Your Vital Action Plan
-✓ 30 days of ALFRED — your personalized AI coach
+✓ 30 days of ALFRED — your personalized AI coach (workshop context + VAPI™, archetype, pattern driver, 28-day My Plan, 6Cs, Vital Actions when you use the same email)
 
 **$497. Half-day. Interactive. Limited to 20 seats.**
 

@@ -56,7 +56,7 @@ In the Strategic Alignment Intensive, I walk you through the exact framework my 
 - Build The Revenue Bridge — turning meaning into math
 - Identify their Vital Action — the single move that makes everything else easier
 
-And at the end, you walk away with your **Aligned AIOS** — plus **30 days free** in **ALFRED** (Aligned Freedom Coach), the app that loads your workshop, your VAPI™ context, and your weekly scorecard into one coach.
+And at the end, you walk away with your **Aligned AIOS** — plus **30 days free** in **ALFRED** (Aligned Freedom Coach), the app that loads your workshop, your VAPI™ context (archetype, pattern driver, 28-day My Plan with matching email), and your weekly scorecard into one coach.
 
 **[CTA]**
 $497. Half-day. Limited to 20 seats per quarter. Click below to reserve yours. This will change how you plan your next quarter.

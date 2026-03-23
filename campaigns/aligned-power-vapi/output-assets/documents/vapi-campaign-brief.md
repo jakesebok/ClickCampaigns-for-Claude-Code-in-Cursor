@@ -8,6 +8,8 @@
 
 ## 1. Campaign overview
 
+**Live product note (2026):** VAPI™ now includes **Founder Archetype**, **pattern driver** (with Driver Library), **12 domains / 3 arenas**, and—when the taker uses the **same email** as their free Aligned Portal or ALFRED account—a **personalized 28-day sprint (My Plan)** with week-by-week actions. Landing and results copy in `output-assets/html/` reflects this.
+
 - **Landing page:** Visitor learns about the VAPI assessment and clicks to start (no email required to begin).
 - **Quiz:** 54 questions, Typeform-style (one question per screen). Answer scale: Strongly agree → Strongly disagree (7 options). Questions map to **9 domains**; answers are weighted per domain to produce 9 separate scores.
 - **Email gate:** At the end of the quiz, user enters name/email to receive results.

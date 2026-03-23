@@ -6,7 +6,7 @@ import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED): coaching that keeps your assessment, archetype, pattern, weekly check-ins, and strategic context in the conversation when real life gets loud.";
+  "Aligned Freedom Coach (ALFRED): coaching that keeps your VAPI™ results, Founder Archetype, pattern driver, 28-day My Plan, weekly check-ins, and strategic context in the conversation when real life gets loud.";
 
 export const metadata: Metadata = {
   title: "Aligned Freedom Coach (ALFRED): Coaching That Keeps Your Priorities Alive | Jake Sebok",
@@ -86,7 +86,9 @@ export default function WhoIsAlfredPage() {
               </p>
               <p className="text-base sm:text-lg font-medium text-ap-mid leading-relaxed mb-8">
                 Generic AI hands you clever paragraphs. This is coaching that remembers what you committed to, so you
-                are not re-explaining your life every time you need a steady voice.
+                are not re-explaining your life every time you need a steady voice. Take VAPI™ first with the same email
+                as your account and your pattern driver plus personalized 28-day My Plan stay in the room too—not just
+                scores on a page.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <a
