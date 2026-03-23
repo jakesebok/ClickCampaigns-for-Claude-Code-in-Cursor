@@ -2048,7 +2048,7 @@
       } else {
         html += '<div class="space-y-2">';
         if (driverName) {
-          html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">';
+          html += '<div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">';
           html += '<div class="flex items-start gap-4 sm:gap-6">';
           html +=
             '<span class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-xl shrink-0" style="background:' +
@@ -2067,9 +2067,21 @@
             escapeHtml(previewTitle) +
             "</h2>";
           html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline || "") + "</p>";
+          html +=
+            '<span class="mt-2 inline-flex sm:hidden items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+            accent +
+            "14;color:" +
+            accent +
+            ";border:1px solid " +
+            accent +
+            '33;">Pattern strength: ' +
+            evaluation.topDriverScore +
+            " / " +
+            DRIVER_CONTENT[driverName].maxPossible +
+            "</span>";
           html += "</div></div>";
           html +=
-            '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
+            '<span class="hidden sm:inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
             accent +
             "14;color:" +
             accent +
@@ -2089,7 +2101,7 @@
         }
         if (driverName) {
           html +=
-            '<p class="text-base text-[var(--ap-secondary)] ml-[5rem] sm:ml-[6.5rem]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+            '<p class="text-base text-[var(--ap-secondary)] ml-0 sm:ml-[6.5rem]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
             escapeHtml(DRIVER_CONTENT[driverName].coreFear) +
             "</p>";
         }

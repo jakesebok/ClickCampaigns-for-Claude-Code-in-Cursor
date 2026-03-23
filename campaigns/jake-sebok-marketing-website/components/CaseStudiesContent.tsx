@@ -329,23 +329,26 @@ export function CaseStudiesContent() {
             {moreResultsTestimonials.map((t) => (
               <div
                 key={t.author}
-                className="flex-shrink-0 w-[min(400px,85vw)] snap-center rounded-[24px] overflow-hidden border border-ap-border bg-white hover:border-ap-accent/40 transition-colors group"
+                className="flex-shrink-0 w-[min(400px,85vw)] snap-center rounded-[24px] border border-ap-border bg-white hover:border-ap-accent/40 transition-colors p-6 sm:p-7"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <Image
-                    src={t.image}
-                    alt={t.author}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="400px"
-                  />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden bg-ap-off flex-shrink-0">
+                    <Image
+                      src={t.image}
+                      alt={t.author}
+                      fill
+                      className="object-cover"
+                      sizes="56px"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-outfit font-semibold text-ap-primary">{t.author}</p>
+                    {t.headline && (
+                      <p className="text-sm text-ap-muted">{t.headline}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="p-6 sm:p-8">
-                  {t.headline && (
-                    <p className="font-outfit text-gradient-accent font-semibold text-sm uppercase tracking-wider mb-3">
-                      {t.headline}
-                    </p>
-                  )}
+                <div>
                   <blockquote className="font-cormorant italic text-lg text-ap-primary leading-relaxed mb-4">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>

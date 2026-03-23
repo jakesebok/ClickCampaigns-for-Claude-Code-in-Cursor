@@ -173,7 +173,7 @@ export default function LandingPage() {
               { icon: BatteryCharging, label: "Capacity", desc: "Can my nervous system hold my life?" },
               { icon: ShieldCheck, label: "Confidence", desc: "Am I keeping my word to myself?" },
               { icon: Zap, label: "Courage", desc: "Am I doing the hard right thing?" },
-              { icon: Users, label: "Connection", desc: "Am I present with the people who matter?" },
+              { icon: Users, label: "Connection", desc: "Am I present with who matters most?" },
             ].map((c) => (
               <div
                 key={c.label}
