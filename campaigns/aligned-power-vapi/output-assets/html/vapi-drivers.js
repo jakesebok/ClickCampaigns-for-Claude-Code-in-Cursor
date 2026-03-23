@@ -1920,7 +1920,7 @@
       if (driversAreCoEqual) {
         html += '<p class="' + noteCopyClass + ' mt-2">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + '</p>';
         html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)] mt-3">Your Primary Patterns</p>';
-        html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4">';
+        html += '<div class="grid grid-cols-1 gap-5 mt-4">';
         [
           { key: driverName, score: evaluation.topDriverScore },
           { key: secondaryDriverName, score: evaluation.secondDriverScore },
