@@ -170,32 +170,50 @@
     // PRIORITY 4: THE ENGINE
     if (exScore != null && exScore >= 7.0 && ((ecScore != null && ecScore <= 5.0) || (vsScore != null && vsScore <= 5.0))) return 'The Engine';
 
-    // PRIORITY 5: THE DRIFTER
-    var allMid = s != null && r != null && b != null &&
-      s >= 5.0 && s <= 7.9 && r >= 5.0 && r <= 7.9 && b >= 5.0 && b <= 7.9;
     var spread = Math.max(s, r, b) - Math.min(s, r, b);
-    if (allMid && spread <= 2.0) return 'The Drifter';
+    var businessIsLowest = b <= s && b <= r;
+    var personalIsLowest = s <= r && s <= b;
 
-    // PRIORITY 6: THE PERFORMER (Business highest, Self lowest, spread >= 2)
-    if (s != null && r != null && b != null) {
-      var maxA = Math.max(s, r, b);
-      var minA = Math.min(s, r, b);
-      if (b === maxA && s === minA && (b - s) >= 2.0) return 'The Performer';
+    // PRIORITY 5: THE SEEKER (evaluate imbalance before Drifter)
+    var seekerGate =
+      s != null && r != null && b != null &&
+      s >= 6.0 &&
+      b < 6.0 &&
+      businessIsLowest &&
+      ((s - b) >= 1.0 || (s >= 6.0 && r >= 6.0));
+
+    // PRIORITY 6: THE GUARDIAN (evaluate imbalance before Drifter)
+    var guardianGate =
+      s != null && r != null && b != null &&
+      r >= 6.0 &&
+      b < 6.0 &&
+      businessIsLowest &&
+      ((r - b) >= 1.0 || (r >= 6.0 && s >= 6.0));
+
+    // PRIORITY 7: THE PERFORMER (evaluate imbalance before Drifter)
+    var performerGate =
+      s != null && r != null && b != null &&
+      b >= 6.0 &&
+      s < 6.0 &&
+      personalIsLowest &&
+      (b - s) >= 1.0;
+
+    // Seeker vs Guardian tiebreak: stronger arena wins, ties default Seeker.
+    if (seekerGate && guardianGate) return s >= r ? 'The Seeker' : 'The Guardian';
+    if (seekerGate) return 'The Seeker';
+    if (guardianGate) return 'The Guardian';
+    if (performerGate) return 'The Performer';
+
+    // PRIORITY 8: THE DRIFTER (fallback only for balanced middle profiles)
+    var noArenaBelowFive = s != null && r != null && b != null && s >= 5.0 && r >= 5.0 && b >= 5.0;
+    var noArenaAboveSevenPointFive = s != null && r != null && b != null && s <= 7.5 && r <= 7.5 && b <= 7.5;
+    if (overall != null && overall >= 5.0 && overall <= 7.0 && noArenaBelowFive && noArenaAboveSevenPointFive && spread < 1.0) {
+      return 'The Drifter';
     }
 
-    // PRIORITY 7: THE GHOST (Business highest, Relationships lowest, spread >= 2)
+    // Legacy Ghost pattern retained as non-Drifter fallback.
     if (s != null && r != null && b != null) {
       if (b === Math.max(s, r, b) && r === Math.min(s, r, b) && (b - r) >= 2.0) return 'The Ghost';
-    }
-
-    // PRIORITY 8: THE GUARDIAN (Relationships highest, Business lowest, spread >= 2)
-    if (s != null && r != null && b != null) {
-      if (r === Math.max(s, r, b) && b === Math.min(s, r, b) && (r - b) >= 2.0) return 'The Guardian';
-    }
-
-    // PRIORITY 9: THE SEEKER (Self highest, Business lowest, spread >= 2)
-    if (s != null && r != null && b != null) {
-      if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2.0) return 'The Seeker';
     }
 
     // FALLBACK: THE DRIFTER

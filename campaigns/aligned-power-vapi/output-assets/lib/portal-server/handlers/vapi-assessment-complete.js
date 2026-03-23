@@ -114,14 +114,32 @@ function determineArchetypeServer(results) {
   if (overall != null && overall <= 4.5) return 'The Phoenix';
   if (arenasLow >= 2) return 'The Phoenix';
   if (exScore != null && exScore >= 7 && ((ecScore != null && ecScore <= 5) || (vsScore != null && vsScore <= 5))) return 'The Engine';
-  const allMid = s != null && r != null && b != null && s >= 5 && s <= 7.9 && r >= 5 && r <= 7.9 && b >= 5 && b <= 7.9;
   const spread = Math.max(s, r, b) - Math.min(s, r, b);
-  if (allMid && spread <= 2) return 'The Drifter';
-  if (s != null && r != null && b != null) {
-    if (b === Math.max(s, r, b) && s === Math.min(s, r, b) && (b - s) >= 2) return 'The Performer';
-    if (b === Math.max(s, r, b) && r === Math.min(s, r, b) && (b - r) >= 2) return 'The Ghost';
-    if (r === Math.max(s, r, b) && b === Math.min(s, r, b) && (r - b) >= 2) return 'The Guardian';
-    if (s === Math.max(s, r, b) && b === Math.min(s, r, b) && (s - b) >= 2) return 'The Seeker';
+  const businessIsLowest = b <= s && b <= r;
+  const personalIsLowest = s <= r && s <= b;
+  const seekerGate =
+    s >= 6 &&
+    b < 6 &&
+    businessIsLowest &&
+    ((s - b) >= 1 || (s >= 6 && r >= 6));
+  const guardianGate =
+    r >= 6 &&
+    b < 6 &&
+    businessIsLowest &&
+    ((r - b) >= 1 || (r >= 6 && s >= 6));
+  const performerGate =
+    b >= 6 &&
+    s < 6 &&
+    personalIsLowest &&
+    (b - s) >= 1;
+  if (seekerGate && guardianGate) return s >= r ? 'The Seeker' : 'The Guardian';
+  if (seekerGate) return 'The Seeker';
+  if (guardianGate) return 'The Guardian';
+  if (performerGate) return 'The Performer';
+  const noArenaBelowFive = s >= 5 && r >= 5 && b >= 5;
+  const noArenaAboveSevenPointFive = s <= 7.5 && r <= 7.5 && b <= 7.5;
+  if (overall != null && overall >= 5 && overall <= 7 && noArenaBelowFive && noArenaAboveSevenPointFive && spread < 1) {
+    return 'The Drifter';
   }
   return 'The Drifter';
 }

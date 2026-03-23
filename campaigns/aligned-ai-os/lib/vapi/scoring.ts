@@ -131,16 +131,38 @@ export function getArchetype(arenas: Record<string, number>, domains: Record<str
   if (overall <= 4.5 || belowCount >= 2) return "The Phoenix";
   if ((domains.EX || 0) >= 7 && ((domains.EC || 0) <= 5 || (domains.VS || 0) <= 5))
     return "The Engine";
-  const allMid = p >= 5 && p <= 7.9 && r >= 5 && r <= 7.9 && b >= 5 && b <= 7.9;
-  if (allMid && spread <= 2) return "The Drifter";
-  if (b === Math.max(...allArenas) && p === Math.min(...allArenas) && spread >= 2)
-    return "The Performer";
-  if (b === Math.max(...allArenas) && r === Math.min(...allArenas) && spread >= 2)
-    return "The Ghost";
-  if (r === Math.max(...allArenas) && b === Math.min(...allArenas) && spread >= 2)
-    return "The Guardian";
-  if (p === Math.max(...allArenas) && b === Math.min(...allArenas) && spread >= 2)
-    return "The Seeker";
+
+  const businessIsLowest = b <= p && b <= r;
+  const personalIsLowest = p <= r && p <= b;
+
+  // Imbalance archetypes must resolve before Drifter fallback.
+  const seekerGate =
+    p >= 6 &&
+    b < 6 &&
+    businessIsLowest &&
+    (p - b >= 1 || (p >= 6 && r >= 6));
+  const guardianGate =
+    r >= 6 &&
+    b < 6 &&
+    businessIsLowest &&
+    (r - b >= 1 || (r >= 6 && p >= 6));
+  const performerGate =
+    b >= 6 &&
+    p < 6 &&
+    personalIsLowest &&
+    b - p >= 1;
+
+  // Seeker vs Guardian tiebreak: if both qualify, use stronger arena; tie defaults Seeker.
+  if (seekerGate && guardianGate) return p >= r ? "The Seeker" : "The Guardian";
+  if (seekerGate) return "The Seeker";
+  if (guardianGate) return "The Guardian";
+  if (performerGate) return "The Performer";
+
+  const noArenaBelowFive = p >= 5 && r >= 5 && b >= 5;
+  const noArenaAboveSevenPointFive = p <= 7.5 && r <= 7.5 && b <= 7.5;
+  if (overall >= 5 && overall <= 7 && noArenaBelowFive && noArenaAboveSevenPointFive && spread < 1) {
+    return "The Drifter";
+  }
   return "The Drifter";
 }
 
