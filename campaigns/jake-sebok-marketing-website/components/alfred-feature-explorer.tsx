@@ -346,10 +346,7 @@ const MORE_LINKS = [
 
 export type AlfredFeatureExplorerEmbed = "marketing" | "app-dark";
 
-export function AlfredFeatureExplorer({
-  embed = "marketing",
-  hidePreviewDisclaimer = false,
-}: { embed?: AlfredFeatureExplorerEmbed; hidePreviewDisclaimer?: boolean } = {}) {
+export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredFeatureExplorerEmbed } = {}) {
   const isAppDark = embed === "app-dark";
   const [tab, setTab] = useState<AppTab>("dashboard");
   const [coachPhase, setCoachPhase] = useState<CoachPhase>("home");
@@ -955,17 +952,15 @@ export function AlfredFeatureExplorer({
             </div>
           </div>
 
-          {!hidePreviewDisclaimer && (
-            <p
-              className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
-                isAppDark ? "text-muted-foreground" : "text-ap-muted"
-              }`}
-            >
-              This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
-              product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
-              answers ground in your assessment, blueprint, scorecard, and commitments.
-            </p>
-          )}
+          <p
+            className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
+              isAppDark ? "text-muted-foreground" : "text-ap-muted"
+            }`}
+          >
+            This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
+            product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
+            answers ground in your assessment, blueprint, scorecard, and commitments.
+          </p>
         </div>
       </div>
     </div>
