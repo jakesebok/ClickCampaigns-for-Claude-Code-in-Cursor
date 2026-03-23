@@ -20,7 +20,7 @@ export default function AlfredProductExplorerEmbedPage() {
       <style>{`
         .alfred-embed-mode,
         .alfred-embed-mode body {
-          background: transparent !important;
+          background: #2d3953 !important;
         }
         .alfred-embed-mode header,
         .alfred-embed-mode footer {
@@ -30,13 +30,16 @@ export default function AlfredProductExplorerEmbedPage() {
         .alfred-embed-mode body > main > * {
           background: transparent !important;
         }
+        .alfred-embed-mode #alfred-product-explorer [class*="max-w-[260px]"] {
+          max-width: 255px !important;
+        }
       `}</style>
       <section
         id="alfred-product-explorer"
-        className="overflow-hidden bg-transparent px-4 py-3 sm:px-6 sm:py-6"
+        className="overflow-hidden bg-[#2d3953] px-4 py-3 sm:px-6 sm:py-6"
       >
         <div className="mx-auto max-w-[1100px]">
-          <AlfredFeatureExplorer />
+          <AlfredFeatureExplorer embed="app-dark" />
         </div>
       </section>
     </>
