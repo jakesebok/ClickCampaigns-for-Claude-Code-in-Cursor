@@ -1420,9 +1420,7 @@
       : "Read full pattern driver profile";
     var previewHeading = isAlignedMomentum
       ? "What's Fueling This"
-      : driversAreCoEqual
-        ? "Your Primary Patterns"
-        : "What's Driving This";
+      : "What's Driving This";
     var previewTitle = isAlignedMomentum
       ? ALIGNED_MOMENTUM_CONTENT.name
       : driverName
@@ -1921,6 +1919,7 @@
       html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
       if (driversAreCoEqual) {
         html += '<p class="' + noteCopyClass + ' mt-2">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + '</p>';
+        html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)] mt-3">Your Primary Patterns</p>';
         html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4">';
         [
           { key: driverName, score: evaluation.topDriverScore },
@@ -1933,10 +1932,20 @@
             '<div class="rounded-2xl border border-[var(--ap-border)] p-4 sm:p-5 space-y-3" style="border-left:4px solid ' +
             acPrev +
             ';">';
+          html += '<div class="flex items-center gap-2.5">';
+          html +=
+            '<span class="inline-flex items-center justify-center w-8 h-8 rounded-xl border shrink-0" style="background:' +
+            acPrev +
+            '14;border-color:' +
+            acPrev +
+            '33;">' +
+            getDriverIcon(dk, 28) +
+            "</span>";
           html +=
             '<h2 class="text-xl sm:text-2xl font-extrabold text-[var(--ap-primary)]">' +
             escapeHtml(dPrev.name) +
             "</h2>";
+          html += "</div>";
           html +=
             '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
             acPrev +
@@ -1960,11 +1969,22 @@
       } else {
         html += '<div class="space-y-2">';
         if (driverName) {
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)]">Your Primary Driver</p>';
           html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
+          html += '<div class="flex items-center gap-3">';
+          html +=
+            '<span class="inline-flex items-center justify-center w-10 h-10 rounded-2xl border shrink-0" style="background:' +
+            accent +
+            '14;border-color:' +
+            accent +
+            '33;">' +
+            getDriverIcon(driverName, 36) +
+            "</span>";
           html +=
             '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
             escapeHtml(previewTitle) +
             "</h2>";
+          html += "</div>";
           html +=
             '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
             accent +
