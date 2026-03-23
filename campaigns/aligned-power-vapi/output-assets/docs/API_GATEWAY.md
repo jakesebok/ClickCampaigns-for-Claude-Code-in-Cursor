@@ -4,7 +4,7 @@ Vercel **Hobby** allows **12 Serverless Functions** per deployment. Each file un
 
 ## How it works
 
-1. **Single entry:** Only **`api/gw.js`** is deployed as a serverless function at `/api/gw`.
+1. **Single entry:** Only **`api/gw.js`** is deployed as a serverless function at `/api/gw`. It must use **`export default { fetch }`** (Web Standard), not `export default async function (req)` returning `Response`, or Vercel can crash with `FUNCTION_INVOCATION_FAILED`.
 2. **Rewrite:** `vercel.json` sends every **`/api/*`** request to **`/api/gw?r=$1`**, where `$1` is the path after `/api/` (e.g. `config`, `save-vapi-results`, `cron/6c-reminders`).
 3. **Handlers:** Implementation lives in **`lib/portal-server/handlers/`** (not under `api/`), so those files are **not** separate functions. Shared logic is in **`lib/portal-server/`** (sprint, VAPI enrich, driver scoring).
 4. **Loading:** `gw.js` uses **dynamic `import()`** per route so cold starts do not load all handlers at once.

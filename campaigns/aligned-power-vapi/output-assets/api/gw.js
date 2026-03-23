@@ -26,8 +26,17 @@ const ROUTE_LOADERS = {
   "cron/6c-reminders": () => import("../lib/portal-server/handlers/cron-6c-reminders.js"),
 };
 
-export default async function handler(request) {
-  const url = new URL(request.url);
+/**
+ * Vercel Node functions must use the Web Standard `default.fetch` export for Request/Response.
+ * A plain `export default async function (request)` is treated as a legacy handler and crashes
+ * when you return `new Response(...)`.
+ * @see https://vercel.com/docs/functions/functions-api-reference#fetch-web-standard
+ */
+async function gatewayFetch(request) {
+  const url = new URL(
+    request.url,
+    typeof request.url === "string" && request.url.startsWith("http") ? undefined : "https://internal.local"
+  );
   let route = (url.searchParams.get("r") || "").replace(/^\/+/, "").replace(/\/+$/, "");
 
   if (!route || route === "gw") {
@@ -75,6 +84,10 @@ export default async function handler(request) {
     });
   }
 }
+
+export default {
+  fetch: gatewayFetch,
+};
 
 function allowedMethods(mod) {
   return ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"]
