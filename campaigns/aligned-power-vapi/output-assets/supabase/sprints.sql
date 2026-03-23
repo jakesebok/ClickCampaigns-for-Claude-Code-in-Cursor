@@ -31,8 +31,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS sprints_one_active_per_email
   ON public.sprints (lower(user_email))
   WHERE status = 'active';
 
-COMMENT ON TABLE public.sprints IS '28-day My Plan payload; primary_surface = portal | alfred (where UI leads first).';
-COMMENT ON COLUMN public.sprints.primary_surface IS 'portal: show in Aligned portal; alfred: show in Alfred app.';
+COMMENT ON TABLE public.sprints IS '28-day My Plan payload; primary_surface = portal | alfred (assessment origin / analytics; full plan is shown on both surfaces).';
+COMMENT ON COLUMN public.sprints.primary_surface IS 'Where the user took the assessment that created this sprint (portal vs alfred). Does not gate which app can display the plan.';
 COMMENT ON COLUMN public.sprints.payload IS 'version, title, summary, weeks[], archetype, driver, generatedAt, etc.';
 
 ALTER TABLE public.sprints ENABLE ROW LEVEL SECURITY;

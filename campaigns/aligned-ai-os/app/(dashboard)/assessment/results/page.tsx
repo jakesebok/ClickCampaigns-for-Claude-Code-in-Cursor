@@ -63,6 +63,10 @@ import {
 import { DRIVER_ACCENT_COLORS, DriverIcon } from "@/lib/vapi/driver-icons";
 import { getDriverTransitionSummary } from "@/lib/vapi/driver-progress";
 import { VAPI_PROGRESS_TRANSITIONS } from "@/lib/vapi/progress-transitions";
+import {
+  MyPlanCalloutLargeApp,
+  MyPlanInlineCalloutApp,
+} from "@/components/my-plan-callouts";
 
 type MetricKey = "overall" | `arena:${string}` | `domain:${string}`;
 
@@ -207,6 +211,7 @@ function ArchetypeSection({
           </div>
         </>
       )}
+      <MyPlanInlineCalloutApp variant="archetype" borderAccent={archetypeColor} />
     </div>
   );
 }
@@ -496,6 +501,9 @@ function DriverSection({
                 Learn more about all driver patterns <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
+            {!isAlignedMomentum && driverName ? (
+              <MyPlanInlineCalloutApp variant="driver" borderAccent={accent} />
+            ) : null}
             {secondary && (
               <div className="space-y-3 border-t border-border/70 pt-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
@@ -2071,6 +2079,8 @@ function ResultsContent() {
               </div>
             </div>
           )}
+
+          <MyPlanCalloutLargeApp />
 
           {/* CTA */}
           <div className="rounded-2xl border border-border p-6 space-y-4 bg-secondary/30">

@@ -234,6 +234,16 @@
       <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-2 leading-tight">Where you stand. Where to focus.</h1>
       <p id="dashboard-intro-text" class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
+      <div id="my-plan-dashboard-reminder" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-primary)]/20 bg-white p-5 sm:p-6 shadow-sm relative pr-12">
+        <button type="button" id="my-plan-reminder-dismiss" class="absolute top-3 right-3 p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Dismiss reminder">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-1">My Plan</p>
+        <h2 class="text-lg sm:text-xl font-extrabold text-[var(--ap-primary)] mb-2" style="font-family: Outfit, sans-serif;">Your 30-day plan is waiting</h2>
+        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Based on your assessment results, we&apos;ve created a personalized action plan for your growth edge.</p>
+        <a href="/my-plan" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors w-full sm:w-auto">View My Plan <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+
       <div id="alfred-dashboard-cta" class="mb-10 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/10 p-6 sm:p-8 dashboard-card">
         <div class="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8">
           <div class="flex gap-4 items-start">
@@ -243,12 +253,12 @@
             <div class="min-w-0 flex-1">
               <p class="eyebrow mb-1">Continue your journey</p>
               <h2 class="text-xl sm:text-2xl text-[var(--ap-primary)] mb-2 leading-tight font-extrabold" style="font-family: Outfit, sans-serif;">ALFRED — Aligned Freedom Coach</h2>
-              <p class="text-[var(--ap-secondary)] text-sm sm:text-base leading-relaxed">Your portal stores your assessments and scorecards. <strong class="text-[var(--ap-primary)]">ALFRED</strong> is where that intelligence becomes a daily coach—VAPI™ context, archetype, 6Cs, and Vital Actions in one app.</p>
+              <p class="text-[var(--ap-secondary)] text-sm sm:text-base leading-relaxed">Your full plan and assessments live here in the portal too. <strong class="text-[var(--ap-primary)]">ALFRED</strong> adds what most plans don&apos;t: daily check-ins, pattern-aware nudges, and AI coaching when you&apos;re stuck—so you actually execute instead of re-reading Week 1.</p>
             </div>
           </div>
           <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full lg:w-auto shrink-0 lg:ml-auto">
             <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors shadow-lg shadow-[var(--ap-accent)]/25">
-              Open ALFRED
+              Start 7-day free trial
               <i data-lucide="external-link" class="w-4 h-4"></i>
             </a>
             <a href="https://jakesebok.com/who-is-alfred" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3 rounded-[100px] transition-colors bg-[var(--ap-surface)]">What is ALFRED?</a>
@@ -317,27 +327,26 @@
 
       <div id="my-plan-dashboard-card" class="hidden mb-10 rounded-2xl border-2 border-[var(--ap-primary)]/20 bg-white p-6 sm:p-8 dashboard-card">
         <div class="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-          <div class="flex gap-4 items-start">
+          <div class="flex gap-4 items-start min-w-0 flex-1">
             <div class="shrink-0 w-12 h-12 rounded-2xl bg-[var(--ap-primary)]/10 flex items-center justify-center" aria-hidden="true">
               <i data-lucide="list-checks" class="w-7 h-7 text-[var(--ap-accent)]"></i>
             </div>
-            <div>
+            <div class="min-w-0">
               <p class="eyebrow mb-1">Your 28-day sprint</p>
               <h2 class="text-xl text-[var(--ap-primary)] mb-1 leading-tight font-extrabold" style="font-family: Outfit, sans-serif;">My Plan</h2>
               <p id="my-plan-card-summary" class="text-[var(--ap-secondary)] text-sm leading-relaxed"></p>
+              <p id="my-plan-card-progress" class="hidden text-[var(--ap-muted)] text-xs mt-2 font-medium"></p>
             </div>
           </div>
-          <a href="/my-plan" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors whitespace-nowrap">
+          <a href="/my-plan" class="inline-flex items-center justify-center gap-2 shrink-0 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors whitespace-nowrap">
             Open My Plan
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
         </div>
-      </div>
-
-      <div id="my-plan-alfred-card" class="hidden mb-10 rounded-2xl border border-[var(--ap-border)] bg-white/80 p-6">
-        <p class="text-sm font-semibold text-[var(--ap-primary)] mb-1">Your plan is in ALFRED</p>
-        <p class="text-sm text-[var(--ap-secondary)] mb-4">Your latest VAPI was completed in the ALFRED app. Track your 28-day sprint there.</p>
-        <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-bold text-[var(--ap-accent)]">Open ALFRED <i data-lucide="external-link" class="w-4 h-4"></i></a>
+        <div id="my-plan-self-service-alfred-cta" class="hidden mt-4 pt-4 border-t border-[var(--ap-border)]">
+          <p class="text-sm text-[var(--ap-secondary)] mb-2">Want daily check-ins and coaching when you&apos;re stuck? <strong class="text-[var(--ap-primary)]">ALFRED</strong> is built for follow-through—not for hiding your plan.</p>
+          <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-bold text-[var(--ap-accent)]">Track daily progress in ALFRED <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
       </div>
 
       <div id="six-c-section" class="mb-10 hidden">
@@ -674,28 +683,6 @@
         if (hm) hm.classList.remove('hidden');
       })();
 
-      (async function loadMyPlanCard() {
-        try {
-          var token = session.access_token;
-          var r = await fetch('/api/sprint-get-me', { headers: { Authorization: 'Bearer ' + token } });
-          var j = await r.json();
-          if (!r.ok || !j.sprint) return;
-          if (j.sprint.primary_surface === 'portal') {
-            var card = document.getElementById('my-plan-dashboard-card');
-            if (card) {
-              card.classList.remove('hidden');
-              var sum = (j.sprint.payload && j.sprint.payload.summary) ? j.sprint.payload.summary : 'Your personalized 28-day focus from VAPI.';
-              var el = document.getElementById('my-plan-card-summary');
-              if (el) el.textContent = sum;
-            }
-          } else if (j.sprint.primary_surface === 'alfred') {
-            var ac = document.getElementById('my-plan-alfred-card');
-            if (ac) ac.classList.remove('hidden');
-          }
-        } catch (e) { /* ignore */ }
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
-      })();
-
       // Onboarding modal: show if not yet completed
       var userMeta = session.user.user_metadata || {};
       if (!userMeta.onboarding_complete) {
@@ -785,6 +772,50 @@
         else alfredDashboardCta.classList.remove('hidden');
       }
 
+      async function loadMyPlanCard() {
+        try {
+          var token = session.access_token;
+          var r = await fetch('/api/sprint-get-me', { headers: { Authorization: 'Bearer ' + token } });
+          var j = await r.json();
+          if (!r.ok || !j.sprint) return;
+          var card = document.getElementById('my-plan-dashboard-card');
+          if (!card) return;
+          card.classList.remove('hidden');
+          var payload = j.sprint.payload || {};
+          var sum = payload.summary ? payload.summary : 'Your personalized 28-day focus from VAPI.';
+          var sumEl = document.getElementById('my-plan-card-summary');
+          if (sumEl) sumEl.textContent = sum;
+          var weeks = payload.weeks || [];
+          var done = 0;
+          var total = 0;
+          weeks.forEach(function (w) {
+            (w.tasks || []).forEach(function (t) {
+              total++;
+              if (t.completed) done++;
+            });
+          });
+          var progEl = document.getElementById('my-plan-card-progress');
+          if (progEl) {
+            if (total > 0) {
+              progEl.textContent =
+                'Progress: ' + done + ' of ' + total + ' actions (' + Math.round((100 * done) / total) + '%).';
+              progEl.classList.remove('hidden');
+            } else {
+              progEl.classList.add('hidden');
+            }
+          }
+          var selfCta = document.getElementById('my-plan-self-service-alfred-cta');
+          if (selfCta) {
+            if (isNonClient) selfCta.classList.remove('hidden');
+            else selfCta.classList.add('hidden');
+          }
+        } catch (e) {
+          /* ignore */
+        }
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+      await loadMyPlanCard();
+
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('dashboard-content').classList.remove('hidden');
 
@@ -802,6 +833,32 @@
           errEl.classList.add('hidden');
         }
       }
+
+      (function initMyPlanDashboardReminder() {
+        var LS_VIEW = 'portal_hasViewedMyPlan';
+        var LS_DISMISS = 'portal_dismissedMyPlanReminder';
+        var box = document.getElementById('my-plan-dashboard-reminder');
+        var dismissBtn = document.getElementById('my-plan-reminder-dismiss');
+        if (dismissBtn && box) {
+          dismissBtn.addEventListener('click', function () {
+            try {
+              localStorage.setItem(LS_DISMISS, '1');
+            } catch (e) {}
+            box.classList.add('hidden');
+          });
+        }
+        window.__showPortalMyPlanReminderIfNeeded = function () {
+          if (!box) return;
+          try {
+            if (localStorage.getItem(LS_VIEW) === '1') return;
+            if (localStorage.getItem(LS_DISMISS) === '1') return;
+          } catch (e) {
+            return;
+          }
+          box.classList.remove('hidden');
+          if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        };
+      })();
 
       function formatDate(iso) {
         var d = new Date(iso);
@@ -1048,6 +1105,7 @@
       }
 
       if (rows && rows.length > 0) {
+      if (typeof window.__showPortalMyPlanReminderIfNeeded === 'function') window.__showPortalMyPlanReminderIfNeeded();
       var latest = rows[0];
       var latestScore = overallScore(latest.results);
       var latestTier = (latest.results.overallTier || '').trim() || null;

@@ -1191,6 +1191,31 @@
     );
   }
 
+  /** My Plan inline CTA on results page (skipped for Aligned Momentum). Marketing site uses portal URLs. */
+  function buildMyPlanDriverInlineHtml(accent) {
+    var signup =
+      "https://portal.alignedpower.coach/signup?redirect=" + encodeURIComponent("/my-plan");
+    var plan = "https://portal.alignedpower.coach/my-plan";
+    return (
+      '<div class="my-plan-inline-driver no-print mt-6 rounded-xl border border-[var(--ap-border)] border-l-4 pl-4 pr-4 py-4 bg-amber-50/90" style="border-left-color:' +
+      accent +
+      '">' +
+      '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-1 flex items-center gap-2">' +
+      '<i data-lucide="lightbulb" class="w-4 h-4 shrink-0 text-[var(--ap-accent)]"></i> This driver has a counter-move.</p>' +
+      '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-3">Your 30-day plan includes specific guidance for working with (not against) this pattern.</p>' +
+      '<div class="my-plan-inline-guest">' +
+      '<a href="' +
+      signup +
+      '" class="my-plan-cta-signup inline-flex items-center justify-center gap-2 text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg w-full sm:w-auto">Create free account</a>' +
+      "</div>" +
+      '<div class="my-plan-inline-auth hidden">' +
+      '<a href="' +
+      plan +
+      '" class="inline-flex items-center justify-center gap-2 text-sm font-bold text-[var(--ap-accent)] hover:underline w-full sm:w-auto">View My Plan →</a>' +
+      "</div></div>"
+    );
+  }
+
   function buildResultsSection(results, options) {
     var evaluation = ensureEvaluation(results);
     var context = (options && options.context) === "dashboard" ? "dashboard" : "results";
@@ -1639,6 +1664,9 @@
       html += '</div></div></div>';
     } else {
       html += profileHtml;
+    }
+    if (context === "results" && !isAlignedMomentum && driverName) {
+      html += buildMyPlanDriverInlineHtml(accent);
     }
     html += "</div></div>";
     return html;

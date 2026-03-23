@@ -803,10 +803,10 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
           onMouseLeave={() => setPhoneHover(false)}
         >
           <div
-            className="relative w-full rounded-[2.5rem] border-2 border-[#8e8e93] bg-[linear-gradient(160deg,#f2f2f4_0%,#d8d8dc_42%,#b4b4bc_100%)] shadow-[0_28px_70px_-18px_rgba(14,22,36,0.55),inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(0,0,0,0.12)] transition-shadow duration-300 ease-out"
+            className="relative w-full rounded-[2.75rem] border-4 border-[#26262c] bg-[linear-gradient(160deg,#f2f2f4_0%,#d8d8dc_42%,#b4b4bc_100%)] shadow-[0_0_0_2px_#0a0a0c,0_28px_70px_-18px_rgba(14,22,36,0.6),inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-2px_0_rgba(0,0,0,0.2)] transition-shadow duration-300 ease-out"
             style={{ aspectRatio: "9 / 19" }}
           >
-            <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2rem]">
+            <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2.45rem]">
               <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
 
               <div className="relative flex flex-1 min-h-0 flex-col bg-[#0E1624] text-white/90">

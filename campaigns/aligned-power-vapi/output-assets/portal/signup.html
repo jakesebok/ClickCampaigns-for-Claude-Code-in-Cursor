@@ -90,7 +90,7 @@
       var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
       var signupParams = new URLSearchParams(window.location.search);
       var redirect = signupParams.get('redirect') || '';
-      var allowedRedirects = ['/dashboard', '/admin', '/settings', '/scorecard', '/coach', '/portal/driver-library', '/portal/archetype-library'];
+      var allowedRedirects = ['/dashboard', '/admin', '/settings', '/scorecard', '/coach', '/my-plan', '/portal/driver-library', '/portal/archetype-library'];
       var redirectToAfterAuth = (allowedRedirects.indexOf(redirect) !== -1 || (redirect && redirect.startsWith('/coach/client'))) ? redirect : '/dashboard';
       var session = await supabase.auth.getSession();
       if (session.data.session) {

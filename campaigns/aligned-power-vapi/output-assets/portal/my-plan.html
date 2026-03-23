@@ -41,7 +41,12 @@
     [data-theme="dark"] .bg-white\/95 { background-color: var(--ap-header-bg) !important; }
     body { font-family: 'Cormorant Garamond', serif; font-weight: 600; background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, #0E1624 5%, var(--ap-bg)) 40%, color-mix(in srgb, #FF6B1A 4%, var(--ap-bg)) 100%); background-attachment: fixed; color: var(--ap-text); min-height: 100vh; }
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    .eyebrow { font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ap-accent); }
     .plan-rich strong { font-family: Outfit, sans-serif; font-weight: 700; }
+    /* Pattern watch: neutral card so body + bold stay readable in light & dark */
+    #pattern-watch-box .plan-rich,
+    #pattern-watch-box .plan-rich p { color: var(--ap-primary); font-size: 15px; line-height: 1.65; }
+    #pattern-watch-box .plan-rich strong { color: var(--ap-primary); }
     @media (max-width: 767px) {
       .nav-links-desk { display: none !important; }
       .nav-cta-bar { display: inline-flex !important; }
@@ -140,34 +145,37 @@
 
   <main class="max-w-4xl mx-auto px-4 py-10">
     <div id="loading" class="text-center py-16 text-[var(--ap-muted)]">Loading your plan…</div>
-    <div id="wrong-surface" class="hidden rounded-2xl border-2 border-[var(--ap-border)] bg-white p-8 text-center">
-      <p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">Your plan lives in ALFRED</p>
-      <p class="text-sm text-[var(--ap-secondary)] mb-6">You completed your latest VAPI in the ALFRED app. Open My Plan there to track your 28-day sprint.</p>
-      <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px]">Open ALFRED</a>
-    </div>
     <div id="no-sprint" class="hidden rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-white/80 p-8 text-center">
       <p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">No plan yet</p>
       <p class="text-sm text-[var(--ap-secondary)] mb-6">Complete the VAPI assessment while logged in (or from the marketing site with your portal email). Your personalized 28-day plan will appear here.</p>
       <a href="/assessment" class="inline-flex items-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px]">Take assessment</a>
     </div>
     <div id="plan-content" class="hidden">
-      <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--ap-accent)] mb-2">28-day sprint</p>
-      <h1 id="plan-title" class="text-3xl text-[var(--ap-primary)] mb-2">My Plan</h1>
-      <p id="plan-summary" class="text-[var(--ap-secondary)] mb-8"></p>
-      <div id="plan-context" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 space-y-4 text-sm text-[var(--ap-secondary)]">
-        <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)]">Why this focus</p>
-        <div id="ctx-why" class="plan-rich leading-relaxed"></div>
-        <div id="ctx-extra" class="space-y-3 border-t border-[var(--ap-border)] pt-4"></div>
+      <div class="mb-10 pb-8 border-b-2 border-[var(--ap-border)]">
+        <p class="eyebrow mb-2">28-day sprint</p>
+        <h1 id="plan-title" class="text-3xl sm:text-4xl font-extrabold text-[var(--ap-primary)] tracking-tight mb-3">My Plan</h1>
+        <p id="plan-summary" class="text-base sm:text-lg leading-relaxed text-[var(--ap-secondary)] max-w-3xl"></p>
       </div>
-      <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 border-amber-400/60 bg-amber-50 dark:bg-amber-950/30 p-6">
-        <p class="text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-200 mb-2">A pattern to watch</p>
-        <div id="pattern-watch-text" class="plan-rich text-sm text-amber-950 dark:text-amber-100 leading-relaxed"></div>
+      <div id="plan-context" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] bg-[var(--ap-surface)]/95 p-6 sm:p-8 space-y-5 shadow-sm">
+        <h2 class="text-sm font-extrabold uppercase tracking-wider text-[var(--ap-primary)]">Why this focus</h2>
+        <div id="ctx-why" class="plan-rich text-[15px] leading-relaxed text-[var(--ap-secondary)]"></div>
+        <div id="ctx-extra" class="space-y-4 border-t border-[var(--ap-border)] pt-5"></div>
       </div>
-      <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6">
-        <p class="text-xs font-bold uppercase tracking-wider text-[var(--ap-primary)] mb-2">From your coach</p>
-        <div id="coach-context-text" class="plan-rich text-sm text-[var(--ap-secondary)]"></div>
+      <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] border-l-[5px] border-l-[var(--ap-accent)] bg-[var(--ap-surface)]/95 p-6 sm:p-8 shadow-sm">
+        <p class="eyebrow mb-3">A pattern to watch</p>
+        <div id="pattern-watch-text" class="plan-rich leading-relaxed"></div>
       </div>
+      <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6 sm:p-8 shadow-sm">
+        <h2 class="text-sm font-extrabold uppercase tracking-wider text-[var(--ap-primary)] mb-3">From your coach</h2>
+        <div id="coach-context-text" class="plan-rich text-[15px] leading-relaxed text-[var(--ap-secondary)]"></div>
+      </div>
+      <h2 id="weeks-section-heading" class="hidden text-sm font-extrabold uppercase tracking-wider text-[var(--ap-muted)] mb-4">Week by week</h2>
       <div id="weeks-container" class="space-y-8"></div>
+      <div id="alfred-features-cta" class="hidden mt-10 rounded-2xl border-2 border-[var(--ap-accent)]/40 bg-[var(--ap-accent)]/5 p-6 sm:p-8">
+        <p class="text-lg font-extrabold text-[var(--ap-primary)] mb-2" style="font-family: Outfit, sans-serif;">Turn your plan into follow-through</p>
+        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Your 30-day plan is above. Most people read plans like this and do Week 1—then life happens. <strong class="text-[var(--ap-primary)]">ALFRED</strong> checks in daily, catches avoidance patterns, and gives you AI coaching when you&apos;re stuck. It&apos;s not where your plan &quot;lives&quot;; it&apos;s what helps you actually do it.</p>
+        <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px]">Start 7-day free trial <i data-lucide="external-link" class="w-4 h-4"></i></a>
+      </div>
     </div>
   </main>
 
@@ -320,6 +328,8 @@
       }
 
       var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
+      var isActiveClient = !!(activeRow && activeRow.active_client);
+      var isNonClient = email !== 'jacob@alignedpower.coach' && !isActiveClient;
       if (activeRow && activeRow.active_client) {
         if (header && header.getAttribute('data-nav-role') !== 'admin') header.setAttribute('data-nav-role', 'client');
         ['header-6c-link', 'header-6c-link-mobile'].forEach(function (id) {
@@ -348,6 +358,9 @@
 
       if (!res.ok || json.error) {
         document.getElementById('no-sprint').classList.remove('hidden');
+        try {
+          localStorage.setItem('portal_hasViewedMyPlan', '1');
+        } catch (e) {}
         if (window.lucide) lucide.createIcons();
         return;
       }
@@ -355,12 +368,9 @@
       var sprint = json.sprint;
       if (!sprint) {
         document.getElementById('no-sprint').classList.remove('hidden');
-        if (window.lucide) lucide.createIcons();
-        return;
-      }
-
-      if (sprint.primary_surface === 'alfred') {
-        document.getElementById('wrong-surface').classList.remove('hidden');
+        try {
+          localStorage.setItem('portal_hasViewedMyPlan', '1');
+        } catch (e) {}
         if (window.lucide) lucide.createIcons();
         return;
       }
@@ -380,9 +390,9 @@
           if (!v || !String(v).trim()) return;
           var d = document.createElement('div');
           d.innerHTML =
-            '<p class="text-xs font-bold text-[var(--ap-primary)] mb-1">' +
+            '<h3 class="text-sm font-extrabold text-[var(--ap-primary)] mb-1.5">' +
             escapeHtml(label) +
-            '</p><div class="plan-rich leading-relaxed">' +
+            '</h3><div class="plan-rich text-[15px] leading-relaxed text-[var(--ap-secondary)]">' +
             formatPlanHtml(String(v).trim()) +
             '</div>';
           extra.appendChild(d);
@@ -407,6 +417,11 @@
 
       var weeks = payload.weeks || [];
       var reflections = payload.weekReflections || {};
+      var weeksHeading = document.getElementById('weeks-section-heading');
+      if (weeksHeading) {
+        if (weeks.length) weeksHeading.classList.remove('hidden');
+        else weeksHeading.classList.add('hidden');
+      }
       var wrap = document.getElementById('weeks-container');
       wrap.innerHTML = weeks
         .map(function (w) {
@@ -415,7 +430,7 @@
             .map(function (t) {
               var checked = t.completed ? ' checked' : '';
               return (
-                '<label class="flex gap-3 items-start p-3 rounded-xl border border-[var(--ap-border)] bg-white cursor-pointer hover:border-[var(--ap-accent)]/50">' +
+                '<label class="flex gap-3 items-start p-3.5 rounded-xl border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] cursor-pointer hover:border-[var(--ap-accent)]/50 transition-colors">' +
                 '<input type="checkbox" class="task-cb mt-1 w-4 h-4 accent-[var(--ap-accent)]" data-id="' +
                 escapeAttr(t.id) +
                 '"' +
@@ -432,22 +447,31 @@
             .join('');
           var refVal = reflections[String(wn)] || '';
           return (
-            '<section class="rounded-2xl border-2 border-[var(--ap-border)] bg-white/90 p-6 shadow-sm">' +
-            '<h2 class="text-xl text-[var(--ap-primary)] mb-1">Week ' +
+            '<section class="rounded-2xl border-2 border-[var(--ap-border)] bg-[var(--ap-surface)]/95 p-6 sm:p-8 shadow-sm">' +
+            '<div class="border-b border-[var(--ap-border)] pb-4 mb-4">' +
+            '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] tracking-tight">Week ' +
             wn +
             '</h2>' +
-            '<p class="text-sm font-semibold text-[var(--ap-accent)] mb-4 plan-rich">' +
+            '<p class="text-base font-semibold text-[var(--ap-accent)] mt-1 plan-rich">' +
             formatPlanInline(w.theme || '') +
-            '</p>' +
-            '<div class="space-y-2 mb-4">' +
+            '</p></div>' +
+            '<div class="space-y-2 mb-5">' +
             tasks +
             '</div>' +
-            '<label class="block text-xs font-bold uppercase tracking-wider text-[var(--ap-muted)] mb-2">Reflection</label>' +
-            '<textarea rows="3" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-white text-sm text-[var(--ap-primary)]" data-week="' +
+            '<label class="block text-sm font-extrabold text-[var(--ap-primary)] mb-2">Reflection</label>' +
+            '<textarea rows="4" class="week-ref w-full px-4 py-3 rounded-xl border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] text-sm leading-relaxed text-[var(--ap-primary)]" data-week="' +
             wn +
             '" placeholder="What shifted this week?">' +
             escapeHtml(refVal) +
-            '</textarea></section>'
+            '</textarea>' +
+            '<div class="flex flex-wrap items-center justify-between gap-2 mt-2">' +
+            '<span class="week-ref-status text-xs text-[var(--ap-muted)] min-h-[1.25em]" data-week-status="' +
+            wn +
+            '"></span>' +
+            '<button type="button" class="week-ref-save text-sm font-bold px-5 py-2.5 rounded-lg bg-[var(--ap-accent)] text-white hover:opacity-90" data-week-save="' +
+            wn +
+            '">Save reflection</button>' +
+            '</div></section>'
           );
         })
         .join('');
@@ -464,21 +488,19 @@
       }
 
       async function savePatch(taskUpdates, weekReflections) {
-        await fetch('/api/sprint-patch-me', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-          body: JSON.stringify({ taskUpdates: taskUpdates || undefined, weekReflections: weekReflections || undefined }),
-        });
+        try {
+          var res = await fetch('/api/sprint-patch-me', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+            body: JSON.stringify({ taskUpdates: taskUpdates || undefined, weekReflections: weekReflections || undefined }),
+          });
+          return res.ok;
+        } catch (err) {
+          return false;
+        }
       }
 
       var pendingTasks = {};
-      wrap.querySelectorAll('.task-cb').forEach(function (cb) {
-        cb.addEventListener('change', function () {
-          pendingTasks[cb.getAttribute('data-id')] = cb.checked;
-          debouncedSaveTasks();
-        });
-      });
-
       var debouncedSaveTasks = debounce(function () {
         if (Object.keys(pendingTasks).length === 0) return;
         var u = Object.assign({}, pendingTasks);
@@ -486,16 +508,72 @@
         savePatch(u, null);
       }, 500);
 
+      var reflectionTimers = {};
+      function setWeekStatus(wn, msg) {
+        var el = wrap.querySelector('[data-week-status="' + wn + '"]');
+        if (el) el.textContent = msg || '';
+      }
+      function saveReflectionWeek(wn, value) {
+        var o = {};
+        o[String(wn)] = value;
+        setWeekStatus(wn, 'Saving…');
+        savePatch(null, o).then(function (ok) {
+          if (ok) {
+            setWeekStatus(wn, 'Saved');
+            setTimeout(function () {
+              var s = wrap.querySelector('[data-week-status="' + wn + '"]');
+              if (s && s.textContent === 'Saved') s.textContent = '';
+            }, 2200);
+          } else {
+            setWeekStatus(wn, 'Could not save. Tap Save reflection or check your connection.');
+          }
+        });
+      }
+      function scheduleReflectionSave(wn, value) {
+        clearTimeout(reflectionTimers[wn]);
+        setWeekStatus(wn, '');
+        reflectionTimers[wn] = setTimeout(function () {
+          reflectionTimers[wn] = null;
+          saveReflectionWeek(wn, value);
+        }, 850);
+      }
+
+      wrap.querySelectorAll('.task-cb').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          pendingTasks[cb.getAttribute('data-id')] = cb.checked;
+          debouncedSaveTasks();
+        });
+      });
+
       wrap.querySelectorAll('.week-ref').forEach(function (ta) {
         var wk = ta.getAttribute('data-week');
+        ta.addEventListener('input', function () {
+          scheduleReflectionSave(wk, ta.value);
+        });
         ta.addEventListener('blur', function () {
-          var o = {};
-          o[wk] = ta.value;
-          savePatch(null, o);
+          clearTimeout(reflectionTimers[wk]);
+          reflectionTimers[wk] = null;
+          saveReflectionWeek(wk, ta.value);
+        });
+      });
+
+      wrap.querySelectorAll('.week-ref-save').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var wn = btn.getAttribute('data-week-save');
+          var ta = wrap.querySelector('.week-ref[data-week="' + wn + '"]');
+          if (!ta) return;
+          clearTimeout(reflectionTimers[wn]);
+          reflectionTimers[wn] = null;
+          saveReflectionWeek(wn, ta.value);
         });
       });
 
       document.getElementById('plan-content').classList.remove('hidden');
+      try {
+        localStorage.setItem('portal_hasViewedMyPlan', '1');
+      } catch (e) {}
+      var featCta = document.getElementById('alfred-features-cta');
+      if (featCta && isNonClient) featCta.classList.remove('hidden');
       if (window.lucide) lucide.createIcons();
     })();
   </script>

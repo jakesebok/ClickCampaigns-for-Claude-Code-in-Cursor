@@ -1,6 +1,6 @@
 /**
  * GET /api/sprint-get-me
- * Returns the caller's active sprint (any primary_surface). Portal UI filters by primary_surface.
+ * Returns the caller's active sprint (any primary_surface). Display is unified across Portal and Alfred; primary_surface is metadata (where the assessment was taken).
  * Authorization: Bearer <supabase access token>
  */
 

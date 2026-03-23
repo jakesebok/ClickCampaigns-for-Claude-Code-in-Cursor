@@ -31,6 +31,7 @@ import {
   ChevronDown,
   ChevronUp,
   UserCircle,
+  ListChecks,
 } from "lucide-react";
 import { getTier, getTierColor, ARCHETYPE_DESCRIPTIONS, getPriorityMatrix, type VapiArchetype } from "@/lib/vapi/scoring";
 import { ARCHETYPES_FULL } from "@/lib/vapi/archetypes-full";
@@ -60,6 +61,7 @@ import {
   isDateInScorecardWindow,
   isSameEasternCalendarWeek,
 } from "@/lib/scorecard-window";
+import { MyPlanDashboardReminder } from "@/components/my-plan-callouts";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
   PH: Activity, IA: Compass, ME: Brain, AF: Focus,
@@ -104,6 +106,16 @@ type TrialBanner = {
   isActive: boolean;
 };
 
+type DashboardSprint = {
+  id: string;
+  primary_surface: string;
+  payload: {
+    title?: string;
+    summary?: string;
+    weeks?: { weekNumber: number; tasks?: { completed?: boolean }[] }[];
+  };
+};
+
 const QUAD_COLORS: Record<string, string> = {
   "Critical Priority": "bg-red-500/15 border-red-500/30",
   "Protect & Sustain": "bg-green-500/15 border-green-500/30",
@@ -133,13 +145,15 @@ export default function DashboardPage() {
   const [historyExpanded, setHistoryExpanded] = useState(false);
   const [vitalActionExpanded, setVitalActionExpanded] = useState(false);
   const [trialBanner, setTrialBanner] = useState<TrialBanner | null>(null);
+  const [activeSprint, setActiveSprint] = useState<DashboardSprint | null>(null);
 
   useEffect(() => {
     Promise.all([
       fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
       fetch("/api/scorecard").then((r) => r.json()).catch(() => ({ entries: [], currentWeek: null })),
       fetch("/api/settings").then((r) => r.json()).catch(() => null),
-    ]).then(([vapiData, scorecardData, settings]) => {
+      fetch("/api/sprint/me").then((r) => r.json()).catch(() => ({ sprint: null })),
+    ]).then(([vapiData, scorecardData, settings, sprintData]) => {
       setVapiResults(
         (vapiData.results || []).map((row: VapiResult) => ({
           ...row,
@@ -167,6 +181,9 @@ export default function DashboardPage() {
           setTrialBanner({ daysLeft, isActive: true });
         }
       }
+
+      const sp = sprintData?.sprint as DashboardSprint | null | undefined;
+      setActiveSprint(sp && sp.id ? sp : null);
 
       setLoading(false);
     });
@@ -263,6 +280,21 @@ export default function DashboardPage() {
     ...nonCriticalPriorities.slice(0, Math.max(0, 3 - criticalPriorities.length)),
   ].slice(0, 3);
 
+  let sprintProgressLabel: string | null = null;
+  if (activeSprint?.payload?.weeks?.length) {
+    let done = 0;
+    let total = 0;
+    for (const w of activeSprint.payload.weeks) {
+      for (const t of w.tasks || []) {
+        total += 1;
+        if (t.completed) done += 1;
+      }
+    }
+    if (total > 0) {
+      sprintProgressLabel = `Progress: ${done} of ${total} actions (${Math.round((100 * done) / total)}%).`;
+    }
+  }
+
   const archetypeDriverSummary = isAlignedMomentum
     ? `state: ${ALIGNED_MOMENTUM_NAME}`
     : driver
@@ -318,6 +350,8 @@ export default function DashboardPage() {
 
       <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
         <div className="max-w-4xl mx-auto space-y-6">
+          <MyPlanDashboardReminder hasAssessment={vapiResults.length > 0} />
+
           {trialBanner?.isActive && (
             <div className="rounded-2xl border border-amber-400/60 bg-amber-500/10 px-4 py-3 flex items-center justify-between gap-3 text-sm">
               <div className="space-y-0.5">
@@ -423,6 +457,39 @@ export default function DashboardPage() {
               <ArrowRight className="h-5 w-5 shrink-0 text-accent" />
             </Link>
           )}
+
+          {activeSprint ? (
+            <Link
+              href="/my-plan"
+              className="block rounded-2xl border-2 border-primary/20 bg-card p-5 shadow-sm transition-colors hover:border-accent/40 hover:bg-accent/5"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+                <div className="flex gap-4 items-start min-w-0">
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <ListChecks className="h-5 w-5 text-accent" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      Your 28-day sprint
+                    </p>
+                    <h3 className="text-lg font-semibold text-foreground leading-tight mt-0.5">
+                      {activeSprint.payload?.title || "My Plan"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-1 line-clamp-2">
+                      {activeSprint.payload?.summary || "Your personalized focus from VAPI."}
+                    </p>
+                    {sprintProgressLabel ? (
+                      <p className="text-xs text-muted-foreground mt-2 font-medium">{sprintProgressLabel}</p>
+                    ) : null}
+                  </div>
+                </div>
+                <span className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground sm:ml-auto">
+                  Open My Plan
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+          ) : null}
 
           <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
             Your alignment at a glance

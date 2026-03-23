@@ -12,6 +12,7 @@ import {
   Users,
   ChevronDown,
   ChevronUp,
+  Target,
 } from "lucide-react";
 import { SCORECARD_CATEGORIES, calculateScore, getOverallScore } from "@/lib/scorecard";
 import { getScorecardWindow } from "@/lib/scorecard-window";
@@ -34,8 +35,37 @@ const ICONS: Record<string, React.ElementType> = {
   users: Users,
 };
 
+function getScorecardScoreColor(score: number) {
+  if (score <= 30) return "#ef4444";
+  if (score <= 55) return "#f97316";
+  if (score <= 79) return "#eab308";
+  return "#22c55e";
+}
+
+function parseScorecardNotes(entry: ScorecardEntry | null): {
+  oneThing: string | null;
+  reflections: Record<string, string>;
+} {
+  if (!entry?.notes) return { oneThing: null, reflections: {} };
+  try {
+    const parsed = JSON.parse(entry.notes) as {
+      oneThing?: string;
+      reflections?: Record<string, string>;
+    };
+    return {
+      oneThing: parsed.oneThing?.trim() || null,
+      reflections: parsed.reflections || {},
+    };
+  } catch {
+    return { oneThing: null, reflections: {} };
+  }
+}
+
 export default function ScorecardPage() {
   const [entries, setEntries] = useState<ScorecardEntry[]>([]);
+  const [currentWeekEntry, setCurrentWeekEntry] = useState<ScorecardEntry | null>(
+    null
+  );
   const [answers, setAnswers] = useState<Record<string, number[]>>({});
   const [reflections, setReflections] = useState<Record<string, string>>({});
   const [oneThing, setOneThing] = useState("");
@@ -44,6 +74,7 @@ export default function ScorecardPage() {
   const [submitted, setSubmitted] = useState(false);
   const [step, setStep] = useState<"score" | "reflect" | "onething">("score");
   const [hasAnySubmissions, setHasAnySubmissions] = useState(false);
+  const [vitalActionExpanded, setVitalActionExpanded] = useState(false);
 
   useEffect(() => {
     SCORECARD_CATEGORIES.forEach((c) => {
@@ -53,13 +84,12 @@ export default function ScorecardPage() {
     fetch("/api/scorecard")
       .then((r) => r.json())
       .then((data) => {
-        const allEntries = [
-          ...(data.currentWeek ? [data.currentWeek] : []),
-          ...(data.entries || []),
-        ];
-        setEntries(data.entries || []);
-        setHasAnySubmissions(allEntries.length > 0);
-        if (data.currentWeek) {
+        const past = data.entries || [];
+        const cw = data.currentWeek ?? null;
+        setEntries(past);
+        setCurrentWeekEntry(cw);
+        setHasAnySubmissions(!!(cw || past.length > 0));
+        if (cw) {
           setSubmitted(true);
         }
       })
@@ -109,10 +139,22 @@ export default function ScorecardPage() {
   const scores = getScores();
   const overall = getOverallScore(scores);
 
-  const sixCsCoachHref = useMemo(() => {
-    const list = entries.filter(
+  /** Same ordering as dashboard: current week first, then past (newest first from API). */
+  const scoredEntriesMerged = useMemo(() => {
+    const past = entries.filter(
       (e) => e.scores && Object.keys(e.scores).length > 0
     );
+    const cur =
+      currentWeekEntry &&
+      currentWeekEntry.scores &&
+      Object.keys(currentWeekEntry.scores).length > 0
+        ? currentWeekEntry
+        : null;
+    return cur ? [cur, ...past] : past;
+  }, [currentWeekEntry, entries]);
+
+  const sixCsCoachHref = useMemo(() => {
+    const list = scoredEntriesMerged;
     if (list.length < 1) {
       return chatQueryUrl(
         "I submitted my latest 6Cs scorecard. Help me interpret what moved, what my lowest C is signaling, and one Vital Action adjustment for next week."
@@ -149,10 +191,19 @@ export default function ScorecardPage() {
         declineDelta: declineDelta,
       })
     );
-  }, [entries]);
+  }, [scoredEntriesMerged]);
 
   const window = getScorecardWindow();
   const canSubmit = window.canSubmit || !hasAnySubmissions;
+
+  const latestScoredForOffWindow = scoredEntriesMerged[0] || null;
+  const { oneThing: offWindowOneThing, reflections: offWindowReflections } =
+    parseScorecardNotes(latestScoredForOffWindow);
+  const offWindowVisibleReflections = SCORECARD_CATEGORIES.map((category) => ({
+    key: category.key,
+    label: category.label,
+    value: offWindowReflections[category.key]?.trim() || "",
+  })).filter((r) => r.value);
 
   if (loading) {
     return (
@@ -165,25 +216,200 @@ export default function ScorecardPage() {
   if (!canSubmit && !submitted) {
     return (
       <div className="flex flex-col h-full">
-        <header className="px-6 py-4 border-b border-border">
+        <header className="px-6 py-4 border-b border-border space-y-2">
           <h1 className="text-lg font-semibold">6Cs Scorecard</h1>
           <p className="text-sm text-muted-foreground">Weekly alignment check</p>
+          {scoredEntriesMerged.length > 0 && (
+            <Link
+              href={sixCsCoachHref}
+              className="inline-flex text-xs sm:text-sm font-medium text-accent hover:underline"
+            >
+              Coach on 6Cs →
+            </Link>
+          )}
         </header>
         <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
-          <div className="max-w-2xl mx-auto text-center py-12 space-y-4">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/10">
-              <ClipboardCheck className="h-8 w-8 text-amber-500" />
+          <div className="max-w-2xl mx-auto space-y-10 pb-8">
+            <div className="text-center space-y-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500/10">
+                <ClipboardCheck className="h-8 w-8 text-amber-500" />
+              </div>
+              <h2 className="text-xl font-serif font-bold">
+                Scorecard is only available during the weekly window
+              </h2>
+              <p className="text-muted-foreground">{window.message}</p>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+              >
+                ← Back to dashboard
+              </Link>
             </div>
-            <h2 className="text-xl font-serif font-bold">
-              Scorecard is only available during the weekly window
-            </h2>
-            <p className="text-muted-foreground">{window.message}</p>
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
-            >
-              ← Back to dashboard
-            </Link>
+
+            {/* Same Vital Action + 6C reflections pattern as dashboard (read-only) */}
+            {offWindowOneThing ? (
+              <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Target className="h-5 w-5 text-accent" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      This Week&apos;s Vital Action
+                    </p>
+                    {latestScoredForOffWindow && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        From week of{" "}
+                        {new Date(
+                          latestScoredForOffWindow.weekStart
+                        ).toLocaleDateString()}
+                      </p>
+                    )}
+                    <p className="font-medium leading-snug whitespace-pre-wrap break-words mt-2">
+                      {offWindowOneThing}
+                    </p>
+                  </div>
+                </div>
+                {offWindowVisibleReflections.length > 0 && (
+                  <>
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        onClick={() => setVitalActionExpanded((o) => !o)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                        aria-expanded={vitalActionExpanded}
+                        aria-controls="scorecard-offwindow-reflections"
+                      >
+                        {vitalActionExpanded ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                        <span>View my 6C reflections</span>
+                      </button>
+                    </div>
+                    {vitalActionExpanded && (
+                      <div
+                        id="scorecard-offwindow-reflections"
+                        className="mt-4 pt-4 border-t border-border/60 space-y-2"
+                      >
+                        {offWindowVisibleReflections.map((reflection) => (
+                          <div
+                            key={reflection.key}
+                            className="rounded-xl border border-border bg-background/60 px-4 py-3"
+                          >
+                            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                              {reflection.label}
+                            </p>
+                            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">
+                              {reflection.value}
+                            </p>
+                          </div>
+                        ))}
+                        <div className="pt-2 flex justify-center">
+                          <button
+                            type="button"
+                            onClick={() => setVitalActionExpanded(false)}
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                          >
+                            <ChevronUp className="h-4 w-4" />
+                            <span>Collapse</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className="rounded-2xl border-2 border-dashed border-accent/30 bg-accent/5 p-5 flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Target className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0 text-left">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    This Week&apos;s Vital Action
+                  </p>
+                  <p className="font-medium text-muted-foreground mt-1">
+                    {scoredEntriesMerged.length > 0
+                      ? "Your latest scorecard doesn't have a Vital Action saved yet. When the window opens, complete the final step to set one."
+                      : "Complete your first scorecard when the window opens to set your Vital Action here."}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {latestScoredForOffWindow && (
+              <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 shadow-sm">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <ClipboardCheck className="h-4 w-4 text-accent shrink-0" />
+                    <span className="text-sm font-medium text-muted-foreground">
+                      Latest 6Cs scores
+                    </span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    Week of{" "}
+                    {new Date(
+                      latestScoredForOffWindow.weekStart
+                    ).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="flex items-end gap-3">
+                  <span
+                    className="text-4xl font-bold font-serif"
+                    style={{
+                      color: getScorecardScoreColor(
+                        getOverallScore(latestScoredForOffWindow.scores)
+                      ),
+                    }}
+                  >
+                    {getOverallScore(latestScoredForOffWindow.scores)}%
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {SCORECARD_CATEGORIES.map((c) => {
+                    const Icon = ICONS[c.icon];
+                    const pct = latestScoredForOffWindow.scores[c.key] || 0;
+                    const scoreColor = getScorecardScoreColor(pct);
+                    return (
+                      <div
+                        key={c.key}
+                        className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
+                      >
+                        {Icon && (
+                          <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />
+                        )}
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          {c.label}
+                        </p>
+                        <p
+                          className="text-lg font-bold tabular-nums"
+                          style={{ color: scoreColor }}
+                        >
+                          {pct}%
+                        </p>
+                        <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all"
+                            style={{
+                              width: `${pct}%`,
+                              backgroundColor: scoreColor,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <Link
+                  href={sixCsCoachHref}
+                  className="inline-flex text-sm font-semibold text-accent hover:underline pt-1"
+                >
+                  Coach on these 6Cs →
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
