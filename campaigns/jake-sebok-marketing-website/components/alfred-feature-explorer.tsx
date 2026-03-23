@@ -697,9 +697,9 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
   return (
     <div
       ref={sectionRef}
-      className="grid w-full min-w-0 items-start gap-4 max-lg:grid-cols-[minmax(0,1fr)_minmax(132px,42vw)] lg:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] lg:gap-14 xl:gap-16 lg:items-center"
+      className="grid lg:grid-cols-[minmax(0,1fr)_minmax(260px,320px)] gap-10 lg:gap-14 xl:gap-16 items-center w-full min-w-0"
     >
-      <div className="min-w-0 space-y-6 lg:py-4">
+      <div className="order-2 lg:order-1 min-w-0 space-y-6 lg:py-4">
         <div>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-2">
             {left.kicker}
@@ -795,9 +795,9 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
         )}
       </div>
 
-      <div className="flex justify-center lg:justify-end max-lg:self-start">
+      <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
         <div
-          className="relative w-full max-lg:max-w-none max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]"
+          className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]"
           onMouseEnter={() => setPhoneHover(true)}
           onMouseLeave={() => setPhoneHover(false)}
         >
