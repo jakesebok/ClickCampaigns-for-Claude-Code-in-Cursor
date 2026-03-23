@@ -149,7 +149,9 @@ export default function DashboardPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
+      fetch("/api/vapi", { cache: "no-store" })
+        .then((r) => r.json())
+        .catch(() => ({ results: [] })),
       fetch("/api/scorecard").then((r) => r.json()).catch(() => ({ entries: [], currentWeek: null })),
       fetch("/api/settings").then((r) => r.json()).catch(() => null),
       fetch("/api/sprint/me").then((r) => r.json()).catch(() => ({ sprint: null })),

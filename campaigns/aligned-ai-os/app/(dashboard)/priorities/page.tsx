@@ -74,7 +74,7 @@ export default function PrioritiesPage() {
   const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    fetch("/api/vapi")
+    fetch("/api/vapi", { cache: "no-store" })
       .then((r) => r.json())
       .then(setVapiResults)
       .catch(() => setVapiResults({ results: [] }));

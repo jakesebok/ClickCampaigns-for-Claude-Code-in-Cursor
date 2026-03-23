@@ -1135,8 +1135,14 @@ function ResultsContent() {
   useEffect(() => {
     const load = async () => {
       const [allRes, singleRes] = await Promise.all([
-        fetch("/api/vapi").then((r) => r.json()).catch(() => ({ results: [] })),
-        id ? fetch(`/api/vapi?id=${id}`).then((r) => r.json()).catch(() => ({})) : Promise.resolve({}),
+        fetch("/api/vapi", { cache: "no-store" })
+          .then((r) => r.json())
+          .catch(() => ({ results: [] })),
+        id
+          ? fetch(`/api/vapi?id=${id}`, { cache: "no-store" })
+              .then((r) => r.json())
+              .catch(() => ({}))
+          : Promise.resolve({}),
       ]);
       const all = (allRes.results || []).map((r: {
         id: string;

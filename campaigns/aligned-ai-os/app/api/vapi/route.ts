@@ -23,8 +23,17 @@ import {
   type VapiDriverScores,
 } from "@/lib/vapi/drivers";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const NO_STORE_HEADERS = {
+  "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+  Pragma: "no-cache",
+  Expires: "0",
+} as const;
 
 async function fetchPortalVapiByEmail(email: string) {
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return null;
@@ -32,6 +41,7 @@ async function fetchPortalVapiByEmail(email: string) {
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/vapi_results?email=ilike.${encodeURIComponent(emailNorm)}&select=id,email,first_name,last_name,results,created_at,source&order=created_at.desc`,
     {
+      cache: "no-store",
       headers: {
         apikey: SUPABASE_SERVICE_ROLE_KEY,
         Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
@@ -326,45 +336,48 @@ function getDriverEvaluationFromStoredResults(
 export async function GET(req: NextRequest) {
   const user = await getOrCreateUser();
   if (!user)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: NO_STORE_HEADERS });
 
   const id = req.nextUrl.searchParams.get("id");
   const rows = await fetchPortalVapiByEmail(user.email);
   if (!rows || rows.length === 0) {
-    return NextResponse.json({ results: [] });
+    return NextResponse.json({ results: [] }, { headers: NO_STORE_HEADERS });
   }
 
   if (id) {
     const row = rows.find((r: { id: string }) => r.id === id);
-    if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (!row) return NextResponse.json({ error: "Not found" }, { status: 404, headers: NO_STORE_HEADERS });
     const r = row.results as Record<string, unknown>;
     const normalizedArenaScores = normalizeArenaScores(
       r.arenaScores as Record<string, number>
     );
     const archetype = deriveArchetypeFromStoredResults(r, normalizedArenaScores);
     const driverEvaluation = getDriverEvaluationFromStoredResults(r);
-    return NextResponse.json({
-      result: {
-        id: row.id,
-        domainScores: (r.domainScores as Record<string, number>) || {},
-        arenaScores: normalizedArenaScores,
-        overallScore: Math.round(((r.overall as number) || 0) * 10),
-        archetype,
-        importance:
-          ((r.importanceRatings as Record<string, number>) ||
-            (r.importanceScores as Record<string, number>) ||
-            {}),
-        assignedDriver: driverEvaluation.assignedDriver,
-        secondaryDriver: driverEvaluation.secondaryDriver,
-        driverScores: driverEvaluation.driverScores,
-        topDriverScore: driverEvaluation.topDriverScore,
-        secondaryDriverScore: driverEvaluation.secondaryDriverScore,
-        primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
-        driverState: driverEvaluation.driverState,
-        driverFallbackType: driverEvaluation.driverFallbackType,
-        createdAt: row.created_at,
+    return NextResponse.json(
+      {
+        result: {
+          id: row.id,
+          domainScores: (r.domainScores as Record<string, number>) || {},
+          arenaScores: normalizedArenaScores,
+          overallScore: Math.round(((r.overall as number) || 0) * 10),
+          archetype,
+          importance:
+            ((r.importanceRatings as Record<string, number>) ||
+              (r.importanceScores as Record<string, number>) ||
+              {}),
+          assignedDriver: driverEvaluation.assignedDriver,
+          secondaryDriver: driverEvaluation.secondaryDriver,
+          driverScores: driverEvaluation.driverScores,
+          topDriverScore: driverEvaluation.topDriverScore,
+          secondaryDriverScore: driverEvaluation.secondaryDriverScore,
+          primaryToSecondaryMargin: driverEvaluation.primaryToSecondaryMargin,
+          driverState: driverEvaluation.driverState,
+          driverFallbackType: driverEvaluation.driverFallbackType,
+          createdAt: row.created_at,
+        },
       },
-    });
+      { headers: NO_STORE_HEADERS }
+    );
   }
 
   const results = rows.map((row: { id: string; results: Record<string, unknown>; created_at: string }) => {
@@ -396,7 +409,7 @@ export async function GET(req: NextRequest) {
     };
   });
 
-  return NextResponse.json({ results });
+  return NextResponse.json({ results }, { headers: NO_STORE_HEADERS });
 }
 
 export async function POST(req: NextRequest) {

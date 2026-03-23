@@ -19,7 +19,7 @@ export function AssessmentNavLink({
   const [hasResults, setHasResults] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch("/api/vapi")
+    fetch("/api/vapi", { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => setHasResults((data.results?.length ?? 0) > 0))
       .catch(() => setHasResults(false));

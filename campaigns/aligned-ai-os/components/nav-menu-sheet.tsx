@@ -33,7 +33,7 @@ export function NavMenuSheet() {
   const [hasAssessmentResults, setHasAssessmentResults] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch("/api/vapi")
+    fetch("/api/vapi", { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => setHasAssessmentResults((data.results?.length ?? 0) > 0))
       .catch(() => setHasAssessmentResults(false));
