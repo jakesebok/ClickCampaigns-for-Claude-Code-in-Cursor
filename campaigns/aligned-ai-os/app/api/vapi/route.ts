@@ -9,6 +9,8 @@ import { buildPortalResultsFormat } from "@/lib/vapi/portal-format";
 import {
   ALIGNED_MOMENTUM_NAME,
   determineDriver,
+  DRIVER_MIN_MARGIN,
+  DRIVER_THRESHOLD,
   flattenGroupedAnswersToScoredResponses,
   getDriverFallbackType,
   getDriverState,
@@ -196,18 +198,35 @@ function getDriverEvaluationFromStoredResults(
       driverState === "aligned_momentum"
         ? ALIGNED_MOMENTUM_NAME
         : storedAssignedDriver;
+    const topS = results.topDriverScore as number;
+    const secS = results.secondDriverScore as number;
+    const margin = results.primaryToSecondaryMargin as number;
+    const driversAreCoEqual =
+      typeof results.driversAreCoEqual === "boolean"
+        ? results.driversAreCoEqual
+        : Boolean(
+            assignedDriver &&
+              assignedDriver !== ALIGNED_MOMENTUM_NAME &&
+              secondaryDriver &&
+              typeof topS === "number" &&
+              topS >= DRIVER_THRESHOLD &&
+              typeof secS === "number" &&
+              secS >= DRIVER_THRESHOLD &&
+              typeof margin === "number" &&
+              margin < DRIVER_MIN_MARGIN
+          );
     return {
       assignedDriver,
       secondaryDriver,
       driverScores: results.driverScores as VapiDriverScores,
       driverGates: results.driverGates as VapiDriverGates,
-      topDriverScore: results.topDriverScore as number,
-      secondDriverScore: results.secondDriverScore as number,
+      topDriverScore: topS,
+      secondDriverScore: secS,
       secondaryDriverScore:
         typeof results.secondaryDriverScore === "number"
           ? (results.secondaryDriverScore as number)
           : null,
-      primaryToSecondaryMargin: results.primaryToSecondaryMargin as number,
+      primaryToSecondaryMargin: margin,
       driverState,
       driverFallbackType: getDriverFallbackType({
         domainScores: (results.domainScores as Record<string, number>) || {},
@@ -216,6 +235,7 @@ function getDriverEvaluationFromStoredResults(
         assignedDriver,
         driverState,
       }),
+      driversAreCoEqual,
     };
   }
 
@@ -261,6 +281,7 @@ function getDriverEvaluationFromStoredResults(
       driverState:
         fallbackType === "aligned_momentum" ? "aligned_momentum" : "no_driver",
       driverFallbackType: fallbackType,
+      driversAreCoEqual: false,
     };
   }
 
@@ -298,6 +319,7 @@ function getDriverEvaluationFromStoredResults(
     driverState:
       fallbackType === "aligned_momentum" ? "aligned_momentum" : "no_driver",
     driverFallbackType: fallbackType,
+    driversAreCoEqual: false,
   };
 }
 

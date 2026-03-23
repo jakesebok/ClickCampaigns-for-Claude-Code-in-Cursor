@@ -692,7 +692,8 @@
       : {
           assignedDriver: results && typeof results.assignedDriver === "string" ? results.assignedDriver : null,
           secondaryDriver: results && typeof results.secondaryDriver === "string" ? results.secondaryDriver : null,
-          driverState: results && typeof results.driverState === "string" ? results.driverState : "no_driver"
+          driverState: results && typeof results.driverState === "string" ? results.driverState : "no_driver",
+          driversAreCoEqual: !!(results && results.driversAreCoEqual),
         };
     var isAlignedMomentum =
       evaluation.driverState === "aligned_momentum" ||
@@ -716,7 +717,11 @@
     if (isAlignedMomentum) {
       html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + (window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME] : '#B8960C') + '12;border-color:' + (window.VAPI_DRIVERS && window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS ? window.VAPI_DRIVERS.DRIVER_ACCENT_COLORS[ALIGNED_MOMENTUM_NAME] : '#B8960C') + '26;">Your current state: ' + buildStateAnchor(ALIGNED_MOMENTUM_NAME) + '.</div>';
     } else if (primaryDriver) {
-      html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + primaryAccent + '12;border-color:' + primaryAccent + '26;">Your primary driver: ' + buildDriverAnchor(primaryDriver) + '. Your secondary driver: ' + (secondaryDriver ? buildDriverAnchor(secondaryDriver) : 'None identified') + '.</div>';
+      if (evaluation.driversAreCoEqual && secondaryDriver) {
+        html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + primaryAccent + '12;border-color:' + primaryAccent + '26;">Your primary patterns (equally strong): ' + buildDriverAnchor(primaryDriver) + ' and ' + buildDriverAnchor(secondaryDriver) + '.</div>';
+      } else {
+        html += '<div class="mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed text-[var(--ap-primary)]" style="background:' + primaryAccent + '12;border-color:' + primaryAccent + '26;">Your primary driver: ' + buildDriverAnchor(primaryDriver) + '. Your secondary driver: ' + (secondaryDriver ? buildDriverAnchor(secondaryDriver) : 'None identified') + '.</div>';
+      }
     } else {
       html += '<div class="mt-6 flex flex-col gap-4 rounded-2xl border border-[var(--ap-border)] px-5 py-4 sm:flex-row sm:items-center sm:justify-between" style="background:var(--ap-surface, #ffffff);"><p class="text-sm leading-relaxed text-[var(--ap-secondary)]">' + escapeHtml(DRIVER_LIBRARY_EMPTY_RESULTS_BANNER) + '</p><a href="' + escapeHtml(takeAssessmentHref) + '" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Take the Assessment <span aria-hidden="true">→</span></a></div>';
     }

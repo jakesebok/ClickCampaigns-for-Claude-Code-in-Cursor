@@ -43,10 +43,54 @@
     h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
     .eyebrow { font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ap-accent); }
     .plan-rich strong { font-family: Outfit, sans-serif; font-weight: 700; }
-    /* Pattern watch: neutral card so body + bold stay readable in light & dark */
+    /* Pattern watch: high-visibility callout (blue family, not amber) */
+    .pattern-watch-callout {
+      position: relative;
+      overflow: hidden;
+      border-color: color-mix(in srgb, #2563eb 28%, var(--ap-border)) !important;
+      background: linear-gradient(
+        165deg,
+        color-mix(in srgb, #2563eb 9%, var(--ap-surface)) 0%,
+        var(--ap-surface) 55%
+      ) !important;
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, #3b82f6 12%, transparent),
+        0 14px 40px -14px color-mix(in srgb, #1d4ed8 35%, transparent);
+    }
+    .pattern-watch-callout::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1d4ed8, #0ea5e9, #38bdf8);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .pattern-watch-callout {
+      border-color: color-mix(in srgb, #60a5fa 35%, var(--ap-border)) !important;
+      background: linear-gradient(
+        165deg,
+        color-mix(in srgb, #3b82f6 14%, var(--ap-surface)) 0%,
+        var(--ap-surface) 50%
+      ) !important;
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, #60a5fa 18%, transparent),
+        0 16px 48px -16px color-mix(in srgb, #2563eb 45%, transparent);
+    }
+    .pattern-watch-icon { color: #2563eb; }
+    [data-theme="dark"] .pattern-watch-icon { color: #93c5fd; }
     #pattern-watch-box .plan-rich,
-    #pattern-watch-box .plan-rich p { color: var(--ap-primary); font-size: 15px; line-height: 1.65; }
-    #pattern-watch-box .plan-rich strong { color: var(--ap-primary); }
+    #pattern-watch-box .plan-rich p {
+      color: var(--ap-primary);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    #pattern-watch-box .plan-rich strong {
+      color: var(--ap-primary);
+      font-weight: 800;
+    }
+    .task-label-text { flex: 1; min-width: 0; word-break: break-word; }
     @media (max-width: 767px) {
       .nav-links-desk { display: none !important; }
       .nav-cta-bar { display: inline-flex !important; }
@@ -161,9 +205,12 @@
         <div id="ctx-why" class="plan-rich text-[15px] leading-relaxed text-[var(--ap-secondary)]"></div>
         <div id="ctx-extra" class="space-y-4 border-t border-[var(--ap-border)] pt-5"></div>
       </div>
-      <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-border)] border-l-[5px] border-l-[var(--ap-accent)] bg-[var(--ap-surface)]/95 p-6 sm:p-8 shadow-sm">
-        <p class="eyebrow mb-3">A pattern to watch</p>
-        <div id="pattern-watch-text" class="plan-rich leading-relaxed"></div>
+      <div id="pattern-watch-box" class="hidden mb-8 rounded-2xl border-2 p-6 sm:p-8 pattern-watch-callout">
+        <div class="flex items-center gap-2.5 mb-3 relative">
+          <i data-lucide="scan-eye" class="pattern-watch-icon w-5 h-5 shrink-0" aria-hidden="true"></i>
+          <p class="eyebrow mb-0">A pattern to watch</p>
+        </div>
+        <div id="pattern-watch-text" class="plan-rich leading-relaxed relative"></div>
       </div>
       <div id="coach-context-box" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-accent)]/30 bg-[var(--ap-accent)]/5 p-6 sm:p-8 shadow-sm">
         <h2 class="text-sm font-extrabold uppercase tracking-wider text-[var(--ap-primary)] mb-3">From your coach</h2>
@@ -206,6 +253,60 @@
         var t = escapeHtml(String(raw));
         t = t.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-[var(--ap-primary)]">$1</strong>');
         return t.replace(/\n/g, '<br>');
+      }
+
+      function normalizeTaskText(s) {
+        return String(s || '')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      /** One visual block when title/description repeat; full width so text is not clipped in flex rows. */
+      function buildTaskCheckboxInnerHtml(t) {
+        var title = normalizeTaskText(t.title);
+        var desc = normalizeTaskText(t.description || '');
+        var tl = title.toLowerCase();
+        var dl = desc.toLowerCase();
+        var onlyTitle = '';
+        var onlyBody = '';
+        if (!desc) {
+          onlyTitle = title;
+        } else if (!title) {
+          onlyBody = desc;
+        } else if (dl === tl) {
+          onlyBody = desc;
+        } else if (dl.indexOf(tl) === 0) {
+          var rest = desc.slice(title.length).replace(/^[\s:.;,\-–—]+/g, '').trim();
+          if (!rest) {
+            onlyTitle = title;
+          } else {
+            onlyBody = desc;
+          }
+        } else {
+          onlyTitle = title;
+          onlyBody = desc;
+        }
+        var inner;
+        if (onlyTitle && !onlyBody) {
+          inner =
+            '<span class="text-[15px] font-semibold text-[var(--ap-primary)] leading-snug plan-rich">' +
+            formatPlanInline(onlyTitle) +
+            '</span>';
+        } else if (onlyBody && !onlyTitle) {
+          inner =
+            '<span class="text-[15px] text-[var(--ap-primary)] leading-relaxed plan-rich">' +
+            formatPlanInline(onlyBody) +
+            '</span>';
+        } else {
+          inner =
+            '<span class="font-semibold text-[var(--ap-primary)] block plan-rich leading-snug">' +
+            formatPlanInline(onlyTitle) +
+            '</span>' +
+            '<span class="text-sm text-[var(--ap-secondary)] plan-rich block mt-1.5 leading-relaxed">' +
+            formatPlanInline(onlyBody) +
+            '</span>';
+        }
+        return '<span class="task-label-text">' + inner + '</span>';
       }
 
       function initTheme() {
@@ -431,17 +532,13 @@
               var checked = t.completed ? ' checked' : '';
               return (
                 '<label class="flex gap-3 items-start p-3.5 rounded-xl border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] cursor-pointer hover:border-[var(--ap-accent)]/50 transition-colors">' +
-                '<input type="checkbox" class="task-cb mt-1 w-4 h-4 accent-[var(--ap-accent)]" data-id="' +
+                '<input type="checkbox" class="task-cb mt-1 w-4 h-4 shrink-0 accent-[var(--ap-accent)]" data-id="' +
                 escapeAttr(t.id) +
                 '"' +
                 checked +
                 ' />' +
-                '<span><span class="font-semibold text-[var(--ap-primary)] block plan-rich">' +
-                formatPlanInline(t.title) +
-                '</span>' +
-                '<span class="text-sm text-[var(--ap-secondary)] plan-rich block mt-1">' +
-                formatPlanInline(t.description || '') +
-                '</span></span></label>'
+                buildTaskCheckboxInnerHtml(t) +
+                '</label>'
               );
             })
             .join('');

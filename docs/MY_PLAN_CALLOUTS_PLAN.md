@@ -69,8 +69,8 @@ Listed in Section A.
 
 | Key | Where set | Purpose |
 |-----|-----------|---------|
-| `portal_hasViewedMyPlan` | Portal `my-plan.html` after plan loads | Hide portal dashboard reminder |
-| `portal_dismissedMyPlanReminder` | Portal dashboard dismiss button | Hide reminder |
+| `portal_hasViewedMyPlan` | Portal `my-plan.html` after plan loads | (Legacy) was used with old duplicate reminder; main CTA is `my-plan-dashboard-card` |
+| `portal_dismissedMyPlanReminder` | *(removed)* was Portal dashboard dismiss on duplicate “30-day plan” block | No longer written; safe to ignore in localStorage |
 | `alfred_hasViewedMyPlan` | Alfred `my-plan/page.tsx` on mount | Hide Alfred reminder |
 | `alfred_dismissedMyPlanReminder` | Alfred reminder dismiss | Hide reminder |
 

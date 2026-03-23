@@ -232,6 +232,7 @@ function getDriverSummary(source) {
       secondaryDriverScore: null,
       primaryToSecondaryMargin: 0,
       driverFallbackType: 'standard',
+      driversAreCoEqual: false,
     };
   }
 
@@ -264,6 +265,7 @@ function getDriverSummary(source) {
         enriched.overall ?? source.overall,
         enriched.assignedDriver || null
       ),
+      driversAreCoEqual: !!enriched.driversAreCoEqual,
     };
   }
 
@@ -279,9 +281,27 @@ function getDriverSummary(source) {
     'secondaryDriver' in source &&
     'secondaryDriverScore' in source
   ) {
+    const cachedPrimary =
+      typeof source.assignedDriver === 'string' ? source.assignedDriver : null;
+    const cachedSecondary =
+      typeof source.secondaryDriver === 'string' ? source.secondaryDriver : null;
+    const cachedCoEqual =
+      typeof source.driversAreCoEqual === 'boolean'
+        ? source.driversAreCoEqual
+        : !!(
+            cachedPrimary &&
+            cachedPrimary !== ALIGNED_MOMENTUM_NAME &&
+            cachedSecondary &&
+            typeof source.topDriverScore === 'number' &&
+            source.topDriverScore >= 6 &&
+            typeof source.secondDriverScore === 'number' &&
+            source.secondDriverScore >= 6 &&
+            typeof source.primaryToSecondaryMargin === 'number' &&
+            source.primaryToSecondaryMargin < 2
+          );
     return {
-      assignedDriver: typeof source.assignedDriver === 'string' ? source.assignedDriver : null,
-      secondaryDriver: typeof source.secondaryDriver === 'string' ? source.secondaryDriver : null,
+      assignedDriver: cachedPrimary,
+      secondaryDriver: cachedSecondary,
       driverScores: source.driverScores,
       driverGates: source.driverGates,
       topDriverScore: source.topDriverScore,
@@ -299,6 +319,7 @@ function getDriverSummary(source) {
         source.overall,
         typeof source.assignedDriver === 'string' ? source.assignedDriver : null
       ),
+      driversAreCoEqual: cachedCoEqual,
     };
   }
   if (!hasResponses) {
@@ -324,6 +345,7 @@ function getDriverSummary(source) {
         source.overall,
         null
       ),
+      driversAreCoEqual: false,
     };
   }
 }
@@ -851,7 +873,12 @@ export async function POST(request) {
   const resolvedLastName  = lastName  || lookup.lastName;
   const previousDriverEvaluation = lookup.previousAssessment
     ? getDriverSummary(lookup.previousAssessment.results || {})
-    : { assignedDriver: null, secondaryDriver: null, driverState: 'no_driver' };
+    : {
+        assignedDriver: null,
+        secondaryDriver: null,
+        driverState: 'no_driver',
+        driversAreCoEqual: false,
+      };
   const previousArchetypeName = lookup.previousAssessment
     ? normalizeArchetypeName(
         determineArchetypeServer(lookup.previousAssessment.results || {}) ||

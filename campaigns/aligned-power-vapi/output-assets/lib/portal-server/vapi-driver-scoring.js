@@ -473,12 +473,24 @@ export function enrichResultsWithDriver(results) {
   const topDriverScore = rankedDrivers[0]?.score ?? 0;
   const secondDriverScore = rankedDrivers[1]?.score ?? 0;
   const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-  const dysfunctionDriver =
+
+  const clearWinnerPrimary =
     rankedDrivers[0] &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? rankedDrivers[0].driverName
       : null;
+  const tieAtTopPrimary =
+    !clearWinnerPrimary &&
+    rankedDrivers[0] &&
+    rankedDrivers[1] &&
+    topDriverScore >= DRIVER_THRESHOLD &&
+    secondDriverScore >= DRIVER_THRESHOLD &&
+    primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+      ? rankedDrivers[0].driverName
+      : null;
+
+  const dysfunctionDriver = clearWinnerPrimary || tieAtTopPrimary || null;
   const secondaryDriver =
     dysfunctionDriver &&
     rankedDrivers[1] &&
@@ -488,6 +500,14 @@ export function enrichResultsWithDriver(results) {
       ? rankedDrivers[1].driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+
+  const driversAreCoEqual = Boolean(
+    dysfunctionDriver &&
+      secondaryDriver &&
+      topDriverScore >= DRIVER_THRESHOLD &&
+      secondDriverScore >= DRIVER_THRESHOLD &&
+      primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+  );
   const inferredFallbackType = getDriverFallbackType(
     domainScores,
     compositeScore,
@@ -522,5 +542,6 @@ export function enrichResultsWithDriver(results) {
     primaryToSecondaryMargin,
     driverState,
     driverFallbackType,
+    driversAreCoEqual,
   };
 }

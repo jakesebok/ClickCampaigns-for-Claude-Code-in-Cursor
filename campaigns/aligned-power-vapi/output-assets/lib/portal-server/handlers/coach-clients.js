@@ -63,7 +63,16 @@ function determineDriver(results) {
   const composite = typeof results.overall === 'number' ? results.overall : null;
   const domains = domainScores;
   const lowDomains = Object.keys(domains).filter((code) => typeof domains[code] === 'number' && domains[code] < 5.5).length;
-  if (top && top.score >= 6 && second && (top.score - second.score) >= 2) return top.name;
+  if (top && top.score >= 6 && second && top.score - second.score >= 2) return top.name;
+  if (
+    top &&
+    top.score >= 6 &&
+    second &&
+    second.score >= 6 &&
+    top.score - second.score < 2
+  ) {
+    return top.name;
+  }
   if (composite != null && composite >= 7 && lowDomains <= 1) return 'Aligned Momentum';
   return null;
 }

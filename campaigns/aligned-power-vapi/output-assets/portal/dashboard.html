@@ -234,18 +234,8 @@
       <h1 class="text-3xl sm:text-4xl text-[var(--ap-primary)] mb-2 leading-tight">Where you stand. Where to focus.</h1>
       <p id="dashboard-intro-text" class="text-[var(--ap-secondary)] mb-8">Assessments and weekly scorecard. View results below or take the assessment again to track over time.</p>
 
-      <div id="my-plan-dashboard-reminder" class="hidden mb-8 rounded-2xl border-2 border-[var(--ap-primary)]/20 bg-white p-5 sm:p-6 shadow-sm relative pr-12">
-        <button type="button" id="my-plan-reminder-dismiss" class="absolute top-3 right-3 p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors" aria-label="Dismiss reminder">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-        <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-1">My Plan</p>
-        <h2 class="text-lg sm:text-xl font-extrabold text-[var(--ap-primary)] mb-2" style="font-family: Outfit, sans-serif;">Your 30-day plan is waiting</h2>
-        <p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Based on your assessment results, we&apos;ve created a personalized action plan for your growth edge.</p>
-        <a href="/my-plan" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors w-full sm:w-auto">View My Plan <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-      </div>
-
       <div id="alfred-dashboard-cta" class="mb-10 rounded-2xl border-2 border-[var(--ap-accent)] bg-[var(--ap-accent)]/10 p-6 sm:p-8 dashboard-card">
-        <div class="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8">
+        <div class="flex flex-col gap-5">
           <div class="flex gap-4 items-start">
             <div class="shrink-0 w-14 h-14 rounded-2xl bg-[var(--ap-accent)]/25 flex items-center justify-center ring-2 ring-white/80" aria-hidden="true">
               <i data-lucide="sparkles" class="w-8 h-8 text-[var(--ap-accent)]"></i>
@@ -254,14 +244,14 @@
               <p class="eyebrow mb-1">Continue your journey</p>
               <h2 class="text-xl sm:text-2xl text-[var(--ap-primary)] mb-2 leading-tight font-extrabold" style="font-family: Outfit, sans-serif;">ALFRED — Aligned Freedom Coach</h2>
               <p class="text-[var(--ap-secondary)] text-sm sm:text-base leading-relaxed">Your full plan and assessments live here in the portal too. <strong class="text-[var(--ap-primary)]">ALFRED</strong> adds what most plans don&apos;t: daily check-ins, pattern-aware nudges, and AI coaching when you&apos;re stuck—so you actually execute instead of re-reading Week 1.</p>
+              <div class="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors shadow-lg shadow-[var(--ap-accent)]/25">
+                  Start 7-day free trial
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="https://jakesebok.com/who-is-alfred" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3 rounded-[100px] transition-colors bg-[var(--ap-surface)]">What is ALFRED?</a>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full lg:w-auto shrink-0 lg:ml-auto">
-            <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3 rounded-[100px] transition-colors shadow-lg shadow-[var(--ap-accent)]/25">
-              Start 7-day free trial
-              <i data-lucide="external-link" class="w-4 h-4"></i>
-            </a>
-            <a href="https://jakesebok.com/who-is-alfred" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3 rounded-[100px] transition-colors bg-[var(--ap-surface)]">What is ALFRED?</a>
           </div>
         </div>
       </div>
@@ -834,32 +824,6 @@
         }
       }
 
-      (function initMyPlanDashboardReminder() {
-        var LS_VIEW = 'portal_hasViewedMyPlan';
-        var LS_DISMISS = 'portal_dismissedMyPlanReminder';
-        var box = document.getElementById('my-plan-dashboard-reminder');
-        var dismissBtn = document.getElementById('my-plan-reminder-dismiss');
-        if (dismissBtn && box) {
-          dismissBtn.addEventListener('click', function () {
-            try {
-              localStorage.setItem(LS_DISMISS, '1');
-            } catch (e) {}
-            box.classList.add('hidden');
-          });
-        }
-        window.__showPortalMyPlanReminderIfNeeded = function () {
-          if (!box) return;
-          try {
-            if (localStorage.getItem(LS_VIEW) === '1') return;
-            if (localStorage.getItem(LS_DISMISS) === '1') return;
-          } catch (e) {
-            return;
-          }
-          box.classList.remove('hidden');
-          if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
-        };
-      })();
-
       function formatDate(iso) {
         var d = new Date(iso);
         return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -1105,7 +1069,6 @@
       }
 
       if (rows && rows.length > 0) {
-      if (typeof window.__showPortalMyPlanReminderIfNeeded === 'function') window.__showPortalMyPlanReminderIfNeeded();
       var latest = rows[0];
       var latestScore = overallScore(latest.results);
       var latestTier = (latest.results.overallTier || '').trim() || null;

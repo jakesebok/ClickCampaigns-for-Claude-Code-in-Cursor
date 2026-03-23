@@ -3,8 +3,9 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
-import { Loader2, ExternalLink } from "lucide-react";
+import { Loader2, ExternalLink, ScanEye } from "lucide-react";
 import { markAlfredMyPlanViewed } from "@/components/my-plan-callouts";
+import { getSprintTaskDisplay } from "@/lib/sprint-task-display";
 
 type PlanContext = {
   whyItMatters?: string;
@@ -214,9 +215,18 @@ export default function MyPlanPage() {
         ) : null}
 
         {payload.driverModifier?.trim() ? (
-          <section className="rounded-2xl border border-border border-l-4 border-l-accent bg-card p-5 shadow-sm sm:p-6">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-accent mb-3">A pattern to watch</h2>
-            <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+          <section className="relative overflow-hidden rounded-2xl border-2 border-blue-700/25 bg-gradient-to-br from-blue-600/[0.08] via-card to-card p-5 shadow-[0_14px_40px_-14px_rgba(29,78,216,0.28)] dark:border-sky-500/35 dark:from-sky-500/[0.14] dark:shadow-[0_16px_48px_-16px_rgba(37,99,235,0.38)] sm:p-6">
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-700 via-sky-500 to-sky-400"
+              aria-hidden
+            />
+            <div className="relative mb-3 flex items-center gap-2.5">
+              <ScanEye className="h-5 w-5 shrink-0 text-blue-600 dark:text-sky-300" aria-hidden />
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-blue-900 dark:text-sky-100">
+                A pattern to watch
+              </h2>
+            </div>
+            <p className="relative text-sm font-medium leading-relaxed text-foreground whitespace-pre-wrap">
               {payload.driverModifier.trim()}
             </p>
           </section>
@@ -241,12 +251,14 @@ export default function MyPlanPage() {
               {w.theme ? <p className="mt-1 text-base font-medium text-accent">{w.theme}</p> : null}
             </div>
             <ul className="space-y-2">
-              {(w.tasks || []).map((t) => (
+              {(w.tasks || []).map((t) => {
+                const taskUi = getSprintTaskDisplay(t);
+                return (
                 <li key={t.id}>
                   <label className="flex gap-3 items-start cursor-pointer rounded-xl border border-border p-3.5 transition-colors hover:border-accent/40 hover:bg-accent/5">
                     <input
                       type="checkbox"
-                      className="mt-1 h-4 w-4 rounded border-border accent-accent"
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-border accent-accent"
                       checked={!!t.completed}
                       onChange={(e) => {
                         const next = e.target.checked;
@@ -264,15 +276,26 @@ export default function MyPlanPage() {
                         void savePatch({ [t.id]: next });
                       }}
                     />
-                    <span>
-                      <span className="font-medium block">{t.title}</span>
-                      {t.description ? (
-                        <span className="text-sm text-muted-foreground">{t.description}</span>
-                      ) : null}
+                    <span className="min-w-0 flex-1 break-words">
+                      {taskUi.mode === "both" ? (
+                        <>
+                          <span className="block font-medium leading-snug text-foreground">{taskUi.title}</span>
+                          <span className="mt-1.5 block text-sm leading-relaxed text-muted-foreground">
+                            {taskUi.body}
+                          </span>
+                        </>
+                      ) : taskUi.mode === "body" ? (
+                        <span className="block text-[15px] font-medium leading-relaxed text-foreground">
+                          {taskUi.body}
+                        </span>
+                      ) : (
+                        <span className="block font-medium leading-snug text-foreground">{taskUi.title}</span>
+                      )}
                     </span>
                   </label>
                 </li>
-              ))}
+                );
+              })}
             </ul>
             <div className="pt-1">
               <label className="text-sm font-semibold text-foreground block mb-2">

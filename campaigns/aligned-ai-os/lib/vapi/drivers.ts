@@ -61,6 +61,8 @@ export type VapiDriverEvaluation = {
   primaryToSecondaryMargin: number;
   driverState: VapiDriverState;
   driverFallbackType: VapiDriverFallbackType;
+  /** True when primary + secondary both scored ≥ threshold and margin &lt; MIN_MARGIN (co-equal patterns). */
+  driversAreCoEqual: boolean;
 };
 
 export const DRIVER_THRESHOLD = 6;
@@ -928,12 +930,22 @@ export function determineDriver(input: {
   const topDriverScore = winningDriver?.score ?? 0;
   const secondDriverScore = runnerUp?.score ?? 0;
   const primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-  const dysfunctionDriver =
+  const clearWinnerPrimary =
     winningDriver &&
     topDriverScore >= DRIVER_THRESHOLD &&
     topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
       ? winningDriver.driverName
       : null;
+  const tieAtTopPrimary =
+    !clearWinnerPrimary &&
+    winningDriver &&
+    runnerUp &&
+    topDriverScore >= DRIVER_THRESHOLD &&
+    secondDriverScore >= DRIVER_THRESHOLD &&
+    primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+      ? winningDriver.driverName
+      : null;
+  const dysfunctionDriver = clearWinnerPrimary || tieAtTopPrimary || null;
   const secondaryDriver =
     dysfunctionDriver &&
     runnerUp &&
@@ -943,6 +955,13 @@ export function determineDriver(input: {
       ? runnerUp.driverName
       : null;
   const secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+  const driversAreCoEqual = Boolean(
+    dysfunctionDriver &&
+      secondaryDriver &&
+      topDriverScore >= DRIVER_THRESHOLD &&
+      secondDriverScore >= DRIVER_THRESHOLD &&
+      primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+  );
   const inferredFallbackType = getDriverFallbackType({
     domainScores,
     compositeScore: normalizedCompositeScore,
@@ -971,5 +990,6 @@ export function determineDriver(input: {
     primaryToSecondaryMargin,
     driverState,
     driverFallbackType,
+    driversAreCoEqual,
   };
 }

@@ -220,6 +220,8 @@
   var DRIVER_FALLBACK = DRIVER_STANDARD_FALLBACK;
   var DRIVER_NOTE =
     "This driver is identified based on patterns in your scores and priorities. It represents the most likely internal pattern producing your results. It is a hypothesis, not a diagnosis. If it resonates, it's a powerful starting point. If it doesn't fully fit, your detailed scores and intake reflection will surface a more precise picture.";
+  var DRIVER_CO_EQUAL_EXPLAINER =
+    "Your assessment reveals two equally strong patterns operating simultaneously. These are likely reinforcing each other.";
   var ALL_DOMAIN_CODES = ["PH", "IA", "ME", "AF", "RS", "FA", "CO", "WI", "VS", "EX", "OH", "EC"];
   var SELF_DOMAIN_CODES = ["PH", "IA", "ME", "AF"];
   var RELATIONSHIPS_DOMAIN_CODES = ["RS", "FA", "CO", "WI"];
@@ -851,12 +853,24 @@
     var topDriverScore = rankedDrivers[0] ? rankedDrivers[0].score : 0;
     var secondDriverScore = rankedDrivers[1] ? rankedDrivers[1].score : 0;
     var primaryToSecondaryMargin = topDriverScore - secondDriverScore;
-    var dysfunctionDriver =
+
+    var clearWinnerPrimary =
       rankedDrivers[0] &&
       topDriverScore >= DRIVER_THRESHOLD &&
       topDriverScore - secondDriverScore >= DRIVER_MIN_MARGIN
         ? rankedDrivers[0].driverName
         : null;
+    var tieAtTopPrimary =
+      !clearWinnerPrimary &&
+      rankedDrivers[0] &&
+      rankedDrivers[1] &&
+      topDriverScore >= DRIVER_THRESHOLD &&
+      secondDriverScore >= DRIVER_THRESHOLD &&
+      primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+        ? rankedDrivers[0].driverName
+        : null;
+
+    var dysfunctionDriver = clearWinnerPrimary || tieAtTopPrimary || null;
     var secondaryDriver =
       dysfunctionDriver &&
       rankedDrivers[1] &&
@@ -866,6 +880,14 @@
         ? rankedDrivers[1].driverName
         : null;
     var secondaryDriverScore = secondaryDriver ? secondDriverScore : null;
+
+    var driversAreCoEqual = !!(
+      dysfunctionDriver &&
+      secondaryDriver &&
+      topDriverScore >= DRIVER_THRESHOLD &&
+      secondDriverScore >= DRIVER_THRESHOLD &&
+      primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+    );
     var inferredFallbackType = getDriverFallbackType(
       domainScores,
       compositeScore,
@@ -896,6 +918,7 @@
       primaryToSecondaryMargin: primaryToSecondaryMargin,
       driverState: driverState,
       driverFallbackType: driverFallbackType,
+      driversAreCoEqual: driversAreCoEqual,
     };
   }
 
@@ -912,6 +935,7 @@
         primaryToSecondaryMargin: 0,
         driverState: "no_driver",
         driverFallbackType: "standard",
+        driversAreCoEqual: false,
       };
     }
     var hasResponses =
@@ -930,6 +954,7 @@
       results.primaryToSecondaryMargin = evaluation.primaryToSecondaryMargin;
       results.driverState = evaluation.driverState;
       results.driverFallbackType = evaluation.driverFallbackType;
+      results.driversAreCoEqual = evaluation.driversAreCoEqual;
       return evaluation;
     }
     if (
@@ -944,18 +969,34 @@
       "secondaryDriver" in results &&
       "secondaryDriverScore" in results
     ) {
+      var cachedPrimary =
+        typeof results.assignedDriver === "string"
+          ? (
+              results.assignedDriver === ALIGNED_MOMENTUM_NAME ||
+              DRIVER_CONTENT[results.assignedDriver]
+            )
+            ? results.assignedDriver
+            : null
+          : null;
+      var cachedSecondary =
+        typeof results.secondaryDriver === "string" ? results.secondaryDriver : null;
+      var cachedCoEqual =
+        typeof results.driversAreCoEqual === "boolean"
+          ? results.driversAreCoEqual
+          : !!(
+              cachedPrimary &&
+              cachedPrimary !== ALIGNED_MOMENTUM_NAME &&
+              cachedSecondary &&
+              typeof results.topDriverScore === "number" &&
+              results.topDriverScore >= DRIVER_THRESHOLD &&
+              typeof results.secondDriverScore === "number" &&
+              results.secondDriverScore >= DRIVER_THRESHOLD &&
+              typeof results.primaryToSecondaryMargin === "number" &&
+              results.primaryToSecondaryMargin < DRIVER_MIN_MARGIN
+            );
       return {
-        assignedDriver:
-          typeof results.assignedDriver === "string"
-            ? (
-                results.assignedDriver === ALIGNED_MOMENTUM_NAME ||
-                DRIVER_CONTENT[results.assignedDriver]
-              )
-              ? results.assignedDriver
-              : null
-            : null,
-        secondaryDriver:
-          typeof results.secondaryDriver === "string" ? results.secondaryDriver : null,
+        assignedDriver: cachedPrimary,
+        secondaryDriver: cachedSecondary,
         driverScores: results.driverScores,
         driverGates: results.driverGates,
         topDriverScore: results.topDriverScore,
@@ -982,6 +1023,7 @@
               : null
           )
         ),
+        driversAreCoEqual: cachedCoEqual,
       };
     }
     var inferredFallbackType = getDriverFallbackType(
@@ -1005,6 +1047,7 @@
             ? "aligned_momentum"
             : "no_driver",
         driverFallbackType: inferredFallbackType,
+        driversAreCoEqual: false,
       };
     }
   }
@@ -1071,7 +1114,110 @@
     );
   }
 
+  function buildPrintCoEqualDriverBlock(driverKey, driver, accent, patternScore) {
+    return (
+      '<div class="driver-print-coequal-cell" style="border:1px solid ' +
+      accent +
+      "33;border-radius:12px;padding:16px;background:" +
+      accent +
+      '08;">' +
+      '<div class="driver-print-header" style="flex-direction:column;align-items:flex-start;">' +
+      '<div class="driver-print-icon" style="background:' +
+      accent +
+      "14;border-color:" +
+      accent +
+      '33;">' +
+      getDriverIcon(driverKey, 52) +
+      "</div>" +
+      '<div class="driver-print-heading-copy" style="margin-top:10px;">' +
+      '<h2 class="driver-print-title">' +
+      escapeHtml(driver.name) +
+      "</h2>" +
+      '<p class="driver-print-core-fear"><span>Core fear:</span> ' +
+      escapeHtml(driver.coreFear) +
+      "</p>" +
+      '<p class="driver-print-tagline">' +
+      escapeHtml(driver.tagline) +
+      "</p></div></div>" +
+      '<div class="driver-print-strength" style="background:' +
+      accent +
+      "10;color:" +
+      accent +
+      ";border-color:" +
+      accent +
+      '22;margin-top:12px;">Pattern strength: ' +
+      patternScore +
+      " / " +
+      driver.maxPossible +
+      "</div>" +
+      '<blockquote class="driver-print-quote" style="background:' +
+      accent +
+      "10;border-left:2px solid " +
+      accent +
+      ';margin-top:12px;">&quot;' +
+      escapeHtml(driver.coreBelief) +
+      "&quot;</blockquote>" +
+      '<p class="driver-print-body" style="margin-top:12px;">' +
+      escapeHtml(driver.description) +
+      "</p></div>"
+    );
+  }
+
+  function buildPrintCoEqualDriverPages(evaluation, primaryKey, secondaryKey) {
+    var d1 = DRIVER_CONTENT[primaryKey];
+    var d2 = DRIVER_CONTENT[secondaryKey];
+    var acc1 = DRIVER_ACCENT_COLORS[primaryKey] || "var(--ap-accent)";
+    var acc2 = DRIVER_ACCENT_COLORS[secondaryKey] || "var(--ap-accent)";
+    var firstPage =
+      '<div class="print-only driver-print-shell driver-print-page driver-print-first" style="border-left:4px solid ' +
+      acc1 +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      acc1 +
+      '">Your Primary Patterns</p>' +
+      '<p class="driver-print-body" style="margin-bottom:18px;">' +
+      escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) +
+      "</p>" +
+      '<div class="driver-print-coequal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">' +
+      buildPrintCoEqualDriverBlock(primaryKey, d1, acc1, evaluation.topDriverScore) +
+      buildPrintCoEqualDriverBlock(secondaryKey, d2, acc2, evaluation.secondDriverScore) +
+      "</div>" +
+      "</div></div>";
+    var secondPage =
+      '<div class="print-only driver-print-shell driver-print-page driver-print-second" style="border-left:4px solid ' +
+      acc1 +
+      ';"><div class="driver-print-inner">' +
+      '<p class="driver-print-eyebrow" style="color:' +
+      acc1 +
+      '">Your Primary Patterns (continued)</p>' +
+      '<h3 class="driver-print-continued-title">' +
+      escapeHtml(d1.name) +
+      "</h3>" +
+      buildPrintDetailBlock("How This Shows Up in Your Scores", d1.mechanism) +
+      buildPrintDetailBlock("What This Is Costing You", d1.whatItCosts) +
+      buildPrintDetailBlock("The Way Out", d1.theWayOut) +
+      '<h3 class="driver-print-continued-title" style="margin-top:28px;">' +
+      escapeHtml(d2.name) +
+      "</h3>" +
+      buildPrintDetailBlock("How This Shows Up in Your Scores", d2.mechanism) +
+      buildPrintDetailBlock("What This Is Costing You", d2.whatItCosts) +
+      buildPrintDetailBlock("The Way Out", d2.theWayOut) +
+      '<p class="driver-print-note">' +
+      escapeHtml(DRIVER_NOTE) +
+      "</p></div></div>";
+    return firstPage + secondPage;
+  }
+
   function buildPrintDriverPages(evaluation, driverName, secondaryDriverName, accent) {
+    if (
+      evaluation &&
+      evaluation.driversAreCoEqual &&
+      secondaryDriverName &&
+      DRIVER_CONTENT[driverName] &&
+      DRIVER_CONTENT[secondaryDriverName]
+    ) {
+      return buildPrintCoEqualDriverPages(evaluation, driverName, secondaryDriverName);
+    }
     var driver = DRIVER_CONTENT[driverName];
     var secondaryDriver = secondaryDriverName ? DRIVER_CONTENT[secondaryDriverName] : null;
     var secondaryAccent = secondaryDriverName
@@ -1228,6 +1374,11 @@
       DRIVER_CONTENT[evaluation.secondaryDriver]
         ? evaluation.secondaryDriver
         : null;
+    var driversAreCoEqual = !!(
+      evaluation.driversAreCoEqual &&
+      driverName &&
+      secondaryDriverName
+    );
     var accent = isAlignedMomentum
       ? ALIGNED_MOMENTUM_CONTENT.colorAccent
       : driverName
@@ -1264,8 +1415,14 @@
         : "border-t border-[var(--ap-border)] px-4 py-4 text-base sm:text-[17px] text-[var(--ap-secondary)] leading-relaxed";
     var alignedMomentumNote =
       "Aligned Momentum reflects the current state of your internal operating system based on your VAPI scores. It is not permanent. It's maintained through ongoing practice, honest self-assessment, and the boundaries and habits that produced it. Retake the VAPI regularly to confirm this state is holding.";
-    var dashboardToggleLabel = "Read full pattern driver profile";
-    var previewHeading = isAlignedMomentum ? "What's Fueling This" : "What's Driving This";
+    var dashboardToggleLabel = driversAreCoEqual
+      ? "Read full pattern profiles"
+      : "Read full pattern driver profile";
+    var previewHeading = isAlignedMomentum
+      ? "What's Fueling This"
+      : driversAreCoEqual
+        ? "Your Primary Patterns"
+        : "What's Driving This";
     var previewTitle = isAlignedMomentum
       ? ALIGNED_MOMENTUM_CONTENT.name
       : driverName
@@ -1300,7 +1457,11 @@
       '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' +
       accent +
       '">' +
-      (isAlignedMomentum ? "What's Fueling This Pattern" : "What's Driving This Pattern") +
+      (isAlignedMomentum
+        ? "What's Fueling This Pattern"
+        : driversAreCoEqual
+          ? "Your Primary Patterns"
+          : "What's Driving This Pattern") +
       "</p>";
     if (isAlignedMomentum) {
       profileHtml += '<div class="flex flex-col gap-5">';
@@ -1417,6 +1578,138 @@
         escapeHtml(alignedMomentumNote) +
         "</p>";
       dashboardExpandedHtml += "</div>";
+    } else if (driversAreCoEqual) {
+      var accCoPri = DRIVER_ACCENT_COLORS[driverName] || accent;
+      var accCoSec = DRIVER_ACCENT_COLORS[secondaryDriverName] || accent;
+      var dCoPri = DRIVER_CONTENT[driverName];
+      var dCoSec = DRIVER_CONTENT[secondaryDriverName];
+      function buildCoEqualDriverCard(dk, d, ac, score) {
+        var b = "";
+        b +=
+          '<div class="rounded-2xl border border-[var(--ap-border)] p-5 sm:p-6 space-y-4 shadow-sm" style="border-left:4px solid ' +
+          ac +
+          ";background:" +
+          surface +
+          ';">';
+        b += '<div class="flex items-start gap-4">';
+        b +=
+          '<div class="flex-shrink-0 w-16 h-16 rounded-2xl border flex items-center justify-center" style="background:' +
+          ac +
+          "14;border-color:" +
+          ac +
+          '33;">';
+        b += getDriverIcon(dk, 64);
+        b += "</div>";
+        b += '<div class="min-w-0 space-y-2">';
+        b +=
+          '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+          escapeHtml(d.name) +
+          "</h2>";
+        b +=
+          '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+          escapeHtml(d.coreFear) +
+          "</p>";
+        b += '<p class="' + summaryCopyClass + '">' + escapeHtml(d.tagline) + "</p>";
+        b += "</div></div>";
+        b +=
+          '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+          ac +
+          "14;color:" +
+          ac +
+          ";border:1px solid " +
+          ac +
+          '33;">Pattern strength: ' +
+          score +
+          " / " +
+          d.maxPossible +
+          "</span>";
+        b +=
+          '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+          ac +
+          "14;border-left:2px solid " +
+          ac +
+          ';">&quot;' +
+          escapeHtml(d.coreBelief) +
+          "&quot;</blockquote>";
+        b += '<p class="' + bodyCopyClass + '">' + escapeHtml(d.description) + "</p>";
+        [
+          ["How This Shows Up in Your Scores", d.mechanism],
+          ["What This Is Costing You", d.whatItCosts],
+          ["The Way Out", d.theWayOut],
+        ].forEach(function (section) {
+          b +=
+            '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+            surface +
+            ';">';
+          b +=
+            '<summary class="' +
+            detailsTitleClass +
+            '"><span>' +
+            escapeHtml(section[0]) +
+            '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          b += '<div class="' + detailsBodyClass + '">' + escapeHtml(section[1]) + "</div></details>";
+        });
+        b += "</div>";
+        return b;
+      }
+      function buildCoEqualExpandedChunk(dk, d, ac, isLast) {
+        var sep = isLast ? "" : " pb-8 mb-8 border-b border-[var(--ap-border)]";
+        var x = '<div class="space-y-5' + sep + '">';
+        x +=
+          '<h3 class="text-xl sm:text-2xl font-extrabold text-[var(--ap-primary)]">' +
+          escapeHtml(d.name) +
+          "</h3>";
+        x +=
+          '<blockquote class="rounded-2xl px-4 py-4 text-xl sm:text-2xl leading-tight font-semibold text-[var(--ap-primary)]" style="background:' +
+          ac +
+          "14;border-left:2px solid " +
+          ac +
+          ';">&quot;' +
+          escapeHtml(d.coreBelief) +
+          "&quot;</blockquote>";
+        x += '<p class="' + bodyCopyClass + '">' + escapeHtml(d.description) + "</p>";
+        [
+          ["How This Shows Up in Your Scores", d.mechanism],
+          ["What This Is Costing You", d.whatItCosts],
+          ["The Way Out", d.theWayOut],
+        ].forEach(function (section) {
+          x +=
+            '<details class="driver-details rounded-2xl border border-[var(--ap-border)] group" style="background:' +
+            surface +
+            ';">';
+          x +=
+            '<summary class="' +
+            detailsTitleClass +
+            '"><span>' +
+            escapeHtml(section[0]) +
+            '</span><i data-lucide="chevron-down" class="driver-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          x += '<div class="' + detailsBodyClass + '">' + escapeHtml(section[1]) + "</div></details>";
+        });
+        x += "</div>";
+        return x;
+      }
+      profileHtml += '<p class="' + noteCopyClass + '">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + "</p>";
+      profileHtml += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+      profileHtml += buildCoEqualDriverCard(driverName, dCoPri, accCoPri, evaluation.topDriverScore);
+      profileHtml += buildCoEqualDriverCard(secondaryDriverName, dCoSec, accCoSec, evaluation.secondDriverScore);
+      profileHtml += "</div>";
+      profileHtml += '<div class="space-y-4 border-t border-[var(--ap-border)]/70 pt-4">';
+      profileHtml += '<p class="' + noteCopyClass + '">' + escapeHtml(DRIVER_NOTE) + "</p>";
+      profileHtml +=
+        '<a href="' +
+        libraryHref +
+        '" class="driver-library-link inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-driver-library-link="1" style="color:' +
+        accCoPri +
+        '">Learn more about all driver patterns &gt;</a>';
+      profileHtml += "</div>";
+      dashboardExpandedHtml += buildCoEqualExpandedChunk(driverName, dCoPri, accCoPri, false);
+      dashboardExpandedHtml += buildCoEqualExpandedChunk(secondaryDriverName, dCoSec, accCoSec, true);
+      dashboardExpandedHtml +=
+        '<p class="' +
+        noteCopyClass +
+        '">' +
+        escapeHtml(DRIVER_NOTE) +
+        "</p>";
     } else if (driverName) {
       var driver = DRIVER_CONTENT[driverName];
       profileHtml += '<div class="flex flex-col gap-5">';
@@ -1626,33 +1919,82 @@
     if (useCollapsedDashboard) {
       html += '<div class="p-6 sm:p-8 relative space-y-5">';
       html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
-      html += '<div class="space-y-2">';
-      if (driverName) {
-        html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
-        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
-        html +=
-          '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
-          accent +
-          '14;color:' +
-          accent +
-          ';border:1px solid ' +
-          accent +
-          '33;">Pattern strength: ' +
-          evaluation.topDriverScore +
-          ' / ' +
-          DRIVER_CONTENT[driverName].maxPossible +
-          "</span>";
-        html += '</div>';
+      if (driversAreCoEqual) {
+        html += '<p class="' + noteCopyClass + ' mt-2">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + '</p>';
+        html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4">';
+        [
+          { key: driverName, score: evaluation.topDriverScore },
+          { key: secondaryDriverName, score: evaluation.secondDriverScore },
+        ].forEach(function (row) {
+          var dk = row.key;
+          var dPrev = DRIVER_CONTENT[dk];
+          var acPrev = DRIVER_ACCENT_COLORS[dk] || accent;
+          html +=
+            '<div class="rounded-2xl border border-[var(--ap-border)] p-4 sm:p-5 space-y-3" style="border-left:4px solid ' +
+            acPrev +
+            ';">';
+          html +=
+            '<h2 class="text-xl sm:text-2xl font-extrabold text-[var(--ap-primary)]">' +
+            escapeHtml(dPrev.name) +
+            "</h2>";
+          html +=
+            '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit" style="background:' +
+            acPrev +
+            "14;color:" +
+            acPrev +
+            ";border:1px solid " +
+            acPrev +
+            '33;">Pattern strength: ' +
+            row.score +
+            " / " +
+            dPrev.maxPossible +
+            "</span>";
+          html +=
+            '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+            escapeHtml(dPrev.coreFear) +
+            "</p>";
+          html += '<p class="' + summaryCopyClass + '">' + escapeHtml(dPrev.tagline) + "</p>";
+          html += "</div>";
+        });
+        html += "</div>";
       } else {
-        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' + escapeHtml(previewTitle) + '</h2>';
+        html += '<div class="space-y-2">';
+        if (driverName) {
+          html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
+          html +=
+            '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+            escapeHtml(previewTitle) +
+            "</h2>";
+          html +=
+            '<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider w-fit shrink-0" style="background:' +
+            accent +
+            "14;color:" +
+            accent +
+            ";border:1px solid " +
+            accent +
+            '33;">Pattern strength: ' +
+            evaluation.topDriverScore +
+            " / " +
+            DRIVER_CONTENT[driverName].maxPossible +
+            "</span>";
+          html += "</div>";
+        } else {
+          html +=
+            '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
+            escapeHtml(previewTitle) +
+            "</h2>";
+        }
+        if (driverName) {
+          html +=
+            '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' +
+            escapeHtml(DRIVER_CONTENT[driverName].coreFear) +
+            "</p>";
+        }
+        if (previewTagline) {
+          html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + "</p>";
+        }
+        html += "</div>";
       }
-      if (driverName) {
-        html += '<p class="text-base text-[var(--ap-secondary)]"><span class="font-semibold text-[var(--ap-primary)]">Core fear:</span> ' + escapeHtml(DRIVER_CONTENT[driverName].coreFear) + '</p>';
-      }
-      if (previewTagline) {
-        html += '<p class="' + summaryCopyClass + '">' + escapeHtml(previewTagline) + '</p>';
-      }
-      html += '</div>';
       html += '<div class="space-y-4">';
       html += '<details class="driver-profile-details group">';
       html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">' + dashboardToggleLabel + ' <i data-lucide="chevron-down" class="driver-profile-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
