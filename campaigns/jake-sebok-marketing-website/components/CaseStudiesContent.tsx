@@ -167,11 +167,12 @@ function TransformationCard({
         {title}
       </h4>
       {before ? (
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="space-y-3">
           <div>
             <span className="font-semibold text-ap-muted text-xs uppercase tracking-wider">Before</span>
             <p className="text-ap-mid text-sm font-medium leading-relaxed mt-1">{before}</p>
           </div>
+          <div className="h-px bg-ap-border" />
           <div>
             <span className="font-semibold text-ap-accent text-xs uppercase tracking-wider">After</span>
             <p className="text-ap-primary text-sm font-semibold leading-relaxed mt-1">{after}</p>
@@ -207,7 +208,7 @@ function StorySection({
                   src={data.image}
                   alt={data.name}
                   fill
-                  className="object-cover"
+                  className={data.id === "marshall" ? "object-cover object-[50%_18%]" : "object-cover"}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>

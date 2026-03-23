@@ -19,7 +19,7 @@ const navLinks = [
       { href: "/work-with-me/aligned-leaders", label: "Aligned Leaders Community" },
     ],
   },
-  { href: "/case-studies", label: "Client Stories" },
+  { href: "/client-stories", label: "Client Stories" },
 ];
 
 export function Header() {

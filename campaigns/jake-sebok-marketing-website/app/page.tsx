@@ -370,7 +370,7 @@ export default function HomePage() {
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="mt-8 text-center">
             <Link
-              href="/case-studies"
+              href="/client-stories"
               className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
             >
               Read Marshall&apos;s story: from dreading work to excited every day
