@@ -1443,6 +1443,12 @@
         html += buildPrintFallbackSection(fallbackContent.heading, fallbackContent.text, accent);
       }
     }
+    if (useCollapsedDashboard) {
+      html +=
+        '<p class="eyebrow mb-1">' +
+        escapeHtml(isAlignedMomentum ? "What's Fueling This" : "What's Driving This") +
+        "</p>";
+    }
     html +=
       '<div class="driver-section rounded-[30px] border border-[var(--ap-border)] shadow-sm overflow-hidden mb-10 relative scroll-mt-24" style="background:' +
       cardBackground +
@@ -1916,7 +1922,6 @@
     profileHtml += "</div>";
     if (useCollapsedDashboard) {
       html += '<div class="p-6 sm:p-8 relative space-y-5">';
-      html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + accent + '">' + escapeHtml(previewHeading) + '</p>';
       if (driversAreCoEqual) {
         html += '<p class="' + noteCopyClass + ' mt-2">' + escapeHtml(DRIVER_CO_EQUAL_EXPLAINER) + '</p>';
         html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)] mt-3">Your Primary Patterns</p>';
@@ -1969,16 +1974,16 @@
       } else {
         html += '<div class="space-y-2">';
         if (driverName) {
-          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)]">Your Primary Driver</p>';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-muted)] ml-[3.25rem] sm:ml-[3.75rem]">Your Primary Driver</p>';
           html += '<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">';
           html += '<div class="flex items-center gap-3">';
           html +=
-            '<span class="inline-flex items-center justify-center w-10 h-10 rounded-2xl border shrink-0" style="background:' +
+            '<span class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl border shrink-0" style="background:' +
             accent +
             '14;border-color:' +
             accent +
             '33;">' +
-            getDriverIcon(driverName, 36) +
+            getDriverIcon(driverName, 40) +
             "</span>";
           html +=
             '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)]">' +
