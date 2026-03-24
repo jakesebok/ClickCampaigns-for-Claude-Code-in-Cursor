@@ -112,27 +112,17 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+      <section className="relative py-14 sm:py-20 bg-[#0a0f1a] overflow-hidden">
         <img
           src="/images/alfred-phone-hero.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 w-[420px] sm:w-[520px] lg:w-[600px] opacity-[0.08] sm:opacity-[0.10] select-none object-contain"
+          alt="ALFRED dashboard on iPhone"
+          className="pointer-events-none absolute right-[-4%] sm:right-[2%] top-1/2 -translate-y-1/2 w-[340px] sm:w-[440px] lg:w-[540px] opacity-25 sm:opacity-30 lg:opacity-40 select-none object-contain"
         />
         <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
-          <blockquote className="border-l-4 border-ap-accent pl-5 sm:pl-6 mb-8 max-w-[720px]">
-            <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic">
-              &ldquo;I built ALFRED because I wanted something that would challenge me and optimize for what I actually
-              want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, values docs that you throw in a drawer
-              and forget about? Here, along with your assessment results, founder archetype, and weekly reflections, they
-              stay current and alive in the conversation — in front of you and guiding your decisions when resolve runs
-              thin.&rdquo;
-            </p>
-          </blockquote>
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-w-[720px]">
             This is not a generic chat coach
           </h2>
-          <div className="max-w-[720px] space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
+          <div className="max-w-[720px] space-y-5 text-white/70 font-medium leading-relaxed text-lg">
             <p>
               You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
               dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
@@ -192,7 +182,7 @@ export default function WhoIsAlfredPage() {
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
             Simple surfaces. No shame scoreboards. Built for people who already have too many tabs open.
           </p>
-          <ul className="grid sm:grid-cols-3 gap-6">
+          <ul className="grid sm:grid-cols-3 gap-6 mb-10">
             {dailyItems.map((item) => (
               <li key={item.title} className="rounded-[16px] bg-ap-off border border-ap-border p-6">
                 <h3 className="font-outfit font-bold text-base text-ap-primary mb-2">{item.title}</h3>
@@ -200,6 +190,18 @@ export default function WhoIsAlfredPage() {
               </li>
             ))}
           </ul>
+          <blockquote className="border-l-4 border-ap-accent pl-5 sm:pl-6 max-w-[720px]">
+            <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic">
+              &ldquo;I built ALFRED because I wanted something that would challenge me and optimize for what I actually
+              want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, values docs that you throw in a drawer
+              and forget about? Here, along with your assessment results, founder archetype, and weekly reflections, they
+              stay current and alive in the conversation — in front of you and guiding your decisions when resolve runs
+              thin.&rdquo;
+            </p>
+            <footer className="mt-3 text-sm font-semibold text-ap-mid">
+              — Jake Sebok
+            </footer>
+          </blockquote>
         </div>
       </section>
 
