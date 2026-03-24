@@ -69,8 +69,7 @@ export default function WhoIsAlfredPage() {
                 Aligned Freedom Coach
               </p>
               <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.75rem] text-ap-primary leading-[1.1] mb-5 sm:mb-6">
-                The coach that still knows your priorities when you&apos;re tired, busy, or about to say yes to the
-                wrong thing.
+                The coach that remembers what matters.
               </h1>
 
               <AlfredHeroPhone className="lg:hidden mb-8" />
@@ -83,12 +82,6 @@ export default function WhoIsAlfredPage() {
                 Here, along with your assessment results, founder archetype, and weekly reflections, they stay current
                 and alive in the conversation, so they&apos;re in front of you and guiding your decisions when resolve
                 runs thin.
-              </p>
-              <p className="text-base sm:text-lg font-medium text-ap-mid leading-relaxed mb-8">
-                Generic AI hands you clever paragraphs. This is coaching that remembers what you committed to, so you
-                are not re-explaining your life every time you need a steady voice. Take VAPI™ first with the same email
-                as your account and your pattern driver plus personalized 28-day My Plan stay in the room too—not just
-                scores on a page.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <a
@@ -136,9 +129,14 @@ export default function WhoIsAlfredPage() {
               dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
             </p>
             <p>
-              ALFRED is built for the gap between a good insight and actually following through. It is the voice that
-              remembers where your relationships are stretched thin, how your archetype tends to over-correct, and the
-              one commitment that protects both your health and your revenue this week.
+              ALFRED is built for the gap between a good insight and actually following through. This is coaching that
+              remembers what you committed to, so you are not re-explaining your life every time you need a steady
+              voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
+              over-correct, and the one commitment that protects both your health and your revenue this week.
+            </p>
+            <p>
+              Take VAPI™ first with the same email as your account and your pattern driver plus personalized 28-day My
+              Plan stay in the room too—not just scores on a page.
             </p>
             <p>
               Repetition is not a character flaw. It is how humans stay honest. The app holds the frame so you can do the
@@ -161,16 +159,19 @@ export default function WhoIsAlfredPage() {
               Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part out
               loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
-            <p className="text-sm text-ap-muted font-medium leading-relaxed">
-              The tour runs automatically through Dashboard highlights, Coach, Voice, Results, drivers, and the screens
-              under More—starting only after you scroll this block into view so you land on the first stop, not whatever
-              step the timer would have reached above the fold. Use the bottom nav and menu to explore on your own; pause
-              anytime, then use prev/next or the dots to jump stops. Hover the phone to freeze auto-advance while you
-              interact. On desktop, hover a dimmed Dashboard card to jump to that highlight; only the preview scrolls
-              inside the device—your place on this page stays put.
-            </p>
+            <details className="mx-auto w-fit text-left">
+              <summary className="cursor-pointer text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors">
+                Tour notes
+              </summary>
+              <p className="mt-3 max-w-[720px] text-sm text-ap-muted font-medium leading-relaxed">
+                The tour auto-runs through Dashboard, Coach, Voice, Results, Drivers, and More after this section enters
+                view. Use nav/menu, pause, arrows, or dots to explore. Hover the phone to freeze auto-advance; desktop
+                card hover jumps to a highlight. Labels/layout mirror the live product, while coach replies use
+                illustrative sample context.
+              </p>
+            </details>
           </div>
-          <AlfredFeatureExplorer />
+          <AlfredFeatureExplorer hidePreviewDisclaimer />
         </div>
       </section>
 

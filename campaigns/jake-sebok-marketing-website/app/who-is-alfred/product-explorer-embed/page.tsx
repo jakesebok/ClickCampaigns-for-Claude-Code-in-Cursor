@@ -28,10 +28,10 @@ export default function AlfredProductExplorerEmbedPage() {
       `}</style>
       <section
         id="alfred-product-explorer"
-        className="min-h-screen bg-ap-bg overflow-hidden px-4 py-6 sm:px-6 sm:py-10"
+        className="min-h-screen bg-ap-bg overflow-hidden px-4 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10"
       >
         <div className="mx-auto max-w-[1100px]">
-          <AlfredFeatureExplorer />
+          <AlfredFeatureExplorer hidePreviewDisclaimer />
         </div>
       </section>
     </>
