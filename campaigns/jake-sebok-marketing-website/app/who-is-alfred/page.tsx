@@ -74,14 +74,8 @@ export default function WhoIsAlfredPage() {
 
               <AlfredHeroPhone className="lg:hidden mb-8" />
 
-              <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-4">
-                I built <span className="text-ap-primary">ALFRED</span> (Aligned Freedom Coach) because I wanted something
-                that would challenge me and optimize for{" "}
-                <span className="text-gradient-accent">what I actually want</span>, not whatever looks shiny at 11 p.m.
-                The mission, vision, values docs that you throw in a drawer and forget about?{"  "}
-                Here, along with your assessment results, founder archetype, and weekly reflections, they stay current
-                and alive in the conversation, so they&apos;re in front of you and guiding your decisions when resolve
-                runs thin.
+              <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-8">
+                ALFRED keeps your best decisions in the room when your energy is low and the week gets loud.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <a
@@ -118,8 +112,23 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6">
+      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+        <img
+          src="/images/alfred-phone-hero.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 w-[420px] sm:w-[520px] lg:w-[600px] opacity-[0.08] sm:opacity-[0.10] select-none object-contain"
+        />
+        <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
+          <blockquote className="border-l-4 border-ap-accent pl-5 sm:pl-6 mb-8 max-w-[720px]">
+            <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic">
+              &ldquo;I built ALFRED because I wanted something that would challenge me and optimize for what I actually
+              want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, values docs that you throw in a drawer
+              and forget about? Here, along with your assessment results, founder archetype, and weekly reflections, they
+              stay current and alive in the conversation — in front of you and guiding your decisions when resolve runs
+              thin.&rdquo;
+            </p>
+          </blockquote>
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
             This is not a generic chat coach
           </h2>
