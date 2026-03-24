@@ -112,10 +112,10 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-x-hidden">
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-8 xl:gap-12">
-            <div className="max-w-[720px] shrink-0">
+          <div className="flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-10 lg:gap-6 xl:gap-10">
+            <div className="max-w-[720px] shrink-0 lg:py-1">
               <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4">
                 This is not a generic chat coach
               </h2>
@@ -135,12 +135,14 @@ export default function WhoIsAlfredPage() {
                 </p>
               </div>
             </div>
-            <div className="relative flex flex-1 min-w-0 justify-center lg:justify-end lg:pl-4">
-              <img
-                src="/images/phone_with_shadow_trans.png"
-                alt="ALFRED dashboard on iPhone"
-                className="pointer-events-none w-full max-w-[200px] opacity-[0.12] sm:max-w-[240px] sm:opacity-100 lg:max-w-[min(38vw,400px)] xl:max-w-[440px] h-auto object-contain select-none lg:-translate-y-1 xl:-translate-y-2"
-              />
+            <div className="relative flex flex-1 min-w-0 min-h-[220px] justify-center self-stretch lg:justify-end lg:pl-2 xl:pl-4">
+              <div className="flex h-full min-h-[200px] w-full items-center justify-center lg:min-h-full lg:justify-end">
+                <img
+                  src="/images/phone_with_shadow_trans.png"
+                  alt="ALFRED dashboard on iPhone"
+                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-[0.12] select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] sm:opacity-100 lg:h-[70%] lg:min-h-[360px] lg:max-h-[min(75vh,880px)] lg:w-auto lg:max-w-[min(58vw,760px)] xl:max-w-[min(52vw,820px)] lg:-translate-y-1 xl:-translate-y-2"
+                />
+              </div>
             </div>
           </div>
         </div>
