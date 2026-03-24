@@ -113,30 +113,35 @@ export default function WhoIsAlfredPage() {
       </section>
 
       <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
-        <img
-          src="/images/alfred-phone-hero.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 h-[90%] w-auto opacity-[0.10] sm:opacity-100 sm:mix-blend-screen select-none object-contain"
-        />
-        <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
-            This is not a generic chat coach
-          </h2>
-          <div className="max-w-[720px] space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
-            <p>
-              You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
-              dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
-            </p>
-            <p>
-              ALFRED is built for the gap between a good insight and actually following through. This is coaching that
-              remembers what you committed to, so you are not re-explaining your life every time you need a steady
-              voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
-              over-correct, and the one commitment that protects both your health and your revenue this week.
-            </p>
-            <p className="text-ap-primary font-semibold">
-              ALFRED cuts the noise. You execute.
-            </p>
+        <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-8 xl:gap-12">
+            <div className="max-w-[720px] shrink-0">
+              <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4">
+                This is not a generic chat coach
+              </h2>
+              <div className="space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
+                <p>
+                  You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
+                  dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
+                </p>
+                <p>
+                  ALFRED is built for the gap between a good insight and actually following through. This is coaching that
+                  remembers what you committed to, so you are not re-explaining your life every time you need a steady
+                  voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
+                  over-correct, and the one commitment that protects both your health and your revenue this week.
+                </p>
+                <p className="text-ap-primary font-semibold">
+                  ALFRED cuts the noise. You execute.
+                </p>
+              </div>
+            </div>
+            <div className="relative flex flex-1 min-w-0 justify-center lg:justify-end lg:pl-4">
+              <img
+                src="/images/phone_with_shadow_trans.png"
+                alt="ALFRED dashboard on iPhone"
+                className="pointer-events-none w-full max-w-[200px] opacity-[0.12] sm:max-w-[240px] sm:opacity-100 lg:max-w-[min(38vw,400px)] xl:max-w-[440px] h-auto object-contain select-none lg:-translate-y-1 xl:-translate-y-2"
+              />
+            </div>
           </div>
         </div>
       </section>
