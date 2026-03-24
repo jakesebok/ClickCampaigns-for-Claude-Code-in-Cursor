@@ -112,17 +112,17 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-[#0a0f1a] overflow-hidden">
+      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
         <img
           src="/images/alfred-phone-hero.png"
           alt="ALFRED dashboard on iPhone"
-          className="pointer-events-none absolute right-[-4%] sm:right-[2%] top-1/2 -translate-y-1/2 w-[340px] sm:w-[440px] lg:w-[540px] opacity-25 sm:opacity-30 lg:opacity-40 select-none object-contain"
+          className="pointer-events-none absolute right-[-8%] sm:right-[-2%] lg:right-[2%] top-1/2 -translate-y-1/2 w-[680px] sm:w-[880px] lg:w-[1080px] select-none object-contain"
         />
         <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-w-[720px]">
+          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
             This is not a generic chat coach
           </h2>
-          <div className="max-w-[720px] space-y-5 text-white/70 font-medium leading-relaxed text-lg">
+          <div className="max-w-[720px] space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
             <p>
               You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
               dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
@@ -133,13 +133,8 @@ export default function WhoIsAlfredPage() {
               voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
               over-correct, and the one commitment that protects both your health and your revenue this week.
             </p>
-            <p>
-              Take VAPI™ first with the same email as your account and your pattern driver plus personalized 28-day My
-              Plan stay in the room too—not just scores on a page.
-            </p>
-            <p>
-              Repetition is not a character flaw. It is how humans stay honest. The app holds the frame so you can do the
-              work.
+            <p className="text-ap-primary font-bold text-xl sm:text-2xl leading-snug">
+              ALFRED cuts the noise. You execute.
             </p>
           </div>
         </div>
