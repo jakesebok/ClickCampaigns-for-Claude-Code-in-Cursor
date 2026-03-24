@@ -117,7 +117,7 @@ export default function WhoIsAlfredPage() {
           src="/images/alfred-phone-hero.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 w-[420px] sm:w-[520px] lg:w-[600px] opacity-[0.08] sm:opacity-[0.10] select-none object-contain"
+          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 w-[420px] sm:w-[520px] lg:w-[600px] opacity-[0.10] sm:opacity-100 select-none object-contain"
         />
         <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
