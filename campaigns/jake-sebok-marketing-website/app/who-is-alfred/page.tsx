@@ -115,8 +115,9 @@ export default function WhoIsAlfredPage() {
       <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
         <img
           src="/images/alfred-phone-hero.png"
-          alt="ALFRED dashboard on iPhone"
-          className="pointer-events-none absolute right-[-8%] sm:right-[-2%] lg:right-[2%] top-1/2 -translate-y-1/2 w-[680px] sm:w-[880px] lg:w-[1080px] select-none object-contain"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-6%] top-1/2 -translate-y-1/2 w-[420px] sm:w-[520px] lg:w-[600px] opacity-[0.08] sm:opacity-[0.10] select-none object-contain"
         />
         <div className="relative z-10 max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4 max-w-[720px]">
@@ -133,7 +134,7 @@ export default function WhoIsAlfredPage() {
               voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
               over-correct, and the one commitment that protects both your health and your revenue this week.
             </p>
-            <p className="text-ap-primary font-bold text-xl sm:text-2xl leading-snug">
+            <p className="text-ap-primary font-semibold">
               ALFRED cuts the noise. You execute.
             </p>
           </div>
@@ -177,7 +178,7 @@ export default function WhoIsAlfredPage() {
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
             Simple surfaces. No shame scoreboards. Built for people who already have too many tabs open.
           </p>
-          <ul className="grid sm:grid-cols-3 gap-6 mb-10">
+          <ul className="grid sm:grid-cols-3 gap-6 mb-12">
             {dailyItems.map((item) => (
               <li key={item.title} className="rounded-[16px] bg-ap-off border border-ap-border p-6">
                 <h3 className="font-outfit font-bold text-base text-ap-primary mb-2">{item.title}</h3>
@@ -186,16 +187,14 @@ export default function WhoIsAlfredPage() {
             ))}
           </ul>
           <blockquote className="border-l-4 border-ap-accent pl-5 sm:pl-6 max-w-[720px]">
-            <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic">
+            <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic mb-3">
               &ldquo;I built ALFRED because I wanted something that would challenge me and optimize for what I actually
               want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, values docs that you throw in a drawer
               and forget about? Here, along with your assessment results, founder archetype, and weekly reflections, they
               stay current and alive in the conversation — in front of you and guiding your decisions when resolve runs
               thin.&rdquo;
             </p>
-            <footer className="mt-3 text-sm font-semibold text-ap-mid">
-              — Jake Sebok
-            </footer>
+            <cite className="not-italic text-sm font-semibold text-ap-mid">— Jake Sebok</cite>
           </blockquote>
         </div>
       </section>
