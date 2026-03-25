@@ -365,8 +365,8 @@ export default function WhoIsAlfredPage() {
                 Straightforward access
               </p>
               <h2 className="relative font-outfit font-bold text-[1.65rem] sm:text-3xl leading-[1.12] mb-5">
-                Simple pricing.{" "}
-                <span className="text-gradient-accent-hero [text-shadow:none]">No upsell maze</span>
+                Simple pricing.
+                <span className="block text-gradient-accent-hero [text-shadow:none]">No upsell maze.</span>
               </h2>
               <p className="relative text-[17px] sm:text-lg text-white/82 font-medium leading-relaxed">
                 One product. One lane. No scavenger hunt for the real features after you sign in.
