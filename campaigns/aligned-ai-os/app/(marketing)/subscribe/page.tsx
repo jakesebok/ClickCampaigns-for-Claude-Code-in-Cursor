@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import { useRouter } from "next/navigation";
 import { Check, ArrowRight } from "lucide-react";
 import { FIRE_STARTER_COUNT } from "@/lib/ai/prompts";
@@ -104,13 +105,15 @@ export default function SubscribePage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <Link href="/">
-          <Image
-            src="/logo-apos.png"
-            alt="Aligned Freedom Coach"
-            width={140}
-            height={40}
-            className="h-8 w-auto"
-          />
+          <LogoOnDarkGlow size="md">
+            <Image
+              src="/logo-apos.png"
+              alt="Aligned Freedom Coach"
+              width={140}
+              height={40}
+              className="logo-on-dark-img h-8 w-auto"
+            />
+          </LogoOnDarkGlow>
         </Link>
         <div className="flex items-center gap-4">
           <Link

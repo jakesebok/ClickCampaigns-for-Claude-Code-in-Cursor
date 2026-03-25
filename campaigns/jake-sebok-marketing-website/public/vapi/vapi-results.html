@@ -21,6 +21,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <link rel="stylesheet" href="/css/logo-on-dark-glow.css">
   <script src="/vapi/vapi-results-interpretations.js"></script>
   <script src="/vapi/vapi-archetypes.js"></script>
   <script src="/vapi/vapi-drivers.js"></script>
@@ -414,8 +415,12 @@
         <img src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" class="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity">
       </div>
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
-        <a href="/" class="flex-shrink-0">
-          <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-7 w-auto brightness-0 invert opacity-90" width="120" height="34">
+        <a href="/" class="relative flex-shrink-0 overflow-visible">
+          <span class="logo-on-dark-wrap logo-on-dark--sm">
+            <span class="logo-on-dark-glow-outer" aria-hidden="true"></span>
+            <span class="logo-on-dark-glow-inner" aria-hidden="true"></span>
+            <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="logo-on-dark-img h-7 w-auto opacity-90" width="120" height="34">
+          </span>
         </a>
         <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
           <nav class="flex flex-wrap items-center justify-center gap-6 text-sm">

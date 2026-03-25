@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="../css/logo-on-dark-glow.css">
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -29,8 +30,12 @@
 <body class="min-h-screen antialiased">
   <main class="max-w-md mx-auto px-4 pt-16 pb-12">
     <div class="text-center mb-8">
-      <a href="/dashboard" class="inline-block mb-4">
-        <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-12 sm:h-14 w-auto mx-auto" />
+      <a href="/dashboard" class="inline-block mb-4 portal-logo-on-dark">
+        <span class="logo-on-dark-wrap logo-on-dark--md">
+          <span class="logo-on-dark-glow-outer" aria-hidden="true"></span>
+          <span class="logo-on-dark-glow-inner" aria-hidden="true"></span>
+          <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="logo-on-dark-img h-12 sm:h-14 w-auto mx-auto" />
+        </span>
       </a>
       <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Check your email</h1>
       <p class="text-[var(--ap-secondary)]">We’ve sent you a confirmation link.</p>

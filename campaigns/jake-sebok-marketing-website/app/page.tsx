@@ -512,14 +512,14 @@ export default function HomePage() {
             </div>
           </div>
             </div>
-            <div className="hidden lg:block lg:col-span-5 order-2 self-stretch xl:translate-x-[calc(50vw-540px-1.5rem)]">
-              <div className="relative aspect-[4/5] rounded-l-[20px] overflow-hidden shadow-xl">
+            <div className="hidden lg:flex lg:col-span-5 order-2 self-stretch items-stretch justify-start">
+              <div className="relative aspect-[4/5] w-full max-w-[min(100%,420px)] rounded-l-[20px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
                   alt="Jake Sebok"
                   fill
                   className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 420px"
                 />
               </div>
             </div>

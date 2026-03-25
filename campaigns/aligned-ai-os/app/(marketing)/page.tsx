@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 
 const AlfredLandingDemoSection = dynamic(
   () =>
@@ -38,13 +39,15 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <Image
-          src="/logo-apos.png"
-          alt="ALFRED"
-          width={160}
-          height={44}
-          className="h-9 w-auto"
-        />
+        <LogoOnDarkGlow size="md">
+          <Image
+            src="/logo-apos.png"
+            alt="ALFRED"
+            width={160}
+            height={44}
+            className="logo-on-dark-img h-9 w-auto"
+          />
+        </LogoOnDarkGlow>
         <div className="flex items-center gap-4">
           <Link
             href="/pricing"
@@ -339,13 +342,15 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="px-6 py-12 border-t border-border">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <Image
-            src="/logo-apos.png"
-            alt="ALFRED"
-            width={120}
-            height={34}
-            className="h-7 w-auto opacity-60"
-          />
+          <LogoOnDarkGlow size="sm">
+            <Image
+              src="/logo-apos.png"
+              alt="ALFRED"
+              width={120}
+              height={34}
+              className="logo-on-dark-img h-7 w-auto opacity-60"
+            />
+          </LogoOnDarkGlow>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <Link href="/pricing" className="hover:text-foreground">
               Pricing

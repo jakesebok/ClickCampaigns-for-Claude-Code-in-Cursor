@@ -46,7 +46,7 @@ export function AlfredHeroPhone({ className = "" }: { className?: string }) {
                     alt="ALFRED — Aligned Freedom Coach"
                     width={400}
                     height={160}
-                    className="h-auto w-full object-contain drop-shadow-[0_0_28px_rgba(255,107,26,0.35)]"
+                    className="logo-on-dark-img h-auto w-full object-contain"
                     priority
                   />
                 </div>

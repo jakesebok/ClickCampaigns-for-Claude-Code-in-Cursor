@@ -117,6 +117,77 @@
   }
 }
 
+/* Logo on dark — soft orange halo (matches jakesebok.com footer) */
+.logo-on-dark-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  vertical-align: middle;
+}
+.logo-on-dark-wrap .logo-on-dark-glow-outer {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--logo-glow-outer-h, 4rem);
+  width: var(--logo-glow-outer-w, 8.5rem);
+  border-radius: 9999px;
+  filter: blur(34px);
+  background: radial-gradient(
+    circle at 50% 46%,
+    rgba(255, 107, 26, 0.52) 0%,
+    rgba(255, 107, 26, 0.28) 38%,
+    rgba(255, 107, 26, 0.1) 62%,
+    transparent 78%
+  );
+}
+.logo-on-dark-wrap .logo-on-dark-glow-inner {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--logo-glow-inner-h, 2.25rem);
+  width: var(--logo-glow-inner-w, 8rem);
+  border-radius: 9999px;
+  filter: blur(12px);
+  background: radial-gradient(
+    circle at 50% 44%,
+    rgba(255, 230, 210, 0.55) 0%,
+    rgba(255, 140, 80, 0.72) 22%,
+    rgba(255, 107, 26, 0.45) 48%,
+    transparent 72%
+  );
+}
+.logo-on-dark-img,
+.logo-on-dark-wrap img.logo-on-dark-img {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 10px rgba(255, 248, 240, 0.5))
+    drop-shadow(0 0 26px rgba(255, 107, 26, 0.65));
+}
+.logo-on-dark--sm {
+  --logo-glow-outer-h: 4rem;
+  --logo-glow-outer-w: 8.5rem;
+  --logo-glow-inner-h: 2.25rem;
+  --logo-glow-inner-w: 8rem;
+}
+.logo-on-dark--md {
+  --logo-glow-outer-h: 4.75rem;
+  --logo-glow-outer-w: 10rem;
+  --logo-glow-inner-h: 2.75rem;
+  --logo-glow-inner-w: 9.5rem;
+}
+.logo-on-dark--lg {
+  --logo-glow-outer-h: 6.25rem;
+  --logo-glow-outer-w: 13rem;
+  --logo-glow-inner-h: 3.5rem;
+  --logo-glow-inner-w: 11.5rem;
+}
+
 /* Clerk: ensure social buttons (Google, etc.) are readable on dark theme */
 [data-clerk-component] button[type="button"]:has(svg) {
   background: white !important;

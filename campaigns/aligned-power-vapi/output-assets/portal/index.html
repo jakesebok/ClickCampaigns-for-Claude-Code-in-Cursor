@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <link rel="stylesheet" href="../css/logo-on-dark-glow.css">
   <style>
     :root {
       --ap-primary: #0E1624;
@@ -34,8 +35,12 @@
   <main class="max-w-3xl mx-auto px-5 sm:px-6 pt-12 sm:pt-20 pb-16 sm:pb-24">
     <!-- Hero -->
     <section class="text-center mb-12 sm:mb-16">
-      <a href="/" class="inline-block mb-8">
-        <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-14 sm:h-16 w-auto mx-auto" />
+      <a href="/" class="inline-block mb-8 portal-logo-on-dark">
+        <span class="logo-on-dark-wrap logo-on-dark--lg">
+          <span class="logo-on-dark-glow-outer" aria-hidden="true"></span>
+          <span class="logo-on-dark-glow-inner" aria-hidden="true"></span>
+          <img src="../images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="logo-on-dark-img h-14 sm:h-16 w-auto mx-auto" />
+        </span>
       </a>
       <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ap-accent)] mb-3">Aligned Performance Portal</p>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl text-[var(--ap-primary)] leading-tight mb-5">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Check } from "lucide-react";
@@ -64,13 +65,15 @@ export default async function PricingPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <Link href="/">
-          <Image
-            src="/logo-apos.png"
-            alt="Aligned Freedom Coach"
-            width={140}
-            height={40}
-            className="h-8 w-auto"
-          />
+          <LogoOnDarkGlow size="md">
+            <Image
+              src="/logo-apos.png"
+              alt="Aligned Freedom Coach"
+              width={140}
+              height={40}
+              className="logo-on-dark-img h-8 w-auto"
+            />
+          </LogoOnDarkGlow>
         </Link>
         <div className="flex items-center gap-4">
           <Link
