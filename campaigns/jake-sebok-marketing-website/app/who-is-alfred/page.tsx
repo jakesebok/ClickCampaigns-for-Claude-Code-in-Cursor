@@ -78,7 +78,7 @@ export default function WhoIsAlfredPage() {
           aria-hidden
         />
         <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] gap-8 sm:gap-10 lg:gap-14 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(220px,340px)] gap-8 sm:gap-10 lg:gap-14 xl:gap-16 items-center">
             <div className="max-w-xl lg:max-w-none">
               <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
                 Aligned Freedom Coach
@@ -109,14 +109,8 @@ export default function WhoIsAlfredPage() {
                     />
                   </svg>
                 </a>
-                <Link
-                  href="/assessment"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base hover:border-ap-accent hover:text-gradient-accent transition-all"
-                >
-                  Take VAPI™ first
-                </Link>
               </div>
-              <p className="text-ap-muted text-sm mt-4">
+              <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl drop-shadow-[0_1px_0_rgba(255,255,255,0.85)]">
                 {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for Intensive
                 and Accelerator clients.
               </p>
@@ -156,12 +150,12 @@ export default function WhoIsAlfredPage() {
                 </p>
               </div>
             </div>
-            <div className="relative z-0 flex flex-1 min-w-0 min-h-0 justify-center self-stretch max-lg:absolute max-lg:inset-0 max-lg:pointer-events-none lg:min-w-[min(45%,320px)] lg:justify-end lg:pl-4 xl:pl-8">
-              <div className="flex h-full min-h-[200px] w-full max-w-full items-center justify-center max-lg:py-6 lg:min-h-full lg:justify-end lg:overflow-visible">
+            <div className="relative z-0 flex flex-1 min-w-0 min-h-0 justify-center self-stretch max-lg:absolute max-lg:inset-0 max-lg:pointer-events-none lg:min-w-[min(45%,320px)] lg:justify-center lg:px-2 xl:px-4">
+              <div className="flex h-full min-h-[200px] w-full max-w-full items-center justify-center max-lg:py-6 lg:min-h-full lg:justify-center lg:overflow-visible">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center max-lg:opacity-[0.2] opacity-100 select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:max-w-full lg:object-right lg:origin-right lg:scale-[1.72] lg:translate-x-2 xl:translate-x-4 lg:-translate-y-1 xl:-translate-y-2 drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center max-lg:opacity-[0.3] opacity-100 select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:max-w-full lg:object-center lg:origin-center lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                 />
               </div>
             </div>

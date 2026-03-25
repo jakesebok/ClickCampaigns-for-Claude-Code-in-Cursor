@@ -803,7 +803,7 @@ export function AlfredFeatureExplorer({
 
       <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
         <div
-          className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]"
+          className="relative w-full max-w-[234px] sm:max-w-[252px] lg:max-w-[300px]"
           onMouseEnter={() => setPhoneHover(true)}
           onMouseLeave={() => setPhoneHover(false)}
         >

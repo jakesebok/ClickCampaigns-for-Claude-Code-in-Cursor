@@ -8,7 +8,7 @@ import Link from "next/link";
 export function AlfredHeroPhone({ className = "" }: { className?: string }) {
   return (
     <div className={className}>
-      <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px] alfred-hero-float-after">
+      <div className="relative mx-auto w-full max-w-[195px] sm:max-w-[210px] lg:max-w-[225px] alfred-hero-float-after">
         <div
           className="relative rounded-[2.75rem] border-4 border-[#26262c] bg-[linear-gradient(160deg,#f2f2f4_0%,#d8d8dc_42%,#b4b4bc_100%)] shadow-[0_0_0_2px_#0a0a0c,0_28px_70px_-18px_rgba(14,22,36,0.6),inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-2px_0_rgba(0,0,0,0.2)]"
           style={{ aspectRatio: "9 / 19" }}
