@@ -817,7 +817,7 @@ export function AlfredFeatureExplorer({
               <div className="relative flex flex-1 min-h-0 flex-col bg-[#0E1624] text-white/90">
                 <div
                   ref={phoneScrollRef}
-                  className="alfred-phone-scroll flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-smooth"
+                  className="alfred-phone-scroll scrollbar-hide-keep-gutter flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-smooth"
                 >
                   {tab === "dashboard" && (
                     <DashboardScreen
@@ -879,7 +879,7 @@ export function AlfredFeatureExplorer({
                     onClick={() => setMoreOpen(false)}
                   >
                     <div
-                      className="rounded-t-2xl border-t border-white/10 bg-[#121a28] max-h-[55%] overflow-y-auto"
+                      className="rounded-t-2xl border-t border-white/10 bg-[#121a28] max-h-[55%] overflow-y-auto scrollbar-hide-keep-gutter"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
