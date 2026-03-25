@@ -30,9 +30,9 @@ export function Footer() {
           />
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
-        <Link href="/" className="relative flex-shrink-0">
+        <Link href="/" className="relative flex-shrink-0 overflow-visible">
           <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[180%] w-[130%] rounded-full bg-[#ff6b1a] blur-[32px] opacity-[0.14]"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-20 w-44 rounded-full bg-[#ff6b1a] blur-[38px] opacity-[0.38]"
             aria-hidden
           />
           <Image
@@ -40,7 +40,7 @@ export function Footer() {
             alt="Jake Sebok"
             width={120}
             height={34}
-            className="relative h-7 w-auto brightness-0 invert opacity-95 drop-shadow-[0_0_18px_rgba(255,107,26,0.30)]"
+            className="relative h-7 w-auto opacity-95 drop-shadow-[0_0_20px_rgba(255,107,26,0.40)]"
           />
         </Link>
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
