@@ -65,13 +65,14 @@ export default async function PricingPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
         <Link href="/">
-          <LogoOnDarkGlow size="md">
+          <LogoOnDarkGlow size="lg">
             <Image
               src="/logo-apos.png"
               alt="Aligned Freedom Coach"
-              width={140}
-              height={40}
-              className="logo-on-dark-img h-8 w-auto"
+              width={280}
+              height={77}
+              className="logo-on-dark-img h-12 sm:h-14 w-auto"
+              priority
             />
           </LogoOnDarkGlow>
         </Link>

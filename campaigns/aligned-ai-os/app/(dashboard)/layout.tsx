@@ -54,13 +54,13 @@ export default function DashboardLayout({
       {/* Sidebar — desktop */}
       <aside className="hidden md:flex md:w-64 flex-col border-r border-border bg-card pt-1">
         <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
-          <LogoOnDarkGlow size="md">
+          <LogoOnDarkGlow size="lg">
             <Image
               src="/logo-apos.png"
               alt="ALFRED"
-              width={140}
-              height={40}
-              className="logo-on-dark-img h-8 w-auto"
+              width={260}
+              height={72}
+              className="logo-on-dark-img h-11 w-auto"
             />
           </LogoOnDarkGlow>
         </div>

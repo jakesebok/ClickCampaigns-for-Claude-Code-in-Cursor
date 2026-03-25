@@ -39,13 +39,14 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background">
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <LogoOnDarkGlow size="md">
+        <LogoOnDarkGlow size="lg">
           <Image
             src="/logo-apos.png"
             alt="ALFRED"
-            width={160}
-            height={44}
-            className="logo-on-dark-img h-9 w-auto"
+            width={280}
+            height={77}
+            className="logo-on-dark-img h-12 sm:h-14 w-auto"
+            priority
           />
         </LogoOnDarkGlow>
         <div className="flex items-center gap-4">
@@ -342,13 +343,13 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="px-6 py-12 border-t border-border">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <LogoOnDarkGlow size="sm">
+          <LogoOnDarkGlow size="md">
             <Image
               src="/logo-apos.png"
               alt="ALFRED"
-              width={120}
-              height={34}
-              className="logo-on-dark-img h-7 w-auto opacity-60"
+              width={220}
+              height={60}
+              className="logo-on-dark-img h-10 sm:h-11 w-auto opacity-60"
             />
           </LogoOnDarkGlow>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
