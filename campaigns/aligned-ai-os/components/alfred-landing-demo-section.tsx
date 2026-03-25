@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { AlfredFeatureExplorer } from "@/components/alfred-feature-explorer";
 
 /**
@@ -30,8 +31,12 @@ export function AlfredLandingDemoSection() {
           <p className="mb-3 text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
             Same rhythm as the live product: Dashboard, Coach, Voice, Results, My Plan, Drivers, and More.
           </p>
-          <details className="mx-auto w-full max-w-[720px] text-center sm:text-left">
-            <summary className="cursor-pointer text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground marker:content-none [&::-webkit-details-marker]:hidden list-none">
+          <details className="group mx-auto w-full max-w-[720px]">
+            <summary className="flex w-full cursor-pointer list-none items-center justify-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
+              <ChevronDown
+                aria-hidden
+                className="h-3.5 w-3.5 shrink-0 opacity-80 transition-transform duration-200 ease-out -rotate-90 group-open:rotate-0"
+              />
               Tour notes
             </summary>
             <p className="mt-3 text-left text-sm font-medium leading-relaxed text-muted-foreground">

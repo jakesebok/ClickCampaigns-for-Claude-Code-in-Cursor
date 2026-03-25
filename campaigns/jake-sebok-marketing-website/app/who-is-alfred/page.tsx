@@ -57,24 +57,45 @@ export default function WhoIsAlfredPage() {
   return (
     <>
       <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
-        {/* Soft under-glow for depth — wide enough to read past the hero phone */}
+        {/* Massive ambient field — multi-stop oranges, no hard edges */}
         <div
-          className="pointer-events-none absolute -top-[12%] -left-[22%] z-0 h-[72%] w-[min(118vw,920px)] sm:h-[64%] sm:w-[min(112vw,1020px)] md:w-[min(108vw,1100px)] lg:top-0 lg:-left-[12%] lg:h-[115%] lg:w-[min(92vw,1180px)] xl:w-[min(88vw,1280px)] rounded-[35%] bg-ap-accent/50 blur-[52px] opacity-[0.85]"
-          aria-hidden
-        />
-        {/* Primary shard — sharp tech slice + intense gradient */}
-        <div
-          className="pointer-events-none absolute top-0 -left-[14%] z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:-left-[10%] lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-br from-ap-accent/55 via-ap-accent/48 to-ap-accent-2/38 shadow-[0_0_100px_-8px_rgba(255,107,26,0.55),32px_8px_80px_-20px_rgba(255,107,26,0.42),inset_0_1px_0_rgba(255,255,255,0.22)]"
+          className="pointer-events-none absolute -top-[28%] -left-[35%] z-0 h-[135%] w-[min(165vw,1700px)] lg:-top-[18%] lg:-left-[22%] lg:h-[125%] lg:w-[min(140vw,1600px)] blur-[64px] opacity-[0.95]"
           style={{
-            clipPath: "polygon(0% 0%, 100% 0%, 94% 14%, 100% 32%, 86% 58%, 100% 82%, 64% 100%, 0% 88%)",
-            filter: "drop-shadow(0 0 28px rgba(255,107,26,0.35))",
+            background:
+              "radial-gradient(ellipse 80% 65% at 22% 28%, rgba(255,107,26,0.55) 0%, rgba(255,140,66,0.32) 32%, rgba(255,159,107,0.18) 52%, rgba(234,88,12,0.08) 72%, transparent 88%)",
           }}
           aria-hidden
         />
-        {/* Specular edge strip */}
+        {/* Deep burnt-orange under-plane — angular, no vertical cuts */}
         <div
-          className="pointer-events-none absolute top-0 -left-[14%] z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:-left-[10%] lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-70 mix-blend-soft-light"
-          style={{ clipPath: "polygon(0% 0%, 82% 0%, 100% 10%, 90% 38%, 100% 62%, 72% 48%, 0% 26%)" }}
+          className="pointer-events-none absolute top-[6%] -left-[12%] z-0 h-[88%] w-[min(130vw,1420px)] lg:top-[2%] lg:-left-[6%] lg:h-full lg:w-[min(118vw,1500px)] opacity-[0.92]"
+          style={{
+            background:
+              "linear-gradient(156deg, rgba(194,65,12,0.5) 0%, rgba(234,88,12,0.42) 28%, rgba(255,107,26,0.28) 58%, rgba(255,159,107,0.12) 100%)",
+            clipPath: "polygon(4% 6%, 96% 18%, 100% 72%, 28% 100%, 0% 52%)",
+            filter: "drop-shadow(0 28px 90px rgba(234,88,12,0.35))",
+          }}
+          aria-hidden
+        />
+        {/* Primary blade — bright accent → peach, single diagonal sweep */}
+        <div
+          className="pointer-events-none absolute -top-[8%] -left-[20%] z-0 h-[105%] w-[min(135vw,1480px)] lg:-top-[4%] lg:-left-[10%] lg:h-[118%] lg:w-[min(122vw,1550px)]"
+          style={{
+            background:
+              "linear-gradient(138deg, #ff6b1a 0%, #ff7b2e 18%, #ff8f4a 36%, #ff9f6b 55%, rgba(255,159,107,0.35) 78%, rgba(255,107,26,0.06) 100%)",
+            clipPath: "polygon(0% 0%, 100% 4%, 52% 100%, -4% 96%)",
+            filter: "drop-shadow(0 20px 70px rgba(255,107,26,0.5))",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
+          }}
+          aria-hidden
+        />
+        {/* Clean foil highlight — diagonal light only */}
+        <div
+          className="pointer-events-none absolute -left-[18%] top-0 z-0 h-[52%] w-[min(100vw,1100px)] mix-blend-soft-light opacity-[0.55] lg:-left-[8%]"
+          style={{
+            background: "linear-gradient(118deg, rgba(255,255,255,0.5) 0%, rgba(255,214,188,0.25) 28%, transparent 62%)",
+            clipPath: "polygon(0% 0%, 78% 0%, 32% 62%, 0% 22%)",
+          }}
           aria-hidden
         />
         <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
@@ -183,11 +204,11 @@ export default function WhoIsAlfredPage() {
               Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part out
               loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
-            <details className="mx-auto w-fit text-left">
-              <summary className="cursor-pointer text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors">
+            <details className="mx-auto w-full max-w-[720px] text-left">
+              <summary className="cursor-pointer list-none text-center text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
                 Tour notes
               </summary>
-              <p className="mt-3 max-w-[720px] text-sm text-ap-muted font-medium leading-relaxed">
+              <p className="mt-3 text-sm text-ap-muted font-medium leading-relaxed">
                 The tour auto-runs through Dashboard, Coach, Voice, Results, Drivers, and More after this section enters
                 view. Use nav/menu, pause, arrows, or dots to explore. Hover the phone to freeze auto-advance; desktop
                 card hover jumps to a highlight. Labels/layout mirror the live product, while coach replies use
