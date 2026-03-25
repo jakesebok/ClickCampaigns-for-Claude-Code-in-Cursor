@@ -142,7 +142,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative isolate z-10 py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden">
+      <section className="relative isolate z-10 py-20 sm:py-24 lg:py-28 text-white [overflow-x:clip]">
         <div
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
