@@ -347,7 +347,13 @@ const MORE_LINKS = [
 
 export type AlfredFeatureExplorerEmbed = "marketing" | "app-dark";
 
-export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredFeatureExplorerEmbed } = {}) {
+export function AlfredFeatureExplorer({
+  embed = "marketing",
+  hidePreviewDisclaimer = false,
+}: {
+  embed?: AlfredFeatureExplorerEmbed;
+  hidePreviewDisclaimer?: boolean;
+} = {}) {
   const isAppDark = embed === "app-dark";
   const [tab, setTab] = useState<AppTab>("dashboard");
   const [coachPhase, setCoachPhase] = useState<CoachPhase>("home");
@@ -798,7 +804,7 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
 
       <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
         <div
-          className="relative w-full max-w-[260px] sm:max-w-[280px] lg:max-w-[300px]"
+          className="relative w-full max-w-[234px] sm:max-w-[252px] lg:max-w-[300px]"
           onMouseEnter={() => setPhoneHover(true)}
           onMouseLeave={() => setPhoneHover(false)}
         >
@@ -953,15 +959,17 @@ export function AlfredFeatureExplorer({ embed = "marketing" }: { embed?: AlfredF
             </div>
           </div>
 
-          <p
-            className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
-              isAppDark ? "text-muted-foreground" : "text-ap-muted"
-            }`}
-          >
-            This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
-            product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
-            answers ground in your assessment, blueprint, scorecard, and commitments.
-          </p>
+          {!hidePreviewDisclaimer ? (
+            <p
+              className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
+                isAppDark ? "text-muted-foreground" : "text-ap-muted"
+              }`}
+            >
+              This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
+              product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
+              answers ground in your assessment, blueprint, scorecard, and commitments.
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

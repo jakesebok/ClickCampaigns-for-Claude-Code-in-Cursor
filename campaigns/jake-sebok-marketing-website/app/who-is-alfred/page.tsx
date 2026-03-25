@@ -59,12 +59,12 @@ export default function WhoIsAlfredPage() {
       <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
         {/* Soft under-glow for depth — wide enough to read past the hero phone */}
         <div
-          className="pointer-events-none absolute -top-[12%] -left-[8%] z-0 h-[72%] w-[min(118vw,920px)] sm:h-[64%] sm:w-[min(112vw,1020px)] md:w-[min(108vw,1100px)] lg:top-0 lg:left-0 lg:h-[115%] lg:w-[min(92vw,1180px)] xl:w-[min(88vw,1280px)] rounded-[35%] bg-ap-accent/50 blur-[52px] opacity-[0.85]"
+          className="pointer-events-none absolute -top-[12%] -left-[22%] z-0 h-[72%] w-[min(118vw,920px)] sm:h-[64%] sm:w-[min(112vw,1020px)] md:w-[min(108vw,1100px)] lg:top-0 lg:-left-[12%] lg:h-[115%] lg:w-[min(92vw,1180px)] xl:w-[min(88vw,1280px)] rounded-[35%] bg-ap-accent/50 blur-[52px] opacity-[0.85]"
           aria-hidden
         />
         {/* Primary shard — sharp tech slice + intense gradient */}
         <div
-          className="pointer-events-none absolute top-0 left-0 z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-br from-ap-accent/55 via-ap-accent/48 to-ap-accent-2/38 shadow-[0_0_100px_-8px_rgba(255,107,26,0.55),32px_8px_80px_-20px_rgba(255,107,26,0.42),inset_0_1px_0_rgba(255,255,255,0.22)]"
+          className="pointer-events-none absolute top-0 -left-[14%] z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:-left-[10%] lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-br from-ap-accent/55 via-ap-accent/48 to-ap-accent-2/38 shadow-[0_0_100px_-8px_rgba(255,107,26,0.55),32px_8px_80px_-20px_rgba(255,107,26,0.42),inset_0_1px_0_rgba(255,255,255,0.22)]"
           style={{
             clipPath: "polygon(0% 0%, 100% 0%, 94% 14%, 100% 32%, 86% 58%, 100% 82%, 64% 100%, 0% 88%)",
             filter: "drop-shadow(0 0 28px rgba(255,107,26,0.35))",
@@ -73,14 +73,14 @@ export default function WhoIsAlfredPage() {
         />
         {/* Specular edge strip */}
         <div
-          className="pointer-events-none absolute top-0 left-0 z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-70 mix-blend-soft-light"
+          className="pointer-events-none absolute top-0 -left-[14%] z-0 h-[60%] w-[min(102vw,760px)] sm:h-[54%] sm:w-[min(96vw,860px)] md:w-[min(94vw,940px)] lg:h-full lg:-left-[10%] lg:w-[min(88vw,1080px)] xl:w-[min(84vw,1180px)] bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-70 mix-blend-soft-light"
           style={{ clipPath: "polygon(0% 0%, 82% 0%, 100% 10%, 90% 38%, 100% 62%, 72% 48%, 0% 26%)" }}
           aria-hidden
         />
         <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
           <div className="grid gap-8 sm:gap-10 md:grid-cols-[minmax(0,1fr)_minmax(220px,340px)] md:gap-10 lg:gap-14 xl:gap-16 items-center">
             <div className="max-w-xl md:max-w-none">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-primary mb-4">
+              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
                 Aligned Freedom Coach
               </p>
               <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.75rem] text-ap-primary leading-[1.1] mb-5 sm:mb-6 text-center md:text-left">
@@ -110,7 +110,7 @@ export default function WhoIsAlfredPage() {
                   </svg>
                 </a>
               </div>
-              <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl drop-shadow-[0_1px_0_rgba(255,255,255,0.85)]">
+              <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl">
                 {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for Intensive
                 and Accelerator clients.
               </p>
@@ -129,19 +129,19 @@ export default function WhoIsAlfredPage() {
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
         <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
         <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="relative flex flex-col md:flex-row md:items-stretch md:justify-between gap-10 md:gap-8 lg:gap-10 xl:gap-14">
-            <div className="relative z-20 max-w-[720px] shrink-0 max-md:max-w-none md:max-w-[min(100%,36rem)] lg:max-w-[min(100%,36rem)] xl:max-w-[min(100%,40rem)] md:z-10 lg:py-1 md:pr-4 lg:pr-6 max-md:drop-shadow-none md:drop-shadow-[0_2px_24px_rgba(14,22,36,0.65)]">
-              <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4">
-                This is not a generic chat coach
-              </h2>
-              <div className="flex justify-center md:hidden my-2 mb-6">
+          <div className="relative flex flex-col md:flex-row md:items-stretch md:justify-between gap-10 md:gap-6 lg:gap-10 xl:gap-14">
+            <div className="relative z-20 flex min-w-0 w-full flex-col max-w-[720px] max-md:max-w-none md:max-w-[min(28rem,48%)] lg:max-w-[min(34rem,50%)] xl:max-w-[min(40rem,52%)] md:shrink md:z-10 lg:py-1 md:pr-3 lg:pr-6 max-md:drop-shadow-none md:drop-shadow-[0_2px_24px_rgba(14,22,36,0.65)]">
+              <div className="order-1 flex justify-center md:hidden my-2 mb-6">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
                   className="pointer-events-none h-auto max-h-[min(48vh,340px)] w-full max-w-[min(88vw,320px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                 />
               </div>
-              <div className="space-y-5 text-white/80 font-medium leading-relaxed text-lg">
+              <h2 className="order-2 md:order-1 font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-md:mt-0">
+                This is not a generic chat coach
+              </h2>
+              <div className="order-3 md:order-2 space-y-5 text-white/80 font-medium leading-relaxed text-lg">
                 <p>
                   You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
                   dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
@@ -157,12 +157,12 @@ export default function WhoIsAlfredPage() {
                 </p>
               </div>
             </div>
-            <div className="hidden md:flex relative z-0 flex-1 min-w-0 min-h-0 items-stretch justify-center self-stretch md:min-w-[min(40%,260px)] lg:min-w-[min(45%,320px)] md:px-2 lg:px-2 xl:px-4">
+            <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(42%,220px)] md:max-w-[min(52%,380px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-1 lg:px-2 xl:px-4">
               <div className="flex h-full min-h-[220px] w-full max-w-full items-center justify-center md:min-h-full lg:min-h-full lg:overflow-visible md:py-4 lg:py-0">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58vh,480px)] w-full max-w-[min(92vw,440px)] object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(70vh,520px)] md:scale-[1.55] md:origin-center lg:max-h-none lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:max-w-full lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
+                  className="pointer-events-none h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(62vh,440px)] md:max-w-[min(100%,320px)] md:scale-[1.28] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
                 />
               </div>
             </div>
