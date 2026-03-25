@@ -115,13 +115,14 @@ export function Header() {
               );
             }
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+            const hideHomeOnTablet = link.href === "/";
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`shrink-0 whitespace-nowrap text-sm font-semibold transition-colors ${
-                  isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"
-                }`}
+                  hideHomeOnTablet ? "md:max-lg:hidden" : ""
+                } ${isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"}`}
               >
                 {link.label}
               </Link>
@@ -132,7 +133,7 @@ export function Header() {
             className={`shrink-0 whitespace-nowrap text-sm font-semibold underline underline-offset-[0.35em] decoration-2 transition-colors ${
               pathname === "/who-is-alfred"
                 ? "text-gradient-accent decoration-ap-accent"
-                : "text-ap-accent decoration-ap-accent/55 hover:decoration-ap-accent hover:text-gradient-accent"
+                : "text-ap-mid decoration-ap-muted hover:text-gradient-accent hover:decoration-ap-accent"
             }`}
           >
             Who is ALFRED?
@@ -251,10 +252,10 @@ export function Header() {
             })}
             <Link
               href="/who-is-alfred"
-              className={`w-fit text-sm font-semibold underline underline-offset-[0.35em] decoration-2 py-1 ${
+              className={`w-fit text-sm font-semibold underline underline-offset-[0.35em] decoration-2 py-1 transition-colors ${
                 pathname === "/who-is-alfred"
                   ? "text-gradient-accent decoration-ap-accent"
-                  : "text-ap-accent decoration-ap-accent/55 hover:decoration-ap-accent hover:text-gradient-accent"
+                  : "text-ap-mid decoration-ap-muted hover:text-gradient-accent hover:decoration-ap-accent"
               }`}
               onClick={() => setMobileOpen(false)}
             >
