@@ -36,7 +36,7 @@ export function Footer() {
             alt="Jake Sebok"
             width={120}
             height={34}
-            className="h-7 w-auto brightness-0 invert opacity-90"
+            className="h-7 w-auto brightness-0 invert opacity-90 drop-shadow-[0_0_28px_rgba(255,107,26,0.35)]"
           />
         </Link>
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
