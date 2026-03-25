@@ -66,13 +66,13 @@ export default function WhoIsAlfredPage() {
           }}
           aria-hidden
         />
-        {/* Deep burnt-orange under-plane — angular, no vertical cuts */}
+        {/* Deep burnt-orange under-plane — angles DOWN (vs primary wedge) so the pair does not read as dual “uphill” behind the phone */}
         <div
-          className="pointer-events-none absolute top-[6%] -left-[12%] z-0 h-[88%] w-[min(130vw,1420px)] lg:top-[2%] lg:-left-[6%] lg:h-full lg:w-[min(118vw,1500px)] opacity-[0.92]"
+          className="pointer-events-none absolute top-[4%] -left-[12%] z-0 h-[92%] w-[min(130vw,1420px)] lg:top-0 lg:-left-[6%] lg:h-full lg:w-[min(118vw,1500px)] opacity-[0.92]"
           style={{
             background:
-              "linear-gradient(156deg, rgba(194,65,12,0.5) 0%, rgba(234,88,12,0.42) 28%, rgba(255,107,26,0.28) 58%, rgba(255,159,107,0.12) 100%)",
-            clipPath: "polygon(4% 6%, 96% 18%, 100% 72%, 28% 100%, 0% 52%)",
+              "linear-gradient(198deg, rgba(194,65,12,0.42) 0%, rgba(234,88,12,0.38) 32%, rgba(255,107,26,0.22) 62%, rgba(255,159,107,0.08) 100%)",
+            clipPath: "polygon(6% 2%, 100% 0%, 86% 58%, 32% 100%, -3% 92%, 3% 44%)",
             filter: "drop-shadow(0 28px 90px rgba(234,88,12,0.35))",
           }}
           aria-hidden
@@ -142,7 +142,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden [overflow-anchor:none]">
+      <section className="relative py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
@@ -156,7 +156,7 @@ export default function WhoIsAlfredPage() {
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(48vh,340px)] w-full max-w-[min(88vw,320px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                  className="pointer-events-none h-auto max-h-[min(58svh,440px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                 />
               </div>
               <h2 className="order-2 md:order-1 font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-md:mt-0">
@@ -178,12 +178,12 @@ export default function WhoIsAlfredPage() {
                 </p>
               </div>
             </div>
-            <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(42%,220px)] md:max-w-[min(52%,380px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-1 lg:px-2 xl:px-4">
-              <div className="flex h-full min-h-[220px] w-full max-w-full items-center justify-center md:min-h-full lg:min-h-full lg:overflow-visible md:py-4 lg:py-0">
+            <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(52%,300px)] md:max-w-[min(68%,560px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-0 lg:px-2 xl:px-4">
+              <div className="flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52svh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(62vh,440px)] md:max-w-[min(100%,320px)] md:scale-[1.28] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
+                  className="pointer-events-none h-auto max-h-[min(58svh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78svh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88svh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
                 />
               </div>
             </div>
@@ -204,9 +204,18 @@ export default function WhoIsAlfredPage() {
               Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part out
               loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
-            <details className="mx-auto w-full max-w-[720px] text-left">
-              <summary className="cursor-pointer list-none text-center text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
-                Tour notes
+            <details className="group mx-auto w-full max-w-[720px] text-left">
+              <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
+                <span>Tour notes</span>
+                <svg
+                  className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </summary>
               <p className="mt-3 text-sm text-ap-muted font-medium leading-relaxed">
                 The tour auto-runs through Dashboard, Coach, Voice, Results, Drivers, and More after this section enters
@@ -324,30 +333,100 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
-        <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-6">
-            Pricing that respects your attention
-          </h2>
-          <div className="space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
-            <p>
-              Priced under what most people pay for a single coaching session each month, with everything included and
-              no upsell maze inside the app. Current numbers live on the{" "}
-              <a
-                href={`${ALFRED_APP_URL}/pricing`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gradient-accent font-semibold hover:underline"
-              >
-                pricing page
-              </a>
-              .
-            </p>
-            <p>
-              Strategic Alignment Intensive attendees and Aligned Power Accelerator clients receive extended trial
-              access through the codes shared in program, because the tool is meant to extend what gets built in the
-              room, not replace it.
-            </p>
+      <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden bg-ap-bg border-y border-ap-border">
+        <div
+          className="pointer-events-none absolute -top-28 right-[-18%] h-[min(72vw,560px)] w-[min(72vw,560px)] rounded-full opacity-[0.38] blur-[88px]"
+          style={{
+            background:
+              "radial-gradient(circle at 40% 40%, rgba(255,107,26,0.5) 0%, rgba(255,159,107,0.18) 48%, transparent 72%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-20 -left-[12%] h-56 w-[min(95vw,720px)] rounded-full opacity-30 blur-[72px] bg-gradient-to-tr from-ap-accent/35 via-ap-accent-2/15 to-transparent"
+          aria-hidden
+        />
+
+        <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
+          <div className="rounded-[22px] sm:rounded-[28px] border border-ap-border bg-white shadow-[0_36px_110px_-42px_rgba(14,22,36,0.22)] overflow-hidden grid lg:grid-cols-[minmax(260px,360px)_1fr]">
+            <div className="relative bg-ap-primary px-8 py-10 sm:px-10 sm:py-12 lg:px-11 lg:py-14 text-white overflow-hidden">
+              <div
+                className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-[0.35] blur-3xl"
+                style={{
+                  background: "radial-gradient(circle, rgba(255,107,26,0.75) 0%, transparent 68%)",
+                }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -bottom-8 left-1/2 h-40 w-[140%] -translate-x-1/2 opacity-20 blur-2xl bg-gradient-to-t from-ap-accent/50 to-transparent"
+                aria-hidden
+              />
+              <p className="relative font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent-2/95 mb-4">
+                Straightforward access
+              </p>
+              <h2 className="relative font-outfit font-bold text-[1.65rem] sm:text-3xl leading-[1.12] mb-5">
+                Pricing that{" "}
+                <span className="text-gradient-accent-hero [text-shadow:none]">respects your attention</span>
+              </h2>
+              <p className="relative text-[17px] sm:text-lg text-white/82 font-medium leading-relaxed">
+                One product. One lane. No scavenger hunt for the real features after you sign in.
+              </p>
+            </div>
+
+            <div className="relative px-8 py-10 sm:px-10 sm:py-12 lg:pl-12 lg:pr-11 lg:py-14 bg-gradient-to-br from-white via-white to-ap-bg/70">
+              <ul className="grid sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
+                <li className="rounded-2xl border border-ap-border bg-ap-off/90 px-4 py-4 sm:px-5 sm:py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+                  <p className="font-outfit font-bold text-sm text-ap-primary mb-1.5">Session-priced</p>
+                  <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
+                    Monthly cost sits under what many founders pay for a single coaching hour.
+                  </p>
+                </li>
+                <li className="rounded-2xl border border-ap-border bg-ap-off/90 px-4 py-4 sm:px-5 sm:py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+                  <p className="font-outfit font-bold text-sm text-ap-primary mb-1.5">All-in</p>
+                  <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
+                    Full experience inside ALFRED. No upsell maze between you and the work.
+                  </p>
+                </li>
+                <li className="rounded-2xl border border-ap-border bg-white px-4 py-4 sm:px-5 sm:py-5 shadow-[0_0_0_1px_rgba(255,107,26,0.12),0_18px_40px_-28px_rgba(255,107,26,0.35)] sm:col-span-1">
+                  <p className="font-outfit font-bold text-sm text-gradient-accent mb-1.5">Programs extend the room</p>
+                  <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
+                    Intensive and Accelerator clients get extended trial access through program codes, so the app backs
+                    what you build live.
+                  </p>
+                </li>
+              </ul>
+
+              <div className="space-y-5 text-ap-mid font-medium leading-relaxed text-base sm:text-lg">
+                <p>
+                  Current price and plan details live on the{" "}
+                  <a
+                    href={`${ALFRED_APP_URL}/pricing`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gradient-accent font-semibold hover:underline"
+                  >
+                    pricing page
+                  </a>
+                  .
+                </p>
+                <a
+                  href={`${ALFRED_APP_URL}/pricing`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-7 py-3.5 rounded-pill transition-all w-full sm:w-auto"
+                >
+                  View live pricing
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

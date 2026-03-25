@@ -69,10 +69,10 @@ export default function LandingPage() {
           <span className="text-gradient-accent">actually knows you.</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          Your values. Your goals. Your real constraints. ALFRED turns your
-          deepest clarity into a personalized AI coach that keeps you focused,
-          aligned, and growing — without burning out.
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <span className="block">Your values. Your goals. Your real constraints.</span>
+          <span className="mt-2 block">ALFRED keeps you focused, aligned, and growing</span>
+          <span className="mt-2 block">without burning out.</span>
         </p>
 
         <div className="inline-flex flex-col sm:flex-row items-stretch gap-4 mx-auto">
@@ -90,12 +90,10 @@ export default function LandingPage() {
             Attend the Workshop
           </Link>
         </div>
-        <p className="mt-8 text-sm text-muted-foreground">
+        <p className="mt-8 text-center text-sm text-muted-foreground">
           <Link href="#product-tour" className="font-medium text-accent hover:underline">
             See an interactive product tour
-          </Link>{" "}
-          — dashboard, coach, voice, My Plan (your 28-day sprint from VAPI), and more. Hover the phone there to pause
-          auto-advance while you explore.
+          </Link>
         </p>
       </section>
 
