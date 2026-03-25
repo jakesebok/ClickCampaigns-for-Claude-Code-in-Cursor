@@ -57,9 +57,24 @@ export default function WhoIsAlfredPage() {
   return (
     <>
       <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
+        {/* Soft under-glow for depth */}
         <div
-          className="pointer-events-none absolute top-0 left-0 z-0 h-[58%] w-[min(92vw,640px)] sm:h-[52%] sm:w-[min(88vw,720px)] lg:h-full lg:w-[min(68vw,860px)] xl:w-[min(62vw,920px)] bg-ap-accent/[0.26] shadow-[28px_0_60px_-20px_rgba(255,107,26,0.45)]"
-          style={{ clipPath: "polygon(0% 0%, 92% 0%, 100% 100%, 0% 100%)" }}
+          className="pointer-events-none absolute -top-[12%] -left-[8%] z-0 h-[72%] w-[min(110vw,820px)] sm:h-[64%] sm:w-[min(100vw,880px)] lg:top-0 lg:left-0 lg:h-[115%] lg:w-[min(78vw,960px)] xl:w-[min(72vw,1000px)] rounded-[35%] bg-ap-accent/50 blur-[52px] opacity-[0.85]"
+          aria-hidden
+        />
+        {/* Primary shard — sharp tech slice + intense gradient */}
+        <div
+          className="pointer-events-none absolute top-0 left-0 z-0 h-[60%] w-[min(92vw,660px)] sm:h-[54%] sm:w-[min(88vw,740px)] lg:h-full lg:w-[min(72vw,900px)] xl:w-[min(66vw,960px)] bg-gradient-to-br from-ap-accent/55 via-ap-accent/48 to-ap-accent-2/38 shadow-[0_0_100px_-8px_rgba(255,107,26,0.55),32px_8px_80px_-20px_rgba(255,107,26,0.42),inset_0_1px_0_rgba(255,255,255,0.22)]"
+          style={{
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 22%, 58% 100%, 0% 92%)",
+            filter: "drop-shadow(0 0 28px rgba(255,107,26,0.35))",
+          }}
+          aria-hidden
+        />
+        {/* Specular edge strip */}
+        <div
+          className="pointer-events-none absolute top-0 left-0 z-0 h-[60%] w-[min(92vw,660px)] sm:h-[54%] sm:w-[min(88vw,740px)] lg:h-full lg:w-[min(72vw,900px)] xl:w-[min(66vw,960px)] bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-70 mix-blend-soft-light"
+          style={{ clipPath: "polygon(0% 0%, 72% 0%, 100% 18%, 48% 55%, 0% 35%)" }}
           aria-hidden
         />
         <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
@@ -112,14 +127,20 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-x-hidden">
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-10 lg:gap-10 xl:gap-14">
-            <div className="relative z-10 max-w-[720px] shrink-0 lg:max-w-[min(100%,36rem)] xl:max-w-[min(100%,40rem)] lg:py-1 lg:pr-6">
-              <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4">
+      <section className="relative py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden">
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
+          aria-hidden
+        />
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
+        <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="relative isolate flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-10 lg:gap-10 xl:gap-14">
+            <div className="relative z-20 max-w-[720px] shrink-0 lg:max-w-[min(100%,36rem)] xl:max-w-[min(100%,40rem)] lg:z-10 lg:py-1 lg:pr-6 max-lg:drop-shadow-[0_2px_24px_rgba(14,22,36,0.65)]">
+              <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4">
                 This is not a generic chat coach
               </h2>
-              <div className="space-y-5 text-ap-mid font-medium leading-relaxed text-lg">
+              <div className="space-y-5 text-white/80 font-medium leading-relaxed text-lg">
                 <p>
                   You already have models that can sound wise for thirty seconds. The crack shows up midweek, when energy
                   dips, boundaries wobble, and the chat you opened has no memory of what you decided mattered last month.
@@ -130,17 +151,17 @@ export default function WhoIsAlfredPage() {
                   voice. ALFRED already knows where your relationships are stretched thin, how your archetype tends to
                   over-correct, and the one commitment that protects both your health and your revenue this week.
                 </p>
-                <p className="text-ap-primary font-semibold">
+                <p className="text-gradient-accent font-semibold">
                   ALFRED cuts the noise. You execute.
                 </p>
               </div>
             </div>
-            <div className="relative z-0 flex flex-1 min-w-0 min-h-[220px] justify-center self-stretch lg:min-w-[min(45%,320px)] lg:justify-end lg:pl-4 xl:pl-8">
-              <div className="flex h-full min-h-[200px] w-full max-w-full items-center justify-center lg:min-h-full lg:justify-end lg:overflow-visible">
+            <div className="relative z-0 flex flex-1 min-w-0 min-h-0 justify-center self-stretch max-lg:absolute max-lg:inset-0 max-lg:pointer-events-none lg:min-w-[min(45%,320px)] lg:justify-end lg:pl-4 xl:pl-8">
+              <div className="flex h-full min-h-[200px] w-full max-w-full items-center justify-center max-lg:py-6 lg:min-h-full lg:justify-end lg:overflow-visible">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-[0.12] select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] sm:opacity-100 lg:h-[min(100%,98vh)] lg:min-h-[800px] lg:max-h-[min(98vh,1920px)] lg:w-auto lg:max-w-full lg:object-right lg:translate-x-3 xl:translate-x-8 lg:-translate-y-1 xl:-translate-y-2"
+                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center max-lg:opacity-[0.2] opacity-100 select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:max-w-full lg:object-right lg:origin-right lg:scale-[1.72] lg:translate-x-2 xl:translate-x-4 lg:-translate-y-1 xl:-translate-y-2 drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                 />
               </div>
             </div>
