@@ -36,7 +36,11 @@ export function Footer() {
             alt="Jake Sebok"
             width={120}
             height={34}
-            className="h-7 w-auto brightness-0 invert opacity-90 drop-shadow-[0_0_28px_rgba(255,107,26,0.35)]"
+            className="h-7 w-auto opacity-90"
+            style={{
+              // Combine inversion + glow into a single filter so they don't overwrite each other.
+              filter: "brightness(0) invert(1) drop-shadow(0 0 28px rgba(255,107,26,0.35))",
+            }}
           />
         </Link>
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
