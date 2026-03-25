@@ -142,7 +142,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden [overflow-anchor:none] [overscroll-behavior:contain]">
+      <section className="relative isolate z-10 py-20 sm:py-24 lg:py-28 text-white overflow-x-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
@@ -156,7 +156,7 @@ export default function WhoIsAlfredPage() {
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58svh,440px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                  className="pointer-events-none h-auto max-h-[min(58vh,440px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                 />
               </div>
               <h2 className="order-2 md:order-1 font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-md:mt-0">
@@ -179,11 +179,11 @@ export default function WhoIsAlfredPage() {
               </div>
             </div>
             <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(52%,300px)] md:max-w-[min(68%,560px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-0 lg:px-2 xl:px-4">
-              <div className="flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52svh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
+              <div className="flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52vh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
                 <img
                   src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58svh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78svh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88svh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
+                  className="pointer-events-none h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78vh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
                 />
               </div>
             </div>
