@@ -512,7 +512,7 @@ export default function HomePage() {
             </div>
           </div>
             </div>
-            <div className="hidden lg:block lg:col-span-5 order-2 self-stretch xl:-mr-[calc(50vw-540px-1.5rem)]">
+            <div className="hidden lg:block lg:col-span-5 order-2 self-stretch xl:translate-x-[calc(50vw-540px-1.5rem)]">
               <div className="relative aspect-[4/5] rounded-l-[20px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
