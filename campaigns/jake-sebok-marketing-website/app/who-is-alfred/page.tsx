@@ -138,9 +138,9 @@ export default function WhoIsAlfredPage() {
             <div className="relative z-0 flex flex-1 min-w-0 min-h-[220px] justify-center self-stretch lg:min-w-[min(45%,320px)] lg:justify-end lg:pl-4 xl:pl-8">
               <div className="flex h-full min-h-[200px] w-full max-w-full items-center justify-center lg:min-h-full lg:justify-end lg:overflow-visible">
                 <img
-                  src="/images/phone_with_shadow_trans.png"
+                  src="/images/phone_with_natural_shadow.png"
                   alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-[0.12] select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] sm:opacity-100 lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:max-w-full lg:object-right lg:translate-x-3 xl:translate-x-8 lg:-translate-y-1 xl:-translate-y-2"
+                  className="pointer-events-none h-auto max-h-[min(52vh,420px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-[0.12] select-none sm:max-h-[min(58vh,480px)] sm:max-w-[min(92vw,440px)] sm:opacity-100 lg:h-[min(100%,98vh)] lg:min-h-[800px] lg:max-h-[min(98vh,1920px)] lg:w-auto lg:max-w-full lg:object-right lg:translate-x-3 xl:translate-x-8 lg:-translate-y-1 xl:-translate-y-2"
                 />
               </div>
             </div>
