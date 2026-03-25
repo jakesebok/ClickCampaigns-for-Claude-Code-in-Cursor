@@ -32,8 +32,12 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
         <Link href="/" className="relative flex-shrink-0 overflow-visible">
           <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-20 w-44 rounded-full bg-[#ff6b1a] blur-[38px] opacity-[0.38]"
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-12 w-28 rounded-full blur-[26px] opacity-[0.30]"
             aria-hidden
+            style={{
+              background:
+                "radial-gradient(circle at 50% 45%, rgba(255,107,26,0.55) 0%, rgba(255,107,26,0.25) 34%, rgba(255,107,26,0.12) 55%, transparent 72%)",
+            }}
           />
           <Image
             src="/images/logo-jake-sebok-horizontal.png"
