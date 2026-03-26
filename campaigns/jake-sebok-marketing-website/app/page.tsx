@@ -235,7 +235,7 @@ export default function HomePage() {
             The Truth
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            It isn&apos;t a strategy problem. It&apos;s not even a discipline problem. It&apos;s an <span className="text-gradient-accent">alignment</span> problem.
+            If discipline were the answer, you would already be there. The real problem is <span className="text-gradient-accent">alignment</span>.
           </h2>
           <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
             Maybe your business is growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. When success competes with your true values, your body treats growth like a threat. It hits the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
@@ -406,14 +406,14 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
                 <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take the VAPI™</h3>
               </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">The VAPI™ measures your experience across 12 life and business domains. 72 statements, ~12 minutes. You get your Founder Archetype, your pattern driver, and a clear picture of where you&apos;re strong and where to focus next—with a personalized 28-day My Plan when you use the same email as your free portal or ALFRED account.</p>
+              <p className="text-white/75 text-base font-medium leading-relaxed">72 statements. About 12 minutes. Get your Founder Archetype, your pattern driver, and a clear read on where to focus next.</p>
             </div>
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
                 <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Get your results</h3>
               </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">Scores for every domain, your full Founder Archetype profile, your pattern driver, and your top three priorities—plus your 28-day My Plan (same email as portal or ALFRED). Tailored to your pattern—no generic advice. Save as PDF or retake over time to track progress.</p>
+              <p className="text-white/75 text-base font-medium leading-relaxed">See your scores, top priorities, full archetype profile, and your 28-day plan when you use the same email as your portal or ALFRED account. Save as PDF or retake over time.</p>
             </div>
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
@@ -586,7 +586,7 @@ export default function HomePage() {
               </h2>
               <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
                 Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
-                Discover your Founder Archetype, pattern driver, and where you stand across 12 domains—with a personalized 28-day My Plan when you use the same email as your portal or ALFRED account.
+                Discover your Founder Archetype, pattern driver, and where you stand across 12 domains, with a personalized 28-day plan when you use the same email as your portal or ALFRED account.
                 <span className="block mt-2 text-white/90 font-medium">Free. No payment required.</span>
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
