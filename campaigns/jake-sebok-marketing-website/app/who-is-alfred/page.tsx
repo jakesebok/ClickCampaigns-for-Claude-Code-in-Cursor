@@ -56,88 +56,134 @@ const dailyItems = [
 export default function WhoIsAlfredPage() {
   return (
     <>
-      <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 bg-ap-bg overflow-hidden">
-        {/* Massive ambient field — multi-stop oranges, no hard edges */}
+      <section className="relative pt-16 sm:pt-24 pb-14 sm:pb-[4.5rem] lg:pb-24 overflow-hidden">
         <div
-          className="pointer-events-none absolute -top-[28%] -left-[35%] z-0 h-[135%] w-[min(165vw,1700px)] lg:-top-[18%] lg:-left-[22%] lg:h-[125%] lg:w-[min(140vw,1600px)] blur-[64px] opacity-[0.95]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,#f8fafc_0%,#eef2f7_54%,#f4efe7_100%)]"
+          aria-hidden
+        />
+        {/* Cool ambient field for the copy side */}
+        <div
+          className="pointer-events-none absolute -top-28 -left-20 z-0 h-[26rem] w-[26rem] rounded-full blur-[72px] opacity-[0.95]"
           style={{
             background:
-              "radial-gradient(ellipse 80% 65% at 22% 28%, rgba(255,107,26,0.55) 0%, rgba(255,140,66,0.32) 32%, rgba(255,159,107,0.18) 52%, rgba(234,88,12,0.08) 72%, transparent 88%)",
+              "radial-gradient(circle, rgba(58,74,92,0.22) 0%, rgba(58,74,92,0.12) 30%, rgba(58,74,92,0.05) 52%, transparent 76%)",
           }}
           aria-hidden
         />
-        {/* Deep burnt-orange under-plane — angles DOWN (vs primary wedge) so the pair does not read as dual “uphill” behind the phone */}
+        {/* Focused warm field behind the phone, not under the copy */}
         <div
-          className="pointer-events-none absolute top-[4%] -left-[12%] z-0 h-[92%] w-[min(130vw,1420px)] lg:top-0 lg:-left-[6%] lg:h-full lg:w-[min(118vw,1500px)] opacity-[0.92]"
+          className="pointer-events-none absolute top-[2%] right-[-12%] z-0 h-[28rem] w-[28rem] rounded-full blur-[74px] opacity-[0.96] lg:top-[3%] lg:right-[-6%] lg:h-[34rem] lg:w-[34rem]"
           style={{
             background:
-              "linear-gradient(198deg, rgba(194,65,12,0.42) 0%, rgba(234,88,12,0.38) 32%, rgba(255,107,26,0.22) 62%, rgba(255,159,107,0.08) 100%)",
-            clipPath: "polygon(6% 2%, 100% 0%, 86% 58%, 32% 100%, -3% 92%, 3% 44%)",
-            filter: "drop-shadow(0 28px 90px rgba(234,88,12,0.35))",
+              "radial-gradient(circle, rgba(255,107,26,0.54) 0%, rgba(255,159,107,0.28) 34%, rgba(255,187,146,0.18) 54%, transparent 76%)",
           }}
           aria-hidden
         />
-        {/* Primary blade — bright accent → peach, single diagonal sweep */}
         <div
-          className="pointer-events-none absolute -top-[8%] -left-[20%] z-0 h-[105%] w-[min(135vw,1480px)] lg:-top-[4%] lg:-left-[10%] lg:h-[118%] lg:w-[min(122vw,1550px)]"
+          className="pointer-events-none absolute inset-y-0 right-[-16%] z-0 hidden w-[58%] lg:block"
           style={{
             background:
-              "linear-gradient(138deg, #ff6b1a 0%, #ff7b2e 18%, #ff8f4a 36%, #ff9f6b 55%, rgba(255,159,107,0.35) 78%, rgba(255,107,26,0.06) 100%)",
-            clipPath: "polygon(0% 0%, 100% 4%, 52% 100%, -4% 96%)",
-            filter: "drop-shadow(0 20px 70px rgba(255,107,26,0.5))",
-            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
+              "linear-gradient(145deg, rgba(14,22,36,0.18) 0%, rgba(25,34,54,0.12) 24%, rgba(255,107,26,0.08) 58%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)",
           }}
           aria-hidden
         />
-        {/* Clean foil highlight — diagonal light only */}
         <div
-          className="pointer-events-none absolute -left-[18%] top-0 z-0 h-[52%] w-[min(100vw,1100px)] mix-blend-soft-light opacity-[0.55] lg:-left-[8%]"
+          className="pointer-events-none absolute left-[4%] top-8 z-0 h-px w-[min(34rem,56vw)] bg-[linear-gradient(90deg,rgba(14,22,36,0.22),rgba(14,22,36,0.04),transparent)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute left-[4%] top-8 z-0 h-28 w-[min(34rem,56vw)] opacity-50"
           style={{
-            background: "linear-gradient(118deg, rgba(255,255,255,0.5) 0%, rgba(255,214,188,0.25) 28%, transparent 62%)",
-            clipPath: "polygon(0% 0%, 78% 0%, 32% 62%, 0% 22%)",
+            background: "linear-gradient(180deg, rgba(255,255,255,0.44) 0%, transparent 100%)",
           }}
           aria-hidden
         />
-        <div className="relative z-10 max-w-[1100px] mx-auto px-5 sm:px-6">
-          <div className="grid gap-8 sm:gap-10 md:grid-cols-[minmax(0,1fr)_minmax(220px,340px)] md:gap-10 lg:gap-14 xl:gap-16 items-center">
+        <div className="relative z-10 max-w-[1180px] mx-auto px-5 sm:px-6">
+          <div className="grid gap-8 sm:gap-10 md:grid-cols-[minmax(0,1.02fr)_minmax(250px,380px)] md:gap-10 lg:gap-16 xl:gap-20 items-center">
             <div className="max-w-xl md:max-w-none">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
-                Aligned Freedom Coach
-              </p>
-              <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.75rem] text-ap-primary leading-[1.1] mb-5 sm:mb-6 text-center md:text-left">
-                Clarity in your pocket when it matters.
-              </h1>
-
-              <AlfredHeroPhone className="md:hidden mb-8" />
-
-              <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-8">
-                ALFRED keeps your priorities in front of you when the week gets loud, so you can make clean decisions fast without losing what matters.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-                <a
-                  href={ALFRED_APP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
-                >
-                  Start My 7-Day Trial
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+              <div className="relative overflow-hidden rounded-[28px] border border-white/75 bg-white/78 px-6 py-7 shadow-[0_34px_90px_-48px_rgba(14,22,36,0.34)] backdrop-blur-md sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+                <div
+                  className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.32) 0%, rgba(255,159,107,0.12) 40%, transparent 74%)",
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute -left-16 bottom-0 h-44 w-44 rounded-full blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(58,74,92,0.16) 0%, rgba(58,74,92,0.08) 40%, transparent 76%)",
+                  }}
+                  aria-hidden
+                />
+                <div className="relative">
+                  <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
+                    Aligned Freedom Coach
+                  </p>
+                  <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.8rem] text-ap-primary leading-[1.08] tracking-tight mb-5 sm:mb-6 text-center md:text-left">
+                    Clarity in your pocket when it matters.
+                  </h1>
+                  <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-6">
+                    ALFRED keeps your priorities in front of you when the week gets loud, so you can make clean
+                    decisions fast without losing what matters.
+                  </p>
+                  <ul className="flex flex-wrap gap-2.5 mb-7">
+                    <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
+                      Keeps priorities loaded
+                    </li>
+                    <li className="rounded-full border border-ap-border bg-ap-off/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
+                      Clear decisions under pressure
+                    </li>
+                    <li className="rounded-full border border-[rgba(255,107,26,0.18)] bg-[rgba(255,247,240,0.94)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#b6531b]">
+                      Built for the messy week
+                    </li>
+                  </ul>
+                  <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                    <a
+                      href={ALFRED_APP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
+                    >
+                      Start My 7-Day Trial
+                      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                  <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl">
+                    {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for
+                    Intensive and Accelerator clients.
+                  </p>
+                </div>
               </div>
-              <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl">
-                {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for Intensive
-                and Accelerator clients.
-              </p>
+
+              <AlfredHeroPhone className="md:hidden mt-8" />
             </div>
 
-            <AlfredHeroPhone className="hidden md:block relative w-full max-w-md mx-auto md:max-w-none md:mx-0" />
+            <div className="hidden md:block relative">
+              <div
+                className="pointer-events-none absolute inset-x-[12%] top-[16%] h-[58%] rounded-full blur-[72px] opacity-[0.9]"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(255,159,107,0.44) 0%, rgba(255,107,26,0.22) 34%, rgba(14,22,36,0.08) 70%, transparent 82%)",
+                }}
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute inset-y-[8%] inset-x-[8%] rounded-[36px] border border-white/45 bg-[linear-gradient(155deg,rgba(255,255,255,0.3),rgba(255,255,255,0.08)_34%,rgba(14,22,36,0.08)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
+                aria-hidden
+              />
+              <AlfredHeroPhone className="relative z-10 w-full max-w-md mx-auto md:max-w-none md:mx-0" />
+            </div>
           </div>
         </div>
       </section>
@@ -262,8 +308,12 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-ap-bg">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            Why ALFRED feels different
+            Who&apos;s in the room with you?
           </h2>
+          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
+            Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part
+            out loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
+          </p>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
             Most AI tools sound smart in a blank chat. ALFRED is built for real decision moments. It keeps your
             priorities, constraints, and context in front of you so the advice still fits your life when the week gets

@@ -272,10 +272,11 @@ export default function HomePage() {
                 </svg>
               </div>
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                Awareness
+                See the real bottleneck
               </h3>
               <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Know exactly what&apos;s holding you back and the path to get where you want to go. No more wondering which step to take next. No more wasting energy on strategies that won&apos;t work. You&apos;ll know exactly which moves will make the difference.
+                Get clear on what is draining energy, where your business is fighting your life, and which next move
+                actually matters. No more guessing. No more solving the wrong problem.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -285,10 +286,11 @@ export default function HomePage() {
                 </svg>
               </div>
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                Internal Alignment
+                End the inner split
               </h3>
               <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Turn self-sabotage into momentum. Identify your blocks and turn them into allies. This is the moment we pour rocket fuel on your business, lowering your defenses and amplifying your output.
+                When one part of you wants growth and another part does not trust the cost, execution gets weird. We
+                bring that conflict into the open so momentum stops leaking.
               </p>
             </div>
             <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
@@ -299,10 +301,11 @@ export default function HomePage() {
                 </svg>
               </div>
               <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                Embodied Execution
+                Build a week you can hold
               </h3>
               <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Live the dream you identified. Be the person you want to be. Your average Tuesday becomes something the current version of you would dream of.
+                Turn clarity into calendars, decisions, and commitments you can actually keep. No heroic Tuesday
+                followed by a collapse on Thursday.
               </p>
             </div>
           </div>
@@ -335,13 +338,15 @@ export default function HomePage() {
                 Have it all. <span className="text-gradient-accent">Really.</span>
               </h2>
               <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                Stop chasing the carrot at the end of the stick when what you really wanted was the apple that&apos;s right in front of you.
+                Too many people will sell you the beautiful prison and call it ambition.
               </p>
               <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                Some say you&apos;ll have to miss ball games and dance recitals to build something big. I reject that. You shouldn&apos;t have to compromise what you actually care about, what actually matters to you, to build a business that&apos;s supposed to support your life.
+                I reject that. You should not have to miss ball games, dance recitals, your health, or your peace to
+                build something meaningful. The business is supposed to support your life, not quietly eat it.
               </p>
               <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                When you fuel yourself with what you actually value, success stops being a threat. You end the war between your work and your life. And you start moving forward with greater enthusiasm, <span className="text-gradient-accent font-semibold">because you&apos;re no longer fighting yourself.</span>
+                When work fits your real values, success stops feeling like a threat. The war between your business and
+                your life quiets down. You move with more energy, <span className="text-gradient-accent font-semibold">because you&apos;re no longer building against yourself.</span>
               </p>
               <p className="font-semibold text-lg text-ap-primary">
                 No trade-offs. The work we do together is built on that belief.
@@ -406,14 +411,14 @@ export default function HomePage() {
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
                 <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take the VAPI™</h3>
               </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">72 statements. About 12 minutes. Get your Founder Archetype, your pattern driver, and a clear read on where to focus next.</p>
+              <p className="text-white/75 text-base font-medium leading-relaxed">72 statements. About 12 minutes. Get a clear read on where you are strong, where you are stretched, and what deserves attention next.</p>
             </div>
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
                 <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Get your results</h3>
               </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">See your scores, top priorities, full archetype profile, and your 28-day plan when you use the same email as your portal or ALFRED account. Save as PDF or retake over time.</p>
+              <p className="text-white/75 text-base font-medium leading-relaxed">See your scores, top priorities, and deeper patterns. Use the same email as your portal or ALFRED account to unlock your 28-day plan. Save as PDF or retake over time.</p>
             </div>
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
@@ -585,8 +590,9 @@ export default function HomePage() {
                 Ready to stop building the <span className="text-gradient-accent">cage</span>?
               </h2>
               <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
-                Start with the free VAPI™ Assessment. 72 questions. ~12 minutes.
-                Discover your Founder Archetype, pattern driver, and where you stand across 12 domains, with a personalized 28-day plan when you use the same email as your portal or ALFRED account.
+                Start with the free VAPI™ Assessment. In about 12 minutes, you&apos;ll see where you are strong, where
+                you are stretched, and what to fix next. Use the same email as your portal or ALFRED account to unlock
+                your personalized 28-day plan.
                 <span className="block mt-2 text-white/90 font-medium">Free. No payment required.</span>
               </p>
               <div className="flex flex-wrap gap-3 justify-center">

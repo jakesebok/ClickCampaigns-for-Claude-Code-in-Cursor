@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Strategic Alignment Intensive — Jake Sebok",
   description:
-    "A quarterly half-day workshop for owner-operators who want to connect their daily actions directly to the outcomes that actually matter and leave with a custom Aligned AIOS master prompt.",
+    "A quarterly half-day workshop for owner-operators who need clearer priorities, cleaner decisions, and an Aligned AIOS prompt that actually knows their context.",
 };
 
 export default function StrategicIntensivesPage() {
@@ -30,11 +30,10 @@ export default function StrategicIntensivesPage() {
             life you actually want.
           </p>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
-            The Strategic Alignment Intensive fixes that in a single half-day.
-            You&apos;ll connect your daily actions directly to the outcomes that
-            actually matter — and walk away with a personalized{" "}
-            <strong className="text-ap-primary">Aligned AIOS</strong> master prompt that turns your AI of choice into a coach,
-            strategic advisor, and executive assistant that actually knows you.
+            The Strategic Alignment Intensive fixes that in a single half-day. You&apos;ll get clear on what matters,
+            what this season actually requires, and what deserves your focus next. You also leave with a personalized{" "}
+            <strong className="text-ap-primary">Aligned AIOS</strong> prompt, an AI coach and strategist built from
+            your real priorities, boundaries, and goals.
           </p>
         </div>
       </section>
@@ -49,39 +48,39 @@ export default function StrategicIntensivesPage() {
           <div className="space-y-4">
             {[
               {
-                title: "The Real Reasons (Your Life Lists)",
+                title: "What you actually want",
                 description:
-                  "The end goals underneath the means goals. What you actually want your life to feel like — not just the revenue target.",
+                  "The end goals underneath the means goals. What you want life and work to feel like, not just the number on the whiteboard.",
               },
               {
-                title: "Your Driving Fire + Cause Worth Playing For",
+                title: "The reason this work matters",
                 description:
-                  "A purpose statement that passes the full-body test. Not marketing copy — the real reason you do this work.",
+                  "A purpose statement you can actually feel. Not branding language. The honest reason you do this work.",
               },
               {
-                title: "Your Top 5 Core Values (Operational)",
+                title: "Operating values",
                 description:
-                  "Definition + behaviors + boundary for each. Values that make hard decisions easy.",
+                  "Five values with definitions, behaviors, and boundaries, so hard decisions get cleaner.",
               },
               {
-                title: "The Future You",
+                title: "The future you are building toward",
                 description:
-                  "The person you're becoming across self, social, skills, and service. Standards, not wishes.",
+                  "The standards for who you are becoming across work, self, relationships, and service.",
               },
               {
-                title: "The Revenue Bridge: From Meaning To Math",
+                title: "Revenue math that matches reality",
                 description:
-                  "Needs + desires + impact = Required Revenue. Reverse-engineered to weekly qualified conversations.",
+                  "Translate meaning into numbers, then into weekly conversations and practical targets.",
               },
               {
-                title: "Your Vital Action Plan",
+                title: "The one move that matters most",
                 description:
-                  "The single move that makes everything else easier. Installed on your calendar. Protected from sabotage.",
+                  "A protected action plan for the move that makes everything else easier or unnecessary.",
               },
               {
-                title: "Your Aligned AIOS Master Prompt",
+                title: "Your Aligned AIOS prompt",
                 description:
-                  "A custom master prompt that turns Claude, ChatGPT, Gemini, or another AI into your personalized coach, strategic advisor, and executive assistant. It knows your values, goals, revenue math, standards, and Vital Action because you built that context in the workshop.",
+                  "A personalized AI coach and strategist built from your actual priorities, goals, boundaries, and revenue math.",
               },
             ].map((item) => (
               <div
@@ -134,9 +133,8 @@ export default function StrategicIntensivesPage() {
                   Half-day live workshop (virtual or in-person)
                 </h3>
                 <p className="text-ap-mid">
-                  We work through the full Alignment Arc framework together.
-                  Teaching, exercises, worksheets. You build every asset in real
-                  time — not a passive lecture.
+                  We work through the full clarity process together. Teaching, exercises, and working sessions. You
+                  build every asset in real time, not from the back row of a lecture.
                 </p>
               </div>
             </div>
@@ -147,14 +145,12 @@ export default function StrategicIntensivesPage() {
               </div>
               <div>
                 <h3 className="font-outfit font-semibold text-ap-primary mb-1">
-                  Turn your workshop outputs into your Aligned AIOS
+                  Turn the work into a coach that remembers your context
                 </h3>
                 <p className="text-ap-mid">
-                  We use what you build in the Intensive to create the master
-                  prompt that powers your Aligned AIOS. That prompt can
-                  run inside Claude, ChatGPT, Gemini, or another model and turns
-                  it into a system that knows your values, goals, revenue math,
-                  strategic priorities, and Vital Action.
+                  We use what you build in the Intensive to create the prompt behind your Aligned AIOS. It can run
+                  inside Claude, ChatGPT, Gemini, or another model and give you advice based on your real priorities,
+                  goals, boundaries, and numbers.
                 </p>
               </div>
             </div>
@@ -168,10 +164,8 @@ export default function StrategicIntensivesPage() {
                   Leave with a system you can use immediately
                 </h3>
                 <p className="text-ap-mid">
-                  You leave with a working master prompt and the strategic
-                  context to use it right away. The deliverable is not generic
-                  AI advice. It&apos;s a custom Aligned AIOS built from what we
-                  excavate together in the workshop.
+                  You leave with a working system you can use immediately. Not generic AI prompts. A private coach and
+                  strategist built from the decisions you made in the workshop.
                 </p>
               </div>
             </div>
@@ -219,7 +213,7 @@ export default function StrategicIntensivesPage() {
               $497
             </h2>
             <p className="text-ap-mid text-lg mb-2">
-              Half-day live workshop + pre-work packet + all worksheets + your Aligned AIOS master prompt
+              Half-day live workshop + pre-work packet + all worksheets + your Aligned AIOS prompt
             </p>
 
             <Link

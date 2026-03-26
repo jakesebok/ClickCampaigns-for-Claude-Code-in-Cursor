@@ -62,10 +62,10 @@ export function AlfredHeroPhone({ className = "" }: { className?: string }) {
 
         <Link
           href="#alfred-product-explorer"
-          className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-ap-border bg-white px-4 py-3 shadow-md transition-colors hover:border-ap-accent/60 hover:shadow-lg"
+          className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,247,250,0.95))] px-4 py-3 shadow-[0_24px_48px_-34px_rgba(14,22,36,0.35)] transition-colors hover:border-ap-accent/40 hover:shadow-[0_28px_56px_-34px_rgba(14,22,36,0.42)]"
         >
           <span className="min-w-0 text-left">
-            <span className="block text-[10px] font-semibold uppercase tracking-wider text-ap-accent">
+            <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#b6531b]">
               Interactive demo
             </span>
             <span className="block text-sm font-semibold text-ap-primary leading-snug">
@@ -73,7 +73,7 @@ export function AlfredHeroPhone({ className = "" }: { className?: string }) {
             </span>
           </span>
           <span
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ap-accent/10 text-ap-accent transition-colors hover:bg-ap-accent hover:text-white"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ap-primary text-white shadow-[0_12px_28px_-18px_rgba(14,22,36,0.6)] transition-colors hover:bg-ap-accent"
             aria-hidden
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

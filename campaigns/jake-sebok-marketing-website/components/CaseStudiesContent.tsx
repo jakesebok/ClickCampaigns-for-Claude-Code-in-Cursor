@@ -308,7 +308,10 @@ export function CaseStudiesContent() {
                 Ready for your own story?
               </h2>
               <p className="text-white/80 text-xl font-semibold max-w-2xl mx-auto mb-10">
-                Start with the free VAPI™ Assessment. Discover your Founder Archetype, pattern driver, and where you stand—with a personalized 28-day My Plan when you use the same email as your portal or ALFRED account—then let&apos;s build something that feels like an extension of who you are.
+                Start with the free VAPI™ Assessment. In about 12 minutes, you&apos;ll see where you are strong, where
+                you are stuck, and what deserves attention next. Use the same email as your portal or ALFRED account
+                to unlock your personalized 28-day plan, then let&apos;s build something that feels like an extension
+                of who you are.
               </p>
               <Link
                 href="/assessment"

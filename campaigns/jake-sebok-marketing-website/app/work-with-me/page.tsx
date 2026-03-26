@@ -5,14 +5,14 @@ const ALFRED_APP_URL = "https://alfredai.coach";
 export const metadata = {
   title: "Work With Me — Jake Sebok",
   description:
-    "Free VAPI™ Assessment (Founder Archetype, pattern driver, 28-day My Plan with matching email), workshops, intensives, communities, Accelerator, and Aligned Freedom Coach (ALFRED).",
+    "Start with the free VAPI™ Assessment, then choose the room that fits your season: workshop, community, intensive, Accelerator, or ALFRED.",
 };
 
 const offerings = [
   {
     title: "Free VAPI™ Assessment",
     description:
-      "72 questions. ~12 minutes. Discover your Founder Archetype, your pattern driver, and an honest snapshot across 12 life and business domains. Same email as your free portal or ALFRED account unlocks your personalized 28-day My Plan—week-by-week actions, not just scores.",
+      "72 statements. About 12 minutes. See where you are strong, where you are stretched, and what deserves attention next. Use the same email as your portal or ALFRED account to unlock your personalized 28-day plan.",
     cta: "Take the Assessment",
     href: "/assessment",
     free: true,
@@ -20,7 +20,7 @@ const offerings = [
   {
     title: "Aligned Freedom Workshop",
     description:
-      "90-minute monthly workshop. Surface the beliefs and patterns holding you back—get coached live in the room. Clarity. Community. No fluff.",
+      "90-minute monthly workshop. Bring the place you feel stuck, get coached live, and leave with one move you can actually make this week. Clarity. Community. No fluff.",
     cta: "Join the Next Workshop",
     href: "/work-with-me/freedom-workshop",
     free: true,
@@ -28,7 +28,7 @@ const offerings = [
   {
     title: "Freedom Builders Community",
     description:
-      "Often the next step after the VAPI™. The Aligned Freedom Course lives inside the community—framework + peers to build the foundation for aligned growth.",
+      "Free community for founders who know something is off and want a steadier foundation. The Aligned Freedom Course lives inside, with people who can help you keep moving.",
     cta: "See the Community",
     href: "/work-with-me/freedom-builders",
     free: true,
@@ -36,21 +36,21 @@ const offerings = [
   {
     title: "Strategic Alignment Intensives",
     description:
-      "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
+      "Quarterly half-day workshop for owner-operators who need cleaner priorities, better decisions, and a path forward that actually fits.",
     cta: "See the Intensive",
     href: "/work-with-me/strategic-intensives",
   },
   {
     title: "Aligned Leaders Community",
     description:
-      "$97/mo or $997/yr: weekly live calls, accountability, and a curated cohort of values-aligned founders. Depth and belonging between Freedom Builders and the Aligned Power Accelerator.",
+      "$97/mo or $997/yr. Weekly live support, honest accountability, and a serious room for founders who want community without the hustle-culture noise.",
     cta: "See the Membership",
     href: "/work-with-me/aligned-leaders",
   },
   {
     title: "Aligned Power Accelerator",
     description:
-      "12-month group coaching program. The flagship experience for entrepreneurs ready to build a business that's an extension of who they are. Application required.",
+      "12-month group coaching program for entrepreneurs who are done succeeding in ways that cost too much and ready to rebuild around what actually fits. Application required.",
     cta: "Apply Now",
     href: "/work-with-me/apply",
     featured: true,
@@ -75,7 +75,10 @@ export default function WorkWithMePage() {
             Your place. Your pace.
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
-            Start with the free VAPI™ Assessment to see your Founder Archetype, your pattern driver, and the levers most likely to move your life and business forward. From there, choose the room that fits your season: a free workshop, the community, a Strategic Alignment Intensive, ongoing group support, or the flagship Accelerator. Every path is built to turn clarity into sustained action, not another short burst of motivation.
+            Start with the free VAPI™ Assessment to see where you are strong, where you are stuck, and what needs
+            attention first. From there, choose the room that fits your season: a workshop, community, intensive,
+            ongoing support, or the flagship Accelerator. Every path is built to turn clarity into sustained action,
+            not another short burst of motivation.
           </p>
         </div>
       </section>
@@ -153,7 +156,9 @@ export default function WorkWithMePage() {
                 Need your commitment to survive past the workshop?
               </h2>
               <p className="text-lg font-semibold text-ap-mid leading-relaxed">
-                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. It keeps your VAPI™ results, Founder Archetype, pattern driver, 28-day My Plan, weekly 6Cs, and Vital Action in the room when you&apos;re tired, busy, or tempted to say yes to the wrong thing. Different offer than what&apos;s above. Same alignment standard.
+                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. It keeps your priorities,
+                commitments, and key context close when the week gets loud, so the clarity you found in a good moment
+                does not disappear in a tired one. Different offer than what&apos;s above. Same standard.
               </p>
             </div>
             <div className="flex flex-col gap-3 shrink-0 sm:min-w-[200px]">

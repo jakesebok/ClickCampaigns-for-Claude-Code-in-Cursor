@@ -4,7 +4,7 @@ import { SocialLinks } from "@/components/SocialLinks";
 export const metadata = {
   title: "Contact — Jake Sebok",
   description:
-    "Get in touch with Jake Sebok. Questions about the VAPI Assessment, workshops, or coaching? Send a message.",
+    "Get in touch with Jake Sebok. Questions about the VAPI™ Assessment, ALFRED, workshops, or coaching? Send a message.",
 };
 
 export default function ContactPage() {
@@ -23,9 +23,8 @@ export default function ContactPage() {
           Let&apos;s talk.
         </h1>
         <p className="text-ap-mid text-xl font-semibold mb-10">
-          Have a question about the VAPI™ Assessment, the Aligned Freedom
-          Workshop, or coaching? Send me a message and I&apos;ll get back to
-          you.
+          Have a question about the VAPI™ Assessment, ALFRED, workshops, or working together? Send me a note and
+          I&apos;ll point you in the right direction.
         </p>
 
         <form
@@ -91,7 +90,7 @@ export default function ContactPage() {
           >
             Take the VAPI™
           </Link>{" "}
-          and discover your Founder Archetype.
+          and see where you&apos;re strong, stretched, and what needs attention next.
         </p>
       </div>
     </section>

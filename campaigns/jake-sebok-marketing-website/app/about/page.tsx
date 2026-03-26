@@ -7,7 +7,7 @@ import { testimonials } from "@/lib/testimonials";
 export const metadata = {
   title: "About Jake Sebok — Values-Aligned Performance Coach",
   description:
-    "Jake Sebok helps entrepreneurs who feel trapped by their businesses rediscover their vision. Master Certified Coach, business owner, and full-time dad who chose alignment over the cage.",
+    "Jake Sebok helps entrepreneurs build businesses that fit their lives, not just their ambition. Master Certified Coach, business owner, and full-time dad who chose alignment over the cage.",
 };
 
 export default function AboutPage() {
@@ -124,10 +124,14 @@ export default function AboutPage() {
               I coach the whole human being, not just the business
             </h3>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-4">
-              Where competitors optimize for output, I optimize for alignment. I use NLP-based parts work to address the root cause of self-sabotage. I build Alignment Blueprints from your actual values, not inherited or assumed ones.
+              Most business problems look strategic from the outside and personal from the inside. I help you surface
+              the real conflict, name what the current version of success is costing you, and rebuild from what
+              actually fits. The tools include deep coaching, parts work, and values work, but the point is simple:
+              execution stops feeling like a fight with yourself.
             </p>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed">
-              This isn&apos;t peak performance. It&apos;s sustainable performance, because peaks imply valleys and valleys carry a cost you were never willing to pay.
+              This is sustainable performance. You do not need a peak that wrecks the rest of your life. You need your
+              work, relationships, health, and ambition pulling in the same direction.
             </p>
           </div>
 
@@ -137,7 +141,9 @@ export default function AboutPage() {
               Built on thinkers who understood the human journey
             </h3>
             <p className="text-ap-mid text-xl font-semibold leading-relaxed">
-              Howard Thurman. Joseph Campbell&apos;s Hero&apos;s Journey. Carl Jung&apos;s psychology. Brené Brown&apos;s belonging work. I don&apos;t just coach tactics. I help you let go of old identities and return to the fire that was always yours.
+              Howard Thurman. Joseph Campbell. Carl Jung. Brené Brown. Thinkers who understood that real change is not
+              just tactical, it is identity-level. I use what is useful from that lineage to help you let an old
+              version of success die and build from something truer.
             </p>
           </div>
         </div>

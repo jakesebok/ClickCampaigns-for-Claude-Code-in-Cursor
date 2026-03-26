@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Freedom Builders Community — Jake Sebok",
-    description:
-    "The next step after the VAPI™. Free community plus the Aligned Freedom Course—framework and peers to build the foundation for aligned growth.",
+  description:
+    "Free community and course for founders who know something is off and want a steadier foundation for growth.",
 };
 
 export default function FreedomBuildersPage() {
@@ -19,17 +19,20 @@ export default function FreedomBuildersPage() {
           Freedom Builders Community
         </p>
         <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-          Build the foundation for aligned growth
+          Build the foundation your growth can actually hold
         </h1>
         <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-6">
-          This is often the next step founders take after the VAPI™—you&apos;ve seen your Founder Archetype, your scores, and your priorities. Now you need the framework and the people to act on it. The{" "}
-          <strong className="text-ap-primary">Aligned Freedom Course</strong> lives inside Freedom Builders, and the community gives you the support to apply it.
+          This is often the next step after the VAPI™. You know something is off. You can feel the cost of the version
+          of success you have been chasing. Freedom Builders gives you a place to slow down, get honest, and start
+          rebuilding around what actually fits.
         </p>
         <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8">
-          Here&apos;s what the work is built for: going beneath the surface goals to uncover what you actually want. Mapping the hidden cost of the goals you&apos;re chasing—on your health, relationships, and nervous system. Identifying where your business model conflicts with your values and generates the self-sabotage you can&apos;t explain. Dismantling the subconscious patterns that cap your growth and trigger burnout. Rebuilding your business around sustainability, leverage, and joy—so growth no longer requires self-sacrifice. And integrating it all: business, body, relationships, and life pulling in the same direction.
+          Inside, the <strong className="text-ap-primary">Aligned Freedom Course</strong> helps you clarify what you
+          actually want, spot the patterns and business-model choices draining you, and rebuild around sustainability,
+          leverage, and joy. The community gives you people who get it while you do the work.
         </p>
         <p className="text-lg font-semibold text-ap-mid leading-relaxed mb-10">
-          Learn at your own pace. Connect with founders who get it. Build something worth waking up for.
+          Learn at your own pace. Connect with people who get it. Build something worth waking up for.
         </p>
         <Link
           href="/contact"

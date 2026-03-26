@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Apply — Aligned Power Accelerator | Jake Sebok",
   description:
-    "Apply for the Aligned Power Accelerator—a 12-month group coaching program for entrepreneurs ready to build a business that's an extension of who they are.",
+    "Apply for the Aligned Power Accelerator, a 12-month group coaching program for entrepreneurs ready to build a business that fits their life and ambition.",
 };
 
 export default function ApplyPage() {
@@ -33,9 +33,8 @@ export default function ApplyPage() {
             Apply for the 12-month program
           </h1>
           <p className="text-xl font-semibold text-ap-mid">
-            The Accelerator is for entrepreneurs who are ready to do the real
-            work. I take a limited cohort each year. Tell me about yourself, your
-            business, and why you want in.
+            The Accelerator is for entrepreneurs who are done succeeding in ways that cost too much. Small cohort.
+            Personal review. Tell me about your business, what is not working, and why now matters.
           </p>
         </div>
       </section>
@@ -114,7 +113,7 @@ export default function ApplyPage() {
                 name="why"
                 required
                 rows={5}
-                placeholder="Tell me your story. What's not working? What would change if you had alignment between who you are and how you work?"
+                placeholder="Tell me your story. What is working, what is not, and what would change if your business finally fit your life?"
                 className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition resize-none"
               />
             </div>

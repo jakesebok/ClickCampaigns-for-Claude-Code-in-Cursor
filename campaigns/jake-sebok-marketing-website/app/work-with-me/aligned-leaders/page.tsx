@@ -3,34 +3,34 @@ import Link from "next/link";
 export const metadata = {
   title: "Aligned Leaders Community · Jake Sebok",
   description:
-    "$97/mo or $997/yr: weekly live calls, accountability, resources, and a curated cohort of values-aligned founders. A bridge between the free community and the Aligned Power Accelerator.",
+    "$97/mo or $997/yr: weekly live calls, accountability, resources, and a serious room for founders who want honest support without hustle-culture noise.",
 };
 
 const pillars = [
   {
     title: "Curated belonging",
     description:
-      "This isn’t a noisy feed or a race to look successful. It’s a container for founders who care about alignment, integrity, and depth, where belonging beats performing.",
+      "Not a noisy feed. Not a place to posture. A serious room for founders who care about integrity, depth, and telling the truth about what is actually happening.",
   },
   {
     title: "A weekly anchor",
     description:
-      "Live calls keep the community real. You get rhythm, not randomness: a predictable place to bring what’s actually happening in your business and life.",
+      "Live calls give your week a place to land. Bring the decision, friction, or drift you do not want to carry alone.",
   },
   {
     title: "Accountability that doesn’t shame",
     description:
-      "We name commitments, celebrate truth over polish, and use friction as data, not as evidence that you’re broken. Pain is a compass; the room helps you read it.",
+      "We name commitments, tell the truth when the week went sideways, and use friction as data instead of evidence that you’re broken.",
   },
   {
     title: "Practical depth",
     description:
-      "Resources, prompts, and conversations tie back to the work you’re already doing: VAPI™, values, nervous system, revenue, leadership. So insight turns into movement.",
+      "Resources, prompts, and conversations tie back to your real week: priorities, capacity, revenue, leadership, and the parts of life your business is supposed to support.",
   },
   {
     title: "Sustainable pace",
     description:
-      "Growth that costs you your health or relationships isn’t the win. This is ongoing support for founders building something they can sustain, not another sprint to burnout.",
+      "Growth that costs your health or relationships is not the win. This is ongoing support for founders building something they can actually sustain.",
   },
 ];
 
@@ -48,12 +48,12 @@ const included = [
   {
     title: "Peer accountability",
     description:
-      "A cohort of like-minded, values-aligned founders who get the tension between ambition and authenticity, and who will call you forward without cold hustle culture.",
+      "A cohort of like-minded founders who get the tension between ambition and authenticity, and who will call you forward without cold hustle culture.",
   },
   {
-    title: "Priority lane in Jake’s ecosystem",
+    title: "Clear path to deeper work",
     description:
-      "You’re inside the orbit: aligned language, shared context, and a natural bridge if you later want deeper work like the Aligned Power Accelerator.",
+      "If you later want an Intensive or the Accelerator, you are already in shared context instead of starting cold.",
   },
 ];
 
@@ -75,19 +75,14 @@ export default function AlignedLeadersPage() {
             Your people. Your compass. Ongoing support.
           </h1>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-6">
-            You can be good at business and still feel alone in the parts that
-            matter: values, identity, the mask you wear to keep everything
-            together. What if you didn&apos;t have to white-knuckle that anymore?
+            You can be good at business and still feel alone in the parts that matter. The decisions. The pressure.
+            The part of you trying to hold it all together. What if you did not have to white-knuckle that anymore?
           </p>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-10">
             The{" "}
             <strong className="text-ap-primary">Aligned Leaders Community</strong>{" "}
-            is for founders who want{" "}
-            <strong className="text-ap-primary">belonging</strong>, not{" "}
-            <strong className="text-ap-primary">fitting in</strong>, alongside
-            peers who are building with integrity. Weekly calls, real
-            accountability, and resources that help you steer by alignment, not
-            just adrenaline.
+            is for founders who want weekly support, honest accountability, and peers who care as much about how the
+            business feels to run as how it performs. Belonging, not performance. Rhythm, not random motivation.
           </p>
         </div>
       </section>
@@ -130,10 +125,8 @@ export default function AlignedLeadersPage() {
             Why $97 a month
           </h2>
           <p className="text-ap-mid text-lg mb-8">
-            The fee does three jobs: it keeps the room serious, it funds the
-            container (calls, curation, resources), and it makes your commitment
-            visible to you. You&apos;re not buying access to a secret
-            tactic. You&apos;re buying consistency, proximity, and a standard.
+            The fee does three jobs: it keeps the room serious, it funds the container, and it makes your commitment
+            visible to you. You are not buying a secret tactic. You are buying consistency, proximity, and a standard.
           </p>
           <ul className="space-y-3 text-lg font-semibold text-ap-mid">
             <li className="flex gap-3">
@@ -214,9 +207,8 @@ export default function AlignedLeadersPage() {
                   Apply or reach out
                 </h3>
                 <p className="text-ap-mid">
-                  We keep the cohort values-aligned. Start with a short
-                  conversation or message so we both know it&apos;s a fit. That
-                  protects the room for everyone.
+                  We keep the room high-trust and intentional. Start with a short conversation or message so we both
+                  know it&apos;s a fit. That protects the room for everyone.
                 </p>
               </div>
             </div>
@@ -275,7 +267,7 @@ export default function AlignedLeadersPage() {
       <section className="pb-16 sm:pb-20">
         <div className="max-w-[720px] mx-auto px-5 sm:px-6 pt-16">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-6">
-            Where this sits in the ecosystem
+            Where this fits
           </h2>
           <p className="text-ap-mid text-lg mb-8">
             Same mission. Different depth and commitment. You don&apos;t have to
@@ -288,8 +280,7 @@ export default function AlignedLeadersPage() {
                 Freedom Builders (free)
               </h3>
               <p className="text-ap-mid">
-                Foundational community plus the Aligned Freedom Course. Learn and
-                connect at your own pace.
+                Free community and the Aligned Freedom Course. Learn, reconnect, and build at your own pace.
               </p>
             </div>
             <div className="rounded-[16px] border-2 border-ap-accent/40 bg-ap-accent/5 p-5">
@@ -380,7 +371,7 @@ export default function AlignedLeadersPage() {
             </p>
             <p className="text-ap-mid text-lg mb-6">
               Weekly calls, cohort accountability, resources & replays, and a
-              values-aligned room.
+              serious room.
             </p>
 
             <Link
