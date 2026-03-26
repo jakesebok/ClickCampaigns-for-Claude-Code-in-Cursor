@@ -25,7 +25,7 @@ const plans = [
     price: "$39",
     period: "/month",
     description: "Full access. Cancel anytime.",
-    cta: "Start 7-Day Free Trial",
+    cta: "Start My 7-Day Trial",
     href: "/api/checkout?plan=monthly",
     highlight: false,
   },
@@ -34,7 +34,7 @@ const plans = [
     price: "$349",
     period: "/year",
     description: "Save 25%. Less than $1/day.",
-    cta: "Start 7-Day Free Trial",
+    cta: "Start My 7-Day Trial",
     href: "/api/checkout?plan=annual",
     highlight: true,
     badge: "Best value",
@@ -89,11 +89,12 @@ export default async function PricingPage() {
       <div className="px-6 py-24 max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-serif font-bold mb-4">
-            Simple pricing. Real coaching.
+            Simple pricing. Full-context coaching.
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Less than the cost of one coaching session per month. All features
-            included. No upsells inside the app.
+            One lane. Full product. Your Alignment Blueprint, VAPI™, Fire
+            Starters, Daily Sparks, and 6Cs stay in the room for less than many
+            founders spend on a single coaching session.
           </p>
         </div>
 
@@ -152,7 +153,7 @@ export default async function PricingPage() {
         {/* Extended Trials */}
         <div className="max-w-2xl mx-auto space-y-6">
           <h2 className="text-xl font-serif font-bold text-center">
-            Extended access for Intensive & coaching
+            Extended access for Intensives and coaching clients
           </h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {tiers.map((t) => (

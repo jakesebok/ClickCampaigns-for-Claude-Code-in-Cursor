@@ -52,7 +52,7 @@ export default function HomePage() {
                 success.
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
-                Inconsistent execution and low motivation aren&apos;t proof you need to grind harder. They&apos;re signs you&apos;re building the wrong thing. When what you build matches who you are, effort becomes momentum and your impact finally catches up to your ambition.
+                Inconsistent execution and low motivation are usually signs the business no longer fits the life you actually want. When what you build matches who you are, effort stops leaking, momentum compounds, and your impact catches up to your ambition.
               </p>
               <div className="flex flex-wrap gap-3 items-stretch">
                 <Link
@@ -68,7 +68,7 @@ export default function HomePage() {
                   href="/work-with-me"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all min-w-[220px]"
                 >
-                  See How It Works
+                  See Your Next Step
                 </Link>
               </div>
             </div>
@@ -238,7 +238,7 @@ export default function HomePage() {
             It isn&apos;t a strategy problem. It&apos;s not even a discipline problem. It&apos;s an <span className="text-gradient-accent">alignment</span> problem.
           </h2>
           <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
-            Your business might be growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. And when success competes with your true values, your body treats growth like a threat. It slams on the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
+            Maybe your business is growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. When success competes with your true values, your body treats growth like a threat. It hits the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
           </p>
           <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
             <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
@@ -398,7 +398,7 @@ export default function HomePage() {
             Three steps. <span className="text-gradient-accent">Your pace.</span>
           </h2>
           <p className="text-white/80 text-lg font-semibold max-w-2xl mb-8">
-            Start with the free assessment. Get clarity. Then choose your path.
+            Start with the free assessment. Get your map. Then choose the level of support that fits.
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
@@ -418,9 +418,9 @@ export default function HomePage() {
             <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
-                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take Action</h3>
+                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Choose your next step</h3>
               </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">Workshops, community, intensives, group coaching. Many entry points—from low-commitment to high-touch. Find the right fit for where you are.</p>
+              <p className="text-white/75 text-base font-medium leading-relaxed">Workshop, community, intensive, or coaching. Choose the level of support that matches this season instead of guessing your way into more complexity.</p>
             </div>
           </div>
           <div className="mt-10 flex justify-center">
@@ -560,7 +560,7 @@ export default function HomePage() {
                 href="/work-with-me"
                 className="text-gradient-accent font-semibold text-sm hover:underline"
               >
-                explore how it works
+                see your options
               </Link>
             </div>
           </div>
@@ -603,7 +603,7 @@ export default function HomePage() {
                   href="/work-with-me"
                   className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-white/60 text-white font-semibold text-base tracking-wider hover:bg-white/10 transition-all"
                 >
-                  See All Offerings
+                  See Your Options
                 </Link>
               </div>
               <div className="mt-8 pt-8 border-t border-white/20 text-center">

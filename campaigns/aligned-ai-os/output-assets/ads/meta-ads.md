@@ -82,7 +82,7 @@ What if it refused to give you "hustle harder" advice and only offered alignment
 Build it in one half-day. $497 + 30 days free Aligned Freedom Coach access.
 
 **Headline:** Values-Aligned Strategy on Demand
-**CTA:** Learn More
+**CTA:** Reserve Your Seat
 **Link:** [jakesebok.com/work-with-me/strategic-intensives]
 
 ---
@@ -124,4 +124,4 @@ Activate your 30-day free access now. Use code INTENSIVE30.
 
 **Headline:** Your AI Coach Is Ready
 **CTA:** Activate Now
-**Link:** [Aligned Freedom Coach app signup page]
+**Link:** [alfredai.coach/sign-up]

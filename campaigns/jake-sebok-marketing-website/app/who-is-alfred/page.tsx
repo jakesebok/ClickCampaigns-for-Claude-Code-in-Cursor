@@ -111,7 +111,7 @@ export default function WhoIsAlfredPage() {
               <AlfredHeroPhone className="md:hidden mb-8" />
 
               <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-8">
-                ALFRED keeps your best decisions in the room when your energy is low and the week gets loud.
+                ALFRED keeps your Alignment Blueprint, VAPI™ read, 6Cs, and weekly commitments in the room when your energy drops and the week gets loud.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <a
@@ -120,7 +120,7 @@ export default function WhoIsAlfredPage() {
                   rel="noopener noreferrer"
                   className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
                 >
-                  Open Aligned Freedom Coach
+                  Start My 7-Day Trial
                   <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path
                       strokeLinecap="round"
@@ -231,10 +231,9 @@ export default function WhoIsAlfredPage() {
             <blockquote className="rounded-2xl border border-ap-border border-l-4 border-l-ap-accent bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_24px_60px_-28px_rgba(14,22,36,0.18)]">
               <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic text-center sm:text-left mb-4">
                 &ldquo;I built ALFRED because I wanted something that would challenge me and optimize for what I actually
-                want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, values docs that you throw in a drawer
-                and forget about? Here, along with your assessment results, founder archetype, and weekly reflections, they
-                stay current and alive in the conversation — in front of you and guiding your decisions when resolve runs
-                thin.&rdquo;
+                want, not whatever looks shiny at 11&nbsp;p.m. The mission, vision, and values docs most people throw in a
+                drawer and forget about stay current here. Along with your assessment results, founder archetype, and
+                weekly reflections, they stay alive in the conversation and in front of you when resolve runs thin.&rdquo;
               </p>
               <cite className="not-italic block text-center sm:text-left text-sm font-semibold text-ap-mid">
                 — Jake Sebok

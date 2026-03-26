@@ -58,7 +58,7 @@ In the second column, list every activity, person, and environment that leaves y
 
 That gap between the two lists? That's the misalignment. That's where your fire is being suffocated. And that gap is also your map forward—because what needs to change becomes obvious once you see it written in your own handwriting.
 
-**Take the VAPI Assessment.** I've built a tool that helps you identify where you are on the path from transformation to vocation. It won't tell you what to do—but it will tell you where you're stuck, and that's worth knowing. You can find it at the URL below.
+**Take the VAPI™ Assessment.** I built it to give you an honest baseline on where your life and work are aligned, where they&apos;re leaking, and what needs attention first. It won&apos;t hand you a destiny in a neat little box. It will show you the pressure points with more clarity than most people ever let themselves see, and that clarity is often enough to make the next right step obvious. You can take it at https://jakesebok.com/assessment.
 
 **Join the community.** You don't have to walk this path alone. You weren't meant to figure life out alone. Coaching, mentorship, and community aren't crutches—they're accelerators. There are other fire-wielders out there—people who understand the journey, who speak the language, who know what it's like to hold something sacred and try to build a life around it. Find them. Be with them. Let them see your fire.
 
@@ -102,5 +102,5 @@ Let's get after it.
 
 ---
 
-*For exercises, the VAPI assessment, and resources to support your journey:*
-*[URL]*
+*For exercises, the VAPI™ Assessment, and resources to support your journey:*
+*https://jakesebok.com/assessment*

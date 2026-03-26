@@ -88,7 +88,7 @@ Step back for a second and look at what you have now:
 - A capacity check that says whether this is sustainable
 - A highest-leverage move to pull when the math doesn't fit
 
-This is not a dream. This is not a vision board. This is a **strategy machine.** And every number in it feeds directly into your AI OS so your coach can hold you accountable to the math—not just the motivation.
+This is not a dream. This is not a vision board. This is a **strategy machine.** And every number in it feeds directly into your **Aligned AIOS** so your coach can hold you accountable to the math—not just the motivation.
 
 Alright. Lesson 6, done. Deep breath. You've done incredible work.
 

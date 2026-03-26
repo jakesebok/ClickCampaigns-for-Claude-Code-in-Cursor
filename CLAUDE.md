@@ -297,6 +297,16 @@ Full details: [agents/Agents-List.md](agents/Agents-List.md)
 
 ## How I Build Assets
 
+### The Ryan Layer (Always Active)
+
+Ryan's direct response copywriting principles are permanently loaded into every specialist who touches copy. This is not a separate handoff — it's a permanent lens.
+
+Every headline, CTA, proof element, and persuasion sequence is written with Ryan's expertise baked in from the start. When Cassidy designs a page, she writes headlines with Ryan's specificity standards. When Paige writes emails, she uses Ryan's emotional triggers. When Tyler writes a webinar script, he builds in Ryan's objection handling.
+
+**After every asset is created,** a single-pass copy review runs using `production/copy-critique/SKILL.md`. This catches anything the permanent lens missed. Changes are applied as diffs to the same file — no draft/final split.
+
+---
+
 ### Workflow A: Non-HTML Direct Response
 **Emails, ad copy, VSL scripts, sales letters (as documents)**
 
@@ -306,24 +316,23 @@ Ryan (Direct Response Copywriter) creates the asset:
 
 **Examples:** Email sequences, Meta ads, YouTube ad scripts, VSL scripts, affiliate swipe copy
 
+**Copy Review:** After completing this asset, perform a single-pass copy review following `production/copy-critique/SKILL.md`. Apply changes as diffs to the same file.
+
 ---
 
-### Workflow B: Short HTML Pages (Design-First + Copy Critique)
-**Pages with headlines, bullets, and CTAs - not long-form copy**
+### Workflow B: Short HTML Pages (Design-First + Copy Review)
+**Pages with headlines, bullets, and CTAs — not long-form copy**
 
-Cassidy (Website Designer) leads, Ryan (Copywriter) critiques:
+Cassidy (Website Designer) creates the page with Ryan's copy principles already loaded:
 
 1. **For funnel pages, ask about styling first** (see [Styling Guide](#funnel-pages-ask-user))
-2. **Cassidy creates HTML** with her best copy for headlines, subheadlines, bullets, CTAs
-3. **Ryan reviews and creates a copy critique document** (Markdown) with:
-   - Specific suggested changes
-   - Rationale for each change
-   - Alternative headline/CTA options
-4. **Cassidy updates copy only** - design stays pixel-perfect identical
+2. **Cassidy creates HTML** with strong copy from the start — specific headlines, benefit-driven subheadlines, compelling CTAs (Ryan's principles are baked in)
+3. **Single-pass copy review** — re-read the page through Ryan's direct response lens, identify specific improvements, apply as diffs to the same file
+4. **Design lock** — verify copy changes haven't broken layout, spacing, or responsive behavior
 
 **Output files:**
-- `html/[page-name].html` - The final page
-- `documents/[page-name]-copy-critique.md` - Ryan's critique (for reference)
+- `html/[page-name].html` — The finished page (copy already refined)
+- `documents/[page-name]-copy-critique.md` — What was changed and why (user reference)
 
 **Pages that use this workflow:**
 
@@ -336,6 +345,8 @@ Cassidy (Website Designer) leads, Ryan (Copywriter) critiques:
 | About pages | Brand website → full brand |
 | Contact pages | Brand website → full brand |
 
+**Copy Review:** After completing this asset, perform a single-pass copy review following `production/copy-critique/SKILL.md`. Apply changes as diffs to the same file. Save critique to `documents/[page-name]-copy-critique.md`.
+
 ---
 
 ### Workflow C: Long-Form HTML Pages (Copy-First)
@@ -343,16 +354,18 @@ Cassidy (Website Designer) leads, Ryan (Copywriter) critiques:
 
 All pages in this workflow are funnel pages → **always ask about styling** (see [Styling Guide](#funnel-pages-ask-user))
 
-Ryan (Copywriter) leads, Cassidy (Designer) implements:
+Ryan (Copywriter) leads, Cassidy (Designer) implements with Ryan's principles loaded:
 
 1. **Ryan writes complete copy first** → Markdown document (4,000-10,000+ words)
    - Full sales letter with headlines, story, proof, offer stack, objection handling, CTAs
-2. **Cassidy designs HTML around the copy** - copy dictates page structure
-3. **Ryan does final copy review** (optional tweaks if needed)
+2. **Cassidy designs HTML around the copy** with Ryan's principles still active — copy dictates page structure
+3. **Single-pass copy review** — re-read the finished HTML through Ryan's lens, apply final improvements as diffs
+4. **Design lock** — verify copy changes haven't broken layout or responsive behavior
 
 **Output files:**
-- `documents/[page-name]-copy.md` - Ryan's full copy document
-- `html/[page-name].html` - Cassidy's designed page
+- `documents/[page-name]-copy.md` — Ryan's full copy document
+- `html/[page-name].html` — The finished designed page (copy already refined)
+- `documents/[page-name]-copy-critique.md` — What was changed and why (user reference)
 
 **Pages that use this workflow:**
 - Long-form sales pages
@@ -361,26 +374,25 @@ Ryan (Copywriter) leads, Cassidy (Designer) implements:
 - Upsell/downsell pages
 - Any page requiring persuasive long-form writing
 
+**Copy Review:** After completing this asset, perform a single-pass copy review following `production/copy-critique/SKILL.md`. Apply changes as diffs to the same file. Save critique to `documents/[page-name]-copy-critique.md`.
+
 ---
 
 ### Workflow D: Webinar Slides
 **Webinar presentations with script**
 
-Tyler (Webinar Specialist) leads, Ryan (Copywriter) critiques, Cassidy (Designer) implements:
+Tyler (Webinar Specialist) leads with Ryan's copy principles loaded, Cassidy (Designer) implements:
 
-1. **Tyler writes the complete webinar script** (Markdown):
+1. **Tyler writes the complete webinar script** (Markdown) with Ryan's persuasion principles baked in:
    - Slide-by-slide outline (50+ slides)
    - Speaker notes / what to say for each slide
    - Story structure, offer reveal, close
    - Follows Perfect Webinar framework
-2. **Ryan critiques the copy** (Markdown):
-   - Reviews persuasion elements, offer positioning, objection handling
-   - Suggests stronger hooks, transitions, and closes
-3. **Tyler incorporates feedback** and finalizes script
-4. **I ask about format and styling:**
+2. **Single-pass copy review** — re-read through Ryan's lens, apply improvements as diffs to the script
+3. **I ask about format and styling:**
    - Format: "Do you want PowerPoint (.pptx), HTML slides, or both?"
    - Styling: See [Styling Guide > Presentations](#presentations-ask-user)
-5. **Cassidy designs the slide deck** in chosen format(s):
+4. **Cassidy designs the slide deck** in chosen format(s):
    - Visual design based on Tyler's script
    - 5 words max per slide rule
    - Keeps design focused on speaker, not slides
@@ -393,24 +405,26 @@ Tyler (Webinar Specialist) leads, Ryan (Copywriter) critiques, Cassidy (Designer
 | **Both** | Maximum flexibility | Get both formats from same script |
 
 **Output files:**
-- `documents/webinar-script.md` - Tyler's full script with speaker notes
-- `documents/webinar-copy-critique.md` - Ryan's critique
-- `presentations/webinar-slides.pptx` - PowerPoint (if chosen)
-- `html/webinar-slides.html` - HTML slides (if chosen)
+- `documents/webinar-script.md` — Tyler's full script with speaker notes (copy already refined)
+- `presentations/webinar-slides.pptx` — PowerPoint (if chosen)
+- `html/webinar-slides.html` — HTML slides (if chosen)
+
+**Copy Review:** After completing the script, perform a single-pass copy review following `production/copy-critique/SKILL.md`. Apply changes as diffs to the same file.
 
 ---
 
 ### Workflow E: Lead Magnets & Books
 **PDFs, guides, checklists, workbooks, reports, and books**
 
-Kendall (Book Ghostwriter) leads, Lena (Graphic Designer) designs:
+Kendall (Book Ghostwriter) leads with Ryan's copy principles loaded, Lena (Graphic Designer) designs:
 
-1. **Kendall writes the complete content** (Markdown):
+1. **Kendall writes the complete content** (Markdown) with Ryan's persuasion principles for headlines, CTAs, and key takeaways:
    - Full text with chapters/sections
    - Headlines, subheads, body copy
    - Callout boxes, key takeaways
-2. **I ask: "Do you want PDF, DOCX (editable), or both?"**
-3. **Lena designs the formatted document** using **full Brand Style Guide** (see [Styling Guide](#lead-magnets-pdfs--books-full-brand)):
+2. **Single-pass copy review** — re-read through Ryan's lens, apply improvements as diffs
+3. **I ask: "Do you want PDF, DOCX (editable), or both?"**
+4. **Lena designs the formatted document** using **full Brand Style Guide** (see [Styling Guide](#lead-magnets-pdfs--books-full-brand)):
    - Professional layout with brand colors/fonts
    - Cover page, table of contents
    - Visual hierarchy and formatting
@@ -431,9 +445,26 @@ Kendall (Book Ghostwriter) leads, Lena (Graphic Designer) designs:
 - Full books - 100-200+ pages
 
 **Output files:**
-- `documents/[asset-name]-content.md` - Kendall's full content
-- `pdfs/[asset-name].pdf` - Designed PDF (if chosen)
-- `documents/[asset-name].docx` - Editable Word doc (if chosen)
+- `documents/[asset-name]-content.md` — Kendall's full content (copy already refined)
+- `pdfs/[asset-name].pdf` — Designed PDF (if chosen)
+- `documents/[asset-name].docx` — Editable Word doc (if chosen)
+
+**Copy Review:** After completing the content, perform a single-pass copy review following `production/copy-critique/SKILL.md`. Apply changes as diffs to the same file.
+
+---
+
+### Cross-Asset Consistency
+
+When building multiple assets for the same campaign, apply a consistency pass after all assets are complete. This catches discrepancies that per-asset reviews miss:
+
+- Guarantee terms match across all pages and emails
+- Pricing, savings amounts, and discount percentages are consistent
+- Dates and deadlines align across all assets
+- Product/offer names use exact same wording everywhere
+- Copyright year is current on all pages
+- CTA destinations point to the correct next step in the funnel
+
+See `production/copy-critique/SKILL.md` for full details.
 
 ---
 
@@ -515,6 +546,7 @@ Production skills ensure high-quality output for final deliverables. These skill
 | Asset Type | Repo Skill File | Claude Code Command |
 |------------|-----------------|---------------------|
 | **HTML pages** | `production/frontend-design/SKILL.md` | `/frontend-design` |
+| **Copy critique** | `production/copy-critique/SKILL.md` | — |
 | **PowerPoint decks** | `production/pptx/SKILL.md` | `/pptx` |
 | **PDF documents** | `production/pdf/SKILL.md` | `/pdf` |
 | **Word documents** | `production/docx/SKILL.md` | `/docx` |
@@ -542,12 +574,14 @@ Read: skills-and-instructions/skills/production/docx/SKILL.md
 ### How Skills Work Together
 - **Marketing skills** (`skills/funnels/`, `skills/tasks/`) = WHAT to write (VSL structure, email sequences, persuasion frameworks)
 - **Production skills** (`skills/production/`) = HOW to output it (well-designed HTML, properly formatted files)
+- **Copy critique** (`skills/production/copy-critique/`) = QUALITY — single-pass direct response review applied to every asset
 
 ### Example Workflow for a Sales Page
 1. Read the marketing skill: `skills/funnels/vsl-hybrid/SKILL.md`
 2. Write the copy following direct response principles
 3. Read the production skill: `skills/production/frontend-design/SKILL.md`
 4. Create production-quality HTML following the design guidelines
+5. Run single-pass copy review per `skills/production/copy-critique/SKILL.md`
 
 Always reference the appropriate production skill when creating final deliverables.
 
@@ -609,6 +643,72 @@ Saves image file to specified path.
 
 ---
 
+## Clone Page
+
+Clone any existing webpage into a self-contained HTML file. Uses [Firecrawl](https://www.firecrawl.dev/) to scrape the page, embed all CSS inline, remove tracking scripts, and extract the site's branding.
+
+**Requires:** `FIRECRAWL_API_KEY` in `.env`
+
+```bash
+node scripts/clone-page.js "https://example.com/sales-page" campaigns/[campaign-name]/output-assets/html/cloned-page.html
+```
+
+**What it produces:**
+- **`cloned-page.html`** — Self-contained HTML with all CSS embedded, images as absolute URLs, tracking scripts removed
+- **`cloned-page-branding.md`** — Extracted brand analysis (colors, fonts, typography, button styles)
+
+**Use cases:**
+- Clone a competitor's page as a starting point, then rewrite the copy with your brand voice
+- Study a page's design system via the branding report
+- Use a great layout as a structural template for your own funnel
+
+---
+
+## HTML to PDF
+
+Convert any HTML page into a professional PDF using Playwright's Chromium engine. Full CSS support including flexbox, grid, custom fonts, gradients, and shadows.
+
+```bash
+node scripts/html-to-pdf.js campaigns/[campaign-name]/output-assets/html/lead-magnet.html campaigns/[campaign-name]/output-assets/pdfs/lead-magnet.pdf
+```
+
+**Options:** `--landscape`, `--letter` (US Letter vs A4), `--no-margin`, `--scale=N`, `--header="text"`, `--footer="text"`, `--page-numbers`, `--no-background`, `--wait=N`
+
+```bash
+node scripts/html-to-pdf.js input.html output.pdf --page-numbers --letter
+node scripts/html-to-pdf.js input.html output.pdf --landscape --no-margin
+```
+
+**One-time setup:** `npx playwright install chromium` (included in `npm run setup`)
+
+**Workflow:** The team builds beautiful HTML/CSS first (Kendall writes, Lena designs), then converts to PDF — the PDF inherits all the styling.
+
+| Use Case | Approach |
+|----------|----------|
+| **Lead magnet / eBook** | HTML → PDF via `html-to-pdf.js` |
+| **Branded report** | HTML → PDF via `html-to-pdf.js` |
+| **Quick text PDF** | Use `production/pdf/SKILL.md` directly |
+| **Print-ready PDF** | HTML → PDF with `--no-margin` |
+
+---
+
+## Google Workspace Integration (Optional)
+
+Export finished campaign assets directly to Google Drive, Docs, Slides, Sheets, Gmail, and Calendar using the free Google Workspace CLI (`gws`).
+
+| Without GWS CLI | With GWS CLI |
+|-----|------|
+| Build an HTML page, then manually upload to Drive | "Save this page to my Google Drive" |
+| Copy email text, paste into Gmail one by one | "Create Gmail drafts for all 12 launch emails" |
+| Manually create calendar events for launch dates | "Add all launch dates to my Google Calendar" |
+
+**Setup:** See `integrations/google-workspace/INSTALL.md` for step-by-step instructions.
+**Use cases:** See `integrations/google-workspace/USE-CASES.md` for practical recipes.
+
+This is **completely optional** — all assets are built and saved locally regardless.
+
+---
+
 ## Commands
 
 | Command | What It Does |
@@ -656,10 +756,16 @@ Which pages do you need? Or say "all" for the complete funnel.
 |------|-------|
 | Funnel skill files | `skills-and-instructions/skills/funnels/[type]/SKILL.md` |
 | Task skill files | `skills-and-instructions/skills/tasks/[type]/SKILL.md` |
+| Production skills | `skills-and-instructions/skills/production/[type]/SKILL.md` |
+| Copy critique skill | `skills-and-instructions/skills/production/copy-critique/SKILL.md` |
 | Campaign output | `campaigns/[name]/output-assets/` |
 | Campaign brand files | `campaigns/[name]/brand-kit/` |
 | **Jake Sebok brand kit (repo root)** | `brand-kit/` (knowledge base, style guide, lexicon) |
 | **Jake Sebok writing style** | `Resources/Jake's Voice/JAKE-SEBOK-WRITING-STYLE.md` |
+| Image scripts | `scripts/pexels-search.js`, `scripts/generate-image.js` |
+| Clone page script | `scripts/clone-page.js` |
+| HTML-to-PDF script | `scripts/html-to-pdf.js` |
+| Google Workspace docs | `integrations/google-workspace/` |
 
 ---
 

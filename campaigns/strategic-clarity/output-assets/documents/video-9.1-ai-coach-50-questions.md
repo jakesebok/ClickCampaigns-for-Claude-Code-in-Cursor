@@ -6,7 +6,7 @@
 
 ## VIDEO SCRIPT
 
-Alright. Final lesson. And honestly? This might be the most *fun* one.
+Alright. Final lesson. And honestly? This is the one that makes the whole system usable on a Tuesday.
 
 You've built your **Aligned AIOS**. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
@@ -121,7 +121,7 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Connected your vision to your reality
 - Turned meaning into math
 - Chose one Vital Action and installed it on your calendar
-- Built a Aligned Freedom Coach that holds all of it
+- Built an Aligned AIOS and a coaching system that can hold all of it
 - And now you've got Fire Starters—fifty-six questions that turn that system into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
@@ -132,7 +132,7 @@ And the beautiful thing? It grows with you. Monthly Patch Notes keep it current.
 
 ### One Last Invitation
 
-Here's what I want you to do right now. Pick one question from the list—any question—and run it. With your Master Context loaded. See what comes back. See how it feels to get advice that's *actually* tailored to you. Advice that respects your values. Advice that knows your numbers. Advice that holds you to the person you're becoming.
+Here's what I want you to do right now. Pick one question from the list and run it before you leave this lesson. With your Master Context loaded. See what comes back. See how it feels to get advice that's *actually* tailored to you. Advice that respects your values. Advice that knows your numbers. Advice that holds you to the person you're becoming.
 
 And then do it again tomorrow. And the day after. Make it a habit. Because this is what Strategic Clarity looks like in practice—not a module you completed, but a system you live in.
 

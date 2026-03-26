@@ -22,9 +22,9 @@ That's what the Alignment Arc does. It's a framework that pulls out:
 - **The Revenue Bridge** — What your business actually needs to produce—built on *your* life, not a random number.
 - **Your Vital Action** — The one move that makes everything else easier.
 
-All of it feeds into **ALFRED** (Aligned Freedom Coach)—your app where **Aligned AIOS** (your master prompt from Strategic Clarity) runs alongside your VAPI™ scores, Founder Archetype, driver pattern, weekly **6Cs**, and **Vital Actions**. A coach that knows your values, your revenue math, your capacity, and never recommends something that compromises who you are.
+All of it feeds into **ALFRED** (Aligned Freedom Coach)—your app where **Aligned AIOS** (your master prompt from Strategic Clarity) runs alongside your VAPI™ scores, Founder Archetype, driver pattern, weekly **6Cs**, and **Vital Actions**. A coach that remembers your values, your revenue math, your capacity, and the one commitment you said matters most, so the next move stays aligned when real life gets loud.
 
-Phase I was about seeing clearly. Phase II is about building the system that keeps you aligned—with the real you that's been there the whole time.
+Phase I was about seeing clearly. Phase II builds the system that keeps you aligned when pressure rises, choices multiply, and old patterns want the wheel.
 
 Let's get after it.
 

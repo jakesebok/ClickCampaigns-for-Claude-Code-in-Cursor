@@ -29,7 +29,7 @@ const offerings = [
     title: "Freedom Builders Community",
     description:
       "Often the next step after the VAPI™. The Aligned Freedom Course lives inside the community—framework + peers to build the foundation for aligned growth.",
-    cta: "Learn More",
+    cta: "See the Community",
     href: "/work-with-me/freedom-builders",
     free: true,
   },
@@ -37,14 +37,14 @@ const offerings = [
     title: "Strategic Alignment Intensives",
     description:
       "Quarterly deep-dive for owner-operators. Get strategic clarity and a clear path forward.",
-    cta: "Learn More",
+    cta: "See the Intensive",
     href: "/work-with-me/strategic-intensives",
   },
   {
     title: "Aligned Leaders Community",
     description:
       "$97/mo or $997/yr: weekly live calls, accountability, and a curated cohort of values-aligned founders. Depth and belonging between Freedom Builders and the Aligned Power Accelerator.",
-    cta: "Learn More",
+    cta: "See the Membership",
     href: "/work-with-me/aligned-leaders",
   },
   {
@@ -75,7 +75,7 @@ export default function WorkWithMePage() {
             Your place. Your pace.
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-2xl">
-            The best entry point is the free VAPI™ Assessment, where you discover your Founder Archetype, your pattern driver (what&apos;s really driving the dysfunction), and the levers you can pull to move forward—with a 28-day My Plan when you use the same email as your portal or ALFRED account. The monthly Aligned Freedom Workshop is also free—we go beneath the tactics, surface what&apos;s holding you back, and I coach you live in the room. From there, you can join the free community, invest in intensives, or commit to more accountability in groups of like-minded founders. If you feel like it&apos;s a good fit, you can even apply for the flagship Aligned Power Accelerator program where the real magic happens.
+            Start with the free VAPI™ Assessment to see your Founder Archetype, your pattern driver, and the levers most likely to move your life and business forward. From there, choose the room that fits your season: a free workshop, the community, a Strategic Alignment Intensive, ongoing group support, or the flagship Accelerator. Every path is built to turn clarity into sustained action, not another short burst of motivation.
           </p>
         </div>
       </section>
@@ -153,10 +153,7 @@ export default function WorkWithMePage() {
                 Need your commitment to survive past the workshop?
               </h2>
               <p className="text-lg font-semibold text-ap-mid leading-relaxed">
-                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. Coaching that keeps your
-                VAPI™ results, Founder Archetype, pattern driver, 28-day My Plan, weekly 6Cs, and Vital Action in the room
-                when you&apos;re tired, busy, or tempted to say yes to the wrong thing. Different kind of offer than what&apos;s above. Same alignment
-                standard.
+                <strong className="text-ap-primary">ALFRED</strong> is the only app I sell. It keeps your VAPI™ results, Founder Archetype, pattern driver, 28-day My Plan, weekly 6Cs, and Vital Action in the room when you&apos;re tired, busy, or tempted to say yes to the wrong thing. Different offer than what&apos;s above. Same alignment standard.
               </p>
             </div>
             <div className="flex flex-col gap-3 shrink-0 sm:min-w-[200px]">
@@ -164,7 +161,7 @@ export default function WorkWithMePage() {
                 href="/who-is-alfred"
                 className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-sm px-6 py-3.5 rounded-pill text-center"
               >
-                How ALFRED fits
+                See How ALFRED Fits
               </Link>
               <a
                 href={ALFRED_APP_URL}
@@ -172,7 +169,7 @@ export default function WorkWithMePage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3.5 rounded-pill border-[1.5px] border-ap-border text-ap-primary hover:border-ap-accent hover:text-gradient-accent transition-all"
               >
-                Open the app
+                Open ALFRED
                 <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path
                     strokeLinecap="round"
@@ -198,7 +195,7 @@ export default function WorkWithMePage() {
               Ready to go <span className="text-gradient-accent">ALL IN</span>?
             </h2>
             <p className="text-white/80 text-xl font-semibold mb-10 max-w-xl mx-auto">
-              The Aligned Power Accelerator is my flagship 12-month program for entrepreneurs who are done with half-measures. Limited cohort. Application required. This is for those ready to build a business that&apos;s an extension of who they actually are.
+              The Aligned Power Accelerator is my flagship 12-month program for entrepreneurs who are done with half-measures. Limited cohort. Application required. This is for founders ready to build a business that feels like an extension of who they actually are.
             </p>
             <Link
               href="/work-with-me/apply"

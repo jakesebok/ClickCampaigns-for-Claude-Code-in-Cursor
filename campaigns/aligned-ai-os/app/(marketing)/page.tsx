@@ -75,8 +75,8 @@ export default function LandingPage() {
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
           <span className="block">Your values. Your goals. Your real constraints.</span>
-          <span className="mt-2 block">ALFRED keeps you focused, aligned, and growing</span>
-          <span className="mt-2 block">without burning out.</span>
+          <span className="mt-2 block">ALFRED keeps your blueprint, VAPI™, and weekly commitments in the room</span>
+          <span className="mt-2 block">so growth does not depend on memory or willpower.</span>
         </p>
 
         <div className="inline-flex flex-col sm:flex-row items-stretch gap-4 mx-auto">
@@ -84,7 +84,7 @@ export default function LandingPage() {
             href="/sign-up"
             className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
           >
-            Start Free Trial
+            Start My 7-Day Trial
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
@@ -274,15 +274,14 @@ export default function LandingPage() {
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Join the quarterly Strategic Alignment Intensive ($497). Build your
-            complete Alignment Blueprints with expert guidance. Get 30 days of free
-            ALFRED access — and an AI coach that knows you 10x deeper than the
-            guided onboarding.
+            complete Alignment Blueprints live, get expert guidance in the room,
+            and leave with 30 days of ALFRED access tied to what you built.
           </p>
           <Link
             href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
           >
-            Learn About the Intensive
+            See the Intensive
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -311,7 +310,7 @@ export default function LandingPage() {
                 href="/sign-up"
                 className="block w-full py-3 rounded-xl border border-border text-center text-sm hover:bg-secondary transition-colors"
               >
-                Start Free Trial
+                Start My 7-Day Trial
               </Link>
             </div>
 
@@ -333,7 +332,7 @@ export default function LandingPage() {
                 href="/sign-up?plan=annual"
                 className="block w-full py-3 rounded-xl bg-accent text-accent-foreground text-center text-sm hover:bg-accent/90 transition-colors"
               >
-                Start Free Trial
+                Start My 7-Day Trial
               </Link>
             </div>
           </div>

@@ -15,24 +15,24 @@
 
 ### Script / content
 
-**Headline:** Before we start: do you have your baseline?
+**Headline:** Before we start: get your baseline.
 
 Your VAPI results are the foundation for everything in this course. The Aligned Freedom course is designed to build *from* your scores—so we can put names to your gaps, diagnose what’s really going on, and see what’s possible when you stop staying stuck.
 
 **If you’ve already taken the VAPI** and you have your results (scores across 12 domains and 3 arenas), you’re ready. Go ahead to Module 1.
 
-**If you haven’t taken the VAPI yet,** that’s your first step. It’s free, it takes about 12–15 minutes, and it gives you an honest snapshot of where you stand. Once you have your results, come back here and start Module 1. You’ll get so much more out of the course when you’re working from your own baseline instead of guessing.
+**If you haven’t taken the VAPI yet,** that’s your first step. It’s free, it takes about 12–15 minutes, and it gives you an honest snapshot of where you stand. Once you have your results, come back here and start Module 1. You&apos;ll get more from every lesson when you&apos;re working from a real baseline instead of guessing.
 
-**[CTA button]** Take the free VAPI Assessment → [link to VAPI landing/quiz]
+**[CTA button]** Get my VAPI™ baseline → [link to VAPI landing/quiz]
 
-**[Secondary line]** Already have your results? [Start Module 1 →]
+**[Secondary line]** Already have your results? [Start Module 1 now →]
 
 ---
 
 ### Implementation note
 
-- If the course platform can detect “has completed VAPI” (e.g. via email or tag), show “Start Module 1” prominently to those users and “Take the VAPI first” only to those who haven’t.
-- If you can’t detect it, show both options clearly: “Take the VAPI first” as the primary CTA and “I have my results, start Module 1” for returning users.
+- If the course platform can detect “has completed VAPI” (e.g. via email or tag), show “Start Module 1 now” prominently to those users and “Get my VAPI™ baseline” only to those who haven’t.
+- If you can’t detect it, show both options clearly: “Get my VAPI™ baseline” as the primary CTA and “I have my results, start Module 1 now” for returning users.
 
 ---
 

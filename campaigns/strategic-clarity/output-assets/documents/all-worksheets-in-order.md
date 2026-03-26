@@ -1849,7 +1849,7 @@ PASTE WORKSHEETS BELOW THIS LINE (only if you did not attach a file)
 
 ## Monthly Patch Notes Prompt
 
-Use this prompt each month to update your AI OS without rebuilding from scratch. Copy it into your AI, then paste your current Master Context and your updates.
+Use this prompt each month to update your Aligned AIOS without rebuilding from scratch. Copy it into your AI, then paste your current Master Context and your updates.
 
 ---
 

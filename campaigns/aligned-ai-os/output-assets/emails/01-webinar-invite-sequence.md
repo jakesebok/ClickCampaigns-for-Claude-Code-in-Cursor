@@ -27,7 +27,7 @@ I run a quarterly workshop called the **Strategic Alignment Intensive** where I 
 
 The next Intensive is coming up. It's a half-day, it's interactive (not a lecture), and everyone who attends gets **30 days of free ALFRED access** — **ALFRED** is *Aligned Freedom Coach*, the app where that intelligence runs with your workshop outputs, VAPI™ scores, archetype, pattern driver, 28-day My Plan (same email), 6Cs, and Vital Actions.
 
-**[Reserve My Seat — $497 →]**
+**[Reserve my seat for $497 →]**
 
 This isn't motivational. It's operational. You'll leave with real assets you use every week.
 
@@ -53,7 +53,7 @@ The issue isn't your strategy. It's that your strategy was never connected to wh
 
 In the Strategic Alignment Intensive, I show you how to fix that — in a single half-day.
 
-**[Learn more + reserve your seat →]**
+**[Reserve my seat for the Intensive →]**
 
 — Jake
 
@@ -80,7 +80,7 @@ And it gives you a plan that's filtered through *your* values, built on *your* n
 
 That's **ALFRED** — **Aligned Freedom Coach** (same product). It's not the same thing as the **Aligned AIOS** prompt you build in the room; ALFRED is the app that *runs* that intelligence — plus your live VAPI™, archetype, pattern driver, personalized 28-day My Plan (same email as your account), 6Cs, and Vital Actions. Every Intensive attendee gets 30 days free.
 
-**[Reserve my seat — $497 →]**
+**[Reserve my seat for $497 →]**
 
 The Intensive builds your **Aligned AIOS**. ALFRED makes it operational every day. Together, they change how you plan, decide, and execute — permanently.
 
@@ -103,7 +103,7 @@ This isn't motivation work. It's decision clarity + operational strategy built o
 
 The next Intensive is coming up and seats are limited to 20 (it's interactive, not a webinar).
 
-**[Grab your seat →]**
+**[Reserve my seat →]**
 
 — Jake
 
@@ -128,7 +128,7 @@ Here's what you'll build:
 
 **$497. Half-day. Interactive. Limited to 20 seats.**
 
-**[Reserve my seat →]**
+**[Reserve my seat for $497 →]**
 
 Next Intensive won't be for another quarter. If you're feeling the pull, trust it.
 
