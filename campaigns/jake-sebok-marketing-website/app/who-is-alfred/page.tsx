@@ -44,8 +44,8 @@ const whatAlfredDoesItems = [
     body: "When the week gets reactive, he pulls you back to the few things that actually matter.",
   },
   {
-    title: "Cuts through shiny objects",
-    body: "He helps you tell the difference between a real opportunity and a distraction that just feels exciting.",
+    title: "Keeps you from chasing the wrong thing",
+    body: "He helps you tell whether a new opportunity is real or just shiny object syndrome dressed up as momentum.",
   },
   {
     title: "Protects your real priorities",
@@ -78,8 +78,8 @@ const proofItems = [
 
 const realWeekItems = [
   {
-    title: "You are tempted by something shiny.",
-    body: "He helps you separate a real opportunity from a distraction wearing a good outfit.",
+    title: "A new opportunity shows up at exactly the wrong time.",
+    body: "He helps you tell whether it deserves a yes, a later, or a clean no before it steals time from what already matters.",
   },
   {
     title: "Your priorities are disappearing.",
@@ -121,7 +121,7 @@ const comparisonRows = [
 const pressureItems = [
   "Priorities get blurry",
   "Urgency takes over",
-  "Shiny things hijack the week",
+  "The exciting thing hijacks the week",
   "Tradeoffs disappear",
 ];
 
@@ -139,7 +139,7 @@ const whoItIsntForItems = [
 const heroPills = [
   "Keeps priorities visible",
   "Clear decisions under pressure",
-  "Cuts through shiny objects",
+  "Stops reactive detours",
   "Steady guidance in a messy week",
 ];
 
@@ -277,10 +277,28 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
+      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+        <div
+          className="pointer-events-none absolute -top-20 left-[-10%] h-[220px] w-[min(44vw,420px)] opacity-[0.42]"
+          style={{
+            background:
+              "linear-gradient(142deg, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.22) 44%, rgba(255,107,26,0.06) 100%)",
+            clipPath: "polygon(0% 10%, 100% 0%, 66% 100%, 0% 82%)",
+            filter: "drop-shadow(0 22px 56px rgba(255,107,26,0.22))",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute bottom-[-14%] right-[-8%] h-48 w-[min(36vw,340px)] rounded-full opacity-[0.28] blur-[78px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(58,74,92,0.24) 0%, rgba(58,74,92,0.1) 48%, transparent 76%)",
+          }}
+          aria-hidden
+        />
         <div className="max-w-[1120px] mx-auto px-5 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
-            <div className="max-w-[760px] lg:sticky lg:top-24">
+            <div className="max-w-[760px]">
               <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
                 <div
                   className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
@@ -471,27 +489,24 @@ export default function WhoIsAlfredPage() {
           aria-hidden
         />
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
-          <div className="max-w-[760px] mx-auto mb-10 sm:mb-12 text-center">
+          <div className="max-w-[760px] mx-auto mb-8 sm:mb-10 text-center">
             <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
               A feel-first tour
             </p>
             <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
               Who&apos;s in the room with you?
             </h2>
-            <p className="text-xl sm:text-[1.35rem] text-ap-mid font-semibold leading-relaxed mb-4">
+            <p className="text-xl sm:text-[1.35rem] text-ap-mid font-semibold leading-relaxed max-w-[730px] mx-auto">
               Serious operators have always had someone in the earpiece: calm, informed, willing to say the truth out
-              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
+              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape. He feels less
+              like a tool and more like the calm operator who knows your world well enough to steady you, challenge
+              you, and call you back to what matters.
             </p>
-            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3 max-w-[720px] mx-auto">
-              He is not a productivity toy. He feels more like the calm operator who knows your world well enough to
-              steady you, challenge you, and call you back to what matters.
-            </p>
-            <p className="text-base sm:text-lg text-ap-muted font-medium leading-relaxed mb-3 max-w-[680px] mx-auto">
-              This preview is less about features than feel. Notice how he thinks, what he remembers, and where he
-              pushes.
-            </p>
-            <details className="group mx-auto w-full max-w-[720px] text-left">
-              <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
+          </div>
+          <AlfredFeatureExplorer hidePreviewDisclaimer />
+          <div className="mt-5 flex justify-center lg:justify-end">
+            <details className="group relative w-full max-w-[320px] text-left">
+              <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-ap-border bg-white/92 px-4 py-2 text-sm font-semibold text-ap-muted shadow-[0_16px_32px_-26px_rgba(14,22,36,0.28)] transition-colors hover:text-ap-primary lg:ml-auto [&::-webkit-details-marker]:hidden">
                 <span>Tour notes</span>
                 <svg
                   className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
@@ -503,14 +518,16 @@ export default function WhoIsAlfredPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
-              <p className="mt-3 text-sm text-ap-muted font-medium leading-relaxed">
-                The tour auto-runs through the main screens after this section enters view. Use the nav, pause button,
-                arrows, or dots to explore. Hover the phone to freeze auto-advance. Labels and layout mirror the live
-                product, while replies use illustrative sample situations.
-              </p>
+              <div className="absolute left-0 z-20 w-[min(92vw,320px)] rounded-[22px] border border-ap-border bg-white/96 px-4 py-4 text-sm font-medium leading-relaxed text-ap-mid shadow-[0_28px_60px_-28px_rgba(14,22,36,0.3)] backdrop-blur-sm bottom-[calc(100%+0.95rem)] lg:left-auto lg:right-0">
+                The tour auto-runs after this section enters view. Use the nav, pause button, arrows, or dots to look
+                around. Hover the phone to freeze auto-advance.
+                <div
+                  className="absolute -bottom-2 left-8 h-4 w-4 rotate-45 border-b border-r border-ap-border bg-white/96 lg:left-auto lg:right-8"
+                  aria-hidden
+                />
+              </div>
             </details>
           </div>
-          <AlfredFeatureExplorer hidePreviewDisclaimer />
 
           <div className="relative mt-14 sm:mt-16 max-w-[880px] mx-auto px-0 sm:px-2" aria-label="Why Jake built ALFRED">
             <blockquote className="rounded-2xl border border-ap-border border-l-4 border-l-ap-accent bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_24px_60px_-28px_rgba(14,22,36,0.18)]">
@@ -527,29 +544,56 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
+      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+        <div
+          className="pointer-events-none absolute -top-20 right-[-8%] h-[240px] w-[min(40vw,360px)] opacity-[0.42]"
+          style={{
+            background:
+              "linear-gradient(154deg, rgba(255,107,26,0.44) 0%, rgba(255,159,107,0.24) 42%, rgba(255,107,26,0.04) 100%)",
+            clipPath: "polygon(28% 0%, 100% 6%, 78% 100%, 0% 82%)",
+            filter: "drop-shadow(0 20px 54px rgba(255,107,26,0.24))",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute bottom-[-18%] left-[-6%] h-52 w-[min(34vw,320px)] rounded-full opacity-[0.24] blur-[82px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(36,52,73,0.34) 0%, rgba(36,52,73,0.12) 48%, transparent 76%)",
+          }}
+          aria-hidden
+        />
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
-            <div className="max-w-[760px] lg:sticky lg:top-24">
-              <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
+            <div className="max-w-[760px]">
+              <div className="relative overflow-hidden rounded-[24px] border border-[rgba(14,22,36,0.14)] bg-[linear-gradient(160deg,#172334_0%,#223147_52%,#31445d_100%)] px-6 py-6 shadow-[0_32px_72px_-40px_rgba(14,22,36,0.6)] sm:px-7 sm:py-7">
                 <div
-                  className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
+                  className="pointer-events-none absolute -right-8 top-0 h-32 w-32 rounded-full blur-3xl opacity-70"
                   style={{
                     background:
-                      "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 44%, transparent 76%)",
+                      "radial-gradient(circle, rgba(255,159,107,0.42) 0%, rgba(255,159,107,0.16) 44%, transparent 76%)",
                   }}
                   aria-hidden
                 />
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+                <div
+                  className="pointer-events-none absolute -left-10 bottom-0 h-28 w-44 opacity-[0.28]"
+                  style={{
+                    background:
+                      "linear-gradient(128deg, rgba(255,107,26,0.6) 0%, rgba(255,159,107,0.2) 56%, transparent 100%)",
+                    clipPath: "polygon(0% 28%, 100% 0%, 54% 100%, 0% 100%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="relative font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent-2/90 mb-4">
                   Why It Lands
                 </p>
-                <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
+                <h2 className="relative font-outfit font-bold text-2xl sm:text-3xl text-white mb-3">
                   Why his advice feels so specific.
                 </h2>
-                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
+                <p className="relative text-xl sm:text-[1.35rem] font-semibold text-white leading-[1.35] mb-4">
                   He is not guessing from today&apos;s question.
                 </p>
-                <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
+                <p className="relative text-base sm:text-lg text-white/80 font-medium leading-relaxed">
                   He coaches from the bigger picture you build with him over time.
                 </p>
               </div>
@@ -576,29 +620,57 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-ap-bg border-y border-ap-border">
+      <section className="relative py-14 sm:py-20 bg-ap-bg border-y border-ap-border overflow-hidden">
+        <div
+          className="pointer-events-none absolute -top-16 left-[-8%] h-[210px] w-[min(38vw,360px)] opacity-[0.36]"
+          style={{
+            background:
+              "linear-gradient(142deg, rgba(255,107,26,0.36) 0%, rgba(255,159,107,0.18) 42%, rgba(255,107,26,0.04) 100%)",
+            clipPath: "polygon(0% 10%, 100% 0%, 70% 100%, 0% 82%)",
+            filter: "drop-shadow(0 18px 48px rgba(255,107,26,0.18))",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute bottom-[-12%] right-[-10%] h-56 w-[min(46vw,420px)] opacity-[0.3]"
+          style={{
+            background:
+              "linear-gradient(218deg, rgba(36,52,73,0.24) 0%, rgba(36,52,73,0.08) 44%, transparent 100%)",
+            clipPath: "polygon(24% 0%, 100% 14%, 82% 100%, 0% 82%)",
+          }}
+          aria-hidden
+        />
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
-            <div className="max-w-[760px] lg:sticky lg:top-24">
-              <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
+            <div className="max-w-[760px]">
+              <div className="relative overflow-hidden rounded-[24px] border border-[rgba(255,107,26,0.14)] bg-[linear-gradient(180deg,rgba(255,250,245,0.98),rgba(255,255,255,0.92))] px-6 py-6 shadow-[0_24px_56px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
                 <div
-                  className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
+                  className="pointer-events-none absolute -right-6 top-0 h-28 w-28 rounded-full blur-3xl opacity-70"
                   style={{
                     background:
-                      "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 44%, transparent 76%)",
+                      "radial-gradient(circle, rgba(255,159,107,0.34) 0%, rgba(255,159,107,0.12) 44%, transparent 76%)",
                   }}
                   aria-hidden
                 />
-                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+                <div
+                  className="pointer-events-none absolute -bottom-8 left-0 h-20 w-40 opacity-[0.26]"
+                  style={{
+                    background:
+                      "linear-gradient(118deg, rgba(255,107,26,0.62) 0%, rgba(255,159,107,0.16) 62%, transparent 100%)",
+                    clipPath: "polygon(0% 30%, 100% 0%, 60% 100%, 0% 100%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="relative font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
                   Real Week Use Cases
                 </p>
-                <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
+                <h2 className="relative font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
                   How ALFRED helps in a real week.
                 </h2>
-                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
+                <p className="relative text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
                   This is where ALFRED earns his place.
                 </p>
-                <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
+                <p className="relative text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
                   Not in a calm hypothetical week. In the one you are actually living.
                 </p>
               </div>
