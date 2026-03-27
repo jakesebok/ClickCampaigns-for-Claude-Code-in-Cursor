@@ -6,11 +6,9 @@ import {
   ArrowRight,
   BarChart3,
   Brain,
-  CalendarDays,
   CheckCircle2,
   Compass,
   Crosshair,
-  MessageSquare,
   Shield,
   Sparkles,
   Star,
@@ -87,36 +85,42 @@ const weeklyRhythm = [
   { icon: Users, label: "You need to reset fast", desc: "He gives you a way back into the week without shame, confusion, or starting from zero." },
 ];
 
-const insideApp = [
+const founderProof = [
   {
-    icon: CalendarDays,
-    title: "Weekly planning that holds up in real life",
+    icon: Shield,
+    title: "Built around a real founder problem",
     description:
-      "Build a week you can actually defend when meetings, sales, family, and life all collide.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Coaching chat grounded in your world",
-    description:
-      "Ask messy questions in plain language and get answers shaped by your priorities, goals, and limits.",
+      "Jake built ALFRED around the same pattern he sees constantly: too many priorities, goals disconnected from values, and a business that starts bleeding into home life.",
   },
   {
     icon: Brain,
-    title: "Voice when you need to think out loud",
+    title: "Context before advice",
     description:
-      "Use live voice sessions when typing is too tidy for the truth you actually need to hear.",
+      "ALFRED does not wait for you to restate your whole life. Your priorities, goals, constraints, and weekly signals shape the answer before you ever see it.",
   },
   {
-    icon: BarChart3,
-    title: "Assessment results that become a real plan",
+    icon: Compass,
+    title: "Designed for messy weeks, not perfect ones",
     description:
-      "See where you are strong, where you are leaking energy, and what to focus on next.",
+      "He is most useful when a decision gets loaded, a new opportunity appears, or the plan starts slipping under real-world pressure.",
+  },
+];
+
+const weekContrast = [
+  {
+    moment: "Monday morning",
+    withoutAlfred: "You reopen the calendar and renegotiate the week again.",
+    withAlfred: "Your priority is already visible, so the week starts from something solid.",
   },
   {
-    icon: CheckCircle2,
-    title: "Weekly check-ins that catch drift early",
-    description:
-      "Stay close to what matters without turning your life into one more noisy app.",
+    moment: "A tempting opportunity hits",
+    withoutAlfred: "You spin, react, or say yes before the tradeoff is clear.",
+    withAlfred: "You get a cleaner yes, later, or no based on what this season can actually hold.",
+  },
+  {
+    moment: "Friday feels off",
+    withoutAlfred: "You know something slipped, but you cannot tell what or why.",
+    withAlfred: "The weekly check-in shows where drift started and what to reset next.",
   },
 ];
 
@@ -288,6 +292,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-card/70 px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Why Trust This
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              ALFRED was built from real founder coaching, not prompt tricks.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              This is Jake Sebok&apos;s founder-coaching logic turned into something you can carry all week, not just in a
+              workshop or one hard conversation.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {founderProof.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[24px] border border-border bg-background/92 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
+                  <item.icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="mb-3 font-semibold text-foreground">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <AlfredLandingDemoSection />
 
       <section className="border-y border-border bg-card/70 px-6 py-24">
@@ -358,28 +394,35 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              In The App
+              What Changes
             </p>
             <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-              A simple toolset built around one job.
+              Without ALFRED, pressure rewrites the week.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              Keep what matters visible. Get coaching that fits your life. Make the next right move without starting from
-              zero.
+              With ALFRED, you come back to what matters faster. That is the real product outcome.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-            {insideApp.map((item) => (
+          <div className="grid gap-6 lg:grid-cols-3">
+            {weekContrast.map((item) => (
               <article
-                key={item.title}
+                key={item.moment}
                 className="rounded-[24px] border border-border bg-background/88 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
               >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
-                  <item.icon className="h-5 w-5 text-accent" />
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.14em] text-accent">{item.moment}</p>
+                <div className="rounded-2xl border border-border bg-card/60 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Without ALFRED
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.withoutAlfred}</p>
                 </div>
-                <h3 className="mb-3 font-semibold text-foreground">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                <div className="mt-4 rounded-2xl border border-accent/20 bg-accent/5 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+                    With ALFRED
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground">{item.withAlfred}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -464,12 +507,6 @@ export default function LandingPage() {
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <Link href="/pricing" className="hover:text-foreground">
               Pricing
-            </Link>
-            <Link
-              href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
-              className="hover:text-foreground"
-            >
-              Intensive
             </Link>
             <Link href="/sign-in" className="hover:text-foreground">
               Sign In
