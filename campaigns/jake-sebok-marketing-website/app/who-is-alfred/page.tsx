@@ -56,46 +56,41 @@ const dailyItems = [
 export default function WhoIsAlfredPage() {
   return (
     <>
-      <section className="relative pt-16 sm:pt-24 pb-14 sm:pb-[4.5rem] lg:pb-24 overflow-hidden">
+      <section className="relative pt-16 sm:pt-24 pb-14 sm:pb-[4.5rem] lg:pb-24 bg-ap-bg overflow-hidden">
         <div
-          className="absolute inset-0 bg-[linear-gradient(180deg,#f8fafc_0%,#eef2f7_54%,#f4efe7_100%)]"
-          aria-hidden
-        />
-        {/* Cool ambient field for the copy side */}
-        <div
-          className="pointer-events-none absolute -top-28 -left-20 z-0 h-[26rem] w-[26rem] rounded-full blur-[72px] opacity-[0.95]"
+          className="pointer-events-none absolute -top-[28%] -left-[35%] z-0 h-[135%] w-[min(165vw,1700px)] lg:-top-[18%] lg:-left-[22%] lg:h-[125%] lg:w-[min(140vw,1600px)] blur-[64px] opacity-[0.95]"
           style={{
             background:
-              "radial-gradient(circle, rgba(58,74,92,0.22) 0%, rgba(58,74,92,0.12) 30%, rgba(58,74,92,0.05) 52%, transparent 76%)",
-          }}
-          aria-hidden
-        />
-        {/* Focused warm field behind the phone, not under the copy */}
-        <div
-          className="pointer-events-none absolute top-[2%] right-[-12%] z-0 h-[28rem] w-[28rem] rounded-full blur-[74px] opacity-[0.96] lg:top-[3%] lg:right-[-6%] lg:h-[34rem] lg:w-[34rem]"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,107,26,0.54) 0%, rgba(255,159,107,0.28) 34%, rgba(255,187,146,0.18) 54%, transparent 76%)",
+              "radial-gradient(ellipse 80% 65% at 22% 28%, rgba(255,107,26,0.55) 0%, rgba(255,140,66,0.32) 32%, rgba(255,159,107,0.18) 52%, rgba(234,88,12,0.08) 72%, transparent 88%)",
           }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-[-16%] z-0 hidden w-[58%] lg:block"
+          className="pointer-events-none absolute top-[4%] -left-[12%] z-0 h-[92%] w-[min(130vw,1420px)] lg:top-0 lg:-left-[6%] lg:h-full lg:w-[min(118vw,1500px)] opacity-[0.92]"
           style={{
             background:
-              "linear-gradient(145deg, rgba(14,22,36,0.18) 0%, rgba(25,34,54,0.12) 24%, rgba(255,107,26,0.08) 58%, rgba(255,255,255,0) 100%)",
-            clipPath: "polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              "linear-gradient(198deg, rgba(194,65,12,0.42) 0%, rgba(234,88,12,0.38) 32%, rgba(255,107,26,0.22) 62%, rgba(255,159,107,0.08) 100%)",
+            clipPath: "polygon(6% 2%, 100% 0%, 86% 58%, 32% 100%, -3% 92%, 3% 44%)",
+            filter: "drop-shadow(0 28px 90px rgba(234,88,12,0.35))",
           }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute left-[4%] top-8 z-0 h-px w-[min(34rem,56vw)] bg-[linear-gradient(90deg,rgba(14,22,36,0.22),rgba(14,22,36,0.04),transparent)]"
+          className="pointer-events-none absolute -top-[8%] -left-[20%] z-0 h-[105%] w-[min(135vw,1480px)] lg:-top-[4%] lg:-left-[10%] lg:h-[118%] lg:w-[min(122vw,1550px)]"
+          style={{
+            background:
+              "linear-gradient(138deg, #ff6b1a 0%, #ff7b2e 18%, #ff8f4a 36%, #ff9f6b 55%, rgba(255,159,107,0.35) 78%, rgba(255,107,26,0.06) 100%)",
+            clipPath: "polygon(0% 0%, 100% 4%, 52% 100%, -4% 96%)",
+            filter: "drop-shadow(0 20px 70px rgba(255,107,26,0.5))",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
+          }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute left-[4%] top-8 z-0 h-28 w-[min(34rem,56vw)] opacity-50"
+          className="pointer-events-none absolute -left-[18%] top-0 z-0 h-[52%] w-[min(100vw,1100px)] mix-blend-soft-light opacity-[0.55] lg:-left-[8%]"
           style={{
-            background: "linear-gradient(180deg, rgba(255,255,255,0.44) 0%, transparent 100%)",
+            background: "linear-gradient(118deg, rgba(255,255,255,0.5) 0%, rgba(255,214,188,0.25) 28%, transparent 62%)",
+            clipPath: "polygon(0% 0%, 78% 0%, 32% 62%, 0% 22%)",
           }}
           aria-hidden
         />
@@ -140,6 +135,9 @@ export default function WhoIsAlfredPage() {
                     <li className="rounded-full border border-[rgba(255,107,26,0.18)] bg-[rgba(255,247,240,0.94)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#b6531b]">
                       Built for the messy week
                     </li>
+                    <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
+                      Remembers your context
+                    </li>
                   </ul>
                   <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                     <a
@@ -166,7 +164,6 @@ export default function WhoIsAlfredPage() {
                 </div>
               </div>
 
-              <AlfredHeroPhone className="md:hidden mt-8" />
             </div>
 
             <div className="hidden md:block relative">
