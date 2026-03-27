@@ -351,14 +351,12 @@ export default function WhoIsAlfredPage() {
                   What He Does
                 </p>
                 <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4">
-                  When the week gets loud, here&apos;s what ALFRED does.
+                  Most founders don&apos;t need more ideas.
                 </h2>
-                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
-                  Most founders do not need more ideas.
-                </p>
                 <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
                   They need help staying loyal to what matters when urgent problems, tempting opportunities, and real
-                  life all hit at once. That is what ALFRED is built for.
+                  life all hit at once. ALFRED is the trusted advisor in your pocket who helps you protect your
+                  priorities and make the next right move. That is what he is built for.
                 </p>
               </div>
             </div>
