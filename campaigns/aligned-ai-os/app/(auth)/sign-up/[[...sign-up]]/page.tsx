@@ -8,7 +8,15 @@ export default async function SignUpPage() {
   if (userId) redirect("/dashboard");
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-6 py-10">
+      <div className="max-w-md text-center">
+        <h1 className="mb-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+          Start your 7-day trial.
+        </h1>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          ALFRED keeps your priorities, tradeoffs, and next right move in the room when the week gets loud.
+        </p>
+      </div>
       <SignUp
         signInUrl="/sign-in"
         appearance={{
@@ -23,7 +31,6 @@ export default async function SignUpPage() {
             formButtonPrimary:
               "bg-primary hover:bg-primary/90 text-primary-foreground",
             card: "bg-card border border-border shadow-none",
-            // Social buttons: light bg so Google text is readable
             socialButtonsBlockButton:
               "bg-white hover:bg-gray-100 text-gray-900 border border-gray-200",
             socialButtonsBlockButtonText: "text-gray-900 font-medium",

@@ -144,28 +144,28 @@ const DASHBOARD_TOUR = [
     id: "leverage",
     kicker: "Your week",
     title: "One commitment, always in sight",
-    body: "Your Vital Action is the non-negotiable you chose when the noise was quiet. Seeing it first cuts decision fatigue: you stop re-litigating the week every morning, protect time for what actually moves revenue and identity, and build calendar honesty before the week frays.",
+    body: "The first thing ALFRED shows you is the priority you said matters most this week. That keeps you from renegotiating the week every morning and makes it easier to protect time for the work that actually moves life and business forward.",
     focus: "leverage" as const,
   },
   {
     id: "weekly",
-    kicker: "Performance rhythm",
-    title: "A weekly honest read you can act on",
-    body: "The 6Cs scorecard is a fast integrity check on how you are actually operating—not a judgment wall. When you submit it on rhythm, you catch drift early, name the one category that is quietly stealing capacity, and give Alfred a truthful signal so your weekly review becomes execution coaching instead of spreadsheet shame.",
+    kicker: "Weekly reset",
+    title: "A weekly honest read you can actually use",
+    body: "This check-in helps you see how you are really operating, not how you wish you were operating. When you use it consistently, ALFRED can spot drift early and coach you before one rough week turns into a lost month.",
     focus: "weekly" as const,
   },
   {
     id: "priorities",
-    kicker: "Ground truth",
-    title: "Scores weighted by what you said matters",
-    body: "Your composite VAPI read plus Focus Here First is the difference between guessing where you are strong and knowing where you are borrowing from the future. You get a ranked, importance-aware picture so you correct course mid-quarter—not after the year is gone.",
+    kicker: "Assessment results",
+    title: "See where you are strong and where you are leaking",
+    body: "The results page shows where you are carrying strength, where you are borrowing from the future, and what needs attention first. It turns vague stress into a ranked picture you can actually use.",
     focus: "priorities" as const,
   },
   {
     id: "pattern",
-    kicker: "Self-awareness",
-    title: "Archetype and driver: how you perform under stress",
-    body: "Archetype and likely driver translate your assessment into a language for your patterns, so coaching is not generic advice. When Alfred references them, recommendations fit how you actually behave when pressure hits. When you want the deeper read, the Archetype and Driver libraries unpack those patterns: what is underneath, what it is costing you, and how to move forward.",
+    kicker: "Patterns",
+    title: "Understand how you behave under pressure",
+    body: "The assessment also helps ALFRED name the patterns that tend to show up when stress hits, so the coaching fits how you actually move instead of giving generic advice.",
     focus: "pattern" as const,
   },
 ];
@@ -581,37 +581,37 @@ export function AlfredFeatureExplorer({
   const leftTitleAndBody = () => {
     if (tab === "scorecard") {
       return {
-        kicker: "6Cs scorecard",
-        title: "A weekly operating rhythm, not a vibe check",
-        body: "Structured prompts across Clarity through Connection turn subjective weeks into comparable data. Over time you see which dimension quietly erodes execution, catch the story you tell when you are overloaded, and give Alfred a clean signal for planning and accountability—without living in a spreadsheet.",
+        kicker: "Weekly check-in",
+        title: "A weekly reset, not a guilt trip",
+        body: "This check-in helps you name how you are actually operating across the parts of life and work that matter. Over time it becomes easier to spot drift, see what is quietly eroding execution, and give ALFRED a clean signal for better coaching.",
       };
     }
     if (tab === "priorities") {
       return {
         kicker: "Priorities",
-        title: "Importance × score, not generic advice",
-        body: "The matrix maps what you said matters against how you are actually performing. Critical Priority surfaces the leaks that will hurt you if ignored; Protect & Sustain guards what is already working; the other quadrants show where you may be over-investing or under-watching. It is the map for where to spend this month’s focus.",
+        title: "See what deserves attention first",
+        body: "This view compares what you said matters against how things are actually going. It helps you see what needs attention now, what is already working, and where you may be spending energy in the wrong place.",
       };
     }
     if (tab === "blueprint") {
       return {
-        kicker: "Alignment Blueprint",
-        title: "The context layer behind every answer",
-        body: "North Star, values, Becoming, revenue math, Vital Action, and boundaries live in one living document. When you coach with Alfred, he is not guessing—he is reasoning from the same strategic clarity you committed to, so plans and pushes stay aligned with the life you said you want.",
+        kicker: "Your context",
+        title: "The bigger picture behind every answer",
+        body: "Your priorities, goals, numbers, boundaries, and direction live here. That is how ALFRED gives guidance that fits your life instead of making you start from zero every time.",
       };
     }
     if (tab === "archetypes") {
       return {
-        kicker: "Archetype library",
-        title: "Nine founder patterns, same assessment spine",
-        body: "Your archetype is a shorthand for how strength and shadow tend to show up across arenas. Browsing the library helps you decode tension faster, name what you are optimizing for, and have sharper conversations with Alfred about tradeoffs—before a blind spot becomes an expensive quarter.",
+        kicker: "Patterns",
+        title: "See founder patterns in plain English",
+        body: "The pattern library helps you understand how your strengths and blind spots tend to show up under pressure, so you and ALFRED can work with something concrete instead of vague frustration.",
       };
     }
     if (tab === "settings") {
       return {
         kicker: "Settings",
         title: "You decide how Alfred shows up",
-        body: "Account details, how and when Daily Sparks reach you, and experience preferences live in one place—no scavenger hunt through mystery menus. When you tune delivery, the product stays encouraging instead of noisy, which protects focus and trust during hard weeks. The deeper win is psychological: configuration feels like choosing a coaching relationship, not tolerating defaults that fight your rhythm.",
+        body: "Account details, reminder timing, and experience preferences live in one place. That lets you keep ALFRED helpful without letting him become one more noisy app fighting for your attention.",
       };
     }
     if (tab === "coach") {
@@ -624,69 +624,69 @@ export function AlfredFeatureExplorer({
         if (isWeeklyScheduleDemo) {
           return {
             kicker: "Coach",
-            title: "Weekly Planning, with room to go deep",
-            body: "Multi-bubble thread: opener, your casual line in the composer, then Alfred streams answers in separate bubbles—with deliberate pauses between turns so you can read before the next beat. The script is sample copy; in your account it is generated from your blueprint, Vital Action, QC math, and boundaries.",
+            title: "Plan the real week you are about to live",
+            body: "This example shows how ALFRED turns your goals, boundaries, and workload into a week you can actually defend. In a live account, the reply is built from your own context, not a generic planning template.",
           };
         }
         if (isInnerLimitingBeliefDemo) {
           return {
             kicker: "Coach",
-            title: "Find the belief, then stress-test it against your Real Reasons",
-            body: "The preview types like a real person would—messy, no jargon about frameworks—while Alfred still weaves in what you already put in your blueprint (presence at home, Vital Action, and what you said matters). Each turn is its own bubble with space to read before the next message. Live chat does the same from your actual data.",
+            title: "Get under the story, not just the symptom",
+            body: "The conversation reads like a real exchange, but ALFRED is still tying it back to what matters to you. That is how insight becomes practical instead of abstract.",
           };
         }
         return {
           kicker: "Coach",
-          title: "Coaching frames, not blank-chat roulette",
-          body: `The frame you see is how Alfred opens “${label}”—a deliberate question instead of generic brainstorming. In the app, answers pull from your blueprint, scores, driver pattern, and commitments. This preview only expands into long written examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}”; choose those prompts in the mock to see full illustrations.`,
+          title: "Guided prompts instead of a blank box",
+          body: `ALFRED starts with a useful frame instead of leaving you to guess how to ask. In the app, the answers pull from your priorities, patterns, and weekly reality. This preview expands into full examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}.”`,
         };
       }
       if (coachPhase === "category" && coachCategory === "Weekly Planning") {
         return {
-          kicker: "Fire Starters",
-          title: "Weekly Planning",
-          body: "These starters walk you through building the schedule, naming leverage outcomes, making ruthless cuts, and sizing a minimum viable week when chaos hits—so the calendar stops being a wish list. They translate your Alignment Blueprint into concrete tradeoffs instead of leaving you to invent structure from scratch. You leave with a week you can defend and boundaries you can name out loud. Stack enough of those weeks and you stop losing quarters to quiet drift.",
+          kicker: "Coaching prompts",
+          title: "Build a week you can actually defend",
+          body: "These prompts help you sort priorities, make hard cuts, and build a week that can survive real life instead of collapsing the moment something changes.",
         };
       }
       if (coachPhase === "category" && coachCategory === "Inner Work + Beliefs") {
         return {
-          kicker: "Fire Starters",
-          title: "Inner Work + Beliefs",
-          body: "These prompts are for the layer strategy slides past: the belief underneath the frustration, the avoidance dressed up as productivity, shame masquerading as standards, and the hard conversation you keep rescheduling. Alfred threads them through your driver narrative and blueprint so you are not performing insight—you are negotiating with a pattern that has a name.",
+          kicker: "Coaching prompts",
+          title: "Work on the part underneath the problem",
+          body: "These prompts help you get below the frustration, avoidance, or self-sabotage loop so the coaching can deal with the actual problem instead of dancing around it.",
         };
       }
       return {
-        kicker: "Coach tab",
-        title: "Organized prompts, not a blank chat",
-        body: "Fire Starters sort coaching by the week you are actually in—weekly planning, strategy, sales, marketing and messaging, nervous-system execution, review, inner work, VAPI sense-making, and deep patterns—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality. Marketing + Messaging turns your Real Reasons into hooks and narratives. Inner Work + Beliefs is where stuckness gets language: the belief under “I can’t,” parts in conflict, and the self-sabotage loop—always tied back to what you said actually matters.",
+        kicker: "Coach",
+        title: "Start with the kind of help you actually need",
+        body: "The prompts are organized by real founder needs: planning the week, making decisions, working through pressure, and getting unstuck. You do not have to guess where to begin or invent the structure yourself.",
       };
     }
     if (tab === "voice") {
       return {
         kicker: "Voice",
-        title: "Speak with Alfred",
-        body: "Core beliefs rarely shift when you are only typing—you can edit away the uncomfortable truth. Voice keeps mindset work embodied: you hear your own story out loud, stay with the feeling long enough to question it, and rehearse a new stance in live dialogue instead of silent draft mode. That back-and-forth is what loosens fixed narratives and makes identity-level change stick. In ALFRED, Voice is tuned for that inner-work rhythm; live sessions start when you are in the app.",
+        title: "Think out loud with ALFRED",
+        body: "Sometimes typing is too tidy for the truth. Voice gives you a way to talk through what is actually going on and let ALFRED coach you in real time instead of from a sanitized version of the problem.",
       };
     }
     if (tab === "results") {
       return {
         kicker: "Assessment results",
-        title: "Depth you can act on—not a single number",
-        body: "You get a composite read, archetype story, arena and domain breakdowns, interpretations, priority patterns, and driver tie-ins—so the assessment becomes a map, not a vanity score. That depth turns “I feel off” into named leaks and named strengths you can defend under pressure. You stop debating what to fix first because the page ranks urgency against what you said matters. The compounding benefit is confidence: you return to one trusted reference when the quarter gets noisy, instead of re-inventing the diagnosis every time.",
+        title: "See what is off and what to do next",
+        body: "The assessment gives you more than a score. It gives you a map of where you are strong, where you are stretched, and what deserves attention first so you can stop guessing.",
       };
     }
     if (tab === "drivers") {
       if (driversPhase === "escapeDetail") {
         return {
           kicker: "Driver Library",
-          title: "Turn a label into a playbook",
-          body: "A driver profile names the pattern beneath the pattern—how it shows up in life, what it costs, and what “healthy” looks like for you. Reading the full write-up turns a label into language you can use in Coach, in marriage, and in leadership without shame spirals. When the story is explicit, you can negotiate with it instead of obeying it. The payoff is behavioral: you finally have a playbook for the exit that fits your actual constraints—not a meme about discipline.",
+          title: "Turn a pattern into something you can work with",
+          body: "A full profile helps you see how a pattern shows up, what it costs, and what healthier behavior actually looks like. Once the pattern is named clearly, it becomes easier to work with instead of just reacting to it.",
         };
       }
       return {
         kicker: "Driver Library",
-        title: "From signal to story",
-        body: "The banner spotlights your primary driver so you are not drowning in psychology jargon on a Tuesday night. Opening a profile delivers the long-form narrative—how the pattern reads in scores, relationships, and execution, plus the path out. That continuity matters because founders stop treating symptoms and start working the root. Tap The Escape Artist in the preview to feel how deep the library goes before you are in the live app.",
+        title: "Go from signal to story",
+        body: "The library helps you make sense of the pattern underneath the problem so you can stop treating symptoms and start addressing the root.",
       };
     }
     {

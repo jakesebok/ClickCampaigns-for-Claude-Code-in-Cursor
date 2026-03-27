@@ -23,13 +23,14 @@ export function AlfredLandingDemoSection() {
       <div className="relative z-10 mx-auto max-w-[1100px] px-5 sm:px-6">
         <div className="mx-auto mb-12 max-w-[720px] text-center">
           <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
-            Inside the app
+            Product Tour
           </p>
           <h2 className="mb-3 font-outfit text-2xl font-bold text-foreground sm:text-3xl">
-            Explore ALFRED before you sign in
+            See how ALFRED thinks before you sign in
           </h2>
           <p className="mb-3 text-sm font-medium leading-relaxed text-muted-foreground sm:text-base">
-            Same rhythm as the live product: Dashboard, Coach, Voice, Results, My Plan, Drivers, and More.
+            This is the real product rhythm: your dashboard, coaching, voice, assessment results, weekly check-ins, and
+            the tools that help you keep what matters in view when the week gets loud.
           </p>
           <details className="group mx-auto w-full max-w-[720px]">
             <summary className="flex w-full cursor-pointer list-none items-center justify-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground marker:content-none [&::-webkit-details-marker]:hidden">
@@ -40,11 +41,10 @@ export function AlfredLandingDemoSection() {
               Tour notes
             </summary>
             <p className="mt-3 text-left text-sm font-medium leading-relaxed text-muted-foreground">
-              The tour runs through Dashboard, Coach, Voice, Results, My Plan (28-day sprint from VAPI), Drivers, and
-              the screens behind More. Auto-advance starts when this section scrolls into view (you begin on the first
-              stop). Pause anytime, use arrows or dots to jump, and hover the phone to freeze auto-advance while you tap
-              around. Labels and layout match what subscribers use; coach replies here use illustrative sample context,
-              while your signed-in account grounds answers in your assessment, blueprint, scorecard, and commitments.
+              The tour walks through the same screens subscribers use. Auto-advance starts when this section comes into
+              view. Pause anytime, jump with the arrows or dots, and hover the phone to freeze the motion while you tap
+              around. The layout and labels match the real app; the replies here use sample situations, while a live
+              account answers from your own priorities, goals, numbers, and weekly history.
             </p>
           </details>
         </div>

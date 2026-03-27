@@ -4,19 +4,18 @@ import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Check } from "lucide-react";
-import { FIRE_STARTER_COUNT } from "@/lib/ai/prompts";
 
-const features = [
-  "Personalized AI coaching chat (powered by Claude)",
-  "Values-aligned decision filter",
-  "The Revenue Bridge built in",
-  `Fire Starters — ${FIRE_STARTER_COUNT} strategic prompts across 9 categories`,
-  "Weekly Vital Action tracking",
-  "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
-  "Morning coach notifications",
-  "Alignment Blueprint dashboard",
-  "Alignment Blueprint updates (monthly)",
-  "Works on desktop, phone, and tablet (PWA)",
+const featureList = [
+  "Coaching chat that remembers what matters to you",
+  "Decision support grounded in your priorities and limits",
+  "Goals, numbers, and weekly sales targets kept in the room",
+  "Guided prompts for planning, reflection, and hard decisions",
+  "A weekly priority you can actually defend",
+  "Weekly check-ins that catch drift early",
+  "Morning nudges when you want them",
+  "A living dashboard for what matters this season",
+  "Updates as your priorities and constraints change",
+  "Desktop, phone, and tablet access",
 ];
 
 const plans = [
@@ -24,7 +23,7 @@ const plans = [
     name: "Monthly",
     price: "$39",
     period: "/month",
-    description: "Full access. Cancel anytime.",
+    description: "Full product. Cancel anytime.",
     cta: "Start My 7-Day Trial",
     href: "/api/checkout?plan=monthly",
     highlight: false,
@@ -33,7 +32,7 @@ const plans = [
     name: "Annual",
     price: "$349",
     period: "/year",
-    description: "Save 25%. Less than $1/day.",
+    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
     cta: "Start My 7-Day Trial",
     href: "/api/checkout?plan=annual",
     highlight: true,
@@ -43,18 +42,20 @@ const plans = [
 
 const tiers = [
   {
-    tier: "Strategic Alignment Intensive Attendees",
-    trial: "30-day free Aligned Freedom Coach access",
-    context: "Full Alignment Blueprints from live worksheets",
-    note: "Attend the quarterly $497 Intensive and get 30 days of Aligned Freedom Coach free.",
+    tier: "Strategic Alignment Intensive",
+    trial: "30 days of ALFRED",
+    context: "Build your priorities, numbers, and constraints live, then keep coaching from what you created in the room.",
+    note: "Quarterly Intensive attendees get 30 days of access included with their workshop enrollment.",
   },
   {
-    tier: "Aligned Power Coaching Clients",
-    trial: "12 months free Aligned Freedom Coach access",
-    context: "Full Alignment Blueprints from complete Strategic Clarity module",
-    note: "Included with Aligned Power Accelerator enrollment.",
+    tier: "Aligned Power Accelerator",
+    trial: "12 months of ALFRED",
+    context: "Long-term coaching clients get extended access because ALFRED becomes part of the operating system.",
+    note: "Included with Accelerator enrollment.",
   },
 ];
+
+const pricingPills = ["7-day trial", "No upsell maze", "Full product access"];
 
 export default async function PricingPage() {
   const { userId } = await auth();
@@ -62,8 +63,7 @@ export default async function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/">
           <LogoOnDarkGlow size="lg">
             <Image
@@ -71,74 +71,72 @@ export default async function PricingPage() {
               alt="Aligned Freedom Coach"
               width={280}
               height={77}
-              className="logo-on-dark-img h-12 sm:h-14 w-auto"
+              className="logo-on-dark-img h-12 w-auto sm:h-14"
               priority
             />
           </LogoOnDarkGlow>
         </Link>
         <div className="flex items-center gap-4">
-          <Link
-            href="/sign-in"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
+          <Link href="/sign-in" className="text-sm text-muted-foreground hover:text-foreground">
             Sign In
           </Link>
         </div>
       </nav>
 
-      <div className="px-6 py-24 max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-serif font-bold mb-4">
-            Simple pricing. Full-context coaching.
+      <div className="mx-auto max-w-5xl px-6 py-20 sm:py-24">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <div className="mb-6 flex flex-wrap justify-center gap-2.5">
+            {pricingPills.map((pill) => (
+              <span
+                key={pill}
+                className="rounded-full border border-border bg-card/80 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+              >
+                {pill}
+              </span>
+            ))}
+          </div>
+          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight sm:text-5xl">
+            Simple pricing.
+            <span className="block text-gradient-accent">One lane. Full product.</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            One lane. Full product. Your Alignment Blueprint, VAPI™, Fire
-            Starters, Daily Sparks, and 6Cs stay in the room for less than many
-            founders spend on a single coaching session.
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            You are not paying for a funnel of add-ons. You are paying for a trusted advisor in your pocket who helps
+            you protect your priorities and make the next right move when the week gets loud.
           </p>
         </div>
 
-        {/* Plans */}
-        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+        <div className="mx-auto mb-16 grid max-w-3xl gap-6 sm:grid-cols-2">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 space-y-6 ${
-                plan.highlight
-                  ? "border-2 border-accent relative"
-                  : "border border-border"
+              className={`relative rounded-[24px] p-8 ${
+                plan.highlight ? "border-2 border-accent bg-card shadow-[0_28px_60px_-38px_rgba(255,107,26,0.28)]" : "border border-border bg-card/88"
               }`}
             >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-accent-foreground text-xs rounded-full">
+              {plan.badge ? (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs text-accent-foreground">
                   {plan.badge}
                 </div>
-              )}
-              <div>
-                <h3 className="text-lg font-semibold">{plan.name}</h3>
-                <div className="mt-2">
-                  <span className="text-4xl font-serif font-bold">
-                    {plan.price}
-                  </span>
-                  <span className="text-muted-foreground">{plan.period}</span>
-                </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {plan.description}
-                </p>
+              ) : null}
+              <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
+              <div className="mt-3">
+                <span className="font-serif text-4xl font-bold text-foreground">{plan.price}</span>
+                <span className="text-muted-foreground">{plan.period}</span>
               </div>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
 
-              <ul className="space-y-3">
-                {features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm">
-                    <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
-                    {feature}
+              <ul className="mt-6 space-y-3">
+                {featureList.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-sm text-foreground">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                    <span className="leading-relaxed text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <a
                 href={plan.href}
-                className={`block w-full py-3 rounded-xl text-center text-sm font-medium transition-colors ${
+                className={`mt-8 block w-full rounded-xl py-3 text-center text-sm font-medium transition-colors ${
                   plan.highlight
                     ? "bg-accent text-accent-foreground hover:bg-accent/90"
                     : "border border-border hover:bg-secondary"
@@ -150,22 +148,28 @@ export default async function PricingPage() {
           ))}
         </div>
 
-        {/* Extended Trials */}
-        <div className="max-w-2xl mx-auto space-y-6">
-          <h2 className="text-xl font-serif font-bold text-center">
-            Extended access for Intensives and coaching clients
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {tiers.map((t) => (
-              <div
-                key={t.tier}
-                className="rounded-xl border border-border p-5 space-y-2"
-              >
-                <h3 className="font-medium">{t.tier}</h3>
-                <p className="text-sm text-accent font-medium">{t.trial}</p>
-                <p className="text-xs text-muted-foreground">{t.context}</p>
-                <p className="text-xs text-muted-foreground">{t.note}</p>
-              </div>
+        <div className="mx-auto max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">
+          <div className="mb-8 max-w-2xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Extended Access
+            </p>
+            <h2 className="mb-3 font-serif text-2xl font-bold sm:text-3xl">
+              Longer access if you come through Jake&apos;s programs.
+            </h2>
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+              If you build your foundation with Jake live, ALFRED gets more context faster. That is why the trial window
+              is longer for Intensive attendees and Accelerator clients.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {tiers.map((tier) => (
+              <article key={tier.tier} className="rounded-[22px] border border-border bg-background/90 p-5">
+                <h3 className="font-semibold text-foreground">{tier.tier}</h3>
+                <p className="mt-2 text-sm font-semibold text-accent">{tier.trial}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tier.context}</p>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{tier.note}</p>
+              </article>
             ))}
           </div>
         </div>

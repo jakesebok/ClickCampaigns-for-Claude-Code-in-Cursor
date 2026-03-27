@@ -8,7 +8,15 @@ export default async function SignInPage() {
   if (userId) redirect("/dashboard");
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-6 py-10">
+      <div className="max-w-md text-center">
+        <h1 className="mb-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
+          Welcome back.
+        </h1>
+        <p className="text-base leading-relaxed text-muted-foreground">
+          Pick up where you left off and bring your priorities back into the room.
+        </p>
+      </div>
       <SignIn
         signUpUrl="/sign-up"
         appearance={{

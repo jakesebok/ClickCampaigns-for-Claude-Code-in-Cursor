@@ -2,6 +2,22 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
+import {
+  ArrowRight,
+  BarChart3,
+  Bell,
+  Brain,
+  CalendarDays,
+  CheckCircle2,
+  Compass,
+  Crosshair,
+  MessageSquare,
+  Shield,
+  Smartphone,
+  Sparkles,
+  Star,
+  Users,
+} from "lucide-react";
 
 const AlfredLandingDemoSection = dynamic(
   () =>
@@ -11,275 +27,418 @@ const AlfredLandingDemoSection = dynamic(
   {
     loading: () => (
       <div className="dark border-y border-accent/25 bg-[hsl(222_36%_7%)] py-24 text-center text-sm text-muted-foreground">
-        Loading interactive preview…
+        Loading interactive preview...
       </div>
     ),
   }
 );
-import {
-  ArrowRight,
-  Shield,
-  Target,
-  BarChart3,
-  MessageSquare,
-  Smartphone,
-  Bell,
-  CheckCircle2,
-  Star,
-  Crosshair,
-  Link2,
-  BatteryCharging,
-  ShieldCheck,
-  Zap,
-  Users,
-} from "lucide-react";
+
+const heroPills = [
+  "Keeps priorities visible",
+  "Clear yes / no decisions",
+  "Catches drift early",
+  "Works across every device",
+];
+
+const heroProof = [
+  {
+    title: "Protect what matters",
+    body: "He keeps your priorities, tradeoffs, and next best move in the room.",
+  },
+  {
+    title: "Cut through noise",
+    body: "Urgent problems and tempting opportunities stop hijacking the week so easily.",
+  },
+  {
+    title: "Make cleaner decisions",
+    body: "ALFRED helps you decide what deserves a yes, a later, or a clean no.",
+  },
+];
+
+const whatAlfredDoes = [
+  {
+    title: "Stops the drift",
+    body: "When the week gets reactive, he pulls you back to the few things that actually matter.",
+    icon: Shield,
+  },
+  {
+    title: "Sorts yes, no, or not now",
+    body: "He helps you tell the difference between a real opportunity and a distraction wearing a good outfit.",
+    icon: Compass,
+  },
+  {
+    title: "Keeps real life in the room",
+    body: "He weighs your priorities against your calendar, your energy, your family reality, and your actual limits.",
+    icon: Users,
+  },
+  {
+    title: "Catches breakdown early",
+    body: "Your weekly check-ins make it easier to spot drift before a hard week becomes a lost month.",
+    icon: CheckCircle2,
+  },
+];
+
+const whyItLands = [
+  {
+    title: "He knows what matters to you",
+    body: "Your priorities, values, and the kind of life you are trying to build are part of the coaching, not an afterthought.",
+    icon: Star,
+  },
+  {
+    title: "He knows the game you are actually playing",
+    body: "Your goals, numbers, and weekly sales targets stay in the room, so advice is grounded in the business you are actually running.",
+    icon: BarChart3,
+  },
+  {
+    title: "He knows what your life can hold",
+    body: "Your time, energy, boundaries, and real constraints shape the answer before you ever see it.",
+    icon: Brain,
+  },
+];
+
+const weeklyRhythm = [
+  { icon: Crosshair, label: "Clarity", desc: "Do I know what matters most right now?" },
+  { icon: Shield, label: "Coherence", desc: "Do my actions still match what I said I wanted?" },
+  { icon: Sparkles, label: "Capacity", desc: "Can my life and nervous system actually hold this week?" },
+  { icon: Star, label: "Confidence", desc: "Am I keeping my word to myself?" },
+  { icon: ArrowRight, label: "Courage", desc: "Am I doing the hard right thing or staying busy instead?" },
+  { icon: Users, label: "Connection", desc: "Am I staying present with the people who matter most?" },
+];
+
+const insideApp = [
+  {
+    icon: CalendarDays,
+    title: "Weekly planning prompts that hold the line",
+    description:
+      "Build a week you can actually defend when meetings, sales, family, and life all collide.",
+  },
+  {
+    icon: MessageSquare,
+    title: "A coach you can text like a human",
+    description:
+      "Ask messy questions in plain language. He still answers from your real priorities, numbers, and limits.",
+  },
+  {
+    icon: Brain,
+    title: "Voice when you need to think out loud",
+    description:
+      "Use live voice sessions when typing is too tidy for the truth you actually need to hear.",
+  },
+  {
+    icon: BarChart3,
+    title: "Assessment results that become a real plan",
+    description:
+      "See where you are strong, where you are leaking energy, and what to focus on next.",
+  },
+  {
+    icon: Bell,
+    title: "Morning nudges and weekly check-ins",
+    description:
+      "Stay close to what matters without turning your life into one more noisy app.",
+  },
+  {
+    icon: Smartphone,
+    title: "Your coach wherever the week happens",
+    description:
+      "Desktop, phone, or tablet. ALFRED stays available when the decision is actually happening.",
+  },
+];
+
+const pricingPreview = [
+  {
+    name: "Monthly",
+    price: "$39",
+    period: "/mo",
+    description: "Full product. Cancel anytime.",
+    href: "/sign-up?plan=monthly",
+    featured: false,
+  },
+  {
+    name: "Annual",
+    price: "$349",
+    period: "/yr",
+    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
+    href: "/sign-up?plan=annual",
+    featured: true,
+    badge: "Best value",
+  },
+];
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
+    <div className="min-h-screen overflow-x-hidden bg-background">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <LogoOnDarkGlow size="lg">
           <Image
             src="/logo-apos.png"
             alt="ALFRED"
             width={280}
             height={77}
-            className="logo-on-dark-img h-12 sm:h-14 w-auto"
+            className="logo-on-dark-img h-12 w-auto sm:h-14"
             priority
           />
         </LogoOnDarkGlow>
         <div className="flex items-center gap-4">
-          <Link
-            href="/pricing"
-            className="text-sm text-muted-foreground hover:text-accent transition-colors"
-          >
+          <Link href="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-accent">
             Pricing
           </Link>
-          {/* Auth buttons are in root layout header */}
+          <Link href="/sign-in" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Sign In
+          </Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="px-6 py-24 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-sm text-muted-foreground mb-8 animate-float">
-          <Star className="h-3.5 w-3.5 text-accent" />
-          Built on the Alignment Arc Framework
+      <section className="relative overflow-hidden px-6 pb-20 pt-12 sm:pt-16 lg:pb-24">
+        <div
+          className="pointer-events-none absolute -left-[18%] top-0 h-[520px] w-[min(58vw,760px)] rounded-full blur-[96px] opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.16) 42%, transparent 72%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute right-[-12%] top-24 h-[440px] w-[min(42vw,520px)] opacity-[0.22]"
+          style={{
+            background:
+              "linear-gradient(150deg, rgba(35,52,75,0.22) 0%, rgba(35,52,75,0.08) 38%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(20% 0%, 100% 8%, 80% 100%, 0% 84%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-center">
+          <div className="max-w-3xl">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-sm text-muted-foreground">
+              <Star className="h-3.5 w-3.5 text-accent" />
+              For founders and operators under real pressure
+            </div>
+
+            <h1 className="mb-6 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              The AI coach that remembers what matters
+              <span className="block text-gradient-accent">when the week gets loud.</span>
+            </h1>
+
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+              ALFRED is the trusted advisor in your pocket. He remembers your priorities, values, goals, numbers, and
+              limits so you can make clean decisions when urgent problems, tempting opportunities, and real life all hit
+              at once.
+            </p>
+
+            <ul className="mb-8 flex max-w-3xl flex-wrap gap-2.5">
+              {heroPills.map((pill) => (
+                <li
+                  key={pill}
+                  className="rounded-full border border-border bg-card/80 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+                >
+                  {pill}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <Link
+                href="/sign-up"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-medium text-accent-foreground transition-colors hover:bg-accent/90"
+              >
+                Start My 7-Day Trial
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="#product-tour"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-accent/20 px-8 py-4 font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-accent/10"
+              >
+                Take the Product Tour
+              </Link>
+            </div>
+
+            <p className="mt-5 text-sm font-medium text-muted-foreground">
+              7-day trial. No upsell maze. Works on desktop, phone, and tablet.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="relative overflow-hidden rounded-[28px] border border-border bg-card/80 p-6 shadow-[0_32px_90px_-54px_rgba(14,22,36,0.28)] backdrop-blur sm:p-8">
+              <div
+                className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full blur-3xl opacity-50"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 42%, transparent 76%)",
+                }}
+                aria-hidden
+              />
+              <p className="relative mb-5 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                What ALFRED keeps in the room
+              </p>
+              <div className="relative space-y-4">
+                {heroProof.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-border bg-background/85 p-4 shadow-[0_18px_34px_-28px_rgba(14,22,36,0.2)]"
+                  >
+                    <p className="mb-1.5 font-semibold text-foreground">{item.title}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="relative mt-6 rounded-2xl border border-accent/20 bg-accent/5 px-4 py-4">
+                <p className="text-sm font-semibold leading-relaxed text-foreground">
+                  Trusted advisor in your pocket.
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  Less blank-slate AI. More calm, informed guidance when the decision actually matters.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6">
-          An AI coach that
-          <br />
-          <span className="text-gradient-accent">actually knows you.</span>
-        </h1>
+      <section className="px-6 pb-20">
+        <div className="mx-auto max-w-6xl rounded-[32px] border border-border bg-card/72 p-8 shadow-[0_28px_80px_-56px_rgba(14,22,36,0.28)] sm:p-10 lg:p-12">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              What He Does
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              Most founders don&apos;t need more ideas.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              They need help staying loyal to what matters when urgent problems, tempting opportunities, and real life
+              all hit at once. ALFRED is the trusted advisor in your pocket who helps you protect your priorities and
+              make the next right move. That is what he is built for.
+            </p>
+          </div>
 
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-          <span className="block">Your values. Your goals. Your real constraints.</span>
-          <span className="mt-2 block">ALFRED keeps your blueprint, VAPI™, and weekly commitments in the room</span>
-          <span className="mt-2 block">so growth does not depend on memory or willpower.</span>
-        </p>
-
-        <div className="inline-flex flex-col sm:flex-row items-stretch gap-4 mx-auto">
-          <Link
-            href="/sign-up"
-            className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
-          >
-            Start My 7-Day Trial
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
-            className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-accent/30 text-foreground hover:bg-accent/10 hover:border-accent/50 transition-colors"
-          >
-            Attend the Workshop
-          </Link>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {whatAlfredDoes.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[24px] border border-border bg-background/92 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.22)]"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
+                  <item.icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="mb-3 font-semibold text-foreground">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          <Link href="#product-tour" className="font-medium text-accent hover:underline">
-            See an interactive product tour
-          </Link>
-        </p>
       </section>
 
       <AlfredLandingDemoSection />
 
-      {/* How It Works */}
-      <section className="px-6 py-24 bg-card/80 border-y border-border">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif font-bold text-center mb-4">
-            Not another generic chatbot.
-          </h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-16">
-            Most AI gives you generic advice because it doesn&apos;t know you.
-            ALFRED is different. It knows your core values, your revenue
-            targets, your capacity constraints, and the person you&apos;re
-            becoming. Every answer is personalized.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Build your Alignment Blueprints",
-                description:
-                  "Upload your Alignment Arc worksheets from the Intensive or answer guided questions. Your AI coach learns your values, goals, Driving Fire, and real business numbers.",
-                icon: Target,
-              },
-              {
-                step: "02",
-                title: "Get personalized coaching",
-                description:
-                  "Ask anything — weekly planning, strategy, sales, mindset. Every answer is filtered through your values and scored against your real capacity.",
-                icon: MessageSquare,
-              },
-              {
-                step: "03",
-                title: "Stay aligned daily",
-                description:
-                  "Daily Sparks, weekly Vital Action tracking, the 6Cs scorecard, and your pattern driver + personalized 28-day My Plan from VAPI (same email as your account). Your coach keeps you focused on what actually matters to you.",
-                icon: Bell,
-              },
-            ].map((item) => (
-              <div key={item.step} className="space-y-4">
-                <div className="text-xs font-medium text-muted-foreground">
-                  STEP {item.step}
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center shrink-0">
-                    <item.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+      <section className="border-y border-border bg-card/70 px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Why It Lands
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              Why his advice feels different.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              ALFRED is not guessing from the question you typed today. He coaches from the bigger picture you build with
+              him over time.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* 6Cs Section */}
-      <section className="px-6 py-24">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif font-bold text-center mb-4">
-            Track your alignment weekly.
-          </h2>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
-            The 6Cs Scorecard measures what matters — not just output.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: Crosshair, label: "Clarity", desc: "Do I know what matters most?" },
-              { icon: Link2, label: "Coherence", desc: "Do my actions match my values?" },
-              { icon: BatteryCharging, label: "Capacity", desc: "Can my nervous system hold my life?" },
-              { icon: ShieldCheck, label: "Confidence", desc: "Am I keeping my word to myself?" },
-              { icon: Zap, label: "Courage", desc: "Am I doing the hard right thing?" },
-              { icon: Users, label: "Connection", desc: "Am I present with who matters most?" },
-            ].map((c) => (
-              <div
-                key={c.label}
-                className="flex items-start gap-3 rounded-xl border border-border p-5 bg-card/30 hover:border-accent/20 transition-colors"
+          <div className="grid gap-6 md:grid-cols-3">
+            {whyItLands.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[24px] border border-border bg-background/92 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
               >
-                <div className="w-9 h-9 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
-                  <c.icon className="h-4 w-4 text-accent" />
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
+                  <item.icon className="h-5 w-5 text-accent" />
                 </div>
-                <div>
-                  <h3 className="font-semibold">{c.label}</h3>
-                  <p className="text-sm text-muted-foreground">{c.desc}</p>
-                </div>
-              </div>
+                <h3 className="mb-3 font-semibold text-foreground">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="px-6 py-24 bg-card/80 border-y border-border">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif font-bold text-center mb-16">
-            Everything you need to stay aligned.
-          </h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Shield,
-                title: "Values-First Decision Filter",
-                description:
-                  "Every recommendation is scored against your core values. Your coach never suggests actions that violate what matters most.",
-              },
-              {
-                icon: BarChart3,
-                title: "The Revenue Bridge: From Meaning To Math",
-                description:
-                  "Your real numbers — Required Revenue, QCs per week, close rates — built into every strategy recommendation.",
-              },
-              {
-                icon: Target,
-                title: "Vital Action Tracking",
-                description:
-                  "Set your weekly Vital Action. Get mid-week check-ins. End-of-week reflections. Stay focused on the move that matters most.",
-              },
-              {
-                icon: Crosshair,
-                title: "Pattern driver + 28-day My Plan",
-                description:
-                  "Your VAPI™ results surface your Founder Archetype and pattern driver. Complete the assessment with the same email as this account and open My Plan—week-by-week actions from your scores, not a generic checklist.",
-              },
-              {
-                icon: Bell,
-                title: "Daily Sparks",
-                description:
-                  "Light coaching prompts when you want to name how you are showing up before your inbox names it for you. Values-aligned, on-brand, and not generic blasts.",
-              },
-              {
-                icon: CheckCircle2,
-                title: "6Cs Scorecard",
-                description:
-                  "Rate yourself weekly across Clarity, Coherence, Capacity, Confidence, Courage, and Connection.",
-              },
-              {
-                icon: Smartphone,
-                title: "Works Everywhere",
-                description:
-                  "Desktop, phone, tablet. Install it like an app. Your coach is always in your pocket.",
-              },
-            ].map((feature) => (
-              <div
-                key={feature.title}
-                className="rounded-2xl border border-border p-6 space-y-3 bg-card/50 hover:border-accent/30 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
-                    <feature.icon className="h-5 w-5 text-accent" />
-                  </div>
-                  <h3 className="font-semibold">{feature.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Workshop CTA */}
       <section className="px-6 py-24">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl font-serif font-bold">
-            Want the full experience?
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Weekly Reset
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              A weekly check-in that catches drift before the month is gone.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              ALFRED&apos;s weekly reset helps you see how you are actually operating, not just what you shipped. It turns
+              vague stress into something you can name, track, and coach.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {weeklyRhythm.map((item) => (
+              <article
+                key={item.label}
+                className="rounded-[22px] border border-border bg-card/40 p-5 transition-colors hover:border-accent/25"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/12">
+                  <item.icon className="h-4 w-4 text-accent" />
+                </div>
+                <h3 className="mb-1 font-semibold text-foreground">{item.label}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-card/70 px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Inside ALFRED
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              Everything in the app points back to what matters.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              The point is not more features. The point is giving you a system that helps you stay clear, honest, and
+              aligned when the week tries to pull you off-center.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {insideApp.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[24px] border border-border bg-background/88 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
+                  <item.icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="mb-3 font-semibold text-foreground">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-4xl rounded-[32px] border border-accent/20 bg-[linear-gradient(145deg,rgba(255,107,26,0.08),rgba(255,255,255,0.96)_38%,rgba(255,247,240,0.92)_100%)] p-8 text-center shadow-[0_32px_90px_-56px_rgba(255,107,26,0.22)] sm:p-10 lg:p-12">
+          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            Want The Full Experience?
+          </p>
+          <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+            Want ALFRED to know your world faster?
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Join the quarterly Strategic Alignment Intensive ($497). Build your
-            complete Alignment Blueprints live, get expert guidance in the room,
-            and leave with 30 days of ALFRED access tied to what you built.
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Join the Strategic Alignment Intensive. Build your priorities, numbers, boundaries, and weekly direction
+            live, then bring 30 days of ALFRED home with you so the coaching starts from what you built in the room.
           </p>
           <Link
             href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 font-medium text-accent-foreground transition-colors hover:bg-accent/90"
           >
             See the Intensive
             <ArrowRight className="h-4 w-4" />
@@ -287,68 +446,70 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Preview */}
-      <section className="px-6 py-24 bg-card/80 border-y border-border">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="text-3xl font-serif font-bold">
-            Simple, aligned pricing.
+      <section className="border-y border-border bg-card/70 px-6 py-24">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            Pricing Preview
+          </p>
+          <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+            Simple pricing. One lane. Full product.
           </h2>
+          <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            No upsell maze. No stripped-down tier. Just the full ALFRED experience for less than many founders spend on a
+            single coaching hour.
+          </p>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="rounded-2xl border border-border p-8 space-y-4">
-              <h3 className="font-semibold">Monthly</h3>
-              <div className="text-4xl font-serif font-bold">
-                $39
-                <span className="text-lg text-muted-foreground font-normal">
-                  /mo
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Cancel anytime. Full access to all features.
-              </p>
-              <Link
-                href="/sign-up"
-                className="block w-full py-3 rounded-xl border border-border text-center text-sm hover:bg-secondary transition-colors"
+          <div className="mx-auto grid max-w-2xl gap-6 sm:grid-cols-2">
+            {pricingPreview.map((plan) => (
+              <div
+                key={plan.name}
+                className={`relative rounded-[24px] p-8 ${
+                  plan.featured ? "border-2 border-accent bg-background" : "border border-border bg-background/88"
+                }`}
               >
-                Start My 7-Day Trial
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border-2 border-accent p-8 space-y-4 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-accent-foreground text-xs rounded-full">
-                Best value
+                {plan.badge ? (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs text-accent-foreground">
+                    {plan.badge}
+                  </div>
+                ) : null}
+                <h3 className="font-semibold text-foreground">{plan.name}</h3>
+                <div className="mt-3 text-4xl font-bold text-foreground">
+                  <span className="font-serif">{plan.price}</span>
+                  <span className="text-lg font-normal text-muted-foreground">{plan.period}</span>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
+                <Link
+                  href={plan.href}
+                  className={`mt-6 block rounded-xl py-3 text-sm font-medium transition-colors ${
+                    plan.featured
+                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                      : "border border-border hover:bg-secondary"
+                  }`}
+                >
+                  Start My 7-Day Trial
+                </Link>
               </div>
-              <h3 className="font-semibold">Annual</h3>
-              <div className="text-4xl font-serif font-bold">
-                $349
-                <span className="text-lg text-muted-foreground font-normal">
-                  /yr
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Save 25%. That&apos;s less than $1/day for a personal AI coach.
-              </p>
-              <Link
-                href="/sign-up?plan=annual"
-                className="block w-full py-3 rounded-xl bg-accent text-accent-foreground text-center text-sm hover:bg-accent/90 transition-colors"
-              >
-                Start My 7-Day Trial
-              </Link>
-            </div>
+            ))}
           </div>
+
+          <p className="mt-8 text-sm text-muted-foreground">
+            <Link href="/pricing" className="font-medium text-accent hover:underline">
+              See full pricing
+            </Link>{" "}
+            for plan details and extended access through Jake&apos;s programs.
+          </p>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-6 py-12 border-t border-border">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-border px-6 py-12">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
           <LogoOnDarkGlow size="md">
             <Image
               src="/logo-apos.png"
               alt="ALFRED"
               width={220}
               height={60}
-              className="logo-on-dark-img h-10 sm:h-11 w-auto opacity-60"
+              className="logo-on-dark-img h-10 w-auto opacity-60 sm:h-11"
             />
           </LogoOnDarkGlow>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
@@ -359,11 +520,11 @@ export default function LandingPage() {
               href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
               className="hover:text-foreground"
             >
-              Workshop
+              Intensive
             </Link>
-            <a href="https://circle.so" className="hover:text-foreground">
-              Community
-            </a>
+            <Link href="/sign-in" className="hover:text-foreground">
+              Sign In
+            </Link>
           </div>
         </div>
       </footer>

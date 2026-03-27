@@ -5,20 +5,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight } from "lucide-react";
-import { FIRE_STARTER_COUNT } from "@/lib/ai/prompts";
+import { ArrowRight, Check } from "lucide-react";
 
 const features = [
-  "Personalized AI coaching chat (powered by Claude)",
-  "Values-aligned decision filter",
-  "The Revenue Bridge built in",
-  `Fire Starters — ${FIRE_STARTER_COUNT} strategic prompts across 9 categories`,
-  "Weekly Vital Action tracking",
-  "6Cs Scorecard (Clarity, Coherence, Capacity, Confidence, Courage, Connection)",
-  "Morning coach notifications",
-  "Alignment Blueprint dashboard",
-  "Alignment Blueprint updates (monthly)",
-  "Works on desktop, phone, and tablet (PWA)",
+  "Coaching chat that remembers what matters to you",
+  "Decision support grounded in your priorities and limits",
+  "Goals, numbers, and weekly sales targets kept in the room",
+  "Guided prompts for planning, reflection, and hard decisions",
+  "A weekly priority you can actually defend",
+  "Weekly check-ins that catch drift early",
+  "Morning nudges when you want them",
+  "A living dashboard for what matters this season",
+  "Updates as your priorities and constraints change",
+  "Desktop, phone, and tablet access",
 ];
 
 const plans = [
@@ -26,7 +25,7 @@ const plans = [
     name: "Monthly",
     price: "$39",
     period: "/month",
-    description: "Full access. Cancel anytime.",
+    description: "Full product. Cancel anytime.",
     planId: "monthly",
     highlight: false,
   },
@@ -34,7 +33,7 @@ const plans = [
     name: "Annual",
     price: "$349",
     period: "/year",
-    description: "Save 25%. Less than $1/day.",
+    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
     planId: "annual",
     highlight: true,
     badge: "Best value",
@@ -57,9 +56,7 @@ export default function SubscribePage() {
           return;
         }
         const status = data.subscriptionStatus as string | undefined;
-        const trialEndsAt = data.trialEndsAt
-          ? new Date(data.trialEndsAt)
-          : null;
+        const trialEndsAt = data.trialEndsAt ? new Date(data.trialEndsAt) : null;
         const now = Date.now();
 
         if (status === "active") {
@@ -88,10 +85,8 @@ export default function SubscribePage() {
 
   if (state === "loading") {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">
-          Loading...
-        </div>
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
       </div>
     );
   }
@@ -102,8 +97,7 @@ export default function SubscribePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/">
           <LogoOnDarkGlow size="lg">
             <Image
@@ -111,93 +105,81 @@ export default function SubscribePage() {
               alt="Aligned Freedom Coach"
               width={280}
               height={77}
-              className="logo-on-dark-img h-12 sm:h-14 w-auto"
+              className="logo-on-dark-img h-12 w-auto sm:h-14"
               priority
             />
           </LogoOnDarkGlow>
         </Link>
         <div className="flex items-center gap-4">
-          <Link
-            href="/dashboard"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
+          <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">
             Back to app
           </Link>
         </div>
       </nav>
 
-      <div className="px-6 py-16 max-w-4xl mx-auto">
-        {/* State-specific header */}
-        <div className="text-center mb-12">
-          {state === "trial" && (
+      <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          {state === "trial" ? (
             <>
-              <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">
-                Add your payment method
+              <h1 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+                Keep your coaching live.
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 Your free trial ends in{" "}
                 <strong className="text-foreground">
                   {daysLeft} day{daysLeft === 1 ? "" : "s"}
                 </strong>
-                . Add your payment method now to continue without interruption.
-                You won&apos;t be charged until your trial ends.
+                . Add your payment method now so your priorities, history, and coaching stay uninterrupted. You will not
+                be charged until the trial ends.
               </p>
             </>
-          )}
-          {state === "expired" && (
+          ) : (
             <>
-              <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">
-                Your trial has ended
+              <h1 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+                Pick up where you left off.
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                Subscribe now to keep using ALFRED and your Alignment Blueprint.
-                Less than the cost of one coaching session per month.
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                Subscribe now to keep ALFRED, your dashboard, and your coaching history live. Less than the cost of one
+                coaching hour per month.
               </p>
             </>
           )}
         </div>
 
-        {/* Plans */}
-        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl px-8 pb-8 space-y-6 ${
-                plan.highlight
-                  ? "border-2 border-accent relative pt-3"
-                  : "border border-border pt-8"
+              className={`relative rounded-[24px] p-8 ${
+                plan.highlight ? "border-2 border-accent bg-card shadow-[0_28px_60px_-38px_rgba(255,107,26,0.28)]" : "border border-border bg-card/88"
               }`}
             >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent text-accent-foreground text-xs rounded-full">
+              {plan.badge ? (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs text-accent-foreground">
                   {plan.badge}
                 </div>
-              )}
+              ) : null}
               <div>
-                <h3 className="text-lg font-semibold">{plan.name}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
                 <div className="mt-2">
-                  <span className="text-4xl font-serif font-bold">
-                    {plan.price}
-                  </span>
+                  <span className="font-serif text-4xl font-bold text-foreground">{plan.price}</span>
                   <span className="text-muted-foreground">{plan.period}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {plan.description}
-                </p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
               </div>
 
-              <ul className="space-y-3">
+              <ul className="mt-6 space-y-3">
                 {features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm">
-                    <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
-                    {feature}
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                    <span className="leading-relaxed text-muted-foreground">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <a
                 href={`/api/checkout?plan=${plan.planId}&from=subscribe`}
-                className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-center text-sm font-medium transition-colors ${
+                className={`mt-8 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-center text-sm font-medium transition-colors ${
                   plan.highlight
                     ? "bg-accent text-accent-foreground hover:bg-accent/90"
                     : "border border-border hover:bg-secondary"
@@ -210,9 +192,7 @@ export default function SubscribePage() {
           ))}
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-8">
-          Cancel anytime. No long-term commitment.
-        </p>
+        <p className="mt-8 text-center text-sm text-muted-foreground">Cancel anytime. No long-term commitment.</p>
       </div>
     </div>
   );
