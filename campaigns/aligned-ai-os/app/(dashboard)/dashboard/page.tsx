@@ -222,6 +222,12 @@ export default function DashboardPage() {
     !!latestScorecard &&
     !currentWindowSubmitted &&
     isSameEasternCalendarWeek(latestScorecard.createdAt);
+  const showSubmissionWindowCtas =
+    scorecardWindow.canSubmit && !currentWindowSubmitted;
+  const submissionWindowUrgent =
+    showSubmissionWindowCtas &&
+    scorecardWindow.hoursLeft > 0 &&
+    scorecardWindow.hoursLeft <= 6;
   const displayedScorecard =
     currentWindowSubmitted || showFirstSubmissionFallback ? latestScorecard : null;
   let currentOneThing: string | null = null;
@@ -345,6 +351,15 @@ export default function DashboardPage() {
         .sort((a, b) => b.score - a.score)
         .slice(0, 3)
     : [];
+  const latestScorecardOverall = latestScorecard
+    ? getOverallScore(latestScorecard.scores)
+    : null;
+  const latestScorecardDate = latestScorecard
+    ? new Date(latestScorecard.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      })
+    : null;
 
   return (
     <div className="flex flex-col h-full">
@@ -389,6 +404,55 @@ export default function DashboardPage() {
                   </p>
                 </div>
               </div>
+              {showSubmissionWindowCtas && (
+                <div
+                  className={`mt-4 rounded-xl border p-4 ${
+                    submissionWindowUrgent
+                      ? "border-amber-500/40 bg-amber-500/10"
+                      : "border-accent/20 bg-background/70"
+                  }`}
+                >
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="space-y-2">
+                      <div
+                        className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${
+                          submissionWindowUrgent
+                            ? "bg-amber-500/15 text-amber-800 dark:text-amber-300"
+                            : "bg-accent/10 text-accent"
+                        }`}
+                      >
+                        {submissionWindowUrgent ? (
+                          <AlertTriangle className="h-3.5 w-3.5" />
+                        ) : (
+                          <ClipboardCheck className="h-3.5 w-3.5" />
+                        )}
+                        {submissionWindowUrgent ? "Closes today" : "Weekly review open"}
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-sm font-semibold text-foreground">
+                          Update your Vital Action for this week
+                        </p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Complete your 6Cs review and choose the one move ALFRED should keep
+                          front and center next.
+                        </p>
+                      </div>
+                      {scorecardWindow.countdownMessage && (
+                        <p className="text-xs font-medium text-muted-foreground">
+                          {scorecardWindow.countdownMessage}
+                        </p>
+                      )}
+                    </div>
+                    <Link
+                      href="/scorecard"
+                      className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                    >
+                      Update in 6Cs
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              )}
               {visibleReflections.length > 0 && (
                 <>
                   <div className="mt-4">
@@ -440,6 +504,60 @@ export default function DashboardPage() {
                 </>
               )}
             </div>
+          ) : showSubmissionWindowCtas ? (
+            <Link href="/scorecard" className="block group">
+              <div
+                className={`relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-colors ${
+                  submissionWindowUrgent
+                    ? "border-amber-500/40 bg-amber-500/10 hover:border-amber-500/60"
+                    : "border-accent/30 bg-card hover:border-accent/50"
+                }`}
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-accent/70 to-transparent" />
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Target className="h-5 w-5 text-accent" />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-3">
+                    <div
+                      className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${
+                        submissionWindowUrgent
+                          ? "bg-amber-500/15 text-amber-800 dark:text-amber-300"
+                          : "bg-accent/10 text-accent"
+                      }`}
+                    >
+                      {submissionWindowUrgent ? (
+                        <AlertTriangle className="h-3.5 w-3.5" />
+                      ) : (
+                        <ClipboardCheck className="h-3.5 w-3.5" />
+                      )}
+                      {submissionWindowUrgent ? "Closes today" : "Weekly review open"}
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        This Week&apos;s Vital Action
+                      </p>
+                      <p className="mt-1 text-lg font-semibold leading-snug">
+                        Set the move ALFRED should anchor this week
+                      </p>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Complete your 6Cs review to choose the one action that makes everything else
+                      easier or unnecessary.
+                    </p>
+                    {scorecardWindow.countdownMessage && (
+                      <p className="text-xs font-medium text-muted-foreground">
+                        {scorecardWindow.countdownMessage}
+                      </p>
+                    )}
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
+                      Complete weekly review
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ) : (
             <Link
               href="/scorecard"
@@ -585,16 +703,106 @@ export default function DashboardPage() {
                   Your next scorecard will be available Friday at 12pm.
                 </p>
               </div>
-            ) : !hasAnyScorecards && scorecardWindow.canSubmit ? (
-              <Link href="/scorecard" className="block order-1 sm:order-2">
-                <div className="rounded-2xl border-2 border-accent/40 bg-accent/5 p-5 space-y-3 hover:border-accent/60 transition-colors shadow-sm h-full min-h-[280px] flex flex-col items-center justify-center text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/20">
-                    <ClipboardCheck className="h-6 w-6 text-accent" />
+            ) : showSubmissionWindowCtas ? (
+              <Link href="/scorecard" className="block order-1 sm:order-2 group">
+                <div
+                  className={`relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-colors h-full min-h-[280px] flex flex-col ${
+                    submissionWindowUrgent
+                      ? "border-amber-500/40 bg-amber-500/10 hover:border-amber-500/60"
+                      : "border-accent/30 bg-card hover:border-accent/50"
+                  }`}
+                >
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-accent/70 to-transparent" />
+                  <div className="flex items-start justify-between gap-3">
+                    <div
+                      className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${
+                        submissionWindowUrgent
+                          ? "bg-amber-500/15 text-amber-800 dark:text-amber-300"
+                          : "bg-accent/10 text-accent"
+                      }`}
+                    >
+                      {submissionWindowUrgent ? (
+                        <AlertTriangle className="h-3.5 w-3.5" />
+                      ) : (
+                        <ClipboardCheck className="h-3.5 w-3.5" />
+                      )}
+                      {submissionWindowUrgent ? "Closes today" : "Weekly review open"}
+                    </div>
+                    <div className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-accent/10 shrink-0">
+                      <ClipboardCheck className="h-5 w-5 text-accent" />
+                    </div>
                   </div>
-                  <p className="font-semibold text-accent">6Cs Scorecard Available</p>
-                  <p className="text-sm text-muted-foreground">{scorecardWindow.message}</p>
-                  <p className="text-xs font-mono text-muted-foreground">{scorecardWindow.countdownMessage}</p>
-                  <span className="text-sm font-medium text-accent">Fill Out Scorecard →</span>
+
+                  <div className="mt-4 space-y-2">
+                    <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                      6Cs Scorecard
+                    </p>
+                    <h3 className="text-2xl font-serif font-bold leading-tight">
+                      {hasAnyScorecards
+                        ? "Run this week's 6Cs review"
+                        : "Start your first 6Cs review"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {hasAnyScorecards
+                        ? "Review the six dimensions, catch drift early, and reset the Vital Action ALFRED should anchor next."
+                        : "Use your first weekly review to see what's steady, what's leaking, and what this week's Vital Action needs to be."}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 space-y-2">
+                    <div className="rounded-xl border border-border/60 bg-background/70 px-4 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        Submission Window
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-foreground">
+                        Open through Sunday at 6pm Eastern
+                      </p>
+                      {scorecardWindow.countdownMessage && (
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {scorecardWindow.countdownMessage}
+                        </p>
+                      )}
+                    </div>
+                    {latestScorecardOverall !== null ? (
+                      <div className="rounded-xl border border-border/60 bg-background/70 px-4 py-3">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          Last Completed
+                        </p>
+                        <div className="mt-1 flex items-end gap-2">
+                          <span
+                            className="text-2xl font-bold font-serif"
+                            style={{ color: getScorecardScoreColor(latestScorecardOverall) }}
+                          >
+                            {latestScorecardOverall}%
+                          </span>
+                          {latestScorecardDate && (
+                            <span className="text-xs text-muted-foreground mb-1">
+                              on {latestScorecardDate}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="rounded-xl border border-border/60 bg-background/70 px-4 py-3">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          What You&apos;ll Set
+                        </p>
+                        <p className="mt-1 text-sm text-foreground">
+                          Six scores, reflections, and your Vital Action for the week ahead.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-auto pt-5 flex items-center justify-between gap-3">
+                    <span className="text-xs text-muted-foreground">
+                      {hasAnyScorecards ? "Pick up your weekly rhythm" : "First weekly review"}
+                    </span>
+                    <span className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors group-hover:bg-primary/90">
+                      Open weekly review
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
                 </div>
               </Link>
             ) : (

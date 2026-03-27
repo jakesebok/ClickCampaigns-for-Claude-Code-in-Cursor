@@ -131,6 +131,7 @@ const pricingPreview = [
     period: "/mo",
     description: "Choose monthly after your card-free trial.",
     href: "/sign-up?plan=monthly",
+    cta: "Start Card-Free Trial",
     featured: false,
   },
   {
@@ -139,6 +140,10 @@ const pricingPreview = [
     period: "/yr",
     description: "Choose annual after your trial and save 25%.",
     href: "/sign-up?plan=annual",
+    cta: "Start Card-Free Trial",
+    // Premium-path offer parked until the next Intensive window is ready.
+    // href: "/premium-path",
+    // cta: "See Annual Path",
     featured: true,
     badge: "Best value",
   },
@@ -307,11 +312,13 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <blockquote className="mb-10 rounded-[28px] border border-accent/20 bg-[linear-gradient(145deg,rgba(255,107,26,0.08),rgba(255,255,255,0.96)_38%,rgba(255,247,240,0.92)_100%)] p-6 shadow-[0_28px_80px_-56px_rgba(255,107,26,0.22)] sm:p-8">
-            <p className="text-xl font-semibold leading-relaxed text-foreground sm:text-2xl">
-              Serious operators have always had someone in the earpiece: calm, informed, willing to say the truth out
-              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
+          <blockquote className="mb-10 rounded-[24px] border border-border bg-background/92 p-6 sm:p-8">
+            <p className="font-serif text-xl leading-relaxed text-foreground sm:text-[1.7rem]">
+              “I built ALFRED because I wanted clarity I could carry into a hard week. Not another document I felt good
+              about for a day, then forgot. What matters, what I decided, and what this season requires stay close
+              here, so when pressure hits I can get real guidance without starting from scratch.”
             </p>
+            <p className="mt-4 text-sm font-semibold text-muted-foreground">— Jake Sebok</p>
           </blockquote>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -476,7 +483,7 @@ export default function LandingPage() {
                       : "border border-border hover:bg-secondary"
                   }`}
                 >
-                  Start Card-Free Trial
+                  {plan.cta}
                 </Link>
               </div>
             ))}

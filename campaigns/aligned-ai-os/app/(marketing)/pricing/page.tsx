@@ -35,6 +35,9 @@ const plans = [
     description: "Choose annual after your trial and save 25%.",
     cta: "Start Card-Free Trial",
     href: "/sign-up?plan=annual",
+    // Premium-path offer parked until the next Intensive window is ready.
+    // href: "/premium-path",
+    // cta: "See Annual Path",
     highlight: true,
     badge: "Best value",
   },
@@ -134,12 +137,13 @@ export default async function PricingPage() {
         </div>
 
         <div className="mx-auto max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">
+          {/* Premium-path upsell parked until the next Intensive window is ready. */}
           <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Already In Jake&apos;s World?
           </p>
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Some Jake programs include longer ALFRED access. That is additive, not required. ALFRED is built to stand on
-            his own as a self-serve subscription.
+            Some Jake programs include longer ALFRED access. That is additive, not required. ALFRED is built to stand
+            on his own as a self-serve subscription.
           </p>
         </div>
       </div>

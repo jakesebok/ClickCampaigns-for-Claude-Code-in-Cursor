@@ -3,9 +3,16 @@ import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function SignUpPage() {
+export default async function SignUpPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ plan?: string }>;
+}) {
   const { userId } = await auth();
   if (userId) redirect("/dashboard");
+  const params = await searchParams;
+  const plan = params.plan;
+  const isAnnual = plan === "annual";
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-6 py-10">
@@ -14,7 +21,9 @@ export default async function SignUpPage() {
           Start your card-free 7-day trial.
         </h1>
         <p className="text-base leading-relaxed text-muted-foreground">
-          Full access from day one. No card required today.
+          {isAnnual
+            ? "You are starting with the annual path. Full access from day one. No card required today."
+            : "Full access from day one. No card required today."}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           If ALFRED helps you protect priorities and make cleaner decisions, you can choose monthly or annual when the
@@ -53,6 +62,7 @@ export default async function SignUpPage() {
           See pricing
         </Link>
       </p>
+      {/* Premium-path upsell parked until the next Intensive window is ready. */}
     </div>
   );
 }
