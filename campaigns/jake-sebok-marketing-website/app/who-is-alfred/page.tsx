@@ -384,7 +384,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative isolate z-10 py-20 sm:py-24 lg:py-28 overflow-y-visible text-white [overflow-x:clip]">
+      <section className="relative isolate z-30 py-20 sm:py-24 lg:py-28 overflow-y-visible text-white [overflow-x:clip]">
         <div
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
@@ -426,7 +426,7 @@ export default function WhoIsAlfredPage() {
         />
         <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
           <div
-            className="pointer-events-none absolute -top-16 left-[4%] z-0 h-[220px] w-[min(34vw,360px)] opacity-[0.46]"
+            className="pointer-events-none absolute -top-16 left-[4%] z-20 h-[220px] w-[min(34vw,360px)] opacity-[0.46]"
             style={{
               background:
                 "linear-gradient(144deg, rgba(255,107,26,0.46) 0%, rgba(255,159,107,0.2) 42%, rgba(255,107,26,0.04) 100%)",
@@ -436,7 +436,7 @@ export default function WhoIsAlfredPage() {
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute -bottom-18 right-[6%] z-0 h-[190px] w-[min(30vw,300px)] opacity-[0.34]"
+            className="pointer-events-none absolute -bottom-18 right-[6%] z-20 h-[190px] w-[min(30vw,300px)] opacity-[0.34]"
             style={{
               background:
                 "linear-gradient(154deg, rgba(255,107,26,0.38) 0%, rgba(255,159,107,0.14) 46%, rgba(255,107,26,0.02) 100%)",
@@ -445,7 +445,7 @@ export default function WhoIsAlfredPage() {
             }}
             aria-hidden
           />
-          <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(160deg,rgba(10,16,27,0.9)_0%,rgba(18,27,44,0.93)_54%,rgba(33,47,67,0.96)_100%)] shadow-[0_42px_120px_-54px_rgba(0,0,0,0.62)]">
+          <div className="relative z-10 overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(160deg,rgba(10,16,27,0.9)_0%,rgba(18,27,44,0.93)_54%,rgba(33,47,67,0.96)_100%)] shadow-[0_42px_120px_-54px_rgba(0,0,0,0.62)]">
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,159,107,0.8)] to-transparent" aria-hidden />
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,159,107,0.5)] to-transparent" aria-hidden />
             <div
