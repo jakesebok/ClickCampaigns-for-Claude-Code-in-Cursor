@@ -188,12 +188,12 @@ export default function WhoIsAlfredPage() {
         <div className="relative z-10 max-w-[1180px] mx-auto px-5 sm:px-6">
           <div className="grid gap-8 sm:gap-10 md:grid-cols-[minmax(0,1.02fr)_minmax(250px,380px)] md:gap-10 lg:gap-16 xl:gap-20 items-center">
             <div className="max-w-xl md:max-w-none">
-              <div className="relative overflow-hidden rounded-[28px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.9)_46%,rgba(232,238,246,0.92)_100%)] px-6 py-7 shadow-[0_34px_90px_-48px_rgba(14,22,36,0.34)] backdrop-blur-md sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+              <div className="relative overflow-hidden rounded-[28px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.92)_0%,rgba(249,250,252,0.9)_46%,rgba(238,242,246,0.9)_100%)] px-6 py-7 shadow-[0_34px_90px_-48px_rgba(14,22,36,0.34)] backdrop-blur-md sm:px-8 sm:py-9 lg:px-10 lg:py-10">
                 <div
-                  className="pointer-events-none absolute inset-0 opacity-[0.9]"
+                  className="pointer-events-none absolute inset-0 opacity-[0.72]"
                   style={{
                     background:
-                      "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 100%)",
+                      "linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.03) 100%)",
                   }}
                   aria-hidden
                 />
@@ -214,24 +214,24 @@ export default function WhoIsAlfredPage() {
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -right-[14%] top-[-8%] h-[116%] w-[44%] opacity-[0.54]"
+                  className="pointer-events-none absolute -right-[14%] top-[-8%] h-[116%] w-[42%] opacity-[0.36]"
                   style={{
                     background:
-                      "linear-gradient(162deg, rgba(36,52,73,0.26) 0%, rgba(73,90,112,0.16) 38%, rgba(73,90,112,0.06) 62%, rgba(255,255,255,0) 100%)",
+                      "linear-gradient(162deg, rgba(36,52,73,0.18) 0%, rgba(73,90,112,0.11) 40%, rgba(73,90,112,0.03) 64%, rgba(255,255,255,0) 100%)",
                     clipPath: "polygon(24% 0%, 100% 8%, 84% 100%, 0% 92%)",
                   }}
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute right-[6%] bottom-[10%] h-40 w-40 rounded-full blur-[58px] opacity-[0.58]"
+                  className="pointer-events-none absolute right-[7%] bottom-[10%] h-36 w-36 rounded-full blur-[56px] opacity-[0.34]"
                   style={{
                     background:
-                      "radial-gradient(circle, rgba(73,90,112,0.24) 0%, rgba(73,90,112,0.12) 40%, transparent 76%)",
+                      "radial-gradient(circle, rgba(73,90,112,0.18) 0%, rgba(73,90,112,0.08) 40%, transparent 76%)",
                   }}
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(73,90,112,0.3)] to-transparent"
+                  className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(73,90,112,0.22)] to-transparent"
                   aria-hidden
                 />
                 <div className="relative">
@@ -520,20 +520,10 @@ export default function WhoIsAlfredPage() {
         className="relative z-10 py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-visible scroll-mt-24"
       >
         <div
-          className="pointer-events-none absolute -top-24 left-1/2 h-52 w-[min(92vw,920px)] -translate-x-1/2 rounded-full blur-[60px] opacity-[0.48]"
+          className="pointer-events-none absolute -top-16 left-1/2 h-40 w-[min(88vw,860px)] -translate-x-1/2 rounded-full blur-[72px] opacity-35"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,159,107,0.54) 0%, rgba(255,107,26,0.22) 42%, transparent 78%)",
-          }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -top-24 right-[8%] h-[220px] w-[min(34vw,320px)] opacity-[0.42]"
-          style={{
-            background:
-              "linear-gradient(150deg, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.16) 44%, rgba(255,255,255,0) 100%)",
-            clipPath: "polygon(22% 0%, 100% 10%, 78% 100%, 0% 90%)",
-            filter: "drop-shadow(0 18px 48px rgba(255,107,26,0.22))",
+              "radial-gradient(circle, rgba(255,159,107,0.42) 0%, rgba(255,107,26,0.12) 42%, transparent 76%)",
           }}
           aria-hidden
         />
@@ -627,11 +617,11 @@ export default function WhoIsAlfredPage() {
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -left-12 bottom-[-26px] h-36 w-56 opacity-[0.34]"
+                  className="pointer-events-none absolute -left-[24vw] bottom-[-28px] h-40 w-[min(48vw,460px)] opacity-[0.36]"
                   style={{
                     background:
                       "linear-gradient(128deg, rgba(255,107,26,0.6) 0%, rgba(255,159,107,0.2) 56%, transparent 100%)",
-                    clipPath: "polygon(0% 24%, 100% 0%, 58% 100%, 0% 100%)",
+                    clipPath: "polygon(0% 22%, 100% 0%, 54% 100%, 0% 100%)",
                   }}
                   aria-hidden
                 />
@@ -700,15 +690,6 @@ export default function WhoIsAlfredPage() {
                   style={{
                     background:
                       "radial-gradient(circle, rgba(255,159,107,0.34) 0%, rgba(255,159,107,0.12) 44%, transparent 76%)",
-                  }}
-                  aria-hidden
-                />
-                <div
-                  className="pointer-events-none absolute -bottom-8 left-0 h-20 w-40 opacity-[0.26]"
-                  style={{
-                    background:
-                      "linear-gradient(118deg, rgba(255,107,26,0.62) 0%, rgba(255,159,107,0.16) 62%, transparent 100%)",
-                    clipPath: "polygon(0% 30%, 100% 0%, 60% 100%, 0% 100%)",
                   }}
                   aria-hidden
                 />
@@ -951,6 +932,15 @@ export default function WhoIsAlfredPage() {
           aria-hidden
         />
         <div
+          className="pointer-events-none absolute top-10 right-[-8%] h-[180px] w-[min(30vw,260px)] opacity-[0.26]"
+          style={{
+            background:
+              "linear-gradient(146deg, rgba(36,52,73,0.24) 0%, rgba(73,90,112,0.08) 44%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(24% 0%, 100% 8%, 76% 100%, 0% 86%)",
+          }}
+          aria-hidden
+        />
+        <div
           className="pointer-events-none absolute -bottom-12 right-[-12%] h-56 w-[min(42vw,360px)] rounded-full opacity-[0.22] blur-[74px]"
           style={{
             background:
@@ -961,10 +951,27 @@ export default function WhoIsAlfredPage() {
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
           <div className="relative overflow-hidden bg-ap-off rounded-[20px] border border-ap-border p-8 sm:p-10 text-center">
             <div
+              className="pointer-events-none absolute -left-12 top-8 h-28 w-44 opacity-[0.2]"
+              style={{
+                background:
+                  "linear-gradient(132deg, rgba(255,107,26,0.32) 0%, rgba(255,159,107,0.12) 56%, rgba(255,255,255,0) 100%)",
+                clipPath: "polygon(0% 18%, 100% 0%, 58% 100%, 0% 88%)",
+              }}
+              aria-hidden
+            />
+            <div
               className="pointer-events-none absolute -right-10 top-0 h-36 w-36 rounded-full blur-[56px] opacity-[0.28]"
               style={{
                 background:
                   "radial-gradient(circle, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.16) 40%, transparent 74%)",
+              }}
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -bottom-8 left-1/2 h-28 w-[120%] -translate-x-1/2 opacity-[0.16] blur-2xl"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(73,90,112,0.18) 0%, rgba(73,90,112,0.04) 54%, rgba(255,255,255,0) 100%)",
               }}
               aria-hidden
             />
