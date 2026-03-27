@@ -23,7 +23,7 @@ export const WEEKLY_PLANNING_PROMPTS: { label: string; prompt: string }[] = [
   {
     label: "Calendar: Becoming + Vital Action",
     prompt:
-      "Build my week around my Becoming line and my Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables. Use my master context.",
+      "Build my week around my Becoming line and my Vital Action. Give me a realistic calendar plan with protected blocks, buffers, and non-negotiables. Use what you already know about my priorities and commitments.",
   },
   {
     label: "Top 3 outcomes (4 life arenas)",
@@ -33,12 +33,12 @@ export const WEEKLY_PLANNING_PROMPTS: { label: string; prompt: string }[] = [
   {
     label: "Values violations audit",
     prompt:
-      "Audit my week for values violations before we plan: where am I about to trade a core value for speed, approval, or money? Use my stated values from my master context and suggest aligned moves.",
+      "Audit my week for values violations before we plan: where am I about to trade a core value for speed, approval, or money? Use my stated values and suggest aligned moves.",
   },
   {
     label: "Delete or defer this week",
     prompt:
-      "Given my capacity limits from my master context, what must be deleted or deferred this week so I don't break my system?",
+      "Given my real capacity this week, what must be deleted or deferred so I don't break my system?",
   },
 ];
 
@@ -74,7 +74,7 @@ export const INNER_WORK_DEMO_LABEL = "Find and shift limiting belief" as const;
 
 /**
  * Casual first user message for the Inner Work animated demo (not the Fire Starter string).
- * Shows you can type like a human; Alfred still ties to blueprint / Real Reasons from context.
+ * Shows you can type like a human; Alfred still ties to blueprint / Real Reasons.
  */
 export const INNER_WORK_DEMO_CASUAL_USER_MESSAGE =
   "ok this is gonna sound dramatic but i have this constant fear that if im not basically living in slack/email the whole business unravels. like im the only adult in the room. i hate it but its loud today";
@@ -132,7 +132,7 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Got it. I'm anchoring three things from your context: your Vital Action is defending focus blocks, your bridge implies **12 qualified conversations** this week, and your blueprint treats **dinner by 6:30** and **no Slack after 8** as hard edges—not nice-to-haves. We build the calendar around those first.",
+      "Got it. I'm anchoring three things first: your Vital Action is defending focus blocks, your bridge implies **12 qualified conversations** this week, and your blueprint treats **dinner by 6:30** and **no Slack after 8** as hard edges, not nice-to-haves. We build the calendar around those first.",
   },
   {
     role: "user",
@@ -165,7 +165,7 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
 
 /** First assistant message in the animated Coach thread demo (Inner Work full demo). */
 export const COACH_DEMO_INNER_THREAD_OPENER =
-  "Type it messy if you need to—I already have your blueprint, Real Reasons, and Vital Action in context. I'll connect the dots; you don't have to spell the framework.";
+  "Type it messy if you need to. I already know your blueprint, Real Reasons, and Vital Action. I'll connect the dots; you don't have to spell the framework.";
 
 /** lib/vapi/scoring.ts — ARCHETYPE_DESCRIPTIONS["The Ghost"] */
 export const GHOST_ARCHETYPE_DESCRIPTION =
@@ -411,7 +411,7 @@ export const DEMO_PRIORITY_MATRIX_BY_QUADRANT: {
  * Grounded in COACHING_SYSTEM_PROMPT rules (Vital Action, QC, capacity, boundaries).
  * Not API output; demo only.
  */
-export const SAMPLE_SCHEDULE_REPLY = `Here is a week shaped around what is already in your context, not generic hustle.
+export const SAMPLE_SCHEDULE_REPLY = `Here is a week shaped around what you already said matters, not generic hustle.
 
 **Anchor 1: Vital Action**  
 You said your Vital Action is to set and defend focus work blocks. That means the calendar gets built *around* those blocks first, not squeezed in after meetings.

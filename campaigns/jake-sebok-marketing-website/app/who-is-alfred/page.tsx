@@ -6,7 +6,7 @@ import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED): clarity in your pocket when the week gets loud. It keeps your priorities, context, and next best move in front of you when pressure hits.";
+  "Aligned Freedom Coach (ALFRED): clarity in your pocket when the week gets loud. It keeps what matters, what you promised, and your next best move in front of you when pressure hits.";
 
 export const metadata: Metadata = {
   title: "Aligned Freedom Coach (ALFRED): Clarity In Your Pocket When It Matters | Jake Sebok",
@@ -44,8 +44,8 @@ const dailyItems = [
     body: "Straight answers when you are stuck, overloaded, or about to say yes to the wrong thing.",
   },
   {
-    title: "Your priorities stay loaded",
-    body: "The context behind your decisions stays close, so you do not waste energy re-orienting from scratch.",
+    title: "What matters stays close",
+    body: "Your priorities, commitments, and why they matter stay visible, so you do not waste energy finding your footing again.",
   },
   {
     title: "Quick check-ins",
@@ -127,7 +127,7 @@ export default function WhoIsAlfredPage() {
                   </p>
                   <ul className="flex flex-wrap gap-2.5 mb-7">
                     <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
-                      Keeps priorities loaded
+                      Keeps what matters visible
                     </li>
                     <li className="rounded-full border border-ap-border bg-ap-off/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
                       Clear decisions under pressure
@@ -136,7 +136,7 @@ export default function WhoIsAlfredPage() {
                       Built for the messy week
                     </li>
                     <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
-                      Remembers your context
+                      Steady, useful guidance
                     </li>
                   </ul>
                   <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -190,42 +190,112 @@ export default function WhoIsAlfredPage() {
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
         />
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent z-[1]" aria-hidden />
+        <div
+          className="absolute -top-[24%] -left-[22%] z-0 h-[120%] w-[min(118vw,1320px)] blur-[44px] opacity-[0.68]"
+          style={{
+            background:
+              "radial-gradient(ellipse 76% 62% at 24% 28%, rgba(255,107,26,0.42) 0%, rgba(255,140,66,0.2) 30%, rgba(255,159,107,0.08) 54%, transparent 76%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute top-[2%] -left-[10%] z-0 h-[95%] w-[min(122vw,1380px)] opacity-[0.46]"
+          style={{
+            background:
+              "linear-gradient(196deg, rgba(194,65,12,0.32) 0%, rgba(234,88,12,0.28) 30%, rgba(255,107,26,0.12) 58%, rgba(255,159,107,0.04) 100%)",
+            clipPath: "polygon(5% 3%, 100% 0%, 84% 60%, 28% 100%, -2% 92%, 2% 42%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute -top-[6%] right-[-10%] z-0 hidden h-[112%] w-[min(70vw,980px)] lg:block"
+          style={{
+            background:
+              "linear-gradient(138deg, rgba(255,107,26,0.34) 0%, rgba(255,123,46,0.2) 24%, rgba(255,159,107,0.1) 52%, rgba(255,107,26,0.02) 100%)",
+            clipPath: "polygon(24% 0%, 100% 4%, 74% 100%, 0% 96%)",
+            filter: "drop-shadow(0 18px 60px rgba(255,107,26,0.24))",
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute left-0 top-0 z-0 h-[46%] w-[min(90vw,960px)] mix-blend-soft-light opacity-[0.32]"
+          style={{
+            background: "linear-gradient(118deg, rgba(255,255,255,0.36) 0%, rgba(255,214,188,0.14) 24%, transparent 62%)",
+            clipPath: "polygon(0% 0%, 78% 0%, 30% 62%, 0% 20%)",
+          }}
+          aria-hidden
+        />
         <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="relative flex flex-col md:flex-row md:items-stretch md:justify-between gap-10 md:gap-6 lg:gap-10 xl:gap-14">
-            <div className="relative z-20 flex min-w-0 w-full flex-col max-w-[720px] max-md:max-w-none md:max-w-[min(28rem,48%)] lg:max-w-[min(34rem,50%)] xl:max-w-[min(40rem,52%)] md:shrink md:z-10 lg:py-1 md:pr-3 lg:pr-6 max-md:drop-shadow-none md:drop-shadow-[0_2px_24px_rgba(14,22,36,0.65)]">
-              <div className="order-1 flex justify-center md:hidden my-2 mb-6">
-                <img
-                  src="/images/phone_with_natural_shadow.png"
-                  alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58vh,440px)] w-full max-w-[min(92vw,380px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
-                />
+          <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(160deg,rgba(10,16,27,0.9)_0%,rgba(18,27,44,0.93)_54%,rgba(33,47,67,0.96)_100%)] shadow-[0_42px_120px_-54px_rgba(0,0,0,0.62)]">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,159,107,0.8)] to-transparent" aria-hidden />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(255,159,107,0.5)] to-transparent" aria-hidden />
+            <div
+              className="pointer-events-none absolute inset-y-0 right-[-10%] z-0 hidden w-[46%] lg:block"
+              style={{
+                background:
+                  "linear-gradient(145deg, rgba(255,107,26,0.18) 0%, rgba(255,159,107,0.08) 34%, rgba(255,255,255,0) 82%)",
+                clipPath: "polygon(26% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              }}
+              aria-hidden
+            />
+            <div className="relative flex flex-col md:flex-row md:items-stretch md:justify-between gap-10 md:gap-6 lg:gap-10 xl:gap-14 px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12 xl:px-12">
+              <div className="relative z-20 flex min-w-0 w-full flex-col max-w-[720px] max-md:max-w-none md:max-w-[min(30rem,48%)] lg:max-w-[min(36rem,50%)] xl:max-w-[min(40rem,52%)] md:shrink">
+                <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:px-8 sm:py-8">
+                  <div className="flex justify-center md:hidden my-1 mb-6">
+                    <div className="relative">
+                      <div
+                        className="pointer-events-none absolute inset-x-[16%] top-[18%] h-[58%] rounded-full blur-[42px] opacity-[0.72]"
+                        style={{
+                          background:
+                            "radial-gradient(circle, rgba(255,159,107,0.5) 0%, rgba(255,107,26,0.16) 44%, transparent 78%)",
+                        }}
+                        aria-hidden
+                      />
+                      <img
+                        src="/images/phone_with_natural_shadow.png"
+                        alt="ALFRED dashboard on iPhone"
+                        className="relative z-10 pointer-events-none h-auto max-h-[min(58vh,440px)] w-full max-w-[min(92vw,360px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                      />
+                    </div>
+                  </div>
+                  <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4">
+                    Generic AI falls apart when pressure hits.
+                  </h2>
+                  <div className="space-y-5 text-white/80 font-medium leading-relaxed text-lg">
+                    <p>
+                      Most AI feels smart when nothing is on fire. Then the week gets messy and you are back at square
+                      one, trying to explain what matters, what you promised, and what you cannot afford to ignore.
+                    </p>
+                    <p>
+                      ALFRED is built for that moment. He stays close to the real shape of your week, so you can make a
+                      clean call and keep moving instead of starting over.
+                    </p>
+                    <p className="text-gradient-accent font-semibold">
+                      When pressure rises, ALFRED brings you back to what matters.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h2 className="order-2 md:order-1 font-outfit font-bold text-2xl sm:text-3xl text-white mb-4 max-md:mt-0">
-                Generic AI falls apart when pressure hits.
-              </h2>
-              <div className="order-3 md:order-2 space-y-5 text-white/80 font-medium leading-relaxed text-lg">
-                <p>
-                  Most AI feels smart in a blank chat. Then the week turns messy and you are back in a window that does
-                  not remember your priorities, constraints, or the decision you said mattered most.
-                </p>
-                <p>
-                  ALFRED is built for that moment. It keeps the right context close so you can think clearly, decide
-                  quickly, and follow through without re-explaining your life to a chatbot.
-                </p>
-                <p className="text-gradient-accent font-semibold">
-                  When pressure rises, ALFRED brings you back to what matters.
-                </p>
-              </div>
-            </div>
-            <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(52%,300px)] md:max-w-[min(68%,560px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-0 lg:px-2 xl:px-4">
-              <div className="flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52vh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
-                <img
-                  src="/images/phone_with_natural_shadow.png"
-                  alt="ALFRED dashboard on iPhone"
-                  className="pointer-events-none h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78vh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
+              <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(52%,300px)] md:max-w-[min(68%,560px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-0 lg:px-2 xl:px-4">
+                <div
+                  className="pointer-events-none absolute inset-x-[10%] top-[16%] h-[60%] rounded-full blur-[76px] opacity-[0.86]"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.46) 0%, rgba(255,107,26,0.24) 34%, rgba(14,22,36,0.08) 72%, transparent 84%)",
+                  }}
+                  aria-hidden
                 />
+                <div
+                  className="pointer-events-none absolute inset-y-[6%] inset-x-[8%] rounded-[34px] border border-white/10 bg-[linear-gradient(155deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02)_32%,rgba(14,22,36,0.08)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                  aria-hidden
+                />
+                <div className="relative flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52vh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
+                  <img
+                    src="/images/phone_with_natural_shadow.png"
+                    alt="ALFRED dashboard on iPhone"
+                    className="pointer-events-none relative z-10 h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78vh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -234,16 +304,29 @@ export default function WhoIsAlfredPage() {
 
       <section
         id="alfred-product-explorer"
-        className="py-14 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden scroll-mt-24"
+        className="relative py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden scroll-mt-24"
       >
+        <div
+          className="pointer-events-none absolute -top-16 left-1/2 h-40 w-[min(88vw,860px)] -translate-x-1/2 rounded-full blur-[72px] opacity-35"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,159,107,0.42) 0%, rgba(255,107,26,0.12) 42%, transparent 76%)",
+          }}
+          aria-hidden
+        />
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
-          <div className="max-w-[720px] mx-auto mb-12 text-center">
+          <div className="max-w-[760px] mx-auto mb-10 sm:mb-12 text-center">
             <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-              What ALFRED actually helps with
+              Who&apos;s in the room with you?
             </h2>
+            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-4">
+              Serious operators have always had someone in the earpiece: calm, informed, willing to say the truth out
+              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
+            </p>
             <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3">
-              When the calendar is full and the stakes are real, you do not need more content. You need calm, informed
-              guidance that knows your priorities and can help you decide fast. This preview shows how ALFRED does that.
+              The feel matters. You are not meeting a productivity toy here. You are meeting a clear, grounded coach
+              who can help you sort signal from noise when the stakes are real. This preview shows how ALFRED sounds in
+              action.
             </p>
             <details className="group mx-auto w-full max-w-[720px] text-left">
               <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
@@ -261,8 +344,8 @@ export default function WhoIsAlfredPage() {
               <p className="mt-3 text-sm text-ap-muted font-medium leading-relaxed">
                 The tour auto-runs through Dashboard, Coach, Voice, Results, Drivers, and More after this section enters
                 view. Use nav/menu, pause, arrows, or dots to explore. Hover the phone to freeze auto-advance; desktop
-                card hover jumps to a highlight. Labels/layout mirror the live product, while coach replies use
-                illustrative sample context.
+                card hover jumps to a highlight. Labels and layout mirror the live product, while coach replies use
+                illustrative sample situations.
               </p>
             </details>
           </div>
@@ -272,8 +355,8 @@ export default function WhoIsAlfredPage() {
             <blockquote className="rounded-2xl border border-ap-border border-l-4 border-l-ap-accent bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_24px_60px_-28px_rgba(14,22,36,0.18)]">
               <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic text-center sm:text-left mb-4">
                 &ldquo;I built ALFRED because I wanted clarity I could actually carry into a hard week. Not another document
-                I felt good about for a day, then forgot. Your priorities, reflections, and key context stay close here,
-                so when pressure hits you can get real guidance without starting from zero.&rdquo;
+                I felt good about for a day, then forgot. What matters, what I decided, and what this season requires
+                stay close here, so when pressure hits I can get real guidance without starting from scratch.&rdquo;
               </p>
               <cite className="not-italic block text-center sm:text-left text-sm font-semibold text-ap-mid">
                 — Jake Sebok
@@ -289,7 +372,7 @@ export default function WhoIsAlfredPage() {
             How it shows up in a real week
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
-            Simple surfaces. Clear decisions. Built for people carrying too much context in their own head.
+            Simple surfaces. Clear decisions. Built for people carrying too many moving pieces in their own head.
           </p>
           <ul className="grid sm:grid-cols-3 gap-6">
             {dailyItems.map((item) => (
@@ -305,16 +388,11 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-ap-bg">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            Who&apos;s in the room with you?
+            Why the advice feels different
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Serious operators have always had someone in the earpiece: calm, informed, willing to say the quiet part
-            out loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
-          </p>
-          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Most AI tools sound smart in a blank chat. ALFRED is built for real decision moments. It keeps your
-            priorities, constraints, and context in front of you so the advice still fits your life when the week gets
-            loud.
+            Most AI tools sound smart until life gets complicated. ALFRED is built for the real version of the
+            question: what matters most, what you already promised, and what this decision will actually cost.
           </p>
           <div className="overflow-x-auto rounded-[20px] border border-ap-border bg-white">
             <table className="w-full text-left text-sm sm:text-base">
@@ -327,13 +405,13 @@ export default function WhoIsAlfredPage() {
               </thead>
               <tbody className="text-ap-mid font-medium">
                 <tr className="border-b border-ap-border">
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Memory of you</td>
+                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Starting point</td>
                   <td className="p-4 sm:p-5">
-                    Context lives in whatever you paste today. Threads, tabs, and models forget your last hard decision.
+                    You end up re-explaining the same priorities, promises, and tradeoffs every time the week gets hard.
                   </td>
                   <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Your priorities, constraints, recent decisions, and deeper context stay loaded, so you are not
-                    starting from zero every night.
+                    It already knows what matters, what you have been working on, and what you said you wanted this
+                    season to look like.
                   </td>
                 </tr>
                 <tr className="border-b border-ap-border">
@@ -361,7 +439,7 @@ export default function WhoIsAlfredPage() {
           </div>
           <p className="text-sm text-ap-muted mt-4 max-w-[720px]">
             If you have already built your <strong className="text-ap-mid">Aligned AIOS</strong> through Strategic
-            Clarity, ALFRED can carry that deeper context too. The simple promise is this: your priorities stay close
+            Clarity, ALFRED can carry that fuller picture too. The simple promise is this: what matters stays close
             when the week gets noisy. It ships after Phase II in the Accelerator or through a{" "}
             <Link
               href="/work-with-me/strategic-intensives"
@@ -484,7 +562,7 @@ export default function WhoIsAlfredPage() {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ap-accent shrink-0">→</span>
-                  Operators carrying too much context in their own head and too many decisions on their plate.
+                  Operators carrying too much in their own head and too many decisions on their plate.
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ap-accent shrink-0">→</span>

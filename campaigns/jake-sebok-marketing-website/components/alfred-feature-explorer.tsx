@@ -595,8 +595,8 @@ export function AlfredFeatureExplorer({
     if (tab === "blueprint") {
       return {
         kicker: "Alignment Blueprint",
-        title: "The context layer behind every answer",
-        body: "North Star, values, Becoming, revenue math, Vital Action, and boundaries live in one living document. When you coach with Alfred, he is not guessing—he is reasoning from the same strategic clarity you committed to, so plans and pushes stay aligned with the life you said you want.",
+        title: "Why Alfred&apos;s advice actually fits your life",
+        body: "North Star, values, Becoming, revenue math, Vital Action, and boundaries live in one living document. Alfred is not guessing. He is coaching from the same picture of your life you already said you want, so plans and pushes fit the life you are trying to build.",
       };
     }
     if (tab === "archetypes") {
@@ -624,20 +624,20 @@ export function AlfredFeatureExplorer({
           return {
             kicker: "Coach",
             title: "Weekly Planning, with room to go deep",
-            body: "Multi-bubble thread: opener, your casual line in the composer, then Alfred streams answers in separate bubbles—with deliberate pauses between turns so you can read before the next beat. The script is sample copy; in your account it is generated from your blueprint, Vital Action, QC math, and boundaries.",
+            body: "Multi-bubble thread: opener, your casual line in the composer, then Alfred streams answers in separate bubbles with deliberate pauses between turns so you can read before the next beat. The script is sample copy; in your account it is shaped by your priorities, numbers, and boundaries.",
           };
         }
         if (isInnerLimitingBeliefDemo) {
           return {
             kicker: "Coach",
             title: "Find the belief, then stress-test it against your Real Reasons",
-            body: "The preview types like a real person would—messy, no jargon about frameworks—while Alfred still weaves in what you already put in your blueprint (presence at home, Vital Action, and what you said matters). Each turn is its own bubble with space to read before the next message. Live chat does the same from your actual data.",
+            body: "The preview types like a real person would, messy and human, while Alfred still weaves in what you already told him matters. Each turn is its own bubble with space to read before the next message. Live chat does the same from the full picture of your week.",
           };
         }
         return {
           kicker: "Coach",
-          title: "Coaching frames, not blank-chat roulette",
-          body: `The frame you see is how Alfred opens “${label}”—a deliberate question instead of generic brainstorming. In the app, answers pull from your blueprint, scores, driver pattern, and commitments. This preview only expands into long written examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}”; choose those prompts in the mock to see full illustrations.`,
+          title: "Coaching frames, not guesswork",
+          body: `The frame you see is how Alfred opens “${label}”, a deliberate question instead of generic brainstorming. In the app, answers pull from what matters most, your assessment, and the commitments you already made. This preview only expands into long written examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}”; choose those prompts in the mock to see full illustrations.`,
         };
       }
       if (coachPhase === "category" && coachCategory === "Weekly Planning") {
@@ -656,7 +656,7 @@ export function AlfredFeatureExplorer({
       }
       return {
         kicker: "Coach tab",
-        title: "Organized prompts, not a blank chat",
+        title: "Clear starting points, not guesswork",
         body: "Fire Starters sort coaching by the week you are actually in—weekly planning, strategy, sales, marketing and messaging, nervous-system execution, review, inner work, VAPI sense-making, and deep patterns—so you are not guessing what to ask first. Weekly Planning is where the calendar collides with your Vital Action, boundaries, and quota reality. Marketing + Messaging turns your Real Reasons into hooks and narratives. Inner Work + Beliefs is where stuckness gets language: the belief under “I can’t,” parts in conflict, and the self-sabotage loop—always tied back to what you said actually matters.",
       };
     }
@@ -965,7 +965,7 @@ export function AlfredFeatureExplorer({
               }`}
             >
               This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
-              product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
+              product rhythm before you log in. Coach replies here use illustrative sample situations; in your account,
               answers ground in your assessment, blueprint, scorecard, and commitments.
             </p>
           ) : null}
@@ -1630,8 +1630,8 @@ function CoachScreen({
                 ) : threadPrompt.family === "weekly" ? (
                   <>
                     <p>
-                      In the live app, Alfred answers from your blueprint, Vital Action, 6Cs rhythm, and quota context so
-                      the week stays grounded in what you already committed to—not a generic planning template.
+                      In the live app, Alfred answers from your blueprint, Vital Action, 6Cs rhythm, and revenue goals so
+                      the week stays grounded in what you already committed to, not a generic planning template.
                     </p>
                     <p>
                       This preview shows the full written walkthrough for{" "}
@@ -1643,7 +1643,7 @@ function CoachScreen({
                   <>
                     <p>
                       In the live app, Alfred threads inner-work prompts through your blueprint, Real Reasons, Vital
-                      Action, and assessment context—so you are not getting canned therapy quotes.
+                      Action, and assessment results, so you are not getting canned therapy quotes.
                     </p>
                     <p>
                       The long sample conversation appears for{" "}
@@ -1697,8 +1697,8 @@ function VoiceIdleScreen() {
       </div>
       <div className="w-full py-3 rounded-xl bg-ap-accent text-white text-xs font-medium">Start Voice Session</div>
       <p className="text-[8px] text-white/25 mt-3 leading-relaxed">
-        Uses your microphone. Voice sessions use OpenAI Realtime for natural conversation. Your Alignment Blueprints,
-        VAPI scores, and 6Cs data are loaded automatically.
+        Uses your microphone. Voice sessions use OpenAI Realtime for natural conversation. Alfred already has your
+        Blueprint, VAPI scores, and 6Cs history in view.
       </p>
     </div>
   );
@@ -1960,10 +1960,10 @@ function ScorecardDemoScreen() {
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2">
         <h1 className="text-sm font-semibold text-white">6Cs Scorecard</h1>
-        <p className="text-[10px] text-white/45 mt-1">Weekly submission window · same categories as production</p>
+        <p className="text-[10px] text-white/45 mt-1">Weekly check-in · same categories as production</p>
       </header>
       <div className="rounded-xl border border-ap-accent/20 bg-ap-accent/10 px-2.5 py-2 text-[9px] text-white/80 leading-relaxed">
-        Answer once per window. Reflection + “one thing” capture what actually happened—feeds Alfred and your review.
+        Answer once each week. Reflection + “one thing” capture what actually happened and feed Alfred and your review.
       </div>
       <div className="space-y-2">
         {SIX_CS_DEMO.map(({ label, icon: Icon, pct }, idx) => {
@@ -2126,7 +2126,7 @@ function PrioritiesDemoScreen() {
         })}
       </div>
       <p className="text-[8px] text-white/40 leading-relaxed">
-        In-app, each row links to Coach with your priority context preloaded.
+        In-app, each row links to Coach with the right priority already pulled in.
       </p>
     </div>
   );
@@ -2148,14 +2148,14 @@ function BlueprintDemoScreen() {
           <p className="text-[9px] text-white/45 mt-1">Version 3 · Updated Mar 18, 2026</p>
         </div>
         <div className="text-right shrink-0">
-          <p className="text-[8px] text-white/40">Context depth</p>
+          <p className="text-[8px] text-white/40">Knows your world</p>
           <p className="text-[10px] font-bold text-ap-accent">78%</p>
         </div>
       </header>
       <p className="text-[9px] text-white/45 leading-relaxed">
         Sample user: B2B founder, <span className="text-white/70">The Ghost</span> +{" "}
-        <span className="text-white/70">Escape Artist</span> pattern. Blueprint is what Alfred loads into Coach so you
-        are not re-pasting your life story every week.
+        <span className="text-white/70">Escape Artist</span> pattern. Blueprint is what Alfred reads before he coaches
+        you, so you are not re-explaining your week every time.
       </p>
       <div className="flex flex-wrap gap-1">
         {sections.map(({ icon: Icon, label }) => (
@@ -2204,13 +2204,13 @@ function BlueprintDemoScreen() {
         <p className="text-[10px] font-semibold text-white">Vital Action (90 days)</p>
         <p className="text-[9px] text-white/80 leading-relaxed">
           Defend <span className="font-semibold">two 90-minute morning focus blocks</span> Mon–Thu before Slack or email.
-          Non-negotiables already in context: <span className="font-semibold">dinner by 6:30</span>,{" "}
+          Non-negotiables already built into the plan: <span className="font-semibold">dinner by 6:30</span>,{" "}
           <span className="font-semibold">no Slack after 8 p.m.</span>
         </p>
       </div>
       <p className="text-[8px] text-white/40 leading-relaxed">
-        Full app renders your uploaded Strategic Clarity / onboarding answers as markdown here—the same text Alfred sees
-        in Coach.
+        Full app renders your uploaded Strategic Clarity / onboarding answers as markdown here, the same notes Alfred
+        coaches from.
       </p>
     </div>
   );
