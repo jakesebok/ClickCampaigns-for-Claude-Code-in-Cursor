@@ -34,25 +34,9 @@ const AlfredLandingDemoSection = dynamic(
 );
 
 const heroPills = [
-  "Keeps priorities visible",
-  "Clear yes / no decisions",
-  "Catches drift early",
-  "Works across every device",
-];
-
-const heroProof = [
-  {
-    title: "Protect what matters",
-    body: "He keeps your priorities, tradeoffs, and next best move in the room.",
-  },
-  {
-    title: "Cut through noise",
-    body: "Urgent problems and tempting opportunities stop hijacking the week so easily.",
-  },
-  {
-    title: "Make cleaner decisions",
-    body: "ALFRED helps you decide what deserves a yes, a later, or a clean no.",
-  },
+  "Protects priorities",
+  "Cleaner decisions",
+  "Works everywhere",
 ];
 
 const whatAlfredDoes = [
@@ -206,25 +190,27 @@ export default function LandingPage() {
           }}
           aria-hidden
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-center">
-          <div className="max-w-3xl">
+        <div className="relative z-10 mx-auto max-w-3xl">
+          <div className="flex flex-col items-center text-center">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-sm text-muted-foreground">
               <Star className="h-3.5 w-3.5 text-accent" />
-              For founders and operators under real pressure
+              For founders under real pressure
             </div>
 
-            <h1 className="mb-6 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-              The AI coach that remembers what matters
-              <span className="block text-gradient-accent">when the week gets loud.</span>
+            <h1 className="mb-5 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              An AI coach that
+              <span className="block text-gradient-accent">actually knows you.</span>
             </h1>
 
-            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              ALFRED is the trusted advisor in your pocket. He remembers your priorities, values, goals, numbers, and
-              limits so you can make clean decisions when urgent problems, tempting opportunities, and real life all hit
-              at once.
+            <p className="mb-3 text-base font-medium text-foreground/90 sm:text-lg">
+              Your priorities. Your goals. Your real limits.
             </p>
 
-            <ul className="mb-8 flex max-w-3xl flex-wrap gap-2.5">
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+              ALFRED keeps what matters in the room so you can make the next right move when the week gets loud.
+            </p>
+
+            <ul className="mb-8 flex max-w-2xl flex-wrap justify-center gap-2.5">
               {heroPills.map((pill) => (
                 <li
                   key={pill}
@@ -235,7 +221,7 @@ export default function LandingPage() {
               ))}
             </ul>
 
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center">
               <Link
                 href="/sign-up"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-medium text-accent-foreground transition-colors hover:bg-accent/90"
@@ -254,41 +240,6 @@ export default function LandingPage() {
             <p className="mt-5 text-sm font-medium text-muted-foreground">
               7-day trial. No upsell maze. Works on desktop, phone, and tablet.
             </p>
-          </div>
-
-          <div className="relative">
-            <div className="relative overflow-hidden rounded-[28px] border border-border bg-card/80 p-6 shadow-[0_32px_90px_-54px_rgba(14,22,36,0.28)] backdrop-blur sm:p-8">
-              <div
-                className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full blur-3xl opacity-50"
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 42%, transparent 76%)",
-                }}
-                aria-hidden
-              />
-              <p className="relative mb-5 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                What ALFRED keeps in the room
-              </p>
-              <div className="relative space-y-4">
-                {heroProof.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-2xl border border-border bg-background/85 p-4 shadow-[0_18px_34px_-28px_rgba(14,22,36,0.2)]"
-                  >
-                    <p className="mb-1.5 font-semibold text-foreground">{item.title}</p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="relative mt-6 rounded-2xl border border-accent/20 bg-accent/5 px-4 py-4">
-                <p className="text-sm font-semibold leading-relaxed text-foreground">
-                  Trusted advisor in your pocket.
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  Less blank-slate AI. More calm, informed guidance when the decision actually matters.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
