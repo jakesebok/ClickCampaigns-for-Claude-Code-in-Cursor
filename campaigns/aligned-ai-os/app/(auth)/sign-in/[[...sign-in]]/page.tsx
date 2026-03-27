@@ -16,6 +16,9 @@ export default async function SignInPage() {
         <p className="text-base leading-relaxed text-muted-foreground">
           Pick up where you left off and bring your priorities back into the room.
         </p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          New here? You can start with a card-free 7-day trial.
+        </p>
       </div>
       <SignIn
         signUpUrl="/sign-up"
@@ -41,6 +44,12 @@ export default async function SignInPage() {
         Don&apos;t have an account?{" "}
         <Link href="/sign-up" className="text-primary hover:underline">
           Sign up
+        </Link>
+      </p>
+      <p className="text-sm text-muted-foreground">
+        Need plan details?{" "}
+        <Link href="/pricing" className="text-primary hover:underline">
+          See pricing
         </Link>
       </p>
     </div>

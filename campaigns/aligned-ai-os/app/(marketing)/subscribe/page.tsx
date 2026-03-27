@@ -102,7 +102,7 @@ export default function SubscribePage() {
           <LogoOnDarkGlow size="lg">
             <Image
               src="/logo-apos.png"
-              alt="Aligned Freedom Coach"
+              alt="ALFRED"
               width={280}
               height={77}
               className="logo-on-dark-img h-12 w-auto sm:h-14"
@@ -132,6 +132,9 @@ export default function SubscribePage() {
                 . Add your payment method now so your priorities, history, and coaching stay uninterrupted. You will not
                 be charged until the trial ends.
               </p>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                You started with a card-free trial. Choose monthly or annual only if you want to keep going.
+              </p>
             </>
           ) : (
             <>
@@ -139,8 +142,8 @@ export default function SubscribePage() {
                 Pick up where you left off.
               </h1>
               <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                Subscribe now to keep ALFRED, your dashboard, and your coaching history live. Less than the cost of one
-                coaching hour per month.
+                Choose monthly or annual to keep ALFRED, your dashboard, and your coaching history live. Less than the
+                cost of one coaching hour per month.
               </p>
             </>
           )}

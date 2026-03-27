@@ -191,27 +191,11 @@ type AppTourStep =
   | { kind: "more_tab"; tab: "scorecard" | "priorities" | "blueprint" | "archetypes" | "settings"; dotLabel: string };
 
 const APP_TOUR_STEPS: AppTourStep[] = [
-  ...DASHBOARD_TOUR.map(
-    (s): AppTourStep => ({
-      kind: "dashboard",
-      focus: s.focus,
-      dotLabel: s.title,
-    })
-  ),
-  { kind: "coach_home", dotLabel: "Coach — Fire Starters" },
-  { kind: "coach_weekly", dotLabel: "Coach — Weekly planning menu" },
-  { kind: "coach_thread", dotLabel: "Coach — Weekly planning thread" },
-  { kind: "coach_inner", dotLabel: "Coach — Inner Work menu" },
-  { kind: "coach_inner_thread", dotLabel: "Coach — Limiting belief thread" },
-  { kind: "voice", dotLabel: "Voice" },
-  { kind: "results", dotLabel: "Assessment results" },
-  { kind: "drivers_list", dotLabel: "Driver library" },
-  { kind: "drivers_detail", dotLabel: "Driver — full profile" },
-  { kind: "more_tab", tab: "scorecard", dotLabel: "6Cs scorecard" },
-  { kind: "more_tab", tab: "priorities", dotLabel: "Priorities" },
-  { kind: "more_tab", tab: "blueprint", dotLabel: "Alignment Blueprint" },
-  { kind: "more_tab", tab: "archetypes", dotLabel: "Archetype library" },
-  { kind: "more_tab", tab: "settings", dotLabel: "Settings" },
+  { kind: "dashboard", focus: "leverage", dotLabel: "Weekly priority" },
+  { kind: "coach_thread", dotLabel: "Coaching reply" },
+  { kind: "results", dotLabel: "Assessment insight" },
+  { kind: "more_tab", tab: "scorecard", dotLabel: "Weekly check-in" },
+  { kind: "more_tab", tab: "blueprint", dotLabel: "Your context" },
 ];
 
 const APP_TOUR_STEP_COUNT = APP_TOUR_STEPS.length;
@@ -244,9 +228,9 @@ function firstTourIndexForNavTab(tab: AppTab): number {
 }
 
 /** Default dwell on each tour stop when auto-advancing (ms). */
-const TOUR_DEFAULT_DWELL_MS = 6000;
+const TOUR_DEFAULT_DWELL_MS = 5000;
 /** Longer dwell for Coach chat-thread demos so the scripted conversation can play. */
-const TOUR_CHAT_THREAD_DWELL_MS = 22000;
+const TOUR_CHAT_THREAD_DWELL_MS = 12000;
 
 function tourStepDwellMs(step: AppTourStep): number {
   if (step.kind === "coach_thread" || step.kind === "coach_inner_thread") return TOUR_CHAT_THREAD_DWELL_MS;
@@ -337,12 +321,12 @@ function EscapeArtistGlyph({ size = 22 }: { size?: number }) {
 }
 
 const MORE_LINKS = [
-  { label: "6Cs Scorecard", icon: ClipboardCheck },
+  { label: "Weekly Check-In", icon: ClipboardCheck },
   { label: "Priorities", icon: BarChart3 },
-  { label: "Blueprint", icon: FileText },
+  { label: "Your Context", icon: FileText },
   { label: "Assessment Results", icon: Activity },
-  { label: "Archetype Library", icon: BookOpen },
-  { label: "Driver Library", icon: Brain },
+  { label: "Pattern Library", icon: BookOpen },
+  { label: "Pressure Patterns", icon: Brain },
 ] as const;
 
 export type AlfredFeatureExplorerEmbed = "marketing" | "app-dark";
@@ -541,41 +525,103 @@ export function AlfredFeatureExplorer({
   const openDriversToEscape = () => {
     const idx = APP_TOUR_STEPS.findIndex((s) => s.kind === "drivers_detail");
     setPaused(true);
-    if (idx >= 0) setTourIndex(idx);
+    if (idx >= 0) {
+      setTourIndex(idx);
+      return;
+    }
+    setTab("drivers");
+    setCoachPhase("home");
+    setCoachCategory(null);
+    setCoachThreadPrompt(null);
+    setDriversPhase("escapeDetail");
   };
 
   const selectTab = (next: AppTab) => {
     setPaused(true);
     setMoreOpen(false);
     const idx = firstTourIndexForNavTab(next);
-    if (idx >= 0) setTourIndex(idx);
+    if (idx >= 0) {
+      setTourIndex(idx);
+      return;
+    }
+
+    setTab(next);
+    setCoachCategory(null);
+    setCoachThreadPrompt(null);
+    setCoachPhase("home");
+
+    if (next === "dashboard") {
+      setDashboardFocus("leverage");
+      setDriversPhase("list");
+      return;
+    }
+
+    if (next === "drivers") {
+      setDriversPhase("list");
+      return;
+    }
+
+    setDriversPhase("list");
   };
 
   const goMoreDestination = (label: (typeof MORE_LINKS)[number]["label"] | "Settings") => {
     setMoreOpen(false);
     setPaused(true);
-    if (label === "6Cs Scorecard") {
+    if (label === "Weekly Check-In") {
       const i = firstTourIndexForNavTab("scorecard");
-      if (i >= 0) setTourIndex(i);
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("scorecard");
     } else if (label === "Priorities") {
       const i = firstTourIndexForNavTab("priorities");
-      if (i >= 0) setTourIndex(i);
-    } else if (label === "Blueprint") {
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("priorities");
+    } else if (label === "Your Context") {
       const i = firstTourIndexForNavTab("blueprint");
-      if (i >= 0) setTourIndex(i);
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("blueprint");
     } else if (label === "Assessment Results") {
       const i = firstTourIndexForNavTab("results");
-      if (i >= 0) setTourIndex(i);
-    } else if (label === "Archetype Library") {
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("results");
+    } else if (label === "Pattern Library") {
       const i = firstTourIndexForNavTab("archetypes");
-      if (i >= 0) setTourIndex(i);
-    } else if (label === "Driver Library") {
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("archetypes");
+    } else if (label === "Pressure Patterns") {
       const i = firstTourIndexForNavTab("drivers");
-      if (i >= 0) setTourIndex(i);
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("drivers");
+      setDriversPhase("list");
     } else if (label === "Settings") {
       const i = firstTourIndexForNavTab("settings");
-      if (i >= 0) setTourIndex(i);
+      if (i >= 0) {
+        setTourIndex(i);
+        return;
+      }
+      setTab("settings");
     }
+
+    setCoachPhase("home");
+    setCoachCategory(null);
+    setCoachThreadPrompt(null);
   };
 
   const leftTitleAndBody = () => {
@@ -771,6 +817,18 @@ export function AlfredFeatureExplorer({
           </span>
         </div>
 
+        {isAppDark ? (
+          <div className="pt-1">
+            <a
+              href="/sign-up"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent/80"
+            >
+              Start my card-free trial
+              <span aria-hidden>→</span>
+            </a>
+          </div>
+        ) : null}
+
         <div className="flex flex-wrap gap-1.5 max-w-xl" role="tablist" aria-label="Tour stops">
           {APP_TOUR_STEPS.map((s, i) => (
             <button
@@ -965,9 +1023,8 @@ export function AlfredFeatureExplorer({
                 isAppDark ? "text-muted-foreground" : "text-ap-muted"
               }`}
             >
-              This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
-              product rhythm before you log in. Coach replies here use illustrative sample context; in your account,
-              answers ground in your assessment, blueprint, scorecard, and commitments.
+              This is an interactive preview of ALFRED. The screens are real, the data is sample, and the live product
+              answers from your own priorities, goals, weekly check-ins, and context.
             </p>
           ) : null}
         </div>
@@ -1040,7 +1097,7 @@ function DashboardScreen({
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-[9px] font-medium text-white/50 uppercase tracking-wider mb-1">
-              This Week&apos;s Vital Action
+              This Week&apos;s Priority
             </p>
             <p className="text-[12px] font-medium text-white leading-snug">
               Set and defend my focus work time blocks this week.
@@ -1050,7 +1107,7 @@ function DashboardScreen({
       </div>
 
       <p className="text-[9px] font-medium text-white/45 uppercase tracking-wider px-0.5">
-        Your alignment at a glance
+        How your week is really going
       </p>
 
       <div
@@ -1062,7 +1119,7 @@ function DashboardScreen({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-1.5">
             <ClipboardCheck className="h-3.5 w-3.5 text-ap-accent" />
-            <span className="text-[10px] font-medium text-white/50">6Cs Score</span>
+            <span className="text-[10px] font-medium text-white/50">Weekly Check-In</span>
           </div>
           <span className="text-[9px] text-white/40">Submitted</span>
         </div>
@@ -1105,7 +1162,7 @@ function DashboardScreen({
         <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
           <div className="flex items-center gap-1.5 mb-2">
             <Activity className="h-3.5 w-3.5 text-ap-accent" />
-            <span className="text-[10px] font-medium text-white/50">VAPI Score</span>
+            <span className="text-[10px] font-medium text-white/50">Assessment</span>
           </div>
           <div className="flex items-end gap-2">
             <span className="text-2xl font-bold font-cormorant tabular-nums text-white">
@@ -1118,7 +1175,7 @@ function DashboardScreen({
               {vapiTierLabel}
             </span>
           </div>
-          <p className="text-[10px] text-white/55 mt-1 leading-snug">The Ghost</p>
+          <p className="text-[10px] text-white/55 mt-1 leading-snug">Current founder pattern</p>
           <p className="text-[10px] text-white/50 mt-2 leading-relaxed">{GHOST_ARCHETYPE_DESCRIPTION}</p>
           <p className="text-[10px] font-medium text-ap-accent mt-2">Explore My Score →</p>
         </div>
@@ -1146,7 +1203,7 @@ function DashboardScreen({
         className={`rounded-2xl border border-white/10 bg-white/[0.04] p-3 space-y-3 ${focusClass(tourFocus === "pattern", true)}`}
       >
         <div>
-          <p className="text-[9px] font-medium text-white/50 uppercase tracking-wider mb-2">Founder Archetype</p>
+          <p className="text-[9px] font-medium text-white/50 uppercase tracking-wider mb-2">Founder Pattern</p>
           <h2 className="text-base font-cormorant font-bold text-white flex items-center gap-2">
             <Ghost className="h-4 w-4 shrink-0" style={{ color: GHOST_ARCHETYPE_ACCENT }} />
             The Ghost
@@ -1155,7 +1212,7 @@ function DashboardScreen({
           <p className="text-[10px] text-white/50 mt-2 leading-relaxed">{GHOST_ARCHETYPE.description}</p>
         </div>
         <div className="border-t border-white/10 pt-3 space-y-2">
-          <p className="text-[8px] font-semibold uppercase tracking-[0.15em] text-white/40">Likely Driver</p>
+          <p className="text-[8px] font-semibold uppercase tracking-[0.15em] text-white/40">Pressure Pattern</p>
           <div className="flex items-center gap-2">
             <EscapeArtistGlyph size={18} />
             <span className="text-[11px] font-semibold text-white">{ESCAPE_ARTIST_DRIVER.name}</span>
@@ -1948,7 +2005,7 @@ function ResultsDeepScreen() {
       <section className="rounded-2xl border border-dashed border-white/15 p-3">
         <p className="text-[9px] text-white/45 leading-relaxed">
           Full app adds comparative wheels, expandable archetype sections, lagging-arena callouts for The Journeyman,
-          transition summaries, and deep links into Priorities and Blueprint from each block.
+          transition summaries, and deep links into Priorities and Your Context from each block.
         </p>
         <p className="text-[10px] font-medium text-ap-accent mt-2">Explore My Score (wheel) →</p>
       </section>
@@ -1960,8 +2017,8 @@ function ScorecardDemoScreen() {
   return (
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2">
-        <h1 className="text-sm font-semibold text-white">6Cs Scorecard</h1>
-        <p className="text-[10px] text-white/45 mt-1">Weekly submission window · same categories as production</p>
+        <h1 className="text-sm font-semibold text-white">Weekly Check-In</h1>
+        <p className="text-[10px] text-white/45 mt-1">Weekly submission window · same categories as the live app</p>
       </header>
       <div className="rounded-xl border border-ap-accent/20 bg-ap-accent/10 px-2.5 py-2 text-[9px] text-white/80 leading-relaxed">
         Answer once per window. Reflection + “one thing” capture what actually happened—feeds Alfred and your review.
@@ -2069,8 +2126,8 @@ function PrioritiesDemoScreen() {
         <p className="text-[10px] text-white/45 mt-1">Explore your priority matrix</p>
       </header>
       <p className="text-[9px] text-white/45 leading-relaxed">
-        Same quadrants as /priorities: importance you stated in the VAPI vs domain scores. Expand a section to see
-        domains, scores, and tiers.
+        This compares what you said matters against how those areas are actually going. Expand a section to see the
+        strongest signals first.
       </p>
       <div className="space-y-2 max-h-[min(340px,62vh)] overflow-y-auto pr-0.5">
         {DEMO_PRIORITY_MATRIX_BY_QUADRANT.map(({ quadrant, items }) => {
@@ -2135,17 +2192,17 @@ function PrioritiesDemoScreen() {
 
 function BlueprintDemoScreen() {
   const sections = [
-    { icon: Target, label: "North Star Stack" },
+    { icon: Target, label: "Direction" },
     { icon: Heart, label: "Core Values" },
-    { icon: Compass, label: "The Future You" },
-    { icon: DollarSign, label: "Revenue + Operations" },
-    { icon: Crosshair, label: "Vital Action (90 Days)" },
+    { icon: Compass, label: "The Future You're Building" },
+    { icon: DollarSign, label: "Goals + Numbers" },
+    { icon: Crosshair, label: "Priority (90 Days)" },
   ] as const;
   return (
     <div className="p-3 pb-5 space-y-3 text-left">
       <header className="border-b border-white/10 pb-2 flex items-start justify-between gap-2">
         <div>
-          <h1 className="text-sm font-semibold text-white">Alignment Blueprint</h1>
+          <h1 className="text-sm font-semibold text-white">Your Context</h1>
           <p className="text-[9px] text-white/45 mt-1">Version 3 · Updated Mar 18, 2026</p>
         </div>
         <div className="text-right shrink-0">
@@ -2154,9 +2211,8 @@ function BlueprintDemoScreen() {
         </div>
       </header>
       <p className="text-[9px] text-white/45 leading-relaxed">
-        Sample user: B2B founder, <span className="text-white/70">The Ghost</span> +{" "}
-        <span className="text-white/70">Escape Artist</span> pattern. Blueprint is what Alfred loads into Coach so you
-        are not re-pasting your life story every week.
+        Sample user: B2B founder. This is the context ALFRED loads before he answers so you are not re-pasting your life
+        story every week.
       </p>
       <div className="flex flex-wrap gap-1">
         {sections.map(({ icon: Icon, label }) => (
@@ -2170,12 +2226,12 @@ function BlueprintDemoScreen() {
         ))}
       </div>
       <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-2">
-        <p className="text-[10px] font-semibold text-white">North Star Stack</p>
+        <p className="text-[10px] font-semibold text-white">Direction</p>
         <p className="text-[9px] text-white/55 leading-relaxed">
           <span className="text-white/75">Identity:</span> Calm, present CEO who closes without living in Slack.{" "}
-          <span className="text-white/75">Real Reasons:</span> Kid bedtimes, marriage not last on the list, proof I can
-          build without disappearing. <span className="text-white/75">Driving Fire:</span> Replace hero-mode revenue with
-          a system that runs when I step away.
+          <span className="text-white/75">What matters:</span> Kid bedtimes, marriage not last on the list, proof I can
+          build without disappearing. <span className="text-white/75">Build goal:</span> Replace hero-mode revenue with a
+          system that runs when I step away.
         </p>
       </div>
       <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-1.5">
@@ -2194,7 +2250,7 @@ function BlueprintDemoScreen() {
         </p>
       </div>
       <div className="rounded-xl border border-white/10 bg-[#0E1624]/80 p-2.5 space-y-1.5">
-        <p className="text-[10px] font-semibold text-white">Revenue + Operations</p>
+        <p className="text-[10px] font-semibold text-white">Goals + Numbers</p>
         <p className="text-[9px] text-white/55 leading-relaxed">
           Bridge this quarter: <span className="text-white/80">12 qualified conversations / week</span>, ~28% close,
           average deal in band with current offer. Bottleneck is outbound + follow-up, not delivery. Ops: one weekly
@@ -2202,7 +2258,7 @@ function BlueprintDemoScreen() {
         </p>
       </div>
       <div className="rounded-xl border border-ap-accent/30 bg-ap-accent/10 p-2.5 space-y-1">
-        <p className="text-[10px] font-semibold text-white">Vital Action (90 days)</p>
+        <p className="text-[10px] font-semibold text-white">Priority (90 days)</p>
         <p className="text-[9px] text-white/80 leading-relaxed">
           Defend <span className="font-semibold">two 90-minute morning focus blocks</span> Mon–Thu before Slack or email.
           Non-negotiables already in context: <span className="font-semibold">dinner by 6:30</span>,{" "}
@@ -2210,8 +2266,8 @@ function BlueprintDemoScreen() {
         </p>
       </div>
       <p className="text-[8px] text-white/40 leading-relaxed">
-        Full app renders your uploaded Strategic Clarity / onboarding answers as markdown here—the same text Alfred sees
-        in Coach.
+        Full app renders your uploaded onboarding answers as markdown here, which is the same context ALFRED sees in
+        Coach.
       </p>
     </div>
   );

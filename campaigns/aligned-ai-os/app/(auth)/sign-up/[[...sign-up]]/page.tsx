@@ -11,10 +11,14 @@ export default async function SignUpPage() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-6 py-10">
       <div className="max-w-md text-center">
         <h1 className="mb-3 font-serif text-3xl font-bold text-foreground sm:text-4xl">
-          Start your 7-day trial.
+          Start your card-free 7-day trial.
         </h1>
         <p className="text-base leading-relaxed text-muted-foreground">
-          ALFRED keeps your priorities, tradeoffs, and next right move in the room when the week gets loud.
+          Full access from day one. No card required today.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          If ALFRED helps you protect priorities and make cleaner decisions, you can choose monthly or annual when the
+          trial ends.
         </p>
       </div>
       <SignUp
@@ -41,6 +45,12 @@ export default async function SignUpPage() {
         Already have an account?{" "}
         <Link href="/sign-in" className="text-primary hover:underline">
           Log in
+        </Link>
+      </p>
+      <p className="text-sm text-muted-foreground">
+        Want plan details first?{" "}
+        <Link href="/pricing" className="text-primary hover:underline">
+          See pricing
         </Link>
       </p>
     </div>

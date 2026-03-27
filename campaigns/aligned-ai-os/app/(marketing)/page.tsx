@@ -5,7 +5,6 @@ import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import {
   ArrowRight,
   BarChart3,
-  Bell,
   Brain,
   CalendarDays,
   CheckCircle2,
@@ -13,7 +12,6 @@ import {
   Crosshair,
   MessageSquare,
   Shield,
-  Smartphone,
   Sparkles,
   Star,
   Users,
@@ -34,73 +32,73 @@ const AlfredLandingDemoSection = dynamic(
 );
 
 const heroPills = [
-  "Protects priorities",
+  "Protect priorities",
   "Cleaner decisions",
-  "Works everywhere",
+  "Card-free trial",
 ];
 
 const whatAlfredDoes = [
   {
-    title: "Stops the drift",
-    body: "When the week gets reactive, he pulls you back to the few things that actually matter.",
+    title: "The urgent starts winning",
+    body: "He helps you pull the week back to the few things that actually matter before urgency takes over everything.",
     icon: Shield,
   },
   {
-    title: "Sorts yes, no, or not now",
-    body: "He helps you tell the difference between a real opportunity and a distraction wearing a good outfit.",
+    title: "A new opportunity shows up",
+    body: "He helps you decide whether it deserves a yes, a later, or a clean no before it hijacks the week.",
     icon: Compass,
   },
   {
-    title: "Keeps real life in the room",
-    body: "He weighs your priorities against your calendar, your energy, your family reality, and your actual limits.",
+    title: "Real life changes the plan",
+    body: "He weighs the work against your time, energy, family reality, and actual limits instead of pretending those do not matter.",
     icon: Users,
   },
   {
-    title: "Catches breakdown early",
-    body: "Your weekly check-ins make it easier to spot drift before a hard week becomes a lost month.",
+    title: "Something feels off",
+    body: "Weekly check-ins make it easier to spot drift before one hard week turns into a lost month.",
     icon: CheckCircle2,
   },
 ];
 
 const whyItLands = [
   {
-    title: "He knows what matters to you",
-    body: "Your priorities, values, and the kind of life you are trying to build are part of the coaching, not an afterthought.",
+    title: "What matters most right now",
+    body: "Your priorities, values, and the life you are trying to protect stay in the room while he helps you decide.",
     icon: Star,
   },
   {
-    title: "He knows the game you are actually playing",
-    body: "Your goals, numbers, and weekly sales targets stay in the room, so advice is grounded in the business you are actually running.",
+    title: "What you are trying to build",
+    body: "Your goals, numbers, and this season of business shape the advice, so it fits the game you are actually playing.",
     icon: BarChart3,
   },
   {
-    title: "He knows what your life can hold",
-    body: "Your time, energy, boundaries, and real constraints shape the answer before you ever see it.",
+    title: "What your life can actually hold",
+    body: "Your time, boundaries, and real constraints are part of the answer before you ever see it.",
     icon: Brain,
   },
 ];
 
 const weeklyRhythm = [
-  { icon: Crosshair, label: "Clarity", desc: "Do I know what matters most right now?" },
-  { icon: Shield, label: "Coherence", desc: "Do my actions still match what I said I wanted?" },
-  { icon: Sparkles, label: "Capacity", desc: "Can my life and nervous system actually hold this week?" },
-  { icon: Star, label: "Confidence", desc: "Am I keeping my word to myself?" },
-  { icon: ArrowRight, label: "Courage", desc: "Am I doing the hard right thing or staying busy instead?" },
-  { icon: Users, label: "Connection", desc: "Am I staying present with the people who matter most?" },
+  { icon: Compass, label: "A new idea hits", desc: "He helps you decide if it deserves a yes, a later, or a no." },
+  { icon: ArrowRight, label: "You need a hard yes or no", desc: "He helps you weigh the upside against the real cost to your time, focus, and energy." },
+  { icon: Shield, label: "The week gets reactive", desc: "He helps you reset around what still matters instead of letting urgency run the whole week." },
+  { icon: Crosshair, label: "You feel off but cannot name it", desc: "The weekly check-in gives you a cleaner read on where you are slipping and what needs repair first." },
+  { icon: Sparkles, label: "Capacity is getting tight", desc: "He helps you see what your calendar and nervous system can actually hold before you overcommit again." },
+  { icon: Users, label: "You need to reset fast", desc: "He gives you a way back into the week without shame, confusion, or starting from zero." },
 ];
 
 const insideApp = [
   {
     icon: CalendarDays,
-    title: "Weekly planning prompts that hold the line",
+    title: "Weekly planning that holds up in real life",
     description:
       "Build a week you can actually defend when meetings, sales, family, and life all collide.",
   },
   {
     icon: MessageSquare,
-    title: "A coach you can text like a human",
+    title: "Coaching chat grounded in your world",
     description:
-      "Ask messy questions in plain language. He still answers from your real priorities, numbers, and limits.",
+      "Ask messy questions in plain language and get answers shaped by your priorities, goals, and limits.",
   },
   {
     icon: Brain,
@@ -115,16 +113,10 @@ const insideApp = [
       "See where you are strong, where you are leaking energy, and what to focus on next.",
   },
   {
-    icon: Bell,
-    title: "Morning nudges and weekly check-ins",
+    icon: CheckCircle2,
+    title: "Weekly check-ins that catch drift early",
     description:
       "Stay close to what matters without turning your life into one more noisy app.",
-  },
-  {
-    icon: Smartphone,
-    title: "Your coach wherever the week happens",
-    description:
-      "Desktop, phone, or tablet. ALFRED stays available when the decision is actually happening.",
   },
 ];
 
@@ -133,7 +125,7 @@ const pricingPreview = [
     name: "Monthly",
     price: "$39",
     period: "/mo",
-    description: "Full product. Cancel anytime.",
+    description: "Choose monthly after your card-free trial.",
     href: "/sign-up?plan=monthly",
     featured: false,
   },
@@ -141,10 +133,29 @@ const pricingPreview = [
     name: "Annual",
     price: "$349",
     period: "/yr",
-    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
+    description: "Choose annual after your trial and save 25%.",
     href: "/sign-up?plan=annual",
     featured: true,
     badge: "Best value",
+  },
+];
+
+const buyingQuestions = [
+  {
+    question: "Do I need a card to start?",
+    answer: "No. The 7-day trial is card-free.",
+  },
+  {
+    question: "Do I get the full product in the trial?",
+    answer: "Yes. The trial gives you full access, not a stripped-down demo tier.",
+  },
+  {
+    question: "Who is this for?",
+    answer: "Founders and operators carrying competing pressure who want help protecting priorities and making cleaner decisions.",
+  },
+  {
+    question: "What if I am already in Jake's world?",
+    answer: "Some programs include longer ALFRED access, but you do not need another offer to use ALFRED on his own.",
   },
 ];
 
@@ -207,7 +218,7 @@ export default function LandingPage() {
             </p>
 
             <p className="mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              ALFRED keeps what matters in the room so you can make the next right move when the week gets loud.
+              ALFRED helps you protect what matters, make cleaner decisions, and stop losing the week to urgency.
             </p>
 
             <ul className="mb-8 flex max-w-2xl flex-wrap justify-center gap-2.5">
@@ -226,19 +237,19 @@ export default function LandingPage() {
                 href="/sign-up"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-medium text-accent-foreground transition-colors hover:bg-accent/90"
               >
-                Start My 7-Day Trial
+                Start Card-Free Trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="#product-tour"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-accent/20 px-8 py-4 font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-accent/10"
+                className="inline-flex items-center justify-center gap-2 px-2 py-2 text-sm font-semibold text-accent transition-colors hover:text-accent/80"
               >
-                Take the Product Tour
+                See the product tour
               </Link>
             </div>
 
             <p className="mt-5 text-sm font-medium text-muted-foreground">
-              7-day trial. No upsell maze. Works on desktop, phone, and tablet.
+              Card-free 7-day trial. Full access from day one.
             </p>
           </div>
         </div>
@@ -256,7 +267,7 @@ export default function LandingPage() {
             <p className="text-lg leading-relaxed text-muted-foreground">
               They need help staying loyal to what matters when urgent problems, tempting opportunities, and real life
               all hit at once. ALFRED is the trusted advisor in your pocket who helps you protect your priorities and
-              make the next right move. That is what he is built for.
+              make the next right move.
             </p>
           </div>
 
@@ -283,14 +294,14 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              Why It Lands
+              Why It Works
             </p>
             <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-              Why his advice feels different.
+              Before ALFRED answers, he already knows the shape of your week.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              ALFRED is not guessing from the question you typed today. He coaches from the bigger picture you build with
-              him over time.
+              That is why the advice feels more specific than blank-slate AI. He is not starting from today&apos;s question
+              alone.
             </p>
           </div>
 
@@ -315,14 +326,14 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              Weekly Reset
+              Real Week Use Cases
             </p>
             <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-              A weekly check-in that catches drift before the month is gone.
+              How ALFRED helps when the week goes sideways.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              ALFRED&apos;s weekly reset helps you see how you are actually operating, not just what you shipped. It turns
-              vague stress into something you can name, track, and coach.
+              This is where the app earns its keep: when something changes, a decision gets messy, or you can feel drift
+              starting.
             </p>
           </div>
 
@@ -347,18 +358,18 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              Inside ALFRED
+              In The App
             </p>
             <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-              Everything in the app points back to what matters.
+              A simple toolset built around one job.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              The point is not more features. The point is giving you a system that helps you stay clear, honest, and
-              aligned when the week tries to pull you off-center.
+              Keep what matters visible. Get coaching that fits your life. Make the next right move without starting from
+              zero.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
             {insideApp.map((item) => (
               <article
                 key={item.title}
@@ -375,39 +386,17 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-4xl rounded-[32px] border border-accent/20 bg-[linear-gradient(145deg,rgba(255,107,26,0.08),rgba(255,255,255,0.96)_38%,rgba(255,247,240,0.92)_100%)] p-8 text-center shadow-[0_32px_90px_-56px_rgba(255,107,26,0.22)] sm:p-10 lg:p-12">
-          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Want The Full Experience?
-          </p>
-          <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-            Want ALFRED to know your world faster?
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Join the Strategic Alignment Intensive. Build your priorities, numbers, boundaries, and weekly direction
-            live, then bring 30 days of ALFRED home with you so the coaching starts from what you built in the room.
-          </p>
-          <Link
-            href="https://jakesebokmarketingsite.vercel.app/work-with-me/strategic-intensives"
-            className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 font-medium text-accent-foreground transition-colors hover:bg-accent/90"
-          >
-            See the Intensive
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
       <section className="border-y border-border bg-card/70 px-6 py-24">
         <div className="mx-auto max-w-5xl text-center">
           <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Pricing Preview
+            Start Here
           </p>
           <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-            Simple pricing. One lane. Full product.
+            Start with a card-free 7-day trial.
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            No upsell maze. No stripped-down tier. Just the full ALFRED experience for less than many founders spend on a
-            single coaching hour.
+            Full access from day one. If ALFRED helps you protect priorities and make cleaner decisions, choose the plan
+            you want after the trial.
           </p>
 
           <div className="mx-auto grid max-w-2xl gap-6 sm:grid-cols-2">
@@ -437,9 +426,18 @@ export default function LandingPage() {
                       : "border border-border hover:bg-secondary"
                   }`}
                 >
-                  Start My 7-Day Trial
+                  Start Card-Free Trial
                 </Link>
               </div>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-4xl gap-4 text-left sm:grid-cols-2">
+            {buyingQuestions.map((item) => (
+              <article key={item.question} className="rounded-[22px] border border-border bg-background/88 p-5">
+                <h3 className="font-semibold text-foreground">{item.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+              </article>
             ))}
           </div>
 
@@ -447,7 +445,7 @@ export default function LandingPage() {
             <Link href="/pricing" className="font-medium text-accent hover:underline">
               See full pricing
             </Link>{" "}
-            for plan details and extended access through Jake&apos;s programs.
+            for plan details.
           </p>
         </div>
       </section>

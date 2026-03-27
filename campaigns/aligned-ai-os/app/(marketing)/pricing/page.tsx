@@ -23,39 +23,24 @@ const plans = [
     name: "Monthly",
     price: "$39",
     period: "/month",
-    description: "Full product. Cancel anytime.",
-    cta: "Start My 7-Day Trial",
-    href: "/api/checkout?plan=monthly",
+    description: "Choose monthly after your card-free trial. Cancel anytime.",
+    cta: "Start Card-Free Trial",
+    href: "/sign-up?plan=monthly",
     highlight: false,
   },
   {
     name: "Annual",
     price: "$349",
     period: "/year",
-    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
-    cta: "Start My 7-Day Trial",
-    href: "/api/checkout?plan=annual",
+    description: "Choose annual after your trial and save 25%.",
+    cta: "Start Card-Free Trial",
+    href: "/sign-up?plan=annual",
     highlight: true,
     badge: "Best value",
   },
 ];
 
-const tiers = [
-  {
-    tier: "Strategic Alignment Intensive",
-    trial: "30 days of ALFRED",
-    context: "Build your priorities, numbers, and constraints live, then keep coaching from what you created in the room.",
-    note: "Quarterly Intensive attendees get 30 days of access included with their workshop enrollment.",
-  },
-  {
-    tier: "Aligned Power Accelerator",
-    trial: "12 months of ALFRED",
-    context: "Long-term coaching clients get extended access because ALFRED becomes part of the operating system.",
-    note: "Included with Accelerator enrollment.",
-  },
-];
-
-const pricingPills = ["7-day trial", "No upsell maze", "Full product access"];
+const pricingPills = ["Card-free 7-day trial", "Full product access", "Choose your plan later"];
 
 export default async function PricingPage() {
   const { userId } = await auth();
@@ -68,7 +53,7 @@ export default async function PricingPage() {
           <LogoOnDarkGlow size="lg">
             <Image
               src="/logo-apos.png"
-              alt="Aligned Freedom Coach"
+              alt="ALFRED"
               width={280}
               height={77}
               className="logo-on-dark-img h-12 w-auto sm:h-14"
@@ -100,8 +85,8 @@ export default async function PricingPage() {
             <span className="block text-gradient-accent">One lane. Full product.</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            You are not paying for a funnel of add-ons. You are paying for a trusted advisor in your pocket who helps
-            you protect your priorities and make the next right move when the week gets loud.
+            Start with a card-free 7-day trial. Get the full product from day one. If ALFRED helps you protect
+            priorities and make cleaner decisions, choose monthly or annual when the trial ends.
           </p>
         </div>
 
@@ -149,29 +134,13 @@ export default async function PricingPage() {
         </div>
 
         <div className="mx-auto max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">
-          <div className="mb-8 max-w-2xl">
-            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              Extended Access
-            </p>
-            <h2 className="mb-3 font-serif text-2xl font-bold sm:text-3xl">
-              Longer access if you come through Jake&apos;s programs.
-            </h2>
-            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-              If you build your foundation with Jake live, ALFRED gets more context faster. That is why the trial window
-              is longer for Intensive attendees and Accelerator clients.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {tiers.map((tier) => (
-              <article key={tier.tier} className="rounded-[22px] border border-border bg-background/90 p-5">
-                <h3 className="font-semibold text-foreground">{tier.tier}</h3>
-                <p className="mt-2 text-sm font-semibold text-accent">{tier.trial}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tier.context}</p>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{tier.note}</p>
-              </article>
-            ))}
-          </div>
+          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            Already In Jake&apos;s World?
+          </p>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Some Jake programs include longer ALFRED access. That is additive, not required. ALFRED is built to stand on
+            his own as a self-serve subscription.
+          </p>
         </div>
       </div>
     </div>
