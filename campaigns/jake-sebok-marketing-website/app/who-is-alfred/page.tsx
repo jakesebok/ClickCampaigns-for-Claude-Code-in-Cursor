@@ -6,7 +6,7 @@ import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED): clarity in your pocket when the week gets loud. It keeps what matters, what you promised, and your next best move in front of you when pressure hits.";
+  "Aligned Freedom Coach (ALFRED): clarity in your pocket when the week gets loud. He keeps your priorities, tradeoffs, and next best move in front of you when pressure hits.";
 
 export const metadata: Metadata = {
   title: "Aligned Freedom Coach (ALFRED): Clarity In Your Pocket When It Matters | Jake Sebok",
@@ -38,19 +38,109 @@ export const metadata: Metadata = {
   },
 };
 
-const dailyItems = [
+const whatAlfredDoesItems = [
   {
-    title: "Coaching chat",
-    body: "Straight answers when you are stuck, overloaded, or about to say yes to the wrong thing.",
+    title: "Stops the drift",
+    body: "When the week gets reactive, he pulls you back to the few things that actually matter.",
   },
   {
-    title: "What matters stays close",
-    body: "Your priorities, commitments, and why they matter stay visible, so you do not waste energy finding your footing again.",
+    title: "Cuts through shiny objects",
+    body: "He helps you tell the difference between a real opportunity and a distraction that just feels exciting.",
   },
   {
-    title: "Quick check-ins",
-    body: "Short prompts that pull you back to what matters before the week gets away from you.",
+    title: "Protects your real priorities",
+    body: "He keeps your real priorities in the room so the urgent does not quietly replace the important.",
   },
+  {
+    title: "Helps you make cleaner decisions",
+    body: "He helps you weigh the upside, the cost, and what your life can actually hold before you say yes.",
+  },
+];
+
+const proofItems = [
+  {
+    title: "He knows what matters to you",
+    body: "He knows your values, your priorities, and the kind of life you are trying to build.",
+  },
+  {
+    title: "He knows the game you are actually playing",
+    body: "He knows your goals, your numbers, and the weekly sales activity required to make them real.",
+  },
+  {
+    title: "He knows what your life can actually hold",
+    body: "He knows your limits, your hard boundaries, and what your time, energy, and calendar can realistically carry.",
+  },
+  {
+    title: "He sees where you are slipping",
+    body: "Your weekly check-ins help him spot drift early, before a hard week quietly becomes a lost month.",
+  },
+];
+
+const realWeekItems = [
+  {
+    title: "You are tempted by something shiny.",
+    body: "He helps you separate a real opportunity from a distraction wearing a good outfit.",
+  },
+  {
+    title: "Your priorities are disappearing.",
+    body: "He helps you reset around what still matters instead of letting urgency write the week for you.",
+  },
+  {
+    title: "You need a hard yes or no.",
+    body: "He helps you see the tradeoff clearly: the upside, the cost, and what saying yes will do to your time, focus, and energy.",
+  },
+  {
+    title: "You know you are off, but you cannot tell where.",
+    body: "He helps you see where you are breaking down, what needs repair, and what to change next.",
+  },
+];
+
+const comparisonRows = [
+  {
+    label: "Starting point",
+    generic: "Only knows what you type today.",
+    alfred: "He knows what matters, what you are building, and what this season actually requires.",
+  },
+  {
+    label: "Advice quality",
+    generic: "Gives plausible answers that sound smart in the moment.",
+    alfred: "He filters advice through your priorities, your goals, and your real-life limits.",
+  },
+  {
+    label: "Decision support",
+    generic: "Helps you react.",
+    alfred: "He helps you decide in a way you can still respect a week later.",
+  },
+  {
+    label: "Weekly rhythm",
+    generic: "One-off help.",
+    alfred: "He stays with you across the week and helps catch drift before it compounds.",
+  },
+];
+
+const pressureItems = [
+  "Priorities get blurry",
+  "Urgency takes over",
+  "Shiny things hijack the week",
+  "Tradeoffs disappear",
+];
+
+const whoItsForItems = [
+  "Founders and executives carrying too much in their head and too much on their plate.",
+  "People with real responsibility, real pressure, and too many competing inputs.",
+  "Operators who do not need more information. They need clearer thinking when it counts.",
+];
+
+const whoItIsntForItems = [
+  "People looking for novelty, entertainment, or a magic button.",
+  "People who want advice without reflection, ownership, or follow-through.",
+];
+
+const heroPills = [
+  "Keeps priorities visible",
+  "Clear decisions under pressure",
+  "Cuts through shiny objects",
+  "Steady guidance in a messy week",
 ];
 
 export default function WhoIsAlfredPage() {
@@ -118,28 +208,30 @@ export default function WhoIsAlfredPage() {
                   <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
                     Aligned Freedom Coach
                   </p>
-                  <h1 className="font-outfit font-bold text-4xl sm:text-[2.65rem] lg:text-[2.8rem] text-ap-primary leading-[1.08] tracking-tight mb-5 sm:mb-6 text-center md:text-left">
+                  <h1 className="font-outfit font-bold text-[2.65rem] sm:text-[3.1rem] lg:text-[3.3rem] text-ap-primary leading-[1.04] tracking-tight mb-5 sm:mb-6 text-center md:text-left">
                     Clarity in your pocket when it matters.
                   </h1>
-                  <p className="text-lg sm:text-xl font-semibold text-ap-mid leading-relaxed mb-6">
-                    ALFRED keeps your priorities in front of you when the week gets loud, so you can make clean
-                    decisions fast without losing what matters.
+                  <p className="max-w-[38rem] text-[1.05rem] sm:text-[1.24rem] font-semibold text-ap-mid leading-relaxed mb-6 text-center md:text-left">
+                    ALFRED keeps what matters in front of you when the week gets loud, so you can make clean decisions
+                    without losing your priorities, your values, or the life you are trying to build.
                   </p>
-                  <ul className="flex flex-wrap gap-2.5 mb-7">
-                    <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
-                      Keeps what matters visible
-                    </li>
-                    <li className="rounded-full border border-ap-border bg-ap-off/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
-                      Clear decisions under pressure
-                    </li>
-                    <li className="rounded-full border border-[rgba(255,107,26,0.18)] bg-[rgba(255,247,240,0.94)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#b6531b]">
-                      Built for the messy week
-                    </li>
-                    <li className="rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid">
-                      Steady, useful guidance
-                    </li>
+                  <ul className="flex flex-wrap gap-2.5 mb-7 max-w-[40rem] justify-center md:justify-start">
+                    {heroPills.map((pill, index) => (
+                      <li
+                        key={pill}
+                        className={
+                          index === 2
+                            ? "rounded-full border border-[rgba(255,107,26,0.18)] bg-[rgba(255,247,240,0.94)] px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#b6531b]"
+                            : index === 1
+                              ? "rounded-full border border-ap-border bg-ap-off/90 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid"
+                              : "rounded-full border border-ap-border bg-white/85 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ap-mid"
+                        }
+                      >
+                        {pill}
+                      </li>
+                    ))}
                   </ul>
-                  <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-center md:justify-start">
                     <a
                       href={ALFRED_APP_URL}
                       target="_blank"
@@ -157,9 +249,9 @@ export default function WhoIsAlfredPage() {
                       </svg>
                     </a>
                   </div>
-                  <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl">
-                    {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts; extended access for
-                    Intensive and Accelerator clients.
+                  <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl text-center md:text-left">
+                    {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts. Intensive and Accelerator
+                    clients get extended access.
                   </p>
                 </div>
               </div>
@@ -181,6 +273,56 @@ export default function WhoIsAlfredPage() {
               />
               <AlfredHeroPhone className="relative z-10 w-full max-w-md mx-auto md:max-w-none md:mx-0" />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
+        <div className="max-w-[1120px] mx-auto px-5 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
+            <div className="max-w-[760px] lg:sticky lg:top-24">
+              <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
+                <div
+                  className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 44%, transparent 76%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+                  What He Does
+                </p>
+                <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-4">
+                  When the week gets loud, here&apos;s what ALFRED does.
+                </h2>
+                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
+                  Most founders do not need more ideas.
+                </p>
+                <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
+                  They need help staying loyal to what matters when urgent problems, tempting opportunities, and real
+                  life all hit at once. That is what ALFRED is built for.
+                </p>
+              </div>
+            </div>
+            <ul className="grid gap-5 sm:grid-cols-2">
+              {whatAlfredDoesItems.map((item, index) => (
+                <li
+                  key={item.title}
+                  className={
+                    index === 1
+                      ? "rounded-[24px] border border-[rgba(255,107,26,0.18)] bg-[linear-gradient(180deg,rgba(255,247,240,0.96),rgba(255,255,255,0.98))] p-6 shadow-[0_22px_52px_-30px_rgba(255,107,26,0.42)]"
+                      : "rounded-[24px] border border-ap-border bg-ap-off/70 p-6 shadow-[0_18px_40px_-30px_rgba(14,22,36,0.22)]"
+                  }
+                >
+                  <span className="inline-flex items-center rounded-full border border-ap-border bg-white/88 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p className="font-outfit font-bold text-xl text-ap-primary mt-4 mb-3">{item.title}</p>
+                  <p className="text-sm sm:text-[15px] text-ap-mid font-medium leading-relaxed">{item.body}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -258,22 +400,36 @@ export default function WhoIsAlfredPage() {
                       />
                     </div>
                   </div>
+                  <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-white/60 mb-4">
+                    Where Generic AI Breaks
+                  </p>
                   <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-white mb-4">
-                    Generic AI falls apart when pressure hits.
+                    Most AI sounds smart until your real week shows up.
                   </h2>
                   <div className="space-y-5 text-white/80 font-medium leading-relaxed text-lg">
                     <p>
-                      Most AI feels smart when nothing is on fire. Then the week gets messy and you are back at square
-                      one, trying to explain what matters, what you promised, and what you cannot afford to ignore.
+                      Blank-slate AI can give you a decent answer in a calm moment. But founders do not live in calm
+                      moments. You live where team needs, client fires, family reality, revenue pressure, and new
+                      opportunities all collide.
                     </p>
                     <p>
-                      ALFRED is built for that moment. He stays close to the real shape of your week, so you can make a
-                      clean call and keep moving instead of starting over.
+                      ALFRED is built for that moment. He helps you remember what matters, see the tradeoffs clearly,
+                      and make the next right move without starting from zero.
                     </p>
                     <p className="text-gradient-accent font-semibold">
                       When pressure rises, ALFRED brings you back to what matters.
                     </p>
                   </div>
+                  <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                    {pressureItems.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/88"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               <div className="hidden md:flex relative z-0 min-h-0 min-w-0 flex-1 shrink-0 items-stretch justify-center self-stretch md:min-w-[min(52%,300px)] md:max-w-[min(68%,560px)] lg:min-w-[min(40%,280px)] lg:max-w-none md:px-0 lg:px-2 xl:px-4">
@@ -316,17 +472,23 @@ export default function WhoIsAlfredPage() {
         />
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6">
           <div className="max-w-[760px] mx-auto mb-10 sm:mb-12 text-center">
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+              A feel-first tour
+            </p>
             <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
               Who&apos;s in the room with you?
             </h2>
-            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-4">
+            <p className="text-xl sm:text-[1.35rem] text-ap-mid font-semibold leading-relaxed mb-4">
               Serious operators have always had someone in the earpiece: calm, informed, willing to say the truth out
               loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
             </p>
-            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3">
-              The feel matters. You are not meeting a productivity toy here. You are meeting a clear, grounded coach
-              who can help you sort signal from noise when the stakes are real. This preview shows how ALFRED sounds in
-              action.
+            <p className="text-lg text-ap-mid font-medium leading-relaxed mb-3 max-w-[720px] mx-auto">
+              He is not a productivity toy. He feels more like the calm operator who knows your world well enough to
+              steady you, challenge you, and call you back to what matters.
+            </p>
+            <p className="text-base sm:text-lg text-ap-muted font-medium leading-relaxed mb-3 max-w-[680px] mx-auto">
+              This preview is less about features than feel. Notice how he thinks, what he remembers, and where he
+              pushes.
             </p>
             <details className="group mx-auto w-full max-w-[720px] text-left">
               <summary className="cursor-pointer list-none flex items-center justify-center gap-2 text-sm text-ap-muted font-semibold hover:text-ap-mid transition-colors [&::-webkit-details-marker]:hidden">
@@ -342,10 +504,9 @@ export default function WhoIsAlfredPage() {
                 </svg>
               </summary>
               <p className="mt-3 text-sm text-ap-muted font-medium leading-relaxed">
-                The tour auto-runs through Dashboard, Coach, Voice, Results, Drivers, and More after this section enters
-                view. Use nav/menu, pause, arrows, or dots to explore. Hover the phone to freeze auto-advance; desktop
-                card hover jumps to a highlight. Labels and layout mirror the live product, while coach replies use
-                illustrative sample situations.
+                The tour auto-runs through the main screens after this section enters view. Use the nav, pause button,
+                arrows, or dots to explore. Hover the phone to freeze auto-advance. Labels and layout mirror the live
+                product, while replies use illustrative sample situations.
               </p>
             </details>
           </div>
@@ -354,9 +515,9 @@ export default function WhoIsAlfredPage() {
           <div className="relative mt-14 sm:mt-16 max-w-[880px] mx-auto px-0 sm:px-2" aria-label="Why Jake built ALFRED">
             <blockquote className="rounded-2xl border border-ap-border border-l-4 border-l-ap-accent bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_24px_60px_-28px_rgba(14,22,36,0.18)]">
               <p className="text-lg sm:text-xl font-semibold text-ap-primary leading-relaxed italic text-center sm:text-left mb-4">
-                &ldquo;I built ALFRED because I wanted clarity I could actually carry into a hard week. Not another document
-                I felt good about for a day, then forgot. What matters, what I decided, and what this season requires
-                stay close here, so when pressure hits I can get real guidance without starting from scratch.&rdquo;
+                &ldquo;I built ALFRED because I wanted clarity I could carry into a hard week. Not another document I felt
+                good about for a day, then forgot. What matters, what I decided, and what this season requires stay
+                close here, so when pressure hits I can get real guidance without starting from scratch.&rdquo;
               </p>
               <cite className="not-italic block text-center sm:text-left text-sm font-semibold text-ap-mid">
                 — Jake Sebok
@@ -367,34 +528,134 @@ export default function WhoIsAlfredPage() {
       </section>
 
       <section className="py-14 sm:py-20 bg-white border-y border-ap-border">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6">
-          <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            How it shows up in a real week
-          </h2>
-          <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-10">
-            Simple surfaces. Clear decisions. Built for people carrying too many moving pieces in their own head.
-          </p>
-          <ul className="grid sm:grid-cols-3 gap-6">
-            {dailyItems.map((item) => (
-              <li key={item.title} className="rounded-[16px] bg-ap-off border border-ap-border p-6">
-                <h3 className="font-outfit font-bold text-base text-ap-primary mb-2">{item.title}</h3>
-                <p className="text-sm text-ap-mid font-medium leading-relaxed">{item.body}</p>
-              </li>
-            ))}
-          </ul>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
+            <div className="max-w-[760px] lg:sticky lg:top-24">
+              <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
+                <div
+                  className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 44%, transparent 76%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+                  Why It Lands
+                </p>
+                <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
+                  Why his advice feels so specific.
+                </h2>
+                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
+                  He is not guessing from today&apos;s question.
+                </p>
+                <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
+                  He coaches from the bigger picture you build with him over time.
+                </p>
+              </div>
+            </div>
+            <ul className="grid gap-6 sm:grid-cols-2">
+              {proofItems.map((item, index) => (
+                <li
+                  key={item.title}
+                  className={
+                    index === 1
+                      ? "rounded-[24px] border border-[rgba(255,107,26,0.18)] bg-[linear-gradient(180deg,rgba(255,247,240,0.95),rgba(255,255,255,0.98))] p-6 shadow-[0_22px_52px_-34px_rgba(255,107,26,0.4)]"
+                      : "rounded-[24px] border border-ap-border bg-ap-off/75 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.22)]"
+                  }
+                >
+                  <span className="inline-flex items-center rounded-full border border-ap-border bg-white/88 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-outfit font-bold text-xl text-ap-primary mt-4 mb-3">{item.title}</h3>
+                  <p className="text-sm sm:text-[15px] text-ap-mid font-medium leading-relaxed">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 bg-ap-bg">
+      <section className="py-14 sm:py-20 bg-ap-bg border-y border-ap-border">
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
+            <div className="max-w-[760px] lg:sticky lg:top-24">
+              <div className="relative overflow-hidden rounded-[24px] border border-ap-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(245,247,250,0.92))] px-6 py-6 shadow-[0_22px_52px_-38px_rgba(14,22,36,0.22)] sm:px-7 sm:py-7">
+                <div
+                  className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full blur-3xl opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.28) 0%, rgba(255,159,107,0.08) 44%, transparent 76%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+                  Real Week Use Cases
+                </p>
+                <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
+                  How ALFRED helps in a real week.
+                </h2>
+                <p className="text-xl sm:text-[1.35rem] font-semibold text-ap-primary leading-[1.35] mb-4">
+                  This is where ALFRED earns his place.
+                </p>
+                <p className="text-base sm:text-lg text-ap-mid font-medium leading-relaxed">
+                  Not in a calm hypothetical week. In the one you are actually living.
+                </p>
+              </div>
+            </div>
+            <ul className="grid gap-6 sm:grid-cols-2">
+              {realWeekItems.map((item, index) => (
+                <li
+                  key={item.title}
+                  className="rounded-[24px] border border-ap-border bg-white p-6 shadow-[0_18px_44px_-34px_rgba(14,22,36,0.2)]"
+                >
+                  <span className="inline-flex items-center rounded-full border border-ap-border bg-ap-off/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-outfit font-bold text-xl text-ap-primary mt-4 mb-3">{item.title}</h3>
+                  <p className="text-sm sm:text-[15px] text-ap-mid font-medium leading-relaxed">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-20 bg-white border-b border-ap-border">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-muted mb-4">
+            The Difference
+          </p>
           <h2 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3">
-            Why the advice feels different
+            Why ALFRED feels different.
           </h2>
           <p className="text-lg text-ap-mid font-medium max-w-[720px] leading-relaxed mb-8">
-            Most AI tools sound smart until life gets complicated. ALFRED is built for the real version of the
-            question: what matters most, what you already promised, and what this decision will actually cost.
+            Most AI tools help with a prompt. ALFRED helps with a week, a decision, and the person carrying both.
           </p>
-          <div className="overflow-x-auto rounded-[20px] border border-ap-border bg-white">
+          <div className="space-y-4 md:hidden">
+            {comparisonRows.map((row) => (
+              <article key={row.label} className="overflow-hidden rounded-[22px] border border-ap-border bg-white shadow-[0_16px_34px_-30px_rgba(14,22,36,0.18)]">
+                <div className="border-b border-ap-border bg-ap-off px-5 py-4">
+                  <p className="font-outfit font-bold text-ap-primary">{row.label}</p>
+                </div>
+                <div className="space-y-4 p-5">
+                  <div>
+                    <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-muted">
+                      Typical AI
+                    </p>
+                    <p className="text-sm text-ap-mid font-medium leading-relaxed">{row.generic}</p>
+                  </div>
+                  <div className="rounded-2xl border border-ap-border bg-ap-bg/80 p-4">
+                    <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-accent">
+                      ALFRED
+                    </p>
+                    <p className="text-sm text-ap-primary font-semibold leading-relaxed">{row.alfred}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="hidden md:block overflow-x-auto rounded-[20px] border border-ap-border bg-white">
             <table className="w-full text-left text-sm sm:text-base">
               <thead>
                 <tr className="border-b border-ap-border bg-ap-off">
@@ -404,50 +665,26 @@ export default function WhoIsAlfredPage() {
                 </tr>
               </thead>
               <tbody className="text-ap-mid font-medium">
-                <tr className="border-b border-ap-border">
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Starting point</td>
-                  <td className="p-4 sm:p-5">
-                    You end up re-explaining the same priorities, promises, and tradeoffs every time the week gets hard.
-                  </td>
-                  <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    It already knows what matters, what you have been working on, and what you said you wanted this
-                    season to look like.
-                  </td>
-                </tr>
-                <tr className="border-b border-ap-border">
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Advice quality</td>
-                  <td className="p-4 sm:p-5">
-                    Generic hustle templates dressed up in your industry’s keywords. No real values filter, no map of
-                    what it would cost you to say yes.
-                  </td>
-                  <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Advice is filtered through what matters most, what you can realistically carry, and what this week
-                    actually demands.
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-4 sm:p-5 text-ap-primary font-semibold">Operating rhythm</td>
-                  <td className="p-4 sm:p-5">
-                    No honest weekly structure unless you invent and police it yourself.
-                  </td>
-                  <td className="p-4 sm:p-5 bg-ap-bg/80">
-                    Check-ins, reviews, and prompts pull you back to what matters before the week drifts off course.
-                  </td>
-                </tr>
+                {comparisonRows.map((row, index) => (
+                  <tr key={row.label} className={index < comparisonRows.length - 1 ? "border-b border-ap-border" : ""}>
+                    <td className="p-4 sm:p-5 text-ap-primary font-semibold">{row.label}</td>
+                    <td className="p-4 sm:p-5">{row.generic}</td>
+                    <td className="p-4 sm:p-5 bg-ap-bg/80">{row.alfred}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-ap-muted mt-4 max-w-[720px]">
-            If you have already built your <strong className="text-ap-mid">Aligned AIOS</strong> through Strategic
-            Clarity, ALFRED can carry that fuller picture too. The simple promise is this: what matters stays close
-            when the week gets noisy. It ships after Phase II in the Accelerator or through a{" "}
+          <p className="text-sm text-ap-muted mt-4 max-w-[760px] leading-relaxed">
+            If you come through the{" "}
             <Link
               href="/work-with-me/strategic-intensives"
               className="text-gradient-accent font-semibold hover:underline"
             >
               Strategic Alignment Intensive
-            </Link>
-            .
+            </Link>{" "}
+            or the Accelerator, ALFRED can coach from an even richer picture of your world. The simple promise stays
+            the same: he keeps what matters close when the week gets noisy.
           </p>
         </div>
       </section>
@@ -488,14 +725,15 @@ export default function WhoIsAlfredPage() {
                 <span className="block text-gradient-accent-hero [text-shadow:none]">No upsell maze.</span>
               </h2>
               <p className="relative text-[17px] sm:text-lg text-white/82 font-medium leading-relaxed">
-                One product. One clear lane. No scavenger hunt for the real value after you sign in.
+                One product. One clear lane. You are not paying to enter a funnel. You are paying for a coach that
+                stays close when the week gets hard.
               </p>
             </div>
 
             <div className="relative px-8 py-10 sm:px-10 sm:py-12 lg:pl-12 lg:pr-11 lg:py-14 bg-gradient-to-br from-white via-white to-ap-bg/70">
               <ul className="grid sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
                 <li className="rounded-2xl border border-ap-border bg-ap-off/90 px-4 py-4 sm:px-5 sm:py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
-                  <p className="font-outfit font-bold text-sm text-ap-primary mb-1.5">Session-priced</p>
+                  <p className="font-outfit font-bold text-sm text-ap-primary mb-1.5">Less than a coaching hour</p>
                   <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
                     Monthly cost sits under what many founders pay for a single coaching hour.
                   </p>
@@ -507,9 +745,9 @@ export default function WhoIsAlfredPage() {
                   </p>
                 </li>
                 <li className="rounded-2xl border border-ap-border bg-white px-4 py-4 sm:px-5 sm:py-5 shadow-[0_0_0_1px_rgba(255,107,26,0.12),0_18px_40px_-28px_rgba(255,107,26,0.35)] sm:col-span-1">
-                  <p className="font-outfit font-bold text-sm text-gradient-accent mb-1.5">Programs extend the room</p>
+                  <p className="font-outfit font-bold text-sm text-gradient-accent mb-1.5">Programs include extended access</p>
                   <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
-                    Intensive and Accelerator clients get extended trial access through program codes, so the app backs
+                    Intensive and Accelerator clients get longer trial access through program codes, so the app supports
                     what you build live.
                   </p>
                 </li>
@@ -553,34 +791,26 @@ export default function WhoIsAlfredPage() {
       <section className="py-14 sm:py-20 bg-ap-bg">
         <div className="max-w-[960px] mx-auto px-5 sm:px-6">
           <div className="grid sm:grid-cols-2 gap-10 sm:gap-12">
-            <div>
+            <div className="rounded-[22px] border border-ap-border bg-white p-6 sm:p-7 shadow-[0_18px_38px_-32px_rgba(14,22,36,0.18)]">
               <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-4">Who this is for</h2>
               <ul className="space-y-3 text-ap-mid font-medium leading-relaxed">
-                <li className="flex gap-2">
-                  <span className="text-ap-accent shrink-0">→</span>
-                  Executives and founders who need clear thinking in the middle of a noisy week.
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-ap-accent shrink-0">→</span>
-                  Operators carrying too much in their own head and too many decisions on their plate.
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-ap-accent shrink-0">→</span>
-                  People who want a coach in their pocket, not another smart tool they forget to use.
-                </li>
+                {whoItsForItems.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-ap-accent shrink-0">→</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
-            <div>
+            <div className="rounded-[22px] border border-ap-border bg-ap-off/72 p-6 sm:p-7 shadow-[0_18px_38px_-32px_rgba(14,22,36,0.14)]">
               <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-4">Who it isn&apos;t for</h2>
               <ul className="space-y-3 text-ap-mid font-medium leading-relaxed">
-                <li className="flex gap-2">
-                  <span className="text-ap-muted shrink-0">·</span>
-                  Anyone looking for entertainment, novelty, or a magic button.
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-ap-muted shrink-0">·</span>
-                  Anyone unwilling to reflect, choose, and follow through.
-                </li>
+                {whoItIsntForItems.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-ap-muted shrink-0">·</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
