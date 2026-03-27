@@ -307,6 +307,13 @@ export default function LandingPage() {
             </p>
           </div>
 
+          <blockquote className="mb-10 rounded-[28px] border border-accent/20 bg-[linear-gradient(145deg,rgba(255,107,26,0.08),rgba(255,255,255,0.96)_38%,rgba(255,247,240,0.92)_100%)] p-6 shadow-[0_28px_80px_-56px_rgba(255,107,26,0.22)] sm:p-8">
+            <p className="text-xl font-semibold leading-relaxed text-foreground sm:text-2xl">
+              Serious operators have always had someone in the earpiece: calm, informed, willing to say the truth out
+              loud. ALFRED is that kind of steady presence for founders, without the cave and the cape.
+            </p>
+          </blockquote>
+
           <div className="grid gap-6 md:grid-cols-3">
             {founderProof.map((item) => (
               <article
