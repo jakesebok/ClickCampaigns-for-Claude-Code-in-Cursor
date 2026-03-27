@@ -1,5 +1,8 @@
 /**
- * 6Cs Scorecard push reminders. Runs at 12:05pm Eastern (Fri/Sat/Sun).
+ * 6Cs Scorecard push reminders. Vercel Cron runs both 16:05 UTC and 17:05 UTC daily.
+ * The handler selects the correct UTC hour for the current Eastern offset
+ * (16 UTC during DST, 17 UTC during standard time), which keeps weekend
+ * reminders working on Vercel Hobby even though cron timing is within the hour.
  * Sends web push to app users who have subscribed and (Sat/Sun) haven't submitted this week.
  *
  * Env: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, CRON_SECRET, NEXT_PUBLIC_APP_URL
@@ -16,7 +19,7 @@ import {
 
 const TZ = "America/New_York";
 
-function nowInEastern() {
+function nowInEastern(date = new Date()) {
   const fmt = new Intl.DateTimeFormat("en-US", {
     timeZone: TZ,
     weekday: "short",
@@ -24,7 +27,7 @@ function nowInEastern() {
     minute: "numeric",
     hour12: false,
   });
-  const parts = fmt.formatToParts(new Date());
+  const parts = fmt.formatToParts(date);
   const o: Record<string, string> = {};
   parts.forEach((p) => {
     o[p.type] = p.value;
@@ -45,12 +48,31 @@ function nowInEastern() {
   };
 }
 
-function getReminderType(): "available" | "saturday" | "one-hour-left" | null {
-  const e = nowInEastern();
-  const isReminderTime = e.hour === 12 && e.minute >= 0 && e.minute <= 10;
-  if (e.dayOfWeek === 5 && isReminderTime) return "available";
-  if (e.dayOfWeek === 6 && isReminderTime) return "saturday";
-  if (e.dayOfWeek === 0 && isReminderTime) return "one-hour-left";
+function getEasternOffsetMinutes(date = new Date()): number {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ,
+    timeZoneName: "shortOffset",
+  });
+  const parts = fmt.formatToParts(date);
+  const tzName = parts.find((p) => p.type === "timeZoneName")?.value || "";
+  const match = tzName.match(/^GMT([+-])(\d{1,2})(?::?(\d{2}))?$/);
+  if (!match) return -5 * 60;
+  const sign = match[1] === "-" ? -1 : 1;
+  const hours = parseInt(match[2] || "0", 10) || 0;
+  const minutes = parseInt(match[3] || "0", 10) || 0;
+  return sign * (hours * 60 + minutes);
+}
+
+function getExpectedCronUtcHour(date = new Date()): number {
+  return getEasternOffsetMinutes(date) === -4 * 60 ? 16 : 17;
+}
+
+function getReminderType(date = new Date()): "available" | "saturday" | "one-hour-left" | null {
+  if (date.getUTCHours() !== getExpectedCronUtcHour(date)) return null;
+  const e = nowInEastern(date);
+  if (e.dayOfWeek === 5) return "available";
+  if (e.dayOfWeek === 6) return "saturday";
+  if (e.dayOfWeek === 0) return "one-hour-left";
   return null;
 }
 
@@ -106,11 +128,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const type = getReminderType();
+  const type = getReminderType(new Date());
   if (!type) {
     return NextResponse.json({
       ok: true,
-      message: "No reminder scheduled (Fri/Sat/Sun 12:05pm Eastern only)",
+      message: "No reminder scheduled (Fri/Sat/Sun during the noon Eastern cron hour only)",
       type: null,
     });
   }

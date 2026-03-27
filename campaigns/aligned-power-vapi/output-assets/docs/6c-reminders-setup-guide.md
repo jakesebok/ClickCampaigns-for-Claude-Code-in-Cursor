@@ -139,7 +139,7 @@ The 6C reminder API uses this as the “From” address. If you don’t set **SI
 Good for testing only.
 
 1. Do **not** add or verify a domain in Resend.
-2. **Do not** set **SIX_C_FROM_EMAIL** in Vercel, **or** set it to an address Resend allows for testing (e.g. the one they show in the dashboard, often `onboarding@resend.dev` or your own verified email in Resend).
+2. In Vercel, set **SIX_C_FROM_EMAIL** to an address Resend allows for testing (for example the one they show in the dashboard, often `onboarding@resend.dev`, or your own verified email in Resend).
 3. Resend may require you to verify the **recipient** email when using their default domain. Check their docs for “testing” or “sandbox” limits.
 
 For production, use **Part 3a** and verify your own domain.
@@ -183,7 +183,7 @@ This checks that the system is running and knows the correct time. It does **not
 
 2. Press Enter.
 
-**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, and Sunday at 12:05pm Eastern. The important part is that you see a response with no error. You can close the tab.
+**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, and Sunday during the noon Eastern cron hour. The important part is that you see a response with no error. You can close the tab.
 
 ### Test 3: Send yourself a real test email
 
@@ -226,7 +226,7 @@ That usually means the secret in the URL doesn't match what's in Vercel. Try thi
 
 ### When do the real reminders go out?
 
-The system sends reminders **once per day** at **12:05pm Eastern** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens (Friday 12:05pm), a reminder (Saturday 12:05pm), and a "just a few hours left" notice (Sunday 12:05pm). You don't have to do anything else—Vercel runs this automatically.
+The system sends reminders **once per day** during the **noon Eastern cron hour** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens on Friday, a reminder on Saturday, and a "just a few hours left" notice on Sunday. You don't have to do anything else—Vercel runs this automatically.
 
 ---
 
@@ -239,4 +239,4 @@ The system sends reminders **once per day** at **12:05pm Eastern** (Friday, Satu
 - [ ] **Vercel:** Optionally added **SIX_C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
 - [ ] **Vercel:** Redeployed so the new env vars are in effect.
 
-After that, the cron job will run once daily at 12:05pm Eastern (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
+After that, the cron job will run once daily during the noon Eastern cron hour (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).

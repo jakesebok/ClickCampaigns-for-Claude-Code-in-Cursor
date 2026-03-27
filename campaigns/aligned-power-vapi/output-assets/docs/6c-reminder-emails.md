@@ -1,6 +1,6 @@
 # 6C Scorecard reminder emails
 
-Reminder emails are sent to **active clients** (from `portal_active_clients`) during the weekly scorecard window. The cron job calls `/api/cron/6c-reminders`; the API decides which email to send based on **current time in America/New_York**.
+Reminder emails are sent to **active clients** (from `portal_active_clients`) during the weekly scorecard window. The cron job calls `/api/cron/6c-reminders`; the API decides which email to send based on the **current Eastern day** and the **correct UTC cron hour for DST vs. standard time**.
 
 **Who receives each email:**
 - **Friday** ("Your scorecard is available"): All active clients.
@@ -8,9 +8,15 @@ Reminder emails are sent to **active clients** (from `portal_active_clients`) du
 
 ## Schedule (Eastern)
 
-The cron runs **once per day** at 17:05 UTC (12:05pm Eastern, 5 min after scorecard opens). The API sends one email based on the day:
+`vercel.json` defines **two** daily cron entries: `5 16 * * *` and `5 17 * * *`.
+The handler accepts only the one that matches the current Eastern offset:
 
-| Day (when cron runs at 12:05pm Eastern) | Email |
+- **DST (EDT / UTC-4):** 16:00 UTC hour
+- **Standard time (EST / UTC-5):** 17:00 UTC hour
+
+That makes reminders reliable on Vercel Hobby, where cron timing is only guaranteed within the scheduled hour. The API sends one email based on the Eastern day:
+
+| Day (during the noon Eastern cron hour) | Email |
 |-------------------------------------|--------|
 | Friday | "Your scorecard is available for this week" |
 | Saturday | "Reminder: Get your scorecard in this weekend" |
@@ -30,7 +36,7 @@ Summary:
 `vercel.json` in this folder already defines:
 
 - Path: `/api/cron/6c-reminders`
-- Schedule: `5 17 * * *` (once daily at 17:05 UTC = 12:05pm EST). This satisfies Vercel Hobby’s “one run per day” limit. The API sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “just a few hours left” only.
+- Schedule: `5 16 * * *` and `5 17 * * *`. The handler picks the correct one for the current Eastern offset, then sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “just a few hours left” only.
 
 After deployment, Cron runs automatically. You can confirm in Vercel → Project → Settings → Crons.
 
@@ -42,7 +48,7 @@ After deployment, Cron runs automatically. You can confirm in Vercel → Project
 
 Without sending email (to see which type would run):
 
-1. Call the API when it’s Friday 12:05pm Eastern (or change the server time for testing).  
+1. Call the API during the Friday noon Eastern cron hour (or change the server time for testing).  
 2. With sending: set **RESEND_API_KEY** and **CRON_SECRET**, then:
 
    ```bash
@@ -53,5 +59,4 @@ For **status only** (no email): add `?status=1` to the URL. For **one test email
 
 ## Hobby plan note
 
-Vercel Hobby allows only **one cron run per day**. The schedule is set to `5 17 * * *` (once daily at 12:05pm Eastern). If you upgrade to Pro, you can run multiple times per day and add e.g. Friday/Saturday/Sunday 12:05pm emails plus an additional Sunday 5pm "just a few hours left" email.
-
+Vercel Hobby timing is only guaranteed **within the scheduled hour**. This project keeps two daily cron entries (`5 16 * * *` and `5 17 * * *`) so the noon Eastern reminder window works in both DST and standard time. If you upgrade to Pro, you can add more precise reminder times, such as an additional Sunday 5pm "just a few hours left" email.

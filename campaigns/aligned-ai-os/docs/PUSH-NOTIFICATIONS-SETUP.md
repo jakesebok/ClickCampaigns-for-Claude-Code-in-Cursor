@@ -1,6 +1,6 @@
 # 6Cs Scorecard Push Notifications — Setup Guide
 
-Push notifications remind app users when their weekly 6Cs scorecard is available (Friday–Sunday 12:05pm Eastern), matching the portal email reminders.
+Push notifications remind app users when their weekly 6Cs scorecard is available during the Friday–Sunday noon Eastern cron hour, matching the portal email reminders.
 
 ---
 
@@ -63,7 +63,7 @@ npm run db:generate
 
 | Job | Route | Schedule (`vercel.json`) | Purpose |
 |-----|--------|---------------------------|---------|
-| 6Cs reminders | `/api/cron/6c-reminders` | `5 16 * * *` and `5 17 * * *` (UTC) | Weekend scorecard nudges (logic inside route enforces Fri–Sun Eastern window). |
+| 6Cs reminders | `/api/cron/6c-reminders` | `5 16 * * *` and `5 17 * * *` (UTC) | Weekend scorecard nudges. The route accepts the correct hour for the current Eastern offset (EDT vs. EST). |
 | Daily Spark | `/api/cron/morning-prompt` | `0 12 * * *` (once daily, **12:00 UTC**) | One push per opted-in user with an active push subscription. Opens dashboard (`?dailySpark=1`). **No SMS.** |
 
 **No hourly cron:** Daily Spark does **not** use per-user local delivery times. Everyone gets the same UTC send time; change `0 12 * * *` if you want a different global slot (e.g. `0 14 * * *` for 9am Eastern in standard time).
@@ -93,12 +93,12 @@ You'll get JSON like:
 ```json
 {
   "ok": true,
-  "message": "No reminder scheduled (Fri/Sat/Sun 12:05pm Eastern only)",
+  "message": "No reminder scheduled (Fri/Sat/Sun during the noon Eastern cron hour only)",
   "type": null
 }
 ```
 
-When it's Friday/Saturday/Sunday 12:05pm Eastern, you'll see `"type": "available"` (or `"saturday"` / `"one-hour-left"`) and `sent`, `failed`, `total` counts.
+When it's Friday/Saturday/Sunday during the noon Eastern cron hour, you'll see `"type": "available"` (or `"saturday"` / `"one-hour-left"`) and `sent`, `failed`, `total` counts.
 
 ### Test push subscription
 
@@ -111,7 +111,7 @@ When it's Friday/Saturday/Sunday 12:05pm Eastern, you'll see `"type": "available
 ### Test push delivery
 
 1. Subscribe (as above).
-2. Manually trigger the cron when it's Fri/Sat/Sun 12:05pm Eastern, or temporarily change the cron schedule for testing.
+2. Manually trigger the cron during the Fri/Sat/Sun noon Eastern cron hour, or temporarily change the cron schedule for testing.
 3. You should receive a push notification.
 
 ---

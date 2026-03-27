@@ -1,19 +1,22 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Schedule: once daily at 17:05 UTC (12:05pm Eastern). Sends 5 min after scorecard opens.
- * - Friday 12:05pm Eastern → "Your scorecard is available"
- * - Saturday 12:05pm Eastern → Saturday reminder
- * - Sunday 12:05pm Eastern → "Just a few hours left to submit" (only Sunday email)
+ * Schedule: two daily cron entries at 16:05 UTC and 17:05 UTC.
+ * The handler chooses the correct UTC hour for the current Eastern offset
+ * (16 UTC during DST, 17 UTC during standard time) so Vercel Hobby's
+ * within-the-hour cron timing still lands in the weekend noon window.
+ * - Friday noon Eastern hour → "Your scorecard is available"
+ * - Saturday noon Eastern hour → Saturday reminder
+ * - Sunday noon Eastern hour → "Just a few hours left to submit"
  *
  * Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, CRON_SECRET,
- *      SIX_C_FROM_EMAIL (e.g. scorecard@notifications.alignedpower.coach), SIX_C_REPLY_TO (optional).
+ *      SIX_C_FROM_EMAIL (e.g. scorecard@alignedpower.coach), SIX_C_REPLY_TO (optional).
  */
 
 const TZ = 'America/New_York';
 const PORTAL_URL = 'https://portal.alignedpower.coach';
 const SCORECARD_URL = `${PORTAL_URL}/scorecard`;
 
-function nowInEastern() {
+function nowInEastern(date = new Date()) {
   const fmt = new Intl.DateTimeFormat('en-US', {
     timeZone: TZ,
     weekday: 'short',
@@ -21,7 +24,7 @@ function nowInEastern() {
     minute: 'numeric',
     hour12: false,
   });
-  const parts = fmt.formatToParts(new Date());
+  const parts = fmt.formatToParts(date);
   const o = {};
   parts.forEach((p) => { o[p.type] = p.value; });
   const dayNames = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 0 };
@@ -32,12 +35,21 @@ function nowInEastern() {
   };
 }
 
-function getReminderType() {
-  const e = nowInEastern();
-  const isReminderTime = e.hour === 12 && e.minute >= 0 && e.minute <= 10;
-  if (e.dayOfWeek === 5 && isReminderTime) return 'available';
-  if (e.dayOfWeek === 6 && isReminderTime) return 'saturday';
-  if (e.dayOfWeek === 0 && isReminderTime) return 'one-hour-left';
+function getExpectedCronUtcHour(date = new Date()) {
+  const offsetMinutes = getEasternOffsetMinutes(date);
+  return offsetMinutes === -4 * 60 ? 16 : 17;
+}
+
+function isInExpectedCronHour(date = new Date()) {
+  return date.getUTCHours() === getExpectedCronUtcHour(date);
+}
+
+function getReminderType(date = new Date()) {
+  if (!isInExpectedCronHour(date)) return null;
+  const e = nowInEastern(date);
+  if (e.dayOfWeek === 5) return 'available';
+  if (e.dayOfWeek === 6) return 'saturday';
+  if (e.dayOfWeek === 0) return 'one-hour-left';
   return null;
 }
 
@@ -273,7 +285,7 @@ export async function GET(request) {
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const resendKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.SIX_C_FROM_EMAIL || 'scorecard@notifications.alignedpower.coach';
+  const fromEmail = process.env.SIX_C_FROM_EMAIL || 'scorecard@alignedpower.coach';
   const fromLine = `${FROM_NAME} <${fromEmail}>`;
 
   if (!supabaseUrl || !serviceKey) {
@@ -325,22 +337,25 @@ export async function GET(request) {
   // ── Status check ──
   const statusOnly = url && (url.searchParams.get('status') === '1' || url.searchParams.get('status') === 'true');
   if (statusOnly) {
-    const e = nowInEastern();
-    const type = getReminderType();
+    const now = new Date();
+    const e = nowInEastern(now);
+    const type = getReminderType(now);
     return new Response(
       JSON.stringify({
         ok: true,
         status: true,
         eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
+        utc: { hour: now.getUTCHours(), minute: now.getUTCMinutes() },
+        expectedUtcHour: getExpectedCronUtcHour(now),
         reminderType: type,
-        message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun shortly after 12pm Eastern only).',
+        message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun during the noon Eastern cron hour only).',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   }
 
   // ── Scheduled send ──
-  const type = getReminderType();
+  const type = getReminderType(new Date());
   if (!type) {
     return new Response(JSON.stringify({ ok: true, sent: 0, reason: 'no_reminder_scheduled_for_this_time' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
   }
@@ -401,6 +416,7 @@ export async function GET(request) {
   }
 
   let sent = 0;
+  let failed = 0;
   for (const client of clients) {
     const html = buildHtmlEmail({ type, firstName: client.firstName });
     const text = buildTextEmail({ type, firstName: client.firstName });
@@ -418,8 +434,12 @@ export async function GET(request) {
         }),
       });
       if (res.ok) sent++;
-      else console.error('[6c-reminders] Resend error for', client.email, await res.text());
+      else {
+        failed++;
+        console.error('[6c-reminders] Resend error for', client.email, await res.text());
+      }
     } catch (err) {
+      failed++;
       console.error('[6c-reminders] Send error for', client.email, err);
     }
   }
@@ -430,6 +450,7 @@ export async function GET(request) {
     ok: true,
     type,
     sent,
+    failed,
     total: clients.length,
     ...(skipped > 0 && { skipped, reason: 'already_submitted_this_week' }),
   }), { status: 200, headers: { 'Content-Type': 'application/json' } });
