@@ -134,6 +134,7 @@ const whoItsForItems = [
 const whoItIsntForItems = [
   "People looking for novelty, entertainment, or a magic button.",
   "People who want advice without reflection, ownership, or follow-through.",
+  "People who want to be hyped up instead of called back to what matters.",
 ];
 
 const heroPills = [
@@ -187,7 +188,15 @@ export default function WhoIsAlfredPage() {
         <div className="relative z-10 max-w-[1180px] mx-auto px-5 sm:px-6">
           <div className="grid gap-8 sm:gap-10 md:grid-cols-[minmax(0,1.02fr)_minmax(250px,380px)] md:gap-10 lg:gap-16 xl:gap-20 items-center">
             <div className="max-w-xl md:max-w-none">
-              <div className="relative overflow-hidden rounded-[28px] border border-white/75 bg-white/78 px-6 py-7 shadow-[0_34px_90px_-48px_rgba(14,22,36,0.34)] backdrop-blur-md sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+              <div className="relative overflow-hidden rounded-[28px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.92)_0%,rgba(248,250,252,0.9)_46%,rgba(232,238,246,0.92)_100%)] px-6 py-7 shadow-[0_34px_90px_-48px_rgba(14,22,36,0.34)] backdrop-blur-md sm:px-8 sm:py-9 lg:px-10 lg:py-10">
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.9]"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 100%)",
+                  }}
+                  aria-hidden
+                />
                 <div
                   className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full blur-3xl opacity-60"
                   style={{
@@ -202,6 +211,27 @@ export default function WhoIsAlfredPage() {
                     background:
                       "radial-gradient(circle, rgba(58,74,92,0.16) 0%, rgba(58,74,92,0.08) 40%, transparent 76%)",
                   }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute -right-[14%] top-[-8%] h-[116%] w-[44%] opacity-[0.54]"
+                  style={{
+                    background:
+                      "linear-gradient(162deg, rgba(36,52,73,0.26) 0%, rgba(73,90,112,0.16) 38%, rgba(73,90,112,0.06) 62%, rgba(255,255,255,0) 100%)",
+                    clipPath: "polygon(24% 0%, 100% 8%, 84% 100%, 0% 92%)",
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute right-[6%] bottom-[10%] h-40 w-40 rounded-full blur-[58px] opacity-[0.58]"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(73,90,112,0.24) 0%, rgba(73,90,112,0.12) 40%, transparent 76%)",
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(73,90,112,0.3)] to-transparent"
                   aria-hidden
                 />
                 <div className="relative">
@@ -277,7 +307,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-visible">
         <div
           className="pointer-events-none absolute -top-20 left-[-10%] h-[220px] w-[min(44vw,420px)] opacity-[0.42]"
           style={{
@@ -293,6 +323,15 @@ export default function WhoIsAlfredPage() {
           style={{
             background:
               "radial-gradient(circle, rgba(58,74,92,0.24) 0%, rgba(58,74,92,0.1) 48%, transparent 76%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -top-16 right-[6%] h-[190px] w-[min(28vw,240px)] opacity-[0.34]"
+          style={{
+            background:
+              "linear-gradient(164deg, rgba(36,52,73,0.24) 0%, rgba(255,159,107,0.12) 46%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(26% 0%, 100% 8%, 78% 100%, 0% 88%)",
           }}
           aria-hidden
         />
@@ -478,13 +517,23 @@ export default function WhoIsAlfredPage() {
 
       <section
         id="alfred-product-explorer"
-        className="relative py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-hidden scroll-mt-24"
+        className="relative z-10 py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-visible scroll-mt-24"
       >
         <div
-          className="pointer-events-none absolute -top-16 left-1/2 h-40 w-[min(88vw,860px)] -translate-x-1/2 rounded-full blur-[72px] opacity-35"
+          className="pointer-events-none absolute -top-24 left-1/2 h-52 w-[min(92vw,920px)] -translate-x-1/2 rounded-full blur-[60px] opacity-[0.48]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,159,107,0.42) 0%, rgba(255,107,26,0.12) 42%, transparent 76%)",
+              "radial-gradient(circle, rgba(255,159,107,0.54) 0%, rgba(255,107,26,0.22) 42%, transparent 78%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -top-24 right-[8%] h-[220px] w-[min(34vw,320px)] opacity-[0.42]"
+          style={{
+            background:
+              "linear-gradient(150deg, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.16) 44%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(22% 0%, 100% 10%, 78% 100%, 0% 90%)",
+            filter: "drop-shadow(0 18px 48px rgba(255,107,26,0.22))",
           }}
           aria-hidden
         />
@@ -503,31 +552,33 @@ export default function WhoIsAlfredPage() {
               you, and call you back to what matters.
             </p>
           </div>
-          <AlfredFeatureExplorer hidePreviewDisclaimer />
-          <div className="mt-5 flex justify-center lg:justify-end">
-            <details className="group relative w-full max-w-[320px] text-left">
-              <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-ap-border bg-white/92 px-4 py-2 text-sm font-semibold text-ap-muted shadow-[0_16px_32px_-26px_rgba(14,22,36,0.28)] transition-colors hover:text-ap-primary lg:ml-auto [&::-webkit-details-marker]:hidden">
-                <span>Tour notes</span>
-                <svg
-                  className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </summary>
-              <div className="absolute left-0 z-20 w-[min(92vw,320px)] rounded-[22px] border border-ap-border bg-white/96 px-4 py-4 text-sm font-medium leading-relaxed text-ap-mid shadow-[0_28px_60px_-28px_rgba(14,22,36,0.3)] backdrop-blur-sm bottom-[calc(100%+0.95rem)] lg:left-auto lg:right-0">
-                The tour auto-runs after this section enters view. Use the nav, pause button, arrows, or dots to look
-                around. Hover the phone to freeze auto-advance.
-                <div
-                  className="absolute -bottom-2 left-8 h-4 w-4 rotate-45 border-b border-r border-ap-border bg-white/96 lg:left-auto lg:right-8"
-                  aria-hidden
-                />
-              </div>
-            </details>
-          </div>
+          <AlfredFeatureExplorer
+            hidePreviewDisclaimer
+            phoneFooter={
+              <details className="group w-full max-w-[300px] text-left">
+                <summary className="mx-auto inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[rgba(36,52,73,0.14)] bg-white px-4 py-2 text-sm font-semibold text-ap-primary shadow-[0_18px_36px_-28px_rgba(14,22,36,0.32)] transition-colors hover:text-ap-accent [&::-webkit-details-marker]:hidden">
+                  <span>Tour notes</span>
+                  <svg
+                    className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="relative mt-3 rounded-[22px] border border-[rgba(36,52,73,0.14)] bg-[#fbfcfe] px-4 py-4 text-sm font-medium leading-relaxed text-ap-primary shadow-[0_28px_60px_-30px_rgba(14,22,36,0.28)]">
+                  <div
+                    className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-[rgba(36,52,73,0.14)] bg-[#fbfcfe]"
+                    aria-hidden
+                  />
+                  The tour auto-runs after this section enters view. Use the nav, pause button, arrows, or dots to
+                  look around. Hover the phone to freeze auto-advance.
+                </div>
+              </details>
+            }
+          />
 
           <div className="relative mt-14 sm:mt-16 max-w-[880px] mx-auto px-0 sm:px-2" aria-label="Why Jake built ALFRED">
             <blockquote className="rounded-2xl border border-ap-border border-l-4 border-l-ap-accent bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_24px_60px_-28px_rgba(14,22,36,0.18)]">
@@ -544,14 +595,14 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-white border-y border-ap-border overflow-hidden">
+      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-visible">
         <div
-          className="pointer-events-none absolute -top-20 right-[-8%] h-[240px] w-[min(40vw,360px)] opacity-[0.42]"
+          className="pointer-events-none absolute -top-28 right-[-10%] h-[280px] w-[min(42vw,400px)] opacity-[0.5]"
           style={{
             background:
-              "linear-gradient(154deg, rgba(255,107,26,0.44) 0%, rgba(255,159,107,0.24) 42%, rgba(255,107,26,0.04) 100%)",
+              "linear-gradient(154deg, rgba(255,107,26,0.48) 0%, rgba(255,159,107,0.26) 40%, rgba(255,107,26,0.04) 100%)",
             clipPath: "polygon(28% 0%, 100% 6%, 78% 100%, 0% 82%)",
-            filter: "drop-shadow(0 20px 54px rgba(255,107,26,0.24))",
+            filter: "drop-shadow(0 22px 58px rgba(255,107,26,0.24))",
           }}
           aria-hidden
         />
@@ -566,7 +617,7 @@ export default function WhoIsAlfredPage() {
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
             <div className="max-w-[760px]">
-              <div className="relative overflow-hidden rounded-[24px] border border-[rgba(14,22,36,0.14)] bg-[linear-gradient(160deg,#172334_0%,#223147_52%,#31445d_100%)] px-6 py-6 shadow-[0_32px_72px_-40px_rgba(14,22,36,0.6)] sm:px-7 sm:py-7">
+              <div className="relative overflow-visible rounded-[24px] border border-[rgba(14,22,36,0.14)] bg-[linear-gradient(160deg,#172334_0%,#223147_52%,#31445d_100%)] px-6 py-6 shadow-[0_32px_72px_-40px_rgba(14,22,36,0.6)] sm:px-7 sm:py-7">
                 <div
                   className="pointer-events-none absolute -right-8 top-0 h-32 w-32 rounded-full blur-3xl opacity-70"
                   style={{
@@ -576,11 +627,11 @@ export default function WhoIsAlfredPage() {
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute -left-10 bottom-0 h-28 w-44 opacity-[0.28]"
+                  className="pointer-events-none absolute -left-12 bottom-[-26px] h-36 w-56 opacity-[0.34]"
                   style={{
                     background:
                       "linear-gradient(128deg, rgba(255,107,26,0.6) 0%, rgba(255,159,107,0.2) 56%, transparent 100%)",
-                    clipPath: "polygon(0% 28%, 100% 0%, 54% 100%, 0% 100%)",
+                    clipPath: "polygon(0% 24%, 100% 0%, 58% 100%, 0% 100%)",
                   }}
                   aria-hidden
                 />
@@ -620,14 +671,14 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 bg-ap-bg border-y border-ap-border overflow-hidden">
+      <section className="relative z-10 py-14 sm:py-20 bg-ap-bg border-y border-ap-border overflow-visible">
         <div
-          className="pointer-events-none absolute -top-16 left-[-8%] h-[210px] w-[min(38vw,360px)] opacity-[0.36]"
+          className="pointer-events-none absolute -top-24 left-[-10%] h-[250px] w-[min(42vw,390px)] opacity-[0.46]"
           style={{
             background:
-              "linear-gradient(142deg, rgba(255,107,26,0.36) 0%, rgba(255,159,107,0.18) 42%, rgba(255,107,26,0.04) 100%)",
-            clipPath: "polygon(0% 10%, 100% 0%, 70% 100%, 0% 82%)",
-            filter: "drop-shadow(0 18px 48px rgba(255,107,26,0.18))",
+              "linear-gradient(142deg, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.22) 42%, rgba(255,107,26,0.04) 100%)",
+            clipPath: "polygon(0% 8%, 100% 0%, 72% 100%, 0% 84%)",
+            filter: "drop-shadow(0 20px 52px rgba(255,107,26,0.2))",
           }}
           aria-hidden
         />
@@ -889,9 +940,34 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="pb-20 sm:pb-28 pt-4 bg-ap-bg">
+      <section className="relative overflow-hidden pb-20 sm:pb-28 pt-4 bg-ap-bg">
+        <div
+          className="pointer-events-none absolute top-4 left-[-10%] h-[190px] w-[min(34vw,300px)] opacity-[0.3]"
+          style={{
+            background:
+              "linear-gradient(138deg, rgba(255,107,26,0.36) 0%, rgba(255,159,107,0.14) 54%, rgba(255,255,255,0) 100%)",
+            clipPath: "polygon(0% 12%, 100% 0%, 68% 100%, 0% 84%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-12 right-[-12%] h-56 w-[min(42vw,360px)] rounded-full opacity-[0.22] blur-[74px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(58,74,92,0.28) 0%, rgba(58,74,92,0.08) 48%, transparent 74%)",
+          }}
+          aria-hidden
+        />
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <div className="bg-ap-off rounded-[20px] border border-ap-border p-8 sm:p-10 text-center">
+          <div className="relative overflow-hidden bg-ap-off rounded-[20px] border border-ap-border p-8 sm:p-10 text-center">
+            <div
+              className="pointer-events-none absolute -right-10 top-0 h-36 w-36 rounded-full blur-[56px] opacity-[0.28]"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(255,107,26,0.42) 0%, rgba(255,159,107,0.16) 40%, transparent 74%)",
+              }}
+              aria-hidden
+            />
             <h2 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mb-4">
               Why the name &quot;ALFRED&quot;?
             </h2>

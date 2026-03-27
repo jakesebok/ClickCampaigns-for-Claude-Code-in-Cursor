@@ -17,7 +17,7 @@
  * Demo data (Vital Action text, 6Cs numbers, sample coach reply) is illustrative; UI strings match the app.
  */
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ComponentType } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 import {
   Activity,
   AlertTriangle,
@@ -349,9 +349,11 @@ export type AlfredFeatureExplorerEmbed = "marketing" | "app-dark";
 export function AlfredFeatureExplorer({
   embed = "marketing",
   hidePreviewDisclaimer = false,
+  phoneFooter,
 }: {
   embed?: AlfredFeatureExplorerEmbed;
   hidePreviewDisclaimer?: boolean;
+  phoneFooter?: ReactNode;
 } = {}) {
   const isAppDark = embed === "app-dark";
   const [tab, setTab] = useState<AppTab>("dashboard");
@@ -802,15 +804,16 @@ export function AlfredFeatureExplorer({
       </div>
 
       <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-        <div
-          className="relative w-full max-w-[234px] sm:max-w-[252px] lg:max-w-[300px]"
-          onMouseEnter={() => setPhoneHover(true)}
-          onMouseLeave={() => setPhoneHover(false)}
-        >
+        <div className="flex w-full max-w-[320px] flex-col items-center">
           <div
-            className="relative w-full rounded-[2.75rem] border-4 border-[#26262c] bg-[linear-gradient(160deg,#f2f2f4_0%,#d8d8dc_42%,#b4b4bc_100%)] shadow-[0_0_0_2px_#0a0a0c,0_28px_70px_-18px_rgba(14,22,36,0.6),inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-2px_0_rgba(0,0,0,0.2)] transition-shadow duration-300 ease-out"
-            style={{ aspectRatio: "9 / 19" }}
+            className="relative w-full max-w-[234px] sm:max-w-[252px] lg:max-w-[300px]"
+            onMouseEnter={() => setPhoneHover(true)}
+            onMouseLeave={() => setPhoneHover(false)}
           >
+            <div
+              className="relative w-full rounded-[2.75rem] border-4 border-[#26262c] bg-[linear-gradient(160deg,#f2f2f4_0%,#d8d8dc_42%,#b4b4bc_100%)] shadow-[0_0_0_2px_#0a0a0c,0_28px_70px_-18px_rgba(14,22,36,0.6),inset_0_1px_0_rgba(255,255,255,0.45),inset_0_-2px_0_rgba(0,0,0,0.2)] transition-shadow duration-300 ease-out"
+              style={{ aspectRatio: "9 / 19" }}
+            >
             <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[2.45rem]">
               <div className="h-1 shrink-0 bg-ap-accent" aria-hidden />
 
@@ -958,17 +961,20 @@ export function AlfredFeatureExplorer({
             </div>
           </div>
 
-          {!hidePreviewDisclaimer ? (
-            <p
-              className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
-                isAppDark ? "text-muted-foreground" : "text-ap-muted"
-              }`}
-            >
-              This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
-              product rhythm before you log in. Coach replies here use illustrative sample situations; in your account,
-              answers ground in your assessment, blueprint, scorecard, and commitments.
-            </p>
-          ) : null}
+            {phoneFooter ? <div className="mt-4 flex w-full justify-center">{phoneFooter}</div> : null}
+
+            {!hidePreviewDisclaimer ? (
+              <p
+                className={`hidden lg:block text-center text-xs mt-4 max-w-[320px] mx-auto leading-relaxed ${
+                  isAppDark ? "text-muted-foreground" : "text-ap-muted"
+                }`}
+              >
+                This is an interactive preview of ALFRED—labels and layout match what subscribers use, so you can feel the
+                product rhythm before you log in. Coach replies here use illustrative sample situations; in your account,
+                answers ground in your assessment, blueprint, scorecard, and commitments.
+              </p>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
