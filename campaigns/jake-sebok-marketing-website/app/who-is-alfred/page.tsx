@@ -146,7 +146,7 @@ const heroPills = [
 
 export default function WhoIsAlfredPage() {
   return (
-    <>
+    <div className="[overflow-x:clip]">
       <section className="relative pt-16 sm:pt-24 pb-14 sm:pb-[4.5rem] lg:pb-24 bg-ap-bg overflow-hidden">
         <div
           className="pointer-events-none absolute -top-[28%] -left-[35%] z-0 h-[135%] w-[min(165vw,1700px)] lg:-top-[18%] lg:-left-[22%] lg:h-[125%] lg:w-[min(140vw,1600px)] blur-[64px] opacity-[0.95]"
@@ -307,7 +307,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-visible">
+      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-y-visible [overflow-x:clip]">
         <div
           className="pointer-events-none absolute -top-20 left-[-10%] h-[220px] w-[min(44vw,420px)] opacity-[0.42]"
           style={{
@@ -436,12 +436,12 @@ export default function WhoIsAlfredPage() {
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute -bottom-18 right-[6%] z-20 h-[190px] w-[min(30vw,300px)] opacity-[0.34]"
+            className="pointer-events-none absolute -bottom-20 right-[5%] z-20 h-[210px] w-[min(32vw,320px)] opacity-[0.5]"
             style={{
               background:
-                "linear-gradient(154deg, rgba(255,107,26,0.38) 0%, rgba(255,159,107,0.14) 46%, rgba(255,107,26,0.02) 100%)",
+                "linear-gradient(154deg, rgba(255,107,26,0.56) 0%, rgba(255,159,107,0.26) 42%, rgba(255,107,26,0.04) 100%)",
               clipPath: "polygon(24% 0%, 100% 12%, 76% 100%, 0% 86%)",
-              filter: "drop-shadow(0 16px 40px rgba(255,107,26,0.16))",
+              filter: "drop-shadow(0 20px 52px rgba(255,107,26,0.26))",
             }}
             aria-hidden
           />
@@ -537,7 +537,7 @@ export default function WhoIsAlfredPage() {
 
       <section
         id="alfred-product-explorer"
-        className="relative z-10 py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-visible scroll-mt-24"
+        className="relative z-10 py-16 sm:py-24 bg-ap-bg border-b border-ap-border overflow-y-visible [overflow-x:clip] scroll-mt-24"
       >
         <div
           className="pointer-events-none absolute -top-16 left-1/2 h-40 w-[min(88vw,860px)] -translate-x-1/2 rounded-full blur-[72px] opacity-35"
@@ -565,8 +565,8 @@ export default function WhoIsAlfredPage() {
           <AlfredFeatureExplorer
             hidePreviewDisclaimer
             phoneFooter={
-              <details className="group w-full max-w-[300px] text-left">
-                <summary className="mx-auto inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[rgba(36,52,73,0.14)] bg-white px-4 py-2 text-sm font-semibold text-ap-primary shadow-[0_18px_36px_-28px_rgba(14,22,36,0.32)] transition-colors hover:text-ap-accent [&::-webkit-details-marker]:hidden">
+              <details className="group relative mx-auto flex w-full max-w-[300px] flex-col items-center text-left">
+                <summary className="inline-flex cursor-pointer list-none items-center gap-2 rounded-full border border-[rgba(36,52,73,0.14)] bg-white px-4 py-2 text-sm font-semibold text-ap-primary shadow-[0_18px_36px_-28px_rgba(14,22,36,0.32)] transition-colors hover:text-ap-accent [&::-webkit-details-marker]:hidden">
                   <span>Tour notes</span>
                   <svg
                     className="h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
@@ -578,9 +578,9 @@ export default function WhoIsAlfredPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
-                <div className="relative mt-3 rounded-[22px] border border-[rgba(36,52,73,0.14)] bg-[#fbfcfe] px-4 py-4 text-sm font-medium leading-relaxed text-ap-primary shadow-[0_28px_60px_-30px_rgba(14,22,36,0.28)]">
+                <div className="absolute top-[calc(100%+0.8rem)] left-1/2 z-30 hidden w-[min(88vw,340px)] -translate-x-1/2 rounded-[22px] border border-[rgba(36,52,73,0.14)] bg-[#fbfcfe] px-4 py-4 text-sm font-medium leading-relaxed text-ap-primary shadow-[0_28px_60px_-30px_rgba(14,22,36,0.28)] group-open:block sm:left-auto sm:right-[-1.5rem] sm:translate-x-0 lg:right-[-4.5rem]">
                   <div
-                    className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-[rgba(36,52,73,0.14)] bg-[#fbfcfe]"
+                    className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-l border-t border-[rgba(36,52,73,0.14)] bg-[#fbfcfe] sm:left-auto sm:right-[4.25rem] sm:translate-x-0"
                     aria-hidden
                   />
                   The tour auto-runs after this section enters view. Use the nav, pause button, arrows, or dots to
@@ -605,7 +605,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-visible">
+      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-y-visible [overflow-x:clip]">
         <div
           className="pointer-events-none absolute -top-28 right-[-10%] h-[280px] w-[min(42vw,400px)] opacity-[0.5]"
           style={{
@@ -627,9 +627,9 @@ export default function WhoIsAlfredPage() {
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 items-start">
             <div className="max-w-[760px]">
-              <div className="relative overflow-visible rounded-[24px] border border-[rgba(14,22,36,0.14)] bg-[linear-gradient(160deg,#172334_0%,#223147_52%,#31445d_100%)] px-6 py-6 shadow-[0_32px_72px_-40px_rgba(14,22,36,0.6)] sm:px-7 sm:py-7">
+              <div className="relative overflow-visible rounded-[24px] border border-[rgba(14,22,36,0.18)] bg-[linear-gradient(160deg,#172334_0%,#213046_52%,#2f4259_100%)] px-6 py-6 shadow-[0_32px_72px_-40px_rgba(14,22,36,0.6)] sm:px-7 sm:py-7">
                 <div
-                  className="pointer-events-none absolute -right-8 top-0 h-32 w-32 rounded-full blur-3xl opacity-70"
+                  className="pointer-events-none absolute -right-8 top-0 h-28 w-28 rounded-full blur-3xl opacity-30"
                   style={{
                     background:
                       "radial-gradient(circle, rgba(255,159,107,0.42) 0%, rgba(255,159,107,0.16) 44%, transparent 76%)",
@@ -665,8 +665,8 @@ export default function WhoIsAlfredPage() {
                   key={item.title}
                   className={
                     index === 1
-                      ? "rounded-[24px] border border-[rgba(255,107,26,0.18)] bg-[linear-gradient(180deg,rgba(255,247,240,0.95),rgba(255,255,255,0.98))] p-6 shadow-[0_22px_52px_-34px_rgba(255,107,26,0.4)]"
-                      : "rounded-[24px] border border-ap-border bg-ap-off/75 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.22)]"
+                      ? "rounded-[24px] border border-[rgba(255,107,26,0.18)] bg-[linear-gradient(180deg,#fff7f0_0%,#ffffff_100%)] p-6 shadow-[0_22px_52px_-34px_rgba(255,107,26,0.4)]"
+                      : "rounded-[24px] border border-ap-border bg-[rgba(248,250,252,0.98)] p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.22)]"
                   }
                 >
                   <span className="inline-flex items-center rounded-full border border-ap-border bg-white/88 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-muted">
@@ -681,7 +681,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative z-30 py-14 sm:py-20 bg-ap-bg border-y border-ap-border overflow-visible">
+      <section className="relative z-30 py-14 sm:py-20 bg-ap-bg border-y border-ap-border overflow-y-visible [overflow-x:clip]">
         <div
           className="pointer-events-none absolute -top-36 left-[-12%] h-[310px] w-[min(46vw,430px)] opacity-[0.5]"
           style={{
@@ -1043,6 +1043,6 @@ export default function WhoIsAlfredPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
