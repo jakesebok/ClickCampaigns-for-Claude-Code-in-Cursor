@@ -5,16 +5,10 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Check } from "lucide-react";
 
-const featureList = [
-  "Coaching chat that remembers what matters to you",
-  "Decision support grounded in your priorities and limits",
-  "Goals, numbers, and weekly sales targets kept in the room",
-  "Guided prompts for planning, reflection, and hard decisions",
-  "A weekly priority you can actually defend",
-  "Weekly check-ins that catch drift early",
-  "Morning nudges when you want them",
-  "A living dashboard for what matters this season",
-  "Updates as your priorities and constraints change",
+const commonIncludes = [
+  "Coaching chat grounded in what matters to you",
+  "Planning, reflection, and decision support",
+  "A weekly priority and check-in rhythm",
   "Desktop, phone, and tablet access",
 ];
 
@@ -23,7 +17,8 @@ const plans = [
     name: "Monthly",
     price: "$39",
     period: "/month",
-    description: "Choose monthly after your card-free trial. Cancel anytime.",
+    description: "Stay flexible while you feel the rhythm.",
+    bestFor: "Best if you want the full product without a longer commitment.",
     cta: "Start Card-Free Trial",
     href: "/sign-up?plan=monthly",
     highlight: false,
@@ -32,7 +27,8 @@ const plans = [
     name: "Annual",
     price: "$349",
     period: "/year",
-    description: "Choose annual after your trial and save 25%.",
+    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
+    bestFor: "Best if you already want ALFRED close every week.",
     cta: "Start Card-Free Trial",
     href: "/sign-up?plan=annual",
     // Premium-path offer parked until the next Intensive window is ready.
@@ -43,7 +39,7 @@ const plans = [
   },
 ];
 
-const pricingPills = ["Card-free 7-day trial", "Full product access", "Choose your plan later"];
+const pricingPills = ["Card-free 7-day trial", "Same full product in both plans", "Choose your billing cadence later"];
 
 export default async function PricingPage() {
   const { userId } = await auth();
@@ -112,15 +108,12 @@ export default async function PricingPage() {
                 <span className="text-muted-foreground">{plan.period}</span>
               </div>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
-
-              <ul className="mt-6 space-y-3">
-                {featureList.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                    <span className="leading-relaxed text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-6 rounded-2xl border border-border bg-background/70 p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  Best For
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.bestFor}</p>
+              </div>
 
               <a
                 href={plan.href}
@@ -134,6 +127,24 @@ export default async function PricingPage() {
               </a>
             </div>
           ))}
+        </div>
+
+        <div className="mx-auto mb-16 max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">
+          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            Both Plans Include
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {commonIncludes.map((feature) => (
+              <div key={feature} className="flex items-start gap-2 text-sm">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                <span className="leading-relaxed text-muted-foreground">{feature}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+            The product is the same in both plans. The only difference is whether you want to pay month to month or
+            keep ALFRED close for the full year at a lower effective rate.
+          </p>
         </div>
 
         <div className="mx-auto max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">

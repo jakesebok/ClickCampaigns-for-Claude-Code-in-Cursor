@@ -90,7 +90,7 @@ export const INNER_WORK_LIMITING_BELIEF_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "I'm not here to shame the pace—that anxiety is real. I'm also looking at what you wrote about wanting presence at home and the Vital Action you set around defending focus time; those aren't opposites if we separate the story from the facts.\n\nBlunt question: when you imagine actually honoring that this week, what's the first \"yeah, but…\" your brain hands you?",
+      "I'm not here to shame the pace. That anxiety is real. I'm also looking at what you said matters right now: being more present at home and protecting time for the work that actually matters. Those aren't opposites if we separate the story from the facts.\n\nBlunt question: when you imagine actually honoring that this week, what's the first \"yeah, but...\" your brain hands you?",
   },
   {
     role: "user",
@@ -108,19 +108,19 @@ export const INNER_WORK_LIMITING_BELIEF_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Good data. Kinder sentence that still matches what you said you want about time with your people and your standard at work: *rest doesn't erase my standard—it protects the nervous system that has to carry the standard.*\n\nTomorrow: put your Vital Action block on the calendar like a client meeting. When guilt shows up, don't debate—label it out loud: \"old belief,\" sit with it for sixty seconds, then choose your next move.\n\nTell me when that fear spikes loudest (mornings, after kids are down, slow pipeline days)—I'll tie the next step to your real week, not a lecture.",
+      "Good data. Kinder sentence that still matches what you want about time with your people and your standard at work: *rest doesn't erase my standard. It protects the nervous system that has to carry the standard.*\n\nTomorrow: put one protected focus block on the calendar like a client meeting. When guilt shows up, don't debate it. Label it out loud: \"old belief,\" sit with it for sixty seconds, then choose your next move.\n\nTell me when that fear spikes loudest, mornings, after kids are down, slow pipeline days, and I'll tie the next step to your real week, not a lecture.",
   },
 ];
 
 /** First assistant message in the animated Coach thread demo (Weekly Planning full demo). */
 export const COACH_DEMO_WEEKLY_THREAD_OPENER =
-  "I've got your Vital Action, QC target from your revenue bridge, and the boundaries in your blueprint. Type it like a text if you want—I'll build the week around what you already committed to.";
+  "I've got the priorities you set, the sales target you want to hit, and the boundaries you said matter this week. Type it like a text if you want. I'll help you build the week around what you actually care about.";
 
 /**
  * Casual first user line for the Weekly Planning animated demo (not the Fire Starter string).
  */
 export const WEEKLY_DEMO_CASUAL_USER_MESSAGE =
-  "hey can you help me build an actual week around my vital action + my qc number... i keep *meaning* to then tuesday hits and im just reacting to slack all day";
+  "hey can you help me build this week? i keep saying the important work comes first and then slack and random fires eat the whole day";
 
 /**
  * Weekly Planning demo: alternating bubbles after the casual first message (same rhythm as Inner Work demo).
@@ -132,7 +132,7 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Got it. I'm anchoring three things from your context: your Vital Action is defending focus blocks, your bridge implies **12 qualified conversations** this week, and your blueprint treats **dinner by 6:30** and **no Slack after 8** as hard edges—not nice-to-haves. We build the calendar around those first.",
+      "Got it. I'm anchoring three things you already said matter: protected focus time, **12 sales conversations** this week, and hard edges like **dinner by 6:30** and **no Slack after 8**. We build the calendar around those first.",
   },
   {
     role: "user",
@@ -150,7 +150,7 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Here is **Monday only**, using your real edges: Vital Action first, QCs before noon, hard stop for family dinner, no Slack after 8.\n\n**Mon** · 8:00–10:30 Deep work (Vital Action block; phone on Do Not Disturb). 10:45–12:00 Two QC blocks with a 10-minute buffer between. Lunch. 1:00–3:00 Delivery / build time. 3:30–4:30 Admin buffer. 5:30 Hard wrap so you can hit **dinner by 6:30**. After 8 p.m., **no Slack**.\n\nIf a meeting tries to land in the first block, treat it like a calendar error and move it. Once Monday is honest, we mirror the same rules onto Tue–Fri around your fixed commitments.",
+      "Here is **Monday only**, using your real edges: focus block first, sales conversations before noon, hard stop for family dinner, no Slack after 8.\n\n**Mon** · 8:00–10:30 Deep work block; phone on Do Not Disturb. 10:45–12:00 Two sales conversations with a 10-minute buffer between. Lunch. 1:00–3:00 Delivery / build time. 3:30–4:30 Admin buffer. 5:30 Hard wrap so you can hit **dinner by 6:30**. After 8 p.m., **no Slack**.\n\nIf a meeting tries to land in the first block, treat it like a calendar error and move it. Once Monday is honest, we mirror the same rules onto Tue–Fri around your fixed commitments.",
   },
   {
     role: "user",
@@ -159,13 +159,13 @@ export const WEEKLY_PLANNING_DEMO_TURNS: readonly {
   {
     role: "assistant",
     content:
-      "Totally normal—and skipping it is how next week’s Vital Action starves.\n\nTry **30 minutes** this Friday, same time, boring calendar label (“skill development”), same room if you can. Protect it like dinner: if something has to slip, we delete a **meeting**, not the morning Vital Action block, not dinner, and not the 8 p.m. Slack edge.\n\nSend your fixed commitments (pickups, standing calls) and I will drop them into **Tuesday–Friday** with the same structure.",
+      "Totally normal, and skipping it is how the important work gets crowded out again.\n\nTry **30 minutes** this Friday, same time, boring calendar label (“skill development”), same room if you can. Protect it like dinner: if something has to slip, we delete a **meeting**, not the morning focus block, not dinner, and not the 8 p.m. Slack edge.\n\nSend your fixed commitments (pickups, standing calls) and I will drop them into **Tuesday–Friday** with the same structure.",
   },
 ];
 
 /** First assistant message in the animated Coach thread demo (Inner Work full demo). */
 export const COACH_DEMO_INNER_THREAD_OPENER =
-  "Type it messy if you need to—I already have your blueprint, Real Reasons, and Vital Action in context. I'll connect the dots; you don't have to spell the framework.";
+  "Type it messy if you need to. I already have the bigger picture of what matters to you, what you're trying to protect, and what this week is asking of you.";
 
 /** lib/vapi/scoring.ts — ARCHETYPE_DESCRIPTIONS["The Ghost"] */
 export const GHOST_ARCHETYPE_DESCRIPTION =

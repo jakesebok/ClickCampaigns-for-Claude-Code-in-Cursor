@@ -94,7 +94,7 @@ const founderProof = [
   },
   {
     icon: Brain,
-    title: "Context before advice",
+    title: "Your real life before advice",
     description:
       "ALFRED does not wait for you to restate your whole life. Your priorities, goals, constraints, and weekly signals shape the answer before you ever see it.",
   },
@@ -129,7 +129,7 @@ const pricingPreview = [
     name: "Monthly",
     price: "$39",
     period: "/mo",
-    description: "Choose monthly after your card-free trial.",
+    description: "Best if you want to keep ALFRED flexible month to month.",
     href: "/sign-up?plan=monthly",
     cta: "Start Card-Free Trial",
     featured: false,
@@ -138,7 +138,7 @@ const pricingPreview = [
     name: "Annual",
     price: "$349",
     period: "/yr",
-    description: "Choose annual after your trial and save 25%.",
+    description: "Best if you already want ALFRED close every week and want the savings.",
     href: "/sign-up?plan=annual",
     cta: "Start Card-Free Trial",
     // Premium-path offer parked until the next Intensive window is ready.
@@ -159,12 +159,57 @@ const buyingQuestions = [
     answer: "Yes. The trial gives you full access, not a stripped-down demo tier.",
   },
   {
-    question: "Who is this for?",
-    answer: "Founders and operators carrying competing pressure who want help protecting priorities and making cleaner decisions.",
+    question: "How much setup does this take?",
+    answer: "Enough to make ALFRED useful quickly, not a giant setup maze. He gets sharper as you use him.",
   },
   {
     question: "What if I am already in Jake's world?",
     answer: "Some programs include longer ALFRED access, but you do not need another offer to use ALFRED on his own.",
+  },
+];
+
+const objections = [
+  {
+    question: "Is this just ChatGPT with memory?",
+    answer:
+      "No. ALFRED is built around founder coaching logic, weekly check-ins, and the priorities, goals, and limits you keep updating over time.",
+  },
+  {
+    question: "Will this take a lot to set up?",
+    answer:
+      "No. The goal is not to build another system to maintain. You give ALFRED the basics, and he gets more useful as your real week unfolds.",
+  },
+  {
+    question: "Is this therapy?",
+    answer:
+      "No. ALFRED is practical coaching for founders: priorities, decisions, pressure, patterns, and what to do next.",
+  },
+];
+
+const compositeFounderExamples = [
+  {
+    icon: Shield,
+    title: "The scaling founder-CEO",
+    snapshot:
+      "The business is growing, the team needs constant decisions, and the founder becomes the point of escalation for everything. By midweek, the work only they can do has been crowded out by approvals, fires, and fragmented thinking.",
+    shift:
+      "ALFRED helps pull the week back to the few priorities that actually move the business, protect decision-making bandwidth, and stop reactive noise from swallowing strategic work.",
+  },
+  {
+    icon: Users,
+    title: "The high performer whose life is getting thinner",
+    snapshot:
+      "From the outside, things look successful. Inside, the business is quietly eating evenings, attention, and emotional presence. The pressure is real, but so is the cost at home.",
+    shift:
+      "ALFRED keeps ambition, boundaries, and real capacity in the room together, so decisions stop treating family, energy, and long-term sustainability like afterthoughts.",
+  },
+  {
+    icon: Compass,
+    title: "The operator with too many viable paths",
+    snapshot:
+      "There is no shortage of good options: a new offer, a hire, a channel, a partnership, a strategic shift. The problem is not lack of opportunity. It is the cost of choosing badly, or trying to carry too many paths at once.",
+    shift:
+      "ALFRED helps surface the real tradeoffs, so the founder can make cleaner yes, later, or no decisions before focus gets diluted and momentum scatters.",
   },
 ];
 
@@ -307,8 +352,8 @@ export default function LandingPage() {
               ALFRED was built from real founder coaching, not prompt tricks.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              This is Jake Sebok&apos;s founder-coaching logic turned into something you can carry all week, not just in a
-              workshop or one hard conversation.
+              This is Jake Sebok&apos;s founder-coaching logic turned into something you can carry into a hard week, not
+              just a workshop insight you forget by Tuesday.
             </p>
           </div>
 
@@ -347,11 +392,11 @@ export default function LandingPage() {
               Why It Works
             </p>
             <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
-              Before ALFRED answers, he already knows the shape of your week.
+              Before ALFRED answers, he already knows what this week is asking of you.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
-              That is why the advice feels more specific than blank-slate AI. He is not starting from today&apos;s question
-              alone.
+              That is why the advice feels more specific. He is answering with your priorities, goals, limits, and
+              current reality already in view.
             </p>
           </div>
 
@@ -437,6 +482,78 @@ export default function LandingPage() {
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-foreground">{item.withAlfred}</p>
                 </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Composite Founder Examples
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              ALFRED tends to land hardest with founders like these.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              These are composite examples drawn from recurring patterns in high-performing founders and operators, not
+              direct testimonials. Their job is to help you recognize the kind of pressure ALFRED is built to coach
+              through.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {compositeFounderExamples.map((example) => (
+              <article
+                key={example.title}
+                className="rounded-[24px] border border-border bg-background/92 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/12">
+                  <example.icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="mb-4 font-semibold text-foreground">{example.title}</h3>
+                <div className="rounded-2xl border border-border bg-card/60 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    What Their Week Looked Like
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{example.snapshot}</p>
+                </div>
+                <div className="mt-4 rounded-2xl border border-accent/20 bg-accent/5 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+                    How ALFRED Helps
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground">{example.shift}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              Before You Try It
+            </p>
+            <h2 className="mb-4 font-serif text-3xl font-bold leading-tight sm:text-4xl">
+              Questions smart founders ask before they trust this.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              You should ask them. The product only works if it feels simple enough to use and specific enough to trust.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {objections.map((item) => (
+              <article
+                key={item.question}
+                className="rounded-[24px] border border-border bg-background/92 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.2)]"
+              >
+                <h3 className="font-semibold text-foreground">{item.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
               </article>
             ))}
           </div>

@@ -684,7 +684,7 @@ export function AlfredFeatureExplorer({
         return {
           kicker: "Coach",
           title: "Guided prompts instead of a blank box",
-          body: `ALFRED starts with a useful frame instead of leaving you to guess how to ask. In the app, the answers pull from your priorities, patterns, and weekly reality. This preview expands into full examples for “${WEEKLY_PLANNING_DEMO_LABEL}” and “${INNER_WORK_DEMO_LABEL}.”`,
+          body: "ALFRED starts with a useful frame instead of leaving you to guess how to ask. In the app, the answers pull from your priorities, patterns, and weekly reality. This preview expands into a real week-planning example and a deeper conversation example.",
         };
       }
       if (coachPhase === "category" && coachCategory === "Weekly Planning") {
@@ -1688,8 +1688,9 @@ function CoachScreen({
                 ) : threadPrompt.family === "weekly" ? (
                   <>
                     <p>
-                      In the live app, Alfred answers from your blueprint, Vital Action, 6Cs rhythm, and quota context so
-                      the week stays grounded in what you already committed to—not a generic planning template.
+                      In the live app, Alfred answers with your priorities, weekly targets, and the boundaries you want
+                      protected already in view, so the week stays grounded in what you already care about, not a generic
+                      planning template.
                     </p>
                     <p>
                       This preview shows the full written walkthrough for{" "}
@@ -1700,8 +1701,8 @@ function CoachScreen({
                 ) : (
                   <>
                     <p>
-                      In the live app, Alfred threads inner-work prompts through your blueprint, Real Reasons, Vital
-                      Action, and assessment context—so you are not getting canned therapy quotes.
+                      In the live app, Alfred ties this back to what matters to you, the pressure you are under, and the
+                      patterns showing up this week, so you are not getting canned therapy quotes.
                     </p>
                     <p>
                       The long sample conversation appears for{" "}

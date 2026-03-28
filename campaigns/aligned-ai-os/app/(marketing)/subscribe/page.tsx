@@ -7,17 +7,11 @@ import { LogoOnDarkGlow } from "@/components/logo-on-dark-glow";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 
-const features = [
-  "Coaching chat that remembers what matters to you",
-  "Decision support grounded in your priorities and limits",
-  "Goals, numbers, and weekly sales targets kept in the room",
-  "Guided prompts for planning, reflection, and hard decisions",
-  "A weekly priority you can actually defend",
-  "Weekly check-ins that catch drift early",
-  "Morning nudges when you want them",
-  "A living dashboard for what matters this season",
-  "Updates as your priorities and constraints change",
-  "Desktop, phone, and tablet access",
+const whatStaysLive = [
+  "Your coaching history and recent conversations",
+  "Your priorities, plans, and weekly rhythm",
+  "Your dashboard, planning tools, and check-ins",
+  "The same full product on desktop, phone, and tablet",
 ];
 
 const plans = [
@@ -25,7 +19,8 @@ const plans = [
     name: "Monthly",
     price: "$39",
     period: "/month",
-    description: "Full product. Cancel anytime.",
+    description: "Best if you want flexibility.",
+    bestFor: "Keep ALFRED live without a longer commitment.",
     planId: "monthly",
     highlight: false,
   },
@@ -33,7 +28,8 @@ const plans = [
     name: "Annual",
     price: "$349",
     period: "/year",
-    description: "Save 25% if ALFRED is becoming part of your weekly rhythm.",
+    description: "Best if ALFRED is already part of your week.",
+    bestFor: "Save 25% and keep the same full product live all year.",
     planId: "annual",
     highlight: true,
     badge: "Best value",
@@ -133,7 +129,7 @@ export default function SubscribePage() {
                 be charged until the trial ends.
               </p>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                You started with a card-free trial. Choose monthly or annual only if you want to keep going.
+                Nothing new to set up. You are simply choosing whether to keep the coaching live.
               </p>
             </>
           ) : (
@@ -145,8 +141,25 @@ export default function SubscribePage() {
                 Choose monthly or annual to keep ALFRED, your dashboard, and your coaching history live. Less than the
                 cost of one coaching hour per month.
               </p>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Nothing resets. You are picking the billing rhythm that fits.
+              </p>
             </>
           )}
+        </div>
+
+        <div className="mx-auto mb-12 max-w-3xl rounded-[28px] border border-border bg-card/72 p-8 sm:p-10">
+          <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+            What Stays Live
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {whatStaysLive.map((item) => (
+              <div key={item} className="flex items-start gap-2 text-sm">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                <span className="leading-relaxed text-muted-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
@@ -169,16 +182,13 @@ export default function SubscribePage() {
                   <span className="text-muted-foreground">{plan.period}</span>
                 </div>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
+                <div className="mt-6 rounded-2xl border border-border bg-background/70 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    Best For
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.bestFor}</p>
+                </div>
               </div>
-
-              <ul className="mt-6 space-y-3">
-                {features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                    <span className="leading-relaxed text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
 
               <a
                 href={`/api/checkout?plan=${plan.planId}&from=subscribe`}
@@ -195,7 +205,9 @@ export default function SubscribePage() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-muted-foreground">Cancel anytime. No long-term commitment.</p>
+        <p className="mt-8 text-center text-sm text-muted-foreground">
+          Both plans keep the same product live. The only difference is billing cadence.
+        </p>
       </div>
     </div>
   );
