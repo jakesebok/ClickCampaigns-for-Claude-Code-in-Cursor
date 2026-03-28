@@ -1,326 +1,410 @@
-import Link from "next/link";
 import Image from "next/image";
-import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
 import { testimonials } from "@/lib/testimonials";
+
+const heroPills = ["Clarity", "Execution", "Freedom", "Values-led growth"];
+
+const hiddenCostItems = [
+  {
+    title: "The pressure",
+    body: "You are carrying too much of the thinking, too much of the fixing, and too much of the emotional load.",
+  },
+  {
+    title: "The split",
+    body: "You are at work thinking about home, and at home thinking about work. You are rarely fully anywhere.",
+  },
+  {
+    title: "The stall",
+    body: "You know what matters, but execution gets strange. You delay, drift, overcomplicate, or lose the thread.",
+  },
+];
+
+const pathSteps = [
+  {
+    number: "1",
+    title: "Take the VAPI™",
+    body: "72 statements. About 12 minutes. Get a clear read on where you are strong, where you are stretched, and what deserves attention next.",
+  },
+  {
+    number: "2",
+    title: "Get your map",
+    body: "See your scores, deeper patterns, and 28-day plan. Use the same email as your portal or ALFRED account to keep everything connected.",
+  },
+  {
+    number: "3",
+    title: "Choose your next step",
+    body: "Workshop, community, intensive, or coaching. Get the level of support that matches the season you are in.",
+  },
+];
+
+const outcomeItems = [
+  "Cleaner decisions when the week gets loud.",
+  "More consistent execution on work that actually matters.",
+  "A calendar that supports the life you are trying to build.",
+  "More energy for the work only you can do.",
+];
+
+const featuredTestimonial = testimonials[1];
+const supportingTestimonials = [testimonials[0], testimonials[2], testimonials[3]];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero — diagonal orange, punchy headline */}
-      <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
+      <section className="relative overflow-hidden bg-ap-bg">
         <div className="absolute inset-0 bg-ap-bg" />
-        {/* Diagonal orange cut */}
         <div
-          className="absolute top-0 right-0 w-[42%] h-full bg-ap-accent"
-          style={{ clipPath: "polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="pointer-events-none absolute -right-[18%] top-0 h-full w-[min(58vw,780px)] opacity-[0.95]"
+          style={{
+            background:
+              "linear-gradient(162deg, rgba(255,107,26,0.96) 0%, rgba(255,123,46,0.94) 22%, rgba(255,159,107,0.82) 58%, rgba(255,159,107,0.24) 100%)",
+            clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          }}
+          aria-hidden
         />
         <div
-          className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
-          style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="pointer-events-none absolute right-[6%] top-[14%] hidden h-[62%] w-[min(25vw,360px)] opacity-[0.18] lg:block"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.08) 100%)",
+            clipPath: "polygon(28% 0%, 100% 8%, 72% 100%, 0% 88%)",
+          }}
+          aria-hidden
         />
-        {/* Ghost words on orange */}
-        <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Alive.
-        </span>
-        <span className="absolute top-[58%] right-[22%] -translate-y-1/2 z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Free.
-        </span>
-        <span className="absolute bottom-[140px] right-[8%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
-          Clear.
-        </span>
-        {/* Content */}
-        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-            <div className="max-w-xl">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
-                <span className="lg:flex lg:items-center lg:gap-2">
-                  <span className="hidden lg:block w-3.5 h-0.5 bg-ap-accent rounded flex-shrink-0" />
-                  <span>Values-Aligned Performance</span>
-                  <span className="block lg:inline lg:before:content-['_·_']">
-                    <span className="lg:hidden">with Jake Sebok</span>
-                    <span className="hidden lg:inline">Jake Sebok</span>
-                  </span>
-                </span>
+        <div
+          className="pointer-events-none absolute bottom-[-4rem] left-[-8%] h-36 w-[min(58vw,720px)] bg-white"
+          style={{ clipPath: "polygon(0% 38%, 100% 0%, 88% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto max-w-[1160px] px-5 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(300px,420px)] lg:gap-16">
+            <div className="max-w-2xl">
+              <p className="mb-4 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                Values-Aligned Growth and Performance
               </p>
-              <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.93] tracking-tight mb-6">
-                Stop building
-                <br />
-                <span className="text-[#1e3055] sm:hidden">someone else&apos;s</span>
-                <span className="hidden sm:inline text-gradient-accent">someone else&apos;s</span>
-                <br />
-                success.
+              <h1 className="mb-6 font-outfit text-5xl font-extrabold leading-[0.92] tracking-tight text-ap-primary sm:text-6xl">
+                Build a business that scales your income, your impact, and your life.
               </h1>
-              <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
-                Inconsistent execution and low motivation are usually signs the business no longer fits the life you actually want. When what you build matches who you are, effort stops leaking, momentum compounds, and your impact catches up to your ambition.
+              <p className="max-w-2xl text-xl font-semibold leading-relaxed text-ap-mid sm:text-[1.45rem]">
+                You want clearer decisions, stronger execution, more energy, and a business that supports the life it
+                was meant to fund.
               </p>
-              <div className="flex flex-wrap gap-3 items-stretch">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-ap-muted sm:text-lg">
+                For founders who want more growth without shrinking the rest of life to make it happen.
+              </p>
+
+              <ul className="mt-8 flex flex-wrap gap-2.5">
+                {heroPills.map((pill) => (
+                  <li
+                    key={pill}
+                    className="rounded-full border border-ap-border bg-white/86 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ap-muted shadow-[0_16px_38px_-32px_rgba(14,22,36,0.25)]"
+                  >
+                    {pill}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-9 flex flex-wrap items-stretch gap-3">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all min-w-[220px]"
+                  className="cta-pill inline-flex min-w-[220px] items-center justify-center gap-2 rounded-pill bg-ap-accent px-8 py-4 text-base font-semibold tracking-wider text-white transition-all"
                 >
                   Take the VAPI™
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all min-w-[220px]"
+                  className="inline-flex min-w-[220px] items-center justify-center rounded-pill border-[1.5px] border-ap-border px-8 py-4 text-base font-semibold tracking-wider text-ap-primary transition-all hover:border-ap-accent hover:text-ap-accent"
                 >
                   See Your Next Step
                 </Link>
               </div>
             </div>
-            {/* Right column — quote on orange (desktop only) */}
-            <div className="hidden lg:flex items-center justify-end">
-              <div className="space-y-4 max-w-[280px] text-right">
-                <div className="w-10 h-0.5 bg-white/35 ml-auto" />
-                <p className="font-semibold italic text-xl text-white leading-snug">
-                  &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;
+
+            <div className="lg:justify-self-end">
+              <div className="relative overflow-hidden rounded-[30px] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.94)_0%,rgba(250,251,252,0.92)_48%,rgba(243,246,249,0.88)_100%)] p-7 shadow-[0_38px_90px_-48px_rgba(14,22,36,0.34)] sm:p-8">
+                <div
+                  className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full blur-3xl opacity-55"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(255,159,107,0.34) 0%, rgba(255,159,107,0.12) 44%, transparent 74%)",
+                  }}
+                  aria-hidden
+                />
+                <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                  Jake Sebok
                 </p>
-                <div className="flex items-center justify-end gap-3">
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
+                <p className="font-cormorant text-3xl font-bold leading-[1.02] text-ap-primary sm:text-[2.5rem]">
+                  End the war between your business and your life.
+                </p>
+                <p className="mt-5 text-base leading-relaxed text-ap-mid">
+                  You do not need less ambition. You need growth that feels clean to your values, your body, and the
+                  life you are actually trying to live.
+                </p>
+                <div className="mt-6 flex items-center gap-4">
+                  <div className="relative h-16 w-16 overflow-hidden rounded-full ring-2 ring-ap-border">
                     <Image
                       src="/images/jake/MMC Profile.jpeg"
                       alt="Jake Sebok"
                       fill
                       className="object-cover"
-                      sizes="96px"
+                      sizes="64px"
+                      priority
                     />
                   </div>
-                  <p className="text-sm text-white/65">— Jake Sebok, MCPC</p>
+                  <div>
+                    <p className="font-semibold text-ap-primary">Jake Sebok, MCPC</p>
+                    <p className="text-sm text-ap-muted">Founder coach for impact-driven operators.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Trusted By strip — single row on desktop; full-width label + 6 chips on mobile */}
-        <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
-          {/* Mobile: Trusted by full width, then 6 chips */}
-          <div className="lg:hidden">
-            <div className="px-4 py-3 text-center border-b border-ap-border w-full">
-              <span className="font-semibold text-ap-muted text-xs uppercase tracking-wider">Trusted by</span>
+      </section>
+
+      <section className="relative overflow-hidden bg-white py-20 sm:py-28">
+        <div
+          className="pointer-events-none absolute -left-[12%] top-0 h-[220px] w-[min(42vw,420px)] opacity-[0.16]"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,107,26,0.9) 0%, rgba(255,159,107,0.25) 100%)",
+            clipPath: "polygon(0% 0%, 100% 0%, 58% 100%, 0% 78%)",
+          }}
+          aria-hidden
+        />
+        <div className="mx-auto max-w-[1160px] px-5 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+            <div>
+              <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                The Hidden Cost
+              </p>
+              <h2 className="max-w-3xl font-outfit text-3xl font-bold text-ap-primary sm:text-4xl">
+                Growth gets harder when success starts costing too much.
+              </h2>
+              <p className="mt-5 max-w-2xl text-xl font-semibold leading-relaxed text-ap-mid">
+                You can have momentum and still feel the drag. Decision fatigue. Inconsistent execution. Work bleeding
+                into the rest of life. A business that is technically working, but taking more out of you than it
+                should.
+              </p>
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {hiddenCostItems.map((item) => (
+                  <article
+                    key={item.title}
+                    className="rounded-[24px] border border-ap-border bg-ap-bg/84 p-6 shadow-[0_18px_42px_-34px_rgba(14,22,36,0.18)]"
+                  >
+                    <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-accent">
+                      {item.title}
+                    </p>
+                    <p className="text-base font-medium leading-relaxed text-ap-mid">{item.body}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 [&>*:nth-child(2n)]:border-r-0 [&>*:nth-child(n+5)]:border-b-0">
-              {["Doctors", "Coaches", "Healers", "Bodyworkers", "Creators", "Founders"].map((label) => (
-                <div key={label} className="px-4 py-3 text-center border-b border-r border-ap-border">
-                  <span className="font-semibold text-ap-primary text-xs sm:text-base">{label}</span>
+
+            <div className="relative overflow-hidden rounded-[30px] bg-ap-primary p-8 text-white shadow-[0_40px_90px_-48px_rgba(14,22,36,0.55)] sm:p-10">
+              <div
+                className="pointer-events-none absolute right-0 top-0 h-full w-[44%] opacity-[0.32]"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(255,107,26,0.78) 0%, rgba(255,159,107,0.38) 44%, rgba(255,159,107,0.08) 100%)",
+                  clipPath: "polygon(34% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                }}
+                aria-hidden
+              />
+              <div className="relative z-10">
+                <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                  The Reframe
+                </p>
+                <h3 className="font-outfit text-3xl font-bold leading-tight text-white sm:text-4xl">
+                  Stop building someone else&apos;s success.
+                </h3>
+                <p className="mt-5 text-lg font-semibold leading-relaxed text-white/82">
+                  If discipline were the answer, you would already be there. The real issue is not that you need to
+                  want it more. It is that some part of you no longer trusts the way you are trying to grow.
+                </p>
+                <div className="mt-8 rounded-[24px] border border-white/12 bg-white/6 p-6">
+                  <p className="font-cormorant text-3xl font-bold leading-tight text-white sm:text-[2.6rem]">
+                    The business should not feel like a beautiful prison.
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-white/72">
+                    When success conflicts with what matters most, execution stops being clean. And when growth fits
+                    who you really are, performance gets stronger because you are no longer building against yourself.
+                  </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-ap-bg py-20 sm:py-28">
+        <div
+          className="pointer-events-none absolute right-[-8%] top-16 hidden h-[260px] w-[min(30vw,360px)] opacity-[0.18] lg:block"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,107,26,0.8) 0%, rgba(255,159,107,0.12) 100%)",
+            clipPath: "polygon(18% 0%, 100% 0%, 76% 100%, 0% 82%)",
+          }}
+          aria-hidden
+        />
+        <div className="mx-auto max-w-[1160px] px-5 sm:px-6">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+              Proof
+            </p>
+            <h2 className="font-outfit text-3xl font-bold text-ap-primary sm:text-4xl">
+              What happens when alignment replaces the grind.
+            </h2>
+            <p className="mt-5 text-xl font-semibold leading-relaxed text-ap-mid">
+              People do not just get more productive. They get clearer, calmer, and more effective in the parts of
+              life and business that actually matter.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-8">
+            <article className="overflow-hidden rounded-[32px] border border-ap-border bg-white shadow-[0_34px_90px_-56px_rgba(14,22,36,0.28)]">
+              <div className="grid gap-0 md:grid-cols-[minmax(0,0.92fr)_minmax(220px,280px)]">
+                <div className="p-8 sm:p-10">
+                  <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                    Featured Story
+                  </p>
+                  <h3 className="font-outfit text-3xl font-bold text-ap-primary">
+                    {featuredTestimonial.headline}
+                  </h3>
+                  <p className="mt-6 font-cormorant text-[2rem] font-bold leading-[1.08] text-ap-primary sm:text-[2.35rem]">
+                    &ldquo;{featuredTestimonial.quote}&rdquo;
+                  </p>
+                  <div className="mt-8 flex items-center gap-4">
+                    <div className="relative h-14 w-14 overflow-hidden rounded-full ring-2 ring-ap-border">
+                      <Image
+                        src={featuredTestimonial.image}
+                        alt={featuredTestimonial.author}
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-ap-primary">{featuredTestimonial.author}</p>
+                      <p className="text-sm text-ap-muted">Client story</p>
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <Link
+                      href="/client-stories"
+                      className="inline-flex items-center gap-2 rounded-pill border-[1.5px] border-ap-accent/40 px-6 py-3 text-sm font-semibold text-ap-primary transition-all hover:border-ap-accent hover:text-ap-accent"
+                    >
+                      Read Marshall&apos;s story
+                      <svg className="h-4 w-4 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="relative min-h-[280px] md:min-h-full">
+                  <Image
+                    src={featuredTestimonial.image}
+                    alt={featuredTestimonial.author}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 280px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ap-primary/28 via-transparent to-transparent" />
+                </div>
+              </div>
+            </article>
+
+            <div className="grid gap-4">
+              {supportingTestimonials.map((testimonial) => (
+                <article
+                  key={testimonial.author}
+                  className="rounded-[24px] border border-ap-border bg-white p-6 shadow-[0_20px_50px_-40px_rgba(14,22,36,0.2)]"
+                >
+                  <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.18em] text-ap-accent">
+                    {testimonial.headline}
+                  </p>
+                  <p className="mt-3 text-lg font-semibold leading-relaxed text-ap-primary">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <p className="mt-4 text-sm font-medium text-ap-muted">{testimonial.author}</p>
+                </article>
               ))}
             </div>
           </div>
-          {/* Desktop: single row */}
-          <div className="hidden lg:flex flex-wrap w-full">
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-muted text-base uppercase tracking-wider">Trusted by</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Doctors</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Coaches</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Healers</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Bodyworkers</span>
-            </div>
-            <div className="px-6 py-5 text-center flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Creators</span>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* Empathy — pain-accentuating, gap-identifying */}
-      <section className="py-20 sm:py-28 bg-ap-bg">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            The Cost of Success
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            From the outside, it looks like success. But you know the <span className="text-gradient-accent">cost</span>.
-          </h2>
-          <div className="mb-12 max-w-2xl">
-            <p className="text-ap-mid text-xl font-semibold md:whitespace-nowrap">
-              For impact-driven founders who are done white-knuckling their way to the next level.
+      <section className="relative overflow-hidden bg-ap-primary py-20 text-white sm:py-28">
+        <div className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-ap-primary" aria-hidden />
+        <div
+          className="pointer-events-none absolute -left-[10%] top-0 h-[220px] w-[min(48vw,560px)] opacity-[0.34]"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,107,26,0.78) 0%, rgba(255,159,107,0.12) 100%)",
+            clipPath: "polygon(0% 0%, 100% 0%, 68% 100%, 0% 84%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-[1160px] px-5 sm:px-6">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+              The Path
             </p>
-            <h3 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mt-4">
-              Does this sound familiar?
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                The Grind
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                You&apos;re the bottleneck. Strategist, doer, fixer, all of it. You tell yourself it&apos;s temporary, but it&apos;s been &ldquo;temporary&rdquo; for years. The business runs on you, and you&apos;re running on fumes.
-              </p>
-            </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                The Guilt
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                At work, you&apos;re thinking about your family. With your family, you&apos;re thinking about work. You&apos;re never fully anywhere, and the guilt is loud at 2am. The business is bleeding into the life you built it for.
-              </p>
-            </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 1l4 4-4 4" />
-                  <path d="M3 11V9a4 4 0 0 1 4-4h14" />
-                  <path d="M7 23l-4-4 4-4" />
-                  <path d="M21 13v2a4 4 0 0 1-4 4H3" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                The Loop
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Plan. Start. Stall. Repeat. You know exactly what to do. You just can&apos;t make yourself do it. You&apos;ve tried the discipline fixes. They didn&apos;t stick.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* Quote + thumbnail — mobile only, between Cost of Success and The Truth */}
-      <div className="lg:hidden relative z-10 bg-ap-primary border-t border-ap-border px-5 py-8">
-        <div className="max-w-xl mx-auto space-y-4">
-          <div className="w-10 h-0.5 bg-white/40 rounded" />
-          <p className="font-semibold italic text-xl text-white leading-snug">
-            &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;
-          </p>
-          <div className="flex items-center gap-3 justify-end sm:justify-start">
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
-              <Image
-                src="/images/jake/MMC Profile.jpeg"
-                alt="Jake Sebok"
-                fill
-                className="object-cover"
-                sizes="64px"
-                priority
-              />
-            </div>
-            <p className="text-sm text-white/80">— Jake Sebok, MCPC</p>
-          </div>
-        </div>
-      </div>
-
-      {/* The Reframe — alignment, not discipline */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            The Truth
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-            If discipline were the answer, you would already be there. The real problem is <span className="text-gradient-accent">alignment</span>.
-          </h2>
-          <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-8 max-w-2xl">
-            Maybe your business is growing, but it&apos;s growing in a direction that quietly conflicts with what you actually want. When success competes with your true values, your body treats growth like a threat. It hits the brakes. The cycle repeats: overthinking, overworking, under-fulfillment. Burnout.
-          </p>
-          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10 mb-8">
-            <p className="text-2xl sm:text-3xl lg:text-4xl text-ap-primary/35 font-bold leading-snug mb-6 tracking-tight">
-              But when what you&apos;re building matches who you actually are, <span className="text-gradient-accent">execution stops being a war</span> with yourself.
-            </p>
-            <p className="text-ap-mid text-xl font-semibold leading-relaxed">
-              Decisions get clean. Energy comes back. Growth becomes repeatable, not accidental. I help impact-driven leaders end that war so their business scales their income and their impact, and supports a life they&apos;re excited to wake up to every morning.
+            <h2 className="font-outfit text-3xl font-bold text-white sm:text-4xl">
+              See what&apos;s actually off. Then optimize from there.
+            </h2>
+            <p className="mt-5 text-xl font-semibold leading-relaxed text-white/76">
+              The first move is not more effort. It is seeing the real bottleneck clearly.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* The Work — solution */}
-      <section className="py-20 sm:py-28 bg-ap-bg">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            The Work
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            Optimize for <span className="text-gradient-accent">alignment</span>, not output.
-          </h2>
-          <p className="text-ap-mid text-xl font-semibold mb-12 max-w-2xl">
-            More effort won&apos;t fix it. More strategy won&apos;t either. When your mind, your body, and your direction aren&apos;t working together, effort becomes resistance. That changes here. Take your first steps on the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                See the real bottleneck
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Get clear on what is draining energy, where your business is fighting your life, and which next move
-                actually matters. No more guessing. No more solving the wrong problem.
-              </p>
-            </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                End the inner split
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                When one part of you wants growth and another part does not trust the cost, execution gets weird. We
-                bring that conflict into the open so momentum stops leaking.
-              </p>
-            </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-                </svg>
-              </div>
-              <h3 className="font-outfit font-semibold text-lg text-ap-primary mb-3">
-                Build a week you can hold
-              </h3>
-              <p className="text-ap-mid text-base font-medium leading-relaxed">
-                Turn clarity into calendars, decisions, and commitments you can actually keep. No heroic Tuesday
-                followed by a collapse on Thursday.
-              </p>
-            </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {pathSteps.map((step) => (
+              <article
+                key={step.number}
+                className="group rounded-[24px] border border-white/12 bg-white/6 p-7 transition-all hover:border-ap-accent/40 hover:bg-white/[0.08]"
+              >
+                <div className="mb-5 flex items-end gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-ap-accent text-xl font-bold text-white shadow-[0_16px_42px_-18px_rgba(255,107,26,0.65)]">
+                    {step.number}
+                  </div>
+                  <h3 className="pb-0.5 font-outfit text-lg font-semibold text-white">{step.title}</h3>
+                </div>
+                <p className="text-base font-medium leading-relaxed text-white/74">{step.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/assessment"
+              className="cta-pill inline-flex items-center gap-2 rounded-pill bg-ap-accent px-8 py-4 text-base font-semibold tracking-wider text-white transition-all"
+            >
+              Take the VAPI™
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* Have it all — reject the trade-off */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="hidden lg:block lg:col-span-5">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
+      <section className="relative overflow-hidden bg-white py-20 sm:py-28">
+        <div
+          className="pointer-events-none absolute right-[-6%] top-[10%] hidden h-[70%] w-[min(28vw,360px)] opacity-[0.14] lg:block"
+          style={{
+            background: "linear-gradient(180deg, rgba(255,107,26,0.8) 0%, rgba(255,159,107,0.12) 100%)",
+            clipPath: "polygon(28% 0%, 100% 0%, 76% 100%, 0% 88%)",
+          }}
+          aria-hidden
+        />
+        <div className="mx-auto max-w-[1160px] px-5 sm:px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(300px,0.92fr)_minmax(0,1.08fr)] lg:gap-14">
+            <div className="relative overflow-hidden rounded-[30px] shadow-[0_36px_90px_-56px_rgba(14,22,36,0.3)]">
+              <div className="relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jake-and-son.png"
                   alt="Jake Sebok with his son"
@@ -329,291 +413,127 @@ export default function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ap-primary/74 via-ap-primary/22 to-transparent p-6">
+                <p className="max-w-sm font-cormorant text-3xl font-bold leading-tight text-white sm:text-[2.45rem]">
+                  End the war between your business and your life.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-7">
-              <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-                You Don&apos;t Have to Choose
+
+            <div>
+              <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                The Goal
               </p>
-              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-6">
-                Have it all. <span className="text-gradient-accent">Really.</span>
+              <h2 className="font-outfit text-3xl font-bold text-ap-primary sm:text-4xl">
+                The business is supposed to support your life.
               </h2>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                Too many people will sell you the beautiful prison and call it ambition.
+              <p className="mt-5 text-xl font-semibold leading-relaxed text-ap-mid">
+                You should not have to trade your peace, your relationships, or your body to build something
+                meaningful.
               </p>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                I reject that. You should not have to miss ball games, dance recitals, your health, or your peace to
-                build something meaningful. The business is supposed to support your life, not quietly eat it.
+              <p className="mt-5 text-lg leading-relaxed text-ap-mid">
+                The work here is not about shrinking your ambition. It is about building a way of growing that your
+                values, your energy, and the people you love can actually live with.
               </p>
-              <p className="text-ap-mid text-xl font-semibold leading-relaxed mb-6">
-                When work fits your real values, success stops feeling like a threat. The war between your business and
-                your life quiets down. You move with more energy, <span className="text-gradient-accent font-semibold">because you&apos;re no longer building against yourself.</span>
+              <p className="mt-5 text-lg leading-relaxed text-ap-mid">
+                When growth fits who you really are, the drag starts to lift. Decisions get cleaner. Execution gets more
+                consistent. Success stops feeling like something you have to recover from.
               </p>
-              <p className="font-semibold text-lg text-ap-primary">
-                No trade-offs. The work we do together is built on that belief.
-              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {outcomeItems.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-[20px] border border-ap-border bg-ap-bg/82 p-5"
+                  >
+                    <div className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-ap-accent/14">
+                      <svg className="h-4 w-4 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <p className="text-base font-medium leading-relaxed text-ap-mid">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
+      <section className="bg-white pb-20 sm:pb-28">
+        <div className="mx-auto max-w-[1160px] px-5 sm:px-6">
+          <div className="relative overflow-hidden rounded-[32px] bg-ap-primary px-8 py-12 text-center shadow-[0_38px_90px_-56px_rgba(14,22,36,0.55)] sm:px-12 sm:py-16">
+            <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/18 to-transparent" aria-hidden />
+            <div
+              className="pointer-events-none absolute right-0 top-0 h-full w-[36%] opacity-[0.26]"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255,107,26,0.74) 0%, rgba(255,159,107,0.32) 48%, rgba(255,159,107,0.06) 100%)",
+                clipPath: "polygon(36% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              }}
+              aria-hidden
+            />
 
-      {/* Testimonials — carousel (full width) */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            What People Say
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-12">
-            What happens when alignment replaces the grind.
-          </h2>
-        </div>
-        <div className="w-full overflow-hidden">
-          <TestimonialCarousel testimonials={testimonials} />
-        </div>
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="mt-8 text-center">
-            <Link
-              href="/client-stories"
-              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
-            >
-              Read Marshall&apos;s story: from dreading work to excited every day
-              <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* How to Get Started — three steps, full lane */}
-      <section className="relative py-20 sm:py-28 bg-ap-primary text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-ap-primary" aria-hidden />
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
-        <div className="relative max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-3">
-            How to Get Started
-          </p>
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
-            Three steps. <span className="text-gradient-accent">Your pace.</span>
-          </h2>
-          <p className="text-white/80 text-lg font-semibold max-w-2xl mb-8">
-            Start with the free assessment. Get your map. Then choose the level of support that fits.
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-end mb-4">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">1</div>
-                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Take the VAPI™</h3>
-              </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">72 statements. About 12 minutes. Get a clear read on where you are strong, where you are stretched, and what deserves attention next.</p>
-            </div>
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-end mb-4">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">2</div>
-                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Get your results</h3>
-              </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">See your scores, top priorities, and deeper patterns. Use the same email as your portal or ALFRED account to unlock your 28-day plan. Save as PDF or retake over time.</p>
-            </div>
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
-              <div className="flex gap-4 items-end mb-4">
-                <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">3</div>
-                <h3 className="font-outfit font-semibold text-lg text-white pb-0.5">Choose your next step</h3>
-              </div>
-              <p className="text-white/75 text-base font-medium leading-relaxed">Workshop, community, intensive, or coaching. Choose the level of support that matches this season instead of guessing your way into more complexity.</p>
-            </div>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/assessment"
-              className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
-            >
-              Take the VAPI™
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* Outcomes — by the end of our work together */}
-      <section className="py-20 sm:py-28 bg-white overflow-hidden">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            The Outcome
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch mb-12">
-            <div className="lg:col-span-7 order-1 flex flex-col">
-          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
-            By the end of our work together, you will have:
-          </h2>
-          <p className="text-ap-mid text-xl font-semibold mb-8 max-w-2xl">
-            Not a list of tactics. A fundamental shift in how you run your business and your life.
-          </p>
-          <div className="space-y-6">
-            <div className="flex gap-4 sm:gap-6 items-start">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Extreme clarity about WHAT you&apos;re building and WHY</h3>
-                <p className="text-ap-mid text-xl font-semibold leading-relaxed">So you stop chasing opportunities that drain you and start making moves that compound.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 sm:gap-6 items-start">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Clarity on your greatest constraints and the single most valuable levers to pull</h3>
-                <p className="text-ap-mid text-xl font-semibold leading-relaxed">To make everything else easier or unnecessary.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 sm:gap-6 items-start">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Trust in yourself to execute consistently on a plan you believe in</h3>
-                <p className="text-ap-mid text-xl font-semibold leading-relaxed">No forcing it with willpower.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 sm:gap-6 items-start">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">A business that supports your life instead of consuming it</h3>
-                <p className="text-ap-mid text-xl font-semibold leading-relaxed">With real boundaries and a calendar that breathes.</p>
-              </div>
-            </div>
-            <div className="flex gap-4 sm:gap-6 items-start">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="font-outfit font-semibold text-ap-primary mb-1">Energy and vitality you haven&apos;t felt in years</h3>
-                <p className="text-ap-mid text-xl font-semibold leading-relaxed">Because you&apos;re finally doing the work only YOU can do.</p>
-              </div>
-            </div>
-          </div>
-            </div>
-            <div className="hidden lg:flex lg:col-span-5 order-2 self-stretch items-stretch justify-start">
-              <div className="relative aspect-[4/5] w-full max-w-[min(100%,420px)] rounded-l-[20px] overflow-hidden shadow-xl">
+            <div className="relative z-10">
+              <div className="mb-8 flex flex-wrap items-center justify-center gap-6 opacity-90">
                 <Image
-                  src="/images/jake/jake-ideal-end-state.png"
-                  alt="Jake Sebok"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 420px"
+                  src="/images/certifications/icf.png"
+                  alt="International Coaching Federation"
+                  width={100}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
+                <Image
+                  src="/images/certifications/cplc.png"
+                  alt="Certified Professional Life Coach"
+                  width={56}
+                  height={56}
+                  className="h-10 w-auto object-contain"
+                />
+                <Image
+                  src="/images/certifications/mcpc.png"
+                  alt="Master Certified Professional Coach"
+                  width={56}
+                  height={56}
+                  className="h-10 w-auto object-contain"
                 />
               </div>
-            </div>
-          </div>
-          {/* Is it worth it? — client outcomes (no unfounded stats) */}
-          <div className="mb-12 p-8 sm:p-10 bg-ap-bg rounded-[20px] border border-ap-border">
-            <p className="font-outfit font-semibold text-ap-primary mb-6">In the first 30 days, clients report:</p>
-            <ul className="space-y-4">
-              <li className="flex gap-3 items-start">
-                <span className="text-ap-accent mt-1">•</span>
-                <span className="text-ap-mid text-lg font-semibold">Significantly greater clarity and confidence about what they&apos;re building and why</span>
-              </li>
-              <li className="flex gap-3 items-start">
-                <span className="text-ap-accent mt-1">•</span>
-                <span className="text-ap-mid text-lg font-semibold">Feeling less overwhelmed and more intentional</span>
-              </li>
-              <li className="flex gap-3 items-start">
-                <span className="text-ap-accent mt-1">•</span>
-                <span className="text-ap-mid text-lg font-semibold">Taking more productive action that directly impacts their bottom line</span>
-              </li>
-            </ul>
-          </div>
 
-          <div className="mt-10 text-center">
-            <p className="text-ap-mid text-xl font-semibold mb-4">Ready to see where you stand?</p>
-            <div className="flex flex-wrap gap-3 justify-center items-center">
-              <Link
-                href="/assessment"
-                className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
-              >
-                Take the VAPI™
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <span className="text-ap-muted text-sm">or</span>
-              <Link
-                href="/work-with-me"
-                className="text-gradient-accent font-semibold text-sm hover:underline"
-              >
-                see your options
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Orange rule */}
-      <div className="h-0.5 bg-ap-accent" />
-
-      {/* CTA */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
-          <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
-            <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />
-            <div className="relative">
-              <div className="flex flex-wrap items-center justify-center gap-6 mb-8 opacity-90">
-                <Image src="/images/certifications/icf.png" alt="International Coaching Federation" width={100} height={40} className="h-8 w-auto object-contain" />
-                <Image src="/images/certifications/cplc.png" alt="Certified Professional Life Coach" width={56} height={56} className="h-10 w-auto object-contain" />
-                <Image src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" width={56} height={56} className="h-10 w-auto object-contain" />
-              </div>
-              <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
-                Ready to stop building the <span className="text-gradient-accent">cage</span>?
-              </h2>
-              <p className="text-ap-muted text-xl font-semibold max-w-2xl mx-auto mb-10">
-                Start with the free VAPI™ Assessment. In about 12 minutes, you&apos;ll see where you are strong, where
-                you are stretched, and what to fix next. Use the same email as your portal or ALFRED account to unlock
-                your personalized 28-day plan.
-                <span className="block mt-2 text-white/90 font-medium">Free. No payment required.</span>
+              <p className="mb-3 font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent">
+                Start Here
               </p>
-              <div className="flex flex-wrap gap-3 justify-center">
+              <h2 className="font-outfit text-3xl font-bold text-white sm:text-4xl">
+                Ready to see what&apos;s actually off?
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-xl font-semibold leading-relaxed text-white/80">
+                Start with the free VAPI™. In about 12 minutes, you will see what is strong, what is stretched, and
+                what to fix next.
+              </p>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/66">
+                Free. No payment required. Use the same email as your portal or ALFRED account to unlock your 28-day
+                plan.
+              </p>
+
+              <div className="mt-10 flex flex-wrap justify-center gap-3">
                 <Link
                   href="/assessment"
-                  className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
+                  className="cta-pill inline-flex items-center gap-2 rounded-pill bg-ap-accent px-8 py-4 text-base font-semibold tracking-wider text-white transition-all"
                 >
                   Take the VAPI™
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-white/60 text-white font-semibold text-base tracking-wider hover:bg-white/10 transition-all"
+                  className="inline-flex items-center rounded-pill border-[1.5px] border-white/60 px-8 py-4 text-base font-semibold tracking-wider text-white transition-all hover:bg-white/10"
                 >
-                  See Your Options
+                  See Your Next Step
                 </Link>
               </div>
-              <div className="mt-8 pt-8 border-t border-white/20 text-center">
-                <p className="text-sm font-semibold text-white/80 mb-3">Follow along</p>
+
+              <div className="mt-8 border-t border-white/14 pt-8 text-center">
+                <p className="mb-3 text-sm font-semibold text-white/80">Follow along</p>
                 <SocialLinks variant="footer" className="justify-center [&_a]:text-white/70 [&_a:hover]:text-white" />
               </div>
             </div>
