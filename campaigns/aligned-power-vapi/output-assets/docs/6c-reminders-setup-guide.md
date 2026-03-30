@@ -183,7 +183,7 @@ This checks that the system is running and knows the correct time. It does **not
 
 2. Press Enter.
 
-**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, and Sunday during the noon Eastern cron hour. The important part is that you see a response with no error. You can close the tab.
+**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, Sunday, Monday, and Tuesday during the noon Eastern cron hour. The important part is that you see a response with no error. You can close the tab.
 
 ### Test 3: Send yourself a real test email
 
@@ -201,6 +201,10 @@ This sends one test reminder to your own inbox so you can confirm that Resend an
 **What you should see in the browser:** A short line of text that includes "ok":true and "test_send":true and your email address.
 
 **What you should see in your inbox:** Within a minute or two, an email with the subject **"[Test] Your 6C's Scorecard is available for this week."** Check your spam folder if you don't see it in the inbox.
+
+To test a specific reminder template, add `&force_type=available`, `&force_type=saturday`, `&force_type=one-hour-left`, `&force_type=monday-vital-action`, or `&force_type=tuesday-vital-action` to the same URL. Forced-template test sends are restricted to `jacob@alignedpower.coach`. Example:
+
+`https://your-app.vercel.app/api/cron/6c-reminders?secret=YOUR_SECRET&test_send=jacob@alignedpower.coach&force_type=monday-vital-action`
 
 If you receive that email, your setup is working correctly.
 
@@ -226,7 +230,7 @@ That usually means the secret in the URL doesn't match what's in Vercel. Try thi
 
 ### When do the real reminders go out?
 
-The system sends reminders **once per day** during the **noon Eastern cron hour** (Friday, Saturday, and Sunday). So each week, active clients get up to three emails: one when the scorecard opens on Friday, a reminder on Saturday, and a "just a few hours left" notice on Sunday. You don't have to do anything else—Vercel runs this automatically.
+The system sends reminders **once per day** during the **noon Eastern cron hour** from **Friday through Tuesday**. So each week, active clients can get up to five emails: one when the scorecard opens on Friday, a reminder on Saturday, a "just a few hours left" notice on Sunday, and Monday/Tuesday follow-up emails if they missed the scorecard but still have not set their Vital Action. You don't have to do anything else—Vercel runs this automatically.
 
 ---
 
@@ -239,4 +243,4 @@ The system sends reminders **once per day** during the **noon Eastern cron hour*
 - [ ] **Vercel:** Optionally added **SIX_C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
 - [ ] **Vercel:** Redeployed so the new env vars are in effect.
 
-After that, the cron job will run once daily during the noon Eastern cron hour (Fri/Sat/Sun) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
+After that, the cron job will run once daily during the noon Eastern cron hour (Fri-Tue) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
