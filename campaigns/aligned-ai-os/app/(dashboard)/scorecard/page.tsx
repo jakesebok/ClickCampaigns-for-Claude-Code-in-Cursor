@@ -17,6 +17,14 @@ import {
 import { SCORECARD_CATEGORIES, calculateScore, getOverallScore } from "@/lib/scorecard";
 import { getScorecardWindow } from "@/lib/scorecard-window";
 import { chatQueryUrl, buildSixCsTrendCoachPrompt } from "@/lib/chat-deep-links";
+import {
+  findLatestMissedWindowManualEntry,
+  getMissedWindowNoDataRange,
+  hasMeaningfulScores,
+  hasScoredSubmissionInRelevantWindow,
+  parseScorecardNotes,
+  shouldShowFirstSubmissionFallback,
+} from "@/lib/scorecard-entry-state";
 
 type ScorecardEntry = {
   id: string;
@@ -42,25 +50,6 @@ function getScorecardScoreColor(score: number) {
   return "#22c55e";
 }
 
-function parseScorecardNotes(entry: ScorecardEntry | null): {
-  oneThing: string | null;
-  reflections: Record<string, string>;
-} {
-  if (!entry?.notes) return { oneThing: null, reflections: {} };
-  try {
-    const parsed = JSON.parse(entry.notes) as {
-      oneThing?: string;
-      reflections?: Record<string, string>;
-    };
-    return {
-      oneThing: parsed.oneThing?.trim() || null,
-      reflections: parsed.reflections || {},
-    };
-  } catch {
-    return { oneThing: null, reflections: {} };
-  }
-}
-
 export default function ScorecardPage() {
   const [entries, setEntries] = useState<ScorecardEntry[]>([]);
   const [currentWeekEntry, setCurrentWeekEntry] = useState<ScorecardEntry | null>(
@@ -75,6 +64,11 @@ export default function ScorecardPage() {
   const [step, setStep] = useState<"score" | "reflect" | "onething">("score");
   const [hasAnySubmissions, setHasAnySubmissions] = useState(false);
   const [vitalActionExpanded, setVitalActionExpanded] = useState(false);
+  const [manualVitalAction, setManualVitalAction] = useState("");
+  const [manualVitalActionSaving, setManualVitalActionSaving] = useState(false);
+  const [manualVitalActionError, setManualVitalActionError] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     SCORECARD_CATEGORIES.forEach((c) => {
@@ -86,10 +80,11 @@ export default function ScorecardPage() {
       .then((data) => {
         const past = data.entries || [];
         const cw = data.currentWeek ?? null;
+        const cwHasScores = hasMeaningfulScores(cw?.scores);
         setEntries(past);
         setCurrentWeekEntry(cw);
         setHasAnySubmissions(!!(cw || past.length > 0));
-        if (cw) {
+        if (cwHasScores) {
           setSubmitted(true);
         }
       })
@@ -139,15 +134,23 @@ export default function ScorecardPage() {
   const scores = getScores();
   const overall = getOverallScore(scores);
 
+  const allEntriesOrdered = useMemo(() => {
+    const all = [
+      ...(currentWeekEntry ? [currentWeekEntry] : []),
+      ...entries,
+    ];
+    return all.sort(
+      (left, right) =>
+        new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime()
+    );
+  }, [currentWeekEntry, entries]);
+
   /** Same ordering as dashboard: current week first, then past (newest first from API). */
   const scoredEntriesMerged = useMemo(() => {
-    const past = entries.filter(
-      (e) => e.scores && Object.keys(e.scores).length > 0
-    );
+    const past = entries.filter((entry) => hasMeaningfulScores(entry.scores));
     const cur =
       currentWeekEntry &&
-      currentWeekEntry.scores &&
-      Object.keys(currentWeekEntry.scores).length > 0
+      hasMeaningfulScores(currentWeekEntry.scores)
         ? currentWeekEntry
         : null;
     return cur ? [cur, ...past] : past;
@@ -194,16 +197,41 @@ export default function ScorecardPage() {
   }, [scoredEntriesMerged]);
 
   const window = getScorecardWindow();
+  const missedWindowRange = getMissedWindowNoDataRange(window);
   const canSubmit = window.canSubmit || !hasAnySubmissions;
+  const currentWindowSubmitted = hasScoredSubmissionInRelevantWindow(
+    allEntriesOrdered,
+    window
+  );
+  const showFirstSubmissionFallback = shouldShowFirstSubmissionFallback(
+    allEntriesOrdered,
+    currentWindowSubmitted
+  );
 
   const latestScoredForOffWindow = scoredEntriesMerged[0] || null;
+  const latestScoredNotes = parseScorecardNotes(latestScoredForOffWindow?.notes);
   const { oneThing: offWindowOneThing, reflections: offWindowReflections } =
-    parseScorecardNotes(latestScoredForOffWindow);
+    latestScoredNotes;
   const offWindowVisibleReflections = SCORECARD_CATEGORIES.map((category) => ({
     key: category.key,
     label: category.label,
     value: offWindowReflections[category.key]?.trim() || "",
   })).filter((r) => r.value);
+  const missedWindow =
+    scoredEntriesMerged.length > 0 &&
+    !window.canSubmit &&
+    !currentWindowSubmitted &&
+    !showFirstSubmissionFallback;
+  const missedWindowManualEntry = missedWindow
+    ? findLatestMissedWindowManualEntry(allEntriesOrdered, window)
+    : null;
+  const missedWindowManualOneThing = parseScorecardNotes(
+    missedWindowManualEntry?.notes
+  ).oneThing;
+  const missedWindowPlaceholder =
+    latestScoredNotes.oneThing ||
+    parseScorecardNotes(scoredEntriesMerged[1]?.notes).oneThing ||
+    "";
 
   if (loading) {
     return (
@@ -211,6 +239,39 @@ export default function ScorecardPage() {
         <div className="animate-pulse text-muted-foreground">Loading...</div>
       </div>
     );
+  }
+
+  async function handleManualVitalActionSave() {
+    const oneThing = manualVitalAction.trim();
+    if (!oneThing) {
+      setManualVitalActionError("Enter your Vital Action for the week.");
+      return;
+    }
+
+    setManualVitalActionSaving(true);
+    setManualVitalActionError(null);
+
+    try {
+      const res = await fetch("/api/scorecard/vital-action", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ oneThing }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setManualVitalActionError(
+          data?.error || "Could not save your Vital Action."
+        );
+        setManualVitalActionSaving(false);
+        return;
+      }
+
+      globalThis.window.location.reload();
+    } catch {
+      setManualVitalActionError("Could not save your Vital Action.");
+      setManualVitalActionSaving(false);
+    }
   }
 
   if (!canSubmit && !submitted) {
@@ -246,169 +307,264 @@ export default function ScorecardPage() {
               </Link>
             </div>
 
-            {/* Same Vital Action + 6C reflections pattern as dashboard (read-only) */}
-            {offWindowOneThing ? (
-              <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
-                <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-accent" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      This Week&apos;s Vital Action
-                    </p>
-                    {latestScoredForOffWindow && (
-                      <p className="text-xs text-muted-foreground mt-1">
-                        From week of{" "}
-                        {new Date(
-                          latestScoredForOffWindow.weekStart
-                        ).toLocaleDateString()}
-                      </p>
-                    )}
-                    <p className="font-medium leading-snug whitespace-pre-wrap break-words mt-2">
-                      {offWindowOneThing}
-                    </p>
-                  </div>
-                </div>
-                {offWindowVisibleReflections.length > 0 && (
-                  <>
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        onClick={() => setVitalActionExpanded((o) => !o)}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
-                        aria-expanded={vitalActionExpanded}
-                        aria-controls="scorecard-offwindow-reflections"
-                      >
-                        {vitalActionExpanded ? (
-                          <ChevronUp className="h-4 w-4" />
-                        ) : (
-                          <ChevronDown className="h-4 w-4" />
-                        )}
-                        <span>View my 6C reflections</span>
-                      </button>
+            {missedWindow ? (
+              <>
+                {missedWindowManualOneThing ? (
+                  <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                        <Target className="h-5 w-5 text-accent" />
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-3">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
+                          Window missed
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                            This Week&apos;s Vital Action
+                          </p>
+                          <p className="font-medium leading-snug whitespace-pre-wrap break-words">
+                            {missedWindowManualOneThing}
+                          </p>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          The full 6Cs review is closed, but ALFRED will keep this move front and
+                          center until next Friday&apos;s submission window opens.
+                        </p>
+                      </div>
                     </div>
-                    {vitalActionExpanded && (
-                      <div
-                        id="scorecard-offwindow-reflections"
-                        className="mt-4 pt-4 border-t border-border/60 space-y-2"
-                      >
-                        {offWindowVisibleReflections.map((reflection) => (
-                          <div
-                            key={reflection.key}
-                            className="rounded-xl border border-border bg-background/60 px-4 py-3"
-                          >
-                            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
-                              {reflection.label}
-                            </p>
-                            <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">
-                              {reflection.value}
-                            </p>
-                          </div>
-                        ))}
-                        <div className="pt-2 flex justify-center">
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border border-accent/30 bg-card p-5 shadow-sm">
+                    <div className="flex items-start gap-4">
+                      <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                        <Target className="h-5 w-5 text-accent" />
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-4">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
+                          Window missed
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                            This Week&apos;s Vital Action
+                          </p>
+                          <p className="text-lg font-semibold leading-snug">
+                            Set the move ALFRED should anchor this week
+                          </p>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          You missed the full 6Cs review, but you can still set the single action
+                          that should stay front and center for the week ahead.
+                        </p>
+                        <textarea
+                          value={manualVitalAction}
+                          onChange={(event) => {
+                            setManualVitalAction(event.target.value);
+                            if (manualVitalActionError) setManualVitalActionError(null);
+                          }}
+                          placeholder={
+                            missedWindowPlaceholder || "My Vital Action this week is..."
+                          }
+                          rows={3}
+                          className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+                        />
+                        {manualVitalActionError && (
+                          <p className="text-sm text-destructive">{manualVitalActionError}</p>
+                        )}
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            Reflections stay locked until the next scorecard window opens on Friday.
+                          </p>
                           <button
                             type="button"
-                            onClick={() => setVitalActionExpanded(false)}
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                            onClick={handleManualVitalActionSave}
+                            disabled={manualVitalActionSaving}
+                            className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
                           >
-                            <ChevronUp className="h-4 w-4" />
-                            <span>Collapse</span>
+                            {manualVitalActionSaving ? "Saving..." : "Set Vital Action"}
                           </button>
                         </div>
                       </div>
-                    )}
-                  </>
-                )}
-              </div>
-            ) : (
-              <div className="rounded-2xl border-2 border-dashed border-accent/30 bg-accent/5 p-5 flex items-start gap-4">
-                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-accent" />
-                </div>
-                <div className="flex-1 min-w-0 text-left">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    This Week&apos;s Vital Action
-                  </p>
-                  <p className="font-medium text-muted-foreground mt-1">
-                    {scoredEntriesMerged.length > 0
-                      ? "Your latest scorecard doesn't have a Vital Action saved yet. When the window opens, complete the final step to set one."
-                      : "Complete your first scorecard when the window opens to set your Vital Action here."}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {latestScoredForOffWindow && (
-              <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 shadow-sm">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <ClipboardCheck className="h-4 w-4 text-accent shrink-0" />
-                    <span className="text-sm font-medium text-muted-foreground">
-                      Latest 6Cs scores
-                    </span>
+                    </div>
                   </div>
-                  <span className="text-xs text-muted-foreground">
-                    Week of{" "}
-                    {new Date(
-                      latestScoredForOffWindow.weekStart
-                    ).toLocaleDateString()}
-                  </span>
+                )}
+
+                <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center">
+                  <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
+                  <p className="text-sm font-medium">6Cs Scorecard</p>
+                  <p className="text-sm text-muted-foreground">{missedWindowRange.label}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Your next scorecard will be available Friday at 12pm.
+                  </p>
                 </div>
-                <div className="flex items-end gap-3">
-                  <span
-                    className="text-4xl font-bold font-serif"
-                    style={{
-                      color: getScorecardScoreColor(
-                        getOverallScore(latestScoredForOffWindow.scores)
-                      ),
-                    }}
-                  >
-                    {getOverallScore(latestScoredForOffWindow.scores)}%
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {SCORECARD_CATEGORIES.map((c) => {
-                    const Icon = ICONS[c.icon];
-                    const pct = latestScoredForOffWindow.scores[c.key] || 0;
-                    const scoreColor = getScorecardScoreColor(pct);
-                    return (
-                      <div
-                        key={c.key}
-                        className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
-                      >
-                        {Icon && (
-                          <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />
-                        )}
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                          {c.label}
-                        </p>
-                        <p
-                          className="text-lg font-bold tabular-nums"
-                          style={{ color: scoreColor }}
-                        >
-                          {pct}%
-                        </p>
-                        <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
-                          <div
-                            className="h-full rounded-full transition-all"
-                            style={{
-                              width: `${pct}%`,
-                              backgroundColor: scoreColor,
-                            }}
-                          />
-                        </div>
+              </>
+            ) : (
+              <>
+                {/* Same Vital Action + 6C reflections pattern as dashboard (read-only) */}
+                {offWindowOneThing ? (
+                  <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
+                    <div className="flex items-start gap-4">
+                      <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                        <Target className="h-5 w-5 text-accent" />
                       </div>
-                    );
-                  })}
-                </div>
-                <Link
-                  href={sixCsCoachHref}
-                  className="inline-flex text-sm font-semibold text-accent hover:underline pt-1"
-                >
-                  Coach on these 6Cs →
-                </Link>
-              </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                          This Week&apos;s Vital Action
+                        </p>
+                        {latestScoredForOffWindow && (
+                          <p className="text-xs text-muted-foreground mt-1">
+                            From week of{" "}
+                            {new Date(
+                              latestScoredForOffWindow.weekStart
+                            ).toLocaleDateString()}
+                          </p>
+                        )}
+                        <p className="font-medium leading-snug whitespace-pre-wrap break-words mt-2">
+                          {offWindowOneThing}
+                        </p>
+                      </div>
+                    </div>
+                    {offWindowVisibleReflections.length > 0 && (
+                      <>
+                        <div className="mt-4">
+                          <button
+                            type="button"
+                            onClick={() => setVitalActionExpanded((o) => !o)}
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                            aria-expanded={vitalActionExpanded}
+                            aria-controls="scorecard-offwindow-reflections"
+                          >
+                            {vitalActionExpanded ? (
+                              <ChevronUp className="h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4" />
+                            )}
+                            <span>View my 6C reflections</span>
+                          </button>
+                        </div>
+                        {vitalActionExpanded && (
+                          <div
+                            id="scorecard-offwindow-reflections"
+                            className="mt-4 pt-4 border-t border-border/60 space-y-2"
+                          >
+                            {offWindowVisibleReflections.map((reflection) => (
+                              <div
+                                key={reflection.key}
+                                className="rounded-xl border border-border bg-background/60 px-4 py-3"
+                              >
+                                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                                  {reflection.label}
+                                </p>
+                                <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words">
+                                  {reflection.value}
+                                </p>
+                              </div>
+                            ))}
+                            <div className="pt-2 flex justify-center">
+                              <button
+                                type="button"
+                                onClick={() => setVitalActionExpanded(false)}
+                                className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-accent transition-colors"
+                              >
+                                <ChevronUp className="h-4 w-4" />
+                                <span>Collapse</span>
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border-2 border-dashed border-accent/30 bg-accent/5 p-5 flex items-start gap-4">
+                    <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                      <Target className="h-5 w-5 text-accent" />
+                    </div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        This Week&apos;s Vital Action
+                      </p>
+                      <p className="font-medium text-muted-foreground mt-1">
+                        {scoredEntriesMerged.length > 0
+                          ? "Your latest scorecard doesn't have a Vital Action saved yet. When the window opens, complete the final step to set one."
+                          : "Complete your first scorecard when the window opens to set your Vital Action here."}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {latestScoredForOffWindow && (
+                  <div className="rounded-2xl border border-border bg-card/80 p-5 space-y-3 shadow-sm">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <ClipboardCheck className="h-4 w-4 text-accent shrink-0" />
+                        <span className="text-sm font-medium text-muted-foreground">
+                          Latest 6Cs scores
+                        </span>
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        Week of{" "}
+                        {new Date(
+                          latestScoredForOffWindow.weekStart
+                        ).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-end gap-3">
+                      <span
+                        className="text-4xl font-bold font-serif"
+                        style={{
+                          color: getScorecardScoreColor(
+                            getOverallScore(latestScoredForOffWindow.scores)
+                          ),
+                        }}
+                      >
+                        {getOverallScore(latestScoredForOffWindow.scores)}%
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {SCORECARD_CATEGORIES.map((c) => {
+                        const Icon = ICONS[c.icon];
+                        const pct = latestScoredForOffWindow.scores[c.key] || 0;
+                        const scoreColor = getScorecardScoreColor(pct);
+                        return (
+                          <div
+                            key={c.key}
+                            className="flex flex-col items-center p-2.5 rounded-xl border border-border bg-background/50"
+                          >
+                            {Icon && (
+                              <Icon className="h-5 w-5 mb-1" style={{ color: scoreColor }} />
+                            )}
+                            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                              {c.label}
+                            </p>
+                            <p
+                              className="text-lg font-bold tabular-nums"
+                              style={{ color: scoreColor }}
+                            >
+                              {pct}%
+                            </p>
+                            <div className="w-full h-1.5 rounded-full bg-muted/50 mt-1 overflow-hidden">
+                              <div
+                                className="h-full rounded-full transition-all"
+                                style={{
+                                  width: `${pct}%`,
+                                  backgroundColor: scoreColor,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <Link
+                      href={sixCsCoachHref}
+                      className="inline-flex text-sm font-semibold text-accent hover:underline pt-1"
+                    >
+                      Coach on these 6Cs →
+                    </Link>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

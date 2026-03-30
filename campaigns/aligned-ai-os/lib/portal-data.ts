@@ -84,3 +84,34 @@ export async function insertPortalSixC(params: {
   const data = await res.json();
   return Array.isArray(data) ? data[0] : data;
 }
+
+export async function updatePortalSixC(
+  id: string,
+  params: {
+    scores?: Record<string, number>;
+    oneThing?: string | null;
+    weeklyReview?: Record<string, unknown> | null;
+  }
+): Promise<PortalSixCRow | null> {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return null;
+  const body: Record<string, unknown> = {};
+  if ("scores" in params) body.scores = params.scores;
+  if ("oneThing" in params) body.one_thing_to_improve = params.oneThing || null;
+  if ("weeklyReview" in params) body.weekly_review = params.weeklyReview || null;
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/six_c_submissions?id=eq.${encodeURIComponent(id)}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify(body),
+    }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return Array.isArray(data) ? data[0] : data;
+}

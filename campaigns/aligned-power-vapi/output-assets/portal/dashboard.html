@@ -2584,6 +2584,11 @@
             return false;
           });
         }
+        function getRowOneThing(row) {
+          if (!row || !row.one_thing_to_improve) return null;
+          var trimmed = String(row.one_thing_to_improve).trim();
+          return trimmed || null;
+        }
 
         var { data: activeRow } = await supabase.from('portal_active_clients').select('active_client').eq('email', email).maybeSingle();
         if (!activeRow || !activeRow.active_client) return;
@@ -2627,6 +2632,11 @@
         }
         var latest6C = scoredSixCRows[0];
         var prev6C = scoredSixCRows[1] || null;
+        var latestActionRow = (sixCRows || []).find(function(row) {
+          return !!getRowOneThing(row);
+        }) || null;
+        var latestActionText = getRowOneThing(latestActionRow);
+        var latestActionIsManual = !!(latestActionRow && !hasMeaningfulScores(latestActionRow));
         var scores = latest6C.scores || {};
         var labels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
         var icons = { clarity: 'crosshair', coherence: 'link', capacity: 'battery-charging', confidence: 'shield-check', courage: 'zap', connection: 'users' };
@@ -2649,8 +2659,8 @@
           cardsHtml += '<div class="w-full h-2 rounded-full bg-[var(--ap-border)]/50 mt-2 overflow-hidden"><div class="h-full rounded-full transition-all duration-300" style="width:' + pct + '%;background-color:' + color + '"></div></div>';
           cardsHtml += '</div>';
         });
-        var oneThingLatest = (latest6C.one_thing_to_improve && String(latest6C.one_thing_to_improve).trim()) ? String(latest6C.one_thing_to_improve).trim() : null;
-        var prevOneThing = (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) ? String(prev6C.one_thing_to_improve).trim() : null;
+        var latestScoredOneThing = getRowOneThing(latest6C);
+        var prevScoredOneThing = getRowOneThing(prev6C);
         var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
         var linkEl = document.getElementById('six-c-fill-link');
         var closedMsg = document.getElementById('six-c-window-closed-msg');
@@ -2660,8 +2670,9 @@
 
         // Determine whether any scored submission belongs to the active or most recent scorecard window.
         var submittedThisWeek = false;
+        var relevantWindow = null;
         if (win) {
-          var relevantWindow = (typeof getMostRecentScorecardWindow === 'function')
+          relevantWindow = (typeof getMostRecentScorecardWindow === 'function')
             ? getMostRecentScorecardWindow(win)
             : (win.canSubmit
                 ? { opensAt: win.opensAt, closesAt: win.closesAt }
@@ -2688,6 +2699,16 @@
 
         // Determine if user missed the window (returning user, no recent submission, can't submit now)
         var missedWindow = !!(win && !win.canSubmit && !submittedThisWeek && !showFirstSubmissionFallback);
+        var missedWindowManualRow = null;
+        if (missedWindow && relevantWindow && win && win.nextOpen) {
+          var manualAfterTs = relevantWindow.closesAt.getTime();
+          var manualBeforeTs = win.nextOpen.getTime();
+          missedWindowManualRow = (sixCRows || []).find(function(row) {
+            if (!row || !row.created_at || hasMeaningfulScores(row) || !getRowOneThing(row)) return false;
+            var rowTs = new Date(row.created_at).getTime();
+            return rowTs > manualAfterTs && rowTs < manualBeforeTs;
+          }) || null;
+        }
 
         if (missedWindow) {
           // Show "no data" for the 6C section
@@ -2697,14 +2718,16 @@
           var rangeEnd = lastFriday.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
           var noDataMsg = rangeStart === rangeEnd ? 'No data available for the week of ' + rangeStart + '.' : 'No data available for the week of ' + rangeStart + ' – ' + rangeEnd + '.';
           document.getElementById('six-c-cards').innerHTML = '<div class="col-span-full flex flex-col items-center justify-center py-8 px-4 rounded-2xl border-2 border-dashed border-[var(--ap-border)] bg-[var(--ap-bg)]/30"><p class="text-[var(--ap-secondary)] font-semibold text-center">' + noDataMsg + '</p><p class="text-[var(--ap-muted)] text-sm text-center mt-1">Your next scorecard will be available Friday at 12pm.</p></div>';
-          if (oneThingLatest) {
-            // User submitted a Vital Action manually after missing the window — show final banner state
+          if (missedWindowManualRow) {
+            // User already saved a manual Vital Action after the scorecard window closed.
             var banner = document.getElementById('one-thing-banner');
             var bannerContent = document.getElementById('one-thing-banner-content');
             var bannerForm = document.getElementById('one-thing-banner-vital-action-form');
+            var bannerSubtext = document.getElementById('one-thing-banner-subtext');
             if (banner) banner.classList.remove('hidden');
             if (bannerContent) bannerContent.classList.remove('hidden');
-            document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+            document.getElementById('one-thing-banner-text').textContent = getRowOneThing(missedWindowManualRow);
+            if (bannerSubtext) bannerSubtext.textContent = 'You set this as your Vital Action for the week ahead. Keep it top of mind.';
             if (bannerForm) bannerForm.classList.add('hidden');
             document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
             if (oneThingEl) oneThingEl.classList.add('hidden');
@@ -2719,7 +2742,7 @@
             document.getElementById('one-thing-banner-vital-action-form').classList.remove('hidden');
             document.getElementById('one-thing-banner-expand-wrap').classList.add('hidden');
             var vitalInput = document.getElementById('vital-action-input');
-            if (vitalInput && (oneThingLatest || prevOneThing)) vitalInput.placeholder = (oneThingLatest || prevOneThing);
+            if (vitalInput && (latestScoredOneThing || prevScoredOneThing)) vitalInput.placeholder = (latestScoredOneThing || prevScoredOneThing);
             if (oneThingEl) oneThingEl.classList.add('hidden');
             if (actionRowEl) actionRowEl.classList.add('hidden');
             linkEl.classList.add('hidden');
@@ -2735,7 +2758,7 @@
           : weeklyReview;
         var reflectionKeys = ['clarity', 'coherence', 'capacity', 'confidence', 'courage', 'connection'];
         var reflectionLabels = { clarity: 'Clarity', coherence: 'Coherence', capacity: 'Capacity', confidence: 'Confidence', courage: 'Courage', connection: 'Connection' };
-        var hasReflections = !missedWindow && reflectionKeys.some(function(k) { return weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim(); });
+        var hasReflections = !missedWindow && !latestActionIsManual && reflectionKeys.some(function(k) { return weeklyReviewReflections[k] && String(weeklyReviewReflections[k]).trim(); });
         if (hasReflections) {
           function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
           var wrap = document.getElementById('one-thing-banner-expand-wrap');
@@ -2777,7 +2800,11 @@
           if (accordionHidden) accordionHidden.classList.add('hidden');
         }
         if (!missedWindow) {
-          if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
+          if (latestActionIsManual && latestActionText) {
+            oneThingEl.classList.remove('hidden');
+            document.getElementById('six-c-one-thing-text').textContent = latestActionText;
+            if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
+          } else if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
             oneThingEl.classList.remove('hidden');
             document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
             if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
@@ -2785,10 +2812,13 @@
             actionRowEl.classList.remove('mt-0'); actionRowEl.classList.add('mt-4');
           }
         }
-        if (oneThingLatest && !missedWindow) {
+        if (latestActionText && !missedWindow) {
           document.getElementById('one-thing-banner').classList.remove('hidden');
           document.getElementById('one-thing-banner-content').classList.remove('hidden');
-          document.getElementById('one-thing-banner-text').textContent = oneThingLatest;
+          document.getElementById('one-thing-banner-text').textContent = latestActionText;
+          document.getElementById('one-thing-banner-subtext').textContent = latestActionIsManual
+            ? 'You set this as your Vital Action for the week ahead. Keep it top of mind.'
+            : 'You set this as your Vital Action to improve last week. Keep it top of mind.';
           document.getElementById('one-thing-banner-vital-action-form').classList.add('hidden');
         }
         var scorecardCta = document.getElementById('one-thing-scorecard-cta');
@@ -2848,12 +2878,41 @@
             }
             vitalSaveBtn.disabled = true;
             vitalSaveBtn.textContent = 'Saving…';
-            var { error } = await supabase.from('six_c_submissions').insert({
-              email: email,
-              scores: {},
-              one_thing_to_improve: val,
-              weekly_review: null
-            });
+            var existingManualRow = null;
+            if (relevantWindow && win && win.nextOpen) {
+              var manualAfterTs = relevantWindow.closesAt.getTime();
+              var manualBeforeTs = win.nextOpen.getTime();
+              var existingRowsRes = await supabase
+                .from('six_c_submissions')
+                .select('id, created_at, scores, one_thing_to_improve')
+                .eq('email', email)
+                .order('created_at', { ascending: false })
+                .limit(24);
+              existingManualRow = ((existingRowsRes.data || []).find(function(row) {
+                if (!row || !row.created_at || hasMeaningfulScores(row) || !getRowOneThing(row)) return false;
+                var rowTs = new Date(row.created_at).getTime();
+                return rowTs > manualAfterTs && rowTs < manualBeforeTs;
+              })) || null;
+            }
+            var mutation = existingManualRow
+              ? supabase
+                  .from('six_c_submissions')
+                  .update({
+                    scores: {},
+                    one_thing_to_improve: val,
+                    weekly_review: null
+                  })
+                  .eq('id', existingManualRow.id)
+              : supabase
+                  .from('six_c_submissions')
+                  .insert({
+                    email: email,
+                    scores: {},
+                    one_thing_to_improve: val,
+                    weekly_review: null
+                  });
+            var mutationRes = await mutation;
+            var error = mutationRes.error;
             vitalSaveBtn.disabled = false;
             vitalSaveBtn.textContent = 'Set Vital Action';
             if (error) {

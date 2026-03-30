@@ -55,12 +55,16 @@ import {
   buildDashboardPriorityPrompt,
   buildSixCsTrendCoachPrompt,
 } from "@/lib/chat-deep-links";
+import { getScorecardWindow } from "@/lib/scorecard-window";
 import {
-  getScorecardWindow,
-  getMostRecentScorecardWindow,
-  isDateInScorecardWindow,
-  isSameEasternCalendarWeek,
-} from "@/lib/scorecard-window";
+  findLatestMissedWindowManualEntry,
+  getLatestVitalActionEntry,
+  getMissedWindowNoDataRange,
+  hasMeaningfulScores,
+  hasScoredSubmissionInRelevantWindow,
+  parseScorecardNotes,
+  shouldShowFirstSubmissionFallback,
+} from "@/lib/scorecard-entry-state";
 import { MyPlanDashboardReminder } from "@/components/my-plan-callouts";
 
 const DOMAIN_ICONS: Record<string, React.ElementType> = {
@@ -146,6 +150,9 @@ export default function DashboardPage() {
   const [vitalActionExpanded, setVitalActionExpanded] = useState(false);
   const [trialBanner, setTrialBanner] = useState<TrialBanner | null>(null);
   const [activeSprint, setActiveSprint] = useState<DashboardSprint | null>(null);
+  const [manualVitalAction, setManualVitalAction] = useState("");
+  const [manualVitalActionSaving, setManualVitalActionSaving] = useState(false);
+  const [manualVitalActionError, setManualVitalActionError] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -200,28 +207,25 @@ export default function DashboardPage() {
   }
 
   const scorecardWindow = getScorecardWindow();
-  const mostRecentScorecardWindow = getMostRecentScorecardWindow(scorecardWindow);
+  const missedWindowRange = getMissedWindowNoDataRange(scorecardWindow);
   const latestVapi = vapiResults[0] || null;
-  const scoredEntries = scorecardEntries.filter(
-    (e) => e.scores && Object.keys(e.scores).length > 0
+  const orderedScorecardEntries = [...scorecardEntries].sort(
+    (left, right) =>
+      new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime()
+  );
+  const scoredEntries = orderedScorecardEntries.filter((entry) =>
+    hasMeaningfulScores(entry.scores)
   );
   const latestScorecard = scoredEntries[0] || null;
   const hasAnyScorecards = scoredEntries.length > 0;
-  const currentWindowSubmitted = scorecardWindow.canSubmit
-    ? scoredEntries.some((e) =>
-        isDateInScorecardWindow(e.createdAt, {
-          opensAt: scorecardWindow.opensAt,
-          closesAt: scorecardWindow.closesAt,
-        })
-      )
-    : scoredEntries.some((e) =>
-        isDateInScorecardWindow(e.createdAt, mostRecentScorecardWindow)
-      );
-  const showFirstSubmissionFallback =
-    scoredEntries.length === 1 &&
-    !!latestScorecard &&
-    !currentWindowSubmitted &&
-    isSameEasternCalendarWeek(latestScorecard.createdAt);
+  const currentWindowSubmitted = hasScoredSubmissionInRelevantWindow(
+    orderedScorecardEntries,
+    scorecardWindow
+  );
+  const showFirstSubmissionFallback = shouldShowFirstSubmissionFallback(
+    orderedScorecardEntries,
+    currentWindowSubmitted
+  );
   const showSubmissionWindowCtas =
     scorecardWindow.canSubmit && !currentWindowSubmitted;
   const submissionWindowUrgent =
@@ -230,21 +234,30 @@ export default function DashboardPage() {
     scorecardWindow.hoursLeft <= 6;
   const displayedScorecard =
     currentWindowSubmitted || showFirstSubmissionFallback ? latestScorecard : null;
-  let currentOneThing: string | null = null;
-  let currentReflections: Record<string, string> = {};
-  if (latestScorecard?.notes) {
-    try {
-      const parsed = JSON.parse(latestScorecard.notes) as {
-        oneThing?: string;
-        reflections?: Record<string, string>;
-      };
-      currentOneThing = parsed.oneThing || null;
-      currentReflections = parsed.reflections || {};
-    } catch {
-      currentOneThing = null;
-      currentReflections = {};
-    }
-  }
+  const missedWindow =
+    hasAnyScorecards &&
+    !scorecardWindow.canSubmit &&
+    !currentWindowSubmitted &&
+    !showFirstSubmissionFallback;
+  const missedWindowManualEntry = missedWindow
+    ? findLatestMissedWindowManualEntry(orderedScorecardEntries, scorecardWindow)
+    : null;
+  const missedWindowManualOneThing = parseScorecardNotes(
+    missedWindowManualEntry?.notes
+  ).oneThing;
+  const latestActionEntry = getLatestVitalActionEntry(orderedScorecardEntries);
+  const latestActionNotes = parseScorecardNotes(latestActionEntry?.notes);
+  const currentActionIsManual = !!(
+    latestActionEntry && !hasMeaningfulScores(latestActionEntry.scores)
+  );
+  const currentOneThing = latestActionNotes.oneThing;
+  const currentReflections = currentActionIsManual
+    ? {}
+    : latestActionNotes.reflections;
+  const missedWindowPlaceholder =
+    parseScorecardNotes(latestScorecard?.notes).oneThing ||
+    parseScorecardNotes(scoredEntries[1]?.notes).oneThing ||
+    "";
   const visibleReflections = SCORECARD_CATEGORIES.map((category) => ({
     key: category.key,
     label: category.label,
@@ -361,6 +374,39 @@ export default function DashboardPage() {
       })
     : null;
 
+  async function handleManualVitalActionSave() {
+    const oneThing = manualVitalAction.trim();
+    if (!oneThing) {
+      setManualVitalActionError("Enter your Vital Action for the week.");
+      return;
+    }
+
+    setManualVitalActionSaving(true);
+    setManualVitalActionError(null);
+
+    try {
+      const res = await fetch("/api/scorecard/vital-action", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ oneThing }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setManualVitalActionError(
+          data?.error || "Could not save your Vital Action."
+        );
+        setManualVitalActionSaving(false);
+        return;
+      }
+
+      window.location.reload();
+    } catch {
+      setManualVitalActionError("Could not save your Vital Action.");
+      setManualVitalActionSaving(false);
+    }
+  }
+
   return (
     <div className="flex flex-col h-full">
       <PageHeader title="Dashboard" />
@@ -388,8 +434,86 @@ export default function DashboardPage() {
               </Link>
             </div>
           )}
-          {/* Vital Action — top, front and center (from latest 6Cs scorecard) */}
-          {currentOneThing ? (
+          {/* Vital Action — top, front and center */}
+          {missedWindow && missedWindowManualOneThing ? (
+            <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Target className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0 space-y-3">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    Window missed
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      This Week&apos;s Vital Action
+                    </p>
+                    <p className="font-medium leading-snug whitespace-pre-wrap break-words">
+                      {missedWindowManualOneThing}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    The full 6Cs review is closed, but ALFRED will keep this move front and
+                    center until next Friday&apos;s submission window opens.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : missedWindow ? (
+            <div className="rounded-2xl border border-accent/30 bg-card p-5 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Target className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0 space-y-4">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    Window missed
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      This Week&apos;s Vital Action
+                    </p>
+                    <p className="text-lg font-semibold leading-snug">
+                      Set the move ALFRED should anchor this week
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    You missed the full 6Cs review, but you can still set the single action that
+                    should stay front and center for the week ahead.
+                  </p>
+                  <textarea
+                    value={manualVitalAction}
+                    onChange={(event) => {
+                      setManualVitalAction(event.target.value);
+                      if (manualVitalActionError) setManualVitalActionError(null);
+                    }}
+                    placeholder={
+                      missedWindowPlaceholder || "My Vital Action this week is..."
+                    }
+                    rows={3}
+                    className="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+                  />
+                  {manualVitalActionError && (
+                    <p className="text-sm text-destructive">{manualVitalActionError}</p>
+                  )}
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Reflections stay locked until the next scorecard window opens on Friday.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleManualVitalActionSave}
+                      disabled={manualVitalActionSaving}
+                      className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {manualVitalActionSaving ? "Saving..." : "Set Vital Action"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : currentOneThing ? (
             <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
@@ -453,7 +577,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
               )}
-              {visibleReflections.length > 0 && (
+              {!currentActionIsManual && visibleReflections.length > 0 && (
                 <>
                   <div className="mt-4">
                     <button
@@ -690,15 +814,7 @@ export default function DashboardPage() {
               <div className="rounded-2xl border border-dashed border-border p-5 space-y-3 flex flex-col items-center justify-center text-center min-h-[280px] order-1 sm:order-2">
                 <ClipboardCheck className="h-8 w-8 text-muted-foreground/50" />
                 <p className="text-sm font-medium">6Cs Scorecard</p>
-                <p className="text-sm text-muted-foreground">
-                  {(() => {
-                    const start = new Date(mostRecentScorecardWindow.opensAt).toLocaleDateString();
-                    const end = new Date(mostRecentScorecardWindow.closesAt).toLocaleDateString();
-                    return start === end
-                      ? `No data available for the week of ${start}.`
-                      : `No data available for the week of ${start} – ${end}.`;
-                  })()}
-                </p>
+                <p className="text-sm text-muted-foreground">{missedWindowRange.label}</p>
                 <p className="text-xs text-muted-foreground">
                   Your next scorecard will be available Friday at 12pm.
                 </p>
