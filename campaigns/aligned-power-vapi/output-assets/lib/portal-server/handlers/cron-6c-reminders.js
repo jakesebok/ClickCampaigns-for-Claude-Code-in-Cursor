@@ -65,6 +65,15 @@ const SUBJECTS = {
 };
 
 const FROM_NAME = 'Jake Sebok';
+const FORCED_TEST_RECIPIENT = 'jacob@alignedpower.coach';
+
+function normalizeEmail(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function isReminderType(value) {
+  return value === 'available' || value === 'saturday' || value === 'one-hour-left';
+}
 
 // Returns full branded HTML email
 function buildHtmlEmail({ type, firstName }) {
@@ -270,10 +279,17 @@ function getScorecardWindow() {
   };
 }
 
+function getThisWeekWindowBounds() {
+  const { opensAt, closesAt } = getScorecardWindow();
+  return { opensAt, closesAt };
+}
+
 export async function GET(request) {
   const url = request.url ? new URL(request.url) : null;
   const authHeader = request.headers.get('authorization') || request.headers.get('Authorization') || '';
   const secret = (authHeader.replace(/^Bearer\s+/i, '').trim() || (url && url.searchParams.get('secret')) || '').trim();
+  const forcedTypeRaw = url && url.searchParams.get('force_type');
+  const forcedType = isReminderType(forcedTypeRaw) ? forcedTypeRaw : null;
   const cronSecret = (process.env.CRON_SECRET || '').trim();
   if (!cronSecret) {
     return new Response(JSON.stringify({ error: 'missing_env', message: 'CRON_SECRET required' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
@@ -295,13 +311,23 @@ export async function GET(request) {
   // ── Test send ──
   const testSendEmail = url && url.searchParams.get('test_send');
   if (testSendEmail) {
-    if (!isValidEmail(testSendEmail)) {
+    const normalizedTestEmail = normalizeEmail(testSendEmail);
+    if (!isValidEmail(normalizedTestEmail)) {
       return new Response(JSON.stringify({ error: 'invalid_email', message: 'test_send must be a valid email address' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (forcedType && normalizedTestEmail !== FORCED_TEST_RECIPIENT) {
+      return new Response(
+        JSON.stringify({
+          error: 'forbidden_test_recipient',
+          message: `Forced reminder tests may only send to ${FORCED_TEST_RECIPIENT}.`,
+        }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
     }
     if (!resendKey) {
       return new Response(JSON.stringify({ error: 'missing_env', message: 'RESEND_API_KEY required to send test email' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
-    const type = 'available';
+    const type = forcedType || 'available';
     const html = buildHtmlEmail({ type, firstName: null });
     const text = buildTextEmail({ type, firstName: null });
     try {
@@ -310,7 +336,7 @@ export async function GET(request) {
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
         body: JSON.stringify({
           from: fromLine,
-          to: [testSendEmail.trim().toLowerCase()],
+          to: [normalizedTestEmail],
           subject: '[Test] ' + SUBJECTS[type],
           html,
           text,
@@ -328,7 +354,13 @@ export async function GET(request) {
         );
       }
       const data = await res.json().catch(() => ({}));
-      return new Response(JSON.stringify({ ok: true, test_send: true, to: testSendEmail, id: data.id || null }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      return new Response(JSON.stringify({
+        ok: true,
+        test_send: true,
+        forcedType: type,
+        to: normalizedTestEmail,
+        id: data.id || null,
+      }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (err) {
       return new Response(JSON.stringify({ ok: false, error: 'send_error', message: String(err.message) }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
@@ -339,7 +371,7 @@ export async function GET(request) {
   if (statusOnly) {
     const now = new Date();
     const e = nowInEastern(now);
-    const type = getReminderType(now);
+    const type = forcedType || getReminderType(now);
     return new Response(
       JSON.stringify({
         ok: true,
@@ -348,6 +380,7 @@ export async function GET(request) {
         utc: { hour: now.getUTCHours(), minute: now.getUTCMinutes() },
         expectedUtcHour: getExpectedCronUtcHour(now),
         reminderType: type,
+        forcedType,
         message: type ? `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week).` : 'No reminder scheduled for this time (Fri/Sat/Sun during the noon Eastern cron hour only).',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
