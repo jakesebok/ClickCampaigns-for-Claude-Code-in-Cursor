@@ -1,6 +1,6 @@
 # 6C Scorecard reminder emails
 
-Reminder emails are sent to **active clients** (from `portal_active_clients`) during and immediately after the weekly scorecard window. The cron job calls `/api/cron/6c-reminders`; the API decides which email to send based on the **current Eastern day** and the **correct UTC cron hour for DST vs. standard time**.
+Reminder emails are sent to **active clients** (from `portal_active_clients`) during and immediately after the weekly scorecard window. The cron job calls `/api/cron/6c-reminders`; the API decides which email to send based on the **current Eastern day**. To make Vercel Hobby more reliable, the project now runs multiple fallback cron hours and uses **Resend idempotency keys** so redundant attempts do not create duplicate emails.
 
 **Who receives each email:**
 - **Friday** ("Your scorecard is available"): All active clients.
@@ -9,15 +9,11 @@ Reminder emails are sent to **active clients** (from `portal_active_clients`) du
 
 ## Schedule (Eastern)
 
-`vercel.json` defines **two** daily cron entries: `5 16 * * *` and `5 17 * * *`.
-The handler accepts only the one that matches the current Eastern offset:
+`vercel.json` defines **four** daily cron entries: `5 15 * * *`, `5 16 * * *`, `5 17 * * *`, and `5 18 * * *`.
 
-- **DST (EDT / UTC-4):** 16:00 UTC hour
-- **Standard time (EST / UTC-5):** 17:00 UTC hour
+That gives the reminder system multiple fallback attempts around the Eastern midday window. The API sends one email based on the Eastern day, and Resend idempotency prevents duplicate sends if more than one cron attempt lands on the same day:
 
-That makes reminders reliable on Vercel Hobby, where cron timing is only guaranteed within the scheduled hour. The API sends one email based on the Eastern day:
-
-| Day (during the noon Eastern cron hour) | Email |
+| Day (during the fallback reminder window) | Email |
 |-------------------------------------|--------|
 | Friday | "Your scorecard is available for this week" |
 | Saturday | "Reminder: Get your scorecard in this weekend" |
@@ -39,7 +35,7 @@ Summary:
 `vercel.json` in this folder already defines:
 
 - Path: `/api/cron/6c-reminders`
-- Schedule: `5 16 * * *` and `5 17 * * *`. The handler picks the correct one for the current Eastern offset, then sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “just a few hours left”, Monday/Tuesday → Vital Action catch-up for missed submissions.
+- Schedule: `5 15 * * *`, `5 16 * * *`, `5 17 * * *`, and `5 18 * * *`. The handler uses any of those fallback hours for the current Eastern day, then sends based on Eastern time: Friday → “available”, Saturday → reminder, Sunday → “just a few hours left”, Monday/Tuesday → Vital Action catch-up for missed submissions.
 
 After deployment, Cron runs automatically. You can confirm in Vercel → Project → Settings → Crons.
 
@@ -51,7 +47,7 @@ After deployment, Cron runs automatically. You can confirm in Vercel → Project
 
 Without sending email (to see which type would run):
 
-1. Call the API during the Friday-Tuesday noon Eastern cron hour (or change the server time for testing).
+1. Call the API during the Friday-Tuesday fallback reminder hours (or change the server time for testing).
 2. With sending: set **RESEND_API_KEY** and **CRON_SECRET**, then:
 
    ```bash
@@ -62,4 +58,4 @@ For **status only** (no email): add `?status=1` to the URL. For **one test email
 
 ## Hobby plan note
 
-Vercel Hobby timing is only guaranteed **within the scheduled hour**. This project keeps two daily cron entries (`5 16 * * *` and `5 17 * * *`) so the noon Eastern reminder window works in both DST and standard time from Friday through Tuesday. If you upgrade to Pro, you can add more precise reminder times, such as an additional Sunday 5pm "just a few hours left" email.
+Vercel Hobby timing is only guaranteed **within the scheduled hour**. This project keeps four daily cron entries (`5 15 * * *`, `5 16 * * *`, `5 17 * * *`, and `5 18 * * *`) so Friday-Tuesday reminders get multiple fallback attempts around the Eastern midday window. The handler sends based on the Eastern day, and Resend idempotency keys prevent duplicate emails if more than one attempt runs successfully.

@@ -1,9 +1,9 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Schedule: two daily cron entries at 16:05 UTC and 17:05 UTC.
- * The handler chooses the correct UTC hour for the current Eastern offset
- * (16 UTC during DST, 17 UTC during standard time) so Vercel Hobby's
- * within-the-hour cron timing still lands in the weekend noon window.
+ * Schedule: four daily cron entries at 15:05, 16:05, 17:05, and 18:05 UTC.
+ * The handler accepts any configured fallback hour around the Eastern midday
+ * reminder window and relies on Resend idempotency keys so redundant attempts
+ * do not create duplicate emails.
  * - Friday noon Eastern hour → "Your scorecard is available"
  * - Saturday noon Eastern hour → Saturday reminder
  * - Sunday noon Eastern hour → "Just a few hours left to submit"
@@ -17,6 +17,7 @@ const TZ = 'America/New_York';
 const PORTAL_URL = 'https://portal.alignedpower.coach';
 const SCORECARD_URL = `${PORTAL_URL}/scorecard`;
 const DASHBOARD_URL = `${PORTAL_URL}/dashboard`;
+const CONFIGURED_CRON_UTC_HOURS = [15, 16, 17, 18];
 
 function nowInEastern(date = new Date()) {
   const fmt = new Intl.DateTimeFormat('en-US', {
@@ -42,12 +43,12 @@ function getExpectedCronUtcHour(date = new Date()) {
   return offsetMinutes === -4 * 60 ? 16 : 17;
 }
 
-function isInExpectedCronHour(date = new Date()) {
-  return date.getUTCHours() === getExpectedCronUtcHour(date);
+function isInConfiguredCronHour(date = new Date()) {
+  return CONFIGURED_CRON_UTC_HOURS.includes(date.getUTCHours());
 }
 
 function getReminderType(date = new Date()) {
-  if (!isInExpectedCronHour(date)) return null;
+  if (!isInConfiguredCronHour(date)) return null;
   const e = nowInEastern(date);
   if (e.dayOfWeek === 5) return 'available';
   if (e.dayOfWeek === 6) return 'saturday';
@@ -79,6 +80,16 @@ function normalizeEmail(value) {
 
 function normalizeOneThing(value) {
   return String(value || '').trim();
+}
+
+function getEasternDateKey(date = new Date()) {
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: TZ,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  return fmt.format(date);
 }
 
 function isReminderType(value) {
@@ -540,16 +551,17 @@ export async function GET(request) {
     const e = nowInEastern(now);
     const type = forcedType || getReminderType(now);
     const message = !type
-      ? 'No reminder scheduled for this time (Fri/Tue during the noon Eastern cron hour only).'
+      ? 'No reminder scheduled for this time (Fri/Tue during the configured fallback cron hours only).'
       : isVitalActionReminderType(type)
-        ? `Would send "${type}" to active clients who missed the most recent scored 6Cs window and have not set a Vital Action yet.`
-        : `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week).`;
+        ? `Would send "${type}" to active clients who missed the most recent scored 6Cs window and have not set a Vital Action yet. Redundant cron attempts are deduped with Resend idempotency keys.`
+        : `Would send "${type}" to active clients (Sat/Sun: only those who haven't submitted a scored 6Cs this week). Redundant cron attempts are deduped with Resend idempotency keys.`;
     return new Response(
       JSON.stringify({
         ok: true,
         status: true,
         eastern: { dayOfWeek: e.dayOfWeek, hour: e.hour, minute: e.minute },
         utc: { hour: now.getUTCHours(), minute: now.getUTCMinutes() },
+        configuredUtcHours: CONFIGURED_CRON_UTC_HOURS,
         expectedUtcHour: getExpectedCronUtcHour(now),
         reminderType: type,
         forcedType,
@@ -642,13 +654,20 @@ export async function GET(request) {
 
   let sent = 0;
   let failed = 0;
+  let deduped = 0;
+  const reminderDateKey = getEasternDateKey();
   for (const client of clients) {
     const html = buildHtmlEmail({ type, firstName: client.firstName });
     const text = buildTextEmail({ type, firstName: client.firstName });
+    const idempotencyKey = `6c-reminder/${type}/${reminderDateKey}/${client.email}`;
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${resendKey}`,
+          'Idempotency-Key': idempotencyKey,
+        },
         body: JSON.stringify({
           from: fromLine,
           to: [client.email],
@@ -659,7 +678,10 @@ export async function GET(request) {
         }),
       });
       if (res.ok) sent++;
-      else {
+      else if (res.status === 409) {
+        deduped++;
+        console.info('[6c-reminders] Resend deduped request for', client.email, idempotencyKey, await res.text());
+      } else {
         failed++;
         console.error('[6c-reminders] Resend error for', client.email, await res.text());
       }
@@ -678,6 +700,7 @@ export async function GET(request) {
     ok: true,
     type,
     sent,
+    deduped,
     failed,
     total: clients.length,
     ...(skipped > 0 && { skipped, reason: skippedReason }),

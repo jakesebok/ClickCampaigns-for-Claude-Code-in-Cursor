@@ -435,32 +435,7 @@ export default function DashboardPage() {
             </div>
           )}
           {/* Vital Action — top, front and center */}
-          {missedWindow && missedWindowManualOneThing ? (
-            <div className="rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
-              <div className="flex items-start gap-4">
-                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-accent" />
-                </div>
-                <div className="flex-1 min-w-0 space-y-3">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
-                    Window missed
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      This Week&apos;s Vital Action
-                    </p>
-                    <p className="font-medium leading-snug whitespace-pre-wrap break-words">
-                      {missedWindowManualOneThing}
-                    </p>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    The full 6Cs review is closed, but ALFRED will keep this move front and
-                    center until next Friday&apos;s submission window opens.
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : missedWindow ? (
+          {missedWindow && !missedWindowManualOneThing ? (
             <div className="rounded-2xl border border-accent/30 bg-card p-5 shadow-sm">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">

@@ -42,11 +42,19 @@
   "crons": [
     {
       "path": "/api/cron/6c-reminders",
+      "schedule": "5 15 * * *"
+    },
+    {
+      "path": "/api/cron/6c-reminders",
       "schedule": "5 16 * * *"
     },
     {
       "path": "/api/cron/6c-reminders",
       "schedule": "5 17 * * *"
+    },
+    {
+      "path": "/api/cron/6c-reminders",
+      "schedule": "5 18 * * *"
     }
   ]
 }
