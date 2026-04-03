@@ -49,7 +49,13 @@ function isInConfiguredCronHour(date = new Date()) {
 
 function isInFallbackReminderWindow(date = new Date()) {
   const eastern = nowInEastern(date);
-  return eastern.hour >= 11 && eastern.hour <= 12;
+  if (eastern.dayOfWeek === 5) {
+    return eastern.hour >= 12 && eastern.hour <= 13;
+  }
+  if (eastern.dayOfWeek === 6 || eastern.dayOfWeek === 0 || eastern.dayOfWeek === 1 || eastern.dayOfWeek === 2) {
+    return eastern.hour >= 11 && eastern.hour <= 12;
+  }
+  return false;
 }
 
 function getReminderType(date = new Date()) {

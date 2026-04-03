@@ -183,7 +183,7 @@ This checks that the system is running and knows the correct time. It does **not
 
 2. Press Enter.
 
-**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, Sunday, Monday, and Tuesday during the configured fallback cron hours that still land in the Eastern 11am-noon reminder window. The important part is that you see a response with no error. You can close the tab.
+**What you should see:** A page of plain text that includes words like "ok", "eastern", "reminderType", and a sentence about what would happen at this time. Most of the time you'll see something like "No reminder scheduled for this time"—that's normal, because reminders only go out on Friday, Saturday, Sunday, Monday, and Tuesday during the configured fallback cron hours. Friday is additionally gated so the “scorecard is available” email cannot send before the Friday window opens at 12pm Eastern. The important part is that you see a response with no error. You can close the tab.
 
 ### Test 3: Send yourself a real test email
 
@@ -230,7 +230,7 @@ That usually means the secret in the URL doesn't match what's in Vercel. Try thi
 
 ### When do the real reminders go out?
 
-The system sends reminders **once per day** from **Friday through Tuesday**, but it now has multiple fallback cron attempts that still land in the Eastern 11am-noon reminder window. So each week, active clients can get up to five emails: one when the scorecard opens on Friday, a reminder on Saturday, a "just a few hours left" notice on Sunday, and Monday/Tuesday follow-up emails if they missed the scorecard but still have not set their Vital Action. Redundant cron attempts are deduped with Resend idempotency, so clients still receive only one copy of each day's email.
+The system sends reminders **once per day** from **Friday through Tuesday**, but it now has multiple fallback cron attempts. Friday is specifically protected so the reminder cannot go out before the scorecard window opens at 12pm Eastern. So each week, active clients can get up to five emails: one when the scorecard opens on Friday, a reminder on Saturday, a "just a few hours left" notice on Sunday, and Monday/Tuesday follow-up emails if they missed the scorecard but still have not set their Vital Action. Redundant cron attempts are deduped with Resend idempotency, so clients still receive only one copy of each day's email.
 
 ---
 
@@ -243,4 +243,4 @@ The system sends reminders **once per day** from **Friday through Tuesday**, but
 - [ ] **Vercel:** Optionally added **SIX_C_FROM_EMAIL** (e.g. `scorecard@alignedpower.coach`) if you verified that domain.
 - [ ] **Vercel:** Redeployed so the new env vars are in effect.
 
-After that, the cron job will run with multiple fallback attempts that still land in the Eastern 11am-noon reminder window (Fri-Tue) and send the corresponding reminder. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
+After that, the cron job will run with multiple fallback attempts (Fri-Tue) and send the corresponding reminder, with Friday protected so the email cannot arrive before the scorecard window opens. For the schedule and more detail, see [6c-reminder-emails.md](./6c-reminder-emails.md).
