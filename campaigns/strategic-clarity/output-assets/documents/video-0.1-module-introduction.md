@@ -54,7 +54,7 @@ By the end of this module, you will have:
 
 4. **The Future You** — who you're becoming across Self (Personal), Social (Relationships), Skills (Business), and Service (Contribution). Growth that doesn't require self-abandonment.
 
-5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. We're not just turning vision into numbers here. We're reckoning your needs against your capacity and identifying the lever that will allow you to get where you're going without breaking what matters. What must be true? What are you tolerating? What's it costing you?
+5. **Reality Check** — a bridge between the vision you just cast and the life you're currently living. We're not just turning vision into numbers here. We're weighing your needs against your capacity and identifying the lever that will allow you to get where you're going without breaking what matters. What must be true? What are you tolerating? What's it costing you?
 
 6. **The Revenue Bridge: From Meaning To Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real. No "work harder." Leverage.
 
@@ -93,7 +93,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 4:** We map The Future You. The person you're becoming across every domain that matters.
 
-**Lesson 5:** We face The Reckoning. We reckon your needs against your capacity and name what's in the way—so the plan we build actually accounts for your real life, not just the aspirational one.
+**Lesson 5:** We do a Reality Check. We name what's in the way and weigh your needs against your capacity so the plan we build actually accounts for your real life, not just the aspirational one.
 
 **Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the annual, quarterly, monthly, and weekly actions.
 

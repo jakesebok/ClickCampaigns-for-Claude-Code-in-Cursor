@@ -8,7 +8,7 @@
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—Real Reasons, Driving Fire, values, The Future You, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, Driving Fire, values, The Future You, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -25,6 +25,20 @@ A Required Revenue number that's built on *your* actual life—your baseline nee
 When we're done, you'll know exactly what your business needs to generate—and why. Every dollar will be connected to something real. And when you hit a rough month? You won't be wondering "why am I doing this?" You'll know. Because you built the number on purpose.
 
 ---
+
+### Step 0: What Aligned Success Feels Like
+
+Before we talk numbers, start with the felt experience.
+
+Open the worksheet and answer the Step 0 questions. When this works in a way that feels aligned:
+- how do you want mornings to feel?
+- what do you want your relationship with money to feel like?
+- what do you want your relationship with time to feel like?
+- what do you want your energy to feel like?
+
+This matters because the number is not the point. The lived experience is the point. The number is in service of the life.
+
+Now we move into the math.
 
 ### Step 1: The Non-Negotiables (Baseline Needs)
 

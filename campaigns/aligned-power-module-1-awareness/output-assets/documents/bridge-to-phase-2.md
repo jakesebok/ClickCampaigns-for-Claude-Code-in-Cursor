@@ -18,7 +18,7 @@ That's what the Alignment Arc does. It's a framework that pulls out:
 - **Your Driving Fire** — Why you do what you do. The belief underneath everything.
 - **Your Values Code** — The non-negotiables that filter every decision.
 - **The Future You** — Who you're becoming across Self, Social, Skills, and Service.
-- **The Reckoning** — The gap between where you are and where you're going.
+- **Reality Check** — The gap between where you are and where you're going.
 - **The Revenue Bridge** — What your business actually needs to produce—built on *your* life, not a random number.
 - **Your Vital Action** — The one move that makes everything else easier.
 

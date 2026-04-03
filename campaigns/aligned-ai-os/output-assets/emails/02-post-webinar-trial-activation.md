@@ -95,7 +95,7 @@ That's because Aligned Freedom Coach knows *you*.
 
 Here are two ways to make it even smarter:
 
-**1. Do The Reckoning worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make Aligned Freedom Coach more realistic about your current situation.
+**1. Do the Reality Check worksheet** (if you haven't yet). It fills in the "what's actually in the way" fields that make Aligned Freedom Coach more realistic about your current situation.
 
 **2. Submit your first 6Cs Scorecard.** Aligned Freedom Coach tracks your scores across Clarity, Coherence, Capacity, Confidence, Courage, and Connection — and references trends in future conversations.
 

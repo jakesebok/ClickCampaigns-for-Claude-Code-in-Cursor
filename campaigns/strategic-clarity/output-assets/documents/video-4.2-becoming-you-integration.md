@@ -79,7 +79,7 @@ Before we move to the next lesson, take a breath. You've done a lot of vision wo
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
-I'll see you in Lesson 5, where we do The Reckoning before turning all of this into numbers.
+I'll see you in Lesson 5, where we do a Reality Check before turning all of this into numbers.
 
 ---
 

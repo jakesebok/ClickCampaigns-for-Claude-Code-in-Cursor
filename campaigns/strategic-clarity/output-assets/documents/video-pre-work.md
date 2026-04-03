@@ -26,7 +26,7 @@ Your Pre-Work Packet is the starting coordinates.
 
 Let me be upfront about something. This phase of the program serves two distinct purposes—and both of them matter.
 
-**First: Information.** We're collecting the raw data that your Aligned Freedom Coach will use to serve you. Your values inputs. Your peak moments. Your revenue numbers. Your offer snapshot. All of it becomes the dataset your AFC draws from every time it coaches you, plans with you, or flags a misaligned decision. The quality of your inputs directly determines the quality of your coach. Okay?
+**First: Information.** We're collecting the raw data that your Aligned Freedom Coach will use to serve you. Your values inputs. Your peak moments. Your revenue numbers. Your offer ecosystem. All of it becomes the dataset your AFC draws from every time it coaches you, plans with you, or flags a misaligned decision. The quality of your inputs directly determines the quality of your coach. Okay?
 
 **Second—and this is the part most people don't expect: Transformation.** Simply *doing* this work is going to change you. Not theoretically. Not eventually. Right now. When you sit down and write your peak moments, name what you admire in others, look at your real numbers—you're going to have insights you can't unsee. Things will surface that have been quietly running your decisions for years. The act of excavation is itself transformative.
 
@@ -42,9 +42,11 @@ There are four exercises in the packet:
 
 **Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them. Pro tip: speaking these out loud instead of typing will get you the truest, messiest, most unfiltered outputs. I use Wispr Flow for this—it transcribes and cleans up your speech in real time, no punctuation dictation needed. 14-day free trial, link in the packet. Full disclosure: I'm an affiliate.
 
-**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources, stream mix. I know, not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
-**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your Aligned Freedom Coach needs to understand your business to give you useful advice. This is how it learns.
+Inside Exercise 3, you'll see **core sections** everyone completes, plus **optional tracks** for specific models. Most of you will complete the core sections and move straight into Exercise 4. The optional tracks are there so less-standard models—repeat-client businesses, multi-stream operators, space models, retreat builders—aren't left guessing.
+
+**Exercise 4: Offer Ecosystem + Primary Revenue Driver Snapshot.** Your offers, your audience, your sales process, your delivery model, and the offer that currently does the most work in the business. For a lot of you, this is basically your flagship offer plus the surrounding ecosystem. Your Aligned Freedom Coach needs to understand your business to give you useful advice. This is how it learns.
 
 ---
 

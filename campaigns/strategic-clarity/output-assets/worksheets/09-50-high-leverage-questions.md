@@ -140,7 +140,7 @@
 
 53. "What's the ONE system improvement that would remove the most friction next week?"
 
-54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
+54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, average sale value (ASV), or capacity?"
 
 55. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
 

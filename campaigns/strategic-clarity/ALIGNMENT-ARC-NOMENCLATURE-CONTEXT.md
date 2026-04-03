@@ -17,7 +17,7 @@
 | Just Cause | The Cause Worth Playing For |
 | Core Values Extraction | Your Values Code: Excavating Your Non-Negotiables |
 | The Becoming | The Future You |
-| Reality Check | The Reckoning |
+| The Reckoning | Reality Check |
 | From Meaning to Math | The Revenue Bridge: From Meaning To Math |
 | ONE THING / The ONE Thing | Your Vital Action |
 | ONE THING Domino Plan | The Vital Action Plan |
@@ -46,7 +46,7 @@
 | [MIQ] | [REAL_REASONS] |
 | [WHY] | [DRIVING_FIRE] |
 | [F4] | [BECOMING] |
-| [REALITY] | [RECKONING] |
+| [RECKONING] | [REALITY] |
 | [DOMINO] | [VITAL_ACTION] |
 
 ---
@@ -69,7 +69,7 @@
 - Just Cause
 - The Becoming (except in historical/source context)
 - Future Four / Future 4
-- Reality Check
+- The Reckoning
 - From Meaning to Math (except in historical/source context)
 - Aligned AI OS (use **Aligned AIOS** instead)
 - Domino Plan

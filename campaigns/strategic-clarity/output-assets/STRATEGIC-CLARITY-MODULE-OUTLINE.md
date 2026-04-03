@@ -35,6 +35,9 @@
 | Pre-Work Video — Why Pre-Work Matters | `documents/video-pre-work.md` | Script | ~5–8 min |
 | Pre-Work Packet | `worksheets/00-pre-work-packet.md` | Worksheet | — |
 
+Notes:
+Core sections are completed by everyone. For most businesses, Core + Exercise 4 will cover it. Optional tracks exist for repeat-client, multi-stream, studio/collective, retreat/event, and other-hats use cases.
+
 ---
 
 ### Lesson 1: The Real Reasons (End Goals vs. Means Goals)
@@ -78,12 +81,12 @@
 
 ---
 
-### Lesson 5: The Reckoning (Bridge to Operationalization)
+### Lesson 5: Reality Check (Bridge to Operationalization)
 
 | Asset | File | Type | Duration |
 |-------|------|------|----------|
-| Video 5.1 — The Reckoning | `documents/video-5.1-reality-check.md` | Script | ~5–10 min |
-| The Reckoning Worksheet | `worksheets/05-reality-check.md` | Worksheet | — |
+| Video 5.1 — Reality Check | `documents/video-5.1-reality-check.md` | Script | ~5–10 min |
+| Reality Check Worksheet | `worksheets/05-reality-check.md` | Worksheet | — |
 
 ---
 
@@ -95,6 +98,9 @@
 | Video 6.2 — The Math (Revenue → QCs) | `documents/video-6.2-gtm-the-math.md` | Script | ~10–12 min |
 | Video 6.3 — Lead Path Fork + Highest-Leverage Move | `documents/video-6.3-gtm-lead-path-leverage.md` | Script | ~5–8 min |
 | The Revenue Bridge Worksheet | `worksheets/06-goals-that-matter.md` | Worksheet | — |
+
+Notes:
+Revenue Bridge keeps flagship/core-offer math as the default path, with stream-mix analysis for everyone plus optional retention, high-touch capacity, seasonality, space, and retreat/event math when relevant.
 
 ---
 
@@ -139,7 +145,7 @@ Lesson 3: Your Values Code — What do I stand for? (Operational definitions + b
     ↓
 Lesson 4: The Future You — Who am I growing into? Self (Personal), Social (Relationships), Skills (Business), Service (Contribution)
     ↓
-Lesson 5: The Reckoning — What's actually true right now? (Bridge to operationalization)
+Lesson 5: Reality Check — What's actually true right now? (Bridge to operationalization)
     ↓
 Lesson 6: The Revenue Bridge — What does my business need to produce?
     ↓
@@ -178,7 +184,8 @@ All video scripts written in Jake Sebok's voice per `Resources/Jake's Voice/JAKE
 ## Delivery Notes
 
 - **Worksheets** are formatted as markdown with empty tables, ready for conversion to Google Docs
+- **Pre-Work + Revenue Bridge** use a core-first structure with optional business-model tracks so most people can move fast while edge cases still get clear guidance
 - **Video scripts** are written as teleprompter-ready scripts with natural speech patterns
-- **Master Prompt** updated to reference The Reckoning worksheet with graceful `[NEEDS INPUT]` handling when skipped
+- **Master Prompt** updated to reference the Reality Check worksheet with graceful `[NEEDS INPUT]` handling when skipped
 - **The Alignment Arc Intensive** uses the same worksheets, facilitated live—no separate materials needed
 - **Aligned Freedom Coach workflow:** (1) **Generation:** Start a chat with the master prompt; attach completed worksheets file (preferred) or paste below the line. (2) **Ongoing coaching:** Use the generated Master Context as a persistent context document—paste at start of conversations or add to AI project/custom instructions so the coach knows the user every time

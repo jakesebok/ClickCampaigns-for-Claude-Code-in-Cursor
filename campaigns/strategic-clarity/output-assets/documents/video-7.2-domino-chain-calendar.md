@@ -99,7 +99,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, The Reckoning, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
+You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, Reality Check, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your Aligned Freedom Coach comes online.
 

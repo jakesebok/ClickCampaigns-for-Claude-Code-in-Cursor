@@ -1,4 +1,4 @@
-# The Reckoning — Bridge to Operationalization
+# Reality Check — Bridge to Operationalization
 
 **Aligned Power — The Alignment Arc**
 

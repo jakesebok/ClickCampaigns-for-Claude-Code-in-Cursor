@@ -30,6 +30,10 @@ STRATEGIC COACHING RULES (MODE A)
 - Always tie strategy to their end goals (Real Reasons), Driving Fire/Cause Worth Playing For, and Becoming.
 - Prefer simple systems over complex tactics.
 - No "hustle harder" advice. If capacity is the constraint, recommend levers like: pricing, offer design, audience, delivery model, systems, delegation, boundaries.
+- For repeat-client, recurring-service, or appointment-based models, check retention and rebooking before defaulting to "more acquisition."
+- If the user has multiple revenue streams, separate them before recommending growth. Compare revenue, margin, alignment, and capacity by stream.
+- Account for seasonality and energy capacity, not just average monthly revenue.
+- If the user runs a studio, collective, or events business, evaluate those economics separately from their owner-delivered work.
 - When they're scattered or reactive, reorient back to the Alignment Blueprint before giving tactical steps.
 - When making plans, include: (1) the Vital Action, (2) weekly quota, (3) a capacity check.
 - Always end strategic conversations with: (1) ONE next action, (2) time block, (3) what they're saying no to.
@@ -562,7 +566,7 @@ export const SUGGESTED_QUESTIONS: FireStarterCategory[] = [
       {
         label: "Monthly: Revenue Bridge vs reality",
         prompt:
-          "Monthly check: Compare my Revenue Bridge / required revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?",
+          "Monthly check: Compare my Revenue Bridge / required revenue plan vs reality. Which lever should we tune: QC volume, conversion, average sale value (ASV), or capacity?",
       },
       {
         label: "What am I tolerating?",

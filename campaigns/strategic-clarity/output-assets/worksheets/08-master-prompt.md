@@ -34,7 +34,7 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 - If multiple answers exist, choose the clearest / most specific, and put extras into "Notes / Backup Language" at the end.
 - If any content conflicts, resolve conflicts by this priority order:
   1) Core Values + Boundaries
-  2) Real Reasons "Must Be True" conditions (from The Reckoning worksheet)
+  2) Real Reasons "Must Be True" conditions (from the Reality Check worksheet)
   3) Driving Fire statement
   4) Cause Worth Playing For
   5) The Future You
@@ -45,12 +45,12 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 FIELD MAP (where each field comes from)
 Use these worksheet tags to find the content:
 [REAL_REASONS] = The Real Reasons / Life Lists worksheet (Experiences, Growth, Contribution)
-[RECKONING] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
+[REALITY] = Reality Check worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If the Reality Check worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
 [DRIVING_FIRE] = Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fire, Full-Body Test notes, Strengthen answers, Cause Worth Playing For future state answers, Connect the Dots table)
 [VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
 [BECOMING] = The Future You worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
-[OFFERS] = Pre-Work Packet Exercise 4A (Offer Ecosystem Snapshot: offer table with Name, Price, Time per client, Duration, Margin, Role; plus Offer Flow: entry, primary driver, upsell, downsell)
-[REV] = The Revenue Bridge worksheet (Baseline needs, Future You investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[OFFERS] = Pre-Work Packet Exercise 4 (Offer Ecosystem Snapshot, Offer Flow, Primary Revenue Driver Basics, Sales Process Snapshot, Delivery & Operations Reality, Client Experience + Retention)
+[REV] = The Revenue Bridge worksheet (Aligned success markers, Baseline needs, Future You investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Revenue Stream Mix, Acquisition math, Retention math, Lead source fork metrics, Capacity + seasonality, Optional space / event economics, Highest-leverage move)
 [VITAL_ACTION] = Your Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
@@ -76,6 +76,10 @@ Output Rules (Strategic)
 - Always tie strategy to my end goals (Real Reasons), my Driving Fire/Cause Worth Playing For, and my Becoming.
 - Prefer simple systems over complex tactics.
 - No "hustle harder" advice. If capacity is the constraint, recommend levers like: pricing, offer design, audience, delivery model, systems, delegation, boundaries.
+- For repeat-client, recurring-service, or appointment-based models, diagnose retention and rebooking before defaulting to more acquisition.
+- If I have multiple revenue streams, separate them before recommending growth. Compare revenue, margin, alignment, and capacity by stream.
+- Account for seasonality and energy capacity, not just average monthly revenue.
+- If I run a studio, collective, or events business, evaluate those economics separately from my owner-delivered work.
 - When I'm scattered or reactive, reorient me back to the Alignment Blueprint before giving tactical steps.
 - When making plans, you must include:
   (1) the Vital Action,
@@ -98,7 +102,7 @@ Who I am (today):
 [BRACKET: derive a 2–3 sentence identity statement from recurring themes across REAL_REASONS + DRIVING_FIRE + VALUES + BECOMING. If unclear: [NEEDS INPUT]]
 
 The pattern I'm leaving:
-[BRACKET: pull from RECKONING Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If The Reckoning was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
+[BRACKET: pull from REALITY Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If Reality Check was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
 
 My operating constraints (real life):
 Available weekly hours for growth work: [BRACKET: from REV Capacity section; else [NEEDS INPUT]]
@@ -109,13 +113,13 @@ Capacity limit (max clients/projects at once): [BRACKET: from REV Capacity; else
 
 My current friction points:
 The most common thing that derails me is:
-[BRACKET: from RECKONING Resistance + VITAL_ACTION sabotage patterns + REV resistance notes. If The Reckoning not completed, use VITAL_ACTION and REV only.]
+[BRACKET: from REALITY Resistance + VITAL_ACTION sabotage patterns + REV resistance notes. If Reality Check was not completed, use VITAL_ACTION and REV only.]
 
 The "avoidance loop" I default to is:
 [BRACKET: if present; else [NEEDS INPUT]]
 
 The "overwork loop" I default to is:
-[BRACKET: from RECKONING Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
+[BRACKET: from REALITY Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
 
 2) MY TOP 5 CORE VALUES (OPERATIONALIZED)
 Value #1: [BRACKET: VALUES Top 5 #1]
@@ -145,7 +149,7 @@ Boundary: [BRACKET: VALUES #5 boundary]
 
 Values Conflict Watchlist (common traps):
 - When I chase ________, I tend to betray value ________.
-  [BRACKET: derive from VALUES reflections + RECKONING Misalignments. If not explicit: [NEEDS INPUT]]
+  [BRACKET: derive from VALUES reflections + REALITY Misalignments. If not explicit: [NEEDS INPUT]]
 - When I feel pressure, I tend to sacrifice ________.
   [BRACKET: same method; else [NEEDS INPUT]]
 
@@ -161,22 +165,22 @@ A) My Real Reasons (Life Lists)
 [BRACKET: REAL_REASONS Contribution]
 
 Real Reasons "Must Be True" Conditions (non-negotiables for success):
-[BRACKET: RECKONING Must Be True. If The Reckoning not completed: [NEEDS INPUT — complete The Reckoning worksheet to populate this field]]
+[BRACKET: REALITY Must Be True. If Reality Check was not completed: [NEEDS INPUT — complete the Reality Check worksheet to populate this field]]
 
 Current Misalignments (what I'm tolerating):
-[BRACKET: RECKONING Misalignments. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Misalignments. If not completed: [NEEDS INPUT]]
 
 What it's costing me:
-[BRACKET: RECKONING Costs. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Costs. If not completed: [NEEDS INPUT]]
 
 My Next Right Move:
-[BRACKET: RECKONING Next Right Move. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Next Right Move. If not completed: [NEEDS INPUT]]
 
 What resists this change (fear/protective part):
-[BRACKET: RECKONING Resistance. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Resistance. If not completed: [NEEDS INPUT]]
 
 Support that makes alignment easier:
-[BRACKET: RECKONING Support. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Support. If not completed: [NEEDS INPUT]]
 
 B) My Driving Fire (Purpose)
 Driving Fire Statement (clean draft):
@@ -224,10 +228,31 @@ Offer inventory (list each offer with price, your time/client, duration, margin,
 Offer flow:
 Entry offer: [BRACKET: OFFERS entry offer]
 Primary revenue driver: [BRACKET: OFFERS primary driver]
-Typical upsell path: [BRACKET: OFFERS upsell path]
-Downsell (if no to flagship): [BRACKET: OFFERS downsell]
+Typical upsell or rebooking path: [BRACKET: OFFERS upsell or rebooking path]
+Downsell / lower-friction next step: [BRACKET: OFFERS downsell]
+
+Primary revenue driver details:
+Who it's for: [BRACKET: OFFERS primary driver audience]
+Core problem solved: [BRACKET: OFFERS primary driver problem]
+Core promise / outcome: [BRACKET: OFFERS primary driver promise]
+Delivery model + duration: [BRACKET: OFFERS primary driver delivery + duration]
+Price / payment structure: [BRACKET: OFFERS primary driver price]
+Primary sales conversion event: [BRACKET: OFFERS primary conversion event]
+
+Retention / client experience:
+Rebooking or "what's next" process: [BRACKET: OFFERS rebooking process if present; else [NEEDS INPUT]]
+Follow-up process for non-buyers or inactive clients: [BRACKET: OFFERS lead follow-up or past-client follow-up if present; else [NEEDS INPUT]]
+Referral ask process: [BRACKET: OFFERS referral ask if present; else [NEEDS INPUT]]
+Testimonial / review ask process: [BRACKET: OFFERS testimonial ask if present; else [NEEDS INPUT]]
 
 B) Required Revenue (Baseline + Life + Impact)
+Aligned success markers:
+Morning state: [BRACKET: REV aligned success morning state]
+Money relationship: [BRACKET: REV aligned success money]
+Time relationship: [BRACKET: REV aligned success time]
+Energy state: [BRACKET: REV aligned success energy]
+What I'm actually proud of: [BRACKET: REV aligned success pride]
+
 Baseline Needs (annual): [BRACKET: REV Baseline total]
 Becoming Investments (annual): [BRACKET: REV Becoming total]
 Real Reasons Desires (annual): [BRACKET: REV Real Reasons Desires total]
@@ -239,13 +264,22 @@ C) This Year's Revenue Target
 Target annual revenue: [BRACKET: REV Target Revenue annual]
 Target monthly revenue: [BRACKET: REV monthly]
 Target weekly revenue: [BRACKET: REV weekly]
+Highest month / lowest month reality: [BRACKET: REV seasonal high-low if present; else [NEEDS INPUT]]
 
-D) Unit Economics
+D) Revenue Stream Mix + Unit Economics
+Highest-revenue stream: [BRACKET: REV highest revenue stream]
+Highest-margin stream: [BRACKET: REV highest margin stream]
+Most aligned stream: [BRACKET: REV most aligned stream]
+Stream to reduce or exit: [BRACKET: REV reduce or exit stream]
+
 Average sale value (ASV): [BRACKET: REV ASV]
 Gross margin (approx): [BRACKET: REV margin if present; else [NEEDS INPUT]]
 Close rate (sales calls → clients): [BRACKET: REV close rate]
 Show rate (booked → attended): [BRACKET: REV show rate]
 Qualified conversation → sales call rate: [BRACKET: REV QC→Sales Call rate]
+Rebooking rate: [BRACKET: REV rebooking rate if present; else [NEEDS INPUT]]
+Average client lifespan / total sessions: [BRACKET: REV client lifespan if present; else [NEEDS INPUT]]
+Client lifetime value (LTV): [BRACKET: REV LTV if present; else [NEEDS INPUT]]
 
 E) Qualified Conversations (QC) Math
 Required sales per year: [BRACKET: REV required sales/year]
@@ -254,8 +288,17 @@ Required qualified conversations per year: [BRACKET: REV required QCs/year]
 Per month: [BRACKET: REV QCs/month]
 Per week: [BRACKET: REV QCs/week]
 
+Retention leverage (if applicable):
+Current active clients: [BRACKET: REV active clients if present; else [NEEDS INPUT]]
+Current monthly revenue from existing clients: [BRACKET: REV existing-client monthly revenue if present; else [NEEDS INPUT]]
+Biggest retention leak: [BRACKET: REV biggest retention leak if present; else [NEEDS INPUT]]
+Retention move to test first: [BRACKET: REV first retention move if present; else [NEEDS INPUT]]
+
 F) Lead Source Fork
 Primary lane: [BRACKET: REV selected lane: Referrals/Ads/Hybrid]
+Highest-quality client source right now: [BRACKET: REV best client source if present; else [NEEDS INPUT]]
+Underleveraged source: [BRACKET: REV underinvested source if present; else [NEEDS INPUT]]
+Source to reduce or ignore: [BRACKET: REV low-quality source if present; else [NEEDS INPUT]]
 
 REFERRAL LANE (weekly operating targets)
 Weekly QCs needed: [BRACKET: REV referral weekly QCs]
@@ -284,14 +327,24 @@ Capacity Reality
 Max QCs/week without chaos: [BRACKET: REV capacity max QCs/wk]
 Max sales calls/week: [BRACKET: REV max sales calls/wk]
 Max delivery hours/week: [BRACKET: REV max delivery hours/wk]
-Current overload symptoms: [BRACKET: REV overload symptoms; else RECKONING Costs + VITAL_ACTION sabotage]
+Current overload symptoms: [BRACKET: REV overload symptoms; else REALITY Costs + VITAL_ACTION sabotage]
+Max sustainable sessions/week (if session-based model): [BRACKET: REV max sustainable sessions if present; else [NEEDS INPUT]]
+Recovery need after intensive work: [BRACKET: REV recovery need if present; else [NEEDS INPUT]]
+Strongest months: [BRACKET: REV strongest months if present; else [NEEDS INPUT]]
+Weakest months: [BRACKET: REV weakest months if present; else [NEEDS INPUT]]
+Slow-season strategy: [BRACKET: REV slow-month strategy if present; else [NEEDS INPUT]]
+
+Optional business model notes
+Space economics: [BRACKET: REV space profitability + occupancy if present; else [NEEDS INPUT]]
+Retreat / event economics: [BRACKET: REV retreat event economics if present; else [NEEDS INPUT]]
 
 If required QCs exceed capacity, recommend in this order:
 1) Raise price / increase ASV
-2) Improve conversion (screen + offer + sales process)
-3) Reduce delivery load (productize/systemize/narrow scope)
-4) Delegate/contract
-5) Change model (group/retainer/async)
+2) Improve retention / rebooking (if repeat-client model)
+3) Improve conversion (screen + offer + sales process)
+4) Reduce delivery load (productize/systemize/narrow scope)
+5) Delegate/contract
+6) Change model (group/retainer/async)
 Only last: increase volume
 
 7) THE VITAL ACTION (90-DAY EXECUTION)
@@ -406,7 +459,7 @@ Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR VITAL_A
 PASTE WORKSHEETS BELOW THIS LINE (only if you did not attach a file)
 ===========================
 [PASTE THE REAL REASONS / LIFE LISTS WORKSHEET]
-[PASTE THE RECKONING WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
+[PASTE THE REALITY CHECK WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
 [PASTE YOUR DRIVING FIRE + CAUSE WORTH PLAYING FOR WORKSHEET]
 [PASTE YOUR VALUES CODE WORKSHEET]
 [PASTE THE BECOMING WORKSHEET]

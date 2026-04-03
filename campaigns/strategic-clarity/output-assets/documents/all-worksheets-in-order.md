@@ -1,7 +1,5 @@
 # Strategic Clarity — All Worksheets (In Order)
 
----
-
 # Aligned Power — Alignment Arc Pre-Work Packet
 
 > **Complete this packet before jumping into Phase II | Strategic Clarity.** Plan 60–90 minutes in a quiet space. Fill it digitally—we'll use AI during the exercises, so copy/paste matters. Move fast. Depth beats perfection. Don't solve anything yet—just collect clean inputs.
@@ -23,7 +21,7 @@ Everything you write here feeds directly into your **Aligned Freedom Coach Upgra
 - [ ] Exercise 1: Your Values Code Inputs
 - [ ] Exercise 2: Peak Moments
 - [ ] Exercise 3: From Meaning to Math Inputs
-- [ ] Exercise 4: Flagship Offer Snapshot
+- [ ] Exercise 4: Offer Ecosystem + Primary Revenue Driver Snapshot
 
 ---
 
@@ -101,7 +99,9 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 
 **Goal:** Gather honest estimates we'll refine during the exercises. If you don't know, write your best guess and mark it with an asterisk (*).
 
-### A) Baseline Numbers
+**How to use this section:** Everyone completes the **Core** sections first. For most businesses, the Core sections plus Exercise 4 will be enough. Then complete any **Optional Tracks** that match your business model. If a section doesn't apply, skip it.
+
+### Core A) Baseline Numbers
 
 | Category | Annual Amount ($) | Notes |
 |----------|-------------------|-------|
@@ -111,7 +111,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 | Debt obligations (personal + business) |  |  |
 | Buffer / reserves (runway, emergency fund, cushion) |  |  |
 
-### B) Investments You Want Your Business to Fund (next 12 months)
+### Core B) Investments You Want Your Business to Fund (next 12 months)
 
 | Investment / Desire | Why It Matters | Estimated Annual Amount ($) |
 |---------------------|----------------|----------------------------|
@@ -119,18 +119,58 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 |                     |                |                            |
 |                     |                |                            |
 
-### C) Revenue Context (last 12 months)
+### Core C) Revenue Stream Snapshot
+
+List every revenue stream you currently have, even if you're planning to phase it out. If you only have one stream, that's fine.
+
+| Revenue Stream | Monthly Revenue ($) | % of Total | Margin (%) | Hours / Month | Keep / Grow / Maintain / Reduce / Exit |
+|----------------|---------------------|------------|------------|---------------|----------------------------------------|
+|                |                     |            |            |               |                                        |
+|                |                     |            |            |               |                                        |
+|                |                     |            |            |               |                                        |
+|                |                     |            |            |               |                                        |
+|                |                     |            |            |               |                                        |
+
+### Core D) Revenue Context + Seasonality (last 12 months)
 
 | Last 12 months gross revenue ($) |  |
 |----------------------------------|--|
 | Average monthly revenue ($) |  |
+| Highest revenue month (which month + amount) |  |
+| Lowest revenue month (which month + amount) |  |
 | Current average sale value / ASV ($) |  |
 | Average profit margin |  |
 | Delivery hours per client per week & month |  |
 | Current active clients (avg per month) |  |
 | How many more clients could you reasonably bring on? |  |
+| Your 3 strongest months (historically) |  |
+| Your 3 weakest months (historically) |  |
+| What usually drives the peaks? |  |
+| What usually causes the valleys? |  |
+| How do you currently handle slow months? |  |
 
-### D) Qualified Conversation & Conversion Snapshot
+### Core E) Referral Source Breakdown
+
+Estimate the percentage of new clients from the last 90 days that came from each source.
+
+| Source | % of New Clients | Notes |
+|--------|------------------|-------|
+| Existing client referrals / word of mouth |  |  |
+| Cross-referrals / partners / community relationships |  |  |
+| Workshops / classes / events |  |  |
+| Social media (organic) |  |  |
+| Website / SEO / Google |  |  |
+| Directories / listings |  |  |
+| Paid advertising |  |  |
+| Other |  |  |
+
+| Field | Your Answer |
+|-------|-------------|
+| Your #1 source of high-quality clients |  |
+| A source you've underinvested in |  |
+| A source that tends to bring low-quality or misaligned clients |  |
+
+### Core F) Qualified Conversation & Conversion Snapshot
 
 | Qualified conversations per week (current) |  |
 |--------------------------------------------|--|
@@ -139,7 +179,7 @@ Write 4–5 moments where you felt most alive, proud, or deeply "this is what I'
 | A conversation is "qualified" if… |  |
 | If close rate is below ~20%, what's the likely issue? |  |
 
-### E) Lead Path Fork (choose your primary growth lane)
+### Core G) Lead Path Fork (choose your primary growth lane)
 
 Check one primary lane for the next season. You can keep the other running, but we'll build your plan around one.
 
@@ -153,8 +193,12 @@ Check one primary lane for the next season. You can keep the other running, but 
 | # of referral partners who send leads consistently |  |
 | Partner conversations per week (networking, follow-ups, outreach) |  |
 | Conversion: partner conversations → qualified conversations (%) |  |
+| Do you have a simple referral ask or process? |  |
+| Do you proactively invite clients to refer? |  |
 
 #### If Paid Ads / Funnels is primary:
+
+*Skip this section if you're not currently running paid ads or planning to in the next 90 days.*
 
 | Primary platform (Meta / Google / YouTube / etc.) |  |
 |---------------------------------------------------|--|
@@ -167,7 +211,7 @@ Check one primary lane for the next season. You can keep the other running, but 
 | Close rate on sales conversations (%) |  |
 | Return on Ad Spend (ROAS) |  |
 
-### F) Capacity Check
+### Core H) Capacity Check
 
 | Hours/week available for CEO work (sales, marketing, ops) — not delivery |  |
 |--------------------------------------------------------------------------|--|
@@ -175,7 +219,7 @@ Check one primary lane for the next season. You can keep the other running, but 
 | Hours/week you WANT to spend in delivery / fulfillment (ideal) |  |
 | Non-negotiable boundary you want protected this season |  |
 
-#### Support + Delegation Snapshot
+### Core I) Support + Delegation Snapshot
 
 *Who (or what) is already doing work that would otherwise land on you? List contractors, employees, VAs, bookkeepers, designers—anyone you pay to handle tasks. If you're solo, leave the rows blank or write "None" in the first row.*
 
@@ -194,46 +238,124 @@ Check one primary lane for the next season. You can keep the other running, but 
 
 | Total hours/week currently delegated |  |
 |--------------------------------------|--|
+| What's the next thing you should delegate? |  |
+| What's stopping you from delegating it? |  |
+
+### Optional Track J) Repeat-Client / Session-Based Model
+
+Complete this only if your business depends on repeat bookings, appointments, sessions, treatments, retainers, or continuity revenue.
+
+| Field | Your Number / Answer |
+|-------|----------------------|
+| New clients per month (avg) |  |
+| Rebooking rate (% of clients who book again) |  |
+| Average client lifespan (months active or total sessions) |  |
+| Client frequency (avg sessions per month per active client) |  |
+| No-show rate (%) |  |
+| Late cancellation rate (%) |  |
+| Client Lifetime Value / LTV ($) |  |
+| Max 1:1 sessions per day that feels sustainable |  |
+| Max 1:1 sessions per week before burnout |  |
+| Recovery time needed after intensive sessions |  |
+| Types of sessions / clients that drain you most |  |
+| Types of sessions / clients that energize you most |  |
+| Signs you're approaching energetic burnout |  |
+| What you do, or should do, to recover |  |
+
+**If you don't know your LTV:** `Average session price x sessions per month x average months active`
+
+### Optional Track K) Studio / Collective / Space Model
+
+Complete this only if you lease space, sublet rooms, host other providers, or run a studio / collective / clinic model.
+
+| Field | Your Number / Answer |
+|-------|----------------------|
+| Monthly lease / rent cost for the space |  |
+| Monthly revenue from providers / room rentals / rev share |  |
+| Number of providers or rooms |  |
+| Current occupancy rate (%) |  |
+| Break-even occupancy (%) |  |
+| Average provider tenure |  |
+| Provider turnover in the last 12 months |  |
+| Is the space profitable on its own without your owner-delivered revenue? |  |
+| What's working well with the space model? |  |
+| Biggest friction point in the space model |  |
+
+### Optional Track L) Retreat / Event Model
+
+Complete this if retreats, workshops, intensives, or multi-day experiences are part of your business now or in the next 12 months.
+
+| Field | Your Number / Answer |
+|-------|----------------------|
+| Have you run a retreat / multi-day event before? |  |
+| If yes, how many? |  |
+| Typical retreat or event price per attendee ($) |  |
+| Estimated cost to run one event |  |
+| Break-even attendees |  |
+| Target attendees |  |
+| Profit margin at target attendance (%) |  |
+| Lead time needed to fill it |  |
+| Biggest challenge with retreats / events |  |
+| Dream retreat or event format |  |
+| What's stopping you from running the next one? |  |
+
+### Optional Track M) Other Hats Audit
+
+Complete this if you're dividing meaningful time and energy across multiple businesses, roles, or commitments.
+
+| Business / Role | Hours / Week | Revenue / Month ($) | Energy Drain (1-10) | Why You're Still Doing It | Plan to Reduce / Exit? |
+|-----------------|--------------|---------------------|---------------------|---------------------------|------------------------|
+|                 |              |                     |                     |                           |                        |
+|                 |              |                     |                     |                           |                        |
+|                 |              |                     |                     |                           |                        |
+
+| Field | Your Answer |
+|-------|-------------|
+| Total hours / week going to other hats |  |
+| If you could only keep one, which would it be? |  |
+| Which one drains the most energy relative to its return? |  |
 
 ---
 
-## Exercise 4 — Offer Ecosystem + Flagship Snapshot
+## Exercise 4 — Offer Ecosystem + Primary Revenue Driver Snapshot
 
-**Goal:** Give us the fastest possible path to aligned strategy. Your AI Coach needs to see your full offer map—not just the flagship—so it can recommend the right levers (price, conversion, sequencing, capacity).
+**Goal:** Give us the fastest possible path to aligned strategy. Your AI Coach needs to see your full offer map and your primary revenue driver so it can recommend the right levers (price, conversion, retention, sequencing, capacity). For many businesses, this is simply your flagship offer plus the surrounding ecosystem.
 
 ### A) Offer Ecosystem Snapshot
 
-*List every offer you sell—free or paid, one-time or recurring. Include lead magnets, discovery calls, workshops, coaching packages, retainers, courses, anything that generates revenue or feeds your funnel. If you have only one offer, that's fine; list it.*
+*List every offer you sell—free or paid, one-time or recurring. Include lead magnets, discovery calls, workshops, sessions, packages, retainers, courses, anything that generates revenue or feeds your funnel. If you have only one offer, that's fine; list it.*
 
 | Offer Name | Price | Your Time per Client | Duration | Margin (or cost) | Role in Funnel |
 |------------|-------|----------------------|----------|------------------|----------------|
 | e.g. Discovery Call | $0 | 1 hr | 1 session | — | Entry |
-| e.g. 90-Day Intensive | $5,000 | 3 hrs/week | 90 days | ~70% | Flagship |
+| e.g. 90-Day Intensive | $5,000 | 3 hrs/week | 90 days | ~70% | Primary Revenue Driver |
+| e.g. Single Session | $150 | 90 min | 1 session | ~90% | Standalone |
 | e.g. Monthly Retainer | $800/mo | 2 hrs/month | Ongoing | ~80% | Upsell |
 | | | | | | |
 | | | | | | |
 
-**Column guide:** *Your Time per Client* = hours you spend per client (hrs/week or hrs/month). *Margin* = what you keep after delivery costs (estimate % or $ if you know it). *Role in Funnel* = Entry / Flagship / Upsell / Downsell / Standalone.
+**Column guide:** *Your Time per Client* = hours you spend per client (hrs/session, hrs/week, or hrs/month). *Margin* = what you keep after delivery costs (estimate % or $ if you know it). *Role in Funnel* = Entry / Primary Revenue Driver / Upsell / Downsell / Standalone.
 
 **Offer Flow (how they connect):**
 
 | Entry offer (what people buy or opt into first) |  |
 |-------------------------------------------------|--|
-| Primary revenue driver (which offer brings in most revenue?) |  |
-| Typical upsell path (what do flagship buyers often add?) |  |
-| Downsell (if they say no to your flagship, what do you offer?) |  |
+| Primary revenue driver (which offer brings in most revenue? For many businesses, this is the flagship offer.) |  |
+| Typical upsell or rebooking path |  |
+| Downsell or lower-friction next step |  |
+| Do you have a rebooking or "what's next" process? |  |
 
 ---
 
-### B) Flagship Offer Basics
+### B) Primary Revenue Driver Basics
 
-| Flagship offer name |  |
-|---------------------|--|
+| Primary revenue driver name |  |
+|-----------------------------|--|
 | Who it's for (describe the person + situation) |  |
 | Primary problem you solve (plain language) |  |
 | Promise / outcome (what changes?) |  |
 | What you deliver (deliverables + format) |  |
-| Duration (e.g., 4 weeks, 90 days, ongoing) |  |
+| Duration (e.g. 1 session, 4 weeks, 90 days, ongoing) |  |
 | Price (and payment options) |  |
 
 ### C) What Makes It Sell (Positioning + Proof)
@@ -253,6 +375,7 @@ Check one primary lane for the next season. You can keep the other running, but 
 | Average sales cycle length (first touch → sale) |  |
 | What qualifies someone (must-have criteria) |  |
 | What disqualifies someone (red flags) |  |
+| Do you follow up with leads who don't book or buy? |  |
 
 ### E) Delivery & Operations Reality
 
@@ -264,9 +387,20 @@ Check one primary lane for the next season. You can keep the other running, but 
 | Tools you use (CRM, scheduling, project management, email, etc.) |  |
 | Current capacity ceiling (max clients at once without chaos) |  |
 
+### F) Client Experience + Retention
+
+| What do you do at the end of a session / engagement? |  |
+|------------------------------------------------------|--|
+| Do you proactively schedule the next session or step? |  |
+| Do you have a formal offboarding or next-step conversation? |  |
+| How do you stay in touch with past clients? |  |
+| Do you ask for referrals? |  |
+| Do you ask for testimonials / reviews? |  |
+
 ---
 
 *Bring this completed packet with you. Everything you've written powers your Aligned Freedom Coach.*
+
 
 ---
 
@@ -306,6 +440,7 @@ What do I want to feel more often? What do I want my days to look like? Who do I
 |   |
 |   |
 |   |
+|   |
 
 ---
 
@@ -315,6 +450,7 @@ What qualities do I need to embody (courage, boundaries, trust, leadership, calm
 
 |   |
 |---|
+|   |
 |   |
 |   |
 |   |
@@ -348,6 +484,7 @@ Who do I want to serve and how? What impact do I want to be known for? What prob
 |   |
 |   |
 |   |
+|   |
 
 ---
 
@@ -361,6 +498,7 @@ What's one means goal you've been chasing that doesn't actually satisfy the end 
 ---
 
 *Your Life Lists feed directly into your Aligned Freedom Coach. The more honest you are here, the more powerful your AI coach becomes.*
+
 
 ---
 
@@ -630,6 +768,7 @@ Write your mission statement clean:
 
 *Your Driving Fire, Cause Worth Playing For, and Mission Statement feed directly into your Aligned Freedom Coach. They become the purpose filter for every decision your AI coach helps you make.*
 
+
 ---
 
 # Your Values Code: Excavating Your Non-Negotiables
@@ -778,6 +917,7 @@ In the same AI chat window, paste the following prompt. Answer each of the quest
 ---
 
 *Your Top 5 Core Values feed directly into your Aligned Freedom Coach. They become the non-negotiable filter for every recommendation your AI coach makes.*
+
 
 ---
 
@@ -997,9 +1137,10 @@ Your Life Lists already captured *how* you want to contribute. Here we make Futu
 
 *The Future You feeds directly into your Aligned Freedom Coach. It becomes the vision your AI coach holds you accountable to—across every domain of your life.*
 
+
 ---
 
-# The Reckoning — Bridge to Operationalization
+# Reality Check — Bridge to Operationalization
 
 **Aligned Power — The Alignment Arc**
 
@@ -1083,15 +1224,31 @@ What would make alignment easier? (A person, a system, a boundary, a conversatio
 
 *These answers feed into your Aligned Freedom Coach under "Real Reasons Must Be True," "Misalignments," "Costs," "Next Right Move," "Resistance," and "Support." They make your AI coach smarter about your real life—not just your ideal one. Do the work. Especially the uncomfortable parts.*
 
+
 ---
 
 # The Revenue Bridge: From Meaning To Math
 
 **Aligned Power — The Alignment Arc**
 
-> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target—so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the person you're becoming, knock out a few Real Reasons–based stretch desires, and contribute to your Cause Worth Playing For.
+> This worksheet bridges what you want (baseline needs, stretch desires, and impact) into a clean Required Revenue target so you can stop guessing and start choosing the highest-leverage moves. You'll calculate what it takes to cover baseline obligations, fund the person you're becoming, knock out a few Real Reasons-based stretch desires, and contribute to your Cause Worth Playing For.
 >
 > **Rules:** Use rough numbers. Accuracy comes later. This is a strategy tool, not a morality test. We optimize for alignment: the business supports your life and your cause, not the other way around.
+
+---
+
+## Step 0 — What Aligned Success Feels Like
+
+Before we touch the math, anchor to what this is actually for. When you hit your Target Revenue in a way that feels aligned, what will be different about your daily experience?
+
+| Field | Your Answer |
+|-------|-------------|
+| When I wake up, I feel... |  |
+| My relationship with money feels... |  |
+| My relationship with time feels... |  |
+| My energy throughout the day is... |  |
+| The people around me notice that I'm more... |  |
+| The thing I'm most proud of isn't the revenue. It's... |  |
 
 ---
 
@@ -1116,7 +1273,7 @@ List what must be true financially for you and your business to feel stable (not
 
 ## Step 2 — Fund The Future You + Real Reasons (Stretch Desires)
 
-Translate the next-level life you want into numbers so your business target is tied to what you actually want—not just "growth."
+Translate the next-level life you want into numbers so your business target is tied to what you actually want, not just "growth."
 
 | Domain | What does "better" look like? | Why it matters (1 sentence) | Annual Investment ($) | First Step / Next 30 Days |
 |--------|-------------------------------|-----------------------------|-----------------------|---------------------------|
@@ -1130,15 +1287,15 @@ Translate the next-level life you want into numbers so your business target is t
 |   |
 |---|
 
-Now list 1–5 Real Reasons–based stretch desires you want your business to fund this year:
+Now list 1-5 Real Reasons-based stretch desires you want your business to fund this year:
 
 | Real Reasons Desire | Annual Amount ($) |
-|--------------|-------------------|
-|              |                   |
-|              |                   |
-|              |                   |
-|              |                   |
-|              |                   |
+|---------------------|-------------------|
+|                     |                   |
+|                     |                   |
+|                     |                   |
+|                     |                   |
+|                     |                   |
 
 **Real Reasons Desires Total (annual):**
 
@@ -1149,7 +1306,7 @@ Now list 1–5 Real Reasons–based stretch desires you want your business to fu
 
 ## Step 3 — Resource the Impact (Your "Tithe" for the Cause)
 
-Your business doesn't have to be your Cause Worth Playing For—but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
+Your business doesn't have to be your Cause Worth Playing For, but it can fund it. Treat your impact target like a tithe: a percentage you protect, not an afterthought. *Reference your Future Service vision from The Future You worksheet.*
 
 | Your Cause Worth Playing For (plain language) |  |
 |-----------------------------------------------|--|
@@ -1181,22 +1338,69 @@ Required Revenue finances your baseline + desires + impact. Target Revenue adds 
 
 ---
 
-## Step 5 — Operationalize: From Target Revenue to Weekly Activities
+## Step 5 — Revenue Stream Mix (Core)
 
-We're not tracking "leads." We're tracking **qualified conversations**: real, scheduled, right-fit conversations with people who have intent and capacity. *Paste the numbers from your Pre-Work Packet.*
+Before you decide what to grow, separate your streams. If you have one flagship offer and one clean delivery model, this step should go fast. If not, don't lump everything together.
+
+| Revenue Stream | Annual Revenue ($) | % of Total | Margin (%) | Hours / Year | Approx. $ / Hour | Aligned? (1-10) |
+|----------------|--------------------|------------|------------|--------------|------------------|-----------------|
+|                |                    |            |            |              |                  |                 |
+|                |                    |            |            |              |                  |                 |
+|                |                    |            |            |              |                  |                 |
+|                |                    |            |            |              |                  |                 |
+|                |                    |            |            |              |                  |                 |
+
+| Field | Your Answer |
+|-------|-------------|
+| Which stream has the highest $ / hour? |  |
+| Which stream is most aligned with your energy and values? |  |
+| Which stream should you grow? |  |
+| Which stream should you maintain? |  |
+| Which stream should you reduce or exit? |  |
+| If you could only keep one stream, which would it be? |  |
+
+---
+
+## Step 6 — Operationalize: From Target Revenue to Weekly Activities
+
+We're not tracking "leads." We're tracking **qualified conversations**: real, scheduled, right-fit conversations with people who have intent and capacity. For most businesses, the acquisition math below is the main branch. If you have a repeat-client or continuity-based model, run the retention branch too.
+
+### 6A — Acquisition Math
 
 | Input | Your Number | Notes |
 |-------|-------------|-------|
 | Target Revenue (annual) |  |  |
-| Average sale value / AOV ($) |  |  |
-| Sales needed (Target Revenue ÷ AOV) |  |  |
+| Average sale value / ASV ($) |  |  |
+| Sales needed (Target Revenue ÷ ASV) |  |  |
 | Close rate from sales conversations (%) |  |  |
 | Sales conversations needed (Sales ÷ close rate) |  |  |
-| QC → Sales conversation rate (screen quality) |  |  |
+| QC -> Sales conversation rate (screen quality) |  |  |
 | Qualified conversations needed (Sales convos ÷ rate) |  |  |
 | Qualified conversations per month (÷ 12) |  |  |
 | Qualified conversations per week (÷ 52) |  |  |
 | Qualified conversations per work week (÷ ___ work weeks) |  |  |
+
+### 6B — Retention Math (optional, for repeat-client models)
+
+If your business includes repeat clients, sessions, retainers, treatments, or ongoing care, run this branch too.
+
+| Input | Your Number | Notes |
+|-------|-------------|-------|
+| Current active clients |  |  |
+| Average sessions / engagements per client per month |  |  |
+| Average session / engagement price ($) |  |  |
+| Current monthly revenue from existing clients |  |  |
+| Rebooking rate (%) |  |  |
+| Average client lifespan (months or total sessions) |  |  |
+| Estimated client lifetime value / LTV ($) |  |  |
+| If rebooking rate increased by 20%, new monthly revenue would be... |  |  |
+| If average client frequency increased by 1, new monthly revenue would be... |  |  |
+
+| Field | Your Answer |
+|-------|-------------|
+| Biggest retention leak |  |
+| One thing you could do to improve rebooking |  |
+| One thing you could do to increase frequency or continuity |  |
 
 **If capacity is tight, which lever are you most willing to pull first?**
 
@@ -1205,37 +1409,48 @@ We're not tracking "leads." We're tracking **qualified conversations**: real, sc
 - [ ] Change model (group, retainer, async, productized)
 - [ ] Hire support / delegate
 - [ ] Reduce commitments / eliminate low-value work
+- [ ] Improve retention / rebooking
+- [ ] Increase client frequency
+- [ ] Reduce or exit a low-value revenue stream
 
 ---
 
-## Step 6 — Choose Your Primary Conversation Engine
+## Step 7 — Choose Your Primary Conversation Engine
 
 Pick ONE primary engine for the next 90 days. You can add the second later.
 
 - [ ] **Referral Engine** (relationship-based)
 - [ ] **Ads Engine** (paid acquisition)
 
-### 6A — Referral Engine
+### 7A — Referral Engine
 
 *Paste the numbers from your Pre-Work Packet.*
 
-| Referral Lever | Your Target | First Experiment |
-|----------------|-------------|------------------|
-| Partner conversations scheduled / week |  |  |
-| Referral asks made / week |  |  |
-| Introductions requested / week |  |  |
-| Qualified conversations booked / week |  |  |
-| Show rate % (kept appointments) |  |  |
+| Referral Lever | Your Current | Your Target | First Experiment |
+|----------------|--------------|-------------|------------------|
+| Partner conversations scheduled / week |  |  |  |
+| Referral asks made / week |  |  |  |
+| Introductions requested / week |  |  |  |
+| Qualified conversations booked / week |  |  |  |
+| Show rate % (kept appointments) |  |  |  |
 
-### 6B — Ads Engine
+| Field | Your Answer |
+|-------|-------------|
+| Your top 3 referral sources right now |  |
+| Which source brings the highest-quality clients? |  |
+| Who should be referring but isn't yet? |  |
+| What would make it easier for people to refer you? |  |
+| Write your simple referral ask here |  |
 
-*Paste the numbers from your Pre-Work Packet.*
+### 7B — Ads Engine
+
+*Skip this section if you're not currently running paid ads or planning to in the next 90 days.*
 
 | Ads Metric | Your Number | Notes |
 |------------|-------------|-------|
 | Cost per opt-in / lead (CPL) |  |  |
-| Opt-in → booked QC rate |  |  |
-| Booked QCs / week (from Step 5) |  |  |
+| Opt-in -> booked QC rate |  |  |
+| Booked QCs / week (from Step 6A) |  |  |
 | Opt-ins needed / week (Booked ÷ rate) |  |  |
 | Weekly ad spend (Opt-ins × CPL) |  |  |
 | Annual ad spend (Weekly × 52) |  |  |
@@ -1246,50 +1461,136 @@ Pick ONE primary engine for the next 90 days. You can add the second later.
 
 ---
 
-## Step 7 — Capacity Check
+## Step 8 — Capacity + Seasonality Check
 
-Can your current model actually deliver this revenue without breaking your values, health, or relationships? If not, the solution is leverage—not grit. *Paste the numbers from your Pre-Work Packet.*
+### 8A — Time Capacity
+
+Can your current model actually deliver this revenue without breaking your values, health, or relationships? If not, the solution is leverage, not grit.
 
 | Capacity Question | Your Answer | Notes / Constraints |
 |-------------------|-------------|---------------------|
 | Hours/week you are willing to work (sustainable) |  |  |
 | Delivery hours per sale (avg) |  |  |
 | Total delivery hours needed (sales × delivery hours) |  |  |
-| Admin/ops hours/week (current) |  |  |
-| Sales/marketing hours/week required |  |  |
+| Admin / ops hours/week (current) |  |  |
+| Sales / marketing hours/week required |  |  |
 | Is this sustainable for 12 months? (Yes / No) |  |  |
 | If NO: which constraint is real? (time, energy, skill, offer, price) |  |  |
 
-### Bottleneck + Leverage
+### 8B — High-Touch Capacity (optional)
 
-| Your Answer | Who Will Do It Instead? |
-|-------------|-------------------------|
-| One thing you must stop doing personally (highest-leverage to remove): |  |
+If your work is session-based, coaching-intensive, healing-based, therapy-based, or otherwise emotionally / energetically intensive, check this too.
 
-**High-Leverage Options (choose 1–2 to explore next):**
+| Capacity Question | Your Answer |
+|-------------------|-------------|
+| Max sustainable sessions / intensive client blocks per week |  |
+| Sessions / intensive client blocks required per week to hit Target Revenue |  |
+| Gap (required - sustainable) |  |
+| Recovery time needed after intensive work |  |
+| If there's a gap, which lever will you pull? |  |
+
+### 8C — Seasonality Planning
+
+| Field | Your Answer |
+|-------|-------------|
+| Expected revenue in your strongest months |  |
+| Expected revenue in your weakest months |  |
+| Cash reserve needed to cover slow months |  |
+| What will you do differently in slow months? |  |
+| What will you do differently in peak months? |  |
+
+---
+
+## Step 9 — Optional Model Modules (only if relevant)
+
+### 9A — Space / Collective Economics
+
+Complete this if you lease space to others or run a studio / collective model.
+
+| Field | Your Number / Answer |
+|-------|----------------------|
+| Monthly lease / rent cost |  |
+| Annual lease / rent cost |  |
+| Monthly provider / room revenue |  |
+| Annual provider / room revenue |  |
+| Space profit / loss before owner-delivered revenue |  |
+| Break-even occupancy (%) |  |
+| Current occupancy (%) |  |
+| Is the space profitable without your owner-delivered revenue? |  |
+| Biggest operational challenge with the space |  |
+
+### 9B — Retreat / Event Economics
+
+Complete this if retreats, events, workshops, or intensives are part of your growth plan.
+
+| Field | Your Number / Answer |
+|-------|----------------------|
+| Number of events planned this year |  |
+| Average price per attendee ($) |  |
+| Average attendees per event |  |
+| Revenue per event ($) |  |
+| Cost per event ($) |  |
+| Profit per event ($) |  |
+| Profit margin (%) |  |
+| Break-even attendees |  |
+| Lead time needed to fill it |  |
+| First action to make the next event real |  |
+
+---
+
+## Step 10 — Bottleneck + Highest-Leverage Move
+
+| Field | Your Answer | Who Will Do It Instead? |
+|-------|-------------|-------------------------|
+| One thing you must stop doing personally (highest-leverage to remove) |  |  |
+
+**High-Leverage Options (choose 1-2 to explore next):**
 
 - [ ] Raise price / increase average sale value
 - [ ] Change offer (outcome-based package, tighter scope)
 - [ ] Change delivery model (group, hybrid, productized service)
 - [ ] Improve screening (fewer, better conversations)
 - [ ] Improve conversion process (scripts, follow-up, close rate)
+- [ ] Improve retention (rebooking, continuity, client experience)
 - [ ] Delegate / systemize delivery or admin
-- [ ] Reduce low-value work (stop doing, stop serving, stop offering)
+- [ ] Reduce or exit a low-value stream or other hat
+- [ ] Strengthen seasonality planning / cash reserves
+
+| Field | Your Answer |
+|-------|-------------|
+| My ONE highest-leverage move is... |  |
+| Because if this changes, everything downstream changes by... |  |
+| The first small experiment I will run in the next 7 days is... |  |
 
 ---
 
-## Finish — Your Highest-Leverage Move
+## Summary Dashboard
 
-Based on your math + capacity check, choose the ONE lever to pull first. *(This feeds Your Vital Action Plan.)*
-
-| My ONE highest-leverage move is: |  |
-|----------------------------------|--|
-| Because if this changes, everything downstream changes by: |  |
-| The first small experiment I will run in the next 7 days is: |  |
+| Metric | Your Number |
+|--------|-------------|
+| Target Revenue (annual) |  |
+| Primary revenue stream to grow |  |
+| Primary conversation engine |  |
+| Qualified conversations needed per week |  |
+| Key retention metric to improve (if applicable) |  |
+| Highest-leverage move |  |
+| First experiment (7 days) |  |
 
 ---
 
-*Your Revenue Bridge numbers feed directly into your Aligned Freedom Coach. They become the revenue math and capacity constraints your AI coach uses to keep recommendations grounded in reality—not theory.*
+## Alignment Check
+
+| Question | Your Answer |
+|----------|-------------|
+| If I hit this Target Revenue, will I feel the way I described in Step 0? |  |
+| Is there anything in this plan that conflicts with my values or boundaries? |  |
+| Am I excited about this plan, or does it feel like a grind? |  |
+| What's one thing I could change to make this plan feel more aligned? |  |
+
+---
+
+*Your Revenue Bridge numbers feed directly into your Aligned Freedom Coach. They become the revenue math and, where relevant, the retention logic, capacity constraints, and business-model realities your AI coach uses to keep recommendations grounded in reality, not theory.*
+
 
 ---
 
@@ -1428,6 +1729,7 @@ Write it. Sign it.
 
 *Your Vital Action Plan feeds directly into your Aligned Freedom Coach. It becomes the execution anchor your AI coach references for every weekly plan, strategy recommendation, and priority check.*
 
+
 ---
 
 # Aligned Freedom Coach — Master Prompt
@@ -1466,7 +1768,7 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 - If multiple answers exist, choose the clearest / most specific, and put extras into "Notes / Backup Language" at the end.
 - If any content conflicts, resolve conflicts by this priority order:
   1) Core Values + Boundaries
-  2) Real Reasons "Must Be True" conditions (from The Reckoning worksheet)
+  2) Real Reasons "Must Be True" conditions (from the Reality Check worksheet)
   3) Driving Fire statement
   4) Cause Worth Playing For
   5) The Future You
@@ -1477,12 +1779,12 @@ NON-NEGOTIABLE OUTPUT RULES (to keep this consistent every run)
 FIELD MAP (where each field comes from)
 Use these worksheet tags to find the content:
 [REAL_REASONS] = The Real Reasons / Life Lists worksheet (Experiences, Growth, Contribution)
-[RECKONING] = The Reckoning worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If The Reckoning worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
+[REALITY] = Reality Check worksheet (Must Be True, Misalignments, Costs, Next Right Move, Resistance, Support). NOTE: If the Reality Check worksheet was not completed, write [NEEDS INPUT] for these fields—do not guess.
 [DRIVING_FIRE] = Your Driving Fire + Cause Worth Playing For worksheet (Peak Moments table, Theme Mining answers, Draft Driving Fire, Full-Body Test notes, Strengthen answers, Cause Worth Playing For future state answers, Connect the Dots table)
 [VALUES] = Your Values Code worksheet (Top 5 table: value, definition, behaviors, boundary; plus reflections + values conflict notes)
 [BECOMING] = The Future You worksheet (Self, Social, Skills, Service + integration + 90-day focus + financial must-be-true note)
-[OFFERS] = Pre-Work Packet Exercise 4A (Offer Ecosystem Snapshot: offer table with Name, Price, Time per client, Duration, Margin, Role; plus Offer Flow: entry, primary driver, upsell, downsell)
-[REV] = The Revenue Bridge worksheet (Baseline needs, Future You investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Unit economics, QC math, Lead source fork metrics, Conversion quality check, Capacity check, Highest-leverage move)
+[OFFERS] = Pre-Work Packet Exercise 4 (Offer Ecosystem Snapshot, Offer Flow, Primary Revenue Driver Basics, Sales Process Snapshot, Delivery & Operations Reality, Client Experience + Retention)
+[REV] = The Revenue Bridge worksheet (Aligned success markers, Baseline needs, Future You investments, Real Reasons desires, Cause tithe, buffer, Required Annual Number, Target Revenue, Revenue Stream Mix, Acquisition math, Retention math, Lead source fork metrics, Capacity + seasonality, Optional space / event economics, Highest-leverage move)
 [VITAL_ACTION] = Your Vital Action Plan (Lead lane, Someday outcomes, Vital Action per lane, Arc Chain, Calendar install, sabotage list, commitment)
 
 Now fill the template.
@@ -1508,6 +1810,10 @@ Output Rules (Strategic)
 - Always tie strategy to my end goals (Real Reasons), my Driving Fire/Cause Worth Playing For, and my Becoming.
 - Prefer simple systems over complex tactics.
 - No "hustle harder" advice. If capacity is the constraint, recommend levers like: pricing, offer design, audience, delivery model, systems, delegation, boundaries.
+- For repeat-client, recurring-service, or appointment-based models, diagnose retention and rebooking before defaulting to more acquisition.
+- If I have multiple revenue streams, separate them before recommending growth. Compare revenue, margin, alignment, and capacity by stream.
+- Account for seasonality and energy capacity, not just average monthly revenue.
+- If I run a studio, collective, or events business, evaluate those economics separately from my owner-delivered work.
 - When I'm scattered or reactive, reorient me back to the Alignment Blueprint before giving tactical steps.
 - When making plans, you must include:
   (1) the Vital Action,
@@ -1530,7 +1836,7 @@ Who I am (today):
 [BRACKET: derive a 2–3 sentence identity statement from recurring themes across REAL_REASONS + DRIVING_FIRE + VALUES + BECOMING. If unclear: [NEEDS INPUT]]
 
 The pattern I'm leaving:
-[BRACKET: pull from RECKONING Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If The Reckoning was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
+[BRACKET: pull from REALITY Misalignments + Costs + any explicit "old pattern" notes in BECOMING Integration or VITAL_ACTION sabotage. If Reality Check was not completed, pull from BECOMING Integration and VITAL_ACTION sabotage only.]
 
 My operating constraints (real life):
 Available weekly hours for growth work: [BRACKET: from REV Capacity section; else [NEEDS INPUT]]
@@ -1541,13 +1847,13 @@ Capacity limit (max clients/projects at once): [BRACKET: from REV Capacity; else
 
 My current friction points:
 The most common thing that derails me is:
-[BRACKET: from RECKONING Resistance + VITAL_ACTION sabotage patterns + REV resistance notes. If The Reckoning not completed, use VITAL_ACTION and REV only.]
+[BRACKET: from REALITY Resistance + VITAL_ACTION sabotage patterns + REV resistance notes. If Reality Check was not completed, use VITAL_ACTION and REV only.]
 
 The "avoidance loop" I default to is:
 [BRACKET: if present; else [NEEDS INPUT]]
 
 The "overwork loop" I default to is:
-[BRACKET: from RECKONING Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
+[BRACKET: from REALITY Costs/Misalignments + REV capacity symptoms; else [NEEDS INPUT]]
 
 2) MY TOP 5 CORE VALUES (OPERATIONALIZED)
 Value #1: [BRACKET: VALUES Top 5 #1]
@@ -1577,7 +1883,7 @@ Boundary: [BRACKET: VALUES #5 boundary]
 
 Values Conflict Watchlist (common traps):
 - When I chase ________, I tend to betray value ________.
-  [BRACKET: derive from VALUES reflections + RECKONING Misalignments. If not explicit: [NEEDS INPUT]]
+  [BRACKET: derive from VALUES reflections + REALITY Misalignments. If not explicit: [NEEDS INPUT]]
 - When I feel pressure, I tend to sacrifice ________.
   [BRACKET: same method; else [NEEDS INPUT]]
 
@@ -1593,22 +1899,22 @@ A) My Real Reasons (Life Lists)
 [BRACKET: REAL_REASONS Contribution]
 
 Real Reasons "Must Be True" Conditions (non-negotiables for success):
-[BRACKET: RECKONING Must Be True. If The Reckoning not completed: [NEEDS INPUT — complete The Reckoning worksheet to populate this field]]
+[BRACKET: REALITY Must Be True. If Reality Check was not completed: [NEEDS INPUT — complete the Reality Check worksheet to populate this field]]
 
 Current Misalignments (what I'm tolerating):
-[BRACKET: RECKONING Misalignments. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Misalignments. If not completed: [NEEDS INPUT]]
 
 What it's costing me:
-[BRACKET: RECKONING Costs. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Costs. If not completed: [NEEDS INPUT]]
 
 My Next Right Move:
-[BRACKET: RECKONING Next Right Move. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Next Right Move. If not completed: [NEEDS INPUT]]
 
 What resists this change (fear/protective part):
-[BRACKET: RECKONING Resistance. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Resistance. If not completed: [NEEDS INPUT]]
 
 Support that makes alignment easier:
-[BRACKET: RECKONING Support. If not completed: [NEEDS INPUT]]
+[BRACKET: REALITY Support. If not completed: [NEEDS INPUT]]
 
 B) My Driving Fire (Purpose)
 Driving Fire Statement (clean draft):
@@ -1656,10 +1962,31 @@ Offer inventory (list each offer with price, your time/client, duration, margin,
 Offer flow:
 Entry offer: [BRACKET: OFFERS entry offer]
 Primary revenue driver: [BRACKET: OFFERS primary driver]
-Typical upsell path: [BRACKET: OFFERS upsell path]
-Downsell (if no to flagship): [BRACKET: OFFERS downsell]
+Typical upsell or rebooking path: [BRACKET: OFFERS upsell or rebooking path]
+Downsell / lower-friction next step: [BRACKET: OFFERS downsell]
+
+Primary revenue driver details:
+Who it's for: [BRACKET: OFFERS primary driver audience]
+Core problem solved: [BRACKET: OFFERS primary driver problem]
+Core promise / outcome: [BRACKET: OFFERS primary driver promise]
+Delivery model + duration: [BRACKET: OFFERS primary driver delivery + duration]
+Price / payment structure: [BRACKET: OFFERS primary driver price]
+Primary sales conversion event: [BRACKET: OFFERS primary conversion event]
+
+Retention / client experience:
+Rebooking or "what's next" process: [BRACKET: OFFERS rebooking process if present; else [NEEDS INPUT]]
+Follow-up process for non-buyers or inactive clients: [BRACKET: OFFERS lead follow-up or past-client follow-up if present; else [NEEDS INPUT]]
+Referral ask process: [BRACKET: OFFERS referral ask if present; else [NEEDS INPUT]]
+Testimonial / review ask process: [BRACKET: OFFERS testimonial ask if present; else [NEEDS INPUT]]
 
 B) Required Revenue (Baseline + Life + Impact)
+Aligned success markers:
+Morning state: [BRACKET: REV aligned success morning state]
+Money relationship: [BRACKET: REV aligned success money]
+Time relationship: [BRACKET: REV aligned success time]
+Energy state: [BRACKET: REV aligned success energy]
+What I'm actually proud of: [BRACKET: REV aligned success pride]
+
 Baseline Needs (annual): [BRACKET: REV Baseline total]
 Becoming Investments (annual): [BRACKET: REV Becoming total]
 Real Reasons Desires (annual): [BRACKET: REV Real Reasons Desires total]
@@ -1671,13 +1998,22 @@ C) This Year's Revenue Target
 Target annual revenue: [BRACKET: REV Target Revenue annual]
 Target monthly revenue: [BRACKET: REV monthly]
 Target weekly revenue: [BRACKET: REV weekly]
+Highest month / lowest month reality: [BRACKET: REV seasonal high-low if present; else [NEEDS INPUT]]
 
-D) Unit Economics
+D) Revenue Stream Mix + Unit Economics
+Highest-revenue stream: [BRACKET: REV highest revenue stream]
+Highest-margin stream: [BRACKET: REV highest margin stream]
+Most aligned stream: [BRACKET: REV most aligned stream]
+Stream to reduce or exit: [BRACKET: REV reduce or exit stream]
+
 Average sale value (ASV): [BRACKET: REV ASV]
 Gross margin (approx): [BRACKET: REV margin if present; else [NEEDS INPUT]]
 Close rate (sales calls → clients): [BRACKET: REV close rate]
 Show rate (booked → attended): [BRACKET: REV show rate]
 Qualified conversation → sales call rate: [BRACKET: REV QC→Sales Call rate]
+Rebooking rate: [BRACKET: REV rebooking rate if present; else [NEEDS INPUT]]
+Average client lifespan / total sessions: [BRACKET: REV client lifespan if present; else [NEEDS INPUT]]
+Client lifetime value (LTV): [BRACKET: REV LTV if present; else [NEEDS INPUT]]
 
 E) Qualified Conversations (QC) Math
 Required sales per year: [BRACKET: REV required sales/year]
@@ -1686,8 +2022,17 @@ Required qualified conversations per year: [BRACKET: REV required QCs/year]
 Per month: [BRACKET: REV QCs/month]
 Per week: [BRACKET: REV QCs/week]
 
+Retention leverage (if applicable):
+Current active clients: [BRACKET: REV active clients if present; else [NEEDS INPUT]]
+Current monthly revenue from existing clients: [BRACKET: REV existing-client monthly revenue if present; else [NEEDS INPUT]]
+Biggest retention leak: [BRACKET: REV biggest retention leak if present; else [NEEDS INPUT]]
+Retention move to test first: [BRACKET: REV first retention move if present; else [NEEDS INPUT]]
+
 F) Lead Source Fork
 Primary lane: [BRACKET: REV selected lane: Referrals/Ads/Hybrid]
+Highest-quality client source right now: [BRACKET: REV best client source if present; else [NEEDS INPUT]]
+Underleveraged source: [BRACKET: REV underinvested source if present; else [NEEDS INPUT]]
+Source to reduce or ignore: [BRACKET: REV low-quality source if present; else [NEEDS INPUT]]
 
 REFERRAL LANE (weekly operating targets)
 Weekly QCs needed: [BRACKET: REV referral weekly QCs]
@@ -1716,14 +2061,24 @@ Capacity Reality
 Max QCs/week without chaos: [BRACKET: REV capacity max QCs/wk]
 Max sales calls/week: [BRACKET: REV max sales calls/wk]
 Max delivery hours/week: [BRACKET: REV max delivery hours/wk]
-Current overload symptoms: [BRACKET: REV overload symptoms; else RECKONING Costs + VITAL_ACTION sabotage]
+Current overload symptoms: [BRACKET: REV overload symptoms; else REALITY Costs + VITAL_ACTION sabotage]
+Max sustainable sessions/week (if session-based model): [BRACKET: REV max sustainable sessions if present; else [NEEDS INPUT]]
+Recovery need after intensive work: [BRACKET: REV recovery need if present; else [NEEDS INPUT]]
+Strongest months: [BRACKET: REV strongest months if present; else [NEEDS INPUT]]
+Weakest months: [BRACKET: REV weakest months if present; else [NEEDS INPUT]]
+Slow-season strategy: [BRACKET: REV slow-month strategy if present; else [NEEDS INPUT]]
+
+Optional business model notes
+Space economics: [BRACKET: REV space profitability + occupancy if present; else [NEEDS INPUT]]
+Retreat / event economics: [BRACKET: REV retreat event economics if present; else [NEEDS INPUT]]
 
 If required QCs exceed capacity, recommend in this order:
 1) Raise price / increase ASV
-2) Improve conversion (screen + offer + sales process)
-3) Reduce delivery load (productize/systemize/narrow scope)
-4) Delegate/contract
-5) Change model (group/retainer/async)
+2) Improve retention / rebooking (if repeat-client model)
+3) Improve conversion (screen + offer + sales process)
+4) Reduce delivery load (productize/systemize/narrow scope)
+5) Delegate/contract
+6) Change model (group/retainer/async)
 Only last: increase volume
 
 7) THE VITAL ACTION (90-DAY EXECUTION)
@@ -1838,7 +2193,7 @@ Next 7-day Experiment: [BRACKET: from REV highest-leverage experiment OR VITAL_A
 PASTE WORKSHEETS BELOW THIS LINE (only if you did not attach a file)
 ===========================
 [PASTE THE REAL REASONS / LIFE LISTS WORKSHEET]
-[PASTE THE RECKONING WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
+[PASTE THE REALITY CHECK WORKSHEET — optional; if skipped, those fields become [NEEDS INPUT]]
 [PASTE YOUR DRIVING FIRE + CAUSE WORTH PLAYING FOR WORKSHEET]
 [PASTE YOUR VALUES CODE WORKSHEET]
 [PASTE THE BECOMING WORKSHEET]
@@ -1937,6 +2292,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 ---
 
 *Your Master Prompt and Monthly Patch Notes are the engine of your Aligned Freedom Coach. Run the master prompt once to initialize. Run Patch Notes monthly to keep it current.*
+
 
 ---
 
@@ -2082,7 +2438,7 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 
 53. "What's the ONE system improvement that would remove the most friction next week?"
 
-54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, AOV, or capacity?"
+54. "Monthly: Compare my Required Revenue plan vs reality. Which lever should we tune: QC volume, conversion, average sale value (ASV), or capacity?"
 
 55. "Tell me the truth: what am I tolerating that's keeping me in misalignment?"
 
@@ -2091,3 +2447,4 @@ C) OPTIONAL NEW WORKSHEET EXCERPTS (PASTE BELOW)
 ---
 
 *These Fire Starters are designed to work with your Aligned Freedom Coach. The more complete your worksheets, the more personalized and powerful every answer becomes.*
+

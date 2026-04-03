@@ -31,9 +31,28 @@ This is not "I want to make more money." This is "My life requires $X, and here'
 
 ---
 
-### Step 5: From Revenue to Weekly Behaviors
+### Step 5: Revenue Stream Mix
 
-Now we reverse-engineer. This is where the magic happens—and also where the math gets real.
+Before we reverse-engineer anything, separate your streams.
+
+If you have one clean flagship offer and one clean model, amazing. This step should be quick. But some of you don't. Some of you have multiple revenue streams. Client work. Workshops. Space rental. Events. Side offers. Maybe one thing that's profitable, one thing that's meaningful, and one thing that's quietly eating your life.
+
+So Step 5 says: don't lump it. Separate it.
+
+Look at each stream by:
+- revenue
+- margin
+- hours required
+- rough dollars per hour
+- and alignment
+
+Because not all revenue is created equal. Some money costs you too much. Some money fuels the whole thing. Some money looks small on paper but creates high-trust clients. And some money needs to be reduced or exited, not scaled.
+
+This matters because the answer isn't always "grow the business." Sometimes the answer is: grow the right stream and stop subsidizing the wrong one.
+
+### Step 6: From Revenue to Weekly Behaviors
+
+Now we reverse-engineer. This is where the math gets real.
 
 We're not tracking "leads." I want to be very clear about that. We're tracking **qualified conversations**: real, scheduled, right-fit conversations with people who have intent and capacity. Not tire-kickers. Not "let's grab coffee." Conversations that can result in a yes or a no.
 
@@ -58,6 +77,16 @@ Then we break it down across every timeframe: divide by 4 for quarterly. Divide 
 That's it. That's the number at every level. Everything your life requires—stability, growth, experiences, impact—reverse-engineers to roughly 3 qualified conversations per week. About 12 per month. About 36 per quarter.
 
 Does that feel doable? It should. Because we didn't start with "you need to do 50 cold calls a day." We started with your actual life and reverse-engineered the exact annual, quarterly, monthly, and weekly behaviors that make it real.
+
+Now, for some of you, there's a second branch: **retention math.**
+
+If your business has repeat clients, recurring appointments, sessions, or continuity revenue, we don't only ask, "How do I get more new people?" We also ask:
+- What is my rebooking rate?
+- How long does a client stay?
+- How often do they come back?
+- Where is the leak?
+
+Because for some businesses, the easiest money isn't more acquisition. It's better continuity. Better rebooking. Better follow-through. Better client lifetime value. The worksheet gives you both branches so you can see whether your real lever is new conversations, stronger retention, or both.
 
 ---
 
@@ -89,6 +118,12 @@ The key fields:
 - Show rate (booked → attended)
 - QC → Sales conversation rate
 
+And if that repeat-client branch applies to you, don't skip the retention fields:
+- Rebooking rate
+- Average client lifespan
+- Frequency
+- Estimated LTV
+
 If you're not sure about your close rate, use 25% as a starting benchmark. If you're not sure about your QC quality rate, use 60%. These are conservative. Better to plan conservatively and overdeliver than to plan optimistically and scramble.
 
 ---
@@ -97,9 +132,9 @@ If you're not sure about your close rate, use 25% as a starting benchmark. If yo
 
 When you're done with Step 5, you have something most business owners never have: a weekly scoreboard with one number on it. **Qualified conversations per week.**
 
-That's your leading indicator. Not revenue (that's a lagging indicator). Not leads (that's vanity). Qualified conversations. Because if you hit your QC number every week, and your conversion rates hold, the revenue takes care of itself.
+For most of you, that's the leading indicator. Not revenue (that's a lagging indicator). Not leads (that's vanity). Qualified conversations. And if you're in a repeat-client model, right beside that number you now have your key retention metric too. Because if you hit the right QC number *and* plug the right retention leak, the revenue takes care of itself far faster.
 
-Your AI coach will track this number. When you ask for a weekly plan, it'll include your QC target. When you fall behind, it'll diagnose whether the issue is volume, quality, or conversion—and recommend the right lever.
+Your AI coach will track these numbers. When you ask for a weekly plan, it'll include your QC target. When you fall behind, it'll diagnose whether the issue is volume, quality, conversion, stream mix, or, where relevant, retention and recommend the right lever.
 
 In the next video, we'll choose your lead path—referral or ads—and do the capacity check to make sure this plan actually fits your real life.
 

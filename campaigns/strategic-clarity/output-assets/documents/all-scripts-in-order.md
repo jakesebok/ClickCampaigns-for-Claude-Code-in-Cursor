@@ -28,7 +28,7 @@ Your Pre-Work Packet is the starting coordinates.
 
 Let me be upfront about something. This phase of the program serves two distinct purposes—and both of them matter.
 
-**First: Information.** We're collecting the raw data that your Aligned Freedom Coach will use to serve you. Your values inputs. Your peak moments. Your revenue numbers. Your offer snapshot. All of it becomes the dataset your AFC draws from every time it coaches you, plans with you, or flags a misaligned decision. The quality of your inputs directly determines the quality of your coach. Okay?
+**First: Information.** We're collecting the raw data that your Aligned Freedom Coach will use to serve you. Your values inputs. Your peak moments. Your revenue numbers. Your offer ecosystem. All of it becomes the dataset your AFC draws from every time it coaches you, plans with you, or flags a misaligned decision. The quality of your inputs directly determines the quality of your coach. Okay?
 
 **Second—and this is the part most people don't expect: Transformation.** Simply *doing* this work is going to change you. Not theoretically. Not eventually. Right now. When you sit down and write your peak moments, name what you admire in others, look at your real numbers—you're going to have insights you can't unsee. Things will surface that have been quietly running your decisions for years. The act of excavation is itself transformative.
 
@@ -44,9 +44,11 @@ There are four exercises in the packet:
 
 **Exercise 2: Peak Moments.** You're writing four to five stories from your life—moments where you felt most alive, most proud, most "this is what I'm here for." Across seasons: childhood, adolescence, career, recent. These stories contain the pattern of your Driving Fire. We're going to mine them. Pro tip: speaking these out loud instead of typing will get you the truest, messiest, most unfiltered outputs. I use Wispr Flow for this—it transcribes and cleans up your speech in real time, no punctuation dictation needed. 14-day free trial, link in the packet. Full disclosure: I'm an affiliate.
 
-**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources. I know—not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
+**Exercise 3: From Meaning to Math Inputs.** Baseline numbers. What does your business actually look like right now? Revenue, expenses, capacity, conversion rates, lead sources, stream mix. I know, not the sexy stuff. But this is what makes The Revenue Bridge worksheet actually *work* instead of just being wishful thinking.
 
-**Exercise 4: Flagship Offer Snapshot.** Your offer, your audience, your sales process, your delivery model. Your Aligned Freedom Coach needs to understand your business to give you useful advice. This is how it learns.
+Inside Exercise 3, you'll see **core sections** everyone completes, plus **optional tracks** for specific models. Most of you will complete the core sections and move straight into Exercise 4. The optional tracks are there so less-standard models—repeat-client businesses, multi-stream operators, space models, retreat builders—aren't left guessing.
+
+**Exercise 4: Offer Ecosystem + Primary Revenue Driver Snapshot.** Your offers, your audience, your sales process, your delivery model, and the offer that currently does the most work in the business. For a lot of you, this is basically your flagship offer plus the surrounding ecosystem. Your Aligned Freedom Coach needs to understand your business to give you useful advice. This is how it learns.
 
 ---
 
@@ -87,6 +89,7 @@ Let's get after it.
 ---
 
 *[End of Pre-Work Video]*
+
 
 ---
 
@@ -146,7 +149,7 @@ By the end of this module, you will have:
 
 4. **The Future You** — who you're becoming across Self (Personal), Social (Relationships), Skills (Business), and Service (Contribution). Growth that doesn't require self-abandonment.
 
-5. **The Reckoning** — a bridge between the vision you just cast and the life you're currently living. We're not just turning vision into numbers here. We're reckoning your needs against your capacity and identifying the lever that will allow you to get where you're going without breaking what matters. What must be true? What are you tolerating? What's it costing you?
+5. **Reality Check** — a bridge between the vision you just cast and the life you're currently living. We're not just turning vision into numbers here. We're weighing your needs against your capacity and identifying the lever that will allow you to get where you're going without breaking what matters. What must be true? What are you tolerating? What's it costing you?
 
 6. **The Revenue Bridge: From Meaning To Math** — we're going to take everything you want and turn it into a Required Revenue number, then reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real. No "work harder." Leverage.
 
@@ -185,7 +188,7 @@ Here's the arc. Each lesson builds on the one before it:
 
 **Lesson 4:** We map The Future You. The person you're becoming across every domain that matters.
 
-**Lesson 5:** We face The Reckoning. We reckon your needs against your capacity and name what's in the way—so the plan we build actually accounts for your real life, not just the aspirational one.
+**Lesson 5:** We do a Reality Check. We name what's in the way and weigh your needs against your capacity so the plan we build actually accounts for your real life, not just the aspirational one.
 
 **Lesson 6:** We build The Revenue Bridge. Needs + desires + impact = a number. Then we reverse-engineer the annual, quarterly, monthly, and weekly actions.
 
@@ -216,6 +219,7 @@ Let's get after it.
 ---
 
 *[End of Video 0.1]*
+
 
 ---
 
@@ -325,6 +329,7 @@ I'll meet you in the next video where we'll walk through your Life Lists togethe
 
 *[End of Video 1.1]*
 
+
 ---
 
 # Video 1.2 — Your Life Lists: Worksheet Facilitation
@@ -412,6 +417,7 @@ Let's get after it.
 
 *[End of Video 1.2]*
 
+
 ---
 
 # Video 2.1 — The Golden Circle: Finding Your Driving Fire
@@ -493,6 +499,7 @@ Don't answer yet. Just let the question sit. We'll work it in the next video.
 ---
 
 *[End of Video 2.1]*
+
 
 ---
 
@@ -594,6 +601,7 @@ Let's get after it.
 ---
 
 *[End of Video 2.2]*
+
 
 ---
 
@@ -725,6 +733,7 @@ I'll see you in Lesson 3, where we go find your core values.
 
 *[End of Video 2.3]*
 
+
 ---
 
 # Video 3.1 — Why Values Matter
@@ -810,6 +819,7 @@ In the next video, I'll walk you through the extraction process step by step.
 ---
 
 *[End of Video 3.1]*
+
 
 ---
 
@@ -909,6 +919,7 @@ Let's get after it.
 ---
 
 *[End of Video 3.2]*
+
 
 ---
 
@@ -1016,6 +1027,7 @@ Let your body vote.
 
 *[End of Video 4.1]*
 
+
 ---
 
 # Video 4.2 — Integration + 90-Day Focus
@@ -1064,7 +1076,7 @@ Pick one. Write the reason.
 
 **"The old pattern that will try to pull me back is..."**
 
-Name the saboteur. The habit. The story. The protective part of you that will fight to keep things the same. "I'll default to work mode." "I'll convince myself I don't have time." "I'll start something new to avoid going deep on this."
+Name the saboteur. The habit. The story. The protective part of you that will try to keep things the same. "I'll default to work mode." "I'll convince myself I don't have time." "I'll start something new to avoid going deep on this."
 
 This isn't about beating yourself up. It's about being *prepared*. The pattern will show up. That's guaranteed. What matters is whether you've already decided what you'll do when it does.
 
@@ -1099,15 +1111,16 @@ Before we move to the next lesson, take a breath. You've done a lot of vision wo
 
 And here's what I want you to know: you're not behind. You're not broken. You're not starting late. Everything you wrote down—the vision, the future, the person you're becoming—it's not something you have to manufacture. It's something you have to *remember*. And then choose. And then practice. Daily.
 
-I'll see you in Lesson 5, where we do The Reckoning before turning all of this into numbers.
+I'll see you in Lesson 5, where we do a Reality Check before turning all of this into numbers.
 
 ---
 
 *[End of Video 4.2]*
 
+
 ---
 
-# Video 5.1 — The Reckoning
+# Video 5.1 — Reality Check
 
 **Lesson 5: Bridge to Operationalization | ~5–10 minutes**
 
@@ -1119,7 +1132,7 @@ Alright. Lesson 5. And this one's going to be short but honest.
 
 You've done incredible work. You've named what you actually want. You've found your Driving Fire. You've defined your values. You've cast a vision for who you're becoming. That's real. That matters.
 
-But here's what I've learned—and this is the part nobody likes to hear: **vision without a reckoning is just fantasy with good lighting.**
+But here's what I've learned—and this is the part nobody likes to hear: **vision without a reality check is just fantasy with good lighting.**
 
 ---
 
@@ -1131,13 +1144,13 @@ Not what we want to be true. What *is* true.
 
 Because your Real Reasons describe what you want. Your values describe an ideal you. The Future You describes the person you're becoming. All beautiful. All necessary. But if we don't also name the gap—the distance between *here* and *there*—we'll build a plan that doesn't account for reality. And plans that don't account for reality don't survive contact with Monday morning.
 
-This is The Reckoning.
+This is Reality Check.
 
 ---
 
 ### Six Questions
 
-Open The Reckoning worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one. This would be a perfect place to use something like Wispr Flow or a similar tool—honest reflection often flows more freely when you speak it. Link in the worksheet.
+Open the Reality Check worksheet. There are six questions. That's it. One page. You can do this in ten minutes. But I'd encourage you to take a little longer if you can. Because the quality of these answers determines how smart your AI coach is about your *real* life—not just your aspirational one. This would be a perfect place to use something like Wispr Flow or a similar tool—honest reflection often flows more freely when you speak it. Link in the worksheet.
 
 **1. Real Reasons Must Be True.** What must be true in your life for your Real Reasons to actually happen? Not "it would be nice if..." What's non-negotiable? What conditions *must* exist? Maybe it's "I need to be debt-free." Maybe it's "I need to work fewer than 40 hours a week." Maybe it's "I need a partner who supports this vision." Name the requirements.
 
@@ -1176,7 +1189,7 @@ Those two sentences—if you're honest—are worth more than a hundred hours of 
 
 You've done the vision work. You've done the truth work. Now it's time to do the math.
 
-In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, The Future You, The Reckoning—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real.
+In Lesson 6, we take everything you've built—Real Reasons, Driving Fire, values, The Future You, Reality Check—and we turn it into a number. A real number. Your Required Revenue. And then we reverse-engineer the exact annual, quarterly, monthly, and weekly behaviors that make it real.
 
 No more "I should probably make more money." Instead: "I need $X, which requires Y sales, which requires Z conversations per week, and here's how I get them."
 
@@ -1187,6 +1200,7 @@ Let's get after it.
 ---
 
 *[End of Video 5.1]*
+
 
 ---
 
@@ -1200,7 +1214,7 @@ Let's get after it.
 
 Lesson 6. This is where the rubber meets the road.
 
-Everything we've done so far—Real Reasons, Driving Fire, values, The Future You, The Reckoning—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
+Everything we've done so far—Real Reasons, Driving Fire, values, The Future You, Reality Check—has been about clarity. Clarity about what you want, who you are, and what you're building toward. Beautiful work. Essential work.
 
 But clarity without numbers is just... well, it's a really inspiring journal entry. And journals don't pay the bills.
 
@@ -1217,6 +1231,20 @@ A Required Revenue number that's built on *your* actual life—your baseline nee
 When we're done, you'll know exactly what your business needs to generate—and why. Every dollar will be connected to something real. And when you hit a rough month? You won't be wondering "why am I doing this?" You'll know. Because you built the number on purpose.
 
 ---
+
+### Step 0: What Aligned Success Feels Like
+
+Before we talk numbers, start with the felt experience.
+
+Open the worksheet and answer the Step 0 questions. When this works in a way that feels aligned:
+- how do you want mornings to feel?
+- what do you want your relationship with money to feel like?
+- what do you want your relationship with time to feel like?
+- what do you want your energy to feel like?
+
+This matters because the number is not the point. The lived experience is the point. The number is in service of the life.
+
+Now we move into the math.
 
 ### Step 1: The Non-Negotiables (Baseline Needs)
 
@@ -1297,6 +1325,7 @@ I'll see you in the next one.
 
 *[End of Video 6.1]*
 
+
 ---
 
 # Video 6.2 — The Math: Revenue → Qualified Conversations
@@ -1332,9 +1361,28 @@ This is not "I want to make more money." This is "My life requires $X, and here'
 
 ---
 
-### Step 5: From Revenue to Weekly Behaviors
+### Step 5: Revenue Stream Mix
 
-Now we reverse-engineer. This is where the magic happens—and also where the math gets real.
+Before we reverse-engineer anything, separate your streams.
+
+If you have one clean flagship offer and one clean model, amazing. This step should be quick. But some of you don't. Some of you have multiple revenue streams. Client work. Workshops. Space rental. Events. Side offers. Maybe one thing that's profitable, one thing that's meaningful, and one thing that's quietly eating your life.
+
+So Step 5 says: don't lump it. Separate it.
+
+Look at each stream by:
+- revenue
+- margin
+- hours required
+- rough dollars per hour
+- and alignment
+
+Because not all revenue is created equal. Some money costs you too much. Some money fuels the whole thing. Some money looks small on paper but creates high-trust clients. And some money needs to be reduced or exited, not scaled.
+
+This matters because the answer isn't always "grow the business." Sometimes the answer is: grow the right stream and stop subsidizing the wrong one.
+
+### Step 6: From Revenue to Weekly Behaviors
+
+Now we reverse-engineer. This is where the math gets real.
 
 We're not tracking "leads." I want to be very clear about that. We're tracking **qualified conversations**: real, scheduled, right-fit conversations with people who have intent and capacity. Not tire-kickers. Not "let's grab coffee." Conversations that can result in a yes or a no.
 
@@ -1359,6 +1407,16 @@ Then we break it down across every timeframe: divide by 4 for quarterly. Divide 
 That's it. That's the number at every level. Everything your life requires—stability, growth, experiences, impact—reverse-engineers to roughly 3 qualified conversations per week. About 12 per month. About 36 per quarter.
 
 Does that feel doable? It should. Because we didn't start with "you need to do 50 cold calls a day." We started with your actual life and reverse-engineered the exact annual, quarterly, monthly, and weekly behaviors that make it real.
+
+Now, for some of you, there's a second branch: **retention math.**
+
+If your business has repeat clients, recurring appointments, sessions, or continuity revenue, we don't only ask, "How do I get more new people?" We also ask:
+- What is my rebooking rate?
+- How long does a client stay?
+- How often do they come back?
+- Where is the leak?
+
+Because for some businesses, the easiest money isn't more acquisition. It's better continuity. Better rebooking. Better follow-through. Better client lifetime value. The worksheet gives you both branches so you can see whether your real lever is new conversations, stronger retention, or both.
 
 ---
 
@@ -1390,6 +1448,12 @@ The key fields:
 - Show rate (booked → attended)
 - QC → Sales conversation rate
 
+And if that repeat-client branch applies to you, don't skip the retention fields:
+- Rebooking rate
+- Average client lifespan
+- Frequency
+- Estimated LTV
+
 If you're not sure about your close rate, use 25% as a starting benchmark. If you're not sure about your QC quality rate, use 60%. These are conservative. Better to plan conservatively and overdeliver than to plan optimistically and scramble.
 
 ---
@@ -1398,9 +1462,9 @@ If you're not sure about your close rate, use 25% as a starting benchmark. If yo
 
 When you're done with Step 5, you have something most business owners never have: a weekly scoreboard with one number on it. **Qualified conversations per week.**
 
-That's your leading indicator. Not revenue (that's a lagging indicator). Not leads (that's vanity). Qualified conversations. Because if you hit your QC number every week, and your conversion rates hold, the revenue takes care of itself.
+For most of you, that's the leading indicator. Not revenue (that's a lagging indicator). Not leads (that's vanity). Qualified conversations. And if you're in a repeat-client model, right beside that number you now have your key retention metric too. Because if you hit the right QC number *and* plug the right retention leak, the revenue takes care of itself far faster.
 
-Your AI coach will track this number. When you ask for a weekly plan, it'll include your QC target. When you fall behind, it'll diagnose whether the issue is volume, quality, or conversion—and recommend the right lever.
+Your AI coach will track these numbers. When you ask for a weekly plan, it'll include your QC target. When you fall behind, it'll diagnose whether the issue is volume, quality, conversion, stream mix, or, where relevant, retention and recommend the right lever.
 
 In the next video, we'll choose your lead path—referral or ads—and do the capacity check to make sure this plan actually fits your real life.
 
@@ -1409,6 +1473,7 @@ Let's keep going.
 ---
 
 *[End of Video 6.2]*
+
 
 ---
 
@@ -1420,11 +1485,11 @@ Let's keep going.
 
 ## VIDEO SCRIPT
 
-Last piece of The Revenue Bridge. Two more steps and you've got a complete operational plan.
+Last piece of The Revenue Bridge. A couple more steps and you've got a complete operational plan.
 
 ---
 
-### Step 6: Choose Your Conversation Engine
+### Step 7: Choose Your Conversation Engine
 
 You've got your QC number. Now—how are you going to get those conversations?
 
@@ -1436,9 +1501,9 @@ There are two primary engines:
 
 Pick ONE for the next 90 days. You can layer the second one in later. But trying to build both engines simultaneously when you're also trying to get clarity on your life and business? That's a recipe for doing two things poorly instead of one thing well.
 
-If you choose **Referral**: fill out Step 6A. How many partner conversations per week? How many referral asks? How many introductions requested? What's your show rate?
+If you choose **Referral**: fill out Step 7A. How many partner conversations per week? How many referral asks? How many introductions requested? What's your show rate?
 
-If you choose **Ads**: fill out Step 6B. What's your cost per lead? Your opt-in to booked-call rate? Your weekly ad spend? Your CAC and ROAS?
+If you choose **Ads**: fill out Step 7B. What's your cost per lead? Your opt-in to booked-call rate? Your weekly ad spend? Your CAC and ROAS?
 
 Both paths lead to the same destination—your weekly QC number. They just get there differently.
 
@@ -1446,7 +1511,7 @@ Here's a principle I want you to hold: **the highest-quality conversations come 
 
 ---
 
-### Step 7: The Capacity Check
+### Step 8: The Capacity + Seasonality Check
 
 Now the truth test.
 
@@ -1470,16 +1535,31 @@ The lever options are listed in the worksheet:
 - Change the delivery model (group, hybrid, productized)
 - Improve screening (fewer, better conversations)
 - Improve conversion (scripts, follow-up, close rate)
+- Improve retention and rebooking
 - Delegate or systemize
-- Reduce low-value work
+- Reduce low-value work or exit a stream
 
 The question is always: **which ONE of these would create the most downstream impact?**
 
 That's the highest-leverage move.
 
+And now there's another layer in this section that matters for the right business models.
+
+If your business is high-touch, session-based, coaching-intensive, healing-based, or otherwise emotionally or energetically demanding, you also check **energy capacity**. Not just hours. Sessions per week. Recovery time. What kinds of sessions drain you. What kinds of sessions energize you. Because a calendar can look "possible" on paper and still be completely unsustainable in your nervous system.
+
+And if your business is seasonal, you check that too. Strong months. Weak months. Cash reserves. What changes in the valley. What changes in the peak. Because average monthly revenue can lie to you if your business lives in real cycles.
+
+### Step 9: Optional Model Modules
+
+This is where we catch the less-standard models without turning the whole worksheet into a monster for everybody.
+
+If you run a **studio, clinic, or collective**, you do the space economics. Lease cost. Room or provider revenue. Occupancy. Break-even. Is the space profitable on its own, or is your core offer subsidizing it?
+
+If you run, or want to run, **retreats or events**, you do the event economics. Price. Cost. Break-even attendance. Lead time. Profit. Because "I'd love to do retreats someday" gets a lot more useful once the math has a shape.
+
 ---
 
-### The Finish: Your Highest-Leverage Move
+### Step 10: The Finish — Your Highest-Leverage Move
 
 At the bottom of the worksheet, you're going to write three things:
 
@@ -1497,9 +1577,11 @@ Step back for a second and look at what you have now:
 
 - A Required Revenue number built on your actual life
 - A Target Revenue with a reality buffer
+- A stream-mix view that shows what actually deserves to grow
 - The exact number of qualified conversations per week to hit your target
+- An optional retention branch for repeat-client models
 - A primary lead engine with specific weekly behaviors
-- A capacity check that says whether this is sustainable
+- A capacity and seasonality check that says whether this is sustainable
 - A highest-leverage move to pull when the math doesn't fit
 
 This is not a dream. This is not a vision board. This is a **strategy machine.** And every number in it feeds directly into your **Aligned AIOS** so your coach can hold you accountable to the math—not just the motivation.
@@ -1513,6 +1595,7 @@ Let's get after it.
 ---
 
 *[End of Video 6.3]*
+
 
 ---
 
@@ -1613,6 +1696,7 @@ For now, fill in your lanes, choose your Lead Lane, and define your Vital Action
 ---
 
 *[End of Video 7.1]*
+
 
 ---
 
@@ -1717,7 +1801,7 @@ The whole point of Strategic Clarity is that your daily actions serve your whole
 
 ### What's Next
 
-You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, The Reckoning, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
+You've now got everything you need: Real Reasons, Driving Fire, values, The Future You, Reality Check, The Revenue Bridge, and Your Vital Action Plan installed on your calendar.
 
 In Lesson 8, we take *all of it* and feed it into the Master Prompt. That's where your Aligned Freedom Coach comes online.
 
@@ -1726,6 +1810,7 @@ Almost there. Let's keep going.
 ---
 
 *[End of Video 7.2]*
+
 
 ---
 
@@ -1741,7 +1826,7 @@ Okay. This is the payoff.
 
 Everything you've built—every worksheet, every honest answer, every number, every value, every vision statement—it all comes together right here.
 
-Welcome to your Aligned Freedom Coach.
+Welcome to your **Aligned AIOS** — this is the master prompt payoff.
 
 ---
 
@@ -1755,7 +1840,7 @@ We're about to change that.
 
 You're going to take a **Master Prompt**—a structured template we've built—and feed it your completed worksheets. Best way: attach your worksheets file. Alternative: paste them below the designated line. The AI reads everything you've written and generates two documents:
 
-1. **Your Aligned Freedom Coach UPGRADE — MASTER CONTEXT (v1)** — This is your operating system. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
+1. **Your ALIGNED AIOS UPGRADE — MASTER CONTEXT (v1)** — This is your **Aligned AIOS**. It contains your identity, your values (operationalized), your Real Reasons, your Driving Fire and Cause Worth Playing For, your Becoming, your revenue math, your capacity constraints, your Vital Action, and explicit instructions for how the AI should coach you—including both strategic coaching and inner work (NLP, belief change, parts work) when you need it.
 
 2. **Your ALIGNMENT BLUEPRINT SUMMARY SHEET** — A one-page snapshot. Your north star stack, your values and boundaries, your Becoming, your revenue targets, and your Vital Action. Everything in one glance.
 
@@ -1788,7 +1873,7 @@ Here's the process. It's straightforward.
 
 **Step 5:** Feed it your worksheets. Two options:
 - **Preferred:** If your AI supports file uploads, attach your completed worksheets file—the consolidated "All Worksheets in Order" document works perfectly. One file. Done.
-- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, The Reckoning, Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
+- **Alternative:** If you can't attach files, paste each of your completed worksheets below the line that says "PASTE WORKSHEETS BELOW THIS LINE." In order: Real Reasons, Reality Check, Driving Fire + Cause Worth Playing For, Values Code, The Future You, The Revenue Bridge, Your Vital Action Plan.
 
 **Step 6:** Hit send. Let the AI process everything and generate your Master Context and Blueprint.
 
@@ -1800,7 +1885,7 @@ Here's the process. It's straightforward.
 
 ### Monthly Patch Notes
 
-Your Aligned Freedom Coach isn't static. It grows with you.
+Your Aligned AIOS isn't static. It grows with you.
 
 At the bottom of the worksheet, there's a **Monthly Patch Notes** prompt. Once a month—or whenever something significant changes—you run this prompt with your current Master Context and your updates. Changed your offer? Patch it. Refined a value? Patch it. Hit a revenue milestone and need new targets? Patch it.
 
@@ -1814,9 +1899,9 @@ Think of it like updating the operating system on your phone. Same phone. Better
 
 Here's the thing. I built something I use every day myself.
 
-It's called Aligned Freedom Coach—the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in.
+It's called **ALFRED** — **Aligned Freedom Coach** — the same framework, but as an app. You upload your completed worksheets once. The app generates your Master Context. It stores it. And you just… chat. No copying. No pasting into every new conversation. No running the Patch Notes prompt manually every month—patching is built in. ALFRED also layers in your VAPI™ scores, Founder Archetype, driver pattern, 6Cs, and Vital Actions — **Aligned AIOS on steroids.**
 
-I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at alfredai.coach. Check it out. See if it feels easier. No pressure.
+I'm so excited about it that I'm giving you 30 days free. Whether you attended the workshop live or you're going through this on video—use code **INTENSIVE30** at **alfredai.coach**. Check it out. See if it feels easier. No pressure.
 
 Either way—you've got everything you need. The manual process works. The app is just… the version I built for myself that I wanted to share.
 
@@ -1824,7 +1909,7 @@ Either way—you've got everything you need. The manual process works. The app i
 
 ### The Decision Filter
 
-One of the most powerful features built into your OS is the Decision Filter. Any time you ask your AI coach about an opportunity, a strategy, a partnership, a pivot—it will score it on six dimensions:
+One of the most powerful features built into your Aligned AIOS is the Decision Filter. Any time you ask your AI coach about an opportunity, a strategy, a partnership, a pivot—it will score it on six dimensions:
 
 1. Values fit
 2. Moves your Real Reasons forward
@@ -1845,7 +1930,7 @@ Take a second and think about what you just created.
 
 You didn't just set goals. You excavated what you actually want. You found your purpose. You defined your values—with teeth. You mapped the person you're becoming. You named what's in the way. You turned meaning into math. You chose one Vital Action and protected it. And then you poured all of it into an AI that will hold you accountable to *your* truth every single day.
 
-That's not a workshop exercise. That's an operating system for your life.
+That's not a workshop exercise. That's an **Aligned AIOS** for your life.
 
 And in the next lesson—the final one—I'm going to show you exactly how to use it. Fire Starters: fifty-six questions, organized by use case, that turn your AI coach into a daily tool for planning, strategy, sales, marketing, execution, inner work, and reviews.
 
@@ -1854,6 +1939,7 @@ Almost done. I'll see you in Lesson 9.
 ---
 
 *[End of Video 8.1]*
+
 
 ---
 
@@ -1865,9 +1951,9 @@ Almost done. I'll see you in Lesson 9.
 
 ## VIDEO SCRIPT
 
-Alright. Final lesson. And honestly? This might be the most *fun* one.
+Alright. Final lesson. And honestly? This is the one that makes the whole system usable on a Tuesday.
 
-You've built the operating system. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
+You've built your **Aligned AIOS**. Your AI knows your values, your Real Reasons, your Driving Fire, your revenue math, your Vital Action—all of it. Now we put it to work.
 
 I'm going to walk you through the Fire Starters—fifty-six high-leverage questions organized by use case—so you know exactly how to leverage your AI coach for everything from weekly planning to monthly reviews to "I'm spiraling and need to get grounded in 60 seconds."
 
@@ -1980,7 +2066,7 @@ You walked into this module—maybe skeptical, maybe hopeful, maybe a little of 
 - Connected your vision to your reality
 - Turned meaning into math
 - Chose one Vital Action and installed it on your calendar
-- Built a Aligned Freedom Coach that holds all of it
+- Built an Aligned AIOS and a coaching system that can hold all of it
 - And now you've got Fire Starters—fifty-six questions that turn that system into a daily tool
 
 This isn't a course you took. This is a system you built. For *your* life. On *your* terms.
@@ -1991,7 +2077,7 @@ And the beautiful thing? It grows with you. Monthly Patch Notes keep it current.
 
 ### One Last Invitation
 
-Here's what I want you to do right now. Pick one question from the list—any question—and run it. With your Master Context loaded. See what comes back. See how it feels to get advice that's *actually* tailored to you. Advice that respects your values. Advice that knows your numbers. Advice that holds you to the person you're becoming.
+Here's what I want you to do right now. Pick one question from the list and run it before you leave this lesson. With your Master Context loaded. See what comes back. See how it feels to get advice that's *actually* tailored to you. Advice that respects your values. Advice that knows your numbers. Advice that holds you to the person you're becoming.
 
 And then do it again tomorrow. And the day after. Make it a habit. Because this is what Strategic Clarity looks like in practice—not a module you completed, but a system you live in.
 
@@ -2008,3 +2094,4 @@ Let's get after it.
 ---
 
 *[End of Video 9.1]*
+

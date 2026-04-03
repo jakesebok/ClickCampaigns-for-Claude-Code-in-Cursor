@@ -1,6 +1,6 @@
 /**
  * 6C Scorecard reminder emails. Call from Vercel Cron (or manually with CRON_SECRET).
- * Schedule: four daily cron entries at 15:05, 16:05, 17:05, and 18:05 UTC.
+ * Schedule: three daily cron entries at 15:05, 16:05, and 17:05 UTC.
  * The handler accepts any configured fallback hour around the Eastern midday
  * reminder window and relies on Resend idempotency keys so redundant attempts
  * do not create duplicate emails.
@@ -17,7 +17,7 @@ const TZ = 'America/New_York';
 const PORTAL_URL = 'https://portal.alignedpower.coach';
 const SCORECARD_URL = `${PORTAL_URL}/scorecard`;
 const DASHBOARD_URL = `${PORTAL_URL}/dashboard`;
-const CONFIGURED_CRON_UTC_HOURS = [15, 16, 17, 18];
+const CONFIGURED_CRON_UTC_HOURS = [15, 16, 17];
 
 function nowInEastern(date = new Date()) {
   const fmt = new Intl.DateTimeFormat('en-US', {
@@ -47,8 +47,13 @@ function isInConfiguredCronHour(date = new Date()) {
   return CONFIGURED_CRON_UTC_HOURS.includes(date.getUTCHours());
 }
 
+function isInFallbackReminderWindow(date = new Date()) {
+  const eastern = nowInEastern(date);
+  return eastern.hour >= 11 && eastern.hour <= 12;
+}
+
 function getReminderType(date = new Date()) {
-  if (!isInConfiguredCronHour(date)) return null;
+  if (!isInConfiguredCronHour(date) || !isInFallbackReminderWindow(date)) return null;
   const e = nowInEastern(date);
   if (e.dayOfWeek === 5) return 'available';
   if (e.dayOfWeek === 6) return 'saturday';

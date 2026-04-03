@@ -106,7 +106,7 @@ One good decision — or one avoided bad one — pays for a year of Aligned Free
 
 — Jake
 
-P.S. — The filter gets sharper the more context you add. If you haven't done The Reckoning worksheet yet, upload it. It fills in the "what's actually in the way" fields.
+P.S. — The filter gets sharper the more context you add. If you haven't done the Reality Check worksheet yet, upload it. It fills in the "what's actually in the way" fields.
 
 ---
 

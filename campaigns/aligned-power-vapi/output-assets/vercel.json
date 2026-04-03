@@ -51,10 +51,6 @@
     {
       "path": "/api/cron/6c-reminders",
       "schedule": "5 17 * * *"
-    },
-    {
-      "path": "/api/cron/6c-reminders",
-      "schedule": "5 18 * * *"
     }
   ]
 }
