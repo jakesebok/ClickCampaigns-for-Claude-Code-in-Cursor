@@ -115,6 +115,26 @@ function isVitalActionReminderType(value) {
   return value === 'monday-vital-action' || value === 'tuesday-vital-action';
 }
 
+function buildSixCsDetailsHtml() {
+  return `
+    <h3 style="margin:0 0 12px;color:#0E1624;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;table-layout:fixed;">
+      <tr>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Clarity</strong></td>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Coherence</strong></td>
+      </tr>
+      <tr>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Capacity</strong></td>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Confidence</strong></td>
+      </tr>
+      <tr>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Courage</strong></td>
+        <td width="50%" style="padding:6px 8px;color:#3A4A5C;font-size:14px;white-space:nowrap;">&#9670; <strong>Connection</strong></td>
+      </tr>
+    </table>
+    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your Vital Action to focus on next week.</p>`;
+}
+
 // Returns full branded HTML email
 function buildHtmlEmail({ type, firstName }) {
   const name = firstName ? `Hi ${firstName},` : 'Hi there,';
@@ -126,21 +146,7 @@ function buildHtmlEmail({ type, firstName }) {
       cta: 'Fill Out My Scorecard →',
       urgency: null,
       primaryUrl: SCORECARD_URL,
-      detailsHtml: `
-    <h3 style="margin:0 0 12px;color:#0E1624;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Clarity</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Coherence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Capacity</strong></td>
-      </tr>
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Confidence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Courage</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Connection</strong></td>
-      </tr>
-    </table>
-    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your Vital Action to focus on next week.</p>`,
+      detailsHtml: buildSixCsDetailsHtml(),
       footerCta: 'Log In to My Portal &rarr;',
     },
     saturday: {
@@ -150,21 +156,7 @@ function buildHtmlEmail({ type, firstName }) {
       cta: 'Complete My Scorecard →',
       urgency: null,
       primaryUrl: SCORECARD_URL,
-      detailsHtml: `
-    <h3 style="margin:0 0 12px;color:#0E1624;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Clarity</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Coherence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Capacity</strong></td>
-      </tr>
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Confidence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Courage</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Connection</strong></td>
-      </tr>
-    </table>
-    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your Vital Action to focus on next week.</p>`,
+      detailsHtml: buildSixCsDetailsHtml(),
       footerCta: 'Log In to My Portal &rarr;',
     },
     'one-hour-left': {
@@ -174,21 +166,7 @@ function buildHtmlEmail({ type, firstName }) {
       cta: 'Submit Now — Closes at 6pm →',
       urgency: `<p style="margin:0;font-size:13px;color:#B45309;font-weight:600;">⏱ Closes today at 6pm Eastern</p>`,
       primaryUrl: SCORECARD_URL,
-      detailsHtml: `
-    <h3 style="margin:0 0 12px;color:#0E1624;font-size:16px;font-weight:700;">The 6C&rsquo;s are:</h3>
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Clarity</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Coherence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Capacity</strong></td>
-      </tr>
-      <tr>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Confidence</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Courage</strong></td>
-        <td style="padding:5px 8px;color:#3A4A5C;font-size:14px;">&#9670; <strong>Connection</strong></td>
-      </tr>
-    </table>
-    <p style="margin:0 0 28px;color:#3A4A5C;font-size:15px;line-height:1.7;">Rate yourself honestly across each one. See what&rsquo;s holding you back and set your Vital Action to focus on next week.</p>`,
+      detailsHtml: buildSixCsDetailsHtml(),
       footerCta: 'Log In to My Portal &rarr;',
     },
     'monday-vital-action': {
