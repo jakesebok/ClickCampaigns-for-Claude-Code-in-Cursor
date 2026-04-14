@@ -1,4 +1,10 @@
 import type { BuildIntakePayloadV1 } from "@/lib/build-assessment-intake/types";
+import {
+  buildAdminEmailHtml,
+  buildAdminEmailText,
+  buildSubmitterEmailHtml,
+  buildSubmitterEmailText,
+} from "@/lib/build-assessment-intake/intake-email-html";
 
 export const dynamic = "force-dynamic";
 
@@ -10,66 +16,6 @@ const USER_FROM =
   process.env.VAPI_USER_FROM_EMAIL || "hello@notifications.alignedpower.coach";
 const ADMIN_FROM =
   process.env.VAPI_ADMIN_FROM_EMAIL || "assessments@notifications.alignedpower.coach";
-
-function escHtml(s: string) {
-  return String(s || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function formatPayloadText(p: BuildIntakePayloadV1): string {
-  return JSON.stringify(p, null, 2);
-}
-
-function buildUserEmailHtmlFixed(p: BuildIntakePayloadV1, email: string) {
-  const name = p.contactName || "";
-  const greeting = name ? `Hi ${escHtml(name)},` : "Hi there,";
-  const body = escHtml(formatPayloadText(p));
-  return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#F5F7FA;font-family:Helvetica Neue,Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:32px 16px;">
-<tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #DDE3ED;">
-  <tr><td style="padding:36px 40px 28px;">
-    <p style="margin:0 0 16px;color:#3A4A5C;font-size:16px;line-height:1.6;">${greeting}</p>
-    <p style="margin:0 0 16px;color:#3A4A5C;font-size:16px;line-height:1.6;">Thanks for completing the <strong>Build Your Assessment</strong> intake. I received your answers and will review them personally.</p>
-    <p style="margin:0 0 16px;color:#3A4A5C;font-size:16px;line-height:1.6;">A copy of your submission is included below for your records. If anything looks off, reply to this email and we will fix it.</p>
-    <p style="margin:0;color:#7A8FA8;font-size:13px;">Submitted by: ${escHtml(email)}</p>
-  </td></tr>
-  <tr><td style="padding:0 40px 36px;">
-    <p style="margin:0 0 8px;color:#7A8FA8;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Your answers (JSON)</p>
-    <pre style="margin:0;padding:16px;background:#F5F7FA;border-radius:8px;border:1px solid #DDE3ED;font-size:11px;line-height:1.5;color:#0E1624;white-space:pre-wrap;word-break:break-word;">${body}</pre>
-  </td></tr>
-</table>
-</td></tr>
-</table>
-</body></html>`;
-}
-
-function buildAdminEmailHtml(p: BuildIntakePayloadV1, recordId: string) {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#F5F7FA;font-family:Helvetica Neue,Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#F5F7FA;padding:24px 16px;">
-<tr><td align="center">
-<table width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#FFFFFF;border-radius:12px;border:1px solid #DDE3ED;">
-  <tr><td style="padding:24px 28px;background:#0E1624;color:#fff;font-size:18px;font-weight:700;">New Build Your Assessment intake</td></tr>
-  <tr><td style="padding:20px 28px;color:#3A4A5C;font-size:14px;">
-    <p style="margin:0 0 8px;"><strong>Record ID:</strong> ${escHtml(recordId)}</p>
-    <p style="margin:0 0 8px;"><strong>Name:</strong> ${escHtml(p.contactName)}</p>
-    <p style="margin:0 0 16px;"><strong>Email:</strong> ${escHtml(p.contactEmail)}</p>
-    <pre style="margin:0;padding:14px;background:#F5F7FA;border-radius:8px;font-size:11px;line-height:1.45;white-space:pre-wrap;word-break:break-word;">${escHtml(formatPayloadText(p))}</pre>
-  </td></tr>
-</table>
-</td></tr>
-</table>
-</body></html>`;
-}
 
 function isValidEmail(e: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim());
@@ -124,13 +70,6 @@ export async function POST(request: Request) {
     contactName: name,
   };
 
-  if (!full.privacyPolicyUrl?.trim() || !full.termsUrl?.trim()) {
-    return Response.json(
-      { error: "missing_legal_urls", message: "Privacy and terms URLs required" },
-      { status: 400 }
-    );
-  }
-
   const insertRes = await fetch(
     `${supabaseUrl}/rest/v1/build_assessment_intake_submissions`,
     {
@@ -171,8 +110,8 @@ export async function POST(request: Request) {
     errors: string[];
   } = { ok: true, id: recordId, userEmailSent: false, adminEmailSent: false, errors: [] };
 
-  const userHtml = buildUserEmailHtmlFixed(full, email);
-  const userText = `${name ? `Hi ${name},` : "Hi there,"}\n\nThanks for completing the Build Your Assessment intake.\n\n${formatPayloadText(full)}`;
+  const userHtml = buildSubmitterEmailHtml(full, email);
+  const userText = buildSubmitterEmailText(full, email);
 
   try {
     const r = await fetch("https://api.resend.com/emails", {
@@ -197,6 +136,7 @@ export async function POST(request: Request) {
   }
 
   const adminHtml = buildAdminEmailHtml(full, recordId);
+  const adminText = buildAdminEmailText(full, recordId);
   try {
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -209,7 +149,7 @@ export async function POST(request: Request) {
         to: [ADMIN_EMAIL],
         subject: `Build Your Assessment intake — ${name}`,
         html: adminHtml,
-        text: `New intake\nID: ${recordId}\n${formatPayloadText(full)}`,
+        text: adminText,
       }),
     });
     if (r.ok) results.adminEmailSent = true;

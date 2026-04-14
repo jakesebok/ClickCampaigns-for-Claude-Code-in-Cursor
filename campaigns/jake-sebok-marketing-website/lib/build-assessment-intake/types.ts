@@ -41,17 +41,31 @@ export type BuildIntakePayloadV1 = {
   planCadenceNotes: string;
   planUpdateNotes: string;
 
-  authPreference: "supabase" | "clerk" | "unsure" | "";
+  /** Whether they already use an auth vendor (Clerk, Auth0, Cognito, etc.) */
+  hasAuthProvider: "" | "yes" | "no";
+  /** Named when hasAuthProvider is "yes" */
+  authProviderName: string;
+
   coachDashboardExtras: string;
 
   interestedInLongitudinal: boolean;
   longitudinalNotes: string;
 
+  brandWebsiteUrl: string;
   brandLogoUrl: string;
+  /** Google Drive (or similar) link to logo / brand assets */
+  brandLogoDriveUrl: string;
+  brandColorPrimaryHex: string;
+  brandColorSecondaryHex: string;
+  brandColorAccentHex: string;
   brandColorsNotes: string;
+  brandHeadlineFont: string;
+  brandBodyFont: string;
+  brandAccentFont: string;
   brandTypographyNotes: string;
   brandTheme: "light" | "dark" | "both" | "";
 
+  /** Optional; collected later if missing */
   privacyPolicyUrl: string;
   termsUrl: string;
 
@@ -100,14 +114,24 @@ export const DEFAULT_BUILD_INTAKE: BuildIntakePayloadV1 = {
   planCadenceNotes: "",
   planUpdateNotes: "",
 
-  authPreference: "",
+  hasAuthProvider: "",
+  authProviderName: "",
+
   coachDashboardExtras: "",
 
   interestedInLongitudinal: false,
   longitudinalNotes: "",
 
+  brandWebsiteUrl: "",
   brandLogoUrl: "",
+  brandLogoDriveUrl: "",
+  brandColorPrimaryHex: "",
+  brandColorSecondaryHex: "",
+  brandColorAccentHex: "",
   brandColorsNotes: "",
+  brandHeadlineFont: "",
+  brandBodyFont: "",
+  brandAccentFont: "",
   brandTypographyNotes: "",
   brandTheme: "",
 

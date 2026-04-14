@@ -1,0 +1,57 @@
+{
+  "firstName": "Jordan",
+  "lastName": "Kim",
+  "email": "preview@intake.alignedpower.coach",
+  "overall": 6.2,
+  "overallTier": "Functional",
+  "arenaScores": {
+    "Personal": 6.3,
+    "Relationships": 5.9,
+    "Business": 6.4
+  },
+  "arenaTiers": {
+    "Personal": "Functional",
+    "Relationships": "Functional",
+    "Business": "Functional"
+  },
+  "domainScores": {
+    "PH": 6.5,
+    "IA": 6.8,
+    "ME": 5.9,
+    "AF": 6.0,
+    "RS": 6.2,
+    "FA": 5.7,
+    "CO": 5.8,
+    "WI": 6.1,
+    "VS": 6.6,
+    "EX": 6.4,
+    "OH": 5.5,
+    "EC": 6.3
+  },
+  "domains": [
+    { "code": "PH", "domain": "Physical Health", "arena": "Personal", "score": 6.5, "tier": "Functional" },
+    { "code": "IA", "domain": "Inner Alignment", "arena": "Personal", "score": 6.8, "tier": "Functional" },
+    { "code": "ME", "domain": "Mental / Emotional Health", "arena": "Personal", "score": 5.9, "tier": "Functional" },
+    { "code": "AF", "domain": "Attention & Focus", "arena": "Personal", "score": 6.0, "tier": "Functional" },
+    { "code": "RS", "domain": "Relationship to Self", "arena": "Relationships", "score": 6.2, "tier": "Functional" },
+    { "code": "FA", "domain": "Family", "arena": "Relationships", "score": 5.7, "tier": "Functional" },
+    { "code": "CO", "domain": "Community", "arena": "Relationships", "score": 5.8, "tier": "Functional" },
+    { "code": "WI", "domain": "World / Impact", "arena": "Relationships", "score": 6.1, "tier": "Functional" },
+    { "code": "VS", "domain": "Vision / Strategy", "arena": "Business", "score": 6.6, "tier": "Functional" },
+    { "code": "EX", "domain": "Execution", "arena": "Business", "score": 6.4, "tier": "Functional" },
+    { "code": "OH", "domain": "Operational Health", "arena": "Business", "score": 5.5, "tier": "Functional" },
+    { "code": "EC", "domain": "Ecology", "arena": "Business", "score": 6.3, "tier": "Functional" }
+  ],
+  "top3": [
+    { "code": "VS", "domain": "Vision / Strategy", "arena": "Business", "score": 6.6, "tier": "Functional" },
+    { "code": "IA", "domain": "Inner Alignment", "arena": "Personal", "score": 6.8, "tier": "Functional" },
+    { "code": "EX", "domain": "Execution", "arena": "Business", "score": 6.4, "tier": "Functional" }
+  ],
+  "bottom3": [
+    { "code": "OH", "domain": "Operational Health", "arena": "Business", "score": 5.5, "tier": "Functional" },
+    { "code": "FA", "domain": "Family", "arena": "Relationships", "score": 5.7, "tier": "Functional" },
+    { "code": "CO", "domain": "Community", "arena": "Relationships", "score": 5.8, "tier": "Functional" }
+  ],
+  "acquiescence": false,
+  "allResponses": {}
+}

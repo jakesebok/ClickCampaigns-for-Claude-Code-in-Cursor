@@ -9,6 +9,7 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   useCallback,
@@ -22,7 +23,9 @@ import {
   DEFAULT_BUILD_INTAKE,
   type BuildIntakePayloadV1,
 } from "@/lib/build-assessment-intake/types";
+import { IntakeTooltip } from "./IntakeTooltip";
 import { SixCDemoModal } from "./SixCDemoModal";
+import { VapiResultsExampleModal } from "./VapiResultsExampleModal";
 import {
   BUSINESS_GOAL_OPTIONS,
   OPTIONAL_MODULE_OPTIONS,
@@ -88,14 +91,36 @@ export function BuildIntakeWizard() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sixOpen, setSixOpen] = useState(false);
+  const [vapiExampleOpen, setVapiExampleOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(STORAGE_KEY);
       if (raw) {
-        const parsed = JSON.parse(raw) as Partial<BuildIntakePayloadV1>;
-        setData((d) => ({ ...d, ...parsed, version: 1 }));
+        const parsed = JSON.parse(raw) as Partial<BuildIntakePayloadV1> & {
+          authPreference?: string;
+        };
+        setData(() => {
+          const base: BuildIntakePayloadV1 = {
+            ...DEFAULT_BUILD_INTAKE,
+            ...parsed,
+            version: 1,
+          };
+          if (
+            !base.hasAuthProvider &&
+            parsed.authPreference === "supabase"
+          ) {
+            base.hasAuthProvider = "no";
+          } else if (
+            !base.hasAuthProvider &&
+            (parsed.authPreference === "clerk" || parsed.authPreference === "unsure")
+          ) {
+            base.hasAuthProvider = "yes";
+            if (!base.authProviderName) base.authProviderName = "See prior intake (Clerk/unsure)";
+          }
+          return base;
+        });
       }
     } catch {
       /* ignore */
@@ -122,6 +147,12 @@ export function BuildIntakeWizard() {
     }
     setStepId("welcome");
   }, [steps, stepId, data.optionalSections]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [stepId]);
+
   const stepIndex = Math.max(0, steps.indexOf(stepId));
   const progress = ((stepIndex + 1) / steps.length) * 100;
 
@@ -219,8 +250,8 @@ export function BuildIntakeWizard() {
   }
 
   return (
-    <div className="build-intake-canvas min-h-[calc(100dvh-4.5rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-      <header className="sticky top-0 z-30 border-b border-white/70 bg-white/85 backdrop-blur-xl shadow-[0_8px_32px_-16px_rgba(14,22,36,0.12)]">
+    <div className="build-intake-canvas flex min-h-[100dvh] flex-col pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <header className="fixed left-0 right-0 top-0 z-[60] border-b border-white/70 bg-white/92 pt-[env(safe-area-inset-top)] shadow-[0_8px_32px_-16px_rgba(14,22,36,0.14)] backdrop-blur-xl">
         <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-7 lg:px-10 pt-3.5 sm:pt-4 pb-3.5">
           <div className="flex items-center justify-between gap-3 mb-2">
             <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--ap-muted)] font-outfit">
@@ -242,7 +273,7 @@ export function BuildIntakeWizard() {
         </div>
       </header>
 
-      <div className="flex-1 w-full max-w-2xl lg:max-w-3xl mx-auto px-4 sm:px-8 lg:px-10 pt-6 sm:pt-10 md:pt-12 pb-10 sm:pb-14">
+      <div className="mx-auto w-full max-w-2xl flex-1 px-4 pb-10 pt-[calc(7.25rem+env(safe-area-inset-top))] sm:px-8 sm:pb-14 sm:pt-[calc(7.75rem+env(safe-area-inset-top))] md:pt-[calc(8.25rem+env(safe-area-inset-top))] lg:max-w-3xl lg:px-10">
         <div key={stepId} className={reduceMotion ? "" : "intake-step-animate"}>
           {stepId === "welcome" && (
             <WelcomeStep onNext={goNext} />
@@ -271,6 +302,7 @@ export function BuildIntakeWizard() {
               toggleMulti={toggleMulti}
               onNext={goNext}
               onBack={goBack}
+              onOpenVapiExample={() => setVapiExampleOpen(true)}
             />
           )}
           {stepId === "scoring" && (
@@ -282,6 +314,7 @@ export function BuildIntakeWizard() {
               toggleMulti={toggleMulti}
               onNext={goNext}
               onBack={goBack}
+              onOpenVapiExample={() => setVapiExampleOpen(true)}
             />
           )}
           {stepId === "voice" && (
@@ -322,6 +355,10 @@ export function BuildIntakeWizard() {
       </div>
 
       <SixCDemoModal open={sixOpen} onClose={() => setSixOpen(false)} />
+      <VapiResultsExampleModal
+        open={vapiExampleOpen}
+        onClose={() => setVapiExampleOpen(false)}
+      />
     </div>
   );
 }
@@ -802,33 +839,59 @@ function ModulesStep({
   toggleMulti,
   onNext,
   onBack,
+  onOpenVapiExample,
 }: {
   data: BuildIntakePayloadV1;
   toggleMulti: (f: "optionalSections", id: string) => void;
   onNext: () => void;
   onBack: () => void;
+  onOpenVapiExample: () => void;
 }) {
   return (
     <div>
       <h2 className="intake-section-title !mb-2 sm:!mb-3">
         Modules beyond core assessment
       </h2>
-      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit">
+      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit leading-relaxed">
         Core delivery always includes a structured assessment flow and a results
-        experience. Select add-ons you want scoped.
+        experience. Everything below is optional scope you want priced and designed.
+        The public VAPI™ on this site shows how several of these modules feel in
+        production.
       </p>
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <button
+          type="button"
+          onClick={onOpenVapiExample}
+          className="intake-nav-secondary w-full justify-center sm:w-auto"
+        >
+          See a real VAPI™ results page (sample data)
+        </button>
+        <Link
+          href="/assessment/start"
+          className="text-center text-sm font-semibold text-[var(--ap-accent)] underline-offset-2 hover:underline sm:text-left"
+        >
+          Or take the live assessment yourself →
+        </Link>
+      </div>
+      <div className="space-y-4 mb-8">
         {OPTIONAL_MODULE_OPTIONS.map((m) => {
           const on = data.optionalSections.includes(m.id);
           return (
-            <button
+            <div
               key={m.id}
-              type="button"
-              onClick={() => toggleMulti("optionalSections", m.id)}
-              className={`intake-pill ${on ? "intake-pill-on" : "intake-pill-off"}`}
+              className="rounded-2xl border border-[var(--ap-border)]/90 bg-white/90 p-4 shadow-sm"
             >
-              {m.label}
-            </button>
+              <button
+                type="button"
+                onClick={() => toggleMulti("optionalSections", m.id)}
+                className={`intake-pill mb-2 ${on ? "intake-pill-on" : "intake-pill-off"}`}
+              >
+                {m.label}
+              </button>
+              <p className="text-[13px] leading-relaxed text-[var(--ap-secondary)] font-outfit">
+                {m.blurb}
+              </p>
+            </div>
           );
         })}
       </div>
@@ -868,14 +931,32 @@ function ScoringStep({
           className="mt-2 intake-field"
         />
       </label>
-      <label className="flex items-center gap-3 mb-4 cursor-pointer font-outfit text-sm">
+      <label className="flex items-start gap-3 mb-4 cursor-pointer font-outfit">
         <input
           type="checkbox"
           checked={data.bandsTiersDiscussKickoff}
           onChange={(e) => set("bandsTiersDiscussKickoff", e.target.checked)}
-          className="h-4 w-4 accent-[var(--ap-accent)]"
+          className="h-4 w-4 mt-1 shrink-0 accent-[var(--ap-accent)]"
         />
-        Band / tier names will need a working session (counts differ by product).
+        <span className="text-sm text-[var(--ap-primary)] leading-relaxed">
+          <span className="font-semibold block mb-1.5">
+            Plan a kickoff call to name score bands or tiers
+          </span>
+          <span className="text-[var(--ap-secondary)] font-normal block text-[13px] sm:text-sm">
+            “Bands” and “tiers” are the client-facing labels for ranges of scores—for
+            example{" "}
+            <em className="not-italic text-[var(--ap-primary)]/95">
+              Low / Moderate / High
+            </em>
+            , three named stages like{" "}
+            <em className="not-italic text-[var(--ap-primary)]/95">
+              Calibrate → Accelerate → Scale
+            </em>
+            , or letter grades. How many levels you need (three vs. four vs. five)
+            depends on your product, so we finalize names and counts on a live call
+            instead of only from this intake.
+          </span>
+        </span>
       </label>
       <div className="rounded-2xl border border-[var(--ap-border)] bg-white p-4 mb-4">
         <p className="text-sm text-[var(--ap-secondary)] font-outfit mb-3">
@@ -926,29 +1007,61 @@ function OutputsStep({
   toggleMulti,
   onNext,
   onBack,
+  onOpenVapiExample,
 }: {
   data: BuildIntakePayloadV1;
   toggleMulti: (f: "resultsOutputs", id: string) => void;
   onNext: () => void;
   onBack: () => void;
+  onOpenVapiExample: () => void;
 }) {
   return (
     <div>
       <h2 className="intake-section-title !mb-4 sm:!mb-5">
         Results page must include
       </h2>
-      <div className="flex flex-wrap gap-2 mb-6">
+      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit leading-relaxed">
+        Choose everything clients should see on their results experience. Not sure
+        what a label means? Open the annotated VAPI™ preview—each option below maps
+        to a region on that real page.
+      </p>
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <button
+          type="button"
+          onClick={onOpenVapiExample}
+          className="intake-nav-secondary w-full justify-center sm:w-auto"
+        >
+          Open VAPI™ example with vocabulary labels
+        </button>
+        <Link
+          href="/assessment/start"
+          className="text-center text-sm font-semibold text-[var(--ap-accent)] underline-offset-2 hover:underline sm:text-left"
+        >
+          Take VAPI™ to feel the flow →
+        </Link>
+      </div>
+      <div className="mb-8 space-y-4">
         {RESULT_OUTPUT_OPTIONS.map((m) => {
           const on = data.resultsOutputs.includes(m.id);
           return (
-            <button
+            <div
               key={m.id}
-              type="button"
-              onClick={() => toggleMulti("resultsOutputs", m.id)}
-              className={`intake-pill ${on ? "intake-pill-on" : "intake-pill-off"}`}
+              className="rounded-2xl border border-[var(--ap-border)]/90 bg-white/95 p-4 shadow-sm"
             >
-              {m.label}
-            </button>
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => toggleMulti("resultsOutputs", m.id)}
+                  className={`intake-pill ${on ? "intake-pill-on" : "intake-pill-off"}`}
+                >
+                  {m.label}
+                </button>
+                <IntakeTooltip label={m.label}>{m.hint}</IntakeTooltip>
+              </div>
+              <p className="pl-0.5 text-[13px] font-outfit leading-relaxed text-[var(--ap-secondary)]">
+                {m.hint}
+              </p>
+            </div>
           );
         })}
       </div>
@@ -982,6 +1095,11 @@ function VoiceStep({
       <h2 className="intake-section-title !mb-4 sm:!mb-5">
         Voice & authorship
       </h2>
+      <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+        This step decides how dense the interpretation copy feels and what reference
+        material we wire into the experience (pattern libraries, help articles, your
+        methodology).
+      </p>
       <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
         Reading level
       </p>
@@ -1011,14 +1129,14 @@ function VoiceStep({
           value={data.contentDepth}
           onChange={(e) => set("contentDepth", e.target.value)}
           rows={3}
-          placeholder="Short blurbs vs long coaching-style narratives…"
+          placeholder="Example: one tight paragraph per domain vs. long-form coaching narrative; where you want more story vs. more checklist."
           className="mt-2 intake-field"
         />
       </label>
       <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
         Who authors copy?
       </p>
-      <div className="flex flex-col gap-2 mb-4">
+      <div className="flex flex-col gap-2 mb-6">
         {WHO_AUTHORS_OPTIONS.map((o) => (
           <button
             key={o.id}
@@ -1034,17 +1152,28 @@ function VoiceStep({
           </button>
         ))}
       </div>
-      <label className="block mb-6">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Libraries (drivers, FAQs, methodology pages)
-        </span>
+      <div className="rounded-2xl border border-[var(--ap-border)] bg-[#FAFAFB] p-4 sm:p-5 mb-4">
+        <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit mb-2">
+          Supporting libraries & help content
+        </p>
+        <p className="text-[13px] text-[var(--ap-secondary)] font-outfit leading-relaxed mb-3">
+          <strong className="text-[var(--ap-primary)]">Pattern libraries</strong> are
+          curated narratives (similar to VAPI™ archetypes and drivers) that unlock
+          based on scores.{" "}
+          <strong className="text-[var(--ap-primary)]">FAQs</strong> are short help
+          answers for common questions inside the app.{" "}
+          <strong className="text-[var(--ap-primary)]">Methodology pages</strong> are
+          longer “how to read this” articles you want linked from results. Paste
+          links, upload plans, or describe what exists today.
+        </p>
         <textarea
           value={data.librariesNotes}
           onChange={(e) => set("librariesNotes", e.target.value)}
-          rows={3}
-          className="mt-2 intake-field"
+          rows={4}
+          placeholder="Example: Link to our Notion methodology hub. FAQs live in Intercom (we will export). Driver copy should mirror the tone in our course workbook…"
+          className="intake-field"
         />
-      </label>
+      </div>
       <NavRow
         onBack={onBack}
         onNext={onNext}
@@ -1115,31 +1244,41 @@ function AuthStep({
   onNext: () => void;
   onBack: () => void;
 }) {
+  const needsProviderName = data.hasAuthProvider === "yes";
+  const canContinue =
+    data.hasAuthProvider !== "" &&
+    (data.hasAuthProvider === "no" ||
+      (data.hasAuthProvider === "yes" &&
+        data.authProviderName.trim().length > 1));
+
   return (
     <div>
-      <h2 className="intake-section-title">
-        Accounts & auth
-      </h2>
-      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit leading-relaxed">
-        Default for most engagements is{" "}
-        <strong>Supabase Auth</strong> for the portal. If you need a richer consumer
-        app experience, we may layer <strong>Clerk</strong> or similar—especially
-        when you want turnkey OAuth and mobile-ready session handling.
+      <h2 className="intake-section-title">Accounts & sign-in</h2>
+      <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+        We need to know whether you already pay for a login provider (Auth0, Clerk,
+        Cognito, Firebase Auth, Stytch, etc.) or if we should recommend one during
+        kickoff. You do not need to decide implementation details here—just the
+        business reality.
       </p>
-      <div className="flex flex-col gap-2 mb-6">
+      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
+        Do you already have an auth provider for this product?
+      </p>
+      <div className="mb-6 flex flex-col gap-2">
         {(
           [
-            ["supabase", "Supabase Auth (portal-first)"],
-            ["clerk", "Clerk (app-forward)"],
-            ["unsure", "Not sure — recommend in kickoff"],
+            ["yes", "Yes — we already use one"],
+            ["no", "No — please recommend at kickoff"],
           ] as const
         ).map(([id, label]) => (
           <button
             key={id}
             type="button"
-            onClick={() => set("authPreference", id)}
+            onClick={() => {
+              set("hasAuthProvider", id);
+              if (id === "no") set("authProviderName", "");
+            }}
             className={`intake-choice text-left ${
-              data.authPreference === id
+              data.hasAuthProvider === id
                 ? "intake-choice-active"
                 : "intake-choice-default"
             }`}
@@ -1148,11 +1287,20 @@ function AuthStep({
           </button>
         ))}
       </div>
-      <NavRow
-        onBack={onBack}
-        onNext={onNext}
-        disableNext={!data.authPreference}
-      />
+      {needsProviderName && (
+        <label className="mb-6 block">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
+            Who powers sign-in today?
+          </span>
+          <input
+            value={data.authProviderName}
+            onChange={(e) => set("authProviderName", e.target.value)}
+            className="mt-2 intake-field"
+            placeholder="Example: Clerk (marketing site + app), Auth0 tenant “acme”, Google-only Firebase…"
+          />
+        </label>
+      )}
+      <NavRow onBack={onBack} onNext={onNext} disableNext={!canContinue} />
     </div>
   );
 }
@@ -1178,10 +1326,23 @@ function CoachStep({
       <h2 className="intake-section-title">
         Coaching OS & ongoing scorecards
       </h2>
-      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit leading-relaxed">
-        Baseline scope includes coach and admin views unless you say otherwise. Tell
-        us anything else you need on those surfaces.
+      <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+        Baseline scope includes coach and admin views unless you say otherwise. Start
+        with the interactive preview if recurring scorecards matter to you.
       </p>
+      <button
+        type="button"
+        onClick={onOpenSix}
+        className="mb-6 w-full rounded-2xl border-2 border-[var(--ap-accent)] bg-gradient-to-br from-[#FFF8F3] to-white px-4 py-5 text-left font-outfit shadow-md shadow-[rgba(255,107,26,0.12)] transition-colors hover:from-[#FFF3EE] hover:to-white"
+      >
+        <span className="text-sm font-bold text-[var(--ap-primary)] block mb-1">
+          View interactive 6C demo (~60 seconds)
+        </span>
+        <span className="text-xs text-[var(--ap-secondary)] leading-relaxed">
+          Opens as a full-screen overlay: Likert buttons, Vital Action, then a
+          dashboard-style grid. Nothing leaves this browser session.
+        </span>
+      </button>
       <label className="block mb-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
           Extra coach / admin needs
@@ -1219,19 +1380,6 @@ function CoachStep({
           />
         )}
       </div>
-      <button
-        type="button"
-        onClick={onOpenSix}
-        className="mb-6 w-full rounded-2xl border-2 border-[var(--ap-accent)] bg-white px-4 py-4 text-left font-outfit shadow-sm hover:bg-[#FFF3EE] transition-colors"
-      >
-        <span className="text-sm font-bold text-[var(--ap-primary)] block mb-1">
-          View interactive 6C demo
-        </span>
-        <span className="text-xs text-[var(--ap-secondary)]">
-          Stays inside this page — shortened scorecard, Vital Action, dashboard-style
-          scores.
-        </span>
-      </button>
       <NavRow onBack={onBack} onNext={onNext} />
     </div>
   );
@@ -1251,26 +1399,148 @@ function BrandStep({
   onNext: () => void;
   onBack: () => void;
 }) {
+  const [pullingBrand, setPullingBrand] = useState(false);
+  const [pullError, setPullError] = useState<string | null>(null);
+
+  const pullFromSite = async () => {
+    const raw = data.brandWebsiteUrl.trim();
+    if (!/^https:\/\//i.test(raw)) {
+      setPullError("Enter a full https:// URL first.");
+      return;
+    }
+    setPullingBrand(true);
+    setPullError(null);
+    try {
+      const res = await fetch("/api/extract-brand-from-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: raw }),
+      });
+      const json = (await res.json()) as {
+        colors?: string[];
+        googleFonts?: string[];
+        bodyFontGuess?: string | null;
+        message?: string;
+      };
+      if (!res.ok) {
+        setPullError(json.message || "Could not read that page. Paste hex codes manually.");
+        return;
+      }
+      const colors = json.colors || [];
+      if (colors[0]) set("brandColorPrimaryHex", colors[0]);
+      if (colors[1]) set("brandColorSecondaryHex", colors[1]);
+      if (colors[2]) set("brandColorAccentHex", colors[2]);
+      const gf = json.googleFonts || [];
+      if (gf[0] && !data.brandHeadlineFont) set("brandHeadlineFont", gf[0]);
+      if (gf[1] && !data.brandBodyFont) set("brandBodyFont", gf[1]);
+      else if (json.bodyFontGuess && !data.brandBodyFont)
+        set("brandBodyFont", json.bodyFontGuess.split(",")[0].trim());
+      if (colors.length) {
+        set(
+          "brandColorsNotes",
+          (data.brandColorsNotes ? data.brandColorsNotes + "\n\n" : "") +
+            `Auto-detected swatches (review): ${colors.slice(0, 6).join(", ")}`
+        );
+      }
+    } catch {
+      setPullError("Network error. Try again or paste colors manually.");
+    } finally {
+      setPullingBrand(false);
+    }
+  };
+
   return (
     <div>
-      <h2 className="intake-section-title !mb-4 sm:!mb-5">
-        Brand & legal
-      </h2>
-      <label className="block mb-3">
+      <h2 className="intake-section-title !mb-4 sm:!mb-5">Brand & presentation</h2>
+      <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+        Legal pages are handled later so you are not blocked here. Focus on visuals:
+        logos, hex codes, fonts, and theme.
+      </p>
+
+      <label className="mb-3 block">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Logo URL (hosted file)
+          Public website URL (for color & font hints)
+        </span>
+        <input
+          type="url"
+          value={data.brandWebsiteUrl}
+          onChange={(e) => set("brandWebsiteUrl", e.target.value)}
+          className="mt-1 intake-field"
+          placeholder="https://"
+        />
+      </label>
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <button
+          type="button"
+          onClick={pullFromSite}
+          disabled={pullingBrand}
+          className="intake-nav-secondary w-full justify-center sm:w-auto disabled:opacity-50"
+        >
+          {pullingBrand ? "Scanning site…" : "Pull colors & fonts from site"}
+        </button>
+        <span className="text-xs text-[var(--ap-muted)] font-outfit">
+          Best-effort parse (https only). Many sites block automated fetches; you can
+          always paste manually.
+        </span>
+      </div>
+      {pullError && (
+        <p className="mb-4 text-sm text-red-600 font-outfit" role="alert">
+          {pullError}
+        </p>
+      )}
+
+      <label className="mb-3 block">
+        <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
+          Logo file (direct URL)
         </span>
         <input
           type="url"
           value={data.brandLogoUrl}
           onChange={(e) => set("brandLogoUrl", e.target.value)}
           className="mt-1 intake-field"
-          placeholder="https://"
+          placeholder="https://cdn…/logo.svg"
         />
       </label>
-      <label className="block mb-3">
+      <label className="mb-6 block">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Colors
+          Or share a Drive link to logo / brand PDF
+        </span>
+        <input
+          type="url"
+          value={data.brandLogoDriveUrl}
+          onChange={(e) => set("brandLogoDriveUrl", e.target.value)}
+          className="mt-1 intake-field"
+          placeholder="https://drive.google.com/…"
+        />
+      </label>
+
+      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
+        Hex colors
+      </p>
+      <div className="mb-4 grid gap-3 sm:grid-cols-3">
+        {(
+          [
+            ["brandColorPrimaryHex", "Primary"],
+            ["brandColorSecondaryHex", "Secondary"],
+            ["brandColorAccentHex", "Accent"],
+          ] as const
+        ).map(([key, lab]) => (
+          <label key={key} className="block">
+            <span className="text-[11px] font-semibold text-[var(--ap-secondary)] font-outfit">
+              {lab}
+            </span>
+            <input
+              value={data[key]}
+              onChange={(e) => set(key, e.target.value)}
+              className="mt-1 intake-field font-mono text-sm"
+              placeholder="#0E1624"
+            />
+          </label>
+        ))}
+      </div>
+      <label className="mb-6 block">
+        <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
+          Color notes (gradients, rules, “never use”)
         </span>
         <textarea
           value={data.brandColorsNotes}
@@ -1279,9 +1549,34 @@ function BrandStep({
           className="mt-1 intake-field py-2.5"
         />
       </label>
-      <label className="block mb-3">
+
+      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
+        Typography
+      </p>
+      <div className="mb-4 grid gap-3 sm:grid-cols-3">
+        {(
+          [
+            ["brandHeadlineFont", "Headline / display"],
+            ["brandBodyFont", "Body"],
+            ["brandAccentFont", "Accent / quotes"],
+          ] as const
+        ).map(([key, lab]) => (
+          <label key={key} className="block">
+            <span className="text-[11px] font-semibold text-[var(--ap-secondary)] font-outfit">
+              {lab}
+            </span>
+            <input
+              value={data[key]}
+              onChange={(e) => set(key, e.target.value)}
+              className="mt-1 intake-field text-sm"
+              placeholder="e.g. Cormorant Garamond"
+            />
+          </label>
+        ))}
+      </div>
+      <label className="mb-6 block">
         <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Typography
+          Typography notes (licensing, fallbacks)
         </span>
         <textarea
           value={data.brandTypographyNotes}
@@ -1290,10 +1585,11 @@ function BrandStep({
           className="mt-1 intake-field py-2.5"
         />
       </label>
+
       <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
         Theme
       </p>
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="mb-6 flex flex-wrap gap-2">
         {(["light", "dark", "both"] as const).map((t) => (
           <button
             key={t}
@@ -1307,43 +1603,8 @@ function BrandStep({
           </button>
         ))}
       </div>
-      <label className="block mb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Privacy policy URL (required) *
-        </span>
-        <input
-          type="url"
-          required
-          value={data.privacyPolicyUrl}
-          onChange={(e) => set("privacyPolicyUrl", e.target.value)}
-          className="mt-1 intake-field"
-          placeholder="https://"
-        />
-      </label>
-      <label className="block mb-6">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] font-outfit">
-          Terms URL (required) *
-        </span>
-        <input
-          type="url"
-          required
-          value={data.termsUrl}
-          onChange={(e) => set("termsUrl", e.target.value)}
-          className="mt-1 intake-field"
-          placeholder="https://"
-        />
-      </label>
-      <p className="text-xs text-[var(--ap-muted)] font-outfit mb-4">
-        You provide final legal pages. We do not draft them for you.
-      </p>
-      <NavRow
-        onBack={onBack}
-        onNext={onNext}
-        disableNext={
-          !/^https?:\/\//i.test(data.privacyPolicyUrl.trim()) ||
-          !/^https?:\/\//i.test(data.termsUrl.trim())
-        }
-      />
+
+      <NavRow onBack={onBack} onNext={onNext} disableNext={false} />
     </div>
   );
 }

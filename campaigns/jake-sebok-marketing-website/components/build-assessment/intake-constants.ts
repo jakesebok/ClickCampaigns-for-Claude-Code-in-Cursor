@@ -18,22 +18,87 @@ export const BUSINESS_GOAL_OPTIONS = [
 ] as const;
 
 export const OPTIONAL_MODULE_OPTIONS = [
-  { id: "client_portal", label: "Client portal (history, progress)" },
-  { id: "coaching_dashboard", label: "Coaching dashboard" },
-  { id: "importance_matrix", label: "Importance × performance matrix" },
-  { id: "auto_plans", label: "Auto-generated plans (sprints, weeks, themes)" },
-  { id: "longitudinal", label: "Ongoing scorecard / rhythm (like 6Cs)" },
-  { id: "native_app", label: "Dedicated client app (mobile or web)" },
+  {
+    id: "client_portal",
+    label: "Client portal (history, progress)",
+    blurb:
+      "A logged-in place where clients return: past runs, streaks, and “where you left off.” In VAPI™, the portal also unlocks My Plan and the full priority matrix.",
+  },
+  {
+    id: "coaching_dashboard",
+    label: "Coaching dashboard",
+    blurb:
+      "Your private view of clients, cohorts, scores over time, and flags (e.g. who is stuck). Separate from what the client sees.",
+  },
+  {
+    id: "importance_matrix",
+    label: "Importance × performance matrix",
+    blurb:
+      "Crosses how much each area matters to them with how they scored, so they see what to protect vs. what needs attention. On the public VAPI™ results page you see a teaser; the full matrix unlocks in the portal.",
+  },
+  {
+    id: "auto_plans",
+    label: "Auto-generated plans (sprints, weeks, themes)",
+    blurb:
+      "Structured follow-on plans (for example a 28-day arc) generated from results—not a generic PDF. VAPI™ ships a “My Plan” experience tied to results.",
+  },
+  {
+    id: "longitudinal",
+    label: "Ongoing scorecard / rhythm (like 6Cs)",
+    blurb:
+      "Repeating pulses (weekly, monthly) so you see change over time. The 6C demo on the next step shows the spirit of that rhythm.",
+  },
+  {
+    id: "native_app",
+    label: "Dedicated client app (mobile or web)",
+    blurb:
+      "A branded app surface—not only a web tab—with room for deeper retention and notifications. Optional; scope is confirmed on a call.",
+  },
 ] as const;
 
 export const RESULT_OUTPUT_OPTIONS = [
-  { id: "composite", label: "Composite / index score" },
-  { id: "arenas", label: "Arena or category scores" },
-  { id: "domains", label: "Individual domain or pillar scores" },
-  { id: "wheel", label: "Interactive wheel visualization" },
-  { id: "explore", label: "Explore-your-score breakdown" },
-  { id: "libraries", label: "Pattern or driver libraries" },
-  { id: "pdf", label: "Downloadable PDF summary" },
+  {
+    id: "composite",
+    label: "Composite / index score",
+    hint:
+      "One headline number (and tier) summarizing the whole assessment—what you’d put on a dashboard tile or email subject line.",
+  },
+  {
+    id: "arenas",
+    label: "Arena or category scores",
+    hint:
+      "In VAPI™, Personal, Relationships, and Business are “arenas.” Each is the average of several domains underneath. Check this if you want those mid-level scores, not only the single composite.",
+  },
+  {
+    id: "domains",
+    label: "Individual domain or pillar scores",
+    hint:
+      "Finest grain: every pillar you define (VAPI™ uses twelve). Clients see these on the wheel and in the explore-your-score copy.",
+  },
+  {
+    id: "wheel",
+    label: "Interactive wheel visualization",
+    hint:
+      "The circular alignment graphic. Clients tap slices to read interpretation for that pillar.",
+  },
+  {
+    id: "explore",
+    label: "Explore-your-score breakdown",
+    hint:
+      "The interactive breakdown where choosing a metric updates the story (overall, an arena, or a single domain).",
+  },
+  {
+    id: "libraries",
+    label: "Pattern or driver libraries",
+    hint:
+      "Rich narrative blocks such as founder archetype and pattern drivers—content pulled from curated libraries based on scores.",
+  },
+  {
+    id: "pdf",
+    label: "Downloadable PDF summary",
+    hint:
+      "Print-friendly results (browser print / save as PDF) with your branding once applied.",
+  },
 ] as const;
 
 export const READING_LEVEL_STOPS = [

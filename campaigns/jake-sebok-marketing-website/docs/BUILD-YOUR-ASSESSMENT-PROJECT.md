@@ -8,7 +8,7 @@
 - Intake: `/build-your-assessment/intake`
 - Thank-you / summary: `/build-your-assessment/complete`
 
-**Footer:** single link — “Want an assessment like mine?” → `/build-your-assessment`
+**Distribution:** share `/build-your-assessment` directly (no site footer link; optional later).
 
 **Stack:** Next.js App Router (existing site), Tailwind, Resend (same env pattern as VAPI), Supabase service role (same project as marketing/VAPI).
 
@@ -68,6 +68,6 @@
 
 ## Completion log
 
-**2026-04-14:** Waves 1–8 implemented in `jake-sebok-marketing-website`: landing (`/build-your-assessment`), wizard (`/build-your-assessment/intake`), complete (`/build-your-assessment/complete`), API `POST /api/build-assessment-intake`, footer link, Supabase migration file `supabase/migrations/20260214120000_build_assessment_intake_submissions.sql`, inline 6C demo modal.
+**2026-04-14:** Waves 1–8 implemented in `jake-sebok-marketing-website`: landing (`/build-your-assessment`), wizard (`/build-your-assessment/intake`), complete (`/build-your-assessment/complete`), API `POST /api/build-assessment-intake`, Supabase migration file `supabase/migrations/20260214120000_build_assessment_intake_submissions.sql`, inline 6C demo modal.
 
 **Before production:** Run the SQL migration in the Supabase SQL editor for the Jake project so inserts succeed.
