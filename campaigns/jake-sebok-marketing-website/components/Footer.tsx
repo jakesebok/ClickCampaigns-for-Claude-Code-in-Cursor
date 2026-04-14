@@ -65,6 +65,12 @@ export function Footer() {
             <Link href="/terms" className="text-ap-muted hover:text-white transition-colors">
               Terms
             </Link>
+            <Link
+              href="/build-your-assessment"
+              className="text-ap-muted hover:text-white transition-colors"
+            >
+              Want an assessment like mine?
+            </Link>
           </nav>
           <SocialLinks variant="footer" />
         </div>
