@@ -19,7 +19,7 @@
           sessionStorage.setItem('vapiResults', JSON.stringify(demo));
           sessionStorage.setItem('vapi_results_email', demo.email || '');
         } catch (e) {}
-        window.location.replace('/vapi/vapi-results.html');
+        window.location.replace('/vapi/vapi-results.html?vapiDemo=1');
       })
       .catch(function () {
         document.body.innerHTML = '<p>Could not load the example. Try again or take the live VAPI™ assessment.</p>';

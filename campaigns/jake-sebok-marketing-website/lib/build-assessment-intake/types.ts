@@ -13,11 +13,18 @@ export type BuildIntakePayloadV1 = {
   jobToBeDoneNotes: string;
 
   constructTree: {
+    /**
+     * grouped: parent arenas each contain domains (e.g. VAPI™-style buckets).
+     * flat: constructs only—no shared parent (e.g. twelve equal pillars).
+     */
+    structure: "grouped" | "flat";
     arenas: Array<{
       id: string;
       name: string;
       domains: Array<{ id: string; name: string }>;
     }>;
+    /** Used when structure is "flat" (domains without arenas). */
+    standaloneDomains: Array<{ id: string; name: string }>;
   };
 
   lengthPreference: "short" | "balanced" | "comprehensive" | "";
@@ -91,7 +98,11 @@ export const DEFAULT_BUILD_INTAKE: BuildIntakePayloadV1 = {
   audienceAndContext: "",
   jobToBeDoneNotes: "",
 
-  constructTree: { arenas: [] },
+  constructTree: {
+    structure: "grouped",
+    arenas: [],
+    standaloneDomains: [],
+  },
 
   lengthPreference: "",
   scalePreference: "",

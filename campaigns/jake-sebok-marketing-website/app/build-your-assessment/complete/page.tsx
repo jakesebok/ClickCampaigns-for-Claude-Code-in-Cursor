@@ -104,7 +104,13 @@ export default function BuildAssessmentCompletePage() {
 
   const constructLines = useMemo(() => {
     if (!p) return [];
-    return p.constructTree.arenas.flatMap((a) =>
+    const tree = p.constructTree;
+    if (tree.structure === "flat") {
+      return (tree.standaloneDomains || []).map(
+        (d) => d.name || "Construct"
+      );
+    }
+    return (tree.arenas || []).flatMap((a) =>
       a.domains.length
         ? a.domains.map(
             (d) =>
@@ -134,11 +140,13 @@ export default function BuildAssessmentCompletePage() {
     );
   }
 
+  const constructTreeFlat = p.constructTree.structure === "flat";
   const arenaCount = p.constructTree.arenas.length;
   const domainCount = p.constructTree.arenas.reduce(
     (n, a) => n + a.domains.length,
     0
   );
+  const standaloneCount = (p.constructTree.standaloneDomains || []).length;
 
   const resultsPills = (p.resultsOutputs || []).map(
     (id) => OUT_LABEL[id] || id
@@ -189,13 +197,31 @@ export default function BuildAssessmentCompletePage() {
               <p className="mb-1 font-outfit text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ap-muted)]">
                 Construct map
               </p>
-              <p className="font-outfit text-2xl font-bold tabular-nums tracking-tight text-[var(--ap-primary)] sm:text-3xl">
-                {arenaCount}{" "}
-                <span className="text-base font-semibold sm:text-lg">arenas</span>
-              </p>
-              <p className="mt-1.5 font-outfit text-sm text-[var(--ap-secondary)]">
-                {domainCount} domains
-              </p>
+              {constructTreeFlat ? (
+                <>
+                  <p className="font-outfit text-2xl font-bold tabular-nums tracking-tight text-[var(--ap-primary)] sm:text-3xl">
+                    {standaloneCount}{" "}
+                    <span className="text-base font-semibold sm:text-lg">
+                      constructs
+                    </span>
+                  </p>
+                  <p className="mt-1.5 font-outfit text-sm text-[var(--ap-secondary)]">
+                    Flat framework (no parent arenas)
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="font-outfit text-2xl font-bold tabular-nums tracking-tight text-[var(--ap-primary)] sm:text-3xl">
+                    {arenaCount}{" "}
+                    <span className="text-base font-semibold sm:text-lg">
+                      arenas
+                    </span>
+                  </p>
+                  <p className="mt-1.5 font-outfit text-sm text-[var(--ap-secondary)]">
+                    {domainCount} domains
+                  </p>
+                </>
+              )}
             </div>
           </div>
           <div className="build-complete-card sm:col-span-2">
@@ -254,7 +280,15 @@ export default function BuildAssessmentCompletePage() {
             <Field label="Gaps / notes" value={p.proprietaryGapNotes} />
           </Section>
 
-          <Section title="Constructs (arenas & domains)">
+          <Section title="Constructs">
+            <Field
+              label="Organization"
+              value={
+                constructTreeFlat
+                  ? "Flat (constructs only, no parent arenas)"
+                  : "Grouped (arenas contain domains)"
+              }
+            />
             {constructLines.length ? (
               <ul className="list-inside list-disc space-y-1 font-outfit text-sm text-[var(--ap-primary)]">
                 {constructLines.map((line, i) => (
@@ -381,11 +415,6 @@ export default function BuildAssessmentCompletePage() {
               value={p.rushSoonerThan30Days ? "Yes" : "No"}
             />
             <Field label="Rush context" value={p.rushContextNotes} />
-          </Section>
-
-          <Section title="Legal (optional, if provided)">
-            <Field label="Privacy policy URL" value={p.privacyPolicyUrl} />
-            <Field label="Terms URL" value={p.termsUrl} />
           </Section>
         </div>
 

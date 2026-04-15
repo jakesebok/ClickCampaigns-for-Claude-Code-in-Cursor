@@ -2,40 +2,39 @@
 
 import { X } from "lucide-react";
 import { createPortal } from "react-dom";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { RESULT_OUTPUT_OPTIONS } from "./intake-constants";
 
 const LEGEND: { outputId: string; mapsTo: string }[] = [
   {
     outputId: "composite",
     mapsTo:
-      "Overall score and tier at the top (e.g. Functional, Dialed). This is your single headline number.",
+      "Overall score and tier beside the wheel (headline number). This is the single composite read clients see first.",
   },
   {
     outputId: "arenas",
     mapsTo:
-      "The three arena rows (Personal, Relationships, Business). Each is an average of the domains underneath it.",
+      "The three arena cards (Personal, Relationships, Business). Each is an average of the domains underneath.",
   },
   {
     outputId: "domains",
     mapsTo:
-      "Every pillar score in the wheel and in the breakdown. VAPI™ uses twelve domains; yours can use different names but the same idea.",
+      "Every pillar score in the domain detail section. VAPI™ uses twelve; yours can use different names but the same grain.",
   },
   {
     outputId: "wheel",
     mapsTo:
-      "The circular “alignment at a glance” graphic with twelve segments.",
+      "The interactive wheel in “Explore your score”—tap wedges to change the metric and story (still works in this preview).",
   },
   {
     outputId: "explore",
     mapsTo:
-      "The interactive explore-your-score area where clients tap a slice to read copy for that domain.",
+      "The whole Explore your score module: metric list + copy + interactive wheel together.",
   },
   {
     outputId: "libraries",
     mapsTo:
-      "Pattern and driver libraries (archetype, driver narrative). Shown as rich sections below the scores.",
+      "Pattern and driver libraries—archetype story and pattern driver sections below the scores.",
   },
   {
     outputId: "pdf",
@@ -43,6 +42,17 @@ const LEGEND: { outputId: string; mapsTo: string }[] = [
       "Print / save as PDF from the results page (browser print styles).",
   },
 ];
+
+/** Element IDs inside `/vapi/vapi-results.html` when loaded with `?vapiDemo=1` (set in page script). */
+const DEMO_HIGHLIGHT_IDS: Record<string, string> = {
+  composite: "vapi-demo-target-composite",
+  arenas: "vapi-demo-target-arenas",
+  domains: "vapi-demo-target-domains",
+  wheel: "results-breakdown-wheel-outer",
+  explore: "results-explore-section",
+  libraries: "driver-section",
+  pdf: "vapi-demo-target-pdf",
+};
 
 export function VapiResultsExampleModal({
   open,
@@ -52,7 +62,30 @@ export function VapiResultsExampleModal({
   onClose: () => void;
 }) {
   const [mounted, setMounted] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [activeLegend, setActiveLegend] = useState<string | null>(null);
+
   useEffect(() => setMounted(true), []);
+
+  const postHighlight = useCallback((outputId: string | null) => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    const targetId = outputId ? DEMO_HIGHLIGHT_IDS[outputId] : null;
+    win.postMessage(
+      {
+        type: "vapi-demo-highlight",
+        targetId: targetId || "clear",
+      },
+      "*"
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      setActiveLegend(null);
+      postHighlight(null);
+    }
+  }, [open, postHighlight]);
 
   useEffect(() => {
     if (!open) return;
@@ -86,17 +119,13 @@ export function VapiResultsExampleModal({
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-[var(--ap-secondary)] font-outfit leading-relaxed">
               This preview loads the same public results page used in production, seeded
-              with stored sample scores (not invented markup). Use the legend to connect
-              each pill on the intake to what clients actually see.
+              with stored sample scores. Tap a label on the right to spotlight that part of
+              the page (the rest dims). Outbound links in the preview are disabled so this
+              stays a visual walkthrough—the interactive wheel still works.
             </p>
             <p className="mt-2 text-xs text-[var(--ap-muted)] font-outfit">
-              Prefer the live flow?{" "}
-              <Link
-                href="/assessment/start"
-                className="font-semibold text-[var(--ap-accent)] underline underline-offset-2 hover:opacity-90"
-              >
-                Take VAPI™
-              </Link>
+              Prefer the live flow? Complete the real assessment from the Build Your
+              Assessment entry (links are not active inside this preview).
             </p>
           </div>
           <button
@@ -113,27 +142,49 @@ export function VapiResultsExampleModal({
           <div className="grid gap-0 lg:grid-cols-[1fr_min(340px,38%)] lg:gap-0">
             <div className="border-b border-[var(--ap-border)]/70 bg-[#0a0f18] lg:border-b-0 lg:border-r">
               <iframe
+                ref={iframeRef}
                 title="VAPI results example"
                 src="/vapi/build-intake-results-bootstrap.html"
                 className="h-[min(58dvh,520px)] w-full sm:h-[min(62vh,560px)] lg:h-[min(72vh,640px)]"
                 loading="lazy"
+                onLoad={() => postHighlight(activeLegend)}
               />
             </div>
             <aside className="bg-gradient-to-b from-white to-[#FAFAFB] p-5 sm:p-6 lg:max-h-[min(72vh,640px)] lg:overflow-y-auto">
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--ap-muted)] font-outfit mb-3">
                 Intake vocabulary → on this page
               </p>
-              <ul className="space-y-4">
+              <p className="text-xs text-[var(--ap-muted)] font-outfit mb-4 leading-relaxed">
+                Tap to spotlight. The preview scrolls to that region and dims the rest.
+              </p>
+              <ul className="space-y-2">
                 {LEGEND.map((row) => {
                   const opt = RESULT_OUTPUT_OPTIONS.find((o) => o.id === row.outputId);
+                  const isActive = activeLegend === row.outputId;
                   return (
                     <li key={row.outputId}>
-                      <span className="mb-1 inline-block rounded-md bg-[var(--ap-accent)]/12 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--ap-primary)] font-outfit">
-                        {opt?.label ?? row.outputId}
-                      </span>
-                      <p className="text-[13px] leading-relaxed text-[var(--ap-secondary)] font-outfit">
-                        {row.mapsTo}
-                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const next =
+                            activeLegend === row.outputId ? null : row.outputId;
+                          setActiveLegend(next);
+                          postHighlight(next);
+                        }}
+                        className={`w-full rounded-xl border px-3 py-2.5 text-left transition-colors ${
+                          isActive
+                            ? "border-[var(--ap-accent)] bg-[var(--ap-accent)]/10 ring-2 ring-[var(--ap-accent)]/25"
+                            : "border-[var(--ap-border)]/80 bg-white/80 hover:border-[var(--ap-accent)]/40"
+                        }`}
+                        aria-pressed={isActive}
+                      >
+                        <span className="mb-1 inline-block rounded-md bg-[var(--ap-accent)]/12 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--ap-primary)] font-outfit">
+                          {opt?.label ?? row.outputId}
+                        </span>
+                        <p className="text-[13px] leading-relaxed text-[var(--ap-secondary)] font-outfit mt-1">
+                          {row.mapsTo}
+                        </p>
+                      </button>
                     </li>
                   );
                 })}

@@ -62,6 +62,14 @@ function cardWrap(inner: string) {
 }
 
 function constructsList(p: BuildIntakePayloadV1): string {
+  const flat = p.constructTree?.structure === "flat";
+  if (flat) {
+    const sd = p.constructTree?.standaloneDomains || [];
+    if (!sd.length)
+      return `<span style="color:${C.muted};font-style:italic;">—</span>`;
+    const lines = sd.map((d) => escHtml(d.name || "Construct"));
+    return `<ul style="margin:8px 0 0;padding-left:20px;color:${C.secondary};font-size:15px;line-height:1.6;font-family:Helvetica Neue,Arial,sans-serif;">${lines.map((l) => `<li style="margin-bottom:6px;">${l}</li>`).join("")}</ul>`;
+  }
   const lines: string[] = [];
   for (const a of p.constructTree?.arenas || []) {
     const an = a.name || "Arena";
@@ -116,7 +124,13 @@ export function buildIntakeSummaryHtml(p: BuildIntakePayloadV1): string {
 
   parts.push(
     cardWrap(
-      sectionEyebrow("Constructs (arenas & domains)") +
+      sectionEyebrow("Constructs") +
+        fieldHtml(
+          "Organization",
+          p.constructTree?.structure === "flat"
+            ? "Flat (constructs only, no parent arenas)"
+            : "Grouped (arenas contain domains)"
+        ) +
         `<div style="font-size:15px;color:${C.secondary};font-family:Helvetica Neue,Arial,sans-serif;">${constructsList(p)}</div>`
     )
   );
@@ -304,6 +318,12 @@ function T(s: string | undefined | null) {
 }
 
 function constructsPlain(p: BuildIntakePayloadV1): string {
+  if (p.constructTree?.structure === "flat") {
+    const sd = p.constructTree?.standaloneDomains || [];
+    return sd.length
+      ? sd.map((d) => d.name || "—").join("\n")
+      : "—";
+  }
   const lines: string[] = [];
   for (const a of p.constructTree?.arenas || []) {
     const an = a.name || "Arena";
@@ -347,7 +367,13 @@ export function buildIntakeSummaryPlainText(p: BuildIntakePayloadV1): string {
   f("Description", T(p.proprietarySystemDescription));
   f("Gaps / notes", T(p.proprietaryGapNotes));
 
-  sec("CONSTRUCTS (ARENAS & DOMAINS)");
+  sec("CONSTRUCTS");
+  f(
+    "Organization",
+    p.constructTree?.structure === "flat"
+      ? "Flat (constructs only)"
+      : "Grouped (arenas + domains)"
+  );
   o.push(constructsPlain(p));
 
   sec("LENGTH & SCALE");

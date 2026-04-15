@@ -15,6 +15,17 @@
   <meta name="twitter:title" content="Your VAPI™ Results | Jake Sebok">
   <meta name="twitter:description" content="Archetype, pattern driver, scores, and your 28-day My Plan from VAPI™.">
   <meta name="twitter:image" content="https://jakesebok.com/images/vapi/og-landing.png">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(window.location.search);
+        if (q.get("vapiDemo") === "1") {
+          document.documentElement.classList.add("vapi-demo-embed");
+          window.__VAPI_DEMO_EMBED__ = true;
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -53,6 +64,25 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
+    /* Intake modal embed: visual demo only — block outbound links; wheel stays interactive (SVG + buttons) */
+    html.vapi-demo-embed #results-content a[href],
+    html.vapi-demo-embed footer a[href],
+    html.vapi-demo-embed header a[href],
+    html.vapi-demo-embed #portal-sticky-banner a[href],
+    html.vapi-demo-embed #continue-journey a[href],
+    html.vapi-demo-embed #driver-library-gate a[href],
+    html.vapi-demo-embed #archetype-library-gate a[href] {
+      pointer-events: none !important;
+      cursor: default !important;
+      opacity: 0.55;
+    }
+    html.vapi-demo-embed.vapi-demo-spotlight-active .vapi-demo-spotlight {
+      position: relative;
+      z-index: 60;
+      border-radius: 14px;
+      box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.95), 0 0 0 9999px rgba(14, 22, 36, 0.52);
+      transition: box-shadow 0.35s ease;
+    }
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
     .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
     .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
@@ -301,7 +331,7 @@
         </a>
       </div>
       <div class="flex flex-col items-end gap-0.5">
-        <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">
+        <button type="button" id="vapi-demo-target-pdf" onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">
           <i data-lucide="download" class="w-4 h-4"></i>
           Download / Print results
         </button>
@@ -790,7 +820,7 @@
         var html = '<h2 class="no-print text-2xl text-[var(--ap-primary)] mb-4 mt-10">Your alignment at a glance</h2>';
         html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white shadow-sm p-6 mb-10 overflow-x-auto">';
         html += '<div class="flex flex-col sm:flex-row items-center gap-6">';
-        html += '<div class="alignment-glance-left flex-shrink-0 mx-auto cursor-pointer outline-none rounded-lg focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2" style="max-width:320px" role="button" tabindex="0" title="Click to enlarge">';
+        html += '<div id="vapi-demo-target-wheel-hero" class="alignment-glance-left flex-shrink-0 mx-auto cursor-pointer outline-none rounded-lg focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2" style="max-width:320px" role="button" tabindex="0" title="Click to enlarge">';
         html += '<div class="alignment-glance-inner">';
         html += '<h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-1">The Power of Alignment</h2>';
         html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">12 core domains for an aligned high impact life and business.</p>';
@@ -866,7 +896,7 @@
         html += '<img src="/images/vapi/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-12 w-auto mt-4 mx-auto block"/>';
         html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center hidden sm:flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
         html += '</div></div>';
-        html += '<div class="flex-1 min-w-0">';
+        html += '<div id="vapi-demo-target-composite" class="flex-1 min-w-0">';
         if (overall != null && overallTier) {
           html += '<p class="text-sm font-semibold text-[var(--ap-muted)] mb-1">Overall composite score</p>';
           html += '<p class="text-5xl font-bold mb-1" style="color:' + tierColor(overallTier) + '">' + overall + ' <span class="text-2xl font-normal text-[var(--ap-secondary)]">/ 10</span></p>';
@@ -1065,6 +1095,28 @@
         return '';
       }
 
+      function initVapiDemoEmbedMessaging() {
+        if (!window.__VAPI_DEMO_EMBED__) return;
+        window.addEventListener('message', function (ev) {
+          var d = ev.data;
+          if (!d || d.type !== 'vapi-demo-highlight') return;
+          var id = d.targetId;
+          document.querySelectorAll('.vapi-demo-spotlight').forEach(function (n) {
+            n.classList.remove('vapi-demo-spotlight');
+          });
+          document.documentElement.classList.remove('vapi-demo-spotlight-active');
+          if (!id || id === 'clear') return;
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.classList.add('vapi-demo-spotlight');
+          document.documentElement.classList.add('vapi-demo-spotlight-active');
+          setTimeout(function () {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 80);
+        });
+      }
+      initVapiDemoEmbedMessaging();
+
       function render(results) {
         var firstName = results.firstName || '';
         var lastName = results.lastName || '';
@@ -1224,6 +1276,7 @@
         html += '</div>';
         html += '</div>';
 
+        html += '<div id="vapi-demo-target-arenas">';
         html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Arena scores</h2>';
         html += '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">';
         ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
@@ -1238,6 +1291,7 @@
           html += '<p class="text-sm text-[var(--ap-secondary)] mt-3 leading-relaxed">' + text + '</p>';
           html += '</div>';
         });
+        html += '</div>';
         html += '</div>';
 
         // ALFRED — mid-page CTA (after arena overview, before priority matrix)
@@ -1261,6 +1315,7 @@
 
         var arenaOrder = ['Personal', 'Relationships', 'Business'];
         var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        html += '<div id="vapi-demo-target-domains">';
         arenaOrder.forEach(function(arena, idx) {
           var isFirst = idx === 0;
           // Insert "See how you change over time" CTA between Personal and Relationships (non-logged-in only; removed by portal script when logged in)
@@ -1298,11 +1353,18 @@
           });
           html += '</div>'; // end print-arena-group
         });
+        html += '</div>';
 
         html += buildMyPlanLargeCalloutHtml();
         html += '<p class="text-sm text-[var(--ap-muted)] mt-8 no-print">Use &ldquo;Download / Print results&rdquo; above to save this page as a PDF.</p>';
 
         document.getElementById('results-content').innerHTML = html;
+        if (window.__VAPI_DEMO_EMBED__) {
+          document.querySelectorAll('.vapi-demo-spotlight').forEach(function (n) {
+            n.classList.remove('vapi-demo-spotlight');
+          });
+          document.documentElement.classList.remove('vapi-demo-spotlight-active');
+        }
         attachAlignmentLightbox();
         initExploreSection(results, domains);
         if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();

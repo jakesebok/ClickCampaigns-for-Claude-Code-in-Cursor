@@ -112,13 +112,21 @@ export function BuildIntakeWizard() {
             parsed.authPreference === "supabase"
           ) {
             base.hasAuthProvider = "no";
-          } else if (
+          } else           if (
             !base.hasAuthProvider &&
             (parsed.authPreference === "clerk" || parsed.authPreference === "unsure")
           ) {
             base.hasAuthProvider = "yes";
             if (!base.authProviderName) base.authProviderName = "See prior intake (Clerk/unsure)";
           }
+          const ct = parsed.constructTree;
+          base.constructTree = {
+            structure: ct?.structure === "flat" ? "flat" : "grouped",
+            arenas: Array.isArray(ct?.arenas) ? ct.arenas : [],
+            standaloneDomains: Array.isArray(ct?.standaloneDomains)
+              ? ct.standaloneDomains
+              : [],
+          };
           return base;
         });
       }
@@ -555,10 +563,58 @@ function ConstructsStep({
   onNext: () => void;
   onBack: () => void;
 }) {
+  const structure = data.constructTree.structure ?? "grouped";
+
+  const setStructure = (next: "grouped" | "flat") => {
+    if (next === structure) return;
+    setData((d) => {
+      const ct = d.constructTree;
+      if (next === "flat") {
+        const flattened: Array<{ id: string; name: string }> = [];
+        for (const a of ct.arenas) {
+          for (const dom of a.domains) {
+            flattened.push({ id: dom.id, name: dom.name });
+          }
+        }
+        return {
+          ...d,
+          constructTree: {
+            structure: "flat",
+            arenas: [],
+            standaloneDomains: [...(ct.standaloneDomains || []), ...flattened],
+          },
+        };
+      }
+      const standalone = ct.standaloneDomains || [];
+      return {
+        ...d,
+        constructTree: {
+          structure: "grouped",
+          standaloneDomains: [],
+          arenas:
+            standalone.length > 0
+              ? [
+                  {
+                    id: newId("arena"),
+                    name: "",
+                    domains: standalone.map((x) => ({
+                      id: x.id,
+                      name: x.name,
+                    })),
+                  },
+                ]
+              : [],
+        },
+      };
+    });
+  };
+
   const addArena = () => {
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
+        structure: "grouped",
         arenas: [
           ...d.constructTree.arenas,
           { id: newId("arena"), name: "", domains: [] },
@@ -571,6 +627,7 @@ function ConstructsStep({
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
         arenas: d.constructTree.arenas.map((a) =>
           a.id !== arenaId
             ? a
@@ -590,6 +647,7 @@ function ConstructsStep({
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
         arenas: d.constructTree.arenas.map((a) =>
           a.id === arenaId ? { ...a, name } : a
         ),
@@ -601,6 +659,7 @@ function ConstructsStep({
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
         arenas: d.constructTree.arenas.map((a) =>
           a.id !== arenaId
             ? a
@@ -619,6 +678,7 @@ function ConstructsStep({
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
         arenas: d.constructTree.arenas.map((a) =>
           a.id !== arenaId
             ? a
@@ -635,99 +695,225 @@ function ConstructsStep({
     setData((d) => ({
       ...d,
       constructTree: {
+        ...d.constructTree,
         arenas: d.constructTree.arenas.filter((a) => a.id !== arenaId),
       },
     }));
   };
 
-  const valid =
+  const addStandalone = () => {
+    setData((d) => ({
+      ...d,
+      constructTree: {
+        ...d.constructTree,
+        structure: "flat",
+        standaloneDomains: [
+          ...(d.constructTree.standaloneDomains || []),
+          { id: newId("dom"), name: "" },
+        ],
+      },
+    }));
+  };
+
+  const updateStandalone = (id: string, name: string) => {
+    setData((d) => ({
+      ...d,
+      constructTree: {
+        ...d.constructTree,
+        standaloneDomains: (d.constructTree.standaloneDomains || []).map((x) =>
+          x.id === id ? { ...x, name } : x
+        ),
+      },
+    }));
+  };
+
+  const removeStandalone = (id: string) => {
+    setData((d) => ({
+      ...d,
+      constructTree: {
+        ...d.constructTree,
+        standaloneDomains: (d.constructTree.standaloneDomains || []).filter(
+          (x) => x.id !== id
+        ),
+      },
+    }));
+  };
+
+  const validGrouped =
     data.constructTree.arenas.length > 0 &&
     data.constructTree.arenas.every(
       (a) =>
         a.name.trim().length > 0 &&
         a.domains.length > 0 &&
-        a.domains.every((d) => d.name.trim().length > 0)
+        a.domains.every((dom) => dom.name.trim().length > 0)
     );
+
+  const standalone = data.constructTree.standaloneDomains || [];
+  const validFlat =
+    standalone.length > 0 &&
+    standalone.every((d) => d.name.trim().length > 0);
+
+  const valid = structure === "flat" ? validFlat : validGrouped;
 
   return (
     <div>
       <h2 className="intake-section-title !mb-2 sm:!mb-3 flex flex-wrap items-center gap-2 md:gap-3">
         <Layers className="w-7 h-7 text-[var(--ap-accent)]" />
-        Arenas & domains
+        Your construct framework
       </h2>
-      <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
-        Add an <strong>arena</strong> (big bucket), then add <strong>domains</strong>{" "}
-        underneath. This mirrors how we structure scores and the wheel.
+      <p className="text-sm text-[var(--ap-secondary)] mb-4 font-outfit leading-relaxed">
+        Choose how your model is organized. Some assessments use parent{" "}
+        <strong className="text-[var(--ap-primary)]">arenas</strong> with smaller{" "}
+        <strong className="text-[var(--ap-primary)]">domains</strong> underneath.
+        Others use a single list of equal constructs (for example twelve pillars)
+        with no shared parent—both are valid.
       </p>
 
-      <div className="space-y-4 mb-6">
-        {data.constructTree.arenas.map((arena) => (
-          <div
-            key={arena.id}
-            className="rounded-2xl border border-[var(--ap-border)]/90 bg-white/95 p-4 sm:p-5 shadow-[0_8px_32px_-20px_rgba(14,22,36,0.1)] ring-1 ring-white/90"
-          >
-            <div className="flex items-start gap-2 mb-3">
-              <ChevronRight className="w-5 h-5 text-[var(--ap-accent)] shrink-0 mt-1" />
-              <input
-                type="text"
-                value={arena.name}
-                onChange={(e) => updateArena(arena.id, e.target.value)}
-                placeholder="Arena name (e.g. Mindset)"
-                className="flex-1 intake-field py-2.5 font-semibold"
-              />
-              <button
-                type="button"
-                onClick={() => removeArena(arena.id)}
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-xl text-[var(--ap-muted)] hover:text-red-600 hover:bg-red-50 transition-colors"
-                aria-label="Remove arena"
+      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-2 font-outfit">
+        Structure
+      </p>
+      <div className="flex flex-col gap-2 mb-8">
+        <button
+          type="button"
+          onClick={() => setStructure("grouped")}
+          className={`intake-choice text-left ${
+            structure === "grouped"
+              ? "intake-choice-active"
+              : "intake-choice-default"
+          }`}
+        >
+          Grouped: arenas, then domains under each
+        </button>
+        <button
+          type="button"
+          onClick={() => setStructure("flat")}
+          className={`intake-choice text-left ${
+            structure === "flat"
+              ? "intake-choice-active"
+              : "intake-choice-default"
+          }`}
+        >
+          Flat: constructs only (no parent buckets)
+        </button>
+      </div>
+
+      {structure === "grouped" ? (
+        <>
+          <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+            Add an <strong>arena</strong> (big bucket), then add{" "}
+            <strong>domains</strong> underneath. This mirrors how we structure
+            scores and the wheel when you use grouped arenas.
+          </p>
+
+          <div className="space-y-4 mb-6">
+            {data.constructTree.arenas.map((arena) => (
+              <div
+                key={arena.id}
+                className="rounded-2xl border border-[var(--ap-border)]/90 bg-white/95 p-4 sm:p-5 shadow-[0_8px_32px_-20px_rgba(14,22,36,0.1)] ring-1 ring-white/90"
               >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="ml-6 space-y-2 border-l-2 border-[var(--ap-border)]/80 pl-4">
-              {arena.domains.map((dom) => (
-                <div key={dom.id} className="flex items-center gap-2">
-                  <ChevronDown className="w-4 h-4 text-[var(--ap-muted)] shrink-0" />
+                <div className="flex items-start gap-2 mb-3">
+                  <ChevronRight className="w-5 h-5 text-[var(--ap-accent)] shrink-0 mt-1" />
                   <input
                     type="text"
-                    value={dom.name}
-                    onChange={(e) =>
-                      updateDomain(arena.id, dom.id, e.target.value)
-                    }
-                    placeholder="Domain / construct name"
-                    className="flex-1 intake-field py-2.5"
+                    value={arena.name}
+                    onChange={(e) => updateArena(arena.id, e.target.value)}
+                    placeholder="Arena name (e.g. Mindset)"
+                    className="flex-1 intake-field py-2.5 font-semibold"
                   />
                   <button
                     type="button"
-                    onClick={() => removeDomain(arena.id, dom.id)}
+                    onClick={() => removeArena(arena.id)}
                     className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-xl text-[var(--ap-muted)] hover:text-red-600 hover:bg-red-50 transition-colors"
-                    aria-label="Remove domain"
+                    aria-label="Remove arena"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => addDomain(arena.id)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--ap-accent)] font-outfit mt-1"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                Add domain
-              </button>
-            </div>
+                <div className="ml-6 space-y-2 border-l-2 border-[var(--ap-border)]/80 pl-4">
+                  {arena.domains.map((dom) => (
+                    <div key={dom.id} className="flex items-center gap-2">
+                      <ChevronDown className="w-4 h-4 text-[var(--ap-muted)] shrink-0" />
+                      <input
+                        type="text"
+                        value={dom.name}
+                        onChange={(e) =>
+                          updateDomain(arena.id, dom.id, e.target.value)
+                        }
+                        placeholder="Domain / construct name"
+                        className="flex-1 intake-field py-2.5"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeDomain(arena.id, dom.id)}
+                        className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-xl text-[var(--ap-muted)] hover:text-red-600 hover:bg-red-50 transition-colors"
+                        aria-label="Remove domain"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => addDomain(arena.id)}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--ap-accent)] font-outfit mt-1"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    Add domain
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <button
-        type="button"
-        onClick={addArena}
-        className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-dashed border-[var(--ap-accent)]/50 px-4 py-2.5 text-sm font-semibold text-[var(--ap-accent)] font-outfit hover:bg-[#FFF3EE]"
-      >
-        <Plus className="w-4 h-4" />
-        Add arena
-      </button>
+          <button
+            type="button"
+            onClick={addArena}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-dashed border-[var(--ap-accent)]/50 px-4 py-2.5 text-sm font-semibold text-[var(--ap-accent)] font-outfit hover:bg-[#FFF3EE]"
+          >
+            <Plus className="w-4 h-4" />
+            Add arena
+          </button>
+        </>
+      ) : (
+        <>
+          <p className="text-sm text-[var(--ap-secondary)] mb-6 font-outfit leading-relaxed">
+            List each <strong>construct</strong> or <strong>pillar</strong> on its
+            own—no arena layer. Add as many rows as you need (for example twelve).
+          </p>
+          <div className="space-y-3 mb-6">
+            {standalone.map((dom) => (
+              <div
+                key={dom.id}
+                className="flex items-center gap-2 rounded-2xl border border-[var(--ap-border)]/90 bg-white/95 p-3 sm:p-4 shadow-sm"
+              >
+                <input
+                  type="text"
+                  value={dom.name}
+                  onChange={(e) => updateStandalone(dom.id, e.target.value)}
+                  placeholder="Construct / pillar name"
+                  className="flex-1 intake-field py-2.5"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeStandalone(dom.id)}
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-xl text-[var(--ap-muted)] hover:text-red-600 hover:bg-red-50 transition-colors"
+                  aria-label="Remove construct"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={addStandalone}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-dashed border-[var(--ap-accent)]/50 px-4 py-2.5 text-sm font-semibold text-[var(--ap-accent)] font-outfit hover:bg-[#FFF3EE]"
+          >
+            <Plus className="w-4 h-4" />
+            Add construct
+          </button>
+        </>
+      )}
 
       <NavRow onBack={onBack} onNext={onNext} disableNext={!valid} />
     </div>
@@ -868,6 +1054,8 @@ function ModulesStep({
         </button>
         <Link
           href="/assessment/start"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center text-sm font-semibold text-[var(--ap-accent)] underline-offset-2 hover:underline sm:text-left"
         >
           Or take the live assessment yourself →
@@ -1035,6 +1223,8 @@ function OutputsStep({
         </button>
         <Link
           href="/assessment/start"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center text-sm font-semibold text-[var(--ap-accent)] underline-offset-2 hover:underline sm:text-left"
         >
           Take VAPI™ to feel the flow →
