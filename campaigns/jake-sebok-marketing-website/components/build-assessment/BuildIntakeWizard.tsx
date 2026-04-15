@@ -1238,7 +1238,7 @@ function OutputsStep({
               key={m.id}
               className="rounded-2xl border border-[var(--ap-border)]/90 bg-white/95 p-4 shadow-sm"
             >
-              <div className="mb-2 flex flex-wrap items-center gap-2">
+              <div className="mb-2 flex flex-wrap items-start gap-2">
                 <button
                   type="button"
                   onClick={() => toggleMulti("resultsOutputs", m.id)}
@@ -1246,7 +1246,11 @@ function OutputsStep({
                 >
                   {m.label}
                 </button>
-                <IntakeTooltip label={m.label}>{m.hint}</IntakeTooltip>
+                <div className="min-w-0 flex-1">
+                  <IntakeTooltip className="w-full" label={m.label}>
+                    {m.hint}
+                  </IntakeTooltip>
+                </div>
               </div>
               <p className="pl-0.5 text-[13px] font-outfit leading-relaxed text-[var(--ap-secondary)]">
                 {m.hint}
@@ -1664,7 +1668,7 @@ function BrandStep({
           type="button"
           onClick={pullFromSite}
           disabled={pullingBrand}
-          className="intake-nav-secondary w-full justify-center sm:w-auto disabled:opacity-50"
+          className="intake-nav-secondary w-fit max-w-full whitespace-nowrap justify-center disabled:opacity-50"
         >
           {pullingBrand ? "Scanning site…" : "Pull colors & fonts from site"}
         </button>
