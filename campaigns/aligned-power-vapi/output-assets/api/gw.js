@@ -57,6 +57,11 @@ const ROUTE_LOADERS = {
 
   // Wave 1 — Cron (new)
   "cron/ritual-reminders": () => import("../lib/portal-server/handlers/cron-ritual-reminders.js"),
+
+  // Wave 1 polish — coach client detail + user export + cohort PDF
+  "coach-client-detail": () => import("../lib/portal-server/handlers/coach-client-detail.js"),
+  "user-history-export": () => import("../lib/portal-server/handlers/user-history-export.js"),
+  "cohort-pdf-export": () => import("../lib/portal-server/handlers/cohort-pdf-export.js"),
 };
 
 async function gatewayFetch(request) {

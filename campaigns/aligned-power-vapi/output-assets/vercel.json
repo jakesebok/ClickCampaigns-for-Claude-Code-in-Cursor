@@ -13,11 +13,21 @@
     { "source": "/check-email", "destination": "/portal/check-email.html" },
     { "source": "/dashboard", "destination": "/portal/dashboard.html" },
     { "source": "/settings", "destination": "/portal/settings.html" },
+    { "source": "/settings/notifications", "destination": "/portal/notification-settings.html" },
     { "source": "/scorecard", "destination": "/portal/six-c-scorecard.html" },
     { "source": "/coach", "destination": "/portal/coach.html" },
     { "source": "/coach/client", "destination": "/portal/coach-client.html" },
+    { "source": "/coach-dashboard", "destination": "/portal/coach-dashboard.html" },
+    { "source": "/coach/client-detail", "destination": "/portal/coach-client-detail.html" },
     { "source": "/admin", "destination": "/portal/admin.html" },
-    { "source": "/my-plan", "destination": "/portal/my-plan.html" }
+    { "source": "/my-plan", "destination": "/portal/my-plan.html" },
+    { "source": "/morning-checkin", "destination": "/portal/morning-checkin.html" },
+    { "source": "/evening-review", "destination": "/portal/evening-review.html" },
+    { "source": "/monthly-pulse", "destination": "/portal/monthly-pulse.html" },
+    { "source": "/longitudinal", "destination": "/portal/longitudinal.html" },
+    { "source": "/share/:hash", "destination": "/portal/share.html" },
+    { "source": "/marketplace", "destination": "/portal/marketplace.html" },
+    { "source": "/install", "destination": "/portal/install.html" }
   ],
   "redirects": [
     { "source": "/:path*", "has": [{ "type": "host", "value": "alignedpower.coach" }], "destination": "https://portal.alignedpower.coach/:path*", "permanent": true },
@@ -36,21 +46,18 @@
     { "source": "/portal/six-c-scorecard.html", "destination": "/scorecard", "permanent": true },
     { "source": "/portal/coach.html", "destination": "/coach", "permanent": true },
     { "source": "/portal/coach-client.html", "destination": "/coach/client", "permanent": true },
+    { "source": "/portal/coach-dashboard.html", "destination": "/coach-dashboard", "permanent": true },
     { "source": "/portal/admin.html", "destination": "/admin", "permanent": true },
-    { "source": "/portal/my-plan.html", "destination": "/my-plan", "permanent": true }
+    { "source": "/portal/my-plan.html", "destination": "/my-plan", "permanent": true },
+    { "source": "/portal/morning-checkin.html", "destination": "/morning-checkin", "permanent": true },
+    { "source": "/portal/evening-review.html", "destination": "/evening-review", "permanent": true },
+    { "source": "/portal/monthly-pulse.html", "destination": "/monthly-pulse", "permanent": true },
+    { "source": "/portal/longitudinal.html", "destination": "/longitudinal", "permanent": true }
   ],
   "crons": [
-    {
-      "path": "/api/cron/6c-reminders",
-      "schedule": "5 15 * * *"
-    },
-    {
-      "path": "/api/cron/6c-reminders",
-      "schedule": "5 16 * * *"
-    },
-    {
-      "path": "/api/cron/6c-reminders",
-      "schedule": "5 17 * * *"
-    }
+    { "path": "/api/cron/6c-reminders", "schedule": "5 15 * * *" },
+    { "path": "/api/cron/6c-reminders", "schedule": "5 16 * * *" },
+    { "path": "/api/cron/6c-reminders", "schedule": "5 17 * * *" },
+    { "path": "/api/cron/ritual-reminders", "schedule": "*/15 * * * *" }
   ]
 }

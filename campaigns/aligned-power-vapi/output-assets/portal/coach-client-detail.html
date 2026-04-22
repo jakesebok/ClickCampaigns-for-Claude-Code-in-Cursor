@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client detail | Coach Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#0E1624 5%,var(--ap-bg)));background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .kpi{font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:var(--ap-primary);}
+    .kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--ap-muted);font-weight:700;}
+    .day-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;}
+    .dt-aligned{background:#dcfce7;color:#14532d;}.dt-drift{background:#fee2e2;color:#991b1b;}.dt-scratch{background:#e5e7eb;color:#374151;}.dt-win{background:#dcfce7;color:#14532d;}
+    .dt-boundary{background:#fef3c7;color:#92400e;}.dt-overextension{background:#fde68a;color:#78350f;}.dt-any{background:#e0e7ff;color:#3730a3;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/coach-dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to roster</span></a>
+      <span id="client-email-header" class="text-sm text-[var(--ap-muted)]"></span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10 space-y-6">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading client…</div>
+    <div id="content" class="hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Client</p>
+          <h1 class="text-3xl text-[var(--ap-primary)]" id="client-name">—</h1>
+          <p class="text-[var(--ap-muted)]" id="client-sub">—</p>
+        </div>
+        <button id="generate-brief" type="button" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-2 px-5 rounded-lg text-sm">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>Generate pre-session brief
+        </button>
+      </div>
+
+      <!-- KPIs -->
+      <section class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="card bg-white rounded-xl p-4"><p class="kpi" id="kpi-assessments">—</p><p class="kpi-label">Assessments</p></div>
+        <div class="card bg-white rounded-xl p-4"><p class="kpi" id="kpi-streak">—</p><p class="kpi-label">Ritual streak</p></div>
+        <div class="card bg-white rounded-xl p-4"><p class="kpi" id="kpi-morning">—</p><p class="kpi-label">Mornings · 7d</p></div>
+        <div class="card bg-white rounded-xl p-4"><p class="kpi" id="kpi-evening">—</p><p class="kpi-label">Evenings · 7d</p></div>
+        <div class="card bg-white rounded-xl p-4"><p class="kpi" id="kpi-drift">—</p><p class="kpi-label">Drift days · 7d</p></div>
+      </section>
+
+      <!-- Brief -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-3">Latest pre-session brief</h2>
+        <div id="brief-body" class="whitespace-pre-wrap text-[var(--ap-primary)] text-sm leading-relaxed">No brief yet. Click "Generate pre-session brief" above.</div>
+        <div id="brief-meta" class="text-xs text-[var(--ap-muted)] mt-3"></div>
+      </section>
+
+      <!-- Trajectory -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-3">Archetype trajectory</h2>
+        <div id="trajectory-list" class="space-y-2"></div>
+      </section>
+
+      <!-- Rituals recent -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card bg-white rounded-2xl p-6">
+          <h2 class="text-lg text-[var(--ap-primary)] mb-3">Recent mornings</h2>
+          <div id="mornings-list" class="space-y-2 text-sm"></div>
+        </div>
+        <div class="card bg-white rounded-2xl p-6">
+          <h2 class="text-lg text-[var(--ap-primary)] mb-3">Recent evenings</h2>
+          <div id="evenings-list" class="space-y-2 text-sm"></div>
+        </div>
+      </section>
+
+      <!-- Driver history -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-3">Driver activation history</h2>
+        <div id="drivers-list" class="space-y-2"></div>
+      </section>
+
+      <!-- Presence + Alerts -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card bg-white rounded-2xl p-6">
+          <h2 class="text-lg text-[var(--ap-primary)] mb-3">Presence events (fired)</h2>
+          <div id="presence-list" class="space-y-2 text-sm"></div>
+        </div>
+        <div class="card bg-white rounded-2xl p-6">
+          <h2 class="text-lg text-[var(--ap-primary)] mb-3">Pattern alerts</h2>
+          <div id="alerts-list" class="space-y-2 text-sm"></div>
+        </div>
+      </section>
+
+      <!-- Private notes -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-3">Private coach notes</h2>
+        <p class="text-xs text-[var(--ap-muted)] mb-2">Only you see this.</p>
+        <textarea id="notes" rows="6" class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] text-[var(--ap-text)] focus:border-[var(--ap-accent)] focus:outline-none resize-y"></textarea>
+        <button id="save-notes" type="button" class="mt-3 inline-flex items-center gap-2 bg-[var(--ap-primary)] text-white font-semibold py-2 px-4 rounded-lg text-sm">Save notes</button>
+        <span id="notes-status" class="ml-3 text-xs text-[var(--ap-muted)]"></span>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    const configRes = await fetch('/api/config'); eval(await configRes.text());
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+    const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { window.location.href = '/login'; }
+
+    const token = session.access_token;
+    const params = new URLSearchParams(location.search);
+    const clientEmail = params.get('email');
+    if (!clientEmail) { document.getElementById('loading').textContent = 'No client specified.'; }
+    else {
+      document.getElementById('client-email-header').textContent = clientEmail;
+
+      const r = await fetch('/api/coach-client-detail?email=' + encodeURIComponent(clientEmail), { headers: { Authorization: 'Bearer ' + token } });
+      if (!r.ok) { document.getElementById('loading').textContent = 'Access denied or not found.'; }
+      else {
+        const d = await r.json();
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+
+        const latest = d.latest_assessment;
+        document.getElementById('client-name').textContent = clientEmail.split('@')[0];
+        document.getElementById('client-sub').textContent = latest ? `${latest.archetype} · ${latest.primary_driver || 'no driver'} · Overall ${latest.overall || '—'}` : 'No assessments yet';
+
+        document.getElementById('kpi-assessments').textContent = d.summary.assessments_count;
+        document.getElementById('kpi-streak').textContent = d.ritual_streak;
+        document.getElementById('kpi-morning').textContent = d.summary.morning_7d;
+        document.getElementById('kpi-evening').textContent = d.summary.evening_7d;
+        document.getElementById('kpi-drift').textContent = d.summary.drift_count_7d;
+
+        // Brief
+        if (d.session_briefs && d.session_briefs.length) {
+          document.getElementById('brief-body').textContent = d.session_briefs[0].brief.summary || '(no summary)';
+          document.getElementById('brief-meta').textContent = `Generated ${new Date(d.session_briefs[0].generated_at).toLocaleString()}`;
+        }
+
+        // Trajectory
+        const traj = document.getElementById('trajectory-list');
+        d.trajectory.forEach(t => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-4 p-3 rounded-lg bg-[var(--ap-bg)]';
+          row.innerHTML = `<div class="text-xs text-[var(--ap-muted)] w-28">${new Date(t.date).toLocaleDateString()}</div>
+            <div class="flex-1"><div class="font-semibold">${t.archetype}</div>
+            <div class="text-xs text-[var(--ap-muted)]">${t.primary_driver || '—'} · ${t.overall || '—'}</div></div>`;
+          traj.appendChild(row);
+        });
+
+        // Mornings
+        const mList = document.getElementById('mornings-list');
+        d.morning_checkins.slice(0,10).forEach(m => {
+          const el = document.createElement('div');
+          el.className = 'p-2 rounded-lg bg-[var(--ap-bg)]';
+          const prs = (m.priorities || []).map(p => `<span class="text-xs text-[var(--ap-muted)]">${p.domain_code || '—'}</span>`).join(' · ');
+          el.innerHTML = `<div class="flex justify-between"><span class="font-semibold text-[var(--ap-primary)]">${m.local_date}</span><span class="text-xs text-[var(--ap-muted)]">Honored: ${m.honored_domain || '—'}</span></div>
+            <div class="text-xs text-[var(--ap-muted)] mt-1">${prs || 'no priorities'}</div>
+            <div class="text-xs text-[var(--ap-muted)] italic mt-1">${escapeHtml(m.alignment_intention || '')}</div>`;
+          mList.appendChild(el);
+        });
+        if (!d.morning_checkins.length) mList.innerHTML = '<p class="text-[var(--ap-muted)]">No recent mornings.</p>';
+
+        // Evenings
+        const eList = document.getElementById('evenings-list');
+        d.evening_reviews.slice(0,10).forEach(e => {
+          const el = document.createElement('div');
+          el.className = 'p-2 rounded-lg bg-[var(--ap-bg)]';
+          el.innerHTML = `<div class="flex justify-between items-center"><span class="font-semibold">${e.local_date}</span><span class="day-chip dt-${e.day_type}">${e.day_type}</span></div>
+            <div class="text-xs text-[var(--ap-muted)] mt-1">Priorities honored: ${e.priorities_honored_count ?? '—'}/3 · Drivers: ${(e.drivers_echoed||[]).join(', ') || 'none'}</div>
+            <div class="text-xs italic text-[var(--ap-secondary)] mt-1">${escapeHtml(e.response || '')}</div>`;
+          eList.appendChild(el);
+        });
+        if (!d.evening_reviews.length) eList.innerHTML = '<p class="text-[var(--ap-muted)]">No recent evenings.</p>';
+
+        // Drivers
+        const drList = document.getElementById('drivers-list');
+        d.driver_history.forEach(drv => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between p-3 rounded-lg bg-[var(--ap-bg)]';
+          row.innerHTML = `<div><span class="font-semibold">${drv.key.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</span>
+            <div class="text-xs text-[var(--ap-muted)]">Last ${drv.last_echoed ? new Date(drv.last_echoed).toLocaleDateString() : '—'}</div></div>
+            <div class="text-lg font-bold text-[var(--ap-accent)]">${drv.count}×</div>`;
+          drList.appendChild(row);
+        });
+        if (!d.driver_history.length) drList.innerHTML = '<p class="text-[var(--ap-muted)]">No drivers echoed yet.</p>';
+
+        // Presence
+        const pList = document.getElementById('presence-list');
+        d.presence_fired.forEach(p => {
+          const el = document.createElement('div');
+          el.className = 'p-2 rounded-lg bg-[var(--ap-bg)]';
+          el.innerHTML = `<div class="flex justify-between"><span class="font-semibold">${p.trigger_id}</span><span class="text-xs text-[var(--ap-muted)]">${new Date(p.evaluated_at).toLocaleDateString()}</span></div>
+            <div class="text-xs text-[var(--ap-muted)] italic mt-1">${escapeHtml((p.payload && p.payload.copy) || '')}</div>`;
+          pList.appendChild(el);
+        });
+        if (!d.presence_fired.length) pList.innerHTML = '<p class="text-[var(--ap-muted)]">No presence events fired yet.</p>';
+
+        // Alerts
+        const aList = document.getElementById('alerts-list');
+        d.pattern_alerts.forEach(a => {
+          const el = document.createElement('div');
+          el.className = 'p-2 rounded-lg bg-[var(--ap-bg)] border-l-4 ' + (a.severity === 'high' ? 'border-red-500' : a.severity === 'critical' ? 'border-red-700' : 'border-amber-400');
+          el.innerHTML = `<div class="flex justify-between"><span class="font-semibold">${a.alert_type.replace(/_/g,' ')}</span><span class="text-xs text-[var(--ap-muted)]">${new Date(a.detected_at).toLocaleDateString()}</span></div>
+            <div class="text-xs text-[var(--ap-muted)] mt-1">${escapeHtml((a.payload && a.payload.summary) || '')}</div>`;
+          aList.appendChild(el);
+        });
+        if (!d.pattern_alerts.length) aList.innerHTML = '<p class="text-[var(--ap-muted)]">No active alerts.</p>';
+
+        // Notes
+        document.getElementById('notes').value = d.coach_notes || '';
+        document.getElementById('save-notes').addEventListener('click', async () => {
+          const notes = document.getElementById('notes').value.trim();
+          const status = document.getElementById('notes-status');
+          status.textContent = 'Saving…';
+          const r = await fetch('/api/coach-notes', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: JSON.stringify({ client_email: clientEmail, notes }) });
+          status.textContent = r.ok ? 'Saved.' : 'Error.';
+        });
+
+        document.getElementById('generate-brief').addEventListener('click', async () => {
+          document.getElementById('brief-body').textContent = 'Generating…';
+          const r2 = await fetch('/api/coach-pre-session-brief', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+            body: JSON.stringify({ client_email: clientEmail, session_scheduled_at: new Date(Date.now() + 2*3600*1000).toISOString() }),
+          });
+          if (!r2.ok) { document.getElementById('brief-body').textContent = 'Error generating brief.'; return; }
+          const j = await r2.json();
+          document.getElementById('brief-body').textContent = (j.brief && j.brief.brief && j.brief.brief.summary) || '(no summary)';
+          document.getElementById('brief-meta').textContent = 'Generated just now';
+        });
+
+        function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+      }
+    }
+  </script>
+</body>
+</html>

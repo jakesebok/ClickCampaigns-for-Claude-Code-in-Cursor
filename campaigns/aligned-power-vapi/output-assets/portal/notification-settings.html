@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Notification Settings | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#0E1624 5%,var(--ap-bg)));background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .field-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--ap-border);gap:16px;}
+    .field-row:last-child{border-bottom:none;}
+    .field-label{font-size:14px;font-weight:600;color:var(--ap-primary);}
+    .field-hint{font-size:12px;color:var(--ap-muted);margin-top:2px;}
+    .control{min-width:160px;}
+    input[type=time],select{padding:8px 12px;border:1px solid var(--ap-border);border-radius:8px;font-family:inherit;font-size:14px;background:var(--ap-surface);color:var(--ap-text);width:100%;}
+    input:focus,select:focus{outline:none;border-color:var(--ap-accent);}
+    .chip-group{display:flex;gap:6px;flex-wrap:wrap;}
+    .chip{padding:6px 12px;border:2px solid var(--ap-border);border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;background:var(--ap-surface);color:var(--ap-primary);}
+    .chip.active{background:var(--ap-primary);color:#fff;border-color:var(--ap-primary);}
+    .perm-state{font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.1em;}
+    .perm-granted{background:#dcfce7;color:#14532d;}
+    .perm-denied{background:#fee2e2;color:#991b1b;}
+    .perm-default{background:#fef3c7;color:#92400e;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]"><img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto"><span>Aligned Performance Portal</span></a>
+      <a href="/settings" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">All settings</a>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading…</div>
+
+    <div id="content" class="hidden space-y-6">
+      <div>
+        <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Notifications</p>
+        <h1 class="text-3xl text-[var(--ap-primary)] mb-2">When we reach you, and how.</h1>
+        <p class="text-[var(--ap-secondary)]">Defaults are opinionated. Change whatever does not fit your day.</p>
+      </div>
+
+      <!-- Push permission -->
+      <section class="card bg-white rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="text-lg">Web push</h2>
+            <p class="field-hint">Notifications arrive as native phone/desktop pings when the portal is installed as a PWA.</p>
+          </div>
+          <span id="perm-state" class="perm-state perm-default">Not set</span>
+        </div>
+        <div class="flex gap-2 mt-3">
+          <button id="btn-enable-push" type="button" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-2 px-4 rounded-lg text-sm">Enable push</button>
+          <button id="btn-install-pwa" type="button" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-2 px-4 rounded-lg border-2 border-[var(--ap-border)] text-sm">Install app</button>
+          <button id="btn-test" type="button" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-2 px-4 rounded-lg border-2 border-[var(--ap-border)] text-sm">Send test</button>
+        </div>
+      </section>
+
+      <!-- Times -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-lg mb-3">Daily timing</h2>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Morning check-in reminder</div>
+            <div class="field-hint">Default: 6:00 AM local. Picks the 15-min cron slot closest to this.</div>
+          </div>
+          <div class="control"><input type="time" id="morning_time" /></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Evening review reminder</div>
+            <div class="field-hint">Default: 5:00 PM local. Catches you before you check out.</div>
+          </div>
+          <div class="control"><input type="time" id="evening_time" /></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Timezone</div>
+            <div class="field-hint">Detected from your browser.</div>
+          </div>
+          <div class="control"><select id="timezone"><option>America/New_York</option><option>America/Chicago</option><option>America/Denver</option><option>America/Los_Angeles</option><option>Europe/London</option><option>Europe/Berlin</option><option>Asia/Singapore</option><option>Australia/Sydney</option></select></div>
+        </div>
+      </section>
+
+      <!-- Quiet hours -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-lg mb-3">Quiet hours</h2>
+        <p class="field-hint mb-3">Presence engine and reminders respect this window. Crisis content bypasses.</p>
+        <div class="field-row">
+          <div class="field-label">Start</div>
+          <div class="control"><input type="time" id="quiet_start" /></div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">End</div>
+          <div class="control"><input type="time" id="quiet_end" /></div>
+        </div>
+      </section>
+
+      <!-- Channels -->
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-lg mb-3">Channels</h2>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Morning reminder</div>
+            <div class="field-hint">Where you see the morning nudge.</div>
+          </div>
+          <div class="chip-group" data-field="channel_morning"><button type="button" class="chip" data-v="push">Push</button><button type="button" class="chip" data-v="email">Email</button><button type="button" class="chip" data-v="both">Both</button><button type="button" class="chip" data-v="off">Off</button></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Evening reminder</div>
+            <div class="field-hint">Closes the day if you haven't already.</div>
+          </div>
+          <div class="chip-group" data-field="channel_evening"><button type="button" class="chip" data-v="push">Push</button><button type="button" class="chip" data-v="email">Email</button><button type="button" class="chip" data-v="both">Both</button><button type="button" class="chip" data-v="off">Off</button></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Presence flags</div>
+            <div class="field-hint">Pattern previews when a driver has an opening.</div>
+          </div>
+          <div class="chip-group" data-field="channel_presence"><button type="button" class="chip" data-v="push">Push</button><button type="button" class="chip" data-v="email">Email</button><button type="button" class="chip" data-v="both">Both</button><button type="button" class="chip" data-v="off">Off</button></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Coach messages</div>
+            <div class="field-hint">Briefings and notes from Jake.</div>
+          </div>
+          <div class="chip-group" data-field="channel_coach"><button type="button" class="chip" data-v="email">Email</button><button type="button" class="chip" data-v="push">Push</button><button type="button" class="chip" data-v="both">Both</button></div>
+        </div>
+      </section>
+
+      <div class="flex gap-3">
+        <button type="button" id="save-btn" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-3 px-6 rounded-lg shadow-sm">Save settings</button>
+        <a href="/dashboard" class="inline-flex items-center justify-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)]">Back</a>
+        <span id="save-status" class="inline-flex items-center text-sm text-[var(--ap-muted)]"></span>
+      </div>
+    </div>
+  </main>
+
+  <script src="/portal/install-prompt.js" defer></script>
+  <script type="module">
+    const configRes = await fetch('/api/config'); eval(await configRes.text());
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+    const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { window.location.href = '/login?redirect=' + encodeURIComponent('/settings/notifications'); }
+    else {
+      const token = session.access_token;
+      const loading = document.getElementById('loading');
+      const content = document.getElementById('content');
+
+      // Load prefs
+      const r = await fetch('/api/notification-prefs', { headers: { Authorization: 'Bearer ' + token } });
+      const j = r.ok ? await r.json() : { prefs: {} };
+      const prefs = j.prefs || {};
+      const tz = prefs.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York';
+      document.getElementById('morning_time').value = (prefs.morning_time || '06:00').slice(0,5);
+      document.getElementById('evening_time').value = (prefs.evening_time || '17:00').slice(0,5);
+      document.getElementById('quiet_start').value = (prefs.quiet_hours_start || '21:00').slice(0,5);
+      document.getElementById('quiet_end').value = (prefs.quiet_hours_end || '07:00').slice(0,5);
+
+      // Hydrate timezone
+      const tzSel = document.getElementById('timezone');
+      if (!Array.from(tzSel.options).some(o => o.value === tz)) {
+        const opt = document.createElement('option'); opt.value = tz; opt.textContent = tz; tzSel.appendChild(opt);
+      }
+      tzSel.value = tz;
+
+      // Chip groups
+      ['channel_morning','channel_evening','channel_presence','channel_coach'].forEach(field => {
+        const group = document.querySelector(`[data-field="${field}"]`);
+        const current = prefs[field] || (field === 'channel_coach' ? 'email' : 'push');
+        Array.from(group.children).forEach(c => {
+          if (c.dataset.v === current) c.classList.add('active');
+          c.addEventListener('click', () => {
+            Array.from(group.children).forEach(sib => sib.classList.remove('active'));
+            c.classList.add('active');
+          });
+        });
+      });
+
+      // Push permission state
+      function updatePermState() {
+        const el = document.getElementById('perm-state');
+        el.classList.remove('perm-granted','perm-denied','perm-default');
+        if (!('Notification' in window)) { el.textContent = 'Unavailable'; el.classList.add('perm-default'); return; }
+        const s = Notification.permission;
+        if (s === 'granted') { el.textContent = 'Granted'; el.classList.add('perm-granted'); }
+        else if (s === 'denied') { el.textContent = 'Denied'; el.classList.add('perm-denied'); }
+        else { el.textContent = 'Not set'; el.classList.add('perm-default'); }
+      }
+      updatePermState();
+
+      document.getElementById('btn-enable-push').addEventListener('click', async () => {
+        if (!('serviceWorker' in navigator) || !('PushManager' in window)) { alert('Push not supported in this browser.'); return; }
+        const perm = await Notification.requestPermission();
+        updatePermState();
+        if (perm !== 'granted') return;
+        const reg = await navigator.serviceWorker.register('/sw.js');
+        // Subscribe with VAPID public key if exposed in config
+        if (window.VAPID_PUBLIC_KEY) {
+          try {
+            const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(window.VAPID_PUBLIC_KEY) });
+            // Persist subscription
+            await fetch('/api/notification-prefs', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+              body: JSON.stringify({ push_subscription: sub.toJSON() }),
+            });
+            alert('Push enabled.');
+          } catch (e) { console.error(e); alert('Could not subscribe to push: ' + e.message); }
+        } else {
+          alert('Push permission granted, but server VAPID key not set. Tell Jake.');
+        }
+      });
+
+      document.getElementById('btn-install-pwa').addEventListener('click', () => {
+        if (window.APInstall) window.APInstall.showNative(); else window.location.href = '/install';
+      });
+
+      document.getElementById('btn-test').addEventListener('click', async () => {
+        if (Notification.permission === 'granted') {
+          new Notification('Aligned Performance — test', { body: 'Push is working. Nothing else to do here.' });
+        } else alert('Enable push first.');
+      });
+
+      document.getElementById('save-btn').addEventListener('click', async () => {
+        const get = (field) => document.querySelector(`[data-field="${field}"] .active`)?.dataset.v || (field === 'channel_coach' ? 'email' : 'push');
+        const payload = {
+          timezone: document.getElementById('timezone').value,
+          morning_time: document.getElementById('morning_time').value,
+          evening_time: document.getElementById('evening_time').value,
+          quiet_hours_start: document.getElementById('quiet_start').value,
+          quiet_hours_end: document.getElementById('quiet_end').value,
+          channel_morning: get('channel_morning'),
+          channel_evening: get('channel_evening'),
+          channel_presence: get('channel_presence'),
+          channel_coach: get('channel_coach'),
+        };
+        const status = document.getElementById('save-status');
+        status.textContent = 'Saving…';
+        const r = await fetch('/api/notification-prefs', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: JSON.stringify(payload) });
+        status.textContent = r.ok ? 'Saved.' : 'Error. Try again.';
+      });
+
+      function urlBase64ToUint8Array(base64) {
+        const padding = '='.repeat((4 - base64.length % 4) % 4);
+        const base = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/');
+        const raw = atob(base);
+        const arr = new Uint8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+        return arr;
+      }
+
+      loading.classList.add('hidden');
+      content.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
