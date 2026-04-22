@@ -8,17 +8,19 @@
 
 ### Colors (Slate & Spark palette)
 
-| Role | Hex | Usage |
-|------|-----|-------|
-| **Background** | #F5F7FA | Page backgrounds |
-| **Dark** | #0E1624 | Primary text, nav |
-| **Dark 2** | #192236 | Secondary dark elements |
-| **Orange (Primary)** | #FF6B1A | CTAs, accents, highlights |
-| **Orange 2** | #FF9F6B | Gradients, lighter accents |
-| **Border** | #DDE3ED | Borders, dividers |
-| **Mid** | #3A4A5C | Body text, secondary copy |
-| **Muted** | #7A8FA8 | Labels, captions |
-| **Off** | #EEF1F7 | Toggle backgrounds, subtle surfaces |
+
+| Role                 | Hex     | Usage                               |
+| -------------------- | ------- | ----------------------------------- |
+| **Background**       | #F5F7FA | Page backgrounds                    |
+| **Dark**             | #0E1624 | Primary text, nav                   |
+| **Dark 2**           | #192236 | Secondary dark elements             |
+| **Orange (Primary)** | #FF6B1A | CTAs, accents, highlights           |
+| **Orange 2**         | #FF9F6B | Gradients, lighter accents          |
+| **Border**           | #DDE3ED | Borders, dividers                   |
+| **Mid**              | #3A4A5C | Body text, secondary copy           |
+| **Muted**            | #7A8FA8 | Labels, captions                    |
+| **Off**              | #EEF1F7 | Toggle backgrounds, subtle surfaces |
+
 
 ### Typography
 
@@ -28,6 +30,7 @@
 - **Buttons:** Outfit, weight 600
 
 **Google Fonts import:**
+
 ```
 Cormorant Garamond: 600, 700 (italic)
 Outfit: 400, 500, 600, 700, 800
@@ -52,11 +55,13 @@ Outfit: 400, 500, 600, 700, 800
 
 All buttons use **border-radius: 100px** for a full pill shape.
 
-| Style | Specs |
-|-------|-------|
-| **Primary (fill)** | Orange background, white text, 11px font, 600 weight, letter-spacing 0.06em, padding 13px 26px |
-| **Outline (light)** | Transparent bg, dark text, 1.5px border, same padding |
-| **Outline (dark)** | Transparent bg, light text, 1.5px border for dark backgrounds |
+
+| Style               | Specs                                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| **Primary (fill)**  | Orange background, white text, 11px font, 600 weight, letter-spacing 0.06em, padding 13px 26px |
+| **Outline (light)** | Transparent bg, dark text, 1.5px border, same padding                                          |
+| **Outline (dark)**  | Transparent bg, light text, 1.5px border for dark backgrounds                                  |
+
 
 ### Toggle groups (theme, font)
 
