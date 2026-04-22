@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Longitudinal Intelligence | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#0E1624 5%,var(--ap-bg)) 50%);background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .heatcell{width:16px;height:16px;border-radius:3px;display:inline-block;}
+    .lvl-0{background:var(--ap-border);}
+    .lvl-1{background:color-mix(in srgb,#FF6B1A 40%,var(--ap-border));}
+    .lvl-2{background:var(--ap-accent);}
+    .quad-critical{color:#dc2626;}.quad-protect{color:#16a34a;}.quad-monitor{color:#6b7280;}.quad-overinvest{color:#eab308;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]"><img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto"><span>Aligned Performance Portal</span></a>
+      <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading your biography…</div>
+    <div id="content" class="hidden space-y-6">
+      <div>
+        <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Longitudinal intelligence</p>
+        <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your biography, written in your own data.</h1>
+        <p class="text-[var(--ap-secondary)]"><span id="assessments-count">0</span> assessments · <span id="pulses-count">0</span> monthly pulses · <span id="streak">0</span>-day ritual streak</p>
+      </div>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Archetype trajectory</h2>
+        <div id="trajectory-timeline" class="space-y-3"></div>
+        <p id="trajectory-caption" class="text-[var(--ap-secondary)] text-sm mt-4"></p>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Driver activation history</h2>
+        <div id="driver-list" class="space-y-2"></div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Importance drift</h2>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">What mattered to you at your first assessment vs. your most recent. Shifts here are the clearest signal that your priorities have genuinely moved.</p>
+        <div class="w-full" style="max-height:320px;position:relative;"><canvas id="importance-chart"></canvas></div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Matrix movement</h2>
+        <div id="matrix-grid" class="grid grid-cols-1 gap-3"></div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">90-day ritual streak</h2>
+        <div id="heatmap" class="flex flex-wrap gap-[3px]"></div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    (async function(){
+      const configRes = await fetch('/api/config'); eval(await configRes.text());
+      const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { window.location.href = '/login?redirect=' + encodeURIComponent('/longitudinal'); return; }
+      const r = await fetch('/api/longitudinal', { headers: { 'Authorization': 'Bearer ' + session.access_token } });
+      if (!r.ok) { document.getElementById('loading').textContent = 'Could not load longitudinal data.'; return; }
+      const data = await r.json();
+
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+      document.getElementById('assessments-count').textContent = data.assessments_count;
+      document.getElementById('pulses-count').textContent = data.pulses_count;
+      document.getElementById('streak').textContent = data.streak;
+
+      // Trajectory
+      const tlEl = document.getElementById('trajectory-timeline');
+      (data.trajectory || []).forEach((t, i) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-4 p-3 rounded-lg bg-[var(--ap-bg)]';
+        row.innerHTML = `
+          <div class="text-xs text-[var(--ap-muted)] w-24">${new Date(t.date).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}</div>
+          <div class="flex-1">
+            <div class="font-semibold text-[var(--ap-primary)]">${t.archetype}</div>
+            <div class="text-xs text-[var(--ap-muted)]">${t.primary_driver || 'No dominant driver'} · Overall ${t.overall || '—'}</div>
+          </div>`;
+        tlEl.appendChild(row);
+      });
+      const first = (data.trajectory || [])[0];
+      const last = (data.trajectory || [])[(data.trajectory || []).length - 1];
+      if (first && last) {
+        document.getElementById('trajectory-caption').textContent = `You were ${first.archetype}, now you're ${last.archetype}. The trajectory is yours.`;
+      }
+
+      // Drivers
+      const dl = document.getElementById('driver-list');
+      (data.driver_history || []).slice(0, 10).forEach(d => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between p-3 rounded-lg bg-[var(--ap-bg)]';
+        row.innerHTML = `
+          <div>
+            <div class="font-semibold text-[var(--ap-primary)]">${d.key.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</div>
+            <div class="text-xs text-[var(--ap-muted)]">Last echoed ${d.last_echoed ? new Date(d.last_echoed).toLocaleDateString() : '—'}</div>
+          </div>
+          <div class="text-lg font-bold text-[var(--ap-accent)]">${d.count}×</div>`;
+        dl.appendChild(row);
+      });
+      if (!data.driver_history || !data.driver_history.length) {
+        dl.innerHTML = '<p class="text-sm text-[var(--ap-muted)]">Once you complete a few evening reviews, this will populate with the drivers you see most.</p>';
+      }
+
+      // Importance drift chart
+      if (data.importance_drift && data.importance_drift.length) {
+        const labels = data.importance_drift.map(d => d.code);
+        const fromData = data.importance_drift.map(d => d.from);
+        const toData = data.importance_drift.map(d => d.to);
+        new Chart(document.getElementById('importance-chart'), {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              { label: 'First assessment', data: fromData, backgroundColor: 'rgba(122,143,168,0.4)' },
+              { label: 'Most recent',      data: toData,   backgroundColor: '#FF6B1A' },
+            ],
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { min: 0, max: 10 } } },
+        });
+      }
+
+      // Matrix movement
+      const mg = document.getElementById('matrix-grid');
+      (data.matrix_movement || []).slice(-3).forEach(m => {
+        const row = document.createElement('div');
+        row.className = 'p-4 rounded-lg border border-[var(--ap-border)]';
+        const crit = m.domains.filter(d => d.quadrant === 'critical').map(d => d.code).join(' ');
+        const pro = m.domains.filter(d => d.quadrant === 'protect').map(d => d.code).join(' ');
+        row.innerHTML = `
+          <div class="text-xs text-[var(--ap-muted)] mb-2">${new Date(m.date).toLocaleDateString()}</div>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <div><span class="quad-critical font-semibold">Critical Priority:</span> ${crit || '—'}</div>
+            <div><span class="quad-protect font-semibold">Protect & Sustain:</span> ${pro || '—'}</div>
+          </div>`;
+        mg.appendChild(row);
+      });
+
+      // Heatmap
+      const hm = document.getElementById('heatmap');
+      (data.heatmap || []).slice().reverse().forEach(d => {
+        const cell = document.createElement('span');
+        cell.className = `heatcell lvl-${d.level}`;
+        cell.title = `${d.date}: ${d.morning ? 'morning' : ''}${d.morning && d.evening ? ' + ' : ''}${d.evening ? 'evening' : ''}`.trim() || d.date;
+        hm.appendChild(cell);
+      });
+    })();
+  </script>
+</body>
+</html>

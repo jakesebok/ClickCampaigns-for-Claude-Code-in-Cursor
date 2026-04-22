@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Morning Alignment | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-accent:#FF6B1A;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg) 0%,color-mix(in srgb,#0E1624 5%,var(--ap-bg)) 40%,color-mix(in srgb,#FF6B1A 4%,var(--ap-bg)) 100%);background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .chip{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:2px solid var(--ap-border);border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
+    .chip:hover{border-color:var(--ap-accent);}
+    .chip.selected{background:var(--ap-accent);color:#fff;border-color:var(--ap-accent);}
+    .priority-row{display:flex;gap:8px;align-items:flex-start;}
+    .priority-row input[type=text]{flex:1;padding:12px;border:2px solid var(--ap-border);border-radius:10px;font-family:inherit;font-size:15px;background:var(--ap-surface);color:var(--ap-text);}
+    .priority-row input[type=text]:focus{outline:none;border-color:var(--ap-accent);}
+    .domain-mini-picker{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;}
+    .domain-mini{padding:3px 8px;border:1px solid var(--ap-border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;background:transparent;color:var(--ap-muted);}
+    .domain-mini.selected{background:var(--ap-primary);color:#fff;border-color:var(--ap-primary);}
+    .presence-banner{margin-bottom:24px;padding:20px 24px;border-radius:16px;border:2px solid var(--ap-accent);background:color-mix(in srgb,#FF6B1A 10%,var(--ap-surface));}
+    .success{background:color-mix(in srgb,#FF6B1A 8%,var(--ap-surface));border:2px solid var(--ap-accent);border-radius:16px;padding:24px;text-align:center;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]">
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>Aligned Performance Portal</span>
+      </a>
+      <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading…</div>
+
+    <div id="presence-slot"></div>
+
+    <div id="content" class="hidden">
+      <div class="mb-6">
+        <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Morning alignment</p>
+        <h1 class="text-3xl text-[var(--ap-primary)] mb-2">What's the shape of today?</h1>
+        <p class="text-[var(--ap-secondary)]">Forty-five seconds. Three honest answers. The rest of your day gets sharper.</p>
+      </div>
+
+      <form id="morning-form" class="space-y-6">
+        <!-- Priorities -->
+        <div class="card bg-white rounded-2xl p-6">
+          <label class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Today, my top priorities are</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">One to five. Tag each with a domain. You'll thank yourself tonight.</p>
+          <div id="priority-rows" class="space-y-4"></div>
+          <button type="button" id="add-priority-btn" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Add another
+          </button>
+        </div>
+
+        <!-- Honored domain -->
+        <div class="card bg-white rounded-2xl p-6">
+          <label class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">The domain I'm honoring today is</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">Pick one. The others can wait until tomorrow.</p>
+          <div id="honored-domain-chips" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Intention -->
+        <div class="card bg-white rounded-2xl p-6">
+          <label for="intention" class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Today I'd feel aligned if</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">One line. Whatever comes first is probably right.</p>
+          <input type="text" id="intention" name="intention" maxlength="280" class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] text-[var(--ap-text)] focus:border-[var(--ap-accent)] focus:outline-none" placeholder="e.g. I close the loop on the proposal I've been avoiding." />
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button type="submit" id="submit-btn" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-base py-3 px-6 rounded-lg shadow-sm">
+            Save morning check-in
+          </button>
+          <a href="/dashboard" class="inline-flex items-center justify-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)] hover:border-[var(--ap-primary)]">Maybe later</a>
+        </div>
+      </form>
+
+      <div id="success-state" class="hidden mt-8 success">
+        <p class="text-[var(--ap-primary)] font-semibold text-xl mb-1" id="success-line">Check-in saved.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4" id="success-sub">Your day just got a spine.</p>
+        <div id="pattern-preview" class="hidden mt-4 text-left p-4 rounded-xl border-2 border-[var(--ap-accent)]/40 bg-[var(--ap-bg)]">
+          <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Pattern preview</p>
+          <p id="pattern-text" class="text-[var(--ap-primary)]"></p>
+        </div>
+        <a href="/dashboard" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Return to dashboard →</a>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    const DOMAINS = [
+      { code:'PH', name:'Physical Health' }, { code:'IA', name:'Inner Alignment' }, { code:'ME', name:'Mental & Emotional' }, { code:'AF', name:'Attention & Focus' },
+      { code:'RS', name:'Relationship to Self' }, { code:'FA', name:'Family' }, { code:'CO', name:'Community' }, { code:'WI', name:'World & Impact' },
+      { code:'VS', name:'Vision & Strategy' }, { code:'EX', name:'Execution' }, { code:'OH', name:'Operational Health' }, { code:'EC', name:'Ecology' },
+    ];
+
+    (async function() {
+      const configRes = await fetch('/api/config');
+      const configText = await configRes.text();
+      eval(configText);
+      const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { window.location.href = '/login?redirect=' + encodeURIComponent('/morning-checkin'); return; }
+      const email = (session.user.email || '').trim().toLowerCase();
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York';
+
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+
+      // Render domain chips for honored domain
+      const chipsEl = document.getElementById('honored-domain-chips');
+      let honoredDomain = null;
+      DOMAINS.forEach(d => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip';
+        btn.dataset.code = d.code;
+        btn.textContent = d.name;
+        btn.addEventListener('click', () => {
+          Array.from(chipsEl.children).forEach(c => c.classList.remove('selected'));
+          btn.classList.add('selected');
+          honoredDomain = d.code;
+        });
+        chipsEl.appendChild(btn);
+      });
+
+      // Priority rows
+      const rowsEl = document.getElementById('priority-rows');
+      let rowCount = 0;
+      function addRow() {
+        if (rowCount >= 5) return;
+        rowCount++;
+        const row = document.createElement('div');
+        row.className = 'space-y-2';
+        row.innerHTML = `
+          <div class="priority-row">
+            <input type="text" data-field="text" placeholder="Priority ${rowCount}" maxlength="200" />
+          </div>
+          <div class="domain-mini-picker"></div>`;
+        const picker = row.querySelector('.domain-mini-picker');
+        DOMAINS.forEach(d => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'domain-mini';
+          btn.dataset.code = d.code;
+          btn.textContent = d.code;
+          btn.title = d.name;
+          btn.addEventListener('click', () => {
+            Array.from(picker.children).forEach(c => c.classList.remove('selected'));
+            btn.classList.add('selected');
+            row.dataset.domainCode = d.code;
+          });
+          picker.appendChild(btn);
+        });
+        rowsEl.appendChild(row);
+      }
+      addRow(); addRow(); addRow();
+      document.getElementById('add-priority-btn').addEventListener('click', addRow);
+
+      document.getElementById('morning-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const priorities = Array.from(rowsEl.children).map(row => ({
+          text: row.querySelector('[data-field=text]').value.trim(),
+          domain_code: row.dataset.domainCode || null,
+        })).filter(p => p.text);
+        const alignment_intention = document.getElementById('intention').value.trim();
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
+        const r = await fetch('/api/morning-checkin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + session.access_token,
+          },
+          body: JSON.stringify({ priorities, honored_domain: honoredDomain, alignment_intention, timezone: tz }),
+        });
+        if (!r.ok) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Save morning check-in';
+          alert('Something went sideways. Try again in a moment.');
+          return;
+        }
+
+        document.getElementById('morning-form').classList.add('hidden');
+        document.getElementById('success-state').classList.remove('hidden');
+
+        // Fetch presence for pattern preview
+        try {
+          const pr = await fetch('/api/presence-today', { headers: { 'Authorization': 'Bearer ' + session.access_token } });
+          if (pr.ok) {
+            const pdata = await pr.json();
+            const banner = (pdata.banners || []).find(b => b.trigger_id === 'V-01' || b.trigger_id === 'V-04');
+            if (banner) {
+              document.getElementById('pattern-preview').classList.remove('hidden');
+              document.getElementById('pattern-text').textContent = (banner.payload && banner.payload.copy) || 'Watch for your driver today.';
+            }
+          }
+        } catch (err) { console.error(err); }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Coach Network | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#FF6B1A 5%,var(--ap-bg)));background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .placeholder-card{background:var(--ap-surface);border:2px dashed var(--ap-border);border-radius:16px;padding:32px;text-align:center;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]"><img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto"><span>Aligned Performance Portal</span></a>
+      <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Peer coach network</p>
+    <h1 class="text-3xl text-[var(--ap-primary)] mb-3">Coaches matched to your archetype</h1>
+    <p class="text-[var(--ap-secondary)] mb-8" id="intro">Loading…</p>
+
+    <div id="live-grid" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+    <div id="coming-soon" class="placeholder-card hidden">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[var(--ap-accent)]/15 mb-4">
+        <i data-lucide="users-round" class="w-7 h-7 text-[var(--ap-accent)]"></i>
+      </div>
+      <h2 class="text-2xl text-[var(--ap-primary)] mb-2">Activates when the Axiom network goes live.</h2>
+      <p class="text-[var(--ap-secondary)] mb-6 max-w-lg mx-auto">Axiom is building a network of coaches whose methodologies run on this platform. When five or more peer coaches are live, a directory will populate here — matched to your archetype. You will see this first.</p>
+      <p class="text-sm text-[var(--ap-muted)]" id="progress-line">—</p>
+    </div>
+  </main>
+
+  <script>
+    (async function(){
+      const r = await fetch('/api/peer-marketplace');
+      if (!r.ok) return;
+      const data = await r.json();
+      const intro = document.getElementById('intro');
+      if (data.is_live) {
+        intro.textContent = `Axiom is live. ${data.count} peer coaches on the network.`;
+        const grid = document.getElementById('live-grid');
+        grid.classList.remove('hidden');
+        (data.coaches || []).forEach(c => {
+          const card = document.createElement('div');
+          card.className = 'card bg-white rounded-2xl p-5';
+          card.innerHTML = `
+            <h3 class="text-lg text-[var(--ap-primary)]">${c.display_name}</h3>
+            <p class="text-sm text-[var(--ap-secondary)] mb-2">${c.headline || ''}</p>
+            <p class="text-xs text-[var(--ap-muted)]">${(c.specialties || []).join(' · ')}</p>`;
+          grid.appendChild(card);
+        });
+      } else {
+        intro.textContent = 'Your VAPI results tell us your archetype. The peer network will surface coaches who specialize in your pattern.';
+        document.getElementById('coming-soon').classList.remove('hidden');
+        document.getElementById('progress-line').textContent = `${data.count} of ${data.min_for_live} coaches needed to activate`;
+      }
+    })();
+  </script>
+</body>
+</html>

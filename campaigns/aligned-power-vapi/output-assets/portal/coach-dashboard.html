@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Coach Admin Dashboard | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#0E1624 6%,var(--ap-bg)));background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+    .st-active{background:#16a34a;}.st-drifting{background:#eab308;}.st-pattern_alert{background:#dc2626;}.st-dormant{background:#9ca3af;}
+    .table-row{display:grid;grid-template-columns:16px 1fr 140px 140px 100px 120px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--ap-border);cursor:pointer;}
+    .table-row:hover{background:color-mix(in srgb,#FF6B1A 3%,var(--ap-bg));}
+    .brief-modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px;}
+    .brief-modal.open{display:flex;}
+    .brief-modal-inner{background:var(--ap-surface);max-width:720px;width:100%;max-height:90vh;overflow-y:auto;border-radius:20px;padding:32px;}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]"><img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto"><span>Coach Admin Dashboard</span></a>
+      <nav class="flex items-center gap-3">
+        <a href="/coach" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Sprints</a>
+        <a href="/coach-dashboard" class="text-sm font-semibold text-[var(--ap-accent)]">Admin</a>
+        <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">My view</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10 space-y-6">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading coach dashboard…</div>
+    <div id="content" class="hidden space-y-6">
+
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="card bg-white rounded-2xl p-5">
+          <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold">Active clients</p>
+          <p class="text-3xl font-bold text-[var(--ap-primary)] mt-1" id="kpi-clients">—</p>
+        </div>
+        <div class="card bg-white rounded-2xl p-5">
+          <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold">At risk</p>
+          <p class="text-3xl font-bold text-[var(--ap-accent)] mt-1" id="kpi-risk">—</p>
+        </div>
+        <div class="card bg-white rounded-2xl p-5">
+          <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold">Open pattern alerts</p>
+          <p class="text-3xl font-bold text-[var(--ap-primary)] mt-1" id="kpi-alerts">—</p>
+        </div>
+        <div class="card bg-white rounded-2xl p-5">
+          <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold">Most common archetype</p>
+          <p class="text-xl font-bold text-[var(--ap-primary)] mt-1" id="kpi-archetype">—</p>
+        </div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl text-[var(--ap-primary)]">Client roster</h2>
+          <input id="roster-filter" placeholder="Filter…" class="px-3 py-2 border-2 border-[var(--ap-border)] rounded-lg text-sm bg-[var(--ap-surface)]" />
+        </div>
+        <div class="hidden md:grid grid-cols-[16px_1fr_140px_140px_100px_120px] gap-3 text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold pb-2 border-b-2 border-[var(--ap-border)]">
+          <div></div><div>Client</div><div>Archetype</div><div>Primary driver</div><div>Days silent</div><div>Activity 7d</div>
+        </div>
+        <div id="roster-list"></div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Pattern alerts</h2>
+        <div id="alerts-list" class="space-y-2"></div>
+      </section>
+
+      <section class="card bg-white rounded-2xl p-6">
+        <h2 class="text-xl text-[var(--ap-primary)] mb-4">Cohort intelligence</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold mb-2">Archetype distribution</p>
+            <div id="cohort-archetypes" class="space-y-1"></div>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider text-[var(--ap-muted)] font-semibold mb-2">Driver activation (most common)</p>
+            <div id="cohort-drivers" class="space-y-1"></div>
+          </div>
+        </div>
+        <button id="export-cohort" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline"><i data-lucide="download" class="w-4 h-4"></i>Export anonymized PDF brief</button>
+      </section>
+    </div>
+  </main>
+
+  <div id="brief-modal" class="brief-modal">
+    <div class="brief-modal-inner">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl text-[var(--ap-primary)]" id="brief-client">Client</h3>
+        <button id="brief-close" class="text-[var(--ap-muted)] hover:text-[var(--ap-primary)]"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div id="brief-meta" class="text-xs text-[var(--ap-muted)] mb-4"></div>
+      <div id="brief-body" class="whitespace-pre-wrap text-[var(--ap-primary)]"></div>
+      <div class="mt-6 flex gap-3">
+        <button id="brief-generate" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-2 px-5 rounded-lg">Generate brief now</button>
+        <a id="brief-open-client" class="inline-flex items-center gap-2 text-[var(--ap-primary)] font-semibold py-2 px-5 rounded-lg border-2 border-[var(--ap-border)]">Open client view</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    (async function(){
+      const configRes = await fetch('/api/config'); eval(await configRes.text());
+      const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { window.location.href = '/login?redirect=' + encodeURIComponent('/coach-dashboard'); return; }
+      const token = session.access_token;
+
+      const r = await fetch('/api/coach-dashboard-data', { headers: { Authorization: 'Bearer ' + token } });
+      if (!r.ok) { document.getElementById('loading').textContent = 'Access denied or error.'; return; }
+      const data = await r.json();
+
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+      document.getElementById('kpi-clients').textContent = data.roster.length;
+      document.getElementById('kpi-risk').textContent = data.cohort.at_risk_count;
+      document.getElementById('kpi-alerts').textContent = (data.alerts || []).filter(a => !a.acknowledged_at && !a.dismissed_at).length;
+      const topArch = Object.entries(data.cohort.archetype_distribution || {}).sort((a,b) => b[1]-a[1])[0];
+      document.getElementById('kpi-archetype').textContent = topArch ? `${topArch[0]} (${topArch[1]})` : '—';
+
+      // Roster
+      const list = document.getElementById('roster-list');
+      function renderRoster(filter){
+        list.innerHTML = '';
+        data.roster.filter(r => !filter || (r.email.includes(filter) || (r.archetype||'').toLowerCase().includes(filter))).forEach(r => {
+          const row = document.createElement('div');
+          row.className = 'table-row';
+          row.innerHTML = `
+            <div><span class="status-dot st-${r.status}"></span></div>
+            <div class="font-semibold text-[var(--ap-primary)]">${r.email}</div>
+            <div class="text-[var(--ap-secondary)] text-sm">${r.archetype || '—'}</div>
+            <div class="text-[var(--ap-secondary)] text-sm">${r.primary_driver || '—'}</div>
+            <div class="text-[var(--ap-muted)] text-sm">${r.days_silent == null ? '—' : r.days_silent + 'd'}</div>
+            <div class="text-[var(--ap-muted)] text-sm">${r.morning_count_7d}m · ${r.evening_count_7d}e</div>`;
+          row.addEventListener('click', () => openBrief(r));
+          list.appendChild(row);
+        });
+      }
+      renderRoster('');
+      document.getElementById('roster-filter').addEventListener('input', (e) => renderRoster(e.target.value.toLowerCase()));
+
+      // Alerts
+      const al = document.getElementById('alerts-list');
+      if (!(data.alerts || []).length) al.innerHTML = '<p class="text-sm text-[var(--ap-muted)]">No active alerts. The Presence engine is running; patterns will surface here as they emerge.</p>';
+      (data.alerts || []).forEach(a => {
+        const row = document.createElement('div');
+        row.className = 'p-3 rounded-lg bg-[var(--ap-bg)] border border-[var(--ap-border)]';
+        row.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="font-semibold text-[var(--ap-primary)]">${a.alert_type.replace(/_/g,' ')}</div>
+            <div class="text-xs text-[var(--ap-muted)]">${new Date(a.detected_at).toLocaleString()}</div>
+          </div>
+          <div class="text-sm text-[var(--ap-secondary)]">${a.client_email}</div>
+          <div class="text-sm text-[var(--ap-secondary)] mt-1">${(a.payload && a.payload.summary) || ''}</div>`;
+        al.appendChild(row);
+      });
+
+      // Cohort viz
+      const arEl = document.getElementById('cohort-archetypes');
+      Object.entries(data.cohort.archetype_distribution || {}).sort((a,b)=>b[1]-a[1]).forEach(([k,v]) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between text-sm';
+        row.innerHTML = `<span>${k}</span><span class="font-semibold text-[var(--ap-accent)]">${v}</span>`;
+        arEl.appendChild(row);
+      });
+      const drEl = document.getElementById('cohort-drivers');
+      Object.entries(data.cohort.driver_activation || {}).sort((a,b)=>b[1]-a[1]).slice(0,8).forEach(([k,v]) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between text-sm';
+        row.innerHTML = `<span>${k}</span><span class="font-semibold text-[var(--ap-accent)]">${v}</span>`;
+        drEl.appendChild(row);
+      });
+
+      document.getElementById('export-cohort').addEventListener('click', () => {
+        window.print();
+      });
+
+      // Brief modal
+      const modal = document.getElementById('brief-modal');
+      document.getElementById('brief-close').addEventListener('click', () => modal.classList.remove('open'));
+      let activeClient = null;
+      async function openBrief(client) {
+        activeClient = client;
+        modal.classList.add('open');
+        document.getElementById('brief-client').textContent = client.email;
+        document.getElementById('brief-meta').textContent = `${client.archetype || '—'} · ${client.primary_driver || '—'} · ${client.days_silent} days silent`;
+        document.getElementById('brief-open-client').href = `/coach/client?email=${encodeURIComponent(client.email)}`;
+        document.getElementById('brief-body').textContent = 'Loading most recent brief…';
+        const g = await fetch('/api/coach-pre-session-brief?client_email=' + encodeURIComponent(client.email), { headers: { Authorization: 'Bearer ' + token } });
+        if (g.ok) {
+          const j = await g.json();
+          const latest = (j.briefs || [])[0];
+          if (latest) {
+            document.getElementById('brief-body').textContent = (latest.brief && latest.brief.summary) || '(no summary)';
+          } else {
+            document.getElementById('brief-body').textContent = 'No brief yet. Click "Generate brief now" for a fresh one.';
+          }
+        } else {
+          document.getElementById('brief-body').textContent = 'Could not load briefs.';
+        }
+      }
+      document.getElementById('brief-generate').addEventListener('click', async () => {
+        if (!activeClient) return;
+        document.getElementById('brief-body').textContent = 'Generating…';
+        const g = await fetch('/api/coach-pre-session-brief', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ client_email: activeClient.email, session_scheduled_at: new Date(Date.now() + 2*3600*1000).toISOString() }),
+        });
+        if (!g.ok) { document.getElementById('brief-body').textContent = 'Error generating brief.'; return; }
+        const j = await g.json();
+        document.getElementById('brief-body').textContent = (j.brief && j.brief.brief && j.brief.brief.summary) || '(no summary)';
+      });
+    })();
+  </script>
+</body>
+</html>

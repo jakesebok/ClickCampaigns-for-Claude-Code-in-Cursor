@@ -1,0 +1,22 @@
+{
+  "name": "Aligned Performance Portal",
+  "short_name": "VAPI",
+  "description": "VAPI — your Aligned Performance operating system. Morning alignment, evening integrity, longitudinal intelligence.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5F7FA",
+  "theme_color": "#0E1624",
+  "icons": [
+    { "src": "/images/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/images/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/images/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Morning check-in", "short_name": "Morning", "url": "/morning-checkin", "icons": [{ "src": "/images/favicon.svg", "sizes": "any" }] },
+    { "name": "Evening review", "short_name": "Evening", "url": "/evening-review", "icons": [{ "src": "/images/favicon.svg", "sizes": "any" }] },
+    { "name": "Dashboard", "short_name": "Dashboard", "url": "/dashboard", "icons": [{ "src": "/images/favicon.svg", "sizes": "any" }] }
+  ],
+  "categories": ["productivity", "health", "lifestyle"]
+}

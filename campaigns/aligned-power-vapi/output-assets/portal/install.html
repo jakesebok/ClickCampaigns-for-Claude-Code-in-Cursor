@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Install VAPI | Aligned Performance</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--ap-primary:#0E1624;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;}
+    body{font-family:'Cormorant Garamond',serif;background:var(--ap-bg);color:var(--ap-text);min-height:100vh;}
+    h1,h2{font-family:'Outfit',sans-serif;font-weight:800;}
+  </style>
+</head>
+<body class="min-h-screen antialiased flex items-center justify-center p-4">
+  <main class="max-w-lg w-full bg-white rounded-3xl p-8 shadow-xl border-l-4 border-[var(--ap-accent)]">
+    <h1 class="text-3xl mb-4">Add VAPI to your home screen</h1>
+    <div id="ios-steps" class="hidden">
+      <ol class="list-decimal list-inside space-y-2 text-slate-700">
+        <li>Tap the <strong>Share</strong> icon at the bottom of Safari.</li>
+        <li>Scroll and tap <strong>Add to Home Screen</strong>.</li>
+        <li>Tap <strong>Add</strong> in the top right corner.</li>
+      </ol>
+      <p class="text-sm text-slate-500 mt-4">On iPhone, the browser install prompt is manual. After install, VAPI behaves like a native app — push notifications, offline shell, one-tap open.</p>
+    </div>
+    <div id="android-steps" class="hidden">
+      <ol class="list-decimal list-inside space-y-2 text-slate-700">
+        <li>Tap the menu button in Chrome.</li>
+        <li>Choose <strong>Add to Home screen</strong> or <strong>Install app</strong>.</li>
+        <li>Confirm <strong>Install</strong>.</li>
+      </ol>
+      <button id="native-install" class="mt-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-2 px-5 rounded-lg">Install now</button>
+    </div>
+    <div id="desktop-steps" class="hidden">
+      <p class="text-slate-700">Click the install icon in your browser's address bar (look for a ⬇ in Chrome / Edge).</p>
+      <button id="native-install-desktop" class="mt-4 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-2 px-5 rounded-lg">Install now</button>
+    </div>
+    <a href="/dashboard" class="inline-block mt-6 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
+  </main>
+  <script src="/portal/install-prompt.js"></script>
+  <script>
+    (function(){
+      var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      var android = /Android/i.test(navigator.userAgent);
+      if (ios) document.getElementById('ios-steps').classList.remove('hidden');
+      else if (android) document.getElementById('android-steps').classList.remove('hidden');
+      else document.getElementById('desktop-steps').classList.remove('hidden');
+      ['native-install','native-install-desktop'].forEach(function(id){
+        var btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', function(){ window.APInstall && window.APInstall.showNative(); });
+      });
+    })();
+  </script>
+</body>
+</html>

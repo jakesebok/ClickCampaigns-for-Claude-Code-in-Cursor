@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared archetype | VAPI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg),color-mix(in srgb,#FF6B1A 6%,var(--ap-bg)));background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+  </style>
+</head>
+<body class="min-h-screen antialiased flex items-center justify-center px-4">
+  <main class="max-w-xl w-full text-center">
+    <div id="content" class="hidden bg-white rounded-3xl p-10 shadow-xl border-l-4 border-[var(--ap-accent)]">
+      <p class="uppercase text-xs tracking-widest font-semibold text-[var(--ap-accent)] mb-3">VAPI Archetype</p>
+      <h1 class="text-5xl text-[var(--ap-primary)] mb-3" id="arch">—</h1>
+      <p class="text-[var(--ap-secondary)] mb-6" id="drv">—</p>
+      <p class="text-sm text-[var(--ap-muted)] mb-8">This person completed the Aligned Performance Index and chose to share their archetype. Take the assessment yourself in 12 minutes.</p>
+      <a href="/assessment" class="inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold py-3 px-6 rounded-lg">Take the assessment</a>
+    </div>
+    <div id="loading" class="text-[var(--ap-muted)]">Loading…</div>
+  </main>
+  <script>
+    (async function(){
+      const parts = location.pathname.split('/');
+      const hash = parts[parts.length - 1];
+      const r = await fetch('/api/share-result?hash=' + encodeURIComponent(hash));
+      if (!r.ok) { document.getElementById('loading').textContent = 'Link not found or expired.'; return; }
+      const j = await r.json();
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+      document.getElementById('arch').textContent = (j.share && j.share.archetype_label) || 'Unassigned';
+      document.getElementById('drv').textContent = (j.share && j.share.primary_driver_label) ? 'Primary driver: ' + j.share.primary_driver_label : '';
+    })();
+  </script>
+</body>
+</html>

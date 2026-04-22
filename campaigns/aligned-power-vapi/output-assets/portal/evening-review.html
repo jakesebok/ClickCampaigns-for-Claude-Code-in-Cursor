@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="/portal/theme-init.js"></script>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Evening Integrity Review | Aligned Performance Portal</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0E1624">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <style>
+    :root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-bg:#F5F7FA;--ap-text:#0E1624;--ap-muted:#7A8FA8;--ap-border:#DDE3ED;--ap-surface:#ffffff;}
+    [data-theme="dark"]{--ap-primary:#e8eaf2;--ap-secondary:#b8c4d4;--ap-accent:#FF6B1A;--ap-bg:#161b26;--ap-text:#e8eaf2;--ap-muted:#8a9bb3;--ap-border:#2d3849;--ap-surface:#1e2438;}
+    [data-theme="dark"] .bg-white{background-color:var(--ap-surface)!important;}
+    body{font-family:'Cormorant Garamond',serif;font-weight:600;background:linear-gradient(165deg,var(--ap-bg) 0%,color-mix(in srgb,#0E1624 6%,var(--ap-bg)) 50%,color-mix(in srgb,#FF6B1A 4%,var(--ap-bg)) 100%);background-attachment:fixed;color:var(--ap-text);min-height:100vh;}
+    h1,h2,h3{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-0.02em;}
+    .card{box-shadow:0 1px 0 0 rgba(255,255,255,0.6) inset,0 4px 6px -1px rgba(0,0,0,0.04),0 14px 28px -8px rgba(14,22,36,0.12);border-left:3px solid var(--ap-accent);}
+    .daytype-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px;border:2px solid var(--ap-border);border-radius:14px;background:var(--ap-surface);cursor:pointer;transition:all .18s;text-align:left;}
+    .daytype-card:hover{border-color:var(--ap-accent);}
+    .daytype-card.selected{background:var(--ap-primary);color:#fff;border-color:var(--ap-primary);}
+    .daytype-card.selected .daytype-hint{color:#fff;opacity:.78;}
+    .daytype-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;}
+    .daytype-hint{font-size:12px;color:var(--ap-muted);}
+    .driver-chip{padding:6px 12px;border:2px solid var(--ap-border);border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;background:transparent;color:var(--ap-primary);}
+    .driver-chip.selected{background:var(--ap-primary);color:#fff;border-color:var(--ap-primary);}
+    .priority-pill{display:flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--ap-border);border-radius:14px;background:var(--ap-surface);cursor:pointer;}
+    .priority-pill.honored{background:color-mix(in srgb,#16a34a 12%,var(--ap-surface));border-color:#16a34a;}
+    .prompt-text{font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;line-height:1.4;color:var(--ap-primary);}
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b-2 border-[var(--ap-accent)]/30 bg-white/95 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/dashboard" class="inline-flex items-center gap-2.5 font-semibold text-[var(--ap-primary)]">
+        <img src="../images/favicon.svg" alt="" class="h-8 sm:h-9 w-auto" />
+        <span>Aligned Performance Portal</span>
+      </a>
+      <a href="/dashboard" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-10">
+    <div id="loading" class="text-center py-12 text-[var(--ap-muted)]">Loading…</div>
+
+    <div id="content" class="hidden">
+      <div class="mb-6">
+        <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-1">Evening integrity review</p>
+        <h1 class="text-3xl text-[var(--ap-primary)] mb-2">How honest do you want to be with yourself tonight?</h1>
+        <p class="text-[var(--ap-secondary)]">Sixty seconds. Process over outcome. Data, not a verdict.</p>
+      </div>
+
+      <form id="evening-form" class="space-y-6">
+        <!-- Step 1: day type -->
+        <div class="card bg-white rounded-2xl p-6">
+          <label class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Today was</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">Pick the shape that best fits. The reflection prompt follows.</p>
+          <div id="daytype-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- Step 2: prompt + response -->
+        <div id="prompt-card" class="card bg-white rounded-2xl p-6 hidden">
+          <p class="uppercase text-xs tracking-wider font-semibold text-[var(--ap-accent)] mb-2">Tonight's prompt</p>
+          <p id="prompt-text" class="prompt-text mb-4"></p>
+          <textarea id="response" maxlength="2000" rows="4" class="w-full px-4 py-3 rounded-lg border-2 border-[var(--ap-border)] bg-[var(--ap-surface)] text-[var(--ap-text)] focus:border-[var(--ap-accent)] focus:outline-none resize-y" placeholder="What comes first is probably right."></textarea>
+        </div>
+
+        <!-- Step 3: priorities honored (if morning check-in exists) -->
+        <div id="priorities-card" class="card bg-white rounded-2xl p-6 hidden">
+          <label class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Tap the priorities you actually honored</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">This morning you said you'd move these. Be accurate, not dramatic.</p>
+          <div id="priorities-list" class="flex flex-col gap-2"></div>
+        </div>
+
+        <!-- Step 4: drivers echoed -->
+        <div class="card bg-white rounded-2xl p-6">
+          <label class="block text-sm font-semibold text-[var(--ap-primary)] mb-1">Which driver had an opening?</label>
+          <p class="text-xs text-[var(--ap-muted)] mb-4">Optional. If one showed up, name it. Knowing is the first defense.</p>
+          <div id="driver-chips" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button type="submit" id="submit-btn" class="inline-flex items-center justify-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-base py-3 px-6 rounded-lg shadow-sm">Close today</button>
+          <a href="/dashboard" class="inline-flex items-center justify-center gap-2 text-[var(--ap-primary)] font-semibold py-3 px-6 rounded-lg border-2 border-[var(--ap-border)]">Not tonight</a>
+        </div>
+      </form>
+
+      <div id="success-state" class="hidden mt-8 text-center">
+        <p class="text-[var(--ap-primary)] font-semibold text-xl mb-1">Review closed.</p>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Tomorrow morning will be sharper because tonight was honest.</p>
+        <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Return to dashboard →</a>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    const DAY_TYPES = [
+      { id:'aligned',       label:'Aligned',       hint:'Honored your plan' },
+      { id:'drift',         label:'Drift',         hint:'A priority slipped' },
+      { id:'scratch',       label:'Scratch',       hint:'Ordinary, neither' },
+      { id:'win',           label:'Win',           hint:'Real forward motion' },
+      { id:'boundary',      label:'Boundary',      hint:'Said no to something' },
+      { id:'overextension', label:'Overextension', hint:'More than baseline' },
+      { id:'any',           label:'Just reflect',  hint:'General read' },
+    ];
+    const PROMPTS = {
+      aligned:       { id:'vapi-eve-01', text:"Today honored your plan. Name one thing this alignment did not prove about you." },
+      drift:         { id:'vapi-eve-02', text:"A priority slipped. Name the exact moment the justification arrived." },
+      scratch:       { id:'vapi-eve-03', text:"Ordinary day. Rich on practice. Name one thing you noticed this week that you missed last week." },
+      win:           { id:'vapi-eve-04', text:"A win. Was it conviction in the plan, or hope the plan would reward you?" },
+      any:           { id:'vapi-eve-05', text:"Your top driver had an opening today. Name the moment you felt it, or confirm it stayed quiet." },
+      boundary:      { id:'vapi-eve-06', text:"You said no to something today. Rule-based or feeling-based? Mark both valid. Name which." },
+      overextension: { id:'vapi-eve-07', text:"You took on more than baseline. What specifically about today earned the extra, in one sentence?" },
+    };
+    const DRIVERS = [
+      { key:'achievers_trap', name:"Achiever's Trap" }, { key:'escape_artist', name:'Escape Artist' },
+      { key:'pleasers_bind', name:"Pleaser's Bind" }, { key:'imposter_loop', name:'Imposter Loop' },
+      { key:'perfectionists_prison', name:"Perfectionist's Prison" }, { key:'protector', name:'Protector' },
+      { key:'martyr_complex', name:'Martyr Complex' }, { key:'fog', name:'The Fog' },
+      { key:'scattered_mind', name:'Scattered Mind' }, { key:'builders_gap', name:"Builder's Gap" },
+    ];
+
+    (async function() {
+      const configRes = await fetch('/api/config');
+      const configText = await configRes.text();
+      eval(configText);
+      const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+      const supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { window.location.href = '/login?redirect=' + encodeURIComponent('/evening-review'); return; }
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York';
+
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+
+      // Fetch today's morning check-in so we can show priorities
+      let todayMorning = null;
+      try {
+        const r = await fetch('/api/morning-checkin?tz=' + encodeURIComponent(tz), { headers: { 'Authorization': 'Bearer ' + session.access_token } });
+        if (r.ok) { const j = await r.json(); todayMorning = j.checkin; }
+      } catch {}
+
+      // Render day types
+      const grid = document.getElementById('daytype-grid');
+      let selectedDayType = null;
+      DAY_TYPES.forEach(d => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'daytype-card';
+        btn.innerHTML = `<span class="daytype-label">${d.label}</span><span class="daytype-hint">${d.hint}</span>`;
+        btn.addEventListener('click', () => {
+          Array.from(grid.children).forEach(c => c.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedDayType = d.id;
+          const p = PROMPTS[d.id] || PROMPTS.any;
+          document.getElementById('prompt-card').classList.remove('hidden');
+          document.getElementById('prompt-text').textContent = p.text;
+          document.getElementById('prompt-card').dataset.promptId = p.id;
+          if (todayMorning && Array.isArray(todayMorning.priorities) && todayMorning.priorities.length) {
+            document.getElementById('priorities-card').classList.remove('hidden');
+          }
+        });
+        grid.appendChild(btn);
+      });
+
+      // Render priorities list
+      if (todayMorning && Array.isArray(todayMorning.priorities)) {
+        const list = document.getElementById('priorities-list');
+        todayMorning.priorities.forEach((p, i) => {
+          const el = document.createElement('button');
+          el.type = 'button';
+          el.className = 'priority-pill';
+          el.dataset.idx = i;
+          el.innerHTML = `<i data-lucide="circle" class="w-4 h-4"></i><span>${escapeHtml(p.text || '')}</span>`;
+          el.addEventListener('click', () => {
+            el.classList.toggle('honored');
+            const icon = el.querySelector('i');
+            icon.setAttribute('data-lucide', el.classList.contains('honored') ? 'check-circle-2' : 'circle');
+            if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+          });
+          list.appendChild(el);
+        });
+        if (window.lucide && window.lucide.createIcons) window.lucide.createIcons();
+      }
+
+      // Driver chips
+      const chipsEl = document.getElementById('driver-chips');
+      const driversSelected = new Set();
+      DRIVERS.forEach(d => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'driver-chip';
+        btn.textContent = d.name;
+        btn.addEventListener('click', () => {
+          if (driversSelected.has(d.key)) { driversSelected.delete(d.key); btn.classList.remove('selected'); }
+          else { driversSelected.add(d.key); btn.classList.add('selected'); }
+        });
+        chipsEl.appendChild(btn);
+      });
+
+      document.getElementById('evening-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!selectedDayType) { alert("Pick what today was first."); return; }
+        const promptCard = document.getElementById('prompt-card');
+        const response = document.getElementById('response').value.trim();
+        const priorities_honored_count = Array.from(document.querySelectorAll('.priority-pill.honored')).length;
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
+        const r = await fetch('/api/evening-review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+          body: JSON.stringify({
+            day_type: selectedDayType,
+            prompt_id: promptCard.dataset.promptId,
+            response,
+            priorities_honored_count,
+            drivers_echoed: Array.from(driversSelected),
+            timezone: tz,
+          }),
+        });
+        if (!r.ok) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Close today';
+          alert('Something went sideways. Try again.');
+          return;
+        }
+        document.getElementById('evening-form').classList.add('hidden');
+        document.getElementById('success-state').classList.remove('hidden');
+      });
+
+      function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+    })();
+  </script>
+</body>
+</html>
