@@ -15,12 +15,25 @@
 - **Casual even when formal** — "Okay?" and "Right?" as rhetorical check-ins. "Let's be real." "Come on." Conversational rhythm even in polished content.
 
 ### Sentence Rhythm
-- **Short sentences for impact:** "You are enough. You are not broken. You are worthy of love exactly as you are."
+- **Short sentences for impact:** "You are enough. You are worthy of love exactly as you are."
 - **Lists of three:** "full of passion and love and purpose" / "mind, body, and heart" / "name it, feel it, grieve it"
 - **Rhetorical questions** to create engagement: "What if that pain isn't the problem? What if it's a compass?"
-- **Start sentences with "And"** — conversational flow, not stiff grammar
-- **Em dashes for emphasis** — "That pain—it's not a flaw, it's a signal."
-- **Parenthetical asides** — "(Okay?)" "(Right?)" "(I mean, come on.)"
+- **Start sentences with "And"** for conversational flow, not stiff grammar
+- **Parenthetical asides:** "(Okay?)" "(Right?)" "(I mean, come on.)"
+
+> Note on punctuation: em dashes are an anti-pattern (see below). Use periods, commas, colons, or parentheticals to carry the rhythm instead.
+
+---
+
+## Anti-Patterns: AI Tells to Avoid
+
+These show up in AI-generated writing and signal "stock language" to anyone who's been online lately, including coaches, operators, and the kind of founder you're trying to reach. Don't write them. When editing AI drafts, scrub them out before publishing.
+
+- **Em dashes (`—`).** AI's favorite rhythm crutch. Use a period, comma, colon, or parenthetical instead. Only acceptable when quoting a title that contains one.
+- **"You are not broken. You're just [aphorism]."** The paired structure is the tell, regardless of how the second clause is phrased ("you've just been surviving," "you're just learning to," "you've just forgotten who you are"). The standalone phrase "You are not broken" can still appear sparingly. The templated pairing is out.
+- **"White knuckling."** Overused self-help cliché. Use "forcing it," "grinding through," "willpower-only," or describe the actual texture (clenched jaw, held breath) instead.
+- **"Just" as a hollow softener.** "You're just learning." "We're just getting started." Often sounds humble but actually weakens the statement. Cut "just" and see if the sentence is stronger.
+- **Empty contrast pairs.** "Not X. Y." When Y is generic ("Not a flaw. A signal.") it lands as posture, not insight. Earn the contrast with specificity or rewrite without it.
 
 ---
 
@@ -30,7 +43,7 @@ Use these as touchstones. Jake returns to them across his work:
 
 | Phrase | Context |
 |--------|---------|
-| **You are not broken.** | Core affirmation; often paired with "You've just been surviving in a world that taught you to forget who you are." |
+| **You are not broken.** | Core affirmation. Use sparingly. Do not pair with a "you're just [X]" aphorism (see Anti-Patterns). |
 | **Pain is a compass.** | Reframe: discomfort points toward what you need |
 | **The war cry of your most authentic self** | Rebelling against a life that won't allow it to be free |
 | **It's a signal, not a flaw.** | That ache, that tension = internal GPS |
@@ -53,7 +66,7 @@ Jake relies on these recurring metaphors. Use them to maintain consistency:
 - Life as a quest, adventure, hero's journey
 - "Coming home," "the journey home," "return with the elixir"
 - Map, path, road, maze
-- "You're not broken, you're not behind—you just need to remember who you were before the world told you you needed to be someone else."
+- "Remembering who you were before the world told you to be someone else."
 
 ### Masks & Performance
 - Persona, mask, performing, pretending
@@ -158,6 +171,9 @@ Jake weaves in experts and stories. Use these when relevant:
 - Cold or clinical language
 - "Fix yourself," "improve yourself" (prefer "meet yourself," "find yourself")
 - Overused self-help clichés without the Jake reframe
+- "White knuckling" (see Anti-Patterns)
+- The "You are not broken / you're just [aphorism]" pairing (see Anti-Patterns)
+- Em dashes (see Anti-Patterns)
 
 ---
 
