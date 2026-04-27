@@ -160,6 +160,23 @@
         </div>
       </div>
 
+      <!-- 28-day sprint (My Plan) — for this client -->
+      <div class="bg-white rounded-2xl border border-[var(--ap-border)] section-card p-6 mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+          <div>
+            <h2 class="text-xl text-[var(--ap-primary)] mb-1 flex items-center gap-2">
+              <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+              28-day sprint (My Plan)
+            </h2>
+            <p class="text-sm text-[var(--ap-muted)]">This client&apos;s active plan. Regenerate from latest VAPI or edit coach context.</p>
+          </div>
+          <button type="button" id="client-sprint-refresh" class="text-sm font-semibold px-4 py-2 rounded-xl border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)]">Refresh</button>
+        </div>
+        <div id="client-sprint-loading" class="text-sm text-[var(--ap-muted)] py-4">Loading sprint…</div>
+        <div id="client-sprint-empty" class="hidden text-sm text-[var(--ap-muted)] py-4">No active sprint yet. The client gets a plan when they complete VAPI.</div>
+        <div id="client-sprint-list" class="hidden space-y-4"></div>
+      </div>
+
       <!-- VAPI assessments -->
       <div class="bg-white rounded-2xl border border-[var(--ap-border)] section-card overflow-hidden mb-8">
         <div class="p-6 border-b border-[var(--ap-border)]/60">
@@ -434,6 +451,83 @@
         } catch (e) {}
         btn.disabled = false;
       });
+
+      async function loadClientSprint() {
+        var loading = document.getElementById('client-sprint-loading');
+        var empty = document.getElementById('client-sprint-empty');
+        var list = document.getElementById('client-sprint-list');
+        if (loading) loading.classList.remove('hidden');
+        if (empty) empty.classList.add('hidden');
+        if (list) { list.classList.add('hidden'); list.innerHTML = ''; }
+        try {
+          var sr = await fetch('/api/coach-sprints', { headers: authHeader });
+          var sj = sr.ok ? await sr.json() : { sprints: [] };
+          var sprints = (sj.sprints || []).filter(function(s) {
+            return (s.user_email || '').trim().toLowerCase() === clientEmail;
+          });
+          if (loading) loading.classList.add('hidden');
+          if (!sprints.length) {
+            if (empty) empty.classList.remove('hidden');
+            return;
+          }
+          if (list) {
+            list.classList.remove('hidden');
+            list.innerHTML = sprints.map(function(s) {
+              var p = s.payload || {};
+              var title = p.title || 'Sprint';
+              var surf = s.primary_surface === 'alfred' ? 'ALFRED' : 'Portal';
+              return '<div class="rounded-xl border border-[var(--ap-border)] p-4 bg-[var(--ap-bg)]/30" data-sprint-id="' + escapeHtml(s.id) + '" data-client-email="' + escapeHtml(s.user_email) + '">' +
+                '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">' +
+                '<div><p class="font-semibold text-[var(--ap-primary)]">' + escapeHtml(title) + '</p>' +
+                '<p class="text-sm text-[var(--ap-secondary)]">Primary surface: <span class="text-[var(--ap-muted)]">' + surf + '</span></p></div>' +
+                '<button type="button" class="client-sprint-regen text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-lg bg-[var(--ap-accent)] text-white hover:opacity-90">Regenerate from latest VAPI</button></div>' +
+                '<label class="block mt-3 text-xs font-semibold text-[var(--ap-muted)]">Coach context (visible to client)</label>' +
+                '<textarea class="client-sprint-ctx w-full mt-1 px-3 py-2 rounded-lg border border-[var(--ap-border)] text-sm" rows="2">' + escapeHtml(s.coach_context || '') + '</textarea>' +
+                '<label class="block mt-2 text-xs font-semibold text-[var(--ap-muted)]">Private notes</label>' +
+                '<textarea class="client-sprint-priv w-full mt-1 px-3 py-2 rounded-lg border border-[var(--ap-border)] text-sm" rows="2">' + escapeHtml(s.coach_private_notes || '') + '</textarea>' +
+                '<button type="button" class="client-sprint-save mt-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Save sprint notes</button></div>';
+            }).join('');
+            list.querySelectorAll('.client-sprint-save').forEach(function(btn) {
+              btn.addEventListener('click', async function() {
+                var card = btn.closest('[data-sprint-id]');
+                if (!card) return;
+                var id = card.getAttribute('data-sprint-id');
+                var ctx = card.querySelector('.client-sprint-ctx');
+                var priv = card.querySelector('.client-sprint-priv');
+                btn.textContent = 'Saving…';
+                await fetch('/api/coach-sprint-save', {
+                  method: 'POST',
+                  headers: { ...authHeader, 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ sprintId: id, coach_context: ctx ? ctx.value : '', coach_private_notes: priv ? priv.value : '' }),
+                });
+                btn.textContent = 'Saved';
+                setTimeout(function() { btn.textContent = 'Save sprint notes'; }, 1500);
+              });
+            });
+            list.querySelectorAll('.client-sprint-regen').forEach(function(btn) {
+              btn.addEventListener('click', async function() {
+                btn.disabled = true;
+                btn.textContent = 'Regenerating…';
+                await fetch('/api/coach-sprint-regenerate', {
+                  method: 'POST',
+                  headers: { ...authHeader, 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email: clientEmail }),
+                });
+                btn.disabled = false;
+                btn.textContent = 'Regenerate from latest VAPI';
+                loadClientSprint();
+              });
+            });
+          }
+        } catch (e) {
+          if (loading) loading.classList.add('hidden');
+          if (empty) { empty.textContent = 'Could not load sprint.'; empty.classList.remove('hidden'); }
+        }
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+      loadClientSprint();
+      var clientSprintRefresh = document.getElementById('client-sprint-refresh');
+      if (clientSprintRefresh) clientSprintRefresh.addEventListener('click', loadClientSprint);
 
       // VAPI table (expandable rows with importance matrix)
       var vapiBody = document.getElementById('vapi-body');
