@@ -333,6 +333,38 @@
         });
         return normalized;
       }
+
+      // Returns { dimension, mode, response, signal, quickTaps } if the new
+      // deep-dive shape is present, else null. Used to switch render path.
+      function getWeeklyReviewDeepDive(review) {
+        if (typeof review === 'string') {
+          try { review = JSON.parse(review); } catch (e) { review = null; }
+        }
+        if (!review || typeof review !== 'object') return null;
+        var dd = review.deepDive;
+        if (!dd || !dd.dimension || !dd.response) return null;
+        return {
+          dimension: dd.dimension,
+          mode: dd.mode || null,
+          response: String(dd.response).trim(),
+          signal: dd.signal || null,
+          quickTaps: (review.quickTaps && typeof review.quickTaps === 'object') ? review.quickTaps : {}
+        };
+      }
+
+      var DEEP_DIVE_MODE_LABELS = {
+        witness: 'The Witness',
+        diagnostic: 'The Diagnostic',
+        future_self: 'The Future Self',
+        body: 'The Body',
+        tolerated: 'The Tolerated',
+        declaration: 'The Declaration'
+      };
+      var QUICK_TAP_LABELS = {
+        steady: 'Steady',
+        needs_attention: 'Needs attention',
+        cant_tell: "Can't tell"
+      };
       function escapeHtml(s) {
         if (s == null) return '';
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -625,12 +657,37 @@
             var s = typeof scores[k] === 'number' ? Math.round(scores[k]) : '—';
             return '<span class="inline-block mr-3"><strong>' + escapeHtml(labels[k] || k) + ':</strong> ' + s + '%</span>';
           }).join('');
-          var reflectionValues = getWeeklyReviewReflections(row.weekly_review || {});
-          var refsHtml = refKeys.map(function(k) {
-            var v = reflectionValues && reflectionValues[k] && String(reflectionValues[k]).trim();
-            if (!v) return '';
-            return '<div class="mb-2"><p class="text-xs font-semibold text-[var(--ap-muted)] mb-0.5">' + escapeHtml(refLabels[k] || k) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(v) + '</p></div>';
-          }).filter(Boolean).join('');
+          var deepDive = getWeeklyReviewDeepDive(row.weekly_review || {});
+          var reflectionsHtml = '';
+          if (deepDive) {
+            // New shape: one deep-dive + quick taps for the rest.
+            var dimLabel = refLabels[deepDive.dimension] || deepDive.dimension;
+            var modeLabel = DEEP_DIVE_MODE_LABELS[deepDive.mode] || '';
+            var deepDiveHtml = '<div class="mb-3 p-3 rounded-lg border border-[var(--ap-accent)]/40 bg-[var(--ap-accent)]/5">' +
+              '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-accent)] mb-1">Deep dive: ' + escapeHtml(dimLabel) + (modeLabel ? ' &middot; ' + escapeHtml(modeLabel) : '') + '</p>' +
+              '<p class="text-sm text-[var(--ap-secondary)] whitespace-pre-wrap">' + escapeHtml(deepDive.response) + '</p>' +
+              '</div>';
+            var quickTapsHtml = '';
+            if (deepDive.quickTaps && Object.keys(deepDive.quickTaps).length > 0) {
+              var quickTapItems = refKeys
+                .filter(function(k) { return k !== deepDive.dimension && deepDive.quickTaps[k]; })
+                .map(function(k) {
+                  return '<span class="inline-flex items-center gap-1 mr-3 mb-1 text-xs"><span class="font-semibold text-[var(--ap-muted)]">' + escapeHtml(refLabels[k] || k) + ':</span> <span class="text-[var(--ap-secondary)]">' + escapeHtml(QUICK_TAP_LABELS[deepDive.quickTaps[k]] || deepDive.quickTaps[k]) + '</span></span>';
+                });
+              if (quickTapItems.length > 0) {
+                quickTapsHtml = '<div class="mb-2"><p class="text-xs font-semibold text-[var(--ap-muted)] mb-1">Quick check on the rest</p><div>' + quickTapItems.join('') + '</div></div>';
+              }
+            }
+            reflectionsHtml = deepDiveHtml + quickTapsHtml;
+          } else {
+            // Legacy shape: 6 reflections.
+            var reflectionValues = getWeeklyReviewReflections(row.weekly_review || {});
+            reflectionsHtml = refKeys.map(function(k) {
+              var v = reflectionValues && reflectionValues[k] && String(reflectionValues[k]).trim();
+              if (!v) return '';
+              return '<div class="mb-2"><p class="text-xs font-semibold text-[var(--ap-muted)] mb-0.5">' + escapeHtml(refLabels[k] || k) + '</p><p class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(v) + '</p></div>';
+            }).filter(Boolean).join('');
+          }
           return '<tr class="sixc-row" data-detail-id="' + detailId + '">' +
             '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + formatDate(row.created_at) + '</td>' +
             '<td class="px-4 py-3 text-sm text-[var(--ap-secondary)]">' + escapeHtml(oneThingShort) + '</td>' +
@@ -641,7 +698,7 @@
             '<div class="space-y-4 text-sm">' +
             '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">6C Scores</p><p class="text-[var(--ap-secondary)]">' + scoresHtml + '</p></div>' +
             (oneThing !== '—' ? '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Vital Action to improve</p><p class="text-[var(--ap-secondary)]">' + escapeHtml(oneThing) + '</p></div>' : '') +
-            (refsHtml ? '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Reflections</p>' + refsHtml + '</div>' : '') +
+            (reflectionsHtml ? '<div><p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-1">Reflection</p>' + reflectionsHtml + '</div>' : '') +
             '</div></td></tr>';
         }).join('');
         sixcBody.querySelectorAll('.sixc-row').forEach(function(tr) {
