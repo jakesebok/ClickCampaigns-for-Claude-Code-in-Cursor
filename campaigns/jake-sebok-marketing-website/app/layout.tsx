@@ -18,17 +18,38 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakesebok.com"),
-  title: "Jake Sebok — Values-Aligned Performance Coaching for Entrepreneurs",
+  title: "Growth and Performance Coaching for Entrepreneurs | Jake Sebok",
   description:
-    "Help entrepreneurs who feel trapped by their businesses rediscover their vision and build something sustainable, values-driven, and fully alive.",
+    "Growth and performance coaching with Jake Sebok. For founders who want clearer decisions, stronger execution, and a business that supports the life it was meant to fund. Start with the free VAPI™ assessment.",
+  keywords: [
+    "growth and performance coaching",
+    "Jake Sebok",
+    "values-aligned performance",
+    "executive coaching",
+    "entrepreneur coaching",
+    "founder coaching",
+    "VAPI",
+    "Aligned Power Program",
+  ],
+  authors: [{ name: "Jake Sebok" }],
+  creator: "Jake Sebok",
+  publisher: "Jake Sebok",
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
-    title: "Jake Sebok — Values-Aligned Performance Coaching",
+    title: "Growth and Performance Coaching for Entrepreneurs | Jake Sebok",
     description:
-      "Build a business that's an extension of who you are, not a cage you built around yourself.",
+      "Build a business that scales your income, your impact, and your life. Growth and performance coaching with Jake Sebok.",
     url: "https://jakesebok.com",
+    siteName: "Jake Sebok",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Growth and Performance Coaching for Entrepreneurs | Jake Sebok",
+    description:
+      "For founders who want more growth without shrinking the rest of life to make it happen.",
   },
 };
 

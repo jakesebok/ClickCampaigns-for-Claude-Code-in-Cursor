@@ -1,0 +1,89 @@
+{
+  "firstName": "Avery",
+  "lastName": "Chen",
+  "email": "preview@intake.alignedpower.coach",
+  "overall": 6.2,
+  "overallTier": "Functional",
+  "arenaScores": {
+    "Personal": 6.7,
+    "Relationships": 6.4,
+    "Business": 5.7
+  },
+  "arenaTiers": {
+    "Personal": "Functional",
+    "Relationships": "Functional",
+    "Business": "Functional"
+  },
+  "domainScores": {
+    "PH": 6.8,
+    "IA": 6.9,
+    "ME": 6.6,
+    "AF": 6.5,
+    "RS": 6.5,
+    "FA": 6.4,
+    "CO": 6.3,
+    "WI": 6.4,
+    "VS": 6.0,
+    "EX": 4.7,
+    "OH": 4.4,
+    "EC": 6.7
+  },
+  "domains": [
+    { "code": "PH", "domain": "Physical Health", "arena": "Personal", "score": 6.8, "tier": "Functional" },
+    { "code": "IA", "domain": "Inner Alignment", "arena": "Personal", "score": 6.9, "tier": "Functional" },
+    { "code": "ME", "domain": "Mental / Emotional Health", "arena": "Personal", "score": 6.6, "tier": "Functional" },
+    { "code": "AF", "domain": "Attention & Focus", "arena": "Personal", "score": 6.5, "tier": "Functional" },
+    { "code": "RS", "domain": "Relationship to Self", "arena": "Relationships", "score": 6.5, "tier": "Functional" },
+    { "code": "FA", "domain": "Family", "arena": "Relationships", "score": 6.4, "tier": "Functional" },
+    { "code": "CO", "domain": "Community", "arena": "Relationships", "score": 6.3, "tier": "Functional" },
+    { "code": "WI", "domain": "World / Impact", "arena": "Relationships", "score": 6.4, "tier": "Functional" },
+    { "code": "VS", "domain": "Vision / Strategy", "arena": "Business", "score": 6.0, "tier": "Functional" },
+    { "code": "EX", "domain": "Execution", "arena": "Business", "score": 4.7, "tier": "Below the Line" },
+    { "code": "OH", "domain": "Operational Health", "arena": "Business", "score": 4.4, "tier": "Below the Line" },
+    { "code": "EC", "domain": "Ecology", "arena": "Business", "score": 6.7, "tier": "Functional" }
+  ],
+  "top3": [
+    { "code": "IA", "domain": "Inner Alignment", "arena": "Personal", "score": 6.9, "tier": "Functional" },
+    { "code": "PH", "domain": "Physical Health", "arena": "Personal", "score": 6.8, "tier": "Functional" },
+    { "code": "EC", "domain": "Ecology", "arena": "Business", "score": 6.7, "tier": "Functional" }
+  ],
+  "bottom3": [
+    { "code": "OH", "domain": "Operational Health", "arena": "Business", "score": 4.4, "tier": "Below the Line" },
+    { "code": "EX", "domain": "Execution", "arena": "Business", "score": 4.7, "tier": "Below the Line" },
+    { "code": "VS", "domain": "Vision / Strategy", "arena": "Business", "score": 6.0, "tier": "Functional" }
+  ],
+  "acquiescence": false,
+  "allResponses": {},
+  "assignedDriver": "The Builder's Gap",
+  "secondaryDriver": null,
+  "secondaryDriverScore": null,
+  "topDriverScore": 12,
+  "secondDriverScore": 4,
+  "primaryToSecondaryMargin": 8,
+  "driverState": "dysfunction_driver",
+  "driverFallbackType": "none",
+  "driverScores": {
+    "The Achiever's Trap": 2,
+    "The Escape Artist": 1,
+    "The Pleaser's Bind": 0,
+    "The Imposter Loop": 1,
+    "The Perfectionist's Prison": 0,
+    "The Protector": 2,
+    "The Martyr Complex": 0,
+    "The Fog": 1,
+    "The Scattered Mind": 0,
+    "The Builder's Gap": 12
+  },
+  "driverGates": {
+    "The Achiever's Trap": false,
+    "The Escape Artist": false,
+    "The Pleaser's Bind": false,
+    "The Imposter Loop": false,
+    "The Perfectionist's Prison": false,
+    "The Protector": false,
+    "The Martyr Complex": false,
+    "The Fog": false,
+    "The Scattered Mind": false,
+    "The Builder's Gap": true
+  }
+}

@@ -15,6 +15,16 @@ const nextConfig = {
       { source: "/assessment/archetypes", destination: "/vapi/vapi-archetype-library.html" },
     ];
   },
+  async redirects() {
+    return [
+      { source: "/work-with-me/freedom-workshop", destination: "/", permanent: true },
+      { source: "/work-with-me/freedom-builders", destination: "/", permanent: true },
+      { source: "/work-with-me/strategic-intensives", destination: "/", permanent: true },
+      { source: "/work-with-me/aligned-leaders", destination: "/", permanent: true },
+      { source: "/homepage", destination: "/", permanent: true },
+      { source: "/homepage-2", destination: "/", permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

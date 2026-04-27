@@ -280,7 +280,7 @@ export default function WhoIsAlfredPage() {
                     </a>
                   </div>
                   <p className="text-ap-primary text-sm font-semibold mt-4 max-w-xl text-center md:text-left">
-                    {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts. Intensive and Accelerator
+                    {ALFRED_APP_URL.replace("https://", "")} · 7-day trial for new accounts. Aligned Power Program
                     clients get extended access.
                   </p>
                 </div>
@@ -800,13 +800,13 @@ export default function WhoIsAlfredPage() {
           <p className="text-sm text-ap-muted mt-4 max-w-[760px] leading-relaxed">
             If you come through the{" "}
             <Link
-              href="/work-with-me/strategic-intensives"
+              href="/work-with-me/apply"
               className="text-gradient-accent font-semibold hover:underline"
             >
-              Strategic Alignment Intensive
-            </Link>{" "}
-            or the Accelerator, ALFRED can coach from an even richer picture of your world. The simple promise stays
-            the same: he keeps what matters close when the week gets noisy.
+              Aligned Power Program
+            </Link>
+            , ALFRED can coach from an even richer picture of your world. The simple promise stays the same: he keeps
+            what matters close when the week gets noisy.
           </p>
         </div>
       </section>
@@ -867,9 +867,9 @@ export default function WhoIsAlfredPage() {
                   </p>
                 </li>
                 <li className="rounded-2xl border border-ap-border bg-white px-4 py-4 sm:px-5 sm:py-5 shadow-[0_0_0_1px_rgba(255,107,26,0.12),0_18px_40px_-28px_rgba(255,107,26,0.35)] sm:col-span-1">
-                  <p className="font-outfit font-bold text-sm text-gradient-accent mb-1.5">Programs include extended access</p>
+                  <p className="font-outfit font-bold text-sm text-gradient-accent mb-1.5">Program access included</p>
                   <p className="text-xs sm:text-[13px] text-ap-mid font-medium leading-relaxed">
-                    Intensive and Accelerator clients get longer trial access through program codes, so the app supports
+                    Aligned Power Program clients get longer trial access through program codes, so the app supports
                     what you build live.
                   </p>
                 </li>
@@ -1008,19 +1008,15 @@ export default function WhoIsAlfredPage() {
               If you like word-nerd trivia, the roots point to wise counsel. That&apos;s the point.
             </p>
             <p className="text-ap-mid font-medium mb-8">
-              Not ready yet? Start free with{" "}
-              <Link href="/work-with-me/freedom-builders" className="text-gradient-accent font-semibold hover:underline">
-                Freedom Builders and the Aligned Freedom Course
-              </Link>
-              , join a{" "}
-              <Link href="/work-with-me/freedom-workshop" className="text-gradient-accent font-semibold hover:underline">
-                monthly workshop
-              </Link>
-              , or{" "}
-              <Link href="/work-with-me/apply" className="text-gradient-accent font-semibold hover:underline">
-                apply to the Accelerator
+              Not ready yet? Start free with the{" "}
+              <Link href="/assessment" className="text-gradient-accent font-semibold hover:underline">
+                VAPI&trade; Assessment
               </Link>{" "}
-              when you want the full program.
+              to see where you stand, or{" "}
+              <Link href="/work-with-me/apply" className="text-gradient-accent font-semibold hover:underline">
+                apply for the Aligned Power Program
+              </Link>{" "}
+              when you want 1:1 coaching alongside the app.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
               <a

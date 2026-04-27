@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loading VAPI™ example…</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 2rem; background: #F5F7FA; color: #0E1624; text-align: center; }
+    p { max-width: 20rem; margin: 0 auto; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <p>Loading the real VAPI™ results page with sample data…</p>
+  <script>
+    fetch('/vapi/build-intake-demo-results.json')
+      .then(function (r) { return r.json(); })
+      .then(function (demo) {
+        try {
+          sessionStorage.setItem('vapiResults', JSON.stringify(demo));
+          sessionStorage.setItem('vapi_results_email', demo.email || '');
+        } catch (e) {}
+        window.location.replace('/vapi/vapi-results.html?vapiDemo=1');
+      })
+      .catch(function () {
+        document.body.innerHTML = '<p>Could not load the example. Try again or take the live VAPI™ assessment.</p>';
+      });
+  </script>
+</body>
+</html>

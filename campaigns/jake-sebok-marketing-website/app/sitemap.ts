@@ -12,11 +12,7 @@ const paths: { path: string; changeFrequency: MetadataRoute.Sitemap[0]["changeFr
   { path: "/client-stories", changeFrequency: "monthly", priority: 0.8 },
   { path: "/testimonials", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/work-with-me/strategic-intensives", changeFrequency: "monthly", priority: 0.85 },
-  { path: "/work-with-me/apply", changeFrequency: "monthly", priority: 0.85 },
-  { path: "/work-with-me/freedom-workshop", changeFrequency: "monthly", priority: 0.75 },
-  { path: "/work-with-me/freedom-builders", changeFrequency: "monthly", priority: 0.75 },
-  { path: "/work-with-me/aligned-leaders", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/work-with-me/apply", changeFrequency: "monthly", priority: 0.9 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
 ];

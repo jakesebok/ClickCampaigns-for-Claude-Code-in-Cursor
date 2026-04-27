@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/images/vapi/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your VAPI™ Results | Jake Sebok</title>
+  <meta name="description" content="Your VAPI™ results: Founder Archetype, pattern driver, alignment scores, priority matrix, and personalized 28-day My Plan (portal or ALFRED with matching email).">
+  <meta property="og:title" content="Your VAPI™ Results | Jake Sebok">
+  <meta property="og:description" content="Archetype, pattern driver, scores, priorities, and 28-day My Plan from your VAPI™ assessment.">
+  <meta property="og:image" content="https://jakesebok.com/images/vapi/og-landing.png">
+  <meta property="og:url" content="https://jakesebok.com/assessment/results">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your VAPI™ Results | Jake Sebok">
+  <meta name="twitter:description" content="Archetype, pattern driver, scores, and your 28-day My Plan from VAPI™.">
+  <meta name="twitter:image" content="https://jakesebok.com/images/vapi/og-landing.png">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(window.location.search);
+        if (q.get("vapiDemo") === "1") {
+          document.documentElement.classList.add("vapi-demo-embed");
+          window.__VAPI_DEMO_EMBED__ = true;
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => lucide.createIcons());</script>
+  <link rel="stylesheet" href="/css/logo-on-dark-glow.css">
+  <script src="/vapi/vapi-results-interpretations.js"></script>
+  <script src="/vapi/vapi-archetypes.js"></script>
+  <script src="/vapi/vapi-drivers.js"></script>
+  <style>
+    :root {
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-accent-2: #FF9F6B;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
+    }
+    .text-gradient-accent {
+      background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .archetype-details[open] .archetype-chevron { transform: rotate(180deg); }
+    .driver-details[open] .driver-chevron { transform: rotate(180deg); }
+    /* Screen only: larger body text for readability (print view unchanged) */
+    @media screen {
+      #results-content { font-size: 17px; }
+      #results-content .text-sm { font-size: 15px; }
+      #results-content p { font-size: 15px; }
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; font-weight: 400; background: var(--ap-bg); color: var(--ap-text); }
+    /* Intake modal embed: visual demo only — block outbound links; wheel stays interactive (SVG + buttons) */
+    html.vapi-demo-embed #results-content a[href],
+    html.vapi-demo-embed footer a[href],
+    html.vapi-demo-embed header a[href],
+    html.vapi-demo-embed #portal-sticky-banner a[href],
+    html.vapi-demo-embed #continue-journey a[href],
+    html.vapi-demo-embed #driver-library-gate a[href],
+    html.vapi-demo-embed #archetype-library-gate a[href] {
+      pointer-events: none !important;
+      cursor: default !important;
+      opacity: 0.55;
+    }
+    html.vapi-demo-embed.vapi-demo-spotlight-active .vapi-demo-spotlight {
+      position: relative;
+      z-index: 60;
+      border-radius: 14px;
+      box-shadow: 0 0 0 3px rgba(255, 107, 26, 0.95), 0 0 0 9999px rgba(14, 22, 36, 0.52);
+      transition: box-shadow 0.35s ease;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    .lightbox-print-content .alignment-glance-inner h2 { font-size: 0.75em; }
+    .lightbox-print-content .alignment-glance-inner > p { font-size: 0.75em !important; }
+    .print-only { display: none; }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { padding-bottom: 2.5rem; }
+      .driver-section { display: none !important; }
+      .driver-print-shell {
+        display: block !important;
+        background: #fff !important;
+        border: 1px solid var(--ap-border);
+        border-radius: 1.2rem;
+        box-shadow: none !important;
+        overflow: hidden;
+      }
+      .driver-print-page {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        break-after: page;
+        page-break-after: always;
+        min-height: 8.55in;
+      }
+      .driver-print-first {
+        break-before: page;
+        page-break-before: always;
+      }
+      .driver-print-inner {
+        padding: 1rem 1.15rem 1.2rem;
+        min-height: 8.55in;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .driver-print-eyebrow {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        margin: 0;
+      }
+      .driver-print-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      .driver-print-icon,
+      .driver-print-secondary-icon {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .driver-print-icon { width: 3.6rem; height: 3.6rem; }
+      .driver-print-secondary-icon { width: 2.35rem; height: 2.35rem; border-radius: 0.7rem; }
+      .driver-print-title,
+      .driver-print-continued-title {
+        font-size: 1.9rem !important;
+        line-height: 1.05 !important;
+        margin: 0;
+        color: var(--ap-primary);
+      }
+      .driver-print-continued-title { margin-bottom: 0.25rem; }
+      .driver-print-core-fear,
+      .driver-print-tagline,
+      .driver-print-body,
+      .driver-print-detail-body,
+      .driver-print-note,
+      .driver-print-secondary-belief,
+      .driver-print-secondary-tagline {
+        font-family: "Outfit", sans-serif;
+        color: var(--ap-secondary);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .driver-print-core-fear,
+      .driver-print-tagline { font-size: 0.95rem !important; }
+      .driver-print-core-fear span { color: var(--ap-primary); font-weight: 600; }
+      .driver-print-tagline { font-style: italic; }
+      .driver-print-body,
+      .driver-print-detail-body { font-size: 0.99rem !important; }
+      .driver-print-quote {
+        margin: 0;
+        padding: 0.8rem 0.95rem;
+        border-radius: 0.9rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.45rem !important;
+        line-height: 1.2 !important;
+        font-weight: 700;
+        color: var(--ap-primary);
+      }
+      .driver-print-strength {
+        display: inline-flex;
+        width: fit-content;
+        border: 1px solid var(--ap-border);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .driver-print-detail {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        padding: 0.8rem 0.95rem;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .driver-print-detail-title,
+      .driver-print-secondary-label,
+      .driver-print-secondary-name {
+        margin: 0 0 0.35rem 0;
+        font-family: "Outfit", sans-serif;
+        color: var(--ap-primary);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+      .driver-print-note {
+        margin-top: auto;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--ap-border);
+        font-size: 0.85rem !important;
+      }
+      .driver-print-secondary {
+        border: 1px solid var(--ap-border);
+        border-radius: 0.9rem;
+        padding: 0.8rem 0.95rem;
+      }
+      .driver-print-secondary-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .driver-print-secondary-belief {
+        font-size: 0.9rem !important;
+        font-style: italic;
+      }
+      .driver-print-secondary-tagline {
+        font-size: 0.88rem !important;
+        margin-top: 0.2rem;
+      }
+
+      /* Prevent individual cards from splitting mid-card (excludes priority matrix — handled separately) */
+      #results-content .rounded-xl:not(.pm-quadrant),
+      #results-content .rounded-lg:not(.pm-card),
+      #results-content .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Hero block: title flows directly into the wheel — no break between them */
+      .print-hero-block .results-title-block { break-after: avoid; page-break-after: avoid; margin-bottom: 0.5rem !important; }
+      .print-hero-block .results-title-block h1 { font-size: 1.75rem !important; line-height: 1.2; }
+      .print-hero-block .results-title-block p { font-size: 0.7rem !important; margin-top: 0.25rem !important; margin-bottom: 0 !important; }
+
+      /* Section headings stay glued to whatever follows them */
+      #results-content h2 { break-after: avoid; page-break-after: avoid; }
+      #results-content h3 { break-after: avoid; page-break-after: avoid; }
+
+      /* ─── Priority matrix ─── */
+      /* Section heading + intro paragraph stay with what follows */
+      #results-content h2.where-to-focus { break-after: avoid; page-break-after: avoid; }
+      #results-content p.where-to-focus-intro { break-after: avoid; page-break-after: avoid; }
+
+      /* Each quadrant block: header stays glued to the first card */
+      .pm-quadrant { break-inside: auto; page-break-inside: auto; }
+      .pm-quadrant-header { break-after: avoid; page-break-after: avoid; }
+
+      /* Switch card layout from flex-wrap to single-column stacking for print */
+      .pm-cards-wrap { display: block !important; }
+      .pm-card { display: block !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important; flex: none !important; break-inside: avoid; page-break-inside: avoid; margin-bottom: 0.5rem; }
+      .pm-card:last-child { margin-bottom: 0; }
+
+      /* Force all accordion bodies open, hide chevrons */
+      .pm-card-body { display: block !important; }
+      .pm-card-toggle { pointer-events: none; }
+      .pm-chev { display: none !important; }
+
+      /* Quadrant container: don't try to keep the whole thing together (may be many cards) */
+      /* Instead, keep heading+first card together, then allow natural page breaks after each card */
+      .pm-quadrant + .pm-quadrant { margin-top: 1rem; }
+
+      /* "Worth Examining" flag box */
+      .pm-flag-box { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Remove overflow clipping so card bodies can't be cut */
+      .pm-card { overflow: visible !important; }
+
+      /* Add breathing room between card body text and its container top */
+      .pm-card-body { padding-top: 0.5rem !important; }
+
+      /* Top 3 strengths + Priority focus areas: start on page 2, with header */
+      .print-strengths-focus-section { break-before: page; page-break-before: always; }
+      .print-strengths-focus-header { font-size: 1.25rem !important; font-weight: 700; color: var(--ap-primary); margin: 0 0 0.75rem 0 !important; }
+      .print-strengths-focus { display: grid !important; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .print-strengths-focus .rounded-lg { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Domain detail: every arena group starts on its own fresh page */
+      .print-arena-group { break-before: page; page-break-before: always; break-inside: auto; }
+      /* Personal is the first arena — it still gets its own page (starts after scores/matrix) */
+      .print-first-arena { break-before: page; page-break-before: always; }
+      /* Arena h3 heading always stays with the first card below it */
+      .print-arena-group h3 { break-after: avoid; page-break-after: avoid; }
+      /* Individual domain cards inside an arena can break across pages if needed */
+      .print-arena-group .rounded-lg { break-inside: avoid; page-break-inside: avoid; padding: 1.25rem !important; }
+
+      .enlarge-hint { display: none !important; }
+      .print-report-header { margin-bottom: 0.25rem; padding-bottom: 0.25rem; border-bottom: none; font-size: 0.7rem; color: var(--ap-secondary); line-height: 1.2; }
+      .print-report-header strong { color: var(--ap-primary); font-weight: 600; }
+      .print-page-footer { position: fixed; bottom: 0; left: 0; right: 0; height: 2.25rem; display: flex !important; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.65rem; color: var(--ap-muted); background: #fff; border-top: 1px solid var(--ap-border); padding: 0 0.5rem; }
+      .print-page-footer img { height: 1.25rem; width: auto; object-fit: contain; flex-shrink: 0; vertical-align: middle; }
+      .print-page-footer span { flex: 0 1 auto; line-height: 1.2; }
+    }
+    @page { size: letter; margin: 0.525in 0.75in; }
+    #results-breakdown-wheel-container.breakdown-wheel-container--zoomed { overflow: hidden; border-radius: 50%; }
+    .wheel-segment { transition: opacity 0.35s ease-out; cursor: pointer; }
+    .wheel-domain-label { transition: opacity 0.4s ease-out; }
+    .results-breakdown-metric-btn.rbm-selected:hover { background: var(--ap-bg) !important; color: var(--ap-primary) !important; }
+    /* Priority matrix: cards align to top so collapsed cards shrink to header height */
+    .pm-cards-wrap { align-items: flex-start; }
+    .pm-card { align-self: flex-start; }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="border-b border-[var(--ap-border)] bg-white/80 backdrop-blur-sm sm:sticky top-0 z-[100] no-print">
+    <!-- Portal CTA banner — shown for everyone; content varies by login state -->
+    <div id="portal-sticky-banner" class="hidden w-full bg-[var(--ap-accent)] text-white">
+      <div id="portal-banner-inner" class="max-w-4xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p class="text-xs font-medium text-white/90 text-center sm:text-left">Save your results and track your progress over time. It&apos;s free.</p>
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a id="portal-banner-signup" href="https://portal.alignedpower.coach/signup" class="text-xs font-bold bg-white text-[var(--ap-accent)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap">Create free account</a>
+          <a id="portal-banner-login" href="https://portal.alignedpower.coach/login" class="text-xs font-semibold text-white/70 hover:text-white underline underline-offset-2 transition-colors whitespace-nowrap">Log in</a>
+        </div>
+      </div>
+    </div>
+    <!-- /Portal CTA banner -->
+    <div class="max-w-4xl mx-auto px-4 pt-6 pb-5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <span id="results-back-admin" class="hidden"><a href="/admin" class="text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] no-print">← Back to Admin</a></span>
+        <a href="/" id="results-logo-link" class="flex items-center focus:outline-none [&_img]:block [&_img]:bg-transparent">
+          <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok — Values-Aligned Performance Indicator™" class="h-14 sm:h-16 w-auto bg-transparent" />
+        </a>
+      </div>
+      <div class="flex flex-col items-end gap-0.5">
+        <button type="button" id="vapi-demo-target-pdf" onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          Download / Print results
+        </button>
+        <span class="text-xs text-[var(--ap-muted)] hidden sm:inline">Tip: Turn off &ldquo;Headers and footers&rdquo; in the print dialog for a clean PDF.</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-4 py-10 sm:py-14">
+    <div class="print-only print-page-footer" aria-hidden="true">
+      <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" />
+      <span>Values-Aligned Performance Indicator™ (VAPI™). © 2026 Jake Sebok. All rights reserved.</span>
+    </div>
+    <div id="results-content"></div>
+
+    <div id="continue-journey" class="space-y-6 no-print mt-12 scroll-mt-24">
+      <h2 class="text-2xl text-[var(--ap-primary)]">Continue your alignment journey</h2>
+      <div class="rounded-2xl border-2 border-[var(--ap-accent)] bg-gradient-to-br from-[var(--ap-accent)]/15 to-[var(--ap-primary)]/5 shadow-lg p-6 sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-2">Next step</p>
+        <h3 class="text-xl sm:text-2xl text-[var(--ap-primary)] mb-3">Turn this snapshot into a daily coach — ALFRED</h3>
+        <p class="text-[var(--ap-secondary)] text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">You&apos;ve seen your scores and patterns. <strong class="text-[var(--ap-primary)]">Aligned Freedom Coach (ALFRED)</strong> is the app where that picture meets your week—VAPI™ context, Founder Archetype, pattern driver, your 28-day My Plan, 6Cs, and Vital Actions (same email), so you&apos;re not guessing alone after you close this tab.</p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+          <a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-[100px] bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-6 py-3.5 transition-colors shadow-md shadow-[var(--ap-accent)]/20">
+            Open ALFRED
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+          <a href="https://jakesebok.com/who-is-alfred" class="inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[var(--ap-primary)]/25 hover:border-[var(--ap-accent)] text-[var(--ap-primary)] font-semibold text-sm px-6 py-3.5 transition-colors">What is ALFRED?</a>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Free Aligned Freedom course</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Put names to your gaps, diagnose what’s really going on, and see what it’s costing you and what’s possible when you stop staying stuck. Your VAPI results are your baseline; the course builds from here.</p>
+        <p class="text-xs text-[var(--ap-muted)] mb-4">If you’re joining the course from somewhere else, take the VAPI first so you have your baseline, then start the course.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Get free access <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Join the Aligned Entrepreneurs Community</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Connect with other values-driven entrepreneurs, get support, and stay accountable as you grow.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Join the community <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-lg p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Work with Jake Sebok</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Ready for deeper support? Our coaching programs and workshops help you move from clarity to embodied execution.</p>
+        <a href="#" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-secondary)]">Learn about coaching & workshops <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">
+        <h3 class="text-xl text-[var(--ap-primary)] mb-2">Your results, saved</h3>
+        <p class="text-[var(--ap-secondary)] text-sm mb-4">Log in to your portal to see this assessment and your history over time, all in one place.</p>
+        <a href="https://portal.alignedpower.coach/login" id="go-to-portal-btn" class="inline-flex items-center gap-2 font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Go to my portal <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+  </main>
+
+  <div id="driver-library-gate" class="hidden fixed inset-0 z-[200]">
+    <div id="driver-library-gate-backdrop" class="absolute inset-0 bg-[rgba(14,22,36,0.72)] backdrop-blur-sm"></div>
+    <div class="relative flex min-h-full items-center justify-center px-4 py-10">
+      <div class="w-full max-w-xl rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-2xl sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Driver Library</p>
+            <h2 class="mt-2 text-3xl text-[var(--ap-primary)]">Unlock the Full Driver Library</h2>
+          </div>
+          <button type="button" id="driver-library-gate-close" class="rounded-full p-2 text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]" aria-label="Close">
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed text-[var(--ap-secondary)]">
+          <p>The Driver Library is an in-depth exploration of all 10 internal patterns that drive founder behavior. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each pattern connects to the others.</p>
+          <p>Create your free portal account to access the full library, save your VAPI results, and track your progress over time.</p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a id="driver-library-gate-signup" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Fdriver-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+          <a id="driver-library-gate-login" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Fdriver-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
+        </div>
+        <button type="button" id="driver-library-gate-dismiss" class="mt-5 text-sm font-medium text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="archetype-library-gate" class="hidden fixed inset-0 z-[200]">
+    <div id="archetype-library-gate-backdrop" class="absolute inset-0 bg-[rgba(14,22,36,0.72)] backdrop-blur-sm"></div>
+    <div class="relative flex min-h-full items-center justify-center px-4 py-10">
+      <div class="w-full max-w-xl rounded-3xl border border-[var(--ap-border)] bg-white p-6 shadow-2xl sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Archetype Library</p>
+            <h2 class="mt-2 text-3xl text-[var(--ap-primary)]">Unlock the Full Archetype Library</h2>
+          </div>
+          <button type="button" id="archetype-library-gate-close" class="rounded-full p-2 text-[var(--ap-muted)] hover:bg-[var(--ap-bg)] hover:text-[var(--ap-primary)]" aria-label="Close">
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed text-[var(--ap-secondary)]">
+          <p>The Archetype Library is an in-depth exploration of all 9 founder operating patterns. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each archetype connects to the others.</p>
+          <p>Create your free portal account to access the full library, save your VAPI results, and track your progress over time.</p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a id="archetype-library-gate-signup" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Farchetype-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+          <a id="archetype-library-gate-login" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Farchetype-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
+        </div>
+        <button type="button" id="archetype-library-gate-dismiss" class="mt-5 text-sm font-medium text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[var(--ap-primary)] text-white border-t-2 border-[var(--ap-accent)] py-8 mt-12 no-print">
+    <div class="max-w-[1080px] mx-auto px-5 sm:px-6">
+      <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mb-8 pb-6 border-b border-white/10">
+        <img src="/images/certifications/icf.png" alt="International Coaching Federation" class="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity">
+        <img src="/images/certifications/cplc.png" alt="Certified Professional Life Coach" class="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity">
+        <img src="/images/certifications/mcpc.png" alt="Master Certified Professional Coach" class="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity">
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
+        <a href="/" class="relative flex-shrink-0 overflow-visible">
+          <span class="logo-on-dark-wrap logo-on-dark--sm">
+            <span class="logo-on-dark-glow-outer" aria-hidden="true"></span>
+            <span class="logo-on-dark-glow-inner" aria-hidden="true"></span>
+            <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="logo-on-dark-img h-7 w-auto opacity-90" width="120" height="34">
+          </span>
+        </a>
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+          <nav class="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <a href="/" class="text-white/70 hover:text-white transition-colors">Home</a>
+            <a href="/about" class="text-white/70 hover:text-white transition-colors">About</a>
+            <a href="/work-with-me" class="text-white/70 hover:text-white transition-colors">Work With Me</a>
+            <a href="/contact" class="text-white/70 hover:text-white transition-colors">Contact</a>
+            <a href="/privacy" class="text-white/70 hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" class="text-white/70 hover:text-white transition-colors">Terms</a>
+          </nav>
+          <div class="flex items-center gap-4">
+            <a href="https://www.linkedin.com/in/jakesebok" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white transition-colors" aria-label="LinkedIn">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="https://www.instagram.com/jakesebok" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white transition-colors" aria-label="Instagram">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a href="https://www.facebook.com/jakesebok" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white transition-colors" aria-label="Facebook">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="https://www.youtube.com/@jakesebok" target="_blank" rel="noopener noreferrer" class="text-white/70 hover:text-white transition-colors" aria-label="YouTube">
+              <i data-lucide="youtube" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        <p class="text-white/70 text-xs">© 2026 Jake Sebok</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    (async function() {
+      var raw = sessionStorage.getItem('vapiResults');
+      var results = raw ? (function() { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
+      console.log('[VAPI save] Started. Has results in sessionStorage:', !!raw, '| Has email:', !!(results && results.email));
+      try {
+        if (!raw || !results) {
+          console.warn('[VAPI save] No results in sessionStorage.');
+          return;
+        }
+        if (!results.email) {
+          console.warn('[VAPI save] No email in results. Cannot save.');
+          return;
+        }
+        if (sessionStorage.getItem('vapiResultsSaved')) {
+          console.log('[VAPI save] Already saved this session. Skipping.');
+          return;
+        }
+        if (!results.archetype && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine) {
+          results.archetype = VAPI_ARCHETYPE.determine(results);
+        }
+        console.log('[VAPI save] Saving via /api/save-vapi-results for:', results.email);
+        var saveRes = await fetch('/api/save-vapi-results', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: results.email,
+            firstName: results.firstName || null,
+            lastName: results.lastName || null,
+            results: results,
+          }),
+        });
+        var saveJson = await saveRes.json();
+        if (!saveRes.ok || saveJson.error) {
+          console.error('[VAPI save] Save failed:', saveRes.status, JSON.stringify(saveJson));
+          return;
+        }
+        sessionStorage.setItem('vapiResultsSaved', '1');
+        console.log('[VAPI save] Save succeeded.');
+      } catch (e) {
+        console.error('[VAPI save] Unexpected error:', e.message, e);
+      }
+    })();
+  </script>
+  <!-- Portal CTA visibility: show banner + inline CTAs only when NOT logged in -->
+  <script type="module">
+    (async function() {
+      function applyMyPlanCalloutAuth(session) {
+        var isAuth = !!(session && session.user);
+        document.querySelectorAll('.my-plan-results-guest, .my-plan-inline-guest').forEach(function (el) {
+          if (isAuth) el.classList.add('hidden');
+          else el.classList.remove('hidden');
+        });
+        document.querySelectorAll('.my-plan-results-auth, .my-plan-inline-auth').forEach(function (el) {
+          if (isAuth) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        });
+        var raw = sessionStorage.getItem('vapiResults');
+        var results = raw ? (function () { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
+        var email = results && results.email ? String(results.email).trim().toLowerCase() : '';
+        if (email) {
+          document.querySelectorAll('a.my-plan-cta-signup').forEach(function (a) {
+            try {
+              var u = new URL(a.getAttribute('href'));
+              u.searchParams.set('email', email);
+              var qs = u.searchParams.toString();
+              a.href = u.origin + u.pathname + (qs ? '?' + qs : '');
+            } catch (e) {
+              a.href = 'https://portal.alignedpower.coach/signup?email=' + encodeURIComponent(email) + '&redirect=' + encodeURIComponent('/my-plan');
+            }
+          });
+        }
+      }
+
+      function applyPortalCtaVisibility(session) {
+        var banner = document.getElementById('portal-sticky-banner');
+        var bannerInner = document.getElementById('portal-banner-inner');
+        var inlineCtas = document.querySelectorAll('.portal-inline-cta');
+        if (session && session.user) {
+          // User is logged in — show banner with "Go to portal" message; hide inline CTAs
+          if (banner && bannerInner) {
+            bannerInner.innerHTML = '<p class="text-xs font-medium text-white/90 text-center sm:text-left">See your progress over time. Log into your portal now.</p>' +
+              '<a href="https://portal.alignedpower.coach/dashboard" class="text-xs font-bold bg-white text-[var(--ap-primary)] hover:bg-white/90 px-3 py-1 rounded-md transition-colors whitespace-nowrap flex-shrink-0">Go to my portal</a>';
+            banner.classList.remove('hidden');
+          }
+          inlineCtas.forEach(function(el) { el.remove(); });
+        } else {
+          // Not logged in — show the sticky banner
+          if (banner) banner.classList.remove('hidden');
+          // Pre-fill email on signup/login links if we have it from session storage
+          var raw = sessionStorage.getItem('vapiResults');
+          var results = raw ? (function() { try { return JSON.parse(raw); } catch(e) { return null; } })() : null;
+          var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
+          if (email) {
+            document.querySelectorAll('a.portal-cta-signup, #portal-banner-signup').forEach(function(a) {
+              a.href = 'https://portal.alignedpower.coach/signup?email=' + encodeURIComponent(email);
+            });
+            document.querySelectorAll('a.portal-cta-login, #portal-banner-login').forEach(function(a) {
+              a.href = 'https://portal.alignedpower.coach/login?email=' + encodeURIComponent(email);
+            });
+          }
+        }
+        applyMyPlanCalloutAuth(session);
+      }
+      try {
+        var r = await fetch('/api/config');
+        if (!r.ok) return;
+        eval(await r.text());
+        if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) return;
+        var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+        var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        var { data: { session } } = await supabase.auth.getSession();
+        // Defer so results are guaranteed to be in DOM (results script may run after this module)
+        setTimeout(function() { applyPortalCtaVisibility(session); }, 0);
+        document.addEventListener('vapi-results-rendered', function() { applyPortalCtaVisibility(session); });
+      } catch (e) {
+        // On any error, default: show the banner (safe fallback)
+        var banner = document.getElementById('portal-sticky-banner');
+        if (banner) banner.classList.remove('hidden');
+      }
+    })();
+  </script>
+
+  <script type="module">
+    (function() {
+      var btn = document.getElementById('go-to-portal-btn');
+      if (!btn) return;
+      btn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        var raw = sessionStorage.getItem('vapiResults');
+        var results = raw ? (function() { try { return JSON.parse(raw); } catch (err) { return null; } })() : null;
+        var email = (results && results.email) ? String(results.email).trim().toLowerCase() : '';
+        var base = '/';
+        if (!email) {
+          window.location.href = base + 'login';
+          return;
+        }
+        try {
+          var r = await fetch('/api/config');
+          if (!r.ok) { window.location.href = base + 'login?email=' + encodeURIComponent(email); return; }
+          var t = await r.text();
+          eval(t);
+          if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
+            return;
+          }
+          var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+          var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+          var { data: exists, error } = await supabase.rpc('check_portal_email_exists', { check_email: email });
+          if (error) {
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
+            return;
+          }
+          if (exists) {
+            window.location.href = base + 'login?email=' + encodeURIComponent(email);
+          } else {
+            window.location.href = base + 'signup?email=' + encodeURIComponent(email);
+          }
+        } catch (err) {
+          window.location.href = base + 'login?email=' + encodeURIComponent(email);
+        }
+      });
+    })();
+  </script>
+  <script type="module">
+    (async function() {
+      var session = null;
+      try {
+        var configRes = await fetch('/api/config');
+        if (configRes.ok) {
+          eval(await configRes.text());
+          if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+            var { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm');
+            var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+            var sessionResult = await supabase.auth.getSession();
+            session = sessionResult.data.session;
+          }
+        }
+      } catch (error) {}
+
+      function getPortalAuthHref(path, targetPath) {
+        var redirect = 'redirect=' + encodeURIComponent(targetPath);
+        var raw = sessionStorage.getItem('vapiResults');
+        var results = raw ? (function() { try { return JSON.parse(raw); } catch (e) { return null; } })() : null;
+        var email = results && results.email ? String(results.email).trim().toLowerCase() : '';
+        var href = 'https://portal.alignedpower.coach/' + path + '?' + redirect;
+        if (email) href += '&email=' + encodeURIComponent(email);
+        return href;
+      }
+
+      function openGate(config) {
+        if (config.signupLink) config.signupLink.href = getPortalAuthHref('signup', config.targetPath);
+        if (config.loginLink) config.loginLink.href = getPortalAuthHref('login', config.targetPath);
+        if (config.element) config.element.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      }
+
+      function closeGate(config) {
+        if (config.element) config.element.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      var gateConfigs = {
+        driver: {
+          targetPath: '/portal/driver-library',
+          element: document.getElementById('driver-library-gate'),
+          closeBtn: document.getElementById('driver-library-gate-close'),
+          dismissBtn: document.getElementById('driver-library-gate-dismiss'),
+          backdrop: document.getElementById('driver-library-gate-backdrop'),
+          signupLink: document.getElementById('driver-library-gate-signup'),
+          loginLink: document.getElementById('driver-library-gate-login')
+        },
+        archetype: {
+          targetPath: '/portal/archetype-library',
+          element: document.getElementById('archetype-library-gate'),
+          closeBtn: document.getElementById('archetype-library-gate-close'),
+          dismissBtn: document.getElementById('archetype-library-gate-dismiss'),
+          backdrop: document.getElementById('archetype-library-gate-backdrop'),
+          signupLink: document.getElementById('archetype-library-gate-signup'),
+          loginLink: document.getElementById('archetype-library-gate-login')
+        }
+      };
+
+      Object.keys(gateConfigs).forEach(function(key) {
+        var config = gateConfigs[key];
+        if (config.closeBtn) config.closeBtn.addEventListener('click', function() { closeGate(config); });
+        if (config.dismissBtn) config.dismissBtn.addEventListener('click', function() { closeGate(config); });
+        if (config.backdrop) config.backdrop.addEventListener('click', function() { closeGate(config); });
+      });
+
+      document.addEventListener('click', function(event) {
+        var link = event.target.closest('[data-driver-library-link="1"]');
+        var archetypeLink = event.target.closest('[data-archetype-library-link="1"]');
+        if (link) {
+          if (session && session.user) {
+            event.preventDefault();
+            window.open(link.href, '_blank', 'noopener');
+            return;
+          }
+          event.preventDefault();
+          openGate(gateConfigs.driver);
+          return;
+        }
+        if (!archetypeLink) return;
+        if (session && session.user) {
+          event.preventDefault();
+          window.open(archetypeLink.href, '_blank', 'noopener');
+          return;
+        }
+        event.preventDefault();
+        openGate(gateConfigs.archetype);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      if (sessionStorage.getItem('vapiResultsFromAdmin')) {
+        var el = document.getElementById('results-back-admin');
+        if (el) el.classList.remove('hidden');
+      }
+      var COLORS = window.VAPI_TIER_COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
+      var INTERP = window.VAPI_INTERPRETATIONS || { domain: {}, arena: {} };
+      var results = null;
+      try {
+        var raw = sessionStorage.getItem('vapiResults');
+        if (raw) results = JSON.parse(raw);
+      } catch (e) {}
+
+      function tierColor(tier) { return COLORS[tier] || 'var(--ap-accent)'; }
+      function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+      var PORTAL_ORIGIN = 'https://portal.alignedpower.coach';
+
+      function buildMyPlanArchetypeInlineHtml(accentColor) {
+        var su = PORTAL_ORIGIN + '/signup?redirect=' + encodeURIComponent('/my-plan');
+        var mp = PORTAL_ORIGIN + '/my-plan';
+        return (
+          '<div class="my-plan-inline-archetype no-print mt-5 rounded-xl border border-[var(--ap-border)] border-l-4 pl-4 pr-4 py-4 bg-sky-50/80" style="border-left-color:' + accentColor + '">' +
+          '<p class="text-sm font-semibold text-[var(--ap-primary)] mb-1 flex items-center gap-2">' +
+          '<i data-lucide="lightbulb" class="w-4 h-4 shrink-0 text-[var(--ap-accent)]"></i> What to do with this?</p>' +
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-3">Your Archetype reveals patterns, but patterns can shift. Your personalized 28-day sprint (My Plan) targets the specific domain holding you back.</p>' +
+          '<div class="my-plan-inline-guest">' +
+          '<a href="' + su + '" class="my-plan-cta-signup inline-flex items-center justify-center gap-2 text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg w-full sm:w-auto">Create free account</a>' +
+          '</div>' +
+          '<div class="my-plan-inline-auth hidden">' +
+          '<a href="' + mp + '" class="inline-flex items-center justify-center gap-2 text-sm font-bold text-[var(--ap-accent)] hover:underline w-full sm:w-auto">View My Plan →</a>' +
+          '</div></div>'
+        );
+      }
+
+      function buildMyPlanLargeCalloutHtml() {
+        var su = PORTAL_ORIGIN + '/signup?redirect=' + encodeURIComponent('/my-plan');
+        var mp = PORTAL_ORIGIN + '/my-plan';
+        return (
+          '<div class="my-plan-results-callout-large no-print mt-12 mb-2 rounded-2xl border-2 border-[var(--ap-accent)]/40 bg-gradient-to-br from-[var(--ap-accent)]/10 to-[var(--ap-primary)]/5 p-6 sm:p-8 shadow-lg">' +
+          '<div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">' +
+          '<div class="shrink-0 w-12 h-12 rounded-xl bg-[var(--ap-accent)]/20 flex items-center justify-center">' +
+          '<i data-lucide="target" class="w-7 h-7 text-[var(--ap-accent)]"></i></div>' +
+          '<div class="min-w-0 flex-1">' +
+          '<div class="my-plan-results-guest">' +
+          '<h2 class="text-xl sm:text-2xl font-extrabold text-[var(--ap-primary)] mb-3">Get Your Personalized 28-Day My Plan</h2>' +
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-2">Your results identified your Archetype, Driver, and growth edge. Create your free portal account to access your custom action plan, built specifically from these results.</p>' +
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Week-by-week guidance. Specific to your situation.</p>' +
+          '<a href="' + su + '" class="my-plan-cta-signup inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-[100px] bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3">Create free account</a>' +
+          '</div>' +
+          '<div class="my-plan-results-auth hidden">' +
+          '<h2 class="text-xl sm:text-2xl font-extrabold text-[var(--ap-primary)] mb-3">Your 28-Day Action Plan Is Ready</h2>' +
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-2">You\'ve just learned your Archetype, your Driver, and where you\'re strong and struggling across 12 domains. That\'s the diagnosis.</p>' +
+          '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">Now comes the prescription: a personalized 28-day sprint (My Plan) that targets your highest-leverage growth area, with week-by-week actions, not just insight.</p>' +
+          '<a href="' + mp + '" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-[100px] bg-[var(--ap-primary)] hover:opacity-90 text-white font-bold text-sm px-6 py-3">View My Plan <i data-lucide="arrow-right" class="w-4 h-4"></i></a>' +
+          '</div></div></div></div>'
+        );
+      }
+
+      var ARENA_DARK = { Personal: '#9e4a5e', Relationships: '#5b7c9a', Business: '#38a169' };
+      var ARENA_LIGHT = { Personal: '#f0d8dc', Relationships: '#dce6ed', Business: '#d4f0e0' };
+      var WHEEL_LABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+
+      function buildLifeWheelSVG(domains, opts) {
+        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var overall = opts && typeof opts.overall === 'number' ? opts.overall : null;
+        var overallTier = opts && opts.overallTier ? opts.overallTier : '';
+        var byCode = {};
+        domains.forEach(function(d) { byCode[d.code] = d; });
+        var cx = 160, cy = 160, r = 120;
+        var segmentAngle = 360 / 12;
+        var labelRadius = r + 12;
+        var rInner = r * 0.42;
+        function cellPath(r0, r1, a0Rad, a1Rad) {
+          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
+          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
+          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
+          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
+          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
+        }
+        var html = '<h2 class="no-print text-2xl text-[var(--ap-primary)] mb-4 mt-10">Your alignment at a glance</h2>';
+        html += '<div class="rounded-xl border border-[var(--ap-border)] bg-white shadow-sm p-6 mb-10 overflow-x-auto">';
+        html += '<div class="flex flex-col sm:flex-row items-center gap-6">';
+        html += '<div id="vapi-demo-target-wheel-hero" class="alignment-glance-left flex-shrink-0 mx-auto cursor-pointer outline-none rounded-lg focus:ring-2 focus:ring-[var(--ap-accent)] focus:ring-offset-2" style="max-width:320px" role="button" tabindex="0" title="Click to enlarge">';
+        html += '<div class="alignment-glance-inner">';
+        html += '<h2 class="text-2xl sm:text-3xl text-[var(--ap-primary)] mb-1">The Power of Alignment</h2>';
+        html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">12 core domains for an aligned high impact life and business.</p>';
+        html += '<div class="relative w-full overflow-visible" style="max-width:320px; margin:0 auto;">';
+        html += '<svg viewBox="0 0 320 320" class="w-full h-auto relative z-10" style="overflow:visible" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Life wheel of 12 alignment domains">';
+        html += '<defs>';
+        html += '<filter id="arenaLabelShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        html += '<filter id="arenaLabelShadowDepth" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        var arcPersonalStart = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcPersonalEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcPersonal" d="M' + arcPersonalStart.x.toFixed(2) + ',' + arcPersonalStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcPersonalEnd.x.toFixed(2) + ',' + arcPersonalEnd.y.toFixed(2) + '"/>';
+        var arcRelStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcRelEnd = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="arcRel" d="M' + arcRelStart.x.toFixed(2) + ',' + arcRelStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 0 ' + arcRelEnd.x.toFixed(2) + ',' + arcRelEnd.y.toFixed(2) + '"/>';
+        var arcBizStart = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcBizEnd = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="arcBiz" d="M' + arcBizStart.x.toFixed(2) + ',' + arcBizStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcBizEnd.x.toFixed(2) + ',' + arcBizEnd.y.toFixed(2) + '"/>';
+        html += '</defs>';
+        for (var i = 0; i < 12; i++) {
+          var d = byCode[order[i]];
+          var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
+          var arena = (d && d.arena) ? d.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10);
+            var r1 = r * (k / 10);
+            var fill = (k <= score) ? darkC : lightC;
+            html += '<path d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+          }
+        }
+        for (var ring = 1; ring <= 10; ring++) {
+          var rr = r * (ring / 10);
+          html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        for (var i = 0; i < 12; i++) {
+          var a0 = (i * segmentAngle - 90) * Math.PI / 180;
+          var x0 = cx + r * Math.cos(a0);
+          var y0 = cy + r * Math.sin(a0);
+          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x0 + '" y2="' + y0 + '" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r + 16) + '" y2="' + cy + '" stroke="#9ca3af" stroke-width="1"/>';
+        for (var k = 2; k <= 10; k++) {
+          var rr = r * (k - 1.2) / 10;
+          html += '<text x="' + (cx + rr + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Outfit,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">' + k + '</text>';
+        }
+        var rrStar = r * 9.8 / 10;
+        html += '<text x="' + (cx + rrStar + 6) + '" y="' + (cy - 2) + '" font-size="6.5" fill="#0E1624" font-family="Outfit,sans-serif" font-weight="500" text-anchor="start" filter="url(#arenaLabelShadow)">\u2605</text>';
+        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.5"/>';
+        for (var i = 0; i < 12; i++) {
+          var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad);
+          var ty = cy + labelRadius * Math.sin(midRad);
+          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
+          var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
+          var lineHeight = 10;
+          var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          html += '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#arenaLabelShadow)">';
+          for (var L = 0; L < lines.length; L++) {
+            html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + escapeHtml(lines[L]) + '</tspan>';
+          }
+          html += '</text>';
+        }
+        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcPersonal" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" transform="translate(0, 8)" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcRel" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#arenaLabelShadowDepth)"><textPath xlink:href="#arcBiz" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '</svg>';
+        html += '</div>';
+        html += '<img src="/images/vapi/vapi-logo.png" alt="Values-Aligned Performance Indicator" class="h-12 w-auto mt-4 mx-auto block"/>';
+        html += '<p class="enlarge-hint text-xs text-[var(--ap-muted)] mt-3 text-center hidden sm:flex items-center justify-center gap-1.5 w-full"><i data-lucide="search" class="w-3.5 h-3.5 shrink-0"></i>Click to enlarge</p>';
+        html += '</div></div>';
+        html += '<div id="vapi-demo-target-composite" class="flex-1 min-w-0">';
+        if (overall != null && overallTier) {
+          html += '<p class="text-sm font-semibold text-[var(--ap-muted)] mb-1">Overall composite score</p>';
+          html += '<p class="text-5xl font-bold mb-1" style="color:' + tierColor(overallTier) + '">' + overall + ' <span class="text-2xl font-normal text-[var(--ap-secondary)]">/ 10</span></p>';
+          html += '<p class="font-semibold mb-3" style="color:' + tierColor(overallTier) + '">' + overallTier + '</p>';
+          var compositeText = (INTERP.composite && INTERP.composite[overallTier]) ? INTERP.composite[overallTier] : '';
+          if (compositeText) html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mb-4">' + escapeHtml(compositeText) + '</p>';
+        }
+        html += '<div class="flex flex-wrap gap-x-4 gap-y-1 text-sm">';
+        ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
+          var c = ARENA_DARK[arena];
+          html += '<span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-full flex-shrink-0" style="background:' + c + '"></span><span class="font-medium text-[var(--ap-primary)]">' + arena + '</span></span>';
+        });
+        html += '</div>';
+        html += '</div></div>';
+        html += '</div>';
+        return html;
+      }
+
+      function buildExploreWheelSVG(domains) {
+        var order = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var fid = 'resultsWheelShadow';
+        var arcIdP = 'resultsArcP'; var arcIdR = 'resultsArcR'; var arcIdB = 'resultsArcB';
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+        var byCode = {};
+        (domains || []).forEach(function(d) {
+          var copy = { code: d.code, score: d.score, arena: (d.arena === 'Self' ? 'Personal' : d.arena) || 'Personal' };
+          byCode[d.code] = copy;
+        });
+        var cx = 160; var cy = 160; var r = 120;
+        var segmentAngle = 360 / 12;
+        var labelRadius = r + 14;
+        var rInner = r * 0.42;
+        function cellPath(r0, r1, a0Rad, a1Rad) {
+          var x1 = cx + r1 * Math.cos(a0Rad), y1 = cy + r1 * Math.sin(a0Rad);
+          var x2 = cx + r1 * Math.cos(a1Rad), y2 = cy + r1 * Math.sin(a1Rad);
+          var x3 = cx + r0 * Math.cos(a1Rad), y3 = cy + r0 * Math.sin(a1Rad);
+          var x4 = cx + r0 * Math.cos(a0Rad), y4 = cy + r0 * Math.sin(a0Rad);
+          return 'M' + cx + ',' + cy + ' L' + x1.toFixed(2) + ',' + y1.toFixed(2) + ' A' + r1 + ',' + r1 + ' 0 0 1 ' + x2.toFixed(2) + ',' + y2.toFixed(2) + ' L' + x3.toFixed(2) + ',' + y3.toFixed(2) + ' A' + r0 + ',' + r0 + ' 0 0 0 ' + x4.toFixed(2) + ',' + y4.toFixed(2) + ' Z';
+        }
+        var html = '<svg viewBox="0 0 320 320" class="w-full h-auto overflow-visible" style="max-width:280px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Alignment wheel">';
+        html += '<defs>';
+        html += '<filter id="' + fid + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        html += '<filter id="resultsExploreArenaLabelShadowDepth" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="1.4" flood-color="rgba(0,0,0,0.5)" flood-opacity="1"/></filter>';
+        html += '<filter id="resultsExploreArenaLabelHalo" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter>';
+        var arcP0 = { x: cx + rInner * Math.cos(-90 * Math.PI / 180), y: cy + rInner * Math.sin(-90 * Math.PI / 180) };
+        var arcP1 = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        html += '<path id="' + arcIdP + '" d="M' + arcP0.x.toFixed(2) + ',' + arcP0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcP1.x.toFixed(2) + ',' + arcP1.y.toFixed(2) + '"/>';
+        var arcRStart = { x: cx + rInner * Math.cos(30 * Math.PI / 180), y: cy + rInner * Math.sin(30 * Math.PI / 180) };
+        var arcREnd = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        html += '<path id="' + arcIdR + '" d="M' + arcRStart.x.toFixed(2) + ',' + arcRStart.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcREnd.x.toFixed(2) + ',' + arcREnd.y.toFixed(2) + '"/>';
+        var arcB0 = { x: cx + rInner * Math.cos(150 * Math.PI / 180), y: cy + rInner * Math.sin(150 * Math.PI / 180) };
+        var arcB1 = { x: cx + rInner * Math.cos(270 * Math.PI / 180), y: cy + rInner * Math.sin(270 * Math.PI / 180) };
+        html += '<path id="' + arcIdB + '" d="M' + arcB0.x.toFixed(2) + ',' + arcB0.y.toFixed(2) + ' A' + rInner + ',' + rInner + ' 0 0 1 ' + arcB1.x.toFixed(2) + ',' + arcB1.y.toFixed(2) + '"/>';
+        html += '</defs>';
+        for (var i = 0; i < 12; i++) {
+          var d = byCode[order[i]];
+          var score = (d && typeof d.score === 'number') ? Math.max(0, Math.min(10, Math.round(d.score))) : 0;
+          var arena = (d && d.arena) ? d.arena : 'Personal';
+          var darkC = ARENA_DARK[arena] || ARENA_DARK.Personal;
+          var lightC = ARENA_LIGHT[arena] || ARENA_LIGHT.Personal;
+          var a0Rad = (i * segmentAngle - 90) * Math.PI / 180;
+          var a1Rad = ((i + 1) * segmentAngle - 90) * Math.PI / 180;
+          for (var k = 1; k <= 10; k++) {
+            var r0 = r * ((k - 1) / 10); var r1 = r * (k / 10);
+            var fill = (k <= score) ? darkC : lightC;
+            html += '<path class="wheel-segment" data-domain-index="' + i + '" data-arena="' + esc(arena) + '" d="' + cellPath(r0, r1, a0Rad, a1Rad) + '" fill="' + fill + '" fill-opacity="0.78" stroke="rgba(0,0,0,0.06)" stroke-width="0.3"/>';
+          }
+        }
+        for (var ring = 1; ring <= 10; ring++) { var rr = r * (ring / 10); html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#d1d5db" stroke-width="0.5"/>'; }
+        for (var i = 0; i < 12; i++) {
+          var a0 = (i * segmentAngle - 90) * Math.PI / 180;
+          html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + r * Math.cos(a0)) + '" y2="' + (cy + r * Math.sin(a0)) + '" stroke="#d1d5db" stroke-width="0.5"/>';
+        }
+        html += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#374151" stroke-width="0.25"/>';
+        for (var i = 0; i < 12; i++) {
+          var midDeg = i * segmentAngle - 90 + segmentAngle / 2;
+          var midRad = midDeg * Math.PI / 180;
+          var tx = cx + labelRadius * Math.cos(midRad); var ty = cy + labelRadius * Math.sin(midRad);
+          var anchor = (midDeg >= -90 && midDeg < 90) ? 'start' : 'end';
+          if (Math.abs(midDeg) < 10 || Math.abs(midDeg - 180) < 10) anchor = 'middle';
+          var lines = WHEEL_LABEL_LINES[order[i]] || [order[i]];
+          var lineHeight = 10; var firstDy = lines.length > 1 ? -0.5 * (lines.length - 1) * lineHeight : 0;
+          html += '<text class="wheel-domain-label" x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + fid + ')">';
+          for (var L = 0; L < lines.length; L++) { html += '<tspan x="' + tx.toFixed(2) + '" dy="' + (L === 0 ? firstDy + 'px' : lineHeight + 'px') + '">' + esc(lines[L]) + '</tspan>'; }
+          html += '</text>';
+        }
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#resultsExploreArenaLabelShadowDepth)"><textPath xlink:href="#' + arcIdP + '" startOffset="50%" text-anchor="middle">Personal</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#resultsExploreArenaLabelShadowDepth)"><textPath xlink:href="#' + arcIdR + '" startOffset="50%" text-anchor="middle">Relationships</textPath></text>';
+        html += '<text class="wheel-arena-label" font-size="11" fill="#f7f2e8" font-family="Cormorant Garamond,serif" font-weight="700" filter="url(#resultsExploreArenaLabelShadowDepth)"><textPath xlink:href="#' + arcIdB + '" startOffset="50%" text-anchor="middle">Business</textPath></text>';
+        html += '</svg>';
+        return html;
+      }
+
+      // ── PRIORITY MATRIX TEASER (results page) ─────────────────────────────
+      // Full matrix lives in portal dashboard. Compact 2x2 quadrant preview with fogged-glass cards + CTA.
+      function buildPriorityMatrixTeaser() {
+        var signupHref = 'https://portal.alignedpower.coach/signup';
+        try {
+          var email = sessionStorage.getItem('vapi_results_email');
+          if (email) signupHref += '?email=' + encodeURIComponent(email);
+        } catch (e) {}
+        var quadrantDefs = [
+          { border: 'border-red-200', bg: 'bg-red-50', accentColor: '#EF4444', domain: 'Mental / Emotional' },
+          { border: 'border-green-200', bg: 'bg-green-50', accentColor: '#22C55E', domain: 'Physical Health' },
+          { border: 'border-gray-200', bg: 'bg-gray-50', accentColor: '#6B7280', domain: 'Community' },
+          { border: 'border-amber-200', bg: 'bg-amber-50', accentColor: '#EAB308', domain: 'Execution' },
+        ];
+        var previewHtml = '';
+        previewHtml += '<h2 class="where-to-focus no-print text-2xl text-[var(--ap-primary)] mb-2 mt-10">Where to Focus</h2>';
+        previewHtml += '<p class="where-to-focus-intro no-print text-sm text-[var(--ap-secondary)] mb-6 leading-relaxed">Based on your scores and the importance ratings you set, here is where your energy is best directed. Your personalized focus areas and guidance are available in your portal.</p>';
+        previewHtml += '<div class="relative no-print">';
+        previewHtml += '<div class="pm-teaser-grid grid grid-cols-2 gap-3 select-none pointer-events-none min-h-[320px]">';
+        quadrantDefs.forEach(function(q) {
+          previewHtml += '<div class="rounded-xl border-2 ' + q.border + ' ' + q.bg + ' p-4 flex flex-col">';
+          previewHtml += '<div class="relative flex-1 bg-white rounded-lg border border-[var(--ap-border)] p-4 overflow-hidden">';
+          previewHtml += '<p class="font-semibold text-[var(--ap-secondary)] text-sm leading-tight">' + q.domain + '</p>';
+          previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-0.5">7/10 · Priority: 8/10</p>';
+          previewHtml += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed mt-3">Your personalized guidance appears here when you create a portal account.</p>';
+          previewHtml += '<div class="absolute inset-0 rounded-lg bg-white/60 backdrop-blur-[3px]" aria-hidden="true"></div>';
+          previewHtml += '</div></div>';
+        });
+        previewHtml += '</div>';
+        previewHtml += '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto">';
+        previewHtml += '<div class="text-center px-6 py-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-[var(--ap-border)] max-w-sm">';
+        previewHtml += '<p class="text-lg font-semibold text-[var(--ap-primary)] mb-2">See your personalized focus areas</p>';
+        previewHtml += '<p class="text-sm text-[var(--ap-secondary)] mb-4 leading-relaxed">Create a free portal account to unlock your full priority matrix: which domains need attention, which to protect, and personalized guidance for each.</p>';
+        previewHtml += '<a href="' + signupHref + '" class="portal-cta-signup inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors">Create free account <i data-lucide="arrow-right" class="w-4 h-4"></i></a>';
+        previewHtml += '<p class="text-xs text-[var(--ap-muted)] mt-3">Already have an account? <a href="https://portal.alignedpower.coach/login" class="portal-cta-login font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] underline underline-offset-2">Log in</a></p>';
+        previewHtml += '</div></div></div>';
+        return previewHtml;
+      }
+
+      // PM_COPY and buildPriorityMatrix moved to vapi-priority-matrix.js (used by dashboard only)
+
+      function renderPlaceholder() {
+        var el = document.getElementById('results-content');
+        el.innerHTML = '<div class="text-center mb-10"><p class="text-[var(--ap-accent)] mb-2">Your Results</p><h1 class="text-4xl text-[var(--ap-primary)]">Your VAPI™ Scores</h1><p class="text-[var(--ap-secondary)] mt-2">Complete the assessment to see your results.</p></div><p class="text-[var(--ap-muted)]"><a href="/assessment">Start My VAPI™ Assessment</a></p>';
+      }
+
+      function buildArchetypeSection(results) {
+        var archetypeName = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null) || results.archetype || null;
+        if (!archetypeName) return '';
+        var meta = (typeof VAPI_ARCHETYPES !== 'undefined' && VAPI_ARCHETYPES[archetypeName]) ? VAPI_ARCHETYPES[archetypeName] : null;
+        var color = meta && meta.color_accent ? meta.color_accent : 'var(--ap-accent)';
+        var tagline = meta && meta.tagline ? meta.tagline : '';
+        var iconSvg = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getIcon) ? VAPI_ARCHETYPE.getIcon(archetypeName, color) : '';
+        var laggingArenaSummary = archetypeName === 'The Journeyman' && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.getLaggingArenaSummary
+          ? VAPI_ARCHETYPE.getLaggingArenaSummary(results)
+          : null;
+        var html = '<div class="archetype-section bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg overflow-hidden mb-10 relative" style="border-left:4px solid ' + color + ';">';
+        html += '<div class="p-6 sm:p-8 relative">';
+        html += '<div class="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">';
+        if (iconSvg) {
+          html += '<div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center" style="background:' + color + '20;">';
+          html += '<div class="w-10 h-10 sm:w-12 sm:h-12" style="color:' + color + '">' + iconSvg + '</div></div>';
+        }
+        html += '<div class="min-w-0 flex-1">';
+        html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em] mb-1" style="color:' + color + '">Your Founder Archetype</p>';
+        html += '<h2 class="text-2xl sm:text-3xl font-extrabold text-[var(--ap-primary)] mb-2">' + escapeHtml(archetypeName) + '</h2>';
+        if (tagline) html += '<p class="text-lg text-[var(--ap-secondary)] leading-relaxed">' + escapeHtml(tagline) + '</p>';
+        html += '</div></div>';
+        if (meta && (meta.description || meta.strength || meta.growth_path)) {
+          html += '<details class="archetype-details mt-4 group">';
+          html += '<summary class="cursor-pointer inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] transition-colors list-none [&::-webkit-details-marker]:hidden">Read full archetype profile <i data-lucide="chevron-down" class="archetype-chevron w-4 h-4 shrink-0 transition-transform duration-200"></i></summary>';
+          html += '<div class="mt-4 space-y-4 text-[15px] text-[var(--ap-secondary)] leading-relaxed pb-10 w-full">';
+          if (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.buildConstellation) {
+            html += VAPI_ARCHETYPE.buildConstellation(archetypeName);
+          }
+          if (meta.description) html += '<p>' + meta.description + '</p>';
+          if (meta.strength) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Strength</p><p>' + escapeHtml(meta.strength) + '</p></div>';
+          if (meta.shadow) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Shadow</p><p>' + escapeHtml(meta.shadow) + '</p></div>';
+          if (meta.constraint) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Constraint</p><p>' + escapeHtml(meta.constraint) + '</p></div>';
+          if (meta.growth_path) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Growth path</p><p>' + escapeHtml(meta.growth_path) + '</p></div>';
+          if (meta.program_phase) html += '<div><p class="font-extrabold text-[var(--ap-primary)] mb-1 text-base">Program phase</p><p>' + escapeHtml(meta.program_phase) + '</p></div>';
+          html += '<div class="absolute bottom-0 left-0 right-0 flex justify-center pb-2"><button type="button" class="flex items-center justify-center p-2 rounded-lg text-[var(--ap-muted)] hover:text-[var(--ap-primary)] hover:bg-[var(--ap-bg)] transition-colors cursor-pointer" onclick="var d=this.closest(\'details\');if(d)d.removeAttribute(\'open\')" aria-label="Collapse"><i data-lucide="chevron-up" class="w-4 h-4"></i></button></div>';
+          html += '</div></details>';
+        }
+        if (laggingArenaSummary && laggingArenaSummary.lagging && laggingArenaSummary.second && laggingArenaSummary.strongest) {
+          html += '<div class="mt-5 rounded-xl border p-4" style="border-color:' + color + '33;background:' + color + '10;">';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-[0.22em]" style="color:' + color + '">Your lagging arena</p>';
+          html += '<p class="mt-2 text-[15px] text-[var(--ap-secondary)] leading-relaxed">Your lagging arena is ' + escapeHtml(laggingArenaSummary.lagging.label) + '. At ' + laggingArenaSummary.lagging.score.toFixed(1) + ', it\'s solid, but it\'s not keeping pace with your strength elsewhere. This is your current edge. Examine the domains within this arena. One or two are likely pulling the average down. That\'s where focused attention will have the highest leverage. You don\'t need to overhaul anything. You need to bring this arena into alignment with what you\'ve already built.</p>';
+          html += '</div>';
+        }
+        html += buildMyPlanArchetypeInlineHtml(color);
+        html += '<div class="mt-5 pt-4 border-t border-[var(--ap-border)]/70">';
+        html += '<a href="/assessment/archetypes" class="inline-flex items-center gap-2 text-sm font-semibold hover:opacity-80 transition-colors" data-archetype-library-link="1" style="color:' + color + '">Learn more about all founder archetypes &gt;</a>';
+        html += '</div>';
+        html += '</div></div>';
+        return html;
+      }
+
+      function buildDriverSection(results) {
+        if (typeof VAPI_DRIVERS !== 'undefined' && VAPI_DRIVERS && VAPI_DRIVERS.buildResultsSection) {
+          return VAPI_DRIVERS.buildResultsSection(results, { id: 'driver-section', context: 'results' });
+        }
+        return '';
+      }
+
+      function initVapiDemoEmbedMessaging() {
+        if (!window.__VAPI_DEMO_EMBED__) return;
+        window.addEventListener('message', function (ev) {
+          var d = ev.data;
+          if (!d || d.type !== 'vapi-demo-highlight') return;
+          var id = d.targetId;
+          document.querySelectorAll('.vapi-demo-spotlight').forEach(function (n) {
+            n.classList.remove('vapi-demo-spotlight');
+          });
+          document.documentElement.classList.remove('vapi-demo-spotlight-active');
+          if (!id || id === 'clear') return;
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.classList.add('vapi-demo-spotlight');
+          document.documentElement.classList.add('vapi-demo-spotlight-active');
+          setTimeout(function () {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 80);
+        });
+      }
+      initVapiDemoEmbedMessaging();
+
+      function render(results) {
+        var firstName = results.firstName || '';
+        var lastName = results.lastName || '';
+        var fullName = [firstName, lastName].filter(Boolean).join(' ');
+        var overall = results.overall;
+        var overallTier = results.overallTier;
+        var arenaScores = results.arenaScores || {};
+        var arenaTiers = results.arenaTiers || {};
+        if (arenaScores.Self != null && arenaScores.Personal == null) arenaScores.Personal = arenaScores.Self;
+        if (arenaTiers.Self && !arenaTiers.Personal) arenaTiers.Personal = arenaTiers.Self;
+        var domains = (results.domains || []).map(function(d) {
+          var out = Object.assign({}, d);
+          if (out.arena === 'Self') out.arena = 'Personal';
+          return out;
+        });
+        var top3 = results.top3 || [];
+        var bottom3 = results.bottom3 || [];
+        var acquiescence = results.acquiescence;
+        results.archetype = (typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.determine ? VAPI_ARCHETYPE.determine(results) : null) || results.archetype || null;
+
+        var html = '';
+
+        var reportDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        if (acquiescence) {
+          html += '<div class="rounded-lg border-2 border-amber-500 bg-amber-50 p-4 mb-8 text-amber-900"><p class="font-semibold">Note on your responses</p><p class="text-sm mt-1">Some of your responses appear contradictory. For the most accurate results, retake the assessment and read each statement carefully.</p></div>';
+        }
+
+        html += '<div class="print-only print-report-header"><strong>VAPI™ Results</strong>' + (fullName ? ' · ' + escapeHtml(fullName) : '') + ' · ' + reportDate + '</div>';
+        // Wrap title + wheel together so they never split across a page break
+        html += '<div class="print-hero-block">';
+        html += '<div class="results-title-block text-center mb-10">';
+        html += '<p class="no-print text-sm font-semibold uppercase tracking-wider text-gradient-accent mb-2">Your Results</p>';
+        html += '<h1 class="text-4xl sm:text-5xl text-[var(--ap-primary)] leading-tight">' + (firstName ? firstName + ', your ' : 'Your ') + 'VAPI™ Score</h1>';
+        html += '<p class="text-[var(--ap-secondary)] mt-2">Values-Aligned Performance Indicator™. 12 Domains. 3 Arenas. 1 Aligned Life.</p>';
+        html += '</div>';
+
+        html += buildLifeWheelSVG(domains, { overall: overall, overallTier: overallTier });
+        html += buildArchetypeSection(results);
+        html += '<div id="journeyman-growth-edge-mount"></div>';
+        html += buildDriverSection(results);
+        html += '</div>'; // end print-hero-block
+        // Print-only: Top 3 Strengths and Priority Focus Areas — start on page 2, in card layout
+        html += '<div class="print-only print-strengths-focus-section">';
+        html += '<h2 class="print-strengths-focus-header">Your Key Focus Zones</h2>';
+        html += '<div class="print-strengths-focus grid grid-cols-2 gap-6 mt-0 mb-8">';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
+        html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Top 3 strengths</p>';
+        html += '<ul class="space-y-2.5 mt-2">';
+        top3.forEach(function(d) {
+          var c = tierColor(d.tier);
+          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+        });
+        html += '</ul></div>';
+        html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6">';
+        html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3 pb-1 border-b border-[var(--ap-border)]/50 w-fit">Priority focus areas</p>';
+        html += '<ul class="space-y-2.5 mt-2">';
+        bottom3.forEach(function(d) {
+          var c = tierColor(d.tier);
+          html += '<li class="flex items-center justify-between gap-3 text-sm"><span class="text-[var(--ap-text)]">' + escapeHtml(d.domain || d.code || '') + '</span><span class="font-semibold shrink-0 tabular-nums" style="color:' + c + '">' + (d.score != null ? Math.round(d.score * 10) / 10 : '—') + '</span></li>';
+        });
+        html += '</ul></div></div>';
+        html += '</div>'; // end print-strengths-focus-section
+        html += '<div id="results-explore-section" class="no-print mb-10">';
+        html += '<h2 class="text-xl text-[var(--ap-primary)] mb-2">Explore your score</h2>';
+        html += '<p class="text-[var(--ap-secondary)] text-sm mb-4">Dig into your composite, arena, and domain scores. Choose a metric from the menu or tap a wedge on the wheel.</p>';
+        html += '<div class="bg-white rounded-2xl border border-[var(--ap-border)] shadow-lg p-6">';
+        html += '<div class="flex flex-col lg:flex-row gap-6">';
+        html += '<div class="flex-1 min-w-0 flex flex-col justify-center">';
+        html += '<div class="flex items-center justify-between gap-2 mb-1">';
+        html += '<p id="results-breakdown-metric-label" class="text-sm font-semibold uppercase tracking-wider text-[var(--ap-muted)]">Overall score</p>';
+        html += '<div class="lg:hidden relative shrink-0" id="results-breakdown-metric-dropdown-wrap">';
+        html += '<button type="button" id="results-breakdown-metric-dropdown-trigger" class="inline-flex items-center gap-1 rounded-full py-1 px-2.5 border border-[var(--ap-border)] bg-white text-[10px] font-medium uppercase tracking-wider text-[var(--ap-text)] hover:border-[var(--ap-primary)]/50 hover:bg-[var(--ap-bg)] transition-colors max-w-[100px]" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="results-breakdown-metric-label">';
+        html += '<span id="results-breakdown-metric-dropdown-label" class="truncate">Overall</span>';
+        html += '<i data-lucide="chevron-down" class="w-3 h-3 text-[var(--ap-muted)] flex-shrink-0 transition-transform" id="results-breakdown-metric-chevron"></i>';
+        html += '</button>';
+        html += '<div id="results-breakdown-metric-dropdown-panel" class="absolute top-full right-0 mt-1 z-20 w-48 bg-white border border-[var(--ap-border)] rounded-lg shadow-lg overflow-hidden hidden max-h-[280px] overflow-y-auto">';
+        html += '<div id="results-breakdown-metric-list" class="space-y-0.5 p-1.5">';
+        html += '<div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 first:mt-0 px-2 py-0.5">Composite</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>';
+        html += '<div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Arena</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>';
+        html += '<div class="text-[10px] font-semibold text-[var(--ap-primary)] mt-1.5 px-2 py-0.5">Domain</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>';
+        html += '</div></div></div></div>';
+        html += '<div class="flex items-baseline gap-2 flex-wrap mb-4">';
+        html += '<span id="results-breakdown-score-value" class="text-4xl sm:text-5xl font-bold text-[var(--ap-primary)]">—</span>';
+        html += '<span class="text-xl text-[var(--ap-muted)]">/ 10</span>';
+        html += '<span id="results-breakdown-tier-badge" class="hidden font-semibold px-3 py-1 rounded-full text-sm text-white"></span>';
+        html += '</div>';
+        html += '<div id="results-breakdown-wheel-outer" class="relative w-full max-w-[330px] mx-auto overflow-visible" style="aspect-ratio: 1 / 1;">';
+        html += '<div id="results-breakdown-wheel-container" class="absolute inset-[25px] flex items-center justify-center overflow-visible">';
+        html += '<div id="results-breakdown-wheel-wrap" class="w-full h-full flex items-center justify-center transition-transform duration-[0.65s] ease-out" style="transform: scale(1) rotate(0deg);">';
+        html += '<div id="results-breakdown-wheel-svg"></div>';
+        html += '</div></div>';
+        html += '<div id="results-breakdown-wheel-labels-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-10" aria-hidden="true">';
+        html += '<svg id="results-breakdown-wheel-labels-svg" viewBox="0 0 330 330" class="w-full h-full overflow-visible" xmlns="http://www.w3.org/2000/svg"></svg>';
+        html += '</div></div>';
+        html += '</div>';
+        html += '<p class="lg:hidden text-center text-xs text-[var(--ap-muted)] mt-3">Tap a domain to explore your score</p>';
+        html += '<div class="hidden lg:flex lg:w-52 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-[var(--ap-border)] pt-4 lg:pt-0 lg:pl-4 flex-col">';
+        html += '<p class="text-xs font-semibold uppercase tracking-wider text-[var(--ap-muted)] mb-3">Metric</p>';
+        html += '<div class="relative flex-1 min-h-0">';
+        html += '<div id="results-breakdown-metric-list-sidebar" class="space-y-1 max-h-[370px] overflow-y-auto pr-1">';
+        html += '<div class="text-sm font-semibold text-[var(--ap-primary)] mt-3 first:mt-0">Composite</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="overall">Overall score</button>';
+        html += '<div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Arena</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Personal">Personal</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Relationships">Relationships</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="arena:Business">Business</button>';
+        html += '<div class="text-sm font-semibold text-[var(--ap-primary)] mt-3">Domain</div>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:PH">Physical Health</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:IA">Inner Alignment</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:ME">Mental / Emotional</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:AF">Attention &amp; Focus</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:RS">Relationship to Self</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:FA">Family</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:CO">Community</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:WI">World / Impact</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:VS">Vision / Strategy</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EX">Execution</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:OH">Operational Health</button>';
+        html += '<button type="button" class="results-breakdown-metric-btn block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors border border-transparent hover:bg-[var(--ap-bg)] hover:border-[var(--ap-border)]" data-value="domain:EC">Ecology</button>';
+        html += '</div>';
+        html += '<div id="results-breakdown-sidebar-scroll-up" class="absolute top-0 left-0 right-0 z-10 flex justify-center pt-2 pb-6 bg-gradient-to-b from-white to-transparent pointer-events-none transition-opacity duration-200 opacity-0" aria-hidden="true">';
+        html += '<i data-lucide="chevron-up" class="w-5 h-5 text-[var(--ap-primary)]"></i>';
+        html += '</div>';
+        html += '<div id="results-breakdown-sidebar-scroll-down" class="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-2 pt-6 bg-gradient-to-t from-white to-transparent pointer-events-none transition-opacity duration-200" aria-hidden="false">';
+        html += '<i data-lucide="chevron-down" class="w-5 h-5 text-[var(--ap-primary)]"></i>';
+        html += '</div>';
+        html += '</div></div>';
+        html += '</div>';
+        html += '<div id="results-breakdown-interpretation" class="mt-6 pt-6 border-t border-[var(--ap-border)] hidden w-full px-0">';
+        html += '<p id="results-breakdown-interpretation-text" class="text-sm text-[var(--ap-secondary)] leading-relaxed"></p>';
+        html += '</div></div></div>';
+        // Inline CTA 1 — after composite score, before arena scores
+        html += '<div class="no-print portal-inline-cta bg-[var(--ap-primary)]/5 border border-[var(--ap-primary)]/20 rounded-xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">Your results are ready. Save them before you leave.</p>';
+        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Create a free portal account to save these results, track your progress over time, and see what changes between assessments.</p>';
+        html += '</div>';
+        html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">';
+        html += '<a href="https://portal.alignedpower.coach/signup" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Create free account</a>';
+        html += '<a href="https://portal.alignedpower.coach/login" class="portal-cta-login text-sm font-semibold border border-[var(--ap-primary)]/40 hover:border-[var(--ap-primary)] text-[var(--ap-primary)] px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap">Log in</a>';
+        html += '</div>';
+        html += '</div>';
+
+        html += '<div id="vapi-demo-target-arenas">';
+        html += '<h2 class="text-2xl text-[var(--ap-primary)] mb-4">Arena scores</h2>';
+        html += '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">';
+        ['Personal', 'Relationships', 'Business'].forEach(function(arena) {
+          var score = arenaScores[arena];
+          var tier = arenaTiers[arena];
+          var text = (INTERP.arena[arena] && INTERP.arena[arena][tier]) ? INTERP.arena[arena][tier] : '';
+          if (score == null) score = '—';
+          html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-5">';
+          html += '<p class="font-semibold text-[var(--ap-primary)]">' + arena + '</p>';
+          html += '<p class="text-2xl font-bold mt-1" style="color:' + tierColor(tier) + '">' + score + ' / 10</p>';
+          html += '<p class="text-sm font-medium mt-1" style="color:' + tierColor(tier) + '">' + tier + '</p>';
+          html += '<p class="text-sm text-[var(--ap-secondary)] mt-3 leading-relaxed">' + text + '</p>';
+          html += '</div>';
+        });
+        html += '</div>';
+        html += '</div>';
+
+        // ALFRED — mid-page CTA (after arena overview, before priority matrix)
+        html += '<div class="no-print alf-inline-cta rounded-xl border-2 border-[var(--ap-accent)] bg-gradient-to-br from-[var(--ap-accent)]/12 to-[var(--ap-primary)]/5 p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+        html += '<div class="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--ap-accent)]/25 flex items-center justify-center" aria-hidden="true">';
+        html += '<i data-lucide="sparkles" class="w-5 h-5 text-[var(--ap-accent)]"></i>';
+        html += '</div>';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<p class="text-xs font-bold uppercase tracking-widest text-[var(--ap-accent)] mb-1">Continue your journey</p>';
+        html += '<p class="font-semibold text-[var(--ap-primary)] mb-1">Put this snapshot to work with ALFRED</p>';
+        html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Aligned Freedom Coach uses your VAPI™ results, archetype, and check-ins—so your AI coach stays values-aligned when life gets loud.</p>';
+        html += '</div>';
+        html += '<div class="flex flex-col sm:flex-row gap-2 flex-shrink-0 w-full sm:w-auto">';
+        html += '<a href="https://alfredai.coach" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-[100px] transition-colors whitespace-nowrap">Open ALFRED <i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>';
+        html += '<a href="https://jakesebok.com/who-is-alfred" class="inline-flex items-center justify-center gap-2 text-sm font-semibold border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)] px-4 py-2.5 rounded-[100px] transition-colors whitespace-nowrap">What is ALFRED?</a>';
+        html += '</div>';
+        html += '</div>';
+
+        // Priority Matrix teaser — full matrix lives in portal dashboard
+        html += buildPriorityMatrixTeaser();
+
+        var arenaOrder = ['Personal', 'Relationships', 'Business'];
+        var domainOrder = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        html += '<div id="vapi-demo-target-domains">';
+        arenaOrder.forEach(function(arena, idx) {
+          var isFirst = idx === 0;
+          // Insert "See how you change over time" CTA between Personal and Relationships (non-logged-in only; removed by portal script when logged in)
+          if (idx === 1) {
+            html += '<div class="no-print portal-inline-cta bg-gradient-to-r from-[var(--ap-primary)]/8 to-[var(--ap-accent)]/8 border border-[var(--ap-accent)]/25 rounded-xl p-5 my-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">';
+            html += '<div class="text-2xl flex-shrink-0">📈</div>';
+            html += '<div class="flex-1 min-w-0">';
+            html += '<p class="font-semibold text-[var(--ap-primary)] mb-0.5">See how you change over time.</p>';
+            html += '<p class="text-sm text-[var(--ap-secondary)] leading-relaxed">Re-take the VAPI in 30–90 days and your portal will show you exactly what shifted: scores, priorities, and what to focus on next.</p>';
+            html += '</div>';
+            html += '<div class="flex flex-col items-center gap-1.5 flex-shrink-0">';
+            html += '<a href="https://portal.alignedpower.coach/signup" class="portal-cta-signup text-sm font-bold bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white px-4 py-2.5 rounded-lg transition-colors text-center whitespace-nowrap w-full">Start tracking free</a>';
+            html += '<a href="https://portal.alignedpower.coach/login" class="portal-cta-login text-sm font-semibold text-[var(--ap-muted)] hover:text-[var(--ap-primary)] underline underline-offset-2 transition-colors text-center whitespace-nowrap">Already have an account?</a>';
+            html += '</div>';
+            html += '</div>';
+          }
+          html += '<div class="print-arena-group' + (isFirst ? ' print-first-arena' : '') + '">';
+          // Include the "Domain detail" h2 inside the first arena group so it
+          // always lands on the same page as the Personal section heading and cards
+          if (isFirst) {
+            html += '<h2 class="text-2xl text-[var(--ap-primary)] mt-10 mb-4">Domain detail</h2>';
+          }
+          var mt = isFirst ? 'mt-2' : 'mt-8';
+          html += '<h3 class="text-xl text-[var(--ap-primary)] ' + mt + ' mb-4">' + escapeHtml(arena) + '</h3>';
+          domains.filter(function(d) { return d.arena === arena; }).forEach(function(d) {
+            var pct = Math.min(100, d.score * 10);
+            var text = (INTERP.domain[d.code] && INTERP.domain[d.code][d.tier]) ? INTERP.domain[d.code][d.tier] : '';
+            html += '<div class="bg-white rounded-lg border border-[var(--ap-border)] shadow-sm p-6 mb-4">';
+            html += '<div class="flex flex-wrap items-center gap-2 mb-2"><span class="font-semibold text-[var(--ap-secondary)]">' + d.domain + '</span>';
+            html += '<span class="font-bold" style="color:' + tierColor(d.tier) + '">' + d.score + ' / 10</span>';
+            html += '<span class="text-sm font-medium px-2 py-0.5 rounded" style="background:' + tierColor(d.tier) + '20;color:' + tierColor(d.tier) + '">' + d.tier + '</span></div>';
+            html += '<div class="h-2 bg-[var(--ap-muted)]/30 rounded-full overflow-hidden mb-4"><div class="h-full rounded-full transition-all duration-500" style="width:' + pct + '%;background:' + tierColor(d.tier) + '"></div></div>';
+            html += '<p class="text-[var(--ap-secondary)] leading-relaxed text-sm">' + text + '</p>';
+            html += '</div>';
+          });
+          html += '</div>'; // end print-arena-group
+        });
+        html += '</div>';
+
+        html += buildMyPlanLargeCalloutHtml();
+        html += '<p class="text-sm text-[var(--ap-muted)] mt-8 no-print">Use &ldquo;Download / Print results&rdquo; above to save this page as a PDF.</p>';
+
+        document.getElementById('results-content').innerHTML = html;
+        if (window.__VAPI_DEMO_EMBED__) {
+          document.querySelectorAll('.vapi-demo-spotlight').forEach(function (n) {
+            n.classList.remove('vapi-demo-spotlight');
+          });
+          document.documentElement.classList.remove('vapi-demo-spotlight-active');
+        }
+        attachAlignmentLightbox();
+        initExploreSection(results, domains);
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+        if (results.archetype === 'The Journeyman') {
+          import('/vapi/lib/vapi-journeyman-display.js').then(function(mod) {
+            var mount = document.getElementById('journeyman-growth-edge-mount');
+            if (!mount || !mod.buildJourneymanGrowthEdgeHtml) return;
+            var edgeHtml = mod.buildJourneymanGrowthEdgeHtml(results, { escapeHtml: escapeHtml });
+            if (edgeHtml) {
+              mount.outerHTML = edgeHtml;
+              if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+            } else {
+              mount.remove();
+            }
+          }).catch(function() {
+            var m = document.getElementById('journeyman-growth-edge-mount');
+            if (m) m.remove();
+          });
+        }
+        var constEl = document.querySelector('.archetype-constellation');
+        if (constEl && typeof VAPI_ARCHETYPE !== 'undefined' && VAPI_ARCHETYPE.initConstellationTooltips) VAPI_ARCHETYPE.initConstellationTooltips(constEl);
+        document.dispatchEvent(new CustomEvent('vapi-results-rendered'));
+      }
+
+      function initExploreSection(res, domains) {
+        var container = document.getElementById('results-explore-section');
+        if (!container) return;
+        var singleResult = res;
+        var tierColors = COLORS || { Dialed: '#22C55E', Functional: '#EAB308', 'Below the Line': '#F97316', 'In the Red': '#EF4444' };
+        document.getElementById('results-breakdown-wheel-svg').innerHTML = buildExploreWheelSVG(domains);
+        var wheelWrap = document.getElementById('results-breakdown-wheel-wrap');
+        var wheelSvgEl = document.getElementById('results-breakdown-wheel-svg').querySelector('svg');
+        if (wheelSvgEl) {
+          wheelSvgEl.style.width = '100%';
+          wheelSvgEl.style.height = '100%';
+          wheelSvgEl.style.maxWidth = '320px';
+          wheelSvgEl.style.maxHeight = '320px';
+        }
+        var RDOM_ORDER = ['PH', 'IA', 'ME', 'AF', 'RS', 'FA', 'CO', 'WI', 'VS', 'EX', 'OH', 'EC'];
+        var RDOM_NAMES = { PH: 'Physical Health', IA: 'Inner Alignment', ME: 'Mental / Emotional', AF: 'Attention & Focus', RS: 'Relationship to Self', FA: 'Family', CO: 'Community', WI: 'World / Impact', VS: 'Vision / Strategy', EX: 'Execution', OH: 'Operational Health', EC: 'Ecology' };
+        var RLABEL_LINES = { PH: ['Physical', 'Health'], IA: ['Inner', 'Alignment'], ME: ['Mental /', 'Emotional'], AF: ['Attention', '& Focus'], RS: ['Relationship', 'to Self'], FA: ['Family'], CO: ['Community'], WI: ['World /', 'Impact'], VS: ['Vision /', 'Strategy'], EX: ['Execution'], OH: ['Operational', 'Health'], EC: ['Ecology'] };
+        var rLabelsTimeout = null;
+        function updateResultsLabels(currentRotationDeg) {
+          var overlay = document.getElementById('results-breakdown-wheel-labels-overlay');
+          var labelsSvg = document.getElementById('results-breakdown-wheel-labels-svg');
+          if (!overlay || !labelsSvg) return;
+          var cx = 165, cy = 165, wheelR = 140, gap = 9, anchorR = wheelR + gap, lineHeight = 10, halfFont = 5;
+          var filterId = 'resultsOverlayLabelShadow';
+          var h = '<defs><filter id="' + filterId + '" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="rgba(255,255,255,0.95)" flood-opacity="1"/></filter></defs>';
+          for (var i = 0; i < 12; i++) {
+            var a = ((-75 + 30 * i + currentRotationDeg) % 360 + 360) % 360;
+            var rad = a * Math.PI / 180;
+            var ax = cx + anchorR * Math.cos(rad), ay = cy + anchorR * Math.sin(rad);
+            var lines = RLABEL_LINES[RDOM_ORDER[i]] || [RDOM_ORDER[i]];
+            var numLines = lines.length, blockH = (numLines - 1) * lineHeight;
+            var anchor;
+            if (a > 315 || a <= 45) anchor = 'start';
+            else if (a > 135 && a <= 225) anchor = 'end';
+            else anchor = 'middle';
+            var firstLineY;
+            if (a > 45 && a <= 135) firstLineY = ay + halfFont;
+            else if (a > 225 && a <= 315) firstLineY = ay - blockH - halfFont;
+            else firstLineY = ay - blockH / 2;
+            h += '<text x="' + ax.toFixed(2) + '" y="' + firstLineY.toFixed(2) + '" font-size="10" fill="#FF6B1A" font-family="Cormorant Garamond,serif" font-weight="800" text-anchor="' + anchor + '" dominant-baseline="middle" filter="url(#' + filterId + ')">';
+            for (var L = 0; L < numLines; L++) {
+              h += '<tspan x="' + ax.toFixed(2) + '" dy="' + (L === 0 ? '0' : lineHeight + 'px') + '">' + lines[L].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</tspan>';
+            }
+            h += '</text>';
+          }
+          labelsSvg.innerHTML = h;
+          overlay.classList.remove('opacity-0');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+        function hideResultsLabels() {
+          var overlay = document.getElementById('results-breakdown-wheel-labels-overlay');
+          if (!overlay) return;
+          overlay.classList.add('opacity-0');
+          overlay.setAttribute('aria-hidden', 'true');
+          document.getElementById('results-breakdown-wheel-labels-svg').innerHTML = '';
+        }
+        function getScoreForMetric(r, metricKey) {
+          if (!r) return null;
+          if (metricKey === 'overall') return typeof r.overall === 'number' ? r.overall : null;
+          if (metricKey.indexOf('arena:') === 0) { var as = r.arenaScores || {}; return typeof as[metricKey.slice(6)] === 'number' ? as[metricKey.slice(6)] : null; }
+          if (metricKey.indexOf('domain:') === 0) {
+            var code = metricKey.slice(7);
+            var ds = r.domainScores || {};
+            if (typeof ds[code] === 'number') return ds[code];
+            var d = (r.domains || []).find(function(x) { return x.code === code; });
+            return (d && typeof d.score === 'number') ? d.score : null;
+          }
+          return null;
+        }
+        function getTierForMetric(r, metricKey) {
+          if (!r) return null;
+          if (metricKey === 'overall') return (r.overallTier || '').trim() || null;
+          if (metricKey.indexOf('arena:') === 0) { var at = r.arenaTiers || {}; return (at[metricKey.slice(6)] || '').trim() || null; }
+          if (metricKey.indexOf('domain:') === 0) {
+            var code = metricKey.slice(7);
+            var d = (r.domains || []).find(function(x) { return x.code === code; });
+            return (d && d.tier) ? d.tier : null;
+          }
+          return null;
+        }
+        function getMetricLabel(metricKey) {
+          if (metricKey === 'overall') return 'Overall score';
+          if (metricKey.indexOf('arena:') === 0) return metricKey.slice(6);
+          return (metricKey.indexOf('domain:') === 0) ? (RDOM_NAMES[metricKey.slice(7)] || metricKey.slice(7)) : metricKey;
+        }
+        function getInterpretation(r, metricKey) {
+          var tier = getTierForMetric(r, metricKey);
+          if (!tier) return '';
+          var INTERP = window.VAPI_INTERPRETATIONS;
+          if (!INTERP) return '';
+          if (metricKey === 'overall') return (INTERP.composite && INTERP.composite[tier]) || '';
+          if (metricKey.indexOf('arena:') === 0) { var arena = metricKey.slice(6); return (INTERP.arena && INTERP.arena[arena] && INTERP.arena[arena][tier]) || ''; }
+          if (metricKey.indexOf('domain:') === 0) { var code = metricKey.slice(7); return (INTERP.domain && INTERP.domain[code] && INTERP.domain[code][tier]) || ''; }
+          return '';
+        }
+        function getSegmentIndexForMetric(metricKey) {
+          if (metricKey !== 'overall' && metricKey.indexOf('domain:') === 0) {
+            var i = RDOM_ORDER.indexOf(metricKey.slice(7));
+            return i >= 0 ? i : null;
+          }
+          return null;
+        }
+        function getWheelTransform(metricKey) {
+          var focusScale = 1.33;
+          if (metricKey === 'overall') return { scale: focusScale, rotate: 0 };
+          if (metricKey.indexOf('domain:') === 0) {
+            var i = getSegmentIndexForMetric(metricKey);
+            if (i == null) return { scale: focusScale, rotate: 0 };
+            return { scale: focusScale, rotate: -90 - (-75 + 30 * i) };
+          }
+          if (metricKey.indexOf('arena:') === 0) {
+            var centerAngles = { Personal: -30, Relationships: 90, Business: 210 };
+            var angle = centerAngles[metricKey.slice(6)];
+            if (angle == null) return { scale: focusScale, rotate: 0 };
+            return { scale: focusScale, rotate: -90 - angle };
+          }
+          return { scale: focusScale, rotate: 0 };
+        }
+        function updateBreakdown(metricKey) {
+          if (rLabelsTimeout) { clearTimeout(rLabelsTimeout); rLabelsTimeout = null; }
+          hideResultsLabels();
+          var score = getScoreForMetric(singleResult, metricKey);
+          var tier = getTierForMetric(singleResult, metricKey);
+          document.getElementById('results-breakdown-metric-label').textContent = getMetricLabel(metricKey);
+          var rDropdownLabel = document.getElementById('results-breakdown-metric-dropdown-label');
+          if (rDropdownLabel) rDropdownLabel.textContent = getMetricLabel(metricKey);
+          document.getElementById('results-breakdown-score-value').textContent = score != null ? Math.round(score * 10) / 10 : '—';
+          var badgeEl = document.getElementById('results-breakdown-tier-badge');
+          if (tier) {
+            badgeEl.textContent = tier;
+            badgeEl.style.background = tierColors[tier] || 'var(--ap-accent)';
+            badgeEl.classList.remove('hidden');
+          } else { badgeEl.classList.add('hidden'); }
+          var t = getWheelTransform(metricKey);
+          wheelWrap.style.transform = 'scale(' + t.scale + ') rotate(' + t.rotate + 'deg)';
+          var wheelContainer = document.getElementById('results-breakdown-wheel-container');
+          wheelContainer.classList.add('breakdown-wheel-container--zoomed');
+          rLabelsTimeout = setTimeout(function() { rLabelsTimeout = null; updateResultsLabels(t.rotate); }, 660);
+          var interpText = getInterpretation(singleResult, metricKey);
+          var interpEl = document.getElementById('results-breakdown-interpretation-text');
+          if (interpText) {
+            interpEl.textContent = interpText;
+            document.getElementById('results-breakdown-interpretation').classList.remove('hidden');
+          } else {
+            interpEl.textContent = '';
+            document.getElementById('results-breakdown-interpretation').classList.add('hidden');
+          }
+          var svgEl = document.getElementById('results-breakdown-wheel-svg').querySelector('svg');
+          if (svgEl) {
+            var segments = svgEl.querySelectorAll('.wheel-segment');
+            var dimOpacity = '0.13';
+            var focusOpacity = '1';
+            if (metricKey === 'overall') segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+            else if (metricKey.indexOf('arena:') === 0) {
+              var arenaFocus = metricKey.slice(6);
+              segments.forEach(function(p) { p.style.opacity = p.getAttribute('data-arena') === arenaFocus ? focusOpacity : dimOpacity; });
+            } else if (metricKey.indexOf('domain:') === 0) {
+              var domainIdx = getSegmentIndexForMetric(metricKey);
+              segments.forEach(function(p) { p.style.opacity = p.getAttribute('data-domain-index') === String(domainIdx) ? focusOpacity : dimOpacity; });
+            } else segments.forEach(function(p) { p.style.opacity = focusOpacity; });
+            var domainLabels = svgEl.querySelectorAll('.wheel-domain-label');
+            domainLabels.forEach(function(el) { el.style.opacity = '0'; });
+            var arenaLabels = svgEl.querySelectorAll('.wheel-arena-label');
+            var isDomain = metricKey.indexOf('domain:') === 0;
+            arenaLabels.forEach(function(el) {
+              el.setAttribute('fill', isDomain ? '#000' : '#f7f2e8');
+              el.setAttribute('filter', isDomain ? 'url(#resultsExploreArenaLabelHalo)' : 'url(#resultsExploreArenaLabelShadowDepth)');
+            });
+          }
+        }
+        var rbml = document.getElementById('results-breakdown-metric-list');
+        var rDropdownTrigger = document.getElementById('results-breakdown-metric-dropdown-trigger');
+        var rDropdownPanel = document.getElementById('results-breakdown-metric-dropdown-panel');
+        var rDropdownWrap = document.getElementById('results-breakdown-metric-dropdown-wrap');
+        var rChevronEl = document.getElementById('results-breakdown-metric-chevron');
+        function rCloseDropdown() {
+          if (rDropdownPanel) rDropdownPanel.classList.add('hidden');
+          if (rDropdownTrigger) rDropdownTrigger.setAttribute('aria-expanded', 'false');
+          if (rChevronEl) rChevronEl.style.transform = '';
+        }
+        function rOpenDropdown() {
+          if (rDropdownPanel) rDropdownPanel.classList.remove('hidden');
+          if (rDropdownTrigger) rDropdownTrigger.setAttribute('aria-expanded', 'true');
+          if (rChevronEl) rChevronEl.style.transform = 'rotate(180deg)';
+        }
+        if (rDropdownTrigger && rDropdownPanel) {
+          rDropdownTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isOpen = !rDropdownPanel.classList.contains('hidden');
+            if (isOpen) rCloseDropdown(); else rOpenDropdown();
+          });
+          document.addEventListener('click', function(e) {
+            if (rDropdownWrap && !rDropdownWrap.contains(e.target)) rCloseDropdown();
+          });
+        }
+        function setResultsBreakdownSelection(value) {
+          container.querySelectorAll('.results-breakdown-metric-btn').forEach(function(b) {
+            var on = b.getAttribute('data-value') === value;
+            b.classList.toggle('bg-[var(--ap-primary)]', on);
+            b.classList.toggle('text-white', on);
+            b.classList.toggle('border-[var(--ap-primary)]', on);
+            b.classList.toggle('rbm-selected', on);
+            b.classList.toggle('text-[var(--ap-text)]', !on);
+          });
+        }
+        rbml.addEventListener('click', function(e) {
+          var btn = e.target.closest('.results-breakdown-metric-btn');
+          if (!btn) return;
+          var value = btn.getAttribute('data-value');
+          setResultsBreakdownSelection(value);
+          rCloseDropdown();
+          updateBreakdown(value);
+        });
+        var rbmlSidebar = document.getElementById('results-breakdown-metric-list-sidebar');
+        var rScrollDown = document.getElementById('results-breakdown-sidebar-scroll-down');
+        var rScrollUp = document.getElementById('results-breakdown-sidebar-scroll-up');
+        function updateResultsSidebarScrollIndicators() {
+          if (!rbmlSidebar || !rScrollDown || !rScrollUp) return;
+          var el = rbmlSidebar;
+          var atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 8;
+          var atTop = el.scrollTop < 8;
+          rScrollDown.style.opacity = atBottom ? '0' : '1';
+          rScrollDown.setAttribute('aria-hidden', atBottom ? 'true' : 'false');
+          rScrollUp.style.opacity = atTop ? '0' : '1';
+          rScrollUp.setAttribute('aria-hidden', atTop ? 'true' : 'false');
+        }
+        if (rbmlSidebar) {
+          rbmlSidebar.addEventListener('click', function(e) {
+            var btn = e.target.closest('.results-breakdown-metric-btn');
+            if (!btn) return;
+            var value = btn.getAttribute('data-value');
+            setResultsBreakdownSelection(value);
+            updateBreakdown(value);
+          });
+          rbmlSidebar.addEventListener('scroll', updateResultsSidebarScrollIndicators);
+          setTimeout(updateResultsSidebarScrollIndicators, 100);
+        }
+        var rWheelSvgContainer = document.getElementById('results-breakdown-wheel-svg');
+        if (rWheelSvgContainer) {
+          rWheelSvgContainer.addEventListener('click', function(e) {
+            var seg = e.target.closest && e.target.closest('.wheel-segment');
+            if (!seg) return;
+            var idx = seg.getAttribute('data-domain-index');
+            if (idx == null) return;
+            var metricKey = 'domain:' + RDOM_ORDER[parseInt(idx, 10)];
+            setResultsBreakdownSelection(metricKey);
+            rCloseDropdown();
+            updateBreakdown(metricKey);
+          });
+        }
+        setResultsBreakdownSelection('overall');
+        container.querySelectorAll('.results-breakdown-metric-btn:not([data-value="overall"])').forEach(function(b) { b.classList.add('text-[var(--ap-text)]'); });
+        updateBreakdown('overall');
+      }
+
+      function attachAlignmentLightbox() {
+        var el = document.querySelector('.alignment-glance-left');
+        if (!el) return;
+        function openLightbox() {
+          var overlay = document.createElement('div');
+          overlay.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 no-print';
+          overlay.setAttribute('role', 'dialog');
+          overlay.setAttribute('aria-modal', 'true');
+          overlay.setAttribute('aria-label', 'Enlarged alignment view');
+          var inner = document.createElement('div');
+          inner.className = 'bg-white rounded-xl w-[95vw] max-w-6xl h-[95vh] max-h-[95vh] overflow-auto relative shadow-xl';
+          var closeBtn = document.createElement('button');
+          closeBtn.type = 'button';
+          closeBtn.className = 'absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full text-[var(--ap-secondary)] hover:bg-[var(--ap-muted)]/30 hover:text-[var(--ap-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)]';
+          closeBtn.setAttribute('aria-label', 'Close');
+          closeBtn.innerHTML = '&times;';
+          closeBtn.style.fontSize = '1.5rem';
+          closeBtn.style.lineHeight = '1';
+          var printBtn = document.createElement('button');
+          printBtn.type = 'button';
+          printBtn.className = 'absolute top-4 right-16 w-10 h-10 flex items-center justify-center rounded-full text-[var(--ap-secondary)] hover:bg-[var(--ap-muted)]/30 hover:text-[var(--ap-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--ap-accent)]';
+          printBtn.setAttribute('aria-label', 'Print this view');
+          printBtn.textContent = 'Print';
+          printBtn.style.fontSize = '0.875rem';
+          var contentWrap = document.createElement('div');
+          contentWrap.className = 'p-12 sm:p-16 flex items-center justify-center min-h-[200px] lightbox-print-content';
+          var clone = document.querySelector('.alignment-glance-inner').cloneNode(true);
+          var hint = clone.querySelector('.enlarge-hint');
+          if (hint) hint.remove();
+          clone.style.transform = 'scale(3.2)';
+          clone.style.transformOrigin = 'top center';
+          contentWrap.appendChild(clone);
+          inner.appendChild(closeBtn);
+          inner.appendChild(printBtn);
+          inner.appendChild(contentWrap);
+          overlay.appendChild(inner);
+          function close() {
+            overlay.remove();
+            document.body.style.overflow = '';
+          }
+          function printLightbox() {
+            var printWin = window.open('', '_blank');
+            if (!printWin) return;
+            var content = contentWrap.cloneNode(true);
+            var cloneInner = content.querySelector('.alignment-glance-inner');
+            if (cloneInner) {
+              cloneInner.style.transform = 'none';
+              var subhead = cloneInner.querySelector('p');
+              if (subhead) subhead.remove();
+              var hint = cloneInner.querySelector('.enlarge-hint');
+              if (hint) hint.remove();
+              var printHeadline = cloneInner.querySelector('h2');
+              if (printHeadline) printHeadline.textContent = 'Your VAPI™ Scores';
+            }
+            content.style.padding = '0';
+            content.style.transform = 'none';
+            var link = document.querySelector('link[href*="fonts.googleapis"]');
+            var fontLink = link ? '<link rel="stylesheet" href="' + link.href + '">' : '';
+            var origin = window.location.origin;
+            var logoAbs = origin + '/images/logo-jake-sebok-horizontal.png';
+            var watermarkAbs = origin + '/images/logo-jake-sebok-horizontal.png';
+            var vapiLogoAbs = origin + '/images/vapi/vapi-logo.png';
+            var bodyHtml = content.innerHTML
+              .replace('src="/images/logo-jake-sebok-horizontal.png"', 'src="' + logoAbs + '"')
+              .replace('src="/images/vapi/vapi-logo.png"', 'src="' + vapiLogoAbs + '"');
+            var printStyles = '<style>' +
+              ':root{--ap-primary:#0E1624;--ap-secondary:#3A4A5C;--ap-accent:#FF6B1A;--ap-muted:#7A8FA8;}' +
+              'body{font-family:\'Cormorant Garamond\',serif;font-weight:600;margin:0;padding:0;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;box-sizing:border-box;background:#fff;overflow:visible;}' +
+              'body *{box-sizing:border-box;}' +
+              '.print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}' +
+              '.alignment-glance-inner{width:100%;margin:0 auto;text-align:center;padding-top:2.25rem;}' +
+              '.alignment-glance-inner h2{font-family:\'Cormorant Garamond\',serif;font-weight:700;font-size:1.375rem;line-height:1.2;color:#0E1624;margin:0 0 0.5rem 0;}' +
+              '.alignment-glance-inner .relative{position:relative;width:100%;max-width:100%;margin:0 auto;overflow:visible;}' +
+              '.alignment-glance-inner svg{width:100%;height:auto;display:block;position:relative;z-index:10;}' +
+              '.alignment-glance-inner > img:last-of-type{display:block;width:auto;height:4rem;margin:1.25rem auto 0;max-width:100%;}' +
+              'img{max-width:100%;height:auto;}' +
+              'svg{max-width:100%;height:auto;}' +
+              '@media print{@page{margin:0.2in;} body{padding:0;margin:0;} .print-scale-wrapper{transform:scale(2);transform-origin:top center;width:4in;}}' +
+              '</style>';
+            var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Your VAPI\u2122 Scores</title>' + fontLink + printStyles + '</head><body><div class="print-scale-wrapper">' + bodyHtml + '</div></body></html>';
+            printWin.document.write(html);
+            printWin.document.close();
+            printWin.focus();
+            setTimeout(function() { try { printWin.print(); printWin.close(); } catch (err) { printWin.close(); } }, 250);
+          }
+          printBtn.addEventListener('click', function(e) { e.stopPropagation(); printLightbox(); });
+          closeBtn.addEventListener('click', close);
+          overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) close();
+          });
+          document.addEventListener('keydown', function onKey(e) {
+            if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onKey); }
+          });
+          document.body.style.overflow = 'hidden';
+          document.body.appendChild(overlay);
+        }
+        el.addEventListener('click', openLightbox);
+        el.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+        });
+      }
+
+      if (results && typeof results.overall === 'number') {
+        render(results);
+      } else {
+        renderPlaceholder();
+      }
+
+      // Before printing: expand all collapsed priority-matrix cards so they print fully
+      window.addEventListener('beforeprint', function() {
+        document.querySelectorAll('.pm-card-body').forEach(function(el) {
+          el.classList.remove('hidden');
+        });
+        document.querySelectorAll('.driver-details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+        document.querySelectorAll('.archetype-details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+        document.querySelectorAll('#journeyman-growth-edge details').forEach(function(d) {
+          d.setAttribute('open', '');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

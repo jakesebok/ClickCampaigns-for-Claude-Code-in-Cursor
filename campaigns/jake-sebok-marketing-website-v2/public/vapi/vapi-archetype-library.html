@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/images/vapi/favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 9 Founder Archetypes | Jake Sebok</title>
+  <meta name="description" content="Explore the 9 founder archetypes inside the VAPI Assessment and understand your current operating pattern.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/vapi/vapi-archetypes.js"></script>
+  <script src="/vapi/vapi-drivers.js"></script>
+  <script src="/vapi/vapi-archetype-library.js"></script>
+  <style>
+    :root {
+      --ap-primary: #0E1624;
+      --ap-secondary: #3A4A5C;
+      --ap-accent: #FF6B1A;
+      --ap-bg: #F5F7FA;
+      --ap-text: #0E1624;
+      --ap-muted: #7A8FA8;
+      --ap-border: #DDE3ED;
+      --ap-surface: #ffffff;
+      --ap-header-bg: rgba(255,255,255,0.94);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(165deg, var(--ap-bg) 0%, color-mix(in srgb, var(--ap-primary) 5%, var(--ap-bg)) 38%, color-mix(in srgb, var(--ap-accent) 5%, var(--ap-bg)) 100%);
+      background-attachment: fixed;
+      color: var(--ap-text);
+      min-height: 100vh;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: -0.02em; }
+    .portal-library-desktop-layout { display: block; }
+    .portal-library-desktop-sidebar { display: none; }
+    .portal-library-desktop-sections { min-width: 0; }
+    .portal-library-sidebar-sticky { position: sticky; top: 5.5rem; }
+    @media (max-width: 767px) {
+      body:not(.portal-lib-archetype-detail) #archetype-library-sections {
+        display: none !important;
+      }
+      body.portal-lib-archetype-detail #archetype-library-sections {
+        display: block !important;
+      }
+      body.portal-lib-archetype-detail #archetype-library-sections section:not(.portal-lib-active-mobile) {
+        display: none !important;
+      }
+    }
+    @media (min-width: 768px) {
+      .portal-library-desktop-layout {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 260px minmax(0, 1fr);
+      }
+      .portal-library-desktop-sidebar { display: block; }
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased">
+  <header class="sticky top-0 z-20 border-b border-[var(--ap-border)] bg-[var(--ap-header-bg)] backdrop-blur-sm">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center">
+          <img src="/images/logo-jake-sebok-horizontal.png" alt="Jake Sebok" class="h-12 w-auto">
+        </a>
+        <a href="/assessment/results" class="hidden text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)] sm:inline">← Back to results</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/assessment/start" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Take assessment</a>
+        <a href="/work-with-me" class="text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">Work with Jake</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:py-10">
+    <div id="loading" class="rounded-3xl border border-[var(--ap-border)] bg-[var(--ap-surface)] px-6 py-10 text-center text-[var(--ap-muted)] shadow-sm">
+      Loading the archetype library...
+    </div>
+    <div id="gated-content" class="hidden rounded-3xl border border-[var(--ap-border)] bg-[var(--ap-surface)] px-6 py-10 shadow-sm sm:px-8">
+      <div class="max-w-2xl">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--ap-accent)]">Archetype Library</p>
+        <h1 class="mt-3 text-4xl text-[var(--ap-primary)]">Unlock the Full Archetype Library</h1>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed text-[var(--ap-secondary)]">
+          <p>The Archetype Library is an in-depth exploration of all 9 founder operating patterns. It includes detailed descriptions, behavioral indicators, reflection prompts, and guidance on how each archetype connects to the others.</p>
+          <p>Create your free portal account to access the full library, save your VAPI results, and track your progress over time.</p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a id="gated-signup-link" href="https://portal.alignedpower.coach/signup?redirect=%2Fportal%2Farchetype-library" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--ap-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#e55a0f]">Create My Free Account <span aria-hidden="true">→</span></a>
+          <a id="gated-login-link" href="https://portal.alignedpower.coach/login?redirect=%2Fportal%2Farchetype-library" class="text-sm font-semibold text-[var(--ap-primary)] underline underline-offset-2 hover:text-[var(--ap-accent)]">I already have an account. Log in.</a>
+        </div>
+        <a href="/assessment/results" class="mt-5 inline-flex text-sm font-medium text-[var(--ap-muted)] hover:text-[var(--ap-primary)]">Maybe later</a>
+      </div>
+    </div>
+    <div id="page-content" class="hidden space-y-8"></div>
+  </main>
+
+  <footer class="border-t border-[var(--ap-border)] bg-[var(--ap-surface)]/90 py-8 backdrop-blur-sm">
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 text-sm text-[var(--ap-muted)] sm:flex-row sm:items-center sm:justify-between">
+      <p>© 2026 Jake Sebok</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="/about" class="hover:text-[var(--ap-primary)]">About</a>
+        <a href="/work-with-me" class="hover:text-[var(--ap-primary)]">Work With Me</a>
+        <a href="/contact" class="hover:text-[var(--ap-primary)]">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    (async function() {
+      var loadingEl = document.getElementById('loading');
+      var gatedEl = document.getElementById('gated-content');
+      var pageContentEl = document.getElementById('page-content');
+      var latestResults = null;
+      var session = null;
+
+      function getPortalAuthHref(path) {
+        var href = 'https://portal.alignedpower.coach/' + path + '?redirect=' + encodeURIComponent('/portal/archetype-library');
+        try {
+          var raw = sessionStorage.getItem('vapiResults');
+          var results = raw ? JSON.parse(raw) : null;
+          var email = results && results.email ? String(results.email).trim().toLowerCase() : '';
+          if (email) href += '&email=' + encodeURIComponent(email);
+        } catch (error) {}
+        return href;
+      }
+
+      try {
+        var response = await fetch('/api/config');
+        if (response.ok) {
+          eval(await response.text());
+          if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+            var createClient = (await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm')).createClient;
+            var supabase = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+            var sessionResult = await supabase.auth.getSession();
+            session = sessionResult.data.session;
+            if (session && session.user && session.user.email) {
+              var email = String(session.user.email).trim().toLowerCase();
+              var rowResult = await supabase
+                .from('vapi_results')
+                .select('results, created_at')
+                .eq('email', email)
+                .order('created_at', { ascending: false })
+                .limit(1);
+              if (rowResult.data && rowResult.data.length) {
+                latestResults = rowResult.data[0].results || null;
+              }
+            }
+          }
+        }
+      } catch (error) {}
+
+      if (!session) {
+        document.getElementById('gated-signup-link').href = getPortalAuthHref('signup');
+        document.getElementById('gated-login-link').href = getPortalAuthHref('login');
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (gatedEl) gatedEl.classList.remove('hidden');
+        return;
+      }
+
+      var rendered = window.VAPI_ARCHETYPE_LIBRARY.buildPage({
+        results: latestResults,
+        takeAssessmentHref: '/assessment/start',
+        programHref: '/work-with-me',
+        driverLibraryHref: '/assessment/drivers'
+      });
+
+      pageContentEl.innerHTML = rendered.html;
+      window.VAPI_ARCHETYPE_LIBRARY.populateSections(
+        document.getElementById('archetype-library-sections'),
+        rendered.currentArchetype,
+        '/assessment/drivers'
+      );
+
+      if (loadingEl) loadingEl.classList.add('hidden');
+      pageContentEl.classList.remove('hidden');
+      if (window.VAPI_ARCHETYPE_LIBRARY && window.VAPI_ARCHETYPE_LIBRARY.attachMobileNav) {
+        window.VAPI_ARCHETYPE_LIBRARY.attachMobileNav(pageContentEl);
+      }
+      lucide.createIcons();
+    })();
+  </script>
+</body>
+</html>

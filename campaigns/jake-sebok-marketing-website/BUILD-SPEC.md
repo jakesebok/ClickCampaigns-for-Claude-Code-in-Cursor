@@ -8,18 +8,22 @@
 
 ## Pages
 
+**Present-state version (live).** The aspirational/future-state version with the full offer ladder is preserved at `campaigns/jake-sebok-marketing-website-v2/`.
+
 | Page | URL | Purpose |
 |------|-----|---------|
-| Home | `/` | Hero, brand promise, **Aligned Power™** methodology line, **Start here** paths, testimonials, CTAs to VAPI/workshop |
+| Home | `/` | Hero, brand promise, **Aligned Power™** methodology line, **Start here** paths, testimonials, CTAs to VAPI and Aligned Power Program |
 | About | `/about` | Story, credentials, vision, testimonials |
-| Work With Me | `/work-with-me` | Offer overview + Aligned Power Accelerator application form |
+| Work With Me | `/work-with-me` | Two ways in: free VAPI™ Assessment + Aligned Power Program application |
+| Apply | `/work-with-me/apply` | Aligned Power Program application form |
 | Who is ALFRED? | `/who-is-alfred` | Aligned Freedom Coach (ALFRED) — merits + funnel to **alfredai.coach** |
+| Client Stories | `/client-stories` | Featured client transformations |
 | Contact | `/contact` | Contact form only (no booking) |
 | Testimonials | `/testimonials` | Full testimonial collection |
 | Privacy Policy | `/privacy` | Legal |
 | Terms of Use | `/terms` | Legal |
 
-**Copy note:** **Aligned Power™** is Jake’s methodology *and* the name of the **Aligned Power Accelerator** (12-month group program).
+**Copy note:** **Aligned Power™** is Jake’s methodology *and* the name of the **Aligned Power Program** — a 12-month, 1:1, high-touch growth and performance coaching experience for entrepreneurs (application required, personally reviewed). It is not a cohort or group program.
 
 ---
 
@@ -29,21 +33,21 @@
 - **Full brand style** — Slate & Spark (style guide)
 - **Modern, gorgeous, interactive** — Enneagram 7 energy, iconoclastic, breaks the mold
 - **Testimonials** — Scattered on Home + About; full page at /testimonials
-- **Application form** — Work With Me: capture revenue, "state their case," why choose them for Accelerator
+- **Application form** — Work With Me: capture revenue, "state their case," why join the Aligned Power Program
 - **Contact form** — Simple form, no booking
 - **Images** — From brand-kit: Pictures of Jake, Testimonials folder
 
 ---
 
-## Offer Flow (Work With Me)
+## Offer Flow (Work With Me) — Present State
 
-Primary path: Get people into free monthly Aligned Freedom Workshop. Also:
-- Free VAPI Assessment
-- Free Aligned Freedom Course (Freedom Builders Community)
-- Quarterly Strategic Alignment Intensives (paid)
-- Paid communities (Aligned Leaders, Growth Alliance Network)
-- Aligned Power Accelerator (application required)
-- 1:1 VIP Coaching (2 slots/year)
+Two ways in:
+- Free VAPI™ Assessment (top of funnel)
+- Aligned Power Program (application required) — 12-month, 1:1, high-touch growth and performance coaching
+
+ALFRED is mentioned as a separate product (the only app Jake sells), with a CTA bridge to alfredai.coach.
+
+> The full aspirational offer ladder (Aligned Freedom Workshop, Freedom Builders Community, Strategic Alignment Intensives, Aligned Leaders Community, etc.) is preserved in the v2 folder for the future-state launch.
 
 ---
 

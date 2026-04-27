@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Apply — Aligned Power Accelerator | Jake Sebok",
+  title: "Apply for the Aligned Power Program | Jake Sebok",
   description:
-    "Apply for the Aligned Power Accelerator, a 12-month group coaching program for entrepreneurs ready to build a business that fits their life and ambition.",
+    "Apply for the Aligned Power Program with Jake Sebok. A 12-month, 1:1, high-touch growth and performance coaching experience for entrepreneurs ready to build a business that fits their life and ambition.",
 };
 
 export default function ApplyPage() {
@@ -27,14 +27,15 @@ export default function ApplyPage() {
             Back to Work With Me
           </Link>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            Aligned Power Accelerator
+            Aligned Power Program
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-            Apply for the 12-month program
+            Apply for the 12-month, 1:1 program
           </h1>
           <p className="text-xl font-semibold text-ap-mid">
-            The Accelerator is for entrepreneurs who are done succeeding in ways that cost too much. Small cohort.
-            Personal review. Tell me about your business, what is not working, and why now matters.
+            The Aligned Power Program is my flagship 12-month, 1:1, high-touch coaching experience for entrepreneurs
+            who are done succeeding in ways that cost too much. Every engagement is customized. Application required and
+            personally reviewed. Tell me about your business, what is not working, and why now matters.
           </p>
         </div>
       </section>
@@ -47,7 +48,7 @@ export default function ApplyPage() {
             method="POST"
             className="space-y-6"
           >
-            <input type="hidden" name="_subject" value="Aligned Power Accelerator Application" />
+            <input type="hidden" name="_subject" value="Aligned Power Program Application" />
             <div>
               <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
                 Full Name *
@@ -106,7 +107,7 @@ export default function ApplyPage() {
             </div>
             <div>
               <label htmlFor="why" className="block text-sm font-semibold text-ap-primary mb-2">
-                Why do you want to join the Accelerator? What&apos;s at stake for you? *
+                Why do you want to join the Aligned Power Program? What&apos;s at stake for you? *
               </label>
               <textarea
                 id="why"
