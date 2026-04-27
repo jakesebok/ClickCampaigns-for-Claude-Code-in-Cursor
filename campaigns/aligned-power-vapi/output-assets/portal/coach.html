@@ -123,19 +123,6 @@
       <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ap-primary)] hover:text-[var(--ap-accent)]">← Back to dashboard</a>
     </div>
     <div id="coach-content" class="hidden">
-      <div class="mb-10 rounded-2xl border-2 border-[var(--ap-border)] bg-white p-6 shadow-sm">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-          <div>
-            <h2 class="text-xl text-[var(--ap-primary)] mb-1" style="font-family: Outfit, sans-serif;">28-day sprints (My Plan)</h2>
-            <p class="text-sm text-[var(--ap-muted)]">Active client plans. Regenerate from latest VAPI or edit coach notes.</p>
-          </div>
-          <button type="button" id="coach-sprints-refresh" class="text-sm font-semibold px-4 py-2 rounded-xl border-2 border-[var(--ap-border)] hover:border-[var(--ap-accent)] text-[var(--ap-primary)]">Refresh list</button>
-        </div>
-        <div id="coach-sprints-loading" class="text-sm text-[var(--ap-muted)] py-4">Loading sprints…</div>
-        <div id="coach-sprints-empty" class="hidden text-sm text-[var(--ap-muted)] py-4">No active sprints yet. Clients get a plan when they complete VAPI.</div>
-        <div id="coach-sprints-list" class="hidden space-y-4"></div>
-      </div>
-
       <div class="mb-8">
         <h1 class="text-3xl text-[var(--ap-primary)] mb-2">Your clients</h1>
         <p class="text-[var(--ap-secondary)]">Click a client to open their profile — VAPI assessments, 6C scorecards, and your notes.</p>
@@ -193,84 +180,6 @@
       }
 
       document.getElementById('coach-content').classList.remove('hidden');
-
-      async function loadCoachSprints() {
-        var loading = document.getElementById('coach-sprints-loading');
-        var empty = document.getElementById('coach-sprints-empty');
-        var list = document.getElementById('coach-sprints-list');
-        if (loading) loading.classList.remove('hidden');
-        if (empty) empty.classList.add('hidden');
-        if (list) { list.classList.add('hidden'); list.innerHTML = ''; }
-        try {
-          var sr = await fetch('/api/coach-sprints', { headers: { Authorization: 'Bearer ' + session.access_token } });
-          var sj = sr.ok ? await sr.json() : { sprints: [] };
-          var sprints = sj.sprints || [];
-          if (loading) loading.classList.add('hidden');
-          if (!sprints.length) {
-            if (empty) empty.classList.remove('hidden');
-            return;
-          }
-          if (list) {
-            list.classList.remove('hidden');
-            list.innerHTML = sprints.map(function(s) {
-              var p = s.payload || {};
-              var title = p.title || 'Sprint';
-              var surf = s.primary_surface === 'alfred' ? 'ALFRED' : 'Portal';
-              return '<div class="rounded-xl border border-[var(--ap-border)] p-4 bg-[var(--ap-bg)]/30" data-sprint-id="' + escapeHtml(s.id) + '" data-client-email="' + escapeHtml(s.user_email) + '">' +
-                '<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">' +
-                '<div><p class="font-semibold text-[var(--ap-primary)]">' + escapeHtml(s.user_email) + '</p>' +
-                '<p class="text-sm text-[var(--ap-secondary)]">' + escapeHtml(title) + ' · <span class="text-[var(--ap-muted)]">' + surf + '</span></p></div>' +
-                '<button type="button" class="coach-sprint-regen text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-lg bg-[var(--ap-accent)] text-white hover:opacity-90">Regenerate</button></div>' +
-                '<label class="block mt-3 text-xs font-semibold text-[var(--ap-muted)]">Coach context (visible to client)</label>' +
-                '<textarea class="coach-sprint-ctx w-full mt-1 px-3 py-2 rounded-lg border border-[var(--ap-border)] text-sm" rows="2">' + escapeHtml(s.coach_context || '') + '</textarea>' +
-                '<label class="block mt-2 text-xs font-semibold text-[var(--ap-muted)]">Private notes</label>' +
-                '<textarea class="coach-sprint-priv w-full mt-1 px-3 py-2 rounded-lg border border-[var(--ap-border)] text-sm" rows="2">' + escapeHtml(s.coach_private_notes || '') + '</textarea>' +
-                '<button type="button" class="coach-sprint-save mt-2 text-sm font-semibold text-[var(--ap-accent)] hover:underline">Save notes</button></div>';
-            }).join('');
-            list.querySelectorAll('.coach-sprint-save').forEach(function(btn) {
-              btn.addEventListener('click', async function() {
-                var card = btn.closest('[data-sprint-id]');
-                if (!card) return;
-                var id = card.getAttribute('data-sprint-id');
-                var ctx = card.querySelector('.coach-sprint-ctx');
-                var priv = card.querySelector('.coach-sprint-priv');
-                btn.textContent = 'Saving…';
-                await fetch('/api/coach-sprint-save', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
-                  body: JSON.stringify({ sprintId: id, coach_context: ctx ? ctx.value : '', coach_private_notes: priv ? priv.value : '' }),
-                });
-                btn.textContent = 'Saved';
-                setTimeout(function() { btn.textContent = 'Save notes'; }, 1500);
-              });
-            });
-            list.querySelectorAll('.coach-sprint-regen').forEach(function(btn) {
-              btn.addEventListener('click', async function() {
-                var card = btn.closest('[data-client-email]');
-                if (!card) return;
-                var em = card.getAttribute('data-client-email');
-                btn.disabled = true;
-                btn.textContent = '…';
-                await fetch('/api/coach-sprint-regenerate', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
-                  body: JSON.stringify({ email: em }),
-                });
-                btn.disabled = false;
-                btn.textContent = 'Regenerate';
-                loadCoachSprints();
-              });
-            });
-          }
-        } catch (e) {
-          if (loading) loading.classList.add('hidden');
-          if (empty) { empty.textContent = 'Could not load sprints.'; empty.classList.remove('hidden'); }
-        }
-        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
-      }
-      loadCoachSprints();
-      var csr = document.getElementById('coach-sprints-refresh');
-      if (csr) csr.addEventListener('click', loadCoachSprints);
 
       function updateThemeIcons() {
         var dark = document.documentElement.getAttribute('data-theme') === 'dark';
