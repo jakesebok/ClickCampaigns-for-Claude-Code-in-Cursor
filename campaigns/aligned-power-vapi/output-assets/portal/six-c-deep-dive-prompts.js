@@ -35,11 +35,12 @@
   // Score signal → ranked mode candidates. The selector picks the first
   // candidate that has not been used in the last 2 weeks for this user.
   var SIGNAL_TO_MODES = {
-    low_score:         ['diagnostic', 'tolerated', 'body'],         // current score under 5
-    big_drop:          ['diagnostic', 'body', 'witness'],           // dropped 2+ vs last week
-    rose_meaningfully: ['witness', 'declaration', 'future_self'],   // rose 2+ vs last week
+    low_score:         ['diagnostic', 'tolerated', 'body'],         // current score under 65
+    big_drop:          ['diagnostic', 'body', 'witness'],           // dropped meaningfully vs last week
+    rose_meaningfully: ['witness', 'declaration', 'future_self'],   // rose meaningfully vs last week
     flat_steady:       ['future_self', 'tolerated', 'declaration'], // unchanged 2+ weeks
-    first_dive:        ['witness']                                  // never deep-dived this dimension
+    first_dive:        ['witness'],                                 // never deep-dived this dimension
+    by_choice:         ['witness', 'diagnostic', 'future_self', 'body', 'tolerated', 'declaration'] // user picked a healthy dimension
   };
 
   // PROMPTS[mode_id][dimension_id] = prompt string.
@@ -102,17 +103,17 @@
   };
 
   // Compute the score signal for a given dimension based on this week's score
-  // and last week's score. Returns a key into SIGNAL_TO_MODES, or null if no
-  // strong signal applies.
+  // and last week's score. Returns a key into SIGNAL_TO_MODES.
+  // Scores are 0-100. Cutoff for "needs deep dive" is 65 (per Jake).
   function computeSignal(thisWeekScore, lastWeekScore, weeksFlat) {
-    if (thisWeekScore == null) return null;
+    if (thisWeekScore == null) return 'by_choice';
     if (lastWeekScore == null) return 'first_dive';
     var delta = thisWeekScore - lastWeekScore;
-    if (thisWeekScore < 5) return 'low_score';
-    if (delta <= -2) return 'big_drop';
-    if (delta >= 2) return 'rose_meaningfully';
-    if (Math.abs(delta) <= 1 && weeksFlat >= 2) return 'flat_steady';
-    return 'witness'; // default fallback
+    if (thisWeekScore < 65) return 'low_score';
+    if (delta <= -20) return 'big_drop';
+    if (delta >= 20) return 'rose_meaningfully';
+    if (Math.abs(delta) <= 10 && weeksFlat >= 2) return 'flat_steady';
+    return 'by_choice'; // healthy dimension picked by free choice
   }
 
   // Pick a mode for this dimension given the signal and recent history.
@@ -138,13 +139,16 @@
   // scores: { clarity: 0-100, coherence: 0-100, ... } current week
   // lastScores: same shape for last week (or null)
   // Returns: array of dimension ids ordered by deep-dive priority.
+  // Cutoff for "low" is 65 (per Jake); meaningful delta is 20 points.
+  // Empty array means no dimension needs the system's attention this week;
+  // the UI should still let the user pick any dimension by choice.
   function recommendDimensions(scores, lastScores) {
     var ranked = DIMENSIONS.map(function (d) {
       var cur = scores[d.id];
       var prev = lastScores ? lastScores[d.id] : null;
       var delta = (cur != null && prev != null) ? cur - prev : 0;
       var priority = 0;
-      if (cur != null && cur < 50) priority += 100 + (50 - cur);
+      if (cur != null && cur < 65) priority += 100 + (65 - cur);
       if (delta <= -20) priority += 80;
       if (delta >= 20) priority += 30;
       return { id: d.id, label: d.label, score: cur, delta: delta, priority: priority };
