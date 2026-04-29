@@ -75,6 +75,12 @@ export const conversations = pgTable("conversations", {
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
   title: text("title").default("New conversation"),
+  /**
+   * Conversation mode. NULL means default coaching chat. "onboarding" routes the
+   * conversation through GUIDED_ONBOARDING_PROMPT and hides regular chat affordances
+   * in the UI. Other modes can be added later (e.g. "scorecard-debrief").
+   */
+  mode: text("mode").$type<"onboarding" | null>(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

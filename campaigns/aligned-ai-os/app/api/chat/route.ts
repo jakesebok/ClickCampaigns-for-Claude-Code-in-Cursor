@@ -3,6 +3,7 @@ import { NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { streamCoachingResponse } from "@/lib/ai/coaching";
+import { GUIDED_ONBOARDING_PROMPT } from "@/lib/ai/prompts";
 import { formatScorecardCoachContext, formatVapiCoachContext } from "@/lib/ai/coach-context";
 import { fetchPortalVapiByEmail, fetchPortalSixCByEmail } from "@/lib/portal-data";
 import { hasBillingBypass } from "@/lib/internal-access";
@@ -10,11 +11,40 @@ import { hasBillingBypass } from "@/lib/internal-access";
 const MAX_MESSAGES_IN_CONTEXT = 20; // Last N messages (10 turns) — keeps context focused and cost-controlled
 const MAX_MESSAGE_LENGTH = 4000; // chars per message — prevents abuse and token bloat
 
+// Internal-only kickoff message used when a guided flow needs Alfred to speak
+// first. Persisted to the messages table so resumes work, but the chat UI
+// filters it out by content match (see chat page).
+const ONBOARDING_KICKOFF_USER_MESSAGE = "[Begin guided onboarding]";
+
 export async function POST(req: NextRequest) {
   const { userId: clerkId } = await auth();
   if (!clerkId) return new Response("Unauthorized", { status: 401 });
 
-  const { messages, conversationId } = await req.json();
+  const body = await req.json();
+  const { conversationId } = body;
+  let { messages } = body;
+  const kickoff: boolean = body.kickoff === true;
+
+  // Look up the conversation's mode (server-trusted) to decide whether to use
+  // the guided onboarding prompt. Client-provided "mode" is ignored — DB wins.
+  let conversationMode: string | null = null;
+  if (conversationId) {
+    const [convo] = await db
+      .select({ mode: schema.conversations.mode })
+      .from(schema.conversations)
+      .where(eq(schema.conversations.id, conversationId))
+      .limit(1);
+    conversationMode = convo?.mode ?? null;
+  }
+
+  // Kickoff handling: when the chat page loads a guided onboarding conversation
+  // for the first time, it sends an empty messages[] with kickoff=true so Alfred
+  // can speak first. We synthesize the internal user message here.
+  if (kickoff && conversationMode === "onboarding") {
+    if (!Array.isArray(messages) || messages.length === 0) {
+      messages = [{ role: "user", content: ONBOARDING_KICKOFF_USER_MESSAGE }];
+    }
+  }
 
   if (!Array.isArray(messages) || messages.length === 0) {
     return new Response(
@@ -43,9 +73,11 @@ export async function POST(req: NextRequest) {
   type ChatMessage = { role: "user" | "assistant"; content: string };
   const trimmedMessages: ChatMessage[] = messages
     .slice(-MAX_MESSAGES_IN_CONTEXT)
-    .filter((m): m is ChatMessage =>
-      (m.role === "user" || m.role === "assistant") && typeof m.content === "string"
-    )
+    .filter((m: unknown): m is ChatMessage => {
+      if (!m || typeof m !== "object") return false;
+      const msg = m as { role?: unknown; content?: unknown };
+      return (msg.role === "user" || msg.role === "assistant") && typeof msg.content === "string";
+    })
     .map((m) => ({
       role: m.role,
       content:
@@ -103,9 +135,13 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  const isOnboarding = conversationMode === "onboarding";
   const stream = await streamCoachingResponse({
     messages: trimmedMessages,
-    masterContext: enrichedContext,
+    // Onboarding intentionally ignores masterContext — the user is here to
+    // build it. The guided prompt is self-contained.
+    masterContext: isOnboarding ? null : enrichedContext,
+    systemPromptOverride: isOnboarding ? GUIDED_ONBOARDING_PROMPT : undefined,
   });
 
   const encoder = new TextEncoder();

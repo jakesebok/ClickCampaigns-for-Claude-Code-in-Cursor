@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Send, Loader2, Mic, ChevronLeft, MessageSquare } from "lucide-react";
+import { Send, Loader2, Mic, ChevronLeft, MessageSquare, Sparkles } from "lucide-react";
 import { NotificationBell } from "@/components/notification-bell";
 import ReactMarkdown from "react-markdown";
 import { SUGGESTED_QUESTIONS } from "@/lib/ai/prompts";
@@ -20,17 +20,32 @@ type Message = {
   content: string;
 };
 
+// Internal kickoff message used so Alfred can speak first in guided flows.
+// Persisted to DB so resumes work, but filtered out of the visible chat.
+const ONBOARDING_KICKOFF_USER_MESSAGE = "[Begin guided onboarding]";
+
 function ChatPageInner() {
   const searchParams = useSearchParams();
+  const isOnboarding = searchParams.get("mode") === "onboarding";
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [onboardingInitState, setOnboardingInitState] = useState<"idle" | "loading" | "ready" | "error">(
+    isOnboarding ? "loading" : "idle"
+  );
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const messagesRef = useRef<Message[]>([]);
+  const conversationIdRef = useRef<string | null>(null);
   const urlPromptConsumed = useRef(false);
+  const onboardingInitStarted = useRef(false);
+
+  useEffect(() => {
+    conversationIdRef.current = conversationId;
+  }, [conversationId]);
 
   useEffect(() => {
     messagesRef.current = messages;
@@ -48,20 +63,27 @@ function ChatPageInner() {
   }, [messages, scrollToBottom]);
 
   const handleSubmit = useCallback(
-    async (content?: string) => {
-      const messageContent =
-        content !== undefined ? content.trim() : input.trim();
-      if (!messageContent || isStreaming) return;
+    async (content?: string, opts?: { kickoff?: boolean }) => {
+      if (isStreaming) return;
+      const isKickoff = opts?.kickoff === true;
+      const messageContent = isKickoff
+        ? ""
+        : content !== undefined
+          ? content.trim()
+          : input.trim();
+      if (!isKickoff && !messageContent) return;
 
       setInput("");
       setShowSuggestions(false);
       setIsStreaming(true);
 
-      const userMessage: Message = {
-        id: crypto.randomUUID(),
-        role: "user",
-        content: messageContent,
-      };
+      const userMessage: Message | null = isKickoff
+        ? null
+        : {
+            id: crypto.randomUUID(),
+            role: "user",
+            content: messageContent,
+          };
 
       const assistantMessage: Message = {
         id: crypto.randomUUID(),
@@ -71,17 +93,23 @@ function ChatPageInner() {
 
       const prior = messagesRef.current;
 
-      setMessages((prev) => [...prev, userMessage, assistantMessage]);
+      setMessages((prev) =>
+        userMessage ? [...prev, userMessage, assistantMessage] : [...prev, assistantMessage]
+      );
 
       try {
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            messages: [...prior, userMessage].map((m) => ({
-              role: m.role,
-              content: m.content,
-            })),
+            messages: isKickoff
+              ? []
+              : [...prior, userMessage!].map((m) => ({
+                  role: m.role,
+                  content: m.content,
+                })),
+            conversationId: conversationIdRef.current,
+            kickoff: isKickoff,
           }),
         });
 
@@ -151,6 +179,7 @@ function ChatPageInner() {
 
   useEffect(() => {
     if (urlPromptConsumed.current) return;
+    if (isOnboarding) return; // onboarding has its own init flow
     const raw = searchParams.get("q") ?? searchParams.get("prompt");
     if (!raw?.trim()) return;
     urlPromptConsumed.current = true;
@@ -165,7 +194,59 @@ function ChatPageInner() {
       void handleSubmit(text);
     }, 0);
     return () => window.clearTimeout(t);
-  }, [searchParams, handleSubmit]);
+  }, [searchParams, handleSubmit, isOnboarding]);
+
+  // Onboarding init: find or create the user's onboarding conversation,
+  // load any prior messages, and trigger Alfred's first message if empty.
+  useEffect(() => {
+    if (!isOnboarding) return;
+    if (onboardingInitStarted.current) return;
+    onboardingInitStarted.current = true;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/onboarding/start", { method: "POST" });
+        if (!res.ok) throw new Error("Failed to initialize onboarding");
+        const data = (await res.json()) as {
+          conversationId: string;
+          messages: { role: "user" | "assistant"; content: string }[];
+        };
+        if (cancelled) return;
+
+        setConversationId(data.conversationId);
+        conversationIdRef.current = data.conversationId;
+
+        // Hydrate prior messages, filtering out the internal kickoff message.
+        const visible = data.messages
+          .filter((m) => m.content !== ONBOARDING_KICKOFF_USER_MESSAGE)
+          .map((m) => ({
+            id: crypto.randomUUID(),
+            role: m.role,
+            content: m.content,
+          }));
+        setMessages(visible);
+        setShowSuggestions(false);
+        setOnboardingInitState("ready");
+
+        // If no real conversation yet (or only the hidden kickoff exists with no
+        // assistant reply), have Alfred speak first.
+        const hasAssistantReply = data.messages.some((m) => m.role === "assistant");
+        if (!hasAssistantReply) {
+          // Slight defer so React commits the conversationId before we fetch.
+          setTimeout(() => {
+            void handleSubmit(undefined, { kickoff: true });
+          }, 50);
+        }
+      } catch {
+        if (!cancelled) setOnboardingInitState("error");
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOnboarding, handleSubmit]);
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -177,22 +258,34 @@ function ChatPageInner() {
   return (
     <div className="flex flex-col h-full">
       <header className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <div>
-          <h1 className="text-lg font-semibold">ALFRED</h1>
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <h1 className="text-lg font-semibold">ALFRED</h1>
+            {isOnboarding && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-primary/15 text-primary">
+                <Sparkles className="h-3 w-3" />
+                Onboarding
+              </span>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground">
-            Values-aligned guidance, personalized to you
+            {isOnboarding
+              ? "Building your Alignment Blueprints, one question at a time"
+              : "Values-aligned guidance, personalized to you"}
           </p>
         </div>
         <div className="flex items-center gap-1">
-          <NotificationBell />
-          <Link
-            href="/voice"
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
-            title="Switch to voice session"
-          >
-            <Mic className="h-4 w-4" />
-            <span className="hidden sm:inline">Voice</span>
-          </Link>
+          {!isOnboarding && <NotificationBell />}
+          {!isOnboarding && (
+            <Link
+              href="/voice"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+              title="Switch to voice session"
+            >
+              <Mic className="h-4 w-4" />
+              <span className="hidden sm:inline">Voice</span>
+            </Link>
+          )}
         </div>
       </header>
 
@@ -200,7 +293,31 @@ function ChatPageInner() {
         ref={scrollRef}
         className="flex-1 overflow-y-auto px-4 py-6 space-y-6 scrollbar-thin"
       >
-        {messages.length === 0 && showSuggestions && (
+        {isOnboarding && messages.length === 0 && (
+          <div className="max-w-xl mx-auto pt-12 text-center space-y-4">
+            <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+              {onboardingInitState === "error" ? (
+                <MessageSquare className="h-6 w-6 text-destructive" />
+              ) : (
+                <Loader2 className="h-6 w-6 text-primary animate-spin" />
+              )}
+            </div>
+            <div>
+              <h2 className="text-xl font-serif font-semibold mb-2">
+                {onboardingInitState === "error"
+                  ? "Could not start onboarding"
+                  : "Preparing your guided onboarding"}
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {onboardingInitState === "error"
+                  ? "Refresh the page to try again, or upload your worksheets instead."
+                  : "Alfred is getting ready to walk you through five short sections. This will take about 10–15 minutes."}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {!isOnboarding && messages.length === 0 && showSuggestions && (
           <div className="max-w-2xl mx-auto space-y-8 pt-8">
             {!selectedCategory ? (
               <>

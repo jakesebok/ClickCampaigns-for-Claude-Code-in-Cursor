@@ -8,15 +8,24 @@ type Message = { role: "user" | "assistant"; content: string };
 export async function streamCoachingResponse({
   messages,
   masterContext,
+  systemPromptOverride,
   model = "claude-sonnet-4-20250514",
 }: {
   messages: Message[];
   masterContext: string | null;
+  /**
+   * When set, this is used as the system prompt verbatim — masterContext is
+   * ignored. Use for guided flows like onboarding where the prompt is
+   * self-contained and doesn't need to be augmented with user blueprint data.
+   */
+  systemPromptOverride?: string;
   model?: string;
 }) {
-  const systemPrompt = masterContext
-    ? `${COACHING_SYSTEM_PROMPT}\n\n---\nUSER'S MASTER CONTEXT:\n${masterContext}`
-    : `${COACHING_SYSTEM_PROMPT}\n\n---\nNote: This user has not yet completed their Alignment Blueprints. Be helpful but encourage them to complete onboarding for a fully personalized experience.`;
+  const systemPrompt = systemPromptOverride
+    ? systemPromptOverride
+    : masterContext
+      ? `${COACHING_SYSTEM_PROMPT}\n\n---\nUSER'S MASTER CONTEXT:\n${masterContext}`
+      : `${COACHING_SYSTEM_PROMPT}\n\n---\nNote: This user has not yet completed their Alignment Blueprints. Be helpful but encourage them to complete onboarding for a fully personalized experience.`;
 
   const stream = anthropic.messages.stream({
     model,
