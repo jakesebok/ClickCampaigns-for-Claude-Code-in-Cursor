@@ -345,11 +345,11 @@
         <p class="text-[var(--ap-secondary)] text-sm mb-6">Most recent weekly scorecard. The 6C's Scorecard is available Friday 12pm – Sunday 6pm each week.</p>
         <div class="dashboard-card bg-white rounded-2xl border border-[var(--ap-border)] border-l-4 border-l-[var(--ap-accent)] p-6 sm:p-8">
           <div id="six-c-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"></div>
-          <div id="six-c-one-thing" class="mt-6 pt-6 pb-4 border-t border-[var(--ap-border)]/60 hidden">
+          <div id="six-c-one-thing" class="mt-6 pt-6 pb-2 border-t border-[var(--ap-border)]/60 hidden">
             <p class="eyebrow mb-1">Last week you set your Vital Action</p>
             <p id="six-c-one-thing-text" class="text-[var(--ap-primary)] text-base font-semibold leading-snug mb-0"></p>
           </div>
-          <div id="six-c-action-row" class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2 sm:gap-3">
+          <div id="six-c-action-row" class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2 sm:gap-3">
             <a id="six-c-fill-link" href="/scorecard" class="hidden inline-flex items-center gap-2 bg-[var(--ap-accent)] hover:bg-[#e55a0f] text-white font-semibold text-sm px-5 py-2.5 rounded-[100px] transition-all duration-200 shadow-lg shadow-[var(--ap-accent)]/25 hover:translate-y-[-1px] hover:shadow-[0_10px_25px_-5px_rgba(255,107,26,0.3)] w-fit">Fill out this week's 6C's <i data-lucide="arrow-right" class="w-4 h-4 inline-block align-text-bottom"></i></a>
             <span id="six-c-window-closed-msg" class="hidden text-xs sm:text-sm text-[var(--ap-muted)] whitespace-nowrap"></span>
           </div>
@@ -2813,14 +2813,14 @@
           if (latestActionIsManual && latestActionText) {
             oneThingEl.classList.remove('hidden');
             document.getElementById('six-c-one-thing-text').textContent = latestActionText;
-            if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
           } else if (prev6C && prev6C.one_thing_to_improve && String(prev6C.one_thing_to_improve).trim()) {
             oneThingEl.classList.remove('hidden');
             document.getElementById('six-c-one-thing-text').textContent = String(prev6C.one_thing_to_improve).trim();
-            if (actionRowEl) { actionRowEl.classList.remove('mt-4'); actionRowEl.classList.add('mt-0'); }
-          } else if (actionRowEl) {
-            actionRowEl.classList.remove('mt-0'); actionRowEl.classList.add('mt-4');
           }
+          // Spacing for the action row is set statically (mt-4) on the element.
+          // Earlier code toggled mt-0/mt-4 here but it was a no-op against the
+          // old mt-8 static class. Now that the static is mt-4 the toggle would
+          // crush spacing to zero when a Vital Action is present.
         }
         if (latestActionText && !missedWindow) {
           document.getElementById('one-thing-banner').classList.remove('hidden');
