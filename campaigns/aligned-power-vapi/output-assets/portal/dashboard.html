@@ -2605,7 +2605,7 @@
           // Check if window is currently open for first-timers
           var winFirst = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
           if (winFirst && winFirst.canSubmit) {
-            // Show scorecard CTA inside the banner
+            // Show scorecard CTA in BOTH the banner AND the 6Cs action row.
             var banner = document.getElementById('one-thing-banner');
             var bannerText = document.getElementById('one-thing-banner-text');
             var cta = document.getElementById('one-thing-scorecard-cta');
@@ -2615,7 +2615,11 @@
             ctaLabel.textContent = 'Your scorecard is open now through Sunday at 6pm.';
             banner.classList.remove('hidden');
             cta.classList.remove('hidden');
-            document.getElementById('six-c-fill-link').classList.add('hidden');
+            var firstTimerLink = document.getElementById('six-c-fill-link');
+            if (firstTimerLink) {
+              firstTimerLink.classList.remove('hidden');
+              firstTimerLink.style.display = '';
+            }
             var closedEl = document.getElementById('six-c-window-closed-msg');
             if (closedEl) closedEl.classList.add('hidden');
           } else {
@@ -2827,8 +2831,11 @@
 
         if (!missedWindow) {
           if (win && win.canSubmit && !submittedThisWeek) {
-            // Window is open — show the CTA strip inside the banner
-            linkEl.classList.add('hidden');
+            // Window is open — show the CTA in BOTH places: the strip inside
+            // the banner (this week's focus) AND the action row below the 6Cs
+            // section. Both surfaces invite the user to fill it out.
+            linkEl.classList.remove('hidden');
+            linkEl.style.display = '';
             closedMsg.classList.add('hidden');
             urgencyEl.classList.add('hidden');
             if (win.message && win.message.toLowerCase().includes('hour')) {
