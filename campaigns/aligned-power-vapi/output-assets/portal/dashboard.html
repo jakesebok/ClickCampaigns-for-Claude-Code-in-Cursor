@@ -2689,7 +2689,13 @@
             if (typeof isDateInScorecardWindow === 'function') {
               if (isDateInScorecardWindow(row.created_at, relevantWindow)) return true;
             }
-            if (win.canSubmit && typeof isSameEasternCalendarWeek === 'function' && isSameEasternCalendarWeek(row.created_at, new Date())) return true;
+            // Direct bounds check covers the case when the helper is unavailable.
+            // We intentionally do NOT fall back to isSameEasternCalendarWeek here:
+            // that would flag any submission in the current Mon–Sun calendar week
+            // as "this week's submission," which falsely hides the Friday CTA for
+            // any submission made earlier in the same calendar week (e.g., admin
+            // bypass submissions on Tue/Wed). The scorecard window is Friday 12pm
+            // through Sunday 6pm — that's the only thing that should count.
             var submittedAt = new Date(row.created_at);
             return submittedAt >= relevantWindow.opensAt && submittedAt <= relevantWindow.closesAt;
           });

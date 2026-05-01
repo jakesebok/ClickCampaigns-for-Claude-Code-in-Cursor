@@ -312,13 +312,16 @@
       }
 
       var win = typeof getScorecardWindow !== 'undefined' ? getScorecardWindow() : null;
+      // submittedThisWeek = a scored row sits inside THIS week's scorecard
+      // window (Friday 12pm through Sunday 6pm Eastern). Calendar-week fallback
+      // intentionally removed — it false-positived for admin-bypass submissions
+      // earlier in the same Mon–Sun week and incorrectly blocked the user.
       var submittedThisWeek = !!(win && win.canSubmit && scoredSubmissions.some(function(row) {
-        if (typeof isDateInScorecardWindow === 'function' && isDateInScorecardWindow(row.created_at, { opensAt: win.opensAt, closesAt: win.closesAt })) {
-          return true;
+        if (typeof isDateInScorecardWindow === 'function') {
+          return isDateInScorecardWindow(row.created_at, { opensAt: win.opensAt, closesAt: win.closesAt });
         }
-        return typeof isSameEasternCalendarWeek === 'function'
-          ? isSameEasternCalendarWeek(row.created_at, new Date())
-          : false;
+        var ts = new Date(row.created_at).getTime();
+        return ts >= win.opensAt.getTime() && ts <= win.closesAt.getTime();
       }));
       if (!IS_ADMIN && !hasNoSubmissions && submittedThisWeek) {
         document.getElementById('window-closed').classList.remove('hidden');
@@ -661,13 +664,16 @@
             .eq('email', email)
             .order('created_at', { ascending: false })
             .limit(24);
+          // Same intent as the page-load submittedThisWeek check above:
+          // "did the user already submit during THIS scorecard window?" — the
+          // calendar-week fallback would false-positive for an earlier-in-the-
+          // same-week admin bypass submission, so it's been removed.
           var alreadySubmittedThisWeek = (liveSubmissions || []).filter(hasMeaningfulScores).some(function(row) {
-            if (typeof isDateInScorecardWindow === 'function' && isDateInScorecardWindow(row.created_at, { opensAt: w.opensAt, closesAt: w.closesAt })) {
-              return true;
+            if (typeof isDateInScorecardWindow === 'function') {
+              return isDateInScorecardWindow(row.created_at, { opensAt: w.opensAt, closesAt: w.closesAt });
             }
-            return typeof isSameEasternCalendarWeek === 'function'
-              ? isSameEasternCalendarWeek(row.created_at, new Date())
-              : false;
+            var ts = new Date(row.created_at).getTime();
+            return ts >= w.opensAt.getTime() && ts <= w.closesAt.getTime();
           });
           if (alreadySubmittedThisWeek) {
             alert('You already completed this week\'s 6C scorecard.');
