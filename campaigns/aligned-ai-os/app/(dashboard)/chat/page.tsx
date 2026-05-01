@@ -9,10 +9,12 @@ import {
 } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Send, Loader2, Mic, ChevronLeft, MessageSquare, Sparkles } from "lucide-react";
+import { Send, Loader2, Mic, ChevronLeft, MessageSquare, Sparkles, Pencil, Check, X } from "lucide-react";
 import { NotificationBell } from "@/components/notification-bell";
 import ReactMarkdown from "react-markdown";
 import { SUGGESTED_QUESTIONS } from "@/lib/ai/prompts";
+import { ONBOARDING_SECTIONS, TOTAL_SECTIONS, getSectionByIndex } from "@/lib/ai/onboarding-sections";
+import type { OnboardingState } from "@/lib/db/schema";
 
 type Message = {
   id: string;
@@ -36,6 +38,9 @@ function ChatPageInner() {
   const [onboardingInitState, setOnboardingInitState] = useState<"idle" | "loading" | "ready" | "error">(
     isOnboarding ? "loading" : "idle"
   );
+  const [onboardingState, setOnboardingState] = useState<OnboardingState | null>(null);
+  const [reviseModalOpen, setReviseModalOpen] = useState(false);
+  const [finalizedNotice, setFinalizedNotice] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const messagesRef = useRef<Message[]>([]);
@@ -46,6 +51,18 @@ function ChatPageInner() {
   useEffect(() => {
     conversationIdRef.current = conversationId;
   }, [conversationId]);
+
+  // When Alfred finalizes onboarding, the server has already generated the
+  // Blueprints and flipped onboardingComplete. Show a brief notice, then drop
+  // the user into the regular coaching chat (no ?mode=onboarding).
+  useEffect(() => {
+    if (!onboardingState?.finalized || finalizedNotice) return;
+    setFinalizedNotice(true);
+    const t = window.setTimeout(() => {
+      window.location.href = "/chat";
+    }, 4500);
+    return () => window.clearTimeout(t);
+  }, [onboardingState?.finalized, finalizedNotice]);
 
   useEffect(() => {
     messagesRef.current = messages;
@@ -154,6 +171,12 @@ function ChatPageInner() {
                     return updated;
                   });
                 }
+                if (parsed.state) {
+                  // Server emits a final state frame after the stream so the
+                  // progress indicator and finalized handler can react without
+                  // a separate fetch.
+                  setOnboardingState(parsed.state as OnboardingState);
+                }
               } catch {
                 // skip malformed chunks
               }
@@ -211,11 +234,13 @@ function ChatPageInner() {
         const data = (await res.json()) as {
           conversationId: string;
           messages: { role: "user" | "assistant"; content: string }[];
+          state: OnboardingState;
         };
         if (cancelled) return;
 
         setConversationId(data.conversationId);
         conversationIdRef.current = data.conversationId;
+        setOnboardingState(data.state);
 
         // Hydrate prior messages, filtering out the internal kickoff message.
         const visible = data.messages
@@ -257,9 +282,9 @@ function ChatPageInner() {
 
   return (
     <div className="flex flex-col h-full">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
+      <header className="flex items-center justify-between gap-4 px-6 py-4 border-b border-border">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
             <h1 className="text-lg font-semibold">ALFRED</h1>
             {isOnboarding && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-primary/15 text-primary">
@@ -268,13 +293,28 @@ function ChatPageInner() {
               </span>
             )}
           </div>
-          <p className="text-sm text-muted-foreground">
-            {isOnboarding
-              ? "Building your Alignment Blueprints, one question at a time"
-              : "Values-aligned guidance, personalized to you"}
-          </p>
+          {isOnboarding && onboardingState ? (
+            <OnboardingProgress state={onboardingState} />
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              {isOnboarding
+                ? "Building your Alignment Blueprints, one question at a time"
+                : "Values-aligned guidance, personalized to you"}
+            </p>
+          )}
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
+          {isOnboarding && onboardingState && hasAnyCompletedSection(onboardingState) && (
+            <button
+              type="button"
+              onClick={() => setReviseModalOpen(true)}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
+              title="Revise a captured section"
+            >
+              <Pencil className="h-4 w-4" />
+              <span className="hidden sm:inline">Revise</span>
+            </button>
+          )}
           {!isOnboarding && <NotificationBell />}
           {!isOnboarding && (
             <Link
@@ -288,6 +328,51 @@ function ChatPageInner() {
           )}
         </div>
       </header>
+
+      {isOnboarding && reviseModalOpen && onboardingState && (
+        <ReviseSectionModal
+          state={onboardingState}
+          onClose={() => setReviseModalOpen(false)}
+          onPick={async (sectionId) => {
+            setReviseModalOpen(false);
+            try {
+              const res = await fetch("/api/onboarding/revise-section", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sectionId }),
+              });
+              if (!res.ok) throw new Error("revise endpoint failed");
+              const data = (await res.json()) as { triggerMessage: string };
+              await handleSubmit(data.triggerMessage);
+            } catch {
+              // Surface a soft error in chat — same pattern as the regular catch.
+              setMessages((prev) => [
+                ...prev,
+                {
+                  id: crypto.randomUUID(),
+                  role: "assistant",
+                  content:
+                    "I couldn't open that section to revise. Please try again in a moment.",
+                },
+              ]);
+            }
+          }}
+        />
+      )}
+
+      {isOnboarding && finalizedNotice && (
+        <div className="border-b border-border bg-primary/10 px-6 py-3 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+            <Check className="h-4 w-4 text-primary" />
+          </div>
+          <div className="text-sm text-foreground">
+            <span className="font-semibold">Onboarding complete.</span>{" "}
+            <span className="text-muted-foreground">
+              Your Alignment Blueprints have been generated. Taking you to the regular chat in a moment…
+            </span>
+          </div>
+        </div>
+      )}
 
       <div
         ref={scrollRef}
@@ -444,6 +529,129 @@ function ChatPageInner() {
             <Send className="h-4 w-4" />
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function hasAnyCompletedSection(state: OnboardingState | null | undefined): boolean {
+  if (!state) return false;
+  return ONBOARDING_SECTIONS.some((s) => state.sections[s.id]?.status === "complete");
+}
+
+function OnboardingProgress({ state }: { state: OnboardingState }) {
+  const completed = ONBOARDING_SECTIONS.filter((s) => state.sections[s.id]?.status === "complete").length;
+  const currentIdx = Math.min(state.currentSection, TOTAL_SECTIONS);
+  const currentSection = getSectionByIndex(currentIdx);
+  const label = state.finalized
+    ? "All sections complete"
+    : state.readyToWrap
+      ? "Ready to finalize"
+      : currentSection
+        ? `Section ${currentIdx} of ${TOTAL_SECTIONS}: ${currentSection.label}`
+        : `Section ${currentIdx} of ${TOTAL_SECTIONS}`;
+
+  return (
+    <div className="mt-1 space-y-2">
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <div className="flex items-center gap-1.5" aria-label={`${completed} of ${TOTAL_SECTIONS} sections complete`}>
+        {ONBOARDING_SECTIONS.map((section, i) => {
+          const isComplete = state.sections[section.id]?.status === "complete";
+          const isCurrent = !state.finalized && !isComplete && i + 1 === currentIdx;
+          return (
+            <div
+              key={section.id}
+              className={[
+                "h-1.5 flex-1 rounded-full transition-colors",
+                isComplete
+                  ? "bg-primary"
+                  : isCurrent
+                    ? "bg-primary/40"
+                    : "bg-border",
+              ].join(" ")}
+              title={`${section.label}${isComplete ? " — captured" : isCurrent ? " — in progress" : ""}`}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ReviseSectionModal({
+  state,
+  onClose,
+  onPick,
+}: {
+  state: OnboardingState;
+  onClose: () => void;
+  onPick: (sectionId: string) => void | Promise<void>;
+}) {
+  return (
+    <div className="fixed inset-0 z-40 flex items-center justify-center p-4">
+      <div
+        className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden
+      />
+      <div className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl border border-border bg-card shadow-xl">
+        <div className="flex items-start justify-between gap-4 p-5 border-b border-border">
+          <div>
+            <h2 className="text-lg font-semibold">Revise a section</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Pick a section to revisit. Alfred will show you what&apos;s captured and walk you through changing it.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-muted-foreground hover:text-foreground p-1 -m-1"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <ul className="p-3 space-y-2">
+          {ONBOARDING_SECTIONS.map((section) => {
+            const captured = state.sections[section.id];
+            const isComplete = captured?.status === "complete";
+            return (
+              <li key={section.id}>
+                <button
+                  type="button"
+                  disabled={!isComplete}
+                  onClick={() => onPick(section.id)}
+                  className={[
+                    "w-full text-left rounded-xl border p-4 transition-colors",
+                    isComplete
+                      ? "border-border hover:border-primary hover:bg-accent/5 cursor-pointer"
+                      : "border-border/50 opacity-60 cursor-not-allowed",
+                  ].join(" ")}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-sm font-semibold">{section.label}</span>
+                    {isComplete && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        <Check className="h-3 w-3" />
+                        Captured
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-2">{section.description}</p>
+                  {captured?.summary ? (
+                    <p className="text-sm text-foreground/90 leading-relaxed line-clamp-3">
+                      {captured.summary}
+                    </p>
+                  ) : (
+                    <p className="text-xs italic text-muted-foreground">
+                      Not yet captured. Finish this section in the chat first.
+                    </p>
+                  )}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

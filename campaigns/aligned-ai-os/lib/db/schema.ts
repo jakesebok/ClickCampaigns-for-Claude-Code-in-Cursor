@@ -69,6 +69,26 @@ export const contextDocuments = pgTable("context_documents", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export type OnboardingSectionId =
+  | "real_reasons"
+  | "driving_fire"
+  | "core_values"
+  | "future_vision"
+  | "business_basics";
+
+export type OnboardingSectionStatus = "not_started" | "in_progress" | "complete";
+
+export type OnboardingState = {
+  /** 1-indexed pointer for "Section X of 5". Defaults to 1 when null/missing. */
+  currentSection: number;
+  /** Per-section captured summary + status. Updated as Alfred emits state markers. */
+  sections: Partial<Record<OnboardingSectionId, { status: OnboardingSectionStatus; summary?: string }>>;
+  /** Set true once Alfred declares all sections complete and prompts for wrap. */
+  readyToWrap: boolean;
+  /** Set true once user confirms wrap and Blueprints have been generated. */
+  finalized: boolean;
+};
+
 export const conversations = pgTable("conversations", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id")
@@ -81,6 +101,12 @@ export const conversations = pgTable("conversations", {
    * in the UI. Other modes can be added later (e.g. "scorecard-debrief").
    */
   mode: text("mode").$type<"onboarding" | null>(),
+  /**
+   * Structured onboarding state. NULL on non-onboarding conversations and on
+   * onboarding conversations created before the state machine was added.
+   * Updated by parsing [[STATE:...]] markers from Alfred's streamed responses.
+   */
+  onboardingState: jsonb("onboarding_state").$type<OnboardingState>(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

@@ -2,9 +2,17 @@ import { auth } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
-import { streamCoachingResponse } from "@/lib/ai/coaching";
+import type { OnboardingState } from "@/lib/db/schema";
+import { generateGuidedContext, streamCoachingResponse } from "@/lib/ai/coaching";
 import { GUIDED_ONBOARDING_PROMPT } from "@/lib/ai/prompts";
 import { formatScorecardCoachContext, formatVapiCoachContext } from "@/lib/ai/coach-context";
+import {
+  applyMarkers,
+  collectResponses,
+  emptyOnboardingState,
+  extractStateMarkers,
+  formatStateForPrompt,
+} from "@/lib/ai/onboarding-state";
 import { fetchPortalVapiByEmail, fetchPortalSixCByEmail } from "@/lib/portal-data";
 import { hasBillingBypass } from "@/lib/internal-access";
 
@@ -16,6 +24,61 @@ const MAX_MESSAGE_LENGTH = 4000; // chars per message — prevents abuse and tok
 // filters it out by content match (see chat page).
 const ONBOARDING_KICKOFF_USER_MESSAGE = "[Begin guided onboarding]";
 
+/**
+ * Stateful filter that strips [[STATE:...]] markers from a streaming text
+ * source. Holds back text that could be the start of a marker until it's
+ * confirmed (or proven not to be), so the user never sees a partial marker
+ * mid-stream. Returns safe text to forward.
+ */
+function createMarkerStripper() {
+  const PARTIAL_HOLD = 16; // a bit longer than "[[STATE:" prefix
+  let pending = "";
+  let inMarker = false;
+
+  return {
+    feed(chunk: string): string {
+      pending += chunk;
+      let safe = "";
+
+      while (pending.length > 0) {
+        if (inMarker) {
+          const closeIdx = pending.indexOf("]]");
+          if (closeIdx === -1) return safe; // marker not done yet, hold all
+          pending = pending.slice(closeIdx + 2);
+          inMarker = false;
+        } else {
+          const openIdx = pending.indexOf("[[STATE:");
+          if (openIdx === -1) {
+            // No marker open. Emit everything except the trailing PARTIAL_HOLD
+            // chars (in case a marker is just starting at the boundary).
+            if (pending.length > PARTIAL_HOLD) {
+              safe += pending.slice(0, pending.length - PARTIAL_HOLD);
+              pending = pending.slice(-PARTIAL_HOLD);
+            }
+            return safe;
+          }
+          // Found a marker — emit text before it, enter marker mode.
+          safe += pending.slice(0, openIdx);
+          pending = pending.slice(openIdx + "[[STATE:".length);
+          inMarker = true;
+        }
+      }
+      return safe;
+    },
+    /** Emit any remaining safe text. Discards a trailing incomplete marker. */
+    flush(): string {
+      if (inMarker) {
+        pending = "";
+        inMarker = false;
+        return "";
+      }
+      const tail = pending;
+      pending = "";
+      return tail;
+    },
+  };
+}
+
 export async function POST(req: NextRequest) {
   const { userId: clerkId } = await auth();
   if (!clerkId) return new Response("Unauthorized", { status: 401 });
@@ -25,16 +88,22 @@ export async function POST(req: NextRequest) {
   let { messages } = body;
   const kickoff: boolean = body.kickoff === true;
 
-  // Look up the conversation's mode (server-trusted) to decide whether to use
-  // the guided onboarding prompt. Client-provided "mode" is ignored — DB wins.
+  // Look up the conversation's mode AND onboarding state (server-trusted)
+  // so we can route through GUIDED_ONBOARDING_PROMPT and resume mid-flow.
+  // Client-provided "mode" is ignored — DB wins.
   let conversationMode: string | null = null;
+  let conversationState: OnboardingState | null = null;
   if (conversationId) {
     const [convo] = await db
-      .select({ mode: schema.conversations.mode })
+      .select({
+        mode: schema.conversations.mode,
+        onboardingState: schema.conversations.onboardingState,
+      })
       .from(schema.conversations)
       .where(eq(schema.conversations.id, conversationId))
       .limit(1);
     conversationMode = convo?.mode ?? null;
+    conversationState = convo?.onboardingState ?? null;
   }
 
   // Kickoff handling: when the chat page loads a guided onboarding conversation
@@ -136,16 +205,24 @@ export async function POST(req: NextRequest) {
   }
 
   const isOnboarding = conversationMode === "onboarding";
+  const onboardingPromptWithState = isOnboarding
+    ? GUIDED_ONBOARDING_PROMPT + formatStateForPrompt(conversationState ?? emptyOnboardingState())
+    : undefined;
+
   const stream = await streamCoachingResponse({
     messages: trimmedMessages,
     // Onboarding intentionally ignores masterContext — the user is here to
     // build it. The guided prompt is self-contained.
     masterContext: isOnboarding ? null : enrichedContext,
-    systemPromptOverride: isOnboarding ? GUIDED_ONBOARDING_PROMPT : undefined,
+    systemPromptOverride: onboardingPromptWithState,
   });
 
   const encoder = new TextEncoder();
-  let fullResponse = "";
+  // rawResponse includes [[STATE:...]] markers; cleanResponse is what the user
+  // sees and what we persist to the messages table.
+  let rawResponse = "";
+  let cleanResponse = "";
+  const stripper = isOnboarding ? createMarkerStripper() : null;
   let usage: {
     input_tokens?: number;
     output_tokens?: number;
@@ -161,10 +238,14 @@ export async function POST(req: NextRequest) {
           event.delta.type === "text_delta"
         ) {
           const text = event.delta.text;
-          fullResponse += text;
-          controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-          );
+          rawResponse += text;
+          const safeText = stripper ? stripper.feed(text) : text;
+          if (safeText) {
+            cleanResponse += safeText;
+            controller.enqueue(
+              encoder.encode(`data: ${JSON.stringify({ text: safeText })}\n\n`)
+            );
+          }
         }
         if (event.type === "message_start" && "message" in event && event.message?.usage) {
           const u = event.message.usage;
@@ -186,12 +267,89 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      if (conversationId && fullResponse) {
+      // Flush any held-back tail from the marker stripper.
+      if (stripper) {
+        const tail = stripper.flush();
+        if (tail) {
+          cleanResponse += tail;
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify({ text: tail })}\n\n`)
+          );
+        }
+      }
+
+      // Persist the user-visible (clean) response. Markers never go to the
+      // messages table so refreshes show clean history.
+      if (conversationId && cleanResponse) {
         await db.insert(schema.messages).values({
           conversationId,
           role: "assistant",
-          content: fullResponse,
+          content: cleanResponse,
         });
+      }
+
+      // Onboarding state machine: parse markers from raw response, apply, persist.
+      // If the user just finalized, also generate Blueprints + flip onboardingComplete.
+      // Always emit the current state down to the client at end-of-stream so the
+      // UI can update its progress indicator without a separate fetch.
+      let finalStateForClient: OnboardingState | null = conversationState;
+      if (isOnboarding && conversationId) {
+        const markers = extractStateMarkers(rawResponse);
+        if (markers.length > 0) {
+          const nextState = applyMarkers(conversationState ?? emptyOnboardingState(), markers);
+          await db
+            .update(schema.conversations)
+            .set({ onboardingState: nextState, updatedAt: new Date() })
+            .where(eq(schema.conversations.id, conversationId));
+          finalStateForClient = nextState;
+
+          if (nextState.finalized) {
+            // Generate Alignment Blueprints from the captured section summaries
+            // and persist them (mirrors the upload flow's persistence pattern).
+            try {
+              const responses = collectResponses(nextState);
+              const { masterContext, blueprint } = await generateGuidedContext(responses);
+
+              const existing = await db
+                .select()
+                .from(schema.contextDocuments)
+                .where(eq(schema.contextDocuments.userId, user.id))
+                .limit(1);
+
+              if (existing.length > 0) {
+                await db
+                  .update(schema.contextDocuments)
+                  .set({
+                    masterContext,
+                    alignmentBlueprint: blueprint,
+                    rawWorksheets: JSON.stringify(responses, null, 2),
+                    contextDepth: 80,
+                    version: (existing[0].version || 1) + 1,
+                    updatedAt: new Date(),
+                  })
+                  .where(eq(schema.contextDocuments.userId, user.id));
+              } else {
+                await db.insert(schema.contextDocuments).values({
+                  userId: user.id,
+                  masterContext,
+                  alignmentBlueprint: blueprint,
+                  rawWorksheets: JSON.stringify(responses, null, 2),
+                  contextDepth: 80,
+                });
+              }
+
+              await db
+                .update(schema.users)
+                .set({ onboardingComplete: true, updatedAt: new Date() })
+                .where(eq(schema.users.id, user.id));
+            } catch (err) {
+              // Fail loud per the project rule — log so we can see it in Vercel
+              // logs, but don't bring down the chat response. State is already
+              // persisted with finalized=true; user can retry from the UI.
+              console.error("[onboarding] Blueprint generation failed:", err);
+            }
+          }
+        }
       }
 
       if (usage && user.id) {
@@ -204,6 +362,12 @@ export async function POST(req: NextRequest) {
           cacheReadInputTokens: usage.cache_read_input_tokens ?? 0,
           cacheCreationInputTokens: usage.cache_creation_input_tokens ?? 0,
         });
+      }
+
+      if (isOnboarding && finalStateForClient) {
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify({ state: finalStateForClient })}\n\n`)
+        );
       }
 
       controller.enqueue(encoder.encode("data: [DONE]\n\n"));

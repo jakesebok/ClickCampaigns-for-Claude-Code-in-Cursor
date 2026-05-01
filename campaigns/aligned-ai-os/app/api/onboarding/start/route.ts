@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { and, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
+import { emptyOnboardingState } from "@/lib/ai/onboarding-state";
 
 /**
  * POST /api/onboarding/start
@@ -10,7 +11,11 @@ import { db, schema } from "@/lib/db";
  * none exists. Used by the chat page when it loads with ?mode=onboarding so
  * the conversation persists across refreshes (resume where you left off).
  *
- * Response: { conversationId: string, messages: { role, content }[] }
+ * Response: {
+ *   conversationId: string,
+ *   messages: { role, content }[],
+ *   state: OnboardingState
+ * }
  */
 export async function POST() {
   const { userId: clerkId } = await auth();
@@ -38,18 +43,22 @@ export async function POST() {
     .limit(1);
 
   let conversationId: string;
+  let state = existing?.onboardingState ?? null;
   if (existing) {
     conversationId = existing.id;
   } else {
+    const initialState = emptyOnboardingState();
     const [created] = await db
       .insert(schema.conversations)
       .values({
         userId: user.id,
         mode: "onboarding",
         title: "Guided onboarding",
+        onboardingState: initialState,
       })
       .returning({ id: schema.conversations.id });
     conversationId = created.id;
+    state = initialState;
   }
 
   // Load messages for this conversation (oldest first) so the UI can replay them.
@@ -62,5 +71,9 @@ export async function POST() {
     .where(eq(schema.messages.conversationId, conversationId))
     .orderBy(schema.messages.createdAt);
 
-  return NextResponse.json({ conversationId, messages: rows });
+  return NextResponse.json({
+    conversationId,
+    messages: rows,
+    state: state ?? emptyOnboardingState(),
+  });
 }
