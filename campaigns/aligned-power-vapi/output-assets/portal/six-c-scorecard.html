@@ -108,7 +108,7 @@
         <!-- Section B: Pick one C to take deeper, then quick taps for the rest -->
         <div id="reflection-section" class="scorecard-card bg-white rounded-2xl border border-[var(--ap-border)] p-6 sm:p-8">
           <h2 class="text-xl text-[var(--ap-primary)] mb-1">Reflection</h2>
-          <p class="text-sm text-[var(--ap-muted)] mb-6">Pick one C to take deeper this week. The other five get a quick check.</p>
+          <p class="text-sm text-[var(--ap-muted)] mb-6">Pick one C to take deeper this week (required). We'll suggest one based on your lowest score, but you can choose any. The other five get a quick check.</p>
 
           <!-- Picker: 6 dimension buttons -->
           <div class="mb-6">
@@ -729,6 +729,39 @@
             return;
           }
         }
+        // Deep-dive is required to submit. Sync the modal textarea into state
+        // first (in case the user typed there without tapping Done), then
+        // validate. On mobile, re-open the modal and focus; on desktop, scroll
+        // and focus the inline textarea.
+        var modalResponseElEarly = document.getElementById('deep-dive-modal-response');
+        if (modalResponseElEarly && modalResponseElEarly.value && !deepDiveState.response) {
+          deepDiveState.response = modalResponseElEarly.value;
+        }
+        if (!deepDiveState.dimension) {
+          alert('Pick one C to take deeper before submitting your scorecard.');
+          var reflectionEl = document.getElementById('reflection-section');
+          if (reflectionEl) reflectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (!(deepDiveState.response || '').trim()) {
+          alert('Take a moment to reflect on your chosen C before submitting.');
+          var isMobileSubmit = window.matchMedia('(max-width: 767px)').matches;
+          if (isMobileSubmit) {
+            showDeepDiveModal();
+            setTimeout(function() {
+              var ta = document.getElementById('deep-dive-modal-response');
+              if (ta) ta.focus();
+            }, 150);
+          } else {
+            var taInline = document.getElementById('deep-dive-response');
+            if (taInline) {
+              taInline.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              taInline.focus();
+            }
+          }
+          return;
+        }
+
         var form = this;
         var btn = document.getElementById('submit-btn');
         btn.disabled = true;
@@ -747,29 +780,20 @@
 
         var oneThing = (form.querySelector('#one-thing') || {}).value ? String(form.querySelector('#one-thing').value).trim() : null;
 
-        // Sync the live modal textarea into state in case the user typed there
-        // and submitted without explicitly tapping Done.
-        var modalResponseEl = document.getElementById('deep-dive-modal-response');
-        if (modalResponseEl && modalResponseEl.value && !deepDiveState.response) {
-          deepDiveState.response = modalResponseEl.value;
-        }
-
-        var deepDiveResponse = (deepDiveState.response || '').trim();
-        var weeklyReview = null;
-        if (deepDiveState.dimension && deepDiveResponse) {
-          weeklyReview = {
-            deepDive: {
-              dimension: deepDiveState.dimension,
-              mode: deepDiveState.mode,
-              response: deepDiveResponse,
-              signal: deepDiveState.signal
-            }
-          };
-          var quickTapKeys = Object.keys(quickTapState);
-          if (quickTapKeys.length > 0) {
-            weeklyReview.quickTaps = {};
-            quickTapKeys.forEach(function(k) { weeklyReview.quickTaps[k] = quickTapState[k]; });
+        // Deep-dive validated above, so weeklyReview is always built.
+        var deepDiveResponse = deepDiveState.response.trim();
+        var weeklyReview = {
+          deepDive: {
+            dimension: deepDiveState.dimension,
+            mode: deepDiveState.mode,
+            response: deepDiveResponse,
+            signal: deepDiveState.signal
           }
+        };
+        var quickTapKeys = Object.keys(quickTapState);
+        if (quickTapKeys.length > 0) {
+          weeklyReview.quickTaps = {};
+          quickTapKeys.forEach(function(k) { weeklyReview.quickTaps[k] = quickTapState[k]; });
         }
 
         var { error } = await supabase.from('six_c_submissions').insert({
