@@ -49,6 +49,11 @@ export default function ApplyPage() {
             className="space-y-6"
           >
             <input type="hidden" name="_subject" value="Aligned Power Program Application" />
+            <input
+              type="hidden"
+              name="_next"
+              value="https://jakesebok.com/work-with-me/apply/thank-you"
+            />
             <div>
               <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
                 Full Name *
