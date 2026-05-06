@@ -33,6 +33,11 @@ export default function ContactPage() {
           className="space-y-6"
         >
           <input type="hidden" name="_subject" value="Contact from jakesebok.com" />
+          <input
+            type="hidden"
+            name="_next"
+            value="https://jakesebok.com/contact/thank-you"
+          />
           <div>
             <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
               Name *
