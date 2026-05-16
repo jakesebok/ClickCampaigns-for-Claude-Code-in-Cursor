@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
 import { Outfit, Cormorant_Garamond } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+
+/**
+ * LocalCraft tracking pixel for jakesebok.com.
+ * Pixel + dashboard live at https://localcraftdigital.com — see
+ * dashboard at /dashboard/analytics under jake@alignedpower.coach.
+ * Cross-origin POST to /api/track is allowed (CORS: *).
+ */
+const LC_PIXEL_ID = "081b3396-6b75-400d-a659-94d51c979d90";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -64,6 +73,11 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <Script
+          src="https://localcraftdigital.com/track.js"
+          strategy="afterInteractive"
+          data-pixel-id={LC_PIXEL_ID}
+        />
       </body>
     </html>
   );
