@@ -16,6 +16,8 @@ export interface BlogPost {
   modified_at: string;
   keywords: string[];
   faq: Array<{ q: string; a: string }>;
+  /** Hero image absolute URL — rendered at the top of the post. */
+  hero_image_url: string | null;
   /** schema.org BlogPosting JSON-LD object — render verbatim into <head>. */
   schema_article: Record<string, unknown>;
   /** schema.org FAQPage JSON-LD object, or null when no FAQ. */
@@ -62,6 +64,7 @@ export function getPost(slug: string): BlogPost | null {
           .filter((x) => x && x.q && x.a)
           .map((x) => ({ q: String(x.q), a: String(x.a) }))
       : [],
+    hero_image_url: typeof data.hero_image_url === "string" && data.hero_image_url.trim() ? data.hero_image_url : null,
     schema_article: (safeJsonParse<Record<string, unknown>>(data.schema_article) ?? {}) as Record<string, unknown>,
     schema_faqpage: safeJsonParse<Record<string, unknown>>(data.schema_faqpage),
     body: content

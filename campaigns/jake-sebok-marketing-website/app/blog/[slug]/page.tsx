@@ -92,6 +92,25 @@ export default async function BlogPostPage({ params }: Params) {
             )}
           </header>
 
+          {post.hero_image_url && (
+            <figure className="mb-10 -mx-6 sm:mx-0">
+              <img
+                src={post.hero_image_url}
+                alt={post.title}
+                width={1536}
+                height={1024}
+                loading="eager"
+                style={{
+                  width: "100%",
+                  aspectRatio: "1536 / 1024",
+                  objectFit: "cover",
+                  borderRadius: 8,
+                  display: "block"
+                }}
+              />
+            </figure>
+          )}
+
           <article className="blog-prose">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
           </article>
