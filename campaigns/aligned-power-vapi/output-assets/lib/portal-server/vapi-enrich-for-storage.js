@@ -45,6 +45,9 @@ export function determineArchetypeFromResults(results) {
   if ((overall != null && overall <= 4.5) || arenasLow >= 2) {
     return "The Phoenix";
   }
+  if (overall != null && overall <= 5.0 && Math.min(personal, relationships, business) <= 3.5) {
+    return "The Phoenix";
+  }
 
   if (exScore != null && exScore >= 7.0 && ((ecScore != null && ecScore <= 5.0) || (vsScore != null && vsScore <= 5.0))) {
     return "The Engine";

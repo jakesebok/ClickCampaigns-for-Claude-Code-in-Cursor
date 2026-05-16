@@ -166,6 +166,7 @@
     if (b != null && b <= 4.5) arenasLow++;
     if (overall != null && overall <= 4.5) return 'The Phoenix';
     if (arenasLow >= 2) return 'The Phoenix';
+    if (overall != null && overall <= 5.0 && s != null && r != null && b != null && Math.min(s, r, b) <= 3.5) return 'The Phoenix';
 
     // PRIORITY 4: THE ENGINE
     if (exScore != null && exScore >= 7.0 && ((ecScore != null && ecScore <= 5.0) || (vsScore != null && vsScore <= 5.0))) return 'The Engine';
