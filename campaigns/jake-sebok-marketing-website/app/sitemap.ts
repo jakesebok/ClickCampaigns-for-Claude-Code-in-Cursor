@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 
 const BASE = "https://jakesebok.com";
 
@@ -13,16 +14,29 @@ const paths: { path: string; changeFrequency: MetadataRoute.Sitemap[0]["changeFr
   { path: "/testimonials", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/work-with-me/apply", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/blog", changeFrequency: "weekly", priority: 0.75 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  return paths.map(({ path, changeFrequency, priority }) => ({
+  const staticEntries = paths.map(({ path, changeFrequency, priority }) => ({
     url: `${BASE}${path}`,
     lastModified,
     changeFrequency,
     priority,
   }));
+
+  // Each blog post published by the LocalCraft Growth pipeline gets its
+  // own sitemap entry so search engines pick it up immediately on the
+  // next crawl after the post is committed.
+  const blogEntries = getAllPosts().map((post) => ({
+    url: `${BASE}/blog/${post.slug}`,
+    lastModified: new Date(post.modified_at || post.published_at),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...blogEntries];
 }

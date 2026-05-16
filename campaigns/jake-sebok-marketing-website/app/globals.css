@@ -434,3 +434,72 @@ body {
     @apply text-sm sm:text-[15px] md:text-base text-[var(--ap-secondary)] font-outfit leading-relaxed;
   }
 }
+
+/* ---------- Blog prose (Growth-pipeline posts) ----------
+   Scoped to .blog-prose so generated markdown renders as readable
+   editorial copy. Matches the Cormorant/Outfit font stack used
+   site-wide. Headings use Cormorant; body uses Outfit. */
+.blog-prose {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #334155;
+  max-width: 68ch;
+}
+.blog-prose h2 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin: 40px 0 14px;
+}
+.blog-prose h3 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(20px, 2.4vw, 24px);
+  line-height: 1.3;
+  color: #0f172a;
+  margin: 28px 0 10px;
+}
+.blog-prose p { margin: 0 0 16px; }
+.blog-prose ul, .blog-prose ol { padding-left: 1.5em; margin: 0 0 16px; }
+.blog-prose li { margin: 6px 0; }
+.blog-prose ul li { list-style: disc; }
+.blog-prose ol li { list-style: decimal; }
+.blog-prose a {
+  color: #b45309;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.blog-prose strong { color: #0f172a; font-weight: 600; }
+.blog-prose em { font-style: italic; }
+.blog-prose blockquote {
+  border-left: 3px solid #b45309;
+  padding: 6px 18px;
+  margin: 18px 0;
+  background: #fff7ed;
+  color: #334155;
+  border-radius: 0 6px 6px 0;
+}
+.blog-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.blog-prose pre {
+  background: #f1f5f9;
+  padding: 14px 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.blog-prose hr {
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+  margin: 32px 0;
+}
