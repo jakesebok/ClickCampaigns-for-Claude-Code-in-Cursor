@@ -1,8 +1,13 @@
 /**
  * Shared transactional-email shell for the Jake Sebok marketing site.
- * Used by contact and apply submission emails. Mirrors the visual treatment
- * of lib/build-assessment-intake/intake-email-html.ts so all Aligned Power
- * transactional mail feels like the same brand.
+ *
+ * Visual language mirrors the VAPI Assessment results email
+ * (campaigns/aligned-power-vapi/output-assets/lib/portal-server/handlers/vapi-assessment-complete.js):
+ *   - Cream header (#FAF9F7) with logo
+ *   - White body card on cool gray (#F5F7FA) page background
+ *   - Soft gray info cards with uppercase-tracked labels
+ *   - Orange (#FF6B1A) primary CTAs, dark (#0E1624) secondary
+ *   - Light gray footer
  */
 
 export const EMAIL_COLORS = {
@@ -10,14 +15,18 @@ export const EMAIL_COLORS = {
   secondary: "#3A4A5C",
   muted: "#7A8FA8",
   accent: "#FF6B1A",
-  bg: "#F5F7FA",
-  card: "#FFFFFF",
-  border: "#DDE3ED",
-  soft: "#FAFAFB",
-  foot: "#EEF1F7",
+  pageBg: "#F5F7FA",
+  cardBg: "#FFFFFF",
+  cardBorder: "#DDE3ED",
+  headerBg: "#FAF9F7",
+  headerBorder: "#E8E6E3",
+  infoCardBg: "#F5F7FA",
 } as const;
 
 const C = EMAIL_COLORS;
+
+export const SITE_ORIGIN = "https://jakesebok.com";
+export const LOGO_URL = `${SITE_ORIGIN}/images/logo-jake-sebok-horizontal.png`;
 
 export function escHtml(s: string | null | undefined) {
   return String(s ?? "")
@@ -33,65 +42,107 @@ export function nl2br(s: string | null | undefined) {
 
 export function fmt(s: string | null | undefined, empty = "—") {
   const t = String(s ?? "").trim();
-  return t ? nl2br(t) : `<span style="color:${C.muted};font-style:italic;">${empty}</span>`;
+  return t
+    ? nl2br(t)
+    : `<span style="color:${C.muted};font-style:italic;">${empty}</span>`;
 }
 
-export function sectionEyebrow(title: string) {
-  return `<p style="margin:0 0 14px;padding:0 0 10px;border-bottom:1px solid ${C.border};font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700;color:${C.primary};letter-spacing:-0.02em;">${escHtml(title)}</p>`;
-}
-
-export function fieldHtml(label: string, valueHtml: string) {
-  return `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:14px;"><tr><td>
-<p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${C.muted};font-family:Helvetica Neue,Arial,sans-serif;">${escHtml(label)}</p>
-<div style="margin:0;font-size:15px;line-height:1.55;color:${C.secondary};font-family:Helvetica Neue,Arial,sans-serif;">${valueHtml}</div>
+/**
+ * A soft-gray card with an uppercase-tracked eyebrow label.
+ * Use for grouping related fields (e.g. "YOUR MESSAGE", "APPLICANT").
+ */
+export function infoCard(label: string, bodyHtml: string): string {
+  return `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border:1px solid ${C.cardBorder};border-radius:8px;background:${C.infoCardBg};">
+<tr><td style="padding:20px 24px;">
+<p style="margin:0 0 14px;color:${C.muted};font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-family:Helvetica Neue,Arial,sans-serif;">${escHtml(label)}</p>
+${bodyHtml}
 </td></tr></table>`;
 }
 
-export function cardWrap(inner: string) {
-  return `<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;"><tr><td style="padding:22px 24px;background:${C.soft};border:1px solid ${C.border};border-radius:14px;">${inner}</td></tr></table>`;
+/**
+ * A label + value row, intended for use inside an infoCard.
+ * Renders as a tiny secondary label above the value.
+ */
+export function fieldRow(label: string, valueHtml: string): string {
+  return `<div style="margin-bottom:14px;">
+<p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${C.muted};font-family:Helvetica Neue,Arial,sans-serif;">${escHtml(label)}</p>
+<div style="margin:0;font-size:15px;line-height:1.55;color:${C.secondary};font-family:Helvetica Neue,Arial,sans-serif;">${valueHtml}</div>
+</div>`;
 }
 
+/**
+ * A button-styled anchor. Primary is orange, secondary is dark.
+ * Wrap in <div style="text-align:center"> as needed.
+ */
+export function ctaButton(opts: {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary";
+}): string {
+  const bg = opts.variant === "secondary" ? C.primary : C.accent;
+  return `<a href="${escHtml(opts.href)}" style="display:inline-block;background:${bg};color:#FFFFFF;font-size:15px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;font-family:Helvetica Neue,Arial,sans-serif;">${escHtml(opts.label)} &#8594;</a>`;
+}
+
+/**
+ * Main email shell. `bodyHtml` should contain everything between the logo
+ * header and the footer (greeting, body paragraphs, info cards, optional CTAs).
+ */
 export function emailShell(opts: {
   preheader: string;
-  heroTitle: string;
-  heroAccent?: string;
-  introHtml: string;
+  title: string;
   bodyHtml: string;
-  footerHtml?: string;
-}) {
+  footerNote?: string;
+}): string {
   const pre = escHtml(opts.preheader);
+  const footer =
+    opts.footerNote ||
+    `Sent from <a href="${SITE_ORIGIN}" style="color:${C.accent};text-decoration:none;">jakesebok.com</a>.`;
   return `<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>${escHtml(opts.heroTitle)}</title>
-<!--[if mso]><style type="text/css">table {border-collapse:collapse;} td {font-family: Arial, sans-serif;}</style><![endif]-->
+<title>${escHtml(opts.title)}</title>
 </head>
-<body style="margin:0;padding:0;background:${C.bg};-webkit-text-size-adjust:100%;">
-<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:${C.bg};opacity:0;">${pre}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.bg};padding:32px 12px;">
+<body style="margin:0;padding:0;background:${C.pageBg};font-family:'Helvetica Neue',Arial,sans-serif;-webkit-text-size-adjust:100%;">
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:${C.pageBg};opacity:0;">${pre}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.pageBg};padding:32px 16px;">
 <tr><td align="center">
-<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:${C.card};border-radius:16px;overflow:hidden;border:1px solid ${C.border};box-shadow:0 24px 48px -28px rgba(14,22,36,0.12);">
-<tr><td style="padding:0;background:linear-gradient(135deg, ${C.primary} 0%, #192236 100%);">
-<table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:28px 32px 24px;">
-<p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:Helvetica Neue,Arial,sans-serif;">Jake Sebok</p>
-<h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;color:#ffffff;line-height:1.2;">${escHtml(opts.heroTitle)}</h1>
-${opts.heroAccent ? `<p style="margin:12px 0 0;font-size:15px;line-height:1.5;color:rgba(255,255,255,0.82);font-family:Helvetica Neue,Arial,sans-serif;">${opts.heroAccent}</p>` : ""}
-</td></tr></table>
-</td></tr>
-<tr><td style="padding:28px 28px 8px;">
-${opts.introHtml}
-</td></tr>
-<tr><td style="padding:8px 28px 32px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:${C.cardBg};border-radius:12px;overflow:hidden;border:1px solid ${C.cardBorder};">
+
+  <tr><td style="background:${C.headerBg};padding:32px 40px;text-align:center;border-bottom:1px solid ${C.headerBorder};">
+    <a href="${SITE_ORIGIN}" style="display:inline-block;text-decoration:none;">
+      <img src="${LOGO_URL}" alt="Jake Sebok" width="200" height="auto" style="display:block;max-width:200px;height:auto;margin:0 auto;border:0;outline:none;text-decoration:none;" />
+    </a>
+  </td></tr>
+
+  <tr><td style="padding:40px 40px 32px;">
 ${opts.bodyHtml}
-</td></tr>
-<tr><td style="padding:20px 28px 28px;background:${C.foot};border-top:1px solid ${C.border};">
-${opts.footerHtml || `<p style="margin:0;font-size:12px;line-height:1.5;color:${C.muted};font-family:Helvetica Neue,Arial,sans-serif;">Sent from jakesebok.com</p>`}
-</td></tr>
+  </td></tr>
+
+  <tr><td style="background:${C.pageBg};padding:24px 40px;text-align:center;border-top:1px solid ${C.cardBorder};">
+    <p style="margin:0 0 8px;color:${C.muted};font-size:13px;font-weight:600;">Jake Sebok</p>
+    <p style="margin:0;color:${C.muted};font-size:12px;line-height:1.6;">${footer}</p>
+  </td></tr>
+
 </table>
 </td></tr>
 </table>
-</body></html>`;
+</body>
+</html>`;
+}
+
+/**
+ * Styled paragraph for use inside emailShell body sections.
+ * Default size matches VAPI body text (16px / 1.6 / secondary color).
+ */
+export function bodyPara(html: string, opts?: { size?: "sm" | "md" | "lg" }): string {
+  const size = opts?.size || "md";
+  const fontSize = size === "sm" ? "14px" : size === "lg" ? "17px" : "16px";
+  return `<p style="margin:0 0 20px;color:${C.secondary};font-size:${fontSize};line-height:1.6;font-family:Helvetica Neue,Arial,sans-serif;">${html}</p>`;
+}
+
+/** A section heading inside the body (e.g. "What happens next"). */
+export function sectionHeading(text: string): string {
+  return `<h2 style="margin:0 0 12px;color:${C.primary};font-size:18px;font-weight:700;font-family:Helvetica Neue,Arial,sans-serif;">${escHtml(text)}</h2>`;
 }

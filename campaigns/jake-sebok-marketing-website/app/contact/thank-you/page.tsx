@@ -23,7 +23,8 @@ export default function ContactThankYouPage() {
           Message Received
         </p>
         <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-          Got it. <span className="text-gradient-accent">Thanks for reaching out.</span>
+          <span className="block">Got it.</span>
+          <span className="block text-gradient-accent">Thanks for reaching out.</span>
         </h1>
         <p className="text-ap-mid text-xl font-semibold mb-10">
           Your note is in my inbox. I read every one personally and reply when I can. If your question is time-sensitive,
