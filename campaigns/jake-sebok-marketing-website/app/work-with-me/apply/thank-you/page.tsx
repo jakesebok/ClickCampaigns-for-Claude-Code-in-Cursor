@@ -25,7 +25,8 @@ export default function ApplyThankYouPage() {
             Application Received
           </p>
           <h1 className="font-outfit font-bold text-4xl sm:text-5xl text-ap-primary leading-tight mb-6">
-            Thank you. <span className="text-gradient-accent">I read every one personally.</span>
+            <span className="block">Thank you.</span>
+            <span className="block text-gradient-accent">I read every one personally.</span>
           </h1>
           <p className="text-xl font-semibold text-ap-mid">
             Your application for the Aligned Power Program is in. I do not outsource this part. Every application gets a
