@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ApplyForm } from "./ApplyForm";
 
 export const metadata = {
   title: "Apply for the Aligned Power Program | Jake Sebok",
@@ -43,95 +44,7 @@ export default function ApplyPage() {
       {/* Application form */}
       <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <form
-            action="https://formspree.io/f/mojkjnev"
-            method="POST"
-            className="space-y-6"
-          >
-            <input type="hidden" name="_subject" value="Aligned Power Program Application" />
-            <input
-              type="hidden"
-              name="_next"
-              value="https://jakesebok.com/work-with-me/apply/thank-you"
-            />
-            <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-ap-primary mb-2">
-                Email *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="business" className="block text-sm font-semibold text-ap-primary mb-2">
-                Business / Role *
-              </label>
-              <input
-                type="text"
-                id="business"
-                name="business"
-                required
-                placeholder="e.g. Chiropractor, Coach, Consultant"
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              />
-            </div>
-            <div>
-              <label htmlFor="revenue" className="block text-sm font-semibold text-ap-primary mb-2">
-                Annual Revenue (approx.) *
-              </label>
-              <select
-                id="revenue"
-                name="revenue"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition"
-              >
-                <option value="">Select range</option>
-                <option value="under-80k">Under $80K</option>
-                <option value="80k-150k">$80K – $150K</option>
-                <option value="150k-300k">$150K – $300K</option>
-                <option value="300k-750k">$300K – $750K</option>
-                <option value="750k-1m">$750K – $1M</option>
-                <option value="over-1m">Over $1M</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="why" className="block text-sm font-semibold text-ap-primary mb-2">
-                Why do you want to join the Aligned Power Program? What&apos;s at stake for you? *
-              </label>
-              <textarea
-                id="why"
-                name="why"
-                required
-                rows={5}
-                placeholder="Tell me your story. What is working, what is not, and what would change if your business finally fit your life?"
-                className="w-full px-4 py-3 rounded-xl border border-ap-border focus:border-ap-accent focus:ring-2 focus:ring-ap-accent/20 outline-none transition resize-none"
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="cta-pill w-full sm:w-auto inline-flex items-center justify-center bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
-              >
-                Submit Application
-              </button>
-            </div>
-          </form>
+          <ApplyForm />
 
           <p className="mt-6 text-sm text-ap-muted">
             I review every application personally. You&apos;ll hear back within
