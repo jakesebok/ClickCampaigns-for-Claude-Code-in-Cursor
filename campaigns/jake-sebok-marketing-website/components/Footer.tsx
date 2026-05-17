@@ -68,9 +68,21 @@ export function Footer() {
           </nav>
           <SocialLinks variant="footer" />
         </div>
-        <p className="text-ap-muted text-xs">
-          © {new Date().getFullYear()} Jake Sebok
-        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-ap-muted text-xs">
+          <p>© {new Date().getFullYear()} Jake Sebok</p>
+          <span className="hidden sm:inline" aria-hidden>·</span>
+          <p>
+            Built by{" "}
+            <a
+              href="https://localcraftdigital.com"
+              target="_blank"
+              rel="noopener"
+              className="underline hover:text-white transition-colors"
+            >
+              LocalCraft Digital
+            </a>
+          </p>
+        </div>
         </div>
       </div>
     </footer>

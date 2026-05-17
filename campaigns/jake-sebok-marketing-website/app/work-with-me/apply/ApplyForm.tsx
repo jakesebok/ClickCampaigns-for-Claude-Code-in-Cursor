@@ -61,7 +61,13 @@ export function ApplyForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6" noValidate>
+    <form
+      id="application-form"
+      data-lc-source="application_form"
+      onSubmit={onSubmit}
+      className="space-y-6"
+      noValidate
+    >
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-ap-primary mb-2">
           Full Name *
