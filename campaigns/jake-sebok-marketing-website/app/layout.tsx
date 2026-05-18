@@ -75,7 +75,7 @@ export default function RootLayout({
         <Footer />
         <Script
           src="https://localcraftdigital.com/track.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           data-pixel-id={LC_PIXEL_ID}
         />
       </body>

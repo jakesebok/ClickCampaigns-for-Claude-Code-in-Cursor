@@ -139,6 +139,7 @@ export default function HomePage() {
                       fill
                       className="object-cover"
                       sizes="128px"
+                      priority
                     />
                   </div>
                   <p className="text-sm text-white/65">Jake Sebok, MCPC</p>
@@ -262,7 +263,6 @@ export default function HomePage() {
                 fill
                 className="object-cover"
                 sizes="64px"
-                priority
               />
             </div>
             <p className="text-sm text-white/80">Jake Sebok, MCPC</p>
