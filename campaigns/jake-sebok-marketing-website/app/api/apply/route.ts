@@ -5,6 +5,7 @@ import {
   buildApplySubmitterEmailText,
   type ApplySubmission,
 } from "@/lib/apply/apply-email-html";
+import { classifySubmission } from "@/lib/spam-detect";
 
 export const dynamic = "force-dynamic";
 
@@ -79,6 +80,43 @@ export async function POST(request: Request) {
   }
   if (!why || why.length < 10) {
     return Response.json({ error: "invalid_why" }, { status: 400 });
+  }
+
+  // Spam classification (BUILD-STANDARDS §9c). The apply form is a
+  // high-intent surface that bots have been hitting hard since the
+  // Formspree migration — every successful POST fires an auto-reply
+  // to the submitter, which is what made the form attractive as a
+  // free email-validation service. Classifier + 200-OK-silent gate
+  // closes that loop without breaking real applicants.
+  const spamCheck = classifySubmission({
+    body: raw as Record<string, any>,
+    name,
+    business,
+    email,
+    // The apply form's "why" field is the message-equivalent for
+    // spam-detection purposes; bots fill it with the same gibberish
+    // they put in /api/contact's message field.
+    message: why,
+    userAgent: request.headers.get("user-agent"),
+  });
+  if (spamCheck.is_spam) {
+    console.warn("[api/apply] spam filtered", {
+      reason: spamCheck.reason,
+      score: spamCheck.score,
+      email,
+      name,
+      business,
+    });
+    return Response.json(
+      {
+        ok: true,
+        id: null,
+        userEmailSent: false,
+        adminEmailSent: false,
+        errors: [] as string[],
+      },
+      { status: 200 }
+    );
   }
 
   const submission: ApplySubmission = { name, email, business, revenue, why };

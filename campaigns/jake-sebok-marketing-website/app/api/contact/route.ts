@@ -5,6 +5,7 @@ import {
   buildContactSubmitterEmailText,
   type ContactSubmission,
 } from "@/lib/contact/contact-email-html";
+import { classifySubmission } from "@/lib/spam-detect";
 
 export const dynamic = "force-dynamic";
 
@@ -62,6 +63,38 @@ export async function POST(request: Request) {
   }
   if (!message || message.length < 2) {
     return Response.json({ error: "invalid_message" }, { status: 400 });
+  }
+
+  // Spam classification (BUILD-STANDARDS §9c). Catches gibberish-name +
+  // gibberish-message + URL-stuffed + keyword-spam bots that pass the
+  // trivial length/email validation above. Return 200 OK silently so
+  // bots don't learn we're filtering (per §9c), and CRITICALLY: skip
+  // the user auto-reply that was making this form attractive as an
+  // email-validation service.
+  const spamCheck = classifySubmission({
+    body: raw as Record<string, any>,
+    name,
+    email,
+    message,
+    userAgent: request.headers.get("user-agent"),
+  });
+  if (spamCheck.is_spam) {
+    console.warn("[api/contact] spam filtered", {
+      reason: spamCheck.reason,
+      score: spamCheck.score,
+      email,
+      name,
+    });
+    return Response.json(
+      {
+        ok: true,
+        id: null,
+        userEmailSent: false,
+        adminEmailSent: false,
+        errors: [] as string[],
+      },
+      { status: 200 }
+    );
   }
 
   const submission: ContactSubmission = { name, email, message };
