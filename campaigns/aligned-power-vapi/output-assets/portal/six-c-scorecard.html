@@ -283,11 +283,20 @@
       var scoredSubmissions = (existingSubmissions || []).filter(hasMeaningfulScores);
       var hasNoSubmissions = scoredSubmissions.length === 0;
 
+      // Defaults for first-time users: prevScores and recentModesByDimension
+      // are used inside selectDimension() below regardless of whether the user
+      // has prior submissions. Without these defaults, first-time users hit
+      // `TypeError: Cannot read properties of undefined (reading '<dim>')`
+      // on every picker click, which silently failed and made the deep-dive
+      // picker appear inert. (Reported by Drew Ewing's first submission.)
+      var prevScores = null;
+      var recentModesByDimension = {};
+
       // Fetch previous week's one thing to use as placeholder (for returning users)
       if (!hasNoSubmissions) {
         var { data: prevRow } = await supabase.from('six_c_submissions').select('one_thing_to_improve, scores, weekly_review, deep_dive_dimension').eq('email', email).order('created_at', { ascending: false }).limit(1).maybeSingle();
         var prevOneThing = (prevRow && prevRow.one_thing_to_improve && String(prevRow.one_thing_to_improve).trim()) ? String(prevRow.one_thing_to_improve).trim() : null;
-        var prevScores = (prevRow && prevRow.scores && typeof prevRow.scores === 'object') ? prevRow.scores : null;
+        prevScores = (prevRow && prevRow.scores && typeof prevRow.scores === 'object') ? prevRow.scores : null;
 
         // Pull the last few weeks of deep-dive history per dimension so the
         // mode selector can avoid recently-used modes for that dimension.
@@ -297,7 +306,7 @@
           .not('deep_dive_dimension', 'is', null)
           .order('created_at', { ascending: false })
           .limit(12);
-        var recentModesByDimension = {};
+        recentModesByDimension = {};
         (recentDeepDives || []).forEach(function(row) {
           var dim = row.deep_dive_dimension;
           var mode = row.weekly_review && row.weekly_review.deepDive && row.weekly_review.deepDive.mode;
