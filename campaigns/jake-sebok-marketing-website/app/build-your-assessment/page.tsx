@@ -50,7 +50,7 @@ export default function BuildYourAssessmentLandingPage() {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5 mb-12 sm:mb-14 max-w-md sm:max-w-none mx-auto" data-reveal data-reveal-delay="1">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5 mb-6 sm:mb-7 max-w-md sm:max-w-none mx-auto" data-reveal data-reveal-delay="1">
           <Link
             href="/build-your-assessment/intake"
             className="intake-nav-primary text-base px-10 py-4 sm:py-[1.125rem] shadow-xl shadow-[rgba(255,107,26,0.28)] w-full sm:w-auto inline-flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-2"
@@ -69,6 +69,13 @@ export default function BuildYourAssessmentLandingPage() {
           >
             Try the public VAPI™ first →
           </Link>
+        </div>
+        <div className="cta-trust mb-12 sm:mb-14" data-reveal data-reveal-delay="1">
+          <span className="cta-trust__item cta-trust__item--accent">Auto-saves every answer</span>
+          <span className="cta-trust__dot" aria-hidden />
+          <span className="cta-trust__item">No card, no commitment</span>
+          <span className="cta-trust__dot" aria-hidden />
+          <span className="cta-trust__item">Quote within a week of intake</span>
         </div>
         <div className="relative mx-auto max-w-lg md:max-w-xl build-intake-hero-card rounded-3xl border border-[var(--ap-border)]/80 bg-white/95 p-7 sm:p-9 md:p-10 text-left ring-1 ring-white/90" data-reveal data-reveal-delay="2">
           <div className="flex justify-center mb-5 sm:mb-6">

@@ -55,13 +55,31 @@ export default function TestimonialsPage() {
           ))}
         </div>
 
-        <div className="mt-16 text-center" data-reveal data-reveal-delay="3">
+        <div className="terminal-cta mt-16" data-reveal data-reveal-delay="3">
+          <p className="terminal-cta__line">
+            Want results like these? See <em>your</em> map first.
+          </p>
           <Link
-            href="/work-with-me"
+            href="/assessment"
             className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"
           >
-            Work With Me
+            Take the VAPI&trade;
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
+          <div className="cta-trust">
+            <span className="cta-trust__item cta-trust__item--accent">Free, no card</span>
+            <span className="cta-trust__dot" aria-hidden />
+            <span className="cta-trust__item">12 minutes</span>
+            <span className="cta-trust__dot" aria-hidden />
+            <Link
+              href="/work-with-me/apply"
+              className="cta-trust__item text-gradient-accent hover:underline font-semibold"
+            >
+              Or apply for 1:1 coaching →
+            </Link>
+          </div>
         </div>
       </div>
     </section>

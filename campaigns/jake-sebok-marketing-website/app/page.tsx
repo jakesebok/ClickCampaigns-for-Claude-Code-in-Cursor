@@ -129,21 +129,27 @@ export default function HomePage() {
               </p>
               <div className="flex flex-wrap gap-3 items-stretch">
                 <Link
-                  href="/work-with-me"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-6 sm:px-8 py-4 rounded-pill transition-all sm:min-w-[220px]"
+                  href="/assessment"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-6 sm:px-8 py-4 rounded-pill transition-all sm:min-w-[240px]"
                 >
-                  Work with me.
+                  Take the VAPI&trade;
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
-                  href="/assessment"
-                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[220px]"
+                  href="/work-with-me"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[200px]"
                 >
-                  Take the VAPI&trade;
+                  See how we work
                 </Link>
               </div>
+              <p className="hero-cta-trust mt-4 font-outfit text-[13px] sm:text-sm font-semibold text-ap-mid">
+                <span className="hero-cta-trust__chip" aria-hidden />
+                <span>
+                  Free. 12 minutes. <span className="text-ap-muted">For founders ready to invest in 12-month, application-based coaching.</span>
+                </span>
+              </p>
             </div>
             <div className="hidden lg:flex items-center justify-end">
               <div className="founder-quote glass-card space-y-4 max-w-[280px] text-right">
@@ -548,7 +554,7 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center gap-4">
             <Link
               href="/assessment"
               className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all"
@@ -558,6 +564,13 @@ export default function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+            <div className="cta-trust cta-trust--on-dark">
+              <span className="cta-trust__item cta-trust__item--accent text-white">Free, no card</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">12 minutes</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">28-day plan from your scores</span>
+            </div>
           </div>
         </div>
       </section>
@@ -687,8 +700,10 @@ export default function HomePage() {
             </ul>
           </div>
 
-          <div className="mt-10 text-center">
-            <p className="text-ap-mid text-xl font-semibold mb-4">Ready to see where you stand?</p>
+          <div className="terminal-cta mt-10">
+            <p className="terminal-cta__line">
+              Ready to see <em>where you stand</em>?
+            </p>
             <div className="flex flex-wrap gap-3 justify-center items-center">
               <Link
                 href="/assessment"
@@ -700,9 +715,16 @@ export default function HomePage() {
                 </svg>
               </Link>
               <span className="text-ap-muted text-sm">or</span>
-              <Link href="/work-with-me" className="text-gradient-accent font-semibold text-sm hover:underline">
-                see your options
+              <Link href="/work-with-me/apply" className="text-gradient-accent font-semibold text-sm hover:underline">
+                apply for the program
               </Link>
+            </div>
+            <div className="cta-trust">
+              <span className="cta-trust__item cta-trust__item--accent">Free, no card</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">Master Certified Coach</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">Founders done with the grind</span>
             </div>
           </div>
         </div>
@@ -862,11 +884,18 @@ export default function HomePage() {
                   </svg>
                 </Link>
                 <Link
-                  href="/work-with-me"
+                  href="/work-with-me/apply"
                   className="inline-flex items-center px-8 py-4 rounded-pill border-[1.5px] border-white/60 text-white font-semibold text-base tracking-wider hover:bg-white/10 transition-all"
                 >
-                  See Your Options
+                  Apply for the Program
                 </Link>
+              </div>
+              <div className="cta-trust cta-trust--on-dark mt-6 justify-center">
+                <span className="cta-trust__item cta-trust__item--accent text-white">ICF Master Certified</span>
+                <span className="cta-trust__dot" aria-hidden />
+                <span className="cta-trust__item">Read personally by Jake</span>
+                <span className="cta-trust__dot" aria-hidden />
+                <span className="cta-trust__item">12-month engagement</span>
               </div>
               <div className="mt-8 pt-8 border-t border-white/20 text-center">
                 <p className="text-sm font-semibold text-white/80 mb-3">Follow along</p>

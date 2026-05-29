@@ -1034,11 +1034,18 @@ export default function WhoIsAlfredPage() {
                 Start My 7-Day Trial
               </a>
               <Link
-                href="/work-with-me"
-                className="inline-flex items-center justify-center px-6 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold hover:border-ap-accent transition-all"
+                href="/assessment"
+                className="inline-flex items-center justify-center px-6 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold hover:border-ap-accent hover:text-gradient-accent transition-all"
               >
-                All programs &amp; workshops
+                Take the VAPI&trade; first
               </Link>
+            </div>
+            <div className="cta-trust mt-6">
+              <span className="cta-trust__item cta-trust__item--accent">7-day trial</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">No card to start</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">Built by Jake, used in coaching</span>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ const offerings = [
     title: "Free VAPI™ Assessment",
     description:
       "72 statements. About 12 minutes. See where you are strong, where you are stretched, and what deserves attention next. Use the same email as your portal or ALFRED account to unlock your personalized 28-day plan.",
-    cta: "Take the Assessment",
+    cta: "Take the VAPI™ — Free",
     href: "/assessment",
     free: true,
   },
@@ -23,7 +23,7 @@ const offerings = [
     title: "Aligned Power Program",
     description:
       "My flagship 12-month, 1:1, high-touch growth and performance coaching experience for entrepreneurs ready to build a business that fits their life and ambition. Customized to you. Application required and personally reviewed.",
-    cta: "Apply Now",
+    cta: "Apply for the Program",
     href: "/work-with-me/apply",
     featured: true,
   },
@@ -282,11 +282,18 @@ export default function WorkWithMePage() {
               href="/work-with-me/apply"
               className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all hover:bg-ap-accent-2"
             >
-              Apply for the Program
+              Apply for the Aligned Power Program
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+            <div className="cta-trust cta-trust--on-dark mt-6">
+              <span className="cta-trust__item cta-trust__item--accent text-white">Read personally by Jake</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">Reply in 5 to 7 business days</span>
+              <span className="cta-trust__dot" aria-hidden />
+              <span className="cta-trust__item">1:1, by application only</span>
+            </div>
           </div>
         </div>
       </section>

@@ -57,14 +57,43 @@ export default function ApplyPage() {
       {/* Application form */}
       <section className="py-12 sm:py-16 bg-white" data-reveal>
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <div data-reveal data-reveal-delay="1">
+          <div
+            className="form-frame apply-form-frame"
+            data-reveal
+            data-reveal-delay="1"
+            data-lc-source="apply_form_frame"
+          >
+            <div className="expectation-setter">
+              <p className="expectation-setter__eyebrow">What happens after you apply</p>
+              <p className="expectation-setter__line">
+                <span className="expectation-setter__numeral">01</span>
+                <span>
+                  <strong>I read every application personally.</strong> No team, no screener, no template.
+                </span>
+              </p>
+              <p className="expectation-setter__line">
+                <span className="expectation-setter__numeral">02</span>
+                <span>
+                  <strong>You hear back in 5 to 7 business days</strong> either way.
+                </span>
+              </p>
+              <p className="expectation-setter__line">
+                <span className="expectation-setter__numeral">03</span>
+                <span>
+                  If we are a fit, the next step is a real <em>conversation</em>. If not, I tell you why.
+                </span>
+              </p>
+            </div>
             <ApplyForm />
           </div>
 
-          <p className="mt-6 text-base text-ap-muted" data-reveal data-reveal-delay="2">
-            I review every application personally. You&apos;ll hear back within
-            5 to 7 business days.
-          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2 text-sm font-semibold text-ap-muted" data-reveal data-reveal-delay="2">
+            <span className="cta-trust__item cta-trust__item--accent text-ap-mid">By application only</span>
+            <span className="cta-trust__dot" aria-hidden />
+            <span>1:1, customized to you</span>
+            <span className="cta-trust__dot" aria-hidden />
+            <span>12-month engagement</span>
+          </div>
         </div>
       </section>
     </>

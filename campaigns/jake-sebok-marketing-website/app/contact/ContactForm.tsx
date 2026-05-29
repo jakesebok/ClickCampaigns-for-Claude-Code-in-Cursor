@@ -111,13 +111,27 @@ export function ContactForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="cta-pill inline-flex items-center justify-center bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-      >
-        {submitting ? "Sending…" : "Send Message"}
-      </button>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+        <button
+          type="submit"
+          disabled={submitting}
+          className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all disabled:opacity-70 disabled:cursor-not-allowed sm:min-w-[200px]"
+        >
+          {submitting ? "Sending…" : "Send Message"}
+          {!submitting && (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          )}
+        </button>
+        <div className="cta-trust cta-trust--start">
+          <span className="cta-trust__item cta-trust__item--accent">No bots</span>
+          <span className="cta-trust__dot" aria-hidden />
+          <span className="cta-trust__item">Reply in a few business days</span>
+          <span className="cta-trust__dot" aria-hidden />
+          <span className="cta-trust__item">Read personally by Jake</span>
+        </div>
+      </div>
     </form>
   );
 }

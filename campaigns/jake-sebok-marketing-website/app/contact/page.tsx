@@ -41,7 +41,28 @@ export default function ContactPage() {
           I&apos;ll point you in the right direction.
         </p>
 
-        <div data-reveal>
+        <div className="form-frame contact-form-frame mt-2" data-reveal data-lc-source="contact_form_frame">
+          <div className="expectation-setter">
+            <p className="expectation-setter__eyebrow">What happens next</p>
+            <p className="expectation-setter__line">
+              <span className="expectation-setter__numeral">01</span>
+              <span>
+                <strong>I read it.</strong> Every message hits my inbox, not a queue.
+              </span>
+            </p>
+            <p className="expectation-setter__line">
+              <span className="expectation-setter__numeral">02</span>
+              <span>
+                <strong>I reply within a few business days.</strong> Usually shorter. Sometimes weekends.
+              </span>
+            </p>
+            <p className="expectation-setter__line">
+              <span className="expectation-setter__numeral">03</span>
+              <span>
+                <strong>You get a real human.</strong> No funnel, no bot, no <em>fake urgency</em>.
+              </span>
+            </p>
+          </div>
           <ContactForm />
         </div>
 
