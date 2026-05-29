@@ -59,7 +59,7 @@ export default function WorkWithMePage() {
       </section>
 
       {/* Offerings grid */}
-      <section className="py-8 sm:py-12">
+      <section className="py-8 sm:py-12" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
             {offerings.map((offer) => (
@@ -120,7 +120,7 @@ export default function WorkWithMePage() {
       </section>
 
       {/* ALFRED — separate from program cards (product bridge, not another “offering” tile) */}
-      <section className="py-12 sm:py-16 bg-ap-off border-y border-ap-border">
+      <section className="py-12 sm:py-16 bg-ap-off border-y border-ap-border" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="max-w-[800px] mx-auto rounded-[24px] border border-ap-border bg-white p-8 sm:p-10 sm:flex sm:items-center sm:gap-10 sm:justify-between">
             <div className="mb-8 sm:mb-0">
@@ -165,7 +165,7 @@ export default function WorkWithMePage() {
       </section>
 
       {/* ALL IN CTA — exclusive opportunity */}
-      <section className="py-20 sm:py-28 bg-ap-primary">
+      <section className="py-20 sm:py-28 bg-ap-primary" data-reveal>
         <div className="max-w-[720px] mx-auto px-5 sm:px-6 text-center">
           <div className="border-t-2 border-ap-accent pt-16 sm:pt-20">
             <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">

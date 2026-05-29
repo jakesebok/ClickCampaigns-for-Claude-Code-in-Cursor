@@ -35,13 +35,19 @@ export default function TestimonialsPage() {
           they are.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.author} {...t} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" data-reveal>
+          {testimonials.map((t, i) => (
+            <div
+              key={t.author}
+              data-reveal
+              data-reveal-delay={(i % 3) + 1}
+            >
+              <TestimonialCard {...t} />
+            </div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center" data-reveal data-reveal-delay="3">
           <Link
             href="/work-with-me"
             className="cta-pill inline-flex items-center gap-2 bg-ap-accent text-white font-semibold text-base px-8 py-4 rounded-pill transition-all"

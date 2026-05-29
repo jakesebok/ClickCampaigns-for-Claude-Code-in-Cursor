@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { SocialLinks } from "@/components/SocialLinks";
+import { EditorialFAQ } from "@/components/EditorialFAQ";
 import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = {
@@ -155,12 +156,14 @@ export default function HomePage() {
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
           <div className="lg:hidden">
             <div className="px-4 py-3 text-center border-b border-ap-border w-full">
-              <span className="font-semibold text-ap-muted text-xs uppercase tracking-wider">Trusted by</span>
+              <span className="font-semibold text-ap-muted text-[11px] uppercase tracking-[0.22em]">
+                Trusted by
+              </span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 [&>*:nth-child(2n)]:border-r-0 [&>*:nth-child(n+5)]:border-b-0">
               {["Doctors", "Coaches", "Healers", "Bodyworkers", "Creators", "Founders"].map((label) => (
                 <div key={label} className="px-4 py-3 text-center border-b border-r border-ap-border">
-                  <span className="font-semibold text-ap-primary text-xs sm:text-base">{label}</span>
+                  <span className="font-semibold text-ap-primary text-[15px] sm:text-base">{label}</span>
                 </div>
               ))}
             </div>
@@ -190,7 +193,7 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="py-20 sm:py-28 bg-ap-bg">
+      <section className="py-20 sm:py-28 bg-ap-bg" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Cost of Success
@@ -274,7 +277,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-white" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Truth
@@ -302,7 +305,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-20 sm:py-28 bg-ap-bg">
+      <section className="py-20 sm:py-28 bg-ap-bg" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Work
@@ -360,7 +363,7 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-white" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="hidden lg:block lg:col-span-5">
@@ -405,7 +408,7 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-white" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             What People Say
@@ -434,7 +437,7 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="relative py-20 sm:py-28 bg-ap-primary text-white overflow-hidden">
+      <section className="relative py-20 sm:py-28 bg-ap-primary text-white overflow-hidden" data-reveal>
         <div className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-ap-primary" aria-hidden />
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
         <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-ap-accent" aria-hidden />
@@ -445,6 +448,32 @@ export default function HomePage() {
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-white mb-6">
             Three steps. <span className="text-gradient-accent">Your pace.</span>
           </h2>
+
+          {/* Premium stat row — display-face numerals + accent bar + small-caps label.
+              Real numbers only (VAPI architecture + program length). No fabricated
+              social proof. Italic Cormorant numerals signal editorial weight. */}
+          <div className="stat-row stat-row--four mt-6 mb-10 max-w-[820px]" aria-label="By the numbers">
+            <div className="stat-card stat-card--on-dark" data-reveal data-reveal-delay="1">
+              <div className="stat-card__numeral stat-card__numeral--accent">12</div>
+              <div className="stat-card__label">Domains</div>
+              <div className="stat-card__sub">Mapped in the VAPI&trade;</div>
+            </div>
+            <div className="stat-card stat-card--on-dark" data-reveal data-reveal-delay="2">
+              <div className="stat-card__numeral">72</div>
+              <div className="stat-card__label">Statements</div>
+              <div className="stat-card__sub">Read in about 12 minutes</div>
+            </div>
+            <div className="stat-card stat-card--on-dark" data-reveal data-reveal-delay="2">
+              <div className="stat-card__numeral">28</div>
+              <div className="stat-card__label">Day Plan</div>
+              <div className="stat-card__sub">Personalized to your scores</div>
+            </div>
+            <div className="stat-card stat-card--on-dark" data-reveal data-reveal-delay="3">
+              <div className="stat-card__numeral stat-card__numeral--accent">12</div>
+              <div className="stat-card__label">Month Program</div>
+              <div className="stat-card__sub">1:1, by application only</div>
+            </div>
+          </div>
           <p className="text-white/80 text-lg font-semibold max-w-2xl mb-8">
             Start with the free assessment. Get your map. Then choose the level of support that fits.
           </p>
@@ -502,7 +531,7 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="py-20 sm:py-28 bg-white overflow-hidden">
+      <section className="py-20 sm:py-28 bg-white overflow-hidden" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             The Outcome
@@ -648,7 +677,111 @@ export default function HomePage() {
 
       <div className="h-0.5 bg-ap-accent" />
 
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-ap-bg" data-reveal>
+        <div className="max-w-[820px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
+            Before You Take It
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-4">
+            Common questions, <span className="text-gradient-accent">honestly answered</span>.
+          </h2>
+          <p className="text-ap-mid text-lg font-semibold mb-10 max-w-[60ch]">
+            What founders ask me before they take the assessment or apply for the program. No pressure, no pitch.
+          </p>
+          <EditorialFAQ
+            items={[
+              {
+                q: "Is the VAPI™ actually free, or is this a soft sell?",
+                a: (
+                  <>
+                    <p>
+                      Free. No card, no upsell wall. You take 72 statements, see your scores across 12 domains, and get
+                      a personalized 28-day plan to act on the result. Use the same email as your portal or ALFRED
+                      account to unlock the plan.
+                    </p>
+                    <p>
+                      If, after seeing your map, you want to talk about the 12-month program, you apply. If not, you
+                      keep the plan. I would rather you take real action on a small thing than buy a big thing for the
+                      wrong reason.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                q: "Who is the Aligned Power™ Program actually for?",
+                a: (
+                  <>
+                    <p>
+                      Founders who have already proven they can build, and now want to do it without paying for the
+                      growth with their health, their family, or their sense of self. Impact-driven, values-aligned,
+                      done with the grind.
+                    </p>
+                    <p>
+                      It is not for people looking for a tactical playbook on Meta ads, a quick mindset hack, or a
+                      group program. It is 1:1, customized, application-only, and a real commitment on both sides.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                q: "Why is this application-based instead of just letting me book a call?",
+                a: (
+                  <>
+                    <p>
+                      Two reasons. First, my calendar is finite, so I want the time we spend together to land on the
+                      right fit, not on a sales conversation we both regret. Second, the application itself is
+                      diagnostic. It tells me where you are stuck, what you have tried, and what you are willing to
+                      change.
+                    </p>
+                    <p>
+                      I read every one personally. If we are a fit, I respond with the next step. If we are not, I tell
+                      you why and where you might be better served.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                q: "How is this different from the executive-coach pages I keep seeing?",
+                a: (
+                  <>
+                    <p>
+                      Most coaching pages stack adjectives. World-class, transformational, master-certified. I have the
+                      credentials, but the work is not in the brochure language. It is in how we look at the parts of
+                      your business that you have been quietly avoiding, and the parts of your life you have been
+                      paying with to keep the business alive.
+                    </p>
+                    <p>
+                      You can also try ALFRED, the app I built so the clarity from our work travels with you into the
+                      hard weeks. That is a real product, not a marketing prop.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                q: "What does the first 30 days actually look like?",
+                a: (
+                  <>
+                    <p>
+                      You take the VAPI&trade; and we use your map to choose the first three places to focus. We meet
+                      1:1 in deep-work sessions, and I am available between sessions for the moments that do not wait
+                      for the calendar. Most clients describe the first month as clearer priorities, less reactive
+                      execution, and a noticeable drop in inner conflict.
+                    </p>
+                    <p>
+                      The goal is not a list of tactics. It is a fundamental shift in how you run the business and how
+                      you carry yourself inside it.
+                    </p>
+                  </>
+                ),
+              },
+            ]}
+          />
+        </div>
+      </section>
+
+      <div className="h-0.5 bg-ap-accent" />
+
+      <section className="py-20 sm:py-28 bg-white" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-12 sm:p-16 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />

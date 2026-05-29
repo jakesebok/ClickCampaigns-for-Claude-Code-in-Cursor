@@ -36,7 +36,7 @@ export default function AboutPage() {
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8 max-w-2xl">
             Master Certified Professional Coach, founder, full-time dad to three amazing kids.
           </p>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start" data-reveal data-reveal-delay="1">
             <div>
               <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
                 <Image
@@ -88,7 +88,7 @@ export default function AboutPage() {
       </section>
 
       {/* Credentials */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Credentials
@@ -156,7 +156,7 @@ export default function AboutPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Proof

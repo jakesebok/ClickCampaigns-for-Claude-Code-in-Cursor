@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
 
   return (
     <main className="px-6 lg:px-10 py-16 lg:py-24 max-w-[920px] mx-auto">
-      <header className="mb-12">
+      <header className="mb-12" data-reveal>
         <p className="text-[12px] uppercase tracking-[0.16em] text-amber-700 font-medium mb-3">
           Notes from Jake
         </p>
@@ -36,16 +36,16 @@ export default function BlogIndexPage() {
         </h1>
         <p className="mt-5 text-[17px] leading-relaxed text-slate-700 max-w-[60ch]">
           Field-tested answers to the questions founders actually search when
-          they're tired of generic coaching content. Updated weekly.
+          they&apos;re tired of generic coaching content. Updated weekly.
         </p>
       </header>
 
       {posts.length === 0 ? (
-        <p className="text-slate-600">No posts yet. Check back soon.</p>
+        <p className="text-slate-600" data-reveal data-reveal-delay="1">No posts yet. Check back soon.</p>
       ) : (
-        <ul className="divide-y divide-slate-200">
+        <ul className="divide-y divide-slate-200" data-reveal data-reveal-delay="1">
           {posts.map((p) => (
-            <li key={p.slug} className="py-8">
+            <li key={p.slug} className="py-8" data-reveal data-reveal-delay="2">
               <article className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-6 items-start">
                 {p.hero_image_url ? (
                   <Link href={`/blog/${p.slug}`} className="block">

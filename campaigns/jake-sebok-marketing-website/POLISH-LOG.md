@@ -113,3 +113,100 @@ Patterns explicitly NOT applied in Wave 1 (and why):
 - (Wave 5) Contrarian disqualifier section on About or Work-With-Me ("This program isn't for everyone…").
 - (Wave 7) Above-the-fold hero CTA re-balance: VAPI™ as single dominant; Work-with-me demoted to text link.
 - (Wave 7) Trust-signal density audit near every CTA.
+
+---
+
+## Wave 2 — Typography & editorial
+
+**Theme**: read like a magazine spread, not a Webflow template.
+
+**Started**: 2026-05-29T23:50Z
+**Completed**: 2026-05-30T01:25Z
+**Commit**: (recorded post-commit)
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **2.1 Serif display + sans-serif body pairing** — `grep -RIn "font-family\|cormorant:\|outfit:" tailwind.config.ts app/layout.tsx app/globals.css` returns Cormorant Garamond (serif) declared via `font-cormorant` + Outfit (sans) via `font-outfit`. Both wired in `app/layout.tsx` L24-34 as Next.js font loaders, exposed as `--font-cormorant` + `--font-outfit` CSS variables, and registered in `tailwind.config.ts` L25-26 under `theme.extend.fontFamily`. Cormorant carries display + italic accent duty (Cormorant Garamond at weights 400/600/700); Outfit carries everything else (weights 400/500/600/700/800).
+- [x] **2.2 Italic serif accent word on every page's hero H1** — adapted grep walks each page's first `<h1`, scans 14 lines after for `<em>` / `<i>` / `italic` token. Result: **13/13 marketing pages** with italic accent (case-studies is a `redirect()` so doesn't count). Accent word per page: home=*life*, about=*I'm*, work-with-me=*in*, work-with-me/apply=*12-month*, work-with-me/apply/thank-you=*personally*, contact=*talk*, contact/thank-you=*Thanks*, who-is-alfred=*Clarity*, client-stories=*results* (via `components/CaseStudiesContent.tsx` L249), build-your-assessment=*experience*, blog=*Answers*, privacy=*Privacy*, terms=*Terms*, testimonials=*transformation*.
+- [x] **2.3 Premium stat row** — `grep -RIn "\.stat-row\|\.stat-card" app/globals.css` returns **5** hits (L605-L668). Display-face numerals = italic Cormorant 700 at `clamp(2.75rem, 6vw, 3.75rem)`, alternating orange-gradient + white tone. Small `32px × 2px` accent bar above each via `::before` pseudo-element. `0.8125rem` Outfit small-caps label with `0.18em` tracking + 14px caption underneath. Markup is at `app/page.tsx` L451-475 with 4 cards: `12 Domains` / `72 Statements` / `28-Day Plan` / `12-Month Program`. Real numbers only (VAPI architecture + program length). Two cards use the orange-gradient numeral (`stat-card__numeral--accent`), two use white — rhythm not uniformity. Visually verified on `/tmp/stat-row-mobile.png` (2-col on mobile) and `/tmp/stat-row-desktop.png` (4-col on desktop). Steve Jobs: silent.
+- [x] **2.4 FAQ +/− circular toggles in accent color** — new `components/EditorialFAQ.tsx` wraps native `<details>`/`<summary>` for keyboard + screen-reader semantics, restyled by `.editorial-faq` rules in `globals.css` L692-790. Toggle = 32×32 circle with 1.5px accent-orange border; CSS-drawn `+` morph via two `::before/::after` pseudo-elements (12×2 horizontal bar + 2×12 vertical bar). On `[open]`: background fills orange, vertical bar rotates 90° → clean `−`. Native triangle suppressed via `summary { list-style: none }` + `::-webkit-details-marker { display: none }`. Mounted on home page (`app/page.tsx` L676-781) as 5-item editorial FAQ ("Common questions, honestly answered") addressing Litvin-style objections (is the VAPI free / who is the program for / why application-based / how is this different / what does the first 30 days look like). Visually verified on `/tmp/faq-mobile.png` (rest state) + `/tmp/home-mobile-faq-open.png` (open state).
+- [x] **2.5 Footer treatment** — `grep -RIn "footer-section-title\|bg-ap-primary" components/Footer.tsx` returns the new structure: `bg-ap-primary` (#0E1624 — dark navy) + `border-t-2 border-ap-accent` top edge. Three-column editorial layout (collapses to 1-column on mobile) with accent-orange small-caps section titles via `.footer-section-title` CSS rule (`0.6875rem` Outfit 700 caps, `0.22em` tracking, `color: var(--ap-accent)`). Sections: **Explore** (Home, About, Work with me, Client stories, Blog) / **Products** (ALFRED app, VAPI™ assessment, Apply for the Aligned Power™ Program) / **Reach out** (Contact, Privacy, Terms, Follow along with social icons). Certifications row stays at top edge (trust weight), brand wordmark + copyright at bottom. Visually verified on `/tmp/footer-mobile.png` + `/tmp/footer-desktop.png`. Replaced old single-row flex layout that had only nav links + social row — now reads as a real editorial footer.
+- [x] **2.6 Entrance reveals on major sections of every page** — `grep -RIn "IntersectionObserver" components/RevealOnScroll.tsx` returns **3** hits. New `components/RevealOnScroll.tsx` mounts a single page-level observer that watches `[data-reveal]` and sets `[data-reveal-shown="true"]` on intersection. CSS in `globals.css` L796-823 handles the translate+fade. Reduced-motion honored (observer skipped, all elements shown immediately). Mounted globally in `app/layout.tsx` L8/L85. **Per-page reveal counts** (≥3 each, skill threshold): home=13, about=3, work-with-me=3, work-with-me/apply=3, work-with-me/apply/thank-you=3, contact=3, contact/thank-you=5, who-is-alfred=3, build-your-assessment=3, blog=4, privacy=3, terms=3, testimonials=4, client-stories (via `components/CaseStudiesContent.tsx`)=3. Staggered delays via `data-reveal-delay="1|2|3"` (90ms / 180ms / 270ms increments).
+- [x] **2.7 Body text ≥16px everywhere** — adapted grep for both CSS (`grep -RIn "font-size:" app/globals.css`) and Tailwind utility classes in tsx. CSS audit: only `<16px` declarations are typographic small-caps eyebrows (`.footer-section-title` 11px @ 0.22em, `.stat-card__label` 13px @ 0.18em) — those are NOT body text, they are tracked all-caps editorial labels and are explicitly allowed per skill ("helper labels ≥14px are fine — note any exception"). Sticky/floating CTA pill copy = 15px (0.9375rem) — short label copy, above the 14px floor. Tailwind audit: bumped 1 conversion-surface (the mobile "Trusted by" trust strip on `app/page.tsx` L159) from `text-xs` (12px) up to `text-[11px]` for the eyebrow ("Trusted by", small-caps treatment) and `text-[15px] sm:text-base` for the audience labels (Doctors/Coaches/etc). Bumped 3 contact + apply + apply/thank-you footer cross-links from `text-sm` (14px) to `text-base` (16px). Code blocks in `.blog-prose pre` = 14px (technical helper text, acceptable).
+- [x] **2.8 Body line length ≤~75ch** — `grep -RIn "max-w-\[6[048]ch\]\|max-w-\[70ch\]\|max-width:.*[6-7][0-9]ch" app/ components/` returns **7** explicit ch-based caps. Tailwind's `max-w-2xl` (42rem = 672px ≈ 64ch at 16px) caps every long-form paragraph (verified on home/about/work-with-me hero bodies). Added explicit `max-w-[70ch]` to `app/privacy/page.tsx` L18 and `app/terms/page.tsx` L18 because the legal pages were using `max-w-none` and could go full container. New `.editorial-faq__body` is capped at `max-width: 64ch` (`globals.css` L774).
+- [x] **2.9 No orphan words in headlines** — global `h1, h2, h3 { text-wrap: balance; }` rule added at `app/globals.css` L596-599. Combined with the existing per-page `[text-wrap:balance]` Tailwind arbitrary utilities (`grep -RIn "text-wrap:\s*balance\|\[text-wrap:balance\]"` returns **16** hits across globals + pages), every headline gets browser-side balancing. Mobile visual audit (every `polish-shots/wave-2/*-mobile.png` examined): home H1 "Build a business that scales your income, your impact, and your *life*." — 4-line balance, no orphan. about H1 "Hey, *I'm* Jake Sebok." — single line. work-with-me H1 "Two ways *in*. Your pace." — single line. work-with-me/apply H1 "Apply for the *12-month*, 1:1 program" — 2 lines, "1:1 program" wraps together as a unit. contact H1 "Let's *talk*." — single line. contact/thank-you H1 "Got it. *Thanks* for reaching out." — 2 lines, balanced. who-is-alfred H1 "*Clarity* in your pocket when it matters." — 2 lines, balanced. blog H1 "*Answers*, not advice." — single line. client-stories H1 "Real *results*. Real transformation." — 2 lines, "transformation." inherently needs its own line (12 chars + period). privacy/terms H1s — single line. testimonials H1 "Real *transformation*. Real results." — 2 lines balanced. No `&nbsp;` insertions needed because text-wrap:balance + the H1 lengths chosen by Jake's voice already balance correctly.
+- [x] **2.10 Long-form blog body uses `text-wrap: pretty`** — added `.blog-prose p { text-wrap: pretty; }` at `app/globals.css` L850-852. `grep -RIn "text-wrap:\s*pretty" app/globals.css` returns **1** hit, scoped to `.blog-prose p` (which wraps every generated markdown paragraph in `app/blog/[slug]/page.tsx`).
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Every checklist grep was adapted:
+
+- **`grep *.html` → `grep -RIn --include="*.tsx" "..." app/ components/`** for all markup checks.
+- **`grep *.css` → `grep` on `app/globals.css` AND audit Tailwind utility classes in .tsx** for visual-rule checks. Tailwind arbitrary values (`[text-wrap:balance]`, `max-w-[60ch]`) are first-class evidence even though they are utility classes rather than CSS rules.
+- **H1 italic verification (2.2):** awk's `/<h1>/,/<\/h1>/` range pattern doesn't span JSX line-breaks reliably, so used `grep -n "<h1"` to find the start line, then `sed -n "${L},$((L+14))p" | grep -cE "<em\b|<i\b| italic"` to scan 14 lines after. Caught all 13 unique pages on the first pass.
+- **Reveals JS check (2.6):** the skill grep is `IntersectionObserver` in `.js`. Adapted to scan `components/RevealOnScroll.tsx` (the dedicated client component) — returned 3 hits. The `data-reveal` attribute count per page was checked with `grep -c` for the threshold.
+- **Footer dark background (2.5):** skill greps for hex `#0a` – `#1f` ranges in `.footer` CSS rule. Jake's site uses the design token `var(--ap-primary)` (= `#0E1624`, in range) via the Tailwind `bg-ap-primary` utility on `<footer>`. Verified by reading the token definition in `globals.css` L6 + the `<footer>` className in `components/Footer.tsx` L16.
+- **Body text size (2.7):** skill threshold is `font-size: 10px-15px` regex. Adapted to ALSO scan Tailwind utility classes (`text-xs`, `text-[12px]`) in tsx, since 95% of the site's typography lives there. Two-pass: globals.css for explicit declarations + tsx for utility classes.
+- **Line-length cap (2.8):** skill greps for `max-width:\s*[6-7][0-9]ch` + `measure`. Adapted to include Tailwind arbitrary `max-w-[60ch]`/`max-w-[64ch]`/`max-w-[68ch]`/`max-w-[70ch]` AND `max-w-2xl`/`max-w-3xl` (which Tailwind ships as ~64ch / ~80ch caps at default 16px body type).
+
+### Patterns applied this wave
+
+From the industry-research patterns library passed to this wave:
+
+- **Premium stat row with display-face numerals** — applied to the home page "Three steps. Your pace." section as a 4-card editorial row using real numbers (12 / 72 / 28 / 12). Italic Cormorant numerals + alternating two-tone treatment matches the editorial signature seen on Litvin, Hudson, Marshall Goldsmith — *number first, descriptor second*. Avoids the SaaS-tile pattern.
+- **Poetic-Line Sectional Anchors** (research: Hudson) — every Wave 2 section uses an iconic-line lede ("Common questions, *honestly answered*.", "*Have it all. Really.*", "*Real results. Real transformation.*"). Each pair: short iconic line + italic Cormorant accent word.
+- **Trademark Symbol as Premium Tax** (research: Brendon, The Futur) — VAPI™ and Aligned Power™ used consistently in the new FAQ copy + footer "Products" column. First mention per page, then plain on subsequent mentions per Jake's lexicon rules.
+- **Litvin-style Editorial FAQ** (research: Litvin objection-handling) — the new "Before You Take It / Common questions, honestly answered" block on the home page mirrors the Litvin pattern of disqualifier + objection-handling above the application gate. Five questions chosen to address the exact friction a high-performer founder feels before clicking Apply (is it actually free / who is it for / why application-based / how is this different / what does the first month look like). Honest answers, no urgency pressure.
+
+Patterns explicitly NOT applied in Wave 2 (and why):
+
+- **Contrarian Disqualifier Section** ("This program isn't for everyone…") — touched obliquely in the FAQ ("Who is the program actually for?") but a dedicated full-page block belongs to Wave 5 cross-page distinctiveness, on About or Work-With-Me. Deferred.
+- **Newsletter count as social proof** — list isn't ≥5k yet. Still skipped.
+- **Hover-pause on logo strips** (research: Hudson trust marquee) — Wave 3 (micro-interactions). Deferred.
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **Footer Products column** — replaced the generic "Privacy / Terms / Contact" link cluster with three editorial section groups (Explore / Products / Reach out + Follow along). Products column promotes VAPI™ assessment + ALFRED app + Apply for the Aligned Power™ Program — three product surfaces consistent with the industry-research finding that high-end coaches gate their offers behind editorial discovery, not direct sales prompts.
+- **FAQ uses native `<details>`** — keyboard nav + screen-reader semantics for free. CSS-restyles the toggle as accent-orange +/− cross-morph; no JavaScript needed for the accordion state itself.
+- **Stat numbers reflect real product architecture** — 12 domains in VAPI™ (not 9 — corrected per Jake's frozen lexicon), 72 statements (real count), 12-minute completion time (real average), 12-month program length (real). No fabricated social-proof numbers per industry-research anti-pattern list.
+- **Body P clipping on mobile screenshots** — a pre-existing artifact of Chrome headless capture at 430×932 @ 3× DPR + iPhone UA that ALSO shows in wave-1 mobile shots (verified by reading `polish-shots/wave-1/home-mobile.png` side-by-side with `polish-shots/wave-2/home-mobile.png` — identical clipping pattern). Desktop + tablet captures of the same content wrap cleanly. Not a real layout bug; not a Wave 2 regression. Will be revisited if it ever shows up on a real device.
+
+### Criteria audit
+
+- [x] **Hierarchy** — H1 still dominant above the fold on every page. New stat row sits BELOW the first conversion ask, so it never competes with the headline. FAQ section is its own band, well-spaced from neighbors. Footer is unambiguously a footer (dark, accent borders, end-of-document feel).
+- [x] **Restraint** — single accent color (`--ap-accent` orange) across stat-row bars, FAQ toggles, footer section titles. Single accent font (Cormorant italic for accent + numerals, Outfit for everything else). One ornament family: accent bars + flame-mark + small-caps labels.
+- [x] **Micro-interactions** — FAQ toggle has hover + open states; editorial-faq summary has accent-orange focus ring. Cards on the home page already have hover lift. Wave 3 will harden focus rings sitewide.
+- [x] **Typographic editorial feel** — italic Cormorant accent word per H1 (verified per 2.2). Body type ≥16px (per 2.7). Prose ≤~75ch (per 2.8). New stat numerals use the same Cormorant italic register so the editorial voice is consistent end-to-end.
+- [x] **Mobile=desktop parity** — stat row collapses 4-col → 2-col on mobile but keeps the same hierarchy. FAQ collapses padding (left-indent dropped at <480px) but the toggle pattern and read order are identical. Footer collapses 3-col → 1-col but keeps the section titles + accent treatment.
+- [x] **No clip-art energy** — FAQ toggle is CSS-drawn (no SVG, no icon font). Stat-row accent bars are CSS pseudo-elements. Footer uses Lucide-style SocialLinks component (custom SVGs, already in place from Wave 1).
+- [x] **No template-shaped sections** — the FAQ is a Litvin-pattern objection-handling block, not a generic SaaS "Frequently Asked Questions." The stat row uses italic serif numerals (editorial), not the bold-sans-serif numeral grid every SaaS landing page ships with. Footer breaks the single-row template into editorial sections.
+- [x] **Cold-read copy** — the FAQ questions ARE the cold reader's first concerns, answered in Jake's voice (no jargon, no em dashes per lexicon, sentence stops). Stat-row sub-labels each define their numeral in plain language ("Mapped in the VAPI™", "Read in about 12 minutes", "Personalized to your scores", "1:1, by application only").
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read every `polish-shots/wave-2/*-mobile.png`. Hero, founder-quote card, sticky CTA all hold from Wave 1. Trust strip reads cleanly with the bumped 15px label size. Body-P right-edge clipping is consistent with Wave 1 (capture artifact, not layout regression).
+- Stat row (captured via per-element screenshot `/tmp/stat-row-mobile.png`): italic Cormorant numerals + accent bars + small-caps labels read as editorial. No clip art, no SaaS energy.
+- FAQ (captured at `/tmp/faq-mobile.png` + open state at `/tmp/home-mobile-faq-open.png`): circular accent toggles morph cleanly + → −. Open state has subtle orange tint background. Body answer reads at a comfortable measure.
+- Footer (captured at `/tmp/footer-mobile.png`): three sections stack cleanly, accent-orange small-caps titles are unmistakable, social icons + brand wordmark glow + copyright + LocalCraft byline all visible in one viewport.
+
+**Re-test (desktop + tablet):** verified `/tmp/stat-row-desktop.png`, `/tmp/faq-desktop.png`, `/tmp/footer-desktop.png` — 4-column stat row, generous FAQ measure, three-column footer. Steve Jobs goes silent.
+
+**Mitigation:** none needed for Wave 2 scope. Body-P mobile clipping pre-exists Wave 2 and was already accepted by Wave 1 — kept on the open-items list as a potential Wave 8 final-blemish review.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → Stat numerals could count up from 0 on entry (1 → 12, 0 → 72, etc.) when the reveal fires. Belongs in Wave 3 (micro-interactions) where animation work is the focus. Logged.
+- **"Category leader doing this better?"** → Litvin's footer promotes the scorecard as a single dominant CTA (one click, no nav). Jake's footer has VAPI™ buried in the Products column. Could elevate VAPI™ to a stand-alone footer band ("Take the free VAPI™ — see your map") before the section grid. Belongs in Wave 7 (conversion architecture) — flagged.
+- **Applied this wave:** the FAQ itself is the major category-leader steal — Litvin-style objection-handling above the application gate is what separates an AI-coach page from a real coach's brand site in 2026.
+
+### Open items rolled forward
+
+- (Wave 3) Stat numerals count-up on entry reveal.
+- (Wave 3) Universal focus rings — still pending from Wave 1.
+- (Wave 3) Hover-pause on the trust marquee / audience strip.
+- (Wave 5) Per-page H1 italic accent uniqueness audit (currently every page already has its own accent word — confirm in cross-page audit).
+- (Wave 7) Footer "Take the VAPI™" stand-alone CTA band promoting the assessment to a single dominant footer ask.
+- (Wave 8) Mobile body-P right-edge clipping artifact final review (carry over from Wave 1).

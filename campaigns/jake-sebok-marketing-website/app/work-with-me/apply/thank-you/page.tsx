@@ -43,9 +43,9 @@ export default function ApplyThankYouPage() {
       </section>
 
       {/* What happens next */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white" data-reveal>
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <div className="bg-ap-bg/50 border border-ap-border rounded-2xl p-6 sm:p-8">
+          <div className="bg-ap-bg/50 border border-ap-border rounded-2xl p-6 sm:p-8" data-reveal data-reveal-delay="1">
             <h2 className="font-outfit font-bold text-2xl text-ap-primary mb-6">What happens next</h2>
             <ol className="space-y-5">
               <li className="flex gap-4">
@@ -86,8 +86,8 @@ export default function ApplyThankYouPage() {
             </ol>
           </div>
 
-          <div className="mt-10">
-            <p className="text-sm font-semibold text-ap-mid mb-4 uppercase tracking-wider">While you wait</p>
+          <div className="mt-10" data-reveal data-reveal-delay="2">
+            <p className="text-xs font-semibold text-ap-mid mb-4 uppercase tracking-[0.18em]">While you wait</p>
             <div className="grid sm:grid-cols-2 gap-4">
               <Link
                 href="/who-is-alfred"
@@ -96,18 +96,18 @@ export default function ApplyThankYouPage() {
                 <p className="font-semibold text-ap-primary mb-1 group-hover:text-gradient-accent transition-colors">
                   Meet ALFRED
                 </p>
-                <p className="text-sm text-ap-mid">
+                <p className="text-base text-ap-mid">
                   My AI coach. The same Aligned Power method, working with you between calls.
                 </p>
               </Link>
               <Link
-                href="/case-studies"
+                href="/client-stories"
                 className="group block bg-white border border-ap-border rounded-2xl p-5 hover:border-ap-accent transition-colors"
               >
                 <p className="font-semibold text-ap-primary mb-1 group-hover:text-gradient-accent transition-colors">
-                  Read case studies
+                  Read client stories
                 </p>
-                <p className="text-sm text-ap-mid">
+                <p className="text-base text-ap-mid">
                   Real stories from clients who built businesses that fit their lives.
                 </p>
               </Link>
@@ -117,7 +117,7 @@ export default function ApplyThankYouPage() {
           <div className="mt-10 text-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-gradient-accent transition-colors"
+              className="inline-flex items-center gap-2 text-base font-semibold text-ap-mid hover:text-gradient-accent transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

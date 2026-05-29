@@ -38,28 +38,32 @@ export default function ContactThankYouPage() {
           please mention that in a follow-up.
         </p>
 
-        <div className="bg-white border border-ap-border rounded-2xl p-6 sm:p-8 mb-10">
-          <p className="text-sm font-semibold text-ap-mid mb-4 uppercase tracking-wider">In the meantime</p>
+        <div className="bg-white border border-ap-border rounded-2xl p-6 sm:p-8 mb-10" data-reveal>
+          <p className="text-xs font-semibold text-ap-mid mb-4 uppercase tracking-[0.18em]">In the meantime</p>
           <div className="space-y-4">
             <Link
               href="/assessment"
               className="group block bg-ap-bg/50 border border-ap-border rounded-xl p-5 hover:border-ap-accent transition-colors"
+              data-reveal
+              data-reveal-delay="1"
             >
               <p className="font-semibold text-ap-primary mb-1 group-hover:text-gradient-accent transition-colors">
                 Take the free VAPI&trade; Assessment
               </p>
-              <p className="text-sm text-ap-mid">
+              <p className="text-base text-ap-mid">
                 72 statements, about 12 minutes. See where you are strong, stretched, and what deserves attention next.
               </p>
             </Link>
             <Link
               href="/who-is-alfred"
               className="group block bg-ap-bg/50 border border-ap-border rounded-xl p-5 hover:border-ap-accent transition-colors"
+              data-reveal
+              data-reveal-delay="2"
             >
               <p className="font-semibold text-ap-primary mb-1 group-hover:text-gradient-accent transition-colors">
                 Meet ALFRED
               </p>
-              <p className="text-sm text-ap-mid">
+              <p className="text-base text-ap-mid">
                 My AI coach. The Aligned Power method, working with you between sessions.
               </p>
             </Link>
@@ -69,7 +73,7 @@ export default function ContactThankYouPage() {
         <div className="text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-gradient-accent transition-colors"
+            className="inline-flex items-center gap-2 text-base font-semibold text-ap-mid hover:text-gradient-accent transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

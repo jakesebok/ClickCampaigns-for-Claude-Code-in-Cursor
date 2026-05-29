@@ -11,12 +11,12 @@ export default function PrivacyPage() {
           <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">Privacy</em>{" "}
           Policy
         </h1>
-        <p className="text-ap-muted text-sm mb-12">
+        <p className="text-ap-muted text-base mb-12">
           Last updated: {new Date().toLocaleDateString("en-US")}
         </p>
 
-        <div className="prose prose-ap max-w-none space-y-8 text-ap-mid">
-          <section>
+        <div className="prose prose-ap max-w-none space-y-8 text-ap-mid max-w-[70ch]">
+          <section data-reveal>
             <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
               1. Information We Collect
             </h2>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
             </ul>
           </section>
 
-          <section>
+          <section data-reveal data-reveal-delay="1">
             <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
               2. How We Use Your Information
             </h2>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section>
+          <section data-reveal data-reveal-delay="2">
             <h2 className="font-outfit font-semibold text-ap-primary text-lg mb-4">
               3. Data Sharing
             </h2>

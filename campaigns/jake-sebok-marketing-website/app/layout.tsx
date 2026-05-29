@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SiteCTAs } from "@/components/SiteCTAs";
+import { RevealOnScroll } from "@/components/RevealOnScroll";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -82,6 +83,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <SiteCTAs />
+        <RevealOnScroll />
         <Script
           src="https://localcraftdigital.com/track.js"
           strategy="lazyOnload"

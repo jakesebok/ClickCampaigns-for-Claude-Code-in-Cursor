@@ -33,20 +33,22 @@ export default function ContactPage() {
           I&apos;ll point you in the right direction.
         </p>
 
-        <ContactForm />
+        <div data-reveal>
+          <ContactForm />
+        </div>
 
-        <div className="mt-10 pt-8 border-t border-ap-border">
-          <p className="text-sm font-semibold text-ap-primary mb-3">Connect with me</p>
+        <div className="mt-10 pt-8 border-t border-ap-border" data-reveal data-reveal-delay="1">
+          <p className="text-base font-semibold text-ap-primary mb-3">Connect with me</p>
           <SocialLinks variant="contact" />
         </div>
 
-        <p className="mt-8 text-sm text-ap-muted">
+        <p className="mt-8 text-base text-ap-muted" data-reveal data-reveal-delay="2">
           Prefer to start with the free assessment?{" "}
           <Link
             href="/assessment"
             className="text-gradient-accent font-semibold hover:underline"
           >
-            Take the VAPI™
+            Take the VAPI&trade;
           </Link>{" "}
           and see where you&apos;re strong, stretched, and what needs attention next.
         </p>

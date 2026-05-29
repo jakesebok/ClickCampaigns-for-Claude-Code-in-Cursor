@@ -48,13 +48,15 @@ export default function ApplyPage() {
       </section>
 
       {/* Application form */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white" data-reveal>
         <div className="max-w-[720px] mx-auto px-5 sm:px-6">
-          <ApplyForm />
+          <div data-reveal data-reveal-delay="1">
+            <ApplyForm />
+          </div>
 
-          <p className="mt-6 text-sm text-ap-muted">
+          <p className="mt-6 text-base text-ap-muted" data-reveal data-reveal-delay="2">
             I review every application personally. You&apos;ll hear back within
-            5–7 business days.
+            5 to 7 business days.
           </p>
         </div>
       </section>

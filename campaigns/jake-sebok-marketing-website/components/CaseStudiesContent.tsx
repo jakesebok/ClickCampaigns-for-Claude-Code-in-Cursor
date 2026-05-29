@@ -148,6 +148,7 @@ function StorySection({
     <section
       id={data.id}
       className={`scroll-mt-24 py-12 sm:py-16 ${isAlt ? "bg-ap-bg" : "bg-white"}`}
+      data-reveal
     >
       <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -259,7 +260,7 @@ export function CaseStudiesContent() {
       <StorySection data={thaddeusData} variant="alt" />
 
       {/* More Results — horizontal scroll */}
-      <section className="py-12 sm:py-16 bg-white overflow-hidden">
+      <section className="py-12 sm:py-16 bg-white overflow-hidden" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6 mb-10">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             More Results
@@ -305,7 +306,7 @@ export function CaseStudiesContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-12 sm:py-16 bg-ap-bg">
+      <section className="py-12 sm:py-16 bg-ap-bg" data-reveal>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="relative overflow-hidden rounded-[20px] bg-ap-primary p-10 sm:p-14 text-center border-t-2 border-ap-accent">
             <div className="absolute inset-0 bg-gradient-to-br from-ap-accent/20 to-transparent" />

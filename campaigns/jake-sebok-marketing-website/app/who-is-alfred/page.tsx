@@ -308,7 +308,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-y-visible [overflow-x:clip]">
+      <section className="relative z-20 py-14 sm:py-20 bg-white border-y border-ap-border overflow-y-visible [overflow-x:clip]" data-reveal>
         <div
           className="pointer-events-none absolute -top-20 left-[-10%] h-[220px] w-[min(44vw,420px)] opacity-[0.42]"
           style={{
@@ -383,7 +383,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative isolate z-30 py-20 sm:py-24 lg:py-28 overflow-y-visible text-white [overflow-x:clip]">
+      <section className="relative isolate z-30 py-20 sm:py-24 lg:py-28 overflow-y-visible text-white [overflow-x:clip]" data-reveal>
         <div
           className="absolute inset-0 bg-gradient-to-b from-ap-primary via-ap-primary-2 to-[#2d3d52]"
           aria-hidden
@@ -812,7 +812,7 @@ export default function WhoIsAlfredPage() {
         </div>
       </section>
 
-      <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden bg-ap-bg border-y border-ap-border">
+      <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden bg-ap-bg border-y border-ap-border" data-reveal>
         <div
           className="pointer-events-none absolute -top-28 right-[-18%] h-[min(72vw,560px)] w-[min(72vw,560px)] rounded-full opacity-[0.38] blur-[88px]"
           style={{
