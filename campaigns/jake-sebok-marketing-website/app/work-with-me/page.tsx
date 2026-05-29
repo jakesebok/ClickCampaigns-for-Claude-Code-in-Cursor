@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { workWithMeSchemaGraph } from "@/lib/schema";
 
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 export const metadata = {
   title: "Work With Me | Growth and Performance Coaching with Jake Sebok",
   description:
-    "Start with the free VAPI™ Assessment, then apply for the Aligned Power Program — Jake Sebok's flagship 12-month, 1:1, high-touch growth and performance coaching for entrepreneurs.",
+    "Two ways in. Take the free VAPI™ assessment, or apply for the Aligned Power Program: Jake Sebok's flagship 12-month, 1:1 coaching for entrepreneurs.",
+  alternates: { canonical: "/work-with-me" },
 };
 
 const offerings = [
@@ -30,6 +32,10 @@ const offerings = [
 export default function WorkWithMePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(workWithMeSchemaGraph()) }}
+      />
       {/* Hero — subtle orange geometric */}
       <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-ap-bg overflow-hidden">
         <div

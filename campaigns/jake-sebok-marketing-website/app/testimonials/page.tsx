@@ -1,15 +1,22 @@
 import Link from "next/link";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { testimonials } from "@/lib/testimonials";
+import { testimonialsSchemaGraph } from "@/lib/schema";
 
 export const metadata = {
-  title: "Testimonials — Jake Sebok",
+  title: "Coaching Testimonials | Real Founders Working With Jake Sebok",
   description:
-    "What entrepreneurs say about working with Jake Sebok. Real transformation, real results from chiropractors, coaches, healers, and service professionals.",
+    "What chiropractors, coaches, healers, and founders say about working with Jake Sebok. Real transformation, real results, in their own words.",
+  alternates: { canonical: "/testimonials" },
 };
 
 export default function TestimonialsPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(testimonialsSchemaGraph()) }}
+      />
     <section className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 bg-ap-bg overflow-hidden">
       <div
         className="pointer-events-none hidden lg:block absolute top-0 right-0 lg:h-full lg:w-[38%] bg-ap-accent/10"
@@ -58,5 +65,6 @@ export default function TestimonialsPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

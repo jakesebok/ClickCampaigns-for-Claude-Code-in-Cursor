@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import { blogIndexSchemaGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Notes & answers | Jake Sebok",
+  title: "Notes and Answers for Founders | Jake Sebok Blog",
   description:
-    "Field-tested answers to the questions founders search when they're tired of generic coaching advice. Updated weekly.",
+    "Field-tested answers to the questions founders search when generic coaching advice falls short. New posts weekly from Master Certified Coach Jake Sebok.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Notes & answers | Jake Sebok",
+    title: "Notes and Answers for Founders | Jake Sebok Blog",
     description:
-      "Field-tested answers to the questions founders search when they're tired of generic coaching advice.",
+      "Field-tested answers to the questions founders search when generic coaching advice falls short.",
     url: "https://jakesebok.com/blog",
     type: "website"
   }
@@ -27,6 +28,10 @@ export default function BlogIndexPage() {
 
   return (
     <main className="px-6 lg:px-10 py-16 lg:py-24 max-w-[920px] mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogIndexSchemaGraph()) }}
+      />
       <header className="mb-12 hero-halo" data-reveal>
         <p className="text-[12px] uppercase tracking-[0.16em] text-amber-700 font-medium mb-3">
           Notes from Jake

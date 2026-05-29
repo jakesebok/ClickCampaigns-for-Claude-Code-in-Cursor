@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { ApplyForm } from "./ApplyForm";
+import { applySchemaGraph } from "@/lib/schema";
 
 export const metadata = {
   title: "Apply for the Aligned Power Program | Jake Sebok",
   description:
-    "Apply for the Aligned Power Program with Jake Sebok. A 12-month, 1:1, high-touch growth and performance coaching experience for entrepreneurs ready to build a business that fits their life and ambition.",
+    "Apply for Jake Sebok's flagship Aligned Power Program: 12 months of 1:1 high-touch coaching for founders ready to build a business that fits their life.",
+  alternates: { canonical: "/work-with-me/apply" },
 };
 
 export default function ApplyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(applySchemaGraph()) }}
+      />
       {/* Hero — subtle orange geometric */}
       <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 bg-ap-bg overflow-hidden">
         <div

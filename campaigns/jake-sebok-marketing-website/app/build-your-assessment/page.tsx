@@ -1,10 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { buildYourAssessmentSchemaGraph } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Build Your Own Assessment | Jake Sebok for Coaches and Founders",
+  description:
+    "Commission a bespoke assessment like VAPI™. Custom constructs, scoring, results, and an optional client-facing app, scoped to how you actually coach.",
+  alternates: { canonical: "/build-your-assessment" },
+};
 
 export default function BuildYourAssessmentLandingPage() {
   return (
     <div className="build-intake-canvas min-h-[calc(100dvh-5rem)] sm:min-h-[calc(100vh-6rem)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildYourAssessmentSchemaGraph()) }}
+      />
       <section className="max-w-3xl lg:max-w-4xl mx-auto px-5 sm:px-8 lg:px-10 pt-10 sm:pt-14 md:pt-16 pb-16 sm:pb-24 text-center hero-halo">
         <div className="inline-flex items-center gap-2 rounded-full border border-[var(--ap-accent)]/25 bg-white/70 px-4 py-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ap-primary)] font-outfit shadow-sm mb-6 sm:mb-8">
           <Sparkles className="w-3.5 h-3.5 text-[var(--ap-accent)] shrink-0" aria-hidden />

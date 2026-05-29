@@ -3,16 +3,22 @@ import Image from "next/image";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { SocialLinks } from "@/components/SocialLinks";
 import { testimonials } from "@/lib/testimonials";
+import { aboutSchemaGraph } from "@/lib/schema";
 
 export const metadata = {
-  title: "About Jake Sebok — Values-Aligned Performance Coach",
+  title: "About Jake Sebok | Values-Aligned Performance Coach",
   description:
-    "Jake Sebok helps entrepreneurs build businesses that fit their lives, not just their ambition. Master Certified Coach, business owner, and full-time dad who chose alignment over the cage.",
+    "Master Certified Coach Jake Sebok helps entrepreneurs build businesses that fit their lives, not just their ambition. The story behind the program.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchemaGraph()) }}
+      />
       {/* Hero — subtle orange geometric */}
       <section className="relative pt-16 sm:pt-24 pb-16 sm:pb-20 bg-ap-bg overflow-hidden">
         <div

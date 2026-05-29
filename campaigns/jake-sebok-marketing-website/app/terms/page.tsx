@@ -1,10 +1,19 @@
+import { legalSchemaGraph } from "@/lib/schema";
+
 export const metadata = {
-  title: "Terms of Use — Jake Sebok",
-  description: "Terms of use for alignedpower.coach and Jake Sebok coaching services.",
+  title: "Terms of Use | Jake Sebok Coaching and VAPI Assessment",
+  description:
+    "Terms that govern your use of jakesebok.com, the VAPI™ assessment, ALFRED, the Aligned Power Program, and related coaching services from Jake Sebok.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(legalSchemaGraph("terms")) }}
+      />
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[760px] mx-auto px-5 sm:px-6 hero-halo">
         <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
@@ -96,5 +105,6 @@ export default function TermsPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

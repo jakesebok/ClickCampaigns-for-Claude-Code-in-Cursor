@@ -5,64 +5,80 @@ import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { SocialLinks } from "@/components/SocialLinks";
 import { EditorialFAQ } from "@/components/EditorialFAQ";
 import { testimonials } from "@/lib/testimonials";
+import {
+  homeSchemaGraph,
+  breadcrumbList,
+  faqSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Growth and Performance Coaching for Entrepreneurs | Jake Sebok",
   description:
-    "Growth and performance coaching for founders who want clearer decisions, stronger execution, and a business that scales income, impact, and life. Start with the free VAPI™ assessment.",
+    "Master Certified Coach Jake Sebok helps founders build businesses that scale income, impact, and life. Start with the free VAPI™ assessment.",
   alternates: {
     canonical: "https://jakesebok.com/",
   },
   openGraph: {
     title: "Growth and Performance Coaching for Entrepreneurs | Jake Sebok",
     description:
-      "For founders who want more growth without shrinking the rest of life to make it happen. Free VAPI™ assessment plus 1:1 application-based coaching with Jake Sebok.",
+      "Master Certified Coach Jake Sebok helps founders build businesses that scale income, impact, and life. Start with the free VAPI™ assessment.",
     url: "https://jakesebok.com/",
     type: "website",
   },
 };
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jake Sebok",
-  jobTitle: "Growth and Performance Coach",
-  description:
-    "Master Certified Professional Coach helping impact-driven entrepreneurs build values-aligned businesses that scale income, impact, and life.",
-  url: "https://jakesebok.com",
-  sameAs: ["https://jakesebok.com/about"],
-  hasCredential: [
-    "International Coaching Federation",
-    "Certified Professional Life Coach",
-    "Master Certified Professional Coach",
-  ],
-};
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Jake Sebok Growth and Performance Coaching",
-  description:
-    "1:1 application-based growth and performance coaching for entrepreneurs who want clearer decisions, stronger execution, and a business that supports the life it was meant to fund.",
-  provider: {
-    "@type": "Person",
-    name: "Jake Sebok",
+/**
+ * Wave 6 (SEO/AEO deep audit) consolidated all home-page schemas into the
+ * shared graph in `lib/schema.ts`. The FAQPage schema below mirrors the
+ * exact questions and answers rendered in the EditorialFAQ component, so AI
+ * engines can quote them verbatim.
+ */
+const homeFaqSchema = faqSchema([
+  {
+    question: "Is the VAPI™ actually free, or is this a soft sell?",
+    answer:
+      "Free. No card, no upsell wall. You take 72 statements, see your scores across 12 domains, and get a personalized 28-day plan to act on the result. Use the same email as your portal or ALFRED account to unlock the plan. If, after seeing your map, you want to talk about the 12-month program, you apply. If not, you keep the plan.",
   },
-  serviceType: "Growth and Performance Coaching",
-  areaServed: "Worldwide",
-  url: "https://jakesebok.com",
-};
+  {
+    question: "Who is the Aligned Power Program actually for?",
+    answer:
+      "Founders who have already proven they can build, and now want to do it without paying for the growth with their health, their family, or their sense of self. Impact-driven, values-aligned, done with the grind. It is not for people looking for a tactical playbook, a quick mindset hack, or a group program. It is 1:1, customized, application-only, and a real commitment on both sides.",
+  },
+  {
+    question:
+      "Why is this application-based instead of just letting me book a call?",
+    answer:
+      "Two reasons. First, my calendar is finite, so I want the time we spend together to land on the right fit, not on a sales conversation we both regret. Second, the application itself is diagnostic. It tells me where you are stuck, what you have tried, and what you are willing to change. I read every one personally. If we are a fit, I respond with the next step. If we are not, I tell you why and where you might be better served.",
+  },
+  {
+    question:
+      "How is this different from the executive-coach pages I keep seeing?",
+    answer:
+      "Most coaching pages stack adjectives. World-class, transformational, master-certified. I have the credentials, but the work is not in the brochure language. It is in how we look at the parts of your business that you have been quietly avoiding, and the parts of your life you have been paying with to keep the business alive. You can also try ALFRED, the app I built so the clarity from our work travels with you into the hard weeks.",
+  },
+  {
+    question: "What does the first 30 days actually look like?",
+    answer:
+      "You take the VAPI™ and we use your map to choose the first three places to focus. We meet 1:1 in deep-work sessions, and I am available between sessions for the moments that do not wait for the calendar. Most clients describe the first month as clearer priorities, less reactive execution, and a noticeable drop in inner conflict. The goal is not a list of tactics. It is a fundamental shift in how you run the business and how you carry yourself inside it.",
+  },
+]);
+
+const homeBreadcrumb = breadcrumbList([{ name: "Home", path: "/" }]);
 
 export default function HomePage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchemaGraph()) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeBreadcrumb) }}
       />
 
       <section className="relative min-h-[85vh] flex flex-col overflow-hidden">

@@ -1,15 +1,22 @@
 import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
 import { ContactForm } from "./ContactForm";
+import { contactSchemaGraph } from "@/lib/schema";
 
 export const metadata = {
-  title: "Contact — Jake Sebok",
+  title: "Contact Jake Sebok | Growth and Performance Coaching",
   description:
-    "Get in touch with Jake Sebok. Questions about the VAPI™ Assessment, ALFRED, workshops, or coaching? Send a message.",
+    "Send a message to Jake Sebok. Questions about the free VAPI™ assessment, ALFRED, workshops, or 1:1 coaching get a real reply within a few business days.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchemaGraph()) }}
+      />
     <section className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 bg-ap-bg overflow-hidden">
       <div
         className="pointer-events-none hidden lg:block absolute top-0 right-0 lg:h-full lg:w-[38%] bg-ap-accent/10"
@@ -55,5 +62,6 @@ export default function ContactPage() {
         </p>
       </div>
     </section>
+    </>
   );
 }

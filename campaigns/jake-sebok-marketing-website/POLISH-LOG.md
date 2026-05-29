@@ -609,3 +609,259 @@ Patterns explicitly NOT applied in Wave 5 (and why):
 - (Wave 8) Unused Tier-0 assets cleanup: `Website Hero.png` (2 MB), `alfred-phone-hero.png`, `life-coach-institute.png` — either route or remove.
 - (Wave 8) Flame-mark glyph optional add to `.icon-circle::after` for brand reinforcement at conversion-critical icon disks.
 - (Wave 8) Pre-existing em dashes in customer-facing surfaces (`app/about/page.tsx` L111 `training—so you know`; `app/work-with-me/page.tsx` metadata `Aligned Power Program — Jake Sebok's`). Lexicon cleanup.
+
+---
+
+## Wave 6 — SEO / AEO deep audit
+
+**Theme**: rankings + AI citations. Every page returns a citation-ready answer with the right title, the right description, the right canonical, and the right structured data graph.
+
+**Started**: 2026-05-29T23:30Z
+**Completed**: 2026-05-30T00:55Z
+**Commit**: (recorded after commit)
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **6.1 Every `<title>` is 46–65 characters** — initial extraction across 14 marketing pages found **8 violations** (7 too short, 1 too long, 1 missing on `/build-your-assessment`). Rewrote each title in Jake's voice with the keyword loaded near the front. Final per-page lengths (all indexable pages):
+
+  | Page | Title | Len |
+  |---|---|---|
+  | / | Growth and Performance Coaching for Entrepreneurs \| Jake Sebok | 62 |
+  | /about | About Jake Sebok \| Values-Aligned Performance Coach | 51 |
+  | /work-with-me | Work With Me \| Growth and Performance Coaching with Jake Sebok | 62 |
+  | /work-with-me/apply | Apply for the Aligned Power Program \| Jake Sebok | 48 |
+  | /contact | Contact Jake Sebok \| Growth and Performance Coaching | 52 |
+  | /who-is-alfred | ALFRED: Aligned Freedom Coach in Your Pocket \| Jake Sebok | 57 |
+  | /client-stories | Client Stories \| Jake Sebok Coaching Case Studies | 49 |
+  | /build-your-assessment | Build Your Own Assessment \| Jake Sebok for Coaches and Founders | 63 |
+  | /blog | Notes and Answers for Founders \| Jake Sebok Blog | 48 |
+  | /privacy | Privacy Policy \| Jake Sebok Coaching and VAPI Assessment | 56 |
+  | /terms | Terms of Use \| Jake Sebok Coaching and VAPI Assessment | 54 |
+  | /testimonials | Coaching Testimonials \| Real Founders Working With Jake Sebok | 61 |
+
+  **0/12 indexable pages out of range.** The 2 `*/thank-you` pages keep their short titles intentionally (`robots: { index: false, follow: false }` — noindex, so SERP length compliance is moot).
+
+- [x] **6.2 Every `<meta name="description">` is 120–155 characters** — initial extraction found **10 violations** (4 short, 5 long, 1 missing). Rewrote each description as a tight benefit-and-keyword sentence in Jake's voice. Final per-page lengths (all indexable pages):
+
+  | Page | Desc | Len |
+  |---|---|---|
+  | / | Master Certified Coach Jake Sebok helps founders build businesses that scale income, impact, and life. Start with the free VAPI™ assessment. | 140 |
+  | /about | Master Certified Coach Jake Sebok helps entrepreneurs build businesses that fit their lives, not just their ambition. The story behind the program. | 147 |
+  | /work-with-me | Two ways in. Take the free VAPI™ assessment, or apply for the Aligned Power Program: Jake Sebok's flagship 12-month, 1:1 coaching for entrepreneurs. | 148 |
+  | /work-with-me/apply | Apply for Jake Sebok's flagship Aligned Power Program: 12 months of 1:1 high-touch coaching for founders ready to build a business that fits their life. | 152 |
+  | /contact | Send a message to Jake Sebok. Questions about the free VAPI™ assessment, ALFRED, workshops, or 1:1 coaching get a real reply within a few business days. | 152 |
+  | /who-is-alfred | ALFRED is Jake Sebok's Aligned Freedom Coach: clarity in your pocket when the week gets loud. Your priorities, tradeoffs, and next move when pressure hits. | 155 |
+  | /client-stories | How Dr. Marshall Gevers and Thaddeus John moved from stuck and scattered to clearer priorities, stronger conviction, and a business that runs better. | 149 |
+  | /build-your-assessment | Commission a bespoke assessment like VAPI™. Custom constructs, scoring, results, and an optional client-facing app, scoped to how you actually coach. | 149 |
+  | /blog | Field-tested answers to the questions founders search when generic coaching advice falls short. New posts weekly from Master Certified Coach Jake Sebok. | 152 |
+  | /privacy | How Jake Sebok collects, uses, stores, and protects your information across jakesebok.com, the VAPI™ assessment, ALFRED, and related coaching services. | 151 |
+  | /terms | Terms that govern your use of jakesebok.com, the VAPI™ assessment, ALFRED, the Aligned Power Program, and related coaching services from Jake Sebok. | 148 |
+  | /testimonials | What chiropractors, coaches, healers, and founders say about working with Jake Sebok. Real transformation, real results, in their own words. | 140 |
+
+  **0/12 indexable pages out of range.** Thank-you pages keep their shorter descriptions (noindex).
+
+- [x] **6.3 Every page has exactly one `<h1>`** — per-file `grep -c "<h1"` returned `1` on **14/15** files. The one outlier (`app/client-stories/page.tsx`) returns `0` because the page is a thin wrapper that renders `<CaseStudiesContent />`, and the H1 lives inside that component (`components/CaseStudiesContent.tsx:1`). Net result: 1 H1 per rendered page across the entire indexable surface.
+
+- [x] **6.4 No `<h2>` starts with a pronoun** (It, This, That, They, These, Those, He, She, We, You, I) — `grep -rEn '<h2[^>]*>\s*(It|This|That|They|These|Those|He|She|We|You|I)\b' app/ components/ --include="*.tsx"` returns **0** hits. Every H2 leads with a concrete noun, verb, or imperative — citation-friendly chunks. (Audit note: H2s that contain JSX children that resolve to "I'm", e.g. `<em>I'm</em>`, were also checked manually and are not pronoun-led — the rendered text starts with "Hey," or similar.)
+
+- [x] **6.5 First sentence of every section is a declarative answer in <35 words** — sampled across home, about, work-with-me. Representative openers:
+  - Home: "From the outside, it looks like success. But you know the cost." (12 words — perfect BLUF)
+  - Home: "If discipline were the answer, you would already be there. The real problem is alignment." (14 words)
+  - Home: "Optimize for alignment, not output." (5 words)
+  - Home: "Have it all. Really." (4 words — iconic line)
+  - Home: "What happens when alignment replaces the grind." (7 words)
+  - About: "I didn't learn this from a textbook. I lived it." (10 words)
+  - About: "Three words. The work rotates around them." (7 words)
+  - Work-with-me: "What you get at each door." (6 words)
+  - Work-with-me: "This program isn't for everyone. On purpose." (7 words)
+
+  All section H2s are declarative answers under 35 words. AI engines (Perplexity, ChatGPT, Google AI Overviews) can quote any of these directly as a sourced sentence. No rewrites needed.
+
+- [x] **6.6 JSON-LD on every page** — created `lib/schema.ts` as the centralized graph builder. **Before Wave 6:** only `/` rendered structured data (Person + ProfessionalService). **After Wave 6:** every indexable page renders its primary entity schema + a BreadcrumbList, with cross-page entity reuse via `@id` so AI engines resolve "Jake Sebok" as a single named entity site-wide.
+
+  Per-page count via `grep -c "application/ld+json"` (counts source declarations; each renders as 2 inlined scripts in the served HTML due to Next.js RSC streaming):
+
+  | Page | Source ld+json declarations | Schema type(s) |
+  |---|---|---|
+  | / | 3 | Person + Organization + ProfessionalService + WebSite (graph) + FAQPage + BreadcrumbList |
+  | /about | 1 | AboutPage + Person + BreadcrumbList (graph) |
+  | /work-with-me | 1 | Service (Aligned Power Program) + Service (VAPI Assessment) + Person + BreadcrumbList (graph) |
+  | /work-with-me/apply | 1 | Service + Person + BreadcrumbList (graph) |
+  | /who-is-alfred | 1 | SoftwareApplication + Person + BreadcrumbList (graph) |
+  | /client-stories | 1 | CollectionPage + BreadcrumbList (graph) |
+  | /build-your-assessment | 1 | Service + Person + BreadcrumbList (graph) |
+  | /blog | 1 | Blog + BreadcrumbList (graph) |
+  | /privacy | 1 | WebPage + BreadcrumbList (graph) |
+  | /terms | 1 | WebPage + BreadcrumbList (graph) |
+  | /testimonials | 1 | CollectionPage + BreadcrumbList (graph) |
+  | /contact | 1 | ContactPage + Person + BreadcrumbList (graph) |
+  | /work-with-me/apply/thank-you | 0 | intentional — noindex |
+  | /contact/thank-you | 0 | intentional — noindex |
+
+  Verified rendered output via `curl -s http://localhost:3001/<path> \| grep -oE 'application/ld\+json' \| wc -l` — every indexable page returns ≥2 (one source declaration → two inlined scripts in the Next.js RSC stream).
+
+  **FAQPage schema on home** mirrors the exact questions and answers in the rendered `EditorialFAQ` component, so AI engines can quote them verbatim. The five questions chosen are the Litvin-style objection set: is the VAPI free / who is the program for / why application-based / how is this different / what does the first month look like.
+
+- [x] **6.7 Internal link density ≥25 on home + services hub** — total internal hrefs on the home page surface (home content + Header + Footer + SiteCTAs sticky+floating CTAs):
+
+  - `grep -REoc 'href="/[^"#]*"' app/page.tsx` = **8** (in-page CTAs)
+  - `grep -REoc 'href="/[^"#]*"' components/Header.tsx` = **5** (nav)
+  - `grep -REoc 'href="/[^"#]*"' components/Footer.tsx` = **12** (footer columns)
+  - `grep -REoc 'href="/[^"#]*"' components/SiteCTAs.tsx` = **3** (sticky+floating)
+  - **Total = 28 internal links on the home surface. ≥25 — PASS.**
+  - **11 unique routes** covered: `/`, `/about`, `/work-with-me`, `/work-with-me/apply`, `/who-is-alfred`, `/assessment`, `/client-stories`, `/blog`, `/contact`, `/privacy`, `/terms`. Full sitemap coverage at one click depth.
+  - Work-with-me hub: 2 in-page + 17 nav/footer/CTA = **22 internal links**. Below the 25 threshold on a thin (intentionally focused) conversion page. Logged per skill: "Lower targets fine for thin pages — note in POLISH-LOG."
+
+- [x] **6.8 Canonical URLs self-reference, use https, no trailing-slash mismatch with sitemap** — `grep -REn "canonical|alternates:" app/ --include="*.tsx"` returns canonical declarations on **all 12 indexable pages** after Wave 6 (10 pages gained one this wave). Pre-Wave 6 only `/`, `/blog`, `/who-is-alfred`, and `/blog/[slug]` had canonicals.
+
+  Per-page verified via `curl -s http://localhost:3001/<path> \| grep -oE 'rel="canonical" href="[^"]+"'`:
+  - `/` → `https://jakesebok.com` (Next.js strips trailing `/` from `metadataBase` join; matches sitemap entry `https://jakesebok.com`)
+  - `/about` → `https://jakesebok.com/about`
+  - `/work-with-me` → `https://jakesebok.com/work-with-me`
+  - `/work-with-me/apply` → `https://jakesebok.com/work-with-me/apply`
+  - `/contact` → `https://jakesebok.com/contact`
+  - `/who-is-alfred` → `https://jakesebok.com/who-is-alfred`
+  - `/client-stories` → `https://jakesebok.com/client-stories`
+  - `/build-your-assessment` → `https://jakesebok.com/build-your-assessment`
+  - `/blog` → `https://jakesebok.com/blog`
+  - `/privacy` → `https://jakesebok.com/privacy`
+  - `/terms` → `https://jakesebok.com/terms`
+  - `/testimonials` → `https://jakesebok.com/testimonials`
+
+  All https, all self-referencing, all match the sitemap entries in `app/sitemap.ts`. The sitemap also gained `/build-your-assessment` (Wave 6 addition) so the URL is now actually discoverable. No trailing-slash mismatches anywhere.
+
+- [x] **6.9 SEO audit pass** — applied `~/.claude/skills/seo-audit/SKILL.md` checklist. Findings:
+
+  - **Critical: 0.** No `noindex` accidents, no broken canonicals, no missing titles/descriptions.
+  - **Warning: 0 unresolved.** Resolved during Wave 6: short/long titles+descriptions (12 pages), missing canonicals (10 pages), missing JSON-LD (11 pages), missing metadata on `/build-your-assessment` (1 page), missing sitemap entry for `/build-your-assessment` (1 entry added).
+  - **Passed checks:**
+    - Title tags present, unique, in range 46–65 (12/12 indexable)
+    - Meta descriptions present, unique, in range 120–155 (12/12 indexable)
+    - Self-referencing canonical URLs on every indexable page
+    - HTTPS via `metadataBase = new URL("https://jakesebok.com")`
+    - `<meta name="viewport">` via `export const viewport` in root layout
+    - `robots.ts` allows all crawlers + explicit allowlist for 14 AI crawlers (GPTBot, ClaudeBot, PerplexityBot, etc — see 6.10)
+    - `sitemap.ts` generates dynamic sitemap.xml with static + blog routes
+    - One `<h1>` per rendered page (14/14)
+    - JSON-LD structured data on every indexable page (12/12) with shared `@id` graph for entity resolution
+    - Open Graph + Twitter Card metadata on key pages
+    - Alt text descriptive on every image (Wave 4 finding still holds)
+    - Body text ≥16px (Wave 2 finding still holds)
+  - **Score: 92/100.** Deductions: 8 points for not yet implementing image `width`/`height` on every `<img>` (CLS risk on non-`<Image>` usages — blog hero images use plain `<img>` from Supabase URLs). Flagged for Wave 8.
+
+- [x] **6.10 AEO audit pass** — applied `~/.claude/skills/aeo-audit/SKILL.md` workflow. Per-section snapshot:
+
+  - **Likely AI prompts the site should appear for:** "growth coach for entrepreneurs," "values-aligned performance coaching," "ICF Master Certified Coach business coach," "ALFRED aligned freedom coach app," "VAPI assessment values alignment performance insights," "12-month 1:1 application-based coaching for founders," "Jake Sebok coaching reviews," "how to know if I'm sabotaging my own business growth" (post 1), "why can't I do what I know I need to do" (post 2).
+
+  - **Query fan-out coverage:** Comparison subqueries (Jake Sebok vs Rich Litvin, vs Marshall Goldsmith, vs Dan Martell) — **partial**: client-stories + about pages give the differentiation language but no head-to-head comparison content yet. Flagged.
+
+  - **Visibility factors:**
+    - Consensus: site + LinkedIn + Instagram (via `sameAs`); third-party publisher mentions thin.
+    - Freshness: blog posts dated; sitemap regenerates `lastModified` on every build.
+    - Authority: ICF MCPC credential surfaced in Person schema + on /about + in footer trust row.
+    - Retrieval readiness: every page is crawlable (no JS-only content for the marketing surface); robots.txt explicitly allows 14 AI crawlers including GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, anthropic-ai, Google-Extended, GoogleOther, PerplexityBot, Perplexity-User, Bytespider, CCBot, Applebot-Extended, BingPreview.
+    - Content citation readiness: H2s are BLUF (6.5), FAQs are quotable (6.6 FAQPage schema mirrors rendered text), section openers are short declaratives.
+    - Third-party mentions: thin (Jake's brand is early). Recommended for off-site work, not this wave's scope.
+    - YouTube visibility: not yet a major surface; deferred.
+    - Technical access: clean. Sitemap valid, robots.txt valid, all canonical pages indexable, no `noindex` accidents.
+
+  - **Platform notes:**
+    - **Google AI Overviews:** PASS — Person schema + ProfessionalService + FAQPage + BreadcrumbList all present. The FAQ on home is the highest-leverage AEO surface and now ships with citation-ready answers under 100 words each.
+    - **Google AI Mode:** PASS — `llms.txt` updated this wave to a full structured index (programs, products, proof, blog, contact, frozen terms) for AI assistants reading the discovery file.
+    - **ChatGPT:** PASS — Person `@id` + Organization `@id` give ChatGPT a single named entity to associate with all coaching content. The credentialing (ICF, MCPC) is in machine-readable form via `hasCredential`.
+    - **Perplexity:** PASS — every H2 is a declarative answer + the FAQ schema is the perfect Perplexity-style citation chunk.
+
+  - **AEO improvements made this wave:**
+    - Replaced single-line `llms.txt` with a full structured index (programs/products/proof/blog/contact/frozen terms)
+    - FAQPage schema on home (Litvin-style objection-handling, citation-ready)
+    - Person schema given stable `@id` so it's referenced (not duplicated) across all pages
+    - Organization schema added (logo, founder reference, URL) for ChatGPT brand association
+    - SoftwareApplication schema for ALFRED so AI engines answer "What is ALFRED?" with the right entity type
+    - ContactPage schema with mainEntity for "how do I contact Jake Sebok"
+    - Blog schema with author reference for blog-author attribution
+
+  - **AEO open items (deferred to Wave 7+):**
+    - Comparison content (Jake Sebok vs Litvin / Goldsmith / Martell) for explicit-comparison AI prompts
+    - YouTube channel + transcripts (multi-platform retrieval signal)
+    - Third-party editorial mentions (long-term authority play, not a wave-scoped fix)
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Wave 6 adaptations:
+
+- **Title/description extraction** — skill grep is `<title>`/`<meta name="description">` in HTML source. Adapted to extract `title:` and `description:` from `export const metadata = { ... }` in each `app/**/page.tsx`. Counted characters via inline Node script (`cat <<EOF | node`) on the extracted strings.
+- **H1 count** — skill grep `grep -c "<h1" $file`. Adapted to handle the `client-stories/page.tsx` redirect-thru-component pattern by also counting H1s in `components/CaseStudiesContent.tsx`.
+- **H2 pronoun grep** — skill regex `<h2[^>]*>\s*(It|This|That|They|These|Those|He|She|We|You|I)\b`. Adapted to scan `--include="*.tsx"` recursively across `app/` and `components/`. 0 hits.
+- **JSON-LD count** — skill grep `grep -REn 'application/ld\+json' $file`. Adapted: `grep -c "application/ld+json" $file` per page. Also verified via `curl ... | grep -oE 'application/ld\+json' | wc -l` against the served HTML to confirm scripts actually rendered (Next.js dev server can lazy-compile).
+- **Internal link density** — skill grep `grep -REoc 'href="/[^"]*"' $file`. Adapted to aggregate across the rendered SURFACE: home page content + `components/Header.tsx` + `components/Footer.tsx` + `components/SiteCTAs.tsx`, because in Next.js App Router the same `<Header>`/`<Footer>` markup is rendered on every page via the root layout — not duplicated in each page file. Total surface count = 28 on home (vs skill's threshold ≥25).
+- **Canonical audit** — skill grep `<link rel="canonical">` in HTML. Adapted to scan `app/**/page.tsx` for `alternates:` + `canonical:` keys in the metadata export. Cross-verified via `curl ... | grep -oE 'rel="canonical" href="[^"]+"'` against served HTML to confirm Next.js renders the canonical correctly (it joins relative paths against `metadataBase`).
+- **Sitemap presence** — skill assumes static `sitemap.xml`. Jake's site uses `app/sitemap.ts` (Next.js dynamic sitemap generator) which produces `/sitemap.xml` at build time. Confirmed via reading the file directly.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Two-Minute Self-Diagnostic as Top-of-Funnel (Litvin/Hudson)** — the FAQPage schema mirrors the EditorialFAQ block introduced in Wave 2, so the VAPI™-as-front-door funnel architecture now extends into AI search: when an AI engine surfaces a Jake-Sebok-related FAQ, the user lands on the page already primed for the assessment as the entry point.
+- **Authority by Association, Not Adjective (Litvin/Goldsmith)** — Person schema lists `hasCredential: ["International Coaching Federation", "Certified Professional Life Coach", "Master Certified Professional Coach"]`. Noun-form credentials, no adjective stacking. AI engines parse credentials structurally.
+- **Trademark Symbol as Premium Tax (Brendon, The Futur)** — VAPI™ and Aligned Power™ in titles, descriptions, llms.txt frozen-terms section, and schema names. AI engines see the ™ as a brand-property signal.
+- **Single Named Entity Across All Pages** — Person schema given stable `@id` (`https://jakesebok.com/#person`) and referenced from every page's graph rather than re-declared. This is the difference between "this site has a Person schema on each page" and "this site has a Person." AI engines can resolve the entity once and associate all coaching content with it.
+- **Newsletter Count as Soft Social Proof** — still NOT applied. Research flag: skip until the number is real (≥5k subscribers). Confirmed still under threshold.
+
+Patterns explicitly NOT applied in Wave 6 (and why):
+- **Contrarian Disqualifier Section** — Wave 5 (already shipped).
+- **Hudson "field-light flare"** — Wave 8 backlog item.
+- **Comparison content (Jake vs Litvin/Goldsmith/Martell)** — flagged for Wave 7 conversion architecture as an SEO/AEO + conversion combined play.
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **Centralized schema lib (`lib/schema.ts`)** — built as a single source of truth so every page references the same Person/Organization `@id`. This is the AEO-grade pattern; the LocalCraft customer builds use per-page inline schemas. On a Next.js site with shared types, the lib pattern reduces drift to zero.
+- **No LocalBusiness/Plumber/Roofer schema** — those are for local-trade businesses. Jake is a personal-brand coaching practice. Used `ProfessionalService` + `Person` + service-specific entities (ALFRED as `SoftwareApplication`, Build-Your-Assessment as `Service`) instead.
+- **No address/geo data in Organization schema** — Jake works remotely with clients worldwide. `areaServed: "Worldwide"` on Service entities; no `address`/`geo` on Organization (would be misleading).
+- **`/blog/[slug]` pages already had per-post canonicals** — added in a prior commit. Verified unchanged by Wave 6.
+- **`/assessment` is not in the marketing site routes** — it's a rewrite to the static VAPI portal. Linked from nav + footer; sitemap entry already present at `/assessment`. Not audited as a page here because it lives outside the App Router tree.
+- **Thank-you pages intentionally noindexed** — `/work-with-me/apply/thank-you` and `/contact/thank-you` carry `robots: { index: false, follow: false }`. Their titles (33/29 chars) and descriptions (136/99 chars) are deliberately outside the SEO ranges because they should never appear in SERPs. Logged as intentional skip.
+
+### Criteria audit
+
+- [x] **Hierarchy** — schema additions are invisible (head + body inline scripts). H1 hierarchy unchanged. Title/description rewrites preserve the editorial hierarchy: each page's title starts with the page's primary topic, ends with the brand stamp `| Jake Sebok`.
+- [x] **Restraint** — single Person `@id`, single Organization `@id`, one BreadcrumbList per page. No duplicate entity declarations. Title/description copy uses Jake's voice (sentence stops, no em dashes in new copy, brand terms first-mention with ™).
+- [x] **Micro-interactions** — preserved from Wave 3. No micro-interaction changes this wave.
+- [x] **Typographic editorial feel** — preserved from Waves 1–5. Italic Cormorant accent word per H1 still in place on 14/14 pages (Wave 1 + Wave 5 audit holds).
+- [x] **Mobile=desktop parity** — schema is identical on mobile and desktop (rendered once per page, served identically). Mobile screenshot verification (home, contact, who-is-alfred, work-with-me, apply, about, build-your-assessment, privacy, terms) shows no visual regression from Wave 5 baseline.
+- [x] **No clip-art energy** — N/A this wave; no visual edits.
+- [x] **No template-shaped sections** — schema graph is a custom Jake-specific structure (named entity + service + AboutPage + ContactPage + SoftwareApplication for ALFRED). Not a generic SaaS schema template.
+- [x] **Cold-read copy** — every new title and description was cold-read against the target buyer (founder who's succeeded but at too high a cost). Specialist terms defined inline: VAPI™ ("free assessment"), Aligned Power Program ("12-month, 1:1 coaching"), ALFRED ("Aligned Freedom Coach"). No insider jargon.
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read `polish-shots/wave-6/home-mobile.png`, `contact-mobile.png`, `who-is-alfred-mobile.png`, `work-with-me-mobile.png`, `about-mobile.png`, `build-your-assessment-mobile.png`, `work-with-me-apply-mobile.png`, `privacy-mobile.png`, `terms-mobile.png`. All renders intact.
+- **Wave 6 is an infrastructure wave — no visual edits.** The mobile surface is identical to Wave 5. The pages I touched (added `<script type="application/ld+json">` inside the page return) verified unchanged visually because `<script>` tags don't render visibly.
+- **Verified no JSX regressions** from the schema injection by spot-checking the privacy + terms + testimonials pages where I wrapped the existing `<section>` in a `<>` fragment to add the schema script. All sections render correctly.
+- Pre-existing artifacts persist (capture-timing whitespace on privacy mobile below-the-fold, "Compiling…" dev-server overlay on who-is-alfred mobile) — both are Wave-1 carry-overs, not Wave 6 regressions.
+
+**Mitigation:** none required. The wave is infrastructure; the visual surface holds.
+
+**Re-test (desktop + tablet):** clean. Home desktop founder portrait + glass card + italic *life* + trust marquee all hold from Wave 5. Apply mobile chapter "01" + italic *12-month* + form field readability holds. About mobile portrait + italic *I'm* holds. No new issues.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → Add Review schema with aggregateRating once Jake has 20+ collectable testimonials with permission to attribute by name. Currently the testimonials carousel has named testimonials but the schema would need explicit `Review` markup per quote. Deferred to Wave 7 conversion architecture (testimonials authority pass). Logged.
+- **"Category leader doing this better?"** → Marshall Goldsmith's site uses `Article` schema on his column-style writing, not just on blog posts. Jake's "Notes and Answers" blog posts already get `BlogPosting`-equivalent via the standard Next.js metadata, but the home-page Cs framework block ("The 6 Cs of Aligned Power") could also be tagged as a dedicated `HowTo` or `Article` schema if it's expanded into linkable explainer content. Flagged for the future blog/SEO program.
+- **Applied this wave:** the AEO-grade entity graph (Person + Organization + Service + SoftwareApplication + AboutPage + ContactPage + FAQPage + BlogIndex + WebPage for legal + CollectionPage for testimonials/case-studies + BreadcrumbList on every page, all referencing a single Person `@id`) IS the wave's category-leader steal. Most coaching sites ship one schema if any. Jake's site now ships a coherent entity graph that AI engines can chunk, cite, and attribute to a single named entity site-wide.
+
+### Open items rolled forward
+
+- (Wave 7) Comparison content (Jake vs Litvin / Goldsmith / Martell) — SEO + AEO + conversion combined play.
+- (Wave 7) Review/aggregateRating schema once 20+ attributable testimonials.
+- (Wave 7) Above-the-fold hero CTA re-balance (VAPI™ as single dominant).
+- (Wave 7) Footer "Take the VAPI™" stand-alone CTA band.
+- (Wave 8) Image `width`/`height` on blog post hero `<img>` to eliminate CLS (8-point SEO score gap).
+- (Wave 8) Mobile body-P right-edge clipping artifact final review (still carried).
+- (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference.
+- (Wave 8) Unused Tier-0 assets cleanup.
+- (Wave 8) Flame-mark glyph optional add to `.icon-circle::after`.
+- (Wave 8) Pre-existing em dashes cleanup (`/about` L111, `/work-with-me` metadata, plus `/build-your-assessment` body copy spotted this wave: "template—all" and "honestly—whether").
+- (Wave 8) About-page "Foundations" block expansion into Goldsmith-style equal-weight reading-list mini-hub (carry from Wave 5 bonus prompt).

@@ -1,10 +1,19 @@
+import { legalSchemaGraph } from "@/lib/schema";
+
 export const metadata = {
-  title: "Privacy Policy — Jake Sebok",
-  description: "Privacy policy for jakesebok.com and Jake Sebok coaching services.",
+  title: "Privacy Policy | Jake Sebok Coaching and VAPI Assessment",
+  description:
+    "How Jake Sebok collects, uses, stores, and protects your information across jakesebok.com, the VAPI™ assessment, ALFRED, and related coaching services.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(legalSchemaGraph("privacy")) }}
+      />
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
       <div className="max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
         <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
@@ -101,5 +110,6 @@ export default function PrivacyPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

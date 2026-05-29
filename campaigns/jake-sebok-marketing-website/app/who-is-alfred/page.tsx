@@ -2,14 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { AlfredFeatureExplorer } from "@/components/alfred-feature-explorer";
 import { AlfredHeroPhone } from "@/components/alfred-hero-phone";
+import { alfredSchemaGraph } from "@/lib/schema";
 
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "Aligned Freedom Coach (ALFRED): clarity in your pocket when the week gets loud. He keeps your priorities, tradeoffs, and next best move in front of you when pressure hits.";
+  "ALFRED is Jake Sebok's Aligned Freedom Coach: clarity in your pocket when the week gets loud. Your priorities, tradeoffs, and next move when pressure hits.";
 
 export const metadata: Metadata = {
-  title: "Aligned Freedom Coach (ALFRED): Clarity In Your Pocket When It Matters | Jake Sebok",
+  title: "ALFRED: Aligned Freedom Coach in Your Pocket | Jake Sebok",
   description: ogDescription,
   alternates: {
     canonical: "/who-is-alfred",
@@ -147,6 +148,10 @@ const heroPills = [
 export default function WhoIsAlfredPage() {
   return (
     <div className="[overflow-x:clip]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(alfredSchemaGraph()) }}
+      />
       <section className="relative pt-16 sm:pt-24 pb-14 sm:pb-[4.5rem] lg:pb-24 bg-ap-bg overflow-hidden">
         <div
           className="pointer-events-none absolute -top-[28%] -left-[35%] z-0 h-[135%] w-[min(165vw,1700px)] lg:-top-[18%] lg:-left-[22%] lg:h-[125%] lg:w-[min(140vw,1600px)] blur-[64px] opacity-[0.95]"
