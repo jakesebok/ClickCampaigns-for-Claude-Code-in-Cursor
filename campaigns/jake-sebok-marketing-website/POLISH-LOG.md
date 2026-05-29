@@ -219,7 +219,7 @@ Patterns explicitly NOT applied in Wave 2 (and why):
 
 **Started**: 2026-05-29T21:30Z
 **Completed**: 2026-05-29T22:28Z
-**Commit**: __WAVE3_SHA__
+**Commit**: 8ab64ca
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
