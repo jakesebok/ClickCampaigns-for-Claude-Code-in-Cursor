@@ -25,15 +25,15 @@ export default function AboutPage() {
           aria-hidden
         />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-            The Story
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
+            <span>The Story · Ch 01</span>
           </p>
-          <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-8 [text-wrap:balance]">
+          <h1 className="font-outfit font-bold text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] text-ap-primary leading-[1.02] tracking-tight mb-6 [text-wrap:balance]">
             Hey,{" "}
             <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">I&apos;m</em>{" "}
             Jake Sebok.
           </h1>
-          <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8 max-w-2xl">
+          <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8 max-w-[58ch]">
             Master Certified Professional Coach, founder, full-time dad to three amazing kids.
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start" data-reveal data-reveal-delay="1">
@@ -151,6 +151,61 @@ export default function AboutPage() {
               just tactical, it is identity-level. I use what is useful from that lineage to help you let an old
               version of success die and build from something truer.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Three pillars — equal-weight card row (Goldsmith hub pattern).
+          The three nouns Jake's whole practice rotates around: growth that
+          doesn't shrink the rest of life, authenticity that's earned not
+          performed, alignment between work and the life it's supposed to
+          fund. No featured card, no color hierarchy, no size differential. */}
+      <section className="py-16 sm:py-20 bg-ap-bg" data-reveal>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+            <span>What I Work On · Three Pillars</span>
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-3 [text-wrap:balance]">
+            Three words. The work rotates around them.
+          </h2>
+          <p className="text-ap-mid text-lg sm:text-xl font-semibold leading-relaxed mb-12 max-w-[62ch]">
+            Not a framework. Not a five-step process. The three nouns I keep coming back to with every founder I work
+            with, because the real work is at their intersection.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+            <div className="pillar-card" data-reveal data-reveal-delay="1">
+              <span className="pillar-card__label">Pillar 01</span>
+              <p className="pillar-card__name">
+                Growth
+                <strong>that scales income, impact, and life</strong>
+              </p>
+              <p className="pillar-card__body">
+                The kind that doesn&apos;t make you trade away the rest of your life to access it. Cleaner decisions,
+                stronger execution, a business that funds the life it was built to fund.
+              </p>
+            </div>
+            <div className="pillar-card" data-reveal data-reveal-delay="2">
+              <span className="pillar-card__label">Pillar 02</span>
+              <p className="pillar-card__name">
+                Authenticity
+                <strong>earned, not performed</strong>
+              </p>
+              <p className="pillar-card__body">
+                Who you are at your most honest, deployed as a business strategy. The version of you your team trusts,
+                your clients buy from, and your family recognizes at the end of the day.
+              </p>
+            </div>
+            <div className="pillar-card" data-reveal data-reveal-delay="3">
+              <span className="pillar-card__label">Pillar 03</span>
+              <p className="pillar-card__name">
+                Alignment
+                <strong>between what you say and what you do</strong>
+              </p>
+              <p className="pillar-card__body">
+                Your work, your relationships, your health, and your ambition all pulling in the same direction.
+                Execution stops feeling like a fight with yourself.
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -242,16 +242,29 @@ export function CaseStudiesContent() {
           aria-hidden
         />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-            Client Stories
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
+            <span>Client Stories · Long form</span>
           </p>
           <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-4 [text-wrap:balance]">
             Real{" "}
             <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">results</em>.{" "}
             Real transformation.
           </h1>
-          <p className="text-lg font-semibold text-ap-mid max-w-2xl leading-relaxed mb-8">
+          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-3" data-reveal data-reveal-delay="1">
+            <div className="flex items-baseline gap-2">
+              <span className="font-cormorant italic font-bold text-3xl sm:text-4xl text-gradient-accent leading-none">2</span>
+              <span className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid">Full stories below</span>
+            </div>
+            <div className="hidden sm:block w-px h-6 bg-ap-border" />
+            <div className="flex items-baseline gap-2">
+              <span className="font-cormorant italic font-bold text-3xl sm:text-4xl text-gradient-accent leading-none">5+</span>
+              <span className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid">More in the scroll</span>
+            </div>
+          </div>
+          <p className="text-lg font-semibold text-ap-mid max-w-[60ch] leading-relaxed mb-8">
             These are the stories of entrepreneurs who chose alignment over the grind, and what happened when they did.
+            Different industries, same fork in the road. Read the two long-form pieces below, then scroll the gallery for
+            more.
           </p>
         </div>
       </section>

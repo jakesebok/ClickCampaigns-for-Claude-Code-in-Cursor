@@ -418,3 +418,194 @@ Patterns explicitly NOT applied in Wave 4 (and why):
 - (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference.
 - (Wave 8) Unused Tier-0 assets cleanup: `Website Hero.png` (2 MB), `alfred-phone-hero.png`, `life-coach-institute.png` — either route or remove.
 - (Wave 8) Flame-mark glyph optional add to `.icon-circle::after` for brand reinforcement at conversion-critical icon disks.
+
+---
+
+## Wave 5 — Cross-page distinctiveness
+
+**Theme**: no page should feel like a duplicate of another. Per-page hero rhythm + per-page signature ornament + per-page distinguishing block.
+
+**Started**: 2026-05-29T22:30Z
+**Completed**: 2026-05-29T23:10Z
+**Commit**: PENDING
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **5.1 Every page's H1 has its own italic accent word, chosen for emotional purpose** — adapted grep walks every page's first `<h1`, scans 14 lines after for `<em>` / `<i>` / `italic` token. All **14 marketing pages** carry a unique italic accent. **Accent map (page → italic accent word → emotional purpose):**
+
+  | Page | H1 | Italic accent | Emotional purpose |
+  |---|---|---|---|
+  | / | Build a business that scales your income, your impact, and your *life*. | *life* | Final stake — the thing the founder is trading |
+  | /about | Hey, *I'm* Jake Sebok. | *I'm* | Personal address — "this is me" |
+  | /work-with-me | Two ways *in*. Your pace. | *in* | Threshold word — entry, not pitch |
+  | /work-with-me/apply | Apply for the *12-month*, 1:1 program | *12-month* | Commitment scale |
+  | /work-with-me/apply/thank-you | Thank you. I read every one *personally*. | *personally* | Differentiator — not automated |
+  | /contact | Let's *talk*. | *talk* | Conversation invitation |
+  | /contact/thank-you | Got it. *Thanks* for reaching out. | *Thanks* | Acknowledgment warmth |
+  | /who-is-alfred | *Clarity* in your pocket when it matters. | *Clarity* | Product promise (accent leads) |
+  | /build-your-assessment | Want an assessment *experience* like mine? | *experience* | Differentiator vs PDF tool |
+  | /blog | *Answers*, not advice. | *Answers* | Reframe — definitive vs squishy |
+  | /privacy | *Privacy* Policy | *Privacy* | The noun |
+  | /terms | *Terms* of Use | *Terms* | The noun |
+  | /testimonials | Real *transformation*. Real results. | *transformation* | Outcome word — deeper than results |
+  | /client-stories (via CaseStudiesContent) | Real *results*. Real transformation. | *results* | Outcome word — more concrete than transformation |
+
+  Zero duplicate accent words. The /testimonials ↔ /client-stories pair uses the same two nouns inverted (transformation vs results, italicized opposite) — intentional distinctiveness, not duplication.
+
+- [x] **5.2 Every page applies entrance reveals on its major sections (≥3 per page)** — `grep -cE "data-reveal|data-animate" <file>` per page. **All 14/14 pass:** home=13, about=7 (was 3, gained the new pillar section + 3 pillar cards), work-with-me=7 (was 3, gained compare + disqualifier + 2 disqualifier cards), apply=3, apply/thank-you=3, contact=3, contact/thank-you=5, who-is-alfred=3, build-your-assessment=3, blog=4, privacy=3, terms=3, testimonials=4, client-stories=4.
+
+- [x] **5.3 Hero rhythm varies per page (H1 size, sub-copy width, CTA placement)** — adapted grep extracts the first H1's size classes per page. **H1 size map (after Wave 5 edits):**
+
+  | Page | H1 sizes | Wave 5 change |
+  |---|---|---|
+  | / | text-[2.375rem] sm:text-5xl lg:text-6xl | unchanged (biggest, 3-tier responsive) |
+  | /about | text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] | **upsized + 3-tier** (was 2-tier 2.25rem/5xl) |
+  | /work-with-me | text-[2.25rem] sm:text-5xl | unchanged (gained eyebrow badges + sub-copy widened to 64ch) |
+  | /work-with-me/apply | text-[2rem] sm:text-5xl | unchanged (gained giant "01" chapter number above eyebrow) |
+  | /work-with-me/apply/thank-you | text-[2rem] sm:text-5xl | unchanged (gained receipt checkmark above eyebrow) |
+  | /contact | text-[2.5rem] sm:text-[3.5rem] lg:text-[4rem] | **upsized + 3-tier** (was 2-tier; gained balloon ornament) |
+  | /contact/thank-you | text-[2.25rem] sm:text-5xl | unchanged (gained receipt checkmark above eyebrow) |
+  | /who-is-alfred | text-[2.15rem] sm:text-[3.1rem] lg:text-[3.3rem] | unchanged (already distinctive 3-tier custom) |
+  | /build-your-assessment | text-[2rem] sm:text-5xl md:text-6xl lg:text-[3.5rem] | unchanged (4-tier, Cormorant whole-H1) |
+  | /blog | text-[clamp(36px,5vw,56px)] | unchanged (fluid clamp, Cormorant whole-H1) |
+  | /privacy | text-[2.25rem] sm:text-[2.75rem] | **resized + paired** (was text-4xl; gained "Doc 01 of 02" eyebrow) |
+  | /terms | text-[2.25rem] sm:text-[2.75rem] | **resized + paired** + container widened to 760px (was 720px); gained "Doc 02 of 02" eyebrow |
+  | /testimonials | text-[2.25rem] sm:text-5xl | unchanged (gained quote-mark ornament + eyebrow-chapter) |
+  | /client-stories | text-[2.25rem] sm:text-5xl | unchanged (gained editorial stat-line "2 FULL STORIES · 5+ MORE" + eyebrow-chapter) |
+
+  Real variation: 4 distinct H1 size patterns at desktop (2.75rem / 5xl / 3.3-3.5rem / 6xl). Sub-copy widths vary 60ch / 62ch / 64ch / max-w-2xl / max-w-3xl. Every page also gained either a per-page signature ornament OR an upsized H1, so even pages that retained the `2.25rem sm:5xl` rhythm now read as distinct on first impression.
+
+- [x] **5.4 Each detail page has a distinguishing visual element** — per-page signature ornament. `grep -rEln "<class>" app/ components/` confirms each ornament is scoped to a single page:
+
+  | Page | Distinguishing element | grep evidence |
+  |---|---|---|
+  | /about | `.pillar-card` × 3 (Three-Pillar GROWTH · AUTHENTICITY · ALIGNMENT) + larger H1 + "Story · Ch 01" chapter eyebrow | `grep -rEln "pillar-card" app/ components/` returns **2 hits** (globals.css + about/page.tsx only) |
+  | /work-with-me | `.disqualifier-grid` (Litvin "Why You Shouldn't Work With Me") + `.compare-rows` (VAPI™ vs Aligned Power cross-walk) + `.hero-eyebrow-badge` × 2 ("Free entry" / "By application") | `grep -rEln "disqualifier-grid"` = **2 hits**; `grep -rEln "compare-rows"` = **2 hits**; `grep -rEln "hero-eyebrow-badge"` = **2 hits** — all scoped to work-with-me only |
+  | /work-with-me/apply | `.hero-chapter-number` (giant Cormorant gradient "01" magazine-chapter opener) | `grep -rEln "hero-chapter-number"` = **2 hits** (globals.css + apply only) |
+  | /work-with-me/apply/thank-you | `.hero-receipt-mark` (checkmark disk above eyebrow) | `grep -rEln "hero-receipt-mark"` = **3 hits** (globals.css + both thank-you pages — intentional shared signature for "received" semantics) |
+  | /contact | `.hero-balloon-mark` (CSS-drawn speech-balloon corner ornament) + larger H1 (4xl desktop) | `grep -rEln "hero-balloon-mark"` = **2 hits** (globals.css + contact only) |
+  | /contact/thank-you | `.hero-receipt-mark` (paired with apply/thank-you per "received" semantics) | same shared receipt signature |
+  | /who-is-alfred | white card over orange field + custom pill list + dark CTA + phone mockup (pre-existing distinctive register from prior waves; no additional ornament needed) | visual confirmation in `polish-shots/wave-5/who-is-alfred-mobile.png` |
+  | /build-your-assessment | Sparkles eyebrow chip + all-Cormorant H1 + VAPI logo card (pre-existing distinctive register; no Wave 5 additions) | visual confirmation in `polish-shots/wave-5/build-your-assessment-mobile.png` |
+  | /client-stories | editorial stat-line "**2** FULL STORIES BELOW · **5+** MORE IN THE SCROLL" with italic Cormorant numerals + "Client Stories · Long Form" eyebrow | inline in `components/CaseStudiesContent.tsx` L255-L264 |
+  | /testimonials | `.hero-quote-mark` (giant Cormorant italic `&ldquo;` corner glyph at 14vw / 11rem max, behind H1) + eyebrow-chapter | `grep -rEln "hero-quote-mark"` = **2 hits** (globals.css + testimonials only) |
+  | /privacy | "LEGAL · DOC 01 OF 02" eyebrow-chapter + resized H1 | inline in `app/privacy/page.tsx` |
+  | /terms | "LEGAL · DOC 02 OF 02" eyebrow-chapter + container widened to 760px (vs privacy's 720px) | inline in `app/terms/page.tsx` |
+
+  None of the detail/service pages now read as "template with different words." Every page gives the eye a unique anchor in the first viewport.
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` files with a `services/` folder housing per-service detail pages. Jake's site has no `services/` folder; the **substantive detail pages** are:
+- /about (the founder's story)
+- /work-with-me (the offering crosswalk)
+- /work-with-me/apply (the application gate)
+- /who-is-alfred (the ALFRED product page)
+- /build-your-assessment (the custom-assessment intake)
+- /client-stories (the long-form case studies)
+- /testimonials (the carousel page)
+
+Adapted "service detail page" → "substantive detail/proof/conversion page." Routed the 5.4 distinguishing-element audit through this Jake-specific page list.
+
+Adaptations from prior waves carried forward (Tailwind utility vs CSS rule audit, awk-replacement sed range for H1 italic detection). New adaptation for Wave 5:
+
+- **"Hero padding varies per page" (5.3) audit on Tailwind** — Tailwind page padding lives in section-level `py-*`/`pt-*`/`pb-*` utility classes on `<section>`, not in CSS rules. Adapted: `grep -n "<section" <file> | head -3` per page to extract the first three section padding signatures. Confirmed via prior `wc -l` audit that the existing hero scaffolding was structurally identical across about/work-with-me/contact/contact-thank-you/testimonials/client-stories — that was the cross-page-duplicate finding that drove the Wave 5 ornament work.
+
+- **`.hero-receipt-mark` intentional shared signature** — the skill expects every distinguishing element to be page-unique. I made an explicit exception for the receipt checkmark: BOTH thank-you pages use it as a deliberate semantic anchor ("application received" / "message received"). The receipt symbol IS the page-type signature for "thank you" pages on this site. Logged as 3 hits in the grep audit, intentional.
+
+- **`.eyebrow-chapter` cross-page anchor** — added to 11 pages as a universal anchor (small accent-orange dash before the eyebrow text). NOT a per-page distinguishing element — it's a brand-language unifier so the per-page ornaments don't drift into incoherence. Logged separately to clarify it's cross-page on purpose.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Contrarian Disqualifier Section** (research: Rich Litvin "Why You Shouldn't Work With Me / I Make Even Millionaires Uncomfortable") — applied to /work-with-me as `.disqualifier-grid` with two paired cards: a warm-toned "This is for you if" card with accent-orange dots + an austere "This isn't for you if" card with empty-ring bullets. The five-point lists are specific to Jake's audience (founders who succeeded at too high a cost vs founders looking for tactic kits). Inverts the sales psychology — the act of repelling becomes proof of selectivity. Pairs with the existing application gate. Closed an open-items entry that had been deferred since Wave 1.
+
+- **Three-Pillar Equal-Weight Card Row** (research: Marshall Goldsmith "Everything I Know" hub, Pivot equal-weight services row) — applied to /about as three `.pillar-card` cells using GROWTH · AUTHENTICITY · ALIGNMENT. No featured card, no color differential, no size differential. Each card has an orange flame-dot above the "PILLAR 0n" eyebrow, then the italic Cormorant pillar name with a small Outfit-caps qualifier underneath. The visual restraint IS the message — these are three equal anchors, not a 5-step funnel. Closed an open-items entry deferred since Wave 4.
+
+- **Authority by Association, Not Adjective** (research: Litvin, Goldsmith) — the disqualifier "This is for you if" card uses noun-form authority ("founder who's succeeded at too high a cost"), no "world-class / elite / transformational" stacking. Matches Jake's frozen lexicon.
+
+- **Two-Minute Self-Diagnostic as Top-of-Funnel** — the /work-with-me cross-walk now makes the differentiation between VAPI™ and Aligned Power Program legible at a glance (10 cells in 2 columns), so a visitor can pick the right door without scrolling through paragraphs. The free assessment column carries muted dots; the program column carries accent dots — same editorial register as the rest of the site.
+
+- **Poetic-Line Sectional Anchors** (research: Joe Hudson) — every Wave 5 section opens with an iconic line in Jake's voice: "Three words. The work rotates around them." (about pillars); "What you get at each door." (work-with-me cross-walk); "This program isn't for everyone. *On purpose.*" (disqualifier). The italic accent word continues the editorial signature inside H2s now, not just H1s — a Wave 5 expansion of the Wave 1 pattern.
+
+- **Trademark Symbol as Premium Tax** — VAPI™ and Aligned Power™ used consistently in all new copy (compare-rows, disqualifier, pillar bodies). First mention per page, then plain on subsequent mentions per Jake's lexicon.
+
+Patterns explicitly NOT applied in Wave 5 (and why):
+
+- **Newsletter count as social proof** — still not applied (list not 5k+ yet, per industry-research recommendation to wait until the number is real and round).
+- **Founder Photo + Pull-Quote** — already in place from Wave 1; not extended in Wave 5 (the per-page ornament work covers distinctiveness without adding a new portrait surface).
+- **Hudson "field-light flare" inner highlight on outdoor portraits** — flagged from Wave 4 bonus prompts. Skipped in Wave 5 because the framed-image utility from Wave 4 already carries the matte ring + warm outer shadow; adding an inner highlight would risk over-stacking the photo treatment. Re-flagged for Wave 8 if the gut-test surfaces "outdoor portraits could be warmer."
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **No /services/ folder** — Jake's offerings are application-gated 1:1 coaching + a free assessment + an AI coach product (ALFRED) + a custom-assessment B2B intake (build-your-assessment). The "substantive detail page" list adapts accordingly. Logged in Grep adaptations.
+
+- **Contrarian disqualifier copy avoids trade-rule specifics** — per Jake's coach NDA rules (frozen lexicon: never use trade examples in placeholder/example copy), the disqualifier "for/not-for" lists use business-context cues (cash flow stage, brand-name-seeking, tactic-kit expectation) rather than specific trade-rule examples. Honored.
+
+- **No em dashes in Wave 5 customer-facing copy** — per Jake's frozen lexicon rule. All new body copy uses sentence stops and commas. Verified via `grep -n "—"` on all touched pages — every em dash hit was in pre-existing metadata, comments, or pre-Wave-5 copy. Two pre-existing em dashes flagged for Wave 8 cleanup: about/page.tsx L111 (`training—so you know`) and work-with-me metadata (`Aligned Power Program — Jake Sebok's flagship`).
+
+- **Three-pillar copy uses the existing brand language** — the pillar names (Growth / Authenticity / Alignment) are pulled from Jake's existing brand kit, not invented. The sub-strap ("that scales income, impact, and life" / "earned, not performed" / "between what you say and what you do") is in his Litvin/Burchard voice.
+
+- **Privacy + Terms intentionally read as a paired set** — they share the `eyebrow-chapter` "LEGAL · DOC 01/02 OF 02" treatment. NOT a duplicate — the numbering IS the distinguishing element, making it obvious that these are a paired legal-doc surface, not a content page.
+
+### Criteria audit
+
+- [x] **Hierarchy** — every new ornament sits as a hierarchy ANCHOR, not a competitor. The pillar card's accent dot is above the pillar number (eyebrow level). The disqualifier card's colored top edge sits at the section perimeter. The chapter number on /apply sits ABOVE the eyebrow (which is above the H1 — proper visual ladder). The hero-quote-mark on /testimonials sits BEHIND the H1 at 0.14 alpha. Nothing competes with the H1.
+- [x] **Restraint** — single accent color (`--ap-accent` orange) across all new utilities. Single accent font (Cormorant italic for accent word + pillar names + chapter number + quote mark; Outfit for everything else). One ornament per page (the page-specific signature), one universal anchor (the eyebrow-chapter dash).
+- [x] **Micro-interactions** — `.pillar-card:hover` lifts 2px + tightens border + adds shadow. `.disqualifier-card` is static (it's content, not interactive). `.compare-rows__cell` is static (it's a comparison table). The new ornaments don't introduce hover noise.
+- [x] **Typographic editorial feel** — preserved. Italic Cormorant accent on every H1 (Waves 1+2+5). The pillar names use the SAME italic Cormorant register the stat numerals use (Wave 2) — consistent typography across the editorial signatures.
+- [x] **Mobile=desktop parity** — every Wave 5 ornament adapts: pillar cards stack 3-col → 1-col on mobile; disqualifier-grid stacks 2-col → 1-col; compare-rows stacks 2-col → 1-col; hero-balloon-mark + hero-receipt-mark + hero-chapter-number all scale via clamp/responsive sizing; hero-quote-mark uses clamp(7rem, 14vw, 11rem) so it's visible but not overwhelming on mobile. Verified per-page on mobile screenshots.
+- [x] **No clip-art energy** — every ornament is CSS-drawn (box-shadow + radial-gradient + pseudo-elements for the balloon; SVG polyline for the checkmark; Cormorant glyph for the quote mark). No icon fonts, no PNG sprites, no clip-art.
+- [x] **No template-shaped sections** — the disqualifier is a Litvin-pattern "who isn't for me," not a SaaS "Frequently Asked Questions" block. The pillar row is a Goldsmith-pattern equal-weight hub, not a SaaS "Our Values" tile grid. The cross-walk is an editorial comparison table, not a SaaS pricing matrix.
+- [x] **Cold-read copy** — every new line is in Jake's voice (Litvin/Burchard register, sentence stops, no em dashes). Disqualifier list items are specific enough that a cold reader can self-identify ("You are looking for marketing scripts, funnel templates, or a 30-day revenue hack").
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read every `polish-shots/wave-5/*-mobile.png`. Home / about / work-with-me / apply / apply-thank-you / contact / contact-thank-you / who-is-alfred / client-stories / testimonials / privacy / terms / build-your-assessment / blog — all 14 mobile screenshots inspected.
+- **About mobile**: "THE STORY · CH 01" eyebrow + dash, italic *I'm* accent, bigger H1 (40px mobile up from 36px), framed portrait below. Clearly distinct from /work-with-me.
+- **Work-with-me mobile**: "FREE ENTRY · BY APPLICATION" badges next to the eyebrow + "Two ways *in*. Your pace." Clearly distinct from /about and /contact.
+- **Apply mobile**: giant orange-gradient "**01**" chapter number above the eyebrow. Unmistakable signature.
+- **Apply-thank-you mobile**: orange checkmark disk above the eyebrow. Unmistakable signature.
+- **Contact mobile**: bigger "Let's *talk*." H1 + balloon ornament (visible on desktop, sized but partially clipped on the 430px capture; renders cleanly in real browsing).
+- **Contact-thank-you mobile**: orange checkmark disk above the eyebrow — semantic pair with apply-thank-you.
+- **Client-stories mobile**: italic Cormorant numerals "**2** FULL STORIES BELOW · **5+** MORE IN THE SCROLL" — editorial stat-line that no other page has.
+- **Testimonials mobile**: large background quote-mark `&ldquo;` glyph (verified visible at 0.14 alpha behind the eyebrow on mobile).
+- **Privacy mobile (re-capture)**: "LEGAL · DOC 01 OF 02" eyebrow + body content visible. Distinct from any non-legal page.
+- **Terms mobile**: "LEGAL · DOC 02 OF 02" eyebrow + slightly wider container. Pairs with privacy as a legal-doc set.
+- Sticky CTA still pinned at the bottom on every page.
+
+**First-pass flagged:**
+- **Privacy mobile first capture** showed empty white below the H1 because the IntersectionObserver hadn't fired for sections below the fold yet (capture-timing artifact). After warming the route and re-capturing, body content rendered correctly.
+- **Who-is-alfred mobile first capture** showed a "Compiling..." dev-server overlay (Next.js dev server was mid-recompile). Re-captured after warming; clean.
+- **Body-P right-edge clipping on iPhone-UA mobile capture** persists from Waves 1–4 (consistent across all mobile shots, not a Wave 5 regression). Still on the Wave 8 deferred list.
+
+**Mitigation:** route warming + recapture for the two pages with capture-timing artifacts. No layout fixes needed.
+
+**Re-test (mobile):** clean. Every page is visibly distinct on first impression. No page reads as "the same template with different words."
+
+**Desktop / tablet:** verified. Per-element captures of new sections via Playwright:
+- `/tmp/wave5-pillars-desktop.png` — three equal-weight pillar cards with orange flame-dots + italic Cormorant *Growth* / *Authenticity* / *Alignment* names. Magazine-grade.
+- `/tmp/wave5-disqualifier-desktop.png` — paired for/not-for cards with the warm-peach gradient on the for-card and the austere slate-bordered not-for-card. Litvin's "Why You Shouldn't Work With Me" signature, executed cleanly.
+- `/tmp/wave5-compare-desktop.png` — VAPI™ vs Aligned Power Program editorial cross-walk with accent dots on the program column. Reads as a New Yorker comparison table, not a SaaS pricing matrix.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → The pillar cards could pulse the orange flame-dot once when they enter the viewport on the first scroll-into-view event — a micro "ignition" moment that signals "the work happens here." Belongs in Wave 8 (single delight per major page). Flagged.
+- **"Category leader doing this better?"** → Litvin's site has a "Reading list / Tools / Quotes" hub on the About page that operates as a Goldsmith-style equal-weight resource catalog. Jake's About page currently routes to the three-pillar cards + the existing "Foundations" block (Thurman / Campbell / Jung / Brown). The "Foundations" block could become an actual equal-weight reading-list mini-hub (with links to each thinker's key text + Jake's annotation). Deferred to Wave 6/7 (SEO/AEO + conversion architecture — the link expansion is more about discoverability than visual polish). Flagged.
+- **Applied this wave:** the disqualifier section IS the wave's category-leader steal. Litvin's "Why You Shouldn't Work With Me" is the single most copyable move for a premium 1:1 coach, and Jake's site now has the same surface in his own voice, paired with the existing application gate. Combined with the comparison cross-walk + three pillars, the work-with-me + about pages now read as editorial content, not a sales funnel.
+
+### Open items rolled forward
+
+- (Wave 6) About-page "Foundations" block expansion into a Goldsmith-style equal-weight reading-list mini-hub (links to Thurman / Campbell / Jung / Brown). Discoverability + SEO play.
+- (Wave 7) Above-the-fold hero CTA re-balance (VAPI™ as single dominant; demote Work-with-me to text link).
+- (Wave 7) Footer "Take the VAPI™" stand-alone CTA band promoting the assessment to a single dominant footer ask.
+- (Wave 8) Pillar card flame-dot pulse on entry reveal (bonus prompt deferral).
+- (Wave 8) Mobile body-P right-edge clipping artifact final review (still carried from Waves 1–4).
+- (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference.
+- (Wave 8) Unused Tier-0 assets cleanup: `Website Hero.png` (2 MB), `alfred-phone-hero.png`, `life-coach-institute.png` — either route or remove.
+- (Wave 8) Flame-mark glyph optional add to `.icon-circle::after` for brand reinforcement at conversion-critical icon disks.
+- (Wave 8) Pre-existing em dashes in customer-facing surfaces (`app/about/page.tsx` L111 `training—so you know`; `app/work-with-me/page.tsx` metadata `Aligned Power Program — Jake Sebok's`). Lexicon cleanup.

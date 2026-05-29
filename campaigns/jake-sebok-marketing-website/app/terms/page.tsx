@@ -6,8 +6,11 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
-      <div className="max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
-        <h1 className="font-outfit font-bold text-4xl text-ap-primary mb-2 [text-wrap:balance]">
+      <div className="max-w-[760px] mx-auto px-5 sm:px-6 hero-halo">
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+          <span>Legal · Doc 02 of 02</span>
+        </p>
+        <h1 className="font-outfit font-bold text-[2.25rem] sm:text-[2.75rem] text-ap-primary mb-2 [text-wrap:balance]">
           <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">Terms</em>{" "}
           of Use
         </h1>

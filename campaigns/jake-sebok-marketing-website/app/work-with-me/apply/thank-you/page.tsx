@@ -25,8 +25,11 @@ export default function ApplyThankYouPage() {
           aria-hidden
         />
         <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            Application Received
+          <div className="hero-receipt-mark" aria-hidden>
+            <svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7" /></svg>
+          </div>
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+            <span>Application Received</span>
           </p>
           <h1 className="font-outfit font-bold text-[2rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
             <span className="block">Thank you.</span>

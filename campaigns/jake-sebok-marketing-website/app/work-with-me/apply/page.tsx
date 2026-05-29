@@ -31,8 +31,9 @@ export default function ApplyPage() {
             </svg>
             Back to Work With Me
           </Link>
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
-            Aligned Power Program
+          <span className="hero-chapter-number" aria-hidden>01</span>
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+            <span>Aligned Power Program · Entry</span>
           </p>
           <h1 className="font-outfit font-bold text-[2rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
             Apply for the{" "}

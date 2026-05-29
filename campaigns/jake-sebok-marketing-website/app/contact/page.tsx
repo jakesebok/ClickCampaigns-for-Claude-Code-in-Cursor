@@ -21,10 +21,11 @@ export default function ContactPage() {
         aria-hidden
       />
       <div className="relative z-10 max-w-[640px] mx-auto px-5 sm:px-6 hero-halo">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-          Get in Touch
+        <span className="hero-balloon-mark" aria-hidden />
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
+          <span>Get in Touch</span>
         </p>
-        <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
+        <h1 className="font-outfit font-bold text-[2.5rem] sm:text-[3.5rem] lg:text-[4rem] text-ap-primary leading-[0.98] tracking-tight mb-6 [text-wrap:balance]">
           Let&apos;s{" "}
           <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">talk</em>.
         </h1>

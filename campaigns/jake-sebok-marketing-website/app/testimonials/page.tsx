@@ -21,10 +21,11 @@ export default function TestimonialsPage() {
         aria-hidden
       />
       <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-          What People Say
+        <span className="hero-quote-mark" aria-hidden>&ldquo;</span>
+        <p className="relative font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
+          <span>What People Say</span>
         </p>
-        <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
+        <h1 className="relative font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
           Real{" "}
           <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">transformation</em>.{" "}
           Real results.

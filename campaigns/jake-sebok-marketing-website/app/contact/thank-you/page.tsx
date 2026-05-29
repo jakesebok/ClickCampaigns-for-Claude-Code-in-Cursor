@@ -23,8 +23,11 @@ export default function ContactThankYouPage() {
         aria-hidden
       />
       <div className="relative z-10 max-w-[640px] mx-auto px-5 sm:px-6 hero-halo">
-        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-          Message Received
+        <div className="hero-receipt-mark" aria-hidden>
+          <svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 7" /></svg>
+        </div>
+        <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
+          <span>Message Received</span>
         </p>
         <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
           <span className="block">Got it.</span>

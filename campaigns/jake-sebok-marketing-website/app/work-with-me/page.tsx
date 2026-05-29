@@ -42,15 +42,19 @@ export default function WorkWithMePage() {
           aria-hidden
         />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
-          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
-            How We Work
-          </p>
+          <div className="flex flex-wrap items-center gap-2.5 mb-4">
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent eyebrow-chapter">
+              <span>How We Work</span>
+            </p>
+            <span className="hero-eyebrow-badge">Free entry</span>
+            <span className="hero-eyebrow-badge hero-eyebrow-badge--muted">By application</span>
+          </div>
           <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
             Two ways{" "}
             <em className="font-cormorant italic font-semibold tracking-tight">in</em>.{" "}
             <span className="text-gradient-accent">Your pace.</span>
           </h1>
-          <p className="text-xl font-semibold text-ap-mid max-w-2xl">
+          <p className="text-xl font-semibold text-ap-mid max-w-[64ch]">
             Start with the free VAPI&trade; Assessment to see where you are strong, where you are stuck, and what needs
             attention first. When you are ready for deeper work, apply for the Aligned Power Program: 12 months of 1:1,
             high-touch coaching built around your business, your values, and the life you actually want to live.
@@ -159,6 +163,95 @@ export default function WorkWithMePage() {
                   />
                 </svg>
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison cross-walk — Free VAPI™ vs Aligned Power Program.
+          Editorial table, not a SaaS pricing matrix. Accent dot on the program
+          column signals "this is the deeper engagement"; muted dot on the
+          assessment column signals "this is the open door." Both legitimate. */}
+      <section className="py-12 sm:py-16 bg-white" data-reveal>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+            <span>Cross-walk</span>
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-3 [text-wrap:balance]">
+            What you get at each door.
+          </h2>
+          <p className="text-ap-mid text-lg sm:text-xl font-semibold leading-relaxed mb-8 max-w-[64ch]">
+            Two ways in, side by side. No upsell pressure: many founders take the assessment, get the 28-day plan, and
+            never need anything else from me. Some are ready for the full year and apply.
+          </p>
+          <div className="compare-rows">
+            <div className="compare-rows__header">VAPI&trade; · Free assessment</div>
+            <div className="compare-rows__header compare-rows__header--accent">Aligned Power Program · By application</div>
+
+            <div className="compare-rows__cell">72 statements, about 12 minutes</div>
+            <div className="compare-rows__cell compare-rows__cell--accent">12 months of 1:1, high-touch coaching with Jake</div>
+
+            <div className="compare-rows__cell">Map across 12 domains of your business and life</div>
+            <div className="compare-rows__cell compare-rows__cell--accent">Customized to your business, your values, the life you want</div>
+
+            <div className="compare-rows__cell">Personalized 28-day plan based on your scores</div>
+            <div className="compare-rows__cell compare-rows__cell--accent">Real-time recalibration as your business and life shift</div>
+
+            <div className="compare-rows__cell">Email follow-up nudges to keep the plan alive</div>
+            <div className="compare-rows__cell compare-rows__cell--accent">Direct access to Jake between sessions for high-stakes calls</div>
+
+            <div className="compare-rows__cell">Free. No application. Take it whenever.</div>
+            <div className="compare-rows__cell compare-rows__cell--accent">Application required and personally reviewed</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contrarian disqualifier — Litvin "Why You Shouldn't Work With Me"
+          pattern. The act of repelling the wrong-fit client signals
+          selectivity. Paired with the for-card so the inversion lands as
+          confidence, not snark. */}
+      <section className="py-16 sm:py-20 bg-ap-bg" data-reveal>
+        <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
+          <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+            <span>Before you apply</span>
+          </p>
+          <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-3 [text-wrap:balance]">
+            This program isn&apos;t for everyone. <em className="font-cormorant italic font-semibold text-gradient-accent">On purpose.</em>
+          </h2>
+          <p className="text-ap-mid text-lg sm:text-xl font-semibold leading-relaxed mb-12 max-w-[64ch]">
+            Saying yes to the wrong people is a disservice to everyone, including them. Here is who I am built for and
+            who I am not. Read both columns. If the right one fits, apply with confidence.
+          </p>
+          <div className="disqualifier-grid">
+            <div className="disqualifier-card disqualifier-card--for" data-reveal data-reveal-delay="1">
+              <p className="disqualifier-card__eyebrow">
+                <span>This is for you if</span>
+              </p>
+              <p className="disqualifier-card__title">
+                You&apos;re a founder who&apos;s succeeded at <em>too high a cost</em>.
+              </p>
+              <ul className="disqualifier-card__list">
+                <li>You have already built something real. The growth question now is sustainability, not survival.</li>
+                <li>You suspect your business is running on a version of you that doesn&apos;t fit who you actually are.</li>
+                <li>You are willing to look at the personal side of business decisions, not just the spreadsheet side.</li>
+                <li>You can sit with hard feedback without needing to win the conversation.</li>
+                <li>A year is not too long if the work changes who you become inside the year.</li>
+              </ul>
+            </div>
+            <div className="disqualifier-card disqualifier-card--not" data-reveal data-reveal-delay="2">
+              <p className="disqualifier-card__eyebrow">
+                <span>This isn&apos;t for you if</span>
+              </p>
+              <p className="disqualifier-card__title">
+                You want a tactic kit and a <em>fast exit</em>.
+              </p>
+              <ul className="disqualifier-card__list">
+                <li>You are looking for marketing scripts, funnel templates, or a 30-day revenue hack.</li>
+                <li>You expect the coach to do the work for you instead of with you.</li>
+                <li>You are unwilling to question the business model you already have if it is what is in the way.</li>
+                <li>You are in survival-stage and need cash flow this week. The program is built for sustained work, not crisis triage.</li>
+                <li>You want a brand-name coach for the optics. The work is not visible from the outside.</li>
+              </ul>
             </div>
           </div>
         </div>
