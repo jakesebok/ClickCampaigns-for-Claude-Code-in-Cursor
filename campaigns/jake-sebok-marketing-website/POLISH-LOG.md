@@ -618,7 +618,7 @@ Patterns explicitly NOT applied in Wave 5 (and why):
 
 **Started**: 2026-05-29T23:30Z
 **Completed**: 2026-05-30T00:55Z
-**Commit**: (recorded after commit)
+**Commit**: f0e6dc1
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
