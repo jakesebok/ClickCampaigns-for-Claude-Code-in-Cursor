@@ -122,7 +122,7 @@ Patterns explicitly NOT applied in Wave 1 (and why):
 
 **Started**: 2026-05-29T23:50Z
 **Completed**: 2026-05-30T01:25Z
-**Commit**: (recorded post-commit)
+**Commit**: 0ac0f55
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
