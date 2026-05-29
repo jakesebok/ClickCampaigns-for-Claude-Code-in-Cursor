@@ -427,7 +427,7 @@ Patterns explicitly NOT applied in Wave 4 (and why):
 
 **Started**: 2026-05-29T22:30Z
 **Completed**: 2026-05-29T23:10Z
-**Commit**: PENDING
+**Commit**: 30e85e4
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
