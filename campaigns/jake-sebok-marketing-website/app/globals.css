@@ -72,10 +72,53 @@ body {
   color: transparent;
 }
 
-/* Pill button hover */
+/* -------------------------------------------------------------------------- */
+/* Primary CTA pill — gradient surface + deep shadow (Wave 3: 3.6 + 3.7)        */
+/* -------------------------------------------------------------------------- */
+/* Base pill: linear gradient + multi-layer shadow (deep, sharpens on hover). */
+.cta-pill {
+  position: relative;
+  background-image: linear-gradient(135deg, #ff8a3d 0%, var(--ap-accent) 55%, #e55a0f 100%);
+  background-color: var(--ap-accent); /* fallback */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(165, 50, 0, 0.18),
+    0 10px 22px -8px rgba(255, 107, 26, 0.42),
+    0 4px 10px -4px rgba(14, 22, 36, 0.18);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease,
+    background-position 320ms ease;
+  background-size: 180% 180%;
+  background-position: 0% 0%;
+}
 .cta-pill:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(255, 107, 26, 0.35);
+  background-position: 100% 100%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(165, 50, 0, 0.25),
+    0 22px 40px -12px rgba(255, 107, 26, 0.62),
+    0 8px 18px -6px rgba(14, 22, 36, 0.28);
+}
+.cta-pill:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(165, 50, 0, 0.32),
+    0 6px 16px -6px rgba(255, 107, 26, 0.45);
+}
+.cta-pill:focus-visible {
+  outline: 2px solid var(--ap-accent);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-pill {
+    transition: none;
+  }
+  .cta-pill:hover {
+    transform: none;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -906,4 +949,277 @@ h3 {
   border: 0;
   border-top: 1px solid #e2e8f0;
   margin: 32px 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Wave 3 — Depth, hover, focus, micro-interactions                            */
+/* -------------------------------------------------------------------------- */
+
+/* 3.4 Universal focus rings. Replace the browser default with a 2px accent
+   ring at 4px offset on every :focus-visible target. Scoped to interactive
+   elements + .focus-ring utility so non-interactive elements with tabindex
+   still get coverage. Keyboard users only — mouse focus stays quiet. */
+*:focus {
+  outline: none;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ap-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+/* On-dark surfaces — switch the ring to white for contrast. Apply class to
+   any element rendered against ap-primary / dark gradient. */
+.focus-ring-on-dark:focus-visible,
+a.focus-ring-on-dark:focus-visible,
+button.focus-ring-on-dark:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+/* Form inputs already render a custom focus state (border + ring). Suppress
+   the outline-offset jump so the visual focus tracks the input edge instead
+   of orbiting outside it. They still get a custom replacement via their own
+   focus:ring-* utilities, so this is not a bare outline:none. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline-offset: 2px;
+}
+
+/* 3.3 Hero H1 subtle radial-gradient halo.
+   Applied via the .hero-halo utility on the hero <h1>'s parent (so the halo
+   sits BEHIND the headline). Soft radial light bloom in accent orange,
+   never large enough to bleed into surrounding content. Pointer-events
+   disabled so it never blocks selection / clicks on the headline. */
+.hero-halo {
+  position: relative;
+}
+.hero-halo::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -8%;
+  top: -28%;
+  width: 70%;
+  height: 140%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 50% at 30% 50%,
+    rgba(255, 107, 26, 0.18) 0%,
+    rgba(255, 107, 26, 0.08) 35%,
+    rgba(255, 159, 107, 0.04) 60%,
+    transparent 78%
+  );
+  filter: blur(8px);
+}
+.hero-halo > * {
+  position: relative;
+  z-index: 1;
+}
+/* On-dark hero variant — softer wash so it reads on dark gradient backgrounds. */
+.hero-halo--on-dark::before {
+  background: radial-gradient(
+    ellipse 65% 55% at 30% 50%,
+    rgba(255, 107, 26, 0.32) 0%,
+    rgba(255, 107, 26, 0.14) 38%,
+    rgba(255, 159, 107, 0.06) 62%,
+    transparent 80%
+  );
+  filter: blur(12px);
+}
+
+/* 3.1 Service / feature / step card hover lift.
+   Every card that uses .lift-card lifts -6px on hover, gains a deeper shadow,
+   and any nested <img> inside .lift-card__media zooms 1.04x. Honors
+   reduced-motion. Pairs with an accent border-left tick on hover so the
+   feedback reads on light AND dark backgrounds. */
+.lift-card {
+  position: relative;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms ease,
+    border-color 320ms ease;
+  will-change: transform;
+}
+.lift-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 48px -24px rgba(14, 22, 36, 0.22),
+    0 8px 18px -8px rgba(255, 107, 26, 0.18);
+}
+.lift-card__media {
+  overflow: hidden;
+}
+.lift-card__media img,
+.lift-card__media > [data-zoom] {
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.lift-card:hover .lift-card__media img,
+.lift-card:hover .lift-card__media > [data-zoom] {
+  transform: scale(1.04);
+}
+/* On-dark variant — softer shadow so it reads on ap-primary panels. */
+.lift-card--on-dark:hover {
+  box-shadow:
+    0 24px 48px -24px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 107, 26, 0.28),
+    0 8px 18px -8px rgba(255, 107, 26, 0.22);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lift-card,
+  .lift-card__media img,
+  .lift-card__media > [data-zoom] {
+    transition: none;
+  }
+  .lift-card:hover {
+    transform: none;
+  }
+  .lift-card:hover .lift-card__media img,
+  .lift-card:hover .lift-card__media > [data-zoom] {
+    transform: none;
+  }
+}
+
+/* 3.2 Audience / persona card — gradient top-bar reveal on hover + label
+   morph to accent. Each cell starts with an invisible 2px top stripe that
+   reveals (scaleX 0 -> 1) on hover, with the label gaining accent color +
+   slight upward shift. Optimized for the home-page trust strip (Doctors /
+   Coaches / etc) but reusable on any persona row. */
+.audience-card {
+  position: relative;
+  isolation: isolate;
+  transition:
+    background 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.audience-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ap-accent) 30%, #ff8a3d 50%, var(--ap-accent) 70%, transparent 100%);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.audience-card:hover {
+  background: rgba(255, 107, 26, 0.04);
+}
+.audience-card:hover::before {
+  transform: scaleX(1);
+}
+.audience-card__label {
+  display: inline-block;
+  transition: color 260ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.audience-card:hover .audience-card__label {
+  color: var(--ap-accent);
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .audience-card,
+  .audience-card::before,
+  .audience-card__label {
+    transition: none;
+  }
+  .audience-card:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+/* 3.5 Trust marquee — desktop only. The mobile audience strip stays as a
+   stacked grid (better thumb-reach). Above lg: switch to a continuous
+   left-scrolling row with accent dots between entries. Pauses on hover so
+   readers can land on a name. Reduced-motion drops the animation and shows
+   a static row. Hard-hidden below lg as a belt-and-suspenders guard against
+   the Tailwind `hidden` utility being overridden by .trust-marquee's own
+   display rule when both target the same element. */
+.trust-marquee {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .trust-marquee {
+    display: flex;
+  }
+}
+.trust-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+.trust-marquee__track {
+  display: flex;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  flex-shrink: 0;
+  animation: trust-marquee-scroll 38s linear infinite;
+  will-change: transform;
+  align-items: center;
+}
+.trust-marquee:hover .trust-marquee__track,
+.trust-marquee:focus-within .trust-marquee__track {
+  animation-play-state: paused;
+}
+.trust-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ap-primary);
+  white-space: nowrap;
+}
+.trust-marquee__item--label {
+  color: var(--ap-muted);
+  letter-spacing: 0.22em;
+  font-weight: 700;
+}
+.trust-marquee__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--ap-accent);
+  flex-shrink: 0;
+}
+@keyframes trust-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trust-marquee__track {
+    animation: none;
+  }
 }

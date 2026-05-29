@@ -24,7 +24,7 @@ export default function ApplyThankYouPage() {
           className="lg:hidden pointer-events-none absolute top-0 inset-x-0 h-[35%] bg-gradient-to-br from-ap-accent/10 via-ap-accent/3 to-transparent"
           aria-hidden
         />
-        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6">
+        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3">
             Application Received
           </p>

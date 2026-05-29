@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
 
   return (
     <main className="px-6 lg:px-10 py-16 lg:py-24 max-w-[920px] mx-auto">
-      <header className="mb-12" data-reveal>
+      <header className="mb-12 hero-halo" data-reveal>
         <p className="text-[12px] uppercase tracking-[0.16em] text-amber-700 font-medium mb-3">
           Notes from Jake
         </p>

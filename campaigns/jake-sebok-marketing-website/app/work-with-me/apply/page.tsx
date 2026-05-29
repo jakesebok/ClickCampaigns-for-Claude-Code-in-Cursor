@@ -21,7 +21,7 @@ export default function ApplyPage() {
           className="lg:hidden pointer-events-none absolute top-0 inset-x-0 h-[35%] bg-gradient-to-br from-ap-accent/10 via-ap-accent/3 to-transparent"
           aria-hidden
         />
-        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6">
+        <div className="relative z-10 max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
           <Link
             href="/work-with-me"
             className="inline-flex items-center gap-2 text-sm font-semibold text-ap-mid hover:text-gradient-accent mb-8 transition-colors"

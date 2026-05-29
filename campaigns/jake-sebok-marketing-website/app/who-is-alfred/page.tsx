@@ -234,7 +234,7 @@ export default function WhoIsAlfredPage() {
                   className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(73,90,112,0.16)] to-transparent"
                   aria-hidden
                 />
-                <div className="relative">
+                <div className="relative hero-halo">
                   <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
                     Aligned Freedom Coach
                   </p>

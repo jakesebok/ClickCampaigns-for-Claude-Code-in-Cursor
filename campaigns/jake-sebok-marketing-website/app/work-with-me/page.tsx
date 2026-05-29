@@ -41,7 +41,7 @@ export default function WorkWithMePage() {
           className="lg:hidden pointer-events-none absolute top-0 inset-x-0 h-[35%] bg-gradient-to-br from-ap-accent/10 via-ap-accent/3 to-transparent"
           aria-hidden
         />
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4">
             How We Work
           </p>
@@ -65,11 +65,11 @@ export default function WorkWithMePage() {
             {offerings.map((offer) => (
               <div
                 key={offer.title}
-                className={`flex flex-col h-full rounded-[20px] border p-8 ${
+                className={`lift-card flex flex-col h-full rounded-[20px] border p-8 ${
                   offer.featured
-                    ? "bg-ap-primary text-white border-ap-primary"
+                    ? "lift-card--on-dark bg-ap-primary text-white border-ap-primary"
                     : "bg-white border-ap-border hover:border-ap-accent/50"
-                } transition-colors`}
+                }`}
               >
                 {offer.free && (
                   <span className="inline-flex items-center self-start px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-ap-accent/20 text-ap-accent">

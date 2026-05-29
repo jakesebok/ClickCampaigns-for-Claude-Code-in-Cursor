@@ -6,7 +6,7 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <section className="pt-16 sm:pt-24 pb-20 sm:pb-28">
-      <div className="max-w-[720px] mx-auto px-5 sm:px-6">
+      <div className="max-w-[720px] mx-auto px-5 sm:px-6 hero-halo">
         <h1 className="font-outfit font-bold text-4xl text-ap-primary mb-2 [text-wrap:balance]">
           <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">Privacy</em>{" "}
           Policy

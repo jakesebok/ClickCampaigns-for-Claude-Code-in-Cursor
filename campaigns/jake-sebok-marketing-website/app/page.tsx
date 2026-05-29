@@ -87,7 +87,7 @@ export default function HomePage() {
         </span>
         <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
           <div className="grid lg:grid-cols-[1.55fr_1fr] gap-12 lg:gap-16 items-center w-full">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl hero-halo">
               <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
                 <span className="lg:flex lg:items-center lg:gap-2">
                   <span className="hidden lg:block w-3.5 h-0.5 bg-ap-accent rounded flex-shrink-0" />
@@ -162,30 +162,47 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 [&>*:nth-child(2n)]:border-r-0 [&>*:nth-child(n+5)]:border-b-0">
               {["Doctors", "Coaches", "Healers", "Bodyworkers", "Creators", "Founders"].map((label) => (
-                <div key={label} className="px-4 py-3 text-center border-b border-r border-ap-border">
-                  <span className="font-semibold text-ap-primary text-[15px] sm:text-base">{label}</span>
+                <div key={label} className="audience-card px-4 py-3 text-center border-b border-r border-ap-border">
+                  <span className="audience-card__label font-semibold text-ap-primary text-[15px] sm:text-base">{label}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="hidden lg:flex flex-wrap w-full">
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-muted text-base uppercase tracking-wider">Trusted by</span>
+          {/* Desktop: continuous trust marquee with accent dots. Pauses on hover.
+              Track is doubled for seamless scroll. The eyebrow label sits in the
+              same track so it reads as one continuous editorial line. */}
+          <div className="hidden lg:block trust-marquee py-5" aria-label="Trusted by Doctors, Coaches, Healers, Bodyworkers, Creators, Founders">
+            <div className="trust-marquee__track" aria-hidden="false">
+              <span className="trust-marquee__item trust-marquee__item--label">Trusted by</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Doctors</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Coaches</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Healers</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Bodyworkers</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Creators</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Founders</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
             </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Doctors</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Coaches</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Healers</span>
-            </div>
-            <div className="px-6 py-5 text-center border-r border-ap-border flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Bodyworkers</span>
-            </div>
-            <div className="px-6 py-5 text-center flex-1 min-w-0">
-              <span className="font-semibold text-ap-primary text-base">Creators</span>
+            <div className="trust-marquee__track" aria-hidden="true">
+              <span className="trust-marquee__item trust-marquee__item--label">Trusted by</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Doctors</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Coaches</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Healers</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Bodyworkers</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Creators</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
+              <span className="trust-marquee__item">Founders</span>
+              <span className="trust-marquee__dot" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -208,7 +225,7 @@ export default function HomePage() {
             <h3 className="font-outfit font-bold text-xl sm:text-2xl text-ap-primary mt-4">Does this sound familiar?</h3>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -222,7 +239,7 @@ export default function HomePage() {
                 on fumes.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z" />
@@ -235,7 +252,7 @@ export default function HomePage() {
                 you built it for.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 1l4 4-4 4" />
@@ -319,7 +336,7 @@ export default function HomePage() {
             on the path from the <span className="text-gradient-accent">cage</span> to the life you actually want.
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
@@ -332,7 +349,7 @@ export default function HomePage() {
                 actually matters. No more guessing. No more solving the wrong problem.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
@@ -344,7 +361,7 @@ export default function HomePage() {
                 bring that conflict into the open so momentum stops leaking.
               </p>
             </div>
-            <div className="bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50 transition-colors">
+            <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
               <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
@@ -478,7 +495,7 @@ export default function HomePage() {
             Start with the free assessment. Get your map. Then choose the level of support that fits.
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+            <div className="lift-card lift-card--on-dark group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">
                   1
@@ -490,7 +507,7 @@ export default function HomePage() {
                 what deserves attention next.
               </p>
             </div>
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+            <div className="lift-card lift-card--on-dark group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">
                   2
@@ -502,7 +519,7 @@ export default function HomePage() {
                 account to unlock your 28-day plan. Save as PDF or retake over time.
               </p>
             </div>
-            <div className="group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
+            <div className="lift-card lift-card--on-dark group flex flex-col p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-ap-accent/40 hover:bg-white/[0.08] transition-all">
               <div className="flex gap-4 items-end mb-4">
                 <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-ap-accent flex items-center justify-center font-outfit font-bold text-xl text-white shadow-lg shadow-ap-accent/40">
                   3

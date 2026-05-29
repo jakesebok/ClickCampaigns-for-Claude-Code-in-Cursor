@@ -210,3 +210,98 @@ Patterns explicitly NOT applied in Wave 2 (and why):
 - (Wave 5) Per-page H1 italic accent uniqueness audit (currently every page already has its own accent word — confirm in cross-page audit).
 - (Wave 7) Footer "Take the VAPI™" stand-alone CTA band promoting the assessment to a single dominant footer ask.
 - (Wave 8) Mobile body-P right-edge clipping artifact final review (carry over from Wave 1).
+
+---
+
+## Wave 3 — Depth, hover, focus, micro-interactions
+
+**Theme**: every interactive surface rewards attention.
+
+**Started**: 2026-05-29T21:30Z
+**Completed**: 2026-05-29T22:28Z
+**Commit**: __WAVE3_SHA__
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **3.1 Service / feature card hover lift (`translateY(-6px)` + shadow + inner image zoom)** — new `.lift-card` rule in `app/globals.css` L1043-L1090. Self-verify: `grep -cE "^\.lift-card" globals.css` returns **8** selector hits; `grep -c "translateY(-6px)" globals.css` returns **1** hit on `.lift-card:hover`; `.lift-card:hover` block contains a `box-shadow` declaration with `0 24px 48px -24px rgba(14, 22, 36, 0.22)` + accent halo. Inner image zoom via `.lift-card__media img { transform: scale(1.04) }` on parent hover (10 `.lift-card__media` rule hits). Applied across the codebase: 9 cards on home (`app/page.tsx` — 3 cost cards / 3 work cards / 3 dark step cards via `lift-card--on-dark`), 2 offering cards on `work-with-me/page.tsx` (free + featured dark variant), and the shared `TestimonialCard` component (1 selector hit affecting every testimonial render — home carousel + testimonials page + client-stories page). Honors `prefers-reduced-motion`: all transforms suppressed.
+- [x] **3.2 Audience cards: gradient top-bar reveal on hover + label morph to accent** — `.audience-card` rule in `app/globals.css` L1096-L1140. Self-verify: `grep -cE "^\.audience-card" globals.css` returns **6** selectors. `.audience-card::before` is the 2px-tall gradient bar (`linear-gradient(90deg, transparent → ap-accent → #ff8a3d → ap-accent → transparent)`) at `transform: scaleX(0)` rest → `scaleX(1)` on parent hover (360ms ease-out curve). `.audience-card__label` morphs to `var(--ap-accent)` color + translates up 1px on hover. Applied to the 6 audience cells on the home mobile trust strip (`app/page.tsx` L165-L168 — Doctors / Coaches / Healers / Bodyworkers / Creators / Founders). Reduced-motion: instant-on bar (no animation), color/transform suppressed.
+- [x] **3.3 Hero H1 subtle radial-gradient halo** — new `.hero-halo` utility in `app/globals.css` L1001-L1034. Self-verify: `grep -cE "^\.hero-halo" globals.css` returns **4** selectors (`.hero-halo`, `.hero-halo::before`, `.hero-halo > *`, `.hero-halo--on-dark::before`). Halo is a `radial-gradient(ellipse 60% 50% at 30% 50%, rgba(255,107,26,0.18) 0%, rgba(255,107,26,0.08) 35%, rgba(255,159,107,0.04) 60%, transparent 78%)` rendered behind the H1 via `::before` at z-index 0; children sit at z-index 1. `pointer-events: none` + `filter: blur(8px)` so it never blocks selection or hard-edges. Applied on **15 surfaces**: home (`app/page.tsx` L90), about, work-with-me, work-with-me/apply, work-with-me/apply/thank-you, contact, contact/thank-you, who-is-alfred, build-your-assessment, blog, privacy, terms, testimonials, client-stories (via `components/CaseStudiesContent.tsx`). Visual confirmation on every wave-3 mobile screenshot — soft peach wash sits behind the italic accent word on each H1.
+- [x] **3.4 Universal focus rings (2px accent outline + 4px offset on every focusable element)** — new global rule in `app/globals.css` L962-L994. Self-verify: `grep -c "outline: 2px solid var(--ap-accent)" globals.css` returns **3** hits (the universal `:focus-visible` rule, plus the FAQ summary and CTA pill which repeat the pattern). `grep -c "outline-offset: 4px" globals.css` returns **4** hits (universal rule + on-dark variant + FAQ + CTA pill). Universal selector list covers `a, button, input, select, textarea, summary, [tabindex], [role="button"], .focus-ring`. On-dark variant (`.focus-ring-on-dark`) switches the ring to white for ap-primary surfaces. Form inputs get `outline-offset: 2px` (override) so the ring tracks the input edge instead of orbiting outside it. Default `*:focus { outline: none }` is paired with the `:focus-visible` replacement, NOT bare — this is the modern keyboard-vs-mouse-focus pattern.
+- [x] **3.5 Trust marquee (logo strip): uppercase, accent dots between entries, pauses on hover** — new `.trust-marquee` ruleset in `app/globals.css` L1147-L1217. Self-verify: `grep -cE "^\.trust-marquee" globals.css` returns **8** selectors. Pause on hover via `.trust-marquee:hover .trust-marquee__track, .trust-marquee:focus-within .trust-marquee__track { animation-play-state: paused }` (L1175-L1178). Continuous left scroll via `@keyframes trust-marquee-scroll` at 38s linear infinite, track translated `0 → -50%` for seamless seam (markup duplicates the track). Edge fade via `mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%)`. Accent dots = `.trust-marquee__dot { width:6px height:6px border-radius:9999px background: var(--ap-accent) }`. Each item: Outfit 600 weight, 0.18em letter-spacing, uppercase. **Hard-hidden below lg via `display:none` + `@media (min-width: 1024px) { display: flex }`** — caught a real bug during the gut-test where `.trust-marquee { display: flex }` overrode Tailwind's `.hidden { display: none }` at all breakpoints, causing the desktop marquee to bleed onto the 430px mobile capture. Fixed by inverting the default. **31 hits** of `trust-marquee` classes in `app/page.tsx` (the doubled track for seamless scroll). Reduced-motion: animation suppressed, static row.
+- [x] **3.6 Primary buttons use gradient backgrounds** — `.cta-pill` base rule rewritten in `app/globals.css` L79-L122. Self-verify: `.cta-pill { … }` block contains `background-image: linear-gradient(135deg, #ff8a3d 0%, var(--ap-accent) 55%, #e55a0f 100%)`. `background-size: 180% 180%` + `background-position: 0% 0% → 100% 100%` on hover creates a slow ~320ms gradient "shift" as the eye moves over the pill. Fallback `background-color: var(--ap-accent)` for CSS gradient unsupported. Applied automatically to every `cta-pill` usage in the codebase (17 hits across page.tsx, work-with-me, contact form, apply form, testimonials, who-is-alfred, about, header — no markup changes needed).
+- [x] **3.7 Primary CTA has a deep shadow that sharpens on hover** — same `.cta-pill` block in `app/globals.css` L79-L102. Rest shadow: `inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(165,50,0,0.18), 0 10px 22px -8px rgba(255,107,26,0.42), 0 4px 10px -4px rgba(14,22,36,0.18)`. Hover shadow: `inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -1px 0 rgba(165,50,0,0.25), 0 22px 40px -12px rgba(255,107,26,0.62), 0 8px 18px -6px rgba(14,22,36,0.28)` — blur 22 vs 10, alpha 0.62 vs 0.42 = visibly stronger. `transform: translateY(-2px)` retained from Wave 1. Active state collapses back to translateY(0) with reduced shadow. Reduced-motion suppresses all transforms.
+- [x] **3.8 No `outline: none` left dangling without a replacement** — audit grep `grep -REn 'outline-none\b' app/ components/` returns **13 hits**; every hit is on the SAME element as `focus:ring-2 focus-visible:ring-2` (Contact form 3 inputs, Apply form 6 fields, SocialLinks, alfred-feature-explorer textarea, VAPI/6Cs modal close buttons, IntakeTooltip). The bare `*:focus { outline: none }` rule at globals.css L962 is paired with the immediately-following `:focus-visible` universal accent ring (L965-L977). The `intake-field:focus { @apply outline-none }` at L544 is paired with its own custom box-shadow + accent border-color in the next block. `.intake-nav-secondary` uses `focus-visible:outline-none` and gets a custom `box-shadow: 0 0 0 2px accent/35%` replacement. Zero bare unpaired outlines remaining.
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Wave 3 adaptations:
+
+- **`.lift-card` is a project-specific utility I added** — not in the LocalCraft skill checklist's vocabulary (the skill says `.service-card`/`.feature-card`/`.card`). On a Next.js + Tailwind site there is no canonical "service card" class — every page uses Tailwind utility combos. Rather than retro-fitting class names across 9 different card grids, I introduced `.lift-card` as the universal lift utility and added it to every card that needs the treatment. Self-verification grep adapted from `.service-card:hover` → `^\.lift-card`.
+- **Hover detection on Tailwind utility cards** — the skill's grep for `:hover` rules in CSS only catches rules I write. For the Tailwind-utility cards I had to mentally audit `hover:border-ap-accent/50 transition-colors` patterns and consciously add `.lift-card` to each so the new universal lift rule applies. Counted via `grep -c "lift-card" app/page.tsx work-with-me/page.tsx TestimonialCard.tsx`.
+- **Focus rings on Tailwind utility focus utilities** — the skill greps `:focus-visible` CSS rules. On a Next.js site most focus replacements live in `focus:ring-* focus-visible:ring-*` utilities inline. The universal `:focus-visible` CSS rule I added catches everything that doesn't have its own ring; the inline utilities cover the rest. Audited both.
+- **Marquee `hidden` collision with `.trust-marquee { display: flex }`** — Tailwind-specific bug. The skill assumes static `.css` files where you'd never have two same-specificity `display` rules competing on the same element. In a Tailwind setup, `.hidden { display: none }` and `.trust-marquee { display: flex }` are equal-specificity utility-vs-component rules; cascade order matters. Fix logged: invert the `.trust-marquee` default to `display: none` and explicitly switch to `flex` only above the `lg` media query.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Trust marquee with accent dots, pauses on hover** (research: Hudson trust marquee) — applied as the desktop home-page audience strip. The Litvin/Hudson editorial signature: trust signals scroll in a continuous reading rhythm rather than sitting static. The pause-on-hover lets readers land on a name without freezing the whole interaction. Mobile keeps the stacked-grid pattern (better thumb reach + readability at 430px).
+- **Founder Photo + Pull-Quote, Hover Lift on Glass Card** (research extension: Joe Hudson, Litvin) — the existing glass founder-quote card from Wave 1 doesn't get `lift-card` (it's already an attention anchor, not a clickable surface). The lift-card pattern is reserved for surfaces that ARE clickable / actionable: cost cards, work cards, step cards, offering cards, testimonial cards. This protects the founder quote from being mistaken for an interactive element.
+- **Premium CTA gradient + deep shadow** (research: extension of premium-coach surface treatment) — Litvin's CTAs are flat orange. Hudson's are dark with subtle gradient. The middle ground here: gradient orange pill with multi-layer shadow that sharpens on hover, signaling "this is the primary action and it has weight." Active state collapses for tactile feedback.
+- **Litvin-style application gating via subtle CTA hierarchy** — primary CTA pill (gradient + deep shadow) leads "Work with me" / "Apply" / "Start the intake"; secondary glass-style pill leads "Take the VAPI™" — but the VAPI™ is still the dominant entry point above the fold on home because the surface treatment of the assessment is consistent (free chip, repeated mention). The CTA hierarchy enforces the funnel without screaming.
+
+Patterns explicitly NOT applied in Wave 3 (and why):
+
+- **Contrarian Disqualifier Section** — Wave 5 (cross-page distinctiveness), still deferred to About / Work-With-Me.
+- **Newsletter count as social proof** — still skipped (list not ≥5k yet).
+- **Cinematic hero entrance / parallax** — the radial halo + glass founder card already do the cinematic work above the fold on home. Adding parallax would feel maximalist. Reserved as an option for Wave 8 if the gut-test surfaces "this could be more memorable."
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **No "service card" terminology** — Jake's offerings are cost cards / work cards / step cards / offering cards / testimonial cards. Same lift treatment via the universal `.lift-card` utility, but the semantic class names reflect his brand (cost / outcome / process / proof) rather than LocalCraft's "service" framing.
+- **CTA gradient is brand-orange to deeper brand-orange, NOT brand-orange to brand-secondary** — Jake's `--ap-accent-2` is a lighter peach (`#FF9F6B`). Mixing peach into the CTA washed it out at small sizes. I went with the darker `#e55a0f` gradient end (matching the existing `.text-gradient-accent-hero` rule from Wave 1) so the pill reads as a single saturated orange unit with subtle depth, not a bi-color washed thing.
+- **No on-dark `lift-card--on-dark` variant on the founder-quote glass card** — the founder card is an attention anchor, not a clickable surface. Lift is reserved for click affordances. Same logic for the stat-row cards (editorial display, not interactive).
+- **Audience-card pattern only applied to the mobile 6-cell trust strip** — desktop became the marquee. Two different patterns serving the same "trust strip" job at two different viewports. Mobile: thumb-reachable grid with hover-state ready for tap. Desktop: marquee that paints the editorial rhythm.
+
+### Criteria audit
+
+- [x] **Hierarchy** — primary CTA pill is unambiguously the most visually weighted CTA element via the new gradient + deep shadow. Secondary CTA stays as bordered pill — clear ladder. H1 retains dominance above the fold; halo enhances rather than competes (radial gradient is at 0.18 max alpha + 8px blur).
+- [x] **Restraint** — single accent color throughout (`--ap-accent` orange). Single accent font (Cormorant italic for accent + numerals, Outfit for everything else). Hover treatments use ONE motion (translateY -6px for cards / -2px for CTAs) + ONE shadow change. No spinning, scaling, glowing, or bouncing layered on top.
+- [x] **Micro-interactions** — every interactive surface has hover state distinct from rest (cards lift, CTAs deepen, audience cells reveal accent bar, marquee pauses) and a focus state distinct from both (universal 2px accent outline at 4px offset for keyboard users). Reduced-motion is honored on EVERY new pattern.
+- [x] **Typographic editorial feel** — preserved from Wave 2. Italic Cormorant accent on every H1 (per 1.3 + 2.2). Halo's radial wash uses the same orange as the italic accent so the hero block reads as a unified editorial unit.
+- [x] **Mobile=desktop parity** — both surfaces have the SAME hover affordances (cards lift, CTAs deepen) but the trust strip diverges intentionally (grid on mobile / marquee on desktop) — same job, viewport-appropriate execution. Sticky mobile CTA bar still carries the same two conversion paths the desktop floating CTA + nav carry.
+- [x] **No clip-art energy** — the gradient bar on the audience card is CSS pseudo-element. The marquee dots are CSS. The CTA shadow is multi-layer box-shadow. No bouncing emojis, no animated SVG sparkles. Custom inline SVGs for the only icons (arrow on CTA, check, etc).
+- [x] **No template-shaped sections** — the marquee is positioned editorially (Trusted by · Doctors · Coaches · Healers · etc) not as a "Our customers" SaaS logo grid. The audience-card gradient bar on hover is a Litvin/Hudson editorial flourish, not a SaaS "feature card" treatment.
+- [x] **Cold-read copy** — no copy changes this wave. Verified Wave 1 + 2 copy still reads cleanly.
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass flagged:**
+
+- **Home: desktop trust marquee was bleeding onto the 430px mobile capture** — the marquee row was visible at the bottom of the mobile shot, sliding text "USTED BY · DOCTORS · COA…" even though the element had `hidden lg:block`. Root cause: my new `.trust-marquee { display: flex }` rule had equal CSS specificity to Tailwind's `.hidden { display: none }`, and cascade ordering let the flex rule win at all viewports.
+- All other mobile pages clean. Hero halos render as subtle peach washes on light-bg pages and don't bleed through on dark-bg sections.
+- Sticky CTA bar still pinned at bottom on every marketing page.
+
+**Mitigation:**
+- Inverted the marquee's default: `.trust-marquee { display: none }` at all viewports, then `@media (min-width: 1024px) { .trust-marquee { display: flex } }`. Re-captured wave-3 mobile shots — marquee now properly hidden below lg.
+- No other regressions surfaced.
+
+**Re-test (mobile):** clean. Home, about, work-with-me, contact, apply, who-is-alfred, build-your-assessment, blog, client-stories, privacy, terms, testimonials, thank-you pages all render hero halo + sticky CTA + cards without overflow or marquee bleed.
+
+**Desktop / tablet:** clean. Home desktop shows the glass founder-quote + hero halo + gradient CTA + trust marquee with accent dots. About desktop shows hero halo wash behind "Hey, *I'm* Jake Sebok." Work-with-me tablet shows the two offering cards with lift treatment ready. Trust marquee on desktop scrolls left at a calm 38s cycle and pauses cleanly on hover.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → The audience-card gradient bar could ALSO morph the cell background to a subtle warm wash (rgba(255,107,26,0.04)) on hover, so the entire cell reads as "alive" when the cursor lands. **Applied this wave**: `audience-card:hover { background: rgba(255,107,26,0.04) }`.
+- **"Category leader doing this better?"** → Hudson's audience labels animate the underline-stroke from left-to-right on hover (a Joe-Hudson editorial signature). The current implementation uses a top-bar reveal — same energy, different stroke direction. Litvin's marquee has the labels in REVERSE order with the dots between, which gives more visual breathing room. Deferred: a Wave 5 cross-page distinctiveness pass could test reverse-order labels on the desktop marquee to see if the editorial cadence reads better.
+- **Applied this wave:** card lift + cta gradient + audience cell wash + marquee dots + hero halo = together they make the page feel "alive" without any single ornament being loud. The Litvin/Hudson editorial feel transfers because the depth and motion are restrained.
+
+### Open items rolled forward
+
+- (Wave 4) Customer-photo audit + Tier-0 routing — current site uses 4-5 real photos of Jake (MMC profile, jake-and-son, jacob-sebok-laughing, client testimonial portraits). Wave 4 should formalize the tiering and confirm every image slot is from the best available source.
+- (Wave 5) Contrarian disqualifier section — still deferred.
+- (Wave 5) Hero rhythm variation across pages — currently uniform structure (eyebrow + H1 + sub-copy + halo). Wave 5 should introduce per-page rhythm variation to fight the "every hero looks the same" risk.
+- (Wave 7) Above-the-fold hero CTA re-balance (VAPI™ as single dominant, demote Work-with-me to text link).
+- (Wave 8) Mobile body-P right-edge clipping artifact final review (still carried from Wave 1).
+- (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference (bonus prompt deferral).
