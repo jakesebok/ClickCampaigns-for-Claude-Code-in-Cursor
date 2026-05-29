@@ -314,7 +314,7 @@ Patterns explicitly NOT applied in Wave 3 (and why):
 
 **Started**: 2026-05-29T22:35Z
 **Completed**: 2026-05-29T23:55Z
-**Commit**: TBD
+**Commit**: a9bf393
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
