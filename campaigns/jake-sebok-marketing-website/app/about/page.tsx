@@ -38,10 +38,10 @@ export default function AboutPage() {
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start" data-reveal data-reveal-delay="1">
             <div>
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
+              <div className="hero-image relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
-                  alt="Jake Sebok"
+                  alt="Jake Sebok laughing in natural daylight, head turned mid-conversation"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"

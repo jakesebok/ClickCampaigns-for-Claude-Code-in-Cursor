@@ -22,7 +22,7 @@ export function Header() {
         <Link href="/" className="flex shrink-0 items-center gap-2 min-w-0">
           <Image
             src="/images/logo-jake-sebok-horizontal.png"
-            alt="Jake Sebok"
+            alt="Jake Sebok wordmark, link to home"
             width={200}
             height={56}
             className="h-14 sm:h-16 md:max-lg:h-[3.25rem] lg:h-16 w-auto max-w-[min(100%,168px)] md:max-lg:max-w-[176px] lg:max-w-none"

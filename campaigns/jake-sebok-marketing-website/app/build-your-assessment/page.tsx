@@ -61,7 +61,7 @@ export default function BuildYourAssessmentLandingPage() {
           <div className="flex justify-center mb-5 sm:mb-6">
             <Image
               src="/images/vapi/vapi-logo.png"
-              alt=""
+              alt="VAPI Values Alignment Performance Insights wordmark"
               width={176}
               height={52}
               className="h-12 sm:h-14 w-auto opacity-95"

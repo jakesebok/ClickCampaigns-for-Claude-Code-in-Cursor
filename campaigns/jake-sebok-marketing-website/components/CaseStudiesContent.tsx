@@ -155,10 +155,10 @@ function StorySection({
           {/* Left: image + quotes — sticky so you stay connected to the person */}
           <div className={`lg:col-span-5 ${isAlt ? "lg:order-2" : ""}`}>
             <div className="lg:sticky lg:top-24 space-y-4">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-lg">
+              <div className="hero-image relative aspect-[4/5]">
                 <Image
                   src={data.image}
-                  alt={data.name}
+                  alt={`${data.name}, ${data.title}, portrait`}
                   fill
                   className={data.id === "marshall" ? "object-cover object-[50%_18%]" : "object-cover"}
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -274,13 +274,13 @@ export function CaseStudiesContent() {
             {moreResultsTestimonials.map((t) => (
               <div
                 key={t.author}
-                className="flex-shrink-0 w-[min(400px,85vw)] snap-center rounded-[24px] border border-ap-border bg-white hover:border-ap-accent/40 transition-colors p-6 sm:p-7"
+                className="lift-card gallery-card flex-shrink-0 w-[min(400px,85vw)] snap-center rounded-[24px] border border-ap-border bg-white hover:border-ap-accent/40 transition-colors p-6 sm:p-7"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden bg-ap-off flex-shrink-0">
+                  <div className="gallery-card__media framed-image relative w-14 h-14 rounded-full bg-ap-off flex-shrink-0">
                     <Image
                       src={t.image}
-                      alt={t.author}
+                      alt={`${t.author}, headshot`}
                       fill
                       className="object-cover"
                       sizes="56px"
@@ -289,7 +289,7 @@ export function CaseStudiesContent() {
                   <div>
                     <p className="font-outfit font-semibold text-ap-primary">{t.author}</p>
                     {t.headline && (
-                      <p className="text-sm text-ap-muted">{t.headline}</p>
+                      <p className="gallery-card__caption text-sm text-ap-muted">{t.headline}</p>
                     )}
                   </div>
                 </div>

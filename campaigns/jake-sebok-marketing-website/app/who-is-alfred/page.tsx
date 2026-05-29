@@ -471,7 +471,7 @@ export default function WhoIsAlfredPage() {
                       />
                       <img
                         src="/images/phone_with_natural_shadow.png"
-                        alt="ALFRED dashboard on iPhone"
+                        alt="ALFRED app home screen on iPhone, showing the daily check-in flow"
                         className="relative z-10 pointer-events-none h-auto max-h-[min(58vh,440px)] w-full max-w-[min(92vw,360px)] object-contain object-center opacity-100 select-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
                       />
                     </div>
@@ -524,7 +524,7 @@ export default function WhoIsAlfredPage() {
                 <div className="relative flex h-full min-h-[280px] w-full max-w-full items-center justify-center md:min-h-[min(52vh,420px)] lg:min-h-full lg:overflow-visible md:py-2 lg:py-0">
                   <img
                     src="/images/phone_with_natural_shadow.png"
-                    alt="ALFRED dashboard on iPhone"
+                    alt="ALFRED app interface on iPhone, oriented to the right and floating against a dark backdrop"
                     className="pointer-events-none relative z-10 h-auto max-h-[min(58vh,480px)] w-full max-w-full object-contain object-center opacity-100 select-none backface-hidden md:max-h-[min(78vh,640px)] md:max-w-[min(100%,500px)] md:scale-[1.62] md:origin-center lg:max-h-none lg:max-w-full lg:h-[90%] lg:min-h-[400px] lg:max-h-[min(88vh,960px)] lg:w-auto lg:scale-[1.72] lg:-translate-y-1 xl:-translate-y-2 [filter:drop-shadow(0_20px_40px_rgba(0,0,0,0.32))]"
                   />
                 </div>

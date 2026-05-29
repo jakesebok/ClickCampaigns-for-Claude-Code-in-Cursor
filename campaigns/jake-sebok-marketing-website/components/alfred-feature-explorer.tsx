@@ -1683,8 +1683,8 @@ function CoachScreen({
 function VoiceIdleScreen() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[280px] px-4 py-8 text-center bg-[#0c0a09]">
-      <div className="w-16 h-16 rounded-full bg-ap-accent/15 flex items-center justify-center mb-4">
-        <Mic className="h-8 w-8 text-ap-accent" />
+      <div className="icon-circle icon-circle--on-dark w-16 h-16 mb-4">
+        <Mic className="h-8 w-8" />
       </div>
       <h2 className="text-lg font-cormorant font-bold text-white mb-2">Speak With Your Coach</h2>
       <p className="text-[10px] text-white/50 leading-relaxed mb-4">

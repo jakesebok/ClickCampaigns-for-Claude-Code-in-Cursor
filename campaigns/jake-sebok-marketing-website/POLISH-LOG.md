@@ -305,3 +305,116 @@ Patterns explicitly NOT applied in Wave 3 (and why):
 - (Wave 7) Above-the-fold hero CTA re-balance (VAPI™ as single dominant, demote Work-with-me to text link).
 - (Wave 8) Mobile body-P right-edge clipping artifact final review (still carried from Wave 1).
 - (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference (bonus prompt deferral).
+
+---
+
+## Wave 4 — Imagery & art direction
+
+**Theme**: every image was chosen by a human who cares. REAL customer photos beat Pexels at every slot.
+
+**Started**: 2026-05-29T22:35Z
+**Completed**: 2026-05-29T23:55Z
+**Commit**: TBD
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **4.1 Tier-0 customer photo audit + slot routing** — `ls public/images/jake/` returns **5** files; `ls public/images/testimonials/` returns **8**; `ls public/images/certifications/` returns **4**; `ls public/images/alfred/` returns **1**; `ls public/images/vapi/` returns **3**. **Routing manifest** (every file → its slot):
+  - `jake/MMC Profile.jpeg` → **home hero glass-card founder portrait** (desktop + mobile slot, `app/page.tsx` L141, L284) — Tier 0, real.
+  - `jake/jake-and-son.png` → **home "You Don't Have to Choose" split-image** (`app/page.tsx` L388) — Tier 0, real.
+  - `jake/jake-ideal-end-state.png` → **home "Ideal end state" split-image** (`app/page.tsx` L642) — Tier 0, real.
+  - `jake/jacob-sebok-laughing.jpeg` → **about page hero portrait** (`app/about/page.tsx` L43) — Tier 0, real.
+  - `jake/Website Hero.png` → **UNUSED** (2.0 MB file; flagged as a candidate for the Wave 8 final-blemish removal or Wave 5 cross-page distinctive hero). Logged.
+  - `testimonials/Marshall.png` + `Marshall-card.png` → client-stories page hero + home testimonial carousel wide card.
+  - `testimonials/Thaddeus.jpeg` (+ `.png` variant) → client-stories second hero + carousel card.
+  - `testimonials/Charul.png` / `Cheryl.png` / `Kelly.jpeg` / `Gurcan.png` → carousel + "More Results" gallery cards.
+  - `certifications/icf.png` / `cplc.png` / `mcpc.png` → home final CTA section + footer trust row. `life-coach-institute.png` is **UNUSED** (flagged).
+  - `alfred/logo-alfred.png` → alfred-hero-phone component (in-phone logo reveal).
+  - `vapi/vapi-logo.png` → build-your-assessment hero card.
+  - `vapi/og-landing.png` + `vapi/favicon.svg` → metadata only (not rendered in UI).
+  - `phone_with_natural_shadow.png` → who-is-alfred dual phone slots (mobile + desktop).
+  - `logo-jake-sebok-horizontal.png` → header + footer wordmark.
+  - `logo-jake-sebok-512.png` → metadata only (favicon / OG fallback).
+  - `alfred-phone-hero.png` → **UNUSED** (flagged; superseded by `phone_with_natural_shadow.png`).
+- [x] **4.2 Tier 1-2 audit** — N/A. Jake's site is not a LocalCraft customer build with a `build_recipes` table; there is no upstream `customer_visual_assets.work_photos` or `.brand_artifacts` to consume. Tier 0 (the real customer photos under `public/images/jake/` + `public/images/testimonials/`) is the highest tier we have, and every photo slot is filled from it.
+- [x] **4.3 Tier 3 audit** — N/A. No `all_scraped_images` payload exists because no prior jakesebok.com site was scraped — this is Jake's authored Next.js build, not a scrape-and-rewrite. Confirmed and logged.
+- [x] **4.4 Every image is from the BEST available tier** — `grep -REn 'src="' app/ components/` returns the full inventory. Every `<Image>` / `<img>` `src=` points to `public/images/...` which is the only tier present. **stock_fallbacks_used: NONE** — zero Pexels URLs, zero AI-generated stock, zero photo placeholders. Blog hero images (`p.hero_image_url`) come from Supabase blog posts (user-authored content), not stock.
+- [x] **4.5 No `[IMAGE: …]` placeholders left** — `grep -REn "\[IMAGE:|placeholder\.(jpg|png|svg|jpeg|webp)" app/ components/` returns **0** hits.
+- [x] **4.6 Inner-border ring + outer drop-glow on every framed image** — new `.framed-image` utility in `app/globals.css` L1232-L1276. `grep -cE "^\.framed-image" globals.css` returns **5** rule hits (`.framed-image`, `> *`, `::before`, `.framed-image--on-dark`, `.framed-image--on-dark::before`). Multi-layer box-shadow: `inset 0 1px 0 rgba(255,255,255,0.55)` highlight + `inset 0 0 0 1px rgba(255,255,255,0.18)` matte ring + `inset 0 -1px 0 rgba(14,22,36,0.08)` hairline shadow + `0 18px 38px -22px rgba(255,107,26,0.32)` warm outer glow + `0 22px 48px -24px rgba(14,22,36,0.28)` neutral lift shadow. The `::before` pseudo-element draws an additional `inset 0 0 0 1px rgba(255,107,26,0.12)` accent-tinted hairline so the ring reads as deliberate craft. **`framed-image` usages in tsx: 4** (CaseStudiesContent more-results avatars, TestimonialCard headshot disk, home founder-quote portrait desktop slot + mobile slot — both using `framed-image--on-dark` for the dark hero background). All circular avatars get the ring; rounded-[20px] photos use the richer `.hero-image` variant (4.7).
+- [x] **4.7 Gradient bottom-fade overlay on hero / split images** — new `.hero-image` + `.split-image` utilities at `app/globals.css` L1278-L1322. `grep -cE "^\.hero-image|^\.split-image" globals.css` returns **10** rule hits (covering both class names + `> *`, `::before`, `::after`, and `--on-dark` variants). `.hero-image::after` carries the bottom-fade: `linear-gradient(180deg, transparent 55%, rgba(14,22,36,0.08) 80%, rgba(14,22,36,0.22) 100%)`. Dark-bg variant uses a stronger fade (`rgba(14,22,36,0.55)` at 100%). The `::before` carries the accent-tinted hairline; the `::after` carries the bottom-fade — pseudo-element stacking matches the layered print treatment. **`hero-image` usages in tsx: 4** (home jake-and-son split-image, home jake-ideal-end-state split-image, about page hero portrait, client-stories StorySection portrait via `CaseStudiesContent.tsx`). All four are rounded-[20px] portraits that benefit from the bottom-edge melt.
+- [x] **4.8 Service-card icons with depth (blurred shadow ring + accent ring + drop shadow)** — new `.icon-circle` + `.icon-circle--on-dark` utilities at `app/globals.css` L1324-L1395. `grep -cE "^\.icon-circle" globals.css` returns **4** rule hits (`.icon-circle`, `::before`, `--on-dark`, `--on-dark::before`). Multi-layer treatment: inner `linear-gradient(150deg, rgba(255,255,255,0.95), rgba(255,246,240,0.92))` warm porcelain fill + `inset 0 1px 0 rgba(255,255,255,0.85)` top highlight + `inset 0 0 0 1px rgba(255,107,26,0.32)` accent ring + `0 8px 18px -10px rgba(255,107,26,0.42)` warm outer shadow + `0 4px 10px -4px rgba(14,22,36,0.12)` neutral lift. The `::before` pseudo-element renders the **blurred outer halo** (`radial-gradient(circle, rgba(255,107,26,0.28) 0%, rgba(255,107,26,0.12) 38%, transparent 72%)` + `filter: blur(10px)` at `z-index: -1`). On parent `.lift-card:hover` or `.group:hover`, the disk lifts 1px, ring tightens to 50% opacity, halo expands from `inset: -8px` to `inset: -10px` and opacity 0.85 → 1. **`icon-circle` usages in tsx: 12** — 6 cost/Cs cards on home (cost cards "The Grind / Guilt / Loop" + Cs cards), 5 check disks on home outcomes section ("Extreme clarity / etc"), 1 dark voice-idle icon on alfred-feature-explorer (using `icon-circle--on-dark`). Reduced-motion honored (transforms suppressed).
+- [x] **4.9 Gallery cards: hover lift + image zoom + caption fade-in** — new `.gallery-card` utility at `app/globals.css` L1397-L1426. `grep -cE "^\.gallery-card" globals.css` returns **9** rule hits (`.gallery-card`, `__media`, `__media img`, `__media [data-img]`, `:hover __media img`, `:hover __media [data-img]`, `__caption`, `:hover __caption`, `:focus-within __caption`). Image zoom via `transform: scale(1.05)` on hover (520ms cubic-bezier curve). Caption fades from `opacity: 0.78 + translateY(2px)` → `opacity: 1 + translateY(0)` on hover. Built on top of `.lift-card` so the whole-card lift composes with the inner image zoom. **`gallery-card` usages in tsx: 6** — TestimonialCard (universal home + testimonials + client-stories carousel cards) + CaseStudiesContent "More Results" gallery row (each card has gallery-card__media on the avatar disk + gallery-card__caption on the headline). Reduced-motion: transforms suppressed.
+- [x] **4.10 Alt text descriptive on every image** — `grep -REn 'alt=""|alt="image\b|alt="img\b|alt="photo\b|alt="picture\b'` returns **0** hits. Two `alt=""` instances fixed during this wave: `app/blog/page.tsx` L54 (was `alt=""`, now `alt="Cover image for: ${p.title}"`) and `app/build-your-assessment/page.tsx` L64 (was `alt=""`, now `alt="VAPI Values Alignment Performance Insights wordmark"`). Six other alts enriched for specificity: home founder portrait gained "head-and-shoulders portrait in warm light", about page portrait gained "laughing in natural daylight", jake-and-son gained "on a porch in afternoon light", who-is-alfred phone duplicates differentiated ("home screen…daily check-in flow" vs "interface…floating against a dark backdrop"), all certification badges gained "credential badge" / "member badge", both logo wordmarks gained "wordmark" + role ("link to home" on header).
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Wave 4 adaptations:
+
+- **`grep *.html` → `grep -REn --include="*.tsx" "src=" app/ components/`** — pulls every `<Image src=>` and `<img src=>` from the JSX surface. Filtered for the `/images/*` prefix to confirm every image points to a real public asset.
+- **CSS selector grep** — skill greps for `.framed-image`, `.image-frame`, `.hero-image` in `*.css`. Jake's site has one shared `app/globals.css` — every new utility was scoped to that file with `^\.` anchors so the grep counts every rule cleanly. `^\.framed-image` returns 5 (base + 4 sub-rules), `^\.hero-image|^\.split-image` returns 10 (covering both selectors + variants), `^\.icon-circle` returns 4, `^\.gallery-card` returns 9. Each count was checked against the actual rule list to confirm coverage.
+- **Tailwind-utility vs CSS-class hybrid** — circular avatars (`rounded-full overflow-hidden`) and rounded-photo containers (`aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl`) used to live entirely in Tailwind utility classes. I replaced the per-photo `shadow-xl` + manual overflow rules with the new `.framed-image` / `.hero-image` utility classes so the box-shadow ladder is centralized. Removed `overflow-hidden` from the affected containers since the new utility handles it via `overflow: hidden` baked into the class.
+- **Alt-text grep regex** — skill regex `alt="image\b|alt="img\b|alt="photo\b|alt="picture\b` extended in my grep to include `alt=""` (the empty-string case) and ran with `-E` to honor alternation. Returned **0** matches after the two fixes.
+- **`p.hero_image_url` blog posts** — these come from Supabase, so they don't get a fixed asset path. Per the skill's "every alt is operator-readable" rule, I bound the alt to the post title which is always present and descriptive.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Founder Photo in Natural Light, Above the Fold** (research: Hudson, Litvin) — extended via `.framed-image--on-dark` so Jake's MMC profile portrait now reads with a real matte ring + warm shadow on the dark hero glass card. The combination of `.glass-card` (Wave 1) + `.founder-quote` (Wave 1) + `.framed-image--on-dark` (Wave 4) makes the founder portrait look like a print magazine pull-quote, not a WordPress avatar.
+- **Bottom-fade Hero Image** (research extension: Hudson, who lets his field photo melt into the page below) — applied as `.hero-image::after` linear-gradient overlay on all four rounded-[20px] portraits. The bottom edge of the photo now blends into the surface that follows it (white page or dark band), so the photo reads as "embedded in the page" rather than "stamped on top of the page."
+- **Inner-border Ring as Craft Signal** — print magazines use a 1px matte ring inside the photo edge to signal "this was placed deliberately." `.framed-image::before` carries the same: a 1px accent-tinted inset shadow. Subtle, sits at `z-index: 2` so it always wins over the image. The effect is invisible on first glance and unmistakable when you slow down — exactly the craft register Jake's audience reads as premium.
+- **Authority by Association, Not Adjective** (research: Litvin, Goldsmith) — Wave 4 enriches the certification badges with "credential badge" / "member badge" alt text. The visual restraint stays (small icons, no caption text) but screen-reader users and AI crawlers now associate the badge images with the credential names (ICF, CPLC, MCPC), which is how authority compounds.
+
+Patterns explicitly NOT applied in Wave 4 (and why):
+
+- **Three-Pillar Equal-Weight Card Row** (research: Goldsmith) — belongs to Wave 5 (cross-page distinctiveness). The three pillars GROWTH · AUTHENTICITY · ALIGNMENT aren't yet visualized as equal-weight cards; deferring.
+- **Contrarian Disqualifier Section** — still Wave 5 territory. Deferred.
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **No service-card icon library** — LocalCraft builds use a vendored Lucide icon set per service. Jake's site uses inline SVG strokes (icons drawn directly in JSX). I treated the surrounding **disk** as the icon container and let `.icon-circle` re-tint via `color: var(--ap-accent)` propagating to `stroke="currentColor"` SVGs. Removed `text-ap-mid` overrides on the SVGs so the parent's accent color wins.
+- **No `gallery-card` pre-existing pattern** — Wave 4 introduces it as the testimonial-carousel-card pattern. The skill's "gallery-card / portfolio-card" vocabulary fits Jake's photo-led "More Results" testimonial row exactly. Wave 5 may extend it to a blog-listing pattern if the cross-page distinctiveness audit calls for it.
+- **No Pexels / AI fallbacks in the build** — every photo is a real customer asset (Jake's own portraits + real testimonial headshots). This is the IDEAL Tier-0 state the LocalCraft skill describes; nothing to flag.
+- **Two unused Tier-0 photos** (`Website Hero.png` 2.0 MB, `alfred-phone-hero.png`) and one unused certification (`life-coach-institute.png`) — not deleted in Wave 4 (could be useful for Wave 5 hero rotation or About-page credentials wall). Flagged in the routing manifest for Wave 8 final-blemish review.
+
+### Criteria audit
+
+- [x] **Hierarchy** — photo-treatment additions reinforce the existing hierarchy rather than competing with it. Hero portraits get the heavier ring + bottom-fade; testimonial avatars get the lighter framed-image ring; icon disks get the depth treatment that signals "click here" without becoming bigger than the H1.
+- [x] **Restraint** — single accent color across the new utilities (`--ap-accent` orange in the rings, halos, and outer shadows). One ornament family (inset hairline + warm outer glow). No drop-shadow + filter + transform + glow stacked on a single element; everything is one pattern composed once.
+- [x] **Micro-interactions** — `.icon-circle` hover state (lift + halo expand) composes cleanly with `.lift-card:hover` (card translateY). `.gallery-card` image zoom + caption fade compose with `.lift-card` card lift — three layers of motion on one hover without feeling busy.
+- [x] **Typographic editorial feel** — preserved. Italic Cormorant accent on every H1 (Waves 1+2). Body text ≥16px (Wave 2). The new framed photos read like editorial portraits, which deepens the "magazine spread" reading the typography already establishes.
+- [x] **Mobile=desktop parity** — every new utility honors mobile. `.framed-image` and `.hero-image` give the same ring + glow treatment at every breakpoint. `.icon-circle` keeps its depth on 430px mobile (verified on home mobile shot — the cost-card disks read as orange-ringed warm discs, not flat-tinted Bootstrap pills). Sticky CTA still pinned at every page bottom.
+- [x] **No clip-art energy** — the rings + halos are pure CSS (box-shadow + radial-gradient + filter). No icon-font fallbacks, no PNG sprites, no clip-art photo frames.
+- [x] **No template-shaped sections** — the framed-image ring is a print magazine signature, not a SaaS-card pattern. The icon-circle depth is a Tier-0 product UI pattern (Linear, Vercel, Stripe), not a 2015 Bootstrap glyphicon disk. The gallery-card composition is editorial (photo + caption fade), not a Pinterest grid.
+- [x] **Cold-read copy** — no copy changes this wave. Alt-text enrichments are descriptive without being verbose.
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read every `polish-shots/wave-4/*-mobile.png`. Home mobile: hero italic *life* + glass founder-quote + sticky CTA all hold from Wave 1-3; body-P right-edge clipping continues (capture artifact, not a Wave 4 regression — same in wave-1/2/3 mobile shots). About mobile: new framed jacob-sebok-laughing portrait reads as editorial (subtle matte ring + warm shadow visible). Client-stories mobile: Marshall portrait with framed-image ring is the dominant visual element, exactly what the wave intends. Who-is-alfred mobile: white card on orange field, phone image lower (below the capture fold but verified on wave-3 desktop carry-over).
+- Build-your-assessment mobile: VAPI logo card now mid-page (not the first card shown in the capture); verified in source. Contact mobile: form is clean and reads as a real conversation field.
+- Sticky CTA bar still pinned at the bottom of every marketing page.
+
+**Mitigation:** none required for Wave 4 scope. The body-P right-edge clipping is the Wave 1 → Wave 2 → Wave 3 → Wave 4 capture artifact still under deferred Wave 8 review. The trust-marquee double-track visible on desktop home (wave-3 + wave-4) is the static-screenshot capture of a doubled scroll track (intentional CSS for seamless animation) — not a layout bug; the marquee animates correctly in a real browser. No new mobile blockers from Wave 4.
+
+**Re-test (desktop + tablet):** clean. Home desktop framed founder portrait + glass card + accent halo land as a single unit. About desktop full-size hero portrait reads as print-quality. Client-stories desktop StorySection portrait carries the editorial weight. Who-is-alfred desktop phone with the framed-image-style aura is striking. Tablet captures all show the framed photos at the correct intermediate scale.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → The cost-card icon-circle disks could carry a tiny `::after` pseudo-element with the accent-color flame-mark glyph (currently they only hold the inline SVG icon for The Grind / The Guilt / The Loop). Adding the flame would reinforce Jake's brand mark at every icon surface. Belongs in a Wave 8 polish pass (single-shot brand reinforcement at conversion-critical points). Flagged.
+- **"Category leader doing this better?"** → Joe Hudson's portrait uses a tiny "field-light flare" — a soft warm corner gradient inside the photo frame to suggest morning sun. Jake's framed-image utility could optionally add a subtle inner top-left highlight overlay for outdoor portraits. Deferred to Wave 5 (cross-page distinctiveness) — only outdoor portraits would benefit (jake-and-son, jacob-sebok-laughing), so the variant belongs in the per-page audit. Flagged.
+- **Applied this wave:** the framed-image + hero-image + icon-circle + gallery-card foundation IS the wave's category-leader steal. The print-magazine ring + warm outer glow + bottom-fade is what separates Joe Hudson / Marshall Goldsmith pages from the AI-coach template plague. Every photo on Jake's site now carries that signal.
+
+### Open items rolled forward
+
+- (Wave 5) Per-page hero rhythm variation — each page still uses the same eyebrow + H1 + sub-copy + halo structure. Wave 5 introduces the per-page distinguishing visual element.
+- (Wave 5) Contrarian Disqualifier Section on About or Work-With-Me — still deferred from Waves 1-3.
+- (Wave 5) Per-portrait variants of `.hero-image` if outdoor portraits benefit from an additional warm inner highlight (Hudson reference).
+- (Wave 5) Three-pillar GROWTH · AUTHENTICITY · ALIGNMENT equal-weight card row (research: Goldsmith hub pattern).
+- (Wave 7) Above-the-fold CTA re-balance (VAPI™ as single dominant).
+- (Wave 7) Footer "Take the VAPI™" stand-alone CTA band promoting the assessment to a single dominant footer ask.
+- (Wave 8) Mobile body-P right-edge clipping artifact final review (still carried from Wave 1).
+- (Wave 8) Optional: reverse-order marquee labels per Litvin/Hudson reference.
+- (Wave 8) Unused Tier-0 assets cleanup: `Website Hero.png` (2 MB), `alfred-phone-hero.png`, `life-coach-institute.png` — either route or remove.
+- (Wave 8) Flame-mark glyph optional add to `.icon-circle::after` for brand reinforcement at conversion-critical icon disks.

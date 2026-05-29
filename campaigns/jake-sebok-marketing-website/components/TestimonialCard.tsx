@@ -11,9 +11,9 @@ export interface Testimonial {
 
 export function TestimonialCard({ quote, headline, author, title, image, wide }: Testimonial) {
   return (
-    <div className={`lift-card min-h-[200px] lg:h-[360px] bg-white rounded-[20px] border border-ap-border p-8 sm:p-10 hover:border-ap-accent/50 flex flex-col ${wide ? "w-[min(600px,90vw)] min-w-[280px] sm:min-w-[380px]" : "w-[min(520px,90vw)] min-w-[280px] sm:min-w-[340px]"}`}>
+    <div className={`lift-card gallery-card min-h-[200px] lg:h-[360px] bg-white rounded-[20px] border border-ap-border p-8 sm:p-10 hover:border-ap-accent/50 flex flex-col ${wide ? "w-[min(600px,90vw)] min-w-[280px] sm:min-w-[380px]" : "w-[min(520px,90vw)] min-w-[280px] sm:min-w-[340px]"}`}>
       {headline && (
-        <p className="font-outfit text-gradient-accent font-semibold text-sm uppercase tracking-wider mb-3 flex-shrink-0">
+        <p className="gallery-card__caption font-outfit text-gradient-accent font-semibold text-sm uppercase tracking-wider mb-3 flex-shrink-0">
           {headline}
         </p>
       )}
@@ -21,10 +21,10 @@ export function TestimonialCard({ quote, headline, author, title, image, wide }:
         &ldquo;{quote}&rdquo;
       </blockquote>
       <div className="flex items-center gap-4 flex-shrink-0">
-        <div className="relative w-12 h-12 rounded-full overflow-hidden bg-ap-off flex-shrink-0">
+        <div className="gallery-card__media framed-image relative w-12 h-12 rounded-full bg-ap-off flex-shrink-0">
           <Image
             src={image}
-            alt={author}
+            alt={`${author}, headshot`}
             fill
             className="object-cover"
             sizes="48px"

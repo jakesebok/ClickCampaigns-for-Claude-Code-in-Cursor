@@ -43,7 +43,7 @@ export function AlfredHeroPhone({ className = "" }: { className?: string }) {
                 <div className="relative w-[min(78%,200px)] alfred-hero-logo-reveal">
                   <Image
                     src="/images/alfred/logo-alfred.png"
-                    alt="ALFRED — Aligned Freedom Coach"
+                    alt="ALFRED logo, the Aligned Freedom Coach companion app"
                     width={400}
                     height={160}
                     className="logo-on-dark-img h-auto w-full object-contain"

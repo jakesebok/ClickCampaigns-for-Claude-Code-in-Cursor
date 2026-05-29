@@ -137,10 +137,10 @@ export default function HomePage() {
                   naturally&nbsp;are.&rdquo;
                 </p>
                 <div className="flex items-center justify-end gap-3 -translate-y-1.5">
-                  <div className="relative w-32 h-32 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0 -translate-x-2 -translate-y-2">
+                  <div className="framed-image framed-image--on-dark relative w-32 h-32 rounded-full ring-2 ring-white/30 flex-shrink-0 -translate-x-2 -translate-y-2">
                     <Image
                       src="/images/jake/MMC Profile.jpeg"
-                      alt="Jake Sebok, Master Certified Professional Coach for growth and performance"
+                      alt="Jake Sebok, Master Certified Professional Coach, head-and-shoulders portrait in warm light"
                       fill
                       className="object-cover"
                       sizes="128px"
@@ -226,8 +226,8 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                   <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                 </svg>
@@ -240,8 +240,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z" />
                 </svg>
               </div>
@@ -253,8 +253,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 1l4 4-4 4" />
                   <path d="M3 11V9a4 4 0 0 1 4-4h14" />
                   <path d="M7 23l-4-4 4-4" />
@@ -280,10 +280,10 @@ export default function HomePage() {
             &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;
           </p>
           <div className="flex items-center gap-3 justify-end sm:justify-start">
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0">
+            <div className="framed-image framed-image--on-dark relative w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ring-white/30 flex-shrink-0">
               <Image
                 src="/images/jake/MMC Profile.jpeg"
-                alt="Jake Sebok, Master Certified Professional Coach"
+                alt="Jake Sebok, Master Certified Professional Coach, head-and-shoulders portrait in warm light"
                 fill
                 className="object-cover"
                 sizes="64px"
@@ -337,8 +337,8 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
@@ -350,8 +350,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                 </svg>
               </div>
@@ -362,8 +362,8 @@ export default function HomePage() {
               </p>
             </div>
             <div className="lift-card bg-white rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 hover:border-ap-accent/50">
-              <div className="w-14 h-14 rounded-2xl bg-ap-mid/20 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-ap-mid" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+              <div className="icon-circle w-14 h-14 mb-6 [border-radius:16px]">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
                 </svg>
@@ -384,10 +384,10 @@ export default function HomePage() {
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="hidden lg:block lg:col-span-5">
-              <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden shadow-xl">
+              <div className="hero-image relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jake-and-son.png"
-                  alt="Jake Sebok with his son"
+                  alt="Jake Sebok with his son, on a porch in afternoon light"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -563,7 +563,7 @@ export default function HomePage() {
               </p>
               <div className="space-y-6">
                 <div className="flex gap-4 sm:gap-6 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                  <div className="icon-circle flex-shrink-0 w-10 h-10 mt-0.5">
                     <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -578,7 +578,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="flex gap-4 sm:gap-6 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                  <div className="icon-circle flex-shrink-0 w-10 h-10 mt-0.5">
                     <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -593,7 +593,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="flex gap-4 sm:gap-6 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                  <div className="icon-circle flex-shrink-0 w-10 h-10 mt-0.5">
                     <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -606,7 +606,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="flex gap-4 sm:gap-6 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                  <div className="icon-circle flex-shrink-0 w-10 h-10 mt-0.5">
                     <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -621,7 +621,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="flex gap-4 sm:gap-6 items-start">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ap-accent/15 flex items-center justify-center mt-0.5">
+                  <div className="icon-circle flex-shrink-0 w-10 h-10 mt-0.5">
                     <svg className="w-5 h-5 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -638,10 +638,10 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden lg:flex lg:col-span-5 order-2 self-stretch items-stretch justify-start">
-              <div className="relative aspect-[4/5] w-full max-w-[min(100%,420px)] rounded-l-[20px] overflow-hidden shadow-xl">
+              <div className="hero-image relative aspect-[4/5] w-full max-w-[min(100%,420px)] [border-radius:20px_0_0_20px]">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
-                  alt="Jake Sebok"
+                  alt="Jake Sebok smiling at the camera, in a quiet bright workspace"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 420px"
@@ -806,21 +806,21 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center justify-center gap-6 mb-8 opacity-90">
                 <Image
                   src="/images/certifications/icf.png"
-                  alt="International Coaching Federation"
+                  alt="International Coaching Federation member badge"
                   width={100}
                   height={40}
                   className="h-8 w-auto object-contain"
                 />
                 <Image
                   src="/images/certifications/cplc.png"
-                  alt="Certified Professional Life Coach"
+                  alt="Certified Professional Life Coach credential badge"
                   width={56}
                   height={56}
                   className="h-10 w-auto object-contain"
                 />
                 <Image
                   src="/images/certifications/mcpc.png"
-                  alt="Master Certified Professional Coach"
+                  alt="Master Certified Professional Coach credential badge"
                   width={56}
                   height={56}
                   className="h-10 w-auto object-contain"

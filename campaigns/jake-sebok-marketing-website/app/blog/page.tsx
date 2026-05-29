@@ -51,7 +51,7 @@ export default function BlogIndexPage() {
                   <Link href={`/blog/${p.slug}`} className="block">
                     <img
                       src={p.hero_image_url}
-                      alt=""
+                      alt={`Cover image for: ${p.title}`}
                       style={{
                         width: "100%",
                         aspectRatio: "3 / 2",

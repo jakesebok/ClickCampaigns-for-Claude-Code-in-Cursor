@@ -19,21 +19,21 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 mb-10 sm:mb-12 pb-8 border-b border-white/10">
           <Image
             src="/images/certifications/icf.png"
-            alt="International Coaching Federation"
+            alt="International Coaching Federation member badge"
             width={120}
             height={48}
             className="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
           <Image
             src="/images/certifications/cplc.png"
-            alt="Certified Professional Life Coach"
+            alt="Certified Professional Life Coach credential badge"
             width={80}
             height={80}
             className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
           <Image
             src="/images/certifications/mcpc.png"
-            alt="Master Certified Professional Coach"
+            alt="Master Certified Professional Coach credential badge"
             width={80}
             height={80}
             className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
@@ -107,7 +107,7 @@ export function Footer() {
             <LogoOnDarkGlow size="sm">
               <Image
                 src="/images/logo-jake-sebok-horizontal.png"
-                alt="Jake Sebok"
+                alt="Jake Sebok wordmark"
                 width={120}
                 height={34}
                 className="logo-on-dark-img h-7 w-auto opacity-100"
