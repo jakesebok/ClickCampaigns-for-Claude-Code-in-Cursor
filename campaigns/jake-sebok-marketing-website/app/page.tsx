@@ -67,13 +67,14 @@ export default function HomePage() {
       <section className="relative min-h-[85vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 bg-ap-bg" />
         <div
-          className="absolute top-0 right-0 w-[42%] h-full bg-ap-accent"
+          className="hidden lg:block absolute top-0 right-0 w-[42%] h-full bg-ap-accent"
           style={{ clipPath: "polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
         <div
-          className="absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
+          className="hidden lg:block absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
+        <div className="lg:hidden absolute top-0 inset-x-0 h-[40%] bg-gradient-to-br from-ap-accent/12 via-ap-accent/4 to-transparent" aria-hidden />
         <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
@@ -96,10 +97,13 @@ export default function HomePage() {
                   </span>
                 </span>
               </p>
-              <h1 className="font-outfit font-extrabold text-5xl sm:text-5xl lg:text-6xl text-[#1e3055] leading-[0.96] tracking-tight mb-6">
+              <h1 className="font-outfit font-extrabold text-[2.375rem] sm:text-5xl lg:text-6xl text-[#1e3055] leading-[1.02] sm:leading-[0.96] tracking-tight mb-6 [text-wrap:balance]">
                 Build a business that scales your income, your impact, and{" "}
-                <br />
-                <span className="text-gradient-accent">your&nbsp;life.</span>
+                <br className="hidden lg:inline" />
+                <span className="text-gradient-accent">
+                  your{" "}
+                  <em className="font-cormorant italic font-semibold tracking-tight">life</em>.
+                </span>
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
                 You want clearer decisions, stronger execution, more energy, and a business that supports the life it
@@ -109,7 +113,7 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-3 items-stretch">
                 <Link
                   href="/work-with-me"
-                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-8 py-4 rounded-pill transition-all min-w-[220px]"
+                  className="cta-pill inline-flex items-center justify-center gap-2 bg-ap-accent text-white font-semibold text-base tracking-wider px-6 sm:px-8 py-4 rounded-pill transition-all sm:min-w-[220px]"
                 >
                   Work with me.
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,14 +122,14 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/assessment"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all min-w-[220px]"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[220px]"
                 >
                   Take the VAPI&trade;
                 </Link>
               </div>
             </div>
             <div className="hidden lg:flex items-center justify-end">
-              <div className="space-y-4 max-w-[280px] text-right">
+              <div className="founder-quote glass-card space-y-4 max-w-[280px] text-right">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
                 <p className="font-semibold italic text-xl text-white leading-snug translate-x-[28px]">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
@@ -250,7 +254,7 @@ export default function HomePage() {
       <div className="h-0.5 bg-ap-accent" />
 
       <div className="lg:hidden relative z-10 bg-ap-primary border-t border-ap-border px-5 py-8">
-        <div className="max-w-xl mx-auto space-y-4">
+        <div className="founder-quote glass-card max-w-xl mx-auto space-y-4">
           <div className="w-10 h-0.5 bg-white/40 rounded" />
           <p className="font-semibold italic text-xl text-white leading-snug">
             &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you naturally&nbsp;are.&rdquo;

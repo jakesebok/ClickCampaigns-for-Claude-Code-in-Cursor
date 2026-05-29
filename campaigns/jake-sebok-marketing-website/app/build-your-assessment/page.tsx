@@ -10,9 +10,9 @@ export default function BuildYourAssessmentLandingPage() {
           <Sparkles className="w-3.5 h-3.5 text-[var(--ap-accent)] shrink-0" aria-hidden />
           For coaches & founders
         </div>
-        <h1 className="font-cormorant text-[2rem] leading-[1.08] sm:text-5xl md:text-6xl lg:text-[3.5rem] text-[var(--ap-primary)] font-bold tracking-tight mb-5 sm:mb-6 max-w-4xl mx-auto">
+        <h1 className="font-cormorant text-[2rem] leading-[1.08] sm:text-5xl md:text-6xl lg:text-[3.5rem] text-[var(--ap-primary)] font-bold tracking-tight mb-5 sm:mb-6 max-w-4xl mx-auto [text-wrap:balance]">
           Want an assessment{" "}
-          <em className="text-gradient-accent-hero not-italic">experience</em> like
+          <em className="text-gradient-accent-hero italic">experience</em> like
           mine?
         </h1>
         <div className="text-base sm:text-lg md:text-xl text-[var(--ap-secondary)] max-w-2xl md:max-w-3xl mx-auto leading-relaxed mb-9 sm:mb-10 font-outfit space-y-5 text-left sm:text-center">

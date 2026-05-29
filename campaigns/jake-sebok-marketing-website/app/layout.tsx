@@ -1,9 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SiteCTAs } from "@/components/SiteCTAs";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 /**
  * LocalCraft tracking pixel for jakesebok.com.
@@ -73,6 +81,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <SiteCTAs />
         <Script
           src="https://localcraftdigital.com/track.js"
           strategy="lazyOnload"

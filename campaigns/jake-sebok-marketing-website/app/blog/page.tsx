@@ -31,8 +31,8 @@ export default function BlogIndexPage() {
         <p className="text-[12px] uppercase tracking-[0.16em] text-amber-700 font-medium mb-3">
           Notes from Jake
         </p>
-        <h1 className="font-cormorant text-[clamp(36px,5vw,56px)] leading-[1.1] tracking-[-0.01em] text-slate-900">
-          Answers, not advice.
+        <h1 className="font-cormorant text-[clamp(36px,5vw,56px)] leading-[1.1] tracking-[-0.01em] text-slate-900 [text-wrap:balance]">
+          <em className="italic font-semibold text-amber-700">Answers</em>, not advice.
         </h1>
         <p className="mt-5 text-[17px] leading-relaxed text-slate-700 max-w-[60ch]">
           Field-tested answers to the questions founders actually search when

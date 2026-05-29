@@ -238,8 +238,9 @@ export default function WhoIsAlfredPage() {
                   <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-mid mb-4 text-center md:text-left">
                     Aligned Freedom Coach
                   </p>
-                  <h1 className="font-outfit font-bold text-[2.65rem] sm:text-[3.1rem] lg:text-[3.3rem] text-ap-primary leading-[1.04] tracking-tight mb-5 sm:mb-6 text-center md:text-left">
-                    Clarity in your pocket when it matters.
+                  <h1 className="font-outfit font-bold text-[2.15rem] sm:text-[3.1rem] lg:text-[3.3rem] text-ap-primary leading-[1.05] sm:leading-[1.04] tracking-tight mb-5 sm:mb-6 text-center md:text-left [text-wrap:balance]">
+                    <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">Clarity</em>{" "}
+                    in your pocket when it matters.
                   </h1>
                   <p className="max-w-[38rem] text-[1.05rem] sm:text-[1.24rem] font-semibold text-ap-mid leading-relaxed mb-6 text-center md:text-left">
                     ALFRED keeps what matters in front of you when the week gets loud, so you can make clean decisions
