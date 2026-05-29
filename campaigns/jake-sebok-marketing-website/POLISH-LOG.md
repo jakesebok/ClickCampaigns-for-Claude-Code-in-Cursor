@@ -874,7 +874,7 @@ Patterns explicitly NOT applied in Wave 6 (and why):
 
 **Started**: 2026-05-29T01:00Z
 **Completed**: 2026-05-30T01:55Z
-**Commit**: WAVE7_SHA_PLACEHOLDER
+**Commit**: 1840999
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
