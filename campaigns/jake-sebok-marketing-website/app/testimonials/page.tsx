@@ -34,7 +34,7 @@ export default function TestimonialsPage() {
         </p>
         <h1 className="relative font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
           Real{" "}
-          <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">transformation</em>.{" "}
+          <em className="not-italic font-semibold text-gradient-accent">transformation</em>.{" "}
           Real results.
         </h1>
         <p className="text-xl font-semibold text-ap-mid max-w-2xl mb-12">

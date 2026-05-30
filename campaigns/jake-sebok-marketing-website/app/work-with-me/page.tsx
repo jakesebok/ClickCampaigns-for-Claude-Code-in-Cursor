@@ -57,7 +57,7 @@ export default function WorkWithMePage() {
           </div>
           <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
             Two ways{" "}
-            <em className="font-cormorant italic font-semibold tracking-tight">in</em>.{" "}
+            <em className="not-italic font-semibold text-gradient-accent">in</em>.{" "}
             <span className="text-gradient-accent">Your pace.</span>
           </h1>
           <p className="text-xl font-semibold text-ap-mid max-w-[64ch]">
@@ -222,7 +222,7 @@ export default function WorkWithMePage() {
             <span>Before you apply</span>
           </p>
           <h2 className="font-outfit font-bold text-3xl sm:text-4xl text-ap-primary mb-3 [text-wrap:balance]">
-            This program isn&apos;t for everyone. <em className="font-cormorant italic font-semibold text-gradient-accent">On purpose.</em>
+            This program isn&apos;t for everyone. <em className="not-italic font-semibold text-gradient-accent">On purpose.</em>
           </h2>
           <p className="text-ap-mid text-lg sm:text-xl font-semibold leading-relaxed mb-12 max-w-[64ch]">
             Saying yes to the wrong people is a disservice to everyone, including them. Here is who I am built for and

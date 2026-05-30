@@ -36,7 +36,7 @@ export default function AboutPage() {
           </p>
           <h1 className="font-outfit font-bold text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] text-ap-primary leading-[1.02] tracking-tight mb-6 [text-wrap:balance]">
             Hey,{" "}
-            <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">I&apos;m</em>{" "}
+            <em className="not-italic font-semibold text-gradient-accent">I&apos;m</em>{" "}
             Jake Sebok.
           </h1>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8 max-w-[58ch]">

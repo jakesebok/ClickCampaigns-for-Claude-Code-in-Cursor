@@ -54,22 +54,34 @@ body {
   height: 0;
 }
 
-/* Orange text gradient — brand orange (top-left) to darker orange (bottom-right) */
+/* Orange text gradient — brand orange (top-left) to darker orange (bottom-right).
+   `display: inline-block` + `padding-bottom` extends the background-clip box past
+   the descender baseline so letters like g/p/y/j (and italic ascenders that bleed
+   below) keep their bottoms instead of getting sliced by the clipping rectangle. */
 .text-gradient-accent {
   background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  display: inline-block;
+  padding: 0.04em 0.02em 0.12em 0.02em;
+  margin: -0.04em -0.02em -0.12em -0.02em;
+  vertical-align: baseline;
 }
 
-/* Hero headline — same gradient direction, darker end (steeper angle for clearer diagonal) */
+/* Hero headline — same gradient direction, darker end (steeper angle for clearer
+   diagonal). Same descender-safe box as above. */
 .text-gradient-accent-hero {
   background: linear-gradient(120deg, var(--ap-accent) 0%, #A63D00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  display: inline-block;
+  padding: 0.04em 0.02em 0.14em 0.02em;
+  margin: -0.04em -0.02em -0.14em -0.02em;
+  vertical-align: baseline;
 }
 
 /* -------------------------------------------------------------------------- */

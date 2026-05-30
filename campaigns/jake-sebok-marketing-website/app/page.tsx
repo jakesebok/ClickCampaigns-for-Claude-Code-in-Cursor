@@ -119,7 +119,7 @@ export default function HomePage() {
                 <br className="hidden lg:inline" />
                 <span className="text-gradient-accent">
                   your{" "}
-                  <em className="font-cormorant italic font-semibold tracking-tight">life</em>.
+                  <em className="not-italic font-semibold">life</em>.
                 </span>
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
@@ -193,8 +193,15 @@ export default function HomePage() {
           {/* Desktop: continuous trust marquee with accent dots. Pauses on hover.
               Track is doubled for seamless scroll. The eyebrow label sits in the
               same track so it reads as one continuous editorial line. */}
+          {/* Single moving track holding TWO identical sets back-to-back. The
+              CSS animates the whole track 0% → -50%, which lands exactly on the
+              start of the duplicate set — giving a true seamless infinite loop
+              with no visible jump or gap. Two sibling tracks (previous shape)
+              animated independently and left empty space on the right edge as
+              both halves slid left at the same rate. */}
           <div className="hidden lg:block trust-marquee py-5" aria-label="Trusted by Doctors, Coaches, Healers, Bodyworkers, Creators, Founders">
-            <div className="trust-marquee__track" aria-hidden="false">
+            <div className="trust-marquee__track">
+              {/* Set A — readable to screen readers */}
               <span className="trust-marquee__item trust-marquee__item--label">Trusted by</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
               <span className="trust-marquee__item">Doctors</span>
@@ -209,21 +216,20 @@ export default function HomePage() {
               <span className="trust-marquee__dot" aria-hidden="true" />
               <span className="trust-marquee__item">Founders</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-            </div>
-            <div className="trust-marquee__track" aria-hidden="true">
-              <span className="trust-marquee__item trust-marquee__item--label">Trusted by</span>
+              {/* Set B — duplicate for seamless wrap; hidden from screen readers */}
+              <span className="trust-marquee__item trust-marquee__item--label" aria-hidden="true">Trusted by</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Doctors</span>
+              <span className="trust-marquee__item" aria-hidden="true">Doctors</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Coaches</span>
+              <span className="trust-marquee__item" aria-hidden="true">Coaches</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Healers</span>
+              <span className="trust-marquee__item" aria-hidden="true">Healers</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Bodyworkers</span>
+              <span className="trust-marquee__item" aria-hidden="true">Bodyworkers</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Creators</span>
+              <span className="trust-marquee__item" aria-hidden="true">Creators</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
-              <span className="trust-marquee__item">Founders</span>
+              <span className="trust-marquee__item" aria-hidden="true">Founders</span>
               <span className="trust-marquee__dot" aria-hidden="true" />
             </div>
           </div>

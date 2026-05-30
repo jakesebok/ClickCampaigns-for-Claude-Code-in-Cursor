@@ -20,7 +20,7 @@ export default function TermsPage() {
           <span>Legal · Doc 02 of 02</span>
         </p>
         <h1 className="font-outfit font-bold text-[2.25rem] sm:text-[2.75rem] text-ap-primary mb-2 [text-wrap:balance]">
-          <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">Terms</em>{" "}
+          <em className="not-italic font-semibold text-gradient-accent">Terms</em>{" "}
           of Use
         </h1>
         <p className="text-ap-muted text-base mb-12">
