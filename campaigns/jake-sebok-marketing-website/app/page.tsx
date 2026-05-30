@@ -220,7 +220,7 @@ export default function HomePage() {
               with no visible jump or gap. Two sibling tracks (previous shape)
               animated independently and left empty space on the right edge as
               both halves slid left at the same rate. */}
-          <div className="hidden lg:block trust-marquee py-5" aria-label="Trusted by Doctors, Coaches, Healers, Bodyworkers, Creators, Founders">
+          <div className="trust-marquee py-5" aria-label="Trusted by Doctors, Coaches, Healers, Bodyworkers, Creators, Founders">
             <div className="trust-marquee__track">
               {/* Set A — readable to screen readers */}
               <span className="trust-marquee__item trust-marquee__item--label">Trusted by</span>
