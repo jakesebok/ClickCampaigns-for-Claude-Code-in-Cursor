@@ -91,7 +91,20 @@ export default function HomePage() {
           className="hidden lg:block absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
-        <div className="lg:hidden absolute top-0 inset-x-0 h-[40%] bg-gradient-to-br from-ap-accent/12 via-ap-accent/4 to-transparent" aria-hidden />
+        {/* Mobile-only diagonal orange wedge — restores the geometric brand
+            presence the lg:block desktop wedge carries above 1024px. Solid
+            accent shape clipped on a diagonal so the hero copy still reads,
+            with a softer secondary wedge underneath for depth. */}
+        <div
+          className="lg:hidden absolute top-0 right-0 w-[72%] h-[34%] bg-ap-accent"
+          style={{ clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
+        <div
+          className="lg:hidden absolute top-0 right-0 w-[50%] h-[22%] bg-ap-accent-2 opacity-65"
+          style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          aria-hidden
+        />
         <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Alive.
         </span>
@@ -101,7 +114,7 @@ export default function HomePage() {
         <span className="absolute bottom-[140px] right-[8%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
           Clear.
         </span>
-        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-16 sm:pt-24 pb-8 sm:pb-12">
+        <div className="relative z-10 flex-1 flex items-center max-w-[1080px] mx-auto px-5 sm:px-6 pt-24 sm:pt-24 pb-14 sm:pb-12">
           <div className="grid lg:grid-cols-[1.55fr_1fr] gap-12 lg:gap-16 items-center w-full">
             <div className="max-w-2xl hero-halo">
               <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-4">
@@ -180,21 +193,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        {/* Mobile audience grid removed per operator request — competed with
+            the hero CTAs above the fold and read as filler. The desktop
+            trust marquee below stays. Mobile users still see the testimonial
+            and case-study sections further down the page. */}
         <div className="relative z-10 w-full border-t-2 border-ap-accent bg-white">
-          <div className="lg:hidden">
-            <div className="px-4 py-3 text-center border-b border-ap-border w-full">
-              <span className="font-semibold text-ap-muted text-[11px] uppercase tracking-[0.22em]">
-                Trusted by
-              </span>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 [&>*:nth-child(2n)]:border-r-0 [&>*:nth-child(n+5)]:border-b-0">
-              {["Doctors", "Coaches", "Healers", "Bodyworkers", "Creators", "Founders"].map((label) => (
-                <div key={label} className="audience-card px-4 py-3 text-center border-b border-r border-ap-border">
-                  <span className="audience-card__label font-semibold text-ap-primary text-[15px] sm:text-base">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
           {/* Desktop: continuous trust marquee with accent dots. Pauses on hover.
               Track is doubled for seamless scroll. The eyebrow label sits in the
               same track so it reads as one continuous editorial line. */}
