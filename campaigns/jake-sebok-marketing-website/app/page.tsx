@@ -152,9 +152,15 @@ export default function HomePage() {
               </p>
             </div>
             <div className="hidden lg:flex items-center justify-end">
-              <div className="founder-quote glass-card space-y-4 max-w-[280px] text-right">
+              {/* Card widened from 280→380px so the full pull-quote sits on
+                  three balanced lines instead of squeezing to four. The prior
+                  translate-x-[28px] shoved the text past the card edge into
+                  empty grid space (read as broken alignment, not intentional
+                  bleed); reduced to 10px so the offset still gives the quote
+                  visual independence from the headshot row without clipping. */}
+              <div className="founder-quote glass-card space-y-4 max-w-[380px] text-right">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
-                <p className="font-semibold italic text-xl text-white leading-snug translate-x-[28px]">
+                <p className="font-semibold italic text-[1.35rem] text-white leading-snug translate-x-[10px]">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
                   naturally&nbsp;are.&rdquo;
                 </p>
@@ -497,7 +503,11 @@ export default function HomePage() {
           {/* Premium stat row — display-face numerals + accent bar + small-caps label.
               Real numbers only (VAPI architecture + program length). No fabricated
               social proof. Italic Cormorant numerals signal editorial weight. */}
-          <div className="stat-row stat-row--four mt-6 mb-10 max-w-[820px]" aria-label="By the numbers">
+          {/* Stat row width matches the 3-card grid below (full container width)
+              so the numbers carry the same horizontal anchor as the cards they
+              introduce. Earlier max-w-[820px] cap made the stat row narrower
+              than the cards and read as misaligned. */}
+          <div className="stat-row stat-row--four mt-6 mb-10" aria-label="By the numbers">
             <div className="stat-card stat-card--on-dark" data-reveal data-reveal-delay="1">
               <div className="stat-card__numeral stat-card__numeral--accent">12</div>
               <div className="stat-card__label">Domains</div>
