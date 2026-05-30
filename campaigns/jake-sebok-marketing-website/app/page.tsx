@@ -166,11 +166,12 @@ export default function HomePage() {
             </div>
             <div className="hidden lg:flex items-center justify-end">
               {/* Card widened to 380px so the full pull-quote sits on three
-                  balanced lines instead of squeezing to four. The translate-x-[28px]
-                  intentional editorial bleed is preserved — Jake wants the quote
-                  to keep its original right-shifted position; the card just grew
-                  to hold the new line length. */}
-              <div className="founder-quote glass-card space-y-4 max-w-[380px] text-right">
+                  balanced lines. lg:translate-x-[56px] pushes the card past
+                  the max-w-[1080px] container's right edge so it bleeds into
+                  the orange wedge — intentional brand bleed, not centered
+                  content. The pull-quote inside still carries its own
+                  translate-x-[28px] for the additional right-shifted feel. */}
+              <div className="founder-quote glass-card space-y-4 max-w-[380px] text-right lg:translate-x-[56px]">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
                 <p className="font-semibold italic text-[1.35rem] text-white leading-snug translate-x-[28px]">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
