@@ -201,7 +201,7 @@ export default function AboutPage() {
                 <span className="foundations-card__dot" aria-hidden="true" />
                 <span className="foundations-card__eyebrow">Foundation 04</span>
                 <p className="foundations-card__name">Brené Brown</p>
-                <p className="foundations-card__text">Daring Greatly</p>
+                <p className="foundations-card__text">Atlas of the Heart</p>
                 <p className="foundations-card__note">
                   Vulnerability is not weakness, and armoring up is not strategy. The data is unambiguous. Founders who
                   cannot drop the mask in private cannot lead at scale in public.
@@ -214,10 +214,15 @@ export default function AboutPage() {
               The Caveat signature anchors the credentials block as personal craft, not a
               corporate bio. Loaded once via app/layout.tsx as --font-caveat. */}
           <div className="signature-block mt-12">
-            <span className="signature-block__label">Yours, in the work</span>
-            <span className="signature-script signature-script--md" aria-label="Jake Sebok signature">
-              Jake
-            </span>
+            <span className="signature-block__label">Let&rsquo;s get after it</span>
+            <Image
+              src="/images/AI Best.png"
+              alt="Jake Sebok signature"
+              width={1536}
+              height={1024}
+              className="signature-image"
+              priority={false}
+            />
           </div>
         </div>
       </section>

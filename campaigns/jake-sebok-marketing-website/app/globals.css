@@ -164,61 +164,8 @@ body {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Sticky mobile CTA bar + floating desktop CTA pill                           */
+/* Floating desktop CTA pill (mobile sticky bar removed per operator request)   */
 /* -------------------------------------------------------------------------- */
-.sticky-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 60;
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom, 0px));
-  background: rgba(14, 22, 36, 0.92);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  border-top: 1px solid rgba(255, 107, 26, 0.45);
-  box-shadow: 0 -10px 28px -12px rgba(0, 0, 0, 0.5);
-  transform: translateY(0);
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
-}
-.sticky-cta[data-hidden="true"] {
-  transform: translateY(120%);
-  opacity: 0;
-  pointer-events: none;
-}
-.sticky-cta a {
-  flex: 1 1 0;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  border-radius: 9999px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-.sticky-cta .sticky-cta__primary {
-  background: linear-gradient(135deg, #ff8a3d 0%, var(--ap-accent) 55%, #e55a0f 100%);
-  color: #fff;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 8px 20px -8px rgba(255, 107, 26, 0.65);
-}
-.sticky-cta .sticky-cta__secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-@media (min-width: 768px) {
-  .sticky-cta {
-    display: none;
-  }
-}
-
 .floating-cta {
   position: fixed;
   right: 1.25rem;
@@ -997,46 +944,16 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-/* 3.3 Hero H1 subtle radial-gradient halo.
-   Applied via the .hero-halo utility on the hero <h1>'s parent (so the halo
-   sits BEHIND the headline). Soft radial light bloom in accent orange,
-   never large enough to bleed into surrounding content. Pointer-events
-   disabled so it never blocks selection / clicks on the headline. */
+/* 3.3 Hero H1 — radial-gradient halo removed per operator request.
+   The .hero-halo utility is kept as a no-op `position: relative` so any
+   existing JSX className references stay valid without re-emitting an
+   orange glow that the operator found distracting behind headlines. */
 .hero-halo {
   position: relative;
-}
-.hero-halo::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  left: -8%;
-  top: -28%;
-  width: 70%;
-  height: 140%;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 60% 50% at 30% 50%,
-    rgba(255, 107, 26, 0.18) 0%,
-    rgba(255, 107, 26, 0.08) 35%,
-    rgba(255, 159, 107, 0.04) 60%,
-    transparent 78%
-  );
-  filter: blur(8px);
 }
 .hero-halo > * {
   position: relative;
   z-index: 1;
-}
-/* On-dark hero variant — softer wash so it reads on dark gradient backgrounds. */
-.hero-halo--on-dark::before {
-  background: radial-gradient(
-    ellipse 65% 55% at 30% 50%,
-    rgba(255, 107, 26, 0.32) 0%,
-    rgba(255, 107, 26, 0.14) 38%,
-    rgba(255, 159, 107, 0.06) 62%,
-    transparent 80%
-  );
-  filter: blur(12px);
 }
 
 /* 3.1 Service / feature / step card hover lift.
@@ -2137,110 +2054,26 @@ select:focus-visible {
    the footer's editorial grid. Dark wedge background so it reads as
    architecturally separate from the grid, with the gradient accent bar
    tying it back to the brand. */
-.footer-vapi-band {
-  position: relative;
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(255, 107, 26, 0.12) 0%, transparent 60%),
-    linear-gradient(180deg, #0a121e 0%, var(--ap-primary) 100%);
-  border-top: 2px solid var(--ap-accent);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 3rem 1.25rem;
-  overflow: hidden;
-  isolation: isolate;
-}
+/* Footer VAPI band — removed per operator request (duplicate of the
+   "Ready to stop building the cage" final CTA already on the home page).
+   Classes left intentionally undefined so any orphan className references
+   render as a no-op rather than carrying stale styling. */
 
-@media (min-width: 640px) {
-  .footer-vapi-band {
-    padding: 4rem 1.5rem;
-  }
-}
-
-.footer-vapi-band::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 107, 26, 0.5) 35%,
-    var(--ap-accent) 50%,
-    rgba(255, 107, 26, 0.5) 65%,
-    transparent 100%
-  );
-  z-index: 2;
-}
-
-.footer-vapi-band__inner {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  display: grid;
-  gap: 1.25rem;
-  justify-items: center;
-  z-index: 3;
-}
-
-.footer-vapi-band__eyebrow {
-  font-family: var(--font-outfit), sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--ap-accent);
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.footer-vapi-band__eyebrow::before {
-  content: "";
-  width: 14px;
-  height: 2px;
-  border-radius: 9999px;
-  background: var(--ap-accent);
-  display: inline-block;
-}
-
-.footer-vapi-band__title {
-  font-family: var(--font-outfit), sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  color: #fff;
-  text-wrap: balance;
-  margin: 0;
-  max-width: 22ch;
-}
-
-.footer-vapi-band__title em {
-  font-family: var(--font-cormorant), serif;
-  font-style: italic;
-  font-weight: 600;
-  background: linear-gradient(135deg, #ff8a3d 0%, var(--ap-accent) 60%, #ff9f6b 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.005em;
-}
-
-.footer-vapi-band__sub {
-  font-family: var(--font-outfit), sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.72);
-  margin: 0;
-  max-width: 52ch;
-}
-
-.footer-vapi-band__cta {
+/* Signature image — replaces the .signature-script Caveat-font text on the
+   /about page with Jake's real handwritten signature. Sized for editorial
+   intimacy under the "Let's get after it" label. */
+.signature-image {
+  width: 160px;
+  height: auto;
   margin-top: 0.25rem;
+  margin-left: -0.5rem;
+  opacity: 0.92;
+  display: block;
+}
+@media (min-width: 640px) {
+  .signature-image {
+    width: 200px;
+  }
 }
 
 /* Terminal-CTA — reusable container so every bottom-of-page CTA gets
@@ -2416,12 +2249,7 @@ select:focus-visible {
 
 .polaroid-tilt {
   transform: rotate(-1.5deg);
-  transition: transform 480ms cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 480ms cubic-bezier(0.2, 0.7, 0.3, 1);
-}
-
-.polaroid-tilt:hover,
-.polaroid-tilt:focus-within {
-  transform: rotate(0deg);
+  transition: box-shadow 480ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
