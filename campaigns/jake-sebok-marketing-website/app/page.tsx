@@ -406,7 +406,7 @@ export default function HomePage() {
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="hidden lg:block lg:col-span-5">
-              <div className="hero-image relative aspect-[4/5]">
+              <div className="hero-image hero-image--outdoor relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jake-and-son.png"
                   alt="Jake Sebok with his son, on a porch in afternoon light"
@@ -667,7 +667,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden lg:flex lg:col-span-5 order-2 self-stretch items-stretch justify-start">
-              <div className="hero-image relative aspect-[4/5] w-full max-w-[min(100%,420px)] [border-radius:20px_0_0_20px]">
+              <div className="hero-image hero-image--outdoor relative aspect-[4/5] w-full max-w-[min(100%,420px)] [border-radius:20px_0_0_20px]">
                 <Image
                   src="/images/jake/jake-ideal-end-state.png"
                   alt="Jake Sebok smiling at the camera, in a quiet bright workspace"

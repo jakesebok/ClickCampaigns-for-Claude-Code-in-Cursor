@@ -1152,3 +1152,125 @@ Patterns explicitly NOT applied in Wave 8 (and why):
 - (Wave 9+) Hand-drawn underline double-stroke variant for A/B test on contact page.
 - (Wave 9+) Possible Review schema + aggregateRating once 20+ attributable testimonials.
 - (Wave 9+) A/B test the footer-vapi-band sub-copy on first-time vs returning visitors.
+
+---
+
+## Wave 9 — Convergence
+
+**Theme**: close the two actionable open items from Wave 8's "Wave 9+" list. Field-light flare on outdoor portraits. Foundations block becomes a Goldsmith-style equal-weight reading-list hub.
+
+**Started**: 2026-05-29T03:55Z
+**Completed**: 2026-05-29T04:35Z
+**Commit**: TBD on `polish-pass`
+**Deploy**: http://localhost:3001/ (orchestrator brief named port 3000; verified Jake Sebok dev server is actually on 3001 per all prior waves — 3000 serves LocalCraft Digital. Logged.)
+
+### Checklist evidence
+
+- [x] **9.1 Hudson field-light flare on outdoor portraits** — new `.hero-image--outdoor` + `.split-image--outdoor` variant added to `app/globals.css` L2562-L2596 (Wave 9 block). The variant composes with the existing Wave 4 `.hero-image` ring + bottom-fade ladder: an `inset 18px 22px 38px -22px rgba(255, 226, 196, 0.55)` warm top-left highlight on the box-shadow stack, plus a radial-gradient layered into `::after` (anchored 22% from the left, 18% from the top — the morning-light corner) at 0.16 alpha max. Subtle on purpose. Reduced-motion users see the same static gradient (no animation).
+
+  **Wired to 3 outdoor portraits** (the only outdoor shots in Jake's image library — confirmed via Wave 4 routing manifest):
+
+  | Page | Element | Photo |
+  |---|---|---|
+  | / (home) | `hero-image hero-image--outdoor` (`app/page.tsx` L409) | `jake-and-son.png` ("You Don't Have to Choose" split image) |
+  | / (home) | `hero-image hero-image--outdoor` (`app/page.tsx` L670) | `jake-ideal-end-state.png` ("Ideal end state" split image) |
+  | /about | `hero-image hero-image--outdoor polaroid-tilt` (`app/about/page.tsx` L50) | `jacob-sebok-laughing.jpeg` (about hero portrait) |
+
+  Self-verify: `grep -REc "hero-image--outdoor" app/ --include="*.tsx" --include="*.css"` returns **2 markup hits in `app/page.tsx`** + **1 in `app/about/page.tsx`** + **2 CSS rule blocks in `app/globals.css`** = 5 total references. Composition with existing Wave 4 / Wave 8 patterns verified: about-page portrait still tilts -1.5° at rest (polaroid-tilt) AND carries the framed-image ring AND the warm bottom-fade AND the new field-light flare — four layers of editorial photo treatment on the founder's introductory face, none competing with the others.
+
+  Visual confirmation:
+  - `/Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor/campaigns/jake-sebok-marketing-website/polish-shots/wave-9/about-mobile.png` — flare visible in top-left of the framed portrait against the snowy daylight backdrop. Subtle warm wash that reads as natural light, not a CSS effect.
+  - `/Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor/campaigns/jake-sebok-marketing-website/polish-shots/wave-9/about-desktop.png` — same flare at desktop scale; harmonizes with the existing warm outer shadow.
+
+  Closes Wave 8 open-items entry: "Hudson 'field-light flare' inner highlight on outdoor portraits — optional refinement on `polaroid-tilt`."
+
+- [x] **9.2 Foundations block becomes equal-weight reading-list mini-hub** — replaced the single-card Foundations block in `app/about/page.tsx` L153-L210 with a 4-card Goldsmith-style equal-weight grid. Each card carries the same three layers (orange flame dot + small-caps eyebrow `FOUNDATION 0n` + italic Cormorant thinker name + Outfit-caps signature work + body annotation in Jake's voice). No featured card, no size differential, no color differential between cards.
+
+  **The four foundations:**
+
+  | Card | Thinker | Signature work | Jake's annotation |
+  |---|---|---|---|
+  | Foundation 01 | Howard Thurman | *Jesus and the Disinherited* | "Ask what makes you come alive. Then go and do that." — the line he opens almost every first session with. |
+  | Foundation 02 | Joseph Campbell | *The Hero with a Thousand Faces* | Founders are mid-journey, not pre-journey. Helps to know the shape of the arc you're inside. |
+  | Foundation 03 | Carl Jung | *Memories, Dreams, Reflections* | The parts you push down at 28 run the company at 38. Integration is the work that lets you stop performing. |
+  | Foundation 04 | Brené Brown | *Daring Greatly* | Vulnerability isn't weakness; armoring up isn't strategy. Founders who can't drop the mask in private can't lead at scale in public. |
+
+  New CSS utilities in `app/globals.css` L2598-L2682 (Wave 9 block): `.foundations-grid` (1-col → 2-col @ 640px → 4-col @ 1024px), `.foundations-card`, `.foundations-card__dot`, `.foundations-card__eyebrow`, `.foundations-card__name`, `.foundations-card__text`, `.foundations-card__note`. Composes with the existing `.lift-card` utility from Wave 3 so each card gets the hover-lift treatment automatically.
+
+  Self-verify: `grep -REc "foundations-card" app/ --include="*.tsx" --include="*.css"` returns **24 hits in `app/about/page.tsx`** (4 cards × 6 sub-class refs) + **6 CSS rule blocks in `app/globals.css`** = 30 total references.
+
+  Visual confirmation:
+  - `/tmp/wave9-foundations-mobile.png` — 1-column stacked, Foundation 01 card visible in viewport with flame dot, FOUNDATION 01 eyebrow, italic *Howard Thurman*, JESUS AND THE DISINHERITED small-caps, and body annotation. Each card identical structure.
+  - `/tmp/wave9-foundations-desktop.png` — 4-column equal-weight grid, all four thinkers visible in one row with the YOURS, IN THE WORK signature flourish (Wave 8) closing the section directly beneath.
+
+  Closes Wave 8 open-items entry: "About-page 'Foundations' block expansion into Goldsmith-style equal-weight reading-list mini-hub."
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Wave 9 adaptations:
+
+- **Outdoor portrait modifier (9.1):** the skill doesn't have a vocabulary for "outdoor vs studio portrait" — that's a project-specific distinction. Adapted: introduced `.hero-image--outdoor` as a BEM-style modifier on the existing Wave 4 `.hero-image` utility. Self-verify grep adapted to `grep -REc "hero-image--outdoor" app/ --include="*.tsx" --include="*.css"` which counts both markup uses and CSS rule blocks separately.
+- **Foundations grid is project-specific (9.2):** the skill assumes shared LocalCraft "trust-bar" or "service-card-grid" vocabulary. Jake's about page has a custom Foundations block with its own design history (single bordered card from Waves 1-8). Adapted: introduced `.foundations-grid` + `.foundations-card` as a new project-specific BEM stack, composed with the existing `.lift-card` from Wave 3 so hover behavior inherits without code duplication.
+- **Port mismatch in orchestrator brief:** brief said `--site-url http://localhost:3000`. Verified port 3000 is serving **LocalCraft Digital** (not Jake Sebok); port 3001 is serving Jake Sebok (matches all prior waves). Adapted: used 3001 for both Wave 9 dev verification and the capture-breakpoints invocation. Logged.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Founder Photo in Natural Light, Above the Fold (research: Hudson, Litvin)** — extended in Wave 9 via the field-light flare. Hudson's about-page portrait carries a subtle warm corner gradient that reads as morning light; Jake's outdoor portraits (jake-and-son on a porch, jacob-sebok-laughing in snow daylight, jake-ideal-end-state in a bright workspace) now do the same. The flare is the difference between "framed studio shot" and "this was taken in real light" — the Hudson editorial signature.
+- **Three-Pillar / Equal-Weight Card Row (research: Marshall Goldsmith "Everything I Know" hub, Pivot equal-weight services row)** — applied a second time in Wave 9, this time to the about-page Foundations block. The original Wave 5 application of this pattern was the Growth/Authenticity/Alignment pillar row; Wave 9 extends it to the reading-list hub for the same reason: no featured card, no hierarchy, visitor self-selects which door to read more behind. Two equal-weight rows on /about now reinforce the same Goldsmith signature.
+- **Authority by Association, Not Adjective (research: Litvin, Goldsmith)** — the Foundations cards name the thinker (Howard Thurman, Joseph Campbell, Carl Jung, Brené Brown) and the signature work, NOT "transformational thought leaders" or "world-class authors." Authority compresses into the nouns; no adjective stacking.
+- **Poetic-Line Sectional Anchors (research: Joe Hudson)** — each Foundations card opens with a line from the thinker or a one-line interpretation in Jake's voice. The Thurman card carries the actual Thurman quote ("Ask what makes you come alive. Then go and do that."), which is the literal version of Hudson's "section opens with a quotable line" pattern.
+
+Patterns explicitly NOT applied in Wave 9 (and why):
+
+- **Hand-drawn underline double-stroke variant** — A/B-test candidate, not a one-shot polish item. Kept on Wave 9+ list for when conversion data exists.
+- **Review schema + aggregateRating** — blocked on having 20+ attributable testimonials with permission to name. Still on the blocked list.
+- **A/B test footer-vapi-band sub-copy on first-time vs returning visitors** — A/B test, not a visual polish item. Kept on Wave 9+ list.
+- **Comparison content (Jake vs Litvin/Goldsmith/Martell)** — explicitly flagged in Waves 6/7/8 as "better suited to the blog/SEO program than a visual polish wave." Held to that decision in Wave 9.
+- **Newsletter count as soft social proof** — still skipped (list isn't ≥5k yet, per industry-research recommendation).
+
+### Criteria audit
+
+- [x] **Hierarchy** — the field-light flare is sub-perceptual until you look for it (0.16 alpha at brightest). It does NOT compete with the photo's subject (Jake's face) and does NOT compete with the H1 above it. The four Foundations cards sit BELOW the body paragraphs that introduce them, in the visual register of supporting evidence — not above the H1. The YOURS-IN-THE-WORK Wave 8 signature still closes the section beneath the cards, preserving the existing read order.
+- [x] **Restraint** — single accent color (`--ap-accent` orange) across the new utilities (flame dot, eyebrow text, hairline ring). Single accent font (Cormorant italic for thinker names, matching the italic Cormorant register from Waves 1/2/5/8). No new accent colors, no new accent fonts, no new ornament families. The flare is one extra inset-shadow layer + one extra background-image stop — the lightest possible touch.
+- [x] **Micro-interactions** — Foundations cards inherit `.lift-card:hover` from Wave 3 (translateY(-6px) + shadow deepen). No new hover patterns introduced. Field-light flare is a static treatment (no animation), so reduced-motion has nothing to honor.
+- [x] **Typographic editorial feel** — preserved from Waves 1-8. The italic Cormorant thinker names match the italic Cormorant pillar names from Wave 5 and the stat numerals from Wave 2 — consistent editorial signature across every italic-Cormorant moment on the site.
+- [x] **Mobile=desktop parity** — Foundations grid collapses 4-col → 2-col @ 640px → 1-col below that. Each card retains the same structure at every breakpoint. Field-light flare is identical at every breakpoint (inset shadow scales with the element). Verified on `/tmp/wave9-foundations-mobile.png` (1-col stacked) and `/tmp/wave9-foundations-desktop.png` (4-col row).
+- [x] **No clip-art energy** — the flare is a CSS radial-gradient + inset box-shadow. The Foundations dot is a CSS `background: var(--ap-accent)` circle with a `box-shadow: 0 0 0 4px rgba(255,107,26,0.14)` halo ring. No SVG icons, no PNG sprites, no clip-art glyphs.
+- [x] **No template-shaped sections** — the Foundations hub is a Goldsmith reading-list pattern (named-author + signature-work + interpretation), not a SaaS "About our values" tile grid. The signature works are real titles in italic small-caps register, not generic "Our Values 1-4" placeholders.
+- [x] **Cold-read copy** — every Foundations annotation is in Jake's voice (sentence stops, no em dashes per his frozen lexicon, plain-English insight not insider jargon). The Thurman quote uses true Unicode curly quotes (Wave 8 holdover applied to new content).
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read `/Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor/campaigns/jake-sebok-marketing-website/polish-shots/wave-9/about-mobile.png`. The outdoor portrait shows the new field-light flare as a subtle warm wash anchoring the top-left of the frame against the snowy daylight backdrop. Polaroid tilt holds. Framed-image ring holds. Bottom-fade holds. Four layers of photo treatment compose without one dominating.
+- Read per-element capture `/tmp/wave9-foundations-mobile.png`. Foundation 01 card visible with flame dot, FOUNDATION 01 eyebrow, italic Howard Thurman, JESUS AND THE DISINHERITED small-caps, and the Thurman annotation. Foundation 02 (Joseph Campbell) and Foundation 03 (Carl Jung) stack below in identical structure.
+- Read `/Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor/campaigns/jake-sebok-marketing-website/polish-shots/wave-9/home-mobile.png`. Hero italic *life* + sticky CTA bar all hold from prior waves. Outdoor portraits (jake-and-son, jake-ideal-end-state) are below the fold on mobile per Wave 4 `hidden lg:block` adaptation — flare is desktop-only at those slots.
+- All 14 mobile screenshots inspected via `polish-shots/wave-9/*-mobile.png`. No new regressions surfaced. Sticky CTA pinned at the bottom of every marketing page.
+
+**Desktop / tablet:**
+
+- Read `/Users/jakesebok/Documents/ClickCampaigns-for-Claude-Code-in-Cursor/campaigns/jake-sebok-marketing-website/polish-shots/wave-9/about-desktop.png`. The jacob-sebok-laughing portrait now reads as taken in real light, not stamped on. The flare's top-left warm corner is subtle but unmistakable when looking for it.
+- Read `/tmp/wave9-foundations-desktop.png`. Four cards in equal-weight row. Same flame dot, same FOUNDATION 0n eyebrow, same italic Cormorant register, same body annotation per card. Below the cards, the Wave 8 YOURS-IN-THE-WORK Caveat-script "Jake" signature anchors the close.
+- All 14 desktop screenshots inspected. No layout regressions. Steve Jobs goes silent.
+
+**First-pass flagged:** none.
+
+**Mitigation:** no fixes required. Wave 9 is convergence — both items composed cleanly with the prior eight waves' work on first attempt.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → The Foundations cards could each link to a Jake-authored Substack-style annotation post ("Why Thurman matters to founders") so the reading list becomes a real content hub. That work belongs to the blog/SEO program, not a visual polish wave. Logged for future content programming.
+- **"Category leader doing this better?"** → Marshall Goldsmith's "Everything I Know" hub has a 4-up grid that includes a custom AI bot trained on his books as one of the four cards. Jake's ALFRED is exactly this surface — once ALFRED's public surface evolves past the current who-is-alfred mockup, the four Foundations cards could be paralleled with a four-up "Working with Jake" hub (VAPI™ · 1:1 program · ALFRED · Build-your-assessment) that uses the same equal-weight card pattern on a different page. Deferred to a future product-architecture wave when ALFRED is shippable.
+- **Applied this wave:** the field-light flare IS the wave's category-leader steal. Joe Hudson's portraits read as taken in real light because they were; Jake's outdoor portraits ALSO were taken in real light, and the flare surfaces that fact visually instead of letting the CSS frame flatten it. Combined with the Wave 4 ring + Wave 8 polaroid tilt, the about-page hero portrait now carries four deliberate layers of editorial treatment — exactly the print-magazine register that separates Hudson and Litvin from the AI-coach template plague.
+
+### Open items rolled forward
+
+- (Wave 10+) Hand-drawn underline double-stroke variant for A/B test on contact page (carry from Wave 8).
+- (Wave 10+) Review schema + aggregateRating once 20+ attributable testimonials (carry from Wave 6/7/8).
+- (Wave 10+) A/B test the footer-vapi-band sub-copy on first-time vs returning visitors (carry from Wave 7).
+- (Wave 10+ / blog program) Comparison content (Jake vs Litvin/Goldsmith/Martell) — explicitly content-program territory.
+- (Wave 10+ / content program) Per-Foundation annotation posts so the reading-list hub becomes a real content hub.
+- (Wave 10+ / product architecture) Equal-weight 4-up "Working with Jake" hub (VAPI™ · 1:1 · ALFRED · Build-your-assessment) once ALFRED's public surface evolves.

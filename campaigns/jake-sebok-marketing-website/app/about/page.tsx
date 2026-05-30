@@ -47,7 +47,7 @@ export default function AboutPage() {
               {/* Polaroid-tilt is the about page's signature delight (Wave 8).
                   Resting at -1.5° feels handed-in, not stamped on; settles to 0°
                   on hover so the eye lands on a level portrait when engaged. */}
-              <div className="hero-image polaroid-tilt relative aspect-[4/5]">
+              <div className="hero-image hero-image--outdoor polaroid-tilt relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok laughing in natural daylight, head turned mid-conversation"
@@ -150,16 +150,64 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Foundations */}
-          <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8 sm:p-10">
-            <h3 className="font-semibold text-ap-primary mb-4">
-              Built on thinkers who understood the human journey
-            </h3>
-            <p className="text-ap-mid text-xl font-semibold leading-relaxed">
-              Howard Thurman. Joseph Campbell. Carl Jung. Brené Brown. Thinkers who understood that real change is not
-              just tactical, it is identity-level. I use what is useful from that lineage to help you let an old
-              version of success die and build from something truer.
+          {/* Foundations — equal-weight reading-list mini-hub (Goldsmith pattern,
+              Wave 9). Four thinkers I keep returning to with founders. No featured
+              card, no hierarchy. Each card holds the same three layers: chapter dot
+              + name + signature work + one-line annotation in my voice. Visitor
+              self-selects which door to read more behind. */}
+          <div>
+            <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
+              <span>The Foundations · Reading List</span>
             </p>
+            <h3 className="font-outfit font-bold text-2xl sm:text-3xl text-ap-primary mb-3 [text-wrap:balance]">
+              Built on thinkers who understood the human journey.
+            </h3>
+            <p className="text-ap-mid text-lg sm:text-xl font-semibold leading-relaxed mb-8 max-w-[62ch]">
+              Real change is not just tactical. It is identity-level. Here is the small shelf of thinkers I keep coming
+              back to with the founders I coach, and the one line each carries that I use most.
+            </p>
+            <div className="foundations-grid" data-reveal>
+              <article className="foundations-card lift-card">
+                <span className="foundations-card__dot" aria-hidden="true" />
+                <span className="foundations-card__eyebrow">Foundation 01</span>
+                <p className="foundations-card__name">Howard Thurman</p>
+                <p className="foundations-card__text">Jesus and the Disinherited</p>
+                <p className="foundations-card__note">
+                  &ldquo;Ask what makes you come alive. Then go and do that.&rdquo; The single sentence I use to start
+                  almost every first session.
+                </p>
+              </article>
+              <article className="foundations-card lift-card">
+                <span className="foundations-card__dot" aria-hidden="true" />
+                <span className="foundations-card__eyebrow">Foundation 02</span>
+                <p className="foundations-card__name">Joseph Campbell</p>
+                <p className="foundations-card__text">The Hero with a Thousand Faces</p>
+                <p className="foundations-card__note">
+                  Founders are mid-journey, not pre-journey. The refusal of the call, the threshold, the return. It
+                  helps to know the shape of the arc you are inside.
+                </p>
+              </article>
+              <article className="foundations-card lift-card">
+                <span className="foundations-card__dot" aria-hidden="true" />
+                <span className="foundations-card__eyebrow">Foundation 03</span>
+                <p className="foundations-card__name">Carl Jung</p>
+                <p className="foundations-card__text">Memories, Dreams, Reflections</p>
+                <p className="foundations-card__note">
+                  The parts of yourself you push down at 28 run the company at 38. Integration is not soft work. It is
+                  the work that lets you stop performing.
+                </p>
+              </article>
+              <article className="foundations-card lift-card">
+                <span className="foundations-card__dot" aria-hidden="true" />
+                <span className="foundations-card__eyebrow">Foundation 04</span>
+                <p className="foundations-card__name">Brené Brown</p>
+                <p className="foundations-card__text">Daring Greatly</p>
+                <p className="foundations-card__note">
+                  Vulnerability is not weakness, and armoring up is not strategy. The data is unambiguous. Founders who
+                  cannot drop the mask in private cannot lead at scale in public.
+                </p>
+              </article>
+            </div>
           </div>
 
           {/* Founder sign-off — one of two handwritten-script flourishes on the site.

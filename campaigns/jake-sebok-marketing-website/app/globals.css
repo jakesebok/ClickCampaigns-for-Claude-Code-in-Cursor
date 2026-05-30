@@ -2558,3 +2558,134 @@ select:focus-visible {
     animation: none;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   WAVE 9 — Convergence
+   Two open-items closures from Wave 8:
+   1. Hudson "field-light flare" warm inner top-left highlight on outdoor
+      portraits (jake-and-son, jacob-sebok-laughing, jake-ideal-end-state).
+   2. Goldsmith-style equal-weight reading-list "Foundations" hub on /about.
+   ────────────────────────────────────────────────────────────────────── */
+
+/* 9.1 — Field-light flare. Composes with the Wave 4 `.hero-image` ring +
+   bottom-fade ladder. Adds a soft warm top-left highlight inside the photo
+   frame that suggests morning / golden-hour light, the Joe Hudson signature.
+   Implemented as an inset box-shadow on the parent so it sits above the
+   image bytes but below the `::before` accent hairline (which carries
+   `z-index: 2`). Subtle on purpose — 0.16 alpha at the brightest point. */
+.hero-image--outdoor,
+.split-image--outdoor {
+  box-shadow:
+    inset 18px 22px 38px -22px rgba(255, 226, 196, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(14, 22, 36, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.4),
+    0 22px 44px -24px rgba(255, 107, 26, 0.35),
+    0 28px 54px -28px rgba(14, 22, 36, 0.32);
+}
+.hero-image--outdoor::after,
+.split-image--outdoor::after {
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 22% 18%,
+      rgba(255, 224, 188, 0.16) 0%,
+      rgba(255, 224, 188, 0.08) 32%,
+      rgba(255, 224, 188, 0.02) 58%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(14, 22, 36, 0.08) 80%,
+      rgba(14, 22, 36, 0.22) 100%
+    );
+}
+
+/* 9.2 — Foundations equal-weight reading-list hub.
+   Goldsmith "Everything I Know" pattern: each entry is a card with no
+   featured row, no hierarchy. Cards share the same surface (warm porcelain),
+   the same accent ornament (orange chapter dot), the same typographic
+   register (italic Cormorant title + Outfit caps eyebrow + body annotation).
+   Visitor self-selects the door.
+   Compose with `.lift-card` for hover behavior. */
+.foundations-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .foundations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .foundations-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.foundations-card {
+  position: relative;
+  isolation: isolate;
+  padding: 1.5rem 1.25rem 1.35rem 1.25rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      170deg,
+      rgba(255, 247, 240, 0.96) 0%,
+      rgba(255, 240, 228, 0.92) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px rgba(255, 107, 26, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.4),
+    0 10px 24px -16px rgba(14, 22, 36, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.foundations-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--ap-accent);
+  box-shadow: 0 0 0 4px rgba(255, 107, 26, 0.14);
+}
+
+.foundations-card__eyebrow {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ap-accent);
+}
+
+.foundations-card__name {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.625rem;
+  line-height: 1.05;
+  color: var(--ap-ink);
+}
+
+.foundations-card__text {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(14, 22, 36, 0.62);
+}
+
+.foundations-card__note {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(14, 22, 36, 0.78);
+  max-width: 32ch;
+}
