@@ -180,11 +180,12 @@ export default function HomePage() {
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
                   naturally&nbsp;are.&rdquo;
                 </p>
-                {/* Headshot + byline row sits flush with the card's left edge
-                   so its left edge aligns with the leftmost extent of the
-                   right-aligned quote text above it. justify-start replaces
-                   the prior justify-end + negative translate combo. */}
-                <div className="flex items-center justify-start gap-3 -translate-y-1.5">
+                {/* Headshot + byline row sits slightly inset from the card's
+                   left padding edge (translate-x-[20px]) so the picture's left
+                   edge lands just inside the leftmost extent of the right-
+                   aligned quote text above it — full flush-left read as too
+                   far left in operator review. */}
+                <div className="flex items-center justify-start gap-3 -translate-y-1.5 translate-x-[20px]">
                   <div className="framed-image framed-image--on-dark relative w-32 h-32 rounded-full ring-2 ring-white/30 flex-shrink-0 -translate-y-2">
                     <Image
                       src="/images/jake/MMC Profile.jpeg"
