@@ -995,7 +995,7 @@ Patterns explicitly NOT applied in Wave 7 (and why):
 
 **Started**: 2026-05-29T02:30Z
 **Completed**: 2026-05-30T03:55Z
-**Commit**: TBD
+**Commit**: a6ed575
 **Deploy**: http://localhost:3001/
 
 ### Checklist evidence
