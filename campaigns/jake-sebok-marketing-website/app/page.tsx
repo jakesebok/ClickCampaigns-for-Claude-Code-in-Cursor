@@ -156,7 +156,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/work-with-me"
-                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[200px]"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-white/45 lg:border-ap-border text-white lg:text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[200px]"
                 >
                   Work with me
                 </Link>

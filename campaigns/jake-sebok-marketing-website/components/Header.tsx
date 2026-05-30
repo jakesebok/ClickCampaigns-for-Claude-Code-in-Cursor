@@ -95,7 +95,7 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden absolute inset-x-0 top-full border-t border-ap-border bg-ap-bg/98 backdrop-blur-md px-5 py-4 shadow-[0_18px_32px_-18px_rgba(14,22,36,0.35)] z-50">
+        <div className="md:hidden absolute inset-x-0 top-full border-t border-ap-border bg-ap-bg px-5 py-4 shadow-[0_24px_40px_-18px_rgba(14,22,36,0.45)] z-50">
           <nav className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
