@@ -1161,7 +1161,7 @@ Patterns explicitly NOT applied in Wave 8 (and why):
 
 **Started**: 2026-05-29T03:55Z
 **Completed**: 2026-05-29T04:35Z
-**Commit**: TBD on `polish-pass`
+**Commit**: b69ebe4 on `polish-pass`
 **Deploy**: http://localhost:3001/ (orchestrator brief named port 3000; verified Jake Sebok dev server is actually on 3001 per all prior waves — 3000 serves LocalCraft Digital. Logged.)
 
 ### Checklist evidence
