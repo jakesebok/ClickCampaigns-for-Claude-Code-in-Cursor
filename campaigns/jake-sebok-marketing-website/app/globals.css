@@ -79,6 +79,20 @@ body {
   vertical-align: baseline;
 }
 
+/* Mobile-only safety halo for any orange gradient text that might overlap the
+   full-height mobile hero wedge (which is also ap-accent orange). The halo is
+   a soft white drop-shadow that's invisible against the cream page bg but adds
+   enough separation to keep the gradient text readable if it crosses into the
+   wedge. Applied below lg so desktop layouts (where the gradient never sits
+   over orange) stay clean. */
+@media (max-width: 1023.98px) {
+  .text-gradient-accent,
+  .text-gradient-accent-hero {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55))
+      drop-shadow(0 1px 1px rgba(255, 255, 255, 0.35));
+  }
+}
+
 /* Hero headline gradient — same shape, steeper angle, slightly more cushion
    for the larger weights this often paints at. */
 .text-gradient-accent-hero {

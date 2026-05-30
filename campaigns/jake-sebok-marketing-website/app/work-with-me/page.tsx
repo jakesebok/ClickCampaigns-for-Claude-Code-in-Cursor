@@ -46,13 +46,13 @@ export default function WorkWithMePage() {
         {/* Mobile diagonal orange wedge — matches the home/about hero
             geometry so brand presence carries across pages. */}
         <div
-          className="lg:hidden pointer-events-none absolute top-0 right-0 w-[68%] h-[30%] bg-ap-accent"
-          style={{ clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="lg:hidden pointer-events-none absolute top-0 right-0 w-[58%] h-full bg-ap-accent"
+          style={{ clipPath: "polygon(72% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           aria-hidden
         />
         <div
-          className="lg:hidden pointer-events-none absolute top-0 right-0 w-[46%] h-[18%] bg-ap-accent-2 opacity-65"
-          style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="lg:hidden pointer-events-none absolute top-0 right-0 w-[36%] h-[40%] bg-ap-accent-2 opacity-55"
+          style={{ clipPath: "polygon(45% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           aria-hidden
         />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
