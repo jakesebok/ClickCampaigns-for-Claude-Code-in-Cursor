@@ -705,8 +705,12 @@ h3 {
   border-bottom: 1px solid var(--ap-border);
   overflow: hidden;
 }
+/* Open state used to tint the whole row with rgba(255,107,26,0.03) —
+   too noisy when several items were open at once (orange ladder effect).
+   The +/− toggle morph + the revealed body copy already signal "open"
+   well enough; the row background stays neutral. */
 .editorial-faq__item[open] {
-  background: rgba(255, 107, 26, 0.03);
+  background: transparent;
 }
 .editorial-faq__item > summary {
   list-style: none;
