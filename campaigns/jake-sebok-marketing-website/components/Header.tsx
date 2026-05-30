@@ -17,7 +17,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 bg-ap-bg/95 backdrop-blur-sm border-b border-ap-border">
+    <header className="sticky top-0 z-50 bg-ap-bg/95 backdrop-blur-sm border-b border-ap-border relative">
       <div className="max-w-[1080px] mx-auto px-5 sm:px-6 flex items-center justify-between gap-3 h-16 sm:h-20 md:max-lg:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2 min-w-0">
           <Image
@@ -95,7 +95,7 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-ap-border bg-ap-bg px-5 py-4">
+        <div className="md:hidden absolute inset-x-0 top-full border-t border-ap-border bg-ap-bg/98 backdrop-blur-md px-5 py-4 shadow-[0_18px_32px_-18px_rgba(14,22,36,0.35)] z-50">
           <nav className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));

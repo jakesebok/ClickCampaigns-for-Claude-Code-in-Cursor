@@ -91,18 +91,22 @@ export default function HomePage() {
           className="hidden lg:block absolute bottom-0 right-0 w-[22%] h-[38%] bg-ap-accent-2 opacity-60"
           style={{ clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
         />
-        {/* Mobile-only diagonal orange wedge — restores the geometric brand
-            presence the lg:block desktop wedge carries above 1024px. Solid
-            accent shape clipped on a diagonal so the hero copy still reads,
-            with a softer secondary wedge underneath for depth. */}
+        {/* Mobile-only diagonal orange wedge — FULL hero height (top-right
+            corner, tapering wider toward the bottom). Calibrated so the top
+            of the wedge clears the H1 area (≤ 16% of viewport width at the
+            top edge) — that keeps the "your life." gradient text in the H1
+            from competing with the wedge fill. By the bottom of the hero,
+            the wedge widens to ~58% so the orange brand presence reads loud
+            against the CTA/trust copy region. Secondary darker wedge adds
+            depth at the top corner. */}
         <div
-          className="lg:hidden absolute top-0 right-0 w-[72%] h-[34%] bg-ap-accent"
-          style={{ clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="lg:hidden absolute top-0 right-0 w-[58%] h-full bg-ap-accent"
+          style={{ clipPath: "polygon(72% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           aria-hidden
         />
         <div
-          className="lg:hidden absolute top-0 right-0 w-[50%] h-[22%] bg-ap-accent-2 opacity-65"
-          style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+          className="lg:hidden absolute top-0 right-0 w-[36%] h-[40%] bg-ap-accent-2 opacity-55"
+          style={{ clipPath: "polygon(45% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           aria-hidden
         />
         <span className="absolute top-[120px] right-[15%] z-20 font-cormorant font-bold italic text-[clamp(72px,9vw,140px)] leading-[0.9] text-white/[0.04] select-none pointer-events-none tracking-tight hidden lg:inline">
