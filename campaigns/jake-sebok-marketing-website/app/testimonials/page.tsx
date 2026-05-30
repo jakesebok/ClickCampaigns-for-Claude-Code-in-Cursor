@@ -28,7 +28,7 @@ export default function TestimonialsPage() {
         aria-hidden
       />
       <div className="relative z-10 max-w-[1080px] mx-auto px-5 sm:px-6 hero-halo">
-        <span className="hero-quote-mark" aria-hidden>&ldquo;</span>
+        <span className="hero-quote-mark hero-quote-mark--drift" aria-hidden>&ldquo;</span>
         <p className="relative font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-4 eyebrow-chapter">
           <span>What People Say</span>
         </p>

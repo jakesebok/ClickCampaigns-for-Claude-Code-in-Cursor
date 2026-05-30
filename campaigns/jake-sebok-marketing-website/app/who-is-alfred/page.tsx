@@ -7,7 +7,7 @@ import { alfredSchemaGraph } from "@/lib/schema";
 const ALFRED_APP_URL = "https://alfredai.coach";
 
 const ogDescription =
-  "ALFRED is Jake Sebok's Aligned Freedom Coach: clarity in your pocket when the week gets loud. Your priorities, tradeoffs, and next move when pressure hits.";
+  "ALFRED is Jake Sebok’s Aligned Freedom Coach: clarity in your pocket when the week gets loud. Your priorities, tradeoffs, and next move when pressure hits.";
 
 export const metadata: Metadata = {
   title: "ALFRED: Aligned Freedom Coach in Your Pocket | Jake Sebok",
@@ -602,7 +602,7 @@ export default function WhoIsAlfredPage() {
                 close here, so when pressure hits I can get real guidance without starting from scratch.&rdquo;
               </p>
               <cite className="not-italic block text-center sm:text-left text-sm font-semibold text-ap-mid">
-                — Jake Sebok
+                Jake Sebok
               </cite>
             </blockquote>
           </div>

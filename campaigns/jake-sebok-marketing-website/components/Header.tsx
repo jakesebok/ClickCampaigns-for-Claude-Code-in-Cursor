@@ -65,7 +65,7 @@ export function Header() {
 
         <button
           type="button"
-          className="md:hidden p-2 text-ap-primary"
+          className="md:hidden p-2 text-ap-primary min-h-[44px] min-w-[44px] flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -96,14 +96,14 @@ export function Header() {
 
       {mobileOpen && (
         <div className="md:hidden border-t border-ap-border bg-ap-bg px-5 py-4">
-          <nav className="flex flex-col gap-4">
+          <nav className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-semibold ${isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"}`}
+                  className={`font-semibold min-h-[44px] flex items-center ${isActive ? "text-gradient-accent" : "text-ap-mid hover:text-gradient-accent"}`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -112,7 +112,7 @@ export function Header() {
             })}
             <Link
               href="/who-is-alfred"
-              className={`w-fit text-sm font-semibold underline underline-offset-[0.35em] decoration-2 py-1 transition-colors ${
+              className={`w-fit text-sm font-semibold underline underline-offset-[0.35em] decoration-2 min-h-[44px] inline-flex items-center transition-colors ${
                 pathname === "/who-is-alfred"
                   ? "text-gradient-accent decoration-ap-accent"
                   : "text-ap-mid decoration-ap-muted hover:text-gradient-accent hover:decoration-ap-accent"
@@ -123,7 +123,7 @@ export function Header() {
             </Link>
             <Link
               href="/assessment"
-              className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold text-sm py-3 px-6 rounded-pill"
+              className="cta-pill inline-flex justify-center bg-ap-accent text-white font-semibold text-sm py-3 px-6 rounded-pill mt-2"
               onClick={() => setMobileOpen(false)}
             >
               Take the VAPI&trade;

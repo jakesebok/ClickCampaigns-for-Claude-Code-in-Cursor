@@ -44,7 +44,10 @@ export default function AboutPage() {
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start" data-reveal data-reveal-delay="1">
             <div>
-              <div className="hero-image relative aspect-[4/5]">
+              {/* Polaroid-tilt is the about page's signature delight (Wave 8).
+                  Resting at -1.5° feels handed-in, not stamped on; settles to 0°
+                  on hover so the eye lands on a level portrait when engaged. */}
+              <div className="hero-image polaroid-tilt relative aspect-[4/5]">
                 <Image
                   src="/images/jake/jacob-sebok-laughing.jpeg"
                   alt="Jake Sebok laughing in natural daylight, head turned mid-conversation"
@@ -114,7 +117,7 @@ export default function AboutPage() {
                 <li>• CrossFit Level 2 Coach</li>
               </ul>
               <p className="text-xl font-semibold text-ap-muted">
-                ICF-accredited. The International Coaching Federation sets the global standard for coaching ethics, competence, and training—so you know you&apos;re working with someone who&apos;s been rigorously vetted.
+                ICF-accredited. The International Coaching Federation sets the global standard for coaching ethics, competence, and training, so you know you&rsquo;re working with someone who&rsquo;s been rigorously vetted.
               </p>
             </div>
             <div className="bg-ap-bg rounded-[20px] border border-ap-border border-l-4 border-l-ap-accent p-8">
@@ -157,6 +160,16 @@ export default function AboutPage() {
               just tactical, it is identity-level. I use what is useful from that lineage to help you let an old
               version of success die and build from something truer.
             </p>
+          </div>
+
+          {/* Founder sign-off — one of two handwritten-script flourishes on the site.
+              The Caveat signature anchors the credentials block as personal craft, not a
+              corporate bio. Loaded once via app/layout.tsx as --font-caveat. */}
+          <div className="signature-block mt-12">
+            <span className="signature-block__label">Yours, in the work</span>
+            <span className="signature-script signature-script--md" aria-label="Jake Sebok signature">
+              Jake
+            </span>
           </div>
         </div>
       </section>

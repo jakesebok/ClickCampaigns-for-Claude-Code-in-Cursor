@@ -54,11 +54,21 @@ export default function BlogIndexPage() {
               <article className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-6 items-start">
                 {p.hero_image_url ? (
                   <Link href={`/blog/${p.slug}`} className="block">
+                    {/* Explicit width/height to reserve layout space and
+                        eliminate CLS — the actual rendered size is dictated by
+                        the 3:2 aspectRatio + width:100%, but the intrinsic
+                        ratio attribute is what the browser uses for reserved
+                        box height before the image bytes arrive. */}
                     <img
                       src={p.hero_image_url}
                       alt={`Cover image for: ${p.title}`}
+                      width={600}
+                      height={400}
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         width: "100%",
+                        height: "auto",
                         aspectRatio: "3 / 2",
                         objectFit: "cover",
                         borderRadius: 6,

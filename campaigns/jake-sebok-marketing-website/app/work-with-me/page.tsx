@@ -6,7 +6,7 @@ const ALFRED_APP_URL = "https://alfredai.coach";
 export const metadata = {
   title: "Work With Me | Growth and Performance Coaching with Jake Sebok",
   description:
-    "Two ways in. Take the free VAPI™ assessment, or apply for the Aligned Power Program: Jake Sebok's flagship 12-month, 1:1 coaching for entrepreneurs.",
+    "Two ways in. Take the free VAPI™ assessment, or apply for the Aligned Power Program: Jake Sebok’s flagship 12-month, 1:1 coaching for entrepreneurs.",
   alternates: { canonical: "/work-with-me" },
 };
 
@@ -15,7 +15,7 @@ const offerings = [
     title: "Free VAPI™ Assessment",
     description:
       "72 statements. About 12 minutes. See where you are strong, where you are stretched, and what deserves attention next. Use the same email as your portal or ALFRED account to unlock your personalized 28-day plan.",
-    cta: "Take the VAPI™ — Free",
+    cta: "Take the VAPI™ · Free",
     href: "/assessment",
     free: true,
   },

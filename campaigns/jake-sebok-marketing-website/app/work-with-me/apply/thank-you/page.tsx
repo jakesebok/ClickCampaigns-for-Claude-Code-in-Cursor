@@ -87,6 +87,16 @@ export default function ApplyThankYouPage() {
                 </div>
               </li>
             </ol>
+
+            {/* Founder sign-off — second of two handwritten-script flourishes on the site.
+                Anchored at the end of the receipt card so the "thank you" lands as a
+                personal note from Jake, not a system-generated confirmation. */}
+            <div className="signature-block mt-8 pt-6 border-t border-ap-border/60">
+              <span className="signature-block__label">Talk soon</span>
+              <span className="signature-script signature-script--sm" aria-label="Jake Sebok signature">
+                Jake
+              </span>
+            </div>
           </div>
 
           <div className="mt-10" data-reveal data-reveal-delay="2">

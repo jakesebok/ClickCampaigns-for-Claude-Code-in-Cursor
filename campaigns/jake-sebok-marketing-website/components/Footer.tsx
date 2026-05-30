@@ -82,36 +82,36 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 mb-10">
           <div>
             <p className="footer-section-title">Explore</p>
-            <nav className="flex flex-col gap-3 text-base">
-              <Link href="/" className="text-white/85 hover:text-white transition-colors">
+            <nav className="flex flex-col gap-1 text-base">
+              <Link href="/" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Home
               </Link>
-              <Link href="/about" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/about" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 About
               </Link>
-              <Link href="/work-with-me" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/work-with-me" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Work with me
               </Link>
-              <Link href="/client-stories" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/client-stories" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Client stories
               </Link>
-              <Link href="/blog" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/blog" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Blog
               </Link>
             </nav>
           </div>
           <div>
             <p className="footer-section-title">Products</p>
-            <nav className="flex flex-col gap-3 text-base">
-              <Link href="/who-is-alfred" className="text-white/85 hover:text-white transition-colors">
+            <nav className="flex flex-col gap-1 text-base">
+              <Link href="/who-is-alfred" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 ALFRED app
               </Link>
-              <Link href="/assessment" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/assessment" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 VAPI&trade; assessment
               </Link>
               <Link
                 href="/work-with-me/apply"
-                className="text-white/85 hover:text-white transition-colors"
+                className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center"
               >
                 Apply for the Aligned Power&trade; Program
               </Link>
@@ -119,14 +119,14 @@ export function Footer() {
           </div>
           <div>
             <p className="footer-section-title">Reach out</p>
-            <nav className="flex flex-col gap-3 text-base">
-              <Link href="/contact" className="text-white/85 hover:text-white transition-colors">
+            <nav className="flex flex-col gap-1 text-base">
+              <Link href="/contact" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Contact
               </Link>
-              <Link href="/privacy" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/privacy" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Privacy
               </Link>
-              <Link href="/terms" className="text-white/85 hover:text-white transition-colors">
+              <Link href="/terms" className="text-white/85 hover:text-white transition-colors min-h-[44px] inline-flex items-center">
                 Terms
               </Link>
             </nav>

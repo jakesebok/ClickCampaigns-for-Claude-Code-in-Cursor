@@ -33,8 +33,8 @@ export default function ContactPage() {
           <span>Get in Touch</span>
         </p>
         <h1 className="font-outfit font-bold text-[2.5rem] sm:text-[3.5rem] lg:text-[4rem] text-ap-primary leading-[0.98] tracking-tight mb-6 [text-wrap:balance]">
-          Let&apos;s{" "}
-          <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent">talk</em>.
+          Let&rsquo;s{" "}
+          <em className="font-cormorant italic font-semibold tracking-tight text-gradient-accent hand-underline">talk</em>.
         </h1>
         <p className="text-ap-mid text-xl font-semibold mb-10">
           Have a question about the VAPI™ Assessment, ALFRED, workshops, or working together? Send me a note and

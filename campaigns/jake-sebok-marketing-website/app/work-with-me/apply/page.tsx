@@ -5,7 +5,7 @@ import { applySchemaGraph } from "@/lib/schema";
 export const metadata = {
   title: "Apply for the Aligned Power Program | Jake Sebok",
   description:
-    "Apply for Jake Sebok's flagship Aligned Power Program: 12 months of 1:1 high-touch coaching for founders ready to build a business that fits their life.",
+    "Apply for Jake Sebok’s flagship Aligned Power Program: 12 months of 1:1 high-touch coaching for founders ready to build a business that fits their life.",
   alternates: { canonical: "/work-with-me/apply" },
 };
 
@@ -37,7 +37,7 @@ export default function ApplyPage() {
             </svg>
             Back to Work With Me
           </Link>
-          <span className="hero-chapter-number" aria-hidden>01</span>
+          <span className="hero-chapter-number hero-chapter-number--glow" aria-hidden>01</span>
           <p className="font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-gradient-accent mb-3 eyebrow-chapter">
             <span>Aligned Power Program · Entry</span>
           </p>

@@ -40,11 +40,11 @@ export default function BuildYourAssessmentLandingPage() {
             </strong>
             : a branded web experience clients log into, with history over time,
             your interpretation layer, coach-facing views where you need them,
-            dashboards, and recurring scorecards when you are ready—all shaped to
+            dashboards, and recurring scorecards when you are ready. All shaped to
             your constructs, not a generic template.
           </p>
           <p>
-            Use this intake so we can quote and plan honestly—whether you need the
+            Use this intake so we can quote and plan honestly. Whether you need the
             core assessment and results first, or you already know you want the full
             app experience on the roadmap.
           </p>
@@ -59,7 +59,7 @@ export default function BuildYourAssessmentLandingPage() {
               Start the intake
               <ArrowRight className="w-5 h-5 shrink-0" aria-hidden />
             </span>
-            <span className="text-[10px] sm:text-xs font-normal text-white/85 sm:hidden -mt-0.5">
+            <span className="text-[11px] sm:text-xs font-normal text-white/85 sm:hidden -mt-0.5">
               One question at a time · Auto-saves
             </span>
           </Link>
@@ -89,8 +89,8 @@ export default function BuildYourAssessmentLandingPage() {
           </div>
           <p className="text-sm sm:text-[15px] md:text-base text-[var(--ap-secondary)] font-outfit leading-relaxed">
             You are not buying a template off the shelf. You are commissioning a
-            bespoke system: constructs, scoring, interpretation, and—when it makes
-            sense for your offer—a client experience that can grow into portal,
+            bespoke system: constructs, scoring, interpretation, and, when it makes
+            sense for your offer, a client experience that can grow into portal,
             dashboards, and metrics aligned to how you coach.
           </p>
         </div>

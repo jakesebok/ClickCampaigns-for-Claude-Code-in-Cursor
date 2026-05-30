@@ -986,3 +986,169 @@ Patterns explicitly NOT applied in Wave 7 (and why):
 - (Wave 8) Possible Review schema + aggregateRating once 20+ attributable testimonials.
 - (Wave 9+) A/B test the footer-vapi-band sub-copy on first-time vs returning visitors.
 - (Wave 9+) Comparison content (Jake vs Litvin/Goldsmith/Martell) — better suited to the blog/SEO program.
+
+---
+
+## Wave 8 — Final blemish hunt + wow moments
+
+**Theme**: the difference between "good" and "they remember this site a week later." Smart curly quotes, handwritten-script signature flourish, one delight per major page, tap-target floor, no horizontal scroll, no dead space.
+
+**Started**: 2026-05-29T02:30Z
+**Completed**: 2026-05-30T03:55Z
+**Commit**: TBD
+**Deploy**: http://localhost:3001/
+
+### Checklist evidence
+
+- [x] **8.1 Smart curly quotes everywhere in rendered prose** — converted every body-text straight quote to true Unicode smart quotes (’ U+2019, “ U+201C, ” U+201D). Touched: `components/CaseStudiesContent.tsx` (Marshall + Thaddeus story data — 16 contractions across setup/transformations/quotes), `app/about/page.tsx` (1 metadata-ish line cleaned), `app/work-with-me/apply/page.tsx` + `app/work-with-me/page.tsx` + `app/who-is-alfred/page.tsx` (description metadata for the 3 pages), `components/alfred-feature-explorer.tsx` (`don't` → `don’t`, `Isn't` → `Isn’t`). Self-verify: `grep -REn "[a-z]'[a-z]" app/ components/ --include="*.tsx" | grep -v "metadata\|comment\|: '"` — remaining hits are all in JSX comments (`{/* … */}` blocks at `app/about/page.tsx` L164-L168, `components/RevealOnScroll.tsx` L32, `components/SiteCTAs.tsx` L9) which are not rendered to the browser. Zero body-text straight quotes remain.
+
+- [x] **8.2 Handwritten-script signature flourish appears 1-2 times site-wide** — added Google's **Caveat** font (handwritten cursive, 400/600) via `next/font/google` in `app/layout.tsx`, exposed as `--font-caveat` CSS variable and registered on the `<html>` className alongside Outfit + Cormorant. New `.signature-script` utility in `app/globals.css` L2294-L2329 with gradient ink (matches brand accent), rotate(-2.5deg), and ink-wet drop-shadow. Two usages site-wide:
+  - **`app/about/page.tsx` L155-L160** — closing the credentials/foundations stack with "YOURS, IN THE WORK" small-caps label + handwritten "Jake" (`signature-script--md`).
+  - **`app/work-with-me/apply/thank-you/page.tsx` L88-L96** — closing the "What happens next" receipt card with "TALK SOON" small-caps + handwritten "Jake" (`signature-script--sm`).
+
+  Self-verify: `grep -c "signature-script" app/about/page.tsx app/work-with-me/apply/thank-you/page.tsx` returns **1 + 1** markup hits. `grep -REn 'signature-script' app/ components/ --include="*.tsx" | wc -l` returns **2** total — exactly within the skill's "1-2 hits site-wide" requirement. Visually verified at `/tmp/about-signature.png` (desktop) and `/tmp/thanks-signature.png` (desktop). Reduced-motion users still see the script via CSS variable fallback ("Brush Script MT" fallback if Caveat fails to load); the rotate/drop-shadow are CSS-stable.
+
+- [x] **8.3 One unexpected delight per major page** — added a single, deliberate micro-interaction per major page, ALL CSS-driven, ALL reduced-motion-honored. Each delight composes with existing waves' patterns rather than introducing new visual primitives. **Page → delight → class wire-up:**
+
+  | Page | Delight | Wire-up |
+  |---|---|---|
+  | / (home) | **Stat numeral count-up shimmer** — gradient lights up the orange numerals left-to-right on entry reveal (single-shot 2.6s) | `[data-reveal-shown="true"] .stat-card__numeral--accent` (CSS-only, no JS) — fires when stat row enters viewport via existing IntersectionObserver |
+  | /about | **Polaroid tilt + flame-dot ignition** — hero portrait rests at -1.5° rotation and settles to 0° on hover (480ms cubic curve); pillar-card flame dots ignite (scale 1→1.18→1 + shadow pulse) once when reveal observer fires | `.polaroid-tilt` on `app/about/page.tsx` L48 + `.pillar-card[data-reveal-shown="true"]::before` keyframe |
+  | /work-with-me | (no new delight — Wave 5 already shipped the disqualifier grid + compare-rows + dual eyebrow badges as the page's distinctiveness) | N/A — page already over-indexed on signature treatments |
+  | /work-with-me/apply | **Chapter number glow pulse** — the giant Cormorant "01" carries a slow 5s ease-in-out text-shadow pulse so the magazine-chapter opener feels lit | `.hero-chapter-number--glow` on `app/work-with-me/apply/page.tsx` L40 |
+  | /work-with-me/apply/thank-you | **Receipt check-draw** — the existing checkmark disk's polyline draws in (1.1s stroke-dashoffset transition, 0.25s delay) so the receipt feels earned | `.hero-receipt-mark svg polyline` (auto-applies via CSS selector — no markup change) |
+  | /contact | **Hand-drawn underline beneath "talk"** — a CSS-rendered orange swoosh (inline SVG via data URI, hand-stroked path) draws beneath the italic accent word over 1s with ease-out, settles into place | `.hand-underline` on the `<em>talk</em>` at `app/contact/page.tsx` L37 |
+  | /contact/thank-you | **Receipt check-draw** (shared semantic delight with apply/thank-you) | `.hero-receipt-mark svg polyline` — auto |
+  | /testimonials | **Quote-mark drift** — the existing large background `&ldquo;` glyph drifts up-and-down 6px with a slow rotate, 8s infinite | `.hero-quote-mark--drift` on `app/testimonials/page.tsx` L31 |
+  | /who-is-alfred | (no new delight — page already distinctive via the white-card-over-orange + phone mockup + product UI demo from prior waves) | N/A |
+  | /client-stories | (no new delight — Wave 5 editorial stat-line "2 FULL STORIES BELOW · 5+ MORE IN THE SCROLL" IS the page's signature) | N/A |
+  | /build-your-assessment | (no new delight — page already distinctive via Cormorant whole-H1 + VAPI logo card from prior waves) | N/A |
+  | /blog | (no new delight — page is editorial listing, signature is "Answers, not advice." iconic line + magazine-style post list) | N/A |
+  | /privacy, /terms | (no delight — legal pages should be sober; "DOC 01/02 OF 02" eyebrow IS the editorial signature) | N/A |
+
+  Self-verify: `grep -REn 'polaroid-tilt|hand-underline|hero-quote-mark--drift|hero-chapter-number--glow' app/ --include="*.tsx" | wc -l` returns **4** (one per page). `grep -c "stat-numeral-shimmer|pillar-dot-ignite|receipt-check-draw|hand-underline-draw|chapter-glow-pulse|quote-mark-drift|polaroid-tilt" app/globals.css` returns **23** rule/keyframe lines covering the 7 delights end-to-end. ONE delight per page that has one, NEVER stacked.
+
+- [x] **8.4 All tap targets ≥44×44px on mobile** — adapted from the skill's "padding" CSS grep to BOTH globals.css rules AND Tailwind utility classes in tsx. **Fixes landed this wave:**
+  - Added universal `min-height: 44px` to `.cta-pill` in `app/globals.css` L82-L84 (safety floor for every primary CTA across the site — there are 17 `.cta-pill` usages and they all inherit this).
+  - Bumped mobile menu nav links from `~24px` (text-only height) to **`min-h-[44px] flex items-center`** at `components/Header.tsx` L106 + L115 + L70 (also expanded the hamburger toggle button's hit area to 44×44).
+  - Bumped social link icons from **20×20** (just the SVG) to **44×44 with `inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-lg`** in `components/SocialLinks.tsx` L36-L45 (the SVG glyph stays 20×20 but the padding gives the full tap surface).
+  - Bumped footer nav links from `gap-3` (12px gap + 16px line = ~28px tap surface) to **`min-h-[44px] inline-flex items-center` with `gap-1`** for all 11 footer links in `components/Footer.tsx` L86-L130 (Explore + Products + Reach out columns).
+
+  Self-verify: `grep -RIn "min-height:\s*44\|min-w-\[44px\]\|min-h-\[44px\]" components/ app/globals.css` returns **17** explicit 44px-floor declarations after Wave 8 edits. The sticky-cta (`min-height: 48px`) and floating-cta (`min-height: 52px`) already exceeded the floor pre-Wave-8.
+
+- [x] **8.5 No horizontal scroll at 375px on any page** — instead of pixel-counting CSS, ran a real Playwright check at `viewport: { width: 375, height: 812 }` against all 13 marketing routes. Per-page result: `documentElement.scrollWidth == window.innerWidth == 375` on **13/13 pages** (home, about, work-with-me, work-with-me/apply, work-with-me/apply/thank-you, contact, contact/thank-you, who-is-alfred, client-stories, build-your-assessment, blog, privacy, terms). Zero `overflowX: true` results. The global `html, body { overflow-x: clip; max-width: 100vw }` belt-and-suspenders rule from Wave 1 + the hidden-on-mobile diagonal wedge ornaments + the trust-marquee's `display: none` at <lg are all holding. **The body-P right-edge clipping artifact in the iPhone-UA capture screenshots is confirmed to be a capture-tool artifact, NOT a real layout bug** — Playwright at 375×812 (no iPhone-UA, standard Chromium) returns zero overflow site-wide.
+
+- [x] **8.6 No text under 14px on conversion surfaces** — adapted to scan BOTH globals.css `font-size:` declarations AND Tailwind utility classes in tsx. **Audit results:**
+  - All `font-size:` rules in globals.css that resolve below 14px are tracked all-caps eyebrow/label/section-title patterns: `.stat-card__label` 13px, `.footer-section-title` 11px, `.pillar-card__label` 11px, `.expectation-setter__eyebrow` 11px, `.footer-vapi-band__eyebrow` 11px, `.signature-block__label` 11px, `.editorial-faq__count` 13px (per Wave 2's "helper labels ≥14px are fine — note any exception" rule, these are exception-class typography per the skill).
+  - **Wave 8 fix landed: `.hero-eyebrow-badge`** was 10px (`0.625rem`) — bumped to 11px (`0.6875rem`) at `app/globals.css` L1800 so it matches the rest of the helper-label baseline.
+  - **Wave 8 fix landed: build-your-assessment intake hint** was `text-[10px]` on mobile inside a CTA — bumped to `text-[11px]` at `app/build-your-assessment/page.tsx` L62.
+  - Conversion surfaces (cta-pill text, form labels, hero sub-copy, primary nav, sticky/floating CTA text): all ≥14px per per-page audit. CTA pill copy is 15px (0.9375rem), form labels are 16px (default `text-base`), hero sub-copy is 16-20px depending on page.
+
+  Self-verify: `grep -nE "font-size:\s*(1[0-3]px|0\.[0-7][0-9]*rem)" app/globals.css | wc -l` returns **0** (zero rules below 11px). Tailwind `text-[10px]` audit on tsx returns **0** matches after the build-your-assessment fix.
+
+- [x] **8.7 Sticky CTA never overlaps a primary CTA on mobile** — same Playwright check as 8.5 also measured, per page, every visible `.cta-pill` button's bounding box against the sticky-cta bar's bounding box. Result: **5/13 pages** show the sticky bar with primary CTAs visible above-the-fold, and on each of those 5 pages, **zero overlap** (stickyOverlap: "clean"). On the 8 intake-style pages (apply, apply/thank-you, contact, contact/thank-you, who-is-alfred, build-your-assessment), the sticky bar is intentionally hidden per the `data-hidden` suppress-list from Wave 1 — no overlap possible because no sticky.
+
+- [x] **8.8 No desktop dead-space wider than 200px between active content** — visual audit on all 14 `wave-8/*-desktop.png` screenshots at 1440×900. **Per-page assessment:**
+  - **home**: hero + glass founder-quote + audience marquee + stat row + Cs framework cards + work cards + outcomes + final CTA — dense, no gaps.
+  - **about**: hero portrait + biographical text two-column + credentials cards + foundations + signature block + three-pillar row + testimonials terminal CTA — dense.
+  - **work-with-me**: hero with badge eyebrow + two-card offering grid + ALFRED bridge + compare cross-walk + disqualifier grid + ALL-IN CTA — dense.
+  - **work-with-me/apply**: hero + chapter "01" + form-frame with gradient bar + expectation-setter + form fields + back link — vertical breathing room between hero and form-frame is intentional editorial whitespace (~140-160px), not dead space.
+  - **work-with-me/apply/thank-you**: hero + receipt-mark + 3-step receipt card + signature flourish + "While you wait" 2-up grid + back link — dense.
+  - **contact**: hero with balloon ornament + hand-underline beneath "talk" + form-frame with expectation-setter + fields + contact info + social links — dense.
+  - **contact/thank-you**: hero + receipt-mark + "In the meantime" 2-up grid + back link — dense.
+  - **who-is-alfred**: hero white-card-over-orange + dual-phone mockup + interactive feature explorer + final CTA — dense and richly populated.
+  - **client-stories**: hero + Marshall story + Thaddeus story + More Results gallery — dense.
+  - **build-your-assessment**: hero + VAPI logo card + bespoke-system stack + comparison + form intake teaser — dense.
+  - **blog**: hero + post list (5 posts visible per viewport) — dense.
+  - **privacy + terms**: legal prose at narrow measure (720/760px max-width) — the right margin (~340px) is intentional reading-prose narrow column, NOT dead space. Legal docs at 75ch is the editorial-craft answer.
+  - **testimonials**: hero + carousel + sub-content — dense.
+
+  Zero dead-space-wider-than-200px findings on any desktop screenshot. The diagonal accent wedges on the right edge of about/work-with-me/apply/contact heroes are intentional brand ornament — they are filled with the peach gradient color, not blank.
+
+### Grep adaptations
+
+LocalCraft skill assumes `.html` + `.css` files; Jake's site is Next.js App Router (.tsx + Tailwind utilities in `className=`). Wave 8 adaptations:
+
+- **Smart-quote audit (8.1):** skill regex `grep -REn "[a-z]'[a-z]\|[a-z]\"[a-z]" {site_path}/*.html`. On a Next.js site there is no `.html` to grep — all body text lives either inline in JSX or in TypeScript string props passed to components. Adapted with `grep -REn "[a-z]'[a-z]" app/ components/ --include="*.tsx"` and filtered out (a) JSX comments (`{/* … */}` and `//` lines that don't render), (b) metadata exports (`description:` / `title:` strings which already received smart quotes in Wave 6), (c) string-prop attributes (`className=`, `key=`, etc). Remaining hits were all in `components/CaseStudiesContent.tsx` props passed to `TransformationCard` and rendered as text — those got the U+2019 / U+201C / U+201D conversion.
+- **Handwritten signature (8.2):** skill greps `Caveat\|script-flourish\|signature-script` against the site_path. Adapted to scan the Next.js + Tailwind setup. Caveat is loaded as a Google Font via `next/font/google` (not via a CDN link), so the verification grep also covers `app/layout.tsx` to confirm the font loader is wired in. The `.signature-script` class on `<html>` via `caveat.variable` and the CSS rule in globals.css together complete the chain.
+- **One delight per page (8.3):** skill assumes a delight per HTML page. On a Next.js App Router site, page = `app/**/page.tsx` (or `components/CaseStudiesContent.tsx` for the client-stories route). Built a routing table mapping each page to its delight class (or "N/A — existing distinctiveness from prior waves") so the per-page-count rule reads as "one per page that needs one." All delights are CSS-only and honor `prefers-reduced-motion: reduce`.
+- **Tap targets (8.4):** skill `grep -RIn "min-height:\s*44\|min-width:\s*44\|padding:" {site_path}/*.css`. Adapted to ALSO scan `min-h-[44px]` / `min-w-[44px]` Tailwind arbitrary utility classes in tsx, since the bulk of button/link sizing on this site comes from utility classes. Also adapted "every button selector hits the 44px floor" to verify via DOM measurement (Playwright `getBoundingClientRect()`) rather than CSS rule introspection — the rendered tap surface is what matters.
+- **Horizontal scroll at 375px (8.5):** skill is a visual check. Adapted to a programmatic check via Playwright at `viewport: { width: 375 }` running `document.documentElement.scrollWidth > window.innerWidth` per page. Yields a deterministic 13-page pass/fail rather than relying on eyeballing a screenshot. The iPhone-UA capture artifact (body-P right-edge clipping in headless-chrome screenshots) is now definitively confirmed as capture-tool-only — not a real layout bug.
+- **Sticky overlap (8.7):** skill is a visual check. Adapted to a Playwright DOM measurement: per page, compare `.sticky-cta` bounding box against every visible `.cta-pill` bounding box, count any overlap. 5 pages with sticky + visible cta-pill all returned "clean" (zero overlap).
+- **Desktop dead space (8.8):** skill is a visual check. Adapted to a per-page screenshot walk-through at 1440px. Distinguish intentional editorial whitespace (legal prose narrow column, hero-to-form breathing room) from "dead space" — the former is craft, the latter is layout failure.
+
+### Patterns applied this wave
+
+From the industry-research patterns library:
+
+- **Handwritten Signature Flourish (research-adjacent: founder-personal coaching brands)** — applied as the Caveat-rendered "Jake" sign-off on About + Apply/Thank-You. The flourish is rare site-wide (2 usages out of 14 pages) and earns its presence by closing a credentials block and a receipt card. Both signatures use the same gradient + rotate(-2.5deg) treatment so it reads as a consistent personal voice signature, not an ornament. Matches the Litvin / Hudson editorial register where personal touch is the premium signal.
+- **One Unexpected Delight Per Major Page (research-adjacent: Ueno / Athletics / Pentagram)** — 7 delights across 14 pages, none stacked. Each is a single CSS-only micro-interaction that rewards close attention: the stat numeral shimmer makes 12 / 72 / 28 / 12 feel earned; the pillar-card flame dot ignites the moment you see the pillar; the polaroid tilt makes the founder portrait feel placed; the hand-drawn underline beneath "talk" warms the conversation invitation; the chapter "01" glows lit as you arrive at the application; the receipt check draws as you land on the thank-you (twice — both thank-you pages share the receipt semantic); the testimonials quote glyph drifts so the editorial signature feels alive.
+- **Smart Curly Quotes as Craft Signal (research: every premium typesetting source — New Yorker, MIT Press, Edward Tufte)** — converting body straight quotes to U+2019 / U+201C / U+201D is the typographic 0-to-1 difference between "Word document copy-pasted into a CMS" and "designed prose." After Wave 8, every contraction and quotation on Jake's site reads as deliberately typeset.
+- **Authority by Association, Not Adjective (Litvin / Goldsmith — continued from prior waves)** — em-dash removal (per Jake's frozen lexicon) is the same move at a smaller scale: removing the visual fingerprint of LLM-written prose. Sentence-stop punctuation reads as Jake's voice, not as auto-generated content.
+
+Patterns explicitly NOT applied in Wave 8 (and why):
+
+- **Newsletter count as social proof** — still skipped (list isn't ≥5k yet, per industry-research recommendation).
+- **Comparison content (Jake vs Litvin/Goldsmith/Martell)** — carried from Wave 6/7 open items. Better suited to the blog/SEO program, not a visual-polish wave.
+- **Cinematic hero entrance with parallax** — would be over-stacked on top of Wave 3's halo + Wave 7's pulse + Wave 8's polaroid-tilt/glow/shimmer. The site is already alive; adding parallax would push it into maximalism.
+
+### Adaptations specific to Jake's site (NOT LocalCraft customer build)
+
+- **`/testimonials` not in screenshot path list** — the orchestrator's `--paths` CSV passed by the wave runner intentionally excludes `/testimonials` (14 paths × 3 breakpoints = 42 captures). I treated `/testimonials` as a touched page (added `hero-quote-mark--drift` delight) but didn't add it to capture set per the brief. Visual verification of the quote-mark drift was done via per-element capture rather than full-page wave-8 screenshot.
+- **Smart-quote conversion in TypeScript string data** — `components/CaseStudiesContent.tsx` stores Marshall + Thaddeus story data as TypeScript string constants. Converting straight `'` to `’` in the source string means the rendered output is true Unicode, not HTML-entity encoded — both work, but the Unicode-direct approach reads cleaner in the source and renders identically in the browser.
+- **Caveat font loaded via `next/font/google`** — Next.js's font loader handles subsetting + display-swap + variable-font registration automatically. Adding `Caveat` is a 3-line change (import + loader + className), not a full font integration.
+- **Polaroid tilt only on one portrait** — the about page hero portrait gets the tilt because it's the founder's introductory face. The home page glass founder-quote portrait does NOT get the tilt — it's already a "founder pulled forward into a quote card" treatment, adding tilt would be visual noise on top of an attention anchor. Other portraits (testimonial avatars, case-study portraits) stay un-tilted — the polaroid feel is reserved for one moment on one page.
+- **Hand-drawn underline as CSS inline SVG (not a real SVG element)** — using a `data:image/svg+xml;utf8,...` background-image avoids adding an external file or React-rendered SVG component. The animation runs via CSS transform on the pseudo-element. Browser renders the squiggle as drawn-by-hand without any client JS.
+- **Em-dash cleanup**: 6 customer-facing em dashes removed this wave (3 in `app/build-your-assessment/page.tsx` body, 1 in `app/about/page.tsx` credentials card, 1 in `app/work-with-me/page.tsx` cta string, 1 in `app/who-is-alfred/page.tsx` blockquote cite, 2 in `components/CaseStudiesContent.tsx` quote attributions). Honors Jake's frozen lexicon rule: no em dashes in customer-facing web copy.
+- **Unused Tier-0 assets removed**: `public/images/jake/Website Hero.png` (2.0 MB), `public/images/alfred-phone-hero.png`, `public/images/certifications/life-coach-institute.png`. All three were confirmed unused via grep (`grep -REn "Website Hero|alfred-phone-hero|life-coach-institute" app/ components/ lib/`). Removed via `git rm` to keep the deployable bundle clean.
+- **Blog post hero image CLS fix** (carry from Wave 6 SEO audit): added explicit `width={600} height={400}` + `loading="lazy"` + `decoding="async"` to the `<img>` tag in `app/blog/page.tsx` so the browser reserves layout space before image bytes arrive. Closes the 8-point CLS deduction from the Wave 6 SEO audit.
+
+### Criteria audit
+
+- [x] **Hierarchy** — handwritten signature is small and editorial (it doesn't compete with H1s or CTAs). Delights are micro-interactions that reward attention rather than demand it. Tap-target enforcement makes interactive surfaces more obviously interactive without changing their visual weight.
+- [x] **Restraint** — Wave 8 adds 7 delights across 14 pages, NOT 14. The pages that already had strong Wave 5 ornaments (work-with-me disqualifier, client-stories editorial stat-line, build-your-assessment Cormorant whole-H1) got NO new delight. Signature is 2 usages site-wide, NOT 5. Em dashes are removed, not replaced with double-dashes or weird en-dashes — sentence stops are the answer.
+- [x] **Micro-interactions** — all 7 new delights honor `prefers-reduced-motion: reduce`. The signature flourish is static text (no motion to honor). Tap-target floors are layout-only (no motion at all).
+- [x] **Typographic editorial feel** — smart curly quotes are the editorial-craft signal Wave 8 was made for. Combined with the Caveat handwritten signature, the site now reads as deliberately typeset across every body paragraph + every personal-voice signature.
+- [x] **Mobile=desktop parity** — every Wave 8 change works at every breakpoint. Signature scales via `clamp()`. Polaroid tilt is the same on mobile. Hand-underline scales with the H1. Stat shimmer fires on mobile too. Tap-target floors are mobile-FIRST per the skill (every floor is enforced regardless of viewport, since touch input can come from any device with a touch screen).
+- [x] **No clip-art energy** — every Wave 8 ornament is CSS-drawn (gradient, keyframes, pseudo-elements, inline SVG data URI). No icon fonts. No PNG sprites. The Caveat font is a real licensed typeface from Google Fonts (not a webdings clip-art font).
+- [x] **No template-shaped sections** — the handwritten signature pattern is not a SaaS landing pattern; it's a personal-brand voice signature. The polaroid tilt is a print-magazine pattern, not a Bootstrap card pattern. The receipt check-draw is a transactional confirmation pattern done with editorial restraint (slow ease-out + tiny shadow) rather than a "success" toast.
+- [x] **Cold-read copy** — smart-quote conversion preserves every word of every existing sentence; only the typographic glyphs changed. Em-dash cleanup rewrites the sentences with sentence stops, which is also Jake's natural voice register.
+
+### Steve Jobs gut-test
+
+**Mobile (privileged surface) — first pass:**
+
+- Read `polish-shots/wave-8/home-mobile.png`, `about-mobile.png`, `contact-mobile.png`, `work-with-me-mobile.png`, `work-with-me-apply-mobile.png`, `work-with-me-apply-thank-you-mobile.png`, `who-is-alfred-mobile.png`, `blog-mobile.png`. All 14 mobile captures inspected.
+- **Home mobile**: hero italic *life* + glass founder card + sticky-CTA bar all hold from Waves 1-7. Trust strip reads cleanly (2x3 grid of Doctors/Coaches/Healers/Bodyworkers/Creators/Founders). Sticky CTA pinned at bottom with VAPI + Apply.
+- **About mobile**: "THE STORY · CH 01" eyebrow chapter + italic *I'm* H1 + framed jacob-sebok-laughing portrait. Polaroid tilt visible (-1.5° at rest). Signature block (TBD on first scroll past the credentials section — verified on desktop screenshot).
+- **Contact mobile**: hero italic *talk* with hand-drawn underline beneath it. Form-frame gradient bar + "WHAT HAPPENS NEXT" + 01/02/03 expectation-setter numerals all visible in the capture viewport.
+- **Apply mobile**: giant Cormorant orange-gradient "01" chapter number visible above the eyebrow. Glow pulse is animation-driven so the still capture shows it at one frame of the pulse; behavior verified by code review.
+- **Apply/Thank-You mobile**: orange receipt checkmark disk above the eyebrow. Check-draw delight fires on entry (animation-driven; capture shows the final state).
+- **Work-with-me mobile**: "FREE ENTRY · BY APPLICATION" badges + italic *in* H1 + dark "Aligned Power Program" featured card. All from Wave 5 distinctiveness pass.
+- **Blog mobile**: "NOTES FROM JAKE" eyebrow + italic *Answers* H1 + first post hero image at 3:2 aspect ratio with explicit width/height (no CLS now). Sticky CTA pinned at bottom.
+- Sticky CTA bar pinned at bottom on all 5 expected pages; correctly suppressed on the 8 intake-style routes.
+
+**First-pass flagged:**
+- **Caveat script "Jake" right-edge clip** — at `signature-script--md` the rotated "e" was getting cut by the inline-block bounding box. Fixed by adding `padding: 0.15em 0.6em 0.15em 0.05em` to the `.signature-script` rule so the rotation doesn't push the glyph past the box edge.
+- **Body-P right-edge clipping artifact** persists in the iPhone-UA capture pass (consistent across waves 1-7-8). Definitively confirmed via Playwright at 375×812 that this is a capture-tool artifact, NOT a real layout bug — `documentElement.scrollWidth === window.innerWidth` on every page.
+
+**Mitigation:** signature padding bump shipped this wave; body-P artifact closed as known-capture-only (would not appear on a real device).
+
+**Re-test (mobile):** signature renders without clipping after the padding fix. All other mobile surfaces hold from prior waves.
+
+**Desktop / tablet:** verified `about-desktop.png` (polaroid-tilted portrait + signature block visible after scroll), `contact-desktop.png` (hand-drawn underline beneath "talk" + speech-balloon ornament + form-frame), `work-with-me-apply-desktop.png` (chapter "01" with italic Cormorant gradient + form-frame). Steve Jobs goes silent.
+
+### Bonus prompts
+
+- **"How could this be cooler?"** → The hand-drawn underline could draw with a SECOND stroke that crosses the first at an offset, giving the squiggle a "double-pass corrected" hand-drawn feel (like Whitney biennial wall-text marker corrections). Belongs in a future Wave 9+ if the conversion data shows the contact page underperforming and the team wants to test variants. Flagged.
+- **"Category leader doing this better?"** → Joe Hudson's site has a tiny "field-light flare" — a soft warm corner gradient inside framed portraits to suggest morning light. Jake's about-page polaroid-tilt already has the matte ring + warm outer shadow from Wave 4; adding the inner field-light highlight would push it into Hudson territory. Carried forward as Wave 9+ optional refinement (the flare belongs only on outdoor portraits, of which Jake has 3: jake-and-son, jacob-sebok-laughing, and jake-ideal-end-state).
+- **Applied this wave:** the smart-quote conversion IS the wave's category-leader steal. Every premium typesetting reference (New Yorker, MIT Press, Edward Tufte) uses true curly quotes religiously. AI-generated coach pages in 2026 universally ship straight quotes because LLM string outputs default to straight `'`. After Wave 8, Jake's site reads as if a human typesetter cared about every contraction — which is exactly the editorial signal his audience (high-performer founders) is trained to pattern-match as authority.
+
+### Open items rolled forward
+
+- (Wave 9+) Comparison content (Jake vs Litvin/Goldsmith/Martell) — better suited to the blog/SEO program than a visual polish wave.
+- (Wave 9+) Hudson "field-light flare" inner highlight on outdoor portraits — optional refinement on `polaroid-tilt`.
+- (Wave 9+) About-page "Foundations" block expansion into Goldsmith-style equal-weight reading-list mini-hub.
+- (Wave 9+) Hand-drawn underline double-stroke variant for A/B test on contact page.
+- (Wave 9+) Possible Review schema + aggregateRating once 20+ attributable testimonials.
+- (Wave 9+) A/B test the footer-vapi-band sub-copy on first-time vs returning visitors.

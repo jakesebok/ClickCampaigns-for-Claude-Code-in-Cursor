@@ -14,42 +14,42 @@ const marshallData = {
   title: "Chiropractor",
   image: "/images/testimonials/Marshall.png",
   eyebrow: "Featured story",
-  headline: "From \"I hate owning a business\" to excited to go to work every day",
+  headline: "From “I hate owning a business” to excited to go to work every day",
   pullQuote:
     "The business now feels more like an extension of me than something I have to go do.",
   setup:
-    "Dr. Marshall Gevers is a chiropractor who learned how to treat patients brilliantly but had no training in how to run a business. He was spinning his wheels, paralyzed by options, and his standard answer whenever anyone asked was: I love being a chiropractor. I hate owning a business. He'd been burned before. He was skeptical of coaching. He was running on fumes.",
+    "Dr. Marshall Gevers is a chiropractor who learned how to treat patients brilliantly but had no training in how to run a business. He was spinning his wheels, paralyzed by options, and his standard answer whenever anyone asked was: I love being a chiropractor. I hate owning a business. He’d been burned before. He was skeptical of coaching. He was running on fumes.",
   transformations: [
     {
       title: "Clients of his dreams",
       before:
-        "Marshall took whoever walked in (\"happy to take scraps,\" as he put it).",
+        "Marshall took whoever walked in (“happy to take scraps,” as he put it).",
       after:
-        "He's crystal clear on his ideal client. When he works with them, he gets excited. It gives him energy for the rest of the day instead of draining him. The business restores him instead of depleting him.",
+        "He’s crystal clear on his ideal client. When he works with them, he gets excited. It gives him energy for the rest of the day instead of draining him. The business restores him instead of depleting him.",
     },
     {
       title: "Excited to go to work",
-      before: '"Oh gosh, I gotta go into work again."',
+      before: "“Oh gosh, I gotta go into work again.”",
       after:
-        '"I\'m excited about coming into work every day." He went from not wanting to continue on the path to being excited for the next five years of business. The shift wasn\'t tactics. It was alignment.',
+        "“I’m excited about coming into work every day.” He went from not wanting to continue on the path to being excited for the next five years of business. The shift wasn’t tactics. It was alignment.",
     },
     {
       title: "Charging more than he thought possible",
       before:
         "He hated feeling like a salesman. He had a hard time asking people for things. He felt like he was bothering them.",
       after:
-        "We reframed it: he's not selling; he's helping. He doesn't feel intrusive anymore. He feels like he's doing what he's supposed to do. He's reaching more people, and the revenue followed.",
+        "We reframed it: he’s not selling; he’s helping. He doesn’t feel intrusive anymore. He feels like he’s doing what he’s supposed to do. He’s reaching more people, and the revenue followed.",
     },
     {
       title: "Less grinding, more aligning",
       before:
-        "A lot of things he dreaded doing, sapping his energy. He didn't want to do them outside of work.",
+        "A lot of things he dreaded doing, sapping his energy. He didn’t want to do them outside of work.",
       after:
-        "He does more networking and business development than ever, but it doesn't feel like work. When opportunities pop up outside work hours, he's excited. The business feels like an extension of him, not something he has to go do.",
+        "He does more networking and business development than ever, but it doesn’t feel like work. When opportunities pop up outside work hours, he’s excited. The business feels like an extension of him, not something he has to go do.",
     },
   ],
   shortQuote:
-    "I knew how to treat patients, but starting a business left me stuck and overthinking everything. Jake helped me cut through the noise, define a vision, and take confident action. What used to feel overwhelming now feels intentional, and it's directly translated into real business growth.",
+    "I knew how to treat patients, but starting a business left me stuck and overthinking everything. Jake helped me cut through the noise, define a vision, and take confident action. What used to feel overwhelming now feels intentional, and it’s directly translated into real business growth.",
   longQuote: undefined as string | undefined,
 };
 
@@ -62,21 +62,21 @@ const thaddeusData = {
   headline:
     "From stuck and scattered to clarity, conviction, and a calendar full of clients",
   pullQuote:
-    "Jake doesn't tell me what to do. He calls forth what was already there.",
+    "Jake doesn’t tell me what to do. He calls forth what was already there.",
   setup:
-    "Thaddeus is an attention coach who helps entrepreneurs with addiction, time management, and ADHD recapture their focus and energy for business progress. And yet he was stuck. He'd felt confused about his purpose, wondering whether what he was doing was actually meaningful. Distraction had become his escape. He was avoiding the very thing he was meant for. He chose Jake because Jake had done the deep work himself, and that depth let him hold a curious, non-judgmental space where Thaddeus could explore the deep matters of his purpose and spirit. He finally felt safe enough to be fully seen.",
+    "Thaddeus is an attention coach who helps entrepreneurs with addiction, time management, and ADHD recapture their focus and energy for business progress. And yet he was stuck. He’d felt confused about his purpose, wondering whether what he was doing was actually meaningful. Distraction had become his escape. He was avoiding the very thing he was meant for. He chose Jake because Jake had done the deep work himself, and that depth let him hold a curious, non-judgmental space where Thaddeus could explore the deep matters of his purpose and spirit. He finally felt safe enough to be fully seen.",
   transformations: [
     {
       title: "More clients in weeks than in six months",
       before: null as string | null,
       after:
-        'The internal shifts showed up fast. "I\'ve gotten more clients booked on my calendar in the past few weeks than I had in the previous six months before working with Jake." Clarity on what he\'s building and why turned into real momentum. The calendar filled. The business moved.',
+        "The internal shifts showed up fast. “I’ve gotten more clients booked on my calendar in the past few weeks than I had in the previous six months before working with Jake.” Clarity on what he’s building and why turned into real momentum. The calendar filled. The business moved.",
     },
     {
       title: "Unshakeable belief in his potential",
       before: null as string | null,
       after:
-        "He's fully committed to building the life he wants, and he shows up for himself, consistently. The doubt that used to hold him back is giving way to conviction. He knows he can do it. He's empowered to create the life of his dreams.",
+        "He’s fully committed to building the life he wants, and he shows up for himself, consistently. The doubt that used to hold him back is giving way to conviction. He knows he can do it. He’s empowered to create the life of his dreams.",
     },
     {
       title: "A vision that made everything click",
@@ -88,19 +88,19 @@ const thaddeusData = {
       title: "Leaning into the discomfort of growth",
       before: null as string | null,
       after:
-        "His breakthrough: the fear of being an outsider, of being judged. It's not a sign to retreat. It's part of the growing process. That reframe changed everything. He stopped resisting the shift. He embraced it.",
+        "His breakthrough: the fear of being an outsider, of being judged. It’s not a sign to retreat. It’s part of the growing process. That reframe changed everything. He stopped resisting the shift. He embraced it.",
     },
     {
       title: "Simple shifts that compound",
       before: null as string | null,
       after:
-        "It doesn't always have to be a mind-blowing realization. Sometimes the biggest breakthroughs come from simple perspective changes and habit tweaks. Jake is good at pointing out the obvious and helping Thaddeus feel confident to experiment with different strategies until he finds what works. No overwhelm. Just clarity and action.",
+        "It doesn’t always have to be a mind-blowing realization. Sometimes the biggest breakthroughs come from simple perspective changes and habit tweaks. Jake is good at pointing out the obvious and helping Thaddeus feel confident to experiment with different strategies until he finds what works. No overwhelm. Just clarity and action.",
     },
   ],
   shortQuote:
     "Jake called me forth to step into my power and become the man I always knew I could be.",
   longQuote:
-    "I feel like Jake understands me at a deep level. I have a clear understanding of what I'm building and why it matters, and it's rare to find someone who holds that kind of space. Jake doesn't tell me what to do. He calls forth what was already there.",
+    "I feel like Jake understands me at a deep level. I have a clear understanding of what I’m building and why it matters, and it’s rare to find someone who holds that kind of space. Jake doesn’t tell me what to do. He calls forth what was already there.",
 };
 
 function TransformationCard({
@@ -168,14 +168,14 @@ function StorySection({
                 <p className="font-cormorant italic text-base text-ap-primary leading-snug mb-3">
                   &ldquo;{data.shortQuote}&rdquo;
                 </p>
-                <p className="font-semibold text-ap-primary text-sm">— {data.name}</p>
+                <p className="font-semibold text-ap-primary text-sm">{data.name}</p>
               </div>
               {"longQuote" in data && data.longQuote && (
                 <div className="rounded-[16px] bg-ap-primary text-white p-5 border-t-2 border-ap-accent">
                   <p className="font-cormorant italic text-sm leading-snug mb-2">
                     &ldquo;{data.longQuote}&rdquo;
                   </p>
-                  <p className="text-white/80 text-xs">— {data.name}</p>
+                  <p className="text-white/80 text-xs">{data.name}</p>
                 </div>
               )}
             </div>

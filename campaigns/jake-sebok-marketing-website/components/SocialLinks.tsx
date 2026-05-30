@@ -33,14 +33,14 @@ export function SocialLinks({ variant = "footer", className = "" }: SocialLinksP
   const isFooter = variant === "footer";
 
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       {socialLinks.map(({ label, href, icon }) => (
         <Link
           key={icon}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`transition-colors focus:outline-none focus:ring-2 focus:ring-ap-accent focus:ring-offset-2 focus:ring-offset-ap-primary rounded-lg ${isFooter ? "text-white/70 hover:text-white" : "text-ap-mid hover:text-ap-accent"}`}
+          className={`inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ap-accent focus:ring-offset-2 focus:ring-offset-ap-primary ${isFooter ? "text-white/70 hover:text-white hover:bg-white/5" : "text-ap-mid hover:text-ap-accent hover:bg-ap-accent/5"}`}
           aria-label={label}
         >
           {icons[icon]}

@@ -2028,7 +2028,7 @@ const PRIORITY_QUAD_UI: Record<
     Icon: Shield,
     shell: "border-emerald-500/30 bg-emerald-500/10",
     title: "text-emerald-300",
-    desc: "High importance, high score — don't neglect these",
+    desc: "High importance, high score — don’t neglect these",
   },
   Monitor: {
     Icon: Eye,
@@ -2481,7 +2481,7 @@ function DriversScreen({
       </div>
 
       <BulletSection title="How to Know If This Is You" items={ESCAPE_ARTIST_LIBRARY.howToKnowThisIsYou} filled />
-      <BulletSection title="How to Know If This Isn't You" items={ESCAPE_ARTIST_LIBRARY.howToKnowThisIsntYou} filled={false} />
+      <BulletSection title="How to Know If This Isn’t You" items={ESCAPE_ARTIST_LIBRARY.howToKnowThisIsntYou} filled={false} />
 
       <div className="space-y-2">
         <h3 className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/45">Reflection Prompts</h3>

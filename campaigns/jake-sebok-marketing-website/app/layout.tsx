@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Cormorant_Garamond } from "next/font/google";
+import { Outfit, Cormorant_Garamond, Caveat } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/Header";
@@ -32,6 +32,17 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
   weight: ["400", "600", "700"],
+});
+
+// Caveat — handwritten-script flourish for the founder signature.
+// Used 1-2 times site-wide (About page sign-off, apply thank-you sign-off).
+// Loaded as a CSS variable so the .signature-script utility in globals.css
+// can switch on prefers-reduced-motion + adjust weight at small viewports.
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["400", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -77,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${caveat.variable}`}>
       <body className="min-h-screen antialiased font-cormorant">
         <Header />
         <main>{children}</main>
