@@ -164,7 +164,7 @@ export default function HomePage() {
               <p className="hero-cta-trust mt-4 font-outfit text-[13px] sm:text-sm font-semibold text-ap-mid">
                 <span className="hero-cta-trust__chip" aria-hidden />
                 <span>
-                  Free. 12 minutes. <span className="text-ap-muted">Get a clear read on where you actually stand &mdash; and where to focus to build a business that sustains the life you want.</span>
+                  Free. 12 minutes. <span className="text-ap-muted">See where you <em className="not-italic text-gradient-accent">actually</em> stand.</span>
                 </span>
               </p>
             </div>
