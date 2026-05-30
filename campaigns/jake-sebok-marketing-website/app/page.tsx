@@ -165,19 +165,22 @@ export default function HomePage() {
               </p>
             </div>
             <div className="hidden lg:flex items-center justify-end">
-              {/* Card widened to 380px so the full pull-quote sits on three
-                  balanced lines. lg:translate-x-[56px] pushes the card past
-                  the max-w-[1080px] container's right edge so it bleeds into
-                  the orange wedge — intentional brand bleed, not centered
-                  content. The pull-quote inside still carries its own
-                  translate-x-[28px] for the additional right-shifted feel. */}
-              <div className="founder-quote glass-card space-y-4 max-w-[380px] text-right lg:translate-x-[56px]">
+              {/* Card grew from 380→408px to encompass the full pull-quote
+                  (the prior translate-x-[28px] on the quote was bleeding the
+                  text past the card's right edge — looked broken once Jake
+                  noticed it). Card moved right via lg:translate-x-[56px] so
+                  it bleeds into the orange wedge. The quote drops its own
+                  translate now that the card width does the encompassing.
+                  The headshot+name row pulls left via -translate-x-[36px]
+                  so the byline reads tucked under the quote, not pushed to
+                  the same right edge. */}
+              <div className="founder-quote glass-card space-y-4 max-w-[408px] text-right lg:translate-x-[56px]">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
-                <p className="font-semibold italic text-[1.35rem] text-white leading-snug translate-x-[28px]">
+                <p className="font-semibold italic text-[1.35rem] text-white leading-snug">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
                   naturally&nbsp;are.&rdquo;
                 </p>
-                <div className="flex items-center justify-end gap-3 -translate-y-1.5">
+                <div className="flex items-center justify-end gap-3 -translate-y-1.5 -translate-x-[36px]">
                   <div className="framed-image framed-image--on-dark relative w-32 h-32 rounded-full ring-2 ring-white/30 flex-shrink-0 -translate-x-2 -translate-y-2">
                     <Image
                       src="/images/jake/MMC Profile.jpeg"
