@@ -35,7 +35,7 @@ export default function ApplyThankYouPage() {
             <span className="block">Thank you.</span>
             <span className="block text-gradient-accent">
               I read every one{" "}
-              <em className="not-italic font-semibold text-gradient-accent">personally</em>.
+              <em className="not-italic text-gradient-accent">personally</em>.
             </span>
           </h1>
           <p className="text-xl font-semibold text-ap-mid">

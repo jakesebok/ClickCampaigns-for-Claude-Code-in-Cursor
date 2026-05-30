@@ -119,7 +119,7 @@ export default function HomePage() {
                 <br className="hidden lg:inline" />
                 <span className="text-gradient-accent">
                   your{" "}
-                  <em className="not-italic font-semibold">life</em>.
+                  <em className="not-italic">life</em>.
                 </span>
               </h1>
               <p className="font-semibold text-xl text-ap-mid leading-relaxed mb-8">
@@ -141,26 +141,25 @@ export default function HomePage() {
                   href="/work-with-me"
                   className="inline-flex items-center justify-center px-6 sm:px-8 py-4 rounded-pill border-[1.5px] border-ap-border text-ap-primary font-semibold text-base tracking-wider hover:border-ap-accent hover:text-gradient-accent transition-all sm:min-w-[200px]"
                 >
-                  See how we work
+                  Work with me
                 </Link>
               </div>
               <p className="hero-cta-trust mt-4 font-outfit text-[13px] sm:text-sm font-semibold text-ap-mid">
                 <span className="hero-cta-trust__chip" aria-hidden />
                 <span>
-                  Free. 12 minutes. <span className="text-ap-muted">For founders ready to invest in 12-month, application-based coaching.</span>
+                  Free. 12 minutes. <span className="text-ap-muted">Get a clear read on where you actually stand &mdash; and where to focus to build a business that sustains the life you want.</span>
                 </span>
               </p>
             </div>
             <div className="hidden lg:flex items-center justify-end">
-              {/* Card widened from 280→380px so the full pull-quote sits on
-                  three balanced lines instead of squeezing to four. The prior
-                  translate-x-[28px] shoved the text past the card edge into
-                  empty grid space (read as broken alignment, not intentional
-                  bleed); reduced to 10px so the offset still gives the quote
-                  visual independence from the headshot row without clipping. */}
+              {/* Card widened to 380px so the full pull-quote sits on three
+                  balanced lines instead of squeezing to four. The translate-x-[28px]
+                  intentional editorial bleed is preserved — Jake wants the quote
+                  to keep its original right-shifted position; the card just grew
+                  to hold the new line length. */}
               <div className="founder-quote glass-card space-y-4 max-w-[380px] text-right">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
-                <p className="font-semibold italic text-[1.35rem] text-white leading-snug translate-x-[10px]">
+                <p className="font-semibold italic text-[1.35rem] text-white leading-snug translate-x-[28px]">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
                   naturally&nbsp;are.&rdquo;
                 </p>
@@ -473,14 +472,27 @@ export default function HomePage() {
         </div>
         <div className="max-w-[1080px] mx-auto px-5 sm:px-6">
           <div className="mt-8 text-center">
+            {/* Restyled from a long-text pill into a card-link so the eyebrow,
+                headline, and arrow each get their own line/spot. The previous
+                pill wrapped the headline mid-sentence and pushed the arrow off
+                the trailing line — read as broken styling. */}
             <Link
               href="/client-stories"
-              className="inline-flex items-center gap-2 text-gradient-accent font-semibold text-base border-2 border-ap-accent/50 hover:border-ap-accent hover:bg-ap-accent/5 px-6 py-3 rounded-pill transition-all"
+              className="story-cta-card group inline-flex items-center gap-4 sm:gap-5 text-left max-w-[640px] bg-white border-2 border-ap-accent/40 hover:border-ap-accent hover:shadow-[0_18px_36px_-22px_rgba(255,107,26,0.45)] hover:-translate-y-0.5 px-5 sm:px-6 py-4 sm:py-5 rounded-2xl transition-all"
             >
-              Read Marshall&apos;s story: from dreading work to excited every day
-              <svg className="w-4 h-4 flex-shrink-0 text-ap-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <span className="flex-1 min-w-0">
+                <span className="block font-outfit text-[10px] font-semibold uppercase tracking-[0.22em] text-ap-accent mb-1">
+                  Read the full story
+                </span>
+                <span className="block font-outfit font-semibold text-ap-primary text-base sm:text-lg leading-snug">
+                  Marshall: from dreading work to excited every day
+                </span>
+              </span>
+              <span className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-ap-accent/10 group-hover:bg-ap-accent flex items-center justify-center transition-colors">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-ap-accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </Link>
           </div>
         </div>

@@ -55,9 +55,17 @@ body {
 }
 
 /* Orange text gradient — brand orange (top-left) to darker orange (bottom-right).
-   `display: inline-block` + `padding-bottom` extends the background-clip box past
-   the descender baseline so letters like g/p/y/j (and italic ascenders that bleed
-   below) keep their bottoms instead of getting sliced by the clipping rectangle. */
+   The inline-block box defines the background-clip:text mask boundary, so the
+   gradient is only painted INSIDE this rectangle — anything the glyph draws
+   past the box edge (descenders on y/g/p/j/q, italic terminal flourishes,
+   period-after-descender) gets sliced flat. The first fix used padding-bottom
+   0.12em, but Outfit-800 descenders at the H1 font-extrabold weight still poked
+   below the box at the 60px hero size (verified via screenshot zoom).
+
+   Fix: bump the inline-block's own line-height to 1.25 AND keep padding-bottom
+   0.2em as a belt-and-suspenders cushion. The negative margin-bottom keeps the
+   surrounding line-box from shifting — vertical-align: baseline preserves the
+   text baseline relative to non-gradient siblings on the same line. */
 .text-gradient-accent {
   background: linear-gradient(135deg, var(--ap-accent) 0%, #E55A0F 100%);
   -webkit-background-clip: text;
@@ -65,13 +73,14 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
   display: inline-block;
-  padding: 0.04em 0.02em 0.12em 0.02em;
-  margin: -0.04em -0.02em -0.12em -0.02em;
+  line-height: 1.25;
+  padding: 0.05em 0.04em 0.22em 0.04em;
+  margin: -0.05em -0.04em -0.22em -0.04em;
   vertical-align: baseline;
 }
 
-/* Hero headline — same gradient direction, darker end (steeper angle for clearer
-   diagonal). Same descender-safe box as above. */
+/* Hero headline gradient — same shape, steeper angle, slightly more cushion
+   for the larger weights this often paints at. */
 .text-gradient-accent-hero {
   background: linear-gradient(120deg, var(--ap-accent) 0%, #A63D00 100%);
   -webkit-background-clip: text;
@@ -79,8 +88,9 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
   display: inline-block;
-  padding: 0.04em 0.02em 0.14em 0.02em;
-  margin: -0.04em -0.02em -0.14em -0.02em;
+  line-height: 1.25;
+  padding: 0.05em 0.04em 0.24em 0.04em;
+  margin: -0.05em -0.04em -0.24em -0.04em;
   vertical-align: baseline;
 }
 
@@ -2120,15 +2130,19 @@ select:focus-visible {
   max-width: 36ch;
 }
 
+/* Em inside a terminal-cta line: same Outfit weight as the parent line,
+   just painted with the orange gradient. The italic Cormorant treatment
+   was killed in the polish-pass review — emphasis should change ONE
+   thing (color), not weight, family, or slant. */
 .terminal-cta__line em {
-  font-family: var(--font-cormorant), serif;
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: inherit;
+  font-family: inherit;
   background: linear-gradient(135deg, #ff8a3d 0%, var(--ap-accent) 60%, #e55a0f 100%);
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
-  letter-spacing: -0.005em;
 }
 
 /* =============================================================

@@ -244,7 +244,7 @@ export default function WhoIsAlfredPage() {
                     Aligned Freedom Coach
                   </p>
                   <h1 className="font-outfit font-bold text-[2.15rem] sm:text-[3.1rem] lg:text-[3.3rem] text-ap-primary leading-[1.05] sm:leading-[1.04] tracking-tight mb-5 sm:mb-6 text-center md:text-left [text-wrap:balance]">
-                    <em className="not-italic font-semibold text-gradient-accent">Clarity</em>{" "}
+                    <em className="not-italic text-gradient-accent">Clarity</em>{" "}
                     in your pocket when it matters.
                   </h1>
                   <p className="max-w-[38rem] text-[1.05rem] sm:text-[1.24rem] font-semibold text-ap-mid leading-relaxed mb-6 text-center md:text-left">

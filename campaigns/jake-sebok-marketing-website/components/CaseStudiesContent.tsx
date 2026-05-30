@@ -247,7 +247,7 @@ export function CaseStudiesContent() {
           </p>
           <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-4 [text-wrap:balance]">
             Real{" "}
-            <em className="not-italic font-semibold text-gradient-accent">results</em>.{" "}
+            <em className="not-italic text-gradient-accent">results</em>.{" "}
             Real transformation.
           </h1>
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-3" data-reveal data-reveal-delay="1">

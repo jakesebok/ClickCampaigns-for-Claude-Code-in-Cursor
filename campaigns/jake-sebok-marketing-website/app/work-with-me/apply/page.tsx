@@ -43,7 +43,7 @@ export default function ApplyPage() {
           </p>
           <h1 className="font-outfit font-bold text-[2rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
             Apply for the{" "}
-            <em className="not-italic font-semibold text-gradient-accent">12-month</em>,{" "}
+            <em className="not-italic text-gradient-accent">12-month</em>,{" "}
             1:1 program
           </h1>
           <p className="text-xl font-semibold text-ap-mid">

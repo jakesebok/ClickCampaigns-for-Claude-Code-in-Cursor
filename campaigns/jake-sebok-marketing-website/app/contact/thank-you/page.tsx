@@ -32,7 +32,7 @@ export default function ContactThankYouPage() {
         <h1 className="font-outfit font-bold text-[2.25rem] sm:text-5xl text-ap-primary leading-tight mb-6 [text-wrap:balance]">
           <span className="block">Got it.</span>
           <span className="block text-gradient-accent">
-            <em className="not-italic font-semibold">Thanks</em>{" "}
+            <em className="not-italic text-gradient-accent">Thanks</em>{" "}
             for reaching out.
           </span>
         </h1>

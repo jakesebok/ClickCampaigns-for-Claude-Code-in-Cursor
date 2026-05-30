@@ -35,9 +35,8 @@ export default function AboutPage() {
             <span>The Story · Ch 01</span>
           </p>
           <h1 className="font-outfit font-bold text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] text-ap-primary leading-[1.02] tracking-tight mb-6 [text-wrap:balance]">
-            Hey,{" "}
-            <em className="not-italic font-semibold text-gradient-accent">I&apos;m</em>{" "}
-            Jake Sebok.
+            Hey, I&rsquo;m{" "}
+            <em className="not-italic text-gradient-accent">Jake&nbsp;Sebok</em>.
           </h1>
           <p className="text-xl font-semibold text-ap-mid leading-relaxed mb-8 max-w-[58ch]">
             Master Certified Professional Coach, founder, full-time dad to three amazing kids.
