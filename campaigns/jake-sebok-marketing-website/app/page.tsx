@@ -131,10 +131,10 @@ export default function HomePage() {
                   </span>
                 </span>
               </p>
-              <h1 className="font-outfit font-extrabold text-[2.375rem] sm:text-5xl lg:text-6xl text-[#1e3055] leading-[1.02] sm:leading-[0.96] tracking-tight mb-6 [text-wrap:balance]">
+              <h1 className="font-outfit font-extrabold text-[2.75rem] sm:text-5xl lg:text-6xl text-[#1e3055] leading-[1.05] sm:leading-[0.96] tracking-tight mb-6 [text-wrap:balance]">
                 Build a business that scales your income, your impact, and{" "}
                 <br className="hidden lg:inline" />
-                <span className="text-gradient-accent">
+                <span className="text-gradient-accent whitespace-nowrap">
                   your{" "}
                   <em className="not-italic">life</em>.
                 </span>
