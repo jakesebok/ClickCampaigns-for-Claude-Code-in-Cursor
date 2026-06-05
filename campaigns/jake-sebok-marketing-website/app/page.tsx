@@ -169,26 +169,16 @@ export default function HomePage() {
               </p>
             </div>
             <div className="hidden lg:flex items-center justify-end">
-              {/* Card grew from 380→408px to encompass the full pull-quote
-                  (the prior translate-x-[28px] on the quote was bleeding the
-                  text past the card's right edge — looked broken once Jake
-                  noticed it). Card moved right via lg:translate-x-[56px] so
-                  it bleeds into the orange wedge. The quote drops its own
-                  translate now that the card width does the encompassing.
-                  The headshot+name row pulls left via -translate-x-[36px]
-                  so the byline reads tucked under the quote, not pushed to
-                  the same right edge. */}
-              <div className="founder-quote glass-card space-y-4 max-w-[408px] text-right lg:translate-x-[56px]">
+              {/* Founder pull-quote sits bare on the orange wedge (no card).
+                  Right-aligned, nudged into the wedge via lg:translate-x-[56px]. */}
+              <div className="space-y-4 max-w-[408px] text-right lg:translate-x-[56px]">
                 <div className="w-10 h-0.5 bg-white/35 ml-auto" />
                 <p className="font-semibold italic text-[1.35rem] text-white leading-snug">
                   &ldquo;Your business shouldn&apos;t be a beautiful prison. It should be the best expression of who you
                   naturally&nbsp;are.&rdquo;
                 </p>
-                {/* Headshot + byline row sits slightly inset from the card's
-                   left padding edge (translate-x-[20px]) so the picture's left
-                   edge lands just inside the leftmost extent of the right-
-                   aligned quote text above it — full flush-left read as too
-                   far left in operator review. */}
+                {/* Headshot + byline row, nudged right so the picture's left
+                   edge sits just inside the quote's leftmost text above it. */}
                 <div className="flex items-center justify-start gap-3 -translate-y-1.5 translate-x-[20px]">
                   <div className="framed-image framed-image--on-dark relative w-32 h-32 rounded-full ring-2 ring-white/30 flex-shrink-0 -translate-y-2">
                     <Image
