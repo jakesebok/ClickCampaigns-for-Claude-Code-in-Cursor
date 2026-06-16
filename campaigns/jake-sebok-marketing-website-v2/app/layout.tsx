@@ -3,6 +3,7 @@ import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SiteFrame } from "@/components/SiteFrame";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -40,9 +41,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${cormorant.variable}`}>
       <body className="min-h-screen antialiased font-cormorant">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SiteFrame header={<Header />} footer={<Footer />}>
+          {children}
+        </SiteFrame>
       </body>
     </html>
   );
