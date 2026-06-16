@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SiteFrame } from "@/components/SiteFrame";
 import { SiteCTAs } from "@/components/SiteCTAs";
 import { RevealOnScroll } from "@/components/RevealOnScroll";
 
@@ -90,10 +91,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${caveat.variable}`}>
       <body className="min-h-screen antialiased font-cormorant">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <SiteCTAs />
+        <SiteFrame header={<Header />} footer={<Footer />} chrome={<SiteCTAs />}>
+          {children}
+        </SiteFrame>
         <RevealOnScroll />
         <Script
           src="https://localcraftdigital.com/track.js"
