@@ -37,7 +37,8 @@ const linkIcon = (
 );
 
 const CSS = `
-.bizcard{min-height:100svh;background:radial-gradient(120% 80% at 50% -10%,rgba(255,107,26,0.20),transparent 60%),linear-gradient(180deg,#192236 0%,#0B0F19 100%);color:#F5F7FA;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px 56px;font-family:var(--font-outfit);}
+html:has(.bizcard),body:has(.bizcard){background:#0B0F19;}
+.bizcard{min-height:100dvh;background:radial-gradient(120% 80% at 50% -10%,rgba(255,107,26,0.20),transparent 60%),linear-gradient(180deg,#192236 0%,#0B0F19 100%);color:#F5F7FA;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px 56px;font-family:var(--font-outfit);}
 .bizcard-inner{width:100%;max-width:420px;text-align:center;}
 .bizcard-photo-wrap{width:128px;height:128px;margin:4px auto 22px;border-radius:999px;padding:4px;background:linear-gradient(135deg,#FF6B1A,#FF9F6B);box-shadow:0 14px 44px -14px rgba(255,107,26,0.55);}
 .bizcard-photo{width:100%;height:100%;object-fit:cover;border-radius:999px;display:block;}
