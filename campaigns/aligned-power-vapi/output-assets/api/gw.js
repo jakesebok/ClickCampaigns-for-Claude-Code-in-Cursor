@@ -24,6 +24,7 @@ const ROUTE_LOADERS = {
   "count-vapi-results": () => import("../lib/portal-server/handlers/count-vapi-results.js"),
   "vapi-assessment-complete": () => import("../lib/portal-server/handlers/vapi-assessment-complete.js"),
   "cron/6c-reminders": () => import("../lib/portal-server/handlers/cron-6c-reminders.js"),
+  unsubscribe: () => import("../lib/portal-server/handlers/unsubscribe.js"),
 };
 
 /**

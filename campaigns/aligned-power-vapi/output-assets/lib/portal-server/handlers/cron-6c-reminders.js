@@ -13,6 +13,8 @@
  *      SIX_C_FROM_EMAIL (e.g. scorecard@alignedpower.coach), SIX_C_REPLY_TO (optional).
  */
 
+import { unsubscribeUrl, unsubscribeHeaders, fetchUnsubscribedSet } from '../email-unsubscribe.js';
+
 const TZ = 'America/New_York';
 const PORTAL_URL = 'https://portal.alignedpower.coach';
 const SCORECARD_URL = `${PORTAL_URL}/scorecard`;
@@ -136,7 +138,7 @@ function buildSixCsDetailsHtml() {
 }
 
 // Returns full branded HTML email
-function buildHtmlEmail({ type, firstName }) {
+function buildHtmlEmail({ type, firstName, email }) {
   const name = firstName ? `Hi ${firstName},` : 'Hi there,';
   const content = {
     available: {
@@ -242,7 +244,7 @@ function buildHtmlEmail({ type, firstName }) {
   <!-- Footer -->
   <tr><td style="background:#F5F7FA;padding:24px 40px;text-align:center;border-top:1px solid #DDE3ED;">
     <p style="margin:0 0 8px;color:#7A8FA8;font-size:13px;">Jake Sebok</p>
-    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you&rsquo;re an active client. <a href="${PORTAL_URL}" style="color:#FF6B1A;">Unsubscribe</a></p>
+    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you&rsquo;re an active client. <a href="${unsubscribeUrl(email)}" style="color:#FF6B1A;">Unsubscribe</a></p>
   </td></tr>
 
 </table>
@@ -253,7 +255,7 @@ function buildHtmlEmail({ type, firstName }) {
 }
 
 // Plain-text fallback
-function buildTextEmail({ type, firstName }) {
+function buildTextEmail({ type, firstName, email }) {
   const name = firstName ? `Hi ${firstName},` : 'Hi there,';
   const texts = {
     available: `${name}
@@ -301,7 +303,8 @@ If the scorecard window slipped by, don't let the whole week drift with it. Open
 
 -- Jake Sebok`,
   };
-  return texts[type] || texts.available;
+  const body = texts[type] || texts.available;
+  return `${body}\n\nTo stop these reminders, unsubscribe: ${unsubscribeUrl(email)}`;
 }
 
 function isValidEmail(s) {
@@ -495,8 +498,8 @@ export async function GET(request) {
       return new Response(JSON.stringify({ error: 'missing_env', message: 'RESEND_API_KEY required to send test email' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
     const type = forcedType || 'available';
-    const html = buildHtmlEmail({ type, firstName: null });
-    const text = buildTextEmail({ type, firstName: null });
+    const html = buildHtmlEmail({ type, firstName: null, email: normalizedTestEmail });
+    const text = buildTextEmail({ type, firstName: null, email: normalizedTestEmail });
     try {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -508,6 +511,7 @@ export async function GET(request) {
           html,
           text,
           reply_to: process.env.SIX_C_REPLY_TO || undefined,
+          headers: unsubscribeHeaders(normalizedTestEmail),
         }),
       });
       if (!res.ok) {
@@ -584,6 +588,17 @@ export async function GET(request) {
     .map((r) => ({ email: (r.email || '').trim().toLowerCase(), firstName: null }))
     .filter((r) => r.email);
 
+  // Honor the unsubscribe suppression list. Abort loudly rather than mail an
+  // opted-out client if the lookup fails (the cron retries next slot).
+  let unsubscribed;
+  try {
+    unsubscribed = await fetchUnsubscribedSet({ supabaseUrl, serviceKey });
+  } catch (err) {
+    console.error('[6c-reminders] suppression lookup failed', err);
+    return new Response(JSON.stringify({ error: 'suppression_lookup_failed' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+  }
+  clients = clients.filter((c) => !unsubscribed.has(c.email));
+
   // Friday: send to all. Saturday/Sunday: only to those who haven't submitted this week.
   if (type === 'saturday' || type === 'one-hour-left') {
     const { opensAt, closesAt } = getThisWeekWindowBounds();
@@ -646,8 +661,8 @@ export async function GET(request) {
   let deduped = 0;
   const reminderDateKey = getEasternDateKey();
   for (const client of clients) {
-    const html = buildHtmlEmail({ type, firstName: client.firstName });
-    const text = buildTextEmail({ type, firstName: client.firstName });
+    const html = buildHtmlEmail({ type, firstName: client.firstName, email: client.email });
+    const text = buildTextEmail({ type, firstName: client.firstName, email: client.email });
     const idempotencyKey = `6c-reminder/${type}/${reminderDateKey}/${client.email}`;
     try {
       const res = await fetch('https://api.resend.com/emails', {
@@ -664,6 +679,7 @@ export async function GET(request) {
           html,
           text,
           reply_to: process.env.SIX_C_REPLY_TO || undefined,
+          headers: unsubscribeHeaders(client.email),
         }),
       });
       if (res.ok) sent++;

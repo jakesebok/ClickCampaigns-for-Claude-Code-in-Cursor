@@ -2,6 +2,7 @@
 export const dynamic = "force-dynamic";
 
 import { enrichResultsWithDriver } from "@/lib/vapi-driver-scoring";
+import { unsubscribeUrl, unsubscribeHeaders } from "@/lib/email/unsubscribe";
 
 /**
  * POST /api/vapi-assessment-complete
@@ -342,6 +343,7 @@ function sortDriverScores(driverScores, driverGates) {
 
 function buildUserEmail({
   firstName,
+  email,
   overall,
   overallTier,
   arenaScores,
@@ -476,7 +478,7 @@ function buildUserEmail({
   <!-- Footer -->
   <tr><td style="background:#F5F7FA;padding:24px 40px;text-align:center;border-top:1px solid #DDE3ED;">
     <p style="margin:0 0 8px;color:#7A8FA8;font-size:13px;">Jake Sebok</p>
-    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you completed the VAPI Assessment. <a href="${PORTAL_URL}" style="color:#FF6B1A;">Unsubscribe</a></p>
+    <p style="margin:0;color:#7A8FA8;font-size:12px;">You received this because you completed the VAPI Assessment. <a href="${unsubscribeUrl(email)}" style="color:#FF6B1A;">Unsubscribe</a></p>
   </td></tr>
 
 </table>
@@ -883,6 +885,7 @@ export async function POST(request) {
   if (email) {
     const { html, text } = buildUserEmail({
       firstName: resolvedFirstName,
+      email: email.trim().toLowerCase(),
       overall,
       overallTier,
       arenaScores,
@@ -910,6 +913,7 @@ export async function POST(request) {
           html,
           text,
           reply_to: process.env.VAPI_REPLY_TO || process.env.SIX_C_REPLY_TO || undefined,
+          headers: unsubscribeHeaders(email.trim().toLowerCase()),
         }),
       });
       if (res.ok) {
